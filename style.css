@@ -1,0 +1,56 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Inter:wght@400;600;700&display=swap');
+
+*{box-sizing:border-box}
+body{margin:0;padding:12px;background:#070d18;color:#f4f8ff;font-family:Inter,Arial,sans-serif}
+.app{max-width:1200px;margin:auto}
+.header{height:64px;display:flex;align-items:center;gap:12px;font-family:Orbitron,sans-serif;letter-spacing:1px}
+.logo{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#6bf2ff,#657bff);color:#07111f;font-size:27px;font-weight:900}
+.header strong,.header small{display:block}
+.header strong{font-size:13px}
+.header small{font-size:9px;letter-spacing:3px;color:#6be9ff;margin-top:4px}
+.live{margin-left:auto;color:#baff68;font-size:10px;letter-spacing:2px}
+#game{height:min(76vh,720px);min-height:450px;position:relative;overflow:hidden;border:1px solid #4fdfff55;border-radius:18px;background:#82cfff;box-shadow:0 20px 70px #0008}
+#game canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#hud{position:absolute;z-index:2;top:14px;left:14px;right:14px;display:flex;gap:9px;pointer-events:none}
+.stat{padding:10px 12px;min-width:92px;background:#07111edb;border:1px solid #a8dcff30;border-radius:11px;backdrop-filter:blur(8px)}
+.stat small{display:block;font-size:9px;letter-spacing:1.5px;color:#a7bed8;margin-bottom:5px}
+.stat b{font:700 17px Orbitron,sans-serif}
+.stat i{font:10px Inter,sans-serif;color:#b3c6dd}
+.gold{color:#ffe66b!important}
+.fuel{margin-left:auto;width:120px;min-width:90px}
+.fuelTrack{height:8px;background:#ffffff28;border-radius:9px;overflow:hidden;margin-top:4px}
+#fuelBar{height:100%;width:100%;background:linear-gradient(90deg,#ff6a59,#ffdf65,#baff68);transition:width .2s}
+.speed{position:absolute;z-index:2;right:17px;bottom:90px;width:92px;height:92px;border:3px solid #b8edff77;border-radius:50%;background:#07111ee8;display:flex;flex-direction:column;justify-content:center;align-items:center;box-shadow:0 0 30px #5ce5ff33;pointer-events:none}
+.speed b{font:800 24px Orbitron;color:#c8ff65}
+.speed small{font-size:9px;letter-spacing:2px;color:#b8cde1;margin-top:4px}
+.overlay{position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%);width:min(390px,calc(100% - 28px));padding:26px 20px;text-align:center;border:1px solid #b6e8ff40;border-radius:20px;background:linear-gradient(145deg,#081426f5,#102039ed);box-shadow:0 20px 70px #0008}
+.hidden{display:none!important}
+.eyebrow{font-size:9px;letter-spacing:3px;color:#9cecff;font-weight:700}
+h1{font:900 clamp(36px,8vw,56px)/1.05 Orbitron,sans-serif;letter-spacing:-2px;margin:15px 0}
+h1 span{color:#6beaff}
+.overlay p{font-size:12px;line-height:1.7;color:#b8cbe0}
+.overlay button{width:100%;padding:15px 10px;margin:12px 0;border:0;border-radius:10px;background:linear-gradient(100deg,#d4ff67,#61f1c3);color:#06121b;font:800 12px Orbitron,sans-serif;letter-spacing:.5px;cursor:pointer}
+.overlay button span{margin-left:8px}
+.overlay>small{display:block;color:#8ea8c5;font-size:10px}
+.controls{position:absolute;z-index:3;left:13px;right:13px;bottom:13px;display:flex;justify-content:space-between;gap:12px}
+.control{width:130px;max-width:42%;padding:16px 8px;border:1px solid #ffffff40;border-radius:12px;background:#07111edc;color:white;font:800 11px Orbitron,sans-serif;touch-action:none;user-select:none}
+.accelerate{background:#155b43e8;border-color:#a7ff8360}
+.brake{background:#6a2737e8;border-color:#ffaaaa60}
+.control:active{filter:brightness(1.4);transform:translateY(2px)}
+footer{display:flex;justify-content:space-between;gap:10px;padding:13px 3px;color:#6c86a4;font-size:8px;letter-spacing:1px}
+@media(max-width:560px){
+ body{padding:7px}
+ .header{height:52px}
+ #game{height:calc(100dvh - 85px);min-height:440px;max-height:780px;border-radius:13px}
+ #hud{top:9px;left:8px;right:8px;gap:5px}
+ .stat{min-width:0;padding:8px}
+ .stat b{font-size:13px}
+ .stat small{font-size:7px;letter-spacing:.8px}
+ .fuel{width:90px}
+ .speed{width:75px;height:75px;right:12px;bottom:80px}
+ .speed b{font-size:19px}
+ .overlay{padding:23px 17px}
+ .control{font-size:9px;padding:15px 4px}
+ footer{font-size:7px}
+}
