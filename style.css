@@ -1,56 +1,53 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Inter:wght@400;600;700&display=swap');
 
 *{box-sizing:border-box}
-body{margin:0;padding:12px;background:#070d18;color:#f4f8ff;font-family:Inter,Arial,sans-serif}
-.app{max-width:1200px;margin:auto}
-.header{height:64px;display:flex;align-items:center;gap:12px;font-family:Orbitron,sans-serif;letter-spacing:1px}
-.logo{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#6bf2ff,#657bff);color:#07111f;font-size:27px;font-weight:900}
-.header strong,.header small{display:block}
-.header strong{font-size:13px}
-.header small{font-size:9px;letter-spacing:3px;color:#6be9ff;margin-top:4px}
-.live{margin-left:auto;color:#baff68;font-size:10px;letter-spacing:2px}
-#game{height:min(76vh,720px);min-height:450px;position:relative;overflow:hidden;border:1px solid #4fdfff55;border-radius:18px;background:#82cfff;box-shadow:0 20px 70px #0008}
-#game canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-#hud{position:absolute;z-index:2;top:14px;left:14px;right:14px;display:flex;gap:9px;pointer-events:none}
-.stat{padding:10px 12px;min-width:92px;background:#07111edb;border:1px solid #a8dcff30;border-radius:11px;backdrop-filter:blur(8px)}
-.stat small{display:block;font-size:9px;letter-spacing:1.5px;color:#a7bed8;margin-bottom:5px}
-.stat b{font:700 17px Orbitron,sans-serif}
-.stat i{font:10px Inter,sans-serif;color:#b3c6dd}
-.gold{color:#ffe66b!important}
-.fuel{margin-left:auto;width:120px;min-width:90px}
-.fuelTrack{height:8px;background:#ffffff28;border-radius:9px;overflow:hidden;margin-top:4px}
-#fuelBar{height:100%;width:100%;background:linear-gradient(90deg,#ff6a59,#ffdf65,#baff68);transition:width .2s}
-.speed{position:absolute;z-index:2;right:17px;bottom:90px;width:92px;height:92px;border:3px solid #b8edff77;border-radius:50%;background:#07111ee8;display:flex;flex-direction:column;justify-content:center;align-items:center;box-shadow:0 0 30px #5ce5ff33;pointer-events:none}
-.speed b{font:800 24px Orbitron;color:#c8ff65}
-.speed small{font-size:9px;letter-spacing:2px;color:#b8cde1;margin-top:4px}
-.overlay{position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%);width:min(390px,calc(100% - 28px));padding:26px 20px;text-align:center;border:1px solid #b6e8ff40;border-radius:20px;background:linear-gradient(145deg,#081426f5,#102039ed);box-shadow:0 20px 70px #0008}
+:root{color-scheme:dark;font-family:Inter,Arial,sans-serif}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07101b;color:#fff}
+button,select{font:inherit}
+button{cursor:pointer;touch-action:manipulation}
+#game{position:relative;width:100%;height:100%;overflow:hidden;background:linear-gradient(#102844,#8ab0c7)}
+canvas{display:block;width:100%;height:100%;outline:none}
+#loading{position:absolute;z-index:20;inset:0;display:grid;place-items:center;background:#07101b;font-size:18px;font-weight:700}
+#hud{position:absolute;z-index:5;top:0;left:0;width:100%;padding:16px;display:flex;align-items:flex-start;gap:14px;pointer-events:none;background:linear-gradient(#06101bdc,transparent)}
+.brand{color:#fff;text-decoration:none;font-weight:1000;letter-spacing:1px;font-size:15px;pointer-events:auto;white-space:nowrap}
+.brand span{color:#47e5ff}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.stat{background:#071323ce;border:1px solid #ffffff25;padding:9px 12px;border-radius:10px;font-size:13px;backdrop-filter:blur(8px)}
+.fuel-panel{margin-left:auto;min-width:120px;background:#071323ce;border:1px solid #ffffff25;border-radius:10px;padding:9px 12px;font-size:11px}
+.fuel-panel span{color:#b9c8d8;font-weight:800;letter-spacing:1px}
+.fuel-track{height:7px;margin:7px 0;background:#344256;border-radius:8px;overflow:hidden}
+#fuel-bar{width:100%;height:100%;background:#36e68b;transition:width .2s,background .2s}
+#fuel-text{font-size:12px}
+.small-button{pointer-events:auto;border:1px solid #ffffff30;border-radius:10px;background:#071323dc;color:#fff;padding:10px 13px}
+.overlay{position:absolute;z-index:10;inset:0;display:grid;place-items:center;padding:18px;background:#03091468;backdrop-filter:blur(3px)}
 .hidden{display:none!important}
-.eyebrow{font-size:9px;letter-spacing:3px;color:#9cecff;font-weight:700}
-h1{font:900 clamp(36px,8vw,56px)/1.05 Orbitron,sans-serif;letter-spacing:-2px;margin:15px 0}
-h1 span{color:#6beaff}
-.overlay p{font-size:12px;line-height:1.7;color:#b8cbe0}
-.overlay button{width:100%;padding:15px 10px;margin:12px 0;border:0;border-radius:10px;background:linear-gradient(100deg,#d4ff67,#61f1c3);color:#06121b;font:800 12px Orbitron,sans-serif;letter-spacing:.5px;cursor:pointer}
-.overlay button span{margin-left:8px}
-.overlay>small{display:block;color:#8ea8c5;font-size:10px}
-.controls{position:absolute;z-index:3;left:13px;right:13px;bottom:13px;display:flex;justify-content:space-between;gap:12px}
-.control{width:130px;max-width:42%;padding:16px 8px;border:1px solid #ffffff40;border-radius:12px;background:#07111edc;color:white;font:800 11px Orbitron,sans-serif;touch-action:none;user-select:none}
-.accelerate{background:#155b43e8;border-color:#a7ff8360}
-.brake{background:#6a2737e8;border-color:#ffaaaa60}
-.control:active{filter:brightness(1.4);transform:translateY(2px)}
-footer{display:flex;justify-content:space-between;gap:10px;padding:13px 3px;color:#6c86a4;font-size:8px;letter-spacing:1px}
-@media(max-width:560px){
- body{padding:7px}
- .header{height:52px}
- #game{height:calc(100dvh - 85px);min-height:440px;max-height:780px;border-radius:13px}
- #hud{top:9px;left:8px;right:8px;gap:5px}
- .stat{min-width:0;padding:8px}
- .stat b{font-size:13px}
- .stat small{font-size:7px;letter-spacing:.8px}
- .fuel{width:90px}
- .speed{width:75px;height:75px;right:12px;bottom:80px}
- .speed b{font-size:19px}
- .overlay{padding:23px 17px}
- .control{font-size:9px;padding:15px 4px}
- footer{font-size:7px}
+.menu-card{width:min(430px,100%);max-height:92%;overflow:auto;padding:28px;border:1px solid #ffffff28;border-radius:22px;background:linear-gradient(145deg,#13243af5,#07111df5);box-shadow:0 25px 90px #0009}
+.eyebrow{color:#43e5ff;font-size:11px;font-weight:900;letter-spacing:3px}
+h1{font-size:clamp(32px,7vw,49px);line-height:1;margin:12px 0}
+h1 span{color:#44e4ff}
+h2{font-size:30px;margin:12px 0}
+.subtitle{color:#c2d0df;font-size:14px;line-height:1.6}
+label{display:block;margin:20px 0 8px;color:#b9c8d8;font-size:11px;font-weight:900;letter-spacing:1.5px}
+select{width:100%;padding:13px;border-radius:10px;border:1px solid #31455e;background:#0c1b2c;color:#fff}
+.primary-button,.secondary-button{width:100%;margin-top:16px;padding:15px;border:0;border-radius:11px;font-weight:1000;letter-spacing:.5px}
+.primary-button{color:#05111a;background:linear-gradient(100deg,#42e4ff,#47efa2)}
+.secondary-button{color:#fff;background:#20344a;border:1px solid #ffffff1a}
+.hint{font-size:11px;line-height:1.6;color:#92a6ba;margin:12px 0 0}
+#controls{position:absolute;z-index:6;bottom:20px;left:0;width:100%;display:flex;align-items:end;justify-content:space-between;padding:0 20px;pointer-events:none}
+.control{pointer-events:auto;width:clamp(54px,12vw,76px);height:clamp(54px,12vw,76px);border:1px solid #ffffff65;border-radius:20px;color:white;font-size:24px;font-weight:900;background:#071323b8;box-shadow:0 8px 25px #0003;backdrop-filter:blur(6px);user-select:none;-webkit-user-select:none}
+.control:active{transform:scale(.94);background:#35cfe9d9}
+.brake{margin-left:auto;margin-right:10px;color:#ffcc80}
+.gas{background:#1cbb8cce;color:#fff;margin-right:10px}
+#toast{position:absolute;z-index:8;top:110px;left:50%;transform:translateX(-50%);padding:10px 16px;border-radius:10px;background:#071323e8;color:#ffe477;font-size:13px;font-weight:900;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1}
+@media(max-width:650px){
+ #hud{padding:10px;gap:7px;flex-wrap:wrap}
+ .brand{font-size:12px;width:100%}
+ .stats{gap:5px}
+ .stat{padding:7px 9px;font-size:11px}
+ .fuel-panel{min-width:95px;padding:7px 9px}
+ .small-button{padding:7px 10px}
+ #controls{padding:0 12px;bottom:14px}
+ .control{border-radius:17px}
+ .menu-card{padding:22px}
 }
