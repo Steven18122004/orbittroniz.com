@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Racing Car 3D UIX - Like Your Image - Orbittroniz</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;user-select:none;-webkit-user-select:none}
+body{background:#000;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.gameWrap{width:100%;max-width:480px;height:100vh;max-height:900px;position:relative;background:linear-gradient(180deg,#38bdf8 0%, #7dd3fc 30%, #fde047 100%);overflow:hidden;display:flex;flex-direction:column}
+canvas{flex:1;width:100%;display:block;touch-action:none}
+/* Steering Wheel - Like your image left bottom */
+.steering{position:absolute;left:12px;bottom:18px;width:96px;height:96px;background:radial-gradient(circle at 30% 30%, #e5e7eb, #6b7280 60%, #374151);border:4px solid #1f2937;border-radius:50%;display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.6);z-index:10;transition:transform 0.1s}
+.steeringInner{width:28px;height:28px;background:#1f2937;border-radius:50%;border:2px solid #9ca3af}
+.steeringSpoke{position:absolute;width:40px;height:8px;background:#d1d5db;border-radius:4px;top:50%;left:50%;transform-origin:left center}
+.steeringSpoke:nth-child(2){transform:translate(0,-50%) rotate(0deg)}
+.steeringSpoke:nth-child(3){transform:translate(0,-50%) rotate(120deg)}
+.steeringSpoke:nth-child(4){transform:translate(0,-50%) rotate(240deg)}
+/* Pedals - Like your image right bottom */
+.pedals{position:absolute;right:12px;bottom:18px;display:flex;gap:12px;z-index:10}
+.pedal{width:48px;height:64px;background:linear-gradient(180deg,#f3f4f6,#9ca3af);border:3px solid #1f2937;border-radius:8px;display:grid;place-items:center;box-shadow:0 6px 12px rgba(0,0,0,0.3), inset 0 2px 0 #fff;cursor:pointer;transition:0.08s;font-size:20px}
+.pedal:active{transform:scale(0.92) translateY(3px);box-shadow:0 2px 6px rgba(0,0,0,0.3)}
+.pedal.brake{height:48px;margin-top:16px}
+.pedal.brake::after{content:'▬▬▬';font-size:10px;letter-spacing:1px}
+.pedal.acc::after{content:'║';font-size:24px;font-weight:900}
+/* Top HUD */
+.hud{position:absolute;top:0;left:0;right:0;height:64px;background:linear-gradient(180deg,rgba(0,0,0,0.5),transparent);display:flex;justify-content:space-between;align-items:center;padding:10px 14px;z-index:10;color:#fff}
+.hudStat{background:rgba(0,0,0,0.5);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:800;display:flex;align-items:center;gap:6px}
+.btnNitro{position:absolute;right:12px;top:80px;width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fbbf24, #d97706);border:3px solid #000;color:#000;font-weight:900;font-size:11px;display:grid;place-items:center;box-shadow:0 6px 0 #000, 0 8px 20px rgba(0,0,0,0.3);z-index:10;cursor:pointer}
+.btnNitro:active{transform:translateY(4px);box-shadow:0 2px 0 #000}
+#msg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px;font-weight:900;color:#fff;text-shadow:0 4px 12px rgba(0,0,0,0.8);z-index:20;pointer-events:none;text-align:center}
+</style>
+</head>
+<body>
+<div class="gameWrap">
+<div class="hud">
+<div class="hudStat">🏁 <span id="score">0</span> m</div>
+<div class="hudStat">🪙 <span id="coins">0</span> | ⛽ <span id="fuel">100</span>%</div>
+<div class="hudStat">💨 <span id="speed">0</span> km/h</div>
+</div>
+<div class="btnNitro" onclick="useNitro()">🚀<br>NITRO</div>
+<canvas id="c" width="480" height="800"></canvas>
+<div id="msg"></div>
+<!-- Steering like image -->
+<div class="steering" id="steering">
+<div class="steeringSpoke"></div>
+<div class="steeringSpoke"></div>
+<div class="steeringSpoke"></div>
+<div class="steeringInner"></div>
+</div>
+<!-- Pedals like image -->
+<div class="pedals">
+<div class="pedal brake" id="brake"></div>
+<div class="pedal acc" id="acc"></div>
+</div>
+</div>
+<script>
+const cvs=document.getElementById('c'), ctx=cvs.getContext('2d');
+let carX=0, carY=0, speed=0, maxSpeed=220, score=0, coins=0, fuel=100, nitro=100, nitroActive=0, steerAngle=0;
+let roadOffset=0, obstacles=[], coinsOnRoad=[], roadCurve=0, targetCurve=0;
+let isAccelerating=false, isBraking=false, isSteeringLeft=false, isSteeringRight=false;
+let gameOver=false;
+
+const roadWidth=400;
+const horizon=200;
+
+function drawRoad(){
+  // Sky like image - blue with clouds
+  let skyGrad=ctx.createLinearGradient(0,0,0,horizon);
+  skyGrad.addColorStop(0,'#38bdf8');
+  skyGrad.addColorStop(0.5,'#7dd3fc');
+  skyGrad.addColorStop(1,'#e0f2fe');
+  ctx.fillStyle=skyGrad;
+  ctx.fillRect(0,0,480,horizon);
+  
+  // Hills green like image
+  ctx.fillStyle='#22c55e';
+  ctx.beginPath();
+  ctx.moveTo(0,horizon);
+  ctx.quadraticCurveTo(120,horizon-80,240,horizon-20);
+  ctx.quadraticCurveTo(360,horizon-60,480,horizon);
+  ctx.lineTo(480,horizon+100);
+  ctx.lineTo(0,horizon+100);
+  ctx.fill();
+  
+  // Road perspective - yellow striped like image
+  for(let y=horizon; y<800; y+=4){
+    let perspective=(y-horizon)/(800-horizon);
+    let width=roadWidth*perspective + 20;
+    let curve=roadCurve*perspective*100;
+    let centerX=240 + curve;
+    
+    // Road base - yellow/orange striped like image
+    let stripePhase=Math.floor((y+roadOffset)/24)%2;
+    ctx.fillStyle=stripePhase===0?'#fbbf24':'#f59e0b';
+    ctx.fillRect(centerX-width/2, y, width, 4);
+    
+    // Road markings center white
+    if(y%40<20){
+      ctx.fillStyle='#ffffff';
+      ctx.fillRect(centerX-4, y, 8, 4);
+    }
+    
+    // Red-white barriers like image
+    if(perspective>0.1){
+      // Left barrier
+      ctx.fillStyle=(Math.floor((y+roadOffset)/20)%2===0)?'#ef4444':'#ffffff';
+      ctx.fillRect(centerX-width/2-12, y, 12, 4);
+      // Right barrier
+      ctx.fillStyle=(Math.floor((y+roadOffset)/20)%2===0)?'#ffffff':'#ef4444';
+      ctx.fillRect(centerX+width/2, y, 12, 4);
+    }
+  }
+  
+  // Distant road curving up like image - bridge
+  ctx.strokeStyle='#d97706';
+  ctx.lineWidth=3;
+  ctx.beginPath();
+  ctx.moveTo(0, horizon+20);
+  ctx.quadraticCurveTo(240, horizon-10, 480, horizon+10);
+  ctx.stroke();
+}
+
+function drawPlayerCar(){
+  let x=240+carX;
+  let y=620;
+  
+  ctx.save();
+  ctx.translate(x,y);
+  
+  // Car shadow
+  ctx.fillStyle='rgba(0,0,0,0.3)';
+  ctx.beginPath();
+  ctx.ellipse(0,30,70,18,0,0,Math.PI*2);
+  ctx.fill();
+  
+  // Car body - blue like image - 3D
+  // Rear view
+  ctx.fillStyle='#0ea5e9';
+  ctx.shadowColor='#0ea5e9';
+  ctx.shadowBlur=20;
+  ctx.beginPath();
+  ctx.roundRect(-70,-30,140,70,12);
+  ctx.fill();
+  ctx.shadowBlur=0;
+  
+  // Roof / engine
+  ctx.fillStyle='#0284c7';
+  ctx.beginPath();
+  ctx.roundRect(-40,-50,80,30,8);
+  ctx.fill();
+  
+  // Back windshield black
+  ctx.fillStyle='#0f172a';
+  ctx.beginPath();
+  ctx.roundRect(-30,-45,60,20,4);
+  ctx.fill();
+  
+  // Taillights red like image - glowing
+  ctx.fillStyle='#ef4444';
+  ctx.shadowColor='#ef4444';
+  ctx.shadowBlur=18;
+  ctx.beginPath();
+  ctx.roundRect(-65,-8,22,10,4);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.roundRect(43,-8,22,10,4);
+  ctx.fill();
+  ctx.shadowBlur=0;
+  
+  // Blue light center like image
+  ctx.fillStyle='#3b82f6';
+  ctx.shadowColor='#3b82f6';
+  ctx.shadowBlur=12;
+  ctx.beginPath();
+  ctx.arc(0,2,5,0,Math.PI*2);
+  ctx.fill();
+  ctx.shadowBlur=0;
+  
+  // License plate white like image
+  ctx.fillStyle='#ffffff';
+  ctx.beginPath();
+  ctx.roundRect(-28,8,56,12,2);
+  ctx.fill();
+  ctx.strokeStyle='#000';
+  ctx.lineWidth=1;
+  ctx.stroke();
+  
+  // Nitro flames when active
+  if(nitroActive>0){
+    ctx.fillStyle='#fbbf24';
+    ctx.shadowColor='#fbbf24';
+    ctx.shadowBlur=20;
+    ctx.beginPath();
+    ctx.moveTo(-40,30);
+    ctx.quadraticCurveTo(-20,60+Math.random()*20,0,50);
+    ctx.quadraticCurveTo(20,60+Math.random()*20,40,30);
+    ctx.fill();
+    ctx.shadowBlur=0;
+  }
+  
+  ctx.restore();
+}
+
+function drawObstacles(){
+  obstacles.forEach(ob=>{
+    let perspective=(ob.y-horizon)/(800-horizon);
+    if(perspective<=0) return;
+    let width=roadWidth*perspective;
+    let curve=roadCurve*perspective*100;
+    let centerX=240+curve;
+    let x=centerX + ob.offset*perspective - (ob.w*perspective)/2;
+    let y=ob.y;
+    let w=ob.w*perspective;
+    let h=ob.h*perspective;
+    
+    if(ob.type==='car'){
+      // Other cars - blue, green like image
+      ctx.fillStyle=ob.color;
+      ctx.shadowColor=ob.color;
+      ctx.shadowBlur=10*perspective;
+      ctx.beginPath();
+      ctx.roundRect(x,y,w,h,4*perspective);
+      ctx.fill();
+      ctx.shadowBlur=0;
+      
+      // Car roof
+      ctx.fillStyle=shade(ob.color,-20);
+      ctx.fillRect(x+w*0.2,y+h*0.2,w*0.6,h*0.3);
+    } else if(ob.type==='coin'){
+      ctx.fillStyle='#fbbf24';
+      ctx.shadowColor='#fbbf24';
+      ctx.shadowBlur=12*perspective;
+      ctx.beginPath();
+      ctx.arc(x+w/2,y+h/2,8*perspective,0,Math.PI*2);
+      ctx.fill();
+      ctx.fillStyle='#000';
+      ctx.font=`bold ${10*perspective}px Inter`;
+      ctx.textAlign='center';
+      ctx.fillText('🪙',x+w/2,y+h/2+3*perspective);
+      ctx.shadowBlur=0;
+    }
+  });
+}
+
+function shade(color,percent){
+  // simple shade
+  return color;
+}
+
+function gameLoop(){
+  if(gameOver) return;
+  
+  roadOffset+=speed*0.3;
+  
+  // Steering
+  if(isSteeringLeft) carX-=6 + speed*0.02;
+  if(isSteeringRight) carX+=6 + speed*0.02;
+  carX=Math.max(-180,Math.min(180,carX));
+  
+  // Speed
+  if(isAccelerating){
+    if(nitroActive>0){
+      speed=Math.min(maxSpeed+80,speed+2);
+      nitroActive--;
+    } else {
+      speed=Math.min(maxSpeed,speed+0.8);
+    }
+    fuel-=0.02;
+  } else {
+    speed=Math.max(0,speed-0.6);
+  }
+  if(isBraking){
+    speed=Math.max(0,speed-3);
+  }
+  
+  // Curve
+  roadCurve+=(targetCurve-roadCurve)*0.02;
+  if(Math.random()<0.008){
+    targetCurve=(Math.random()-0.5)*1.2;
+  }
+  
+  // Apply curve force to car
+  carX+=roadCurve* speed*0.05;
+  
+  // Spawn obstacles - like image other cars ahead
+  if(Math.random()<0.03 + speed*0.0001){
+    let type=Math.random()>0.6?'coin':'car';
+    let colors=['#22c55e','#3b82f6','#ef4444','#fbbf24'];
+    obstacles.push({
+      x:0,
+      y:horizon-20,
+      w:type==='car'?50:24,
+      h:type==='car'?70:24,
+      offset:(Math.random()-0.5)*300,
+      type:type,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      speed:2+Math.random()*2
+    });
+  }
+  
+  // Move obstacles
+  obstacles.forEach(ob=>ob.y+=ob.speed + speed*0.15);
+  obstacles=obstacles.filter(ob=>ob.y<850);
+  
+  // Collision
+  obstacles.forEach((ob,i)=>{
+    if(ob.type==='car'){
+      let perspective=(ob.y-horizon)/(800-horizon);
+      let width=roadWidth*perspective;
+      let curve=roadCurve*perspective*100;
+      let centerX=240+curve;
+      let x=centerX + ob.offset*perspective;
+      let y=ob.y;
+      if(Math.abs((240+carX)-x)<40 && Math.abs(620-y)<50 && perspective>0.5){
+        // Crash
+        document.getElementById('msg').innerText='💥 CRASH! 💥';
+        setTimeout(()=>document.getElementById('msg').innerText='',1200);
+        speed*=0.3;
+        fuel-=5;
+        obstacles.splice(i,1);
+      }
+    } else if(ob.type==='coin'){
+      let perspective=(ob.y-horizon)/(800-horizon);
+      let curve=roadCurve*perspective*100;
+      let centerX=240+curve;
+      let x=centerX + ob.offset*perspective;
+      let y=ob.y;
+      if(Math.abs((240+carX)-x)<35 && Math.abs(620-y)<40 && perspective>0.5){
+        coins++;
+        score+=10;
+        document.getElementById('coins').innerText=coins;
+        document.getElementById('score').innerText=Math.floor(score);
+        obstacles.splice(i,1);
+      }
+    }
+  });
+  
+  // Score
+  score+=speed*0.01;
+  document.getElementById('score').innerText=Math.floor(score);
+  document.getElementById('speed').innerText=Math.floor(speed);
+  document.getElementById('fuel').innerText=Math.max(0,Math.floor(fuel));
+  
+  if(fuel<=0){
+    gameOver=true;
+    document.getElementById('msg').innerHTML='⛽ OUT OF FUEL!<br><span style="font-size:16px">Score: '+Math.floor(score)+' - Tap to Restart</span>';
+    cvs.onclick=()=>location.reload();
+    return;
+  }
+  
+  if(nitro<100 && !isAccelerating) nitro+=0.08;
+  
+  // Draw
+  drawRoad();
+  drawObstacles();
+  drawPlayerCar();
+  
+  requestAnimationFrame(gameLoop);
+}
+
+// Controls - Steering wheel like image
+const steering=document.getElementById('steering');
+let steeringStartX=0, steeringDragging=false;
+
+steering.addEventListener('touchstart',e=>{
+  steeringDragging=true;
+  steeringStartX=e.touches[0].clientX;
+  e.preventDefault();
+});
+steering.addEventListener('touchmove',e=>{
+  if(!steeringDragging) return;
+  let diff=e.touches[0].clientX-steeringStartX;
+  steerAngle=diff*0.8;
+  steering.style.transform=`rotate(${steerAngle}deg)`;
+  if(diff<-15){ isSteeringLeft=true; isSteeringRight=false; }
+  else if(diff>15){ isSteeringRight=true; isSteeringLeft=false; }
+  else { isSteeringLeft=false; isSteeringRight=false; }
+  e.preventDefault();
+});
+steering.addEventListener('touchend',()=>{
+  steeringDragging=false;
+  steerAngle=0;
+  steering.style.transform=`rotate(0deg)`;
+  isSteeringLeft=false;
+  isSteeringRight=false;
+});
+steering.addEventListener('mousedown',e=>{
+  steeringDragging=true;
+  steeringStartX=e.clientX;
+});
+window.addEventListener('mousemove',e=>{
+  if(!steeringDragging) return;
+  let diff=e.clientX-steeringStartX;
+  steerAngle=diff*0.8;
+  steering.style.transform=`rotate(${steerAngle}deg)`;
+  if(diff<-15){ isSteeringLeft=true; isSteeringRight=false; }
+  else if(diff>15){ isSteeringRight=true; isSteeringLeft=false; }
+  else { isSteeringLeft=false; isSteeringRight=false; }
+});
+window.addEventListener('mouseup',()=>{
+  if(steeringDragging){
+    steeringDragging=false;
+    steerAngle=0;
+    steering.style.transform=`rotate(0deg)`;
+    isSteeringLeft=false;
+    isSteeringRight=false;
+  }
+});
+
+// Pedals like image
+document.getElementById('acc').addEventListener('touchstart',e=>{ isAccelerating=true; e.preventDefault(); });
+document.getElementById('acc').addEventListener('touchend',()=>isAccelerating=false);
+document.getElementById('acc').addEventListener('mousedown',()=>isAccelerating=true);
+document.getElementById('acc').addEventListener('mouseup',()=>isAccelerating=false);
+
+document.getElementById('brake').addEventListener('touchstart',e=>{ isBraking=true; e.preventDefault(); });
+document.getElementById('brake').addEventListener('touchend',()=>isBraking=false);
+document.getElementById('brake').addEventListener('mousedown',()=>isBraking=true);
+document.getElementById('brake').addEventListener('mouseup',()=>isBraking=false);
+
+// Keyboard for desktop testing
+window.addEventListener('keydown',e=>{
+  if(e.key==='ArrowLeft'||e.key==='a') isSteeringLeft=true;
+  if(e.key==='ArrowRight'||e.key==='d') isSteeringRight=true;
+  if(e.key==='ArrowUp'||e.key==='w') isAccelerating=true;
+  if(e.key==='ArrowDown'||e.key==='s') isBraking=true;
+  if(e.key===' ') useNitro();
+});
+window.addEventListener('keyup',e=>{
+  if(e.key==='ArrowLeft'||e.key==='a') isSteeringLeft=false;
+  if(e.key==='ArrowRight'||e.key==='d') isSteeringRight=false;
+  if(e.key==='ArrowUp'||e.key==='w') isAccelerating=false;
+  if(e.key==='ArrowDown'||e.key==='s') isBraking=false;
+});
+
+function useNitro(){
+  if(nitro>=20){
+    nitro-=20;
+    nitroActive=120;
+    document.getElementById('msg').innerText='🚀 NITRO! 🚀';
+    setTimeout(()=>{ if(!gameOver) document.getElementById('msg').innerText=''; },600);
+  }
+}
+
+gameLoop();
+</script>
+</body>
+</html>
