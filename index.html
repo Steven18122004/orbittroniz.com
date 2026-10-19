@@ -7,7 +7,10 @@
   <meta name="theme-color" content="#090d1c" />
   <meta name="description" content="Play free browser games on Orbittroniz Games: Ludo, Snake, Tic-Tac-Toe, Memory Match and 2048." />
   <title>Orbittroniz Games — Play Beyond</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
   <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
@@ -42,6 +45,6 @@
   </main>
   <div class="modal hidden" id="gameModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-backdrop" data-close="true"></div><section class="game-window"><header class="game-window-head"><div><div class="eyebrow">ORBITTRONIZ ARCADE</div><h2 id="modalTitle">Game</h2></div><button class="close-btn" id="closeGame" aria-label="Close game">✕</button></header><div id="gameContent" class="game-content"></div></section></div>
   <div class="toast" id="toast" role="status"></div>
-  <script src="games.js"></script>
+  <script src="./games.js" defer></script>
 </body>
 </html>
