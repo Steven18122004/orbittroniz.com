@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#07111f">
+  <title>Orbittroniz Neon Offroad</title>
+  <meta name="description" content="Drive, jump and collect coins in Orbittroniz Neon Offroad, a free 3D racing game.">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script src="game.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div class="logo">O</div>
+      <div><strong>ORBITTRONIZ</strong><small>NEON OFFROAD</small></div>
+      <div class="live">● ARCADE</div>
+    </header>
+
+    <section id="game">
+      <div id="hud">
+        <div class="stat"><small>DISTANCE</small><b><span id="distance">0</span> <i>m</i></b></div>
+        <div class="stat"><small>COINS</small><b class="gold">◆ <span id="coins">0</span></b></div>
+        <div class="stat fuel"><small>FUEL</small><div class="fuelTrack"><div id="fuelBar"></div></div></div>
+      </div>
+
+      <div class="speed"><b id="speed">0</b><small>KM/H</small></div>
+
+      <div id="start" class="overlay">
+        <div class="eyebrow">THE MOUNTAINS ARE YOURS</div>
+        <h1>NEON<br><span>OFFROAD</span></h1>
+        <p>Climb higher. Fly farther. Beat your record.</p>
+        <button id="startBtn">START YOUR ENGINE <span>▶</span></button>
+        <small>W / ↑ to accelerate · S / ↓ to brake</small>
+      </div>
+
+      <div id="gameover" class="overlay hidden">
+        <div class="eyebrow">END OF THE RUN</div>
+        <h1>TRY<br><span>AGAIN</span></h1>
+        <p id="reason">You ran out of fuel.</p>
+        <button id="restartBtn">RACE AGAIN ↻</button>
+      </div>
+
+      <div class="controls">
+        <button id="brake" class="control brake">◀ BRAKE</button>
+        <button id="gas" class="control accelerate">GAS ▶</button>
+      </div>
+    </section>
+
+    <footer><span>ORIGINAL GAME • ORBITTRONIZ</span><span>BUILD YOUR LEGEND</span></footer>
+  </main>
+</body>
+</html>
