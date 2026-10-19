@@ -1,16 +1,47 @@
+
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07111f">
-<meta name="description" content="Orbittroniz Neon Offroad — free browser-based 3D driving game."><title>Orbittroniz Neon Offroad</title><link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#090d1c" />
+  <meta name="description" content="Play free browser games on Orbittroniz Games: Ludo, Snake, Tic-Tac-Toe, Memory Match and 2048." />
+  <title>Orbittroniz Games — Play Beyond</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body><main id="app">
-<header class="topbar"><a class="brand" href="./"><span class="brand-mark">O</span><span><b>ORBITTRONIZ</b><small>NEON OFFROAD</small></span></a><div class="top-status"><i class="status-dot"></i><span id="status-text">ENGINE READY</span></div><button id="sound-toggle" class="icon-button">♪ <span id="sound-label">SOUND OFF</span></button></header>
-<section class="game-shell"><div id="game-stage" class="game-stage"><div id="loading-screen" class="loading-screen"><div class="loader-ring"></div><strong>BUILDING YOUR WORLD</strong><span>Starting Orbittroniz 3D engine…</span></div>
-<div class="hud"><div class="hud-card speed-card"><span class="hud-label">SPEED</span><div class="speed-line"><strong id="speed-value">0</strong><span>KM/H</span></div><div class="speed-track"><span id="speed-bar"></span></div></div><div class="hud-card stats-card"><div><span class="hud-label">COINS</span><strong>◈ <span id="coin-value">0</span></strong></div><div><span class="hud-label">FUEL</span><strong>⛽ <span id="fuel-value">100</span>%</strong></div><div><span class="hud-label">DISTANCE</span><strong><span id="distance-value">0</span> m</strong></div></div><div class="hud-card road-card"><span class="hud-label">CURRENT TERRAIN</span><strong id="terrain-name">DUST RUN</strong><span class="road-subtitle" id="gear-hud">MANUAL · GEAR 1</span></div></div>
-<div id="center-message" class="center-message" aria-live="polite"></div><div class="stage-bottom"><div class="mini-tip">WASD / ARROWS TO DRIVE · DRAG WHEEL ON MOBILE</div><button id="pause-button" class="pause-button">Ⅱ PAUSE</button></div></div>
-<section class="controls-panel" aria-label="Driving controls"><div class="steering-area"><div class="control-heading">STEERING<small>DRAG TO TURN</small></div><div id="steering-wheel" role="slider" aria-label="Steering wheel" aria-valuemin="-100" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="wheel-ring"><div class="wheel-spoke spoke-top"></div><div class="wheel-spoke spoke-left"></div><div class="wheel-spoke spoke-right"></div><div class="wheel-hub">O</div></div></div></div>
-<div class="pedals-area"><div class="gear-panel"><div><span class="control-heading">TRANSMISSION</span><small class="muted">MANUAL</small></div><button id="gear-down" class="gear-button" aria-label="Lower gear">−</button><strong id="gear-display">1</strong><button id="gear-up" class="gear-button" aria-label="Higher gear">+</button></div><div class="utility-pedals"><button id="clutch-btn" class="pedal clutch">CLUTCH</button><button id="handbrake-btn" class="pedal handbrake">HANDBRAKE</button></div><div class="pedal-row"><button id="brake-btn" class="pedal brake"><span>▾</span>BRAKE</button><button id="gas-btn" class="pedal gas"><span>▲</span>ACCELERATOR</button></div></div></section></section>
-<section class="lower-grid"><section class="panel garage-panel"><div class="section-heading"><div><span class="eyebrow">YOUR COLLECTION</span><h2>Garage <span class="live-dot"></span></h2></div><span class="coin-pill">◈ <b id="garage-coins">0</b> COINS</span></div><div id="car-list" class="car-list"></div></section><section class="panel mission-panel"><div class="section-heading"><div><span class="eyebrow">FIELD OBJECTIVE</span><h2>Run briefing</h2></div><span class="mission-icon">✦</span></div><p class="mission-copy">Keep your wheels on the track, collect glowing coins and fuel cans, and avoid rocks and barriers to protect your run.</p><div class="mission-row"><span>COINS COLLECTED THIS RUN</span><strong id="mission-coins">0 / 10</strong></div><div class="mission-progress"><span id="mission-progress"></span></div><div class="terrain-select"><label for="terrain-select">CHOOSE TERRAIN</label><select id="terrain-select"><option value="dust">Dust Run</option><option value="asphalt">Neon Highway</option><option value="snow">Frost Trail</option><option value="desert">Red Desert</option></select></div><button id="restart-button" class="primary-button">↻ RESTART RUN</button></section></section>
-<footer><span>ORBITTRONIZ <b>×</b> NEON OFFROAD</span><span>Browser game · Progress saved on this device</span></footer></main>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script><script src="config.js"></script><script src="game.js"></script></body></html>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Orbittroniz Games home"><span class="brand-mark">O</span><span>ORBITTRONIZ<span class="brand-sub">GAMES</span></span></a>
+    <div class="top-actions"><span class="live-dot"></span><span class="online-label">ALL GAMES READY</span><button id="soundToggle" class="icon-btn" title="Toggle sound" aria-label="Toggle sound">♫</button></div>
+  </header>
+  <main id="home" class="shell">
+    <section class="hero">
+      <div class="hero-copy"><div class="eyebrow"><span class="spark">✦</span> YOUR NEXT LEVEL STARTS HERE</div>
+        <h1>PLAY BEYOND<br><span>THE ORDINARY.</span></h1>
+        <p>A universe of quick challenges, clever moves and friendly competition. Pick a game and jump straight in.</p>
+        <div class="hero-actions"><button class="primary-btn" id="exploreBtn">Explore games <span>↘</span></button><span class="micro-note">FREE TO PLAY · NO DOWNLOAD</span></div>
+      </div>
+      <div class="hero-art" aria-label="Decorative 3D game orb"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="planet"><span>O</span></div><div class="float-chip chip-a">✦ <small>PLAY</small></div><div class="float-chip chip-b">↗ <small>LEVEL UP</small></div><div class="art-grid"></div></div>
+    </section>
+    <section class="stats-row"><div><strong>05</strong><span>GAMES TO PLAY</span></div><div><strong>∞</strong><span>WAYS TO HAVE FUN</span></div><div><strong>0</strong><span>PAID API REQUIRED</span></div><div class="stats-end">MADE FOR YOUR SCREEN <span>↗</span></div></section>
+    <section class="games-section" id="gamesSection">
+      <div class="section-head"><div><div class="eyebrow">THE ARCADE</div><h2>Choose your <span>game.</span></h2></div><div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search games..." aria-label="Search games" /></div></div>
+      <div class="filter-row" role="group" aria-label="Filter games"><button class="filter active" data-filter="all">All games <span>05</span></button><button class="filter" data-filter="board">Board</button><button class="filter" data-filter="arcade">Arcade</button><button class="filter" data-filter="puzzle">Puzzle</button></div>
+      <div class="game-grid" id="gameGrid">
+        <article class="game-card featured" data-name="ludo" data-category="board"><div class="card-art art-ludo"><div class="ludo-mini"><i></i><i></i><i></i><i></i><b>✦</b></div><span class="art-tag">CLASSIC</span></div><div class="card-body"><div class="card-meta"><span>BOARD GAME</span><span class="players">● 2–4 PLAYERS</span></div><h3>Ludo Royale</h3><p>Roll the dice. Race your tokens. Own the board.</p><button class="play-btn" data-open="ludo">Play game <span>↗</span></button></div></article>
+        <article class="game-card" data-name="snake" data-category="arcade"><div class="card-art art-snake"><div class="snake-board"><i></i><i></i><i></i><i></i><b></b></div><span class="art-tag">ARCADE</span></div><div class="card-body"><div class="card-meta"><span>ARCADE</span><span class="players">● SOLO</span></div><h3>Neon Snake</h3><p>Eat, grow and beat your personal best.</p><button class="play-btn" data-open="snake">Play game <span>↗</span></button></div></article>
+        <article class="game-card" data-name="tic tac toe" data-category="board"><div class="card-art art-ttt"><div class="ttt-mini"><i>×</i><i></i><i>○</i><i>○</i><i>×</i><i></i><i></i><i>○</i><i>×</i></div><span class="art-tag">QUICK MATCH</span></div><div class="card-body"><div class="card-meta"><span>BOARD GAME</span><span class="players">● 1–2 PLAYERS</span></div><h3>Tic-Tac-Toe</h3><p>A timeless battle of Xs, Os and smart moves.</p><button class="play-btn" data-open="ttt">Play game <span>↗</span></button></div></article>
+        <article class="game-card" data-name="memory match" data-category="puzzle"><div class="card-art art-memory"><div class="memory-mini"><i>✦</i><i>◈</i><i>?</i><i>✦</i></div><span class="art-tag">BRAIN TRAIN</span></div><div class="card-body"><div class="card-meta"><span>PUZZLE</span><span class="players">● SOLO</span></div><h3>Memory Match</h3><p>Flip the cards and find every matching pair.</p><button class="play-btn" data-open="memory">Play game <span>↗</span></button></div></article>
+        <article class="game-card" data-name="2048" data-category="puzzle"><div class="card-art art-2048"><div class="tiles-mini"><i>2</i><i>4</i><i>8</i><i>16</i></div><span class="art-tag">NUMBER PUZZLE</span></div><div class="card-body"><div class="card-meta"><span>PUZZLE</span><span class="players">● SOLO</span></div><h3>2048</h3><p>Combine matching tiles and reach the big number.</p><button class="play-btn" data-open="2048">Play game <span>↗</span></button></div></article>
+      </div>
+      <div id="emptyState" class="empty-state hidden">No games found. Try another search.</div>
+    </section>
+    <section class="bottom-banner"><div class="banner-icon">✦</div><div><h3>Small games. Big breaks.</h3><p>More fun, less setup. Your next favourite is one click away.</p></div><button class="outline-btn" id="backToTop">Back to top ↑</button></section>
+    <footer><a class="footer-brand" href="#home">ORBITTRONIZ <span>GAMES</span></a><span>© <span id="year"></span> Orbittroniz. Built for fun.</span><span>PLAY FAIR · HAVE FUN</span></footer>
+  </main>
+  <div class="modal hidden" id="gameModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-backdrop" data-close="true"></div><section class="game-window"><header class="game-window-head"><div><div class="eyebrow">ORBITTRONIZ ARCADE</div><h2 id="modalTitle">Game</h2></div><button class="close-btn" id="closeGame" aria-label="Close game">✕</button></header><div id="gameContent" class="game-content"></div></section></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="games.js"></script>
+</body>
+</html>
