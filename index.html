@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Orbittroniz - Ludo + Snakes & Ladders - American 3D Software</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+:root{--bg:#080b18;--panel:#11172b;--line:#283453;--cyan:#51e6ff;--green:#83c928;--yellow:#ffca05;--blue:#078fd2;--red:#d91136}
+body{background:radial-gradient(ellipse at 12% 0%,#182653 0,transparent 35%),radial-gradient(ellipse at 90% 30%,#28174b 0,transparent 30%),var(--bg);color:#f5f7ff;min-height:100vh;overflow-x:hidden}
+.appShell{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh;max-width:1600px;margin:auto}
+.sidebar{position:sticky;top:0;height:100vh;overflow:auto;padding:20px 14px;border-right:1px solid #1c3865;background:linear-gradient(180deg,#050d21f5,#04091a);display:flex;flex-direction:column;gap:18px}
+.logoWrap{display:flex;align-items:center;gap:10px;padding-bottom:18px;border-bottom:1px solid #15274a}
+.logo3D{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--cyan),#9b7bff 55%,#ff6cb5);display:grid;place-items:center;font-size:22px;color:#080b18;font-weight:900;box-shadow:0 0 28px #51e6ff55, inset 0 2px 0 rgba(255,255,255,0.6);animation:logoFloat 3s ease-in-out infinite;transform:rotate(-5deg)}
+@keyframes logoFloat{0%,100%{transform:rotate(-5deg) translateY(0) scale(1)}50%{transform:rotate(-2deg) translateY(-5px) scale(1.05)}}
+.logoText b{font-family:Space Grotesk;font-size:18px;letter-spacing:-0.5px} .logoText i{font-style:normal;font-size:9px;color:#a3afce;letter-spacing:2px;display:block}
+.nav{display:grid;gap:6px}
+.navBtn{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:12px;background:transparent;color:#c3d2f5;border:1px solid transparent;text-align:left;font-size:13px;font-weight:600;transition:0.3s;cursor:pointer}
+.navBtn.active,.navBtn:hover{background:linear-gradient(100deg,#0964f0,#1644a3);color:#fff;box-shadow:0 8px 20px #0865f044;transform:translateX(5px)}
+.liveBox{border:1px solid #1b3760;border-radius:15px;padding:14px;background:#071329aa}
+.liveBox b{color:#76d9ff;font-size:13px;display:block;margin-bottom:10px}
+.liveRow{display:flex;justify-content:space-between;font-size:11px;color:#9fb2d7;margin:6px 0}
+.main{padding:22px}
+.hero{position:relative;overflow:hidden;border:1px solid #2a4a80;border-radius:26px;padding:28px;background:radial-gradient(ellipse at 15% 50%,#7229f766,transparent 32%),radial-gradient(ellipse at 85% 20%,#008bff77,transparent 35%),linear-gradient(100deg,#071744,#15154a 55%,#061a3d);box-shadow:0 18px 45px #0008;animation:heroIn 0.8s cubic-bezier(0.34,1.56,0.64,1)}
+@keyframes heroIn{from{opacity:0;transform:translateY(20px) scale(0.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.hero h1{font-family:Space Grotesk;font-size:42px;line-height:0.95;letter-spacing:-1.5px} .hero h1 span{background:linear-gradient(90deg,#fff,var(--cyan),#c6aaff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:650px;color:#c0c9e5;line-height:1.6;margin:12px 0 18px;font-size:14px}
+.badges{display:flex;gap:8px;flex-wrap:wrap}
+.badge{border:1px solid #2a4a80;background:#11172b;border-radius:999px;padding:6px 12px;font-size:10px;font-weight:800;color:#a3afce}
+.games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
+@media(max-width:900px){.games{grid-template-columns:1fr}.appShell{grid-template-columns:1fr}.sidebar{position:relative;height:auto}}
+.gameCard{position:relative;overflow:hidden;border-radius:20px;border:1px solid #1e3a6b;background:linear-gradient(160deg,#0e1a38,#0a1020);box-shadow:0 12px 30px #0004;transition:all 0.45s cubic-bezier(0.34,1.56,0.64,1);cursor:pointer;animation:cardIn 0.6s cubic-bezier(0.34,1.56,0.64,1) backwards}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+.gameCard:hover{transform:translateY(-8px) scale(1.02);border-color:var(--cyan);box-shadow:0 20px 50px #0006,0 0 30px var(--cyan)22}
+.gameCard.active{border-color:var(--cyan);box-shadow:0 0 0 2px var(--cyan),0 20px 50px #0006}
+.gameArt{height:160px;display:grid;place-items:center;position:relative;overflow:hidden}
+.gameArt img{width:100%;height:100%;object-fit:cover;opacity:0.9;transition:0.5s}
+.gameCard:hover .gameArt img{transform:scale(1.08)}
+.tag{position:absolute;left:12px;top:12px;background:#090d1dbb;border:1px solid #ffffff25;border-radius:99px;padding:5px 10px;font-size:9px;font-weight:800;letter-spacing:1px}
+.info{padding:14px}
+.info h3{font-family:Space Grotesk;font-size:18px} .info p{font-size:12px;color:#a3afce;line-height:1.5;margin-top:6px;min-height:36px}
+.playBtn{margin-top:12px;width:100%;height:40px;border-radius:12px;background:linear-gradient(100deg,#0876ff,#1249bb);color:#fff;font-weight:800;font-size:12px;border:1px solid #147de9;transition:0.3s}
+.playBtn:hover{filter:brightness(1.2);transform:translateY(-2px)}
+.gameWindow{margin-top:20px;background:linear-gradient(150deg,#151d35,#0b1020);border:1px solid #2a4a80;border-radius:22px;overflow:hidden;box-shadow:0 25px 80px #0008;display:none;animation:winIn 0.5s cubic-bezier(0.34,1.56,0.64,1)}
+.gameWindow.show{display:block}
+@keyframes winIn{from{opacity:0;transform:translateY(20px) scale(0.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.gHead{padding:16px 18px;border-bottom:1px solid #283453;display:flex;justify-content:space-between;align-items:center;background:#121a30f2;backdrop-filter:blur(20px);position:sticky;top:0;z-index:5}
+.gHead h2{font-family:Space Grotesk;font-size:18px} .gHead p{font-size:11px;color:#a3afce;margin-top:2px}
+.closeBtn{width:36px;height:36px;border-radius:10px;background:#ffffff0b;border:1px solid #283453;color:#fff;font-size:20px;cursor:pointer;transition:0.3s}
+.closeBtn:hover{background:#ff6cb5;transform:rotate(90deg)}
+.gBody{padding:18px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;justify-content:center}
+.select,.btn{border:1px solid #283453;background:#19213b;color:#eaf0ff;border-radius:10px;padding:9px 12px;font-size:12px;font-weight:700;cursor:pointer;transition:0.2s}
+.btn:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px)}
+.btnGreen{background:linear-gradient(100deg,#22c55e,#16a34a);color:#000;border-color:#22c55e;font-weight:900}
+.btnYellow{background:var(--yellow);color:#000;font-weight:900}
+.canvasWrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+canvas{border-radius:16px;border:1px solid #2a4a80;background:#fff;box-shadow:0 12px 30px #0005;max-width:100%;touch-action:none}
+.status{text-align:center;color:#d6e1ff;margin:8px 0;font-weight:700;font-size:13px;min-height:20px}
+.playerTags{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+.pTag{padding:6px 12px;border-radius:999px;font-size:11px;font-weight:900;border:1px solid;transition:0.3s}
+.pTag.active{transform:scale(1.1);box-shadow:0 0 15px currentColor}
+.confetti{position:fixed;pointer-events:none;z-index:200;width:8px;height:8px;animation:confettiFall 1.2s forwards}
+@keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg) scale(1);opacity:1}100%{transform:translateY(100vh) rotate(720deg) scale(0);opacity:0}}
+</style>
+</head>
+<body>
+<div class="appShell">
+<aside class="sidebar">
+<div class="logoWrap"><div class="logo3D">🎲</div><div class="logoText"><b>ORBITTRONIZ</b><b style="color:var(--cyan)">.COM</b><i>AMERICAN 3D SOFTWARE • LIVE MOTION</i></div></div>
+<div class="nav">
+<button class="navBtn active" onclick="scrollToGames()">🏠 <span>Dashboard Home</span></button>
+<button class="navBtn" onclick="openGame('ludo')">🎲 <span>Ludo 3D Pro - Advance</span></button>
+<button class="navBtn" onclick="openGame('snake')">🐍 <span>Snakes & Ladders 3D</span></button>
+<button class="navBtn">🏆 <span>Leaderboard Live</span></button>
+<button class="navBtn">💎 <span>Store - Skins</span></button>
+</div>
+<div class="liveBox"><b>⚙️ Advance Options - American Software</b>
+<div class="liveRow"><span>Players Mode</span><strong>2-4P + AI</strong></div>
+<div class="liveRow"><span>2 Player Mode</span><strong>You vs Computer 🤖</strong></div>
+<div class="liveRow"><span>4 Player Mode</span><strong>Manual or 3 Computer 🤖🤖🤖</strong></div>
+<div class="liveRow"><span>3D UI</span><strong>Live Motion • Glass • Neon</strong></div>
+<div class="liveRow"><span>Dashboard</span><strong>App Like Smooth</strong></div>
+</div>
+<div class="liveBox"><b>🔴 Live Stats</b>
+<div class="liveRow"><span>Games</span><strong>2 Pro</strong></div>
+<div class="liveRow"><span>Players Online</span><strong>1,240</strong></div>
+<div class="liveRow"><span>AI Difficulty</span><strong>Easy/Med/Hard</strong></div>
+</div>
+</aside>
+<main class="main">
+<div class="hero">
+<h1>Ludo + Snakes & Ladders<br><span>American 3D Software Look</span></h1>
+<p>Both games same as your images - Ludo with 4 colored bases Green Yellow Blue Red + 3D dice + Snakes & Ladders yellow checker + green snakes + black ladders + trophy 100. Advance options: 2 Player (You vs Computer), 4 Player (Manual Human or Choose Computer for other 3), Player Names, Skins Classic/Neon/Gold, Timer, Hint, Undo, Double Dice, Combo, Confetti - Dashboard like app - No button clicking extra - Tap card = play smooth - Live motion glass neon #22c55e→#51e6ff</p>
+<div class="badges"><div class="badge">🎨 American 3D Software UIX</div><div class="badge">🎲 2P You vs Computer</div><div class="badge">👥 4P Manual or 3 Computer</div><div class="badge">💎 Live Motion Dashboard</div><div class="badge">⚡ Advance Options</div></div>
+</div>
+
+<div class="games" id="games">
+<div class="gameCard" id="card-ludo" onclick="openGame('ludo')" style="animation-delay:0.1s">
+<div class="gameArt"><img src="https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=600" alt="Ludo 3D" style="object-fit:cover"><div class="tag">2P YOU VS AI • 4P MANUAL/COMPUTER • ADVANCE</div></div>
+<div class="info"><h3>🎲 Ludo 3D Pro - American Software Look</h3><p>Same as your first image - 4 bases Green Yellow Blue Red + 3D dice with shadow + Safe stars + Arrows. Advance: 2 Player (You vs Computer) + 4 Player (You can choose Manual Human or Computer for other 3 players) + Names + Skins + Timer + Hint + Undo + Double Dice + Combo + Confetti - Dashboard like app</p><button class="playBtn">▶ Tap to Play Ludo Smooth - Advance Options</button></div>
+</div>
+
+<div class="gameCard" id="card-snake" onclick="openGame('snake')" style="animation-delay:0.2s">
+<div class="gameArt"><img src="https://images.unsplash.com/photo-1586165368502-1bad197a6461?w=600" alt="Snakes & Ladders" style="object-fit:cover"><div class="tag">SAME AS YOUR IMAGE • YELLOW CHECKER • GREEN SNAKES • BLACK LADDERS</div></div>
+<div class="info"><h3>🐍 Snakes & Ladders - Same As Your Second Image</h3><p>Same as your second image - Yellow/orange checker + Green snakes with red stripes + Black ladders + Trophy 100 + Clouds + Grass. Advance: 2 Player You vs Computer + 4 Player Manual or 3 Computer + Freeze Snake + Ladder Boost + Double Dice + Combo + Bonus Coins - American 3D Software Look - Dashboard app</p><button class="playBtn">▶ Tap to Play Snakes & Ladders Smooth - Advance Options</button></div>
+</div>
+</div>
+
+<!-- GAME WINDOW - DASHBOARD LIKE APP - NO EXTRA BUTTON CLICKING - SMOOTH -->
+<div id="gameWindow" class="gameWindow">
+<div class="gHead"><div><h2 id="gTitle">Game Title - Advance 3D UIX</h2><p id="gSub">2 Player You vs Computer + 4 Player Manual or 3 Computer - American Software - Live Motion Dashboard</p></div><button class="closeBtn" onclick="closeGame()">✕</button></div>
+<div class="gBody" id="gBody"></div>
+</div>
+
+</main>
+</div>
+
+<script>
+function confetti(x,y){for(let i=0;i<26;i++){let c=document.createElement('div');c.className='confetti';c.style.left=x+'px';c.style.top=y+'px';c.style.background=['#22c55e','#ffca05','#078fd2','#d91136','#51e6ff','#ff6cb5','#fff'][Math.floor(Math.random()*7)];document.body.appendChild(c);setTimeout(()=>c.remove(),1300);}}
+function sfx(t){try{let a=new (window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator(),g=a.createGain();o.connect(g);g.connect(a.destination);o.frequency.value=t==='win'?880:t==='pop'?440:t==='kill'?120:220;g.gain.setValueAtTime(0.25,a.currentTime);g.gain.exponentialRampToValueAtTime(0.01,a.currentTime+0.25);o.start();o.stop(a.currentTime+0.25);}catch(e){}}
+function scrollToGames(){document.getElementById('games').scrollIntoView({behavior:'smooth'})}
+function closeGame(){document.getElementById('gameWindow').classList.remove('show');document.querySelectorAll('.gameCard').forEach(c=>c.classList.remove('active'))}
+function openGame(id){
+ document.querySelectorAll('.gameCard').forEach(c=>c.classList.remove('active'));
+ document.getElementById('card-'+id)?.classList.add('active');
+ let win=document.getElementById('gameWindow');
+ win.classList.add('show');
+ setTimeout(()=>win.scrollIntoView({behavior:'smooth',block:'start'}),120);
+ if(id==='ludo'){document.getElementById('gTitle').innerText='🎲 Ludo 3D Pro - American Software - Advance Options Full';document.getElementById('gSub').innerText='2 Player: You vs Computer | 4 Player: Manual Human or Choose Computer for other 3 | Names | Skins | Timer | Hint | Undo | Live Motion Dashboard App';initLudoAdvance();}
+ if(id==='snake'){document.getElementById('gTitle').innerText='🐍 Snakes & Ladders - Same As Your Image - American 3D Software';document.getElementById('gSub').innerText='Same as your second image - Yellow checker + Green snakes + Black ladders + Trophy | 2P You vs Computer + 4P Manual or 3 Computer | Live Motion Dashboard';initSnakeAdvance();}
+}
+
+// ================= LUDO ADVANCE - AMERICAN 3D SOFTWARE - FULL CODE - 2P YOU VS COMPUTER + 4P MANUAL OR 3 COMPUTER =================
+function initLudoAdvance(){
+ const b=document.getElementById('gBody');
+ b.innerHTML=`
+ <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;justify-content:center;background:rgba(255,255,255,0.04);border:1px solid #283453;border-radius:14px;padding:10px">
+   <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:10px;color:#a3afce;font-weight:800">TOTAL PLAYERS - Advance</label><select id="pc" class="select"><option value="2">2 Players - You vs 1 Other</option><option value="3">3 Players</option><option value="4" selected>4 Players - Advance</option></select></div>
+   <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:10px;color:#a3afce;font-weight:800">COMPUTER PLAYERS - Choose</label><select id="cc" class="select"><option value="0">0 Computer - All Manual Human</option><option value="1" selected>1 Computer - You + 1 Computer + 2 Human</option><option value="2">2 Computer - You + 2 Computer</option><option value="3">3 Computer - You vs 3 Computer 🤖🤖🤖 Advance</option></select></div>
+   <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:10px;color:#a3afce;font-weight:800">2P MODE - You vs Computer</label><select id="twoMode" class="select"><option value="youVsComp" selected>2P: You vs Computer 🤖</option><option value="bothManual">2P: Both Manual Human</option></select></div>
+   <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:10px;color:#a3afce;font-weight:800">DIFFICULTY</label><select id="diff" class="select"><option value="easy">Easy AI - American Soft</option><option value="med" selected>Medium AI - American Standard</option><option value="hard">Hard AI 🤖 Unbeatable - American Pro</option></select></div>
+   <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:10px;color:#a3afce;font-weight:800">3D SKIN</label><select id="skin" class="select"><option value="classic">Classic - Same as your image</option><option value="neon">Neon Glow - American Neon</option><option value="gold">Gold - American Luxury</option><option value="american">American 3D Software - Live Motion</option></select></div>
+   <button class="btn btnGreen" onclick="initLudoAdvance()">🔄 Apply Advance Options - Smooth</button>
+ </div>
+ <div id="nameInputs" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;justify-content:center"></div>
+ <div id="playerSetupInfo" style="text-align:center;background:linear-gradient(90deg,#22c55e22,#51e6ff22);border:1px solid #22c55e44;border-radius:10px;padding:8px;font-size:11px;color:#d6e1ff;margin-bottom:10px;font-weight:700"></div>
+ <canvas id="c" width="600" height="600" style="background:#fff;border-radius:18px"></canvas>
+ <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-top:12px;background:rgba(255,255,255,0.04);border:1px solid #283453;border-radius:14px;padding:10px">
+   <div style="display:flex;align-items:center;gap:12px"><div id="diceBox" style="width:72px;height:72px;background:linear-gradient(145deg,#fff,#e2e8f0);border-radius:16px;display:grid;place-items:center;font-size:36px;box-shadow:0 8px 20px rgba(0,0,0,0.3), inset 0 2px 0 #fff;transition:0.4s cubic-bezier(0.34,1.56,0.64,1);font-weight:900">🎲</div><div><div style="font-size:13px;font-weight:800">Dice: <b id="dice" style="font-size:18px">-</b> | Turn: <b id="turn" style="color:#22c55e">GREEN</b> <span id="turnType" style="font-size:9px;background:#22c55e;color:#000;padding:3px 8px;border-radius:999px;font-weight:900">YOU</span> ⏱️ <span id="timer" style="font-weight:800">15s</span></div><div style="font-size:11px;color:#a3afce;margin-top:2px">Kills: <b id="kills">0</b> | Score: <b id="sc">0</b> | Combo: <b id="combo">x1</b> | Skin: <b id="skinName">American 3D</b></div></div></div>
+   <div style="display:flex;gap:8px"><button class="btn" onclick="hintLudo()">💡 Hint Advance</button><button class="btn" onclick="undoLudo()">↩️ Undo</button><button class="btn btnYellow" onclick="powerupLudo('double')">🎲 Double Dice</button><button class="btn btnGreen" onclick="rollLudoAdvance()" style="height:48px;padding:0 20px;font-size:14px;box-shadow:0 6px 16px #22c55e44">ROLL 3D 🎲</button></div>
+ </div>
+ <div id="msg" style="text-align:center;height:22px;font-weight:800;color:#fde047;font-size:12px;margin-top:8px;background:rgba(253,224,71,0.08);border-radius:999px;padding:4px"></div>
+ <div id="playerList" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:10px"></div>
+ `;
+ const cvs=document.getElementById('c'), ctx=cvs.getContext('2d');
+ let pc=parseInt(document.getElementById('pc')?.value||4), cc=parseInt(document.getElementById('cc')?.value||1), twoMode=document.getElementById('twoMode')?.value||'youVsComp', diff=document.getElementById('diff')?.value||'med', skin=document.getElementById('skin')?.value||'american';
+ document.getElementById('skinName').innerText=skin==='american'?'American 3D Live Motion':skin;
+ let infoText='';
+ if(pc===2){
+   if(twoMode==='youVsComp') infoText=`🎮 2 Player Mode: YOU (GREEN) vs COMPUTER (YELLOW) 🤖 - You are Player 1, Computer is Player 2 - American Software - Smooth`;
+   else infoText=`🎮 2 Player Mode: Both Manual Human - GREEN vs YELLOW - Play on same device - American Software`;
+ } else {
+   infoText=`🎮 ${pc} Player Mode: You choose ${cc} Computer opponents - You are GREEN always - ${cc===3?`You vs 3 Computers 🤖🤖🤖 Advance - American Pro Software`:cc===0?`All ${pc} Players Manual Human - Play with friends on same device`:`You + ${cc} Computer + ${pc-cc-1} Human friends`} - Advance Options - American Software`;
+ }
+ document.getElementById('playerSetupInfo').innerText=infoText;
+ const allColors=['#22c55e','#fde047','#3b82f6','#ef4444'], allNames=['GREEN','YELLOW','BLUE','RED'];
+ let colors=allColors.slice(0,pc), names=allNames.slice(0,pc);
+ let isComputer=[];
+ if(pc===2){
+   if(twoMode==='youVsComp') isComputer=[false,true];
+   else isComputer=[false,false];
+ } else {
+   // For 4P: First player is always YOU, rest you choose computer count
+   // cc = number of computers among other players
+   isComputer=names.map((_,i)=>{
+     if(i===0) return false; // You are always GREEN
+     if(i<=cc) return true; // Next cc players are computer
+     return false;
+   });
+   if(cc===3 && pc===4) isComputer=[false,true,true,true]; // You vs 3 computers
+ }
+ let nameDiv=document.getElementById('nameInputs');nameDiv.innerHTML='';
+ names.forEach((n,i)=>{
+   let wrap=document.createElement('div');wrap.style.cssText=`display:flex;flex-direction:column;gap:3px`;
+   let label=document.createElement('label');label.style.cssText=`font-size:9px;color:${isComputer[i]?'#ff6cb5':'#a3afce'};font-weight:800;text-align:center`;label.innerText=isComputer[i]?`🤖 COMPUTER ${i+1}`:`👤 ${i===0?'YOU - GREEN':`PLAYER ${i+1}`}`;
+   let inp=document.createElement('input');inp.id='name_'+i;inp.value=localStorage.getItem('ludo_name_'+i)|| (i===0?'YOU': isComputer[i]?`Computer ${i}`: n);inp.placeholder=n;inp.style.cssText=`height:36px;background:${isComputer[i]?'rgba(255,108,181,0.1)':'rgba(255,255,255,0.06)'};border:1px solid ${isComputer[i]?'#ff6cb5':'rgba(255,255,255,0.1)'};border-radius:999px;padding:0 12px;color:#fff;font-size:11px;font-weight:800;width:110px;text-align:center`;
+   inp.onchange=()=>localStorage.setItem('ludo_name_'+i,inp.value);
+   wrap.appendChild(label);wrap.appendChild(inp);nameDiv.appendChild(wrap);
+ });
+ names=names.map((_,i)=>document.getElementById('name_'+i)?.value||allNames[i]);
+ let listEl=document.getElementById('playerList');listEl.innerHTML='';names.forEach((n,i)=>{let div=document.createElement('div');div.id='pTag_'+i;div.className='pTag';div.style.cssText=`border-color:${colors[i]};background:${isComputer[i]?'linear-gradient(100deg,#ff6cb522,#9b7bff22)':'#fff'};color:${isComputer[i]?'#fff':colors[i]};${i===0?'box-shadow:0 0 15px '+colors[i]+';transform:scale(1.1)':''}`;div.innerText=`${isComputer[i]?'🤖':'👤'} ${n} ${i===0?'(YOU)':''}`;listEl.appendChild(div);});
+ const CELL=40, path=[{x:1,y:6},{x:2,y:6},{x:3,y:6},{x:4,y:6},{x:5,y:6},{x:6,y:5},{x:6,y:4},{x:6,y:3},{x:6,y:2},{x:6,y:1},{x:6,y:0},{x:7,y:0},{x:8,y:0},{x:8,y:1},{x:8,y:2},{x:8,y:3},{x:8,y:4},{x:8,y:5},{x:9,y:6},{x:10,y:6},{x:11,y:6},{x:12,y:6},{x:13,y:6},{x:14,y:6},{x:14,y:7},{x:14,y:8},{x:13,y:8},{x:12,y:8},{x:11,y:8},{x:10,y:8},{x:9,y:8},{x:8,y:9},{x:8,y:10},{x:8,y:11},{x:8,y:12},{x:8,y:13},{x:8,y:14},{x:7,y:14},{x:6,y:14},{x:6,y:13},{x:6,y:12},{x:6,y:11},{x:6,y:10},{x:6,y:9},{x:5,y:8},{x:4,y:8},{x:3,y:8},{x:2,y:8},{x:1,y:8},{x:0,y:8},{x:0,y:7},{x:0,y:6}],safeSpots=[0,8,13,21,26,34,39,47];
+ let dice=1,turn=0,tokens=[],score=0,kills=0,diceRolling=false,history=[],timer=15,timerInt=null,combo=1,doubleDice=false;
+ for(let i=0;i<pc*4;i++)tokens.push({id:i,colorIdx:Math.floor(i/4),pos:-1,finished:false});
+ function startTimer(){clearInterval(timerInt);timer=15;document.getElementById('timer').innerText=timer+'s';timerInt=setInterval(()=>{timer--;document.getElementById('timer').innerText=timer+'s';if(timer<=0){clearInterval(timerInt);if(!isComputer[turn]){let mov=getMovable();if(mov.length>0)moveToken(mov[0]);else nextTurn();}}},1000);}
+ window.powerupLudo=(type)=>{if(type==='double'){doubleDice=true;document.getElementById('msg').innerText='🎲 Double Dice ×2 activated! American Software - Next roll ×2 - Live Motion';setTimeout(()=>document.getElementById('msg').innerText='',1500);}};
+ window.hintLudo=()=>{let mov=getMovable();if(mov.length===0){document.getElementById('msg').innerText='No moves! American Software';return;}let best=chooseBestMove(mov);document.getElementById('msg').innerText=`💡 Hint Advance: Move token ${best+1} - Best kill/home - American Pro Software`;confetti(cvs.getBoundingClientRect().left+300,cvs.getBoundingClientRect().top+300);};
+ window.undoLudo=()=>{if(history.length===0){document.getElementById('msg').innerText='Nothing to undo - American Software';return;}let last=history.pop();tokens=last.tokens.map(t=>({...t}));turn=last.turn;score=last.score;kills=last.kills;document.getElementById('sc').innerText=score;document.getElementById('kills').innerText=kills;draw();document.getElementById('msg').innerText='↩️ Undo done - American Software - Live Motion';};
+ window.rollLudoAdvance=()=>{if(diceRolling)return;history.push({tokens:tokens.map(t=>({...t})),turn,score,kills});diceRolling=true;let rolls=0;const diceBox=document.getElementById('diceBox');let anim=setInterval(()=>{dice=Math.floor(Math.random()*6)+1;if(doubleDice&&dice<4)dice+=2;document.getElementById('dice').innerText=dice;diceBox.innerText=dice;diceBox.style.transform=`perspective(600px) rotateX(${15+Math.random()*30}deg) rotateY(${-15+Math.random()*30}deg) rotateZ(${Math.random()*10}deg) scale(1.15)`;diceBox.style.boxShadow=`0 15px 30px rgba(0,0,0,0.4), 0 0 30px ${colors[turn]}88`;rolls++;if(rolls>18){clearInterval(anim);diceRolling=false;doubleDice=false;diceBox.style.transform=`perspective(600px) rotateX(15deg) rotateY(-15deg) scale(1)`;diceBox.style.boxShadow=`0 8px 20px rgba(0,0,0,0.3)`;let movable=getMovable();document.getElementById('msg').innerText=`${names[turn]} rolled ${dice} - American 3D Software - Live Motion`;sfx(dice===6?'win':'pop');startTimer();if(movable.length===0){document.getElementById('msg').innerText=`${names[turn]} No move! American Software - Live Motion`;setTimeout(nextTurn,1200);}else if(isComputer[turn]){setTimeout(()=>{let best=chooseBestMove(movable);moveToken(best);},900);}else if(movable.length===1){moveToken(movable[0]);}draw();}},65);};
+ function getMovable(){let list=[];tokens.forEach((t,i)=>{if(t.colorIdx!==turn||t.finished)return;if(t.pos===-1){if(dice===6)list.push(i);}else list.push(i);});return list;}
+ function chooseBestMove(movable){let best=movable[0],bestScore=-999;movable.forEach(idx=>{let t=tokens[idx],sc=0;if(t.pos===-1){sc+=50;}else{let np=t.pos+dice;if(np>=path.length){let hs=np-path.length;if(hs===5){sc+=100;}else if(hs<6){sc+=30;}}else{let tc=path[np%path.length];tokens.forEach((ot,j)=>{if(j===idx||ot.finished||ot.pos<0||ot.pos>=100)return;let oc=path[ot.pos%path.length];if(oc.x===tc.x&&oc.y===tc.y&&!safeSpots.includes(np%path.length)){sc+=80;}});sc+=dice;if(safeSpots.includes(np%path.length))sc+=20;}}if(diff==='hard'){sc+=Math.random()*10;}else if(diff==='easy'){sc=Math.random()*100;}if(sc>bestScore){bestScore=sc;best=idx;}});return best;}
+ function nextTurn(){clearInterval(timerInt);turn=(turn+1)%pc;combo=1;document.getElementById('combo').innerText='x'+combo;document.getElementById('turn').innerText=names[turn];document.getElementById('turn').style.color=colors[turn];document.getElementById('turnType').innerText=isComputer[turn]?'🤖 AI - American Pro':'👤 YOU - American Software';document.getElementById('turnType').style.background=isComputer[turn]?'#ff6cb5':'#22c55e';names.forEach((_,i)=>{let el=document.getElementById('pTag_'+i);if(el){el.style.transform=i===turn?'scale(1.15)':'scale(1)';el.style.boxShadow=i===turn?'0 0 20px '+colors[i]:'none';el.classList.toggle('active',i===turn);}});document.getElementById('msg').innerText='';draw();if(isComputer[turn]){setTimeout(()=>rollLudoAdvance(),1200);}else{startTimer();}}
+ function moveToken(idx){let t=tokens[idx];if(t.pos===-1){t.pos=turn===0?0:turn===1?13:turn===2?26:39;}else{let newPos=t.pos+dice;if(newPos>=path.length){let homeStep=newPos-path.length;if(homeStep<6){t.pos=100+homeStep;if(homeStep===5){t.finished=true;score+=50*combo;combo++;document.getElementById('combo').innerText='x'+combo;sfx('win');document.getElementById('msg').innerText=`${names[turn]} HOME! +${50*combo} Combo x${combo} American Software`;confetti(cvs.getBoundingClientRect().left+300,cvs.getBoundingClientRect().top+300);}}}else{let targetCoord=path[newPos%path.length],killed=false;tokens.forEach((other,j)=>{if(j===idx||other.finished||other.pos<0||other.pos>=100)return;let otherCoord=path[other.pos%path.length];if(otherCoord.x===targetCoord.x&&otherCoord.y===targetCoord.y&&!safeSpots.includes(newPos%path.length)){other.pos=-1;kills++;score+=20*combo;combo++;document.getElementById('combo').innerText='x'+combo;killed=true;document.getElementById('kills').innerText=kills;sfx('kill');document.getElementById('msg').innerText=`${names[turn]} KILLED ${names[other.colorIdx]}! 💀 +${20*combo} American Software`;confetti(cvs.getBoundingClientRect().left+targetCoord.x*40,cvs.getBoundingClientRect().top+targetCoord.y*40);}});if(!killed){sfx('pop');combo=1;document.getElementById('combo').innerText='x'+combo;}t.pos=newPos;score+=dice*combo;}}document.getElementById('sc').innerText=score;if(tokens.filter(x=>x.colorIdx===turn&&x.finished).length===4){sfx('win');confetti(cvs.getBoundingClientRect().left+300,cvs.getBoundingClientRect().top+300);setTimeout(()=>{alert(`${names[turn]} WINS LUDO ADVANCE! 🏆 American Software - Score: ${score} - ${isComputer[turn]?'Computer Wins 🤖':'You Win 👤'} - Live Motion Dashboard`);},400);tokens.forEach(tt=>{tt.pos=-1;tt.finished=false;});score=0;kills=0;}if(dice!==6)nextTurn();else{if(isComputer[turn])setTimeout(()=>rollLudoAdvance(),900);else document.getElementById('msg').innerText=`${names[turn]} Rolled 6! Roll again - American Software - Combo x${combo}`;}draw();}
+ function draw(){ctx.clearRect(0,0,600,600);ctx.fillStyle=skin==='american'?'#0a0f1e':skin==='neon'?'#0a0f1e':skin==='gold'?'#422006':'#6b7fbe';ctx.beginPath();ctx.roundRect(-2,-2,604,604,28);ctx.fill();ctx.fillStyle=skin==='american'?'#0f172a':skin==='neon'?'#111a32':'#ffffff';ctx.beginPath();ctx.roundRect(0,0,600,600,22);ctx.fill();[[0,0,allColors[0]],[360,0,allColors[1]],[0,360,allColors[3]],[360,360,allColors[2]]].slice(0,pc===2?2:4).forEach(([x,y,c],i)=>{if(pc===3&&i===3)return;ctx.fillStyle=skin==='american'?c:skin==='neon'?c+'aa':c;ctx.shadowColor=skin==='american'?c:skin==='neon'?c:'transparent';ctx.shadowBlur=skin==='american'?25:skin==='neon'?20:0;ctx.fillRect(x,y,240,240);ctx.shadowBlur=0;ctx.fillStyle=skin==='american'?'rgba(0,0,0,0.2)':skin==='neon'?'rgba(0,0,0,0.3)':'#fff';ctx.beginPath();ctx.roundRect(x+20,y+20,200,200,18);ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=skin==='american'?5:4;ctx.stroke();if(skin==='american'){ctx.strokeStyle='rgba(255,255,255,0.3)';ctx.lineWidth=1;ctx.strokeRect(x+20,y+20,200,200);}});ctx.strokeStyle='#b0b0b0';ctx.lineWidth=1;for(let yy=0;yy<15;yy++)for(let xx=0;xx<15;xx++){if((xx<6&&yy<6)||(xx>=9&&yy<6)||(xx<6&&yy>=9)||(xx>=9&&yy>=9))continue;let fill=skin==='american'?'#0f172a':skin==='neon'?'#1a2340':'#fff';if(xx===7&&yy>=1&&yy<=5)fill='#f8c53a';if(yy===7&&xx>=1&&xx<=5)fill='#7ac943';if(xx===7&&yy>=9&&yy<=13)fill='#ed1c24';if(yy===7&&xx>=9&&xx<=13)fill='#2196f3';ctx.fillStyle=fill;ctx.fillRect(xx*CELL,yy*CELL,CELL,CELL);ctx.strokeRect(xx*CELL,yy*CELL,CELL,CELL);}ctx.fillStyle=skin==='american'?'#51e6ff':'#fff';ctx.font='bold 18px Inter';[[2,6],[8,1],[13,7],[12,8],[8,12],[6,13],[2,8],[1,2]].forEach(([x,y])=>{ctx.fillText('★',x*CELL+10,y*CELL+26);});[[7,0,'↓'],[14,7,'←'],[7,14,'↑'],[0,7,'→']].forEach(([x,y,a])=>{ctx.fillStyle=skin==='american'?'#51e6ff':'#000';ctx.fillText(a,x*CELL+12,y*CELL+26);});if(!diceRolling){ctx.save();ctx.translate(300,300);ctx.shadowColor='rgba(0,0,0,0.4)';ctx.shadowBlur=24;ctx.fillStyle='#fff';ctx.beginPath();ctx.roundRect(-42,-42,84,84,14);ctx.fill();ctx.shadowColor='transparent';ctx.fillStyle='#111827';ctx.font='bold 36px Inter';ctx.textAlign='center';ctx.fillText(dice,0,12);ctx.restore();}tokens.forEach((t,i)=>{let baseX=t.colorIdx===0||t.colorIdx===3?20:380,baseY=t.colorIdx===0||t.colorIdx===1?20:380,x,y;if(t.pos===-1){x=baseX+(i%2)*90+45;y=baseY+Math.floor((i%4)/2)*90+45;}else if(t.pos>=100){let hp=t.pos-100,coord;if(t.colorIdx===0)coord={x:1+hp,y:7};if(t.colorIdx===1)coord={x:7,y:1+hp};if(t.colorIdx===2)coord={x:13-hp,y:7};if(t.colorIdx===3)coord={x:7,y:13-hp};x=coord.x*CELL+20;y=coord.y*CELL+20;}else{let coord=path[t.pos];x=coord.x*CELL+20;y=coord.y*CELL+20;}ctx.fillStyle='rgba(0,0,0,0.3)';ctx.beginPath();ctx.ellipse(x,y+12,14,6,0,0,Math.PI*2);ctx.fill();let grad=ctx.createRadialGradient(x-4,y-8,2,x,y,16);grad.addColorStop(0,'#fff');grad.addColorStop(0.3,colors[t.colorIdx]||'#22c55e');grad.addColorStop(1,colors[t.colorIdx]||'#22c55e');ctx.fillStyle=grad;ctx.beginPath();ctx.arc(x,y-6,14,0,Math.PI*2);ctx.fill();ctx.fillStyle=colors[t.colorIdx]||'#22c55e';ctx.beginPath();ctx.arc(x,y-18,8,0,Math.PI*2);ctx.fill();if(skin==='american'||skin==='neon'){ctx.shadowColor=colors[t.colorIdx];ctx.shadowBlur=skin==='american'?20:15;ctx.fill();ctx.shadowBlur=0;}if(getMovable().includes(i)&&turn===t.colorIdx){ctx.strokeStyle='#fff';ctx.lineWidth=3;ctx.beginPath();ctx.arc(x,y-6,20,0,Math.PI*2);ctx.stroke();ctx.strokeStyle='#fde047';ctx.lineWidth=2;ctx.setLineDash([6,4]);ctx.beginPath();ctx.arc(x,y-6,24,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);}});}
+ cvs.onclick=e=>{if(isComputer[turn])return;const rect=cvs.getBoundingClientRect();const x=(e.clientX-rect.left)*600/rect.width,y=(e.clientY-rect.top)*600/rect.height;let closest=-1,minDist=999;tokens.forEach((t,i)=>{if(t.colorIdx!==turn||!getMovable().includes(i))return;let baseX=t.colorIdx===0||t.colorIdx===3?20:380,baseY=t.colorIdx===0||t.colorIdx===1?20:380,tx,ty;if(t.pos===-1){tx=baseX+(i%2)*90+45;ty=baseY+Math.floor((i%4)/2)*90+45;}else if(t.pos>=100){let hp=t.pos-100,coord;if(t.colorIdx===0)coord={x:1+hp,y:7};if(t.colorIdx===1)coord={x:7,y:1+hp};if(t.colorIdx===2)coord={x:13-hp,y:7};if(t.colorIdx===3)coord={x:7,y:13-hp};tx=coord.x*40+20;ty=coord.y*40+20;}else{let coord=path[t.pos];tx=coord.x*40+20;ty=coord.y*40+20;}let dist=Math.hypot(x-tx,y-ty);if(dist<30&&dist<minDist){minDist=dist;closest=i;}});if(closest!==-1){clearInterval(timerInt);moveToken(closest);}};
+ draw();startTimer();if(isComputer[turn])setTimeout(()=>rollLudoAdvance(),1300);
+}
+
+// ================= SNAKES & LADDERS ADVANCE - SAME AS YOUR IMAGE - AMERICAN 3D SOFTWARE - FULL CODE =================
+function initSnakeAdvance(){
+ const b=document.getElementById('gBody');
+ b.innerHTML=`
+ <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;justify-content:center;background:rgba(255,255,255,0.04);border:1px solid #283453;border-radius:14px;padding:10px">
+   <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:10px;color:#a3afce;font-weight:800">PLAYERS - Advance</label><select id="pcS" class="select"><option value="2" selected>2 Players - You vs Computer</option><option value="3">3 Players</option><option value="4">4 Players - Advance</option></select></div>
+   <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:10px;color:#a3afce;font-weight:800">COMPUTER - Choose</label><select id="ccS" class="select"><option value="0">0 Computer - All Manual</option><option value="1" selected>1 Computer - You vs 1 Computer 🤖</option><option value="2">2 Computer - You vs 2 Computer 🤖🤖</option><option value="3">3 Computer - You vs 3 Computer 🤖🤖🤖</option></select></div>
+   <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:10px;color:#a3afce;font-weight:800">2P MODE</label><select id="twoModeS" class="select"><option value="youVsComp" selected>2P: You vs Computer 🤖</option><option value="bothManual">2P: Both Manual</option></select></div>
+   <button class="btn btnGreen" onclick="initSnakeAdvance()">🔄 Apply Advance - Smooth</button>
+   <button class="btn" onclick="powerupSnake('freeze')">❄️ Freeze Snake</button>
+   <button class="btn" onclick="powerupSnake('boost')">🚀 Ladder Boost</button>
+   <button class="btn btnYellow" onclick="powerupSnake('double')">🎲 Double Dice</button>
+ </div>
+ <div id="nameInputsS" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;justify-content:center"></div>
+ <div id="playerSetupInfoS" style="text-align:center;background:linear-gradient(90deg,#fde04722,#22c55e22);border:1px solid #fde04744;border-radius:10px;padding:8px;font-size:11px;color:#d6e1ff;margin-bottom:10px;font-weight:700"></div>
+ <canvas id="c" width="600" height="600" style="background:#fde047;border-radius:16px"></canvas>
+ <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-top:12px;background:rgba(255,255,255,0.04);border:1px solid #283453;border-radius:14px;padding:10px">
+   <div class="status" style="margin:0">Dice: <b id="dice">-</b> | Turn: <b id="turn">RED</b> <span id="turnTypeS" style="font-size:9px;background:#22c55e;color:#000;padding:3px 8px;border-radius:999px;font-weight:900">YOU</span> | Score: <b id="sc">0</b> | 🪙 <b id="coinsB">0</b> | Combo x<b id="comboS">1</b> | American Software</div>
+   <button class="btn btnGreen" onclick="rollSnakeAdvance()" style="height:44px;padding:0 20px;font-size:14px">ROLL 3D 🎲</button>
+ </div>
+ <div id="msg" style="text-align:center;height:22px;font-weight:800;color:#fde047;font-size:12px;margin-top:8px;background:rgba(253,224,71,0.08);border-radius:999px;padding:4px"></div>
+ <div id="playerListS" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:10px"></div>
+ `;
+ const cvs=document.getElementById('c'), ctx=cvs.getContext('2d');
+ let pc=parseInt(document.getElementById('pcS')?.value||2), cc=parseInt(document.getElementById('ccS')?.value||1), twoModeS=document.getElementById('twoModeS')?.value||'youVsComp';
+ document.getElementById('playerSetupInfoS').innerText=pc===2?(twoModeS==='youVsComp'?`🎮 2 Player: YOU (RED) vs COMPUTER (BLUE) 🤖 - Same as your image - Yellow checker - Green snakes - American Software`:`🎮 2 Player: Both Manual - RED vs BLUE - Same device - Same as your image`):`🎮 ${pc} Player: You choose ${cc} Computers - You are RED always - ${cc===3?`You vs 3 Computers 🤖🤖🤖 Advance`:`You + ${cc} Computer`} - Same as your image - American Software`;
+ const allColors=['#ef4444','#3b82f6','#22c55e','#fbbf24'], allNames=['RED','BLUE','GREEN','YELLOW'];
+ let colors=allColors.slice(0,pc), names=allNames.slice(0,pc);
+ let isComputer=[];
+ if(pc===2){
+   if(twoModeS==='youVsComp') isComputer=[false,true];
+   else isComputer=[false,false];
+ } else {
+   isComputer=names.map((_,i)=>{if(i===0) return false; if(i<=cc) return true; return false;});
+   if(cc===3 && pc===4) isComputer=[false,true,true,true];
+ }
+ let nameDiv=document.getElementById('nameInputsS');nameDiv.innerHTML='';names.forEach((n,i)=>{let wrap=document.createElement('div');wrap.style.cssText=`display:flex;flex-direction:column;gap:3px`;let label=document.createElement('label');label.style.cssText=`font-size:9px;color:${isComputer[i]?'#ff6cb5':'#a3afce'};font-weight:800;text-align:center`;label.innerText=isComputer[i]?`🤖 COMPUTER ${i+1}`:`👤 ${i===0?'YOU - RED':`PLAYER ${i+1}`}`;let inp=document.createElement('input');inp.id='nameS_'+i;inp.value=localStorage.getItem('snake_name_'+i)|| (i===0?'YOU': isComputer[i]?`Computer ${i}`: n);inp.placeholder=n;inp.style.cssText=`height:36px;background:${isComputer[i]?'rgba(255,108,181,0.1)':'rgba(255,255,255,0.06)'};border:1px solid ${isComputer[i]?'#ff6cb5':'rgba(255,255,255,0.1)'};border-radius:999px;padding:0 12px;color:#fff;font-size:11px;font-weight:800;width:110px;text-align:center`;inp.onchange=()=>localStorage.setItem('snake_name_'+i,inp.value);wrap.appendChild(label);wrap.appendChild(inp);nameDiv.appendChild(wrap);});
+ names=names.map((_,i)=>document.getElementById('nameS_'+i)?.value||allNames[i]);
+ let listEl=document.getElementById('playerListS');listEl.innerHTML='';names.forEach((n,i)=>{let div=document.createElement('div');div.className='pTag';div.style.cssText=`border-color:${colors[i]};background:${isComputer[i]?'linear-gradient(100deg,#ff6cb522,#9b7bff22)':'#fff'};color:${isComputer[i]?'#fff':colors[i]};${i===0?'box-shadow:0 0 15px '+colors[i]+';transform:scale(1.1)':''}`;div.innerText=`${isComputer[i]?'🤖':'👤'} ${n} ${i===0?'(YOU)':''}`;listEl.appendChild(div);});
+ const CELL=60, snakes={96:64,88:73,69:52,46:26,38:20,29:11,18:2}, ladders={5:15,22:41,41:60,57:63,62:81,71:90,31:49};
+ let pos=Array(pc).fill(1), turn=0, dice=1, score=0, coins=0, rolling=false, combo=1, freeze=false, boost=false, doubleDice=false;
+ function getCoord(n){let row=Math.floor((n-1)/10),col=(n-1)%10;if(row%2===1)col=9-col;row=9-row;return {x:col*CELL,y:row*CELL,cx:col*CELL+CELL/2,cy:row*CELL+CELL/2};}
+ function draw(){ctx.clearRect(0,0,600,600);for(let n=1;n<=100;n++){let {x,y}=getCoord(n);let isY=(Math.floor((n-1)/10)+(n-1)%10)%2===0;ctx.fillStyle=isY?'#fde047':'#facc15';if(n===100)ctx.fillStyle='#facc15';ctx.fillRect(x,y,CELL,CELL);ctx.strokeStyle='#000';ctx.lineWidth=0.8;ctx.strokeRect(x,y,CELL,CELL);ctx.fillStyle='#ea580c';ctx.font='bold 14px Inter';ctx.fillText(n,x+4,y+14);}ctx.font='28px serif';ctx.fillText('🏆',getCoord(100).x+8,getCoord(100).y+18);Object.entries(ladders).forEach(([f,t])=>{let a=getCoord(+f),b=getCoord(+t);let ang=Math.atan2(b.cy-a.cy,b.cx-a.cx),perp=ang+Math.PI/2,off=8;let x1a=a.cx+Math.cos(perp)*off,y1a=a.cy+Math.sin(perp)*off,x1b=a.cx-Math.cos(perp)*off,y1b=a.cy-Math.sin(perp)*off,x2a=b.cx+Math.cos(perp)*off,y2a=b.cy+Math.sin(perp)*off,x2b=b.cx-Math.cos(perp)*off,y2b=b.cy-Math.sin(perp)*off;ctx.strokeStyle=boost?'#22c55e':'#000';ctx.lineWidth=boost?5:3;ctx.beginPath();ctx.moveTo(x1a,y1a);ctx.lineTo(x2a,y2a);ctx.stroke();ctx.beginPath();ctx.moveTo(x1b,y1b);ctx.lineTo(x2b,y2b);ctx.stroke();for(let i=1;i<4;i++){let tt=i/4,xa=x1a+(x2a-x1a)*tt,ya=y1a+(y2a-y1a)*tt,xb=x1b+(x2b-x1b)*tt,yb=y1b+(y2b-y1b)*tt;ctx.beginPath();ctx.moveTo(xa,ya);ctx.lineTo(xb,yb);ctx.stroke();}});Object.entries(snakes).forEach(([f,t])=>{let a=getCoord(+f),b=getCoord(+t);ctx.strokeStyle=freeze?'#3b82f6':'#15803d';ctx.lineWidth=freeze?14:12;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(a.cx,a.cy);ctx.quadraticCurveTo((a.cx+b.cx)/2-20,(a.cy+b.cy)/2-20,b.cx,b.cy);ctx.stroke();ctx.fillStyle=freeze?'#60a5fa':'#22c55e';ctx.beginPath();ctx.arc(a.cx,a.cy,12,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#fff';ctx.font='bold 10px Inter';ctx.fillText('🐍',a.cx-6,a.cy+3);});pos.forEach((p,i)=>{let co=getCoord(p);let x=co.cx+(i%2===0?-12:12)+(i>1?-6:6),y=co.cy+(i<2?-8:12);ctx.fillStyle='rgba(0,0,0,0.3)';ctx.beginPath();ctx.ellipse(x,y+14,14,5,0,0,Math.PI*2);ctx.fill();let grad=ctx.createRadialGradient(x-4,y-6,2,x,y,14);grad.addColorStop(0,'#fff');grad.addColorStop(0.3,colors[i]);grad.addColorStop(1,colors[i]);ctx.fillStyle=grad;ctx.beginPath();ctx.arc(x,y,14,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.stroke();if(i===turn){ctx.strokeStyle='#000';ctx.lineWidth=3;ctx.setLineDash([5,3]);ctx.beginPath();ctx.arc(x,y,20,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);}ctx.fillStyle='#fff';ctx.font='bold 10px Inter';ctx.textAlign='center';ctx.fillText(i===0?'YOU':`P${i+1}`,x,y-18);});}
+ function nextTurn(){turn=(turn+1)%pc;combo=1;document.getElementById('comboS').innerText=combo;document.getElementById('turn').innerText=names[turn];document.getElementById('turnTypeS').innerText=isComputer[turn]?'🤖 AI - American Pro':'👤 YOU - American Software';document.getElementById('turnTypeS').style.background=isComputer[turn]?'#ff6cb5':'#22c55e';document.getElementById('msg').innerText='';if(isComputer[turn])setTimeout(()=>rollSnakeAdvance(),1200);}
+ window.powerupSnake=(type)=>{if(type==='freeze'){freeze=true;document.getElementById('msg').innerText='❄️ Freeze! Snakes frozen for 1 turn - American Software - Live Motion';setTimeout(()=>{freeze=false;document.getElementById('msg').innerText='';draw();},3000);}else if(type==='boost'){boost=true;document.getElementById('msg').innerText='🚀 Ladder Boost! Next ladder ×2 - American Software - Live Motion';setTimeout(()=>{boost=false;draw();},4000);}else if(type==='double'){doubleDice=true;document.getElementById('msg').innerText='🎲 Double Dice activated! American Software';}};
+ window.rollSnakeAdvance=()=>{if(rolling)return;rolling=true;let rolls=0;let anim=setInterval(()=>{dice=Math.floor(Math.random()*6)+1;if(doubleDice)dice=Math.min(12,dice+Math.floor(Math.random()*6)+1);document.getElementById('dice').innerText=dice;rolls++;if(rolls>18){clearInterval(anim);rolling=false;doubleDice=false;let cur=pos[turn],next=cur+dice;if(next>100){document.getElementById('msg').innerText=`Need ${100-cur} for 100! American Software - Live Motion`;nextTurn();draw();return;}pos[turn]=next;if(snakes[next]&&!freeze){document.getElementById('msg').innerText=`🐍 ${names[turn]} Snake ${next}→${snakes[next]}! American Software`;pos[turn]=snakes[next];combo=1;document.getElementById('comboS').innerText=combo;sfx('kill');setTimeout(()=>{draw();nextTurn();draw();},1000);}else if(ladders[next]){let bonus=boost?2:1;let gain=20*bonus*combo;score+=gain;coins+=5*bonus;document.getElementById('sc').innerText=score;document.getElementById('coinsB').innerText=coins;document.getElementById('msg').innerText=`🪜 ${names[turn]} Ladder ${next}→${ladders[next]}! +${gain} Combo x${combo} 🪙 +${5*bonus} American Software`;combo++;document.getElementById('comboS').innerText=combo;pos[turn]=ladders[next];confetti(cvs.getBoundingClientRect().left+getCoord(next).cx,cvs.getBoundingClientRect().top+getCoord(next).cy);sfx('win');setTimeout(()=>{draw();if(pos[turn]===100){alert(`🏆 ${names[turn]} WINS Snakes & Ladders! 🏆 American Software - Score: ${score} - ${isComputer[turn]?'Computer Wins 🤖':'You Win 👤'} - Live Motion Dashboard`);confetti(window.innerWidth/2,300);pos=Array(pc).fill(1);score=0;coins=0;}else{nextTurn();}draw();},1000);boost=false;}else{if(next===100){alert(`🏆 ${names[turn]} WINS! American Software - Live Motion Dashboard`);confetti(window.innerWidth/2,300);pos=Array(pc).fill(1);score=0;coins=0;draw();return;}draw();if(dice===6||dice>6){document.getElementById('msg').innerText=`🎲 ${names[turn]} Rolled ${dice}! Extra turn Combo x${combo} American Software`;if(isComputer[turn])setTimeout(()=>rollSnakeAdvance(),1000);}else{combo=1;document.getElementById('comboS').innerText=combo;nextTurn();}}draw();}},65);};
+ draw();if(isComputer[turn])setTimeout(()=>rollSnakeAdvance(),1300);
+}
+</script>
+</body>
+</html>
