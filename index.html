@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Orbittroniz 3D Finance Toolkit · India · 12 Calculators</title>
+  <meta name="description" content="Orbittroniz American 3D Finance Toolkit – 12 pro calculators (EMI, SIP, PPF, FD, RD, GST, Age, Discount, Tip, Loan, Salary, CIBIL) with live motion dashboard, glassmorphism, neon glow & app-like 3D UI. Make once, earn daily.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    :root {
+      --bg: #080b18;
+      --panel: #11172b;
+      --line: #1e3a6b;
+      --cyan: #51e6ff;
+      --green: #22c55e;
+      --yellow: #fde047;
+      --blue: #3b82f6;
+      --red: #ef4444;
+      --pink: #ff6cb5;
+      --violet: #9b7bff;
+      --glass-bg: rgba(17, 23, 43, 0.75);
+      --glass-border: rgba(81, 230, 255, 0.2);
+      --shadow-3d: 0 25px 35px -10px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(81, 230, 255, 0.15);
+      --glow-cyan: 0 0 25px rgba(81, 230, 255, 0.35);
+    }
+
+    body {
+      background: radial-gradient(ellipse at 12% 0%, #182653 0, transparent 38%),
+                  radial-gradient(ellipse at 90% 25%, #28174b 0, transparent 35%),
+                  var(--bg);
+      color: #f5f7ff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* 3D depth & grain */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDIiLz4KPC9zdmc+');
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.15;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      min-height: 100vh;
+      max-width: 1700px;
+      margin: auto;
+      position: relative;
+    }
+
+    /* ===== SIDEBAR 3D ===== */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      padding: 20px 14px;
+      border-right: 1px solid #1c3865;
+      background: linear-gradient(180deg, #050d21f5, #04091a);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      box-shadow: 8px 0 30px #00000066, inset -4px 0 15px #51e6ff08;
+      backdrop-filter: blur(16px);
+      z-index: 10;
+    }
+
+    .logoBox {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #15274a;
+    }
+
+    .logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--cyan), var(--violet) 55%, var(--pink));
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      color: #080b18;
+      font-weight: 900;
+      box-shadow: 0 0 32px #51e6ff66, inset 0 2px 0 rgba(255, 255, 255, 0.8);
+      animation: logoFloat 3.2s ease-in-out infinite;
+      transform: rotate(-5deg);
+      transition: 0.3s;
+    }
+
+    .logo:hover {
+      transform: rotate(0deg) scale(1.08);
+    }
+
+    @keyframes logoFloat {
+      0%, 100% { transform: rotate(-5deg) translateY(0) scale(1); }
+      50% { transform: rotate(-2deg) translateY(-6px) scale(1.06); }
+    }
+
+    .logoTxt b {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 19px;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #fff, var(--cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .logoTxt i {
+      font-style: normal;
+      font-size: 9px;
+      color: #a3afce;
+      letter-spacing: 2.4px;
+      display: block;
+      margin-top: 1px;
+    }
+
+    .nav {
+      display: grid;
+      gap: 6px;
+    }
+
+    .navBtn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 14px;
+      border-radius: 14px;
+      background: transparent;
+      color: #c3d2f5;
+      border: 1px solid transparent;
+      text-align: left;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 8px #00000022;
+    }
+
+    .navBtn.active,
+    .navBtn:hover {
+      background: linear-gradient(100deg, #0964f0, #1644a3);
+      color: #fff;
+      box-shadow: 0 8px 20px #0865f044, 0 0 0 1px #51e6ff44;
+      transform: translateX(6px) scale(1.02);
+      border-color: #51e6ff33;
+    }
+
+    /* ===== LIVE BOXES ===== */
+    .liveBox {
+      border: 1px solid #1b3760;
+      border-radius: 18px;
+      padding: 14px;
+      background: linear-gradient(160deg, #071329cc, #07132988);
+      backdrop-filter: blur(12px);
+      transition: 0.3s;
+      box-shadow: 0 10px 20px -5px #00000055, inset 0 0 20px #51e6ff05;
+    }
+
+    .liveBox:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 0 25px #51e6ff22, 0 10px 25px #00000066;
+      transform: translateY(-2px);
+    }
+
+    .liveBox b {
+      color: #76d9ff;
+      font-size: 13px;
+      display: block;
+      margin-bottom: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      text-shadow: 0 0 15px #51e6ff55;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #9fb2d7;
+      margin: 7px 0;
+    }
+
+    .row strong {
+      color: #fff;
+      text-shadow: 0 0 8px #51e6ff55;
+    }
+
+    /* ===== MAIN AREA ===== */
+    .main {
+      padding: 22px 22px 30px;
+      perspective: 1500px;
+    }
+
+    /* ===== HERO 3D ===== */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #2a4a80;
+      border-radius: 32px;
+      padding: 30px 28px;
+      background: radial-gradient(ellipse at 18% 50%, #7229f766, transparent 32%),
+                  radial-gradient(ellipse at 85% 20%, #008bff77, transparent 35%),
+                  linear-gradient(100deg, #071744, #15154a 58%, #061a3d);
+      box-shadow: 0 18px 45px #0008, 0 0 0 1px #51e6ff22, inset 0 2px 0 #ffffff18;
+      isolation: isolate;
+      animation: heroIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: rotateX(0.5deg) rotateY(-0.5deg) translateZ(0);
+      transition: transform 0.3s;
+    }
+
+    .hero:hover {
+      transform: rotateX(0deg) rotateY(0deg) translateZ(10px);
+    }
+
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(22px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: #50e6ff22;
+      right: 6%;
+      top: -80px;
+      border-radius: 50%;
+      filter: blur(2px);
+      box-shadow: 0 0 100px #50e6ff33;
+      animation: float1 6s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes float1 {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.1); }
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2.8px;
+      text-shadow: 0 0 15px #51e6ff88;
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(32px, 4.2vw, 52px);
+      line-height: 0.92;
+      letter-spacing: -1.6px;
+      margin: 10px 0;
+      text-shadow: 0 4px 20px #00000099;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, #fff, var(--cyan), #c6aaff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 20px #51e6ff55);
+    }
+
+    .hero p {
+      max-width: 720px;
+      color: #c0c9e5;
+      line-height: 1.65;
+      margin: 12px 0 18px;
+      font-size: 14px;
+      text-shadow: 0 1px 8px #00000088;
+    }
+
+    .badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      border: 1px solid #2a4a80;
+      background: #11172bcc;
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #a3afce;
+      backdrop-filter: blur(10px);
+      transition: 0.3s;
+      box-shadow: 0 4px 8px #00000044;
+    }
+
+    .badge:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 20px #51e6ff33;
+    }
+
+    /* ===== CARD GRID 3D ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 1150px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .app { grid-template-columns: 200px 1fr; }
+    }
+
+    @media (max-width: 700px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { position: relative; height: auto; }
+      .grid { grid-template-columns: 1fr; }
+      .main { padding: 14px; }
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid #1e3a6b;
+      background: linear-gradient(160deg, #0e1a38 0%, #0a1020 100%);
+      box-shadow: 0 12px 30px #0004, 0 0 0 1px #51e6ff11, inset 0 1px 0 #ffffff08;
+      cursor: pointer;
+      transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      animation: cardIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+      transform: translateZ(0) rotateX(0.5deg) rotateY(-0.3deg);
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.94); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.02) rotateX(0deg) rotateY(0deg) translateZ(12px);
+      border-color: var(--cyan);
+      box-shadow: 0 20px 50px #0006, 0 0 35px var(--glow)44, inset 0 1px 0 #ffffff33;
+    }
+
+    .card.active {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 2px var(--cyan), 0 20px 50px #0006, 0 0 45px var(--glow)55;
+    }
+
+    .cardTop {
+      height: 94px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      background: radial-gradient(circle at 50% 40%, var(--glow), transparent 68%),
+                  linear-gradient(135deg, #1a274f, #0e1428);
+      overflow: hidden;
+    }
+
+    .cardTop span {
+      font-size: 48px;
+      filter: drop-shadow(0 8px 10px #0007);
+      transition: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-shadow: 0 0 25px var(--glow);
+    }
+
+    .card:hover .cardTop span {
+      transform: translateY(-8px) scale(1.18) rotate(4deg);
+      text-shadow: 0 0 40px var(--glow);
+    }
+
+    .tag {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      background: #090d1dcc;
+      border: 1px solid #ffffff22;
+      border-radius: 99px;
+      padding: 4px 9px;
+      font-size: 8.5px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 10px #00000055;
+    }
+
+    .info {
+      padding: 13px;
+    }
+
+    .info h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      letter-spacing: -0.2px;
+    }
+
+    .info p {
+      font-size: 11px;
+      color: #a3afce;
+      line-height: 1.5;
+      margin-top: 6px;
+      min-height: 34px;
+    }
+
+    .play {
+      margin-top: 10px;
+      width: 100%;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(100deg, #0876ff, #1249bb);
+      color: #fff;
+      font-weight: 800;
+      font-size: 11px;
+      border: 1px solid #147de9;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 6px 14px #0876ff44, inset 0 1px 0 #ffffff44;
+    }
+
+    .play:hover {
+      filter: brightness(1.2);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 10px 24px #0876ff66;
+    }
+
+    /* ===== WINDOW / CALCULATOR PANEL 3D ===== */
+    .win {
+      margin-top: 18px;
+      background: linear-gradient(150deg, #151d35, #0b1020);
+      border: 1px solid #2a4a80;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 25px 80px #0008, 0 0 0 1px #51e6ff22, inset 0 1px 0 #ffffff18;
+      display: none;
+      animation: winIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      backdrop-filter: blur(16px);
+      transform: translateZ(0) rotateX(0.3deg);
+    }
+
+    .win.show {
+      display: block;
+    }
+
+    @keyframes winIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .wHead {
+      padding: 16px 18px;
+      border-bottom: 1px solid #283453;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #121a30f2;
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      box-shadow: 0 10px 20px -10px #00000088;
+    }
+
+    .wHead h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      background: linear-gradient(90deg, #fff, #51e6ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .wHead p {
+      font-size: 11px;
+      color: #a3afce;
+      margin-top: 2px;
+    }
+
+    .close {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: #ffffff0b;
+      border: 1px solid #283453;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 4px 8px #00000044;
+      display: grid;
+      place-items: center;
+    }
+
+    .close:hover {
+      background: var(--pink);
+      transform: rotate(90deg) scale(1.05);
+      box-shadow: 0 0 25px #ff6cb588;
+    }
+
+    .wBody {
+      padding: 18px;
+    }
+
+    /* ===== INPUTS 3D ===== */
+    .inputs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .inputs { grid-template-columns: 1fr; }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #76d9ff;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px #51e6ff44;
+    }
+
+    .field input,
+    .field select {
+      height: 46px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 0 14px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      outline: none;
+      transition: 0.3s;
+      box-shadow: inset 0 2px 5px #00000044, 0 2px 5px #00000022;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px #51e6ff33, inset 0 1px 5px #00000044, 0 0 20px #51e6ff33;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btns {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .btn {
+      height: 46px;
+      padding: 0 18px;
+      border-radius: 14px;
+      border: 1px solid #283453;
+      background: #19213b;
+      color: #eaf0ff;
+      font-weight: 800;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 6px 12px #00000033, inset 0 1px 0 #ffffff18;
+    }
+
+    .btn:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 10px 20px #00000044, 0 0 25px #51e6ff33;
+    }
+
+    .btnPrimary {
+      background: linear-gradient(100deg, #22c55e, #16a34a);
+      color: #000;
+      border-color: #22c55e;
+      font-weight: 900;
+      box-shadow: 0 8px 20px #22c55e44, inset 0 1px 0 #ffffff55;
+    }
+
+    .btnPrimary:hover {
+      filter: brightness(1.1);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 30px #22c55e66, 0 0 35px #22c55e44;
+    }
+
+    /* ===== RESULT BOX 3D ===== */
+    .resultBox {
+      margin-top: 16px;
+      background: linear-gradient(160deg, #0a1831, #0a1020);
+      border: 1px solid #1e3a6b;
+      border-radius: 20px;
+      padding: 16px;
+      animation: resIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 15px 30px -5px #00000066, inset 0 1px 0 #ffffff11, 0 0 0 1px #51e6ff15;
+      transform: translateZ(0);
+    }
+
+    @keyframes resIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .resGrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 700px) {
+      .resGrid { grid-template-columns: 1fr; }
+    }
+
+    .resItem {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+      transition: 0.3s;
+      box-shadow: inset 0 1px 0 #ffffff0c;
+    }
+
+    .resItem:hover {
+      border-color: var(--cyan);
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 8px 20px #00000044, 0 0 25px #51e6ff22;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .resItem i {
+      font-style: normal;
+      font-size: 10px;
+      color: #a3afce;
+      font-weight: 800;
+      letter-spacing: 1px;
+      display: block;
+    }
+
+    .resItem b {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      display: block;
+      margin-top: 4px;
+      color: #fff;
+      text-shadow: 0 0 15px #51e6ff44;
+    }
+
+    .resItem b.green { color: var(--green); text-shadow: 0 0 20px #22c55e66; }
+    .resItem b.yellow { color: var(--yellow); text-shadow: 0 0 20px #fde04766; }
+    .resItem b.cyan { color: var(--cyan); text-shadow: 0 0 20px #51e6ff66; }
+    .resItem b.red { color: var(--red); text-shadow: 0 0 20px #ef444466; }
+
+    .bar {
+      height: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 14px;
+      display: flex;
+      box-shadow: inset 0 2px 5px #00000055;
+    }
+
+    .bar div {
+      height: 100%;
+      transition: 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 0 12px currentColor;
+    }
+
+    /* ===== AD & FOOTER ===== */
+    .adBox {
+      margin-top: 18px;
+      height: 70px;
+      background: linear-gradient(90deg, #11172b, #0e1a38);
+      border: 1px dashed #2a4a80;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      color: #6b7a9a;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      box-shadow: inset 0 2px 10px #00000055;
+      backdrop-filter: blur(4px);
+    }
+
+    .footer {
+      margin-top: 24px;
+      border-top: 1px solid #1e3a6b;
+      padding: 18px 0 10px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: #6b7a9a;
+      font-size: 11px;
+      text-shadow: 0 1px 5px #00000066;
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0f1e; }
+    ::-webkit-scrollbar-thumb { background: #1e3a6b; border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logoBox">
+        <div class="logo">₹</div>
+        <div class="logoTxt">
+          <b>ORBITTRONIZ</b><b style="color:var(--cyan)"> FINANCE</b>
+          <i>AMERICAN 3D SOFTWARE • LIVE MOTION • APP LIKE</i>
+        </div>
+      </div>
+      <div class="nav">
+        <button class="navBtn active" onclick="scrollTop()">🏠 Dashboard Home</button>
+        <button class="navBtn" onclick="openCalc('emi')">🏦 EMI Calculator</button>
+        <button class="navBtn" onclick="openCalc('sip')">📈 SIP Calculator</button>
+        <button class="navBtn" onclick="openCalc('ppf')">🏛️ PPF Calculator</button>
+        <button class="navBtn" onclick="openCalc('gst')">🧾 GST Calculator</button>
+        <button class="navBtn" onclick="openCalc('salary')">💼 Salary Calculator</button>
+      </div>
+      <div class="liveBox">
+        <b>💎 Live Finance Tools - American Software</b>
+        <div class="row"><span>Total Calculators</span><strong>12 Pro</strong></div>
+        <div class="row"><span>EMI Searches India</span><strong>5L/month</strong></div>
+        <div class="row"><span>SIP Searches</span><strong>3L/month</strong></div>
+        <div class="row"><span>Ad CPC Finance</span><strong>₹50-150 🔥</strong></div>
+        <div class="row"><span>Dashboard</span><strong>Live Motion App</strong></div>
+      </div>
+      <div class="liveBox">
+        <b>📊 Ad Income - Make Once Earn Daily</b>
+        <div class="row"><span>Banner Ad</span><strong>₹0.5/1k</strong></div>
+        <div class="row"><span>Interstitial</span><strong>₹3-5/1k</strong></div>
+        <div class="row"><span>Rewarded Ad</span><strong>₹8-12/1k 🔥</strong></div>
+        <div class="row"><span>Regular Use</span><strong>Daily 365 Days</strong></div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <div class="hero">
+        <div class="eyebrow">ORBITTRONIZ.COM • AMERICAN 3D SOFTWARE • LIVE MOTION DASHBOARD</div>
+        <h1>Finance Toolkit India<br><span>All Calculators · Make Once, Earn Daily</span></h1>
+        <p>12 Pro Calculators with American Company Software Look – Glass morphism blur 32px, neon glow #22c55e→#51e6ff, live motion, dashboard like app, no extra clicks. EMI, SIP, PPF, FD, RD, GST, Age, Discount, Tip, Loan, Salary, CIBIL – Same attractive 3D theme – Ad ready – Regular use 365 days – Users never delete – Make once, earn daily from ads.</p>
+        <div class="badges">
+          <div class="badge">💎 American 3D Software UIX</div>
+          <div class="badge">📊 12 Calculators Working</div>
+          <div class="badge">💰 Ad CPC ₹50-150 High</div>
+          <div class="badge">📱 Dashboard App Like</div>
+          <div class="badge">⚡ Live Motion Smooth</div>
+          <div class="badge">🔥 Make Once Earn Daily</div>
+        </div>
+      </div>
+
+      <!-- CARD GRID -->
+      <div class="grid" id="grid"></div>
+
+      <!-- CALCULATOR WINDOW -->
+      <div id="win" class="win">
+        <div class="wHead">
+          <div>
+            <h2 id="wTitle">Calculator</h2>
+            <p id="wSub">American 3D Software – Live Motion – Dashboard App Like – Working Calculator</p>
+          </div>
+          <button class="close" onclick="closeWin()">✕</button>
+        </div>
+        <div class="wBody" id="wBody"></div>
+      </div>
+
+      <!-- AD PLACEHOLDER -->
+      <div class="adBox">AD PLACE – AdMob Banner – Finance Ads Pay High ₹50-150 per click – Your Income Here</div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        <span>© 2026 Orbittroniz Finance Toolkit India – American 3D Software</span>
+        <span>12 Calculators • EMI SIP PPF FD RD GST • Make Once Earn Daily 💰</span>
+        <span>Ad Ready • App Like Dashboard • Live Motion</span>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // ========== CALCULATOR DATA ==========
+    const calcs = [
+      { id: 'emi', name: 'EMI Calculator', desc: 'Home, Car, Personal loan EMI – Monthly payment + Total interest + Total payment', emoji: '🏦', glow: '#22c55e', tag: '5L SEARCH/MONTH • HIGH CPC' },
+      { id: 'sip', name: 'SIP Calculator', desc: 'Monthly SIP – Maturity amount + Invested + Gain – Best for mutual fund', emoji: '📈', glow: '#51e6ff', tag: '3L SEARCH • DAILY USE' },
+      { id: 'ppf', name: 'PPF Calculator', desc: 'Public Provident Fund – Yearly investment + Maturity – Govt scheme', emoji: '🏛️', glow: '#fde047', tag: 'GOVT SCHEME • LONG TERM' },
+      { id: 'fd', name: 'FD Calculator', desc: 'Fixed Deposit – Lump sum + Interest + Maturity – Bank FD', emoji: '🏦', glow: '#22c55e', tag: 'BANK FD • SENIOR CITIZEN' },
+      { id: 'rd', name: 'RD Calculator', desc: 'Recurring Deposit – Monthly saving – Maturity + Interest', emoji: '💰', glow: '#3b82f6', tag: 'MONTHLY SAVING' },
+      { id: 'gst', name: 'GST Calculator', desc: 'GST 5% 12% 18% 28% – Add or Remove GST – Shopkeepers daily use', emoji: '🧾', glow: '#fde047', tag: 'SHOPKEEPERS DAILY • NAGPUR' },
+      { id: 'age', name: 'Age Calculator', desc: 'DOB to exact age – Years months days – For forms', emoji: '🎂', glow: '#ff6cb5', tag: 'FORM FILLING' },
+      { id: 'discount', name: 'Discount Calculator', desc: 'Original price – Discount % – You pay + You save – Shopping', emoji: '🏷️', glow: '#ef4444', tag: 'SHOPPING DAILY' },
+      { id: 'tip', name: 'Tip Calculator', desc: 'Bill amount + Tip % – Split between friends – Restaurant', emoji: '💸', glow: '#51e6ff', tag: 'RESTAURANT' },
+      { id: 'loan', name: 'Loan Prepayment', desc: 'Extra payment – Save interest + Reduce tenure – Home loan hack', emoji: '🚀', glow: '#22c55e', tag: 'HOME LOAN HACK' },
+      { id: 'salary', name: 'Salary In-Hand', desc: 'CTC to In-hand – PF + Tax + Deductions – Monthly salary', emoji: '💼', glow: '#3b82f6', tag: 'SALARY DAY • MONTHLY' },
+      { id: 'cibil', name: 'CIBIL & Eligibility', desc: 'Loan eligibility + CIBIL score guide + Documents – Finance BMS', emoji: '📊', glow: '#9b7bff', tag: 'LOAN APPROVAL • BMS FINANCE' }
+    ];
+
+    const $ = s => document.querySelector(s);
+
+    // ========== RENDER CARD GRID ==========
+    function renderGrid() {
+      let g = $('#grid');
+      g.innerHTML = calcs.map((c, i) => `
+        <div class="card" id="card-${c.id}" style="--glow:${c.glow};animation-delay:${i * 0.06}s" onclick="openCalc('${c.id}')">
+          <div class="cardTop">
+            <span>${c.emoji}</span>
+            <div class="tag">${c.tag}</div>
+          </div>
+          <div class="info">
+            <h3>${c.name}</h3>
+            <p>${c.desc}</p>
+            <button class="play">▶ Open Calculator Smooth – American 3D</button>
+          </div>
+        </div>
+      `).join('');
+    }
+    renderGrid();
+
+    // ========== UTILITIES ==========
+    function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    function closeWin() {
+      $('#win').classList.remove('show');
+      document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+    }
+    function openCalc(id) {
+      document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+      document.getElementById('card-' + id)?.classList.add('active');
+      let w = $('#win'), t = calcs.find(x => x.id === id);
+      $('#wTitle').innerText = t.name + ' – American 3D Software – Live Motion Dashboard';
+      $('#wSub').innerText = t.desc + ' – Working calculator – Make once earn daily – Ad ready';
+      w.classList.add('show');
+      setTimeout(() => w.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
+      let body = $('#wBody');
+      // Inject respective HTML
+      if (id === 'emi') body.innerHTML = emiHTML();
+      if (id === 'sip') body.innerHTML = sipHTML();
+      if (id === 'ppf') body.innerHTML = ppfHTML();
+      if (id === 'fd') body.innerHTML = fdHTML();
+      if (id === 'rd') body.innerHTML = rdHTML();
+      if (id === 'gst') body.innerHTML = gstHTML();
+      if (id === 'age') body.innerHTML = ageHTML();
+      if (id === 'discount') body.innerHTML = discountHTML();
+      if (id === 'tip') body.innerHTML = tipHTML();
+      if (id === 'loan') body.innerHTML = loanHTML();
+      if (id === 'salary') body.innerHTML = salaryHTML();
+      if (id === 'cibil') body.innerHTML = cibilHTML();
+      // Auto-calc or set today's date
+      if (id === 'age') {
+        setTimeout(() => {
+          const todayInput = document.getElementById('ageT');
+          if (todayInput) todayInput.valueAsDate = new Date();
+        }, 50);
+      }
+      if (id === 'emi') setTimeout(() => calcEMI(), 80);
+      if (id === 'sip') setTimeout(() => calcSIP(), 80);
+      if (id === 'ppf') setTimeout(() => calcPPF(), 80);
+      if (id === 'fd') setTimeout(() => calcFD(), 80);
+      if (id === 'rd') setTimeout(() => calcRD(), 80);
+      if (id === 'gst') setTimeout(() => calcGST(), 80);
+      if (id === 'discount') setTimeout(() => calcDis(), 80);
+      if (id === 'tip') setTimeout(() => calcTip(), 80);
+      if (id === 'salary') setTimeout(() => calcSalary(), 80);
+      if (id === 'cibil') setTimeout(() => calcCibil(), 80);
+    }
+
+    // ========== FORMATTERS ==========
+    function fmt(n) { return '₹' + Number(n).toLocaleString('en-IN', { maximumFractionDigits: 0 }); }
+    function fmt2(n) { return '₹' + Number(n).toLocaleString('en-IN', { maximumFractionDigits: 2 }); }
+
+    // ========== EMI ==========
+    function emiHTML() {
+      return `
+        <div class="inputs">
+          <div class="field"><label>Loan Amount (₹)</label><input id="emiP" type="number" value="1000000"></div>
+          <div class="field"><label>Interest Rate % Yearly</label><input id="emiR" type="number" value="9.5" step="0.1"></div>
+          <div class="field"><label>Tenure Years</label><input id="emiY" type="number" value="20"></div>
+          <div class="field"><label>Tenure Months (Extra)</label><input id="emiM" type="number" value="0"></div>
+        </div>
+        <div class="btns">
+          <button class="btn btnPrimary" onclick="calcEMI()">Calculate EMI – American Software</button>
+          <button class="btn" onclick="resetEMI()">Reset</button>
+        </div>
+        <div id="emiRes"></div>
+        <div class="adBox">Interstitial Ad Place – After EMI Calculate – Finance Ad High CPC ₹100 – Your Income</div>
+      `;
+    }
+    function calcEMI() {
+      let P = parseFloat(document.getElementById('emiP').value) || 0,
+          R = parseFloat(document.getElementById('emiR').value) || 0,
+          Y = parseFloat(document.getElementById('emiY').value) || 0,
+          M = parseFloat(document.getElementById('emiM').value) || 0;
+      let N = Y * 12 + M;
+      let r = R / 12 / 100;
+      let EMI = 0;
+      if (r === 0) EMI = P / N;
+      else EMI = P * r * Math.pow(1 + r, N) / (Math.pow(1 + r, N) - 1);
+      let total = EMI * N, interest = total - P;
+      document.getElementById('emiRes').innerHTML = `
+        <div class="resultBox">
+          <div class="resGrid">
+            <div class="resItem"><i>MONTHLY EMI</i><b class="green">${fmt2(EMI)}</b></div>
+            <div class="resItem"><i>TOTAL INTEREST</i><b class="yellow">${fmt(interest)}</b></div>
+            <div class="resItem"><i>TOTAL PAYMENT</i><b class="cyan">${fmt(total)}</b></div>
+          </div>
+          <div class="bar">
+            <div style="width:${(P / total * 100).toFixed(1)}%;background:#22c55e"></div>
+            <div style="width:${(interest / total * 100).toFixed(1)}%;background:#fde047"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#a3afce;margin-top:6px">
+            <span>Principal ${(P / total * 100).toFixed(1)}%</span>
+            <span>Interest ${(interest / total * 100).toFixed(1)}%</span>
+          </div>
+        </div>
+      `;
+    }
+    function resetEMI() {
+      document.getElementById('emiP').value = 1000000;
+      document.getElementById('emiR').value = 9.5;
+      document.getElementById('emiY').value = 20;
+      document.getElementById('emiM').value = 0;
+      calcEMI();
+    }
+
+    // ========== SIP ==========
+    function sipHTML() {
+      return `
+        <div class="inputs">
+          <div class="field"><label>Monthly SIP (₹)</label><input id="sipM" type="number" value="5000"></div>
+          <div class="field"><label>Expected Return % Yearly</label><input id="sipR" type="number" value="12" step="0.5"></div>
+          <div class="field"><label>Time Years</label><input id="sipY" type="number" value="15"></div>
+          <div class="field"><label>Step Up % Yearly (Optional)</label><input id="sipS" type="number" value="0"></div>
+        </div>
+        <div class="btns"><button class="btn btnPrimary" onclick="calcSIP()">Calculate SIP – American 3D</button></div>
+        <div id="sipRes"></div>
+      `;
+    }
+    function calcSIP() {
+      let M = parseFloat(document.getElementById('sipM').value) || 0,
+          R = parseFloat(document.getElementById('sipR').value) || 0,
+          Y = parseFloat(document.getElementById('sipY').value) || 0;
+      let n = Y * 12, r = R / 12 / 100;
+      let maturity = 0, invested = 0;
+      let curM = M;
+      for (let i = 1; i <= n; i++) {
+        maturity = (maturity + curM) * (1 + r);
+        invested += curM;
+        if (i % 12 === 0) {
+          let step = parseFloat(document.getElementById('sipS').value) || 0;
+          curM = curM * (1 + step / 100);
+        }
+      }
+      let gain = maturity - invested;
+      document.getElementById('sipRes').innerHTML = `
+        <div class="resultBox">
+          <div class="resGrid">
+            <div class="resItem"><i>INVESTED</i><b>${fmt(invested)}</b></div>
+            <div class="resItem"><i>EST. GAIN</i><b class="green">${fmt(gain)}</b></div>
+            <div class="resItem"><i>MATURITY</i><b class="cyan">${fmt(maturity)}</b></div>
+          </div>
+          <div class="bar">
+            <div style="width:${(invested / maturity * 100).toFixed(1)}%;background:#51e6ff"></div>
+            <div style="width:${(gain / maturity * 100).toFixed(1)}%;background:#22c55e"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ========== PPF ==========
+    function ppfHTML() {
+      return `
+        <div class="inputs">
+          <div class="field"><label>Yearly Investment (₹)</label><input id="ppfA" type="number" value="150000"></div>
+          <div class="field"><label>Interest %</label><input id="ppfR" type="number" value="7.1"></div>
+          <div class="field"><label>Time Years (15-50)</label><input id="ppfY" type="number" value="15"></div>
+        </div>
+        <div class="btns"><button class="btn btnPrimary" onclick="calcPPF()">Calculate PPF – Govt Scheme</button></div>
+        <div id="ppfRes"></div>
+      `;
+    }
+    function calcPPF() {
+      let A = parseFloat(document.getElementById('ppfA').value) || 0;
+      let rate = parseFloat(document.getElementById('ppfR').value) / 100;
+      let Y = parseFloat(document.getElementById('ppfY').value) || 0;
+      let bal = 0, inv = 0;
+      for (let i = 0; i < Y; i++) {
+        bal = (bal + A) * (1 + rate);
+        inv += A;
+      }
+      document.getElementById('ppfRes').innerHTML = `
+        <div class="resultBox">
+          <div class="resGrid">
+            <div class="resItem"><i>INVESTED</i><b>${fmt(inv)}</b></div>
+            <div class="resItem"><i>INTEREST</i><b class="yellow">${fmt(bal - inv)}</b></div>
+            <div class="resItem"><i>MATURITY</i><b class="green">${fmt(bal)}</b></div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ========== FD ==========
+    function fdHTML() {
+      return `
+        <div class="inputs">
+          <div class="field"><label>FD Amount (₹)</label><input id="fdP" type="number" value="100000"></div>
+          <div class="field"><label>Interest % Yearly</label><input id="fdR" type="number" value="7.5"></div>
+          <div class="field"><label>Years</label><input id="fdY" type="number" value="5"></div>
+        </div>
+        <div class="btns"><button class="btn btnPrimary" onclick="calcFD()">Calculate FD</button></div>
+        <div id="fdRes"></div>
+      `;
+    }
+    function calcFD() {
+      let P = parseFloat(document.getElementById('fdP').value) || 0;
+      let R = parseFloat(document.getElementById('fdR').value) / 100;
+      let Y = parseFloat(document.getElementById('fdY').value) || 0;
+      let mat = P * Math.pow(1 + R, Y);
+      document.getElementById('fdRes').innerHTML = `
+        <div class="resultBox">
+          <div class="resGrid">
+            <div class="resItem"><i>INVESTED</i><b>${fmt(P)}</b></div>
+            <div class="resItem"><i>INTEREST</i><b class="yellow">${fmt(mat - P)}</b></div>
+            <div class="resItem"><i>MATURITY</i><b class="green">${fmt(mat)}</b></div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ========== RD ==========
+    function rdHTML() {
+      return `
+        <div class="inputs">
+          <div class="field"><label>Monthly RD (₹)</label><input id="rdM" type="number" value="5000"></div>
+          <div class="field"><label>Interest %</label><input id="rdR" type="number" value="6.5"></div>
+          <div class="field"><label>Months</label><input id="rdN" type="number" value="60"></div>
+        </div>
+        <div class="btns"><button class="btn btnPrimary" onclick="calcRD()">Calculate RD</button></div>
+        <div id="rdRes"></div>
+      `;
+    }
+    function calcRD() {
+      let M = parseFloat(document.getElementById('rdM').value) || 0;
+      let R = parseFloat(document.getElementById('rdR').value) / 100 / 12;
+      let N = parseFloat(document.getElementById('rdN').value) || 0;
+      let mat = 0;
+      for (let i = 0; i < N; i++) {
+        mat = (mat + M) * (1 + R);
+      }
+      let inv = M * N;
+      document.getElementById('rdRes').innerHTML = `
+        <div class="resultBox">
+          <div class="resGrid">
+            <div class="resItem"><i>INVESTED</i><b>${fmt(inv)}</b></div>
+            <div class="resItem"><i>INTEREST</i><b class="yellow">${fmt(mat - inv)}</b></div>
+            <div class="resItem"><i>MATURITY</i><b class="green">${fmt(mat)}</b></div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ========== GST ==========
+    function gstHTML() {
+      return `
+        <div class="inputs">
+          <div class="field"><label>Amount (₹)</label><input id="gstA" type="number" value="1000"></div>
+          <div class="field"><label>GST Rate %</label>
+            <select id="gstR">
+              <option value="5">5%</option>
+              <option value="12">12%</option>
+              <option value="18" selected>18%</option>
+              <option value="28">28%</option>
+            </select>
+          </div>
+          <div class="field"><label>Type</label>
+            <select id="gstT">
+              <option value="add">Add GST (Exclusive)</option>
+              <option value="remove">Remove GST (Inclusive)</option>
+            </select>
+          </div>
+        </div>
+        <div class="btns"><button class="btn btnPrimary" onclick="calcGST()">Calculate GST – Shop Daily Use</button></div>
+        <div id="gstRes"></div>
+      `;
+    }
+    function calcGST() {
+      let A = parseFloat(document.getElementById('gstA').value) || 0;
+      let R = parseFloat(document.getElementById('gstR').value) || 0;
+      let T = document.getElementById('gstT').value;
+      let gst, total;
+      if (T === 'add') {
+        gst = A * R / 100;
+        total = A + gst;
+      } else {
+        gst = A - A * 100 / (100 + R);
+        total = A - gst;
+      }
+      document.getElementById('gstRes').innerHTML = `
+        <div class="resultBox">
+          <div class="resGrid">
+            <div class="resItem"><i>GST AMOUNT</i><b class="yellow">${fmt2(gst)}</b></div>
+            <div class="resItem"><i>NET AMOUNT</i><b>${fmt2(T === 'add' ? A : total)}</b></div>
+            <div class="resItem"><i>TOTAL</i><b class="green">${fmt2(T === 'add' ? total : A)}</b></div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ========== AGE ==========
+    function ageHTML() {
+      return `
+        <div class="inputs">
+          <div class="field"><label>Date of Birth</label><input id="ageD" type="date" value="2000-01-01"></div>
+          <div class="field"><label>Today Date</label><input id="ageT" type="date"></div>
+        </div>
+        <div class="btns"><button class="btn btnPrimary" onclick="calcAge()">Calculate Age</button></div>
+        <div id="ageRes"></div>
+        <script>document.getElementById('ageT').valueAsDate = new Date();<\/script>
+      `;
+    }
+    function calcAge() {
+      let dob = new Date(document.getElementById('ageD').value),
+          today = document.getElementById('ageT').valueAsDate || new Date();
+      if (isNaN(dob.getTime())) return;
+      let diff = today - dob;
+      let years = today.getFullYear() - dob.getFullYear(),
+          months = today.getMonth() - dob.getMonth(),
+          days = today.getDate() - dob.getDate();
+      if (days < 0) {
+        months--;
+        let pm = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+        days += pm;
+      }
+      if (months < 0) { years--; months += 12; }
+      document.getElementById('ageRes').innerHTML = `
+        <div class="resultBox">
+          <div class="resGrid">
+            <div class="resItem"><i>YEARS</i><b class="cyan">${years}</b></div>
+            <div class="resItem"><i>MONTHS</i><b class="yellow">${months}</b></div>
+            <div class="resItem"><i>DAYS</i><b class="green">${days}</b></div>
+          </div>
+          <div style="text-align:center;margin-top:10px;color:#a3afce;font-size:12px">Total Days: ${(diff / 86400000).toFixed(0)} days</div>
+        </div>
+      `;
+    }
+
+    // ========== DISCOUNT ==========
+    function discountHTML() {
+      return `
+        <div class="inputs">
+          <div class="field"><label>Original Price (₹)</label><input id="disP" type="number" value="1000"></div>
+          <div class="field"><label>Discount %</label><input id="disR" type="number" value="25"></div>
+        </div>
+        <div class="btns"><button class="btn btnPrimary" onclick="calcDis()">Calculate Discount</button></div>
+        <div id="disRes"></div>
+      `;
+    }
+    function calcDis() {
+      let P = parseFloat(document.getElementById('disP').value) || 0,
+          R = parseFloat(document.getElementById('disR').value) || 0;
+      let save = P * R / 100, pay = P - save;
+      document.getElementById('disRes').innerHTML = `
+        <div class="resultBox">
+          <div class="resGrid">
+            <div class="resItem"><i>YOU SAVE</i><b class="green">${fmt2(save)}</b></div>
+            <div class="resItem"><i>YOU PAY</i><b class="cyan">${fmt2(pay)}</b></div>
+            <div class="resItem"><i>DISCOUNT</i><b class="yellow">${R}%</b></div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ========== TIP ==========
+    function tipHTML() {
+      return `
+        <div class="inputs">
+          <div class="field"><label>Bill Amount (₹)</label><input id="tipB" type="number" value="1000"></div>
+          <div class="field"><label>Tip %</label><input id="tipP" type="number" value="10"></div>
+          <div class="field"><label>Split Between</label><input id="tipS" type="number" value="2"></div>
+        </div>
+        <div class="btns"><button class="btn btnPrimary" onclick="calcTip()">Calculate Tip</button></div>
+        <div id="tipRes"></div>
+      `;
+    }
+    function calcTip() {
+      let B = parseFloat(document.getElementById('tipB').value) || 0,
+          P = parseFloat(document.getElementById('tipP').value) || 0,
+          S = parseFloat(document.getElementById('tipS').value) || 1;
+      let tip = B * P / 100, total = B + tip, per = total / S;
+      document.getElementById('tipRes').innerHTML = `
+        <div class="resultBox">
+          <div class="resGrid">
+            <div class="resItem"><i>TIP</i><b class="yellow">${fmt2(tip)}</b></div>
+            <div class="resItem"><i>TOTAL</i><b class="green">${fmt2(total)}</b></div>
+            <div class="resItem"><i>PER PERSON</i><b class="cyan">${fmt2(per)}</b></div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ========== LOAN PREPAYMENT ==========
+    function loanHTML() {
+      return `
+        <div class="inputs">
+          <div class="field"><label>Outstanding Loan (₹)</label><input id="loanP" type="number" value="2000000"></div>
+          <div class="field"><label>Interest %</label><input id="loanR" type="number" value="9"></div>
+          <div class="field"><label>Remaining Months</label><input id="loanN" type="number" value="180"></div>
+          <div class="field"><label>Extra Prepayment (₹)</label><input id="loanE" type="number" value="200000"></div>
+        </div>
+        <div class="btns"><button class="btn btnPrimary" onclick="calcLoan()">Calculate Save – Home Loan Hack</button></div>
+        <div id="loanRes"></div>
+      `;
+    }
+    function calcLoan() {
+      let P = parseFloat(document.getElementById('loanP').value) || 0,
+          R = parseFloat(document.getElementById('loanR').value) / 100 / 12,
+          N = parseFloat(document.getElementById('loanN').value) || 0,
+          E = parseFloat(document.getElementById('loanE').value) || 0;
+      let emi = P * R * Math.pow(1 + R, N) / (Math.pow(1 + R, N) - 1);
+      let bal = P, totalInt = 0;
+      for (let i = 0; i < N; i++) {
+        let int = bal * R;
+        totalInt += int;
+        bal -= emi - int;
+        if (bal < 0) bal = 0;
+      }
+      let bal2 = P - E, totalInt2 = 0, months2 = 0;
+      for (let i = 0; i < N; i++) {
+        if (bal2 <= 0) break;
+        let int = bal2 * R;
+        totalInt2 += int;
+        bal2 -= emi - int;
+        months2++;
+      }
+      let save = totalInt - totalInt2, monthsSave = N - months2;
+      document.getElementById('loanRes').innerHTML = `
+        <div class="resultBox">
+          <div class="resGrid">
+            <div class="resItem"><i>INTEREST SAVE</i><b class="green">${fmt(save)}</b></div>
+            <div class="resItem"><i>MONTHS SAVE</i><b class="yellow">${monthsSave}</b></div>
+            <div class="resItem"><i>NEW TENURE</i><b class="cyan">${months2} months</b></div>
+          </div>
+          <div style="text-align:center;margin-top:10px;font-size:11px;color:#a3afce">
+            You pay ${fmt(E)} extra now, save ${fmt(save)} interest + finish ${monthsSave} months early – Home Loan Hack – American Software
+          </div>
+        </div>
+      `;
+    }
+
+    // ========== SALARY ==========
+    function salaryHTML() {
+      return `
+        <div class="inputs">
+          <div class="field"><label>Annual CTC (₹)</label><input id="salC" type="number" value="600000"></div>
+          <div class="field"><label>PF % (12%)</label><input id="salPF" type="number" value="12"></div>
+          <div class="field"><label>Professional Tax Yearly</label><input id="salPT" type="number" value="2500"></div>
+          <div class="field"><label>Other Deductions Yearly</label><input id="salO" type="number" value="0"></div>
+        </div>
+        <div class="btns"><button class="btn btnPrimary" onclick="calcSalary()">Calculate In-Hand Salary</button></div>
+        <div id="salRes"></div>
+      `;
+    }
+    function calcSalary() {
+      let CTC = parseFloat(document.getElementById('salC').value) || 0,
+          PFP = parseFloat(document.getElementById('salPF').value) || 0,
+          PT = parseFloat(document.getElementById('salPT').value) || 0,
+          OD = parseFloat(document.getElementById('salO').value) || 0;
+      let basic = CTC * 0.4,
+          pf = basic * PFP / 100,
+          taxable = CTC - pf - PT - OD - 50000;
+      let tax = 0;
+      if (taxable > 700000) {
+        if (taxable <= 900000) tax = (taxable - 700000) * 0.1;
+        else if (taxable <= 1200000) tax = 20000 + (taxable - 900000) * 0.15;
+        else if (taxable <= 1500000) tax = 65000 + (taxable - 1200000) * 0.2;
+        else tax = 125000 + (taxable - 1500000) * 0.3;
+      }
+      let inhand = (CTC - pf - PT - OD - tax) / 12;
+      document.getElementById('salRes').innerHTML = `
+        <div class="resultBox">
+          <div class="resGrid">
+            <div class="resItem"><i>MONTHLY IN-HAND</i><b class="green">${fmt2(inhand)}</b></div>
+            <div class="resItem"><i>YEARLY TAX (New Regime)</i><b class="yellow">${fmt2(tax)}</b></div>
+            <div class="resItem"><i>PF YEARLY</i><b class="cyan">${fmt2(pf)}</b></div>
+          </div>
+          <div style="text-align:center;margin-top:10px;font-size:11px;color:#a3afce">
+            CTC ${fmt(CTC)} → In-hand ${fmt2(inhand)}/month – American Software – BMS Finance Logic
+          </div>
+        </div>
+      `;
+    }
+
+    // ========== CIBIL ==========
+    function cibilHTML() {
+      return `
+        <div class="inputs">
+          <div class="field"><label>Monthly Income (₹)</label><input id="cibI" type="number" value="50000"></div>
+          <div class="field"><label>Existing EMI (₹)</label><input id="cibE" type="number" value="5000"></div>
+          <div class="field"><label>CIBIL Score</label>
+            <select id="cibS">
+              <option value="750">750+ Excellent</option>
+              <option value="700">700-749 Good</option>
+              <option value="650">650-699 Average</option>
+              <option value="600">Below 650 Low</option>
+            </select>
+          </div>
+          <div class="field"><label>Loan Type</label>
+            <select id="cibL">
+              <option value="home">Home Loan (9%)</option>
+              <option value="car">Car Loan (10%)</option>
+              <option value="personal">Personal Loan (13%)</option>
+            </select>
+          </div>
+        </div>
+        <div class="btns"><button class="btn btnPrimary" onclick="calcCibil()">Check Eligibility – BMS Finance</button></div>
+        <div id="cibRes"></div>
+      `;
+    }
+    function calcCibil() {
+      let inc = parseFloat(document.getElementById('cibI').value) || 0,
+          emi = parseFloat(document.getElementById('cibE').value) || 0,
+          score = parseFloat(document.getElementById('cibS').value) || 0,
+          type = document.getElementById('cibL').value;
+      let maxEMI = inc * 0.5 - emi;
+      let rate = type === 'home' ? 0.09 : type === 'car' ? 0.10 : 0.13;
+      let tenure = type === 'home' ? 240 : type === 'car' ? 60 : 48;
+      let r = rate / 12;
+      let eligible = maxEMI * (Math.pow(1 + r, tenure) - 1) / (r * Math.pow(1 + r, tenure));
+      if (score < 650) eligible = eligible * 0.5;
+      else if (score < 700) eligible = eligible * 0.8;
+      document.getElementById('cibRes').innerHTML = `
+        <div class="resultBox">
+          <div class="resGrid">
+            <div class="resItem"><i>MAX EMI YOU CAN PAY</i><b class="cyan">${fmt2(maxEMI)}</b></div>
+            <div class="resItem"><i>LOAN ELIGIBLE</i><b class="green">${fmt(eligible)}</b></div>
+            <div class="resItem"><i>CIBIL STATUS</i><b class="${score >= 750 ? 'green' : score >= 700 ? 'yellow' : 'red'}">
+              ${score >= 750 ? 'Excellent – High Chance' : score >= 700 ? 'Good – Likely' : score >= 650 ? 'Average – Need Docs' : 'Low – Improve CIBIL'}
+            </b></div>
+          </div>
+          <div style="margin-top:10px;font-size:11px;color:#a3afce;line-height:1.5">
+            <b>Documents:</b> Aadhar, PAN, 6 months salary slip, 6 months bank statement, Form 16<br>
+            <b>Tips:</b> ${score < 750 ? 'Pay EMIs on time, Keep credit utilization <30%, Don\\'t apply many loans together' : "Maintain same, Don't close old cards, Keep 2-3 active accounts"}
+          </div>
+        </div>
+      `;
+    }
+
+    // ========== INITIAL LOAD ==========
+    window.addEventListener('load', () => {
+      openCalc('emi');
+      setTimeout(() => calcEMI(), 300);
+    });
+  </script>
+</body>
+</html>
