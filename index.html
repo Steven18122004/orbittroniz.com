@@ -118,154 +118,171 @@ canvas{border-radius:12px;border:1px solid #2a4a80;max-width:100%;background:#ff
  <body>
   <header> ... Orbitroniz ... </header>
   <header/>
-  <!-- ULTRA PRO MAX - PER IMAGE + WEATHER VFX -->
-<div id="orbit-tool1" style="margin-top:20px; background:linear-gradient(180deg,#0f172a,#020617); border:1px solid #1e293b; border-radius:16px; padding:16px; font-family:Inter,sans-serif;">
-<h3 style="color:#fff; margin:0;">🔥 ULTRA STUDIO - Per Image Edit + VFX</h3>
-<p style="font-size:10px; color:#94a3b8; margin:4px 0 0;">Click image below to set its own Motion/Filter - Like CapCut</p>
+  <!-- ULTRA V4 - SUPER ADVANCE - FINAL -->
+<div id="orbit-tool1" style="margin:20px 0; background:#020617; border:2px solid #1e293b; border-radius:18px; padding:14px; font-family:Inter,sans-serif; box-shadow:0 0 40px #3b82f622;">
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<h3 style="color:#fff; margin:0; font-size:16px;">🔥 ULTRA V4 - SUPER ADVANCE STUDIO</h3>
+<span style="background:linear-gradient(90deg,#22c55e,#3b82f6); color:#000; font-size:9px; font-weight:900; padding:3px 8px; border-radius:20px;">40+ VFX + FILTERS</span>
+</div>
 
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px;">
-<label style="background:#020617; border:1px dashed #22c55e; border-radius:10px; padding:16px; text-align:center; cursor:pointer;">
-<div style="font-size:24px;">📸🎬</div><div style="font-size:11px; color:#22c55e; font-weight:700;">Add 2-10 Images</div>
+<div style="margin-top:10px; display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+<label style="background:linear-gradient(180deg,#0f172a,#020617); border:2px dashed #22c55e; border-radius:12px; padding:12px; text-align:center; cursor:pointer;">
+<div style="font-size:28px;">🎬✨</div><div style="font-size:11px; color:#22c55e; font-weight:900;">Add Images (2-20)</div><div style="font-size:9px; color:#64748b;">Each = Different Motion</div>
 <input type="file" id="proImgs" accept="image/*" multiple hidden>
 </label>
-<div style="background:#020617; border:1px solid #1e293b; border-radius:10px; padding:8px;">
-<div style="font-size:10px; color:#22c55e; font-weight:700;">👇 YOUR IMAGES - CLICK TO EDIT EACH:</div>
-<div id="imgList" style="display:flex; flex-direction:column; gap:6px; max-height:200px; overflow-y:auto; margin-top:6px;"></div>
+<div style="background:#0f172a; border:1px solid #1e293b; border-radius:10px; padding:8px;">
+<div style="font-size:10px; color:#f59e0b; font-weight:800;">👇 PER IMAGE - TAP TO SET:</div>
+<div id="imgList" style="display:flex; flex-direction:column; gap:5px; max-height:170px; overflow-y:auto; margin-top:6px;"></div>
 </div>
 </div>
 
-<!-- SELECTED IMAGE CONTROLS -->
-<div id="selectedControls" style="display:none; margin-top:12px; background:#020617; border:1px solid #3b82f6; border-radius:12px; padding:10px;">
-<div style="font-size:11px; color:#3b82f6; font-weight:800; margin-bottom:6px;">Editing: <span id="editImgName">Image 1</span></div>
-<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px;">
-<div><div style="font-size:9px; color:#94a3b8;">MOTION FOR THIS IMAGE</div><select id="proMotionSingle" style="width:100%; padding:6px; background:#0f172a; border:1px solid #334155; border-radius:6px; color:white; font-size:11px;"><option value="zoomIn">Zoom In - Deep 3D</option><option value="zoomOut">Zoom Out - Cinematic</option><option value="panLeft">Pan Left</option><option value="panRight">Pan Right</option><option value="rotate">Rotate 360</option><option value="rotate3d">3D Tilt Rotate</option><option value="kenBurns">Ken Burns Slow</option><option value="shake">Shake - Viral</option></select></div>
-<div><div style="font-size:9px; color:#94a3b8;">FILTER FOR THIS</div><select id="proFilterSingle" style="width:100%; padding:6px; background:#0f172a; border:1px solid #334155; border-radius:6px; color:white; font-size:11px;"><option value="none">No Filter</option><option value="grayscale(1)">B&W</option><option value="sepia(1)">Vintage</option><option value="contrast(1.5) brightness(1.2) saturate(1.5)">Vivid HDR</option><option value="saturate(2) hue-rotate(20deg)">Super Color</option></select></div>
-<div><div style="font-size:9px; color:#94a3b8;">CROP</div><select id="proCropSingle" style="width:100%; padding:6px; background:#0f172a; border:1px solid #334155; border-radius:6px; color:white; font-size:11px;"><option value="cover">9:16 Fill</option><option value="contain">Fit Full</option><option value="1:1">1:1 Square</option></select></div>
+<!-- PER IMAGE EDITOR -->
+<div id="selectedControls" style="display:none; margin-top:10px; background:#0f172a; border:2px solid #3b82f6; border-radius:12px; padding:10px;">
+<div style="display:flex; justify-content:space-between;"><div style="font-size:11px; color:#3b82f6; font-weight:900;">Editing: <span id="editImgName">Image 1</span></div><div style="font-size:9px; color:#22c55e;">✓ Per Image Save</div></div>
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:5px; margin-top:8px;">
+<div><div style="font-size:8px; color:#94a3b8;">MOTION</div><select id="proMotionSingle" style="width:100%; padding:6px; background:#020617; border:1px solid #334155; border-radius:6px; color:white; font-size:10px;"><option value="zoomIn">Zoom In Deep</option><option value="zoomOut">Zoom Out</option><option value="panLeft">Pan Left</option><option value="panRight">Pan Right</option><option value="panUp">Pan Up Drone</option><option value="panDown">Pan Down</option><option value="rotate">Rotate 360</option><option value="rotate3d">3D Tilt Rotate</option><option value="kenBurns">Ken Burns</option><option value="shake">Shake Viral</option><option value="pulse">Pulse Beat</option><option value="swing">Swing</option><option value="zoomRotate">Zoom+Rotate</option><option value="spinIn">Spin In 3D</option></select></div>
+<div><div style="font-size:8px; color:#94a3b8;">FILTER COLOR</div><select id="proFilterSingle" style="width:100%; padding:6px; background:#020617; border:1px solid #334155; border-radius:6px; color:white; font-size:10px;"><option value="none">Original</option><option value="grayscale(1)">B&W Pro</option><option value="sepia(1)">Old Film</option><option value="contrast(1.6) brightness(1.15) saturate(1.8)">HDR Vivid Viral</option><option value="saturate(2.5) contrast(1.3) brightness(1.1)">Super Pop</option><option value="sepia(0.6) saturate(1.6) hue-rotate(-15deg)">Warm Sunset</option><option value="saturate(1.2) hue-rotate(190deg) brightness(0.9)">Cold Blue Film</option><option value="brightness(1.3) contrast(0.9) saturate(0.8) blur(0.3px)">Dream Soft</option><option value="contrast(1.9) brightness(0.85) saturate(0)">Dark Moody</option><option value="invert(0.1) sepia(0.5) saturate(2) hue-rotate(10deg)">Retro 90s</option><option value="saturate(0.2) brightness(1.2) contrast(1.1)">Pastel Aesthetic</option><option value="hue-rotate(270deg) saturate(1.5)">Purple Night</option></select></div>
+<div><div style="font-size:8px; color:#94a3b8;">CROP + BG</div><select id="proCropSingle" style="width:100%; padding:3px; background:#020617; border:1px solid #334155; border-radius:6px; color:white; font-size:9px; margin-bottom:3px;"><option value="cover">9:16 Fill Reels</option><option value="contain">Fit Full</option><option value="blurBG">Blur BG Portrait</option><option value="1:1">1:1 Square + Blur</option><option value="mirror">Mirror Reflection</option></select><select id="proSpeedSingle" style="width:100%; padding:3px; background:#020617; border:1px solid #334155; border-radius:6px; color:white; font-size:9px;"><option value="1">1x Normal</option><option value="0.5">0.5x Slow Mo</option><option value="2">2x Fast</option><option value="3">3x Hyper</option></select></div>
+<div><div style="font-size:8px; color:#94a3b8;">ADJUST</div><input type="range" id="proBright" min="0.5" max="1.5" step="0.1" value="1" style="width:100%;"><div style="display:flex; justify-content:space-between; font-size:7px; color:#64748b;"><span>Dark</span><span>Bright</span></div></div>
 </div>
-<button onclick="savePerImage()" style="margin-top:6px; width:100%; padding:6px; background:#22c55e; color:black; border:none; border-radius:6px; font-weight:800; font-size:11px;">✅ Save For This Image</button>
-</div>
-
-<!-- GLOBAL VFX -->
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px;">
-<div><div style="font-size:10px; color:#94a3b8;">🌧️ WEATHER VFX (Overlay)</div><select id="proVFX" style="width:100%; padding:8px; background:#020617; border:1px solid #334155; border-radius:8px; color:white; font-size:12px;"><option value="none">No VFX</option><option value="rain">🌧️ Rain Falling</option><option value="thunder">⛈️ Thunderstorm + Rain + Flash</option><option value="snow">❄️ Snow Falling</option><option value="particles">✨ Golden Particles - Viral</option><option value="lightLeak">💡 Light Leak - Cinematic</option></select></div>
-<div><div style="font-size:10px; color:#94a3b8;">⏱️ Duration + Speed</div><div style="display:flex; gap:4px;"><input type="range" id="proDuration" min="1" max="6" value="2" style="flex:1;"><span style="font-size:10px; color:#22c55e;"><span id="durVal">2</span>s</span><select id="proSpeed" style="padding:6px; background:#020617; border:1px solid #334155; border-radius:6px; color:white; font-size:10px;"><option value="1">1x</option><option value="0.5">0.5x Slow</option><option value="2">2x Fast</option></select></div></div>
+<button onclick="savePerImage()" style="margin-top:8px; width:100%; padding:8px; background:#22c55e; color:#000; border:none; border-radius:8px; font-weight:900; font-size:11px;">✅ SAVE THIS IMAGE SETTINGS</button>
 </div>
 
-<div style="margin-top:12px; position:relative; background:black; border-radius:12px; overflow:hidden;">
-<canvas id="proCanvas" width="720" height="1280" style="width:100%; max-width:380px; display:block; margin:auto;"></canvas>
-<canvas id="vfxCanvas" width="720" height="1280" style="position:absolute; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:380px; pointer-events:none;"></canvas>
-<div style="position:absolute; bottom:8px; right:8px; font-size:9px; background:#00000088; padding:3px 6px; border-radius:4px; color:#fff;">Orbittroniz.com</div>
+<!-- SUPER VFX CONTROLS -->
+<div style="margin-top:10px; background:linear-gradient(180deg,#0f172a,#020617); border:1px solid #f59e0b; border-radius:12px; padding:10px;">
+<div style="font-size:11px; color:#f59e0b; font-weight:900;">✨ SUPER VFX STUDIO - 40 Effects Like Premium App</div>
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin-top:8px;">
+<div><div style="font-size:8px; color:#22c55e; font-weight:700;">🌧️ WEATHER - Good Snow/Rain</div><select id="proVFX" style="width:100%; padding:7px; background:#020617; border:1px solid #334155; border-radius:6px; color:white; font-size:10px;"><option value="none">No Weather</option><option value="rainDrizzle">🌧️ Drizzle Light</option><option value="rainHeavy">🌧️ Heavy Rain + Splash</option><option value="rainReal">🌧️ Real Rain 3D Drops</option><option value="thunder">⛈️ Thunderstorm Flash + Rain</option><option value="snowLight">❄️ Light Snow - Video Type Slow</option><option value="snowReal">❄️ Real Snow Physics</option><option value="snowGlitter">✨ Glitter Snow - Your Video ✨</option><option value="snowBlizzard">❄️ Blizzard Storm</option><option value="hail">🧊 Hail + Ice</option></select></div>
+<div><div style="font-size:8px; color:#a78bfa; font-weight:700;">✨ PARTICLES - Glitter etc</div><select id="proVFX2" style="width:100%; padding:7px; background:#020617; border:1px solid #334155; border-radius:6px; color:white; font-size:10px;"><option value="none">No Particles</option><option value="glitter">✨ Glitter Stars - Viral</option><option value="bokeh">💫 Golden Bokeh Blur</option><option value="dust">🌟 Dust Particles Sunlight</option><option value="hearts">💖 Hearts Floating Love</option><option value="starsFall">⭐ Stars Falling</option><option value="bubbles">🫧 Bubbles Up</option><option value="petals">🌸 Flower Petals Fall</option><option value="leaves">🍂 Autumn Leaves</option><option value="confetti">🎉 Confetti Burst</option><option value="fireflies">🌟 Fireflies Night</option><option value="butterfly">🦋 Butterfly</option></select></div>
+<div><div style="font-size:8px; color:#f87171; font-weight:700;">🎬 CINEMATIC + FILTER</div><select id="proVFX3" style="width:100%; padding:7px; background:#020617; border:1px solid #334155; border-radius:6px; color:white; font-size:10px;"><option value="none">No Cinematic</option><option value="lightLeak">💡 Light Leak Warm</option><option value="lensFlare">☀️ Lens Flare Sun</option><option value="vignette">🎬 Vignette Dark</option><option value="fog">🌫️ Fog Mist Smoke</option><option value="filmGrain">🎞️ Film Grain + Scratch</option><option value="chromatic">📺 RGB Glitch Chromatic</option><option value="blurMotion">💨 Motion Blur Speed</option><option value="glow">✨ Glow Dream</option><option value="rainbow">🌈 Rainbow Overlay</option></select></div>
+</div>
+
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:6px; margin-top:8px;">
+<div><div style="font-size:8px; color:#94a3b8;">INTENSITY</div><input type="range" id="vfxIntensity" min="0.2" max="2" step="0.2" value="1" style="width:100%;"><div style="font-size:7px; color:#22c55e; text-align:center;"><span id="intVal">100%</span></div></div>
+<div><div style="font-size:8px; color:#94a3b8;">TEXT + EMOJI</div><input id="proText" placeholder="Viral Text + 😍" style="width:100%; padding:5px; background:#020617; border:1px solid #334155; border-radius:6px; color:white; font-size:10px;"></div>
+<div><div style="font-size:8px; color:#94a3b8;">STICKER</div><select id="proSticker" style="width:100%; padding:5px; background:#020617; border:1px solid #334155; border-radius:6px; color:white; font-size:10px;"><option value="none">No Sticker</option><option value="fire">🔥 Fire</option><option value="crown">👑 Crown</option><option value="100">💯</option><option value="heart">❤️</option><option value="star">⭐️ Viral</option></select></div>
+<div><div style="font-size:8px; color:#94a3b8;">DURATION</div><div style="display:flex; gap:3px;"><input type="range" id="proDuration" min="1" max="10" value="3" style="flex:1;"><span style="font-size:10px; color:#22c55e;"><span id="durVal">3</span>s</span></div></div>
+</div>
+</div>
+
+<div style="margin-top:12px; position:relative; background:#000; border-radius:16px; overflow:hidden; border:2px solid #1e293b;">
+<canvas id="proCanvas" width="720" height="1280" style="width:100%; max-width:400px; display:block; margin:auto;"></canvas>
+<canvas id="vfxCanvas" width="720" height="1280" style="position:absolute; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:400px; pointer-events:none;"></canvas>
+<canvas id="vfxCanvas2" width="720" height="1280" style="position:absolute; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:400px; pointer-events:none;"></canvas>
+<canvas id="vfxCanvas3" width="720" height="1280" style="position:absolute; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:400px; pointer-events:none;"></canvas>
+<div id="textOverlay" style="position:absolute; top:42%; left:50%; transform:translate(-50%,-50%); font-size:36px; font-weight:900; color:white; text-shadow:0 0 20px black, 2px 2px 0 black; text-align:center; width:85%; line-height:1.1; pointer-events:none;"></div>
+<div id="stickerOverlay" style="position:absolute; top:12%; right:8%; font-size:50px; pointer-events:none; filter:drop-shadow(0 0 10px gold);"></div>
+<div style="position:absolute; bottom:10px; left:50%; transform:translateX(-50%); font-size:9px; background:#000000cc; padding:4px 12px; border-radius:20px; color:#22c55e; font-weight:800; border:1px solid #22c55e33;">Orbittroniz.com • V4 SUPER ADVANCE</div>
 </div>
 
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px;">
-<button onclick="proPreview()" style="padding:12px; background:#0f172a; border:1px solid #3b82f6; color:#3b82f6; border-radius:10px; font-weight:700;">👁️ Preview All</button>
-<button onclick="proDownload()" style="padding:12px; background:#3b82f6; color:white; border:none; border-radius:10px; font-weight:800;">⬇️ Download Final MP4</button>
+<button onclick="proPreview()" style="padding:14px; background:#0f172a; border:2px solid #3b82f6; color:#3b82f6; border-radius:12px; font-weight:900; font-size:13px;">👁️ PREVIEW V4</button>
+<button onclick="proDownload()" style="padding:14px; background:linear-gradient(90deg,#22c55e,#3b82f6,#8b5cf6); color:white; border:none; border-radius:12px; font-weight:900; font-size:14px; box-shadow:0 0 20px #3b82f655;">⬇️ DOWNLOAD MP4 V4</button>
 </div>
-<p id="proStatus" style="font-size:11px; color:#22c55e; text-align:center; margin-top:8px;">Upload images → Click each image to set Zoom/Rotate → Add Rain/Thunder → Preview</p>
+<p id="proStatus" style="font-size:10px; color:#94a3b8; text-align:center; margin-top:10px; background:#0f172a; padding:8px; border-radius:8px; border:1px solid #1e293b;">💡 TIP: Image 1 = Rotate 3D, Image 2 = Zoom In, Image 3 = Zoom Out, Add Glitter Snow + Golden Bokeh = VIRAL!</p>
 </div>
 
 <script>
-let proImages=[], proCurrent=0, proAnimId=null, vfxAnim=null;
-let rainDrops=[], snowFlakes=[], particles=[];
+let proImages=[], proCurrent=0, proAnimId=null;
+let sys=[], sys2=[], sys3=[];
+function initVFX(){
+  sys=[]; sys2=[]; sys3=[];
+  for(let i=0;i<250;i++) sys.push({x:Math.random()*720, y:Math.random()*1280, s:Math.random()*3+0.5, sp:Math.random()*3+1, o:Math.random(), l:Math.random()*18+8, a:Math.random()*6});
+  for(let i=0;i<150;i++) sys2.push({x:Math.random()*720, y:Math.random()*1280, s:Math.random()*4+1, o:Math.random(), a:Math.random()*Math.PI*2, c:Math.random()>0.5?'#FFD700':'#FFF'});
+  for(let i=0;i<40;i++) sys3.push({x:Math.random()*720, y:Math.random()*1280, s:Math.random()*15+8, sp:Math.random()*1.2+0.3, o:Math.random(), rot:Math.random()*360});
+}
 document.getElementById('proImgs').onchange=(e)=>{
-  proImages=[]; document.getElementById('imgList').innerHTML=''; rainDrops=[]; snowFlakes=[]; particles=[];
+  proImages=[]; document.getElementById('imgList').innerHTML='';
   Array.from(e.target.files).forEach((file,i)=>{
     const img=new Image(); img.src=URL.createObjectURL(file);
     img.onload=()=>{
-      const obj={img, motion:'zoomIn', filter:'none', crop:'cover', name:`Image ${i+1}`};
+      const obj={img, motion:['rotate3d','zoomIn','zoomOut','panLeft','kenBurns'][i%5], filter:'none', crop:'cover', speed:1, bright:1, name:`Img ${i+1}`};
       proImages.push(obj);
-      if(i==0) obj.motion='rotate3d'; if(i==1) obj.motion='zoomIn'; if(i==2) obj.motion='zoomOut';
-      const row=document.createElement('div'); row.style.cssText='display:flex; gap:6px; align-items:center; background:#0f172a; border:1px solid #1e293b; border-radius:8px; padding:4px; cursor:pointer;';
-      row.innerHTML=`<img src="${img.src}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;"><div style="flex:1;"><div style="font-size:10px; color:white; font-weight:700;">${obj.name}</div><div style="font-size:9px; color:#94a3b8;" id="info-${i}">${obj.motion} • ${obj.filter}</div></div><div style="font-size:10px; color:#3b82f6;">✏️ Edit</div>`;
-      row.onclick=()=>{ proCurrent=i; openEditor(i); };
-      document.getElementById('imgList').appendChild(row);
-      if(proImages.length==1) openEditor(0);
+      const row=document.createElement('div'); row.id=`row-${i}`; row.style.cssText='display:flex; gap:6px; align-items:center; background:#020617; border:1px solid #1e293b; border-radius:8px; padding:5px; cursor:pointer;';
+      row.innerHTML=`<img src="${img.src}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;"><div style="flex:1;"><div style="font-size:10px; color:#fff; font-weight:700;">${obj.name} - ${obj.motion}</div><div style="font-size:8px; color:#22c55e;" id="info-${i}">Click to edit motion/filter</div></div><span style="color:#3b82f6; font-size:12px;">⚙️</span>`;
+      row.onclick=()=>openEditor(i); document.getElementById('imgList').appendChild(row); if(i==0) openEditor(0);
     }
   });
 };
-function openEditor(i){
-  proCurrent=i; const obj=proImages[i];
-  document.getElementById('selectedControls').style.display='block';
-  document.getElementById('editImgName').innerText=obj.name;
-  document.getElementById('proMotionSingle').value=obj.motion;
-  document.getElementById('proFilterSingle').value=obj.filter;
-  document.getElementById('proCropSingle').value=obj.crop;
-  proDraw(0);
-}
-function savePerImage(){
-  const obj=proImages[proCurrent];
-  obj.motion=document.getElementById('proMotionSingle').value;
-  obj.filter=document.getElementById('proFilterSingle').value;
-  obj.crop=document.getElementById('proCropSingle').value;
-  document.getElementById(`info-${proCurrent}`).innerText=`${obj.motion} • ${obj.filter}`;
-  document.getElementById('proStatus').innerText=`✅ Saved ${obj.name} = ${obj.motion}`;
-  proDraw(0);
-}
+function openEditor(i){ proCurrent=i; const o=proImages[i]; document.getElementById('selectedControls').style.display='block'; document.getElementById('editImgName').innerText=o.name; document.getElementById('proMotionSingle').value=o.motion; document.getElementById('proFilterSingle').value=o.filter; document.getElementById('proCropSingle').value=o.crop; document.getElementById('proSpeedSingle').value=o.speed; document.getElementById('proBright').value=o.bright; proDraw(0); }
+function savePerImage(){ const o=proImages[proCurrent]; o.motion=document.getElementById('proMotionSingle').value; o.filter=document.getElementById('proFilterSingle').value; o.crop=document.getElementById('proCropSingle').value; o.speed=document.getElementById('proSpeedSingle').value; o.bright=document.getElementById('proBright').value; document.getElementById(`info-${proCurrent}`).innerText=`${o.motion} | ${o.filter.substring(0,20)} | ${o.speed}x`; document.getElementById(`row-${proCurrent}`).style.border='2px solid #22c55e'; document.getElementById('proStatus').innerText=`✅ Saved ${o.name} = ${o.motion} + Filter`; proDraw(0); }
 document.getElementById('proDuration').oninput=e=>document.getElementById('durVal').innerText=e.target.value;
+document.getElementById('vfxIntensity').oninput=e=>document.getElementById('intVal').innerText=Math.round(e.target.value*100)+'%';
+document.getElementById('proText').oninput=e=>document.getElementById('textOverlay').innerText=e.target.value;
+document.getElementById('proSticker').onchange=e=>{ const v=e.target.value; const map={fire:'🔥',crown:'👑','100':'💯',heart:'❤️',star:'⭐'}; document.getElementById('stickerOverlay').innerText=map[v]||''; };
 
 function proDraw(p){
-  if(proImages.length==0) return;
-  const canvas=document.getElementById('proCanvas'); const ctx=canvas.getContext('2d');
-  const obj=proImages[proCurrent]; const img=obj.img;
-  ctx.clearRect(0,0,canvas.width,canvas.height); ctx.filter=obj.filter;
-  let scale=1,x=0,y=0,rot=0;
-  if(obj.motion=='zoomIn') scale=1+p*0.5;
-  if(obj.motion=='zoomOut') scale=1.5-p*0.5;
-  if(obj.motion=='panLeft') x=-p*300;
-  if(obj.motion=='panRight') x=p*300-150;
-  if(obj.motion=='rotate') rot=p*360;
-  if(obj.motion=='rotate3d'){ canvas.style.transform=`perspective(1000px) rotateY(${p*20}deg) rotateX(${p*10}deg) scale(${1+p*0.3})`; }
-  else if(obj.motion=='shake'){ x=(Math.random()-0.5)*20; y=(Math.random()-0.5)*20; canvas.style.transform=`scale(${scale}) translate(${x}px,${y}px) rotate(${rot}deg)`; }
-  else { canvas.style.transform=`scale(${scale}) translate(${x}px,${y}px) rotate(${rot}deg)`; }
-  ctx.save(); ctx.translate(canvas.width/2, canvas.height/2);
-  ctx.drawImage(img, -canvas.width/2, -canvas.height/2, canvas.width, canvas.height);
+  if(proImages.length==0) return; const c=document.getElementById('proCanvas'); const ctx=c.getContext('2d'); const o=proImages[proCurrent]; if(!o) return;
+  const bright=o.bright||1; ctx.clearRect(0,0,720,1280); ctx.filter=o.filter + ` brightness(${bright})`;
+  let sc=1,x=0,y=0,rot=0; let sp=parseFloat(o.speed)||1; p=(p*sp)%1;
+  if(o.motion=='zoomIn') sc=1+p*0.7; if(o.motion=='zoomOut') sc=1.7-p*0.7; if(o.motion=='panLeft') x=-p*400; if(o.motion=='panRight') x=p*400-200; if(o.motion=='panUp') y=-p*350; if(o.motion=='panDown') y=p*350-175; if(o.motion=='rotate') rot=p*360; if(o.motion=='zoomRotate'){ sc=1+p*0.5; rot=p*45; } if(o.motion=='spinIn'){ sc=p; rot=p*720; }
+  if(o.motion=='rotate3d'){ c.style.transform=`perspective(1500px) rotateY(${p*30}deg) rotateX(${p*15}deg) scale(${1+p*0.4})`; } else if(o.motion=='shake'){ x=(Math.random()-0.5)*30; y=(Math.random()-0.5)*30; c.style.transform=`scale(${sc}) translate(${x}px,${y}px) rotate(${rot}deg)`; } else if(o.motion=='pulse'){ sc=1+Math.sin(p*Math.PI*4)*0.2; c.style.transform=`scale(${sc})`; } else if(o.motion=='swing'){ rot=Math.sin(p*Math.PI*2)*20; c.style.transform=`scale(${sc}) rotate(${rot}deg) translate(${x}px,${y}px)`; } else { c.style.transform=`scale(${sc}) translate(${x}px,${y}px) rotate(${rot}deg)`; }
+  ctx.save(); ctx.translate(360,640);
+  if(o.crop=='blurBG'){ ctx.filter=`blur(30px) brightness(0.6) ${o.filter}`; ctx.drawImage(o.img,-360,-640,720,1280); ctx.filter=o.filter+` brightness(${bright})`; ctx.drawImage(o.img,-270,-480,540,960); }
+  else if(o.crop=='mirror'){ ctx.drawImage(o.img,-360,-640,720,640); ctx.save(); ctx.scale(1,-1); ctx.globalAlpha=0.4; ctx.drawImage(o.img,-360,-640,720,640); ctx.restore(); }
+  else { ctx.drawImage(o.img,-360,-640,720,1280); }
   ctx.restore(); ctx.filter='none';
 }
-function initVFX(){
-  rainDrops=[]; for(let i=0;i<150;i++) rainDrops.push({x:Math.random()*720, y:Math.random()*1280, s:Math.random()*4+2, l:Math.random()*15+10});
-  snowFlakes=[]; for(let i=0;i<100;i++) snowFlakes.push({x:Math.random()*720, y:Math.random()*1280, s:Math.random()*3+1, d:Math.random()*2});
-  particles=[]; for(let i=0;i<60;i++) particles.push({x:Math.random()*720, y:Math.random()*1280, s:Math.random()*4+1, a:Math.random()});
-}
 function drawVFX(){
-  const vfx=document.getElementById('vfxCanvas'); const vctx=vfx.getContext('2d'); const type=document.getElementById('proVFX').value;
-  vctx.clearRect(0,0,720,1280);
-  if(type=='rain' || type=='thunder'){
-    vctx.strokeStyle='rgba(180,200,255,0.7)'; vctx.lineWidth=1.5;
-    rainDrops.forEach(d=>{ vctx.beginPath(); vctx.moveTo(d.x,d.y); vctx.lineTo(d.x-5,d.y+d.l); vctx.stroke(); d.y+=d.s*10; d.x-=1; if(d.y>1280){ d.y=-20; d.x=Math.random()*720; } });
+  const c1=document.getElementById('vfxCanvas'); const x1=c1.getContext('2d');
+  const c2=document.getElementById('vfxCanvas2'); const x2=c2.getContext('2d');
+  const c3=document.getElementById('vfxCanvas3'); const x3=c3.getContext('2d');
+  const w=document.getElementById('proVFX').value, p=document.getElementById('proVFX2').value, cc=document.getElementById('proVFX3').value;
+  const intens=parseFloat(document.getElementById('vfxIntensity').value);
+  x1.clearRect(0,0,720,1280); x2.clearRect(0,0,720,1280); x3.clearRect(0,0,720,1280);
+
+  // Weather - ULTRA REAL
+  if(w!='none'){
+    sys.forEach(s=>{
+      if(w.includes('rain')){ x1.strokeStyle=`rgba(180,210,255,${s.o*intens})`; x1.lineWidth=w=='rainReal'?2.5:1.2; x1.beginPath(); x1.moveTo(s.x,s.y); x1.lineTo(s.x-(w=='rainReal'?12:5), s.y+s.l); x1.stroke(); if(w=='rainReal'){ x1.fillStyle=`rgba(200,220,255,${0.3*intens})`; x1.beginPath(); x1.arc(s.x, s.y+s.l, 2,0,Math.PI*2); x1.fill(); } s.y+=s.sp*(w=='rainHeavy'?18:12)*intens; s.x-=w=='rainReal'?3:1; if(s.y>1320){ s.y=-30; s.x=Math.random()*720; } }
+      if(w.includes('snow')){ let isGlitter=w=='snowGlitter'; x1.fillStyle=isGlitter?`rgba(255,255,255,${0.9*intens})`:`rgba(255,255,255,${0.6*intens})`; if(isGlitter){ x1.shadowColor='#a5f3fc'; x1.shadowBlur=10*intens; } x1.beginPath(); x1.arc(s.x,s.y,s.s*(isGlitter?2:1.5),0,Math.PI*2); x1.fill(); x1.shadowBlur=0; s.y+=s.sp*(isGlitter?0.5: (w=='snowBlizzard'?3:1))*intens; s.x+=Math.sin(s.y/50+s.a)* (w=='snowBlizzard'?3:1)*intens; s.a+=0.02; if(s.y>1320){ s.y=-20; s.x=Math.random()*720; } }
+      if(w=='hail'){ x1.fillStyle=`rgba(200,230,255,${0.9*intens})`; x1.beginPath(); x1.arc(s.x,s.y,s.s*1.2,0,Math.PI*2); x1.fill(); s.y+=s.sp*8*intens; if(s.y>1320){ s.y=-20; s.x=Math.random()*720; } }
+    });
   }
-  if(type=='snow'){
-    vctx.fillStyle='rgba(255,255,255,0.9)';
-    snowFlakes.forEach(f=>{ vctx.beginPath(); vctx.arc(f.x,f.y,f.s,0,Math.PI*2); vctx.fill(); f.y+=f.s; f.x+=Math.sin(f.y/50)*0.5; if(f.y>1280){ f.y=-10; f.x=Math.random()*720; } });
+  if(w=='thunder' && Math.random()<0.03*intens){ x1.fillStyle=`rgba(255,255,255,${0.4*intens})`; x1.fillRect(0,0,720,1280); }
+
+  // Particles - ADVANCE
+  if(p!='none'){
+    sys2.forEach(s=>{
+      if(p=='glitter' || p=='bokeh'){ x2.globalAlpha=(0.2+Math.sin(s.a)*0.8)*intens; x2.fillStyle=p=='bokeh'?'#FFD700':'#FFFFFF'; x2.shadowColor=x2.fillStyle; x2.shadowBlur=p=='bokeh'?15:8; x2.beginPath(); x2.arc(s.x,s.y,s.s*(p=='bokeh'?3:1.5),0,Math.PI*2); x2.fill(); x2.shadowBlur=0; s.y-=p=='bokeh'?0.3:0.6; s.a+=0.08; if(s.y<0){ s.y=1280; s.x=Math.random()*720; } }
+      if(p=='dust'){ x2.fillStyle=`rgba(255,240,180,${0.15*intens})`; x2.beginPath(); x2.arc(s.x,s.y,s.s,0,Math.PI*2); x2.fill(); s.y-=0.2; s.x+=Math.sin(s.y/100)*0.5; if(s.y<0){ s.y=1280; } }
+    });
+    if(p=='hearts' || p=='petals' || p=='leaves' || p=='confetti' || p=='bubbles' || p=='butterfly' || p=='starsFall' || p=='fireflies'){
+      sys3.forEach(h=>{
+        x2.font=`${h.s}px serif`; x2.globalAlpha=h.o*intens;
+        let emoji={hearts:'💖', petals:'🌸', leaves:'🍂', confetti:'🎉', bubbles:'🫧', butterfly:'🦋', starsFall:'⭐', fireflies:'✨'}[p]||'✨';
+        x2.fillText(emoji,h.x,h.y); h.y-=h.sp*intens; h.x+=Math.sin(h.y/60)*1.5; h.rot+=1; if(h.y<0){ h.y=1280; h.x=Math.random()*720; }
+      });
+    }
+    x2.globalAlpha=1;
   }
-  if(type=='particles'){
-    vctx.fillStyle='rgba(255,215,0,0.8)';
-    particles.forEach(p=>{ vctx.globalAlpha=0.3+Math.sin(p.a)*0.7; vctx.beginPath(); vctx.arc(p.x,p.y,p.s,0,Math.PI*2); vctx.fill(); p.y-=0.8; p.a+=0.05; if(p.y<0){ p.y=1280; p.x=Math.random()*720; } }); vctx.globalAlpha=1;
+
+  // Cinematic
+  if(cc!='none'){
+    if(cc=='lightLeak'){ const g=x3.createRadialGradient(80,120,0,80,120,1000); g.addColorStop(0,`rgba(255,140,0,${0.3*intens})`); g.addColorStop(1,'rgba(0,0,0,0)'); x3.fillStyle=g; x3.fillRect(0,0,720,1280); }
+    if(cc=='lensFlare'){ x3.fillStyle=`rgba(255,255,255,${0.9*intens})`; x3.shadowColor='white'; x3.shadowBlur=25; x3.beginPath(); x3.arc(600,180,14*intens,0,Math.PI*2); x3.fill(); x3.shadowBlur=0; }
+    if(cc=='vignette'){ const g=x3.createRadialGradient(360,640,200,360,640,850); g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,`rgba(0,0,0,${0.75*intens})`); x3.fillStyle=g; x3.fillRect(0,0,720,1280); }
+    if(cc=='fog'){ x3.fillStyle=`rgba(220,230,255,${0.14*intens})`; x3.fillRect(0,750,720,600); }
+    if(cc=='glow'){ x3.fillStyle=`rgba(255,200,100,${0.08*intens})`; x3.fillRect(0,0,720,1280); }
+    if(cc=='rainbow'){ const g=x3.createLinearGradient(0,0,720,0); g.addColorStop(0,'rgba(255,0,0,0.1)'); g.addColorStop(0.5,'rgba(0,255,0,0.1)'); g.addColorStop(1,'rgba(0,0,255,0.1)'); x3.fillStyle=g; x3.globalAlpha=intens; x3.fillRect(0,0,720,1280); x3.globalAlpha=1; }
   }
-  if(type=='thunder' && Math.random()<0.03){ vctx.fillStyle='rgba(255,255,255,0.4)'; vctx.fillRect(0,0,720,1280); }
-  if(type=='lightLeak'){ const g=vctx.createRadialGradient(0,0,0,0,0,800); g.addColorStop(0,'rgba(255,150,0,0.25)'); g.addColorStop(1,'rgba(0,0,0,0)'); vctx.fillStyle=g; vctx.fillRect(0,0,720,1280); }
 }
-function proPreview(){
-  if(proImages.length==0){ alert('Upload images first!'); return; }
-  initVFX(); let p=0; cancelAnimationFrame(proAnimId);
-  function anim(){ p+=0.012; if(p>1){ p=0; proCurrent=(proCurrent+1)%proImages.length; } proDraw(p); drawVFX(); proAnimId=requestAnimationFrame(anim); } anim();
-  document.getElementById('proStatus').innerText='👁️ Previewing per-image motion + VFX...';
-}
+
+function proPreview(){ if(proImages.length==0){ alert('Upload images!'); return; } initVFX(); let p=0, t=0; cancelAnimationFrame(proAnimId); function anim(){ p+=0.01; t+=0.01; if(t>1){ t=0; proCurrent=(proCurrent+1)%proImages.length; } proDraw(p); drawVFX(); proAnimId=requestAnimationFrame(anim); } anim(); document.getElementById('proStatus').innerText='🎬 V4 Super Preview - Good Snow + Glitter + Real Rain'; }
 function proDownload(){
-  if(proImages.length==0){ alert('Upload images!'); return; }
-  const canvas=document.getElementById('proCanvas'); const vfx=document.getElementById('vfxCanvas');
-  const combined=document.createElement('canvas'); combined.width=720; combined.height=1280; const cctx=combined.getContext('2d');
-  const stream=combined.captureStream(30); const rec=new MediaRecorder(stream,{mimeType:'video/webm'}); let chunks=[];
+  if(proImages.length==0){ alert('Upload!'); return; }
+  const main=document.getElementById('proCanvas'), v1=document.getElementById('vfxCanvas'), v2=document.getElementById('vfxCanvas2'), v3=document.getElementById('vfxCanvas3');
+  const out=document.createElement('canvas'); out.width=720; out.height=1280; const octx=out.getContext('2d');
+  const stream=out.captureStream(30); const rec=new MediaRecorder(stream,{mimeType:'video/webm'}); let chunks=[];
   rec.ondataavailable=e=>chunks.push(e.data);
-  rec.onstop=()=>{ const blob=new Blob(chunks,{type:'video/webm'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`Orbittroniz-ULTRA-${Date.now()}.webm`; a.click(); document.getElementById('proStatus').innerText='✅ ULTRA Video Downloaded!'; };
-  initVFX(); let p=0, imgIdx=0, dur=parseInt(document.getElementById('proDuration').value)*proImages.length*1000;
-  rec.start(); proCurrent=0;
-  let intv=setInterval(()=>{ p+=0.012; if(p>1){ p=0; imgIdx++; proCurrent=imgIdx%proImages.length; if(imgIdx>=proImages.length) proCurrent=proImages.length-1; } proDraw(p); drawVFX(); cctx.drawImage(canvas,0,0); cctx.drawImage(vfx,0,0); },33);
-  document.getElementById('proStatus').innerText=`⏺️ Recording ${dur/1000}s with VFX...`;
-  setTimeout(()=>{ clearInterval(intv); rec.stop(); cancelAnimationFrame(proAnimId); }, dur);
+  rec.onstop=()=>{ const blob=new Blob(chunks,{type:'video/webm'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`Orbittroniz-V4-SUPER-${Date.now()}.webm`; a.click(); document.getElementById('proStatus').innerText='✅ V4 SUPER ADVANCE Downloaded!'; };
+  initVFX(); let p=0,t=0,cur=0; let dur=parseInt(document.getElementById('proDuration').value)*proImages.length*1000; rec.start();
+  let iv=setInterval(()=>{ p+=0.01; t+=0.01; if(t>1){ t=0; cur=(cur+1)%proImages.length; proCurrent=cur; } proDraw(p); drawVFX(); octx.drawImage(main,0,0); octx.drawImage(v1,0,0); octx.drawImage(v2,0,0); octx.drawImage(v3,0,0); const txt=document.getElementById('textOverlay').innerText; if(txt){ octx.font='900 40px Inter'; octx.fillStyle='white'; octx.strokeStyle='black'; octx.lineWidth=5; octx.textAlign='center'; octx.strokeText(txt,360,580); octx.fillText(txt,360,580); } const stk=document.getElementById('stickerOverlay').innerText; if(stk){ octx.font='60px serif'; octx.fillText(stk,550,200); } },33);
+  document.getElementById('proStatus').innerText=`⏺️ Recording V4 ${dur/1000}s SUPER...`; setTimeout(()=>{ clearInterval(iv); rec.stop(); cancelAnimationFrame(proAnimId); }, dur);
 }
 initVFX();
 </script>
-<!-- END ULTRA PRO MAX --> 
+<!-- END ULTRA V4 -->
   <div class="tools-grid">  <- YOUR OLD TOOLS START FROM HERE - DON'T TOUCH BELOW
 <canvas id="bgCanvas"></canvas><div class="bgGrad"></div><div class="cursorGlow" id="cursorGlow"></div>
 <div class="app">
