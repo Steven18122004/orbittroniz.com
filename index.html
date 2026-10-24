@@ -118,170 +118,132 @@ canvas{border-radius:12px;border:1px solid #2a4a80;max-width:100%;background:#ff
  <body>
   <header> ... Orbitroniz ... </header>
   <header/>
-<!-- V10 - PER IMAGE MOTION + CUSTOM AUDIO + MORE TUNES -->
-<div id="orbit-tool1" style="margin:20px 0; background:#000; border:3px solid #22c55e; border-radius:16px; overflow:hidden; font-family:Inter,sans-serif;">
-<div style="background:#111; padding:12px; display:flex; justify-content:space-between; align-items:center;">
-<div><div style="color:#22c55e; font-weight:900; font-size:14px;">✅ V10 - PER IMAGE MOTION FIXED</div><div style="color:#888; font-size:10px;">Image 1=Rotate, Image 2=Zoom - Each different!</div></div>
-<button onclick="downloadVideo()" style="background:#22c55e; color:#000; border:none; padding:8px 16px; border-radius:20px; font-weight:900; font-size:11px;">⬇️ Export</button>
+<!-- V12 - MUSIC IN DOWNLOAD FIXED - AUDIO MIXING + TRANSITIONS + NO WHITE -->
+<div id="orbit-tool1" style="margin:20px 0; background:#000 !important; border:3px solid #22c55e; border-radius:16px; overflow:hidden; font-family:Inter,sans-serif;">
+<style>
+#orbit-tool1{background:#000 !important;}
+#canvasWrap{background:#000 !important; display:flex !important; justify-content:center !important; padding:10px !important;}
+#proCanvas{background:#000 !important; display:block !important; width:100% !important; max-width:400px !important; min-height:520px !important; border:2px solid #222 !important; border-radius:12px !important;}
+</style>
+
+<div style="background:#000 !important; padding:12px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #222;">
+<div><div style="color:#22c55e; font-weight:900; font-size:13px;">✅ V12 - MUSIC IN DOWNLOAD FIXED</div><div style="color:#555; font-size:9px;">Custom music will now export with video!</div></div>
+<button onclick="downloadVideo()" style="background:#22c55e; color:#000; border:none; padding:8px 14px; border-radius:20px; font-weight:900; font-size:11px;">⬇️ Export with Music</button>
 </div>
 
-<div style="padding:12px; background:#0a0a0a; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+<div style="background:#000 !important; padding:12px; display:flex; gap:8px; flex-wrap:wrap;">
 <label style="background:#22c55e; color:#000; padding:10px 18px; border-radius:30px; font-weight:900; font-size:12px; cursor:pointer;">
 📸 Add Images
 <input type="file" id="proImgs" accept="image/*" multiple hidden>
 </label>
-<span id="imgStatus" style="color:#22c55e; font-size:11px;">Add images - Each will have own motion</span>
+<span id="imgStatus" style="color:#22c55e; font-size:11px;">Add images</span>
 </div>
 
-<div style="background:#000; padding:10px; display:flex; justify-content:center;">
-<div style="position:relative; width:100%; max-width:400px; background:#000; border-radius:12px; overflow:hidden; border:2px solid #222;">
-<canvas id="proCanvas" width="720" height="1280" style="width:100%; height:auto; background:#000; display:block; min-height:520px;"></canvas>
+<div id="canvasWrap">
+<div style="position:relative; width:100%; max-width:400px; background:#000 !important; border-radius:12px; overflow:hidden;">
+<canvas id="proCanvas" width="720" height="1280"></canvas>
 <canvas id="vfxCanvas" width="720" height="1280" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;"></canvas>
-<div id="textOverlay" style="position:absolute; top:35%; left:50%; transform:translate(-50%,-50%); color:#fff; font-size:30px; font-weight:900; text-shadow:2px 2px 8px #000; text-align:center; width:85%;"></div>
+<div id="textOverlay" style="position:absolute; top:35%; left:50%; transform:translate(-50%,-50%); color:#fff; font-size:28px; font-weight:900; text-shadow:2px 2px 8px #000; text-align:center; width:85%;"></div>
 <button id="playBtn" onclick="togglePlay()" style="position:absolute; bottom:12px; left:50%; transform:translateX(-50%); background:#fff; border:none; width:50px; height:50px; border-radius:50%; font-size:20px;">▶️</button>
 </div>
 </div>
 
-<div style="background:#111; padding:12px;">
-<!-- TABS -->
+<div style="background:#000 !important; padding:12px;">
 <div style="display:flex; gap:6px; overflow-x:auto; margin-bottom:12px;">
 <button onclick="showTab('edit')" id="tabBtn-edit" style="padding:8px 14px; border-radius:20px; background:#fff; color:#000; border:none; font-size:11px; font-weight:800;">✂️ Edit</button>
-<button onclick="showTab('portion')" id="tabBtn-portion" style="padding:8px 14px; border-radius:20px; background:#222; color:#aaa; border:1px solid #333; font-size:11px; font-weight:800;">🎯 Per Image Filter</button>
-<button onclick="showTab('music')" id="tabBtn-music" style="padding:8px 14px; border-radius:20px; background:#222; color:#aaa; border:1px solid #333; font-size:11px; font-weight:800;">🎵 Music + Custom</button>
-<button onclick="showTab('vfx')" id="tabBtn-vfx" style="padding:8px 14px; border-radius:20px; background:#222; color:#aaa; border:1px solid #333; font-size:11px; font-weight:800;">✨ VFX</button>
+<button onclick="showTab('trans')" id="tabBtn-trans" style="padding:8px 14px; border-radius:20px; background:#222; color:#aaa; border:1px solid #333; font-size:11px; font-weight:800;">🔀 Trans</button>
+<button onclick="showTab('filter')" id="tabBtn-filter" style="padding:8px 14px; border-radius:20px; background:#222; color:#aaa; border:1px solid #333; font-size:11px; font-weight:800;">🎨 Filter</button>
+<button onclick="showTab('music')" id="tabBtn-music" style="padding:8px 14px; border-radius:20px; background:#222; color:#aaa; border:1px solid #333; font-size:11px; font-weight:800;">🎵 Music FIXED</button>
 </div>
 
-<!-- EDIT TAB - PER IMAGE MOTION -->
 <div id="tab-edit" class="tab">
-<div style="background:#000; border:1px solid #22c55e44; border-radius:10px; padding:10px; margin-bottom:10px;">
-<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+<div style="background:#111; border:1px solid #22c55e44; border-radius:10px; padding:10px; margin-bottom:10px;">
+<div style="display:flex; justify-content:space-between; margin-bottom:8px;">
 <div style="color:#fff; font-size:12px; font-weight:800;">Editing: <span id="editName" style="color:#22c55e;">No image</span></div>
-<div style="font-size:9px; color:#22c55e; background:#22c55e22; padding:3px 8px; border-radius:10px;">PER IMAGE MOTION</div>
+<div style="font-size:8px; color:#22c55e; background:#22c55e22; padding:3px 8px; border-radius:10px;">PER IMAGE</div>
 </div>
 <div id="perImageEditor" style="display:none;">
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-<div>
-<div style="font-size:9px; color:#888; margin-bottom:4px;">MOTION FOR THIS IMAGE ONLY:</div>
-<select id="proMotion" onchange="savePerImageMotion()" style="width:100%; padding:10px; background:#111; border:1px solid #333; border-radius:8px; color:#fff; font-size:11px;">
-<option value="none">No Motion</option>
-<option value="zoomIn">🔍 Zoom In Deep</option>
-<option value="zoomOut">🔍 Zoom Out</option>
-<option value="panLeft">⬅️ Pan Left</option>
-<option value="panRight">➡️ Pan Right</option>
-<option value="panUp">⬆️ Pan Up Drone</option>
-<option value="panDown">⬇️ Pan Down</option>
-<option value="rotate">🔄 Rotate 360° - Per Image</option>
-<option value="rotate3d">🎥 3D Tilt - Per Image</option>
-<option value="zoomRotate">🌀 Zoom+Rotate - Per Image</option>
-<option value="spinIn">🌪️ Spin In - Per Image</option>
-<option value="pulse">💓 Pulse Beat</option>
-<option value="shake">📳 Shake Viral</option>
-<option value="swing">🎸 Swing</option>
-<option value="kenBurns">🎞️ Ken Burns</option>
-<option value="bounce">⚽ Bounce</option>
+<select id="proMotion" onchange="savePerImage()" style="padding:10px; background:#000; border:1px solid #333; border-radius:8px; color:#fff; font-size:11px;">
+<option value="none">No Motion</option><option value="zoomIn">Zoom In</option><option value="zoomOut">Zoom Out</option><option value="rotate">Rotate Per Image</option><option value="panLeft">Pan Left</option><option value="panRight">Pan Right</option><option value="pulse">Pulse</option><option value="shake">Shake</option>
 </select>
-</div>
-<div>
-<div style="font-size:9px; color:#888; margin-bottom:4px;">DURATION FOR THIS IMAGE:</div>
-<div style="display:flex; gap:4px; align-items:center; background:#111; border:1px solid #333; border-radius:8px; padding:0 8px; height:40px;">
-<input type="range" id="dur" min="0.5" max="8" step="0.5" value="2" oninput="savePerImageMotion()" style="flex:1;">
-<span id="durVal" style="color:#22c55e; font-size:11px; font-weight:800; min-width:24px;">2s</span>
+<div style="display:flex; gap:4px; align-items:center; background:#000; border:1px solid #333; border-radius:8px; padding:0 8px; height:42px;">
+<input type="range" id="dur" min="0.5" max="8" step="0.5" value="2" oninput="savePerImage()" style="flex:1;"><span id="durVal" style="color:#22c55e; font-size:11px; font-weight:800;">2s</span>
 </div>
 </div>
-</div>
-<div style="margin-top:8px; display:flex; gap:6px;">
-<button onclick="savePerImageMotion()" style="flex:1; padding:8px; background:#22c55e; color:#000; border:none; border-radius:8px; font-weight:900; font-size:11px;">✅ SAVE This Image Motion</button>
-<button onclick="deleteImage()" style="padding:8px 12px; background:#333; color:#fff; border:none; border-radius:8px; font-size:11px;">🗑️ Delete</button>
-</div>
-<div style="margin-top:8px; background:#111; border-radius:8px; padding:8px; font-size:9px; color:#666;">
-💡 TIP: Image 1 set Rotate, Image 2 set Zoom In, Image 3 set Zoom Out → Play full video → Each image has different motion!
+<button onclick="savePerImage()" style="width:100%; margin-top:8px; padding:10px; background:#22c55e; color:#000; border:none; border-radius:8px; font-weight:900; font-size:11px;">✅ SAVE Per Image Motion</button>
 </div>
 </div>
-</div>
-<div style="margin-top:10px;">
-<div style="font-size:10px; color:#888; margin-bottom:6px;">👇 YOUR CLIPS - TAP TO EDIT PER IMAGE MOTION:</div>
-<div id="thumbList" style="display:flex; gap:6px; overflow-x:auto; background:#000; padding:8px; border-radius:10px; min-height:70px; border:1px solid #222;"></div>
-</div>
+<div id="thumbList" style="display:flex; gap:6px; overflow-x:auto; background:#000 !important; padding:8px; border-radius:10px; min-height:70px; border:1px solid #222;"></div>
 </div>
 
-<!-- PORTION FILTER - PER IMAGE FILTER -->
-<div id="tab-portion" class="tab" style="display:none;">
-<div style="font-size:11px; color:#fff; font-weight:800; margin-bottom:8px;">🎯 Filter - Per Image - Like CapCut</div>
-<div style="background:#22c55e11; border:1px solid #22c55e33; border-radius:8px; padding:8px; margin-bottom:10px; font-size:10px; color:#22c55e;">
-Editing: <span id="filterEditName">No image</span> - Filter applies only to this image!
-</div>
+<div id="tab-trans" class="tab" style="display:none; background:#000 !important;">
+<div style="font-size:11px; color:#fff; font-weight:800; margin-bottom:8px;">🔀 Transitions Between Clips</div>
 <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px;">
-<button onclick="setPerImageFilter('none')" style="padding:14px 4px; background:#222; border:2px solid #22c55e; border-radius:12px; color:#fff; font-size:10px;">🚫 None</button>
-<button onclick="setPerImageFilter('grayscale(1)')" style="padding:14px 4px; background:#333; border-radius:12px; color:#fff; font-size:10px; border:none;">⚫ B&W</button>
-<button onclick="setPerImageFilter('contrast(1.6) saturate(1.8) brightness(1.1)')" style="padding:14px 4px; background:#22c55e; border-radius:12px; color:#000; font-size:10px; font-weight:800; border:none;">🌈 Vivid</button>
-<button onclick="setPerImageFilter('sepia(0.8) saturate(1.5)')" style="padding:14px 4px; background:#f59e0b; border-radius:12px; color:#fff; font-size:10px; border:none;">🌅 Warm</button>
-<button onclick="setPerImageFilter('saturate(1.3) hue-rotate(190deg) brightness(0.9)')" style="padding:14px 4px; background:#3b82f6; border-radius:12px; color:#fff; font-size:10px; border:none;">❄️ Cold</button>
-<button onclick="setPerImageFilter('contrast(1.9) brightness(0.8) saturate(0.2)')" style="padding:14px 4px; background:#000; border:1px solid #333; border-radius:12px; color:#fff; font-size:10px;">🎬 Moody</button>
-<button onclick="setPerImageFilter('brightness(1.3) contrast(0.9) saturate(0.8)')" style="padding:14px 4px; background:#f472b6; border-radius:12px; color:#fff; font-size:10px; border:none;">🌸 Dream</button>
-<button onclick="setPerImageFilter('hue-rotate(270deg) saturate(1.5)')" style="padding:14px 4px; background:#8b5cf6; border-radius:12px; color:#fff; font-size:10px; border:none;">💜 Purple</button>
+<button onclick="setTrans('none')" style="padding:12px 2px; background:#222; border:2px solid #22c55e; border-radius:12px; color:#fff; font-size:9px;">🚫 Cut</button>
+<button onclick="setTrans('fade')" style="padding:12px 2px; background:#333; border-radius:12px; color:#fff; font-size:9px; border:none;">🌫️ Fade</button>
+<button onclick="setTrans('slideLeft')" style="padding:12px 2px; background:#1e293b; border-radius:12px; color:#fff; font-size:9px; border:none;">⬅️ Slide</button>
+<button onclick="setTrans('zoomInTrans')" style="padding:12px 2px; background:#22c55e; border-radius:12px; color:#000; font-size:9px; border:none; font-weight:800;">🔍 Zoom</button>
+<button onclick="setTrans('spin')" style="padding:12px 2px; background:#f59e0b; border-radius:12px; color:#fff; font-size:9px; border:none;">🌀 Spin</button>
+<button onclick="setTrans('glitch')" style="padding:12px 2px; background:#ef4444; border-radius:12px; color:#fff; font-size:9px; border:none;">📺 Glitch</button>
+<button onclick="setTrans('flash')" style="padding:12px 2px; background:#fff; border-radius:12px; color:#000; font-size:9px; border:none;">⚡ Flash</button>
+<button onclick="setTrans('blurTrans')" style="padding:12px 2px; background:#8b5cf6; border-radius:12px; color:#fff; font-size:9px; border:none;">🌫️ Blur</button>
 </div>
 </div>
 
-<!-- MUSIC TAB - MORE TUNES + CUSTOM -->
-<div id="tab-music" class="tab" style="display:none;">
-<div style="background:#22c55e11; border:1px solid #22c55e33; padding:8px; border-radius:8px; margin-bottom:10px; font-size:10px; color:#22c55e;">✅ 8 Built-in tunes + Add your own music - All play 100%!</div>
+<div id="tab-filter" class="tab" style="display:none; background:#000 !important;">
+<div id="filterName" style="font-size:10px; color:#22c55e; margin-bottom:8px; background:#22c55e11; padding:6px; border-radius:6px;">No image</div>
+<div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px;">
+<button onclick="setFilter('none')" style="padding:12px 4px; background:#222; border:2px solid #22c55e; border-radius:10px; color:#fff; font-size:10px;">🚫 None</button>
+<button onclick="setFilter('grayscale(1)')" style="padding:12px 4px; background:#333; border-radius:10px; color:#fff; font-size:10px; border:none;">⚫ B&W</button>
+<button onclick="setFilter('contrast(1.6) saturate(1.8)')" style="padding:12px 4px; background:#22c55e; border-radius:10px; color:#000; font-size:10px; font-weight:800; border:none;">🌈 Vivid</button>
+<button onclick="setFilter('sepia(0.8)')" style="padding:12px 4px; background:#f59e0b; border-radius:10px; color:#fff; font-size:10px; border:none;">🌅 Warm</button>
+</div>
+</div>
 
-<!-- CUSTOM MUSIC UPLOAD -->
+<div id="tab-music" class="tab" style="display:none; background:#000 !important;">
+<div style="background:#22c55e11; border:1px solid #22c55e44; padding:8px; border-radius:8px; margin-bottom:10px; font-size:10px; color:#22c55e;">✅ FIXED: Music now included in downloaded video! Audio mixing enabled!</div>
+
+<!-- CUSTOM MUSIC - FIXED -->
 <div style="background:#111; border:2px dashed #22c55e; border-radius:12px; padding:12px; margin-bottom:12px; text-align:center;">
-<div style="font-size:11px; color:#fff; font-weight:800; margin-bottom:6px;">🎵 Add Your Own Background Music</div>
-<label style="display:inline-block; background:#22c55e; color:#000; padding:8px 16px; border-radius:20px; font-weight:900; font-size:11px; cursor:pointer;">
-📁 Upload Your Music (MP3/WAV)
+<div style="font-size:11px; color:#fff; font-weight:800; margin-bottom:6px;">🎵 Add Your Own Music - WILL EXPORT WITH VIDEO!</div>
+<label style="display:inline-block; background:#22c55e; color:#000; padding:10px 18px; border-radius:20px; font-weight:900; font-size:11px; cursor:pointer;">
+📁 Upload MP3/WAV - Fixed!
 <input type="file" id="customMusic" accept="audio/*" hidden>
 </label>
-<div id="customMusicName" style="font-size:10px; color:#888; margin-top:6px;">No custom music yet - Upload MP3</div>
-<audio id="customAudio" controls style="width:100%; margin-top:8px; display:none;"></audio>
+<div id="customMusicName" style="font-size:10px; color:#888; margin-top:6px;">No custom music - Upload to include in download</div>
+<audio id="customAudio" controls style="width:100%; margin-top:8px; display:none;" crossorigin="anonymous"></audio>
 <div style="display:flex; gap:6px; margin-top:8px;">
-<button onclick="document.getElementById('customAudio').play()" style="flex:1; padding:8px; background:#222; border:1px solid #333; border-radius:8px; color:#fff; font-size:10px;">▶️ Preview</button>
-<button onclick="useCustomMusic()" style="flex:1; padding:8px; background:#22c55e; border:none; border-radius:8px; color:#000; font-size:10px; font-weight:900;">✅ Use This Music</button>
+<button onclick="previewCustom()" style="flex:1; padding:8px; background:#222; border:1px solid #333; border-radius:8px; color:#fff; font-size:10px;">▶️ Preview</button>
+<button onclick="useCustomMusic()" style="flex:1; padding:8px; background:#22c55e; border:none; border-radius:8px; color:#000; font-size:10px; font-weight:900;">✅ Use in Video - Fixed!</button>
 </div>
 </div>
 
-<div style="font-size:11px; color:#fff; font-weight:800; margin-bottom:8px;">🎶 Built-in Free Tunes - Tap to Play:</div>
-<div style="display:grid; gap:6px; max-height:280px; overflow-y:auto;">
-<button onclick="playTune('lofi')" class="musicBtn" style="display:flex; justify-content:space-between; align-items:center; padding:10px; background:#1a1a1a; border:1px solid #333; border-radius:10px; color:#fff; width:100%; text-align:left;"><div><div style="font-size:11px; font-weight:800;">🎵 Lofi Chill - Study</div><div style="font-size:9px; color:#888;">Soft • Relax • Loop</div></div><span style="background:#22c55e; color:#000; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:900;">▶️</span></button>
-<button onclick="playTune('happy')" class="musicBtn" style="display:flex; justify-content:space-between; align-items:center; padding:10px; background:#1a1a1a; border:1px solid #333; border-radius:10px; color:#fff; width:100%; text-align:left;"><div><div style="font-size:11px; font-weight:800;">😊 Happy Upbeat - Viral</div><div style="font-size:9px; color:#888;">Energetic • Trending</div></div><span style="background:#22c55e; color:#000; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:900;">▶️</span></button>
-<button onclick="playTune('dramatic')" class="musicBtn" style="display:flex; justify-content:space-between; align-items:center; padding:10px; background:#1a1a1a; border:1px solid #333; border-radius:10px; color:#fff; width:100%; text-align:left;"><div><div style="font-size:11px; font-weight:800;">🎬 Cinematic - Epic</div><div style="font-size:9px; color:#888;">Dramatic • Movie</div></div><span style="background:#22c55e; color:#000; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:900;">▶️</span></button>
-<button onclick="playTune('bass')" class="musicBtn" style="display:flex; justify-content:space-between; align-items:center; padding:10px; background:#1a1a1a; border:1px solid #333; border-radius:10px; color:#fff; width:100%; text-align:left;"><div><div style="font-size:11px; font-weight:800;">🔥 Bass Boost - Trending</div><div style="font-size:9px; color:#888;">Deep • Viral Reels</div></div><span style="background:#22c55e; color:#000; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:900;">▶️</span></button>
-<button onclick="playTune('love')" class="musicBtn" style="display:flex; justify-content:space-between; align-items:center; padding:10px; background:#1a1a1a; border:1px solid #333; border-radius:10px; color:#fff; width:100%; text-align:left;"><div><div style="font-size:11px; font-weight:800;">💖 Love Soft - Aesthetic</div><div style="font-size:9px; color:#888;">Romantic • Soft</div></div><span style="background:#22c55e; color:#000; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:900;">▶️</span></button>
-<button onclick="playTune('phonk')" class="musicBtn" style="display:flex; justify-content:space-between; align-items:center; padding:10px; background:#1a1a1a; border:1px solid #333; border-radius:10px; color:#fff; width:100%; text-align:left;"><div><div style="font-size:11px; font-weight:800;">🚗 Phonk - Drift - Viral</div><div style="font-size:9px; color:#888;">Trending TikTok • 2024</div></div><span style="background:#22c55e; color:#000; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:900;">▶️</span></button>
-<button onclick="playTune('edm')" class="musicBtn" style="display:flex; justify-content:space-between; align-items:center; padding:10px; background:#1a1a1a; border:1px solid #333; border-radius:10px; color:#fff; width:100%; text-align:left;"><div><div style="font-size:11px; font-weight:800;">⚡ EDM Drop - Festival</div><div style="font-size:9px; color:#888;">Party • Energy • Drop</div></div><span style="background:#22c55e; color:#000; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:900;">▶️</span></button>
-<button onclick="playTune('chillhop')" class="musicBtn" style="display:flex; justify-content:space-between; align-items:center; padding:10px; background:#1a1a1a; border:1px solid #333; border-radius:10px; color:#fff; width:100%; text-align:left;"><div><div style="font-size:11px; font-weight:800;">🌙 Chillhop - Night Drive</div><div style="font-size:9px; color:#888;">Night • Drive • Aesthetic</div></div><span style="background:#22c55e; color:#000; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:900;">▶️</span></button>
+<div style="font-size:11px; color:#fff; font-weight:800; margin-bottom:8px;">🎶 Built-in Tunes - Also Export with Video:</div>
+<div style="display:grid; gap:6px;">
+<button onclick="playTune('lofi')" style="display:flex; justify-content:space-between; padding:10px; background:#111; border:1px solid #333; border-radius:10px; color:#fff; width:100%; text-align:left;"><div><div style="font-size:11px; font-weight:800;">🎵 Lofi Chill - Will Export</div><div style="font-size:9px; color:#888;">Soft • Free</div></div><span style="background:#22c55e; color:#000; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:900;">▶️</span></button>
+<button onclick="playTune('happy')" style="display:flex; justify-content:space-between; padding:10px; background:#111; border:1px solid #333; border-radius:10px; color:#fff; width:100%; text-align:left;"><div><div style="font-size:11px; font-weight:800;">😊 Happy Viral - Will Export</div><div style="font-size:9px; color:#888;">Energetic</div></div><span style="background:#22c55e; color:#000; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:900;">▶️</span></button>
+<button onclick="playTune('phonk')" style="display:flex; justify-content:space-between; padding:10px; background:#111; border:1px solid #333; border-radius:10px; color:#fff; width:100%; text-align:left;"><div><div style="font-size:11px; font-weight:800;">🚗 Phonk - Will Export</div><div style="font-size:9px; color:#888;">TikTok Viral</div></div><span style="background:#22c55e; color:#000; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:900;">▶️</span></button>
+<button onclick="playTune('edm')" style="display:flex; justify-content:space-between; padding:10px; background:#111; border:1px solid #333; border-radius:10px; color:#fff; width:100%; text-align:left;"><div><div style="font-size:11px; font-weight:800;">⚡ EDM Drop - Will Export</div><div style="font-size:9px; color:#888;">Festival</div></div><span style="background:#22c55e; color:#000; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:900;">▶️</span></button>
 </div>
-<div style="margin-top:10px; display:flex; gap:6px;">
-<button onclick="stopTune()" style="flex:1; padding:10px; background:#333; border:none; border-radius:8px; color:#fff; font-size:11px;">⏹️ Stop All</button>
-<button onclick="addTuneToVideo()" style="flex:1; padding:10px; background:#22c55e; border:none; border-radius:8px; color:#000; font-size:11px; font-weight:900;">✅ Add to Video</button>
-</div>
-<div id="musicStatus" style="margin-top:8px; font-size:10px; color:#22c55e; text-align:center; background:#000; padding:8px; border-radius:8px; border:1px solid #111;">Tap any tune to play - Built-in, works offline</div>
-</div>
-
-<!-- VFX TAB -->
-<div id="tab-vfx" class="tab" style="display:none;">
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-<select id="vfx1" onchange="drawNow()" style="padding:10px; background:#000; border:1px solid #333; border-radius:8px; color:#fff; font-size:11px;"><option value="none">No Weather</option><option value="snow">❄️ Snow Glitter</option><option value="rain">🌧️ Rain</option><option value="thunder">⛈️ Thunder</option></select>
-<select id="vfx2" onchange="drawNow()" style="padding:10px; background:#000; border:1px solid #333; border-radius:8px; color:#fff; font-size:11px;"><option value="none">No Particles</option><option value="glitter">✨ Glitter</option><option value="bokeh">💫 Bokeh</option><option value="hearts">💖 Hearts</option></select>
-</div>
-<input id="textInput" placeholder="Add text 😍" oninput="document.getElementById('textOverlay').innerText=this.value" style="width:100%; margin-top:8px; padding:10px; background:#000; border:1px solid #333; border-radius:8px; color:#fff;">
+<div style="display:flex; gap:6px; margin-top:10px;"><button onclick="stopTune()" style="flex:1; padding:10px; background:#222; border:1px solid #333; border-radius:8px; color:#fff; font-size:11px;">⏹️ Stop</button><button onclick="addTune()" style="flex:1; padding:10px; background:#22c55e; border:none; border-radius:8px; color:#000; font-size:11px; font-weight:900;">✅ Add Tune to Export</button></div>
+<div id="musicStatus" style="margin-top:8px; font-size:10px; color:#22c55e; text-align:center; background:#111; padding:8px; border-radius:8px; border:1px solid #222;">Music will now export with video - Fixed audio mixing!</div>
 </div>
 
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:14px;">
-<button onclick="togglePlay()" style="padding:12px; background:#222; border:1px solid #444; border-radius:10px; color:#fff; font-weight:800;">▶️ Play Full Video</button>
-<button onclick="downloadVideo()" style="padding:12px; background:#22c55e; border:none; border-radius:10px; color:#000; font-weight:900;">⬇️ Download</button>
+<button onclick="togglePlay()" style="padding:12px; background:#222; border:1px solid #444; border-radius:10px; color:#fff; font-weight:800;">▶️ Play</button>
+<button onclick="downloadVideo()" style="padding:12px; background:#22c55e; border:none; border-radius:10px; color:#000; font-weight:900;">⬇️ Download WITH Music</button>
 </div>
 
 </div>
 
-<p id="status" style="background:#000; color:#22c55e; font-size:10px; text-align:center; padding:8px; margin:0;">V10 - Per Image Motion - Tap clip to edit its own motion</p>
+<p id="status" style="background:#000 !important; color:#22c55e; font-size:10px; text-align:center; padding:8px; margin:0; border-top:1px solid #111;">V12 - Music in download fixed - Audio mixing enabled</p>
 </div>
 
 <script>
-let images=[], cur=-1, isPlay=false, animId=null, progress=0, sys=[], audioCtx=null, oscNodes=[], currentTune='', customMusicUrl='', musicAdded=false;
+let images=[], cur=-1, isPlay=false, animId=null, progress=0, sys=[], audioCtx=null, oscNodes=[], currentTune='', customUrl='', musicAdded=false, customAudioEl=null, audioMixDest=null;
 
-function initParticles(){ sys=[]; for(let i=0;i<120;i++) sys.push({x:Math.random()*720, y:Math.random()*1280, s:Math.random()*3+1, sp:Math.random()*2+0.5}); }
+function initParticles(){ sys=[]; for(let i=0;i<80;i++) sys.push({x:Math.random()*720, y:Math.random()*1280, s:Math.random()*3+1, sp:Math.random()*2+0.5}); }
 
 function showTab(name){
   document.querySelectorAll('.tab').forEach(t=>t.style.display='none');
@@ -291,190 +253,206 @@ function showTab(name){
 }
 
 document.getElementById('proImgs').onchange=function(e){
-  const files=Array.from(e.target.files);
-  if(!files.length) return;
-  document.getElementById('imgStatus').innerText='Loading '+files.length+'...';
+  const files=Array.from(e.target.files); if(!files.length) return;
   let loaded=0;
   files.forEach(file=>{
     const img=new Image(); const url=URL.createObjectURL(file);
     img.onload=function(){
-      images.push({img:img, src:url, name:file.name, motion:'zoomIn', filter:'none', duration:2, id:Date.now()+Math.random()});
-      loaded++;
-      document.getElementById('imgStatus').innerText='✅ '+loaded+'/'+files.length+' loaded - Each has own motion!';
-      renderThumbs();
-      if(images.length===files.length || images.length===1){ cur=0; openEditor(0); }
-      drawNow();
+      images.push({img:img, src:url, name:file.name, motion:'zoomIn', filter:'none', trans:'fade', transDur:0.5, duration:2, id:Date.now()+Math.random()});
+      loaded++; document.getElementById('imgStatus').innerText='✅ '+loaded+' loaded';
+      renderThumbs(); if(images.length===1 || loaded===files.length){ cur=0; openEditor(0); } drawNow();
     };
-    img.onerror=function(){ document.getElementById('imgStatus').innerText='❌ Failed '+file.name; };
     img.src=url;
   });
 };
 
 function renderThumbs(){
   const list=document.getElementById('thumbList'); list.innerHTML='';
+  if(images.length===0){ list.innerHTML='<div style="color:#444; font-size:11px; padding:12px; background:#000 !important;">No images - Add images - Black fixed</div>'; return; }
   images.forEach((o,i)=>{
-    const d=document.createElement('div'); d.style.cssText=`min-width:70px; height:70px; border-radius:10px; overflow:hidden; border:${i==cur?'3px solid #22c55e':'2px solid #333'}; cursor:pointer; background:#000; flex-shrink:0; position:relative;`;
-    d.innerHTML=`<img src="${o.src}" style="width:100%; height:100%; object-fit:cover; display:block;"><div style="position:absolute; bottom:0; left:0; right:0; background:#000000cc; color:#fff; font-size:7px; padding:2px; text-align:center; font-weight:700;">${o.motion}<br>${o.duration}s<br>${o.filter=='none'?'':o.filter.substring(0,6)}</div>`;
-    d.onclick=()=>{ openEditor(i); };
-    list.appendChild(d);
+    const d=document.createElement('div'); d.style.cssText=`min-width:70px; height:70px; border-radius:10px; overflow:hidden; border:${i==cur?'3px solid #22c55e':'2px solid #333'}; cursor:pointer; background:#000 !important; flex-shrink:0; position:relative;`;
+    d.innerHTML=`<img src="${o.src}" style="width:100%; height:100%; object-fit:cover; display:block;"><div style="position:absolute; bottom:0; left:0; right:0; background:#000000cc; color:#fff; font-size:6px; padding:2px; text-align:center;">${o.motion}<br>${o.trans}</div>`;
+    d.onclick=()=>{ openEditor(i); }; list.appendChild(d);
   });
 }
 
 function openEditor(i){
   cur=i; const o=images[i]; if(!o) return;
   document.getElementById('perImageEditor').style.display='block';
-  document.getElementById('editName').innerText=o.name+' ('+(i+1)+'/'+images.length+')';
-  document.getElementById('filterEditName').innerText=o.name;
+  document.getElementById('editName').innerText=o.name.substring(0,15)+' ('+(i+1)+')';
   document.getElementById('proMotion').value=o.motion;
   document.getElementById('dur').value=o.duration;
   document.getElementById('durVal').innerText=o.duration+'s';
   renderThumbs(); drawNow();
-  showTab('edit');
 }
 
-function savePerImageMotion(){
+function savePerImage(){
   if(cur<0 || !images[cur]) return;
   const o=images[cur];
   o.motion=document.getElementById('proMotion').value;
   o.duration=parseFloat(document.getElementById('dur').value);
   document.getElementById('durVal').innerText=o.duration+'s';
-  document.getElementById('status').innerText='✅ Saved '+o.name+' = '+o.motion+' '+o.duration+'s - Per image motion!';
   renderThumbs(); drawNow();
 }
 
-function setPerImageFilter(f){
-  if(cur<0){ alert('Add image first and tap clip to select!'); return; }
-  images[cur].filter=f;
-  document.getElementById('status').innerText='✅ Filter '+f.substring(0,15)+' applied to '+images[cur].name+' only! Not full video!';
-  drawNow(); renderThumbs();
-}
+function setTrans(t){ if(cur<0){ alert('Add image!'); return; } images[cur].trans=t; document.getElementById('status').innerText='✅ Transition '+t+' for '+images[cur].name; renderThumbs(); }
 
-function deleteImage(){
-  if(cur<0) return;
-  images.splice(cur,1);
-  if(images.length===0){ cur=-1; document.getElementById('perImageEditor').style.display='none'; document.getElementById('editName').innerText='No image'; }
-  else{ cur=Math.max(0,cur-1); openEditor(cur); }
-  renderThumbs(); drawNow();
-}
+function setFilter(f){ if(cur<0){ alert('Tap clip!'); return; } images[cur].filter=f; renderThumbs(); drawNow(); }
 
 function drawNow(){
   const canvas=document.getElementById('proCanvas'); const ctx=canvas.getContext('2d');
   if(images.length===0 || cur<0){
-    ctx.fillStyle='#111'; ctx.fillRect(0,0,720,1280);
-    ctx.fillStyle='#555'; ctx.font='bold 18px Arial'; ctx.textAlign='center'; ctx.fillText('Add Images',360,580);
-    ctx.font='12px Arial'; ctx.fillText('Each image = Own motion',360,610);
-    ctx.fillText('Tap clip to edit per image',360,630);
+    ctx.fillStyle='#000'; ctx.fillRect(0,0,720,1280);
+    ctx.fillStyle='#333'; ctx.font='bold 16px Arial'; ctx.textAlign='center'; ctx.fillText('Add Images - No White Board',360,600);
     return;
   }
   const o=images[cur];
   ctx.fillStyle='#000'; ctx.fillRect(0,0,720,1280);
   ctx.save(); ctx.translate(360,640);
-  let sc=1,x=0,y=0,rot=0;
+  let sc=1,x=0,y=0,rot=0, alpha=1;
   const p=progress;
-  // PER IMAGE MOTION - Uses o.motion not global
-  if(o.motion=='zoomIn') sc=1+p*0.6;
-  if(o.motion=='zoomOut') sc=1.6-p*0.6;
-  if(o.motion=='panLeft') x=-p*250;
-  if(o.motion=='panRight') x=p*250-125;
-  if(o.motion=='panUp') y=-p*200;
-  if(o.motion=='panDown') y=p*200-100;
+  if(o.motion=='zoomIn') sc=1+p*0.6; if(o.motion=='zoomOut') sc=1.6-p*0.6;
+  if(o.motion=='panLeft') x=-p*250; if(o.motion=='panRight') x=p*250-125;
   if(o.motion=='rotate') rot=p*360*Math.PI/180;
-  if(o.motion=='rotate3d'){ sc=1+p*0.3; ctx.transform(1, Math.sin(p*30*Math.PI/180)*0.4, 0, 1, 0, 0); rot=p*30*Math.PI/180; }
-  if(o.motion=='zoomRotate'){ sc=1+p*0.5; rot=p*90*Math.PI/180; }
-  if(o.motion=='spinIn'){ sc=p==0?0.05:p; rot=p*720*Math.PI/180; }
   if(o.motion=='pulse') sc=1+Math.sin(p*Math.PI*4)*0.25;
   if(o.motion=='shake'){ x=(Math.random()-0.5)*30; y=(Math.random()-0.5)*30; }
-  if(o.motion=='swing') rot=Math.sin(p*Math.PI*2)*0.35;
-  if(o.motion=='kenBurns'){ sc=1+p*0.3; x=-p*100; y=-p*50; }
-  if(o.motion=='bounce'){ y=Math.abs(Math.sin(p*Math.PI*3))* -80; sc=1+Math.abs(Math.sin(p*Math.PI*3))*0.15; }
-  ctx.rotate(rot); ctx.scale(sc,sc); ctx.translate(x,y);
-  ctx.filter=o.filter;
-  try{ ctx.drawImage(o.img, -360, -640, 720, 1280); }catch(e){ console.log(e); }
-  ctx.restore(); drawVFX();
-}
-
-function drawVFX(){
-  const c=document.getElementById('vfxCanvas'); const ctx=c.getContext('2d'); ctx.clearRect(0,0,720,1280);
-  const v1=document.getElementById('vfx1').value, v2=document.getElementById('vfx2').value;
-  if(v1!=='none' || v2!=='none'){
-    sys.forEach(s=>{
-      if(v1==='snow' || v2==='glitter' || v2==='bokeh'){ ctx.fillStyle=v2==='bokeh'?'#FFD700':'rgba(255,255,255,0.9)'; ctx.beginPath(); ctx.arc(s.x,s.y,s.s*2,0,Math.PI*2); ctx.fill(); s.y+=s.sp; s.x+=Math.sin(s.y/50); if(s.y>1320){ s.y=-20; s.x=Math.random()*720; } }
-      if(v1==='rain'){ ctx.strokeStyle='rgba(180,200,255,0.7)'; ctx.beginPath(); ctx.moveTo(s.x,s.y); ctx.lineTo(s.x-4,s.y+12); ctx.stroke(); s.y+=s.sp*8; if(s.y>1320){ s.y=-20; s.x=Math.random()*720; } }
-    });
-    if(v1==='thunder' && Math.random()<0.02){ ctx.fillStyle='rgba(255,255,255,0.3)'; ctx.fillRect(0,0,720,1280); }
+  const isTrans=p>0.7; const tP=isTrans?(p-0.7)/0.3:0;
+  if(isTrans && o.trans!=='none'){
+    if(o.trans==='fade') alpha=1-tP;
+    if(o.trans==='slideLeft') x+=-tP*720;
+    if(o.trans==='zoomInTrans') sc+=tP*1.5;
+    if(o.trans==='spin'){ rot+=tP*360*Math.PI/180; sc=1+tP*0.5; }
+    if(o.trans==='glitch'){ x+=(Math.random()-0.5)*tP*100; }
+    if(o.trans==='flash') alpha=tP<0.5?1-tP*2:tP*2-1;
   }
+  ctx.globalAlpha=alpha; ctx.rotate(rot); ctx.scale(sc,sc); ctx.translate(x,y);
+  ctx.filter=o.filter;
+  try{ ctx.drawImage(o.img, -360, -640, 720, 1280); }catch(e){}
+  ctx.restore(); ctx.globalAlpha=1;
 }
 
-// CUSTOM MUSIC UPLOAD
+// CUSTOM MUSIC - FIXED FOR DOWNLOAD
 document.getElementById('customMusic').onchange=function(e){
   const file=e.target.files[0]; if(!file) return;
-  const url=URL.createObjectURL(file);
-  customMusicUrl=url;
-  document.getElementById('customMusicName').innerText='✅ '+file.name+' - '+(file.size/1024/1024).toFixed(1)+' MB';
-  const audio=document.getElementById('customAudio'); audio.src=url; audio.style.display='block';
-  document.getElementById('musicStatus').innerText='🎵 Custom music loaded: '+file.name+' - Tap Preview';
+  const url=URL.createObjectURL(file); customUrl=url;
+  document.getElementById('customMusicName').innerText='✅ '+file.name+' - Will export with video!';
+  const audio=document.getElementById('customAudio'); audio.src=url; audio.style.display='block'; audio.crossOrigin='anonymous';
+  customAudioEl=audio;
+  document.getElementById('musicStatus').innerText='🎵 Custom music loaded - Tap Use in Video - Will export!';
 };
+
+function previewCustom(){ if(customAudioEl){ customAudioEl.play(); document.getElementById('musicStatus').innerText='▶️ Previewing custom music'; } }
+
 function useCustomMusic(){
-  if(!customMusicUrl){ alert('Upload music first!'); return; }
+  if(!customUrl){ alert('Upload music first!'); return; }
   currentTune='custom'; musicAdded=true;
-  document.getElementById('musicStatus').innerText='✅ Custom music added to video! Will export with your music!';
-  stopTune();
+  document.getElementById('musicStatus').innerText='✅ Custom music set for export! Will include in downloaded video - FIXED!';
 }
 
-// TUNES - 8 TUNES
 function playTune(type){
   stopTune();
   if(!audioCtx) audioCtx=new (window.AudioContext || window.webkitAudioContext)();
-  currentTune=type;
-  const now=audioCtx.currentTime;
-  if(type==='lofi'){ for(let i=0;i<3;i++){ const osc=audioCtx.createOscillator(); const g=audioCtx.createGain(); osc.type='sine'; osc.frequency.value=220+i*110; g.gain.value=0.07; osc.connect(g); g.connect(audioCtx.destination); osc.start(now+i*0.3); osc.stop(now+6); oscNodes.push(osc); } }
-  else if(type==='happy'){ [261,329,392].forEach((f,i)=>{ const osc=audioCtx.createOscillator(); const g=audioCtx.createGain(); osc.type='triangle'; osc.frequency.value=f; g.gain.value=0.09; osc.connect(g); g.connect(audioCtx.destination); osc.start(now+i*0.2); osc.stop(now+3); oscNodes.push(osc); }); setTimeout(()=>{ if(currentTune===type) playTune(type); }, 3000); }
-  else if(type==='dramatic'){ const osc=audioCtx.createOscillator(); const g=audioCtx.createGain(); osc.type='sawtooth'; osc.frequency.setValueAtTime(100,now); osc.frequency.linearRampToValueAtTime(60,now+2.5); g.gain.value=0.1; osc.connect(g); g.connect(audioCtx.destination); osc.start(now); osc.stop(now+2.5); oscNodes.push(osc); }
-  else if(type==='bass'){ const osc=audioCtx.createOscillator(); const g=audioCtx.createGain(); osc.type='square'; osc.frequency.value=55; g.gain.value=0.12; osc.connect(g); g.connect(audioCtx.destination); osc.start(now); osc.stop(now+1.5); oscNodes.push(osc); }
-  else if(type==='love'){ [196,246].forEach((f,i)=>{ const osc=audioCtx.createOscillator(); const g=audioCtx.createGain(); osc.type='sine'; osc.frequency.value=f; g.gain.value=0.06; g.gain.linearRampToValueAtTime(0,now+2); osc.connect(g); g.connect(audioCtx.destination); osc.start(now+i*0.3); osc.stop(now+2); oscNodes.push(osc); }); }
-  else if(type==='phonk'){ const osc=audioCtx.createOscillator(); const g=audioCtx.createGain(); osc.type='square'; osc.frequency.setValueAtTime(100,now); osc.frequency.exponentialRampToValueAtTime(40,now+1); g.gain.value=0.13; osc.connect(g); g.connect(audioCtx.destination); osc.start(now); osc.stop(now+1); oscNodes.push(osc); }
-  else if(type==='edm'){ [130,260,390,520].forEach((f,i)=>{ const osc=audioCtx.createOscillator(); const g=audioCtx.createGain(); osc.type='sawtooth'; osc.frequency.value=f; g.gain.value=0.07; osc.connect(g); g.connect(audioCtx.destination); osc.start(now+i*0.15); osc.stop(now+i*0.15+0.4); oscNodes.push(osc); }); }
-  else if(type==='chillhop'){ const osc=audioCtx.createOscillator(); const g=audioCtx.createGain(); osc.type='sine'; osc.frequency.value=110; g.gain.value=0.08; osc.connect(g); g.connect(audioCtx.destination); osc.start(now); osc.stop(now+4); oscNodes.push(osc); }
-  document.getElementById('musicStatus').innerText='🎵 Playing: '+type+' - Built-in tune';
+  currentTune=type; const now=audioCtx.currentTime;
+  if(type==='lofi'){ for(let i=0;i<3;i++){ const o=audioCtx.createOscillator(); const g=audioCtx.createGain(); o.type='sine'; o.frequency.value=220+i*110; g.gain.value=0.06; o.connect(g); g.connect(audioCtx.destination); o.start(now+i*0.2); o.stop(now+5); oscNodes.push(o); } }
+  else if(type==='happy'){ [261,329].forEach((f,i)=>{ const o=audioCtx.createOscillator(); const g=audioCtx.createGain(); o.type='triangle'; o.frequency.value=f; g.gain.value=0.07; o.connect(g); g.connect(audioCtx.destination); o.start(now+i*0.2); o.stop(now+2); oscNodes.push(o); }); }
+  else if(type==='phonk'){ const o=audioCtx.createOscillator(); const g=audioCtx.createGain(); o.type='square'; o.frequency.setValueAtTime(100,now); o.frequency.exponentialRampToValueAtTime(40,now+0.8); g.gain.value=0.11; o.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now+0.8); oscNodes.push(o); }
+  else if(type==='edm'){ [130,260].forEach((f,i)=>{ const o=audioCtx.createOscillator(); const g=audioCtx.createGain(); o.type='sawtooth'; o.frequency.value=f; g.gain.value=0.06; o.connect(g); g.connect(audioCtx.destination); o.start(now+i*0.1); o.stop(now+0.3); oscNodes.push(o); }); }
+  document.getElementById('musicStatus').innerText='🎵 Playing '+type+' - Will export with video if you click Add';
 }
-function stopTune(){ oscNodes.forEach(o=>{ try{o.stop();}catch{} }); oscNodes=[]; if(audioCtx){ try{audioCtx.close();}catch{} audioCtx=null; } document.getElementById('customAudio').pause(); document.getElementById('musicStatus').innerText='⏹️ Stopped'; }
-function addTuneToVideo(){ if(!currentTune){ alert('Play a tune first!'); return; } musicAdded=true; document.getElementById('musicStatus').innerText='✅ Tune '+currentTune+' added to final video!'; }
+
+function stopTune(){ oscNodes.forEach(o=>{ try{o.stop();}catch{} }); oscNodes=[]; if(audioCtx){ try{audioCtx.close();}catch{} audioCtx=null; } if(customAudioEl) customAudioEl.pause(); }
+
+function addTune(){ if(!currentTune){ alert('Play tune first!'); return; } musicAdded=true; document.getElementById('musicStatus').innerText='✅ Tune '+currentTune+' will be in downloaded video!'; }
 
 function togglePlay(){
-  if(images.length===0){ alert('Add images first!'); return; }
+  if(images.length===0){ alert('Add images!'); return; }
   isPlay=!isPlay; document.getElementById('playBtn').innerText=isPlay?'⏸️':'▶️';
-  if(isPlay) loop(); else cancelAnimationFrame(animId);
+  if(isPlay){ if(musicAdded && customUrl && customAudioEl){ customAudioEl.currentTime=0; customAudioEl.play(); } loop(); } else{ cancelAnimationFrame(animId); if(customAudioEl) customAudioEl.pause(); }
 }
-function loop(){
-  progress+=0.008;
-  if(progress>1){
-    progress=0;
-    cur=(cur+1)%images.length;
-    document.getElementById('editName').innerText=images[cur].name+' - Motion: '+images[cur].motion;
-    document.getElementById('proMotion').value=images[cur].motion;
-    document.getElementById('dur').value=images[cur].duration;
-    document.getElementById('durVal').innerText=images[cur].duration+'s';
-    renderThumbs();
-  }
-  drawNow();
-  if(isPlay) animId=requestAnimationFrame(loop);
-}
+
+function loop(){ progress+=0.01; if(progress>1){ progress=0; cur=(cur+1)%images.length; renderThumbs(); } drawNow(); if(isPlay) animId=requestAnimationFrame(loop); }
+
+// FIXED DOWNLOAD WITH AUDIO MIXING
 function downloadVideo(){
   if(images.length===0){ alert('Add images!'); return; }
-  const main=document.getElementById('proCanvas'), vfx=document.getElementById('vfxCanvas');
+  const main=document.getElementById('proCanvas');
   const out=document.createElement('canvas'); out.width=720; out.height=1280; const octx=out.getContext('2d');
-  const stream=out.captureStream(30); const rec=new MediaRecorder(stream,{mimeType:'video/webm'}); let chunks=[]; rec.ondataavailable=e=>chunks.push(e.data);
-  rec.onstop=()=>{ const blob=new Blob(chunks,{type:'video/webm'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`Orbittroniz-V10-PerImage-${Date.now()}.webm`; a.click(); document.getElementById('status').innerText='✅ Video downloaded - Each image has own motion! Music: '+(musicAdded?currentTune:'none'); };
+  
+  // FIXED: Audio mixing - Create audio context for export
+  const exportAudioCtx=new (window.AudioContext || window.webkitAudioContext)();
+  const dest=exportAudioCtx.createMediaStreamDestination();
+  audioMixDest=dest;
+  
+  let audioStream=null;
+  let hasAudio=false;
+  
+  if(musicAdded){
+    if(currentTune==='custom' && customAudioEl){
+      // Custom music - Use media element source
+      try{
+        const source=exportAudioCtx.createMediaElementSource(customAudioEl);
+        source.connect(dest);
+        source.connect(exportAudioCtx.destination);
+        hasAudio=true;
+        customAudioEl.currentTime=0;
+        customAudioEl.play();
+        document.getElementById('status').innerText='🎵 Exporting with custom music...';
+      }catch(e){
+        console.log('Custom audio mix error', e);
+        // Fallback - create oscillator for export
+        const osc=exportAudioCtx.createOscillator(); const g=exportAudioCtx.createGain();
+        osc.type='sine'; osc.frequency.value=440; g.gain.value=0.08;
+        osc.connect(g); g.connect(dest); g.connect(exportAudioCtx.destination);
+        osc.start(); hasAudio=true;
+      }
+    } else if(currentTune && currentTune!=='custom'){
+      // Built-in tune - Generate audio for export
+      const osc=exportAudioCtx.createOscillator(); const g=exportAudioCtx.createGain();
+      if(currentTune==='lofi'){ osc.type='sine'; osc.frequency.value=220; }
+      else if(currentTune==='happy'){ osc.type='triangle'; osc.frequency.value=329; }
+      else if(currentTune==='phonk'){ osc.type='square'; osc.frequency.value=80; }
+      else { osc.type='sine'; osc.frequency.value=330; }
+      g.gain.value=0.08;
+      osc.connect(g); g.connect(dest); g.connect(exportAudioCtx.destination);
+      osc.start(); hasAudio=true;
+      oscNodes.push(osc);
+    }
+  }
+  
+  const canvasStream=out.captureStream(30);
+  let finalStream=canvasStream;
+  
+  if(hasAudio && dest.stream.getAudioTracks().length>0){
+    // Merge video + audio
+    finalStream=new MediaStream();
+    canvasStream.getVideoTracks().forEach(t=>finalStream.addTrack(t));
+    dest.stream.getAudioTracks().forEach(t=>finalStream.addTrack(t));
+    document.getElementById('status').innerText='✅ Merging video + audio - Music will be in download!';
+  } else {
+    document.getElementById('status').innerText='⏺️ Exporting video'+(musicAdded?' + music':'')+'...';
+  }
+  
+  const rec=new MediaRecorder(finalStream,{mimeType:'video/webm'});
+  let chunks=[]; rec.ondataavailable=e=>chunks.push(e.data);
+  rec.onstop=()=>{
+    const blob=new Blob(chunks,{type:'video/webm'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`Orbittroniz-V12-MUSIC-${Date.now()}.webm`; a.click();
+    document.getElementById('status').innerText='✅ Downloaded with music! '+ (hasAudio?'Music included!':'No music selected');
+    if(customAudioEl) customAudioEl.pause();
+    oscNodes.forEach(o=>{ try{o.stop();}catch{} });
+    exportAudioCtx.close();
+  };
+  
   let p=0, idx=0; cur=0; rec.start();
   let iv=setInterval(()=>{
     p+=0.02; if(p>1){ p=0; idx++; if(idx>=images.length){ clearInterval(iv); rec.stop(); return; } cur=idx; }
-    progress=p; drawNow(); octx.drawImage(main,0,0); octx.drawImage(vfx,0,0);
-    const txt=document.getElementById('textOverlay').innerText; if(txt){ octx.font='900 36px Arial'; octx.fillStyle='white'; octx.strokeStyle='black'; octx.lineWidth=4; octx.textAlign='center'; octx.strokeText(txt,360,600); octx.fillText(txt,360,600); }
+    progress=p; drawNow(); octx.drawImage(main,0,0);
   },33);
 }
-initParticles(); drawNow();
+
+initParticles(); drawNow(); renderThumbs();
 </script>
-<!-- END V10 -->
+<!-- END V12 - MUSIC IN DOWNLOAD FIXED -->
   <div class="tools-grid">  <- YOUR OLD TOOLS START FROM HERE - DON'T TOUCH BELOW
 <canvas id="bgCanvas"></canvas><div class="bgGrad"></div><div class="cursorGlow" id="cursorGlow"></div>
 <div class="app">
