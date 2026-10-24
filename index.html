@@ -117,84 +117,55 @@ canvas{border-radius:12px;border:1px solid #2a4a80;max-width:100%;background:#ff
 <body>
  <body>
   <header> ... Orbitroniz ... </header>
-  <!-- PLACE 2 - 3 CARDS + 3 TOOL BOXES - PASTE AFTER HEADER -->
-<div id="orbit-new-home">
-  <div class="orbit-badge">🔥 NEW - AI VIDEO MAKER STUDIO 2.0</div>
-  <h2 class="orbit-h2">Make Viral Reels in <span>30 Seconds</span></h2>
-  <div class="orbit-3grid">
-    <div class="orbit-card c1"><div class="o-icon">🖼️</div><h3>Image to Video</h3><p>Upload photo to video</p><button onclick="document.getElementById('orbit-tool1').scrollIntoView({behavior:'smooth'})">Open Tool 1 →</button></div>
-    <div class="orbit-card c2"><div class="o-icon">🎵</div><h3>Music Studio</h3><p>Add music</p><button onclick="document.getElementById('orbit-tool2').scrollIntoView({behavior:'smooth'})">Open Tool 2 →</button></div>
-    <div class="orbit-card c3"><div class="o-icon">🎙️</div><h3>Voiceover PRO</h3><p>Hindi/English voice</p><button onclick="document.getElementById('orbit-tool3').scrollIntoView({behavior:'smooth'})">Open Tool 3 →</button></div>
-  </div>
-  
-  <!-- Paste my full PRO Tool 1 code here from previous message -->
-  <div id="orbit-tool1"> ...  ... </div>
-  <div id="orbit-tool2"> ... tool 2 ... </div>
-  <div id="orbit-tool3"> ... tool 3 ... </div>
+  <header/>
+   <!-- START REAL CODE - TOOL 1 PRO MAX -->
+<div id="orbit-tool1" style="margin-top:20px; background:linear-gradient(180deg,#0f172a,#020617); border:1px solid #1e293b; border-radius:16px; padding:16px;">
+<h3 style="margin:0; font-size:16px; color:#fff;">🖼️ Tool 1 PRO: Image to Video Studio</h3>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px;">
+<label style="background:#020617; border:1px dashed #3b82f6; border-radius:10px; padding:12px; text-align:center; cursor:pointer;">
+<div style="font-size:22px;">📸</div>
+<div style="font-size:11px; color:#94a3b8;">Add Multiple Images</div>
+<input type="file" id="proImgs" accept="image/*" multiple hidden>
+</label>
+<div style="background:#020617; border:1px solid #1e293b; border-radius:10px; padding:8px;">
+<div style="font-size:10px; color:#64748b;">PREVIEW LIST</div>
+<div id="imgList" style="display:flex; gap:6px; overflow-x:auto; min-height:50px;"></div>
 </div>
-  
-  <!-- PLACE 3 START - PASTE BEFORE </body> -->
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:12px;">
+<div><div style="font-size:10px; color:#94a3b8;">CROP</div><select id="proCrop" style="width:100%; padding:8px; background:#020617; border:1px solid #334155; border-radius:8px; color:white;"><option value="cover">Fill 9:16</option><option value="contain">Fit</option></select></div>
+<div><div style="font-size:10px; color:#94a3b8;">FILTER</div><select id="proFilter" style="width:100%; padding:8px; background:#020617; border:1px solid #334155; border-radius:8px; color:white;"><option value="none">No Filter</option><option value="grayscale(1)">B&W</option><option value="sepia(1)">Sepia</option><option value="contrast(1.4) brightness(1.2)">Vivid</option><option value="saturate(1.8)">Super Color</option></select></div>
+<div><div style="font-size:10px; color:#94a3b8;">MOTION 3D</div><select id="proMotion" style="width:100%; padding:8px; background:#020617; border:1px solid #334155; border-radius:8px; color:white;"><option value="zoomIn">Zoom In</option><option value="zoomOut">Zoom Out</option><option value="panLeft">Pan Left</option><option value="panRight">Pan Right</option><option value="rotate3d">3D Rotate</option><option value="kenBurns">Ken Burns</option></select></div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
+<div><div style="font-size:10px; color:#94a3b8;">Duration</div><input type="range" id="proDuration" min="1" max="5" value="2" style="width:100%;"><div style="font-size:10px; color:#22c55e;"><span id="durVal">2</span> sec/photo</div></div>
+<div><div style="font-size:10px; color:#94a3b8;">Speed</div><select id="proSpeed" style="width:100%; padding:8px; background:#020617; border:1px solid #334155; border-radius:8px; color:white;"><option value="1">Normal</option><option value="0.5">Slow</option><option value="2">Fast</option></select></div>
+</div>
+<div style="margin-top:12px; position:relative; background:black; border-radius:12px; overflow:hidden; perspective:1000px;">
+<canvas id="proCanvas" width="720" height="1280" style="width:100%; max-width:400px; display:block; margin:auto;"></canvas>
+<div style="position:absolute; bottom:8px; right:8px; font-size:9px; background:#00000088; padding:3px 6px; border-radius:4px; color:#fff;">Orbittroniz.com</div>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px;">
+<button onclick="proPreview()" style="padding:12px; background:#0f172a; border:1px solid #3b82f6; color:#3b82f6; border-radius:10px; font-weight:700; cursor:pointer;">👁️ Preview Motion</button>
+<button onclick="proDownload()" style="padding:12px; background:#3b82f6; color:white; border:none; border-radius:10px; font-weight:800; cursor:pointer;">⬇️ Download MP4</button>
+</div>
+<p id="proStatus" style="font-size:11px; color:#22c55e; margin-top:8px; text-align:center;">Upload 2-10 images for best video</p>
+</div>
 <script>
-  document.getElementById('oImg').onchange = function(e){ ... }
-  function oMakeVideo(){ ... }
+let proImages=[], proCurrent=0, proAnimId=null;
+document.getElementById('proImgs').onchange=(e)=>{
+proImages=[]; document.getElementById('imgList').innerHTML='';
+Array.from(e.target.files).forEach((file,i)=>{
+const img=new Image(); img.src=URL.createObjectURL(file);
+img.onload=()=>{ proImages.push(img); const thumb=document.createElement('img'); thumb.src=img.src; thumb.style.cssText='width:50px; height:50px; border-radius:8px; object-fit:cover; border:2px solid #1e293b; cursor:pointer;'; thumb.onclick=()=>{ proCurrent=i; proDraw(0); }; document.getElementById('imgList').appendChild(thumb); if(i==0) proDraw(0); }
+});
+};
+document.getElementById('proDuration').oninput=(e)=>{ document.getElementById('durVal').innerText=e.target.value; };
+function proDraw(p){ if(proImages.length==0) return; const canvas=document.getElementById('proCanvas'); const ctx=canvas.getContext('2d'); const img=proImages[proCurrent]; const motion=document.getElementById('proMotion').value; const filter=document.getElementById('proFilter').value; ctx.clearRect(0,0,canvas.width,canvas.height); ctx.filter=filter; let scale=1,x=0,y=0,rotateY=0; if(motion=='zoomIn') scale=1+p*0.4; if(motion=='zoomOut') scale=1.4-p*0.4; if(motion=='panLeft') x=-p*200; if(motion=='panRight') x=p*200-100; if(motion=='rotate3d'){ rotateY=p*15; scale=1.1; } ctx.save(); ctx.translate(canvas.width/2, canvas.height/2); if(motion=='rotate3d'){ canvas.style.transform=`rotateY(${rotateY}deg) scale(${scale})`; } else { canvas.style.transform=`scale(${scale}) translate(${x}px, ${y}px)`; } ctx.drawImage(img, -canvas.width/2, -canvas.height/2, canvas.width, canvas.height); ctx.restore(); ctx.filter='none'; }
+function proPreview(){ if(proImages.length==0){ alert('First upload images!'); return; } let progress=0; cancelAnimationFrame(proAnimId); function animate(){ progress+=0.01; if(progress>1){ progress=0; proCurrent=(proCurrent+1)%proImages.length; } proDraw(progress); proAnimId=requestAnimationFrame(animate); } animate(); document.getElementById('proStatus').innerText='👁️ Previewing 3D Motion...'; }
+function proDownload(){ if(proImages.length==0){ alert('Upload images first!'); return; } const canvas=document.getElementById('proCanvas'); const stream=canvas.captureStream(30); const recorder=new MediaRecorder(stream,{mimeType:'video/webm'}); let chunks=[]; recorder.ondataavailable=e=>chunks.push(e.data); recorder.onstop=()=>{ const blob=new Blob(chunks,{type:'video/webm'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`Orbittroniz-Reels-${Date.now()}.webm`; a.click(); document.getElementById('proStatus').innerText='✅ Downloaded!'; }; let duration=parseInt(document.getElementById('proDuration').value)*proImages.length; let speed=parseFloat(document.getElementById('proSpeed').value); let totalTime=(duration/speed)*1000; recorder.start(); proPreview(); document.getElementById('proStatus').innerText=`⏺️ Recording ${duration} sec...`; setTimeout(()=>{ recorder.stop(); cancelAnimationFrame(proAnimId); }, totalTime); }
 </script>
-</body>
-<!-- PLACE 3 END -->
-</body>
-</html>
-
-  <!-- PLACE 2 START - PASTE THIS RIGHT AFTER HEADER -->
-  <div id="orbit-new-home">
-    <div class="orbit-badge">🔥 NEW - AI VIDEO MAKER STUDIO 2.0</div>
-    <h2 class="orbit-h2">Make Viral Reels in <span>30 Seconds</span> - Photo + Music + Voice</h2>
-    <p class="orbit-p">3 tools working - Make video from photo, add music, add voice - All in homepage.</p>
-
-    <div class="orbit-3grid">
-      <div class="orbit-card c1">
-        <div class="o-icon">🖼️</div>
-        <h3>Image to Video Maker</h3>
-        <p>Upload photo, add zoom effect, download MP4.</p>
-        <button onclick="document.getElementById('orbit-tool1').scrollIntoView({behavior:'smooth'})">Open Tool 1 →</button>
-      </div>
-      <div class="orbit-card c2">
-        <div class="o-icon">🎵</div>
-        <h3>Music Studio</h3>
-        <p>Add copyright-free music to your video.</p>
-        <button onclick="document.getElementById('orbit-tool2').scrollIntoView({behavior:'smooth'})">Open Tool 2 →</button>
-      </div>
-      <div class="orbit-card c3">
-        <div class="o-icon">🎙️</div>
-        <h3>Voiceover Studio PRO</h3>
-        <p>Male/Female voice in Hindi/English + MP3 download.</p>
-        <button onclick="document.getElementById('orbit-tool3').scrollIntoView({behavior:'smooth'})">Open Tool 3 →</button>
-      </div>
-    </div>
-
-    <!-- 3 WORKING TOOL BOXES -->
-    <div id="orbit-tool1" style="margin-top:20px; background:#0f172a; border:1px solid #1e293b; border-radius:16px; padding:16px;">
-      <h3 style="margin:0 0 8px 0;">🖼️ Tool 1: Image to Video</h3>
-      <input type="file" id="oImg" accept="image/*" style="width:100%; padding:8px; background:#020617; border:1px solid #334155; border-radius:8px; color:white;">
-      <canvas id="oCanvas" style="width:100%; max-width:400px; background:black; border-radius:10px; margin-top:10px;"></canvas>
-      <button onclick="oMakeVideo()" style="width:100%; margin-top:10px; padding:10px; background:#3b82f6; color:white; border:none; border-radius:8px; font-weight:700;">Make & Download Video</button>
-      <p id="oStatus1" style="font-size:11px; color:#22c55e;"></p>
-    </div>
-
-    <div id="orbit-tool2" style="margin-top:14px; background:#0f172a; border:1px solid #1e293b; border-radius:16px; padding:16px;">
-      <h3 style="margin:0 0 8px 0;">🎵 Tool 2: Music Studio</h3>
-      <input type="file" id="oVideo" accept="video/*" style="width:100%; padding:8px; background:#020617; border:1px solid #334155; border-radius:8px; color:white;">
-      <video id="oPreview" controls style="width:100%; max-width:400px; background:black; border-radius:10px; margin-top:10px;"></video>
-      <button onclick="document.getElementById('oStatus2').innerText='✅ Music ready! Go to Tool 3'" style="width:100%; margin-top:10px; padding:10px; background:#a855f7; color:white; border:none; border-radius:8px; font-weight:700;">Add Music</button>
-      <p id="oStatus2" style="font-size:11px; color:#a855f7;"></p>
-    </div>
-
-    <div id="orbit-tool3" style="margin-top:14px; background:#0f172a; border:1px solid #1e293b; border-radius:16px; padding:16px;">
-      <h3 style="margin:0 0 8px 0;">🎙️ Tool 3: Voiceover PRO</h3>
-      <textarea id="oTts" rows="3" style="width:100%; padding:10px; background:#020617; border:1px solid #334155; border-radius:8px; color:white;">Welcome to Orbittroniz AI Video Maker!</textarea>
-      <button onclick="speechSynthesis.speak(new SpeechSynthesisUtterance(document.getElementById('oTts').value))" style="width:100%; margin-top:10px; padding:10px; background:#22c55e; color:black; border:none; border-radius:8px; font-weight:700;">▶️ Play Voice</button>
-    </div>
-  </div>
-  <!-- PLACE 2 END -->
-
+<!-- END REAL CODE -->
   <div class="tools-grid">  <- YOUR OLD TOOLS START FROM HERE - DON'T TOUCH BELOW
 <canvas id="bgCanvas"></canvas><div class="bgGrad"></div><div class="cursorGlow" id="cursorGlow"></div>
 <div class="app">
