@@ -91,6 +91,28 @@ body{background:var(--bg);color:#eef2ff;min-height:100vh;overflow-x:hidden;posit
 canvas{border-radius:12px;border:1px solid #2a4a80;max-width:100%;background:#fff}
 .adBox{margin-top:12px;height:54px;background:linear-gradient(90deg,#11172b,#0e1a38);border:1px dashed #2a4a80;border-radius:11px;display:grid;place-items:center;color:#6b7a9a;font-size:10px;font-weight:700}
 </style>
+ <head>
+  <style> ... your old css ... </style>
+
+  <!-- PLACE 1 START - PASTE THIS IN HEAD -->
+  <style>
+    #orbit-new-home{max-width:1150px; margin:0 auto; padding:0 16px;}
+    .orbit-badge{display:inline-block; background:#22c55e22; border:1px solid #22c55e44; color:#22c55e; padding:5px 12px; border-radius:20px; font-size:11px; font-weight:700;}
+    .orbit-h2{font-size:28px; font-weight:800; color:#fff; margin:12px 0 6px 0;}
+    .orbit-h2 span{background:linear-gradient(90deg,#3b82f6,#22c55e); -webkit-background-clip:text; -webkit-text-fill-color:transparent;}
+    .orbit-p{color:#94a3b8; font-size:13px; margin:0 0 14px 0;}
+    .orbit-3grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px;}
+    .orbit-card{background:#0f172a; border:1px solid #1e293b; border-radius:16px; padding:16px; position:relative;}
+    .o-icon{width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:8px;}
+    .c1 .o-icon{background:#3b82f633;} .c2 .o-icon{background:#a855f733;} .c3 .o-icon{background:#22c55e33;}
+    .orbit-card h3{margin:0 0 4px 0; font-size:15px; color:#fff;}
+    .orbit-card p{margin:0; font-size:11px; color:#94a3b8;}
+    .orbit-card button{width:100%; margin-top:10px; padding:9px; border:none; border-radius:8px; font-weight:700; cursor:pointer;}
+    .c1 button{background:#3b82f6; color:#fff;} .c2 button{background:#a855f7; color:#fff;} .c3 button{background:#22c55e; color:#000;}
+  </style>
+  <!-- PLACE 1 END -->
+
+ </head>
 </head>
 <body>
 <canvas id="bgCanvas"></canvas><div class="bgGrad"></div><div class="cursorGlow" id="cursorGlow"></div>
