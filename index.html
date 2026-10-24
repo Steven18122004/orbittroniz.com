@@ -118,54 +118,154 @@ canvas{border-radius:12px;border:1px solid #2a4a80;max-width:100%;background:#ff
  <body>
   <header> ... Orbitroniz ... </header>
   <header/>
-   <!-- START REAL CODE - TOOL 1 PRO MAX -->
-<div id="orbit-tool1" style="margin-top:20px; background:linear-gradient(180deg,#0f172a,#020617); border:1px solid #1e293b; border-radius:16px; padding:16px;">
-<h3 style="margin:0; font-size:16px; color:#fff;">🖼️ Tool 1 PRO: Image to Video Studio</h3>
+  <!-- ULTRA PRO MAX - PER IMAGE + WEATHER VFX -->
+<div id="orbit-tool1" style="margin-top:20px; background:linear-gradient(180deg,#0f172a,#020617); border:1px solid #1e293b; border-radius:16px; padding:16px; font-family:Inter,sans-serif;">
+<h3 style="color:#fff; margin:0;">🔥 ULTRA STUDIO - Per Image Edit + VFX</h3>
+<p style="font-size:10px; color:#94a3b8; margin:4px 0 0;">Click image below to set its own Motion/Filter - Like CapCut</p>
+
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px;">
-<label style="background:#020617; border:1px dashed #3b82f6; border-radius:10px; padding:12px; text-align:center; cursor:pointer;">
-<div style="font-size:22px;">📸</div>
-<div style="font-size:11px; color:#94a3b8;">Add Multiple Images</div>
+<label style="background:#020617; border:1px dashed #22c55e; border-radius:10px; padding:16px; text-align:center; cursor:pointer;">
+<div style="font-size:24px;">📸🎬</div><div style="font-size:11px; color:#22c55e; font-weight:700;">Add 2-10 Images</div>
 <input type="file" id="proImgs" accept="image/*" multiple hidden>
 </label>
 <div style="background:#020617; border:1px solid #1e293b; border-radius:10px; padding:8px;">
-<div style="font-size:10px; color:#64748b;">PREVIEW LIST</div>
-<div id="imgList" style="display:flex; gap:6px; overflow-x:auto; min-height:50px;"></div>
+<div style="font-size:10px; color:#22c55e; font-weight:700;">👇 YOUR IMAGES - CLICK TO EDIT EACH:</div>
+<div id="imgList" style="display:flex; flex-direction:column; gap:6px; max-height:200px; overflow-y:auto; margin-top:6px;"></div>
 </div>
 </div>
-<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:12px;">
-<div><div style="font-size:10px; color:#94a3b8;">CROP</div><select id="proCrop" style="width:100%; padding:8px; background:#020617; border:1px solid #334155; border-radius:8px; color:white;"><option value="cover">Fill 9:16</option><option value="contain">Fit</option></select></div>
-<div><div style="font-size:10px; color:#94a3b8;">FILTER</div><select id="proFilter" style="width:100%; padding:8px; background:#020617; border:1px solid #334155; border-radius:8px; color:white;"><option value="none">No Filter</option><option value="grayscale(1)">B&W</option><option value="sepia(1)">Sepia</option><option value="contrast(1.4) brightness(1.2)">Vivid</option><option value="saturate(1.8)">Super Color</option></select></div>
-<div><div style="font-size:10px; color:#94a3b8;">MOTION 3D</div><select id="proMotion" style="width:100%; padding:8px; background:#020617; border:1px solid #334155; border-radius:8px; color:white;"><option value="zoomIn">Zoom In</option><option value="zoomOut">Zoom Out</option><option value="panLeft">Pan Left</option><option value="panRight">Pan Right</option><option value="rotate3d">3D Rotate</option><option value="kenBurns">Ken Burns</option></select></div>
+
+<!-- SELECTED IMAGE CONTROLS -->
+<div id="selectedControls" style="display:none; margin-top:12px; background:#020617; border:1px solid #3b82f6; border-radius:12px; padding:10px;">
+<div style="font-size:11px; color:#3b82f6; font-weight:800; margin-bottom:6px;">Editing: <span id="editImgName">Image 1</span></div>
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px;">
+<div><div style="font-size:9px; color:#94a3b8;">MOTION FOR THIS IMAGE</div><select id="proMotionSingle" style="width:100%; padding:6px; background:#0f172a; border:1px solid #334155; border-radius:6px; color:white; font-size:11px;"><option value="zoomIn">Zoom In - Deep 3D</option><option value="zoomOut">Zoom Out - Cinematic</option><option value="panLeft">Pan Left</option><option value="panRight">Pan Right</option><option value="rotate">Rotate 360</option><option value="rotate3d">3D Tilt Rotate</option><option value="kenBurns">Ken Burns Slow</option><option value="shake">Shake - Viral</option></select></div>
+<div><div style="font-size:9px; color:#94a3b8;">FILTER FOR THIS</div><select id="proFilterSingle" style="width:100%; padding:6px; background:#0f172a; border:1px solid #334155; border-radius:6px; color:white; font-size:11px;"><option value="none">No Filter</option><option value="grayscale(1)">B&W</option><option value="sepia(1)">Vintage</option><option value="contrast(1.5) brightness(1.2) saturate(1.5)">Vivid HDR</option><option value="saturate(2) hue-rotate(20deg)">Super Color</option></select></div>
+<div><div style="font-size:9px; color:#94a3b8;">CROP</div><select id="proCropSingle" style="width:100%; padding:6px; background:#0f172a; border:1px solid #334155; border-radius:6px; color:white; font-size:11px;"><option value="cover">9:16 Fill</option><option value="contain">Fit Full</option><option value="1:1">1:1 Square</option></select></div>
 </div>
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
-<div><div style="font-size:10px; color:#94a3b8;">Duration</div><input type="range" id="proDuration" min="1" max="5" value="2" style="width:100%;"><div style="font-size:10px; color:#22c55e;"><span id="durVal">2</span> sec/photo</div></div>
-<div><div style="font-size:10px; color:#94a3b8;">Speed</div><select id="proSpeed" style="width:100%; padding:8px; background:#020617; border:1px solid #334155; border-radius:8px; color:white;"><option value="1">Normal</option><option value="0.5">Slow</option><option value="2">Fast</option></select></div>
+<button onclick="savePerImage()" style="margin-top:6px; width:100%; padding:6px; background:#22c55e; color:black; border:none; border-radius:6px; font-weight:800; font-size:11px;">✅ Save For This Image</button>
 </div>
-<div style="margin-top:12px; position:relative; background:black; border-radius:12px; overflow:hidden; perspective:1000px;">
-<canvas id="proCanvas" width="720" height="1280" style="width:100%; max-width:400px; display:block; margin:auto;"></canvas>
+
+<!-- GLOBAL VFX -->
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px;">
+<div><div style="font-size:10px; color:#94a3b8;">🌧️ WEATHER VFX (Overlay)</div><select id="proVFX" style="width:100%; padding:8px; background:#020617; border:1px solid #334155; border-radius:8px; color:white; font-size:12px;"><option value="none">No VFX</option><option value="rain">🌧️ Rain Falling</option><option value="thunder">⛈️ Thunderstorm + Rain + Flash</option><option value="snow">❄️ Snow Falling</option><option value="particles">✨ Golden Particles - Viral</option><option value="lightLeak">💡 Light Leak - Cinematic</option></select></div>
+<div><div style="font-size:10px; color:#94a3b8;">⏱️ Duration + Speed</div><div style="display:flex; gap:4px;"><input type="range" id="proDuration" min="1" max="6" value="2" style="flex:1;"><span style="font-size:10px; color:#22c55e;"><span id="durVal">2</span>s</span><select id="proSpeed" style="padding:6px; background:#020617; border:1px solid #334155; border-radius:6px; color:white; font-size:10px;"><option value="1">1x</option><option value="0.5">0.5x Slow</option><option value="2">2x Fast</option></select></div></div>
+</div>
+
+<div style="margin-top:12px; position:relative; background:black; border-radius:12px; overflow:hidden;">
+<canvas id="proCanvas" width="720" height="1280" style="width:100%; max-width:380px; display:block; margin:auto;"></canvas>
+<canvas id="vfxCanvas" width="720" height="1280" style="position:absolute; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:380px; pointer-events:none;"></canvas>
 <div style="position:absolute; bottom:8px; right:8px; font-size:9px; background:#00000088; padding:3px 6px; border-radius:4px; color:#fff;">Orbittroniz.com</div>
 </div>
+
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px;">
-<button onclick="proPreview()" style="padding:12px; background:#0f172a; border:1px solid #3b82f6; color:#3b82f6; border-radius:10px; font-weight:700; cursor:pointer;">👁️ Preview Motion</button>
-<button onclick="proDownload()" style="padding:12px; background:#3b82f6; color:white; border:none; border-radius:10px; font-weight:800; cursor:pointer;">⬇️ Download MP4</button>
+<button onclick="proPreview()" style="padding:12px; background:#0f172a; border:1px solid #3b82f6; color:#3b82f6; border-radius:10px; font-weight:700;">👁️ Preview All</button>
+<button onclick="proDownload()" style="padding:12px; background:#3b82f6; color:white; border:none; border-radius:10px; font-weight:800;">⬇️ Download Final MP4</button>
 </div>
-<p id="proStatus" style="font-size:11px; color:#22c55e; margin-top:8px; text-align:center;">Upload 2-10 images for best video</p>
+<p id="proStatus" style="font-size:11px; color:#22c55e; text-align:center; margin-top:8px;">Upload images → Click each image to set Zoom/Rotate → Add Rain/Thunder → Preview</p>
 </div>
+
 <script>
-let proImages=[], proCurrent=0, proAnimId=null;
+let proImages=[], proCurrent=0, proAnimId=null, vfxAnim=null;
+let rainDrops=[], snowFlakes=[], particles=[];
 document.getElementById('proImgs').onchange=(e)=>{
-proImages=[]; document.getElementById('imgList').innerHTML='';
-Array.from(e.target.files).forEach((file,i)=>{
-const img=new Image(); img.src=URL.createObjectURL(file);
-img.onload=()=>{ proImages.push(img); const thumb=document.createElement('img'); thumb.src=img.src; thumb.style.cssText='width:50px; height:50px; border-radius:8px; object-fit:cover; border:2px solid #1e293b; cursor:pointer;'; thumb.onclick=()=>{ proCurrent=i; proDraw(0); }; document.getElementById('imgList').appendChild(thumb); if(i==0) proDraw(0); }
-});
+  proImages=[]; document.getElementById('imgList').innerHTML=''; rainDrops=[]; snowFlakes=[]; particles=[];
+  Array.from(e.target.files).forEach((file,i)=>{
+    const img=new Image(); img.src=URL.createObjectURL(file);
+    img.onload=()=>{
+      const obj={img, motion:'zoomIn', filter:'none', crop:'cover', name:`Image ${i+1}`};
+      proImages.push(obj);
+      if(i==0) obj.motion='rotate3d'; if(i==1) obj.motion='zoomIn'; if(i==2) obj.motion='zoomOut';
+      const row=document.createElement('div'); row.style.cssText='display:flex; gap:6px; align-items:center; background:#0f172a; border:1px solid #1e293b; border-radius:8px; padding:4px; cursor:pointer;';
+      row.innerHTML=`<img src="${img.src}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;"><div style="flex:1;"><div style="font-size:10px; color:white; font-weight:700;">${obj.name}</div><div style="font-size:9px; color:#94a3b8;" id="info-${i}">${obj.motion} • ${obj.filter}</div></div><div style="font-size:10px; color:#3b82f6;">✏️ Edit</div>`;
+      row.onclick=()=>{ proCurrent=i; openEditor(i); };
+      document.getElementById('imgList').appendChild(row);
+      if(proImages.length==1) openEditor(0);
+    }
+  });
 };
-document.getElementById('proDuration').oninput=(e)=>{ document.getElementById('durVal').innerText=e.target.value; };
-function proDraw(p){ if(proImages.length==0) return; const canvas=document.getElementById('proCanvas'); const ctx=canvas.getContext('2d'); const img=proImages[proCurrent]; const motion=document.getElementById('proMotion').value; const filter=document.getElementById('proFilter').value; ctx.clearRect(0,0,canvas.width,canvas.height); ctx.filter=filter; let scale=1,x=0,y=0,rotateY=0; if(motion=='zoomIn') scale=1+p*0.4; if(motion=='zoomOut') scale=1.4-p*0.4; if(motion=='panLeft') x=-p*200; if(motion=='panRight') x=p*200-100; if(motion=='rotate3d'){ rotateY=p*15; scale=1.1; } ctx.save(); ctx.translate(canvas.width/2, canvas.height/2); if(motion=='rotate3d'){ canvas.style.transform=`rotateY(${rotateY}deg) scale(${scale})`; } else { canvas.style.transform=`scale(${scale}) translate(${x}px, ${y}px)`; } ctx.drawImage(img, -canvas.width/2, -canvas.height/2, canvas.width, canvas.height); ctx.restore(); ctx.filter='none'; }
-function proPreview(){ if(proImages.length==0){ alert('First upload images!'); return; } let progress=0; cancelAnimationFrame(proAnimId); function animate(){ progress+=0.01; if(progress>1){ progress=0; proCurrent=(proCurrent+1)%proImages.length; } proDraw(progress); proAnimId=requestAnimationFrame(animate); } animate(); document.getElementById('proStatus').innerText='👁️ Previewing 3D Motion...'; }
-function proDownload(){ if(proImages.length==0){ alert('Upload images first!'); return; } const canvas=document.getElementById('proCanvas'); const stream=canvas.captureStream(30); const recorder=new MediaRecorder(stream,{mimeType:'video/webm'}); let chunks=[]; recorder.ondataavailable=e=>chunks.push(e.data); recorder.onstop=()=>{ const blob=new Blob(chunks,{type:'video/webm'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`Orbittroniz-Reels-${Date.now()}.webm`; a.click(); document.getElementById('proStatus').innerText='✅ Downloaded!'; }; let duration=parseInt(document.getElementById('proDuration').value)*proImages.length; let speed=parseFloat(document.getElementById('proSpeed').value); let totalTime=(duration/speed)*1000; recorder.start(); proPreview(); document.getElementById('proStatus').innerText=`⏺️ Recording ${duration} sec...`; setTimeout(()=>{ recorder.stop(); cancelAnimationFrame(proAnimId); }, totalTime); }
+function openEditor(i){
+  proCurrent=i; const obj=proImages[i];
+  document.getElementById('selectedControls').style.display='block';
+  document.getElementById('editImgName').innerText=obj.name;
+  document.getElementById('proMotionSingle').value=obj.motion;
+  document.getElementById('proFilterSingle').value=obj.filter;
+  document.getElementById('proCropSingle').value=obj.crop;
+  proDraw(0);
+}
+function savePerImage(){
+  const obj=proImages[proCurrent];
+  obj.motion=document.getElementById('proMotionSingle').value;
+  obj.filter=document.getElementById('proFilterSingle').value;
+  obj.crop=document.getElementById('proCropSingle').value;
+  document.getElementById(`info-${proCurrent}`).innerText=`${obj.motion} • ${obj.filter}`;
+  document.getElementById('proStatus').innerText=`✅ Saved ${obj.name} = ${obj.motion}`;
+  proDraw(0);
+}
+document.getElementById('proDuration').oninput=e=>document.getElementById('durVal').innerText=e.target.value;
+
+function proDraw(p){
+  if(proImages.length==0) return;
+  const canvas=document.getElementById('proCanvas'); const ctx=canvas.getContext('2d');
+  const obj=proImages[proCurrent]; const img=obj.img;
+  ctx.clearRect(0,0,canvas.width,canvas.height); ctx.filter=obj.filter;
+  let scale=1,x=0,y=0,rot=0;
+  if(obj.motion=='zoomIn') scale=1+p*0.5;
+  if(obj.motion=='zoomOut') scale=1.5-p*0.5;
+  if(obj.motion=='panLeft') x=-p*300;
+  if(obj.motion=='panRight') x=p*300-150;
+  if(obj.motion=='rotate') rot=p*360;
+  if(obj.motion=='rotate3d'){ canvas.style.transform=`perspective(1000px) rotateY(${p*20}deg) rotateX(${p*10}deg) scale(${1+p*0.3})`; }
+  else if(obj.motion=='shake'){ x=(Math.random()-0.5)*20; y=(Math.random()-0.5)*20; canvas.style.transform=`scale(${scale}) translate(${x}px,${y}px) rotate(${rot}deg)`; }
+  else { canvas.style.transform=`scale(${scale}) translate(${x}px,${y}px) rotate(${rot}deg)`; }
+  ctx.save(); ctx.translate(canvas.width/2, canvas.height/2);
+  ctx.drawImage(img, -canvas.width/2, -canvas.height/2, canvas.width, canvas.height);
+  ctx.restore(); ctx.filter='none';
+}
+function initVFX(){
+  rainDrops=[]; for(let i=0;i<150;i++) rainDrops.push({x:Math.random()*720, y:Math.random()*1280, s:Math.random()*4+2, l:Math.random()*15+10});
+  snowFlakes=[]; for(let i=0;i<100;i++) snowFlakes.push({x:Math.random()*720, y:Math.random()*1280, s:Math.random()*3+1, d:Math.random()*2});
+  particles=[]; for(let i=0;i<60;i++) particles.push({x:Math.random()*720, y:Math.random()*1280, s:Math.random()*4+1, a:Math.random()});
+}
+function drawVFX(){
+  const vfx=document.getElementById('vfxCanvas'); const vctx=vfx.getContext('2d'); const type=document.getElementById('proVFX').value;
+  vctx.clearRect(0,0,720,1280);
+  if(type=='rain' || type=='thunder'){
+    vctx.strokeStyle='rgba(180,200,255,0.7)'; vctx.lineWidth=1.5;
+    rainDrops.forEach(d=>{ vctx.beginPath(); vctx.moveTo(d.x,d.y); vctx.lineTo(d.x-5,d.y+d.l); vctx.stroke(); d.y+=d.s*10; d.x-=1; if(d.y>1280){ d.y=-20; d.x=Math.random()*720; } });
+  }
+  if(type=='snow'){
+    vctx.fillStyle='rgba(255,255,255,0.9)';
+    snowFlakes.forEach(f=>{ vctx.beginPath(); vctx.arc(f.x,f.y,f.s,0,Math.PI*2); vctx.fill(); f.y+=f.s; f.x+=Math.sin(f.y/50)*0.5; if(f.y>1280){ f.y=-10; f.x=Math.random()*720; } });
+  }
+  if(type=='particles'){
+    vctx.fillStyle='rgba(255,215,0,0.8)';
+    particles.forEach(p=>{ vctx.globalAlpha=0.3+Math.sin(p.a)*0.7; vctx.beginPath(); vctx.arc(p.x,p.y,p.s,0,Math.PI*2); vctx.fill(); p.y-=0.8; p.a+=0.05; if(p.y<0){ p.y=1280; p.x=Math.random()*720; } }); vctx.globalAlpha=1;
+  }
+  if(type=='thunder' && Math.random()<0.03){ vctx.fillStyle='rgba(255,255,255,0.4)'; vctx.fillRect(0,0,720,1280); }
+  if(type=='lightLeak'){ const g=vctx.createRadialGradient(0,0,0,0,0,800); g.addColorStop(0,'rgba(255,150,0,0.25)'); g.addColorStop(1,'rgba(0,0,0,0)'); vctx.fillStyle=g; vctx.fillRect(0,0,720,1280); }
+}
+function proPreview(){
+  if(proImages.length==0){ alert('Upload images first!'); return; }
+  initVFX(); let p=0; cancelAnimationFrame(proAnimId);
+  function anim(){ p+=0.012; if(p>1){ p=0; proCurrent=(proCurrent+1)%proImages.length; } proDraw(p); drawVFX(); proAnimId=requestAnimationFrame(anim); } anim();
+  document.getElementById('proStatus').innerText='👁️ Previewing per-image motion + VFX...';
+}
+function proDownload(){
+  if(proImages.length==0){ alert('Upload images!'); return; }
+  const canvas=document.getElementById('proCanvas'); const vfx=document.getElementById('vfxCanvas');
+  const combined=document.createElement('canvas'); combined.width=720; combined.height=1280; const cctx=combined.getContext('2d');
+  const stream=combined.captureStream(30); const rec=new MediaRecorder(stream,{mimeType:'video/webm'}); let chunks=[];
+  rec.ondataavailable=e=>chunks.push(e.data);
+  rec.onstop=()=>{ const blob=new Blob(chunks,{type:'video/webm'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`Orbittroniz-ULTRA-${Date.now()}.webm`; a.click(); document.getElementById('proStatus').innerText='✅ ULTRA Video Downloaded!'; };
+  initVFX(); let p=0, imgIdx=0, dur=parseInt(document.getElementById('proDuration').value)*proImages.length*1000;
+  rec.start(); proCurrent=0;
+  let intv=setInterval(()=>{ p+=0.012; if(p>1){ p=0; imgIdx++; proCurrent=imgIdx%proImages.length; if(imgIdx>=proImages.length) proCurrent=proImages.length-1; } proDraw(p); drawVFX(); cctx.drawImage(canvas,0,0); cctx.drawImage(vfx,0,0); },33);
+  document.getElementById('proStatus').innerText=`⏺️ Recording ${dur/1000}s with VFX...`;
+  setTimeout(()=>{ clearInterval(intv); rec.stop(); cancelAnimationFrame(proAnimId); }, dur);
+}
+initVFX();
 </script>
-<!-- END REAL CODE -->
+<!-- END ULTRA PRO MAX --> 
   <div class="tools-grid">  <- YOUR OLD TOOLS START FROM HERE - DON'T TOUCH BELOW
 <canvas id="bgCanvas"></canvas><div class="bgGrad"></div><div class="cursorGlow" id="cursorGlow"></div>
 <div class="app">
