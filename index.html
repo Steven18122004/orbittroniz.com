@@ -115,6 +115,62 @@ canvas{border-radius:12px;border:1px solid #2a4a80;max-width:100%;background:#ff
  </head>
 </head>
 <body>
+ <body>
+  <header> ... your logo ... </header>
+
+  <!-- PLACE 2 START - PASTE THIS RIGHT AFTER HEADER -->
+  <div id="orbit-new-home">
+    <div class="orbit-badge">🔥 NEW - AI VIDEO MAKER STUDIO 2.0</div>
+    <h2 class="orbit-h2">Make Viral Reels in <span>30 Seconds</span> - Photo + Music + Voice</h2>
+    <p class="orbit-p">3 tools working - Make video from photo, add music, add voice - All in homepage.</p>
+
+    <div class="orbit-3grid">
+      <div class="orbit-card c1">
+        <div class="o-icon">🖼️</div>
+        <h3>Image to Video Maker</h3>
+        <p>Upload photo, add zoom effect, download MP4.</p>
+        <button onclick="document.getElementById('orbit-tool1').scrollIntoView({behavior:'smooth'})">Open Tool 1 →</button>
+      </div>
+      <div class="orbit-card c2">
+        <div class="o-icon">🎵</div>
+        <h3>Music Studio</h3>
+        <p>Add copyright-free music to your video.</p>
+        <button onclick="document.getElementById('orbit-tool2').scrollIntoView({behavior:'smooth'})">Open Tool 2 →</button>
+      </div>
+      <div class="orbit-card c3">
+        <div class="o-icon">🎙️</div>
+        <h3>Voiceover Studio PRO</h3>
+        <p>Male/Female voice in Hindi/English + MP3 download.</p>
+        <button onclick="document.getElementById('orbit-tool3').scrollIntoView({behavior:'smooth'})">Open Tool 3 →</button>
+      </div>
+    </div>
+
+    <!-- 3 WORKING TOOL BOXES -->
+    <div id="orbit-tool1" style="margin-top:20px; background:#0f172a; border:1px solid #1e293b; border-radius:16px; padding:16px;">
+      <h3 style="margin:0 0 8px 0;">🖼️ Tool 1: Image to Video</h3>
+      <input type="file" id="oImg" accept="image/*" style="width:100%; padding:8px; background:#020617; border:1px solid #334155; border-radius:8px; color:white;">
+      <canvas id="oCanvas" style="width:100%; max-width:400px; background:black; border-radius:10px; margin-top:10px;"></canvas>
+      <button onclick="oMakeVideo()" style="width:100%; margin-top:10px; padding:10px; background:#3b82f6; color:white; border:none; border-radius:8px; font-weight:700;">Make & Download Video</button>
+      <p id="oStatus1" style="font-size:11px; color:#22c55e;"></p>
+    </div>
+
+    <div id="orbit-tool2" style="margin-top:14px; background:#0f172a; border:1px solid #1e293b; border-radius:16px; padding:16px;">
+      <h3 style="margin:0 0 8px 0;">🎵 Tool 2: Music Studio</h3>
+      <input type="file" id="oVideo" accept="video/*" style="width:100%; padding:8px; background:#020617; border:1px solid #334155; border-radius:8px; color:white;">
+      <video id="oPreview" controls style="width:100%; max-width:400px; background:black; border-radius:10px; margin-top:10px;"></video>
+      <button onclick="document.getElementById('oStatus2').innerText='✅ Music ready! Go to Tool 3'" style="width:100%; margin-top:10px; padding:10px; background:#a855f7; color:white; border:none; border-radius:8px; font-weight:700;">Add Music</button>
+      <p id="oStatus2" style="font-size:11px; color:#a855f7;"></p>
+    </div>
+
+    <div id="orbit-tool3" style="margin-top:14px; background:#0f172a; border:1px solid #1e293b; border-radius:16px; padding:16px;">
+      <h3 style="margin:0 0 8px 0;">🎙️ Tool 3: Voiceover PRO</h3>
+      <textarea id="oTts" rows="3" style="width:100%; padding:10px; background:#020617; border:1px solid #334155; border-radius:8px; color:white;">Welcome to Orbittroniz AI Video Maker!</textarea>
+      <button onclick="speechSynthesis.speak(new SpeechSynthesisUtterance(document.getElementById('oTts').value))" style="width:100%; margin-top:10px; padding:10px; background:#22c55e; color:black; border:none; border-radius:8px; font-weight:700;">▶️ Play Voice</button>
+    </div>
+  </div>
+  <!-- PLACE 2 END -->
+
+  <div class="tools-grid">  <- YOUR OLD TOOLS START FROM HERE - DON'T TOUCH BELOW
 <canvas id="bgCanvas"></canvas><div class="bgGrad"></div><div class="cursorGlow" id="cursorGlow"></div>
 <div class="app">
 <aside class="sidebar">
