@@ -117,23 +117,29 @@ canvas{border-radius:12px;border:1px solid #2a4a80;max-width:100%;background:#ff
 <body>
  <body>
   <header> ... Orbitroniz ... </header>
+  <!-- PLACE 2 - 3 CARDS + 3 TOOL BOXES - PASTE AFTER HEADER -->
+<div id="orbit-new-home">
+  <div class="orbit-badge">🔥 NEW - AI VIDEO MAKER STUDIO 2.0</div>
+  <h2 class="orbit-h2">Make Viral Reels in <span>30 Seconds</span></h2>
+  <div class="orbit-3grid">
+    <div class="orbit-card c1"><div class="o-icon">🖼️</div><h3>Image to Video</h3><p>Upload photo to video</p><button onclick="document.getElementById('orbit-tool1').scrollIntoView({behavior:'smooth'})">Open Tool 1 →</button></div>
+    <div class="orbit-card c2"><div class="o-icon">🎵</div><h3>Music Studio</h3><p>Add music</p><button onclick="document.getElementById('orbit-tool2').scrollIntoView({behavior:'smooth'})">Open Tool 2 →</button></div>
+    <div class="orbit-card c3"><div class="o-icon">🎙️</div><h3>Voiceover PRO</h3><p>Hindi/English voice</p><button onclick="document.getElementById('orbit-tool3').scrollIntoView({behavior:'smooth'})">Open Tool 3 →</button></div>
+  </div>
+  
+  <!-- Paste my full PRO Tool 1 code here from previous message -->
+  <div id="orbit-tool1"> ... full pro code ... </div>
+  <div id="orbit-tool2"> ... tool 2 ... </div>
+  <div id="orbit-tool3"> ... tool 3 ... </div>
+</div>
   
   <!-- PLACE 3 START - PASTE BEFORE </body> -->
-  <script>
-    document.getElementById('oImg').onchange = function(e){
-      const img=new Image(); img.src=URL.createObjectURL(e.target.files[0]);
-      img.onload=()=>{ const c=document.getElementById('oCanvas'); c.width=720; c.height=1280; c.getContext('2d').drawImage(img,0,0,c.width,c.height); }
-    }
-    function oMakeVideo(){
-      const canvas=document.getElementById('oCanvas'); const stream=canvas.captureStream(30);
-      const rec=new MediaRecorder(stream); let chunks=[]; rec.ondataavailable=e=>chunks.push(e.data);
-      rec.onstop=()=>{ const blob=new Blob(chunks,{type:'video/webm'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='Orbittroniz-Video.webm'; a.click(); document.getElementById('oStatus1').innerText='✅ Downloaded! Upload this video in Tool 2 below'; }
-      rec.start(); document.getElementById('oStatus1').innerText='⏺️ Recording 5 sec...'; setTimeout(()=>rec.stop(),5000);
-    }
-    document.getElementById('oVideo').onchange = function(e){ document.getElementById('oPreview').src=URL.createObjectURL(e.target.files[0]); }
-  </script>
-  <!-- PLACE 3 END -->
-
+<script>
+  document.getElementById('oImg').onchange = function(e){ ... }
+  function oMakeVideo(){ ... }
+</script>
+</body>
+<!-- PLACE 3 END -->
 </body>
 </html>
 
