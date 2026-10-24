@@ -116,7 +116,26 @@ canvas{border-radius:12px;border:1px solid #2a4a80;max-width:100%;background:#ff
 </head>
 <body>
  <body>
-  <header> ... your logo ... </header>
+  <header> ... Orbitroniz ... </header>
+  
+  <!-- PLACE 3 START - PASTE BEFORE </body> -->
+  <script>
+    document.getElementById('oImg').onchange = function(e){
+      const img=new Image(); img.src=URL.createObjectURL(e.target.files[0]);
+      img.onload=()=>{ const c=document.getElementById('oCanvas'); c.width=720; c.height=1280; c.getContext('2d').drawImage(img,0,0,c.width,c.height); }
+    }
+    function oMakeVideo(){
+      const canvas=document.getElementById('oCanvas'); const stream=canvas.captureStream(30);
+      const rec=new MediaRecorder(stream); let chunks=[]; rec.ondataavailable=e=>chunks.push(e.data);
+      rec.onstop=()=>{ const blob=new Blob(chunks,{type:'video/webm'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='Orbittroniz-Video.webm'; a.click(); document.getElementById('oStatus1').innerText='✅ Downloaded! Upload this video in Tool 2 below'; }
+      rec.start(); document.getElementById('oStatus1').innerText='⏺️ Recording 5 sec...'; setTimeout(()=>rec.stop(),5000);
+    }
+    document.getElementById('oVideo').onchange = function(e){ document.getElementById('oPreview').src=URL.createObjectURL(e.target.files[0]); }
+  </script>
+  <!-- PLACE 3 END -->
+
+</body>
+</html>
 
   <!-- PLACE 2 START - PASTE THIS RIGHT AFTER HEADER -->
   <div id="orbit-new-home">
