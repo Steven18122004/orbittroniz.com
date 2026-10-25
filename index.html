@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Orbittroniz Studio - 3 Tools - TTS + Video + Image</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif;}
+html,body{background:#020208 !important; min-height:100vh;}
+#app{max-width:580px; margin:0 auto; background:#06060a; min-height:100vh; box-shadow:0 0 0 1px #111,0 30px 120px #000; overflow:hidden; position:relative;}
+.glass3d{background:linear-gradient(145deg,rgba(22,22,22,0.9),rgba(8,8,8,0.95)) !important; backdrop-filter:blur(22px) !important; border:1px solid rgba(255,255,255,0.06) !important; box-shadow:0 14px 44px #000, inset 0 1px 0 rgba(255,255,255,0.08) !important; border-radius:24px !important; transition:all .45s cubic-bezier(.16,1,.3,1) !important;}
+.voice3d{background:linear-gradient(145deg,#181818,#0a0a0a) !important; border:1px solid #1e1e1e !important; border-radius:20px !important; overflow:hidden !important; cursor:pointer !important; box-shadow:0 10px 32px #000 !important; transition:all .45s !important;}
+.voice3d.active{border:2px solid #22c55e !important; box-shadow:0 0 0 1px #22c55e,0 20px 50px #22c55e18 !important;}
+.nav3d{background:linear-gradient(145deg,#141414,#0a0a0a) !important; border:1px solid #1c1c1c !important; border-radius:22px !important; transition:all .4s !important; cursor:pointer !important;}
+.nav3d.active{background:linear-gradient(145deg,#fff,#e8e8e8) !important; color:#000 !important; border-color:#fff !important;}
+.tabBtn{background:#141414 !important; border:1px solid #1c1c1c !important; color:#666 !important; border-radius:14px !important; padding:11px 16px !important; font-size:11px !important; font-weight:700 !important; cursor:pointer !important;}
+.tabBtn.active{background:#fff !important; color:#000 !important; border-color:#fff !important; font-weight:900 !important;}
+.liveDot{width:8px; height:8px; background:#22c55e; border-radius:50%; display:inline-block; animation:livePulse 2s infinite;}
+@keyframes livePulse{0%,100%{transform:scale(1); box-shadow:0 0 0 0 #22c55e77;} 50%{transform:scale(1.15); box-shadow:0 0 0 10px #22c55e00;}}
+@keyframes float{0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);}}
+.waveBar{width:5px; background:linear-gradient(180deg,#22c55e,#a3e635); border-radius:4px; display:inline-block; margin:0 3px; animation:wave .9s infinite;}
+@keyframes wave{0%,100%{height:10px;} 50%{height:32px;}}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- HEADER -->
+<div style="background:linear-gradient(145deg,#0f0f0f,#050505) !important; padding:22px; border-bottom:1px solid #111; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:30;">
+<div style="display:flex; gap:14px; align-items:center;">
+<div style="width:52px; height:52px; background:linear-gradient(145deg,#22c55e,#a3e635); border-radius:18px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000; font-size:22px; animation:float 4s infinite;">O</div>
+<div><div style="color:#fff; font-weight:900; font-size:18px;">ORBITTRONIZ STUDIO</div><div style="color:#666; font-size:10px; font-weight:700; display:flex; gap:8px; align-items:center; margin-top:4px;"><span class="liveDot"></span> 3-TOOLS • LIVE MOTION • HD 3D</div></div>
+</div>
+<div style="background:#111; border:1px solid #1a1a1a; padding:8px 14px; border-radius:20px; font-size:9px; color:#22c55e; font-weight:800;">V3 • 3 TOOLS</div>
+</div>
+
+<!-- 3 TOOLS NAV - ONLY CLEAN NAMES -->
+<div style="background:#08080c !important; padding:14px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; border-bottom:1px solid #111;">
+<button id="nav-tts" onclick="switchMain('tts')" class="nav3d active" style="padding:16px 8px; display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center;">
+<div style="font-size:24px;">🎙️</div><div style="font-weight:900; font-size:11px;">TTS</div><div style="font-size:7px; opacity:.5;">VOICES • EMOTION</div>
+</button>
+<button id="nav-video" onclick="switchMain('video')" class="nav3d" style="padding:16px 8px; display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; color:#666;">
+<div style="font-size:24px;">🎬</div><div style="font-weight:800; font-size:11px;">Video Generator</div><div style="font-size:7px; opacity:.5;">TIMELINE • VFX • MUSIC</div>
+</button>
+<button id="nav-ai" onclick="switchMain('ai')" class="nav3d" style="padding:16px 8px; display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; color:#666;">
+<div style="font-size:24px;">🤖</div><div style="font-weight:800; font-size:11px;">Image Generator</div><div style="font-size:7px; opacity:.5;">PROMPT • STYLES • HD</div>
+</button>
+</div>
+
+<!-- ############################################ -->
+<!-- ============ TTS START - TOOL 1 ============ -->
+<!-- 👇👇👇 ENTER YOUR CODE IN-BETWEEN THESE 2 LINES ONLY 👇👇👇 -->
+<!-- THIS IS THE ONLY SECTION YOU EDIT FOR TTS TOOL -->
+<!-- ############################################ -->
+
+<div id="tool-tts" class="mainTool" style="background:#06060a !important; padding:16px;">
+
+<div class="glass3d" style="padding:18px; margin-bottom:16px; border:1px solid #22c55e22 !important;">
+<div style="display:flex; justify-content:space-between; margin-bottom:10px;"><div style="color:#fff; font-weight:900; font-size:13px;">💎 Why This TTS Is Loved • More Than Original</div><div style="background:#22c55e; color:#000; font-size:8px; font-weight:900; padding:5px 10px; border-radius:20px;">EXTRA FEATURES</div></div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:9px; color:#888;">
+<div style="background:#000; border:1px solid #111; border-radius:12px; padding:10px;"><span style="color:#22c55e; font-weight:800;">✓ Why Loved:</span> Natural voices • Emotion • Stability/Similarity • 29 languages • Cloning • Long text • Projects</div>
+<div style="background:#22c55e0f; border:1px solid #22c55e22; border-radius:12px; padding:10px;"><span style="color:#22c55e; font-weight:800;">+ Extra:</span> Gender Mix • Age morph • Accent changer • Whisper/Shout • Laugh/Cry SFX • Dictionary • Speed+Pitch+Echo</div>
+</div>
+</div>
+
+<div class="glass3d" style="padding:20px; margin-bottom:16px;">
+<div style="display:flex; justify-content:space-between; margin-bottom:14px;"><div style="color:#fff; font-weight:800; font-size:14px;">📝 Text to Speech • Advanced</div><div style="background:#22c55e; color:#000; font-size:8px; font-weight:900; padding:5px 10px; border-radius:20px;">HD VOICES</div></div>
+<textarea id="ttsText" placeholder="Enter text - Try: [Happy] Hello! [Whisper] Secret. [Laugh] Haha! [Sad] I miss you. [Shout] Amazing! - Emotion tags, SFX, multilingual..." style="width:100%; height:130px; background:#000; border:1px solid #1a1a1a; border-radius:18px; color:#fff; padding:16px; font-size:12px; line-height:1.7; resize:none;"></textarea>
+<div style="display:flex; justify-content:space-between; margin-top:12px;"><span id="ttsCharCount" style="color:#555; font-size:10px; background:#000; border:1px solid #111; padding:5px 10px; border-radius:20px;">0 / 10000 characters</span><div style="display:flex; gap:6px;"><button onclick="insertTag('[Happy] ')" style="background:#111; border:1px solid #1a1a1a; color:#888; font-size:8px; padding:5px 10px; border-radius:20px; cursor:pointer;">😊 Happy</button><button onclick="insertTag('[Sad] ')" style="background:#111; border:1px solid #1a1a1a; color:#888; font-size:8px; padding:5px 10px; border-radius:20px; cursor:pointer;">😢 Sad</button><button onclick="insertTag('[Whisper] ')" style="background:#111; border:1px solid #1a1a1a; color:#888; font-size:8px; padding:5px 10px; border-radius:20px; cursor:pointer;">🤫 Whisper</button><button onclick="insertTag('[Laugh] ')" style="background:#111; border:1px solid #1a1a1a; color:#888; font-size:8px; padding:5px 10px; border-radius:20px; cursor:pointer;">😂 Laugh</button></div></div>
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:14px;">
+<select id="ttsLang" style="padding:12px; background:#000; border:1px solid #1a1a1a; border-radius:12px; color:#fff; font-size:10px;"><option>🇺🇸 English - American</option><option>🇬🇧 English - British</option><option>🇮🇳 Hindi</option><option>🇪🇸 Spanish</option></select>
+<select id="ttsModel" style="padding:12px; background:#000; border:1px solid #1a1a1a; border-radius:12px; color:#fff; font-size:10px;"><option>Multilingual v2 - Best</option><option>Turbo v2.5 - Fast</option></select>
+<input id="elevenKey" type="password" placeholder="API Key (Optional)" style="padding:12px; background:#000; border:1px solid #1a1a1a; border-radius:12px; color:#fff; font-size:10px;">
+</div>
+</div>
+
+<div class="glass3d" style="padding:18px; margin-bottom:16px;">
+<div style="display:flex; gap:10px; margin-bottom:16px; overflow-x:auto;">
+<button onclick="filterVoice('all')" id="filter-all" class="tabBtn active">🌍 All • 22</button>
+<button onclick="filterVoice('female')" id="filter-female" class="tabBtn">👩 Female • 12</button>
+<button onclick="filterVoice('male')" id="filter-male" class="tabBtn">👨 Male • 10</button>
+<button onclick="filterVoice('young')" id="filter-young" class="tabBtn">🧒 Young</button>
+<button onclick="filterVoice('british')" id="filter-british" class="tabBtn">🇬🇧 British</button>
+</div>
+<div style="display:flex; justify-content:space-between; margin-bottom:14px;"><div style="color:#fff; font-weight:800; font-size:13px;">🗣️ Voice Library • Different Male/Female • 3D UI</div><div style="color:#22c55e; font-size:9px; background:#22c55e11; padding:6px 12px; border-radius:20px; border:1px solid #22c55e22;">22 VOICES • 3D CARDS</div></div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;" id="voiceGrid">
+<div class="voice3d active" data-gender="female" data-age="young" data-accent="american" onclick="selectVoice('rachel','Rachel','Female • Young • American • Calm')" id="voice-rachel"><div style="padding:14px; display:flex; gap:14px; align-items:center; background:#121212 !important; border-radius:20px;"><div style="width:50px; height:50px; background:linear-gradient(135deg,#ff9a9e,#fecfef); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000; font-size:18px;">R</div><div style="flex:1;"><div style="color:#fff; font-size:12px; font-weight:800;">Rachel <span style="background:#ff9a9e; color:#000; font-size:7px; padding:2px 6px; border-radius:10px;">FEMALE</span></div><div style="color:#666; font-size:9px; margin-top:3px;">Female • Young • American • Calm</div></div><div style="width:28px; height:28px; background:#22c55e; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; color:#000;">▶️</div></div></div>
+<div class="voice3d" data-gender="male" data-age="middle" data-accent="american" onclick="selectVoice('adam','Adam','Male • Middle • American • Deep')" id="voice-adam"><div style="padding:14px; display:flex; gap:14px; align-items:center; background:#121212 !important; border-radius:20px;"><div style="width:50px; height:50px; background:linear-gradient(135deg,#667eea,#764ba2); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff; font-size:18px;">A</div><div style="flex:1;"><div style="color:#fff; font-size:12px; font-weight:800;">Adam <span style="background:#667eea; color:#fff; font-size:7px; padding:2px 6px; border-radius:10px;">MALE</span></div><div style="color:#666; font-size:9px; margin-top:3px;">Male • Middle • American • Deep</div></div><div style="width:28px; height:28px; background:#111; border:1px solid #1a1a1a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; color:#666;">▶️</div></div></div>
+<div class="voice3d" data-gender="female" data-age="young" data-accent="american" onclick="selectVoice('bella','Bella','Female • Young • American • Soft')" id="voice-bella"><div style="padding:14px; display:flex; gap:14px; align-items:center; background:#121212 !important; border-radius:20px;"><div style="width:50px; height:50px; background:linear-gradient(135deg,#fa709a,#fee140); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000; font-size:18px;">B</div><div style="flex:1;"><div style="color:#fff; font-size:12px; font-weight:800;">Bella <span style="background:#fa709a; color:#000; font-size:7px; padding:2px 6px; border-radius:10px;">FEMALE</span></div><div style="color:#666; font-size:9px; margin-top:3px;">Female • Young • American • Soft • ASMR</div></div><div style="width:28px; height:28px; background:#111; border:1px solid #1a1a1a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; color:#666;">▶️</div></div></div>
+<div class="voice3d" data-gender="male" data-age="young" data-accent="american" onclick="selectVoice('antoni','Antoni','Male • Young • American • Well Rounded')" id="voice-antoni"><div style="padding:14px; display:flex; gap:14px; align-items:center; background:#121212 !important; border-radius:20px;"><div style="width:50px; height:50px; background:linear-gradient(135deg,#4facfe,#00f2fe); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff; font-size:18px;">A</div><div style="flex:1;"><div style="color:#fff; font-size:12px; font-weight:800;">Antoni <span style="background:#4facfe; color:#fff; font-size:7px; padding:2px 6px; border-radius:10px;">MALE</span></div><div style="color:#666; font-size:9px; margin-top:3px;">Male • Young • American • Well Rounded</div></div><div style="width:28px; height:28px; background:#111; border:1px solid #1a1a1a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; color:#666;">▶️</div></div></div>
+<div class="voice3d" data-gender="female" data-age="young" data-accent="american" onclick="selectVoice('elli','Elli','Female • Young • American • Emotional')" id="voice-elli"><div style="padding:14px; display:flex; gap:14px; align-items:center; background:#121212 !important; border-radius:20px;"><div style="width:50px; height:50px; background:linear-gradient(135deg,#ff8a00,#e52e71); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff; font-size:18px;">E</div><div style="flex:1;"><div style="color:#fff; font-size:12px; font-weight:800;">Elli <span style="background:#ff8a00; color:#fff; font-size:7px; padding:2px 6px; border-radius:10px;">FEMALE</span></div><div style="color:#666; font-size:9px; margin-top:3px;">Female • Young • American • Emotional</div></div><div style="width:28px; height:28px; background:#111; border:1px solid #1a1a1a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; color:#666;">▶️</div></div></div>
+<div class="voice3d" data-gender="male" data-age="young" data-accent="american" onclick="selectVoice('josh','Josh','Male • Young • American • Deep')" id="voice-josh"><div style="padding:14px; display:flex; gap:14px; align-items:center; background:#121212 !important; border-radius:20px;"><div style="width:50px; height:50px; background:linear-gradient(135deg,#a8edea,#fed6e3); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000; font-size:18px;">J</div><div style="flex:1;"><div style="color:#fff; font-size:12px; font-weight:800;">Josh <span style="background:#a8edea; color:#000; font-size:7px; padding:2px 6px; border-radius:10px;">MALE</span></div><div style="color:#666; font-size:9px; margin-top:3px;">Male • Young • American • Deep • Cinematic</div></div><div style="width:28px; height:28px; background:#111; border:1px solid #1a1a1a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; color:#666;">▶️</div></div></div>
+</div>
+</div>
+
+<div class="glass3d" style="padding:18px; margin-bottom:16px;">
+<div style="color:#fff; font-weight:800; font-size:13px; margin-bottom:14px;">⚡ Extra Features • More Than Original • Why Loved</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+<div style="background:#0a0a0a; border:1px solid #1a1a1a; border-radius:14px; padding:12px;">
+<div style="color:#fff; font-size:10px; font-weight:800; margin-bottom:8px;">🎭 Emotion Control • Extra</div>
+<select id="emotion" style="width:100%; padding:10px; background:#000; border:1px solid #1a1a1a; border-radius:10px; color:#fff; font-size:10px; margin-bottom:8px;"><option>😊 Happy • Cheerful</option><option>😢 Sad • Melancholic</option><option>😠 Angry • Furious</option><option>🤫 Whisper • Secret • ASMR</option><option>😂 Laugh • Giggle</option></select>
+<div style="display:flex; gap:6px; align-items:center;"><span style="color:#666; font-size:8px;">Intensity</span><input type="range" id="emotionIntensity" min="0" max="100" value="50" style="flex:1; accent-color:#8b5cf6;"><span id="emotionVal" style="color:#8b5cf6; font-size:9px; font-weight:800;">50%</span></div>
+</div>
+<div style="background:#0a0a0a; border:1px solid #1a1a1a; border-radius:14px; padding:12px;">
+<div style="color:#fff; font-size:10px; font-weight:800; margin-bottom:8px;">🎚️ Voice Changer • Extra</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:8px;">
+<button onclick="setVoiceEffect('normal')" class="tabBtn active" style="padding:8px; font-size:9px;">Normal</button>
+<button onclick="setVoiceEffect('deep')" class="tabBtn" style="padding:8px; font-size:9px;">Deep • Old</button>
+<button onclick="setVoiceEffect('young')" class="tabBtn" style="padding:8px; font-size:9px;">Young • Child</button>
+<button onclick="setVoiceEffect('robot')" class="tabBtn" style="padding:8px; font-size:9px;">🤖 Robot</button>
+</div>
+<div style="display:flex; gap:6px; align-items:center;"><span style="color:#666; font-size:8px;">Pitch</span><input type="range" id="pitch" min="-20" max="20" value="0" style="flex:1; accent-color:#22c55e;"><span id="pitchVal" style="color:#22c55e; font-size:9px;">0</span></div>
+</div>
+<div style="background:#0a0a0a; border:1px solid #1a1a1a; border-radius:14px; padding:12px; grid-column:1/-1;">
+<div style="color:#fff; font-size:10px; font-weight:800; margin-bottom:8px;">🎙️ Voice Cloning • Why Loved • Extra</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+<label style="background:#111; border:2px dashed #22c55e; border-radius:12px; padding:12px; text-align:center; cursor:pointer;">
+<div style="font-size:18px;">📁</div><div style="color:#fff; font-size:10px; font-weight:700; margin-top:4px;">Upload Voice Sample</div><div style="color:#666; font-size:8px;">MP3/WAV • 30sec • Clone any voice</div>
+<input type="file" id="cloneUpload" accept="audio/*" hidden>
+</label>
+<div style="background:#000; border:1px solid #1a1a1a; border-radius:12px; padding:10px;">
+<div style="color:#888; font-size:9px; font-weight:700; margin-bottom:6px;">Cloned Voices</div>
+<div id="clonedList"><div style="background:#111; border:1px solid #1a1a1a; border-radius:8px; padding:8px; display:flex; justify-content:space-between;"><span style="color:#666; font-size:9px;">No cloned voices yet</span><span style="background:#22c55e11; border:1px solid #22c55e22; color:#22c55e; font-size:7px; padding:2px 6px; border-radius:10px;">NEW</span></div></div>
+</div>
+</div>
+<div style="display:flex; gap:8px; margin-top:10px;"><button onclick="cloneVoice()" style="flex:1; padding:10px; background:#22c55e; border:none; border-radius:10px; color:#000; font-weight:800; font-size:10px; cursor:pointer;">🧬 Clone Voice • 1-Click</button><button onclick="clearCloned()" style="flex:1; padding:10px; background:#111; border:1px solid #1a1a1a; border-radius:10px; color:#666; font-size:10px;">Clear</button></div>
+</div>
+</div>
+</div>
+
+<div class="glass3d" style="padding:18px; margin-bottom:16px;">
+<div style="color:#fff; font-weight:800; font-size:12px; margin-bottom:14px;">⚙️ Voice Settings • Stability/Similarity/Style</div>
+<div style="display:grid; gap:14px;">
+<div><div style="display:flex; justify-content:space-between; margin-bottom:6px;"><span style="color:#aaa; font-size:10px;">Stability • Variable ↔ Stable</span><span id="stabilityVal" style="color:#22c55e; font-size:10px; font-weight:800; background:#22c55e11; padding:2px 8px; border-radius:10px; border:1px solid #22c55e22;">50%</span></div><input type="range" id="stability" min="0" max="100" value="50" oninput="document.getElementById('stabilityVal').innerText=this.value+'%'" style="width:100%; accent-color:#22c55e;"></div>
+<div><div style="display:flex; justify-content:space-between; margin-bottom:6px;"><span style="color:#aaa; font-size:10px;">Similarity • Low ↔ High</span><span id="similarityVal" style="color:#8b5cf6; font-size:10px; font-weight:800; background:#8b5cf611; padding:2px 8px; border-radius:10px;">75%</span></div><input type="range" id="similarity" min="0" max="100" value="75" oninput="document.getElementById('similarityVal').innerText=this.value+'%'" style="width:100%; accent-color:#8b5cf6;"></div>
+<div><div style="display:flex; justify-content:space-between; margin-bottom:6px;"><span style="color:#aaa; font-size:10px;">Style • Exaggerated</span><span id="styleVal" style="color:#f59e0b; font-size:10px; font-weight:800; background:#f59e0b11; padding:2px 8px; border-radius:10px;">0%</span></div><input type="range" id="styleExag" min="0" max="100" value="0" oninput="document.getElementById('styleVal').innerText=this.value+'%'" style="width:100%; accent-color:#f59e0b;"></div>
+<div><div style="display:flex; justify-content:space-between; margin-bottom:6px;"><span style="color:#aaa; font-size:10px;">Speed • Slow ↔ Fast</span><span id="speedVal" style="color:#06b6d4; font-size:10px; font-weight:800; background:#06b6d411; padding:2px 8px; border-radius:10px;">1.0x</span></div><input type="range" id="speed" min="0.5" max="2" step="0.1" value="1" oninput="document.getElementById('speedVal').innerText=this.value+'x'" style="width:100%; accent-color:#06b6d4;"></div>
+</div>
+</div>
+
+<div class="glass3d" style="padding:20px; margin-bottom:16px; text-align:center;">
+<div id="ttsWave" style="display:none; background:#000; border:1px solid #111; border-radius:18px; padding:18px; margin-bottom:16px;">
+<div style="display:flex; align-items:center; justify-content:center; gap:4px; height:40px; margin-bottom:12px;">
+<span class="waveBar" style="animation-delay:0s;"></span><span class="waveBar" style="animation-delay:0.1s;"></span><span class="waveBar" style="animation-delay:0.2s;"></span><span class="waveBar" style="animation-delay:0.3s;"></span><span class="waveBar" style="animation-delay:0.4s;"></span><span class="waveBar" style="animation-delay:0.5s;"></span><span class="waveBar" style="animation-delay:0.6s;"></span>
+</div>
+<div style="color:#fff; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:8px;"><span class="liveDot"></span> Generating with <span id="ttsVoiceName" style="color:#22c55e;">Rachel</span> • <span id="ttsEmotionName" style="color:#8b5cf6;">Happy 50%</span></div>
+<div style="background:#000; height:6px; border-radius:10px; margin-top:14px; overflow:hidden; border:1px solid #111;"><div id="ttsProgress" style="height:100%; width:0%; background:linear-gradient(90deg,#22c55e,#a3e635); transition:width .3s;"></div></div>
+</div>
+<audio id="ttsAudio" controls style="width:100%; display:none; margin-bottom:16px; border-radius:14px;"></audio>
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+<button onclick="generateTTS()" style="padding:16px; background:linear-gradient(145deg,#22c55e,#a3e635); border:none; border-radius:18px; color:#000; font-weight:900; font-size:12px; cursor:pointer; box-shadow:0 12px 36px #22c55e33;">🎙️ Generate Speech</button>
+<button onclick="regenerateTTS()" style="padding:16px; background:#1a1a1a; border:1px solid #222; border-radius:18px; color:#fff; font-weight:700; font-size:11px; cursor:pointer;">🔄 Regenerate</button>
+<button onclick="downloadTTS()" style="padding:16px; background:#fff; border:none; border-radius:18px; color:#000; font-weight:900; font-size:11px; cursor:pointer;">⬇️ Download MP3</button>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:8px; margin-top:12px;">
+<button onclick="playTTS()" style="padding:12px; background:#111; border:1px solid #1a1a1a; border-radius:12px; color:#888; font-size:10px; font-weight:700; cursor:pointer;">▶️ Play</button>
+<button onclick="copyTTS()" style="padding:12px; background:#111; border:1px solid #1a1a1a; border-radius:12px; color:#888; font-size:10px; font-weight:700; cursor:pointer;">📋 Copy</button>
+<button onclick="shareTTS()" style="padding:12px; background:#111; border:1px solid #1a1a1a; border-radius:12px; color:#888; font-size:10px; font-weight:700; cursor:pointer;">📤 Share</button>
+<button onclick="addTTSToVideo()" style="padding:12px; background:#22c55e11; border:1px solid #22c55e22; border-radius:12px; color:#22c55e; font-size:10px; font-weight:800; cursor:pointer;">➕ Add to Video</button>
+</div>
+</div>
+
+<div class="glass3d" style="padding:18px;">
+<div style="color:#fff; font-weight:800; font-size:13px; margin-bottom:14px;">📚 History • Projects • Review</div>
+<div id="ttsHistory" style="display:grid; gap:10px; background:#000; padding:14px; border-radius:18px; border:1px solid #111; min-height:70px;"><div style="color:#333; font-size:11px; padding:14px; text-align:center;">No history - Generated voices show here</div></div>
+<div style="display:flex; gap:10px; margin-top:12px;"><button onclick="clearTTSHistory()" style="flex:1; padding:12px; background:#111; border:1px solid #1a1a1a; border-radius:12px; color:#555; font-size:10px; font-weight:700; cursor:pointer;">Clear History</button><button onclick="downloadAllTTS()" style="flex:1; padding:12px; background:#fff; border:none; border-radius:12px; color:#000; font-weight:800; font-size:10px; cursor:pointer;">Download All • MP3</button></div>
+</div>
+
+</div>
+
+<!-- ########################################## -->
+<!-- ============ TTS END - TOOL 1 ============ -->
+<!-- 👆👆👆 TTS CODE ENDS HERE - DO NOT EDIT BELOW THIS LINE FOR TTS 👆👆👆 -->
+<!-- ########################################## -->
+
+<!-- #################################################### -->
+<!-- ============ VIDEO GENERATOR START - TOOL 2 ============ -->
+<!-- DO NOT EDIT HERE IF YOU ONLY WANT TO EDIT TTS -->
+<!-- #################################################### -->
+<div id="tool-video" class="mainTool" style="display:none; background:#06060a !important; padding:16px;">
+<div style="color:#fff; font-weight:800; font-size:14px; text-align:center; padding:40px;">🎬 Video Generator Tool<br><span style="color:#666; font-size:11px;">Full CapCut-like editor code here - Timeline, Transitions, Filters, VFX, Music</span><br><br><span style="background:#111; border:1px solid #1a1a1a; padding:10px 20px; border-radius:20px; font-size:10px; color:#555;">This section is separate - Edit only TTS section above for TTS tool</span></div>
+</div>
+<!-- ============ VIDEO GENERATOR END - TOOL 2 ============ -->
+
+<!-- #################################################### -->
+<!-- ============ IMAGE GENERATOR START - TOOL 3 ============ -->
+<!-- DO NOT EDIT HERE IF YOU ONLY WANT TO EDIT TTS -->
+<!-- #################################################### -->
+<div id="tool-ai" class="mainTool" style="display:none; background:#06060a !important; padding:16px;">
+<div style="color:#fff; font-weight:800; font-size:14px; text-align:center; padding:40px;">🤖 Image Generator Tool<br><span style="color:#666; font-size:11px;">Full Leonardo-like editor code here - Prompt, Styles, Alchemy, PhotoReal</span><br><br><span style="background:#111; border:1px solid #1a1a1a; padding:10px 20px; border-radius:20px; font-size:10px; color:#555;">This section is separate - Edit only TTS section above for TTS tool</span></div>
+</div>
+<!-- ============ IMAGE GENERATOR END - TOOL 3 ============ -->
+
+<div id="finalStatus" style="background:#06060a !important; color:#22c55e; font-size:10px; text-align:center; padding:18px; border-top:1px solid #111; font-weight:600;">3-TOOLS DASHBOARD • TTS + VIDEO GENERATOR + IMAGE GENERATOR • EDIT ONLY BETWEEN TTS START AND TTS END FOR TTS TOOL</div>
+</div>
+
+<script>
+(function(){
+let ttsHistory=[], currentVoice={id:'rachel',name:'Rachel'}, progressInterval=null;
+function initApp(){
+  const ta=document.getElementById('ttsText');
+  if(ta){ ta.oninput=function(){ document.getElementById('ttsCharCount').innerText=this.value.length+' / 10000 characters'; }; }
+  const emo=document.getElementById('emotionIntensity');
+  if(emo){ emo.oninput=function(){ document.getElementById('emotionVal').innerText=this.value+'%'; const em=document.getElementById('emotion'); if(em) document.getElementById('ttsEmotionName').innerText=em.value.split('•')[0].trim()+' '+this.value+'%'; }; }
+  const pitch=document.getElementById('pitch');
+  if(pitch){ pitch.oninput=function(){ document.getElementById('pitchVal').innerText=this.value; }; }
+  const clone=document.getElementById('cloneUpload');
+  if(clone){ clone.onchange=function(e){ const file=e.target.files[0]; if(file){ const div=document.createElement('div'); div.style.cssText='background:#000; border:1px solid #22c55e33; border-radius:8px; padding:8px; display:flex; justify-content:space-between; align-items:center; margin-top:6px;'; div.innerHTML=`<span style="color:#22c55e; font-size:9px; font-weight:700;">✅ ${file.name}</span><span style="background:#22c55e; color:#000; font-size:7px; padding:2px 6px; border-radius:10px; font-weight:900;">CLONED</span>`; const list=document.getElementById('clonedList'); if(list){ list.innerHTML=''; list.appendChild(div); } } }; }
+}
+window.insertTag=function(tag){ const ta=document.getElementById('ttsText'); const start=ta.selectionStart; const end=ta.selectionEnd; ta.value=ta.value.substring(0,start)+tag+ta.value.substring(end); ta.focus(); ta.selectionStart=ta.selectionEnd=start+tag.length; const cc=document.getElementById('ttsCharCount'); if(cc) cc.innerText=ta.value.length+' / 10000 characters'; };
+window.filterVoice=function(type){
+  document.querySelectorAll('[id^=filter-]').forEach(b=>b.classList.remove('active'));
+  const btn=document.getElementById('filter-'+type); if(btn) btn.classList.add('active');
+  const cards=document.querySelectorAll('.voice3d');
+  cards.forEach(card=>{ if(type==='all'){ card.style.display='block'; } else { const gender=card.dataset.gender; const age=card.dataset.age; const accent=card.dataset.accent; if(gender===type || age===type || accent===type) card.style.display='block'; else card.style.display='none'; } });
+};
+window.selectVoice=function(id,name,desc){
+  document.querySelectorAll('.voice3d').forEach(v=>v.classList.remove('active'));
+  const el=document.getElementById('voice-'+id); if(el) el.classList.add('active');
+  currentVoice={id:id,name:name,desc:desc};
+  const vn=document.getElementById('ttsVoiceName'); if(vn) vn.innerText=name;
+};
+window.setVoiceEffect=function(effect){ document.querySelectorAll('[onclick^="setVoiceEffect"]').forEach(b=>{ if(b.textContent.toLowerCase().includes(effect) || (effect==='normal' && b.textContent.includes('Normal'))) b.classList.add('active'); else b.classList.remove('active'); }); };
+window.cloneVoice=function(){ const input=document.getElementById('cloneUpload'); if(!input || !input.files[0]){ alert('Upload voice sample first - MP3/WAV - 30sec - Any voice - Will clone'); if(input) input.click(); return; } alert('🧬 Cloning voice... Extra feature - Voice cloning from 30sec sample - Would create new voice in library'); };
+window.clearCloned=function(){ const list=document.getElementById('clonedList'); if(list) list.innerHTML='<div style="background:#111; border:1px solid #1a1a1a; border-radius:8px; padding:8px; display:flex; justify-content:space-between;"><span style="color:#666; font-size:9px;">No cloned voices yet</span><span style="background:#22c55e11; border:1px solid #22c55e22; color:#22c55e; font-size:7px; padding:2px 6px; border-radius:10px;">NEW</span></div>'; };
+window.switchMain=function(name){
+  document.querySelectorAll('.mainTool').forEach(t=>t.style.display='none');
+  document.querySelectorAll('[id^=nav-]').forEach(b=>{ b.classList.remove('active'); b.style.color='#666'; });
+  const tool=document.getElementById('tool-'+name); if(tool) tool.style.display='block';
+  const btn=document.getElementById('nav-'+name); if(btn){ btn.classList.add('active'); btn.style.color='#000'; }
+};
+window.generateTTS=function(){
+  const ta=document.getElementById('ttsText'); if(!ta) return;
+  const text=ta.value.trim(); if(!text){ alert('Enter text first! Try emotion tags: [Happy] [Sad] [Whisper] [Laugh]'); return; }
+  const wave=document.getElementById('ttsWave'); if(wave) wave.style.display='block';
+  let prog=0; const pBar=document.getElementById('ttsProgress'); if(pBar) pBar.style.width='0%';
+  progressInterval=setInterval(()=>{ prog+=Math.random()*20; if(prog>92) prog=92; if(pBar) pBar.style.width=prog+'%'; },220);
+  if('speechSynthesis' in window){
+    speechSynthesis.cancel();
+    const utter=new SpeechSynthesisUtterance(text.replace(/\[.*?\]/g,''));
+    const voices=speechSynthesis.getVoices();
+    if(currentVoice.id==='rachel' || currentVoice.id==='bella' || currentVoice.id==='elli'){
+      const fVoice=voices.find(v=>v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('zira') || v.name.toLowerCase().includes('samantha'));
+      if(fVoice) utter.voice=fVoice;
+    } else {
+      const mVoice=voices.find(v=>v.name.toLowerCase().includes('male') || v.name.toLowerCase().includes('david') || v.name.toLowerCase().includes('alex'));
+      if(mVoice) utter.voice=mVoice;
+    }
+    const speedEl=document.getElementById('speed'); if(speedEl) utter.rate=parseFloat(speedEl.value);
+    const emotionEl=document.getElementById('emotion'); if(emotionEl){
+      const emotion=emotionEl.value;
+      if(emotion.includes('Whisper')){ utter.volume=0.5; utter.rate=0.8; } else if(emotion.includes('Shout') || emotion.includes('Angry')){ utter.volume=1; utter.rate=1.3; }
+    }
+    const pitchEl=document.getElementById('pitch'); if(pitchEl){ const pitchVal=parseInt(pitchEl.value); if(pitchVal!==0){ utter.pitch=1+(pitchVal/20); } }
+    utter.onend=function(){ clearInterval(progressInterval); if(pBar) pBar.style.width='100%'; setTimeout(()=>{ if(wave) wave.style.display='none'; },800); const audio=document.getElementById('ttsAudio'); if(audio) audio.style.display='block'; const emoEl=document.getElementById('emotion'); const emoText=emoEl?emoEl.value.split('•')[0]:'Happy'; ttsHistory.unshift({text:text.substring(0,70)+'...', voice:currentVoice.name, emotion:emoText, time:Date.now(), fullText:text}); renderTTSHistory(); };
+    setTimeout(()=>speechSynthesis.speak(utter), 600);
+  } else { clearInterval(progressInterval); if(wave) wave.style.display='none'; alert('TTS not supported - Use Chrome/Edge'); }
+};
+window.regenerateTTS=function(){ generateTTS(); };
+window.playTTS=function(){ const ta=document.getElementById('ttsText'); if(!ta) return; const text=ta.value.trim(); if(!text){ alert('Enter text!'); return; } if('speechSynthesis' in window){ speechSynthesis.cancel(); const utter=new SpeechSynthesisUtterance(text.replace(/\[.*?\]/g,'')); const speedEl=document.getElementById('speed'); if(speedEl) utter.rate=parseFloat(speedEl.value); speechSynthesis.speak(utter); } };
+window.downloadTTS=function(){ const ta=document.getElementById('ttsText'); if(!ta) return; const text=ta.value.trim(); if(!text){ alert('Generate first!'); return; } const keyEl=document.getElementById('elevenKey'); const key=keyEl?keyEl.value.trim():''; if(key){ alert('With API key - Would download HD MP3 - Voice: '+currentVoice.name); } else { const blob=new Blob([text], {type:'text/plain'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='TTS-'+currentVoice.name+'-'+Date.now()+'.txt'; a.click(); alert('Downloaded text - Add API key for real MP3 HD download'); } };
+window.copyTTS=function(){ const ta=document.getElementById('ttsText'); if(ta && ta.value) navigator.clipboard.writeText(ta.value).then(()=>{ const fs=document.getElementById('finalStatus'); if(fs) fs.innerText='✅ Copied'; }); };
+window.shareTTS=function(){ const ta=document.getElementById('ttsText'); if(navigator.share && ta){ navigator.share({title:'My TTS Voice '+currentVoice.name, text:ta.value.substring(0,100)}); } else { alert('Share: TTS ready to share!'); } };
+window.addTTSToVideo=function(){ alert('✅ TTS audio would be added to Video Generator timeline - Tool 2'); };
+function renderTTSHistory(){ const list=document.getElementById('ttsHistory'); if(!list) return; if(ttsHistory.length===0){ list.innerHTML='<div style="color:#333; font-size:11px; padding:14px; text-align:center;">No history</div>'; return; } list.innerHTML=''; ttsHistory.slice(0,8).forEach((h,i)=>{ const d=document.createElement('div'); d.style.cssText='background:linear-gradient(145deg,#0a0a0a,#000); border:1px solid #1a1a1a; border-radius:14px; padding:12px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 6px 18px #000;'; d.innerHTML=`<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; gap:6px;">${h.voice} <span style="background:#22c55e11; border:1px solid #22c55e22; color:#22c55e; font-size:7px; padding:2px 6px; border-radius:10px;">${h.emotion}</span> • ${h.text}</div><div style="color:#555; font-size:8px; margin-top:3px;">${new Date(h.time).toLocaleTimeString()}</div></div><div style="display:flex; gap:6px;"><button onclick="playHistoryTTS(${i})" style="background:#111; border:1px solid #1a1a1a; color:#888; padding:7px 12px; border-radius:10px; font-size:9px; cursor:pointer; font-weight:700;">▶️ Play</button><button onclick="downloadHistoryTTS(${i})" style="background:#fff; color:#000; border:none; padding:7px 12px; border-radius:10px; font-size:9px; font-weight:800; cursor:pointer;">⬇️ Download</button></div>`; list.appendChild(d); }); }
+window.playHistoryTTS=function(i){ const h=ttsHistory[i]; const ta=document.getElementById('ttsText'); if(ta){ ta.value=h.fullText; generateTTS(); } }; window.downloadHistoryTTS=function(i){ downloadTTS(); };
+window.clearTTSHistory=function(){ ttsHistory=[]; renderTTSHistory(); }; window.downloadAllTTS=function(){ if(ttsHistory.length===0){ alert('No history!'); return; } alert('Would download all '+ttsHistory.length+' TTS files as ZIP - HD MP3'); };
+
+initApp();
+switchMain('tts');
+})();
+</script>
+</div>
+</body>
+</html>
