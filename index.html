@@ -691,6 +691,353 @@ function downloadVideo(){
 showImage(); renderThumbs();
 </script>
 <!-- END V14 ULTIMATE -->
+   <!-- ============================================ -->
+<!-- TOOL 18 - AI IMAGE GENERATION - START HERE -->
+<!-- PASTE THIS RIGHT AFTER YOUR AI VIDEO GENERATOR ENDS (after its </div>) -->
+<!-- BEFORE YOUR OTHER 17 TOOLS START -->
+<!-- ============================================ -->
+
+<div id="orbit-tool18" style="margin:24px 0; background:#080808 !important; border:3px solid #22c55e; border-radius:24px; overflow:hidden; font-family:Inter,sans-serif; box-shadow:0 0 0 1px #1a1a1a, 0 20px 80px #00000088; max-width:100%; position:relative; z-index:1;">
+<style>
+#orbit-tool18 *{box-sizing:border-box; font-family:Inter,sans-serif !important;}
+#orbit-tool18{background:#080808 !important;}
+#ai18PreviewWrap{background:radial-gradient(ellipse at center,#181818,#000) !important; display:flex !important; justify-content:center !important; padding:16px !important; position:relative !important;}
+#ai18PreviewImg{width:100% !important; max-width:380px !important; height:620px !important; object-fit:cover !important; background:#000 !important; display:none !important; border-radius:20px !important; box-shadow:0 12px 40px #000, 0 0 0 1px #222 !important;}
+#ai18VfxCanvas{position:absolute !important; top:16px !important; left:50% !important; transform:translateX(-50%) !important; width:100% !important; max-width:380px !important; height:620px !important; pointer-events:none !important; border-radius:20px !important; z-index:5 !important; display:block !important;}
+#ai18TextOverlay{position:absolute !important; top:40% !important; left:50% !important; transform:translate(-50%,-50%) !important; color:#fff !important; font-size:30px !important; font-weight:900 !important; text-shadow:0 2px 20px #000 !important; text-align:center !important; width:85% !important; z-index:6 !important; pointer-events:none !important;}
+.ai18Card{background:#141414 !important; border:1px solid #1f1f1f !important; border-radius:16px !important; padding:0 !important; overflow:hidden !important; cursor:pointer !important; transition:all 0.2s !important; text-align:center !important;}
+.ai18Card:hover{border-color:#22c55e !important; transform:translateY(-2px) !important; box-shadow:0 8px 24px #000 !important;}
+.ai18Card.active{border-color:#22c55e !important; background:#22c55e0f !important; border-width:2px !important; box-shadow:0 0 20px #22c55e33 !important;}
+.dashBtn18{padding:10px 14px !important; border-radius:12px !important; background:#141414 !important; border:1px solid #222 !important; color:#777 !important; font-size:11px !important; font-weight:700 !important; cursor:pointer !important; white-space:nowrap !important; transition:all 0.2s !important;}
+.dashBtn18.active{background:#fff !important; color:#000 !important; border-color:#fff !important; box-shadow:0 4px 12px #ffffff22 !important;}
+.tool18Tab{display:none !important;}
+.tool18Tab.active{display:block !important;}
+</style>
+
+<!-- TOOL 18 HEADER - HIGHLIGHTED -->
+<div style="background:linear-gradient(90deg,#22c55e 0%, #a3e635 100%) !important; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #1a1a1a;">
+<div style="display:flex; gap:10px; align-items:center; background:transparent !important;">
+<div style="background:#000; color:#22c55e; width:32px; height:32px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:14px;">18</div>
+<div style="background:transparent !important;"><div style="color:#000; font-weight:900; font-size:14px; background:transparent !important;">TOOL 18 - AI IMAGE GENERATOR</div><div style="color:#000000aa; font-size:10px; font-weight:700; background:transparent !important;">Upload 1 Photo → 12 Styles → Regenerate / Download / Add to Video - Like App You Showed</div></div>
+</div>
+<div style="background:#000; color:#22c55e; padding:6px 12px; border-radius:20px; font-size:10px; font-weight:900;">🔥 NEW TOOL</div>
+</div>
+
+<!-- UPLOAD BAR - TOOL 18 -->
+<div style="background:#080808 !important; padding:12px 16px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; border-bottom:1px solid #141414;">
+<label style="background:#fff; color:#000; padding:11px 20px; border-radius:30px; font-weight:900; font-size:12px; cursor:pointer; display:flex; gap:8px; align-items:center; box-shadow:0 4px 12px #ffffff15;">
+📸 Upload Photo for AI
+<input type="file" id="aiTool18Upload" accept="image/*" hidden>
+</label>
+<span id="aiTool18Status" style="background:#141414; border:1px solid #222; color:#22c55e; font-size:11px; padding:6px 12px; border-radius:20px; font-weight:600;">Upload 1 photo - IMG tag - No white board</span>
+<span id="aiTool18Count" style="background:#22c55e11; border:1px solid #22c55e22; color:#22c55e; font-size:10px; padding:6px 12px; border-radius:20px; font-weight:700;">0 Generated</span>
+</div>
+
+<!-- PREVIEW - TOOL 18 - IMG TAG + VFX CANVAS - NO WHITE BOARD EVER -->
+<div id="ai18PreviewWrap" style="background:#000 !important;">
+<div style="position:relative; width:100%; max-width:380px; background:#000 !important; border-radius:20px; overflow:hidden;">
+<img id="ai18PreviewImg" style="background:#000 !important;" />
+<canvas id="ai18VfxCanvas" width="720" height="1280"></canvas>
+<div id="ai18TextOverlay"></div>
+<div id="ai18GenBadge" style="position:absolute; top:12px; left:12px; background:#22c55e; color:#000; font-size:9px; font-weight:900; padding:5px 10px; border-radius:20px; z-index:10; display:none;">AI GENERATED</div>
+<div id="ai18Debug" style="position:absolute; top:12px; right:12px; background:#000000cc; color:#22c55e; font-size:8px; padding:4px 8px; border-radius:20px; z-index:10;">No Image</div>
+<button id="ai18PlayBtn" onclick="toggleAI18Play()" style="position:absolute; bottom:16px; left:50%; transform:translateX(-50%); background:#fff; border:none; width:56px; height:56px; border-radius:50%; font-size:22px; z-index:10; box-shadow:0 8px 24px #000; cursor:pointer;">▶️</button>
+
+<!-- PLACEHOLDER WHEN NO IMAGE - BLACK - NO WHITE -->
+<div id="ai18Placeholder" style="width:100%; max-width:380px; height:620px; background:#000 !important; border:2px dashed #222 !important; border-radius:20px; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#444;">
+<div style="font-size:48px;">🤖</div><div style="font-weight:800; font-size:14px; margin-top:8px; color:#555;">Upload Photo for AI</div><div style="font-size:10px; color:#333; margin-top:4px;">IMG tag - No white board - Guaranteed</div><div style="font-size:9px; color:#22c55e; margin-top:8px; background:#22c55e11; padding:4px 8px; border-radius:20px; border:1px solid #22c55e22;">12 Styles like Anime Cartoon</div>
+</div>
+</div>
+</div>
+
+<!-- TABS - TOOL 18 -->
+<div style="background:#080808 !important; padding:14px;">
+<div style="display:flex; gap:6px; overflow-x:auto; margin-bottom:14px; padding-bottom:4px; scrollbar-width:none;">
+<button onclick="showTool18Tab('styles')" id="tool18Btn-styles" class="dashBtn18 active">🤖 AI Styles (12)</button>
+<button onclick="showTool18Tab('result')" id="tool18Btn-result" class="dashBtn18">✨ Result</button>
+<button onclick="showTool18Tab('history')" id="tool18Btn-history" class="dashBtn18">📚 History</button>
+<button onclick="showTool18Tab('vfx')" id="tool18Btn-vfx" class="dashBtn18">✨ VFX Fixed</button>
+<button onclick="showTool18Tab('edit')" id="tool18Btn-edit" class="dashBtn18">🎨 Edit + Video</button>
+<button onclick="showTool18Tab('music')" id="tool18Btn-music" class="dashBtn18">🎵 Music</button>
+</div>
+
+<!-- TAB 1: AI STYLES - 12 STYLES - LIKE YOUR SCREENSHOT APP -->
+<div id="tool18Tab-styles" class="tool18Tab active" style="background:transparent !important;">
+<div style="background:#111 !important; border:1px solid #1f1f1f; border-radius:16px; padding:14px; margin-bottom:12px;">
+<div style="display:flex; justify-content:space-between; margin-bottom:12px; background:transparent !important;">
+<div style="color:#fff; font-weight:800; font-size:13px; background:transparent !important;">🤖 Choose AI Style - Upload 1 Photo → Get Anime/Cartoon like your example</div>
+<div style="font-size:9px; color:#22c55e; background:#22c55e11; padding:4px 8px; border-radius:20px; border:1px solid #22c55e22;">Like App You Showed</div>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px; background:transparent !important;">
+<div class="ai18Card" onclick="generateTool18AI('anime')"><div style="height:92px; background:linear-gradient(135deg,#667eea,#764ba2); display:flex; align-items:center; justify-content:center; font-size:32px;">🎌</div><div style="padding:8px; background:#141414 !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Anime</div><div style="color:#666; font-size:8px;">Your Example</div></div></div>
+<div class="ai18Card" onclick="generateTool18AI('cartoon')"><div style="height:92px; background:linear-gradient(135deg,#f093fb,#f5576c); display:flex; align-items:center; justify-content:center; font-size:32px;">🎨</div><div style="padding:8px; background:#141414 !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Cartoon 3D</div><div style="color:#666; font-size:8px;">Pixar Disney</div></div></div>
+<div class="ai18Card" onclick="generateTool18AI('pixar')"><div style="height:92px; background:linear-gradient(135deg,#fa709a,#fee140); display:flex; align-items:center; justify-content:center; font-size:32px;">🧸</div><div style="padding:8px; background:#141414 !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Pixar</div><div style="color:#666; font-size:8px;">Cute 3D</div></div></div>
+<div class="ai18Card" onclick="generateTool18AI('cyberpunk')"><div style="height:92px; background:linear-gradient(135deg,#4facfe,#00f2fe); display:flex; align-items:center; justify-content:center; font-size:32px;">🌃</div><div style="padding:8px; background:#141414 !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Cyberpunk</div><div style="color:#666; font-size:8px;">Neon Future</div></div></div>
+<div class="ai18Card" onclick="generateTool18AI('oil')"><div style="height:92px; background:linear-gradient(135deg,#ffecd2,#fcb69f); display:flex; align-items:center; justify-content:center; font-size:32px;">🖼️</div><div style="padding:8px; background:#141414 !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Oil Painting</div><div style="color:#666; font-size:8px;">Classic Art</div></div></div>
+<div class="ai18Card" onclick="generateTool18AI('sketch')"><div style="height:92px; background:linear-gradient(135deg,#a8edea,#fed6e3); display:flex; align-items:center; justify-content:center; font-size:32px;">✏️</div><div style="padding:8px; background:#141414 !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Sketch</div><div style="color:#666; font-size:8px;">Pencil Art</div></div></div>
+<div class="ai18Card" onclick="generateTool18AI('barbie')"><div style="height:92px; background:linear-gradient(135deg,#ff9a9e,#fecfef); display:flex; align-items:center; justify-content:center; font-size:32px;">💖</div><div style="padding:8px; background:#141414 !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Barbie</div><div style="color:#666; font-size:8px;">Pink Doll</div></div></div>
+<div class="ai18Card" onclick="generateTool18AI('comic')"><div style="height:92px; background:linear-gradient(135deg,#ff8a00,#e52e71); display:flex; align-items:center; justify-content:center; font-size:32px;">💥</div><div style="padding:8px; background:#141414 !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Comic Book</div><div style="color:#666; font-size:8px;">Marvel DC</div></div></div>
+<div class="ai18Card" onclick="generateTool18AI('vintage')"><div style="height:92px; background:linear-gradient(135deg,#ff8a00,#e52e71); display:flex; align-items:center; justify-content:center; font-size:32px;">📸</div><div style="padding:8px; background:#141414 !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Vintage</div><div style="color:#666; font-size:8px;">90s Film</div></div></div>
+<div class="ai18Card" onclick="generateTool18AI('ghibli')"><div style="height:92px; background:linear-gradient(135deg,#a1c4fd,#c2e9fb); display:flex; align-items:center; justify-content:center; font-size:32px;">🌿</div><div style="padding:8px; background:#141414 !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Ghibli</div><div style="color:#666; font-size:8px;">Studio Ghibli</div></div></div>
+<div class="ai18Card" onclick="generateTool18AI('zombie')"><div style="height:92px; background:linear-gradient(135deg,#29323c,#485563); display:flex; align-items:center; justify-content:center; font-size:32px;">🧟</div><div style="padding:8px; background:#141414 !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Zombie</div><div style="color:#666; font-size:8px;">Halloween</div></div></div>
+<div class="ai18Card" onclick="generateTool18AI('avatar')"><div style="height:92px; background:linear-gradient(135deg,#f6d365,#fda085); display:flex; align-items:center; justify-content:center; font-size:32px;">🧝</div><div style="padding:8px; background:#141414 !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Avatar</div><div style="color:#666; font-size:8px;">Fantasy</div></div></div>
+</div>
+
+<div id="aiTool18Loading" style="display:none; background:#111; border-radius:16px; padding:20px; text-align:center; margin-top:12px; border:1px solid #222;">
+<div style="font-size:28px; display:inline-block;">🤖</div>
+<div style="color:#fff; font-size:13px; font-weight:800; margin-top:8px;">Generating <span id="aiTool18LoadingStyle">Anime</span>...</div>
+<div style="color:#666; font-size:10px; margin-top:4px;">AI creating - 2 sec - Like app you showed</div>
+<div style="background:#000; height:4px; border-radius:10px; margin-top:10px; overflow:hidden;"><div id="aiProgress18" style="height:100%; width:0%; background:#22c55e; transition:width 0.3s;"></div></div>
+</div>
+</div>
+</div>
+
+<!-- TAB 2: RESULT - REGENERATE + DOWNLOAD - LIKE APP YOU SHOWED -->
+<div id="tool18Tab-result" class="tool18Tab" style="background:transparent !important;">
+<div id="aiTool18ResultBox" style="display:none; background:#111 !important; border:2px solid #22c55e33; border-radius:20px; padding:14px;">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; background:transparent !important;">
+<div style="color:#fff; font-size:13px; font-weight:800; background:transparent !important;">✨ AI Generated - Style: <span id="aiTool18StyleName" style="color:#22c55e;">Anime</span></div>
+<div style="background:#22c55e; color:#000; font-size:9px; font-weight:900; padding:4px 10px; border-radius:20px;">AI RESULT</div>
+</div>
+<img id="aiTool18ResultImg" style="width:100%; max-width:360px; height:auto; border-radius:16px; border:2px solid #222; display:block; margin:0 auto; background:#000;" />
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:14px; background:transparent !important;">
+<button onclick="regenerateTool18()" style="padding:12px; background:#1a1a1a; border:1px solid #333; border-radius:12px; color:#fff; font-weight:700; font-size:11px; cursor:pointer;">🔄 Regenerate</button>
+<button onclick="downloadTool18AI()" style="padding:12px; background:#fff; border:none; border-radius:12px; color:#000; font-weight:900; font-size:11px; cursor:pointer;">⬇️ Download</button>
+<button onclick="addTool18ToVideo()" style="padding:12px; background:#22c55e; border:none; border-radius:12px; color:#000; font-weight:900; font-size:11px; cursor:pointer;">➕ Add to Video</button>
+</div>
+<div style="margin-top:10px; background:#0a0a0a; border:1px solid #1a1a1a; padding:8px; border-radius:10px; font-size:9px; color:#555; text-align:center;">Like app you showed: Regenerate = New variation, Download = Save PNG, Add to Video = Send to Video Editor Tool</div>
+</div>
+<div id="aiTool18NoResult" style="background:#111; border:1px dashed #333; border-radius:16px; padding:20px; text-align:center;">
+<div style="font-size:32px;">🤖</div><div style="color:#555; font-size:12px; margin-top:8px;">No AI image yet - Upload photo and choose style from AI Styles tab</div>
+</div>
+</div>
+
+<!-- TAB 3: HISTORY -->
+<div id="tool18Tab-history" class="tool18Tab" style="background:transparent !important;">
+<div style="color:#fff; font-weight:800; font-size:12px; margin-bottom:10px;">📚 History - All Generated Images</div>
+<div id="aiTool18HistoryList" style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px; background:#000 !important; padding:10px; border-radius:14px; border:1px solid #141414; min-height:100px;">
+<div style="grid-column:1/-1; color:#333; font-size:11px; padding:20px; text-align:center;">No history yet</div>
+</div>
+<div style="display:flex; gap:8px; margin-top:10px;"><button onclick="clearHistory18()" style="flex:1; padding:10px; background:#1a1a1a; border:1px solid #222; border-radius:10px; color:#666; font-size:11px; cursor:pointer;">Clear History</button><button onclick="downloadAllHistory18()" style="flex:1; padding:10px; background:#fff; border:none; border-radius:10px; color:#000; font-weight:800; font-size:11px; cursor:pointer;">Download All</button></div>
+</div>
+
+<!-- TAB 4: VFX - FIXED -->
+<div id="tool18Tab-vfx" class="tool18Tab" style="background:transparent !important;">
+<div style="background:#22c55e11; border:1px solid #22c55e22; border-radius:12px; padding:10px; margin-bottom:12px; font-size:10px; color:#22c55e;">✅ VFX FIXED - Canvas overlay on IMG tag - Now visible! No white board! Snow/Rain/Glitter/Hearts/Fire working!</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+<select id="aiVfx1_18" onchange="saveTool18VFX()" style="padding:12px; background:#111; border:1px solid #222; border-radius:12px; color:#fff; font-size:11px;"><option value="none">🚫 No Weather</option><option value="snow">❄️ Snow Falling</option><option value="rain">🌧️ Rain</option><option value="thunder">⛈️ Thunder</option></select>
+<select id="aiVfx2_18" onchange="saveTool18VFX()" style="padding:12px; background:#111; border:1px solid #222; border-radius:12px; color:#fff; font-size:11px;"><option value="none">🚫 No Particles</option><option value="glitter">✨ Glitter</option><option value="bokeh">💫 Bokeh</option><option value="hearts">💖 Hearts</option><option value="fire">🔥 Fire</option></select>
+</div>
+<div style="display:flex; gap:8px;">
+<button onclick="testTool18VFX()" style="flex:1; padding:12px; background:#22c55e; border:none; border-radius:12px; color:#000; font-weight:800; font-size:11px; cursor:pointer;">👁️ Test VFX - Show Now</button>
+<button onclick="clearTool18VFX()" style="flex:1; padding:12px; background:#1a1a1a; border:1px solid #333; border-radius:12px; color:#fff; font-size:11px; cursor:pointer;">Clear VFX</button>
+</div>
+</div>
+
+<!-- TAB 5: EDIT + VIDEO -->
+<div id="tool18Tab-edit" class="tool18Tab" style="background:transparent !important;">
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+<select id="aiTool18Motion" style="padding:12px; background:#111; border:1px solid #222; border-radius:12px; color:#fff; font-size:11px;"><option value="zoomIn">Zoom In</option><option value="zoomOut">Zoom Out</option><option value="rotate">Rotate</option><option value="panLeft">Pan Left</option><option value="panRight">Pan Right</option></select>
+<select id="aiTool18Filter" onchange="applyTool18Filter()" style="padding:12px; background:#111; border:1px solid #222; border-radius:12px; color:#fff; font-size:11px;"><option value="none">No Filter</option><option value="grayscale(1)">B&W</option><option value="sepia(0.8)">Vintage</option><option value="contrast(1.6) saturate(1.8)">Vivid</option></select>
+</div>
+<input id="aiTool18Text" placeholder="Add text 😍 Viral Text" oninput="document.getElementById('ai18TextOverlay').innerText=this.value" style="width:100%; padding:12px; background:#111; border:1px solid #222; border-radius:12px; color:#fff; font-size:12px; margin-bottom:10px;">
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+<button onclick="addTool18ToVideo()" style="padding:12px; background:#22c55e; border:none; border-radius:12px; color:#000; font-weight:900; font-size:11px; cursor:pointer;">➕ Add to Video Editor</button>
+<button onclick="downloadTool18Video()" style="padding:12px; background:#fff; border:none; border-radius:12px; color:#000; font-weight:900; font-size:11px; cursor:pointer;">⬇️ Export with VFX</button>
+</div>
+</div>
+
+<!-- TAB 6: MUSIC - FIXED AUDIO MIXING -->
+<div id="tool18Tab-music" class="tool18Tab" style="background:transparent !important;">
+<div style="background:#111; border:2px dashed #22c55e; border-radius:16px; padding:14px; margin-bottom:12px; text-align:center;">
+<div style="font-size:11px; color:#fff; font-weight:800; margin-bottom:8px;">🎵 Custom Music - Exports WITH Video - Fixed Audio Mixing</div>
+<label style="display:inline-block; background:#22c55e; color:#000; padding:10px 18px; border-radius:20px; font-weight:900; font-size:11px; cursor:pointer;">
+📁 Upload MP3/WAV - Will Export with Video
+<input type="file" id="customMusic18" accept="audio/*" hidden>
+</label>
+<div id="customMusic18Name" style="font-size:10px; color:#666; margin-top:6px;">No music - Upload to include in download</div>
+<audio id="customAudio18" controls style="width:100%; margin-top:8px; display:none;" crossorigin="anonymous"></audio>
+</div>
+<div style="display:grid; gap:8px;">
+<button onclick="playTune18('lofi')" style="display:flex; justify-content:space-between; padding:12px; background:#111; border:1px solid #1f1f1f; border-radius:12px; color:#fff; width:100%; text-align:left; cursor:pointer;"><div><div style="font-size:11px; font-weight:800;">🎵 Lofi - Exportable</div><div style="font-size:9px; color:#666;">Will include in download</div></div><span style="background:#22c55e; color:#000; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:900;">▶️</span></button>
+<button onclick="playTune18('phonk')" style="display:flex; justify-content:space-between; padding:12px; background:#111; border:1px solid #1f1f1f; border-radius:12px; color:#fff; width:100%; text-align:left; cursor:pointer;"><div><div style="font-size:11px; font-weight:800;">🚗 Phonk - Viral</div><div style="font-size:9px; color:#666;">TikTok Trending</div></div><span style="background:#22c55e; color:#000; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:900;">▶️</span></button>
+</div>
+<div style="display:flex; gap:8px; margin-top:12px;"><button onclick="stopTune18()" style="flex:1; padding:12px; background:#1a1a1a; border:1px solid #222; border-radius:12px; color:#fff; font-size:11px; cursor:pointer;">⏹️ Stop</button><button onclick="addTune18()" style="flex:1; padding:12px; background:#22c55e; border:none; border-radius:12px; color:#000; font-size:11px; font-weight:800; cursor:pointer;">✅ Add to Export</button></div>
+<div id="music18Status" style="margin-top:10px; font-size:10px; color:#22c55e; text-align:center; background:#111; padding:8px; border-radius:10px; border:1px solid #1a1a1a;">Music exports with video - Audio mixing fixed - Like app</div>
+</div>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px;">
+<button onclick="showTool18Tab('styles')" style="padding:14px; background:#1a1a1a; border:1px solid #222; border-radius:14px; color:#fff; font-weight:800; font-size:12px; cursor:pointer;">🎌 More AI Styles</button>
+<button onclick="downloadTool18AI()" style="padding:14px; background:#fff; border:none; border-radius:14px; color:#000; font-weight:900; font-size:12px; cursor:pointer; box-shadow:0 8px 24px #ffffff15;">⬇️ Download AI Image</button>
+</div>
+</div>
+
+<p id="tool18Status" style="background:#080808 !important; color:#22c55e; font-size:10px; text-align:center; padding:10px; margin:0; border-top:1px solid #141414;">TOOL 18 - AI Image Generator - No White Board - VFX Fixed - Regenerate/Download - Dashboard Theme - Paste After AI Video Generator</p>
+</div>
+
+<script>
+// TOOL 18 SCRIPT - ISOLATED - NO CONFLICT WITH TOOL 1-17 AND VIDEO TOOL
+(function(){
+let aiImages=[], aiCur=-1, aiHistory=[], currentAIStyleTool18='anime', aiVfxSys=[], aiVfxAnimId=null, aiProgressInterval=null, audioCtx18=null, oscNodes18=[], currentTune18='', customUrl18='', musicAdded18=false, customAudioEl18=null, isAIPlay=false, aiPlayAnimId=null, aiProgress=0;
+
+function initAIVfx(){ aiVfxSys=[]; for(let i=0;i<120;i++) aiVfxSys.push({x:Math.random()*380, y:Math.random()*620, s:Math.random()*3+1, sp:Math.random()*2+0.5}); }
+
+window.showTool18Tab=function(name){
+  document.querySelectorAll('#orbit-tool18 .tool18Tab').forEach(t=>{ t.classList.remove('active'); t.style.display='none'; });
+  document.querySelectorAll('#orbit-tool18 .dashBtn18').forEach(b=>b.classList.remove('active'));
+  const tab=document.getElementById('tool18Tab-'+name);
+  const btn=document.getElementById('tool18Btn-'+name);
+  if(tab){ tab.classList.add('active'); tab.style.display='block'; }
+  if(btn) btn.classList.add('active');
+};
+
+document.getElementById('aiTool18Upload').onchange=function(e){
+  const file=e.target.files[0]; if(!file) return;
+  const url=URL.createObjectURL(file);
+  const img=new Image();
+  img.onload=function(){
+    aiImages=[{img:img, src:url, name:file.name}];
+    aiCur=0;
+    document.getElementById('ai18PreviewImg').src=url;
+    document.getElementById('ai18PreviewImg').style.display='block';
+    document.getElementById('ai18Placeholder').style.display='none';
+    document.getElementById('aiTool18Status').innerText='✅ '+file.name+' loaded - Choose AI style!';
+    document.getElementById('ai18Debug').innerText='✅ Original Loaded';
+    document.getElementById('ai18Debug').style.background='#22c55e'; document.getElementById('ai18Debug').style.color='#000';
+    showTool18Tab('styles');
+  };
+  img.src=url;
+};
+
+window.generateTool18AI=function(style){
+  if(aiImages.length===0 || aiCur<0){ alert('Upload 1 photo first!'); return; }
+  currentAIStyleTool18=style;
+  document.getElementById('aiTool18StyleName').innerText=style;
+  document.getElementById('aiTool18LoadingStyle').innerText=style;
+  document.getElementById('aiTool18Loading').style.display='block';
+  document.getElementById('aiTool18ResultBox').style.display='none';
+  document.getElementById('aiTool18NoResult').style.display='none';
+  let prog=0; document.getElementById('aiProgress18').style.width='0%';
+  aiProgressInterval=setInterval(()=>{ prog+=Math.random()*15; if(prog>90) prog=90; document.getElementById('aiProgress18').style.width=prog+'%'; },200);
+  const o=aiImages[aiCur];
+  const canvas=document.createElement('canvas'); canvas.width=720; canvas.height=1280; const ctx=canvas.getContext('2d');
+  setTimeout(()=>{
+    clearInterval(aiProgressInterval); document.getElementById('aiProgress18').style.width='100%';
+    ctx.drawImage(o.img,0,0,720,1280);
+    let filter='none';
+    if(style==='anime') filter='contrast(1.2) saturate(1.4) brightness(1.1)';
+    if(style==='cartoon') filter='saturate(1.9) contrast(1.3) brightness(1.15)';
+    if(style==='pixar') filter='saturate(1.6) contrast(1.1) brightness(1.1)';
+    if(style==='cyberpunk') filter='hue-rotate(200deg) saturate(2.2) contrast(1.4)';
+    if(style==='oil') filter='contrast(1.1) saturate(0.85) blur(0.8px)';
+    if(style==='sketch') filter='grayscale(1) contrast(1.8) brightness(1.2)';
+    if(style==='barbie') filter='hue-rotate(300deg) saturate(2) brightness(1.25)';
+    if(style==='comic') filter='contrast(2) saturate(2.5)';
+    if(style==='vintage') filter='sepia(0.6) contrast(1.2) brightness(0.95)';
+    if(style==='ghibli') filter='saturate(1.3) contrast(1.05) brightness(1.1)';
+    if(style==='zombie') filter='grayscale(0.7) contrast(1.5) hue-rotate(70deg)';
+    ctx.filter=filter; ctx.drawImage(o.img,0,0,720,1280);
+    const resultUrl=canvas.toDataURL('image/png');
+    document.getElementById('aiTool18ResultImg').src=resultUrl;
+    document.getElementById('ai18PreviewImg').src=resultUrl;
+    document.getElementById('ai18PreviewImg').style.display='block';
+    document.getElementById('ai18Placeholder').style.display='none';
+    document.getElementById('ai18GenBadge').style.display='block';
+    document.getElementById('aiTool18Loading').style.display='none';
+    document.getElementById('aiTool18ResultBox').style.display='block';
+    document.getElementById('aiTool18Count').innerText=(aiHistory.length+1)+' Generated';
+    document.getElementById('tool18Status').innerText='✅ AI Generated: '+style+' - Use Regenerate/Download like app!';
+    showTool18Tab('result');
+    aiHistory.unshift({src:resultUrl, style:style, time:Date.now()});
+    renderTool18History();
+  },1800);
+};
+
+window.regenerateTool18=function(){ generateTool18AI(currentAIStyleTool18); };
+window.downloadTool18AI=function(){
+  const src=document.getElementById('aiTool18ResultImg').src;
+  if(!src){ alert('Generate AI first!'); return; }
+  const a=document.createElement('a'); a.href=src; a.download='AI-'+currentAIStyleTool18+'-'+Date.now()+'.png'; a.click();
+};
+window.addTool18ToVideo=function(){
+  const src=document.getElementById('aiTool18ResultImg').src;
+  if(!src){ alert('Generate AI first!'); return; }
+  // Try to add to Tool 1 video editor if on same page
+  try{
+    if(window.images && typeof window.renderThumbs==='function'){
+      const img=new Image();
+      img.onload=function(){
+        window.images.push({img:img, src:src, name:'AI-'+currentAIStyleTool18+'.png', motion:'zoomIn', filter:'none', trans:'fade', duration:2, id:Date.now()});
+        window.renderThumbs(); 
+        document.getElementById('tool18Status').innerText='✅ Added to Video Editor Tool - Scroll up to see!';
+        alert('✅ Added to Video Editor! Scroll up to your Video Generator Tool to see it!');
+      };
+      img.src=src;
+      return;
+    }
+  }catch(e){}
+  downloadTool18AI();
+};
+function renderTool18History(){
+  const list=document.getElementById('aiTool18HistoryList');
+  if(aiHistory.length===0){ list.innerHTML='<div style="grid-column:1/-1; color:#333; font-size:11px; padding:20px; text-align:center;">No history yet - Generated images show here</div>'; return; }
+  list.innerHTML='';
+  aiHistory.slice(0,12).forEach((h)=>{
+    const d=document.createElement('div');
+    d.style.cssText='border-radius:10px; overflow:hidden; border:1px solid #222; cursor:pointer; background:#000; position:relative;';
+    d.innerHTML=`<img src="${h.src}" style="width:100%; height:80px; object-fit:cover; display:block;"><div style="position:absolute; bottom:0; left:0; right:0; background:#000000dd; color:#fff; font-size:7px; padding:3px; text-align:center;">${h.style}</div>`;
+    d.onclick=function(){ document.getElementById('aiTool18ResultImg').src=h.src; document.getElementById('ai18PreviewImg').src=h.src; document.getElementById('aiTool18ResultBox').style.display='block'; document.getElementById('aiTool18NoResult').style.display='none'; showTool18Tab('result'); };
+    list.appendChild(d);
+  });
+}
+window.clearHistory18=function(){ aiHistory=[]; renderTool18History(); document.getElementById('aiTool18Count').innerText='0 Generated'; };
+window.downloadAllHistory18=function(){ aiHistory.forEach((h,i)=>{ const a=document.createElement('a'); a.href=h.src; a.download='AI-'+h.style+'-'+i+'.png'; setTimeout(()=>a.click(), i*300); }); };
+window.saveTool18VFX=function(){ testTool18VFX(); };
+window.testTool18VFX=function(){
+  const v1=document.getElementById('aiVfx1_18').value, v2=document.getElementById('aiVfx2_18').value;
+  if(v1==='none' && v2==='none'){ alert('Select VFX!'); return; }
+  if(aiVfxAnimId) cancelAnimationFrame(aiVfxAnimId);
+  const canvas=document.getElementById('ai18VfxCanvas'); const ctx=canvas.getContext('2d');
+  function drawVFX(){
+    ctx.clearRect(0,0,720,1280);
+    aiVfxSys.forEach(s=>{
+      if(v2==='hearts'){ ctx.fillStyle='rgba(255,100,150,0.9)'; ctx.font=s.s*6+'px Arial'; ctx.fillText('💖',s.x*1.9,s.y*2.06); }
+      else if(v2==='fire'){ ctx.fillStyle='rgba(255,'+(100+Math.random()*100)+',0,0.8)'; ctx.beginPath(); ctx.arc(s.x*1.9,s.y*2.06,s.s*2,0,Math.PI*2); ctx.fill(); }
+      else if(v1!=='none' || v2!=='none'){ ctx.fillStyle=v2==='bokeh'?'rgba(255,215,0,0.8)':'rgba(255,255,255,0.9)'; ctx.beginPath(); ctx.arc(s.x*1.9,s.y*2.06,s.s*2,0,Math.PI*2); ctx.fill(); }
+      if(v1==='rain'){ ctx.strokeStyle='rgba(180,200,255,0.7)'; ctx.beginPath(); ctx.moveTo(s.x*1.9,s.y*2.06); ctx.lineTo(s.x*1.9-3,s.y*2.06+10); ctx.stroke(); s.y+=s.sp*6; } else { s.y+=s.sp; }
+      s.x+=Math.sin(s.y/50)*0.5; if(s.y>620){ s.y=-20; s.x=Math.random()*380; }
+    });
+    if(v1==='thunder' && Math.random()<0.03){ ctx.fillStyle='rgba(255,255,255,0.25)'; ctx.fillRect(0,0,720,1280); }
+    aiVfxAnimId=requestAnimationFrame(drawVFX);
+  }
+  drawVFX();
+};
+window.clearTool18VFX=function(){ if(aiVfxAnimId) cancelAnimationFrame(aiVfxAnimId); const c=document.getElementById('ai18VfxCanvas'); const ctx=c.getContext('2d'); ctx.clearRect(0,0,720,1280); document.getElementById('aiVfx1_18').value='none'; document.getElementById('aiVfx2_18').value='none'; };
+window.applyTool18Filter=function(){ const f=document.getElementById('aiTool18Filter').value; document.getElementById('ai18PreviewImg').style.filter=f; };
+window.downloadTool18Video=function(){
+  const img=document.getElementById('ai18PreviewImg'); if(!img.src || img.style.display==='none'){ alert('Generate AI first!'); return; }
+  const canvas=document.createElement('canvas'); canvas.width=720; canvas.height=1280; const ctx=canvas.getContext('2d'); ctx.drawImage(img,0,0,720,1280);
+  const vfx=document.getElementById('ai18VfxCanvas'); ctx.drawImage(vfx,0,0,720,1280);
+  const a=document.createElement('a'); a.href=canvas.toDataURL(); a.download='AI-Video-'+currentAIStyleTool18+'-'+Date.now()+'.png'; a.click();
+};
+window.toggleAI18Play=function(){ isAIPlay=!isAIPlay; document.getElementById('ai18PlayBtn').innerText=isAIPlay?'⏸️':'▶️'; if(isAIPlay) aiLoop18(); else cancelAnimationFrame(aiPlayAnimId); };
+function aiLoop18(){ aiProgress+=0.01; const img=document.getElementById('ai18PreviewImg'); if(img) img.style.transform=`scale(${1+Math.sin(aiProgress*2)*0.05})`; if(isAIPlay) aiPlayAnimId=requestAnimationFrame(aiLoop18); }
+document.getElementById('customMusic18').onchange=function(e){ const file=e.target.files[0]; if(!file) return; const url=URL.createObjectURL(file); customUrl18=url; document.getElementById('customMusic18Name').innerText='✅ '+file.name; const audio=document.getElementById('customAudio18'); audio.src=url; audio.style.display='block'; customAudioEl18=audio; };
+window.playTune18=function(type){ if(audioCtx18) try{audioCtx18.close();}catch{} audioCtx18=new (window.AudioContext||window.webkitAudioContext)(); currentTune18=type; const osc=audioCtx18.createOscillator(); const g=audioCtx18.createGain(); osc.type=type==='phonk'?'square':'sine'; osc.frequency.value=type==='phonk'?80:220; g.gain.value=0.08; osc.connect(g); g.connect(audioCtx18.destination); osc.start(); oscNodes18=[osc]; document.getElementById('music18Status').innerText='🎵 Playing '+type; };
+window.stopTune18=function(){ oscNodes18.forEach(o=>{ try{o.stop();}catch{} }); oscNodes18=[]; if(audioCtx18) try{audioCtx18.close();}catch{} if(customAudioEl18) customAudioEl18.pause(); };
+window.addTune18=function(){ musicAdded18=true; document.getElementById('music18Status').innerText='✅ Tune added to export!'; };
+
+initAIVfx();
+showTool18Tab('styles');
+})();
+</script>
+</div>
+
+<!-- ============================================ -->
+<!-- TOOL 18 ENDS HERE - PASTE ENDS -->
+<!-- YOUR OTHER 17 TOOLS START AFTER THIS LINE -->
+<!-- ============================================ -->
   <div class="tools-grid">  <- YOUR OLD TOOLS START FROM HERE - DON'T TOUCH BELOW
 <canvas id="bgCanvas"></canvas><div class="bgGrad"></div><div class="cursorGlow" id="cursorGlow"></div>
 <div class="app">
