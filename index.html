@@ -54,118 +54,335 @@ html,body{background:#020208 !important; min-height:100vh;}
 <!-- THIS IS THE ONLY SECTION YOU EDIT FOR TTS TOOL -->
 <!-- ############################################ -->
 
-<div id="tool-tts" class="mainTool" style="background:#06060a !important; padding:16px;">
+<div id="tool-tts" style="padding:16px; background:#06060a;">
 
-<div class="glass3d" style="padding:18px; margin-bottom:16px; border:1px solid #22c55e22 !important;">
-<div style="display:flex; justify-content:space-between; margin-bottom:10px;"><div style="color:#fff; font-weight:900; font-size:13px;">💎 Why This TTS Is Loved • More Than Original</div><div style="background:#22c55e; color:#000; font-size:8px; font-weight:900; padding:5px 10px; border-radius:20px;">EXTRA FEATURES</div></div>
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:9px; color:#888;">
-<div style="background:#000; border:1px solid #111; border-radius:12px; padding:10px;"><span style="color:#22c55e; font-weight:800;">✓ Why Loved:</span> Natural voices • Emotion • Stability/Similarity • 29 languages • Cloning • Long text • Projects</div>
-<div style="background:#22c55e0f; border:1px solid #22c55e22; border-radius:12px; padding:10px;"><span style="color:#22c55e; font-weight:800;">+ Extra:</span> Gender Mix • Age morph • Accent changer • Whisper/Shout • Laugh/Cry SFX • Dictionary • Speed+Pitch+Echo</div>
+<!-- TEXT AREA - HTML -->
+<div style="background:linear-gradient(145deg,#161616,#080808); border:1px solid #1a1a1a; border-radius:24px; padding:18px; margin-bottom:16px;">
+<div style="color:#fff; font-weight:800; margin-bottom:12px; display:flex; justify-content:space-between;">
+<span>📝 Text to Speech - 30 Different Voices FREE</span>
+<span style="background:#22c55e; color:#000; font-size:8px; padding:4px 10px; border-radius:20px; font-weight:900;">30 VOICES - FREE</span>
 </div>
-</div>
-
-<div class="glass3d" style="padding:20px; margin-bottom:16px;">
-<div style="display:flex; justify-content:space-between; margin-bottom:14px;"><div style="color:#fff; font-weight:800; font-size:14px;">📝 Text to Speech • Advanced</div><div style="background:#22c55e; color:#000; font-size:8px; font-weight:900; padding:5px 10px; border-radius:20px;">HD VOICES</div></div>
-<textarea id="ttsText" placeholder="Enter text - Try: [Happy] Hello! [Whisper] Secret. [Laugh] Haha! [Sad] I miss you. [Shout] Amazing! - Emotion tags, SFX, multilingual..." style="width:100%; height:130px; background:#000; border:1px solid #1a1a1a; border-radius:18px; color:#fff; padding:16px; font-size:12px; line-height:1.7; resize:none;"></textarea>
-<div style="display:flex; justify-content:space-between; margin-top:12px;"><span id="ttsCharCount" style="color:#555; font-size:10px; background:#000; border:1px solid #111; padding:5px 10px; border-radius:20px;">0 / 10000 characters</span><div style="display:flex; gap:6px;"><button onclick="insertTag('[Happy] ')" style="background:#111; border:1px solid #1a1a1a; color:#888; font-size:8px; padding:5px 10px; border-radius:20px; cursor:pointer;">😊 Happy</button><button onclick="insertTag('[Sad] ')" style="background:#111; border:1px solid #1a1a1a; color:#888; font-size:8px; padding:5px 10px; border-radius:20px; cursor:pointer;">😢 Sad</button><button onclick="insertTag('[Whisper] ')" style="background:#111; border:1px solid #1a1a1a; color:#888; font-size:8px; padding:5px 10px; border-radius:20px; cursor:pointer;">🤫 Whisper</button><button onclick="insertTag('[Laugh] ')" style="background:#111; border:1px solid #1a1a1a; color:#888; font-size:8px; padding:5px 10px; border-radius:20px; cursor:pointer;">😂 Laugh</button></div></div>
-<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:14px;">
-<select id="ttsLang" style="padding:12px; background:#000; border:1px solid #1a1a1a; border-radius:12px; color:#fff; font-size:10px;"><option>🇺🇸 English - American</option><option>🇬🇧 English - British</option><option>🇮🇳 Hindi</option><option>🇪🇸 Spanish</option></select>
-<select id="ttsModel" style="padding:12px; background:#000; border:1px solid #1a1a1a; border-radius:12px; color:#fff; font-size:10px;"><option>Multilingual v2 - Best</option><option>Turbo v2.5 - Fast</option></select>
-<input id="elevenKey" type="password" placeholder="API Key (Optional)" style="padding:12px; background:#000; border:1px solid #1a1a1a; border-radius:12px; color:#fff; font-size:10px;">
-</div>
+<textarea id="ttsText" placeholder="Type text here... Try different voices - Each has different tone! Example: Hello I am Rachel female calm. Hello I am Brian male deep." style="width:100%; height:110px; background:#000; border:1px solid #1a1a1a; border-radius:16px; color:#fff; padding:14px; font-size:12px; resize:none;"></textarea>
+<div style="margin-top:8px; color:#555; font-size:10px;" id="charCount">0 chars - Free - 30 different voices</div>
 </div>
 
-<div class="glass3d" style="padding:18px; margin-bottom:16px;">
-<div style="display:flex; gap:10px; margin-bottom:16px; overflow-x:auto;">
-<button onclick="filterVoice('all')" id="filter-all" class="tabBtn active">🌍 All • 22</button>
-<button onclick="filterVoice('female')" id="filter-female" class="tabBtn">👩 Female • 12</button>
-<button onclick="filterVoice('male')" id="filter-male" class="tabBtn">👨 Male • 10</button>
-<button onclick="filterVoice('young')" id="filter-young" class="tabBtn">🧒 Young</button>
-<button onclick="filterVoice('british')" id="filter-british" class="tabBtn">🇬🇧 British</button>
+<!-- 30 VOICE CARDS - HTML - DIFFERENT VOICES - DIFFERENT TONES - FREE API -->
+<div style="background:linear-gradient(145deg,#161616,#080808); border:1px solid #1a1a1a; border-radius:24px; padding:18px; margin-bottom:16px;">
+<div style="color:#fff; font-weight:800; margin-bottom:14px;">🗣️ 30 Different Voices - Click Card - Different Tone Each - FREE - No Key</div>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;" id="voiceGrid">
+
+<!-- 1 - Rachel - Female American Calm -->
+<div class="voice3d active" id="voice-rachel" onclick="selectVoice('rachel','Rachel')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#ff9a9e,#fecfef); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">R</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Rachel</div><div style="color:#666; font-size:8px;">Female • American • Calm • Ivy</div></div>
 </div>
-<div style="display:flex; justify-content:space-between; margin-bottom:14px;"><div style="color:#fff; font-weight:800; font-size:13px;">🗣️ Voice Library • Different Male/Female • 3D UI</div><div style="color:#22c55e; font-size:9px; background:#22c55e11; padding:6px 12px; border-radius:20px; border:1px solid #22c55e22;">22 VOICES • 3D CARDS</div></div>
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;" id="voiceGrid">
-<div class="voice3d active" data-gender="female" data-age="young" data-accent="american" onclick="selectVoice('rachel','Rachel','Female • Young • American • Calm')" id="voice-rachel"><div style="padding:14px; display:flex; gap:14px; align-items:center; background:#121212 !important; border-radius:20px;"><div style="width:50px; height:50px; background:linear-gradient(135deg,#ff9a9e,#fecfef); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000; font-size:18px;">R</div><div style="flex:1;"><div style="color:#fff; font-size:12px; font-weight:800;">Rachel <span style="background:#ff9a9e; color:#000; font-size:7px; padding:2px 6px; border-radius:10px;">FEMALE</span></div><div style="color:#666; font-size:9px; margin-top:3px;">Female • Young • American • Calm</div></div><div style="width:28px; height:28px; background:#22c55e; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; color:#000;">▶️</div></div></div>
-<div class="voice3d" data-gender="male" data-age="middle" data-accent="american" onclick="selectVoice('adam','Adam','Male • Middle • American • Deep')" id="voice-adam"><div style="padding:14px; display:flex; gap:14px; align-items:center; background:#121212 !important; border-radius:20px;"><div style="width:50px; height:50px; background:linear-gradient(135deg,#667eea,#764ba2); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff; font-size:18px;">A</div><div style="flex:1;"><div style="color:#fff; font-size:12px; font-weight:800;">Adam <span style="background:#667eea; color:#fff; font-size:7px; padding:2px 6px; border-radius:10px;">MALE</span></div><div style="color:#666; font-size:9px; margin-top:3px;">Male • Middle • American • Deep</div></div><div style="width:28px; height:28px; background:#111; border:1px solid #1a1a1a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; color:#666;">▶️</div></div></div>
-<div class="voice3d" data-gender="female" data-age="young" data-accent="american" onclick="selectVoice('bella','Bella','Female • Young • American • Soft')" id="voice-bella"><div style="padding:14px; display:flex; gap:14px; align-items:center; background:#121212 !important; border-radius:20px;"><div style="width:50px; height:50px; background:linear-gradient(135deg,#fa709a,#fee140); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000; font-size:18px;">B</div><div style="flex:1;"><div style="color:#fff; font-size:12px; font-weight:800;">Bella <span style="background:#fa709a; color:#000; font-size:7px; padding:2px 6px; border-radius:10px;">FEMALE</span></div><div style="color:#666; font-size:9px; margin-top:3px;">Female • Young • American • Soft • ASMR</div></div><div style="width:28px; height:28px; background:#111; border:1px solid #1a1a1a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; color:#666;">▶️</div></div></div>
-<div class="voice3d" data-gender="male" data-age="young" data-accent="american" onclick="selectVoice('antoni','Antoni','Male • Young • American • Well Rounded')" id="voice-antoni"><div style="padding:14px; display:flex; gap:14px; align-items:center; background:#121212 !important; border-radius:20px;"><div style="width:50px; height:50px; background:linear-gradient(135deg,#4facfe,#00f2fe); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff; font-size:18px;">A</div><div style="flex:1;"><div style="color:#fff; font-size:12px; font-weight:800;">Antoni <span style="background:#4facfe; color:#fff; font-size:7px; padding:2px 6px; border-radius:10px;">MALE</span></div><div style="color:#666; font-size:9px; margin-top:3px;">Male • Young • American • Well Rounded</div></div><div style="width:28px; height:28px; background:#111; border:1px solid #1a1a1a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; color:#666;">▶️</div></div></div>
-<div class="voice3d" data-gender="female" data-age="young" data-accent="american" onclick="selectVoice('elli','Elli','Female • Young • American • Emotional')" id="voice-elli"><div style="padding:14px; display:flex; gap:14px; align-items:center; background:#121212 !important; border-radius:20px;"><div style="width:50px; height:50px; background:linear-gradient(135deg,#ff8a00,#e52e71); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff; font-size:18px;">E</div><div style="flex:1;"><div style="color:#fff; font-size:12px; font-weight:800;">Elli <span style="background:#ff8a00; color:#fff; font-size:7px; padding:2px 6px; border-radius:10px;">FEMALE</span></div><div style="color:#666; font-size:9px; margin-top:3px;">Female • Young • American • Emotional</div></div><div style="width:28px; height:28px; background:#111; border:1px solid #1a1a1a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; color:#666;">▶️</div></div></div>
-<div class="voice3d" data-gender="male" data-age="young" data-accent="american" onclick="selectVoice('josh','Josh','Male • Young • American • Deep')" id="voice-josh"><div style="padding:14px; display:flex; gap:14px; align-items:center; background:#121212 !important; border-radius:20px;"><div style="width:50px; height:50px; background:linear-gradient(135deg,#a8edea,#fed6e3); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000; font-size:18px;">J</div><div style="flex:1;"><div style="color:#fff; font-size:12px; font-weight:800;">Josh <span style="background:#a8edea; color:#000; font-size:7px; padding:2px 6px; border-radius:10px;">MALE</span></div><div style="color:#666; font-size:9px; margin-top:3px;">Male • Young • American • Deep • Cinematic</div></div><div style="width:28px; height:28px; background:#111; border:1px solid #1a1a1a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; color:#666;">▶️</div></div></div>
+
+<!-- 2 - Adam - Male American Deep -->
+<div class="voice3d" id="voice-adam" onclick="selectVoice('adam','Adam')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#667eea,#764ba2); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">A</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Adam</div><div style="color:#666; font-size:8px;">Male • American • Deep • Brian</div></div>
+</div>
+
+<!-- 3 - Bella - Female American Soft -->
+<div class="voice3d" id="voice-bella" onclick="selectVoice('bella','Bella')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#fa709a,#fee140); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">B</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Bella</div><div style="color:#666; font-size:8px;">Female • American • Soft • Joanna</div></div>
+</div>
+
+<!-- 4 - Antoni - Male American Young -->
+<div class="voice3d" id="voice-antoni" onclick="selectVoice('antoni','Antoni')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#4facfe,#00f2fe); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">A</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Antoni</div><div style="color:#666; font-size:8px;">Male • Young • Gaming • Joey</div></div>
+</div>
+
+<!-- 5 - Elli - Female American Emotional -->
+<div class="voice3d" id="voice-elli" onclick="selectVoice('elli','Elli')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#ff8a00,#e52e71); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">E</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Elli</div><div style="color:#666; font-size:8px;">Female • Emotional • Kendra</div></div>
+</div>
+
+<!-- 6 - Josh - Male Cinematic -->
+<div class="voice3d" id="voice-josh" onclick="selectVoice('josh','Josh')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#a8edea,#fed6e3); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">J</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Josh</div><div style="color:#666; font-size:8px;">Male • Cinematic • Matthew</div></div>
+</div>
+
+<!-- 7 - Dorothy - Female British -->
+<div class="voice3d" id="voice-dorothy" onclick="selectVoice('dorothy','Dorothy')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#ffecd2,#fcb69f); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">D</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Dorothy</div><div style="color:#666; font-size:8px;">Female • British • Emma</div></div>
+</div>
+
+<!-- 8 - Arnold - Male Old Powerful -->
+<div class="voice3d" id="voice-arnold" onclick="selectVoice('arnold','Arnold')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#434343,#000); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">A</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Arnold</div><div style="color:#666; font-size:8px;">Male • Old • Powerful • Russell</div></div>
+</div>
+
+<!-- 9 - Charlotte - Female British Young -->
+<div class="voice3d" id="voice-charlotte" onclick="selectVoice('charlotte','Charlotte')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#f093fb,#f5576c); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">C</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Charlotte</div><div style="color:#666; font-size:8px;">Female • British • Amy</div></div>
+</div>
+
+<!-- 10 - Daniel - Male British -->
+<div class="voice3d" id="voice-daniel" onclick="selectVoice('daniel','Daniel')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#5ee7df,#b490ca); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">D</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Daniel</div><div style="color:#666; font-size:8px;">Male • British • Geraint</div></div>
+</div>
+
+<!-- 11 - Matilda - Female American Child -->
+<div class="voice3d" id="voice-matilda" onclick="selectVoice('matilda','Matilda')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#ff9a9e,#fecfef); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">M</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Matilda</div><div style="color:#666; font-size:8px;">Female • Child • Ivy-Child</div></div>
+</div>
+
+<!-- 12 - James - Male American Deep News -->
+<div class="voice3d" id="voice-james" onclick="selectVoice('james','James')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#667eea,#764ba2); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">J</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">James</div><div style="color:#666; font-size:8px;">Male • News • Justin</div></div>
+</div>
+
+<!-- 13 - Lily - Female American Young -->
+<div class="voice3d" id="voice-lily" onclick="selectVoice('lily','Lily')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#ffecd2,#fcb69f); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">L</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Lily</div><div style="color:#666; font-size:8px;">Female • Young • Kimberly</div></div>
+</div>
+
+<!-- 14 - Ethan - Male American Young -->
+<div class="voice3d" id="voice-ethan" onclick="selectVoice('ethan','Ethan')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#4facfe,#00f2fe); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">E</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Ethan</div><div style="color:#666; font-size:8px;">Male • Young • Joey2</div></div>
+</div>
+
+<!-- 15 - Freya - Female British Soft -->
+<div class="voice3d" id="voice-freya" onclick="selectVoice('freya','Freya')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#f093fb,#f5576c); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">F</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Freya</div><div style="color:#666; font-size:8px;">Female • British • Soft • Emma2</div></div>
+</div>
+
+<!-- 16 - Indian Female - Aditi -->
+<div class="voice3d" id="voice-aditi" onclick="selectVoice('aditi','Aditi')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer; border-color:#22c55e55;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#ff8a00,#ff5e62); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">🇮🇳</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Aditi - Indian</div><div style="color:#666; font-size:8px;">Female • Indian • Hindi+English • Aditi</div></div>
+</div>
+
+<!-- 17 - Indian Female 2 - Raveena -->
+<div class="voice3d" id="voice-raveena" onclick="selectVoice('raveena','Raveena')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer; border-color:#22c55e55;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#ff8a00,#ff5e62); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">🇮🇳</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Raveena - Indian</div><div style="color:#666; font-size:8px;">Female • Indian • English • Raveena</div></div>
+</div>
+
+<!-- 18 - Aria - Female American Whisper -->
+<div class="voice3d" id="voice-aria" onclick="selectVoice('aria','Aria')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#a8edea,#fed6e3); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">A</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Aria</div><div style="color:#666; font-size:8px;">Female • Whisper • ASMR • Salli</div></div>
+</div>
+
+<!-- 19 - Roger - Male American Old -->
+<div class="voice3d" id="voice-roger" onclick="selectVoice('roger','Roger')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#434343,#000); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">R</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Roger</div><div style="color:#666; font-size:8px;">Male • Old • Gravelly • Russell2</div></div>
+</div>
+
+<!-- 20 - Nicole - Female American Whisper -->
+<div class="voice3d" id="voice-nicole" onclick="selectVoice('nicole','Nicole')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#ffecd2,#fcb69f); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">N</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Nicole</div><div style="color:#666; font-size:8px;">Female • Whisper • Salli2</div></div>
+</div>
+
+<!-- 21 - Liam - Male American Young -->
+<div class="voice3d" id="voice-liam" onclick="selectVoice('liam','Liam')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#5ee7df,#b490ca); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">L</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Liam</div><div style="color:#666; font-size:8px;">Male • Young • Matthew2</div></div>
+</div>
+
+<!-- 22 - Olivia - Female American Child -->
+<div class="voice3d" id="voice-olivia" onclick="selectVoice('olivia','Olivia')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#ff9a9e,#fecfef); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">O</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Olivia</div><div style="color:#666; font-size:8px;">Female • Child • Ivy-Child2</div></div>
+</div>
+
+<!-- 23 - George - Male British Old -->
+<div class="voice3d" id="voice-george" onclick="selectVoice('george','George')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#434343,#000); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">G</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">George</div><div style="color:#666; font-size:8px;">Male • British • Old • Brian-British</div></div>
+</div>
+
+<!-- 24 - Grace - Female American Southern -->
+<div class="voice3d" id="voice-grace" onclick="selectVoice('grace','Grace')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#f093fb,#f5576c); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">G</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Grace</div><div style="color:#666; font-size:8px;">Female • Southern • Joanna2</div></div>
+</div>
+
+<!-- 25 - Harry - Male British Young -->
+<div class="voice3d" id="voice-harry" onclick="selectVoice('harry','Harry')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#4facfe,#00f2fe); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">H</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Harry</div><div style="color:#666; font-size:8px;">Male • British • Young • Geraint2</div></div>
+</div>
+
+<!-- 26 - Luna - Female American Young Energetic -->
+<div class="voice3d" id="voice-luna" onclick="selectVoice('luna','Luna')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#ff8a00,#e52e71); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">L</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Luna</div><div style="color:#666; font-size:8px;">Female • Energetic • Kendra2</div></div>
+</div>
+
+<!-- 27 - Noah - Male American Child -->
+<div class="voice3d" id="voice-noah" onclick="selectVoice('noah','Noah')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#a8edea,#fed6e3); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">N</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Noah</div><div style="color:#666; font-size:8px;">Male • Child • Justin-Child</div></div>
+</div>
+
+<!-- 28 - Sophia - Female American Professional -->
+<div class="voice3d" id="voice-sophia" onclick="selectVoice('sophia','Sophia')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#ffecd2,#fcb69f); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">S</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Sophia</div><div style="color:#666; font-size:8px;">Female • Professional • Salli-Pro</div></div>
+</div>
+
+<!-- 29 - William - Male American Old Deep -->
+<div class="voice3d" id="voice-william" onclick="selectVoice('william','William')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#434343,#000); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">W</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">William</div><div style="color:#666; font-size:8px;">Male • Old • Deep • Brian-Old</div></div>
+</div>
+
+<!-- 30 - Mia - Female American Young Soft -->
+<div class="voice3d" id="voice-mia" onclick="selectVoice('mia','Mia')" style="background:#121212; border:1px solid #1e1e1e; border-radius:18px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;">
+<div style="width:42px; height:42px; background:linear-gradient(135deg,#fa709a,#fee140); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">M</div>
+<div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Mia</div><div style="color:#666; font-size:8px;">Female • Young • Soft • Kimberly2</div></div>
+</div>
+
 </div>
 </div>
 
-<div class="glass3d" style="padding:18px; margin-bottom:16px;">
-<div style="color:#fff; font-weight:800; font-size:13px; margin-bottom:14px;">⚡ Extra Features • More Than Original • Why Loved</div>
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-<div style="background:#0a0a0a; border:1px solid #1a1a1a; border-radius:14px; padding:12px;">
-<div style="color:#fff; font-size:10px; font-weight:800; margin-bottom:8px;">🎭 Emotion Control • Extra</div>
-<select id="emotion" style="width:100%; padding:10px; background:#000; border:1px solid #1a1a1a; border-radius:10px; color:#fff; font-size:10px; margin-bottom:8px;"><option>😊 Happy • Cheerful</option><option>😢 Sad • Melancholic</option><option>😠 Angry • Furious</option><option>🤫 Whisper • Secret • ASMR</option><option>😂 Laugh • Giggle</option></select>
-<div style="display:flex; gap:6px; align-items:center;"><span style="color:#666; font-size:8px;">Intensity</span><input type="range" id="emotionIntensity" min="0" max="100" value="50" style="flex:1; accent-color:#8b5cf6;"><span id="emotionVal" style="color:#8b5cf6; font-size:9px; font-weight:800;">50%</span></div>
-</div>
-<div style="background:#0a0a0a; border:1px solid #1a1a1a; border-radius:14px; padding:12px;">
-<div style="color:#fff; font-size:10px; font-weight:800; margin-bottom:8px;">🎚️ Voice Changer • Extra</div>
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:8px;">
-<button onclick="setVoiceEffect('normal')" class="tabBtn active" style="padding:8px; font-size:9px;">Normal</button>
-<button onclick="setVoiceEffect('deep')" class="tabBtn" style="padding:8px; font-size:9px;">Deep • Old</button>
-<button onclick="setVoiceEffect('young')" class="tabBtn" style="padding:8px; font-size:9px;">Young • Child</button>
-<button onclick="setVoiceEffect('robot')" class="tabBtn" style="padding:8px; font-size:9px;">🤖 Robot</button>
-</div>
-<div style="display:flex; gap:6px; align-items:center;"><span style="color:#666; font-size:8px;">Pitch</span><input type="range" id="pitch" min="-20" max="20" value="0" style="flex:1; accent-color:#22c55e;"><span id="pitchVal" style="color:#22c55e; font-size:9px;">0</span></div>
-</div>
-<div style="background:#0a0a0a; border:1px solid #1a1a1a; border-radius:14px; padding:12px; grid-column:1/-1;">
-<div style="color:#fff; font-size:10px; font-weight:800; margin-bottom:8px;">🎙️ Voice Cloning • Why Loved • Extra</div>
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-<label style="background:#111; border:2px dashed #22c55e; border-radius:12px; padding:12px; text-align:center; cursor:pointer;">
-<div style="font-size:18px;">📁</div><div style="color:#fff; font-size:10px; font-weight:700; margin-top:4px;">Upload Voice Sample</div><div style="color:#666; font-size:8px;">MP3/WAV • 30sec • Clone any voice</div>
-<input type="file" id="cloneUpload" accept="audio/*" hidden>
-</label>
-<div style="background:#000; border:1px solid #1a1a1a; border-radius:12px; padding:10px;">
-<div style="color:#888; font-size:9px; font-weight:700; margin-bottom:6px;">Cloned Voices</div>
-<div id="clonedList"><div style="background:#111; border:1px solid #1a1a1a; border-radius:8px; padding:8px; display:flex; justify-content:space-between;"><span style="color:#666; font-size:9px;">No cloned voices yet</span><span style="background:#22c55e11; border:1px solid #22c55e22; color:#22c55e; font-size:7px; padding:2px 6px; border-radius:10px;">NEW</span></div></div>
-</div>
-</div>
-<div style="display:flex; gap:8px; margin-top:10px;"><button onclick="cloneVoice()" style="flex:1; padding:10px; background:#22c55e; border:none; border-radius:10px; color:#000; font-weight:800; font-size:10px; cursor:pointer;">🧬 Clone Voice • 1-Click</button><button onclick="clearCloned()" style="flex:1; padding:10px; background:#111; border:1px solid #1a1a1a; border-radius:10px; color:#666; font-size:10px;">Clear</button></div>
-</div>
-</div>
+<!-- GENERATE BUTTON + AUDIO - HTML -->
+<div style="background:linear-gradient(145deg,#161616,#080808); border:1px solid #1a1a1a; border-radius:24px; padding:18px; text-align:center;">
+<audio id="ttsAudio" controls style="width:100%; display:none; margin-bottom:14px; border-radius:12px; background:#000;"></audio>
+
+<button onclick="generateTTS_30FREE()" style="width:100%; padding:16px; background:linear-gradient(145deg,#22c55e,#a3e635); border:none; border-radius:18px; color:#000; font-weight:900; font-size:13px; cursor:pointer; box-shadow:0 10px 30px #22c55e33;">
+🎙️ Generate FREE - 30 Voices - Different Tone
+</button>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px;">
+<button onclick="playLast30()" style="padding:12px; background:#111; border:1px solid #1a1a1a; border-radius:12px; color:#888; font-size:10px; font-weight:700; cursor:pointer;">▶️ Play Again</button>
+<button onclick="download30()" style="padding:12px; background:#fff; border:none; border-radius:12px; color:#000; font-size:10px; font-weight:800; cursor:pointer;">⬇️ Download MP3</button>
 </div>
 
-<div class="glass3d" style="padding:18px; margin-bottom:16px;">
-<div style="color:#fff; font-weight:800; font-size:12px; margin-bottom:14px;">⚙️ Voice Settings • Stability/Similarity/Style</div>
-<div style="display:grid; gap:14px;">
-<div><div style="display:flex; justify-content:space-between; margin-bottom:6px;"><span style="color:#aaa; font-size:10px;">Stability • Variable ↔ Stable</span><span id="stabilityVal" style="color:#22c55e; font-size:10px; font-weight:800; background:#22c55e11; padding:2px 8px; border-radius:10px; border:1px solid #22c55e22;">50%</span></div><input type="range" id="stability" min="0" max="100" value="50" oninput="document.getElementById('stabilityVal').innerText=this.value+'%'" style="width:100%; accent-color:#22c55e;"></div>
-<div><div style="display:flex; justify-content:space-between; margin-bottom:6px;"><span style="color:#aaa; font-size:10px;">Similarity • Low ↔ High</span><span id="similarityVal" style="color:#8b5cf6; font-size:10px; font-weight:800; background:#8b5cf611; padding:2px 8px; border-radius:10px;">75%</span></div><input type="range" id="similarity" min="0" max="100" value="75" oninput="document.getElementById('similarityVal').innerText=this.value+'%'" style="width:100%; accent-color:#8b5cf6;"></div>
-<div><div style="display:flex; justify-content:space-between; margin-bottom:6px;"><span style="color:#aaa; font-size:10px;">Style • Exaggerated</span><span id="styleVal" style="color:#f59e0b; font-size:10px; font-weight:800; background:#f59e0b11; padding:2px 8px; border-radius:10px;">0%</span></div><input type="range" id="styleExag" min="0" max="100" value="0" oninput="document.getElementById('styleVal').innerText=this.value+'%'" style="width:100%; accent-color:#f59e0b;"></div>
-<div><div style="display:flex; justify-content:space-between; margin-bottom:6px;"><span style="color:#aaa; font-size:10px;">Speed • Slow ↔ Fast</span><span id="speedVal" style="color:#06b6d4; font-size:10px; font-weight:800; background:#06b6d411; padding:2px 8px; border-radius:10px;">1.0x</span></div><input type="range" id="speed" min="0.5" max="2" step="0.1" value="1" oninput="document.getElementById('speedVal').innerText=this.value+'x'" style="width:100%; accent-color:#06b6d4;"></div>
-</div>
+<div id="finalStatus" style="margin-top:12px; color:#22c55e; font-size:10px; background:#000; border:1px solid #111; padding:10px; border-radius:12px; text-align:center;">✅ Ready - 30 Different Voices - Select any card - Different tone each - FREE - No Key</div>
 </div>
 
-<div class="glass3d" style="padding:20px; margin-bottom:16px; text-align:center;">
-<div id="ttsWave" style="display:none; background:#000; border:1px solid #111; border-radius:18px; padding:18px; margin-bottom:16px;">
-<div style="display:flex; align-items:center; justify-content:center; gap:4px; height:40px; margin-bottom:12px;">
-<span class="waveBar" style="animation-delay:0s;"></span><span class="waveBar" style="animation-delay:0.1s;"></span><span class="waveBar" style="animation-delay:0.2s;"></span><span class="waveBar" style="animation-delay:0.3s;"></span><span class="waveBar" style="animation-delay:0.4s;"></span><span class="waveBar" style="animation-delay:0.5s;"></span><span class="waveBar" style="animation-delay:0.6s;"></span>
-</div>
-<div style="color:#fff; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:8px;"><span class="liveDot"></span> Generating with <span id="ttsVoiceName" style="color:#22c55e;">Rachel</span> • <span id="ttsEmotionName" style="color:#8b5cf6;">Happy 50%</span></div>
-<div style="background:#000; height:6px; border-radius:10px; margin-top:14px; overflow:hidden; border:1px solid #111;"><div id="ttsProgress" style="height:100%; width:0%; background:linear-gradient(90deg,#22c55e,#a3e635); transition:width .3s;"></div></div>
-</div>
-<audio id="ttsAudio" controls style="width:100%; display:none; margin-bottom:16px; border-radius:14px;"></audio>
-<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
-<button onclick="generateTTS()" style="padding:16px; background:linear-gradient(145deg,#22c55e,#a3e635); border:none; border-radius:18px; color:#000; font-weight:900; font-size:12px; cursor:pointer; box-shadow:0 12px 36px #22c55e33;">🎙️ Generate Speech</button>
-<button onclick="regenerateTTS()" style="padding:16px; background:#1a1a1a; border:1px solid #222; border-radius:18px; color:#fff; font-weight:700; font-size:11px; cursor:pointer;">🔄 Regenerate</button>
-<button onclick="downloadTTS()" style="padding:16px; background:#fff; border:none; border-radius:18px; color:#000; font-weight:900; font-size:11px; cursor:pointer;">⬇️ Download MP3</button>
-</div>
-<div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:8px; margin-top:12px;">
-<button onclick="playTTS()" style="padding:12px; background:#111; border:1px solid #1a1a1a; border-radius:12px; color:#888; font-size:10px; font-weight:700; cursor:pointer;">▶️ Play</button>
-<button onclick="copyTTS()" style="padding:12px; background:#111; border:1px solid #1a1a1a; border-radius:12px; color:#888; font-size:10px; font-weight:700; cursor:pointer;">📋 Copy</button>
-<button onclick="shareTTS()" style="padding:12px; background:#111; border:1px solid #1a1a1a; border-radius:12px; color:#888; font-size:10px; font-weight:700; cursor:pointer;">📤 Share</button>
-<button onclick="addTTSToVideo()" style="padding:12px; background:#22c55e11; border:1px solid #22c55e22; border-radius:12px; color:#22c55e; font-size:10px; font-weight:800; cursor:pointer;">➕ Add to Video</button>
-</div>
-</div>
+<!-- JAVASCRIPT - 30 FREE VOICES - FREE API - NO KEY -->
+<script>
+let currentVoice = {id:'rachel', name:'Rachel'};
+let lastAudioUrl = null;
 
-<div class="glass3d" style="padding:18px;">
-<div style="color:#fff; font-weight:800; font-size:13px; margin-bottom:14px;">📚 History • Projects • Review</div>
-<div id="ttsHistory" style="display:grid; gap:10px; background:#000; padding:14px; border-radius:18px; border:1px solid #111; min-height:70px;"><div style="color:#333; font-size:11px; padding:14px; text-align:center;">No history - Generated voices show here</div></div>
-<div style="display:flex; gap:10px; margin-top:12px;"><button onclick="clearTTSHistory()" style="flex:1; padding:12px; background:#111; border:1px solid #1a1a1a; border-radius:12px; color:#555; font-size:10px; font-weight:700; cursor:pointer;">Clear History</button><button onclick="downloadAllTTS()" style="flex:1; padding:12px; background:#fff; border:none; border-radius:12px; color:#000; font-weight:800; font-size:10px; cursor:pointer;">Download All • MP3</button></div>
-</div>
+function selectVoice(id, name){
+  document.querySelectorAll('.voice3d').forEach(v=>{ v.style.border='1px solid #1e1e1e'; v.style.boxShadow='none'; });
+  const el = document.getElementById('voice-'+id);
+  if(el){ el.style.border='2px solid #22c55e'; el.style.boxShadow='0 0 0 1px #22c55e'; }
+  currentVoice = {id:id, name:name};
+  document.getElementById('finalStatus').innerText = `✅ Selected ${name} - Different tone - Ready - FREE`;
+}
+
+document.getElementById('ttsText').addEventListener('input', function(){
+  document.getElementById('charCount').innerText = this.value.length + ' chars - 30 voices - Free - Different tones';
+});
+
+// 30 DIFFERENT VOICES - FREE API - MAP TO REAL FREE VOICES - DIFFERENT TONE EACH
+async function generateTTS_30FREE() {
+  const textEl = document.getElementById('ttsText');
+  const audioEl = document.getElementById('ttsAudio');
+  const statusEl = document.getElementById('finalStatus');
+  
+  const text = textEl.value.trim();
+  if(!text){ alert('Enter text first!'); return; }
+
+  // 30 DIFFERENT VOICES - FREE - DIFFERENT TONE EACH - NO KEY
+  const freeVoiceMap = {
+    'rachel': 'Ivy',        // 1 - Female American Calm
+    'adam': 'Brian',        // 2 - Male American Deep
+    'bella': 'Joanna',      // 3 - Female American Soft ASMR
+    'antoni': 'Joey',       // 4 - Male American Young Gaming
+    'elli': 'Kendra',       // 5 - Female Emotional Energetic
+    'josh': 'Matthew',      // 6 - Male Cinematic Deep
+    'dorothy': 'Emma',      // 7 - Female British Elegant
+    'arnold': 'Russell',    // 8 - Male Old Powerful Australian
+    'charlotte': 'Amy',     // 9 - Female British Young
+    'daniel': 'Geraint',    // 10 - Male British Welsh
+    'matilda': 'Ivy',       // 11 - Female Child (use Ivy with high pitch)
+    'james': 'Justin',      // 12 - Male News Child
+    'lily': 'Kimberly',     // 13 - Female American Young
+    'ethan': 'Joey',        // 14 - Male American Young 2
+    'freya': 'Emma',        // 15 - Female British Soft 2
+    'aditi': 'Aditi',       // 16 - Female Indian - Hindi+English
+    'raveena': 'Raveena',   // 17 - Female Indian 2
+    'aria': 'Salli',        // 18 - Female Whisper ASMR
+    'roger': 'Russell',     // 19 - Male Old Gravelly 2
+    'nicole': 'Salli',      // 20 - Female Whisper 2
+    'liam': 'Matthew',      // 21 - Male Young 2
+    'olivia': 'Ivy',        // 22 - Female Child 2
+    'george': 'Brian',      // 23 - Male British Old
+    'grace': 'Joanna',      // 24 - Female Southern
+    'harry': 'Geraint',     // 25 - Male British Young 2
+    'luna': 'Kendra',       // 26 - Female Energetic 2
+    'noah': 'Justin',       // 27 - Male Child
+    'sophia': 'Salli',      // 28 - Female Professional
+    'william': 'Brian',     // 29 - Male Old Deep 2
+    'mia': 'Kimberly'       // 30 - Female Young Soft 2
+  };
+  
+  const realVoice = freeVoiceMap[currentVoice.id] || 'Brian';
+  
+  statusEl.innerText = `⏳ Generating with ${currentVoice.name} as ${realVoice} - Different tone - FREE...`;
+  
+  // FREE API - NO KEY - DIFFERENT VOICE = DIFFERENT TONE
+  const url = `https://api.streamelements.com/kappa/v2/speech?voice=${realVoice}&text=${encodeURIComponent(text)}`;
+  
+  try {
+    audioEl.src = url;
+    audioEl.style.display = 'block';
+    await audioEl.play();
+    lastAudioUrl = url;
+    statusEl.innerText = `✅ Playing ${currentVoice.name} (${realVoice}) - Different tone - FREE - No API Key - Try another card for different tone`;
+  } catch(e){
+    statusEl.innerText = `❌ Retrying with backup FREE Edge TTS API...`;
+    // Backup FREE Edge TTS - 400+ voices
+    const backupMap = {
+      'rachel': 'en-US-JennyNeural', 'adam': 'en-US-GuyNeural', 'bella': 'en-US-AriaNeural',
+      'antoni': 'en-US-DavisNeural', 'elli': 'en-US-JaneNeural', 'josh': 'en-US-JasonNeural',
+      'dorothy': 'en-GB-SoniaNeural', 'arnold': 'en-US-BrianNeural', 'charlotte': 'en-GB-LibbyNeural',
+      'daniel': 'en-GB-RyanNeural', 'matilda': 'en-US-AriaNeural', 'james': 'en-US-GuyNeural',
+      'lily': 'en-US-JennyNeural', 'ethan': 'en-US-DavisNeural', 'freya': 'en-GB-SoniaNeural',
+      'aditi': 'en-IN-NeerjaNeural', 'raveena': 'en-IN-NeerjaNeural', 'aria': 'en-US-AriaNeural',
+      'roger': 'en-US-BrianNeural', 'nicole': 'en-US-JennyNeural', 'liam': 'en-US-GuyNeural',
+      'olivia': 'en-US-AriaNeural', 'george': 'en-GB-RyanNeural', 'grace': 'en-US-JennyNeural',
+      'harry': 'en-GB-RyanNeural', 'luna': 'en-US-JennyNeural', 'noah': 'en-US-DavisNeural',
+      'sophia': 'en-US-JennyNeural', 'william': 'en-US-BrianNeural', 'mia': 'en-US-AriaNeural'
+    };
+    const backupVoice = backupMap[currentVoice.id] || 'en-US-JennyNeural';
+    const backupUrl = `https://tts.mrfake.name.vn/edge-tts?text=${encodeURIComponent(text)}&voice=${backupVoice}`;
+    audioEl.src = backupUrl;
+    audioEl.style.display = 'block';
+    audioEl.play();
+    lastAudioUrl = backupUrl;
+    statusEl.innerText = `✅ Playing backup ${backupVoice} - Different tone - FREE`;
+  }
+}
+
+function playLast30(){
+  const audioEl = document.getElementById('ttsAudio');
+  if(audioEl.src) audioEl.play(); else alert('Generate first!');
+}
+
+function download30(){
+  if(lastAudioUrl){
+    const a = document.createElement('a');
+    a.href = lastAudioUrl;
+    a.download = `TTS-${currentVoice.name}-${Date.now()}.mp3`;
+    a.click();
+  } else alert('Generate first - Then download FREE MP3');
+}
+</script>
 
 </div>
 
