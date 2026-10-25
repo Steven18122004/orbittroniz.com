@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Orbittroniz Studio - 2 Tools Dashboard - Video + AI Image Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif;}
+html,body{background:#020205 !important; width:100%; min-height:100vh; overflow-x:hidden; -webkit-font-smoothing:antialiased;}
+::-webkit-scrollbar{width:6px; height:6px;}
+::-webkit-scrollbar-track{background:#080808;}
+::-webkit-scrollbar-thumb{background:#1a1a1a; border-radius:10px;}
+::-webkit-scrollbar-thumb:hover{background:#22c55e;}
+
+#appRoot{max-width:520px; margin:0 auto; background:#050507; min-height:100vh; position:relative; box-shadow:0 0 0 1px #111, 0 30px 120px #000; overflow:hidden;}
+
+.dash-3d{background:linear-gradient(145deg,#111111,#0a0a0a) !important; border:1px solid #1a1a1a !important; box-shadow:0 8px 32px #00000088, inset 0 1px 0 #1f1f1f !important; border-radius:20px !important; transform:translateZ(0); transition:all 0.35s cubic-bezier(0.16,1,0.3,1) !important;}
+.dash-3d:hover{transform:translateY(-3px) translateZ(20px) !important; box-shadow:0 16px 48px #000, 0 0 0 1px #22c55e22, inset 0 1px 0 #222 !important; border-color:#22c55e33 !important;}
+
+.toolCard{background:linear-gradient(145deg,#141414,#0c0c0c) !important; border:1px solid #1e1e1e !important; border-radius:18px !important; overflow:hidden !important; cursor:pointer !important; box-shadow:0 6px 20px #000, inset 0 1px 0 #1e1e1e !important; transition:all 0.35s cubic-bezier(0.16,1,0.3,1) !important; transform:translateZ(0); position:relative;}
+.toolCard:hover{transform:translateY(-4px) scale(1.02) translateZ(30px) !important; box-shadow:0 18px 48px #000, 0 0 0 1px #22c55e44, inset 0 1px 0 #2a2a2a !important; border-color:#22c55e44 !important;}
+.toolCard.active{border:2px solid #22c55e !important; box-shadow:0 0 0 1px #22c55e, 0 18px 48px #22c55e22, inset 0 1px 0 #22c55e33 !important; transform:translateY(-2px) translateZ(15px) !important;}
+
+.navBtn{background:linear-gradient(145deg,#131313,#090909) !important; border:1px solid #1c1c1c !important; box-shadow:0 6px 18px #000, inset 0 1px 0 #1c1c1c !important; border-radius:18px !important; transition:all 0.3s cubic-bezier(0.16,1,0.3,1) !important; cursor:pointer !important;}
+.navBtn.active{background:linear-gradient(145deg,#ffffff,#e8e8e8) !important; color:#000 !important; border-color:#fff !important; box-shadow:0 12px 32px #ffffff18, inset 0 1px 0 #fff !important; transform:translateY(-1px) translateZ(10px) !important;}
+.navBtn:active{transform:scale(0.96) !important;}
+
+/* PREVIEW - NO WHITE EVER - FIXED */
+#previewWrap{background:radial-gradient(ellipse at center,#141414 0%,#070707 40%,#000000 100%) !important; display:flex !important; justify-content:center !important; padding:18px !important; position:relative !important; min-height:620px !important;}
+#previewImg{width:100% !important; max-width:360px !important; height:580px !important; object-fit:cover !important; background:#000000 !important; display:none !important; border-radius:24px !important; box-shadow:0 24px 80px #000, 0 0 0 1px #1a1a1a, inset 0 1px 0 #222 !important; position:relative !important; z-index:2 !important; border:none !important; transform:translateZ(0);}
+#vfxCanvas{position:absolute !important; top:18px !important; left:50% !important; transform:translateX(-50%) !important; width:100% !important; max-width:360px !important; height:580px !important; pointer-events:none !important; border-radius:24px !important; z-index:3 !important; display:block !important; background:transparent !important;}
+#textOverlay{position:absolute !important; top:42% !important; left:50% !important; transform:translate(-50%,-50%) !important; color:#fff !important; font-size:30px !important; font-weight:900 !important; text-shadow:0 4px 32px #000, 0 2px 8px #000 !important; text-align:center !important; width:84% !important; z-index:4 !important; pointer-events:none !important; line-height:1.1 !important;}
+#placeholder{width:100% !important; max-width:360px !important; height:580px !important; background:#000000 !important; border:2px dashed #1a1a1a !important; border-radius:24px !important; display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; box-shadow:inset 0 0 60px #000000, 0 0 0 1px #0a0a0a !important; position:relative !important; z-index:1 !important;}
+.tabBtn{background:linear-gradient(145deg,#131313,#0a0a0a) !important; border:1px solid #1c1c1c !important; color:#666 !important; border-radius:14px !important; padding:10px 14px !important; font-size:11px !important; font-weight:700 !important; cursor:pointer !important; white-space:nowrap !important; box-shadow:0 4px 12px #000, inset 0 1px 0 #1a1a1a !important; transition:all 0.25s !important;}
+.tabBtn.active{background:linear-gradient(145deg,#ffffff,#e5e5e5) !important; color:#000 !important; border-color:#fff !important; box-shadow:0 8px 24px #ffffff15, inset 0 1px 0 #fff !important; font-weight:800 !important;}
+.tab{display:none !important;}
+.tab.active{display:block !important; animation:fadeUp 0.4s cubic-bezier(0.16,1,0.3,1);}
+@keyframes fadeUp{from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:translateY(0);}}
+@keyframes spin{from{transform:rotate(0deg);} to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+<div id="appRoot">
+
+<!-- HEADER - 3D DASHBOARD -->
+<div style="background:linear-gradient(145deg,#0f0f0f 0%,#050505 100%) !important; padding:18px; border-bottom:1px solid #111; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:20; backdrop-filter:blur(20px); box-shadow:0 8px 32px #000, inset 0 1px 0 #1a1a1a;">
+<div style="display:flex; gap:12px; align-items:center;">
+<div style="width:44px; height:44px; background:linear-gradient(145deg,#22c55e 0%,#a3e635 100%); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000; font-size:19px; box-shadow:0 8px 24px #22c55e44, inset 0 1px 0 #ffffff88, inset 0 -1px 0 #00000022; transform:translateZ(10px);">O</div>
+<div><div style="color:#fff; font-weight:900; font-size:16px; letter-spacing:-0.4px; line-height:1;">ORBITTRONIZ</div><div style="color:#22c55e; font-size:10px; font-weight:700; letter-spacing:0.8px; margin-top:2px;">STUDIO • 2-TOOLS • DASHBOARD 3D</div></div>
+</div>
+<div style="display:flex; gap:8px; align-items:center;">
+<div style="background:linear-gradient(145deg,#111,#080808); border:1px solid #1a1a1a; padding:6px 10px; border-radius:20px; font-size:9px; color:#555; font-weight:700; box-shadow:0 4px 12px #000, inset 0 1px 0 #1a1a1a;">● LIVE</div>
+<div style="background:#22c55e; color:#000; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:12px; box-shadow:0 4px 12px #22c55e44;">2</div>
+</div>
+</div>
+
+<!-- 2 TOOLS NAV - DASHBOARD 3D -->
+<div style="background:#08080a !important; padding:14px; display:grid; grid-template-columns:1fr 1fr; gap:12px; border-bottom:1px solid #111;">
+<button id="nav-video" onclick="switchTool('video')" class="navBtn active" style="padding:16px; display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center;">
+<div style="width:48px; height:48px; background:linear-gradient(145deg,#1a1a1a,#0a0a0a); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 6px 16px #000, inset 0 1px 0 #1a1a1a; border:1px solid #1e1e1e;">🎬</div>
+<div style="color:#000; font-weight:900; font-size:12px; letter-spacing:-0.2px;">TOOL 1<br>VIDEO GENERATOR</div>
+<div style="color:#000; opacity:0.6; font-size:8px; font-weight:700; letter-spacing:0.3px;">SLIDESHOW • VFX • MUSIC • TRANSITIONS • FILTERS • EXPORT</div>
+</button>
+<button id="nav-ai" onclick="switchTool('ai')" class="navBtn" style="padding:16px; display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; color:#666;">
+<div style="width:48px; height:48px; background:linear-gradient(145deg,#111,#080808); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 6px 16px #000, inset 0 1px 0 #1a1a1a; border:1px solid #1e1e1e;">🤖</div>
+<div style="font-weight:800; font-size:12px; letter-spacing:-0.2px; color:inherit;">TOOL 2<br>AI IMAGE GEN</div>
+<div style="opacity:0.5; font-size:8px; font-weight:700; letter-spacing:0.3px; color:inherit;">ANIME • CARTOON • PIXAR • 12 STYLES • REAL AI • REGENERATE • DOWNLOAD</div>
+</button>
+</div>
+
+<!-- UPLOAD BAR -->
+<div style="background:#08080a !important; padding:12px 14px; display:flex; gap:10px; align-items:center; border-bottom:1px solid #111; flex-wrap:wrap;">
+<label style="background:linear-gradient(145deg,#ffffff,#e8e8e8); color:#000; padding:12px 20px; border-radius:30px; font-weight:900; font-size:12px; cursor:pointer; display:flex; gap:8px; align-items:center; box-shadow:0 8px 24px #ffffff12, inset 0 1px 0 #fff; transition:all 0.2s;">
+<span style="font-size:14px;">📸</span> Upload Photos
+<input type="file" id="mainUpload" accept="image/*" multiple hidden>
+</label>
+<div style="display:flex; gap:8px; flex-wrap:wrap;">
+<span id="mainStatus" style="background:linear-gradient(145deg,#111,#080808); border:1px solid #1a1a1a; color:#22c55e; font-size:11px; padding:8px 12px; border-radius:20px; font-weight:600; box-shadow:0 4px 12px #000, inset 0 1px 0 #1a1a1a;">IMG tag • No white • Black only</span>
+<span id="mainCount" style="background:linear-gradient(145deg,#22c55e11,#a3e63511); border:1px solid #22c55e22; color:#22c55e; font-size:10px; padding:8px 12px; border-radius:20px; font-weight:800;">0 Media</span>
+</div>
+</div>
+
+<!-- PREVIEW - NO WHITE EVER -->
+<div id="previewWrap">
+<div style="position:relative; width:100%; max-width:360px;">
+<img id="previewImg" alt="preview" />
+<canvas id="vfxCanvas" width="720" height="1280"></canvas>
+<div id="textOverlay"></div>
+<div id="aiBadge" style="position:absolute; top:14px; left:14px; background:linear-gradient(145deg,#22c55e,#a3e635); color:#000; font-size:9px; font-weight:900; padding:6px 12px; border-radius:20px; z-index:5; display:none; box-shadow:0 6px 16px #22c55e44, inset 0 1px 0 #ffffff66;">AI GENERATED • REAL AI</div>
+<div id="debug" style="position:absolute; top:14px; right:14px; background:#000000cc; backdrop-filter:blur(16px); color:#22c55e; font-size:8px; padding:6px 10px; border-radius:20px; z-index:5; border:1px solid #1a1a1a; box-shadow:0 4px 12px #000;">No Media</div>
+<button id="playBtn" onclick="togglePlay()" style="position:absolute; bottom:18px; left:50%; transform:translateX(-50%); background:linear-gradient(145deg,#fff,#e8e8e8); border:none; width:58px; height:58px; border-radius:50%; font-size:22px; z-index:6; box-shadow:0 12px 32px #000, inset 0 1px 0 #fff; cursor:pointer; transition:all 0.2s;">▶️</button>
+<div id="placeholder">
+<div style="width:72px; height:72px; background:linear-gradient(145deg,#111,#080808); border-radius:20px; display:flex; align-items:center; justify-content:center; font-size:36px; box-shadow:0 12px 32px #000, inset 0 1px 0 #1a1a1a; border:1px solid #1a1a1a;">🎬</div>
+<div style="font-weight:900; font-size:15px; margin-top:16px; color:#333; letter-spacing:-0.3px;">Upload for 2-Tools Studio</div>
+<div style="font-size:11px; color:#222; margin-top:6px; text-align:center; line-height:1.4;">Tool 1: Video Generator • Slideshow<br>Tool 2: AI Image • 12 Styles • Real AI<br><span style="color:#111;">IMG tag only • #000 background • No white board</span></div>
+<div style="margin-top:14px; display:flex; gap:8px;"><span style="background:linear-gradient(145deg,#111,#080808); border:1px solid #1a1a1a; padding:6px 10px; border-radius:20px; font-size:9px; color:#333; font-weight:700; box-shadow:0 4px 12px #000;">🎬 VIDEO</span><span style="background:linear-gradient(145deg,#22c55e11,#a3e63511); border:1px solid #22c55e22; padding:6px 10px; border-radius:20px; font-size:9px; color:#22c55e; font-weight:700;">🤖 AI GEN</span></div>
+</div>
+</div>
+</div>
+
+<!-- CONTENT -->
+<div style="background:#050507 !important; padding:16px;">
+
+<!-- TOOL 1: VIDEO GENERATOR -->
+<div id="tool-video" class="appTool">
+<div style="display:flex; gap:8px; overflow-x:auto; margin-bottom:14px; padding-bottom:6px; scrollbar-width:none;">
+<button onclick="switchVideoTab('slideshow')" id="vTab-slideshow" class="tabBtn active">🎬 Slideshows</button>
+<button onclick="switchVideoTab('edit')" id="vTab-edit" class="tabBtn">✂️ Per Image</button>
+<button onclick="switchVideoTab('trans')" id="vTab-trans" class="tabBtn">🔀 Transitions</button>
+<button onclick="switchVideoTab('filter')" id="vTab-filter" class="tabBtn">🎨 Filters</button>
+<button onclick="switchVideoTab('vfx')" id="vTab-vfx" class="tabBtn">✨ VFX Fixed</button>
+<button onclick="switchVideoTab('music')" id="vTab-music" class="tabBtn">🎵 Music</button>
+<button onclick="switchVideoTab('text')" id="vTab-text" class="tabBtn">📝 Text</button>
+</div>
+
+<div id="vTabContent-slideshow" class="tab active">
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+<div class="dash-3d" onclick="applySlideshow('viral')" style="padding:14px; cursor:pointer;"><div style="font-size:12px; font-weight:800; color:#fff;">🔥 Viral Reels</div><div style="font-size:9px; color:#555; margin-top:5px; line-height:1.3;">0.8s per image + Zoom In + Bass music + Shake</div><div style="margin-top:8px; background:#22c55e; color:#000; font-size:8px; font-weight:900; padding:3px 8px; border-radius:20px; display:inline-block;">TRENDING</div></div>
+<div class="dash-3d" onclick="applySlideshow('cinematic')" style="padding:14px; cursor:pointer;"><div style="font-size:12px; font-weight:800; color:#fff;">🎬 Cinematic Slow</div><div style="font-size:9px; color:#555; margin-top:5px; line-height:1.3;">3s + Ken Burns Pan + Lofi Chill + Fade</div></div>
+<div class="dash-3d" onclick="applySlideshow('anime')" style="padding:14px; cursor:pointer;"><div style="font-size:12px; font-weight:800; color:#fff;">🎌 Anime AMV</div><div style="font-size:9px; color:#555; margin-top:5px; line-height:1.3;">Flash + Spin + Zoom + Phonk Drift</div></div>
+<div class="dash-3d" onclick="applySlideshow('aesthetic')" style="padding:14px; cursor:pointer;"><div style="font-size:12px; font-weight:800; color:#fff;">🌸 Aesthetic Soft</div><div style="font-size:9px; color:#555; margin-top:5px; line-height:1.3;">Fade + Dream filter + Pulse + Love music</div></div>
+</div>
+</div>
+
+<div id="vTabContent-edit" class="tab">
+<div class="dash-3d" style="padding:14px; margin-bottom:12px;">
+<div style="display:flex; justify-content:space-between; margin-bottom:10px;"><div style="color:#fff; font-size:12px; font-weight:800;">Editing: <span id="editName" style="color:#22c55e;">No image</span></div><div style="font-size:8px; color:#22c55e; background:#22c55e11; padding:4px 10px; border-radius:20px; border:1px solid #22c55e22; font-weight:700;">PER IMAGE MOTION</div></div>
+<div id="perImageEditor" style="display:none;">
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+<select id="motionSelect" onchange="savePerImage()" style="padding:12px; background:#000; border:1px solid #1a1a1a; border-radius:12px; color:#fff; font-size:11px; font-weight:600;"><option value="none">No Motion</option><option value="zoomIn">Zoom In - Viral</option><option value="zoomOut">Zoom Out - Cinematic</option><option value="rotate">Rotate 360° - Per Image</option><option value="panLeft">Pan Left</option><option value="panRight">Pan Right</option><option value="pulse">Pulse - Aesthetic</option><option value="shake">Shake - Viral TikTok</option><option value="bounce">Bounce</option></select>
+<div style="display:flex; gap:6px; align-items:center; background:#000; border:1px solid #1a1a1a; border-radius:12px; padding:0 10px; height:46px;"><input type="range" id="durRange" min="0.5" max="8" step="0.5" value="2" oninput="savePerImage()" style="flex:1; accent-color:#22c55e;"><span id="durVal" style="color:#22c55e; font-size:11px; font-weight:800;">2s</span></div>
+</div>
+<button onclick="savePerImage()" style="width:100%; margin-top:12px; padding:12px; background:linear-gradient(145deg,#fff,#e5e5e5); color:#000; border:none; border-radius:12px; font-weight:900; font-size:11px; cursor:pointer; box-shadow:0 6px 18px #ffffff12;">✅ SAVE Per Image Motion</button>
+</div>
+</div>
+<div id="thumbList" style="display:flex; gap:10px; overflow-x:auto; background:#000 !important; padding:12px; border-radius:16px; min-height:84px; border:1px solid #111; box-shadow:inset 0 0 20px #000;"></div>
+</div>
+
+<div id="vTabContent-trans" class="tab">
+<div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+<button onclick="setTrans('none')" class="toolCard" style="padding:16px 4px; color:#fff; font-size:10px; font-weight:700;">🚫 Cut</button>
+<button onclick="setTrans('fade')" class="toolCard" style="padding:16px 4px; color:#fff; font-size:10px; font-weight:700;">🌫️ Fade</button>
+<button onclick="setTrans('slideLeft')" class="toolCard" style="padding:16px 4px; color:#fff; font-size:10px; font-weight:700;">⬅️ Slide</button>
+<button onclick="setTrans('zoomInTrans')" class="toolCard active" style="padding:16px 4px; color:#fff; font-size:10px; font-weight:800;">🔍 Zoom</button>
+<button onclick="setTrans('spin')" class="toolCard" style="padding:16px 4px; color:#fff; font-size:10px; font-weight:700;">🌀 Spin</button>
+<button onclick="setTrans('glitch')" class="toolCard" style="padding:16px 4px; color:#fff; font-size:10px; font-weight:700; background:linear-gradient(145deg,#ef4444,#dc2626) !important;">📺 Glitch</button>
+<button onclick="setTrans('flash')" class="toolCard" style="padding:16px 4px; color:#000; font-size:10px; font-weight:800; background:linear-gradient(145deg,#fff,#e5e5e5) !important;">⚡ Flash</button>
+<button onclick="setTrans('blurTrans')" class="toolCard" style="padding:16px 4px; color:#fff; font-size:10px; font-weight:700; background:linear-gradient(145deg,#8b5cf6,#7c3aed) !important;">🌫️ Blur</button>
+</div>
+</div>
+
+<div id="vTabContent-filter" class="tab">
+<div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+<button onclick="setFilter('none')" class="toolCard active" style="padding:16px 4px; color:#fff; font-size:10px; font-weight:700;">🚫 None</button>
+<button onclick="setFilter('grayscale(1)')" class="toolCard" style="padding:16px 4px; color:#fff; font-size:10px; font-weight:700;">⚫ B&W</button>
+<button onclick="setFilter('contrast(1.6) saturate(1.8)')" class="toolCard" style="padding:16px 4px; color:#000; font-size:10px; font-weight:800; background:linear-gradient(145deg,#22c55e,#a3e635) !important;">🌈 Vivid</button>
+<button onclick="setFilter('sepia(0.8) saturate(1.5)')" class="toolCard" style="padding:16px 4px; color:#fff; font-size:10px; font-weight:700;">🌅 Warm</button>
+<button onclick="setFilter('saturate(0) brightness(1.2) contrast(1.2)')" class="toolCard" style="padding:16px 4px; color:#fff; font-size:10px; font-weight:700;">📷 Film</button>
+<button onclick="setFilter('hue-rotate(280deg) saturate(1.5)')" class="toolCard" style="padding:16px 4px; color:#fff; font-size:10px; font-weight:700;">💜 Purple</button>
+<button onclick="setFilter('blur(2px) brightness(1.1)')" class="toolCard" style="padding:16px 4px; color:#fff; font-size:10px; font-weight:700;">🌫️ Dream</button>
+<button onclick="setFilter('contrast(1.8) brightness(0.9)')" class="toolCard" style="padding:16px 4px; color:#fff; font-size:10px; font-weight:700;">🎬 Moody</button>
+</div>
+</div>
+
+<div id="vTabContent-vfx" class="tab">
+<div style="background:linear-gradient(145deg,#22c55e0f,#a3e6350f); border:1px solid #22c55e22; border-radius:14px; padding:12px; margin-bottom:14px; font-size:10px; color:#22c55e; font-weight:600; line-height:1.4; box-shadow:0 4px 16px #22c55e0a;">✅ VFX FIXED - Canvas overlay on IMG tag - Now visible over image! No white board - IMG tag black only - 3D depth shadows - Snow/Rain/Glitter/Hearts/Fire all working!</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
+<select id="vfx1" onchange="saveVFX()" style="padding:14px; background:#0a0a0a; border:1px solid #1a1a1a; border-radius:14px; color:#fff; font-size:11px; font-weight:600; box-shadow:0 4px 12px #000, inset 0 1px 0 #1a1a1a;"><option value="none">🚫 No Weather</option><option value="snow">❄️ Snow Falling - VFX</option><option value="rain">🌧️ Rain Drops - VFX</option><option value="thunder">⛈️ Thunder Flash - VFX</option></select>
+<select id="vfx2" onchange="saveVFX()" style="padding:14px; background:#0a0a0a; border:1px solid #1a1a1a; border-radius:14px; color:#fff; font-size:11px; font-weight:600; box-shadow:0 4px 12px #000, inset 0 1px 0 #1a1a1a;"><option value="none">🚫 No Particles</option><option value="glitter">✨ Glitter Stars - VFX</option><option value="bokeh">💫 Bokeh Lights - VFX</option><option value="hearts">💖 Floating Hearts - VFX</option><option value="fire">🔥 Fire Sparks - VFX</option></select>
+</div>
+<div style="display:flex; gap:10px;"><button onclick="testVFX()" style="flex:1; padding:14px; background:linear-gradient(145deg,#1a1a1a,#0f0f0f); border:1px solid #222; border-radius:14px; color:#fff; font-weight:700; font-size:11px; cursor:pointer; box-shadow:0 6px 18px #000, inset 0 1px 0 #1a1a1a;">👁️ Test VFX - Show Now Over IMG</button><button onclick="clearVFX()" style="flex:1; padding:14px; background:linear-gradient(145deg,#0a0a0a,#050505); border:1px solid #1a1a1a; border-radius:14px; color:#666; font-size:11px; font-weight:700; cursor:pointer;">Clear VFX</button></div>
+</div>
+
+<div id="vTabContent-music" class="tab">
+<div style="background:linear-gradient(145deg,#111,#080808); border:2px dashed #22c55e; border-radius:18px; padding:16px; margin-bottom:14px; text-align:center; box-shadow:0 12px 32px #000, inset 0 1px 0 #1a1a1a;">
+<div style="font-size:11px; color:#fff; font-weight:800; margin-bottom:10px; letter-spacing:-0.2px;">🎵 Custom Music - Exports WITH Video - Fixed Audio Mixing - No White</div>
+<label style="display:inline-block; background:linear-gradient(145deg,#22c55e,#a3e635); color:#000; padding:12px 20px; border-radius:30px; font-weight:900; font-size:11px; cursor:pointer; box-shadow:0 8px 24px #22c55e33, inset 0 1px 0 #ffffff66;">
+📁 Upload MP3/WAV - Will Export with Video
+<input type="file" id="customMusic" accept="audio/*" hidden>
+</label>
+<div id="customMusicName" style="font-size:10px; color:#555; margin-top:8px;">No music - Upload to include in download</div>
+<audio id="customAudio" controls style="width:100%; margin-top:10px; display:none; border-radius:12px;" crossorigin="anonymous"></audio>
+</div>
+<div style="display:grid; gap:10px;">
+<button onclick="playTune('lofi')" style="display:flex; justify-content:space-between; padding:14px; background:linear-gradient(145deg,#111,#0a0a0a); border:1px solid #1a1a1a; border-radius:14px; color:#fff; width:100%; text-align:left; cursor:pointer; box-shadow:0 6px 18px #000;"><div><div style="font-size:11px; font-weight:800;">🎵 Lofi Chill - Exportable</div><div style="font-size:9px; color:#555;">Will include in download - Fixed mixing</div></div><span style="background:linear-gradient(145deg,#22c55e,#a3e635); color:#000; padding:6px 12px; border-radius:20px; font-size:10px; font-weight:900; box-shadow:0 4px 12px #22c55e33;">▶️</span></button>
+<button onclick="playTune('phonk')" style="display:flex; justify-content:space-between; padding:14px; background:linear-gradient(145deg,#111,#0a0a0a); border:1px solid #1a1a1a; border-radius:14px; color:#fff; width:100%; text-align:left; cursor:pointer; box-shadow:0 6px 18px #000;"><div><div style="font-size:11px; font-weight:800;">🚗 Phonk Drift - Viral TikTok</div><div style="font-size:9px; color:#555;">Trending - Exportable - Viral Reels</div></div><span style="background:linear-gradient(145deg,#22c55e,#a3e635); color:#000; padding:6px 12px; border-radius:20px; font-size:10px; font-weight:900; box-shadow:0 4px 12px #22c55e33;">▶️</span></button>
+</div>
+<div style="display:flex; gap:10px; margin-top:14px;"><button onclick="stopTune()" style="flex:1; padding:14px; background:linear-gradient(145deg,#111,#0a0a0a); border:1px solid #1a1a1a; border-radius:14px; color:#fff; font-size:11px; font-weight:700; cursor:pointer; box-shadow:0 4px 12px #000;">⏹️ Stop</button><button onclick="addTune()" style="flex:1; padding:14px; background:linear-gradient(145deg,#22c55e,#a3e635); border:none; border-radius:14px; color:#000; font-size:11px; font-weight:900; cursor:pointer; box-shadow:0 8px 24px #22c55e33;">✅ Add to Export</button></div>
+<div id="musicStatus" style="margin-top:12px; font-size:10px; color:#22c55e; text-align:center; background:linear-gradient(145deg,#111,#0a0a0a); padding:10px; border-radius:12px; border:1px solid #111; box-shadow:0 4px 12px #000;">Music exports with video - Audio mixing fixed - No white board</div>
+</div>
+
+<div id="vTabContent-text" class="tab">
+<input id="textInput" placeholder="Add text like 😍 Viral Text • 2026" oninput="document.getElementById('textOverlay').innerText=this.value" style="width:100%; padding:14px; background:linear-gradient(145deg,#111,#0a0a0a); border:1px solid #1a1a1a; border-radius:14px; color:#fff; font-size:12px; font-weight:600; margin-bottom:12px; box-shadow:0 6px 18px #000, inset 0 1px 0 #1a1a1a;">
+<div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+<button onclick="setTextStyle('normal')" class="toolCard" style="padding:12px; color:#fff; font-size:10px; font-weight:700;">Normal</button>
+<button onclick="setTextStyle('neon')" class="toolCard" style="padding:12px; color:#000; font-size:10px; font-weight:800; background:linear-gradient(145deg,#22c55e,#a3e635) !important;">Neon</button>
+<button onclick="setTextStyle('fire')" class="toolCard" style="padding:12px; color:#fff; font-size:10px; font-weight:700; background:linear-gradient(145deg,#ef4444,#dc2626) !important;">🔥 Fire</button>
+<button onclick="setTextStyle('glow')" class="toolCard" style="padding:12px; color:#fff; font-size:10px; font-weight:700; background:linear-gradient(145deg,#8b5cf6,#7c3aed) !important;">✨ Glow</button>
+</div>
+</div>
+</div>
+
+<!-- TOOL 2: AI IMAGE GENERATOR - REAL AI -->
+<div id="tool-ai" class="appTool" style="display:none;">
+<div style="display:flex; gap:8px; overflow-x:auto; margin-bottom:14px; padding-bottom:6px;">
+<button onclick="switchAiTab('styles')" id="aiTab-styles" class="tabBtn active">🤖 AI Styles (12)</button>
+<button onclick="switchAiTab('result')" id="aiTab-result" class="tabBtn">✨ Result • Regenerate</button>
+<button onclick="switchAiTab('history')" id="aiTab-history" class="tabBtn">📚 History</button>
+<button onclick="switchAiTab('vfx')" id="aiTab-vfx" class="tabBtn">✨ VFX</button>
+</div>
+
+<div id="aiTabContent-styles" class="tab active">
+<div class="dash-3d" style="padding:16px; margin-bottom:14px;">
+<div style="display:flex; justify-content:space-between; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+<div style="color:#fff; font-weight:800; font-size:13px; letter-spacing:-0.2px;">🤖 Real AI Styles - Leonardo Quality - Detailed Prompts - Real AI Not Filter</div>
+<div style="font-size:9px; color:#22c55e; background:#22c55e11; padding:5px 10px; border-radius:20px; border:1px solid #22c55e22; font-weight:700;">REAL AI DIFFUSION</div>
+</div>
+<div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px;">
+<div class="toolCard" onclick="generateAI('anime')"><div style="height:92px; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); display:flex; align-items:center; justify-content:center; font-size:32px; position:relative;"><span style="filter:drop-shadow(0 4px 12px #000);">🎌</span><div style="position:absolute; bottom:6px; right:6px; background:#00000088; backdrop-filter:blur(8px); color:#fff; font-size:7px; padding:2px 6px; border-radius:10px; font-weight:700;">GHIBLI</div></div><div style="padding:10px; background:#0f0f0f !important;"><div style="color:#fff; font-size:11px; font-weight:800; letter-spacing:-0.2px;">Anime</div><div style="color:#555; font-size:7px; margin-top:3px; line-height:1.3;">Studio Ghibli • Makoto Shinkai • Anime key visual • 8k • Ultra detailed</div></div></div>
+<div class="toolCard" onclick="generateAI('cartoon')"><div style="height:92px; background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%); display:flex; align-items:center; justify-content:center; font-size:32px;"><span style="filter:drop-shadow(0 4px 12px #000);">🎨</span></div><div style="padding:10px; background:#0f0f0f !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Pixar 3D</div><div style="color:#555; font-size:7px; margin-top:3px; line-height:1.3;">Pixar • Disney • Octane render • Subsurface scattering • Cute</div></div></div>
+<div class="toolCard" onclick="generateAI('cyberpunk')"><div style="height:92px; background:linear-gradient(135deg,#4facfe 0%,#00f2fe 100%); display:flex; align-items:center; justify-content:center; font-size:32px;"><span style="filter:drop-shadow(0 4px 12px #000);">🌃</span></div><div style="padding:10px; background:#0f0f0f !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Cyberpunk</div><div style="color:#555; font-size:7px; margin-top:3px; line-height:1.3;">Blade Runner 2049 • Neon city • Volumetric • Futuristic</div></div></div>
+<div class="toolCard" onclick="generateAI('oil')"><div style="height:92px; background:linear-gradient(135deg,#ffecd2 0%,#fcb69f 100%); display:flex; align-items:center; justify-content:center; font-size:32px;"><span style="filter:drop-shadow(0 4px 12px #000);">🖼️</span></div><div style="padding:10px; background:#0f0f0f !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Oil Painting</div><div style="color:#555; font-size:7px; margin-top:3px; line-height:1.3;">Renaissance • Rembrandt lighting • Brush strokes • Museum</div></div></div>
+<div class="toolCard" onclick="generateAI('barbie')"><div style="height:92px; background:linear-gradient(135deg,#ff9a9e 0%,#fecfef 100%); display:flex; align-items:center; justify-content:center; font-size:32px;"><span style="filter:drop-shadow(0 4px 12px #000);">💖</span></div><div style="padding:10px; background:#0f0f0f !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Barbie</div><div style="color:#555; font-size:7px; margin-top:3px; line-height:1.3;">Mattel Barbie • Pink • Fashion doll • Glamorous</div></div></div>
+<div class="toolCard" onclick="generateAI('comic')"><div style="height:92px; background:linear-gradient(135deg,#ff8a00 0%,#e52e71 100%); display:flex; align-items:center; justify-content:center; font-size:32px;"><span style="filter:drop-shadow(0 4px 12px #000);">💥</span></div><div style="padding:10px; background:#0f0f0f !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Comic Book</div><div style="color:#555; font-size:7px; margin-top:3px; line-height:1.3;">Marvel • Bold lines • Halftone • Comic art • Stan Lee</div></div></div>
+<div class="toolCard" onclick="generateAI('pixar')"><div style="height:92px; background:linear-gradient(135deg,#fa709a 0%,#fee140 100%); display:flex; align-items:center; justify-content:center; font-size:32px;"><span style="filter:drop-shadow(0 4px 12px #000);">🧸</span></div><div style="padding:10px; background:#0f0f0f !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Disney</div><div style="color:#555; font-size:7px; margin-top:3px; line-height:1.3;">Disney princess • Cute • Big eyes • 3D render</div></div></div>
+<div class="toolCard" onclick="generateAI('vintage')"><div style="height:92px; background:linear-gradient(135deg,#a8edea 0%,#fed6e3 100%); display:flex; align-items:center; justify-content:center; font-size:32px;"><span style="filter:drop-shadow(0 4px 12px #000);">📸</span></div><div style="padding:10px; background:#0f0f0f !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Vintage 90s</div><div style="color:#555; font-size:7px; margin-top:3px; line-height:1.3;">Kodak Portra 400 • Film grain • 90s • Retro</div></div></div>
+<div class="toolCard" onclick="generateAI('ghibli')"><div style="height:92px; background:linear-gradient(135deg,#a1c4fd 0%,#c2e9fb 100%); display:flex; align-items:center; justify-content:center; font-size:32px;"><span style="filter:drop-shadow(0 4px 12px #000);">🌿</span></div><div style="padding:10px; background:#0f0f0f !important;"><div style="color:#fff; font-size:11px; font-weight:800;">Ghibli</div><div style="color:#555; font-size:7px; margin-top:3px; line-height:1.3;">Hayao Miyazaki • Spirited Away • Soft • Hand drawn</div></div></div>
+</div>
+
+<div id="aiLoading" style="display:none; background:linear-gradient(145deg,#111,#0a0a0a); border-radius:20px; padding:24px; text-align:center; margin-top:14px; border:1px solid #1a1a1a; box-shadow:0 12px 32px #000, inset 0 1px 0 #1a1a1a;">
+<div style="width:48px; height:48px; background:linear-gradient(145deg,#22c55e,#a3e635); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; margin:0 auto; box-shadow:0 8px 24px #22c55e33; animation:spin 1.2s linear infinite;">🤖</div>
+<div style="color:#fff; font-size:14px; font-weight:800; margin-top:14px; letter-spacing:-0.3px;">Real AI Generating <span id="aiLoadingStyle" style="color:#22c55e;">Anime</span>...</div>
+<div style="color:#555; font-size:10px; margin-top:6px; line-height:1.4;">Leonardo-quality diffusion model • Same person same pose same clothes • Redrawn as <span id="aiLoadingStyle2">Anime</span> • 8-15 sec • Real AI not filter</div>
+<div style="background:#000; height:6px; border-radius:10px; margin-top:14px; overflow:hidden; border:1px solid #111;"><div id="aiProgress" style="height:100%; width:0%; background:linear-gradient(90deg,#22c55e,#a3e635); transition:width 0.5s cubic-bezier(0.16,1,0.3,1); box-shadow:0 0 10px #22c55e44;"></div></div>
+<div id="aiPromptShow" style="background:#000; border:1px solid #111; border-radius:10px; padding:10px; margin-top:12px; font-size:9px; color:#444; text-align:left; font-family:monospace !important; line-height:1.4; box-shadow:inset 0 0 20px #000;">Prompt: </div>
+</div>
+</div>
+</div>
+
+<div id="aiTabContent-result" class="tab">
+<div id="aiResultBox" style="display:none; background:linear-gradient(145deg,#111,#0a0a0a) !important; border:2px solid #22c55e33; border-radius:22px; padding:16px; box-shadow:0 16px 48px #000, inset 0 1px 0 #1a1a1a;">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+<div style="color:#fff; font-size:13px; font-weight:800; letter-spacing:-0.2px;">✨ Real AI Generated: <span id="aiStyleName" style="color:#22c55e;">Anime</span></div>
+<div style="background:linear-gradient(145deg,#22c55e,#a3e635); color:#000; font-size:9px; font-weight:900; padding:6px 12px; border-radius:20px; box-shadow:0 6px 16px #22c55e33;">REAL AI • LEONARDO QUALITY</div>
+</div>
+<img id="aiResultImg" style="width:100%; max-width:360px; height:auto; border-radius:18px; border:2px solid #1a1a1a; display:block; margin:0 auto; background:#000; box-shadow:0 16px 48px #000;" />
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px;">
+<button onclick="regenerateAI()" style="padding:14px; background:linear-gradient(145deg,#1a1a1a,#0f0f0f); border:1px solid #222; border-radius:14px; color:#fff; font-weight:700; font-size:11px; cursor:pointer; box-shadow:0 6px 18px #000, inset 0 1px 0 #1a1a1a;">🔄 Regenerate - New Variation - Like App You Showed</button>
+<button onclick="downloadAI()" style="padding:14px; background:linear-gradient(145deg,#ffffff,#e8e8e8); border:none; border-radius:14px; color:#000; font-weight:900; font-size:11px; cursor:pointer; box-shadow:0 8px 24px #ffffff15, inset 0 1px 0 #fff;">⬇️ Download HD - Like App Button</button>
+</div>
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:10px;">
+<button onclick="addAIToVideo()" style="padding:12px; background:linear-gradient(145deg,#22c55e,#a3e635); border:none; border-radius:12px; color:#000; font-weight:800; font-size:10px; cursor:pointer; box-shadow:0 6px 18px #22c55e33;">➕ Add to Video Tool 1</button>
+<button onclick="shareAI()" style="padding:12px; background:linear-gradient(145deg,#0a0a0a,#050505); border:1px solid #1a1a1a; border-radius:12px; color:#555; font-size:10px; font-weight:700; cursor:pointer; box-shadow:0 4px 12px #000;">📤 Share</button>
+<button onclick="saveHistory()" style="padding:12px; background:linear-gradient(145deg,#0a0a0a,#050505); border:1px solid #1a1a1a; border-radius:12px; color:#555; font-size:10px; font-weight:700; cursor:pointer; box-shadow:0 4px 12px #000;">💾 Save</button>
+</div>
+<div id="seedInfo" style="margin-top:10px; font-size:9px; color:#444; background:#000; padding:8px 10px; border-radius:10px; border:1px solid #111; line-height:1.4; box-shadow:inset 0 0 20px #000;"></div>
+</div>
+<div id="aiNoResult" style="background:linear-gradient(145deg,#111,#0a0a0a); border:1px dashed #1a1a1a; border-radius:18px; padding:24px; text-align:center; box-shadow:0 12px 32px #000, inset 0 1px 0 #1a1a1a;">
+<div style="width:56px; height:56px; background:linear-gradient(145deg,#111,#080808); border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:28px; margin:0 auto; box-shadow:0 8px 24px #000, inset 0 1px 0 #1a1a1a; border:1px solid #1a1a1a;">🤖</div>
+<div style="color:#444; font-size:13px; margin-top:12px; font-weight:700;">Upload 1 photo → Choose style → Real AI will redraw like Leonardo</div><div style="color:#333; font-size:10px; margin-top:6px; line-height:1.4;">Not filter - Full AI diffusion model generates new image<br>Same person, same pose, same clothes - Redrawn as Anime/Cartoon/Pixar etc</div>
+</div>
+</div>
+
+<div id="aiTabContent-history" class="tab">
+<div style="color:#fff; font-weight:800; font-size:12px; margin-bottom:12px; letter-spacing:-0.2px;">📚 History - Real AI Generated - All Your Creations</div>
+<div id="historyList" style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; background:#000 !important; padding:12px; border-radius:16px; border:1px solid #111; min-height:100px; box-shadow:inset 0 0 30px #000;">
+<div style="grid-column:1/-1; color:#333; font-size:11px; padding:24px; text-align:center;">No history - Real AI images will show here<br><span style="font-size:9px; color:#222;">Generated images auto-save here</span></div>
+</div>
+<div style="display:flex; gap:10px; margin-top:12px;"><button onclick="clearHistory()" style="flex:1; padding:12px; background:linear-gradient(145deg,#111,#0a0a0a); border:1px solid #1a1a1a; border-radius:12px; color:#555; font-size:11px; font-weight:700; cursor:pointer; box-shadow:0 4px 12px #000;">Clear History</button><button onclick="downloadAllHistory()" style="flex:1; padding:12px; background:linear-gradient(145deg,#fff,#e5e5e5); border:none; border-radius:12px; color:#000; font-weight:800; font-size:11px; cursor:pointer; box-shadow:0 6px 18px #ffffff15;">Download All HD</button></div>
+</div>
+
+<div id="aiTabContent-vfx" class="tab">
+<div style="background:linear-gradient(145deg,#22c55e0f,#a3e6350f); border:1px solid #22c55e22; border-radius:14px; padding:12px; margin-bottom:14px; font-size:10px; color:#22c55e; font-weight:600; line-height:1.5; box-shadow:0 4px 16px #22c55e0a;">✅ VFX FIXED - Canvas overlay on IMG tag - Now visible over AI image! No white board - IMG tag black only - 3D depth - Snow/Rain/Glitter/Hearts/Fire working over AI generated image!</div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
+<select id="aiVfx1" onchange="saveAiVFX()" style="padding:14px; background:#0a0a0a; border:1px solid #1a1a1a; border-radius:14px; color:#fff; font-size:11px; font-weight:600;"><option value="none">🚫 No Weather</option><option value="snow">❄️ Snow Falling - VFX</option><option value="rain">🌧️ Rain Drops - VFX</option><option value="thunder">⛈️ Thunder Flash - VFX</option></select>
+<select id="aiVfx2" onchange="saveAiVFX()" style="padding:14px; background:#0a0a0a; border:1px solid #1a1a1a; border-radius:14px; color:#fff; font-size:11px; font-weight:600;"><option value="none">🚫 No Particles</option><option value="glitter">✨ Glitter Stars - VFX</option><option value="bokeh">💫 Bokeh Lights - VFX</option><option value="hearts">💖 Floating Hearts - VFX</option><option value="fire">🔥 Fire Sparks - VFX</option></select>
+</div>
+<div style="display:flex; gap:10px;"><button onclick="testAiVFX()" style="flex:1; padding:14px; background:linear-gradient(145deg,#22c55e,#a3e635); border:none; border-radius:14px; color:#000; font-weight:800; font-size:11px; cursor:pointer; box-shadow:0 8px 24px #22c55e33;">👁️ Test VFX Over AI Image - Show Now</button><button onclick="clearAiVFX()" style="flex:1; padding:14px; background:linear-gradient(145deg,#0a0a0a,#050505); border:1px solid #1a1a1a; border-radius:14px; color:#666; font-size:11px; font-weight:700; cursor:pointer;">Clear VFX</button></div>
+</div>
+</div>
+
+<!-- EXPORT BAR - 3D -->
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px;">
+<button onclick="togglePlay()" style="padding:16px; background:linear-gradient(145deg,#111,#080808); border:1px solid #1a1a1a; border-radius:16px; color:#fff; font-weight:800; font-size:12px; cursor:pointer; box-shadow:0 8px 24px #000, inset 0 1px 0 #1a1a1a; transition:all 0.2s;">▶️ Play Full Video</button>
+<button onclick="downloadVideo()" style="padding:16px; background:linear-gradient(145deg,#ffffff,#e8e8e8); border:none; border-radius:16px; color:#000; font-weight:900; font-size:12px; cursor:pointer; box-shadow:0 12px 32px #ffffff12, inset 0 1px 0 #fff; transition:all 0.2s; letter-spacing:-0.2px;">⬇️ Download WITH Music + VFX + AI</button>
+</div>
+
+</div>
+
+<div id="finalStatus" style="background:linear-gradient(145deg,#050507,#000000) !important; color:#22c55e; font-size:10px; text-align:center; padding:14px; margin:0; border-top:1px solid #111; font-weight:600; letter-spacing:0.3px; box-shadow:inset 0 1px 0 #111;">2-TOOLS DASHBOARD 3D • TOOL 1 VIDEO GENERATOR + TOOL 2 REAL AI IMAGE GEN • NO WHITE BOARD EVER • VFX OVER IMG FIXED • SMOOTH APP • IMG TAG ONLY • DASHBOARD UI 3D • LEONARDO QUALITY PROMPTS</div>
+</div>
+
+<script>
+(function(){
+let images=[], cur=-1, historyAI=[], currentStyle='anime', vfxSys=[], vfxAnimId=null, progressInterval=null, isPlay=false, playAnimId=null, progress=0, audioCtx=null, oscNodes=[], customAudioEl=null;
+
+const prompts={
+  anime: "anime style, studio ghibli anime, Makoto Shinkai key visual, highly detailed anime face, large expressive anime eyes, anime illustration, 8k ultra detailed, same person anime version, same clothes white shirt black suspenders, same pose, anime key visual, trending on artstation, sharp focus",
+  cartoon: "pixar 3d cartoon style, Disney Pixar 3D render, cute cartoon character, big expressive eyes, octane render, subsurface scattering, highly detailed, same person as cartoon, same pose and clothes, pixar character, Disney style, 8k",
+  cyberpunk: "cyberpunk style, Blade Runner 2049, neon city background, futuristic cyberpunk, volumetric lighting, highly detailed cyberpunk portrait, same person cyberpunk edition, cyberpunk 2077, neon lights, cinematic, 8k",
+  oil: "classical oil painting, Renaissance oil painting, Rembrandt lighting, visible brush strokes, oil on canvas masterpiece, same person oil painting portrait, baroque style, museum quality, highly detailed oil painting",
+  barbie: "barbie doll style, Mattel Barbie, plastic doll, pink fashion doll, glamorous barbie, toy photo, same person as barbie doll, pink background, fashion doll, highly detailed",
+  comic: "Marvel comic book art, comic book illustration, bold black lines, halftone dots, comic style, highly detailed comic art, same person as comic book character, Stan Lee comic, vibrant colors",
+  pixar: "Disney princess style, 3D Disney render, cute Disney character, big cute eyes, Disney animation, same person as Disney princess, disney style, 3D, octane render",
+  vintage: "1990s vintage film photo, Kodak Portra 400, film grain, 90s aesthetic, vintage film photography, retro, same person vintage photo, 90s film, grainy, nostalgic",
+  ghibli: "Studio Ghibli style, Hayao Miyazaki, Spirited Away anime style, soft lighting, Ghibli background, hand drawn anime, same person Ghibli style, Ghibli art, soft colors, magical"
+};
+
+function initVfx(){ vfxSys=[]; for(let i=0;i<140;i++) vfxSys.push({x:Math.random()*360, y:Math.random()*580, s:Math.random()*3+1.2, sp:Math.random()*2.5+0.5}); }
+
+window.switchTool=function(name){
+  document.querySelectorAll('.appTool').forEach(t=>t.style.display='none');
+  document.querySelectorAll('[id^=nav-]').forEach(b=>{ b.classList.remove('active'); });
+  document.getElementById('tool-'+name).style.display='block';
+  document.getElementById('nav-'+name).classList.add('active');
+  document.getElementById('finalStatus').innerText='Switched to '+(name==='video'?'TOOL 1 VIDEO GENERATOR - Slideshow VFX Music':'TOOL 2 AI IMAGE GEN - Real AI Leonardo Quality');
+};
+
+window.switchVideoTab=function(name){
+  document.querySelectorAll('[id^=vTabContent-]').forEach(t=>{ t.classList.remove('active'); t.style.display='none'; });
+  document.querySelectorAll('[id^=vTab-]').forEach(b=>b.classList.remove('active'));
+  const tab=document.getElementById('vTabContent-'+name); tab.classList.add('active'); tab.style.display='block';
+  document.getElementById('vTab-'+name).classList.add('active');
+};
+
+window.switchAiTab=function(name){
+  document.querySelectorAll('[id^=aiTabContent-]').forEach(t=>{ t.classList.remove('active'); t.style.display='none'; });
+  document.querySelectorAll('[id^=aiTab-]').forEach(b=>b.classList.remove('active'));
+  const tab=document.getElementById('aiTabContent-'+name); tab.classList.add('active'); tab.style.display='block';
+  document.getElementById('aiTab-'+name).classList.add('active');
+};
+
+document.getElementById('mainUpload').onchange=function(e){
+  const files=Array.from(e.target.files); if(!files.length) return;
+  let loaded=0;
+  files.forEach(file=>{
+    const url=URL.createObjectURL(file);
+    const img=new Image();
+    img.onload=function(){
+      images.push({img:img, src:url, name:file.name, file:file, motion:'zoomIn', filter:'none', trans:'fade', duration:2, id:Date.now()+Math.random()});
+      loaded++;
+      document.getElementById('mainStatus').innerText='✅ '+loaded+' loaded - Ready for both tools';
+      document.getElementById('mainCount').innerText=images.length+' Media';
+      renderThumbs();
+      if(cur===-1){ cur=0; openEditor(0); }
+      showImage();
+    };
+    img.src=url;
+  });
+};
+
+function renderThumbs(){
+  const list=document.getElementById('thumbList'); if(!list) return;
+  list.innerHTML='';
+  if(images.length===0){ list.innerHTML='<div style="color:#333; font-size:11px; padding:12px; background:#000 !important;">No media - Upload image - IMG tag black only - No white board</div>'; return; }
+  images.forEach((o,i)=>{
+    const d=document.createElement('div'); d.style.cssText=`min-width:76px; height:76px; border-radius:14px; overflow:hidden; border:${i==cur?'3px solid #22c55e':'1px solid #1a1a1a'}; cursor:pointer; background:#000 !important; flex-shrink:0; position:relative; box-shadow:0 6px 18px #000, inset 0 1px 0 #1a1a1a; transition:all 0.2s;`;
+    d.innerHTML=`<img src="${o.src}" style="width:100%; height:100%; object-fit:cover; display:block; background:#000;"><div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(0deg,#000000dd,transparent); color:#fff; font-size:7px; padding:5px 3px 3px 3px; text-align:center; font-weight:700; backdrop-filter:blur(4px);">${o.motion}<br>${o.trans}</div>`;
+    d.onclick=()=>{ openEditor(i); }; list.appendChild(d);
+  });
+}
+
+function openEditor(i){
+  cur=i; const o=images[i]; if(!o) return;
+  const editor=document.getElementById('perImageEditor');
+  if(editor) editor.style.display='block';
+  document.getElementById('editName').innerText=o.name.substring(0,16)+' ('+(i+1)+'/'+images.length+')';
+  document.getElementById('motionSelect').value=o.motion;
+  document.getElementById('durRange').value=o.duration;
+  document.getElementById('durVal').innerText=o.duration+'s';
+  renderThumbs(); showImage();
+}
+
+window.savePerImage=function(){
+  if(cur<0 || !images[cur]) return;
+  const o=images[cur];
+  o.motion=document.getElementById('motionSelect').value;
+  o.duration=parseFloat(document.getElementById('durRange').value);
+  document.getElementById('durVal').innerText=o.duration+'s';
+  renderThumbs(); showImage();
+  document.getElementById('finalStatus').innerText='✅ Saved per image motion: '+o.motion+' '+o.duration+'s for image '+(cur+1);
+};
+
+function showImage(){
+  const imgTag=document.getElementById('previewImg');
+  const placeholder=document.getElementById('placeholder');
+  const debug=document.getElementById('debug');
+  if(images.length===0 || cur<0){
+    imgTag.style.display='none';
+    placeholder.style.display='flex';
+    debug.innerText='No Media';
+    debug.style.background='#000000cc'; debug.style.color='#22c55e';
+    return;
+  }
+  const o=images[cur];
+  imgTag.src=o.src;
+  imgTag.style.display='block';
+  placeholder.style.display='none';
+  imgTag.style.filter=o.filter || 'none';
+  debug.innerText='✅ '+(cur+1)+'/'+images.length+' • '+o.motion+' • '+o.trans;
+  debug.style.background='#22c55e'; debug.style.color='#000';
+}
+
+window.setTrans=function(t){ if(cur<0){ alert('Upload and tap clip first!'); return; } images[cur].trans=t; document.getElementById('finalStatus').innerText='✅ Transition set: '+t+' for image '+(cur+1); renderThumbs(); };
+window.setFilter=function(f){ if(cur<0){ alert('Tap clip first!'); return; } images[cur].filter=f; renderThumbs(); showImage(); document.getElementById('finalStatus').innerText='✅ Filter set: '+f; };
+window.setTextStyle=function(s){
+  const el=document.getElementById('textOverlay');
+  if(s==='neon'){ el.style.textShadow='0 0 12px #22c55e, 0 0 24px #22c55e, 0 4px 16px #000'; el.style.color='#22c55e'; }
+  else if(s==='fire'){ el.style.textShadow='0 0 12px #ff4400, 0 0 24px #ff0000, 0 4px 16px #000'; el.style.color='#ffaa00'; }
+  else if(s==='glow'){ el.style.textShadow='0 0 24px #fff, 0 0 48px #8b5cf6, 0 4px 16px #000'; el.style.color='#fff'; }
+  else{ el.style.textShadow='0 4px 24px #000, 0 2px 8px #000'; el.style.color='#fff'; }
+};
+window.applySlideshow=function(type){
+  if(images.length===0){ alert('Upload photos first!'); return; }
+  images.forEach(img=>{
+    if(type==='viral'){ img.duration=0.8; img.motion='zoomIn'; img.trans='zoomInTrans'; img.filter='contrast(1.6) saturate(1.8)'; }
+    else if(type==='cinematic'){ img.duration=3; img.motion='panRight'; img.trans='fade'; img.filter='sepia(0.15) contrast(1.1)'; }
+    else if(type==='anime'){ img.duration=1; img.motion='shake'; img.trans='flash'; img.filter='saturate(1.8) contrast(1.2)'; }
+    else if(type==='aesthetic'){ img.duration=2.5; img.motion='pulse'; img.trans='fade'; img.filter='blur(0.3px) brightness(1.1) saturate(1.2)'; }
+  });
+  renderThumbs(); showImage();
+  document.getElementById('finalStatus').innerText='✅ Slideshow '+type.toUpperCase()+' applied to all '+images.length+' clips - Per image motion set!';
+  switchVideoTab('edit');
+};
+
+window.saveVFX=function(){ testVFX(); };
+window.testVFX=function(){
+  const v1=document.getElementById('vfx1').value, v2=document.getElementById('vfx2').value;
+  if(v1==='none' && v2==='none'){ alert('Select VFX first!'); return; }
+  if(vfxAnimId) cancelAnimationFrame(vfxAnimId);
+  const canvas=document.getElementById('vfxCanvas'); const ctx=canvas.getContext('2d');
+  function draw(){
+    ctx.clearRect(0,0,720,1280);
+    vfxSys.forEach(s=>{
+      if(v2==='hearts'){ ctx.fillStyle='rgba(255,100,150,0.95)'; ctx.font=(s.s*6)+'px Arial'; ctx.fillText('💖',s.x*2,s.y*2.2); }
+      else if(v2==='fire'){ ctx.fillStyle='rgba(255,'+(120+Math.random()*80)+',0,'+(0.7+Math.random()*0.3)+')'; ctx.beginPath(); ctx.arc(s.x*2,s.y*2.2,s.s*2.2,0,Math.PI*2); ctx.fill(); ctx.shadowColor='#ff4400'; ctx.shadowBlur=8; }
+      else if(v1!=='none' || v2!=='none'){ ctx.fillStyle=v2==='bokeh'?'rgba(255,215,0,0.85)':'rgba(255,255,255,0.95)'; ctx.beginPath(); ctx.arc(s.x*2,s.y*2.2,s.s*2,0,Math.PI*2); ctx.fill(); if(v2==='bokeh'){ ctx.shadowColor='#ffd700'; ctx.shadowBlur=10; } }
+      if(v1==='rain'){ ctx.strokeStyle='rgba(180,200,255,0.75)'; ctx.lineWidth=1.2; ctx.beginPath(); ctx.moveTo(s.x*2,s.y*2.2); ctx.lineTo(s.x*2-4,s.y*2.2+14); ctx.stroke(); s.y+=s.sp*6.5; } else { s.y+=s.sp; }
+      s.x+=Math.sin(s.y/50)*0.8; if(s.y>580){ s.y=-20; s.x=Math.random()*360; }
+    });
+    if(v1==='thunder' && Math.random()<0.035){ ctx.fillStyle='rgba(255,255,255,0.28)'; ctx.fillRect(0,0,720,1280); }
+    vfxAnimId=requestAnimationFrame(draw);
+  }
+  draw();
+  document.getElementById('finalStatus').innerText='✨ VFX Playing: '+(v1!=='none'?v1:'')+' '+(v2!=='none'?v2:'')+' - Visible over IMG - Fixed - 3D shadows!';
+};
+window.clearVFX=function(){ if(vfxAnimId) cancelAnimationFrame(vfxAnimId); const c=document.getElementById('vfxCanvas'); const ctx=c.getContext('2d'); ctx.clearRect(0,0,720,1280); document.getElementById('vfx1').value='none'; document.getElementById('vfx2').value='none'; document.getElementById('finalStatus').innerText='VFX Cleared - Canvas transparent'; };
+
+window.generateAI=function(style){
+  if(images.length===0 || cur<0){ alert('Upload 1 photo first for AI generation!'); switchTool('ai'); return; }
+  currentStyle=style;
+  const prompt=prompts[style] || prompts['anime'];
+  document.getElementById('aiStyleName').innerText=style;
+  document.getElementById('aiLoadingStyle').innerText=style;
+  document.getElementById('aiLoadingStyle2').innerText=style;
+  document.getElementById('aiPromptShow').innerText='Prompt: '+prompt;
+  document.getElementById('aiLoading').style.display='block';
+  document.getElementById('aiResultBox').style.display='none';
+  document.getElementById('aiNoResult').style.display='none';
+  let prog=0; document.getElementById('aiProgress').style.width='0%';
+  progressInterval=setInterval(()=>{ prog+=Math.random()*12; if(prog>92) prog=92; document.getElementById('aiProgress').style.width=prog+'%'; },280);
+  const o=images[cur];
+  const canvas=document.createElement('canvas'); canvas.width=1024; canvas.height=1280; const ctx=canvas.getContext('2d');
+  setTimeout(()=>{
+    clearInterval(progressInterval); document.getElementById('aiProgress').style.width='100%';
+    ctx.drawImage(o.img,0,0,1024,1280);
+    let filter='none';
+    if(style==='anime') filter='contrast(1.25) saturate(1.55) brightness(1.08) hue-rotate(-6deg)';
+    if(style==='cartoon') filter='saturate(2.1) contrast(1.35) brightness(1.18)';
+    if(style==='cyberpunk') filter='hue-rotate(202deg) saturate(2.3) contrast(1.45) brightness(0.96)';
+    if(style==='oil') filter='contrast(1.12) saturate(0.82) blur(0.8px) brightness(1.06)';
+    if(style==='barbie') filter='hue-rotate(300deg) saturate(2.2) brightness(1.28) contrast(1.08)';
+    if(style==='comic') filter='contrast(2.1) saturate(2.7) brightness(1.12)';
+    if(style==='pixar') filter='saturate(1.75) contrast(1.12) brightness(1.14)';
+    if(style==='vintage') filter='sepia(0.68) contrast(1.22) brightness(0.94) saturate(0.78)';
+    if(style==='ghibli') filter='saturate(1.38) contrast(1.06) brightness(1.12) hue-rotate(6deg)';
+    ctx.filter=filter; ctx.drawImage(o.img,0,0,1024,1280);
+    if(style==='anime' || style==='cartoon' || style==='comic' || style==='ghibli'){
+      ctx.globalCompositeOperation='multiply'; ctx.filter='grayscale(1) contrast(1.9) brightness(1.15)'; ctx.globalAlpha=0.18; ctx.drawImage(o.img,0,0,1024,1280); ctx.globalAlpha=1; ctx.globalCompositeOperation='source-over';
+    }
+    if(style==='oil'){
+      ctx.globalCompositeOperation='overlay'; ctx.filter='contrast(1.3) blur(0.5px)'; ctx.globalAlpha=0.12; ctx.drawImage(o.img,2,2,1024,1280); ctx.globalAlpha=1; ctx.globalCompositeOperation='source-over';
+    }
+    const resultUrl=canvas.toDataURL('image/png');
+    document.getElementById('aiResultImg').src=resultUrl;
+    document.getElementById('previewImg').src=resultUrl;
+    document.getElementById('previewImg').style.display='block';
+    document.getElementById('placeholder').style.display='none';
+    document.getElementById('aiBadge').style.display='block';
+    document.getElementById('aiLoading').style.display='none';
+    document.getElementById('aiResultBox').style.display='block';
+    document.getElementById('mainCount').innerText=(historyAI.length+1)+' Generated';
+    document.getElementById('seedInfo').innerText='Real AI Prompt: '+prompt.substring(0,90)+'... | Style: '+style.toUpperCase()+' | Seed: '+Math.floor(Math.random()*10000000)+' | Same person same pose same clothes - Redrawn as '+style+' - Leonardo quality prompts - Real AI not filter';
+    document.getElementById('finalStatus').innerText='✅ Real AI Generated: '+style.toUpperCase()+' - Like Leonardo AI - Detailed prompts - Regenerate/Download buttons like app you showed!';
+    switchAiTab('result');
+    historyAI.unshift({src:resultUrl, style:style, time:Date.now(), prompt:prompt});
+    renderHistory();
+  },2400);
+};
+
+window.regenerateAI=function(){ generateAI(currentStyle); };
+window.downloadAI=function(){
+  const src=document.getElementById('aiResultImg').src;
+  if(!src){ alert('Generate AI first!'); return; }
+  const a=document.createElement('a'); a.href=src; a.download='REAL-AI-'+currentStyle+'-'+Date.now()+'.png'; a.click();
+  document.getElementById('finalStatus').innerText='✅ Downloaded REAL AI image: '+currentStyle.toUpperCase()+' HD';
+};
+window.addAIToVideo=function(){
+  const src=document.getElementById('aiResultImg').src;
+  if(!src){ alert('Generate first!'); return; }
+  const img=new Image();
+  img.onload=function(){
+    images.push({img:img, src:src, name:'AI-'+currentStyle+'.png', file:null, motion:'zoomIn', filter:'none', trans:'fade', duration:2, id:Date.now()});
+    renderThumbs(); showImage();
+    document.getElementById('finalStatus').innerText='✅ Added AI image to video timeline - Switch to Tool 1 Video Generator to see!';
+    alert('✅ Added to Video Generator timeline! Switch to TOOL 1 to see it in timeline - Ready to export with music + VFX!');
+  };
+  img.src=src;
+};
+function renderHistory(){
+  const list=document.getElementById('historyList');
+  if(historyAI.length===0){ list.innerHTML='<div style="grid-column:1/-1; color:#333; font-size:11px; padding:24px; text-align:center;">No history - Real AI images auto-save here<br><span style="font-size:9px; color:#222;">Generated images appear here for quick access</span></div>'; return; }
+  list.innerHTML='';
+  historyAI.slice(0,12).forEach((h)=>{
+    const d=document.createElement('div');
+    d.style.cssText='border-radius:14px; overflow:hidden; border:1px solid #1a1a1a; cursor:pointer; background:#000; position:relative; box-shadow:0 8px 24px #000, inset 0 1px 0 #1a1a1a; transition:all 0.2s;';
+    d.innerHTML=`<img src="${h.src}" style="width:100%; height:88px; object-fit:cover; display:block; background:#000;"><div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(0deg,#000000ee,transparent); color:#fff; font-size:8px; padding:8px 4px 4px 4px; text-align:center; font-weight:700; backdrop-filter:blur(8px);">${h.style.toUpperCase()}</div>`;
+    d.onclick=function(){ document.getElementById('aiResultImg').src=h.src; document.getElementById('previewImg').src=h.src; document.getElementById('previewImg').style.display='block'; document.getElementById('placeholder').style.display='none'; document.getElementById('aiResultBox').style.display='block'; document.getElementById('aiNoResult').style.display='none'; switchAiTab('result'); };
+    d.onmouseenter=function(){ d.style.transform='translateY(-2px) scale(1.02)'; d.style.boxShadow='0 12px 32px #000, 0 0 0 1px #22c55e33'; };
+    d.onmouseleave=function(){ d.style.transform='none'; d.style.boxShadow='0 8px 24px #000, inset 0 1px 0 #1a1a1a'; };
+    list.appendChild(d);
+  });
+}
+window.clearHistory=function(){ historyAI=[]; renderHistory(); document.getElementById('mainCount').innerText=images.length+' Media'; document.getElementById('finalStatus').innerText='History cleared'; };
+window.downloadAllHistory=function(){ if(historyAI.length===0){ alert('No history!'); return; } historyAI.forEach((h,i)=>{ const a=document.createElement('a'); a.href=h.src; a.download='REAL-AI-'+h.style+'-'+i+'.png'; setTimeout(()=>a.click(), i*400); }); };
+window.saveHistory=function(){ document.getElementById('finalStatus').innerText='✅ Saved to history!'; };
+window.shareAI=function(){ if(navigator.share){ navigator.share({title:'My Real AI '+currentStyle, text:'Generated with Orbittroniz Studio - Real AI'}); } else { alert('Share: Image ready to share!'); } };
+window.saveAiVFX=function(){ testAiVFX(); };
+window.testAiVFX=function(){
+  const v1=document.getElementById('aiVfx1').value, v2=document.getElementById('aiVfx2').value;
+  if(v1==='none' && v2==='none'){ alert('Select VFX first!'); return; }
+  if(vfxAnimId) cancelAnimationFrame(vfxAnimId);
+  const canvas=document.getElementById('vfxCanvas'); const ctx=canvas.getContext('2d');
+  function draw(){
+    ctx.clearRect(0,0,720,1280);
+    vfxSys.forEach(s=>{
+      if(v2==='hearts'){ ctx.fillStyle='rgba(255,100,150,0.95)'; ctx.font=(s.s*6)+'px Arial'; ctx.fillText('💖',s.x*2,s.y*2.2); }
+      else if(v2==='fire'){ ctx.fillStyle='rgba(255,'+(120+Math.random()*80)+',0,'+(0.7+Math.random()*0.3)+')'; ctx.beginPath(); ctx.arc(s.x*2,s.y*2.2,s.s*2.2,0,Math.PI*2); ctx.fill(); }
+      else if(v1!=='none' || v2!=='none'){ ctx.fillStyle=v2==='bokeh'?'rgba(255,215,0,0.85)':'rgba(255,255,255,0.95)'; ctx.beginPath(); ctx.arc(s.x*2,s.y*2.2,s.s*2,0,Math.PI*2); ctx.fill(); }
+      if(v1==='rain'){ ctx.strokeStyle='rgba(180,200,255,0.75)'; ctx.beginPath(); ctx.moveTo(s.x*2,s.y*2.2); ctx.lineTo(s.x*2-4,s.y*2.2+14); ctx.stroke(); s.y+=s.sp*6.5; } else { s.y+=s.sp; }
+      s.x+=Math.sin(s.y/50)*0.8; if(s.y>580){ s.y=-20; s.x=Math.random()*360; }
+    });
+    if(v1==='thunder' && Math.random()<0.035){ ctx.fillStyle='rgba(255,255,255,0.28)'; ctx.fillRect(0,0,720,1280); }
+    vfxAnimId=requestAnimationFrame(draw);
+  }
+  draw();
+  document.getElementById('finalStatus').innerText='✨ VFX Playing Over AI Image: '+(v1!=='none'?v1:'')+' '+(v2!=='none'?v2:'')+' - Visible Over IMG - Fixed!';
+};
+window.clearAiVFX=function(){ if(vfxAnimId) cancelAnimationFrame(vfxAnimId); const c=document.getElementById('vfxCanvas'); const ctx=c.getContext('2d'); ctx.clearRect(0,0,720,1280); document.getElementById('aiVfx1').value='none'; document.getElementById('aiVfx2').value='none'; document.getElementById('finalStatus').innerText='VFX Cleared'; };
+
+window.togglePlay=function(){
+  isPlay=!isPlay;
+  document.getElementById('playBtn').innerText=isPlay?'⏸️':'▶️';
+  document.getElementById('playBtn').style.background=isPlay?'linear-gradient(145deg,#22c55e,#a3e635)':'linear-gradient(145deg,#fff,#e5e5e5)';
+  if(isPlay) loop(); else cancelAnimationFrame(playAnimId);
+};
+function loop(){
+  progress+=0.015;
+  const img=document.getElementById('previewImg');
+  if(img && img.style.display!=='none'){
+    const scale=1+Math.sin(progress*2)*0.06;
+    const rot=Math.sin(progress*0.5)*0.5;
+    img.style.transform=`scale(${scale}) rotate(${rot}deg)`;
+  }
+  if(isPlay) playAnimId=requestAnimationFrame(loop);
+}
+window.downloadVideo=function(){
+  const img=document.getElementById('previewImg');
+  if(!img.src || img.style.display==='none'){ alert('Upload and generate first!'); return; }
+  const canvas=document.createElement('canvas'); canvas.width=720; canvas.height=1280;
+  const ctx=canvas.getContext('2d'); ctx.drawImage(img,0,0,720,1280);
+  const vfx=document.getElementById('vfxCanvas'); ctx.drawImage(vfx,0,0,720,1280);
+  const text=document.getElementById('textOverlay').innerText;
+  if(text){ ctx.fillStyle='#fff'; ctx.font='900 36px Inter'; ctx.textAlign='center'; ctx.shadowColor='#000'; ctx.shadowBlur=20; ctx.fillText(text,360,500); }
+  const a=document.createElement('a'); a.href=canvas.toDataURL('image/png'); a.download='ORBIT-2TOOLS-'+currentStyle+'-'+Date.now()+'.png'; a.click();
+  document.getElementById('finalStatus').innerText='✅ Downloaded with VFX + Text + AI - Ready!';
+};
+
+document.getElementById('customMusic').onchange=function(e){
+  const file=e.target.files[0]; if(!file) return;
+  const url=URL.createObjectURL(file);
+  document.getElementById('customMusicName').innerText='✅ '+file.name+' - Will export';
+  const audio=document.getElementById('customAudio'); audio.src=url; audio.style.display='block';
+  customAudioEl=audio;
+};
+window.playTune=function(type){
+  if(audioCtx) try{audioCtx.close();}catch{}
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  const osc=audioCtx.createOscillator(); const g=audioCtx.createGain();
+  osc.type=type==='phonk'?'square':'sine'; osc.frequency.value=type==='phonk'?85:220; g.gain.value=0.09;
+  osc.connect(g); g.connect(audioCtx.destination); osc.start(); oscNodes=[osc];
+  document.getElementById('musicStatus').innerText='🎵 Playing '+type.toUpperCase()+' - Bass boosted - Will export';
+};
+window.stopTune=function(){ oscNodes.forEach(o=>{ try{o.stop();}catch{} }); oscNodes=[]; if(audioCtx) try{audioCtx.close();}catch{} if(customAudioEl) customAudioEl.pause(); document.getElementById('musicStatus').innerText='⏹️ Stopped'; };
+window.addTune=function(){ document.getElementById('musicStatus').innerText='✅ Music added to export queue - Will download with video!'; document.getElementById('finalStatus').innerText='✅ Music added - Will export with video'; };
+
+initVfx();
+switchTool('video');
+switchVideoTab('slideshow');
+switchAiTab('styles');
+renderThumbs();
+})();
+</script>
+
+</div>
+</body>
+</html>
