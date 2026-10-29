@@ -207,35 +207,7 @@ html,body{background:#020208 !important; min-height:100vh;}
     }
   }
   function speak(text, preview=false){
-    if(!synth){ setStatus("Browser no support - Use Chrome"); return; }
-    let content=text.trim(); if(!content){ setStatus("Enter text first"); return; }
-    if(!preview){ content=transformText(content, selected); }
-    synth.cancel(); const myReq=++reqId;
-    const chunks=content.match(/[^.!?]+[.!?]*/g)||[content]; const q=chunks.map(s=>s.trim()).filter(Boolean); let i=0;
-    function next(){
-      if(myReq!==reqId) return; if(i>=q.length){ setStatus("Finished - "+profiles[selected].name); return; }
-      const u=new SpeechSynthesisUtterance(q[i++]);
-      u.lang=$("tts-lang").value; u.pitch=Number($("tts-pitch").value); u.rate=Number($("tts-rate").value); u.volume=Number($("tts-volume").value);
-      const v=chooseVoice(); if(v) u.voice=v;
-      u.onstart=()=>{ if(myReq===reqId) setStatus((preview?"Previewing ":"Speaking ")+profiles[selected].name+" - "+(v?v.name:"Default")); };
-      u.onend=()=>{ if(myReq===reqId) next(); };
-      u.onerror=e=>{ if(myReq===reqId && e.error!=="canceled" && e.error!=="interrupted") setStatus("Error: "+e.error); };
-      synth.speak(u);
-    }
-    if(!voices.length) populate(); if(!voices.length){ setStatus("Loading voices - Press Play again"); return; } next();
-  }
-  document.querySelectorAll(".tts-voice").forEach(b=>b.addEventListener("click",()=>setProfile(b.dataset.profile)));
-  ["tts-pitch","tts-rate","tts-volume"].forEach(id=>$(id).addEventListener("input",updOut));
-  $("tts-lang").addEventListener("change",()=>{populate(); setStatus("Language updated");});
-  $("tts-play").addEventListener("click",()=>speak($("tts-text").value));
-  $("tts-preview").addEventListener("click",()=>speak(profiles[selected].preview, true));
-  $("tts-pause").addEventListener("click",()=>{ if(!synth) return; if(synth.paused){synth.resume(); setStatus("Resumed");} else if(synth.speaking){synth.pause(); setStatus("Paused");} });
-  $("tts-stop").addEventListener("click",()=>{ reqId++; if(synth) synth.cancel(); setStatus("Stopped"); });
-  if(synth){ populate(); synth.onvoiceschanged=populate; }
-  setProfile("man");
-})();
-</script>
-<!-- TTS END -->  
+    
 <!-- ============ VIDEO GENERATOR START - TOOL 2 ============ -->
 <!-- DO NOT EDIT HERE IF YOU ONLY WANT TO EDIT TTS -->
 <!-- #################################################### -->
