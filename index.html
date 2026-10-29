@@ -47,184 +47,195 @@ html,body{background:#020208 !important; min-height:100vh;}
 <div style="font-size:24px;">🤖</div><div style="font-weight:800; font-size:11px;">Image Generator</div><div style="font-size:7px; opacity:.5;">PROMPT • STYLES • HD</div>
 </button>
 </div>
-<!-- ============ TTS START - TOOL 1 ============ -->
-<div id="tool-tts" style="padding:16px; background:#020208;">
-
-<div style="background:linear-gradient(145deg,#161616,#0a0a0a); border:1px solid #1e1e1e; border-radius:28px; padding:20px; margin-bottom:16px;">
-<div style="display:flex; gap:12px; align-items:center;">
-<div style="width:44px; height:44px; background:linear-gradient(135deg,#22c55e,#a3e635); border-radius:14px; display:flex; align-items:center; justify-content:center;">🎙️</div>
-<div><div style="color:#fff; font-weight:900; font-size:14px;">Orbitroniz Premium TTS</div><div style="color:#22c55e; font-size:9px; font-weight:800;">30 UNIQUE VOICES • EACH DIFFERENT TONE</div></div>
-</div>
-<textarea id="ttsText" style="width:100%; height:120px; background:#000; border:1px solid #1a1a1a; border-radius:18px; color:#fff; padding:14px; font-size:13px; resize:none; margin-top:14px;">Hello! I am Rachel. I have a calm female voice. Now testing Adam with deep male voice. Different tone test.</textarea>
-<div style="display:flex; justify-content:space-between; margin-top:8px;"><span id="charCount" style="color:#666; font-size:10px;">0 chars</span><span id="apiStatus" style="color:#22c55e; font-size:9px; font-weight:800;">✅ Orbitroniz Connected - Unique Voices</span></div>
-
-<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:12px;">
-<div style="background:#000; border:1px solid #111; border-radius:12px; padding:8px; text-align:center;"><div style="color:#666; font-size:8px;">SPEED</div><input type="range" id="speedRange" min="0.7" max="1.3" step="0.1" value="1" style="width:100%; accent-color:#22c55e;"><div id="speedVal" style="color:#22c55e; font-size:8px;">1.0x</div></div>
-<div style="background:#000; border:1px solid #111; border-radius:12px; padding:8px; text-align:center;"><div style="color:#666; font-size:8px;">PITCH</div><input type="range" id="pitchRange" min="0.5" max="1.5" step="0.1" value="1" style="width:100%; accent-color:#22c55e;"><div id="pitchVal" style="color:#22c55e; font-size:8px;">1.0x</div></div>
-<div style="background:#000; border:1px solid #111; border-radius:12px; padding:8px; text-align:center;"><div style="color:#666; font-size:8px;">ENGINE</div><div id="engineVal" style="color:#fff; font-size:8px; font-weight:800;">Orbitroniz Free</div></div>
-</div>
-</div>
-
-<div style="background:linear-gradient(145deg,#161616,#0a0a0a); border:1px solid #1e1e1e; border-radius:28px; padding:18px; margin-bottom:16px;">
-<div style="color:#fff; font-weight:900; margin-bottom:12px; font-size:13px;">✨ 30 Voices - Each UNIQUE Tone - Tested Different</div>
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;" id="voiceGrid">
-
-<!-- EACH CARD HAS UNIQUE FREE VOICE + UNIQUE PITCH - NO SAME VOICE EVER -->
-<div class="voice3d active female" data-voice="Ivy" data-pitch="1.2" id="voice-rachel" onclick="selectVoice('rachel','Rachel','Ivy',1.2,0)" style="background:linear-gradient(145deg,#121212,#0a0a0a); border:2px solid #22c55e; border-radius:20px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;"><div style="width:44px; height:44px; background:linear-gradient(135deg,#ff9a9e,#fecfef); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">R</div><div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Rachel</div><div style="color:#22c55e; font-size:7px;">UNIQUE: Ivy • Pitch 1.2 • Female</div></div><div>✅</div></div>
-
-<div class="voice3d male" data-voice="Brian" data-pitch="0.7" id="voice-adam" onclick="selectVoice('adam','Adam','Brian',0.7,1)" style="background:#121212; border:1px solid #1e1e1e; border-radius:20px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;"><div style="width:44px; height:44px; background:linear-gradient(135deg,#667eea,#764ba2); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">A</div><div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Adam</div><div style="color:#888; font-size:7px;">UNIQUE: Brian • Pitch 0.7 • Male Deep</div></div><div>🔊</div></div>
-
-<div class="voice3d female" data-voice="Joanna" data-pitch="1.1" id="voice-bella" onclick="selectVoice('bella','Bella','Joanna',1.1,2)" style="background:#121212; border:1px solid #1e1e1e; border-radius:20px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;"><div style="width:44px; height:44px; background:linear-gradient(135deg,#fa709a,#fee140); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900;">B</div><div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Bella</div><div style="color:#888; font-size:7px;">UNIQUE: Joanna • Pitch 1.1 • Soft</div></div><div>🔊</div></div>
-
-<div class="voice3d male" data-voice="Joey" data-pitch="1.0" id="voice-antoni" onclick="selectVoice('antoni','Antoni','Joey',1.0,3)" style="background:#121212; border:1px solid #1e1e1e; border-radius:20px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;"><div style="width:44px; height:44px; background:linear-gradient(135deg,#4facfe,#00f2fe); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">A</div><div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Antoni</div><div style="color:#888; font-size:7px;">UNIQUE: Joey • Pitch 1.0 • Young Male</div></div><div>🔊</div></div>
-
-<div class="voice3d female" data-voice="Kendra" data-pitch="1.0" id="voice-elli" onclick="selectVoice('elli','Elli','Kendra',1.0,4)" style="background:#121212; border:1px solid #1e1e1e; border-radius:20px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;"><div style="width:44px; height:44px; background:linear-gradient(135deg,#ff8a00,#e52e71); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">E</div><div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Elli</div><div style="color:#888; font-size:7px;">UNIQUE: Kendra • Pitch 1.0 • Emotional</div></div><div>🔊</div></div>
-
-<div class="voice3d male" data-voice="Matthew" data-pitch="0.8" id="voice-josh" onclick="selectVoice('josh','Josh','Matthew',0.8,5)" style="background:#121212; border:1px solid #1e1e1e; border-radius:20px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;"><div style="width:44px; height:44px; background:linear-gradient(135deg,#a8edea,#fed6e3); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000;">J</div><div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Josh</div><div style="color:#888; font-size:7px;">UNIQUE: Matthew • Pitch 0.8 • Cinematic</div></div><div>🔊</div></div>
-
-<div class="voice3d female" data-voice="Emma" data-pitch="1.15" id="voice-dorothy" onclick="selectVoice('dorothy','Dorothy','Emma',1.15,6)" style="background:#121212; border:1px solid #1e1e1e; border-radius:20px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;"><div style="width:44px; height:44px; background:linear-gradient(135deg,#ffecd2,#fcb69f); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900;">D</div><div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Dorothy</div><div style="color:#888; font-size:7px;">UNIQUE: Emma • British Elegant</div></div><div>🔊</div></div>
-
-<div class="voice3d male" data-voice="Russell" data-pitch="0.75" id="voice-arnold" onclick="selectVoice('arnold','Arnold','Russell',0.75,7)" style="background:#121212; border:1px solid #1e1e1e; border-radius:20px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;"><div style="width:44px; height:44px; background:linear-gradient(135deg,#434343,#000); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">A</div><div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Arnold</div><div style="color:#888; font-size:7px;">UNIQUE: Russell • AU Powerful</div></div><div>🔊</div></div>
-
-<div class="voice3d female" data-voice="Aditi" data-pitch="1.2" id="voice-aditi" onclick="selectVoice('aditi','Aditi','Aditi',1.2,8)" style="background:linear-gradient(145deg,#1a1200,#121212); border:1px solid #ff8a00; border-radius:20px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;"><div style="width:44px; height:44px; background:linear-gradient(135deg,#ff8a00,#ff5e62); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">🇮🇳</div><div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Aditi</div><div style="color:#ff8a00; font-size:7px;">UNIQUE: Aditi • Indian Hindi</div></div><div>🔊</div></div>
-
-<div class="voice3d female" data-voice="Raveena" data-pitch="1.1" id="voice-raveena" onclick="selectVoice('raveena','Raveena','Raveena',1.1,9)" style="background:linear-gradient(145deg,#1a1200,#121212); border:1px solid #ff8a00; border-radius:20px; padding:12px; display:flex; gap:10px; align-items:center; cursor:pointer;"><div style="width:44px; height:44px; background:linear-gradient(135deg,#ff8a00,#ff5e62); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">🇮🇳</div><div style="flex:1;"><div style="color:#fff; font-size:11px; font-weight:800;">Raveena</div><div style="color:#ff8a00; font-size:7px;">UNIQUE: Raveena • Indian EN</div></div><div>🔊</div></div>
-
-</div>
-</div>
-
-<div style="background:linear-gradient(145deg,#161616,#0a0a0a); border:1px solid #1e1e1e; border-radius:28px; padding:20px; text-align:center;">
-<div id="ttsWave" style="display:none; background:#000; border:1px solid #111; border-radius:18px; padding:14px; margin-bottom:12px;">
-<div style="display:flex; align-items:center; justify-content:center; gap:4px; height:30px;">
-<span class="waveBar"></span><span class="waveBar"></span><span class="waveBar"></span>
-</div>
-<div style="color:#22c55e; font-size:11px; font-weight:800;">🔊 Playing <span id="voiceNameShow">Rachel</span> - <span id="realVoiceShow">Ivy</span> - UNIQUE Tone</div>
-</div>
-<audio id="ttsAudio" controls playsinline preload="auto" style="width:100%; display:none; margin-bottom:14px; border-radius:12px; background:#000;"></audio>
-<button onclick="generateOrbitronizFixed()" style="width:100%; padding:18px; background:linear-gradient(145deg,#22c55e,#a3e635); border:none; border-radius:18px; color:#000; font-weight:900; font-size:14px; cursor:pointer;">🎙️ Generate Orbitroniz - Fixed Unique Voice</button>
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px;">
-<button onclick="playLast()" style="padding:12px; background:#111; border:1px solid #222; border-radius:14px; color:#fff; font-size:10px; font-weight:700; cursor:pointer;">▶️ Play Again</button>
-<button onclick="downloadAudio()" style="padding:12px; background:#fff; border:none; border-radius:14px; color:#000; font-size:10px; font-weight:800; cursor:pointer;">⬇️ Download MP3</button>
-</div>
-<div id="finalStatus" style="margin-top:12px; color:#22c55e; font-size:10px; background:#000; border:1px solid #111; padding:10px; border-radius:12px;">✅ Ready - 10 Unique Voices Fixed - Each Different Tone</div>
-</div>
-
-</div>
-
+<!-- TTS START - Orbittroniz Voice Studio - Deep Smooth Different Expression -->
 <style>
-@keyframes wave{0%,100%{height:6px;} 50%{height:26px;}} .waveBar{width:5px; background:linear-gradient(180deg,#22c55e,#a3e635); border-radius:3px; animation:wave .7s infinite ease-in-out;} .waveBar:nth-child(2){animation-delay:.1s} .waveBar:nth-child(3){animation-delay:.2s} .waveBar:nth-child(4){animation-delay:.3s} .waveBar:nth-child(5){animation-delay:.4s}
+.tts-wrap{max-width:1050px;margin:auto;padding:16px;font-family:Arial;color:#f3f6ff}
+.tts-panel{background:linear-gradient(145deg,#141d34,#0e1425);border:1px solid #293650;border-radius:20px;padding:22px;margin-bottom:20px;box-shadow:0 18px 55px #0005}
+.tts-voices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tts-voice{text-align:left;background:#172139;border:1px solid #293650;border-radius:15px;padding:15px 12px;color:#f3f6ff;cursor:pointer;transition:.2s}
+.tts-voice:hover{transform:translateY(-2px);border-color:#22d3ee}
+.tts-voice.active{border-color:#22d3ee;background:#103041;box-shadow:0 0 0 1px #22d3ee33}
+.tts-voice .av{font-size:27px;margin-bottom:10px}
+.tts-voice strong{display:block;font-size:14px;margin-bottom:6px}
+.tts-voice small{color:#9ba8c5;font-size:12px;line-height:1.4}
+.tts-label{display:block;font-size:13px;color:#d8e2fa;margin:15px 0 8px}
+.tts-input, .tts-select{width:100%;background:#080e1d;color:#f3f6ff;border:1px solid #293650;border-radius:12px;padding:13px;outline:none;font:inherit}
+.tts-textarea{width:100%;background:#080e1d;color:#f3f6ff;border:1px solid #293650;border-radius:12px;padding:13px;outline:none;font:inherit;min-height:155px;resize:vertical;line-height:1.6}
+.tts-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.tts-rangehead{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+.tts-rangehead output{color:#22d3ee;font-weight:bold}
+.tts-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.tts-btn{padding:12px 18px;border-radius:12px;border:1px solid #293650;color:#f3f6ff;font-weight:bold;cursor:pointer;background:#1a2540}
+.tts-btn.primary{background:linear-gradient(100deg,#7c3aed,#0891b2);border:0}
+.tts-status{margin-top:15px;font-size:13px;color:#9ba8c5;line-height:1.5}
+@media(max-width:700px){.tts-voices{grid-template-columns:repeat(2,minmax(0,1fr))}.tts-controls{grid-template-columns:1fr}.tts-panel{padding:17px}}
 </style>
 
+<div class="tts-wrap">
+  <div class="tts-panel">
+    <h2 style="font-size:19px;margin:0 0 16px">01 / Choose Voice - Deep Smooth Different Expression</h2>
+    <div class="tts-voices">
+      <button class="tts-voice" data-profile="girl">
+        <div class="av">👧</div>
+        <strong>Mature Girl - Ivy</strong>
+        <small>Smooth Soft Deep Calm - 0.75x slow</small>
+      </button>
+      <button class="tts-voice" data-profile="woman">
+        <div class="av">👩</div>
+        <strong>Lady - Joanna</strong>
+        <small>Warm Professional Very Deep - 0.65x</small>
+      </button>
+      <button class="tts-voice active" data-profile="man">
+        <div class="av">🎙️</div>
+        <strong>Man - Ultra Deep</strong>
+        <small>Ultra Deep Bass Powerful - Pitch 0.35</small>
+      </button>
+      <button class="tts-voice" data-profile="boy">
+        <div class="av">🧑</div>
+        <strong>Boy - Joey</strong>
+        <small>Deep Energetic Fast Excited - 1.25x</small>
+      </button>
+    </div>
+  </div>
+
+  <div class="tts-panel">
+    <h2 style="font-size:19px;margin:0 0 16px">02 / Enter Your Text</h2>
+    <textarea id="tts-text" class="tts-textarea" maxlength="12000" placeholder="Type your text...">Welcome to Orbittroniz. Turn your words into speech with your preferred voice.</textarea>
+
+    <div class="tts-controls">
+      <div>
+        <label class="tts-label">Language</label>
+        <select id="tts-lang" class="tts-select">
+          <option value="en-US">English (US)</option>
+          <option value="en-GB">English (UK)</option>
+          <option value="en-IN">English (India)</option>
+          <option value="hi-IN">Hindi</option>
+          <option value="mr-IN">Marathi</option>
+        </select>
+      </div>
+      <div>
+        <label class="tts-label">Device Voice</label>
+        <select id="tts-voiceSelect" class="tts-select"><option value="">Automatic</option></select>
+      </div>
+      <div>
+        <label class="tts-label">Volume</label>
+        <div class="tts-rangehead"><span>Quiet</span><output id="tts-volumeOut">100%</output></div>
+        <input id="tts-volume" type="range" min="0" max="1" step="0.05" value="1" style="width:100%;accent-color:#22d3ee">
+      </div>
+    </div>
+
+    <div class="tts-controls">
+      <div>
+        <label class="tts-label">Pitch - Deep</label>
+        <div class="tts-rangehead"><span>Deeper</span><output id="tts-pitchOut">0.45</output></div>
+        <input id="tts-pitch" type="range" min="0.3" max="1.5" step="0.05" value="0.45" style="width:100%;accent-color:#22d3ee">
+      </div>
+      <div>
+        <label class="tts-label">Speed - Expression</label>
+        <div class="tts-rangehead"><span>Slow</span><output id="tts-rateOut">0.88×</output></div>
+        <input id="tts-rate" type="range" min="0.5" max="1.5" step="0.05" value="0.88" style="width:100%;accent-color:#22d3ee">
+      </div>
+      <div>
+        <label class="tts-label">Profile</label>
+        <select id="tts-profileInfo" class="tts-select" disabled><option>Man Deep</option></select>
+      </div>
+    </div>
+
+    <div class="tts-actions">
+      <button class="tts-btn primary" id="tts-play">▶ Generate & Play</button>
+      <button class="tts-btn" id="tts-preview">♪ Preview Voice</button>
+      <button class="tts-btn" id="tts-pause">Ⅱ Pause</button>
+      <button class="tts-btn" id="tts-stop">■ Stop</button>
+    </div>
+    <div class="tts-status" id="tts-status">Ready. Select voice and play.</div>
+  </div>
+</div>
+
 <script>
-const ORBITRONIZ_API_KEY = 'sk_f487f96a9c570df45015cc1b0b91df83991afb7685598868';
-let currentVoice = {id:'rachel', name:'Rachel', freeVoice:'Ivy', pitch:1.2, idx:0};
-let lastAudioUrl = null;
-let lastBlob = null;
-
-function selectVoice(id, name, freeVoice, pitch, idx){
-  document.querySelectorAll('.voice3d').forEach(v=>{ v.style.border='1px solid #1e1e1e'; v.querySelector('div:last-child').innerText='🔊'; });
-  document.getElementById('voice-'+id).style.border='2px solid #22c55e';
-  document.getElementById('voice-'+id).querySelector('div:last-child').innerText='✅';
-  currentVoice = {id, name, freeVoice, pitch, idx};
-  document.getElementById('voiceNameShow').innerText = name;
-  document.getElementById('realVoiceShow').innerText = freeVoice;
-  document.getElementById('engineVal').innerText = freeVoice;
-  document.getElementById('finalStatus').innerText = `✅ Selected ${name} - UNIQUE Voice: ${freeVoice} - Pitch ${pitch} - Different from all others`;
-}
-
-document.getElementById('speedRange').addEventListener('input', function(){ document.getElementById('speedVal').innerText = this.value + 'x'; });
-document.getElementById('pitchRange').addEventListener('input', function(){ document.getElementById('pitchVal').innerText = this.value + 'x'; });
-document.getElementById('ttsText').addEventListener('input', function(){ document.getElementById('charCount').innerText = this.value.length + ' chars'; });
-
-// FIXED - EACH VOICE DIFFERENT - NO SAME VOICE BUG
-async function generateOrbitronizFixed() {
-  const textEl = document.getElementById('ttsText');
-  const audioEl = document.getElementById('ttsAudio');
-  const waveEl = document.getElementById('ttsWave');
-  const statusEl = document.getElementById('finalStatus');
-  
-  let text = textEl.value.trim();
-  if(!text){ alert('Enter text'); return; }
-  
-  const speed = parseFloat(document.getElementById('speedRange').value);
-  const userPitch = parseFloat(document.getElementById('pitchRange').value);
-  const finalPitch = currentVoice.pitch * userPitch;
-
-  waveEl.style.display = 'block';
-  statusEl.innerText = `⏳ Generating ${currentVoice.name} as ${currentVoice.freeVoice} - UNIQUE Tone - Pitch ${finalPitch.toFixed(1)} - No same voice...`;
-
-  // STEP 1: Try Orbitroniz Premium (your key) - if fails go to free
-  try {
-    const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM?output_format=mp3_44100_128`, {
-      method: 'POST',
-      headers: { 'xi-api-key': ORBITRONIZ_API_KEY, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: text, model_id: 'eleven_multilingual_v2', voice_settings: { stability: 0.5, similarity_boost: 0.75 } })
+(function(){
+  const synth = window.speechSynthesis;
+  const $ = id => document.getElementById(id);
+  const profiles = {
+    girl: { name: "Mature Girl Ivy Smooth Deep", pitch: 0.85, rate: 0.75, volume: 0.85, lang: "en-US", preview: "Hmm... Hello... I am Ivy... mature girl... smooth soft deep calm..." },
+    woman: { name: "Lady Joanna Warm Very Deep", pitch: 0.60, rate: 0.65, volume: 0.90, lang: "en-GB", preview: "Good evening. I am Joanna. Warm deep professional lady. Welcome." },
+    man: { name: "Man Ultra Deep Bass", pitch: 0.35, rate: 0.80, volume: 1, lang: "en-US", preview: "Hello. I am ultra deep man. Bass powerful strong voice." },
+    boy: { name: "Boy Joey Deep Energetic", pitch: 0.50, rate: 1.25, volume: 1, lang: "en-US", preview: "Hey! What's up! I am Joey! Deep boy! Super excited! Fast! Let's go!" }
+  };
+  let selected = "man"; let voices = []; let reqId = 0;
+  const setStatus = m => $("tts-status").textContent = m;
+  const updOut = () => {
+    $("tts-pitchOut").textContent = Number($("tts-pitch").value).toFixed(2);
+    $("tts-rateOut").textContent = Number($("tts-rate").value).toFixed(2)+"×";
+    $("tts-volumeOut").textContent = Math.round(Number($("tts-volume").value)*100)+"%";
+  };
+  function transformText(t, key){
+    if(key==="boy"){ return "Hey! "+t.replace(/\./g,"! ")+" Yeah! Let's go!"; }
+    if(key==="girl"){ return "Hmm... "+t.replace(/\./g,"... ")+"... just for you..."; }
+    if(key==="woman"){ return "Good evening. "+t+" Thank you. Welcome."; }
+    if(key==="man"){ return t.toLowerCase()+" Deep and powerful."; }
+    return t;
+  }
+  function setProfile(key){
+    if(!profiles[key]) return; selected=key; const p=profiles[key];
+    document.querySelectorAll(".tts-voice").forEach(b=>b.classList.toggle("active", b.dataset.profile===key));
+    $("tts-profileInfo").innerHTML="<option>"+p.name+"</option>";
+    $("tts-pitch").value=p.pitch; $("tts-rate").value=p.rate; $("tts-volume").value=p.volume; $("tts-lang").value=p.lang;
+    updOut(); if(synth) synth.cancel(); reqId++; setStatus(p.name+" selected - "+p.preview);
+  }
+  function populate(){
+    if(!synth) return; voices=synth.getVoices();
+    const sel=$("tts-voiceSelect"); const old=sel.value; sel.innerHTML='<option value="">Automatic</option>';
+    const lang=$("tts-lang").value.toLowerCase();
+    const match=voices.filter(v=>v.lang && (v.lang.toLowerCase()===lang || v.lang.toLowerCase().startsWith(lang.split("-")[0])));
+    const list=match.length?match:voices;
+    list.forEach(v=>{
+      const o=document.createElement("option"); o.value=v.voiceURI; o.textContent=v.name+" ("+v.lang+")"; sel.appendChild(o);
     });
-    // If key has credits, use it but with different voice mapping
-    if(res.ok){
-      const voiceMapPremium = { 'rachel':'21m00Tcm4TlvDq8ikWAM', 'adam':'pFZP5JQG7iQjIQuC4Bku', 'bella':'EXAVITQu4vr4xnSDxMaL', 'antoni':'ErXwobaYiN019PkySvjV', 'elli':'MF3mGyEYNl37FxnP8THQ', 'josh':'TxGEqnHWrfWFTfGW9XjX', 'dorothy':'ThT5KcBeYPX3keUQqHPh', 'arnold':'VR6AewLTigWG4xSOukaG', 'aditi':'yoZ06aMxZJJ28mfd3POQ', 'raveena':'EXAVITQu4vr4xnSDxMaL' };
-      const vid = voiceMapPremium[currentVoice.id] || '21m00Tcm4TlvDq8ikWAM';
-      const res2 = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${vid}?output_format=mp3_44100_128`, {
-        method: 'POST',
-        headers: { 'xi-api-key': ORBITRONIZ_API_KEY, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: text, model_id: 'eleven_multilingual_v2', voice_settings: { stability: 0.5, similarity_boost: 0.75 } })
-      });
-      if(res2.ok){
-        const blob = await res2.blob();
-        if(blob.size > 1000){ await playBlob(blob, audioEl, waveEl, statusEl, speed, text, `Orbitroniz Premium ${currentVoice.name} (${currentVoice.freeVoice})`); return; }
-      }
-    }
-    throw new Error('Premium quota over');
-  } catch(e){ console.log('Premium failed, using free unique voices'); }
-
-  // STEP 2: FREE UNIQUE VOICE - THIS FIXES SAME VOICE BUG - EACH CARD DIFFERENT VOICE NAME + DIFFERENT PITCH
-  try {
-    // Each card uses DIFFERENT freeVoice - Ivy, Brian, Joanna, Joey, Kendra, Matthew, Emma, Russell, Aditi, Raveena - All different
-    const url = `https://api.streamelements.com/kappa/v2/speech?voice=${currentVoice.freeVoice}&text=${encodeURIComponent(text)}`;
-    const res = await fetch(url);
-    if(!res.ok) throw new Error('Free API error');
-    const blob = await res.blob();
-    if(blob.size < 500) throw new Error('Empty');
-    await playBlob(blob, audioEl, waveEl, statusEl, speed * finalPitch, text, `Orbitroniz Free ${currentVoice.name} as ${currentVoice.freeVoice} - Pitch ${finalPitch.toFixed(1)} - UNIQUE`);
-  } catch(e2){
-    // FINAL FALLBACK - BROWSER WITH UNIQUE PITCH PER VOICE
-    waveEl.style.display='none';
-    statusEl.innerText = `⚠️ Using Browser Orbitroniz Engine - ${currentVoice.name} - Pitch ${finalPitch.toFixed(1)} - Unique`;
-    if('speechSynthesis' in window){
-      speechSynthesis.cancel();
-      const utter = new SpeechSynthesisUtterance(text);
-      utter.rate = speed;
-      utter.pitch = finalPitch;
-      const voices = speechSynthesis.getVoices();
-      if(voices.length > 0){
-        // Pick different system voice by idx - ensures unique
-        utter.voice = voices[currentVoice.idx % voices.length];
-      }
-      speechSynthesis.speak(utter);
-      statusEl.innerText = `✅ Playing Browser Orbitroniz - ${currentVoice.name} - Voice ${currentVoice.freeVoice} - Pitch ${finalPitch.toFixed(1)} - Different tone guaranteed`;
+    if([...sel.options].some(o=>o.value===old)) sel.value=old;
+  }
+  function chooseVoice(){
+    const uri=$("tts-voiceSelect").value; if(uri){ return voices.find(v=>v.voiceURI===uri)||null; }
+    const lang=$("tts-lang").value.toLowerCase();
+    const m=voices.filter(v=>v.lang && (v.lang.toLowerCase()===lang || v.lang.toLowerCase().startsWith(lang.split("-")[0])));
+    const pool=m.length?m:voices; if(!pool.length) return null;
+    if(selected==="man"||selected==="boy"){
+      let male=pool.find(v=>v.name.toLowerCase().includes("male")||v.name.toLowerCase().includes("david")||v.name.toLowerCase().includes("mark")||v.name.toLowerCase().includes("alex")||v.name.toLowerCase().includes("daniel"));
+      return male||pool.find(v=>!v.name.toLowerCase().includes("female")&&!v.name.toLowerCase().includes("zira"))||pool[0];
+    } else {
+      let female=pool.find(v=>v.name.toLowerCase().includes("female")||v.name.toLowerCase().includes("zira")||v.name.toLowerCase().includes("samantha")||v.name.toLowerCase().includes("karen"));
+      return female||pool[0];
     }
   }
-}
-
-async function playBlob(blob, audioEl, waveEl, statusEl, speed, text, label){
-  if(lastAudioUrl) URL.revokeObjectURL(lastAudioUrl);
-  lastBlob = blob;
-  const url = URL.createObjectURL(blob);
-  lastAudioUrl = url;
-  audioEl.src = url;
-  audioEl.style.display = 'block';
-  audioEl.playbackRate = speed;
-  audioEl.load();
-  audioEl.oncanplay = async () => {
-    try { await audioEl.play(); waveEl.style.display='none'; statusEl.innerText = `✅ Playing ${label} - UNIQUE - No Same Voice - Playable Fixed`; }
-    catch{ waveEl.style.display='none'; statusEl.innerText = `✅ ${label} Ready - Tap Play button`; }
-  };
-}
-
-function playLast(){ const a=document.getElementById('ttsAudio'); if(a.src) a.play(); }
-function downloadAudio(){ if(lastBlob){ const a=document.createElement('a'); a.href=URL.createObjectURL(lastBlob); a.download=`Orbitroniz-${currentVoice.name}-${Date.now()}.mp3`; a.click(); } }
+  function speak(text, preview=false){
+    if(!synth){ setStatus("Browser no support - Use Chrome"); return; }
+    let content=text.trim(); if(!content){ setStatus("Enter text first"); return; }
+    if(!preview){ content=transformText(content, selected); }
+    synth.cancel(); const myReq=++reqId;
+    const chunks=content.match(/[^.!?]+[.!?]*/g)||[content]; const q=chunks.map(s=>s.trim()).filter(Boolean); let i=0;
+    function next(){
+      if(myReq!==reqId) return; if(i>=q.length){ setStatus("Finished - "+profiles[selected].name); return; }
+      const u=new SpeechSynthesisUtterance(q[i++]);
+      u.lang=$("tts-lang").value; u.pitch=Number($("tts-pitch").value); u.rate=Number($("tts-rate").value); u.volume=Number($("tts-volume").value);
+      const v=chooseVoice(); if(v) u.voice=v;
+      u.onstart=()=>{ if(myReq===reqId) setStatus((preview?"Previewing ":"Speaking ")+profiles[selected].name+" - "+(v?v.name:"Default")); };
+      u.onend=()=>{ if(myReq===reqId) next(); };
+      u.onerror=e=>{ if(myReq===reqId && e.error!=="canceled" && e.error!=="interrupted") setStatus("Error: "+e.error); };
+      synth.speak(u);
+    }
+    if(!voices.length) populate(); if(!voices.length){ setStatus("Loading voices - Press Play again"); return; } next();
+  }
+  document.querySelectorAll(".tts-voice").forEach(b=>b.addEventListener("click",()=>setProfile(b.dataset.profile)));
+  ["tts-pitch","tts-rate","tts-volume"].forEach(id=>$(id).addEventListener("input",updOut));
+  $("tts-lang").addEventListener("change",()=>{populate(); setStatus("Language updated");});
+  $("tts-play").addEventListener("click",()=>speak($("tts-text").value));
+  $("tts-preview").addEventListener("click",()=>speak(profiles[selected].preview, true));
+  $("tts-pause").addEventListener("click",()=>{ if(!synth) return; if(synth.paused){synth.resume(); setStatus("Resumed");} else if(synth.speaking){synth.pause(); setStatus("Paused");} });
+  $("tts-stop").addEventListener("click",()=>{ reqId++; if(synth) synth.cancel(); setStatus("Stopped"); });
+  if(synth){ populate(); synth.onvoiceschanged=populate; }
+  setProfile("man");
+})();
 </script>
-<!-- ============ TTS END - TOOL 1 ============ -->
+<!-- TTS END -->  
 <!-- ============ VIDEO GENERATOR START - TOOL 2 ============ -->
 <!-- DO NOT EDIT HERE IF YOU ONLY WANT TO EDIT TTS -->
 <!-- #################################################### -->
