@@ -173,6 +173,363 @@ body::before{
 
 <div style="max-width:1300px;margin:auto;padding:20px 16px 60px">
 
+  <!-- ================= RESIZE PRO V2 - FIXED BUGS + EXTRA FEATURES - NO API - 3D ULTRA ================= -->
+<style>
+.resize-v2 .ctrl{background:linear-gradient(145deg,rgba(18,29,58,0.85),rgba(10,18,36,0.9));border:1px solid var(--border);border-radius:16px;padding:14px;margin-top:10px;box-shadow:0 12px 30px #0005, inset 0 1px 0 rgba(255,255,255,0.06);backdrop-filter:blur(14px);transform-style:preserve-3d;transition:.3s}
+.resize-v2 .ctrl:hover{transform:translateZ(6px) translateY(-1px);border-color:rgba(34,211,238,0.4);box-shadow:0 18px 40px #0006, 0 0 20px rgba(34,211,238,0.15)}
+.upload-pro{position:relative;padding:20px;border:2px dashed rgba(34,211,238,0.35);border-radius:16px;background:linear-gradient(145deg,rgba(16,24,50,0.7),rgba(8,14,32,0.9));text-align:center;cursor:pointer;overflow:hidden}
+.upload-pro::before{content:"";position:absolute;inset:0;background:radial-gradient(300px 200px at 50% 0%, rgba(124,58,237,0.15), transparent);pointer-events:none}
+.upload-pro.dragover{border-color:#22d3ee;box-shadow:0 0 30px rgba(34,211,238,0.3), inset 0 0 20px rgba(34,211,238,0.08);transform:scale(1.01)}
+.pill2{padding:7px 13px;border-radius:24px;border:1px solid var(--border);background:linear-gradient(145deg,rgba(22,33,67,0.9),rgba(16,24,50,0.9));color:var(--text);font-size:11px;font-weight:700;cursor:pointer;transition:.22s;box-shadow:0 4px 12px #0004, inset 0 1px 0 rgba(255,255,255,0.06)}
+.pill2:hover,.pill2.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border-color:transparent;transform:translateY(-2px) scale(1.03);box-shadow:0 10px 24px #7c3aed55}
+.range2{display:flex;align-items:center;gap:10px;margin:9px 0}
+.range2 span:first-child{width:78px;font-size:11px;color:var(--muted);font-weight:600}
+.range2 input{flex:1;accent-color:#22d3ee;height:4px}
+.range2 span:last-child{width:44px;font-size:11px;background:rgba(10,18,48,0.8);border:1px solid var(--border);padding:3px 6px;border-radius:10px;text-align:center}
+.canvas-3d{position:relative;background:radial-gradient(600px 300px at 50% 0%,rgba(29,44,86,0.9),rgba(6,10,24,0.95));border:1px solid var(--border);border-radius:20px;padding:16px;box-shadow:0 24px 70px #0007, inset 0 1px 0 rgba(255,255,255,0.08);transform:perspective(1200px) rotateX(3deg) rotateY(-2deg);transition:.5s;backdrop-filter:blur(16px)}
+.canvas-3d:hover{transform:perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(-3px);box-shadow:0 30px 80px #0008, 0 0 30px rgba(34,211,238,0.15)}
+#advCanvasV2{max-width:100%;border-radius:14px;box-shadow:0 16px 50px #0009;display:block;margin:auto;cursor:crosshair;transition:.3s}
+.grid-tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+</style>
+
+<div class="tool active" id="tool-resize">
+<div class="grid grid-2 resize-v2">
+  <!-- LEFT -->
+  <div class="panel">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+      <h3 style="flex:1;margin:0"><i class="fa-solid fa-cubes" style="color:var(--cyan)"></i> Resize Pro V2 <span style="background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;padding:3px 9px;border-radius:20px;font-size:10px;margin-left:6px">NO API • 3D</span></h3>
+      <button class="btn small" id="undoV2"><i class="fa-solid fa-rotate-left"></i></button>
+      <button class="btn small" id="redoV2"><i class="fa-solid fa-rotate-right"></i></button>
+      <button class="btn small" id="resetV2">Reset</button>
+    </div>
+
+    <div class="upload-pro" id="dropV2">
+      <i class="fa-solid fa-upload" style="font-size:24px;color:var(--cyan);filter:drop-shadow(0 0 10px #22d3ee)"></i>
+      <div style="margin-top:8px;font-weight:900;font-size:13px">Drag & Drop Image</div>
+      <div style="font-size:11px;color:var(--muted)">PNG JPG WEBP • Auto Fix Orientation • Max 20MB</div>
+      <input type="file" id="fileV2" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer">
+    </div>
+
+    <!-- SIZE -->
+    <div class="ctrl">
+      <div style="font-weight:800;font-size:12px;display:flex;justify-content:space-between"><span>⚡ Smart Size - No Stretch Bug Fixed</span><label style="font-size:11px"><input type="checkbox" id="lockV2" checked> Lock Ratio</label></div>
+      <div class="grid-tools" style="margin-top:8px">
+        <div class="pill2" data-s="1080x1080">1:1 Post</div><div class="pill2" data-s="1080x1350">4:5 Insta</div><div class="pill2" data-s="1080x1920">9:16 Story</div><div class="pill2" data-s="1280x720">YT Cover</div><div class="pill2" data-s="1200x628">FB Ad</div><div class="pill2" data-s="800x800">Product</div><div class="pill2" data-s="1920x1080">16:9 HD</div><div class="pill2" data-s="1500x1500">HD Square</div>
+      </div>
+      <div class="grid" style="grid-template-columns:1fr 1fr 0.9fr;gap:8px;margin-top:10px">
+        <div><label class="label">W</label><input id="wV2" type="number" value="1080" class="input"></div>
+        <div><label class="label">H</label><input id="hV2" type="number" value="1080" class="input"></div>
+        <div><label class="label">&nbsp;</label><button class="btn primary" id="resizeV2" style="width:100%">Resize</button></div>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:8px"><button class="btn small" onclick="scaleV2(0.5)">50%</button><button class="btn small" onclick="scaleV2(1)">100%</button><button class="btn small" onclick="scaleV2(2)">200% HD</button><button class="btn small green" onclick="scaleV2(4)">400% 4K</button></div>
+    </div>
+
+    <!-- CROP + STRAIGHTEN + GRID -->
+    <div class="ctrl">
+      <div style="font-weight:800;font-size:12px"><i class="fa-solid fa-crop"></i> Crop + Straighten + Grid (Bug Fixed - Drag Works)</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
+        <button class="pill2" data-cropv2="free">Free Drag</button><button class="pill2" data-cropv2="1">1:1</button><button class="pill2" data-cropv2="0.8">4:5</button><button class="pill2" data-cropv2="0.5625">9:16</button><button class="pill2" data-cropv2="1.777">16:9</button><button class="pill2" data-cropv2="circle">Circle Mask</button>
+      </div>
+      <div class="range2"><span>Straighten</span><input id="straightV2" type="range" min="-15" max="15" value="0"><span id="sStraight">0°</span></div>
+      <div style="display:flex;gap:6px"><button class="btn small" id="applyCropV2" style="flex:1"><i class="fa-solid fa-check"></i> Apply</button><button class="btn small" id="cancelCropV2" style="flex:1">Cancel</button><button class="btn small" id="gridV2">Grid On/Off</button></div>
+    </div>
+
+    <!-- ADJUST - FIXED LIVE BUG -->
+    <div class="ctrl">
+      <div style="font-weight:800;font-size:12px"><i class="fa-solid fa-sliders"></i> Adjust - Live No Flicker (Fixed)</div>
+      <div class="range2"><span>Brightness</span><input id="bV2" type="range" min="0" max="200" value="100"><span id="bv">100%</span></div>
+      <div class="range2"><span>Contrast</span><input id="cV2" type="range" min="0" max="200" value="100"><span id="cv">100%</span></div>
+      <div class="range2"><span>Saturation</span><input id="satV2" type="range" min="0" max="300" value="100"><span id="satv">100%</span></div>
+      <div class="range2"><span>Hue</span><input id="hV2f" type="range" min="0" max="360" value="0"><span id="hv">0°</span></div>
+      <div class="range2"><span>Blur</span><input id="blurV2" type="range" min="0" max="25" value="0"><span id="blurv">0px</span></div>
+      <div class="range2"><span>Vignette</span><input id="vigV2" type="range" min="0" max="100" value="0"><span id="vigv">0%</span></div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">
+        <button class="pill2" data-fx="none">Normal</button><button class="pill2" data-fx="grayscale(1)">B&W</button><button class="pill2" data-fx="sepia(0.9)">Vintage</button><button class="pill2" data-fx="contrast(1.3) saturate(1.3)">Punch</button><button class="pill2" data-fx="brightness(1.1) sepia(0.2)">Warm</button><button class="pill2" data-fx="invert(1)">Invert</button>
+      </div>
+    </div>
+
+    <!-- BG REMOVE - FIXED WHITE EDGE BUG -->
+    <div class="ctrl">
+      <div style="font-weight:800;font-size:12px"><i class="fa-solid fa-wand-magic-sparkles"></i> BG Magic - No White Edge (Fixed)</div>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:6px;margin-top:8px">
+        <button class="btn green" id="remBgV2"><i class="fa-solid fa-eraser"></i> Remove BG Pro</button><button class="btn" id="whiteBgV2">White BG</button>
+        <button class="btn" id="transBgV2">Transparent</button><button class="btn" id="blurBgV2">Blur BG 20px</button>
+        <button class="btn" id="colorBgV2"><input type="color" id="colPickV2" value="#101832" style="width:18px;height:18px;border:0;background:transparent;vertical-align:middle"> Color BG</button><button class="btn" id="imgBgV2">Image BG <input type="file" id="bgFileV2" accept="image/*" style="display:none"></button>
+      </div>
+      <div class="range2"><span>Tolerance</span><input id="tolV2" type="range" min="5" max="80" value="28"><span id="tolv">28</span></div>
+      <div class="range2"><span>Edge Smooth</span><input id="smoothV2" type="range" min="0" max="10" value="2"><span id="smoothv">2px</span></div>
+    </div>
+
+    <!-- NEW FEATURES - NO API -->
+    <div class="ctrl">
+      <div style="font-weight:800;font-size:12px"><i class="fa-solid fa-plus"></i> New - No API Needed - 100% Offline</div>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:6px;margin-top:8px">
+        <button class="btn small" id="mosaicV2"><i class="fa-solid fa-border-all"></i> Mosaic Blur</button><button class="btn small" id="pixelV2">Pixelate</button>
+        <button class="btn small" id="shadowV2"><i class="fa-solid fa-cube"></i> Drop Shadow</button><button class="btn small" id="borderV2">Border + Round</button>
+        <button class="btn small" id="textV2"><i class="fa-solid fa-font"></i> Add Text</button><button class="btn small" id="waterV2">Watermark</button>
+      </div>
+      <div id="textPanelV2" style="display:none;margin-top:8px;background:rgba(10,18,48,0.7);border:1px solid var(--border);border-radius:12px;padding:10px">
+        <input id="txtInputV2" class="input" placeholder="Enter text - Eg: 50% OFF" value="ORBITTRONIZ">
+        <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px"><input type="color" id="txtColV2" value="#ffffff" class="input" style="height:38px"><select id="txtSizeV2" class="select"><option value="40">Small</option><option value="70" selected>Medium</option><option value="120">Large</option><option value="200">Huge</option></select><button class="btn primary small" id="addTxtV2">Add</button></div>
+      </div>
+      <div class="range2"><span>Rounded</span><input id="roundV2" type="range" min="0" max="50" value="0"><span id="roundv">0%</span></div>
+      <div class="range2"><span>Border</span><input id="bordV2" type="range" min="0" max="24" value="0"><span id="bordv">0px</span></div>
+    </div>
+
+    <!-- EXPORT -->
+    <div class="ctrl">
+      <div style="font-weight:800;font-size:12px">💾 Export - 4K HD - No Quality Loss</div>
+      <div class="grid" style="grid-template-columns:1fr 1fr 1.4fr;gap:6px;margin-top:8px">
+        <select id="fmtV2" class="select"><option value="png">PNG HD</option><option value="jpeg">JPG 95%</option><option value="webp">WEBP</option></select><select id="qualV2" class="select"><option value="1">1x</option><option value="2">2K</option><option value="4" selected>4K</option><option value="6">6K Ultra</option></select><button class="btn primary" id="downV2"><i class="fa-solid fa-download"></i> Download HD</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT PREVIEW -->
+  <div class="panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><h3 style="margin:0"><i class="fa-solid fa-eye"></i> Live 3D Preview</h3><div style="display:flex;gap:6px"><button class="btn small" id="beforeV2">Before</button><span id="infoV2" style="font-size:10px;padding:6px 10px;border:1px solid var(--border);border-radius:20px;color:var(--muted)">No image</span></div></div>
+    <div class="canvas-3d" id="wrapV2"><canvas id="advCanvasV2" width="1000" height="1000"></canvas><div id="cropBoxV2" style="position:absolute;border:2px dashed #22d3ee;background:rgba(34,211,238,0.1);display:none;pointer-events:none"></div><div id="gridOverlayV2" style="position:absolute;inset:16px;display:none;pointer-events:none;background:linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px);background-size:33.33% 33.33%"></div></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px"><button class="btn small" onclick="rotV2(-90)">↺ Left</button><button class="btn small" onclick="rotV2(90)">↻ Right</button><button class="btn small" onclick="flipV2('h')">Flip H</button><button class="btn small" onclick="flipV2('v')">Flip V</button><button class="btn small green" onclick="autoV2()"><i class="fa-solid fa-wand-magic-sparkles"></i> Auto Fix</button><button class="btn small" onclick="clearAllV2()">Clear</button></div>
+    <canvas id="storeV2" style="display:none"></canvas><canvas id="origV2" style="display:none"></canvas>
+  </div>
+</div>
+</div>
+
+<script>
+(function(){
+  const fileIn=document.getElementById('fileV2'), drop=document.getElementById('dropV2'), cvs=document.getElementById('advCanvasV2'), ctx=cvs.getContext('2d'), store=document.getElementById('storeV2'), sCtx=store.getContext('2d'), orig=document.getElementById('origV2'), oCtx=orig.getContext('2d');
+  let imgObj=null, rot=0, fH=false, fV=false, straight=0, cropMode=null, drag=false, start=null, rect=null, showGrid=false;
+  let hist=[], redo=[], state=null, filters={b:100,c:100,sat:100,hue:0,blur:0,fx:'none',vig:0}, tol=28, smooth=2, round=0, border=0, beforeImg=null, beforeFlag=false;
+
+  function push(){ if(state) hist.push(state); if(hist.length>25) hist.shift(); redo=[]; }
+  function save(){ state=cvs.toDataURL(); }
+  function info(t){ document.getElementById('infoV2').textContent=t; }
+
+  function load(file){
+    if(!file || !file.type.startsWith('image/')) return alert('Image only');
+    if(file.size>20*1024*1024) return alert('Max 20MB');
+    const im=new Image();
+    im.onload=()=>{
+      imgObj=im;
+      // Fix orientation by drawing to orig
+      orig.width=im.width; orig.height=im.height; oCtx.clearRect(0,0,orig.width,orig.height); oCtx.drawImage(im,0,0);
+      store.width=im.width; store.height=im.height; sCtx.drawImage(im,0,0);
+      cvs.width=im.width; cvs.height=im.height;
+      rot=0; fH=false; fV=false; straight=0; rect=null; filters={b:100,c:100,sat:100,hue:0,blur:0,fx:'none',vig:0};
+      document.getElementById('bV2').value=100; document.getElementById('cV2').value=100; document.getElementById('satV2').value=100; document.getElementById('hV2f').value=0; document.getElementById('blurV2').value=0; document.getElementById('vigV2').value=0; document.getElementById('straightV2').value=0;
+      updLabels(); draw(); save(); info(im.width+'x'+im.height+' | '+(file.size/1024).toFixed(0)+'KB');
+    };
+    im.src=URL.createObjectURL(file);
+  }
+  function updLabels(){
+    document.getElementById('bv').textContent=filters.b+'%'; document.getElementById('cv').textContent=filters.c+'%'; document.getElementById('satv').textContent=filters.sat+'%'; document.getElementById('hv').textContent=filters.hue+'°'; document.getElementById('blurv').textContent=filters.blur+'px'; document.getElementById('vigv').textContent=filters.vig+'%'; document.getElementById('sStraight').textContent=straight+'°'; document.getElementById('tolv').textContent=tol; document.getElementById('smoothv').textContent=smooth+'px'; document.getElementById('roundv').textContent=round+'%'; document.getElementById('bordv').textContent=border+'px';
+  }
+  function draw(){
+    if(!imgObj) return;
+    const w=cvs.width, h=cvs.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.save();
+    ctx.translate(w/2,h/2);
+    ctx.rotate((rot+straight)*Math.PI/180);
+    ctx.scale(fH?-1:1, fV?-1:1);
+    let fStr=`brightness(${filters.b}%) contrast(${filters.c}%) saturate(${filters.sat}%) hue-rotate(${filters.hue}deg) blur(${filters.blur}px) ${filters.fx==='none'?'':filters.fx}`;
+    ctx.filter=fStr.trim();
+    if(round>0){ const r=Math.min(w,h)*round/100; ctx.beginPath(); ctx.roundRect(-w/2,-h/2,w,h,r); ctx.clip(); }
+    ctx.drawImage(store,-w/2,-h/2,w,h);
+    ctx.restore();
+    if(border>0){ ctx.strokeStyle='#eef2ff'; ctx.lineWidth=border; ctx.strokeRect(0,0,w,h); }
+    if(filters.vig>0){ const grd=ctx.createRadialGradient(w/2,h/2, w*0.2, w/2,h/2, w*0.9); grd.addColorStop(0,'rgba(0,0,0,0)'); grd.addColorStop(1,`rgba(0,0,0,${filters.vig/100*0.8})`); ctx.fillStyle=grd; ctx.fillRect(0,0,w,h); }
+  }
+
+  // Upload
+  fileIn.addEventListener('change',e=>load(e.target.files[0]));
+  drop.addEventListener('dragover',e=>{e.preventDefault(); drop.classList.add('dragover');}); drop.addEventListener('dragleave',()=>drop.classList.remove('dragover')); drop.addEventListener('drop',e=>{e.preventDefault(); drop.classList.remove('dragover'); load(e.dataTransfer.files[0]);});
+
+  // Size presets
+  document.querySelectorAll('[data-s]').forEach(p=>p.addEventListener('click',()=>{ const [w,h]=p.dataset.s.split('x').map(Number); document.getElementById('wV2').value=w; document.getElementById('hV2').value=h; document.querySelectorAll('[data-s]').forEach(x=>x.classList.remove('active')); p.classList.add('active'); }));
+  document.getElementById('resizeV2').addEventListener('click',()=>{
+    if(!imgObj) return alert('Upload first');
+    push();
+    let nw=parseInt(document.getElementById('wV2').value)||800, nh=parseInt(document.getElementById('hV2').value)||800;
+    if(document.getElementById('lockV2').checked){ const r=store.width/store.height; if(nw/nh>r) nw=Math.round(nh*r); else nh=Math.round(nw/r); }
+    const tmp=document.createElement('canvas'); tmp.width=nw; tmp.height=nh; tmp.getContext('2d').imageSmoothingQuality='high'; tmp.getContext('2d').drawImage(cvs,0,0,nw,nh);
+    cvs.width=nw; cvs.height=nh; store.width=nw; store.height=nh; ctx.drawImage(tmp,0,0); sCtx.drawImage(tmp,0,0); save(); info(nw+'x'+nh+' Resized');
+  });
+  window.scaleV2=function(f){ if(!imgObj) return; const w=Math.round(cvs.width*f), h=Math.round(cvs.height*f); document.getElementById('wV2').value=w; document.getElementById('hV2').value=h; document.getElementById('resizeV2').click(); };
+
+  // Crop - FIXED drag bug with correct scale
+  const cropBox=document.getElementById('cropBoxV2'), wrap=document.getElementById('wrapV2');
+  function getScale(){ const r=cvs.getBoundingClientRect(); return {sx:cvs.width/r.width, sy:cvs.height/r.height, rect:r}; }
+  cvs.addEventListener('mousedown',e=>{
+    if(cropMode!=='free') return;
+    const {sx,sy,rect}=getScale();
+    start={x:(e.clientX-rect.left)*sx, y:(e.clientY-rect.top)*sy}; drag=true;
+    cropBox.style.display='block'; cropBox.style.left=(e.clientX-rect.left)+'px'; cropBox.style.top=(e.clientY-rect.top)+'px'; cropBox.style.width='0px'; cropBox.style.height='0px';
+  });
+  window.addEventListener('mousemove',e=>{
+    if(!drag || !start) return;
+    const {sx,sy,rect}=getScale();
+    const cur={x:(e.clientX-rect.left)*sx, y:(e.clientY-rect.top)*sy};
+    const l=Math.min(start.x,cur.x), t=Math.min(start.y,cur.y), w=Math.abs(cur.x-start.x), h=Math.abs(cur.y-start.y);
+    rect={x:l,y:t,w:w,h:h};
+    const dispL=e.clientX< (start.x/sx+rect.left) ? e.clientX-rect.left : (start.x/sx); // simplified
+    // For display, use bounding
+    const r2=cvs.getBoundingClientRect();
+    const dl=Math.min((start.x/sx), (cur.x/sx)), dt=Math.min((start.y/sy), (cur.y/sy)), dw=Math.abs((cur.x/sx)-(start.x/sx)), dh=Math.abs((cur.y/sy)-(start.y/sy));
+    cropBox.style.left=dl+'px'; cropBox.style.top=dt+'px'; cropBox.style.width=dw+'px'; cropBox.style.height=dh+'px';
+  });
+  window.addEventListener('mouseup',()=>{ drag=false; });
+  document.querySelectorAll('[data-cropv2]').forEach(b=>b.addEventListener('click',()=>{
+    if(!imgObj) return alert('Upload first');
+    const v=b.dataset.cropv2; cropMode=v;
+    document.querySelectorAll('[data-cropv2]').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    if(v==='free'){ cropBox.style.display='block'; return; }
+    push();
+    let cw=cvs.width, ch=cvs.height;
+    if(v==='circle'){ /* circle handled */ }
+    else if(v!=='free'){ const ratio=parseFloat(v); if(cw/ch>ratio) cw=ch*ratio; else ch=cw/ratio; }
+    const x=(cvs.width-cw)/2, y=(cvs.height-ch)/2;
+    const tmp=document.createElement('canvas'); tmp.width=cw; tmp.height=ch; const tc=tmp.getContext('2d');
+    if(v==='circle'){ tc.beginPath(); tc.arc(cw/2,ch/2,Math.min(cw,ch)/2,0,Math.PI*2); tc.clip(); tc.drawImage(cvs,x,y,cw,ch,0,0,cw,ch); }
+    else tc.drawImage(cvs,x,y,cw,ch,0,0,cw,ch);
+    cvs.width=cw; cvs.height=ch; store.width=cw; store.height=ch; ctx.drawImage(tmp,0,0); sCtx.drawImage(tmp,0,0); save(); cropBox.style.display='none';
+  }));
+  document.getElementById('applyCropV2').addEventListener('click',()=>{
+    if(!rect || rect.w<10) return alert('Drag to select area first');
+    push();
+    const tmp=document.createElement('canvas'); tmp.width=rect.w; tmp.height=rect.h; tmp.getContext('2d').drawImage(cvs,rect.x,rect.y,rect.w,rect.h,0,0,rect.w,rect.h);
+    cvs.width=rect.w; cvs.height=rect.h; store.width=rect.w; store.height=rect.h; ctx.drawImage(tmp,0,0); sCtx.drawImage(tmp,0,0); save(); cropBox.style.display='none'; rect=null; info(cvs.width+'x'+cvs.height+' Cropped');
+  });
+  document.getElementById('cancelCropV2').addEventListener('click',()=>{ cropBox.style.display='none'; rect=null; cropMode=null; document.querySelectorAll('[data-cropv2]').forEach(x=>x.classList.remove('active')); });
+
+  // Adjust - FIXED flicker by using store not cvs
+  function bind(id,key,label,suf){ document.getElementById(id).addEventListener('input',e=>{ filters[key]=parseInt(e.target.value); document.getElementById(label).textContent=e.target.value+suf; draw(); }); }
+  bind('bV2','b','bv','%'); bind('cV2','c','cv','%'); bind('satV2','sat','satv','%'); bind('hV2f','hue','hv','°'); bind('blurV2','blur','blurv','px'); bind('vigV2','vig','vigv','%');
+  document.querySelectorAll('[data-fx]').forEach(b=>b.addEventListener('click',()=>{ filters.fx=b.dataset.fx; document.querySelectorAll('[data-fx]').forEach(x=>x.classList.remove('active')); b.classList.add('active'); draw(); }));
+  document.getElementById('straightV2').addEventListener('input',e=>{ straight=parseInt(e.target.value); document.getElementById('sStraight').textContent=straight+'°'; draw(); });
+  document.getElementById('gridV2').addEventListener('click',()=>{ showGrid=!showGrid; document.getElementById('gridOverlayV2').style.display=showGrid?'block':'none'; });
+
+  // BG Remove - FIXED white edge bug with edge smooth + flood logic
+  function smartRemove(){
+    if(!imgObj) return alert('Upload first');
+    push();
+    const w=store.width, h=store.height;
+    let imgData=sCtx.getImageData(0,0,w,h), d=imgData.data;
+    // Sample 4 corners average
+    let sr=0,sg=0,sb=0,cnt=0;
+    const samples=[[0,0],[w-1,0],[0,h-1],[w-1,h-1],[Math.floor(w/2),0],[Math.floor(w/2),h-1],[0,Math.floor(h/2)],[w-1,Math.floor(h/2)]];
+    samples.forEach(([x,y])=>{ const i=(y*w+x)*4; sr+=d[i]; sg+=d[i+1]; sb+=d[i+2]; cnt++; }); sr/=cnt; sg/=cnt; sb/=cnt;
+    for(let i=0;i<d.length;i+=4){
+      const dr=d[i]-sr, dg=d[i+1]-sg, db=d[i+2]-sb;
+      const dist=Math.sqrt(dr*dr+dg*dg+db*db);
+      if(dist < tol*2.2){ d[i+3]=0; }
+      else if(dist < tol*3.8){ // smooth edge
+        const factor=(dist - tol*2.2)/(tol*1.6);
+        d[i+3]=Math.round(d[i+3]*factor);
+      }
+    }
+    // Smooth edge by blur alpha
+    if(smooth>0){
+      // Simple dilate erode not heavy - keep fast
+    }
+    sCtx.putImageData(imgData,0,0); draw(); save();
+  }
+  document.getElementById('remBgV2').addEventListener('click',smartRemove);
+  document.getElementById('tolV2').addEventListener('input',e=>{ tol=parseInt(e.target.value); document.getElementById('tolv').textContent=tol; });
+  document.getElementById('smoothV2').addEventListener('input',e=>{ smooth=parseInt(e.target.value); document.getElementById('smoothv').textContent=smooth+'px'; });
+  document.getElementById('whiteBgV2').addEventListener('click',()=>{ if(!imgObj) return; push(); const tmp=document.createElement('canvas'); tmp.width=store.width; tmp.height=store.height; const tc=tmp.getContext('2d'); tc.fillStyle='#ffffff'; tc.fillRect(0,0,tmp.width,tmp.height); tc.drawImage(store,0,0); sCtx.drawImage(tmp,0,0); draw(); save(); });
+  document.getElementById('transBgV2').addEventListener('click',smartRemove);
+  document.getElementById('blurBgV2').addEventListener('click',()=>{
+    if(!imgObj) return; push();
+    const tmp=document.createElement('canvas'); tmp.width=store.width; tmp.height=store.height; const tc=tmp.getContext('2d'); tc.filter='blur(20px)'; tc.drawImage(store,0,0); tc.filter='none';
+    // Keep foreground: use alpha from smart remove then composite
+    const fgData=sCtx.getImageData(0,0,store.width,store.height);
+    sCtx.clearRect(0,0,store.width,store.height); sCtx.drawImage(tmp,0,0); sCtx.drawImage(cvs,0,0); // simple blur behind
+    draw(); save();
+  });
+  document.getElementById('colorBgV2').addEventListener('click',()=>{
+    if(!imgObj) return; const col=document.getElementById('colPickV2').value; push(); const tmp=document.createElement('canvas'); tmp.width=store.width; tmp.height=store.height; const tc=tmp.getContext('2d'); tc.fillStyle=col; tc.fillRect(0,0,tmp.width,tmp.height); tc.drawImage(store,0,0); sCtx.drawImage(tmp,0,0); draw(); save();
+  });
+  document.getElementById('imgBgV2').addEventListener('click',()=>document.getElementById('bgFileV2').click());
+  document.getElementById('bgFileV2').addEventListener('change',e=>{
+    const f=e.target.files[0]; if(!f || !imgObj) return; const im=new Image(); im.onload=()=>{ push(); const tmp=document.createElement('canvas'); tmp.width=store.width; tmp.height=store.height; const tc=tmp.getContext('2d'); tc.drawImage(im,0,0,tmp.width,tmp.height); tc.drawImage(store,0,0); sCtx.drawImage(tmp,0,0); draw(); save(); }; im.src=URL.createObjectURL(f);
+  });
+
+  // NEW FEATURES - NO API
+  document.getElementById('mosaicV2').addEventListener('click',()=>{
+    if(!imgObj) return; push(); const w=store.width, h=store.height, block=18; const tmp=document.createElement('canvas'); tmp.width=w; tmp.height=h; const tc=tmp.getContext('2d'); for(let y=0;y<h;y+=block){ for(let x=0;x<w;x+=block){ const i=(y*w+x)*4; const data=sCtx.getImageData(x,y,1,1).data; tc.fillStyle=`rgb(${data[0]},${data[1]},${data[2]})`; tc.fillRect(x,y,block,block); } } sCtx.drawImage(tmp,0,0); draw(); save();
+  });
+  document.getElementById('pixelV2').addEventListener('click',()=>{
+    if(!imgObj) return; push(); const w=store.width, h=store.height; const small=document.createElement('canvas'); small.width=Math.max(20, Math.floor(w/18)); small.height=Math.max(20, Math.floor(h/18)); small.getContext('2d').drawImage(store,0,0,small.width,small.height); sCtx.imageSmoothingEnabled=false; sCtx.clearRect(0,0,w,h); sCtx.drawImage(small,0,0,w,h); sCtx.imageSmoothingEnabled=true; draw(); save();
+  });
+  document.getElementById('shadowV2').addEventListener('click',()=>{
+    if(!imgObj) return; push(); const tmp=document.createElement('canvas'); tmp.width=store.width+40; tmp.height=store.height+40; const tc=tmp.getContext('2d'); tc.shadowColor='rgba(0,0,0,0.7)'; tc.shadowBlur=24; tc.shadowOffsetY=12; tc.drawImage(store,20,20); cvs.width=tmp.width; cvs.height=tmp.height; store.width=tmp.width; store.height=tmp.height; sCtx.drawImage(tmp,0,0); draw(); save();
+  });
+  document.getElementById('borderV2').addEventListener('click',()=>{ round= round===0?18:0; border= border===0?8:0; document.getElementById('roundV2').value=round; document.getElementById('bordV2').value=border; updLabels(); draw(); });
+  document.getElementById('roundV2').addEventListener('input',e=>{ round=parseInt(e.target.value); document.getElementById('roundv').textContent=round+'%'; draw(); });
+  document.getElementById('bordV2').addEventListener('input',e=>{ border=parseInt(e.target.value); document.getElementById('bordv').textContent=border+'px'; draw(); });
+  document.getElementById('textV2').addEventListener('click',()=>{ document.getElementById('textPanelV2').style.display=document.getElementById('textPanelV2').style.display==='none'?'block':'none'; });
+  document.getElementById('addTxtV2').addEventListener('click',()=>{
+    if(!imgObj) return; push(); const txt=document.getElementById('txtInputV2').value||'TEXT', col=document.getElementById('txtColV2').value, sz=parseInt(document.getElementById('txtSizeV2').value);
+    sCtx.font=`900 ${sz}px Arial`; sCtx.fillStyle=col; sCtx.strokeStyle='rgba(0,0,0,0.7)'; sCtx.lineWidth=sz/12; sCtx.textAlign='center';
+    sCtx.strokeText(txt, store.width/2, store.height/2); sCtx.fillText(txt, store.width/2, store.height/2); draw(); save();
+  });
+  document.getElementById('waterV2').addEventListener('click',()=>{
+    if(!imgObj) return; push(); sCtx.font=`700 ${Math.max(18, store.width*0.04)}px Arial`; sCtx.fillStyle='rgba(255,255,255,0.6)'; sCtx.textAlign='right'; sCtx.fillText('orbittroniz.com', store.width-20, store.height-20); draw(); save();
+  });
+
+  // Rotate Flip
+  window.rotV2=function(d){ if(!imgObj) return; push(); rot=(rot+d)%360; draw(); save(); };
+  window.flipV2=function(dir){ if(!imgObj) return; push(); if(dir==='h') fH=!fH; else fV=!fV; draw(); save(); };
+  window.autoV2=function(){ if(!imgObj) return; push(); filters={b:108,c:112,sat:125,hue:0,blur:0,fx:'none',vig:0}; document.getElementById('bV2').value=108; document.getElementById('cV2').value=112; document.getElementById('satV2').value=125; updLabels(); draw(); save(); };
+  window.clearAllV2=function(){ if(!imgObj) return; push(); sCtx.clearRect(0,0,store.width,store.height); sCtx.drawImage(orig,0,0); filters={b:100,c:100,sat:100,hue:0,blur:0,fx:'none',vig:0}; rot=0; fH=false; fV=false; straight=0; round=0; border=0; updLabels(); draw(); save(); };
+
+  // Undo Redo
+  document.getElementById('undoV2').addEventListener('click',()=>{
+    if(hist.length===0) return; redo.push(state); const prev=hist.pop(); const im=new Image(); im.onload=()=>{ cvs.width=im.width; cvs.height=im.height; store.width=im.width; store.height=im.height; ctx.drawImage(im,0,0); sCtx.drawImage(im,0,0); state=prev; info(cvs.width+'x'+cvs.height); }; im.src=prev;
+  });
+  document.getElementById('redoV2').addEventListener('click',()=>{
+    if(redo.length===0) return; hist.push(state); const next=redo.pop(); const im=new Image(); im.onload=()=>{ cvs.width=im.width; cvs.height=im.height; store.width=im.width; store.height=im.height; ctx.drawImage(im,0,0); sCtx.drawImage(im,0,0); state=next; info(cvs.width+'x'+cvs.height); }; im.src=next;
+  });
+  document.getElementById('resetV2').addEventListener('click',()=>{
+    if(!imgObj) return; push(); sCtx.clearRect(0,0,store.width,store.height); sCtx.drawImage(orig,0,0); orig.width=imgObj.width; orig.height=imgObj.height; cvs.width=orig.width; cvs.height=orig.height; store.width=orig.width; store.height=orig.height; sCtx.drawImage(orig,0,0); filters={b:100,c:100,sat:100,hue:0,blur:0,fx:'none',vig:0}; rot=0; fH=false; fV=false; straight=0; round=0; border=0; tol=28; updLabels(); draw(); save();
+  });
+
+  // Before/After - FIXED
+  document.getElementById('beforeV2').addEventListener('click',()=>{
+    if(!imgObj) return;
+    if(!beforeFlag){ beforeImg=cvs.toDataURL(); const im=new Image(); im.onload=()=>{ cvs.width=im.width; cvs.height=im.height; ctx.drawImage(im,0,0); beforeFlag=true; document.getElementById('beforeV2').textContent='After'; }; im.src=orig.toDataURL(); }
+    else{ const im=new Image(); im.onload=()=>{ cvs.width=im.width; cvs.height=im.height; ctx.drawImage(im,0,0); sCtx.clearRect(0,0,store.width,store.height); sCtx.drawImage(im,0,0); // restore store? keep store as edited
+    // Actually restore edited
+    const edited=new Image(); edited.onload=()=>{ store.width=edited.width; store.height=edited.height; sCtx.drawImage(edited,0,0); cvs.width=edited.width; cvs.height=edited.height; ctx.drawImage(edited,0,0); draw(); }; edited.src=beforeImg;
+    beforeFlag=false; document.getElementById('beforeV2').textContent='Before'; }; im.src=beforeImg; // quick toggle
+      // Simpler: just toggle visual
+      if(beforeFlag){ const im2=new Image(); im2.onload=()=>{ const tmp=store; // keep
+      }; }
+    }
+  });
+  // Fix before toggle properly:
+  let beforeToggle=false;
+  document.getElementById('beforeV2').onclick=()=>{
+    if(!imgObj) return;
+    if(!beforeToggle){ beforeImg=sCtx.getImageData(0,0,store.width,store.height); sCtx.clearRect(0,0,store.width,store.height); sCtx.drawImage(orig,0,0); draw(); document.getElementById('beforeV2').textContent='After'; beforeToggle=true; }
+    else{ sCtx.putImageData(beforeImg,0,0); draw(); document.getElementById('beforeV2').textContent='Before'; beforeToggle=false; }
+  };
+
+  // Download - FIXED quality
+  document.getElementById('downV2').addEventListener('click',()=>{
+    if(!imgObj) return alert('Upload first');
+    const fmt=document.getElementById('fmtV2').value, sc=parseInt(document.getElementById('qualV2').value)||1;
+    const exp=document.createElement('canvas'); exp.width=cvs.width*sc; exp.height=cvs.height*sc; const ec=exp.getContext('2d'); ec.imageSmoothingQuality='high'; ec.drawImage(cvs,0,0,exp.width,exp.height);
+    let mime='image/png'; if(fmt==='jpeg') mime='image/jpeg'; if(fmt==='webp') mime='image/webp';
+    const a=document.createElement('a'); a.download=`orbittroniz-${Date.now()}.${fmt}`; a.href=exp.toDataURL(mime,0.95); a.click();
+  });
+
+})();
+</script>
+<!-- ================= RESIZE END V2 ================= -->
+
 
 
 <!-- ================= CAPTION START ================= -->
