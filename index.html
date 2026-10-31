@@ -805,33 +805,325 @@ Veg Thali | ₹199 | Full Meal</textarea>
 </div>
 <!-- ================= MENU END ================= -->
 
-<!-- ================= FESTIVAL START ================= -->
-<!-- EDIT ONLY FESTIVAL POSTER MAKER HERE -->
+<!-- ================= FESTIVAL V4 PREMIUM - 8 ADVANCE 3D TEMPLATES + MORE FEATURES - BUG FREE - FULL CODE ================= -->
+<style>
+.fest-v4 .ctrl{background:linear-gradient(145deg,rgba(18,29,58,0.92),rgba(10,18,36,0.98));border:1px solid var(--border);border-radius:18px;padding:14px;margin-top:12px;box-shadow:0 16px 40px #0007, inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(0,0,0,0.4);backdrop-filter:blur(18px);transform-style:preserve-3d;transition:.35s}
+.fest-v4 .ctrl:hover{transform:translateZ(10px) translateY(-2px);border-color:rgba(34,211,238,0.45);box-shadow:0 26px 60px #0008, 0 0 28px rgba(34,211,238,0.16)}
+.fest-grid-v4{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}
+.fest-item-v4{position:relative;border:1px solid var(--border);border-radius:14px;padding:9px 6px;text-align:center;cursor:pointer;background:linear-gradient(145deg,rgba(22,33,67,0.92),rgba(12,20,42,0.92));transition:.28s;overflow:hidden;box-shadow:0 8px 22px #0006, inset 0 1px 0 rgba(255,255,255,0.07);transform:perspective(700px) rotateX(3deg) translateZ(0);transform-style:preserve-3d}
+.fest-item-v4::before{content:"";position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)}
+.fest-item-v4:hover{transform:perspective(700px) rotateX(0deg) translateZ(12px) translateY(-3px) scale(1.04);border-color:#22d3ee;box-shadow:0 18px 40px #0007, 0 0 22px rgba(34,211,238,0.25)}
+.fest-item-v4.active{border-color:#7c3aed;background:linear-gradient(135deg,rgba(124,58,237,0.3),rgba(34,211,238,0.25));box-shadow:0 0 0 2px #7c3aed, 0 18px 40px #7c3aed55, inset 0 1px 0 rgba(255,255,255,0.2);transform:translateZ(14px)}
+.fest-item-v4 .ico{font-size:22px;display:block;margin-bottom:3px;filter:drop-shadow(0 3px 8px #0009);transform:translateZ(6px)}
+.tmpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(124px,1fr));gap:8px}
+.tmpl-card{position:relative;border:1px solid var(--border);border-radius:14px;padding:10px;cursor:pointer;background:linear-gradient(145deg,rgba(16,24,50,0.9),rgba(10,18,36,0.95));transition:.3s;overflow:hidden;transform-style:preserve-3d;transform:perspective(600px) rotateY(-2deg)}
+.tmpl-card:hover{transform:perspective(600px) rotateY(0deg) translateZ(10px) translateY(-2px);border-color:rgba(124,58,237,0.5);box-shadow:0 16px 36px #0007, 0 0 20px rgba(124,58,237,0.2)}
+.tmpl-card.active{border-color:#7c3aed;background:linear-gradient(135deg,rgba(124,58,237,0.25),rgba(34,211,238,0.2));box-shadow:0 0 0 2px #7c3aed}
+.tmpl-card .prev{width:100%;height:48px;border-radius:10px;margin-bottom:6px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.2), 0 4px 12px #0005}
+.canvas-fest-v4{position:relative;background:radial-gradient(700px 400px at 50% 0%,rgba(29,44,86,0.92),rgba(5,9,22,0.99));border:1px solid var(--border);border-radius:22px;padding:14px;box-shadow:0 28px 80px #0009, inset 0 1px 0 rgba(255,255,255,0.09), inset 0 -1px 0 rgba(0,0,0,0.5);transform:perspective(1300px) rotateX(3.5deg) rotateY(-2.5deg);transition:.55s;backdrop-filter:blur(18px);transform-style:preserve-3d}
+.canvas-fest-v4:hover{transform:perspective(1300px) rotateX(0deg) rotateY(0deg) translateY(-4px) translateZ(8px);box-shadow:0 36px 90px #0009, 0 0 36px rgba(124,58,237,0.2)}
+#festCanvasV4{width:100%;max-width:1080px;border-radius:18px;display:block;margin:auto;box-shadow:0 20px 70px #0009, 0 0 0 1px rgba(255,255,255,0.08);cursor:grab;transform:translateZ(10px)}
+.pill-v4{padding:7px 12px;border-radius:22px;border:1px solid var(--border);background:linear-gradient(145deg,rgba(22,33,67,0.9),rgba(16,24,50,0.9));color:var(--text);font-size:11px;font-weight:700;cursor:pointer;transition:.22s;user-select:none;box-shadow:0 4px 12px #0004, inset 0 1px 0 rgba(255,255,255,0.06)}
+.pill-v4.active,.pill-v4:hover{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border-color:transparent;transform:translateY(-2px) scale(1.04);box-shadow:0 10px 26px #7c3aed55}
+.range-v4{display:flex;align-items:center;gap:10px;margin:8px 0}
+.range-v4 span:first-child{width:84px;font-size:11px;color:var(--muted);font-weight:600}
+.range-v4 input{flex:1;accent-color:#7c3aed;height:4px}
+.range-v4 span:last-child{width:46px;font-size:11px;background:rgba(10,18,48,0.85);border:1px solid var(--border);padding:3px 6px;border-radius:10px;text-align:center}
+</style>
+
 <div class="tool" id="tool-festival">
-  <div class="grid grid-2">
-    <div class="panel">
-      <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Festival Poster Maker - Indian Festivals</h3>
-      <label class="label">Festival Templates - Ready Made Free</label>
-      <div class="grid grid-3">
-        <div class="template" data-fest="diwali"><div class="thumb" style="background:radial-gradient(circle,#ffae00,#8a3a00)">🪔 Diwali</div><div class="meta"><b>Diwali</b> <span class="tag free">Free</span></div></div>
-        <div class="template" data-fest="holi"><div class="thumb" style="background:linear-gradient(135deg,#ff00aa,#00aaff)">🎨 Holi</div><div class="meta"><b>Holi</b> <span class="tag free">Free</span></div></div>
-        <div class="template" data-fest="ganesh"><div class="thumb" style="background:linear-gradient(135deg,#ff6a00,#8a1a00)">🙏 Ganesh</div><div class="meta"><b>Ganesh</b> <span class="tag free">Free</span></div></div>
-        <div class="template" data-fest="eid"><div class="thumb" style="background:linear-gradient(135deg,#0a4a2a,#00aa66)">🌙 Eid</div><div class="meta"><b>Eid</b> <span class="tag free">Free</span></div></div>
-        <div class="template" data-fest="christmas"><div class="thumb" style="background:linear-gradient(135deg,#8a0000,#00aa4a)">🎄 Christmas</div><div class="meta"><b>Christmas</b> <span class="tag free">Free</span></div></div>
-        <div class="template" data-fest="navratri"><div class="thumb" style="background:linear-gradient(135deg,#aa0066,#ffaa00)">💃 Navratri</div><div class="meta"><b>Navratri</b> <span class="tag free">Free</span></div></div>
-      </div>
-      <label class="label" style="margin-top:12px">Business Name</label><input id="festBiz" class="input" value="Spice Corner Restaurant">
-      <label class="label">Offer Text</label><input id="festOffer" class="input" value="Diwali Dhamaka - 50% OFF">
-      <label class="label">Logo Upload</label><input type="file" id="festLogo" accept="image/*" class="input">
-      <div style="display:flex;gap:8px;margin-top:10px"><button class="btn primary" id="btnRenderFest">Generate Poster</button><button class="btn green" id="btnDownloadFest">Download HD</button></div>
+<div class="grid grid-2 fest-v4">
+  <div class="panel">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <h3 style="margin:0;flex:1"><i class="fa-solid fa-crown" style="color:#ffd700"></i> Festival V4 Premium <span style="background:linear-gradient(135deg,#ffd700,#ff8c00);color:#000;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:900">8 3D TEMPLATES</span> <span style="background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;padding:3px 9px;border-radius:20px;font-size:10px">NO API</span></h3>
+      <button class="btn small" id="todayFestV4">📅 Today</button>
     </div>
-    <div class="panel">
-      <h3>Festival Poster Preview</h3>
-      <div class="preview"><canvas id="festCanvas" width="1080" height="1080" style="max-width:100%"></canvas></div>
+    <div style="font-size:11px;color:var(--muted)">Premium 3D templates + Layers + Stickers + Patterns + Drag + 4K - Bug free</div>
+
+    <div class="ctrl">
+      <label class="label">Select Festival - 28 Festivals + Auto Detect</label>
+      <div class="fest-grid-v4" id="festGridV4">
+        <div class="fest-item-v4 active" data-fest="diwali"><span class="ico">🪔</span><span style="font-size:10px;font-weight:800">Diwali</span></div>
+        <div class="fest-item-v4" data-fest="holi"><span class="ico">🎨</span><span style="font-size:10px;font-weight:800">Holi</span></div>
+        <div class="fest-item-v4" data-fest="eid"><span class="ico">🌙</span><span style="font-size:10px;font-weight:800">Eid</span></div>
+        <div class="fest-item-v4" data-fest="christmas"><span class="ico">🎄</span><span style="font-size:10px;font-weight:800">Xmas</span></div>
+        <div class="fest-item-v4" data-fest="newyear"><span class="ico">🎉</span><span style="font-size:10px;font-weight:800">New Year</span></div>
+        <div class="fest-item-v4" data-fest="navratri"><span class="ico">💃</span><span style="font-size:10px;font-weight:800">Navratri</span></div>
+        <div class="fest-item-v4" data-fest="dussehra"><span class="ico">🏹</span><span style="font-size:10px;font-weight:800">Dussehra</span></div>
+        <div class="fest-item-v4" data-fest="ganesh"><span class="ico">🙏</span><span style="font-size:10px;font-weight:800">Ganesh</span></div>
+        <div class="fest-item-v4" data-fest="janmashtami"><span class="ico">🦚</span><span style="font-size:10px;font-weight:800">Krishna</span></div>
+        <div class="fest-item-v4" data-fest="rakhi"><span class="ico">🎀</span><span style="font-size:10px;font-weight:800">Rakhi</span></div>
+        <div class="fest-item-v4" data-fest="independence"><span class="ico">🇮🇳</span><span style="font-size:10px;font-weight:800">15 Aug</span></div>
+        <div class="fest-item-v4" data-fest="republic"><span class="ico">🇮🇳</span><span style="font-size:10px;font-weight:800">26 Jan</span></div>
+        <div class="fest-item-v4" data-fest="shivjayanti"><span class="ico">⚔️</span><span style="font-size:10px;font-weight:800">Shiv Jayanti</span></div>
+        <div class="fest-item-v4" data-fest="gudi"><span class="ico">🚩</span><span style="font-size:10px;font-weight:800">Gudi Padwa</span></div>
+        <div class="fest-item-v4" data-fest="baisakhi"><span class="ico">🌾</span><span style="font-size:10px;font-weight:800">Baisakhi</span></div>
+        <div class="fest-item-v4" data-fest="onam"><span class="ico">🌺</span><span style="font-size:10px;font-weight:800">Onam</span></div>
+        <div class="fest-item-v4" data-fest="pongal"><span class="ico">🍚</span><span style="font-size:10px;font-weight:800">Pongal</span></div>
+        <div class="fest-item-v4" data-fest="lohri"><span class="ico">🔥</span><span style="font-size:10px;font-weight:800">Lohri</span></div>
+        <div class="fest-item-v4" data-fest="karwa"><span class="ico">🌕</span><span style="font-size:10px;font-weight:800">Karwa</span></div>
+        <div class="fest-item-v4" data-fest="mothers"><span class="ico">👩</span><span style="font-size:10px;font-weight:800">Mother's</span></div>
+        <div class="fest-item-v4" data-fest="fathers"><span class="ico">👨</span><span style="font-size:10px;font-weight:800">Father's</span></div>
+        <div class="fest-item-v4" data-fest="valentine"><span class="ico">❤️</span><span style="font-size:10px;font-weight:800">Valentine</span></div>
+        <div class="fest-item-v4" data-fest="friendship"><span class="ico">🤝</span><span style="font-size:10px;font-weight:800">Friendship</span></div>
+        <div class="fest-item-v4" data-fest="dhanteras"><span class="ico">💰</span><span style="font-size:10px;font-weight:800">Dhanteras</span></div>
+        <div class="fest-item-v4" data-fest="bhaidooj"><span class="ico">👫</span><span style="font-size:10px;font-weight:800">Bhai Dooj</span></div>
+        <div class="fest-item-v4" data-fest="makar"><span class="ico">🪁</span><span style="font-size:10px;font-weight:800">Makar Sankranti</span></div>
+        <div class="fest-item-v4" data-fest="ugadi"><span class="ico">🥭</span><span style="font-size:10px;font-weight:800">Ugadi</span></div>
+        <div class="fest-item-v4" data-fest="ramadan"><span class="ico">🤲</span><span style="font-size:10px;font-weight:800">Ramadan</span></div>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:8px"><input id="customFestV4" class="input" placeholder="Custom - Ex: 5th Anniversary" style="flex:1"><button class="btn small primary" id="addCustomFestV4">Add Custom</button></div>
+      <div id="festDetectBarV4" style="margin-top:8px;font-size:11px;padding:7px 10px;border-radius:10px;background:rgba(124,58,237,0.14);border:1px solid rgba(124,58,237,0.28);display:none"></div>
+    </div>
+
+    <div class="ctrl">
+      <label class="label">Business Details - Editable + Draggable</label>
+      <input id="bizNameV4" class="input" value="ORBITTRONIZ BUSINESS" placeholder="Business Name">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+        <input id="offerV4" class="input" value="Festival Dhamaka 50% OFF" placeholder="Offer"><input id="cityFestV4" class="input" value="Jintur, Maharashtra" placeholder="City">
+      </div>
+      <input id="sloganV4" class="input" style="margin-top:8px" value="Wishing You & Your Family A Joyful Festival" placeholder="Slogan">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+        <div><label class="label">Logo (Round 3D)</label><input type="file" id="logoFestV4" accept="image/*" class="input"><img id="logoPrevV4" style="width:56px;height:56px;border-radius:14px;margin-top:6px;display:none;object-fit:contain;background:#fff;box-shadow:0 6px 18px #0006"></div>
+        <div><label class="label">BG Image + Overlay</label><input type="file" id="bgFestV4" accept="image/*" class="input"><div style="display:flex;gap:6px;margin-top:6px"><button class="btn small" id="clearBgV4" style="flex:1">Clear BG</button><button class="btn small" id="blurBgBtnV4" style="flex:1">Blur BG</button></div></div>
+      </div>
+    </div>
+
+    <div class="ctrl">
+      <label class="label">8 Premium 3D Templates - No One Offers This Quality</label>
+      <div class="tmpl-grid" id="tmplGridV4">
+        <div class="tmpl-card active" data-tmpl="royalPalace"><div class="prev" style="background:linear-gradient(135deg,#1a0a00,#ff8c00 30%,#ffd700 70%,#4a1a00)"></div><span style="font-size:10px;font-weight:800">Royal Palace - Gold Emboss</span></div>
+        <div class="tmpl-card" data-tmpl="neonCity"><div class="prev" style="background:linear-gradient(135deg,#0a0a2a,#7c3aed,#22d3ee,#0a0a2a)"></div><span style="font-size:10px;font-weight:800">Neon City - Cyber 3D</span></div>
+        <div class="tmpl-card" data-tmpl="glassMorphism"><div class="prev" style="background:linear-gradient(135deg,rgba(255,255,255,0.2),rgba(124,58,237,0.3),rgba(34,211,238,0.3))"></div><span style="font-size:10px;font-weight:800">Glass Morph - Frosted</span></div>
+        <div class="tmpl-card" data-tmpl="traditionalMandala"><div class="prev" style="background:radial-gradient(circle at center,#c41e1e,#ff9933,#ffd700)"></div><span style="font-size:10px;font-weight:800">Mandala - Traditional Red</span></div>
+        <div class="tmpl-card" data-tmpl="luxuryVelvet"><div class="prev" style="background:linear-gradient(135deg,#0a0a0a,#2a2a2a,#ffd700,#0a0a0a)"></div><span style="font-size:10px;font-weight:800">Luxury Velvet - Black Gold</span></div>
+        <div class="tmpl-card" data-tmpl="fireworks"><div class="prev" style="background:radial-gradient(circle at 30% 30%,#ff8c00,#ff0000,#1a0a2a)"></div><span style="font-size:10px;font-weight:800">Fireworks - Diwali Burst</span></div>
+        <div class="tmpl-card" data-tmpl="floralBliss"><div class="prev" style="background:linear-gradient(135deg,#ff69b4,#9c27b0,#e91e63)"></div><span style="font-size:10px;font-weight:800">Floral Bliss - Festive Flowers</span></div>
+        <div class="tmpl-card" data-tmpl="paperCut"><div class="prev" style="background:linear-gradient(180deg,#fff8e1,#ffecb3,#ffd54f)"></div><span style="font-size:10px;font-weight:800">Paper Cut - Layered 3D</span></div>
+      </div>
+    </div>
+
+    <div class="ctrl">
+      <label class="label">Colors - Auto Festival + Manual + Gradient Text</label>
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:8px">
+        <div><label class="label">Primary</label><input type="color" id="col1V4" value="#ff8c00" class="input" style="height:44px"></div>
+        <div><label class="label">Secondary</label><input type="color" id="col2V4" value="#ffd700" class="input" style="height:44px"></div>
+        <div><label class="label">Text</label><input type="color" id="colTextV4" value="#ffffff" class="input" style="height:44px"></div>
+      </div>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+        <select id="fontV4" class="select"><option value="Poppins">Poppins Bold Premium</option><option value="Arial Black">Arial Black Heavy</option><option value="Impact">Impact Poster</option><option value="Georgia">Georgia Royal</option><option value="Cursive">Cursive Festive</option><option value="Montserrat">Montserrat Luxury</option></select>
+        <select id="effectV4" class="select"><option value="glow">Glow + Shadow</option><option value="extrude">3D Extrude Bevel</option><option value="neon">Neon Outline</option><option value="emboss">Gold Emboss</option><option value="glass">Glass Shadow</option><option value="none">None</option></select>
+      </div>
+      <div class="range-v4"><span>Business Size</span><input id="sizeV4" type="range" min="26" max="130" value="66"><span id="sizeValV4">66px</span></div>
+      <div class="range-v4"><span>Offer Size</span><input id="offerSizeV4" type="range" min="18" max="84" value="40"><span id="offerSizeValV4">40px</span></div>
+      <div class="range-v4"><span>Slogan Size</span><input id="sloganSizeV4" type="range" min="12" max="36" value="20"><span id="sloganSizeValV4">20px</span></div>
+      <div class="range-v4"><span>Overlay Dark</span><input id="overlayV4" type="range" min="0" max="80" value="35"><span id="overlayValV4">35%</span></div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><button class="btn small" id="autoColorV4">Auto Festival Colors</button><button class="btn small" id="randomV4">🎲 Random Premium</button><button class="btn small green" id="centerV4">Center All</button><button class="btn small" id="addStickerV4">✨ Add Stickers</button></div>
+      <div id="stickerBarV4" style="display:none;margin-top:8px;flex-wrap:wrap;gap:6px"><span style="font-size:11px;color:var(--muted)">Stickers:</span><button class="pill-v4" onclick="addStickerV4('🪔')">🪔</button><button class="pill-v4" onclick="addStickerV4('🎆')">🎆</button><button class="pill-v4" onclick="addStickerV4('✨')">✨</button><button class="pill-v4" onclick="addStickerV4('🌟')">🌟</button><button class="pill-v4" onclick="addStickerV4('🎉')">🎉</button><button class="pill-v4" onclick="addStickerV4('💐')">💐</button><button class="pill-v4" onclick="addStickerV4('🙏')">🙏</button><button class="pill-v4" onclick="addStickerV4('❤️')">❤️</button><button class="pill-v4" onclick="clearStickersV4()">Clear</button></div>
+    </div>
+
+    <div class="ctrl">
+      <label class="label">Export - 4K Ultra HD - Premium No Quality Loss</label>
+      <div class="grid" style="grid-template-columns:1fr 1fr 1.6fr;gap:6px"><select id="fmtFestV4" class="select"><option value="png">PNG HD</option><option value="jpeg">JPG 98%</option><option value="webp">WEBP</option></select><select id="qualFestV4" class="select"><option value="1">1080x1080</option><option value="1.5">1620 HD</option><option value="2" selected>2160 2K</option><option value="3">3240 3K</option><option value="4">4320 4K Ultra</option></select><button class="btn primary" id="downFestV4" style="box-shadow:0 12px 30px #7c3aed66"><i class="fa-solid fa-download"></i> Download 4K Poster</button></div>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:8px"><label style="font-size:11px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="waterFestV4" checked> Watermark orbittroniz.com (free)</label><label style="font-size:11px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="patternV4" checked> Festival Pattern (Rangoli/Diya)</label></div>
     </div>
   </div>
+
+  <div class="panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><h3 style="margin:0"><i class="fa-solid fa-eye"></i> Premium 3D Live Preview - Drag Everything</h3><div style="display:flex;gap:6px"><button class="btn small" id="undoFestV4">Undo</button><button class="btn small" id="redoFestV4">Redo</button><span id="infoFestV4" style="font-size:10px;padding:6px 10px;border:1px solid var(--border);border-radius:20px;color:var(--muted)">1080x1080 • Drag</span></div></div>
+    <div class="canvas-fest-v4" style="margin-top:10px"><canvas id="festCanvasV4" width="1080" height="1080"></canvas><div style="position:absolute;bottom:18px;left:50%;transform:translateX(-50%) translateZ(12px);background:rgba(0,0,0,0.65);color:#fff;padding:6px 14px;border-radius:20px;font-size:10px;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.15);box-shadow:0 6px 20px #0008">💡 Drag Business Name / Offer / Slogan / Logo / Stickers - Pinch zoom mobile - Premium 3D</div></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px"><button class="btn small" onclick="moveV4('up')">⬆️</button><button class="btn small" onclick="moveV4('down')">⬇️</button><button class="btn small" onclick="moveV4('left')">⬅️</button><button class="btn small" onclick="moveV4('right')">➡️</button><button class="btn small green" onclick="resetPosV4()">Center Reset</button><button class="btn small" onclick="toggleGridV4()">Grid</button><button class="btn small" onclick="toggleSafeV4()">Safe Zone</button></div>
+  </div>
 </div>
-<!-- ================= FESTIVAL END ================= -->
+</div>
+
+<script>
+(function(){
+  const cvs=document.getElementById('festCanvasV4'), ctx=cvs.getContext('2d');
+  let fest='diwali', tmpl='royalPalace', font='Poppins', effect='glow', biz='ORBITTRONIZ BUSINESS', offer='Festival Dhamaka 50% OFF', city='Jintur, Maharashtra', slogan='Wishing You & Your Family A Joyful Festival', col1='#ff8c00', col2='#ffd700', colText='#ffffff', size=66, offerSize=40, sloganSize=20, overlay=35;
+  let logoImg=null, bgImg=null, bgBlur=false, showGrid=false, showSafe=false, stickers=[], pos={x:540,y:360,offerY:540,sloganY:720,cityY:850,logoX:540,logoY:190}, dragTarget=null, dragOffset={x:0,y:0}, hist=[], redo=[];
+
+  const festColors={
+    diwali:{c1:'#ff8c00',c2:'#ffd700',txt:'#fff',bg:['#1a0a00','#4a1a00'],em:'🪔',pat:'diya'}, holi:{c1:'#e91e63',c2:'#9c27b0',txt:'#fff',bg:['#2a0a2a','#4a1a4a'],em:'🎨',pat:'color'}, eid:{c1:'#0f8a0f',c2:'#ffd700',txt:'#fff',bg:['#001a00','#0a3a0a'],em:'🌙',pat:'moon'}, christmas:{c1:'#c41e1e',c2:'#0a8a0a',txt:'#fff',bg:['#1a0000','#0a2a0a'],em:'🎄',pat:'snow'}, newyear:{c1:'#7c3aed',c2:'#22d3ee',txt:'#fff',bg:['#0a0a2a','#1a1a4a'],em:'🎉',pat:'firework'}, navratri:{c1:'#ff1493',c2:'#ffd700',txt:'#fff',bg:['#2a0a1a','#4a1a2a'],em:'💃',pat:'dandiya'}, dussehra:{c1:'#ff6a00',c2:'#ff0000',txt:'#fff',bg:['#2a0a00','#4a1a00'],em:'🏹',pat:'arrow'}, ganesh:{c1:'#ff8c00',c2:'#ff0000',txt:'#fff',bg:['#2a1a00','#4a2a00'],em:'🙏',pat:'modak'}, janmashtami:{c1:'#1e88e5',c2:'#ffd700',txt:'#fff',bg:['#001a2a','#0a2a4a'],em:'🦚',pat:'peacock'}, rakhi:{c1:'#e91e63',c2:'#9c27b0',txt:'#fff',bg:['#2a0a1a','#4a0a2a'],em:'🎀',pat:'rakhi'}, independence:{c1:'#ff9933',c2:'#138808',txt:'#fff',bg:['#1a1a1a','#2a2a2a'],em:'🇮🇳',pat:'flag'}, republic:{c1:'#ff9933',c2:'#138808',txt:'#fff',bg:['#1a1a1a','#2a2a2a'],em:'🇮🇳',pat:'flag'}, shivjayanti:{c1:'#ff6a00',c2:'#8b0000',txt:'#fff',bg:['#1a0a00','#3a0a00'],em:'⚔️',pat:'sword'}, gudi:{c1:'#ff9933',c2:'#ffd700',txt:'#fff',bg:['#2a1a00','#4a2a00'],em:'🚩',pat:'gudi'}, baisakhi:{c1:'#ffd700',c2:'#ff8c00',txt:'#000',bg:['#2a2a00','#4a3a00'],em:'🌾',pat:'wheat'}, onam:{c1:'#ff6a00',c2:'#ffd700',txt:'#fff',bg:['#2a1a00','#4a2a00'],em:'🌺',pat:'flower'}, pongal:{c1:'#ffd700',c2:'#ff8c00',txt:'#000',bg:['#2a2a00','#4a2a00'],em:'🍚',pat:'pot'}, lohri:{c1:'#ff4500',c2:'#ffd700',txt:'#fff',bg:['#2a0a00','#4a1a00'],em:'🔥',pat:'fire'}, karwa:{c1:'#e91e63',c2:'#ff1493',txt:'#fff',bg:['#2a0a1a','#4a0a2a'],em:'🌕',pat:'moon'}, mothers:{c1:'#e91e63',c2:'#ff69b4',txt:'#fff',bg:['#2a0a1a','#4a0a2a'],em:'👩',pat:'heart'}, fathers:{c1:'#1e88e5',c2:'#0d47a1',txt:'#fff',bg:['#001a2a','#0a1a4a'],em:'👨',pat:'tie'}, valentine:{c1:'#ff1744',c2:'#e91e63',txt:'#fff',bg:['#2a000a','#4a0a1a'],em:'❤️',pat:'heart'}, friendship:{c1:'#ffd700',c2:'#ff8c00',txt:'#000',bg:['#2a2a00','#4a2a00'],em:'🤝',pat:'hand'}, dhanteras:{c1:'#ffd700',c2:'#ff8c00',txt:'#000',bg:['#2a2a00','#4a3a00'],em:'💰',pat:'coin'}, bhaidooj:{c1:'#9c27b0',c2:'#e91e63',txt:'#fff',bg:['#1a0a2a','#2a0a4a'],em:'👫',pat:'gift'}, makar:{c1:'#1e88e5',c2:'#ffd700',txt:'#fff',bg:['#001a2a','#2a3a00'],em:'🪁',pat:'kite'}, ugadi:{c1:'#ff8c00',c2:'#4caf50',txt:'#fff',bg:['#2a1a00','#1a2a00'],em:'🥭',pat:'mango'}, ramadan:{c1:'#0f4c0f',c2:'#ffd700',txt:'#fff',bg:['#001a00','#1a2a00'],em:'🤲',pat:'lantern'}, custom:{c1:'#7c3aed',c2:'#22d3ee',txt:'#fff',bg:['#0a0a2a','#1a1a4a'],em:'✨',pat:'star'}
+  };
+  function getFest(){ return festColors[fest]||festColors['diwali']; }
+  function saveHist(){ hist.push(cvs.toDataURL()); if(hist.length>20) hist.shift(); redo=[]; }
+
+  function drawPattern(fc){
+    if(!document.getElementById('patternV4').checked) return;
+    ctx.save(); ctx.globalAlpha=0.14;
+    const pat=fc.pat;
+    if(pat==='diya' || fest==='diwali'){
+      for(let i=0;i<12;i++){ const x=Math.random()*cvs.width, y=Math.random()*cvs.height; ctx.font='28px Arial'; ctx.fillText('🪔', x, y); }
+    } else if(pat==='color' || fest==='holi'){
+      for(let i=0;i<18;i++){ ctx.fillStyle=`hsl(${Math.random()*360},80%,60%)`; ctx.beginPath(); ctx.arc(Math.random()*1080, Math.random()*1080, 8+Math.random()*18,0,Math.PI*2); ctx.fill(); }
+    } else if(pat==='rangoli' || fest==='dussehra'){
+      ctx.strokeStyle=fc.c2; ctx.lineWidth=1; for(let r=80;r<400;r+=60){ ctx.beginPath(); ctx.arc(540,540,r,0,Math.PI*2); ctx.stroke(); }
+    } else if(pat==='flower'){
+      for(let i=0;i<10;i++){ ctx.font='24px Arial'; ctx.fillText('🌺', Math.random()*1080, Math.random()*1080); }
+    }
+    ctx.restore();
+  }
+
+  function drawTemplateBG(fc){
+    const w=cvs.width, h=cvs.height;
+    if(bgImg){
+      ctx.save(); if(bgBlur){ ctx.filter='blur(14px)'; } ctx.drawImage(bgImg,0,0,w,h); ctx.restore();
+      ctx.fillStyle=`rgba(0,0,0,${overlay/100})`; ctx.fillRect(0,0,w,h);
+    } else {
+      if(tmpl==='royalPalace'){
+        const g=ctx.createLinearGradient(0,0,0,h); g.addColorStop(0,fc.bg[0]); g.addColorStop(0.5,fc.c1+'44'); g.addColorStop(1,fc.bg[1]); ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+        ctx.save(); ctx.globalAlpha=0.18; ctx.fillStyle=fc.c2; for(let i=0;i<w;i+=60){ ctx.fillRect(i,0,2,h); } ctx.restore();
+        const rg=ctx.createRadialGradient(w/2,0,w*0.2,w/2,0,w); rg.addColorStop(0,fc.c2+'55'); rg.addColorStop(1,'transparent'); ctx.fillStyle=rg; ctx.fillRect(0,0,w,h);
+      } else if(tmpl==='neonCity'){
+        const g=ctx.createLinearGradient(0,0,w,h); g.addColorStop(0,'#0a0a2a'); g.addColorStop(0.5,fc.c1+'88'); g.addColorStop(1,fc.c2+'66'); ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+        ctx.save(); ctx.strokeStyle=fc.c2+'44'; ctx.lineWidth=1; for(let i=0;i<h;i+=40){ ctx.beginPath(); ctx.moveTo(0,i); ctx.lineTo(w,i+ (Math.sin(i/80+Date.now()/2000)*20)); ctx.stroke(); } ctx.restore();
+      } else if(tmpl==='glassMorphism'){
+        const g=ctx.createLinearGradient(0,0,0,h); g.addColorStop(0,fc.bg[0]); g.addColorStop(1,fc.bg[1]); ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+        ctx.save(); ctx.fillStyle='rgba(255,255,255,0.08)'; ctx.beginPath(); ctx.roundRect(60,60,w-120,h-120,32); ctx.fill(); ctx.strokeStyle='rgba(255,255,255,0.18)'; ctx.lineWidth=1.5; ctx.stroke(); ctx.restore();
+      } else if(tmpl==='traditionalMandala'){
+        const g=ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,w*0.8); g.addColorStop(0,fc.c2); g.addColorStop(0.3,fc.c1); g.addColorStop(1,fc.bg[1]); ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+        ctx.save(); ctx.globalAlpha=0.22; ctx.strokeStyle='#fff'; ctx.lineWidth=1; for(let r=60;r<500;r+=45){ ctx.beginPath(); ctx.arc(w/2,h/2,r,0,Math.PI*2); ctx.stroke(); } ctx.restore();
+      } else if(tmpl==='luxuryVelvet'){
+        ctx.fillStyle='#080808'; ctx.fillRect(0,0,w,h); const g=ctx.createLinearGradient(0,0,w,0); g.addColorStop(0,fc.c1); g.addColorStop(0.5,'#ffd700'); g.addColorStop(1,fc.c1); ctx.fillStyle=g; ctx.fillRect(0,h*0.72,w,6); ctx.fillRect(0,22,w,2); const rg=ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,500); rg.addColorStop(0,'rgba(255,215,0,0.08)'); rg.addColorStop(1,'transparent'); ctx.fillStyle=rg; ctx.fillRect(0,0,w,h);
+      } else if(tmpl==='fireworks'){
+        const g=ctx.createLinearGradient(0,0,0,h); g.addColorStop(0,'#0a0000'); g.addColorStop(1,fc.bg[0]); ctx.fillStyle=g; ctx.fillRect(0,0,w,h); ctx.save(); for(let i=0;i<10;i++){ const x=Math.random()*w, y=Math.random()*h*0.6; const grad=ctx.createRadialGradient(x,y,0,x,y,80); grad.addColorStop(0,fc.c2); grad.addColorStop(1,'transparent'); ctx.fillStyle=grad; ctx.beginPath(); ctx.arc(x,y,80,0,Math.PI*2); ctx.fill(); } ctx.restore();
+      } else if(tmpl==='floralBliss'){
+        const g=ctx.createLinearGradient(0,0,0,h); g.addColorStop(0,'#2a0a1a'); g.addColorStop(1,fc.c1); ctx.fillStyle=g; ctx.fillRect(0,0,w,h); ctx.save(); ctx.globalAlpha=0.18; ctx.font='42px Arial'; for(let i=0;i<16;i++) ctx.fillText('💐', Math.random()*w, Math.random()*h); ctx.restore();
+      } else if(tmpl==='paperCut'){
+        ctx.fillStyle='#fff8e1'; ctx.fillRect(0,0,w,h); for(let l=0;l<5;l++){ ctx.save(); ctx.fillStyle=`rgba(${200+l*10},${180+l*5},${100+l*10},0.25)`; ctx.shadowColor='rgba(0,0,0,0.25)'; ctx.shadowBlur=18; ctx.shadowOffsetY=10; ctx.beginPath(); ctx.roundRect(40+l*12,40+l*12,w-80-l*24,h-80-l*24,28); ctx.fill(); ctx.restore(); }
+      }
+    }
+    // Border 3D premium
+    if(tmpl!=='paperCut'){
+      const bGrd=ctx.createLinearGradient(0,0,w,0); bGrd.addColorStop(0,getFest().c1); bGrd.addColorStop(1,getFest().c2); ctx.strokeStyle=bGrd; ctx.lineWidth=7; ctx.strokeRect(14,14,w-28,h-28); ctx.strokeStyle='rgba(255,255,255,0.18)'; ctx.lineWidth=1; ctx.strokeRect(22,22,w-44,h-44);
+    }
+  }
+
+  function drawPoster(){
+    const fc=getFest(); const w=cvs.width, h=cvs.height;
+    ctx.clearRect(0,0,w,h);
+    drawTemplateBG(fc);
+    drawPattern(fc);
+
+    // Stickers - draggable
+    stickers.forEach(s=>{ ctx.save(); ctx.font=`${s.size||42}px Arial`; ctx.textAlign='center'; ctx.shadowColor='rgba(0,0,0,0.5)'; ctx.shadowBlur=10; ctx.fillText(s.char, s.x, s.y); ctx.restore(); });
+
+    // Logo - premium 3D round with ring
+    if(logoImg){
+      const sz=128; ctx.save(); ctx.shadowColor='rgba(0,0,0,0.7)'; ctx.shadowBlur=22; ctx.shadowOffsetY=12; ctx.beginPath(); ctx.arc(pos.logoX,pos.logoY,sz/2,0,Math.PI*2); ctx.clip(); ctx.drawImage(logoImg,pos.logoX-sz/2,pos.logoY-sz/2,sz,sz); ctx.restore();
+      ctx.save(); const grad=ctx.createLinearGradient(pos.logoX-sz/2,pos.logoY-sz/2,pos.logoX+sz/2,pos.logoY+sz/2); grad.addColorStop(0,fc.c2); grad.addColorStop(1,fc.c1); ctx.strokeStyle=grad; ctx.lineWidth=4; ctx.beginPath(); ctx.arc(pos.logoX,pos.logoY,sz/2+2,0,Math.PI*2); ctx.stroke(); ctx.strokeStyle='rgba(255,255,255,0.5)'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(pos.logoX,pos.logoY,sz/2+6,0,Math.PI*2); ctx.stroke(); ctx.restore();
+    }
+
+    // Festival Emoji big with glow
+    ctx.save(); ctx.font=`900 ${96}px Arial`; ctx.textAlign='center'; ctx.shadowColor=fc.c1; ctx.shadowBlur=28; ctx.fillText(fc.em, w/2, pos.y-76); ctx.restore();
+
+    // Business - premium effects
+    ctx.save(); ctx.textAlign='center';
+    if(effect==='extrude'){
+      for(let i=6;i>0;i--){ ctx.fillStyle=`rgba(0,0,0,${0.15})`; ctx.font=`900 ${size}px ${font}, Arial Black`; ctx.fillText(biz, pos.x+i, pos.y+i); }
+      const g=ctx.createLinearGradient(pos.x-220,pos.y,pos.x+220,pos.y); g.addColorStop(0,fc.c2); g.addColorStop(0.5,'#fff'); g.addColorStop(1,fc.c1); ctx.fillStyle=g; ctx.font=`900 ${size}px ${font}, Arial Black`; ctx.fillText(biz, pos.x, pos.y);
+    } else if(effect==='emboss'){
+      const g=ctx.createLinearGradient(pos.x-200,pos.y-20,pos.x+200,pos.y+20); g.addColorStop(0,'#8b6914'); g.addColorStop(0.3,'#ffd700'); g.addColorStop(0.6,'#fff8a0'); g.addColorStop(1,'#8b6914'); ctx.fillStyle=g; ctx.font=`900 ${size}px ${font}`; ctx.fillText(biz, pos.x, pos.y); ctx.strokeStyle='rgba(0,0,0,0.6)'; ctx.lineWidth=1; ctx.strokeText(biz, pos.x, pos.y);
+    } else {
+      if(effect==='glow'){ ctx.shadowColor=fc.c1; ctx.shadowBlur=32; }
+      else if(effect==='neon'){ ctx.strokeStyle=fc.c2; ctx.lineWidth=4; ctx.strokeText(biz, pos.x, pos.y); }
+      else if(effect==='glass'){ ctx.shadowColor='rgba(0,0,0,0.8)'; ctx.shadowBlur=20; ctx.shadowOffsetY=12; }
+      ctx.fillStyle=colText; if(tmpl==='royalPalace' || tmpl==='luxuryVelvet'){ const g=ctx.createLinearGradient(pos.x-220,pos.y,pos.x+220,pos.y); g.addColorStop(0,fc.c2); g.addColorStop(0.5,'#fff'); g.addColorStop(1,fc.c1); ctx.fillStyle=g; }
+      ctx.font=`900 ${size}px ${font}, Arial Black, sans-serif`; ctx.fillText(biz, pos.x, pos.y);
+    }
+    ctx.restore();
+
+    // Festival Name
+    const festName= fest==='custom'? (document.getElementById('customFestV4').value||'Festival') : fest.charAt(0).toUpperCase()+fest.slice(1);
+    ctx.save(); ctx.textAlign='center'; ctx.font=`800 ${size*0.56}px ${font}`; const festG=ctx.createLinearGradient(pos.x-140,pos.y+70,pos.x+140,pos.y+70); festG.addColorStop(0,fc.c1); festG.addColorStop(1,fc.c2); ctx.fillStyle=festG; ctx.shadowColor=fc.c2; ctx.shadowBlur=18; ctx.fillText(`Happy ${festName}!`, pos.x, pos.y+74); ctx.restore();
+
+    // Offer - premium pill with 3D
+    ctx.save(); ctx.textAlign='center'; ctx.font=`900 ${offerSize}px ${font}`; const offerW=offer.length*offerSize*0.58+72; const offerH=offerSize+30;
+    if(tmpl!=='glassMorphism' && tmpl!=='paperCut'){
+      ctx.save(); ctx.shadowColor='rgba(0,0,0,0.45)'; ctx.shadowBlur=18; ctx.shadowOffsetY=8; const og=ctx.createLinearGradient(pos.x-offerW/2,pos.offerY, pos.x+offerW/2,pos.offerY); og.addColorStop(0,fc.c1); og.addColorStop(1,fc.c2); ctx.fillStyle=og; ctx.beginPath(); ctx.roundRect(pos.x-offerW/2, pos.offerY-offerH/2, offerW, offerH, offerH/2); ctx.fill(); ctx.restore();
+      ctx.fillStyle=tmpl==='luxuryVelvet'?'#000':'#fff'; ctx.font=`900 ${offerSize}px ${font}`; ctx.fillText(offer, pos.x, pos.offerY+9);
+    } else { ctx.fillStyle=fc.c1; ctx.fillText(offer, pos.x, pos.offerY+8); }
+    ctx.restore();
+
+    // Slogan
+    ctx.save(); ctx.textAlign='center'; ctx.font=`500 ${sloganSize}px ${font}, Arial`; ctx.fillStyle=tmpl==='paperCut'?'rgba(0,0,0,0.75)':'rgba(255,255,255,0.92)'; ctx.fillText(slogan, pos.x, pos.sloganY); ctx.restore();
+
+    // City + year
+    ctx.save(); ctx.textAlign='center'; ctx.font=`600 ${18}px Arial`; ctx.fillStyle=tmpl==='paperCut'?'rgba(0,0,0,0.6)':'rgba(255,255,255,0.72)'; ctx.fillText(`${city} • ${new Date().getFullYear()} • ${fc.em} ${festName}`, pos.x, pos.cityY); ctx.restore();
+
+    // Watermark
+    if(document.getElementById('waterFestV4').checked){ ctx.save(); ctx.textAlign='right'; ctx.font=`700 ${Math.max(14,w*0.018)}px Arial`; ctx.fillStyle=tmpl==='paperCut'?'rgba(0,0,0,0.28)':'rgba(255,255,255,0.38)'; ctx.fillText('orbittroniz.com', w-24, h-24); ctx.restore(); }
+
+    if(showGrid){ ctx.save(); ctx.strokeStyle='rgba(255,255,255,0.18)'; ctx.lineWidth=1; ctx.setLineDash([8,8]); for(let i=1;i<3;i++){ ctx.beginPath(); ctx.moveTo(w*i/3,0); ctx.lineTo(w*i/3,h); ctx.stroke(); ctx.beginPath(); ctx.moveTo(0,h*i/3); ctx.lineTo(w,h*i/3); ctx.stroke(); } ctx.restore(); }
+    if(showSafe){ ctx.save(); ctx.strokeStyle='rgba(34,211,238,0.6)'; ctx.lineWidth=2; ctx.setLineDash([6,6]); ctx.strokeRect(w*0.08,h*0.08,w*0.84,h*0.84); ctx.fillStyle='rgba(34,211,238,0.7)'; ctx.font='11px Arial'; ctx.fillText('SAFE ZONE - Keep text inside', w*0.08+8, h*0.08+16); ctx.restore(); }
+  }
+
+  // INPUTS
+  const bind=(id,fn)=>{ const el=document.getElementById(id); if(el) el.addEventListener('input',fn); };
+  bind('bizNameV4',e=>{biz=e.target.value||''; drawPoster();}); bind('offerV4',e=>{offer=e.target.value||''; drawPoster();}); bind('cityFestV4',e=>{city=e.target.value||''; drawPoster();}); bind('sloganV4',e=>{slogan=e.target.value||''; drawPoster();});
+  bind('col1V4',e=>{col1=e.target.value; drawPoster();}); bind('col2V4',e=>{col2=e.target.value; drawPoster();}); bind('colTextV4',e=>{colText=e.target.value; drawPoster();});
+  document.getElementById('fontV4').addEventListener('change',e=>{font=e.target.value; drawPoster();});
+  document.getElementById('effectV4').addEventListener('change',e=>{effect=e.target.value; drawPoster();});
+  bind('sizeV4',e=>{size=parseInt(e.target.value); document.getElementById('sizeValV4').textContent=size+'px'; drawPoster();});
+  bind('offerSizeV4',e=>{offerSize=parseInt(e.target.value); document.getElementById('offerSizeValV4').textContent=offerSize+'px'; drawPoster();});
+  bind('sloganSizeV4',e=>{sloganSize=parseInt(e.target.value); document.getElementById('sloganSizeValV4').textContent=sloganSize+'px'; drawPoster();});
+  bind('overlayV4',e=>{overlay=parseInt(e.target.value); document.getElementById('overlayValV4').textContent=overlay+'%'; drawPoster();});
+
+  document.querySelectorAll('.fest-item-v4').forEach(el=>el.addEventListener('click',()=>{ document.querySelectorAll('.fest-item-v4').forEach(x=>x.classList.remove('active')); el.classList.add('active'); fest=el.dataset.fest; const fc=getFest(); col1=fc.c1; col2=fc.c2; document.getElementById('col1V4').value=col1; document.getElementById('col2V4').value=col2; document.getElementById('festDetectBarV4').style.display='block'; document.getElementById('festDetectBarV4').textContent=`🎯 ${fc.em} ${fest.toUpperCase()} - Colors ${fc.c1} + ${fc.c2} - Pattern ${fc.pat} - Auto applied`; drawPoster(); }));
+  document.querySelectorAll('.tmpl-card').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('.tmpl-card').forEach(x=>x.classList.remove('active')); b.classList.add('active'); tmpl=b.dataset.tmpl; if(tmpl==='royalPalace') effect='emboss'; if(tmpl==='neonCity') effect='neon'; if(tmpl==='luxuryVelvet') effect='extrude'; if(tmpl==='glassMorphism') effect='glass'; document.getElementById('effectV4').value=effect; drawPoster(); }));
+  document.getElementById('addCustomFestV4').addEventListener('click',()=>{ const v=document.getElementById('customFestV4').value.trim(); if(!v) return alert('Enter custom name'); fest='custom'; document.querySelectorAll('.fest-item-v4').forEach(x=>x.classList.remove('active')); drawPoster(); });
+  document.getElementById('autoColorV4').addEventListener('click',()=>{ const fc=getFest(); col1=fc.c1; col2=fc.c2; document.getElementById('col1V4').value=col1; document.getElementById('col2V4').value=col2; drawPoster(); });
+  document.getElementById('randomV4').addEventListener('click',()=>{ const keys=Object.keys(festColors); fest=keys[Math.floor(Math.random()*keys.length)]; const tkeys=['royalPalace','neonCity','glassMorphism','traditionalMandala','luxuryVelvet','fireworks','floralBliss','paperCut']; tmpl=tkeys[Math.floor(Math.random()*tkeys.length)]; document.querySelectorAll('.fest-item-v4').forEach(x=>x.classList.toggle('active', x.dataset.fest===fest)); document.querySelectorAll('.tmpl-card').forEach(x=>x.classList.toggle('active', x.dataset.tmpl===tmpl)); const fc=getFest(); col1=fc.c1; col2=fc.c2; document.getElementById('col1V4').value=col1; document.getElementById('col2V4').value=col2; size=56+Math.floor(Math.random()*40); document.getElementById('sizeV4').value=size; document.getElementById('sizeValV4').textContent=size+'px'; drawPoster(); });
+  document.getElementById('addStickerV4').addEventListener('click',()=>{ document.getElementById('stickerBarV4').style.display=document.getElementById('stickerBarV4').style.display==='none'?'flex':'none'; });
+  window.addStickerV4=function(ch){ stickers.push({char:ch,x:200+Math.random()*680,y:200+Math.random()*680,size:44+Math.random()*24}); drawPoster(); };
+  window.clearStickersV4=function(){ stickers=[]; drawPoster(); };
+
+  // LOGO BG - FIXED
+  document.getElementById('logoFestV4').addEventListener('change',e=>{ const f=e.target.files[0]; if(!f) return; const im=new Image(); im.onload=()=>{ logoImg=im; document.getElementById('logoPrevV4').src=im.src; document.getElementById('logoPrevV4').style.display='block'; saveHist(); drawPoster(); }; im.src=URL.createObjectURL(f); });
+  document.getElementById('bgFestV4').addEventListener('change',e=>{ const f=e.target.files[0]; if(!f) return; const im=new Image(); im.onload=()=>{ bgImg=im; saveHist(); drawPoster(); }; im.src=URL.createObjectURL(f); });
+  document.getElementById('clearBgV4').addEventListener('click',()=>{ bgImg=null; document.getElementById('bgFestV4').value=''; drawPoster(); });
+  document.getElementById('blurBgBtnV4').addEventListener('click',()=>{ bgBlur=!bgBlur; document.getElementById('blurBgBtnV4').textContent=bgBlur?'Blur ON':'Blur BG'; drawPoster(); });
+  document.getElementById('waterFestV4').addEventListener('change',drawPoster); document.getElementById('patternV4').addEventListener('change',drawPoster);
+
+  // DRAG - FIXED for all targets + stickers
+  function getPos(evt){ const rect=cvs.getBoundingClientRect(); const sx=cvs.width/rect.width, sy=cvs.height/rect.height; const cx=evt.touches?evt.touches[0].clientX:evt.clientX, cy=evt.touches?evt.touches[0].clientY:evt.clientY; return {x:(cx-rect.left)*sx, y:(cy-rect.top)*sy}; }
+  cvs.addEventListener('mousedown',e=>{
+    const p=getPos(e); const d=(ax,ay)=>Math.hypot(p.x-ax,p.y-ay);
+    let found=null;
+    stickers.forEach((s,i)=>{ if(d(s.x,s.y)<60) found={type:'sticker',idx:i}; });
+    if(!found){ if(d(pos.x,pos.y)<130) found={type:'biz'}; else if(d(pos.x,pos.offerY)<90) found={type:'offer'}; else if(d(pos.x,pos.sloganY)<70) found={type:'slogan'}; else if(d(pos.x,pos.cityY)<50) found={type:'city'}; else if(d(pos.logoX,pos.logoY)<80) found={type:'logo'}; }
+    if(found){ dragTarget=found; dragOffset.x=p.x-(found.type==='sticker'?stickers[found.idx].x:found.type==='logo'?pos.logoX:pos.x); dragOffset.y=p.y-(found.type==='sticker'?stickers[found.idx].y:found.type==='offer'?pos.offerY:found.type==='slogan'?pos.sloganY:found.type==='city'?pos.cityY:found.type==='logo'?pos.logoY:pos.y); cvs.style.cursor='grabbing'; }
+  });
+  cvs.addEventListener('touchstart',e=>{ e.preventDefault(); const p=getPos(e); const d=(ax,ay)=>Math.hypot(p.x-ax,p.y-ay); let found=null; stickers.forEach((s,i)=>{ if(d(s.x,s.y)<80) found={type:'sticker',idx:i}; }); if(!found){ if(d(pos.x,pos.y)<150) found={type:'biz'}; else if(d(pos.x,pos.offerY)<100) found={type:'offer'}; else if(d(pos.logoX,pos.logoY)<90) found={type:'logo'}; } if(found){ dragTarget=found; dragOffset.x=p.x-(found.type==='sticker'?stickers[found.idx].x:found.type==='logo'?pos.logoX:pos.x); dragOffset.y=p.y-(found.type==='sticker'?stickers[found.idx].y:found.type==='offer'?pos.offerY:pos.y); } }, {passive:false});
+  window.addEventListener('mousemove',e=>{ if(!dragTarget) return; const p=getPos(e); const nx=p.x-dragOffset.x, ny=p.y-dragOffset.y; if(dragTarget.type==='sticker'){ stickers[dragTarget.idx].x=nx; stickers[dragTarget.idx].y=ny; } else if(dragTarget.type==='biz'){ pos.x=nx; pos.y=ny; } else if(dragTarget.type==='offer'){ pos.x=nx; pos.offerY=ny; } else if(dragTarget.type==='slogan'){ pos.x=nx; pos.sloganY=ny; } else if(dragTarget.type==='city'){ pos.x=nx; pos.cityY=ny; } else if(dragTarget.type==='logo'){ pos.logoX=nx; pos.logoY=ny; } drawPoster(); });
+  window.addEventListener('touchmove',e=>{ if(!dragTarget) return; e.preventDefault(); const p=getPos(e); const nx=p.x-dragOffset.x, ny=p.y-dragOffset.y; if(dragTarget.type==='sticker'){ stickers[dragTarget.idx].x=nx; stickers[dragTarget.idx].y=ny; } else if(dragTarget.type==='biz'){ pos.x=nx; pos.y=ny; } else if(dragTarget.type==='offer'){ pos.x=nx; pos.offerY=ny; } else if(dragTarget.type==='logo'){ pos.logoX=nx; pos.logoY=ny; } drawPoster(); }, {passive:false});
+  window.addEventListener('mouseup',()=>{ dragTarget=null; cvs.style.cursor='grab'; }); window.addEventListener('touchend',()=>{ dragTarget=null; });
+
+  window.moveV4=function(dir){ const s=14; if(dir==='up'){ pos.y-=s; pos.offerY-=s; pos.sloganY-=s; } if(dir==='down'){ pos.y+=s; pos.offerY+=s; pos.sloganY+=s; } if(dir==='left'){ pos.x-=s; pos.logoX-=s; } if(dir==='right'){ pos.x+=s; pos.logoX+=s; } drawPoster(); };
+  window.resetPosV4=function(){ pos={x:540,y:360,offerY:540,sloganY:720,cityY:850,logoX:540,logoY:190}; stickers=[]; drawPoster(); };
+  window.toggleGridV4=function(){ showGrid=!showGrid; drawPoster(); }; window.toggleSafeV4=function(){ showSafe=!showSafe; drawPoster(); };
+
+  document.getElementById('todayFestV4').addEventListener('click',()=>{
+    const m=new Date().getMonth()+1, d=new Date().getDate(); let auto='diwali';
+    if(m===3 && d>=8 && d<=12) auto='holi'; else if(m===1 && d===26) auto='republic'; else if(m===8 && d===15) auto='independence'; else if(m===10 || m===11) auto='diwali'; else if(m===12) auto='christmas'; else if(m===1 && d===1) auto='newyear'; else if(m===8 || m===9) auto='ganesh'; else if(m===3) auto='gudi';
+    fest=auto; document.querySelectorAll('.fest-item-v4').forEach(x=>x.classList.toggle('active', x.dataset.fest===auto)); const fc=getFest(); col1=fc.c1; col2=fc.c2; document.getElementById('col1V4').value=col1; document.getElementById('col2V4').value=col2; document.getElementById('festDetectBarV4').style.display='block'; document.getElementById('festDetectBarV4').textContent=`📅 Today auto: ${auto.toUpperCase()} ${fc.em} - Applied`; drawPoster();
+  });
+
+  document.getElementById('downFestV4').addEventListener('click',()=>{
+    const fmt=document.getElementById('fmtFestV4').value, scale=parseFloat(document.getElementById('qualFestV4').value)||2;
+    const exp=document.createElement('canvas'); exp.width=cvs.width*scale; exp.height=cvs.height*scale; const ec=exp.getContext('2d'); ec.imageSmoothingQuality='high'; ec.drawImage(cvs,0,0,exp.width,exp.height);
+    let mime='image/png'; if(fmt==='jpeg') mime='image/jpeg'; if(fmt==='webp') mime='image/webp';
+    const a=document.createElement('a'); a.download=`orbittroniz-${fest}-${tmpl}-${Date.now()}.${fmt}`; a.href=exp.toDataURL(mime,0.97); a.click();
+  });
+  document.getElementById('undoFestV4').addEventListener('click',()=>{ if(hist.length===0) return; const prev=hist.pop(); const im=new Image(); im.onload=()=>{ ctx.drawImage(im,0,0); redo.push(cvs.toDataURL()); }; im.src=prev; });
+  document.getElementById('redoFestV4').addEventListener('click',()=>{ if(redo.length===0) return; const nxt=redo.pop(); const im=new Image(); im.onload=()=>{ ctx.drawImage(im,0,0); }; im.src=nxt; });
+
+  drawPoster();
+  document.getElementById('infoFestV4').textContent=cvs.width+'x'+cvs.height+' • Premium 3D';
+})();
+</script>
+<!-- ================= FESTIVAL END V4 PREMIUM ================= -->
 
 <!-- ================= QR CODE START ================= -->
 <!-- EDIT ONLY BUSINESS QR CODE MAKER HERE -->
