@@ -87,17 +87,84 @@ body::before{
 
 </head>
 <body>
+<!-- ================= HEADER START - Logo Fixed Left + Live 3D Motion ================= -->
+<style>
+.header-3d{
+  position:sticky;top:0;z-index:50;
+  background:linear-gradient(180deg,rgba(10,15,37,0.92),rgba(6,9,19,0.92));
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:12px 18px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px
+}
+.brand-left{
+  display:flex;align-items:center;gap:12px;
+  font-weight:900;font-size:18px;letter-spacing:.5px;
+  line-height:1;
+}
+.logo-wrap{
+  position:relative;
+  width:46px;height:46px;
+  display:flex;align-items:center;justify-content:center;
+  transform-style:preserve-3d;
+  animation: logoFloat 3s ease-in-out infinite;
+}
+@keyframes logoFloat{
+  0%,100%{ transform: translateY(0px) rotateY(-8deg) rotateX(8deg) }
+  50%{ transform: translateY(-4px) rotateY(8deg) rotateX(-4deg) }
+}
+.logo-img-fixed{
+  width:46px;height:46px;
+  border-radius:12px;
+  object-fit:contain;
+  background:#000;
+  box-shadow: 
+    0 8px 20px rgba(124,58,237,0.35),
+    0 0 0 1px rgba(255,255,255,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  animation: logoRotate 6s linear infinite;
+  transform-style:preserve-3d;
+}
+@keyframes logoRotate{
+  0%{ filter: hue-rotate(0deg) brightness(1) }
+  50%{ filter: hue-rotate(10deg) brightness(1.15) }
+  100%{ filter: hue-rotate(0deg) brightness(1) }
+}
+.logo-glow{
+  position:absolute;top:-4px;left:-4px;right:-4px;bottom:-4px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#7c3aed,#22d3ee);
+  opacity:0.25;z-index:-1;
+  filter:blur(8px);
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+@keyframes glowPulse{
+  0%,100%{ opacity:0.2; transform: scale(0.95) }
+  50%{ opacity:0.4; transform: scale(1.05) }
+}
+.brand-text{display:flex;flex-direction:column;gap:2px}
+.brand-text b{font-size:15px;letter-spacing:.6px;display:flex;align-items:center;gap:8px}
+.brand-text span{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.8px}
+</style>
 
-<!-- ================= HEADER START ================= -->
-<!-- EDIT HEADER ONLY HERE -->
-  <!-- ================= HEADER LOGO - Use Your Uploaded Image ================= -->
-<img src="IMG-20261031-WA4023.jpg" alt="Orbittroniz" class="logo-img" onerror="this.src='https://raw.githubusercontent.com/Steven18122004/orbittroniz.com/main/IMG-20261031-WA4023.jpg'">
-<div style="position:sticky;top:0;z-index:50;background:#0a0f25ee;border-bottom:1px solid var(--border);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
-  <div style="display:flex;align-items:center;gap:12px;font-weight:900;font-size:20px"><div style="width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#22d3ee);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-cube"></i></div> ORBITTRONIZ <span style="color:var(--cyan)">BUSINESS TOOLS</span> <span style="font-size:10px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:20px">FREE</span></div>
+<div class="header-3d">
+  <div class="brand-left">
+    <!-- LOGO FIXED LEFT SIDE OF ORBITTRONIZ - WITH 3D MOTION -->
+    <div class="logo-wrap">
+      <div class="logo-glow"></div>
+      <img src="IMG-20261031-WA4023.jpg" alt="Orbittroniz Logo" class="logo-img-fixed" 
+           onerror="this.src='https://raw.githubusercontent.com/Steven18122004/orbittroniz.com/main/IMG-20261031-WA4023.jpg'">
+    </div>
+    <div class="brand-text">
+      <b>ORBITTRONIZ <span style="color:var(--cyan);font-size:15px">BUSINESS TOOLS</span> <span style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;padding:2px 7px;border-radius:20px;font-size:9px">FREE</span></b>
+      <span>Resize • Caption • Menu • Festival • QR</span>
+    </div>
+  </div>
+
   <div style="display:flex;gap:8px;flex-wrap:wrap" id="tabs">
     <div class="tab active" data-tool="resize"><i class="fa-solid fa-images"></i> Resize Crop BG</div>
     <div class="tab" data-tool="caption"><i class="fa-solid fa-hashtag"></i> Caption</div>
-    <div class="tab" data-tool="menu"><i class="fa-solid fa-utensils"></i> Menu Maker</div>
+    <div class="tab" data-tool="menu"><i class="fa-solid fa-utensils"></i> Menu</div>
     <div class="tab" data-tool="festival"><i class="fa-solid fa-wand-magic-sparkles"></i> Festival</div>
     <div class="tab" data-tool="qr"><i class="fa-solid fa-qrcode"></i> QR Code</div>
   </div>
