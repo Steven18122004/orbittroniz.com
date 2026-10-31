@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbittroniz Business Tools - Modular</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<!-- ================= THEME START ================= -->
+<!-- EDIT ONLY THEME HERE - Colors, 3D, Fonts -->
+<style>
+:root{
+  --bg:#060913;
+  --panel:#101832;
+  --panel2:#162143;
+  --panel3:#1d2c56;
+  --text:#eef2ff;
+  --muted:#8da0c6;
+  --border:#25345a;
+  --accent:#7c3aed;
+  --cyan:#22d3ee;
+  --green:#22c55e;
+  --orange:#f59e0b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(1200px 600px at 20% -10%,#1a2550 0%,#060913 60%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;min-height:100vh}
+.btn{padding:11px 16px;border-radius:12px;border:1px solid var(--border);background:linear-gradient(145deg,var(--panel2),var(--panel3));color:var(--text);cursor:pointer;font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:8px;box-shadow:0 8px 20px #0005}
+.btn.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:0}
+.btn.green{background:linear-gradient(135deg,#16a34a,#22d3ee);border:0}
+.btn.small{padding:8px 12px;font-size:12px}
+.input, .select, .textarea{width:100%;background:#0a1230;color:var(--text);border:1px solid var(--border);border-radius:12px;padding:12px;outline:0}
+.textarea{min-height:100px;resize:vertical}
+.panel{background:linear-gradient(145deg,#121d3a,#0d142b);border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:0 20px 60px #0007}
+.preview{width:100%;min-height:260px;background:#0a1022;border:1px dashed var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.grid{display:grid;gap:16px}
+.grid-2{grid-template-columns:1.2fr .8fr}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}}
+.tag{font-size:10px;padding:3px 7px;border-radius:20px;border:1px solid var(--border)}
+.tag.free{background:#22c55e18;border-color:#22c55e44;color:#22c55e}
+.template{cursor:pointer;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--panel2);box-shadow:0 10px 24px #0005;transition:.25s}
+.template:hover{transform:translateY(-4px);border-color:var(--cyan)}
+.template .thumb{height:110px;display:flex;align-items:center;justify-content:center;font-weight:900}
+.template .meta{padding:10px 12px}
+.tool{display:none}
+.tool.active{display:block}
+.tab{padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:var(--panel2);color:var(--muted);cursor:pointer;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.tab.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border:0}
+.label{font-size:12px;color:var(--muted);margin:12px 0 6px;display:block}
+</style>
+<!-- ================= THEME END ================= -->
+
+</head>
+<body>
+
+<!-- ================= HEADER START ================= -->
+<!-- EDIT HEADER ONLY HERE -->
+<div style="position:sticky;top:0;z-index:50;background:#0a0f25ee;border-bottom:1px solid var(--border);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+  <div style="display:flex;align-items:center;gap:12px;font-weight:900;font-size:20px"><div style="width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#22d3ee);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-cube"></i></div> ORBITTRONIZ <span style="color:var(--cyan)">BUSINESS TOOLS</span> <span style="font-size:10px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:20px">FREE</span></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap" id="tabs">
+    <div class="tab active" data-tool="resize"><i class="fa-solid fa-images"></i> Resize Crop BG</div>
+    <div class="tab" data-tool="caption"><i class="fa-solid fa-hashtag"></i> Caption</div>
+    <div class="tab" data-tool="menu"><i class="fa-solid fa-utensils"></i> Menu Maker</div>
+    <div class="tab" data-tool="festival"><i class="fa-solid fa-wand-magic-sparkles"></i> Festival</div>
+    <div class="tab" data-tool="qr"><i class="fa-solid fa-qrcode"></i> QR Code</div>
+  </div>
+</div>
+<!-- ================= HEADER END ================= -->
+
+<div style="max-width:1300px;margin:auto;padding:20px 16px 60px">
+
+<!-- ================= RESIZE START ================= -->
+<!-- EDIT ONLY RESIZE / CROP / BG REMOVE TOOL HERE -->
+<div class="tool active" id="tool-resize">
+  <div class="grid grid-2">
+    <div class="panel">
+      <h3><i class="fa-solid fa-crop"></i> Resize, Crop, Adjust and Remove Background</h3>
+      <label class="label">Upload Image</label>
+      <input type="file" id="imgUpload" accept="image/*" class="input">
+      <div class="grid grid-3" style="margin-top:12px">
+        <div><label class="label">Width</label><input id="imgW" type="number" value="800" class="input"></div>
+        <div><label class="label">Height</label><input id="imgH" type="number" value="800" class="input"></div>
+        <div><label class="label">Action</label><button class="btn primary" id="btnResize" style="width:100%">Resize</button></div>
+      </div>
+      <div class="grid grid-3" style="margin-top:12px">
+        <div><label class="label">Brightness <span id="bVal">100%</span></label><input id="bright" type="range" min="50" max="150" value="100" style="width:100%"></div>
+        <div><label class="label">Contrast <span id="cVal">100%</span></label><input id="contrast" type="range" min="50" max="150" value="100" style="width:100%"></div>
+        <div><label class="label">Crop</label><button class="btn" id="btnCrop" style="width:100%">Crop 1:1</button></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+        <button class="btn green" id="btnBgRemove">Remove BG</button>
+        <button class="btn" id="btnBgTransparent">Transparent BG</button>
+        <button class="btn primary" id="btnDownloadImg">Download</button>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Live Preview</h3>
+      <div class="preview" id="imgPreview"><span style="color:var(--muted)">Upload image</span></div>
+      <canvas id="imgCanvas" style="display:none"></canvas>
+      <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
+        <button class="btn small" onclick="setRatio(1)">1:1</button><button class="btn small" onclick="setRatio(4/5)">4:5</button><button class="btn small" onclick="setRatio(9/16)">9:16</button><button class="btn small" onclick="setRatio(1.91/1)">Poster</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ================= RESIZE END ================= -->
+
+<!-- ================= CAPTION START ================= -->
+<!-- EDIT ONLY CAPTION & HASHTAG TOOL HERE -->
+<div class="tool" id="tool-caption">
+  <div class="grid grid-2">
+    <div class="panel">
+      <h3><i class="fa-solid fa-hashtag"></i> Caption and Hashtag Generator - Multi Language</h3>
+      <label class="label">Business Type</label>
+      <select id="capBiz" class="select"><option>Restaurant</option><option>Café</option><option>Bakery</option><option>Fast Food</option></select>
+      <label class="label">Offer / Festival Context</label>
+      <input id="capContext" class="input" placeholder="Diwali Offer, 50% OFF, New Launch">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+        <div><label class="label">Language</label><select id="capLang" class="select"><option value="en">English</option><option value="hi">Hindi</option><option value="mr">Marathi</option><option value="hinglish">Hinglish</option><option value="gu">Gujarati</option></select></div>
+        <div><label class="label">Tone</label><select id="capTone" class="select"><option>Promotional</option><option>Festive</option><option>Friendly</option></select></div>
+      </div>
+      <button class="btn primary" id="btnGenCap" style="width:100%;margin-top:12px">Generate Captions</button>
+    </div>
+    <div class="panel">
+      <h3>Generated Results</h3>
+      <div id="capResults" style="display:grid;gap:10px"><div style="padding:12px;background:#0a1230;border:1px solid var(--border);border-radius:12px;color:var(--muted);font-size:13px">Click Generate</div></div>
+    </div>
+  </div>
+</div>
+<!-- ================= CAPTION END ================= -->
+
+<!-- ================= MENU START ================= -->
+<!-- EDIT ONLY MENU & PRICE LIST MAKER HERE -->
+<div class="tool" id="tool-menu">
+  <div class="grid grid-2">
+    <div class="panel">
+      <h3><i class="fa-solid fa-utensils"></i> Menu and Price List Maker</h3>
+      <label class="label">Template</label>
+      <div class="grid grid-3">
+        <div class="template" data-menu-tpl="modern"><div class="thumb" style="background:linear-gradient(135deg,#101a36,#1e2e5a)">MODERN</div><div class="meta"><b>Modern</b> <span class="tag free">Free</span></div></div>
+        <div class="template" data-menu-tpl="royal"><div class="thumb" style="background:linear-gradient(135deg,#2a1a08,#5a3a14)">ROYAL</div><div class="meta"><b>Royal</b> <span class="tag free">Free</span></div></div>
+        <div class="template" data-menu-tpl="cafe"><div class="thumb" style="background:linear-gradient(135deg,#0a2a1a,#1a5a3a)">CAFE</div><div class="meta"><b>Café</b> <span class="tag free">Free</span></div></div>
+      </div>
+      <label class="label" style="margin-top:12px">Restaurant Name</label><input id="menuName" class="input" value="Spice Corner - Jintur">
+      <label class="label">Items (Name | Price | Desc per line)</label><textarea id="menuItems" class="textarea">Chicken Biryani | ₹299 | Fragrant Basmati
+Paneer Tikka | ₹249 | Smoky Grilled
+Cold Coffee | ₹99 | Chilled Creamy
+Veg Thali | ₹199 | Full Meal</textarea>
+      <div style="display:flex;gap:8px;margin-top:10px"><button class="btn primary" id="btnRenderMenu">Preview Menu</button><button class="btn green" id="btnDownloadMenu">Download</button></div>
+    </div>
+    <div class="panel">
+      <h3>Live Menu Preview</h3>
+      <div class="preview"><canvas id="menuCanvas" width="800" height="1100" style="max-width:100%"></canvas></div>
+    </div>
+  </div>
+</div>
+<!-- ================= MENU END ================= -->
+
+<!-- ================= FESTIVAL START ================= -->
+<!-- EDIT ONLY FESTIVAL POSTER MAKER HERE -->
+<div class="tool" id="tool-festival">
+  <div class="grid grid-2">
+    <div class="panel">
+      <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Festival Poster Maker - Indian Festivals</h3>
+      <label class="label">Festival Templates - Ready Made Free</label>
+      <div class="grid grid-3">
+        <div class="template" data-fest="diwali"><div class="thumb" style="background:radial-gradient(circle,#ffae00,#8a3a00)">🪔 Diwali</div><div class="meta"><b>Diwali</b> <span class="tag free">Free</span></div></div>
+        <div class="template" data-fest="holi"><div class="thumb" style="background:linear-gradient(135deg,#ff00aa,#00aaff)">🎨 Holi</div><div class="meta"><b>Holi</b> <span class="tag free">Free</span></div></div>
+        <div class="template" data-fest="ganesh"><div class="thumb" style="background:linear-gradient(135deg,#ff6a00,#8a1a00)">🙏 Ganesh</div><div class="meta"><b>Ganesh</b> <span class="tag free">Free</span></div></div>
+        <div class="template" data-fest="eid"><div class="thumb" style="background:linear-gradient(135deg,#0a4a2a,#00aa66)">🌙 Eid</div><div class="meta"><b>Eid</b> <span class="tag free">Free</span></div></div>
+        <div class="template" data-fest="christmas"><div class="thumb" style="background:linear-gradient(135deg,#8a0000,#00aa4a)">🎄 Christmas</div><div class="meta"><b>Christmas</b> <span class="tag free">Free</span></div></div>
+        <div class="template" data-fest="navratri"><div class="thumb" style="background:linear-gradient(135deg,#aa0066,#ffaa00)">💃 Navratri</div><div class="meta"><b>Navratri</b> <span class="tag free">Free</span></div></div>
+      </div>
+      <label class="label" style="margin-top:12px">Business Name</label><input id="festBiz" class="input" value="Spice Corner Restaurant">
+      <label class="label">Offer Text</label><input id="festOffer" class="input" value="Diwali Dhamaka - 50% OFF">
+      <label class="label">Logo Upload</label><input type="file" id="festLogo" accept="image/*" class="input">
+      <div style="display:flex;gap:8px;margin-top:10px"><button class="btn primary" id="btnRenderFest">Generate Poster</button><button class="btn green" id="btnDownloadFest">Download HD</button></div>
+    </div>
+    <div class="panel">
+      <h3>Festival Poster Preview</h3>
+      <div class="preview"><canvas id="festCanvas" width="1080" height="1080" style="max-width:100%"></canvas></div>
+    </div>
+  </div>
+</div>
+<!-- ================= FESTIVAL END ================= -->
+
+<!-- ================= QR CODE START ================= -->
+<!-- EDIT ONLY BUSINESS QR CODE MAKER HERE -->
+<div class="tool" id="tool-qr">
+  <div class="grid grid-2">
+    <div class="panel">
+      <h3><i class="fa-solid fa-qrcode"></i> Business QR Code Maker</h3>
+      <label class="label">QR Type</label>
+      <select id="qrType" class="select"><option value="url">Website / Menu Link</option><option value="review">Google Review</option><option value="whatsapp">WhatsApp</option><option value="upi">UPI Payment</option><option value="wifi">WiFi</option><option value="contact">Contact VCard</option></select>
+      <label class="label">Enter Data</label><textarea id="qrData" class="textarea">https://orbittroniz.com/menu/spice-corner</textarea>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+        <div><label class="label">Foreground</label><input type="color" id="qrColor" value="#eef2ff" class="input" style="height:44px"></div>
+        <div><label class="label">Background</label><input type="color" id="qrBg" value="#101832" class="input" style="height:44px"></div>
+      </div>
+      <label class="label">Business Name on QR</label><input id="qrBiz" class="input" value="Spice Corner - Scan Menu">
+      <div style="display:flex;gap:8px;margin-top:12px"><button class="btn primary" id="btnGenQR">Generate QR</button><button class="btn green" id="btnDownloadQR">Download PNG</button></div>
+    </div>
+    <div class="panel">
+      <h3>QR Preview</h3>
+      <div class="preview" id="qrPreview" style="flex-direction:column;gap:12px;padding:20px"><div id="qrCanvasWrap" style="background:#fff;padding:16px;border-radius:16px"></div><div id="qrBizPreview" style="font-weight:800">Spice Corner - Scan Menu</div></div>
+    </div>
+  </div>
+</div>
+<!-- ================= QR CODE END ================= -->
+
+</div>
+
+<!-- ================= JAVASCRIPT START ================= -->
+<!-- EDIT JS ONLY HERE - Each Tool JS Has Separate Section -->
+
+<script>
+// ================= TABS JS START =================
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.querySelectorAll('.tool').forEach(x=>x.classList.remove('active'));
+    document.getElementById('tool-'+t.dataset.tool).classList.add('active');
+  });
+});
+// ================= TABS JS END =================
+
+// ================= RESIZE JS START =================
+let currentImg=null;
+const imgCanvas=document.getElementById('imgCanvas');
+const imgCtx=imgCanvas.getContext('2d');
+const imgPreview=document.getElementById('imgPreview');
+document.getElementById('imgUpload').addEventListener('change',e=>{
+  const file=e.target.files[0]; if(!file) return;
+  const img=new Image(); img.onload=()=>{ currentImg=img; imgCanvas.width=img.width; imgCanvas.height=img.height; imgCtx.drawImage(img,0,0); showCanvas(); document.getElementById('imgW').value=img.width; document.getElementById('imgH').value=img.height; }; img.src=URL.createObjectURL(file);
+});
+function showCanvas(){ imgPreview.innerHTML=''; const c=document.createElement('canvas'); c.width=imgCanvas.width; c.height=imgCanvas.height; c.getContext('2d').drawImage(imgCanvas,0,0); c.style.maxWidth='100%'; c.style.borderRadius='12px'; imgPreview.appendChild(c); }
+document.getElementById('btnResize').addEventListener('click',()=>{ if(!currentImg) return alert('Upload first'); const w=parseInt(document.getElementById('imgW').value)||800,h=parseInt(document.getElementById('imgH').value)||800; imgCanvas.width=w; imgCanvas.height=h; imgCtx.drawImage(currentImg,0,0,w,h); showCanvas(); });
+function applyFilters(){ if(!currentImg) return; const b=document.getElementById('bright').value,c=document.getElementById('contrast').value; document.getElementById('bVal').textContent=b+'%'; document.getElementById('cVal').textContent=c+'%'; imgCanvas.width=currentImg.width; imgCanvas.height=currentImg.height; imgCtx.filter=`brightness(${b}%) contrast(${c}%)`; imgCtx.drawImage(currentImg,0,0); imgCtx.filter='none'; showCanvas(); }
+document.getElementById('bright').addEventListener('input',applyFilters);
+document.getElementById('contrast').addEventListener('input',applyFilters);
+document.getElementById('btnCrop').addEventListener('click',()=>{ if(!currentImg) return; const size=Math.min(imgCanvas.width,imgCanvas.height); const x=(imgCanvas.width-size)/2,y=(imgCanvas.height-size)/2; const tmp=document.createElement('canvas'); tmp.width=size; tmp.height=size; tmp.getContext('2d').drawImage(imgCanvas,x,y,size,size,0,0,size,size); imgCanvas.width=size; imgCanvas.height=size; imgCtx.drawImage(tmp,0,0); showCanvas(); });
+document.getElementById('btnBgRemove').addEventListener('click',()=>{ if(!currentImg) return; const d=imgCtx.getImageData(0,0,imgCanvas.width,imgCanvas.height); for(let i=0;i<d.data.length;i+=4){ if(d.data[i]>200&&d.data[i+1]>200&&d.data[i+2]>200) d.data[i+3]=0; } imgCtx.putImageData(d,0,0); showCanvas(); });
+document.getElementById('btnBgTransparent').addEventListener('click',()=>{ if(!currentImg) return; const d=imgCtx.getImageData(0,0,imgCanvas.width,imgCanvas.height); for(let i=0;i<d.data.length;i+=4){ if(d.data[i]>220&&d.data[i+1]>220&&d.data[i+2]>220) d.data[i+3]=0; } imgCtx.putImageData(d,0,0); showCanvas(); });
+function setRatio(r){ if(!currentImg) return; const w=800,h=Math.round(w/r); document.getElementById('imgW').value=w; document.getElementById('imgH').value=h; document.getElementById('btnResize').click(); }
+document.getElementById('btnDownloadImg').addEventListener('click',()=>{ if(!imgCanvas.width) return; const a=document.createElement('a'); a.download='orbittroniz-image.png'; a.href=imgCanvas.toDataURL(); a.click(); });
+// ================= RESIZE JS END =================
+
+// ================= CAPTION JS START =================
+function genCaptions(){
+  const biz=document.getElementById('capBiz').value, offer=document.getElementById('capContext').value||"50% OFF Today", lang=document.getElementById('capLang').value, tone=document.getElementById('capTone').value;
+  let caps=[];
+  if(lang==='en') caps=[`🔥 Today's Special at ${biz}! ${offer} 😍 Visit now!`,`Craving? ${biz} brings ${offer} - Taste that makes you come back! 🍽️`,`Your hunger, our passion! ${offer} only at ${biz} 🚀`,`Don't miss! ${offer} at ${biz} - Limited time! ❤️`];
+  else if(lang==='hi') caps=[`🔥 आज का स्पेशल ${biz} में! ${offer} 😍`,`स्वाद का धमाका! ${biz} - ${offer} 🍽️`,`भूख लगी? ${biz} में आइए - ${offer} ❤️`,`इस त्योहार ${biz} - ${offer} 🎉`];
+  else if(lang==='mr') caps=[`🔥 आजचा स्पेशल ${biz} मध्ये! ${offer} 😍`,`चवीचा स्फोट! ${biz} - ${offer} 🍽️`,`भूक लागली? ${biz} - ${offer} ❤️`,`या सणाला ${biz} - ${offer} 🎉`];
+  else if(lang==='hinglish') caps=[`🔥 Aaj ka special ${biz} mein! ${offer} 😍`,`Taste ka dhamaka! ${biz} - ${offer} 🍽️`,`Bhook lagi? ${biz} - ${offer} ❤️`,`Festival treat - ${biz} - ${offer} 🎉`];
+  else caps=[`🔥 ${biz}! ${offer} 😍`,`${biz} - ${offer} 🍽️`,`Visit ${biz} - ${offer} ❤️`,`${offer} at ${biz} 🎉`];
+  const hashtags=`#${biz.replace(/\s/g,'')} #foodie #foodlover #offer #todaysspecial #${tone.toLowerCase()} #orbittroniz #restaurant #cafe #delicious #jintur #food #viral`;
+  const container=document.getElementById('capResults'); container.innerHTML='';
+  caps.forEach((c,i)=>{ const div=document.createElement('div'); div.style.cssText='padding:14px;background:#0a1230;border:1px solid var(--border);border-radius:12px'; div.innerHTML=`<div style="font-size:11px;color:var(--muted)">Caption ${i+1} - ${lang.toUpperCase()}</div><div style="margin:8px 0;font-size:13px;line-height:1.6">${c}</div><button class="btn small" onclick="navigator.clipboard.writeText('${c.replace(/'/g,"\\'")}');this.textContent='Copied!'">Copy</button>`; container.appendChild(div); });
+  const hd=document.createElement('div'); hd.style.cssText='padding:14px;background:#0a2a1a;border:1px solid #16a34a44;border-radius:12px'; hd.innerHTML=`<div style="font-size:11px;color:#22c55e">Hashtags</div><div style="margin:8px 0;font-size:12px;color:var(--muted)">${hashtags}</div><button class="btn small green" onclick="navigator.clipboard.writeText('${hashtags}')">Copy Hashtags</button>`; container.appendChild(hd);
+}
+document.getElementById('btnGenCap').addEventListener('click',genCaptions);
+// ================= CAPTION JS END =================
+
+// ================= MENU JS START =================
+let menuTpl='modern';
+document.querySelectorAll('[data-menu-tpl]').forEach(el=>el.addEventListener('click',()=>{ document.querySelectorAll('[data-menu-tpl]').forEach(x=>x.style.borderColor=''); el.style.borderColor='#22d3ee'; menuTpl=el.dataset.menuTpl; renderMenu(); }));
+function renderMenu(){
+  const c=document.getElementById('menuCanvas'), ctx=c.getContext('2d'), name=document.getElementById('menuName').value, items=document.getElementById('menuItems').value.split('\n').filter(Boolean);
+  if(menuTpl==='modern'){ ctx.fillStyle='#0f1730'; ctx.fillRect(0,0,c.width,c.height); ctx.fillStyle='#17223e'; ctx.fillRect(0,0,c.width,120); }
+  else if(menuTpl==='royal'){ const g=ctx.createLinearGradient(0,0,0,120); g.addColorStop(0,'#5a3a14'); g.addColorStop(1,'#2a1a08'); ctx.fillStyle=g; ctx.fillRect(0,0,c.width,120); ctx.fillStyle='#1a1205'; ctx.fillRect(0,120,c.width,c.height-120); }
+  else { ctx.fillStyle='#071a12'; ctx.fillRect(0,0,c.width,c.height); ctx.fillStyle='#123a28'; ctx.fillRect(0,0,c.width,120); }
+  ctx.fillStyle='#eef2ff'; ctx.font='900 34px Arial'; ctx.fillText(name,30,75);
+  let y=170; items.forEach(line=>{ const [item,price,desc]=line.split('|').map(s=>s?.trim()); if(!item) return; ctx.fillStyle='#eef2ff'; ctx.font='700 20px Arial'; ctx.fillText(item,30,y); if(price){ ctx.fillStyle='#22d3ee'; ctx.font='800 20px Arial'; ctx.fillText(price,40+ctx.measureText(item).width+20,y); } y+=28; if(desc){ ctx.fillStyle='#8da0c6'; ctx.font='14px Arial'; ctx.fillText(desc,30,y); y+=26; } ctx.fillStyle='#233152'; ctx.fillRect(30,y,740,1); y+=22; });
+}
+document.getElementById('btnRenderMenu').addEventListener('click',renderMenu);
+document.getElementById('btnDownloadMenu').addEventListener('click',()=>{ const c=document.getElementById('menuCanvas'); const a=document.createElement('a'); a.download='menu.png'; a.href=c.toDataURL(); a.click(); });
+renderMenu();
+// ================= MENU JS END =================
+
+// ================= FESTIVAL JS START =================
+let festType='diwali', festLogoImg=null;
+document.querySelectorAll('[data-fest]').forEach(el=>el.addEventListener('click',()=>{ document.querySelectorAll('[data-fest]').forEach(x=>x.style.borderColor=''); el.style.borderColor='#22d3ee'; festType=el.dataset.fest; renderFest(); }));
+document.getElementById('festLogo').addEventListener('change',e=>{ const f=e.target.files[0]; if(!f) return; const img=new Image(); img.onload=()=>{ festLogoImg=img; renderFest(); }; img.src=URL.createObjectURL(f); });
+function renderFest(){
+  const c=document.getElementById('festCanvas'), ctx=c.getContext('2d'), biz=document.getElementById('festBiz').value, offer=document.getElementById('festOffer').value;
+  let bg; if(festType==='diwali'){ bg=ctx.createRadialGradient(540,400,100,540,540,700); bg.addColorStop(0,'#ffae00'); bg.addColorStop(1,'#4a1800'); }
+  else if(festType==='holi'){ bg=ctx.createLinearGradient(0,0,1080,1080); bg.addColorStop(0,'#ff00aa'); bg.addColorStop(0.5,'#00aaff'); bg.addColorStop(1,'#aaff00'); }
+  else if(festType==='ganesh'){ bg=ctx.createLinearGradient(0,0,0,1080); bg.addColorStop(0,'#ff6a00'); bg.addColorStop(1,'#8a1a00'); }
+  else if(festType==='eid'){ bg=ctx.createLinearGradient(0,0,0,1080); bg.addColorStop(0,'#0a4a2a'); bg.addColorStop(1,'#00aa66'); }
+  else if(festType==='christmas'){ bg=ctx.createLinearGradient(0,0,0,1080); bg.addColorStop(0,'#8a0000'); bg.addColorStop(1,'#00aa4a'); }
+  else { bg=ctx.createLinearGradient(0,0,1080,0); bg.addColorStop(0,'#aa0066'); bg.addColorStop(1,'#ffaa00'); }
+  ctx.fillStyle=bg; ctx.fillRect(0,0,c.width,c.height); ctx.fillStyle='rgba(0,0,0,0.35)'; ctx.fillRect(60,60,c.width-120,c.height-120);
+  ctx.fillStyle='#fff'; ctx.font='900 56px Arial'; ctx.textAlign='center'; ctx.fillText(festType.toUpperCase()+' SPECIAL',540,220);
+  ctx.font='800 36px Arial'; ctx.fillStyle='#ffe9a0'; ctx.fillText(offer,540,340,900);
+  ctx.font='700 28px Arial'; ctx.fillStyle='#eef2ff'; ctx.fillText(biz,540,900);
+  if(festLogoImg) ctx.drawImage(festLogoImg,540-60,380,120,120); ctx.textAlign='left';
+}
+document.getElementById('btnRenderFest').addEventListener('click',renderFest);
+document.getElementById('btnDownloadFest').addEventListener('click',()=>{ const c=document.getElementById('festCanvas'); const a=document.createElement('a'); a.download=festType+'-poster.png'; a.href=c.toDataURL(); a.click(); });
+renderFest();
+// ================= FESTIVAL JS END =================
+
+// ================= QR CODE JS START =================
+function genQR(){
+  const data=document.getElementById('qrData').value.trim()||'https://orbittroniz.com', color=document.getElementById('qrColor').value, bg=document.getElementById('qrBg').value, biz=document.getElementById('qrBiz').value;
+  document.getElementById('qrBizPreview').textContent=biz;
+  const wrap=document.getElementById('qrCanvasWrap'); wrap.innerHTML='';
+  new QRCode(wrap,{text:data,width:220,height:220,colorDark:color,colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.H});
+  setTimeout(()=>{ const canvas=wrap.querySelector('canvas'); if(canvas){ const c=document.createElement('canvas'); c.width=400; c.height=480; const ctx=c.getContext('2d'); ctx.fillStyle=bg; ctx.fillRect(0,0,c.width,c.height); ctx.fillStyle='#fff'; ctx.fillRect(20,20,360,360); ctx.drawImage(canvas,20,20,360,360); ctx.fillStyle='#eef2ff'; ctx.font='800 18px Arial'; ctx.textAlign='center'; ctx.fillText(biz,200,420); wrap.dataset.full=c.toDataURL(); } },400);
+}
+document.getElementById('btnGenQR').addEventListener('click',genQR);
+document.getElementById('btnDownloadQR').addEventListener('click',()=>{ const wrap=document.getElementById('qrCanvasWrap'); const data=wrap.dataset.full; if(!data) return alert('Generate first'); const a=document.createElement('a'); a.download='qr.png'; a.href=data; a.click(); });
+document.getElementById('qrType').addEventListener('change',e=>{ const t=e.target.value, inp=document.getElementById('qrData'); if(t==='url') inp.value='https://orbittroniz.com/menu'; if(t==='review') inp.value='https://g.page/r/review'; if(t==='whatsapp') inp.value='https://wa.me/919999999999?text=Hi'; if(t==='upi') inp.value='upi://pay?pa=name@upi&pn=Biz&am=100'; if(t==='wifi') inp.value='WIFI:T:WPA;S:WiFi;P:123;;'; if(t==='contact') inp.value='BEGIN:VCARD\nFN:Biz\nTEL:9999999999\nEND:VCARD'; });
+genQR();
+// ================= QR CODE JS END =================
+</script>
+<!-- ================= JAVASCRIPT END ================= -->
+
+</body>
+</html>
