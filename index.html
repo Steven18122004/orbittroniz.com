@@ -173,41 +173,7 @@ body::before{
 
 <div style="max-width:1300px;margin:auto;padding:20px 16px 60px">
 
-<!-- ================= RESIZE START ================= -->
-<!-- EDIT ONLY RESIZE / CROP / BG REMOVE TOOL HERE -->
-<div class="tool active" id="tool-resize">
-  <div class="grid grid-2">
-    <div class="panel">
-      <h3><i class="fa-solid fa-crop"></i> Resize, Crop, Adjust and Remove Background</h3>
-      <label class="label">Upload Image</label>
-      <input type="file" id="imgUpload" accept="image/*" class="input">
-      <div class="grid grid-3" style="margin-top:12px">
-        <div><label class="label">Width</label><input id="imgW" type="number" value="800" class="input"></div>
-        <div><label class="label">Height</label><input id="imgH" type="number" value="800" class="input"></div>
-        <div><label class="label">Action</label><button class="btn primary" id="btnResize" style="width:100%">Resize</button></div>
-      </div>
-      <div class="grid grid-3" style="margin-top:12px">
-        <div><label class="label">Brightness <span id="bVal">100%</span></label><input id="bright" type="range" min="50" max="150" value="100" style="width:100%"></div>
-        <div><label class="label">Contrast <span id="cVal">100%</span></label><input id="contrast" type="range" min="50" max="150" value="100" style="width:100%"></div>
-        <div><label class="label">Crop</label><button class="btn" id="btnCrop" style="width:100%">Crop 1:1</button></div>
-      </div>
-      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
-        <button class="btn green" id="btnBgRemove">Remove BG</button>
-        <button class="btn" id="btnBgTransparent">Transparent BG</button>
-        <button class="btn primary" id="btnDownloadImg">Download</button>
-      </div>
-    </div>
-    <div class="panel">
-      <h3>Live Preview</h3>
-      <div class="preview" id="imgPreview"><span style="color:var(--muted)">Upload image</span></div>
-      <canvas id="imgCanvas" style="display:none"></canvas>
-      <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
-        <button class="btn small" onclick="setRatio(1)">1:1</button><button class="btn small" onclick="setRatio(4/5)">4:5</button><button class="btn small" onclick="setRatio(9/16)">9:16</button><button class="btn small" onclick="setRatio(1.91/1)">Poster</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- ================= RESIZE END ================= -->
+
 
 <!-- ================= CAPTION START ================= -->
 <!-- EDIT ONLY CAPTION & HASHTAG TOOL HERE -->
