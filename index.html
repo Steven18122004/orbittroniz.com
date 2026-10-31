@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbittroniz Business Tools - 3D Live UI - Free</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<style>
+:root{
+  --bg:#060913;
+  --panel:#101832;
+  --panel2:#162143;
+  --panel3:#1d2c56;
+  --text:#eef2ff;
+  --muted:#8da0c6;
+  --border:#25345a;
+  --accent:#7c3aed;
+  --cyan:#22d3ee;
+  --green:#22c55e;
+  --orange:#f59e0b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(1200px 600px at 20% -10%,#1a2550 0%,#060913 60%),radial-gradient(900px 500px at 90% 10%,#2a1555 0%,#060913 60%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;min-height:100vh;perspective:1000px}
+.top{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,#0a0f25ee,#060913ee);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;font-size:22px;letter-spacing:.5px}
+.brand .logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#22d3ee);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px #7c3aed44, inset 0 1px 0 #ffffff55;transform:rotate3d(1,1,0,10deg)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:linear-gradient(145deg,var(--panel),var(--panel2));color:var(--muted);cursor:pointer;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;box-shadow:0 6px 18px #0005, inset 0 1px 0 #ffffff12;transition:.25s;transform-style:preserve-3d}
+.tab:hover{transform:translateY(-2px) rotateX(5deg);border-color:var(--cyan);color:var(--text)}
+.tab.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border-color:transparent;box-shadow:0 12px 30px #7c3aed55, inset 0 1px 0 #ffffff33;transform:translateY(-2px)}
+.container{max-width:1300px;margin:auto;padding:20px 16px 60px}
+.panel{position:relative;background:linear-gradient(145deg,#121d3a,#0d142b);border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:0 20px 60px #0007, inset 0 1px 0 #ffffff0f, 0 1px 0 #ffffff08;transform-style:preserve-3d;transition:.3s}
+.panel::before{content:"";position:absolute;top:0;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,#22d3ee55,transparent)}
+.panel:hover{transform:translateY(-2px) rotateX(2deg)}
+.panel h3{font-size:15px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.panel h3 i{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#7c3aed22,#22d3ee22);display:flex;align-items:center;justify-content:center;color:var(--cyan);border:1px solid var(--border);box-shadow:inset 0 1px 0 #ffffff11}
+.grid{display:grid;gap:16px}
+.grid-2{grid-template-columns:1.2fr .8fr}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.input, .select, .textarea{width:100%;background:linear-gradient(180deg,#0a1230,#080e25);color:var(--text);border:1px solid var(--border);border-radius:12px;padding:12px 12px;outline:0;font:inherit;box-shadow:inset 0 2px 6px #0006, 0 1px 0 #ffffff06}
+.textarea{min-height:100px;resize:vertical}
+.range{width:100%;accent-color:var(--cyan)}
+.btn{padding:11px 16px;border-radius:12px;border:1px solid var(--border);background:linear-gradient(145deg,var(--panel2),var(--panel3));color:var(--text);cursor:pointer;font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:8px;box-shadow:0 8px 20px #0005, inset 0 1px 0 #ffffff12;transition:.2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px #0006}
+.btn.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:0;box-shadow:0 12px 28px #7c3aed55}
+.btn.green{background:linear-gradient(135deg,#16a34a,#22d3ee);border:0}
+.btn.small{padding:8px 12px;font-size:12px}
+.label{font-size:12px;color:var(--muted);margin:12px 0 6px;display:block}
+.preview{width:100%;min-height:260px;background:radial-gradient(400px 200px at 30% 0%,#1d2c56,#0a1022);border:1px dashed var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;box-shadow:inset 0 10px 30px #0008}
+.preview img, .preview canvas{max-width:100%;max-height:420px;border-radius:12px;box-shadow:0 20px 50px #0008}
+.tool{display:none}
+.tool.active{display:block;animation:pop .35s ease}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.98)} to{opacity:1;transform:translateY(0) scale(1)}}
+.template{cursor:pointer;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:linear-gradient(145deg,var(--panel2),var(--panel));box-shadow:0 10px 24px #0005;transition:.25s;transform-style:preserve-3d}
+.template:hover{transform:translateY(-4px) rotateX(6deg) rotateY(-4deg);border-color:var(--cyan);box-shadow:0 18px 40px #0007}
+.template .thumb{height:110px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;position:relative}
+.template .meta{padding:10px 12px}
+.template .meta b{font-size:12px}
+.template .meta span{font-size:11px;color:var(--muted)}
+.tag{font-size:10px;padding:3px 7px;border-radius:20px;border:1px solid var(--border);color:var(--muted)}
+.tag.free{background:#22c55e18;border-color:#22c55e44;color:#22c55e}
+.canvas-wrap{position:relative}
+.handle{position:absolute;width:12px;height:12px;background:#22d3ee;border:2px solid #fff;border-radius:50%;cursor:se-resize}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:20px;background:#0a1230;border:1px solid var(--border);font-size:12px;margin:4px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="brand"><div class="logo"><i class="fa-solid fa-cube"></i></div> ORBITTRONIZ <span style="color:var(--cyan)">BUSINESS TOOLS</span> <span style="font-size:11px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:20px;margin-left:8px">FREE - ALL WORKING</span></div>
+  <div class="tabs">
+    <div class="tab active" data-tool="image"><i class="fa-solid fa-images"></i> Resize / Crop / BG Remove</div>
+    <div class="tab" data-tool="caption"><i class="fa-solid fa-hashtag"></i> Caption & Hashtag</div>
+    <div class="tab" data-tool="menu"><i class="fa-solid fa-utensils"></i> Menu & Price List</div>
+    <div class="tab" data-tool="festival"><i class="fa-solid fa-wand-magic-sparkles"></i> Festival Poster</div>
+    <div class="tab" data-tool="qr"><i class="fa-solid fa-qrcode"></i> QR Code Maker</div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- 1. IMAGE TOOLS -->
+<div class="tool active" id="tool-image">
+  <div class="grid grid-2">
+    <div class="panel" style="transform:rotateY(-2deg)">
+      <h3><i class="fa-solid fa-crop"></i> Resize, Crop, Adjust & Remove Background - Live 3D</h3>
+      <label class="label">Upload Image</label>
+      <input type="file" id="imgUpload" accept="image/*" class="input">
+      <div class="grid grid-3" style="margin-top:12px">
+        <div><label class="label">Width (px)</label><input id="imgW" type="number" value="800" class="input"></div>
+        <div><label class="label">Height (px)</label><input id="imgH" type="number" value="800" class="input"></div>
+        <div><label class="label">Action</label><button class="btn primary" id="btnResize" style="width:100%"><i class="fa-solid fa-expand"></i> Resize</button></div>
+      </div>
+      <div class="grid grid-3" style="margin-top:12px">
+        <div><label class="label">Brightness <span id="bVal">100%</span></label><input id="bright" type="range" min="50" max="150" value="100" class="range"></div>
+        <div><label class="label">Contrast <span id="cVal">100%</span></label><input id="contrast" type="range" min="50" max="150" value="100" class="range"></div>
+        <div><label class="label">Crop Mode</label><button class="btn" id="btnCrop" style="width:100%"><i class="fa-solid fa-crop-simple"></i> Crop Center 1:1</button></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+        <button class="btn green" id="btnBgRemove"><i class="fa-solid fa-eraser"></i> Remove Background (Free - White/Color)</button>
+        <button class="btn" id="btnBgTransparent"><i class="fa-solid fa-wand-magic"></i> Make Transparent BG</button>
+        <button class="btn primary" id="btnDownloadImg"><i class="fa-solid fa-download"></i> Download PNG/JPG</button>
+      </div>
+      <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap"><span class="tag free">FREE</span><span class="tag">No Watermark</span><span class="tag">3D Preview</span><span class="tag">Works Offline</span></div>
+    </div>
+    <div class="panel" style="transform:rotateY(2deg)">
+      <h3><i class="fa-solid fa-eye"></i> Live Preview - 3D Card</h3>
+      <div class="preview" id="imgPreview"><span style="color:var(--muted);font-size:13px"><i class="fa-solid fa-cloud-arrow-up"></i> Upload image to preview - 3D Live</span></div>
+      <canvas id="imgCanvas" style="display:none"></canvas>
+      <div style="margin-top:10px;display:flex;gap:8px"><button class="btn small" id="btnSquare"><i class="fa-solid fa-square"></i> 1:1 Square</button><button class="btn small" id="btnPortrait"><i class="fa-solid fa-mobile"></i> 4:5 Portrait</button><button class="btn small" id="btnStory"><i class="fa-solid fa-rectangle-ad"></i> 9:16 Story</button><button class="btn small" id="btnPoster"><i class="fa-solid fa-panorama"></i> 1.91:1 Poster</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. CAPTION & HASHTAG -->
+<div class="tool" id="tool-caption">
+  <div class="grid grid-2">
+    <div class="panel">
+      <h3><i class="fa-solid fa-hashtag"></i> Caption & Hashtag Generator - Multi Language - 3D</h3>
+      <label class="label">Business Type</label>
+      <select id="capBiz" class="select"><option>Restaurant</option><option>Café</option><option>Salon</option><option>Bakery</option><option>Fast Food</option><option>Fine Dining</option></select>
+      <label class="label">Festival / Offer Context</label>
+      <input id="capContext" class="input" placeholder="e.g., Diwali Offer, New Biryani Launch, 50% OFF Today">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+        <div><label class="label">Language</label><select id="capLang" class="select"><option value="en">English</option><option value="hi">Hindi - हिन्दी</option><option value="mr">Marathi - मराठी</option><option value="hinglish">Hinglish</option><option value="gu">Gujarati</option><option value="bn">Bengali</option><option value="ta">Tamil</option></select></div>
+        <div><label class="label">Tone</label><select id="capTone" class="select"><option>Promotional</option><option>Festive</option><option>Friendly</option><option>Premium</option><option>Funny</option></select></div>
+      </div>
+      <button class="btn primary" id="btnGenCap" style="width:100%;margin-top:12px"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate Captions & Hashtags - Free</button>
+      <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap"><span class="tag free">Multi Language</span><span class="tag">Free Templates</span><span class="tag">3D Cards</span></div>
+    </div>
+    <div class="panel">
+      <h3><i class="fa-solid fa-copy"></i> Generated - Ready to Copy</h3>
+      <div id="capResults" style="display:grid;gap:10px"><div style="padding:14px;background:#0a1230;border:1px solid var(--border);border-radius:12px;color:var(--muted);font-size:13px">Click Generate - Get 4 captions + 20 hashtags in selected language - 3D Live</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. MENU MAKER -->
+<div class="tool" id="tool-menu">
+  <div class="grid grid-2">
+    <div class="panel">
+      <h3><i class="fa-solid fa-utensils"></i> Menu & Price List Maker - Templates Free</h3>
+      <label class="label">Choose Template - 3D Live</label>
+      <div class="grid grid-3">
+        <div class="template" data-menu-tpl="modern"><div class="thumb" style="background:linear-gradient(135deg,#101a36,#1e2e5a)">MODERN<br><small style="font-size:10px">Minimal</small></div><div class="meta"><b>Modern Minimal</b><br><span>Clean</span> <span class="tag free">Free</span></div></div>
+        <div class="template" data-menu-tpl="royal"><div class="thumb" style="background:linear-gradient(135deg,#2a1a08,#5a3a14)">ROYAL<br><small style="font-size:10px">Gold</small></div><div class="meta"><b>Royal Gold</b><br><span>Premium</span> <span class="tag free">Free</span></div></div>
+        <div class="template" data-menu-tpl="cafe"><div class="thumb" style="background:linear-gradient(135deg,#0a2a1a,#1a5a3a)">CAFE<br><small style="font-size:10px">Green</small></div><div class="meta"><b>Café Fresh</b><br><span>Green</span> <span class="tag free">Free</span></div></div>
+      </div>
+      <label class="label" style="margin-top:12px">Restaurant Name</label><input id="menuName" class="input" value="Spice Corner - Jintur">
+      <label class="label">Menu Items (Name | Price | Description - one per line)</label><textarea id="menuItems" class="textarea">Chicken Biryani | ₹299 | Fragrant Basmati with Spices
+Paneer Tikka | ₹249 | Smoky Grilled Cottage Cheese
+Cold Coffee | ₹99 | Chilled Creamy Coffee
+Veg Thali | ₹199 | Full Meal with 3 Sabzi</textarea>
+      <div style="display:flex;gap:8px;margin-top:10px"><button class="btn primary" id="btnRenderMenu"><i class="fa-solid fa-eye"></i> Preview Menu</button><button class="btn green" id="btnDownloadMenu"><i class="fa-solid fa-download"></i> Download PNG</button></div>
+    </div>
+    <div class="panel">
+      <h3><i class="fa-solid fa-file-lines"></i> Live Menu Preview - 3D Poster</h3>
+      <div class="preview" id="menuPreview"><canvas id="menuCanvas" width="800" height="1100" style="max-width:100%"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. FESTIVAL POSTER -->
+<div class="tool" id="tool-festival">
+  <div class="grid grid-2">
+    <div class="panel">
+      <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Festival Poster Maker - Indian Festivals - Ready Templates Free</h3>
+      <label class="label">Festival - Ready Made Designs</label>
+      <div class="grid grid-3">
+        <div class="template" data-fest="diwali"><div class="thumb" style="background:radial-gradient(circle at 30% 30%,#ffae00,#8a3a00)">🪔 Diwali</div><div class="meta"><b>Diwali</b><br><span>Deepavali Offer</span> <span class="tag free">Free</span></div></div>
+        <div class="template" data-fest="holi"><div class="thumb" style="background:linear-gradient(135deg,#ff00aa,#00aaff,#aaff00)">🎨 Holi</div><div class="meta"><b>Holi</b><br><span>Color Festival</span> <span class="tag free">Free</span></div></div>
+        <div class="template" data-fest="ganesh"><div class="thumb" style="background:linear-gradient(135deg,#ff6a00,#8a1a00)">🙏 Ganesh</div><div class="meta"><b>Ganesh Chaturthi</b><br><span>Bappa Offer</span> <span class="tag free">Free</span></div></div>
+        <div class="template" data-fest="eid"><div class="thumb" style="background:linear-gradient(135deg,#0a4a2a,#00aa66)">🌙 Eid</div><div class="meta"><b>Eid</b><br><span>Eid Mubarak</span> <span class="tag free">Free</span></div></div>
+        <div class="template" data-fest="christmas"><div class="thumb" style="background:linear-gradient(135deg,#8a0000,#00aa4a)">🎄 Christmas</div><div class="meta"><b>Christmas</b><br><span>New Year</span> <span class="tag free">Free</span></div></div>
+        <div class="template" data-fest="navratri"><div class="thumb" style="background:linear-gradient(135deg,#aa0066,#ffaa00)">💃 Navratri</div><div class="meta"><b>Navratri</b><br><span>Garba Night</span> <span class="tag free">Free</span></div></div>
+      </div>
+      <label class="label" style="margin-top:12px">Business Name</label><input id="festBiz" class="input" value="Spice Corner Restaurant">
+      <label class="label">Offer Text</label><input id="festOffer" class="input" value="Diwali Dhamaka - 50% OFF on Full Menu">
+      <label class="label">Upload Logo (Optional)</label><input type="file" id="festLogo" accept="image/*" class="input">
+      <div style="display:flex;gap:8px;margin-top:10px"><button class="btn primary" id="btnRenderFest"><i class="fa-solid fa-eye"></i> Generate Poster</button><button class="btn green" id="btnDownloadFest"><i class="fa-solid fa-download"></i> Download HD</button></div>
+    </div>
+    <div class="panel">
+      <h3><i class="fa-solid fa-image"></i> Festival Poster Preview - 3D Live</h3>
+      <div class="preview" id="festPreview"><canvas id="festCanvas" width="1080" height="1080" style="max-width:100%"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. QR CODE -->
+<div class="tool" id="tool-qr">
+  <div class="grid grid-2">
+    <div class="panel">
+      <h3><i class="fa-solid fa-qrcode"></i> Business QR Code Maker - Menus, Websites, Reviews</h3>
+      <label class="label">QR Type</label>
+      <select id="qrType" class="select"><option value="url">Website / Menu Link</option><option value="review">Google Review Link</option><option value="whatsapp">WhatsApp - Contact</option><option value="upi">UPI Payment</option><option value="wifi">WiFi Login</option><option value="contact">Contact Card - VCard</option></select>
+      <label class="label">Enter Data</label><textarea id="qrData" class="textarea" placeholder="https://orbittroniz.com/menu or https://g.page/r/... or wa.me/91...">https://orbittroniz.com/menu/spice-corner</textarea>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+        <div><label class="label">Foreground Color</label><input type="color" id="qrColor" value="#eef2ff" class="input" style="height:44px"></div>
+        <div><label class="label">Background Color</label><input type="color" id="qrBg" value="#101832" class="input" style="height:44px"></div>
+      </div>
+      <label class="label">Business Name on QR</label><input id="qrBiz" class="input" value="Spice Corner - Scan Menu">
+      <div style="display:flex;gap:8px;margin-top:12px"><button class="btn primary" id="btnGenQR"><i class="fa-solid fa-qrcode"></i> Generate QR - Free</button><button class="btn green" id="btnDownloadQR"><i class="fa-solid fa-download"></i> Download PNG</button></div>
+      <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap"><span class="tag free">Free Forever</span><span class="tag">No Expiry</span><span class="tag">High Quality</span></div>
+    </div>
+    <div class="panel">
+      <h3><i class="fa-solid fa-eye"></i> QR Preview - 3D Card with Business</h3>
+      <div class="preview" id="qrPreview" style="flex-direction:column;gap:12px;padding:20px"><div id="qrCanvasWrap" style="background:#fff;padding:16px;border-radius:16px;box-shadow:0 20px 50px #0008"></div><div id="qrBizPreview" style="font-weight:800;font-size:14px;letter-spacing:.3px">Spice Corner - Scan Menu</div><div style="font-size:11px;color:var(--muted)">Scan for Menu, Website, Reviews - No Payment</div></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// TABS
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.querySelectorAll('.tool').forEach(x=>x.classList.remove('active'));
+    document.getElementById('tool-'+t.dataset.tool).classList.add('active');
+  });
+});
+
+// 1. IMAGE TOOLS - Resize Crop Adjust BG Remove
+let currentImg = null;
+const canvas = document.getElementById('imgCanvas');
+const ctx = canvas.getContext('2d');
+const preview = document.getElementById('imgPreview');
+
+document.getElementById('imgUpload').addEventListener('change', e=>{
+  const file = e.target.files[0]; if(!file) return;
+  const img = new Image(); img.onload=()=>{
+    currentImg=img; canvas.width=img.width; canvas.height=img.height;
+    ctx.drawImage(img,0,0); showCanvas(); document.getElementById('imgW').value=img.width; document.getElementById('imgH').value=img.height;
+  }; img.src=URL.createObjectURL(file);
+});
+function showCanvas(){
+  preview.innerHTML=''; const c = document.createElement('canvas'); c.width=canvas.width; c.height=canvas.height; c.getContext('2d').drawImage(canvas,0,0);
+  c.style.maxWidth='100%'; c.style.borderRadius='12px'; c.style.boxShadow='0 20px 50px #0008'; preview.appendChild(c);
+}
+document.getElementById('btnResize').addEventListener('click',()=>{
+  if(!currentImg) return alert('Upload image first');
+  const w=parseInt(document.getElementById('imgW').value)||800, h=parseInt(document.getElementById('imgH').value)||800;
+  canvas.width=w; canvas.height=h; ctx.drawImage(currentImg,0,0,w,h); showCanvas();
+});
+function applyFilters(){
+  if(!currentImg) return;
+  const b=document.getElementById('bright').value, c=document.getElementById('contrast').value;
+  document.getElementById('bVal').textContent=b+'%'; document.getElementById('cVal').textContent=c+'%';
+  canvas.getContext('2d').filter=`brightness(${b}%) contrast(${c}%)`;
+  canvas.width=currentImg.width; canvas.height=currentImg.height;
+  ctx.filter=`brightness(${b}%) contrast(${c}%)`; ctx.drawImage(currentImg,0,0); ctx.filter='none'; showCanvas();
+}
+document.getElementById('bright').addEventListener('input',applyFilters);
+document.getElementById('contrast').addEventListener('input',applyFilters);
+document.getElementById('btnCrop').addEventListener('click',()=>{
+  if(!currentImg) return; const size=Math.min(canvas.width,canvas.height); const x=(canvas.width-size)/2, y=(canvas.height-size)/2;
+  const tmp=document.createElement('canvas'); tmp.width=size; tmp.height=size; tmp.getContext('2d').drawImage(canvas,x,y,size,size,0,0,size,size);
+  canvas.width=size; canvas.height=size; ctx.drawImage(tmp,0,0); showCanvas();
+});
+document.getElementById('btnBgRemove').addEventListener('click',()=>{
+  if(!currentImg) return alert('Upload image');
+  const imgData=ctx.getImageData(0,0,canvas.width,canvas.height); const data=imgData.data;
+  // Remove white / light background - free simple method
+  for(let i=0;i<data.length;i+=4){
+    const r=data[i], g=data[i+1], b=data[i+2];
+    if(r>200 && g>200 && b>200){ data[i+3]=0; } // transparent
+  }
+  ctx.putImageData(imgData,0,0); showCanvas();
+});
+document.getElementById('btnBgTransparent').addEventListener('click',()=>{
+  if(!currentImg) return; const imgData=ctx.getImageData(0,0,canvas.width,canvas.height); const d=imgData.data;
+  const tr=220;
+  for(let i=0;i<d.length;i+=4){ if(d[i]>tr && d[i+1]>tr && d[i+2]>tr){ d[i+3]=0; } }
+  ctx.putImageData(imgData,0,0); showCanvas();
+});
+function setRatio(r){ if(!currentImg) return; const w=800; const h=Math.round(w/r); document.getElementById('imgW').value=w; document.getElementById('imgH').value=h; document.getElementById('btnResize').click(); }
+document.getElementById('btnSquare').addEventListener('click',()=>setRatio(1));
+document.getElementById('btnPortrait').addEventListener('click',()=>setRatio(4/5));
+document.getElementById('btnStory').addEventListener('click',()=>setRatio(9/16));
+document.getElementById('btnPoster').addEventListener('click',()=>setRatio(1.91/1));
+document.getElementById('btnDownloadImg').addEventListener('click',()=>{ if(!canvas.width) return; const a=document.createElement('a'); a.download='orbittroniz-image.png'; a.href=canvas.toDataURL('image/png'); a.click(); });
+
+// 2. CAPTION GENERATOR
+const captionsData = {
+  en: {
+    Restaurant: { Promotional: ["🔥 Today's Special at {biz}! {offer} 😍 Visit us now!", "Craving delicious? {biz} brings {offer} - Taste that will make you come back! 🍽️", "Your hunger, our passion! {offer} only at {biz} - Order now! 🚀", "Don't miss! {offer} at {biz} - Limited time, unlimited taste! ❤️"],
+                Festive: ["🪔 Festival Feast at {biz}! {offer} - Celebrate taste with us!", "This festival, treat your family at {biz} - {offer} 🎉"]},
+  },
+  hi: { Restaurant: { Promotional: ["🔥 आज का स्पेशल {biz} में! {offer} 😍 जल्दी आइए!", "{biz} में स्वाद का धमाका! {offer} - एक बार खाओगे तो बार बार आओगे! 🍽️"] } },
+  mr: { Restaurant: { Promotional: ["🔥 आजचा स्पेशल {biz} मध्ये! {offer} 😍 लवकर या!", "{biz} मध्ये चवीचा स्फोट! {offer} 🍽️"] } },
+};
+function genCaptions(){
+  const biz=document.getElementById('capBiz').value; const offer=document.getElementById('capContext').value||"50% OFF Today"; const lang=document.getElementById('capLang').value; const tone=document.getElementById('capTone').value;
+  const hashtagsMap = { Restaurant: "#restaurant #foodie #foodlover #biryani #spicecorner #jintur #food #delicious #offer #todaysspecial #orbittroniz", Café: "#cafe #coffee #coldcoffee #cafevibes #pune #coffeeholic #instacoffee #cafetime" };
+  const base = captionsData.en.Restaurant.Promotional;
+  let caps = base.map(s=>s.replaceAll('{biz}',biz).replaceAll('{offer}',offer));
+  if(lang==='hi') caps = ["🔥 आज का स्पेशल "+biz+" में! "+offer+" 😍", "स्वाद का असली मजा - "+biz+" - "+offer+" 🍽️", "इस त्योहार, परिवार के साथ - "+biz+" - "+offer+" 🎉", "भूख लगी? "+biz+" में आइए - "+offer+" ❤️"];
+  if(lang==='mr') caps = ["🔥 आजचा स्पेशल "+biz+" मध्ये! "+offer+" 😍", "चवीचा खरा आनंद - "+biz+" - "+offer+" 🍽️", "या सणाला कुटुंबासह - "+biz+" - "+offer+" 🎉", "भूक लागली? "+biz+" मध्ये या - "+offer+" ❤️"];
+  if(lang==='hinglish') caps = ["🔥 Aaj ka special "+biz+" mein! "+offer+" 😍 Jaldi aao!", "Taste ka dhamaka! "+biz+" - "+offer+" - Ek baar khaoge toh baar baar aaoge! 🍽️", "Festival treat - "+biz+" - "+offer+" - Family ke saath 🎉", "Bhook lagi hai? "+biz+" - "+offer+" - Order now! ❤️"];
+  const hashtags = (hashtagsMap[biz]||hashtagsMap.Restaurant) + " #"+tone.toLowerCase()+" #"+offer.replace(/\s+/g,'').substring(0,15);
+  const container=document.getElementById('capResults'); container.innerHTML='';
+  caps.forEach((c,i)=>{
+    const div=document.createElement('div'); div.style.cssText='padding:14px;background:linear-gradient(145deg,#121d3a,#0d142b);border:1px solid var(--border);border-radius:14px;box-shadow:0 10px 24px #0005'; div.innerHTML=`<div style="font-size:12px;color:var(--muted)">Caption ${i+1} - ${lang.toUpperCase()} - ${tone} - 3D</div><div style="margin:8px 0;font-size:13px;line-height:1.6">${c}</div><div style="display:flex;gap:6px"><button class="btn small" onclick="navigator.clipboard.writeText('${c.replace(/'/g,"\\'")}');this.textContent='Copied!'"><i class="fa-solid fa-copy"></i> Copy</button><span class="tag free">Free</span></div>`; container.appendChild(div);
+  });
+  const hashDiv=document.createElement('div'); hashDiv.style.cssText='padding:14px;background:linear-gradient(145deg,#0a2a1a,#0d142b);border:1px solid #16a34a44;border-radius:14px'; hashDiv.innerHTML=`<div style="font-size:12px;color:#22c55e">Hashtags - Ready</div><div style="margin:8px 0;font-size:12px;line-height:1.6;color:var(--muted)">${hashtags}</div><button class="btn small green" onclick="navigator.clipboard.writeText('${hashtags}');this.textContent='Hashtags Copied!'"><i class="fa-solid fa-hashtag"></i> Copy Hashtags</button>`; container.appendChild(hashDiv);
+}
+document.getElementById('btnGenCap').addEventListener('click',genCaptions);
+
+// 3. MENU MAKER
+let menuTpl='modern';
+document.querySelectorAll('[data-menu-tpl]').forEach(el=>el.addEventListener('click',()=>{ document.querySelectorAll('[data-menu-tpl]').forEach(x=>x.style.borderColor=''); el.style.borderColor='#22d3ee'; menuTpl=el.dataset.menuTpl; renderMenu(); }));
+function renderMenu(){
+  const c=document.getElementById('menuCanvas'); const ctx=c.getContext('2d'); const name=document.getElementById('menuName').value; const items=document.getElementById('menuItems').value.split('\n').filter(Boolean);
+  // background by template
+  if(menuTpl==='modern'){ ctx.fillStyle='#0f1730'; ctx.fillRect(0,0,c.width,c.height); ctx.fillStyle='#17223e'; ctx.fillRect(0,0,c.width,120); }
+  else if(menuTpl==='royal'){ ctx.fillStyle='#1a1205'; ctx.fillRect(0,0,c.width,c.height); ctx.fillStyle='linear-gradient'; const g=ctx.createLinearGradient(0,0,0,120); g.addColorStop(0,'#5a3a14'); g.addColorStop(1,'#2a1a08'); ctx.fillStyle=g; ctx.fillRect(0,0,c.width,120); }
+  else { ctx.fillStyle='#071a12'; ctx.fillRect(0,0,c.width,c.height); ctx.fillStyle='#123a28'; ctx.fillRect(0,0,c.width,120); }
+  ctx.fillStyle='#eef2ff'; ctx.font='900 34px Arial'; ctx.fillText(name,30,75);
+  ctx.font='600 12px Arial'; ctx.fillStyle='#8da0c6'; ctx.fillText('Orbittroniz Business Tools - FREE MENU - 3D',30,100);
+  let y=170;
+  items.forEach(line=>{
+    const [item, price, desc] = line.split('|').map(s=>s?.trim());
+    if(!item) return;
+    ctx.fillStyle='#eef2ff'; ctx.font='700 20px Arial'; ctx.fillText(item,30,y);
+    if(price){ ctx.fillStyle='#22d3ee'; ctx.font='800 20px Arial'; const w=ctx.measureText(item).width; ctx.fillText(price,40+w+20,y); }
+    y+=28;
+    if(desc){ ctx.fillStyle='#8da0c6'; ctx.font='400 14px Arial'; ctx.fillText(desc,30,y); y+=26; } else y+=10;
+    ctx.fillStyle='#233152'; ctx.fillRect(30,y,740,1); y+=22;
+    if(y>1050) return;
+  });
+  ctx.fillStyle='#8da0c6'; ctx.font='10px Arial'; ctx.fillText('Generated Free by Orbittroniz Business Tools - No Payment - All Free',30,c.height-20);
+}
+document.getElementById('btnRenderMenu').addEventListener('click',renderMenu);
+document.getElementById('btnDownloadMenu').addEventListener('click',()=>{ const c=document.getElementById('menuCanvas'); const a=document.createElement('a'); a.download='orbittroniz-menu.png'; a.href=c.toDataURL(); a.click(); });
+renderMenu();
+
+// 4. FESTIVAL POSTER
+let festType='diwali'; let festLogoImg=null;
+document.querySelectorAll('[data-fest]').forEach(el=>el.addEventListener('click',()=>{ document.querySelectorAll('[data-fest]').forEach(x=>x.style.borderColor=''); el.style.borderColor='#22d3ee'; festType=el.dataset.fest; renderFest(); }));
+document.getElementById('festLogo').addEventListener('change',e=>{ const f=e.target.files[0]; if(!f) return; const img=new Image(); img.onload=()=>{ festLogoImg=img; renderFest(); }; img.src=URL.createObjectURL(f); });
+function renderFest(){
+  const c=document.getElementById('festCanvas'); const ctx=c.getContext('2d'); const biz=document.getElementById('festBiz').value; const offer=document.getElementById('festOffer').value;
+  // Background by festival
+  let bg;
+  if(festType==='diwali'){ bg=ctx.createRadialGradient(540,400,100,540,540,700); bg.addColorStop(0,'#ffae00'); bg.addColorStop(0.4,'#ff6a00'); bg.addColorStop(1,'#4a1800'); }
+  else if(festType==='holi'){ bg=ctx.createLinearGradient(0,0,1080,1080); bg.addColorStop(0,'#ff00aa'); bg.addColorStop(0.33,'#00aaff'); bg.addColorStop(0.66,'#aaff00'); bg.addColorStop(1,'#ffaa00'); }
+  else if(festType==='ganesh'){ bg=ctx.createLinearGradient(0,0,0,1080); bg.addColorStop(0,'#ff6a00'); bg.addColorStop(1,'#8a1a00'); }
+  else if(festType==='eid'){ bg=ctx.createLinearGradient(0,0,0,1080); bg.addColorStop(0,'#0a4a2a'); bg.addColorStop(1,'#00aa66'); }
+  else if(festType==='christmas'){ bg=ctx.createLinearGradient(0,0,0,1080); bg.addColorStop(0,'#8a0000'); bg.addColorStop(1,'#00aa4a'); }
+  else { bg=ctx.createLinearGradient(0,0,1080,0); bg.addColorStop(0,'#aa0066'); bg.addColorStop(1,'#ffaa00'); }
+  ctx.fillStyle=bg; ctx.fillRect(0,0,c.width,c.height);
+  // 3D card overlay
+  ctx.fillStyle='rgba(0,0,0,0.35)'; ctx.fillRect(60,60,c.width-120,c.height-120);
+  ctx.strokeStyle='rgba(255,255,255,0.15)'; ctx.lineWidth=2; ctx.strokeRect(60,60,c.width-120,c.height-120);
+  ctx.fillStyle='#fff'; ctx.font='900 64px Arial'; ctx.textAlign='center';
+  const icons={diwali:'🪔',holi:'🎨',ganesh:'🙏',eid:'🌙',christmas:'🎄',navratri:'💃'};
+  ctx.fillText((icons[festType]||'🎉')+' '+festType.toUpperCase()+' SPECIAL',540,220);
+  ctx.font='800 38px Arial'; ctx.fillStyle='#ffe9a0'; ctx.fillText(offer,540,340,900);
+  ctx.font='700 28px Arial'; ctx.fillStyle='#eef2ff'; ctx.fillText(biz,540,900);
+  ctx.font='600 16px Arial'; ctx.fillStyle='#8da0c6'; ctx.fillText('Generated Free - Orbittroniz Business Tools - All Templates Free - No Payment',540,960);
+  if(festLogoImg){ ctx.drawImage(festLogoImg, 540-60, 380, 120, 120); }
+  ctx.textAlign='left';
+}
+document.getElementById('btnRenderFest').addEventListener('click',renderFest);
+document.getElementById('btnDownloadFest').addEventListener('click',()=>{ const c=document.getElementById('festCanvas'); const a=document.createElement('a'); a.download=`orbittroniz-${festType}-poster.png`; a.href=c.toDataURL('image/png'); a.click(); });
+renderFest();
+
+// 5. QR CODE
+let qrObj=null;
+function genQR(){
+  const data=document.getElementById('qrData').value.trim()||'https://orbittroniz.com'; const color=document.getElementById('qrColor').value; const bg=document.getElementById('qrBg').value; const biz=document.getElementById('qrBiz').value;
+  document.getElementById('qrBizPreview').textContent=biz;
+  const wrap=document.getElementById('qrCanvasWrap'); wrap.innerHTML='';
+  qrObj=new QRCode(wrap, { text:data, width:220, height:220, colorDark:color, colorLight:'#ffffff', correctLevel:QRCode.CorrectLevel.H });
+  setTimeout(()=>{
+    const canvas=wrap.querySelector('canvas'); if(canvas){ const c=document.createElement('canvas'); c.width=400; c.height=480; const ctx=c.getContext('2d'); ctx.fillStyle=bg; ctx.fillRect(0,0,c.width,c.height); ctx.fillStyle='#ffffff'; ctx.fillRect(20,20,360,360); ctx.drawImage(canvas,20,20,360,360); ctx.fillStyle='#eef2ff'; ctx.font='800 18px Arial'; ctx.textAlign='center'; ctx.fillText(biz,200,420); ctx.font='11px Arial'; ctx.fillStyle='#8da0c6'; ctx.fillText('Orbittroniz - Free QR - No Payment',200,445); wrap.dataset.full=c.toDataURL(); }
+  },300);
+}
+document.getElementById('btnGenQR').addEventListener('click',genQR);
+document.getElementById('btnDownloadQR').addEventListener('click',()=>{
+  const wrap=document.getElementById('qrCanvasWrap'); const data=wrap.dataset.full; if(!data) return alert('Generate QR first');
+  const a=document.createElement('a'); a.download='orbittroniz-qr.png'; a.href=data; a.click();
+});
+document.getElementById('qrType').addEventListener('change',e=>{
+  const type=e.target.value; const input=document.getElementById('qrData');
+  if(type==='url') input.value='https://orbittroniz.com/menu/spice-corner';
+  if(type==='review') input.value='https://g.page/r/YourBusinessReviewLink';
+  if(type==='whatsapp') input.value='https://wa.me/919999999999?text=Hi%20I%20want%20to%20order';
+  if(type==='upi') input.value='upi://pay?pa=yourname@upi&pn=Spice%20Corner&am=100';
+  if(type==='wifi') input.value='WIFI:T:WPA;S:SpiceCornerWiFi;P:password123;;';
+  if(type==='contact') input.value='BEGIN:VCARD\nVERSION:3.0\nFN:Spice Corner\nTEL:+919999999999\nEND:VCARD';
+});
+genQR();
+</script>
+</body>
+</html>
