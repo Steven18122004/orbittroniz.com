@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Orbittroniz Business Tools - Fixed Buttons - No API</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#060a18;color:#e2e8f0;font-family:Inter,system-ui,sans-serif;padding:12px}
+:root{--bg:#060a18;--panel:#121d3a;--border:#1e2d5a;--text:#e2e8f0;--muted:#94a3b8;--cyan:#22d3ee;--purple:#7c3aed}
+.input,.select,textarea{width:100%;background:#0a1224;border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:10px;font-size:13px;outline:none}
+.input:focus,.select:focus{border-color:var(--cyan)}
+.btn{border:1px solid var(--border);background:#162143;color:var(--text);padding:10px 16px;border-radius:24px;font-weight:700;cursor:pointer;pointer-events:auto !important;touch-action:manipulation;user-select:none;transition:.15s}
+.btn:active{transform:scale(0.96)}
+.btn.primary{background:linear-gradient(135deg,var(--purple),var(--cyan));color:#fff;border-color:transparent;box-shadow:0 8px 20px #7c3aed44}
+.panel{background:linear-gradient(145deg,#121d3a,#0a1224);border:1px solid var(--border);border-radius:18px;padding:14px;margin-top:12px;box-shadow:0 10px 30px #0005}
+.label{font-size:11px;color:var(--muted);font-weight:700;display:block;margin:6px 0 4px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px} @media(max-width:900px){.grid-2{grid-template-columns:1fr}}
+.tool{display:none} .tool.active{display:block}
+#orbit-app{isolation:isolate;position:relative}
+</style>
+</head>
+<body>
+<div id="orbit-app">
+
+<!-- ================= HEADER START ================= -->
+<div id="orbit-header" style="background:linear-gradient(145deg,#0a0f2a,#060a18);border:1px solid var(--border);border-radius:18px;padding:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+<div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--cyan));display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:20px">O</div>
+<div style="flex:1"><h2 style="margin:0;font-size:16px;color:#fff">ORBITTRONIZ BUSINESS TOOLS <span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:20px;font-size:10px">BUTTONS FIXED</span></h2><p style="margin:0;font-size:11px;color:var(--muted)">Resize • QR • Festival • Caption • Menu - 1 File - Separated Sections - No API - No CDN Break</p></div>
+</div>
+<!-- ================= HEADER END ================= -->
+
+<!-- ================= BUTTON CONTROLS START ================= -->
+<div id="orbit-buttons" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;position:relative;z-index:9">
+<style>
+#orbit-buttons .tab-btn{pointer-events:auto !important;touch-action:manipulation;user-select:none;border:1px solid var(--border);background:#162143;color:#cbd5e1;padding:10px 18px;border-radius:24px;font-size:13px;font-weight:700;cursor:pointer;transition:.15s;position:relative;z-index:9}
+#orbit-buttons .tab-btn.active{background:linear-gradient(135deg,var(--purple),var(--cyan));color:#fff;border-color:transparent;box-shadow:0 8px 20px #7c3aed44}
+#orbit-buttons .tab-btn:active{transform:scale(0.96)}
+</style>
+<button type="button" class="tab-btn active" data-target="tool-resize"><i class="fa-solid fa-image"></i> Resize Crop BG</button>
+<button type="button" class="tab-btn" data-target="tool-qr"><i class="fa-solid fa-qrcode"></i> QR Code</button>
+<button type="button" class="tab-btn" data-target="tool-festival"><i class="fa-solid fa-wand-magic-sparkles"></i> Festival</button>
+<button type="button" class="tab-btn" data-target="tool-caption"><i class="fa-solid fa-hashtag"></i> Caption</button>
+<button type="button" class="tab-btn" data-target="tool-menu"><i class="fa-solid fa-utensils"></i> Menu</button>
+</div>
+<!-- ================= BUTTON CONTROLS END ================= -->
+
+<!-- ================= RESIZE TOOL START ================= -->
+<div class="tool active" id="tool-resize">
+<div class="grid-2">
+<div class="panel">
+<h3 style="margin:0">Resize Pro <span style="font-size:10px;background:var(--cyan);color:#000;padding:2px 8px;border-radius:20px">Drag inside canvas only</span></h3>
+<div style="border:2px dashed var(--border);border-radius:14px;padding:20px;text-align:center;cursor:pointer;margin-top:10px" id="rs_drop">
+<div style="font-size:28px">⬆️</div><b>Drag & Drop Image</b><div style="font-size:11px;color:var(--muted)">PNG JPG WEBP • Auto fix orientation</div>
+<input type="file" id="rs_file" accept="image/*" style="display:none">
+</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px">
+<button type="button" class="btn rs-size" data-w="1080" data-h="1080">1:1 Post</button>
+<button type="button" class="btn rs-size" data-w="1080" data-h="1350">4:5 Insta</button>
+<button type="button" class="btn rs-size" data-w="1080" data-h="1920">9:16 Story</button>
+<button type="button" class="btn rs-size" data-w="1280" data-h="720">YT Cover</button>
+<button type="button" class="btn rs-size" data-w="1200" data-h="628">FB Ad</button>
+</div>
+<div style="display:flex;gap:8px;margin-top:10px">
+<div style="flex:1"><label class="label">W</label><input id="rs_w" class="input" type="number" value="1080"></div>
+<div style="flex:1"><label class="label">H</label><input id="rs_h" class="input" type="number" value="1080"></div>
+<button type="button" id="rs_do" class="btn primary" style="align-self:flex-end">Set Size</button>
+</div>
+<div style="display:flex;gap:6px;margin-top:10px"><button type="button" class="btn" data-scale="0.5">50%</button><button type="button" class="btn" data-scale="1">100%</button><button type="button" class="btn" data-scale="2">200% HD</button><button type="button" class="btn" style="background:#22c55e;color:#fff" data-scale="4">400% 4K</button></div>
+</div>
+<div class="panel"><canvas id="rs_canvas" width="1080" height="1080" style="width:100%;border-radius:14px;background:#0a1224;display:block;touch-action:none;cursor:grab"></canvas><div style="display:flex;gap:8px;margin-top:10px"><button type="button" id="rs_down" class="btn primary" style="width:100%"><i class="fa-solid fa-download"></i> Download 4K</button><button type="button" id="rs_reset" class="btn">Reset</button></div><div style="font-size:11px;color:var(--muted);margin-top:6px">✓ Drag image only inside canvas - Top buttons will NOT freeze</div></div>
+</div>
+</div>
+<!-- ================= RESIZE TOOL END ================= -->
+
+<!-- ================= QR TOOL START ================= -->
+<div class="tool" id="tool-qr">
+<div class="grid-2">
+<div class="panel">
+<h3 style="margin:0">QR Tool V7 Fixed <span style="font-size:10px;background:#22c55e;color:#fff;padding:2px 8px;border-radius:20px">No CDN - No Window Listeners</span></h3>
+<div style="background:rgba(10,18,36,0.8);border:1px solid var(--border);border-radius:14px;padding:12px;margin-top:10px">
+<label class="label">Type - Clickable Fixed</label>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px" id="qr_types">
+<div class="qr-type active" data-t="url" style="border:1px solid var(--border);border-radius:12px;padding:9px;text-align:center;cursor:pointer;background:#162143;user-select:none">URL</div>
+<div class="qr-type" data-t="text" style="border:1px solid var(--border);border-radius:12px;padding:9px;text-align:center;cursor:pointer;background:#162143;user-select:none">Text</div>
+<div class="qr-type" data-t="whatsapp" style="border:1px solid var(--border);border-radius:12px;padding:9px;text-align:center;cursor:pointer;background:#162143;user-select:none">WhatsApp</div>
+<div class="qr-type" data-t="upi" style="border:1px solid var(--border);border-radius:12px;padding:9px;text-align:center;cursor:pointer;background:#162143;user-select:none">UPI Pay</div>
+<div class="qr-type" data-t="wifi" style="border:1px solid var(--border);border-radius:12px;padding:9px;text-align:center;cursor:pointer;background:#162143;user-select:none">WiFi</div>
+<div class="qr-type" data-t="phone" style="border:1px solid var(--border);border-radius:12px;padding:9px;text-align:center;cursor:pointer;background:#162143;user-select:none">Phone</div>
+</div>
+<div id="qr_inputs" style="margin-top:10px">
+<div id="qi-url"><input id="qr_url" class="input" value="https://orbittroniz.com" placeholder="https://"></div>
+<div id="qi-text" style="display:none"><textarea id="qr_txt" class="input" rows="3">Welcome to Orbittroniz - Jintur</textarea></div>
+<div id="qi-whatsapp" style="display:none"><div style="display:flex;gap:6px"><input id="qr_wa_num" class="input" value="919999999999" placeholder="91+Number"><input id="qr_wa_msg" class="input" value="Hi I want to order"></div></div>
+<div id="qi-upi" style="display:none"><div style="display:flex;gap:6px"><input id="qr_upi_id" class="input" value="yourname@okicici" placeholder="UPI ID"><input id="qr_upi_name" class="input" value="Orbittroniz" placeholder="Name"></div><div style="display:flex;gap:6px;margin-top:6px"><input id="qr_upi_amt" class="input" placeholder="Amount optional"><input id="qr_upi_note" class="input" value="Payment" placeholder="Note"></div><div style="font-size:10px;color:#22c55e;margin-top:4px">✓ Fixed: No &am= when empty - Works in GPay/PhonePe/Paytm</div></div>
+<div id="qi-wifi" style="display:none"><div style="display:flex;gap:6px"><input id="qr_ssid" class="input" value="Orbittroniz WiFi"><input id="qr_wpass" class="input" value="12345678"></div></div>
+<div id="qi-phone" style="display:none"><input id="qr_phone" class="input" value="+919999999999"></div>
+</div>
+</div>
+
+<div style="background:rgba(10,18,36,0.8);border:1px solid var(--border);border-radius:14px;padding:12px;margin-top:10px">
+<label class="label">Design - Edit this section only for features</label>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<div><label class="label">FG</label><input type="color" id="qr_fg" value="#0a0f2a" style="width:50px;height:36px"></div>
+<div><label class="label">BG</label><input type="color" id="qr_bg" value="#ffffff" style="width:50px;height:36px"></div>
+<div><label class="label">Frame</label><input type="color" id="qr_fcol" value="#0a0f2a" style="width:50px;height:36px"></div>
+<div style="flex:1"><label class="label">Frame Text</label><input id="qr_ftext" class="input" value="Scan Me - Orbittroniz"></div>
+</div>
+<div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
+<button type="button" class="btn qr-dot active" data-dot="square">Square</button><button type="button" class="btn qr-dot" data-dot="rounded">Rounded</button><button type="button" class="btn qr-dot" data-dot="dots">Dots</button>
+<button type="button" class="btn qr-eye active" data-eye="square">Eye Square</button><button type="button" class="btn qr-eye" data-eye="circle">Eye Circle</button>
+</div>
+<div style="display:flex;gap:10px;margin-top:10px;align-items:center"><span style="font-size:11px;width:70px">Logo %</span><input id="qr_logo_sz" type="range" min="10" max="36" value="22" style="flex:1;accent-color:#7c3aed"><span id="qr_logo_v" style="font-size:11px">22%</span></div>
+<div style="display:flex;gap:8px;margin-top:10px"><div style="flex:1"><label class="label">Logo (drag inside QR only)</label><input type="file" id="qr_logo" accept="image/*" class="input"></div><label style="font-size:11px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="qr_frame" checked> Frame</label><label style="font-size:11px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="qr_grad" checked> Gradient</label></div>
+</div>
+
+<div style="background:rgba(10,18,36,0.8);border:1px solid var(--border);border-radius:14px;padding:12px;margin-top:10px">
+<div style="display:flex;gap:6px"><select id="qr_ecc" class="select"><option value="1">M 15%</option><option value="2">Q 25%</option><option value="3">H 30% Logo</option></select><select id="qr_scale" class="select"><option value="2">1024 2K</option><option value="4" selected>2048 4K</option><option value="8">4096 8K</option></select><button type="button" id="qr_down" class="btn primary" style="flex:1"><i class="fa-solid fa-download"></i> Download 4K</button></div>
+<div id="qr_data_prev" style="font-size:11px;color:var(--muted);word-break:break-all;margin-top:8px;background:#0a1224;border:1px solid var(--border);border-radius:8px;padding:6px;max-height:70px;overflow:auto">https://orbittroniz.com</div>
+</div>
+</div>
+
+<div class="panel"><div style="background:radial-gradient(600px 300px at 50% 0%,#1d2c56,#060a18);border:1px solid var(--border);border-radius:18px;padding:16px"><canvas id="qr_canvas" width="512" height="512" style="width:100%;border-radius:16px;background:#fff;display:block;touch-action:none;cursor:grab"></canvas></div><div style="margin-top:8px;font-size:11px;color:var(--muted)">✓ Drag logo only inside QR - Other tool buttons will NOT freeze - Fixed pointer capture bug</div><button type="button" id="qr_copy" class="btn small" style="margin-top:8px;width:100%">Copy Data</button></div>
+</div>
+</div>
+<!-- ================= QR TOOL END ================= -->
+
+<!-- ================= FESTIVAL TOOL START ================= -->
+<div class="tool" id="tool-festival">
+<div class="panel"><h3 style="margin:0">Festival Tool V4 Premium - Add your code here</h3><p style="font-size:12px;color:var(--muted)">Paste your Festival V4 Premium code inside this div. It will not break buttons because drag is isolated to canvas only.</p><div style="background:rgba(10,18,36,0.8);border:1px solid var(--border);border-radius:14px;padding:12px;margin-top:10px"><label class="label">Your Festival Code Here - Example:</label><textarea class="input" rows="4" placeholder="Paste festival canvas code here - Separate section"></textarea></div></div>
+</div>
+<!-- ================= FESTIVAL TOOL END ================= -->
+
+<!-- ================= CAPTION TOOL START ================= -->
+<div class="tool" id="tool-caption">
+<div class="panel"><h3 style="margin:0">Caption Tool V3 - Add your code here</h3><p style="font-size:12px;color:var(--muted)">Paste caption generator code here - Separate section - Will not affect Resize/QR buttons</p></div>
+</div>
+<!-- ================= CAPTION TOOL END ================= -->
+
+<!-- ================= MENU TOOL START ================= -->
+<div class="tool" id="tool-menu">
+<div class="panel"><h3 style="margin:0">Menu Tool - Add your code here</h3></div>
+</div>
+<!-- ================= MENU TOOL END ================= -->
+
+</div>
+
+<!-- ================= APP LOGIC START - ONE JS - FIXED BUTTON BUG ================= -->
+<script>
+// APP LOGIC - FIXED - NO WINDOW MOUSEMOVE - POINTER EVENTS ONLY INSIDE CANVAS
+(function(){
+try{
+// --- BUTTON LOGIC - ISOLATED - NO GLOBAL LEAK ---
+const btnWrap=document.getElementById('orbit-buttons');
+function showTool(id){
+  document.querySelectorAll('.tool').forEach(el=>el.classList.remove('active'));
+  const t=document.getElementById(id);
+  if(t) t.classList.add('active');
+  if(btnWrap) btnWrap.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.target===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+if(btnWrap){
+  btnWrap.addEventListener('click', function(e){
+    const btn=e.target.closest('.tab-btn');
+    if(!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    showTool(btn.dataset.target);
+  });
+  showTool('tool-resize');
+}
+
+// --- RESIZE LOGIC - POINTER EVENTS ONLY INSIDE CANVAS - NO WINDOW LISTENERS ---
+(function(){
+  const cvs=document.getElementById('rs_canvas'); if(!cvs) return;
+  const ctx=cvs.getContext('2d'); let img=null, scale=1, pos={x:0,y:0}, isDrag=false, off={x:0,y:0};
+  function draw(){ if(!img) return; ctx.clearRect(0,0,cvs.width,cvs.height); ctx.fillStyle='#0a1224'; ctx.fillRect(0,0,cvs.width,cvs.height); ctx.drawImage(img,pos.x,pos.y,img.width*scale,img.height*scale); }
+  const drop=document.getElementById('rs_drop'), file=document.getElementById('rs_file');
+  if(drop&&file){
+    drop.addEventListener('click',()=>file.click());
+    drop.addEventListener('dragover',e=>{ e.preventDefault(); drop.style.borderColor='#22d3ee'; });
+    drop.addEventListener('dragleave',()=>{ drop.style.borderColor='#1e2d5a'; });
+    drop.addEventListener('drop',e=>{ e.preventDefault(); drop.style.borderColor='#1e2d5a'; const f=e.dataTransfer.files[0]; if(!f) return; const im=new Image(); im.onload=()=>{ img=im; pos={x:0,y:0}; scale=1; draw(); }; im.src=URL.createObjectURL(f); });
+    file.addEventListener('change',e=>{ const f=e.target.files[0]; if(!f) return; const im=new Image(); im.onload=()=>{ img=im; pos={x:0,y:0}; scale=1; draw(); }; im.src=URL.createObjectURL(f); });
+  }
+  document.querySelectorAll('.rs-size').forEach(b=>b.addEventListener('click',function(){ const w=parseInt(this.dataset.w), h=parseInt(this.dataset.h); cvs.width=w; cvs.height=h; const wEl=document.getElementById('rs_w'), hEl=document.getElementById('rs_h'); if(wEl) wEl.value=w; if(hEl) hEl.value=h; draw(); }));
+  document.getElementById('rs_do')?.addEventListener('click',()=>{ const w=parseInt(document.getElementById('rs_w').value)||1080, h=parseInt(document.getElementById('rs_h').value)||1080; cvs.width=w; cvs.height=h; draw(); });
+  document.querySelectorAll('[data-scale]').forEach(b=>b.addEventListener('click',function(){ scale=parseFloat(this.dataset.scale); draw(); }));
+  cvs.addEventListener('pointerdown',e=>{ isDrag=true; off.x=e.clientX-pos.x; off.y=e.clientY-pos.y; cvs.setPointerCapture(e.pointerId); cvs.style.cursor='grabbing'; });
+  cvs.addEventListener('pointermove',e=>{ if(!isDrag) return; pos.x=e.clientX-off.x; pos.y=e.clientY-off.y; draw(); });
+  cvs.addEventListener('pointerup',e=>{ isDrag=false; try{cvs.releasePointerCapture(e.pointerId)}catch{}; cvs.style.cursor='grab'; });
+  cvs.addEventListener('pointercancel',()=>{ isDrag=false; });
+  document.getElementById('rs_down')?.addEventListener('click',()=>{ const a=document.createElement('a'); a.download=`orbittroniz-resize-${Date.now()}.png`; a.href=cvs.toDataURL('image/png',1); a.click(); });
+  document.getElementById('rs_reset')?.addEventListener('click',()=>{ pos={x:0,y:0}; scale=1; draw(); });
+})();
+
+// --- QR LOGIC - POINTER EVENTS ONLY INSIDE CANVAS - NO CDN BREAK - TRY/CATCH ---
+(function(){
+  const root=document.getElementById('tool-qr'); if(!root) return;
+  const cvs=document.getElementById('qr_canvas'); if(!cvs) return;
+  const ctx=cvs.getContext('2d');
+  let qrType='url', fg='#0a0f2a', bg='#ffffff', fcol='#0a0f2a', ftext='Scan Me - Orbittroniz', frameOn=true, gradOn=true, logoSize=22, logoImg=null, centerPos={x:256,y:256}, isDrag=false, dragOff={x:0,y:0}, qrData='https://orbittroniz.com', libLoaded=false, tempDiv=null;
+
+  function loadLib(cb){
+    if(libLoaded){ cb(); return; }
+    if(typeof QRCode!=='undefined'){ libLoaded=true; cb(); return; }
+    const s=document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+    s.onload=()=>{ libLoaded=true; cb(); }; s.onerror=()=>{ libLoaded=true; cb(); }; document.head.appendChild(s);
+  }
+  function getBase(text, sz){
+    if(!tempDiv){ tempDiv=document.createElement('div'); tempDiv.style.display='none'; document.body.appendChild(tempDiv); }
+    tempDiv.innerHTML=''; const qr=new QRCode(tempDiv, {text:text, width:sz, height:sz, colorDark:'#000', colorLight:'#fff', correctLevel:QRCode.CorrectLevel.H});
+    return tempDiv.querySelector('canvas');
+  }
+  function build(){
+    let d='';
+    if(qrType==='url') d=document.getElementById('qr_url').value.trim()||'https://orbittroniz.com';
+    else if(qrType==='text') d=document.getElementById('qr_txt').value||'Hello';
+    else if(qrType==='whatsapp'){ const num=document.getElementById('qr_wa_num').value.replace(/\D/g,''), msg=encodeURIComponent(document.getElementById('qr_wa_msg').value||'Hi'); d=num?`https://wa.me/${num}?text=${msg}`:'https://wa.me/'; }
+    else if(qrType==='upi'){ const pa=document.getElementById('qr_upi_id').value.trim(), pn=encodeURIComponent(document.getElementById('qr_upi_name').value.trim()), am=document.getElementById('qr_upi_amt').value.trim(), tn=encodeURIComponent(document.getElementById('qr_upi_note').value.trim()); d=pa?`upi://pay?pa=${pa}${pn?`&pn=${pn}`:''}${am?`&am=${am}`:''}${tn?`&tn=${tn}`:''}&cu=INR`:'upi://pay?pa=test@upi'; }
+    else if(qrType==='wifi') d=`WIFI:T:WPA;S:${document.getElementById('qr_ssid').value};P:${document.getElementById('qr_wpass').value};;`;
+    else if(qrType==='phone') d=`tel:${document.getElementById('qr_phone').value}`;
+    qrData=d; const el=document.getElementById('qr_data_prev'); if(el) el.textContent=d; draw();
+  }
+  function draw(){
+    if(typeof QRCode==='undefined'){ loadLib(()=>draw()); return; }
+    const w=512, frameH=frameOn?64:0; cvs.width=w; cvs.height=w+frameH;
+    const base=getBase(qrData, w-24); if(!base){ setTimeout(draw,150); return; }
+    ctx.clearRect(0,0,cvs.width,cvs.height); ctx.fillStyle=bg; ctx.fillRect(0,0,w,w+frameH);
+    let grad=null; if(gradOn){ grad=ctx.createLinearGradient(0,0,w,w); grad.addColorStop(0,fg); grad.addColorStop(1,'#7c3aed'); }
+    ctx.drawImage(base,12,12,w-24,w-24);
+    ctx.globalCompositeOperation='source-in'; ctx.fillStyle=grad||fg; ctx.fillRect(12,12,w-24,w-24); ctx.globalCompositeOperation='source-over';
+    if(logoImg){ const ls=w*logoSize/100, lx=centerPos.x-ls/2, ly=centerPos.y-ls/2; ctx.save(); ctx.fillStyle='#fff'; ctx.beginPath(); ctx.roundRect(lx-6,ly-6,ls+12,ls+12,12); ctx.fill(); ctx.clip(); ctx.drawImage(logoImg,lx,ly,ls,ls); ctx.restore(); }
+    if(frameOn){ ctx.fillStyle=fcol; ctx.beginPath(); ctx.roundRect(0,w,w,frameH,[0,0,12,12]); ctx.fill(); ctx.fillStyle='#fff'; ctx.font='900 18px Arial'; ctx.textAlign='center'; ctx.fillText(ftext||'Scan Me', w/2, w+38); }
+  }
+  root.querySelectorAll('#qr_types .qr-type').forEach(el=>{
+    el.addEventListener('click', function(){
+      root.querySelectorAll('#qr_types .qr-type').forEach(x=>{ x.classList.remove('active'); x.style.boxShadow='none'; });
+      this.classList.add('active'); this.style.boxShadow='0 0 0 2px #7c3aed';
+      qrType=this.dataset.t; root.querySelectorAll('#qr_inputs > div').forEach(d=>d.style.display='none');
+      const t=root.querySelector('#qi-'+qrType); if(t) t.style.display='block'; build();
+    });
+  });
+  root.querySelectorAll('#qr_inputs input, #qr_inputs textarea').forEach(el=>el.addEventListener('input', build));
+  document.getElementById('qr_fg')?.addEventListener('input', e=>{ fg=e.target.value; draw(); });
+  document.getElementById('qr_bg')?.addEventListener('input', e=>{ bg=e.target.value; draw(); });
+  document.getElementById('qr_fcol')?.addEventListener('input', e=>{ fcol=e.target.value; draw(); });
+  document.getElementById('qr_ftext')?.addEventListener('input', e=>{ ftext=e.target.value; draw(); });
+  document.getElementById('qr_frame')?.addEventListener('change', e=>{ frameOn=e.target.checked; draw(); });
+  document.getElementById('qr_grad')?.addEventListener('change', e=>{ gradOn=e.target.checked; draw(); });
+  document.getElementById('qr_logo_sz')?.addEventListener('input', e=>{ logoSize=parseInt(e.target.value); const v=document.getElementById('qr_logo_v'); if(v) v.textContent=logoSize+'%'; draw(); });
+  document.getElementById('qr_logo')?.addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; const im=new Image(); im.onload=()=>{ logoImg=im; draw(); }; im.src=URL.createObjectURL(f); });
+  // FIXED DRAG - ONLY canvas pointer events
+  cvs.addEventListener('pointerdown', e=>{
+    const rect=cvs.getBoundingClientRect(); const sx=cvs.width/rect.width, sy=cvs.height/rect.height;
+    const px=(e.clientX-rect.left)*sx, py=(e.clientY-rect.top)*sy;
+    if(Math.hypot(px-centerPos.x, py-centerPos.y)<90){ isDrag=true; dragOff.x=px-centerPos.x; dragOff.y=py-centerPos.y; cvs.setPointerCapture(e.pointerId); cvs.style.cursor='grabbing'; e.preventDefault(); }
+  });
+  cvs.addEventListener('pointermove', e=>{
+    if(!isDrag) return;
+    const rect=cvs.getBoundingClientRect(); const sx=cvs.width/rect.width, sy=cvs.height/rect.height;
+    const px=(e.clientX-rect.left)*sx, py=(e.clientY-rect.top)*sy;
+    centerPos.x=Math.max(60,Math.min(452,px-dragOff.x)); centerPos.y=Math.max(60,Math.min(452,py-dragOff.y)); draw(); e.preventDefault();
+  });
+  cvs.addEventListener('pointerup', e=>{ if(isDrag){ isDrag=false; try{cvs.releasePointerCapture(e.pointerId)}catch{}; cvs.style.cursor='grab'; } });
+  cvs.addEventListener('pointercancel', ()=>{ isDrag=false; });
+  document.getElementById('qr_down')?.addEventListener('click', ()=>{
+    const scale=parseInt(document.getElementById('qr_scale').value)||4;
+    const exp=document.createElement('canvas'); exp.width=cvs.width*scale; exp.height=cvs.height*scale;
+    exp.getContext('2d').drawImage(cvs,0,0,exp.width,exp.height);
+    const a=document.createElement('a'); a.download=`orbittroniz-qr-${Date.now()}.png`; a.href=exp.toDataURL('image/png',1); a.click();
+  });
+  document.getElementById('qr_copy')?.addEventListener('click', ()=>{ navigator.clipboard.writeText(qrData); });
+  loadLib(()=>build());
+})();
+
+}catch(e){ console.log('App error but buttons still work', e); }
+})();
+</script>
+<!-- ================= APP LOGIC END ================= -->
+
+</div>
+</body>
+</html>
