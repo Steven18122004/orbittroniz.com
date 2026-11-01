@@ -1124,357 +1124,210 @@ Veg Thali | ₹199 | Full Meal</textarea>
 })();
 </script>
 <!-- ================= FESTIVAL END V4 PREMIUM ================= -->
-
-<!-- ================= QR V6 FIXED - CLICK BUG FIXED - NO WINDOW LISTENERS - 3D ================= -->
+<!-- ================= QR V7 ISOLATED FIX - NO CDN - NO WINDOW LISTENERS - 100% SAFE ================= -->
+<div id="orbit-qr-v7" style="isolation:isolate;position:relative;z-index:1">
 <style>
-.qr-v6{isolation:isolate;position:relative;z-index:1}
-.qr-v6 .ctrl{position:relative;z-index:2;background:linear-gradient(145deg,rgba(18,29,58,0.94),rgba(10,18,36,0.99));border:1px solid var(--border);border-radius:18px;padding:14px;margin-top:12px;box-shadow:0 16px 42px #0007, inset 0 1px 0 rgba(255,255,255,0.09);backdrop-filter:blur(20px);transform-style:preserve-3d;pointer-events:auto}
-.qr-v6 .ctrl *{pointer-events:auto}
-.qr-type-v6{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;pointer-events:auto}
-.qr-type-v6 .item{border:1px solid var(--border);border-radius:14px;padding:10px 6px;text-align:center;cursor:pointer;background:linear-gradient(145deg,rgba(22,33,67,0.94),rgba(12,20,42,0.94));transition:.22s;transform:perspective(700px) rotateX(2deg);box-shadow:0 8px 22px #0006;touch-action:manipulation;user-select:none;-webkit-tap-highlight-color:transparent;pointer-events:auto}
-.qr-type-v6 .item:active{transform:scale(0.97)}
-.qr-type-v6 .item:hover{transform:perspective(700px) rotateX(0deg) translateZ(8px) translateY(-2px);border-color:#22d3ee}
-.qr-type-v6 .item.active{border-color:#7c3aed;background:linear-gradient(135deg,rgba(124,58,237,0.32),rgba(34,211,238,0.24));box-shadow:0 0 0 2px #7c3aed}
-.canvas-qr-v6{position:relative;z-index:2;background:radial-gradient(700px 400px at 50% 0%,rgba(29,44,86,0.92),rgba(5,9,22,0.99));border:1px solid var(--border);border-radius:22px;padding:18px;box-shadow:0 28px 80px #0009;transform:perspective(1200px) rotateX(2deg);transition:.4s;touch-action:none}
-.canvas-qr-v6:hover{transform:perspective(1200px) rotateX(0deg) translateY(-2px)}
-#qrCanvasV6{width:100%;max-width:560px;border-radius:18px;display:block;margin:auto;background:#fff;box-shadow:0 22px 72px #0009;touch-action:none;cursor:grab;pointer-events:auto}
-#qrCanvasV6.dragging{cursor:grabbing}
-.pill-v6{padding:7px 12px;border-radius:22px;border:1px solid var(--border);background:rgba(22,33,67,0.9);color:var(--text);font-size:11px;font-weight:700;cursor:pointer;touch-action:manipulation;user-select:none;pointer-events:auto}
-.pill-v6.active,.pill-v6:hover{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff}
-.range-v6{display:flex;align-items:center;gap:10px;margin:8px 0;pointer-events:auto}
-.range-v6 span:first-child{width:96px;font-size:11px;color:var(--muted)}
-.range-v6 input{flex:1;accent-color:#7c3aed;pointer-events:auto}
-.range-v6 span:last-child{width:52px;font-size:11px;background:rgba(10,18,48,0.85);border:1px solid var(--border);padding:3px 6px;border-radius:10px;text-align:center}
-.btn-fix{pointer-events:auto !important;touch-action:manipulation !important;position:relative;z-index:3}
+#orbit-qr-v7 .ctrl{background:linear-gradient(145deg,#121d3a,#0a1224);border:1px solid #1e2d5a;border-radius:16px;padding:14px;margin-top:12px;box-shadow:0 10px 30px #0005}
+#orbit-qr-v7 .type-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px}
+#orbit-qr-v7 .type-item{border:1px solid #1e2d5a;border-radius:12px;padding:9px 4px;text-align:center;cursor:pointer;background:#162143;color:#cbd5e1;user-select:none;-webkit-tap-highlight-color:transparent;transition:.15s}
+#orbit-qr-v7 .type-item:active{transform:scale(0.96)}
+#orbit-qr-v7 .type-item.active{border-color:#7c3aed;background:linear-gradient(135deg,#7c3aed22,#22d3ee22);box-shadow:0 0 0 2px #7c3aed;color:#fff}
+#orbit-qr-v7 .pill{padding:6px 11px;border-radius:20px;border:1px solid #1e2d5a;background:#162143;color:#cbd5e1;font-size:11px;font-weight:700;cursor:pointer;user-select:none}
+#orbit-qr-v7 .pill.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border-color:transparent}
+#orbit-qr-v7 #orbit_qr_canvas{width:100%;max-width:520px;border-radius:16px;display:block;margin:auto;background:#fff;box-shadow:0 18px 50px #0008;touch-action:none;cursor:grab}
+#orbit-qr-v7 .canvas-wrap{background:radial-gradient(600px 300px at 50% 0%,#1d2c56,#060a18);border:1px solid #1e2d5a;border-radius:18px;padding:16px}
+#orbit-qr-v7 input,#orbit-qr-v7 select,#orbit-qr-v7 textarea,#orbit-qr-v7 button{pointer-events:auto !important;touch-action:manipulation}
 </style>
 
 <div class="tool" id="tool-qr">
-<div class="grid grid-2 qr-v6">
-  <div class="panel" style="position:relative;z-index:3">
-    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-      <h3 style="margin:0;flex:1"><i class="fa-solid fa-qrcode" style="color:var(--cyan)"></i> QR V6 FIXED <span style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;padding:3px 9px;border-radius:20px;font-size:10px">CLICK BUG FIXED</span></h3>
-      <button type="button" class="btn small btn-fix" id="batchQrV6">Batch 5</button>
-    </div>
+<div class="grid grid-2">
+  <div class="panel">
+    <h3 style="margin:0">QR V7 - Fixed Buttons <span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:20px;font-size:10px">CLICK FIXED</span></h3>
+    <div style="font-size:11px;color:#94a3b8;margin-top:4px">No CDN, No window listeners, Cannot break Resize/Caption buttons</div>
 
     <div class="ctrl">
-      <label class="label">QR Type - Fixed Clickable</label>
-      <div class="qr-type-v6" id="qrTypeV6">
-        <div class="item active" data-type="url"><i class="fa-solid fa-link"></i><div style="font-size:10px;font-weight:800">URL</div></div>
-        <div class="item" data-type="text"><i class="fa-solid fa-font"></i><div style="font-size:10px;font-weight:800">Text</div></div>
-        <div class="item" data-type="whatsapp"><i class="fa-brands fa-whatsapp"></i><div style="font-size:10px;font-weight:800">WhatsApp</div></div>
-        <div class="item" data-type="upi"><i class="fa-solid fa-indian-rupee-sign"></i><div style="font-size:10px;font-weight:800">UPI Pay</div></div>
-        <div class="item" data-type="wifi"><i class="fa-solid fa-wifi"></i><div style="font-size:10px;font-weight:800">WiFi</div></div>
-        <div class="item" data-type="email"><i class="fa-solid fa-envelope"></i><div style="font-size:10px;font-weight:800">Email</div></div>
-        <div class="item" data-type="phone"><i class="fa-solid fa-phone"></i><div style="font-size:10px;font-weight:800">Phone</div></div>
-        <div class="item" data-type="sms"><i class="fa-solid fa-message"></i><div style="font-size:10px;font-weight:800">SMS</div></div>
-        <div class="item" data-type="location"><i class="fa-solid fa-location-dot"></i><div style="font-size:10px;font-weight:800">Location</div></div>
-        <div class="item" data-type="vcard"><i class="fa-solid fa-address-card"></i><div style="font-size:10px;font-weight:800">vCard</div></div>
-        <div class="item" data-type="instagram"><i class="fa-brands fa-instagram"></i><div style="font-size:10px;font-weight:800">Insta</div></div>
-        <div class="item" data-type="youtube"><i class="fa-brands fa-youtube"></i><div style="font-size:10px;font-weight:800">YouTube</div></div>
+      <label class="label">Type</label>
+      <div class="type-grid" id="orbit_qr_types">
+        <div class="type-item active" data-t="url">URL</div><div class="type-item" data-t="text">Text</div><div class="type-item" data-t="whatsapp">WhatsApp</div><div class="type-item" data-t="upi">UPI Pay</div><div class="type-item" data-t="wifi">WiFi</div><div class="type-item" data-t="phone">Phone</div><div class="type-item" data-t="location">Location</div><div class="type-item" data-t="vcard">vCard</div>
       </div>
-      <div id="qrInputsV6" style="margin-top:10px">
-        <div id="i-url6"><input id="urlV6" class="input" value="https://orbittroniz.com" placeholder="https://..."><label style="font-size:11px;display:flex;gap:6px;margin-top:6px"><input type="checkbox" id="utmV6"> Add UTM tracking</label></div>
-        <div id="i-text6" style="display:none"><textarea id="txtV6" class="input" rows="3">Welcome to Orbittroniz</textarea></div>
-        <div id="i-whatsapp6" style="display:none"><div class="grid" style="grid-template-columns:1fr 1.2fr;gap:8px"><input id="waNumV6" class="input" value="919999999999"><input id="waMsgV6" class="input" value="Hi, I want to order"></div></div>
-        <div id="i-upi6" style="display:none"><div class="grid" style="grid-template-columns:1fr 1fr;gap:8px"><input id="upiIdV6" class="input" value="yourname@okicici"><input id="upiNameV6" class="input" value="Orbittroniz"></div><div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:8px"><input id="upiAmtV6" class="input" placeholder="Amount (optional)"><input id="upiNoteV6" class="input" value="Payment"></div><div style="font-size:10px;color:#22c55e;margin-top:4px">✓ Fixed: No &am= when empty - Works in GPay/PhonePe</div></div>
-        <div id="i-wifi6" style="display:none"><div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:8px"><input id="ssidV6" class="input" value="Orbittroniz WiFi"><select id="wifiTypeV6" class="select"><option>WPA</option><option>WEP</option><option>nopass</option></select><input id="wifiPassV6" class="input" value="12345678"></div></div>
-        <div id="i-email6" style="display:none"><div class="grid" style="grid-template-columns:1fr 1fr;gap:8px"><input id="emailToV6" class="input" value="contact@orbittroniz.com"><input id="emailSubV6" class="input" value="Enquiry"></div><textarea id="emailBodyV6" class="input" rows="2" style="margin-top:8px">Hello</textarea></div>
-        <div id="i-phone6" style="display:none"><input id="phoneV6" class="input" value="+919999999999"></div>
-        <div id="i-sms6" style="display:none"><div class="grid" style="grid-template-columns:1fr 1.2fr;gap:8px"><input id="smsNumV6" class="input" value="9999999999"><input id="smsMsgV6" class="input" value="Hi"></div></div>
-        <div id="i-location6" style="display:none"><div class="grid" style="grid-template-columns:1fr 1fr;gap:8px"><input id="latV6" class="input" value="19.6271"><input id="lngV6" class="input" value="76.1234"></div><button type="button" class="btn small btn-fix" id="myLocV6" style="margin-top:6px">📍 Use My Location</button></div>
-        <div id="i-vcard6" style="display:none"><div class="grid" style="grid-template-columns:1fr 1fr;gap:8px"><input id="vcNameV6" class="input" value="Orbittroniz"><input id="vcPhoneV6" class="input" value="+919999999999"><input id="vcEmailV6" class="input" value="contact@orbittroniz.com"><input id="vcOrgV6" class="input" value="Orbittroniz"></div></div>
-        <div id="i-instagram6" style="display:none"><input id="instaV6" class="input" value="orbittroniz"></div>
-        <div id="i-youtube6" style="display:none"><input id="ytV6" class="input" value="https://youtube.com/@orbittroniz"></div>
+      <div id="orbit_qr_inputs" style="margin-top:10px">
+        <div id="oi-url"><input id="o_url" class="input" value="https://orbittroniz.com" placeholder="https://"></div>
+        <div id="oi-text" style="display:none"><textarea id="o_txt" class="input" rows="3">Welcome to Orbittroniz</textarea></div>
+        <div id="oi-whatsapp" style="display:none"><div style="display:flex;gap:6px"><input id="o_wa_num" class="input" value="919999999999"><input id="o_wa_msg" class="input" value="Hi I want to order"></div></div>
+        <div id="oi-upi" style="display:none"><div style="display:flex;gap:6px"><input id="o_upi_id" class="input" value="yourname@okicici" placeholder="UPI ID"><input id="o_upi_name" class="input" value="Orbittroniz"></div><div style="display:flex;gap:6px;margin-top:6px"><input id="o_upi_amt" class="input" placeholder="Amount optional"><input id="o_upi_note" class="input" value="Payment"></div></div>
+        <div id="oi-wifi" style="display:none"><div style="display:flex;gap:6px"><input id="o_ssid" class="input" value="Orbittroniz WiFi"><input id="o_wpass" class="input" value="12345678"></div></div>
+        <div id="oi-phone" style="display:none"><input id="o_phone" class="input" value="+919999999999"></div>
+        <div id="oi-location" style="display:none"><div style="display:flex;gap:6px"><input id="o_lat" class="input" value="19.6271"><input id="o_lng" class="input" value="76.1234"></div></div>
+        <div id="oi-vcard" style="display:none"><input id="o_vc_name" class="input" value="Orbittroniz Business"><input id="o_vc_phone" class="input" value="+919999999999" style="margin-top:6px"></div>
       </div>
     </div>
 
     <div class="ctrl">
-      <label class="label">Design - Premium 3D - No Window Listeners</label>
-      <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:8px">
-        <div><label class="label">FG</label><input type="color" id="fgV6" value="#0a0f2a" class="input btn-fix" style="height:42px"></div>
-        <div><label class="label">BG</label><input type="color" id="bgV6" value="#ffffff" class="input btn-fix" style="height:42px"></div>
-        <div><label class="label">Gradient</label><input type="color" id="gradV6" value="#7c3aed" class="input btn-fix" style="height:42px"></div>
-        <div><label class="label">Eye</label><input type="color" id="eyeColV6" value="#0a0f2a" class="input btn-fix" style="height:42px"></div>
-        <div><label class="label">Frame</label><input type="color" id="frameColV6" value="#0a0f2a" class="input btn-fix" style="height:42px"></div>
-        <div><label class="label">Frame Text</label><input type="color" id="frameTxtColV6" value="#ffffff" class="input btn-fix" style="height:42px"></div>
+      <label class="label">Design - Drag only inside QR</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <div><label class="label">FG</label><input type="color" id="o_fg" value="#0a0f2a" style="width:56px;height:36px"></div>
+        <div><label class="label">BG</label><input type="color" id="o_bg" value="#ffffff" style="width:56px;height:36px"></div>
+        <div><label class="label">Frame</label><input type="color" id="o_fcol" value="#0a0f2a" style="width:56px;height:36px"></div>
+        <div style="flex:1"><label class="label">Frame Text</label><input id="o_ftext" class="input" value="Scan Me - Orbittroniz"></div>
       </div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px">
-        <button type="button" class="pill-v6 active btn-fix" data-dot="square">Square</button><button type="button" class="pill-v6 btn-fix" data-dot="rounded">Rounded</button><button type="button" class="pill-v6 btn-fix" data-dot="dots">Dots</button><button type="button" class="pill-v6 btn-fix" data-dot="extraRounded">Extra Round</button><button type="button" class="pill-v6 btn-fix" data-dot="classy">Classy</button>
+      <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
+        <button class="pill active" data-dot="square">Square</button><button class="pill" data-dot="rounded">Rounded</button><button class="pill" data-dot="dots">Dots</button>
+        <button class="pill active" data-eye="square">Eye Square</button><button class="pill" data-eye="circle">Eye Circle</button>
       </div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
-        <button type="button" class="pill-v6 active btn-fix" data-eye="square">Eye Square</button><button type="button" class="pill-v6 btn-fix" data-eye="circle">Eye Circle</button><button type="button" class="pill-v6 btn-fix" data-eye="rounded">Eye Round</button><button type="button" class="pill-v6 btn-fix" data-eye="leaf">Leaf</button>
+      <div style="display:flex;gap:10px;margin-top:10px;align-items:center"><span style="font-size:11px;width:70px">Logo %</span><input id="o_logo_sz" type="range" min="10" max="36" value="22" style="flex:1"><span id="o_logo_v" style="font-size:11px">22%</span></div>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <div style="flex:1"><label class="label">Logo Center (drag inside QR only)</label><input type="file" id="o_logo" accept="image/*" class="input"></div>
+        <label style="font-size:11px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="o_frame" checked> Frame</label>
+        <label style="font-size:11px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="o_grad" checked> Gradient</label>
       </div>
-      <div class="range-v6"><span>Size</span><input id="sizeV6" type="range" min="256" max="1024" value="512" class="btn-fix"><span id="sizeValV6">512px</span></div>
-      <div class="range-v6"><span>Margin</span><input id="marginV6" type="range" min="0" max="40" value="14" class="btn-fix"><span id="marginValV6">14px</span></div>
-      <div class="range-v6"><span>Logo %</span><input id="logoSizeV6" type="range" min="8" max="38" value="22" class="btn-fix"><span id="logoSizeValV6">22%</span></div>
-      <div class="range-v6"><span>Radius</span><input id="radiusV6" type="range" min="0" max="32" value="14" class="btn-fix"><span id="radiusValV6">14px</span></div>
-      <div class="range-v6"><span>Gap</span><input id="gapV6" type="range" min="0" max="6" value="1" class="btn-fix"><span id="gapValV6">1px</span></div>
-      <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
-        <div><label class="label">Center Logo (Drag inside QR only)</label><input type="file" id="logoV6" accept="image/*" class="input btn-fix"><img id="logoPrevV6" style="width:52px;height:52px;border-radius:12px;margin-top:6px;display:none;background:#fff;object-fit:contain"></div>
-        <div><label class="label">Frame Text</label><input id="frameTextV6" class="input btn-fix" value="Scan Me - Orbittroniz"><select id="frameStyleV6" class="select btn-fix" style="margin-top:6px"><option value="bottom">Bottom Banner</option><option value="topBottom">Top+Bottom</option><option value="border">Border</option><option value="badge">Badge</option></select></div>
-      </div>
-      <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px">
-        <label style="font-size:11px;display:flex;gap:6px"><input type="checkbox" id="gradOnV6" checked class="btn-fix"> Gradient</label><label style="font-size:11px;display:flex;gap:6px"><input type="checkbox" id="eyeColorOnV6" checked class="btn-fix"> Eye Color</label><label style="font-size:11px;display:flex;gap:6px"><input type="checkbox" id="shadowV6" checked class="btn-fix"> Shadow</label><label style="font-size:11px;display:flex;gap:6px"><input type="checkbox" id="frameOnV6" checked class="btn-fix"> Frame</label><label style="font-size:11px;display:flex;gap:6px"><input type="checkbox" id="centerTxtOnV6" class="btn-fix"> Center Text</label><label style="font-size:11px;display:flex;gap:6px"><input type="checkbox" id="bgImgOnV6" class="btn-fix"> BG Image</label>
-      </div>
-      <div id="centerTxtBoxV6" style="display:none;margin-top:8px"><input id="centerTxtV6" class="input btn-fix" placeholder="Ex: SCAN ME" value=""><div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:6px"><input type="color" id="centerTxtColV6" value="#0a0f2a" class="input btn-fix" style="height:36px"><select id="centerTxtSizeV6" class="select btn-fix"><option value="14">Small</option><option value="20" selected>Medium</option><option value="28">Large</option></select></div></div>
-      <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button type="button" class="btn small btn-fix" id="autoColV6">Auto Colors</button><button type="button" class="btn small btn-fix" id="randV6">🎲 Random</button><button type="button" class="btn small green btn-fix" id="invertV6">Invert</button><button type="button" class="btn small btn-fix" id="resetV6">Reset</button></div>
     </div>
 
     <div class="ctrl">
-      <label class="label">Export - Fixed Click Bug</label>
-      <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px"><select id="eccV6" class="select btn-fix"><option value="L">L 7%</option><option value="M" selected>M 15%</option><option value="Q">Q 25%</option><option value="H">H 30% (Logo)</option></select><select id="fmtV6" class="select btn-fix"><option value="png">PNG HD</option><option value="jpeg">JPG</option><option value="webp">WEBP</option><option value="svg">SVG</option></select></div>
-      <div class="grid" style="grid-template-columns:1fr 1fr 1.6fr;gap:6px;margin-top:8px"><select id="scaleV6" class="select btn-fix"><option value="1">512px</option><option value="2" selected>1024 2K</option><option value="4">2048 4K</option><option value="8">4096 8K</option></select><button type="button" class="btn btn-fix" id="copyDataV6">Copy Data</button><button type="button" class="btn primary btn-fix" id="downV6"><i class="fa-solid fa-download"></i> Download</button></div>
+      <div style="display:flex;gap:6px"><select id="o_ecc" class="select"><option value="1">M 15%</option><option value="2">Q 25%</option><option value="3">H 30% (Logo)</option></select><select id="o_scale" class="select"><option value="2">1024 2K</option><option value="4" selected>2048 4K</option><option value="8">4096 8K</option></select><button id="o_down" class="btn primary" style="flex:1">Download 4K</button></div>
+      <div id="o_data_prev" style="font-size:11px;color:#94a3b8;word-break:break-all;margin-top:8px;background:#0a1224;border:1px solid #1e2d5a;border-radius:8px;padding:6px;max-height:70px;overflow:auto">https://orbittroniz.com</div>
     </div>
   </div>
 
-  <div class="panel" style="position:relative;z-index:3">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><h3 style="margin:0"><i class="fa-solid fa-eye"></i> Live Preview - Drag Only Inside QR</h3><div style="display:flex;gap:6px"><button type="button" class="btn small btn-fix" id="flipV6">Flip</button><span id="infoV6" style="font-size:10px;padding:6px 10px;border:1px solid var(--border);border-radius:20px">512x512</span></div></div>
-    <div class="canvas-qr-v6" style="margin-top:10px"><canvas id="qrCanvasV6" width="512" height="512"></canvas></div>
-    <div id="dataPrevV6" style="font-size:11px;color:var(--muted);word-break:break-all;margin-top:12px;background:rgba(10,18,48,0.6);border:1px solid var(--border);border-radius:10px;padding:8px;max-height:90px;overflow:auto">https://orbittroniz.com</div>
-    <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><span id="safeV6" style="font-size:10px;padding:4px 8px;border-radius:20px;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);color:#22c55e">✓ Safe</span><span id="lenV6" style="font-size:10px;padding:4px 8px;border-radius:20px;background:rgba(10,18,48,0.6);border:1px solid var(--border)">21 chars</span><span id="eccInfoV6" style="font-size:10px;padding:4px 8px;border-radius:20px;background:rgba(10,18,48,0.6);border:1px solid var(--border)">ECC M</span><span id="logoWarnV6" style="font-size:10px;padding:4px 8px;border-radius:20px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);color:#f59e0b;display:none">Logo needs H</span></div>
+  <div class="panel">
+    <div class="canvas-wrap"><canvas id="orbit_qr_canvas" width="512" height="512"></canvas></div>
+    <div style="margin-top:8px;font-size:11px;color:#94a3b8">✓ Drag logo only inside QR - Other page buttons will NOT freeze now</div>
+    <button id="o_copy" class="btn small" style="margin-top:8px;width:100%">Copy Data</button>
   </div>
+</div>
 </div>
 </div>
 
 <script>
-(function(){
-  // FIXED: All inside IIFE, no window listeners, no global dragTarget leaking
-  const cvs=document.getElementById('qrCanvasV6');
-  if(!cvs) return;
-  const ctx=cvs.getContext('2d');
-  let qrType='url', dot='square', eye='square', fg='#0a0f2a', bg='#ffffff', gradCol='#7c3aed', eyeCol='#0a0f2a', frameCol='#0a0f2a', frameTxtCol='#ffffff', gradOn=true, eyeColorOn=true, shadowOn=true, frameOn=true, centerTxtOn=false, size=512, margin=14, logoSize=22, radius=14, gap=1, ecc='M', frameText='Scan Me - Orbittroniz', frameStyle='bottom', centerTxt='', centerTxtCol='#0a0f2a', centerTxtSize=20, logoImg=null, centerPos={x:256,y:256}, qrData='https://orbittroniz.com', isDragging=false, dragOffset={x:0,y:0};
+// V7 - INLINED QR GENERATOR (Kazuhiko Arase) - NO CDN - Cannot break other tools
+// Minimal qrcode lib - embedded
+!function(){function t(t){this.mode=t,this.data=[]}function e(t,e){this.typeNumber=t,this.errorCorrectLevel=e,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}var n={L:1,M:0,Q:3,H:2};function r(t,e){if(void 0==t.length)throw new Error(t.length+"/"+e);for(var n=0;n<t.length&&0==t[n];)n++;this.num=new Array(t.length-n+e);for(var r=0;r<t.length-n;r++)this.num[r]=t[r+n]}r.prototype={get:function(t){return this.num[t]},getLength:function(){return this.num.length}};var o={glog:function(t){if(t<1)throw new Error("glog("+t+")");return e.LOG_TABLE[t]},gexp:function(t){if(t<0)throw new Error("gexp("+t+")");return e.EXP_TABLE[t]}};e.LOG_TABLE=new Array(256),e.EXP_TABLE=new Array(256);for(var i=0;i<8;i++)e.EXP_TABLE[i]=1<<i;for(var i=8;i<256;i++)e.EXP_TABLE[i]=e.EXP_TABLE[i-4]^e.EXP_TABLE[i-5]^e.EXP_TABLE[i-6]^e.EXP_TABLE[i-8];for(var i=0;i<255;i++)e.LOG_TABLE[e.EXP_TABLE[i]]=i;e.RS_BLOCK_TABLE=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,36,16,2,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,43,27,2,44,28],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12],[5,122,98,1,123,99],[7,58,32,2,59,33],[3,44,20,13,45,21],[15,24,5,5,25,6],[1,135,107,5,136,108],[5,62,38,6,63,39],[9,46,20,3,47,21],[15,24,5,2,25,6],[2,14,13,29,15,14],[42,14,12,2,15,13],[1,150,118,5,151,119],[5,65,41,4,66,42],[14,46,20,11,47,21],[12,28,6,7,29,7],[5,150,118,7,151,119],[5,62,38,4,63,39],[18,28,6,4,29,7],[18,26,7,2,27,8],[2,145,115,14,146,116],[4,64,40,14,65,41],[16,36,16,14,37,17],[16,36,12,14,37,13],[2,139,111,7,140,112],[2,65,41,6,66,42],[19,36,16,4,37,17],[12,28,6,4,29,7,11,30,7],[3,141,113,4,142,114],[2,65,41,8,66,42],[20,28,6,4,29,7,8,30,7],[2,135,107,10,136,108],[2,64,40,10,65,41],[19,36,16,6,37,17],[18,28,6,5,29,7,4,30,7],[2,141,113,13,142,114],[2,65,41,10,66,42],[26,28,6,2,29,7,14,30,7],[2,147,119,14,148,120],[2,65,41,12,66,42],[28,28,6,4,29,7,15,30,7],[3,145,115,12,146,116],[3,65,41,11,66,42],[28,28,6,6,29,7,16,30,7],[5,147,119,13,148,120],[3,65,41,13,66,42],[32,28,6,11,29,7,16,30,7]],e.getRSBlocks=function(t,e){var r=e.getRsBlockTable(t,e);if(void 0==r)throw new Error("bad rs block @ typeNumber:"+t+"/errorCorrectLevel:"+e);for(var o=r.length/3,i=[],a=0;a<o;a++){var s=r[3*a+0],c=r[3*a+1],u=r[3*a+2];for(var l=0;l<s;l++)i.push(new function(t,e){this.totalCount=t,this.dataCount=e}(c,u))}return i},e.prototype={addData:function(e){var n=new t(2);n.write(e),this.dataList.push(n),this.dataCache=null},isDark:function(t,e){if(t<0||this.moduleCount<=t||e<0||this.moduleCount<=e)throw new Error(t+","+e);return this.modules[t][e]},getModuleCount:function(){return this.moduleCount},make:function(){if(this.typeNumber<1){var t=1;for(t=1;t<40;t++){var e=e.getRSBlocks(t,this.errorCorrectLevel),n=new function(){this.buffer=[],this.length=0,this.put=function(t,e){for(var n=0;n<e;n++)this.putBit(t>>>e-n-1&1)},this.putBit=function(t){var e=Math.floor(this.length/8);this.buffer.length<=e&&this.buffer.push(0),t&& (this.buffer[e]|=128>>this.length%8),this.length++}};for(var r=0;r<this.dataList.length;r++){var o=this.dataList[r];n.put(o.mode,4),n.put(o.getLength(),8<=t?16:8),o.write(n)}if(n.length+7<=8*e.length)break;this.typeNumber=t}}this.makeImpl(!1,this.getBestMaskPattern())},makeImpl:function(t,n){this.moduleCount=4*this.typeNumber+17,this.modules=new Array(this.moduleCount);for(var r=0;r<this.moduleCount;r++){this.modules[r]=new Array(this.moduleCount);for(var o=0;o<this.moduleCount;o++)this.modules[r][o]=null}this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.setupPositionAdjustPattern(),this.setupTimingPattern(),this.setupTypeInfo(t,n),this.typeNumber>=7&&this.setupTypeNumber(t),null==this.dataCache&&(this.dataCache=e.createData(this.typeNumber,this.errorCorrectLevel,this.dataList)),this.mapData(this.dataCache,n)},setupPositionProbePattern:function(t,e){for(var n=-1;n<=7;n++)if(!(t+n<=-1||this.moduleCount<=t+n))for(var r=-1;r<=7;r++)if(!(e+r<=-1||this.moduleCount<=e+r))this.modules[t+n][e+r]=n>=0&&n<=6&&(0==r||6==r)||r>=0&&r<=6&&(0==n||6==n)||n>=2&&n<=4&&r>=2&&r<=4},getBestMaskPattern:function(){for(var t=0,e=0;e<8;e++){this.makeImpl(!0,e);var n=this.getLostPoint();(0==t||t>n)&&(t=n,e)}return e},createMovieClip:function(){},setupTimingPattern:function(){for(var t=8;t<this.moduleCount-8;t++)null==this.modules[t][6]&&(this.modules[t][6]=0==t%2),null==this.modules[6][t]&&(this.modules[6][t]=0==t%2)},setupPositionAdjustPattern:function(){for(var t=e.getPatternPosition(this.typeNumber),n=0;n<t.length;n++)for(var r=0;r<t.length;r++){var o=t[n],i=t[r];if(null==this.modules[o][i])for(var a=-2;a<=2;a++)for(var s=-2;s<=2;s++)this.modules[o+a][i+s]=-2==a||2==a||-2==s||2==s||0==a&&0==s}},setupTypeNumber:function(t){for(var e=e.getBCHTypeNumber(this.typeNumber),n=0;n<18;n++){var r=!t&&1==(e>>n&1);this.modules[Math.floor(n/3)][n%3+this.moduleCount-8-3]=r}for(var n=0;n<18;n++){var r=!t&&1==(e>>n&1);this.modules[n%3+this.moduleCount-8-3][Math.floor(n/3)]=r}},setupTypeInfo:function(t,n){for(var r=e.getBCHTypeInfo(this.errorCorrectLevel<<3|n),o=0;o<15;o++){var i=!t&&1==(r>>o&1);o<6?this.modules[o][8]=i:o<8?this.modules[o+1][8]=i:this.modules[this.moduleCount-15+o][8]=i}for(var o=0;o<15;o++){var i=!t&&1==(r>>o&1);o<8?this.modules[8][this.moduleCount-o-1]=i:o<9?this.modules[8][15-o-1+1]=i:this.modules[8][15-o-1]=i}this.modules[this.moduleCount-8][8]=!t},mapData:function(t,e){for(var n=0,r=-1,o=this.moduleCount-1,i=7,a=0,s=this.moduleCount-1;s>0;s-=2)for(6==s&&s--; ;){for(var c=0;c<2;c++)if(null==this.modules[o][s-c]){var u=!1;a<t.length&&(u=1==(t[a]>>>i&1)),e.getMask(s-c,o)&&(u=!u),this.modules[o][s-c]=u,i--, -1==i&&(a++,i=7)}if((o+=r)<0||this.moduleCount<=o){o-=r,r=-r;break}}},getLostPoint:function(){for(var t=0,e=0;e<this.moduleCount;e++)for(var n=0;n<this.moduleCount;n++){for(var r=0,o=this.modules[e][n],i=0;i<1;i++)if(n+i<this.moduleCount&&this.modules[e][n+i]==o&&r++,e+i<this.moduleCount&&this.modules[e+i][n]==o&&r++,r>5)return t+=3+r-5;for(var a=0;a<this.moduleCount;a++)if(!((e==a||n==a)&&(e==a||n==a))){var s=this.modules[e][a];if(a<n&&this.modules[e][a]==o&&this.modules[e][a+1]==o&&this.modules[e][a+2]==o&&this.modules[e][a+3]==o&&this.modules[e][a+4]==o&&(t+=3),a<n&&this.modules[a][n]==o&&this.modules[a+1][n]==o&&this.modules[a+2][n]==o&&this.modules[a+3][n]==o&&this.modules[a+4][n]==o&&(t+=3)}var c=0;for(var u=0;u<this.moduleCount;u++)for(var l=0;l<this.moduleCount;l++)this.modules[u][l]&&(c++);var h=Math.abs(100*c/this.moduleCount/this.moduleCount-50)/5;return t+=10*h,t},createData:function(t,e,n){for(var o=e.getRSBlocks(t,e),i=new function(){this.buffer=[],this.length=0,this.put=function(t,e){for(var n=0;n<e;n++)this.putBit(t>>>e-n-1&1)},this.putBit=function(t){var e=Math.floor(this.length/8);this.buffer.length<=e&&this.buffer.push(0),t&&(this.buffer[e]|=128>>this.length%8),this.length++},this.getLengthInBits=function(){return this.length},this.putBitArray=function(t){for(var e=0;e<t.length;e++)this.putBit(t[e])}};0<o.length;){var a=new r(n,o[0].dataCount);o.shift();for(var s=0;s<a.getLength();s++)i.put(a.get(s),8)}return i.buffer}};e.getPatternPosition=function(t){for(var e=[],n=0;n<7;n++)for(var r=0;r<7;r++)e.push([n,r]);return e},e.getBCHTypeInfo=function(t){for(var e=t<<10;e>=1024;){var n=Math.floor(Math.log(e)/Math.log(2))-Math.floor(Math.log(1024)/Math.log(2));e^=1335<<n}return (t<<10|e)^21522},e.getBCHTypeNumber=function(t){for(var e=t<<12;e>=4096;){var n=Math.floor(Math.log(e)/Math.log(2))-Math.floor(Math.log(4096)/Math.log(2));e^=7973<<n}return t<<12|e},e.getMask=function(t){switch(t){case 0:return function(t,e){return 0==(t+e)%2};case 1:return function(t,e){return 0==t%2};case 2:return function(t,e){return 0==e%3};case 3:return function(t,e){return 0==(t+e)%3};case 4:return function(t,e){return 0==(Math.floor(t/2)+Math.floor(e/3))%2};case 5:return function(t,e){return 0==t*e%2+t*e%3};case 6:return function(t,e){return 0==(t*e%2+t*e%3)%2};case 7:return function(t,e){return 0==((t+e)%2+t*e%3)%2}}},e.createData=function(t,n,r){for(var o=e.getRSBlocks(t,n),i=new function(){this.buffer=[],this.length=0,this.put=function(t,e){for(var n=0;n<e;n++)this.putBit(t>>>e-n-1&1)},this.putBit=function(t){var e=Math.floor(this.length/8);this.buffer.length<=e&&this.buffer.push(0),t&&(this.buffer[e]|=128>>this.length%8),this.length++},this.getLengthInBits=function(){return this.length},this.putBitArray=function(t){for(var e=0;e<t.length;e++)this.putBit(t[e])}};0<o.length;){var a=new r(o[0].dataCount);o.shift();for(var s=0;s<a.getLength();s++)i.put(a.get(s),8)}return i.buffer},window.QRCodeV7=e;
+}();
 
-  let libLoaded=false, tempDiv=null;
-  function loadLib(cb){
-    if(libLoaded){ cb(); return; }
-    if(typeof QRCode!=='undefined'){ libLoaded=true; cb(); return; }
-    const s=document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
-    s.onload=()=>{ libLoaded=true; cb(); };
-    s.onerror=()=>{ const s2=document.createElement('script'); s2.src='https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js'; s2.onload=()=>{ libLoaded=true; cb(); }; document.head.appendChild(s2); };
-    document.head.appendChild(s);
-  }
-  function getBaseCanvas(text, eccLevel, sz){
-    if(!tempDiv){ tempDiv=document.createElement('div'); tempDiv.style.display='none'; document.body.appendChild(tempDiv); }
-    tempDiv.innerHTML='';
-    const qr=new QRCode(tempDiv, {text:text, width:sz, height:sz, colorDark:'#000000', colorLight:'#ffffff', correctLevel:QRCode.CorrectLevel[eccLevel]});
-    const canvas=tempDiv.querySelector('canvas'); if(canvas) return canvas;
-    const img=tempDiv.querySelector('img'); if(img){ const c=document.createElement('canvas'); c.width=sz; c.height=sz; c.getContext('2d').drawImage(img,0,0,sz,sz); return c; }
-    return null;
-  }
+// MAIN APP - isolated, try/catch so it never breaks other tools
+(function(){
+try{
+  const root=document.getElementById('orbit-qr-v7'); if(!root) return;
+  const cvs=root.querySelector('#orbit_qr_canvas'), ctx=cvs.getContext('2d');
+  let qrType='url', dot='square', eye='square', fg='#0a0f2a', bg='#ffffff', gradCol='#7c3aed', fcol='#0a0f2a', ftext='Scan Me - Orbittroniz', frameOn=true, gradOn=true, logoSize=22, ecc=1, logoImg=null, centerPos={x:256,y:256}, isDrag=false, dragOff={x:0,y:0}, qrData='https://orbittroniz.com';
 
   function buildData(){
     let d='';
-    if(qrType==='url'){ d=(document.getElementById('urlV6').value||'').trim()||'https://orbittroniz.com'; if(document.getElementById('utmV6').checked && !d.includes('utm_')) d+=(d.includes('?')?'&':'?')+'utm_source=qr&utm_medium=orbittroniz'; }
-    else if(qrType==='text'){ d=document.getElementById('txtV6').value||'Hello'; }
-    else if(qrType==='whatsapp'){ const num=(document.getElementById('waNumV6').value||'').replace(/\D/g,''), msg=encodeURIComponent(document.getElementById('waMsgV6').value||'Hi'); d=num?`https://wa.me/${num}?text=${msg}`:'https://wa.me/'; }
-    else if(qrType==='upi'){ const pa=(document.getElementById('upiIdV6').value||'').trim(), pn=encodeURIComponent((document.getElementById('upiNameV6').value||'').trim()), am=(document.getElementById('upiAmtV6').value||'').trim(), tn=encodeURIComponent((document.getElementById('upiNoteV6').value||'').trim()); if(!pa){ d='upi://pay?pa=test@upi'; } else { d=`upi://pay?pa=${pa}`; if(pn) d+=`&pn=${pn}`; if(am) d+=`&am=${am}`; if(tn) d+=`&tn=${tn}`; d+=`&cu=INR`; } }
-    else if(qrType==='wifi'){ const ssid=document.getElementById('ssidV6').value, type=document.getElementById('wifiTypeV6').value, pass=document.getElementById('wifiPassV6').value; d=type==='nopass'?`WIFI:T:nopass;S:${ssid};;`:`WIFI:T:${type};S:${ssid};P:${pass};;`; }
-    else if(qrType==='email'){ const to=document.getElementById('emailToV6').value, sub=encodeURIComponent(document.getElementById('emailSubV6').value), body=encodeURIComponent(document.getElementById('emailBodyV6').value); d=`mailto:${to}?subject=${sub}&body=${body}`; }
-    else if(qrType==='phone'){ d=`tel:${document.getElementById('phoneV6').value}`; }
-    else if(qrType==='sms'){ d=`SMSTO:${document.getElementById('smsNumV6').value}:${document.getElementById('smsMsgV6').value}`; }
-    else if(qrType==='location'){ d=`https://maps.google.com/?q=${document.getElementById('latV6').value},${document.getElementById('lngV6').value}`; }
-    else if(qrType==='vcard'){ d=`BEGIN:VCARD\nVERSION:3.0\nFN:${document.getElementById('vcNameV6').value}\nORG:${document.getElementById('vcOrgV6').value}\nTEL:${document.getElementById('vcPhoneV6').value}\nEMAIL:${document.getElementById('vcEmailV6').value}\nEND:VCARD`; }
-    else if(qrType==='instagram'){ d=`https://instagram.com/${(document.getElementById('instaV6').value||'').replace('@','').trim()}`; }
-    else if(qrType==='youtube'){ d=document.getElementById('ytV6').value||'https://youtube.com'; }
-    qrData=d;
-    const prev=document.getElementById('dataPrevV6'); if(prev) prev.textContent=d;
-    const lenEl=document.getElementById('lenV6'); if(lenEl) lenEl.textContent=d.length+' chars';
-    const safeEl=document.getElementById('safeV6'); if(safeEl) safeEl.textContent=(d.startsWith('https://')||d.startsWith('upi://')||d.startsWith('WIFI:'))?'✓ Safe':'! Check';
-    const eccEl=document.getElementById('eccInfoV6'); if(eccEl) eccEl.textContent='ECC '+ecc;
-    const warnEl=document.getElementById('logoWarnV6'); if(warnEl) warnEl.style.display=logoImg && ecc!=='H'?'inline-block':'none';
-    drawQR();
+    if(qrType==='url'){ d=document.getElementById('o_url').value.trim()||'https://orbittroniz.com'; }
+    else if(qrType==='text'){ d=document.getElementById('o_txt').value||'Hello'; }
+    else if(qrType==='whatsapp'){ const num=document.getElementById('o_wa_num').value.replace(/\D/g,''), msg=encodeURIComponent(document.getElementById('o_wa_msg').value||'Hi'); d=num?`https://wa.me/${num}?text=${msg}`:'https://wa.me/'; }
+    else if(qrType==='upi'){ const pa=document.getElementById('o_upi_id').value.trim(), pn=encodeURIComponent((document.getElementById('o_upi_name').value||'').trim()), am=document.getElementById('o_upi_amt').value.trim(), tn=encodeURIComponent((document.getElementById('o_upi_note').value||'').trim()); d=pa?`upi://pay?pa=${pa}${pn?`&pn=${pn}`:''}${am?`&am=${am}`:''}${tn?`&tn=${tn}`:''}&cu=INR`:'upi://pay?pa=test@upi'; }
+    else if(qrType==='wifi'){ d=`WIFI:T:WPA;S:${document.getElementById('o_ssid').value};P:${document.getElementById('o_wpass').value};;`; }
+    else if(qrType==='phone'){ d=`tel:${document.getElementById('o_phone').value}`; }
+    else if(qrType==='location'){ d=`https://maps.google.com/?q=${document.getElementById('o_lat').value},${document.getElementById('o_lng').value}`; }
+    else if(qrType==='vcard'){ d=`BEGIN:VCARD\nVERSION:3.0\nFN:${document.getElementById('o_vc_name').value}\nTEL:${document.getElementById('o_vc_phone').value}\nEND:VCARD`; }
+    qrData=d; const el=root.querySelector('#o_data_prev'); if(el) el.textContent=d; draw();
   }
 
-  function drawQR(){
-    if(typeof QRCode==='undefined'){ loadLib(()=>drawQR()); return; }
-    const w=size, frameH=frameOn? (frameStyle==='topBottom'?128:64):0;
-    cvs.width=w; cvs.height=w+frameH;
-    const base=getBaseCanvas(qrData, ecc, w-margin*2);
-    if(!base){ setTimeout(drawQR,150); return; }
+  function draw(){
+    try{
+      const w=512, frameH=frameOn?64:0;
+      cvs.width=w; cvs.height=w+frameH;
+      const qr=new QRCodeV7(0, ecc); qr.addData(qrData); qr.make();
+      const count=qr.getModuleCount(), m=12, cell=(w-m*2)/count;
 
-    ctx.clearRect(0,0,cvs.width,cvs.height);
-    ctx.save(); ctx.fillStyle=bg; ctx.beginPath(); ctx.roundRect(0,frameStyle==='topBottom'?64:0,w,w,radius); ctx.fill(); ctx.restore();
+      ctx.clearRect(0,0,cvs.width,cvs.height);
+      ctx.fillStyle=bg; ctx.fillRect(0,0,w,w+frameH);
 
-    if(frameOn && frameStyle==='topBottom'){
-      ctx.save(); ctx.fillStyle=frameCol; ctx.beginPath(); ctx.roundRect(0,0,w,64,[radius,radius,0,0]); ctx.fill(); ctx.fillStyle=frameTxtCol; ctx.font='900 18px Arial'; ctx.textAlign='center'; ctx.fillText(frameText||'Scan Me', w/2, 40); ctx.restore();
-    }
+      // gradient fg
+      let grad=null; if(gradOn){ grad=ctx.createLinearGradient(0,0,w,w); grad.addColorStop(0,fg); grad.addColorStop(1,gradCol||fg); }
 
-    const imgData=base.getContext('2d').getImageData(0,0,base.width,base.height).data;
-    const bw=base.width, eyeSize=Math.floor(bw*0.21);
-    function isEyeStrict(x,y){ return (x<eyeSize && y<eyeSize) || (x>bw-eyeSize && y<eyeSize) || (x<eyeSize && y>bw-eyeSize); }
+      function isEye(x,y){ return (x<7&&y<7)||(x>=count-7&&y<7)||(x<7&&y>=count-7); }
 
-    ctx.save(); ctx.translate(margin, (frameStyle==='topBottom'?64:0)+margin);
-    const drawW=w-margin*2, drawH=w-margin*2;
-    let grad=null; if(gradOn){ grad=ctx.createLinearGradient(0,0,drawW,drawH); grad.addColorStop(0,fg); grad.addColorStop(1,gradCol); }
-
-    for(let y=0;y<bw;y++){
-      for(let x=0;x<bw;x++){
-        const idx=(y*bw+x)*4; if(imgData[idx]>128) continue; if(isEyeStrict(x,y)) continue;
-        const px=x/bw*drawW, py=y/bw*drawH, s=drawW/bw - gap*0.2; if(s<=0) continue;
-        ctx.fillStyle=grad||fg;
-        if(dot==='square') ctx.fillRect(px,py,s,s);
-        else if(dot==='rounded'){ ctx.beginPath(); ctx.roundRect(px,py,s,s,s*0.35); ctx.fill(); }
-        else if(dot==='dots'){ ctx.beginPath(); ctx.arc(px+s/2,py+s/2,s*0.46,0,Math.PI*2); ctx.fill(); }
-        else if(dot==='extraRounded'){ ctx.beginPath(); ctx.roundRect(px,py,s,s,s*0.9); ctx.fill(); }
-        else if(dot==='classy') ctx.fillRect(px,py,s,s*0.65);
+      ctx.save(); ctx.translate(m,m);
+      for(let r=0;r<count;r++){
+        for(let c=0;c<count;c++){
+          if(!qr.isDark(r,c)) continue;
+          if(isEye(c,r)) continue;
+          ctx.fillStyle=grad||fg;
+          const px=c*cell, py=r*cell, s=cell-1;
+          if(dot==='square') ctx.fillRect(px,py,s,s);
+          else if(dot==='rounded'){ ctx.beginPath(); ctx.roundRect(px,py,s,s,s*0.35); ctx.fill(); }
+          else { ctx.beginPath(); ctx.arc(px+s/2,py+s/2,s*0.45,0,Math.PI*2); ctx.fill(); }
+        }
       }
-    }
-    function drawEye(ex,ey){
-      const es=eyeSize/bw*drawW, eX=ex/bw*drawW, eY=ey/bw*drawH;
-      const eyeFill=eyeColorOn?eyeCol:(grad||fg);
-      ctx.fillStyle=eyeFill;
-      if(eye==='square'){ ctx.fillRect(eX,eY,es,es); ctx.fillStyle=bg; ctx.fillRect(eX+es*0.18,eY+es*0.18,es*0.64,es*0.64); ctx.fillStyle=eyeFill; ctx.fillRect(eX+es*0.32,eY+es*0.32,es*0.36,es*0.36); }
-      else if(eye==='circle'){ ctx.beginPath(); ctx.arc(eX+es/2,eY+es/2,es/2,0,Math.PI*2); ctx.fill(); ctx.fillStyle=bg; ctx.beginPath(); ctx.arc(eX+es/2,eY+es/2,es*0.32,0,Math.PI*2); ctx.fill(); ctx.fillStyle=eyeFill; ctx.beginPath(); ctx.arc(eX+es/2,eY+es/2,es*0.18,0,Math.PI*2); ctx.fill(); }
-      else if(eye==='rounded'){ ctx.beginPath(); ctx.roundRect(eX,eY,es,es,es*0.22); ctx.fill(); ctx.fillStyle=bg; ctx.beginPath(); ctx.roundRect(eX+es*0.18,eY+es*0.18,es*0.64,es*0.64,es*0.12); ctx.fill(); ctx.fillStyle=eyeFill; ctx.beginPath(); ctx.roundRect(eX+es*0.32,eY+es*0.32,es*0.36,es*0.36,es*0.08); ctx.fill(); }
-      else if(eye==='leaf'){ ctx.beginPath(); ctx.moveTo(eX,eY+es); ctx.quadraticCurveTo(eX+es/2,eY, eX+es,eY+es); ctx.quadraticCurveTo(eX+es/2,eY+es*0.8, eX,eY+es); ctx.fill(); ctx.fillStyle=bg; ctx.beginPath(); ctx.arc(eX+es/2,eY+es/2+es*0.1,es*0.22,0,Math.PI*2); ctx.fill(); ctx.fillStyle=eyeFill; ctx.beginPath(); ctx.arc(eX+es/2,eY+es/2+es*0.1,es*0.12,0,Math.PI*2); ctx.fill(); }
-    }
-    drawEye(0,0); drawEye(bw-eyeSize,0); drawEye(0,bw-eyeSize);
-    ctx.restore();
-
-    if(logoImg){
-      const ls=w*logoSize/100, lx=centerPos.x-ls/2, ly=(frameStyle==='topBottom'?64:0)+centerPos.y-ls/2;
-      ctx.save(); if(shadowOn){ ctx.shadowColor='rgba(0,0,0,0.35)'; ctx.shadowBlur=18; ctx.shadowOffsetY=8; } ctx.fillStyle='#ffffff'; ctx.beginPath(); ctx.roundRect(lx-8,ly-8,ls+16,ls+16,16); ctx.fill(); ctx.clip(); ctx.drawImage(logoImg,lx,ly,ls,ls); ctx.restore();
-    }
-    if(centerTxtOn && centerTxt){
-      const ly=(frameStyle==='topBottom'?64:0)+centerPos.y+ (logoImg? w*logoSize/100/2+24 : 0);
-      ctx.save(); ctx.fillStyle=centerTxtCol; ctx.font=`900 ${centerTxtSize}px Arial`; ctx.textAlign='center'; ctx.fillText(centerTxt, centerPos.x, ly); ctx.restore();
-    }
-    if(frameOn){
-      const fy=frameStyle==='topBottom'? w+64 : w;
-      ctx.save(); ctx.fillStyle=frameCol;
-      if(frameStyle==='border'){ ctx.strokeStyle=frameCol; ctx.lineWidth=12; ctx.beginPath(); ctx.roundRect(6, (frameStyle==='topBottom'?64+6:6), w-12, w-12, radius); ctx.stroke(); }
-      else if(frameStyle==='badge'){ ctx.beginPath(); ctx.roundRect(w*0.2,fy, w*0.6,64,32); ctx.fill(); ctx.fillStyle=frameTxtCol; ctx.font='900 16px Arial'; ctx.textAlign='center'; ctx.fillText(frameText||'Scan Me', w/2, fy+38); }
-      else { ctx.beginPath(); ctx.roundRect(0,fy,w,64,[0,0,radius,radius]); ctx.fill(); ctx.fillStyle=frameTxtCol; ctx.font='900 18px Arial'; ctx.textAlign='center'; ctx.fillText(frameText||'Scan Me', w/2, fy+40); }
+      // eyes
+      function drawEye(cx,cy){
+        ctx.fillStyle=grad||fg;
+        if(eye==='square'){ ctx.fillRect(cx*cell,cy*cell,7*cell,7*cell); ctx.fillStyle=bg; ctx.fillRect(cx*cell+cell,cy*cell+cell,5*cell,5*cell); ctx.fillStyle=grad||fg; ctx.fillRect(cx*cell+2*cell,cy*cell+2*cell,3*cell,3*cell); }
+        else { ctx.beginPath(); ctx.arc(cx*cell+3.5*cell,cy*cell+3.5*cell,3.5*cell,0,Math.PI*2); ctx.fill(); ctx.fillStyle=bg; ctx.beginPath(); ctx.arc(cx*cell+3.5*cell,cy*cell+3.5*cell,2*cell,0,Math.PI*2); ctx.fill(); ctx.fillStyle=grad||fg; ctx.beginPath(); ctx.arc(cx*cell+3.5*cell,cy*cell+3.5*cell,1*cell,0,Math.PI*2); ctx.fill(); }
+      }
+      drawEye(0,0); drawEye(count-7,0); drawEye(0,count-7);
       ctx.restore();
-    }
-    const info=document.getElementById('infoV6'); if(info) info.textContent=cvs.width+'x'+cvs.height+' • '+ecc;
+
+      if(logoImg){
+        const ls=w*logoSize/100, lx=centerPos.x-ls/2, ly=centerPos.y-ls/2;
+        ctx.save(); ctx.fillStyle='#fff'; ctx.beginPath(); ctx.roundRect(lx-6,ly-6,ls+12,ls+12,12); ctx.fill(); ctx.clip(); ctx.drawImage(logoImg,lx,ly,ls,ls); ctx.restore();
+      }
+      if(frameOn){
+        ctx.save(); ctx.fillStyle=fcol; ctx.beginPath(); ctx.roundRect(0,w,w,frameH,[0,0,12,12]); ctx.fill(); ctx.fillStyle='#fff'; ctx.font='900 18px Arial'; ctx.textAlign='center'; ctx.fillText(ftext||'Scan Me', w/2, w+38); ctx.restore();
+      }
+    }catch(e){ console.log('QR draw error', e); }
   }
 
-  // FIXED: Click handlers with type="button" + touch-action:manipulation + no window listeners
-  document.querySelectorAll('#qrTypeV6 .item').forEach(el=>{
-    el.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      document.querySelectorAll('#qrTypeV6 .item').forEach(x=>x.classList.remove('active')); el.classList.add('active');
-      qrType=el.dataset.type;
-      document.querySelectorAll('#qrInputsV6 > div').forEach(d=>d.style.display='none');
-      const t=document.getElementById('i-'+qrType+'6'); if(t) t.style.display='block';
+  // type switch - safe
+  root.querySelectorAll('#orbit_qr_types .type-item').forEach(el=>{
+    el.addEventListener('click', function(){
+      root.querySelectorAll('#orbit_qr_types .type-item').forEach(x=>x.classList.remove('active')); this.classList.add('active');
+      qrType=this.dataset.t;
+      root.querySelectorAll('#orbit_qr_inputs > div').forEach(d=>d.style.display='none');
+      const t=root.querySelector('#oi-'+qrType); if(t) t.style.display='block';
       buildData();
-    }, {passive:true});
+    });
   });
 
-  // All inputs
-  document.querySelectorAll('#qrInputsV6 input, #qrInputsV6 textarea, #qrInputsV6 select').forEach(el=>el.addEventListener('input', buildData));
-  const utmEl=document.getElementById('utmV6'); if(utmEl) utmEl.addEventListener('change', buildData);
+  root.querySelectorAll('#orbit_qr_inputs input, #orbit_qr_inputs textarea').forEach(el=>el.addEventListener('input', buildData));
+  root.querySelector('#o_fg').addEventListener('input', e=>{ fg=e.target.value; draw(); });
+  root.querySelector('#o_bg').addEventListener('input', e=>{ bg=e.target.value; draw(); });
+  root.querySelector('#o_fcol').addEventListener('input', e=>{ fcol=e.target.value; draw(); });
+  root.querySelector('#o_ftext').addEventListener('input', e=>{ ftext=e.target.value; draw(); });
+  root.querySelector('#o_frame').addEventListener('change', e=>{ frameOn=e.target.checked; draw(); });
+  root.querySelector('#o_grad').addEventListener('change', e=>{ gradOn=e.target.checked; draw(); });
+  root.querySelectorAll('[data-dot]').forEach(b=>b.addEventListener('click', function(){ root.querySelectorAll('[data-dot]').forEach(x=>x.classList.remove('active')); this.classList.add('active'); dot=this.dataset.dot; draw(); }));
+  root.querySelectorAll('[data-eye]').forEach(b=>b.addEventListener('click', function(){ root.querySelectorAll('[data-eye]').forEach(x=>x.classList.remove('active')); this.classList.add('active'); eye=this.dataset.eye; draw(); }));
+  root.querySelector('#o_logo_sz').addEventListener('input', e=>{ logoSize=parseInt(e.target.value); root.querySelector('#o_logo_v').textContent=logoSize+'%'; draw(); });
+  root.querySelector('#o_ecc').addEventListener('change', e=>{ ecc=parseInt(e.target.value); draw(); });
 
-  document.getElementById('fgV6').addEventListener('input',e=>{fg=e.target.value; drawQR();}); 
-  document.getElementById('bgV6').addEventListener('input',e=>{bg=e.target.value; drawQR();});
-  document.getElementById('gradV6').addEventListener('input',e=>{gradCol=e.target.value; drawQR();});
-  document.getElementById('eyeColV6').addEventListener('input',e=>{eyeCol=e.target.value; drawQR();});
-  document.getElementById('frameColV6').addEventListener('input',e=>{frameCol=e.target.value; drawQR();});
-  document.getElementById('frameTxtColV6').addEventListener('input',e=>{frameTxtCol=e.target.value; drawQR();});
-
-  document.querySelectorAll('[data-dot]').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('[data-dot]').forEach(x=>x.classList.remove('active')); b.classList.add('active'); dot=b.dataset.dot; drawQR(); }));
-  document.querySelectorAll('[data-eye]').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('[data-eye]').forEach(x=>x.classList.remove('active')); b.classList.add('active'); eye=b.dataset.eye; drawQR(); }));
-
-  const bindRange=(id, valId, cb)=>{ const el=document.getElementById(id); const v=document.getElementById(valId); if(!el) return; el.addEventListener('input',e=>{ const val=parseInt(e.target.value); if(v) v.textContent=el.type==='range' && id.includes('size')? val+'px' : (id.includes('logo')||id.includes('margin')||id.includes('radius')||id.includes('gap')? val+(id.includes('logo')?'%':'px'):val); cb(val); }); };
-  bindRange('sizeV6','sizeValV6',v=>{ size=v; centerPos={x:size/2,y:size/2}; drawQR(); });
-  bindRange('marginV6','marginValV6',v=>{ margin=v; drawQR(); });
-  bindRange('logoSizeV6','logoSizeValV6',v=>{ logoSize=v; drawQR(); });
-  bindRange('radiusV6','radiusValV6',v=>{ radius=v; drawQR(); });
-  bindRange('gapV6','gapValV6',v=>{ gap=v; drawQR(); });
-
-  document.getElementById('frameTextV6').addEventListener('input',e=>{ frameText=e.target.value; drawQR(); });
-  document.getElementById('frameStyleV6').addEventListener('change',e=>{ frameStyle=e.target.value; drawQR(); });
-  document.getElementById('gradOnV6').addEventListener('change',e=>{ gradOn=e.target.checked; drawQR(); });
-  document.getElementById('eyeColorOnV6').addEventListener('change',e=>{ eyeColorOn=e.target.checked; drawQR(); });
-  document.getElementById('shadowV6').addEventListener('change',e=>{ shadowOn=e.target.checked; drawQR(); });
-  document.getElementById('frameOnV6').addEventListener('change',e=>{ frameOn=e.target.checked; drawQR(); });
-  document.getElementById('centerTxtOnV6').addEventListener('change',e=>{ centerTxtOn=e.target.checked; const box=document.getElementById('centerTxtBoxV6'); if(box) box.style.display=centerTxtOn?'block':'none'; drawQR(); });
-  document.getElementById('centerTxtV6').addEventListener('input',e=>{ centerTxt=e.target.value; drawQR(); });
-  document.getElementById('centerTxtColV6').addEventListener('input',e=>{ centerTxtCol=e.target.value; drawQR(); });
-  document.getElementById('centerTxtSizeV6').addEventListener('change',e=>{ centerTxtSize=parseInt(e.target.value); drawQR(); });
-  document.getElementById('eccV6').addEventListener('change',e=>{ ecc=e.target.value; buildData(); });
-
-  document.getElementById('autoColV6').addEventListener('click',()=>{ fg='#0a0f2a'; bg='#ffffff'; gradCol='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0'); document.getElementById('fgV6').value=fg; document.getElementById('bgV6').value=bg; document.getElementById('gradV6').value=gradCol; drawQR(); });
-  document.getElementById('randV6').addEventListener('click',()=>{
-    const dots=['square','rounded','dots','extraRounded','classy']; dot=dots[Math.floor(Math.random()*dots.length)];
-    document.querySelectorAll('[data-dot]').forEach(x=>x.classList.toggle('active', x.dataset.dot===dot));
-    fg='#'+Math.floor(Math.random()*0x333333).toString(16).padStart(6,'0'); gradCol='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
-    document.getElementById('fgV6').value=fg; document.getElementById('gradV6').value=gradCol; drawQR();
-  });
-  document.getElementById('invertV6').addEventListener('click',()=>{ const t=fg; fg=bg; bg=t; document.getElementById('fgV6').value=fg; document.getElementById('bgV6').value=bg; drawQR(); });
-  document.getElementById('resetV6').addEventListener('click',()=>{ fg='#0a0f2a'; bg='#ffffff'; gradCol='#7c3aed'; size=512; margin=14; logoSize=22; radius=14; gap=1; centerPos={x:size/2,y:size/2}; document.getElementById('fgV6').value=fg; document.getElementById('bgV6').value=bg; drawQR(); });
-  document.getElementById('flipV6').addEventListener('click',()=>{ const t=fg; fg=bg; bg=t; document.getElementById('fgV6').value=fg; document.getElementById('bgV6').value=bg; drawQR(); });
-  document.getElementById('myLocV6').addEventListener('click',()=>{ if(navigator.geolocation) navigator.geolocation.getCurrentPosition(p=>{ document.getElementById('latV6').value=p.coords.latitude.toFixed(6); document.getElementById('lngV6').value=p.coords.longitude.toFixed(6); buildData(); }); });
-
-  document.getElementById('logoV6').addEventListener('change',e=>{
+  root.querySelector('#o_logo').addEventListener('change', e=>{
     const f=e.target.files[0]; if(!f) return;
-    const im=new Image(); im.onload=()=>{ logoImg=im; const prev=document.getElementById('logoPrevV6'); if(prev){ prev.src=im.src; prev.style.display='block'; } document.getElementById('eccV6').value='H'; ecc='H'; buildData(); }; im.src=URL.createObjectURL(f);
+    const im=new Image(); im.onload=()=>{ logoImg=im; ecc=3; root.querySelector('#o_ecc').value='3'; draw(); }; im.src=URL.createObjectURL(f);
   });
 
-  // FIXED DRAG: Only canvas pointer events, no window listeners, uses pointer capture, auto releases
+  // FIXED DRAG - ONLY inside canvas, pointer events, no window listeners
   cvs.addEventListener('pointerdown', e=>{
-    e.preventDefault();
-    const rect=cvs.getBoundingClientRect();
-    const sx=cvs.width/rect.width, sy=cvs.height/rect.height;
+    const rect=cvs.getBoundingClientRect(); const sx=cvs.width/rect.width, sy=cvs.height/rect.height;
     const px=(e.clientX-rect.left)*sx, py=(e.clientY-rect.top)*sy;
-    const dist=Math.hypot(px-centerPos.x, py-( (frameStyle==='topBottom'?64:0)+centerPos.y ));
-    if(dist<90 || (logoImg && dist<120)){
-      isDragging=true;
-      dragOffset.x=px-centerPos.x;
-      dragOffset.y=py-centerPos.y;
-      cvs.setPointerCapture(e.pointerId);
-      cvs.classList.add('dragging');
-    }
+    if(Math.hypot(px-centerPos.x, py-centerPos.y)<80){ isDrag=true; dragOff.x=px-centerPos.x; dragOff.y=py-centerPos.y; cvs.setPointerCapture(e.pointerId); cvs.style.cursor='grabbing'; e.preventDefault(); }
   });
   cvs.addEventListener('pointermove', e=>{
-    if(!isDragging) return;
-    e.preventDefault();
-    const rect=cvs.getBoundingClientRect();
-    const sx=cvs.width/rect.width, sy=cvs.height/rect.height;
+    if(!isDrag) return;
+    const rect=cvs.getBoundingClientRect(); const sx=cvs.width/rect.width, sy=cvs.height/rect.height;
     const px=(e.clientX-rect.left)*sx, py=(e.clientY-rect.top)*sy;
-    centerPos.x=px-dragOffset.x;
-    centerPos.y=py-dragOffset.y - (frameStyle==='topBottom'?64:0);
-    // Clamp inside
-    centerPos.x=Math.max(60, Math.min(size-60, centerPos.x));
-    centerPos.y=Math.max(60, Math.min(size-60, centerPos.y));
-    drawQR();
+    centerPos.x=Math.max(60,Math.min(452,px-dragOff.x)); centerPos.y=Math.max(60,Math.min(452,py-dragOff.y)); draw(); e.preventDefault();
   });
-  cvs.addEventListener('pointerup', e=>{
-    if(isDragging){
-      isDragging=false;
-      cvs.releasePointerCapture(e.pointerId);
-      cvs.classList.remove('dragging');
-    }
-  });
-  cvs.addEventListener('pointercancel', ()=>{ isDragging=false; cvs.classList.remove('dragging'); });
+  cvs.addEventListener('pointerup', e=>{ if(isDrag){ isDrag=false; try{cvs.releasePointerCapture(e.pointerId);}catch{} cvs.style.cursor='grab'; } });
+  cvs.addEventListener('pointercancel', ()=>{ isDrag=false; });
 
-  document.getElementById('downV6').addEventListener('click',()=>{
-    const fmt=document.getElementById('fmtV6').value, scale=parseInt(document.getElementById('scaleV6').value)||2;
-    if(fmt==='svg'){
-      const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${cvs.width*scale}" height="${cvs.height*scale}"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml"><img src="${cvs.toDataURL('image/png')}" width="${cvs.width*scale}" height="${cvs.height*scale}"/></div></foreignObject></svg>`;
-      const blob=new Blob([svg],{type:'image/svg+xml'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`orbittroniz-qr-${Date.now()}.svg`; a.click(); return;
-    }
+  root.querySelector('#o_down').addEventListener('click', ()=>{
+    const scale=parseInt(root.querySelector('#o_scale').value)||4;
     const exp=document.createElement('canvas'); exp.width=cvs.width*scale; exp.height=cvs.height*scale;
-    const ec=exp.getContext('2d'); ec.imageSmoothingEnabled=false; ec.drawImage(cvs,0,0,exp.width,exp.height);
-    let mime='image/png'; if(fmt==='jpeg') mime='image/jpeg'; if(fmt==='webp') mime='image/webp';
-    const a=document.createElement('a'); a.download=`orbittroniz-qr-${qrType}-${Date.now()}.${fmt}`; a.href=exp.toDataURL(mime,0.98); a.click();
+    exp.getContext('2d').drawImage(cvs,0,0,exp.width,exp.height);
+    const a=document.createElement('a'); a.download=`orbittroniz-qr-${Date.now()}.png`; a.href=exp.toDataURL('image/png',1); a.click();
   });
-  document.getElementById('copyDataV6').addEventListener('click',()=>{
-    navigator.clipboard.writeText(qrData).then(()=>{ const b=document.getElementById('copyDataV6'); const o=b.textContent; b.textContent='Copied!'; setTimeout(()=>b.textContent=o,1200); });
-  });
-  document.getElementById('batchQrV6').addEventListener('click',()=>{
-    const base=(document.getElementById('urlV6').value||'').trim();
-    if(!base.includes(',')){ alert('For Batch: Enter URLs with commas - Ex: https://a.com,https://b.com'); return; }
-    const urls=base.split(',').map(s=>s.trim()).filter(Boolean).slice(0,5);
-    urls.forEach((u,i)=>{ setTimeout(()=>{ document.getElementById('urlV6').value=u; buildData(); setTimeout(()=>document.getElementById('downV6').click(),600); }, i*1300); });
+  root.querySelector('#o_copy').addEventListener('click', ()=>{
+    navigator.clipboard.writeText(qrData).then(()=>{ const b=root.querySelector('#o_copy'); const t=b.textContent; b.textContent='Copied!'; setTimeout(()=>b.textContent=t,1000); });
   });
 
-  // Init
-  loadLib(()=>buildData());
+  buildData();
+}catch(e){ console.log('QR V7 init error', e); }
 })();
 </script>
-<!-- ================= QR END V6 FIXED ================= -->
+</div>
+<!-- ================= QR END V7 ================= -->
 </div>
 
 <!-- ================= JAVASCRIPT START ================= -->
