@@ -1125,30 +1125,356 @@ Veg Thali | ₹199 | Full Meal</textarea>
 </script>
 <!-- ================= FESTIVAL END V4 PREMIUM ================= -->
 
-<!-- ================= QR CODE START ================= -->
-<!-- EDIT ONLY BUSINESS QR CODE MAKER HERE -->
+<!-- ================= QR V6 FIXED - CLICK BUG FIXED - NO WINDOW LISTENERS - 3D ================= -->
+<style>
+.qr-v6{isolation:isolate;position:relative;z-index:1}
+.qr-v6 .ctrl{position:relative;z-index:2;background:linear-gradient(145deg,rgba(18,29,58,0.94),rgba(10,18,36,0.99));border:1px solid var(--border);border-radius:18px;padding:14px;margin-top:12px;box-shadow:0 16px 42px #0007, inset 0 1px 0 rgba(255,255,255,0.09);backdrop-filter:blur(20px);transform-style:preserve-3d;pointer-events:auto}
+.qr-v6 .ctrl *{pointer-events:auto}
+.qr-type-v6{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;pointer-events:auto}
+.qr-type-v6 .item{border:1px solid var(--border);border-radius:14px;padding:10px 6px;text-align:center;cursor:pointer;background:linear-gradient(145deg,rgba(22,33,67,0.94),rgba(12,20,42,0.94));transition:.22s;transform:perspective(700px) rotateX(2deg);box-shadow:0 8px 22px #0006;touch-action:manipulation;user-select:none;-webkit-tap-highlight-color:transparent;pointer-events:auto}
+.qr-type-v6 .item:active{transform:scale(0.97)}
+.qr-type-v6 .item:hover{transform:perspective(700px) rotateX(0deg) translateZ(8px) translateY(-2px);border-color:#22d3ee}
+.qr-type-v6 .item.active{border-color:#7c3aed;background:linear-gradient(135deg,rgba(124,58,237,0.32),rgba(34,211,238,0.24));box-shadow:0 0 0 2px #7c3aed}
+.canvas-qr-v6{position:relative;z-index:2;background:radial-gradient(700px 400px at 50% 0%,rgba(29,44,86,0.92),rgba(5,9,22,0.99));border:1px solid var(--border);border-radius:22px;padding:18px;box-shadow:0 28px 80px #0009;transform:perspective(1200px) rotateX(2deg);transition:.4s;touch-action:none}
+.canvas-qr-v6:hover{transform:perspective(1200px) rotateX(0deg) translateY(-2px)}
+#qrCanvasV6{width:100%;max-width:560px;border-radius:18px;display:block;margin:auto;background:#fff;box-shadow:0 22px 72px #0009;touch-action:none;cursor:grab;pointer-events:auto}
+#qrCanvasV6.dragging{cursor:grabbing}
+.pill-v6{padding:7px 12px;border-radius:22px;border:1px solid var(--border);background:rgba(22,33,67,0.9);color:var(--text);font-size:11px;font-weight:700;cursor:pointer;touch-action:manipulation;user-select:none;pointer-events:auto}
+.pill-v6.active,.pill-v6:hover{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff}
+.range-v6{display:flex;align-items:center;gap:10px;margin:8px 0;pointer-events:auto}
+.range-v6 span:first-child{width:96px;font-size:11px;color:var(--muted)}
+.range-v6 input{flex:1;accent-color:#7c3aed;pointer-events:auto}
+.range-v6 span:last-child{width:52px;font-size:11px;background:rgba(10,18,48,0.85);border:1px solid var(--border);padding:3px 6px;border-radius:10px;text-align:center}
+.btn-fix{pointer-events:auto !important;touch-action:manipulation !important;position:relative;z-index:3}
+</style>
+
 <div class="tool" id="tool-qr">
-  <div class="grid grid-2">
-    <div class="panel">
-      <h3><i class="fa-solid fa-qrcode"></i> Business QR Code Maker</h3>
-      <label class="label">QR Type</label>
-      <select id="qrType" class="select"><option value="url">Website / Menu Link</option><option value="review">Google Review</option><option value="whatsapp">WhatsApp</option><option value="upi">UPI Payment</option><option value="wifi">WiFi</option><option value="contact">Contact VCard</option></select>
-      <label class="label">Enter Data</label><textarea id="qrData" class="textarea">https://orbittroniz.com/menu/spice-corner</textarea>
-      <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
-        <div><label class="label">Foreground</label><input type="color" id="qrColor" value="#eef2ff" class="input" style="height:44px"></div>
-        <div><label class="label">Background</label><input type="color" id="qrBg" value="#101832" class="input" style="height:44px"></div>
-      </div>
-      <label class="label">Business Name on QR</label><input id="qrBiz" class="input" value="Spice Corner - Scan Menu">
-      <div style="display:flex;gap:8px;margin-top:12px"><button class="btn primary" id="btnGenQR">Generate QR</button><button class="btn green" id="btnDownloadQR">Download PNG</button></div>
+<div class="grid grid-2 qr-v6">
+  <div class="panel" style="position:relative;z-index:3">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <h3 style="margin:0;flex:1"><i class="fa-solid fa-qrcode" style="color:var(--cyan)"></i> QR V6 FIXED <span style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;padding:3px 9px;border-radius:20px;font-size:10px">CLICK BUG FIXED</span></h3>
+      <button type="button" class="btn small btn-fix" id="batchQrV6">Batch 5</button>
     </div>
-    <div class="panel">
-      <h3>QR Preview</h3>
-      <div class="preview" id="qrPreview" style="flex-direction:column;gap:12px;padding:20px"><div id="qrCanvasWrap" style="background:#fff;padding:16px;border-radius:16px"></div><div id="qrBizPreview" style="font-weight:800">Spice Corner - Scan Menu</div></div>
+
+    <div class="ctrl">
+      <label class="label">QR Type - Fixed Clickable</label>
+      <div class="qr-type-v6" id="qrTypeV6">
+        <div class="item active" data-type="url"><i class="fa-solid fa-link"></i><div style="font-size:10px;font-weight:800">URL</div></div>
+        <div class="item" data-type="text"><i class="fa-solid fa-font"></i><div style="font-size:10px;font-weight:800">Text</div></div>
+        <div class="item" data-type="whatsapp"><i class="fa-brands fa-whatsapp"></i><div style="font-size:10px;font-weight:800">WhatsApp</div></div>
+        <div class="item" data-type="upi"><i class="fa-solid fa-indian-rupee-sign"></i><div style="font-size:10px;font-weight:800">UPI Pay</div></div>
+        <div class="item" data-type="wifi"><i class="fa-solid fa-wifi"></i><div style="font-size:10px;font-weight:800">WiFi</div></div>
+        <div class="item" data-type="email"><i class="fa-solid fa-envelope"></i><div style="font-size:10px;font-weight:800">Email</div></div>
+        <div class="item" data-type="phone"><i class="fa-solid fa-phone"></i><div style="font-size:10px;font-weight:800">Phone</div></div>
+        <div class="item" data-type="sms"><i class="fa-solid fa-message"></i><div style="font-size:10px;font-weight:800">SMS</div></div>
+        <div class="item" data-type="location"><i class="fa-solid fa-location-dot"></i><div style="font-size:10px;font-weight:800">Location</div></div>
+        <div class="item" data-type="vcard"><i class="fa-solid fa-address-card"></i><div style="font-size:10px;font-weight:800">vCard</div></div>
+        <div class="item" data-type="instagram"><i class="fa-brands fa-instagram"></i><div style="font-size:10px;font-weight:800">Insta</div></div>
+        <div class="item" data-type="youtube"><i class="fa-brands fa-youtube"></i><div style="font-size:10px;font-weight:800">YouTube</div></div>
+      </div>
+      <div id="qrInputsV6" style="margin-top:10px">
+        <div id="i-url6"><input id="urlV6" class="input" value="https://orbittroniz.com" placeholder="https://..."><label style="font-size:11px;display:flex;gap:6px;margin-top:6px"><input type="checkbox" id="utmV6"> Add UTM tracking</label></div>
+        <div id="i-text6" style="display:none"><textarea id="txtV6" class="input" rows="3">Welcome to Orbittroniz</textarea></div>
+        <div id="i-whatsapp6" style="display:none"><div class="grid" style="grid-template-columns:1fr 1.2fr;gap:8px"><input id="waNumV6" class="input" value="919999999999"><input id="waMsgV6" class="input" value="Hi, I want to order"></div></div>
+        <div id="i-upi6" style="display:none"><div class="grid" style="grid-template-columns:1fr 1fr;gap:8px"><input id="upiIdV6" class="input" value="yourname@okicici"><input id="upiNameV6" class="input" value="Orbittroniz"></div><div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:8px"><input id="upiAmtV6" class="input" placeholder="Amount (optional)"><input id="upiNoteV6" class="input" value="Payment"></div><div style="font-size:10px;color:#22c55e;margin-top:4px">✓ Fixed: No &am= when empty - Works in GPay/PhonePe</div></div>
+        <div id="i-wifi6" style="display:none"><div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:8px"><input id="ssidV6" class="input" value="Orbittroniz WiFi"><select id="wifiTypeV6" class="select"><option>WPA</option><option>WEP</option><option>nopass</option></select><input id="wifiPassV6" class="input" value="12345678"></div></div>
+        <div id="i-email6" style="display:none"><div class="grid" style="grid-template-columns:1fr 1fr;gap:8px"><input id="emailToV6" class="input" value="contact@orbittroniz.com"><input id="emailSubV6" class="input" value="Enquiry"></div><textarea id="emailBodyV6" class="input" rows="2" style="margin-top:8px">Hello</textarea></div>
+        <div id="i-phone6" style="display:none"><input id="phoneV6" class="input" value="+919999999999"></div>
+        <div id="i-sms6" style="display:none"><div class="grid" style="grid-template-columns:1fr 1.2fr;gap:8px"><input id="smsNumV6" class="input" value="9999999999"><input id="smsMsgV6" class="input" value="Hi"></div></div>
+        <div id="i-location6" style="display:none"><div class="grid" style="grid-template-columns:1fr 1fr;gap:8px"><input id="latV6" class="input" value="19.6271"><input id="lngV6" class="input" value="76.1234"></div><button type="button" class="btn small btn-fix" id="myLocV6" style="margin-top:6px">📍 Use My Location</button></div>
+        <div id="i-vcard6" style="display:none"><div class="grid" style="grid-template-columns:1fr 1fr;gap:8px"><input id="vcNameV6" class="input" value="Orbittroniz"><input id="vcPhoneV6" class="input" value="+919999999999"><input id="vcEmailV6" class="input" value="contact@orbittroniz.com"><input id="vcOrgV6" class="input" value="Orbittroniz"></div></div>
+        <div id="i-instagram6" style="display:none"><input id="instaV6" class="input" value="orbittroniz"></div>
+        <div id="i-youtube6" style="display:none"><input id="ytV6" class="input" value="https://youtube.com/@orbittroniz"></div>
+      </div>
+    </div>
+
+    <div class="ctrl">
+      <label class="label">Design - Premium 3D - No Window Listeners</label>
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:8px">
+        <div><label class="label">FG</label><input type="color" id="fgV6" value="#0a0f2a" class="input btn-fix" style="height:42px"></div>
+        <div><label class="label">BG</label><input type="color" id="bgV6" value="#ffffff" class="input btn-fix" style="height:42px"></div>
+        <div><label class="label">Gradient</label><input type="color" id="gradV6" value="#7c3aed" class="input btn-fix" style="height:42px"></div>
+        <div><label class="label">Eye</label><input type="color" id="eyeColV6" value="#0a0f2a" class="input btn-fix" style="height:42px"></div>
+        <div><label class="label">Frame</label><input type="color" id="frameColV6" value="#0a0f2a" class="input btn-fix" style="height:42px"></div>
+        <div><label class="label">Frame Text</label><input type="color" id="frameTxtColV6" value="#ffffff" class="input btn-fix" style="height:42px"></div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px">
+        <button type="button" class="pill-v6 active btn-fix" data-dot="square">Square</button><button type="button" class="pill-v6 btn-fix" data-dot="rounded">Rounded</button><button type="button" class="pill-v6 btn-fix" data-dot="dots">Dots</button><button type="button" class="pill-v6 btn-fix" data-dot="extraRounded">Extra Round</button><button type="button" class="pill-v6 btn-fix" data-dot="classy">Classy</button>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
+        <button type="button" class="pill-v6 active btn-fix" data-eye="square">Eye Square</button><button type="button" class="pill-v6 btn-fix" data-eye="circle">Eye Circle</button><button type="button" class="pill-v6 btn-fix" data-eye="rounded">Eye Round</button><button type="button" class="pill-v6 btn-fix" data-eye="leaf">Leaf</button>
+      </div>
+      <div class="range-v6"><span>Size</span><input id="sizeV6" type="range" min="256" max="1024" value="512" class="btn-fix"><span id="sizeValV6">512px</span></div>
+      <div class="range-v6"><span>Margin</span><input id="marginV6" type="range" min="0" max="40" value="14" class="btn-fix"><span id="marginValV6">14px</span></div>
+      <div class="range-v6"><span>Logo %</span><input id="logoSizeV6" type="range" min="8" max="38" value="22" class="btn-fix"><span id="logoSizeValV6">22%</span></div>
+      <div class="range-v6"><span>Radius</span><input id="radiusV6" type="range" min="0" max="32" value="14" class="btn-fix"><span id="radiusValV6">14px</span></div>
+      <div class="range-v6"><span>Gap</span><input id="gapV6" type="range" min="0" max="6" value="1" class="btn-fix"><span id="gapValV6">1px</span></div>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+        <div><label class="label">Center Logo (Drag inside QR only)</label><input type="file" id="logoV6" accept="image/*" class="input btn-fix"><img id="logoPrevV6" style="width:52px;height:52px;border-radius:12px;margin-top:6px;display:none;background:#fff;object-fit:contain"></div>
+        <div><label class="label">Frame Text</label><input id="frameTextV6" class="input btn-fix" value="Scan Me - Orbittroniz"><select id="frameStyleV6" class="select btn-fix" style="margin-top:6px"><option value="bottom">Bottom Banner</option><option value="topBottom">Top+Bottom</option><option value="border">Border</option><option value="badge">Badge</option></select></div>
+      </div>
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px">
+        <label style="font-size:11px;display:flex;gap:6px"><input type="checkbox" id="gradOnV6" checked class="btn-fix"> Gradient</label><label style="font-size:11px;display:flex;gap:6px"><input type="checkbox" id="eyeColorOnV6" checked class="btn-fix"> Eye Color</label><label style="font-size:11px;display:flex;gap:6px"><input type="checkbox" id="shadowV6" checked class="btn-fix"> Shadow</label><label style="font-size:11px;display:flex;gap:6px"><input type="checkbox" id="frameOnV6" checked class="btn-fix"> Frame</label><label style="font-size:11px;display:flex;gap:6px"><input type="checkbox" id="centerTxtOnV6" class="btn-fix"> Center Text</label><label style="font-size:11px;display:flex;gap:6px"><input type="checkbox" id="bgImgOnV6" class="btn-fix"> BG Image</label>
+      </div>
+      <div id="centerTxtBoxV6" style="display:none;margin-top:8px"><input id="centerTxtV6" class="input btn-fix" placeholder="Ex: SCAN ME" value=""><div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:6px"><input type="color" id="centerTxtColV6" value="#0a0f2a" class="input btn-fix" style="height:36px"><select id="centerTxtSizeV6" class="select btn-fix"><option value="14">Small</option><option value="20" selected>Medium</option><option value="28">Large</option></select></div></div>
+      <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button type="button" class="btn small btn-fix" id="autoColV6">Auto Colors</button><button type="button" class="btn small btn-fix" id="randV6">🎲 Random</button><button type="button" class="btn small green btn-fix" id="invertV6">Invert</button><button type="button" class="btn small btn-fix" id="resetV6">Reset</button></div>
+    </div>
+
+    <div class="ctrl">
+      <label class="label">Export - Fixed Click Bug</label>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px"><select id="eccV6" class="select btn-fix"><option value="L">L 7%</option><option value="M" selected>M 15%</option><option value="Q">Q 25%</option><option value="H">H 30% (Logo)</option></select><select id="fmtV6" class="select btn-fix"><option value="png">PNG HD</option><option value="jpeg">JPG</option><option value="webp">WEBP</option><option value="svg">SVG</option></select></div>
+      <div class="grid" style="grid-template-columns:1fr 1fr 1.6fr;gap:6px;margin-top:8px"><select id="scaleV6" class="select btn-fix"><option value="1">512px</option><option value="2" selected>1024 2K</option><option value="4">2048 4K</option><option value="8">4096 8K</option></select><button type="button" class="btn btn-fix" id="copyDataV6">Copy Data</button><button type="button" class="btn primary btn-fix" id="downV6"><i class="fa-solid fa-download"></i> Download</button></div>
     </div>
   </div>
-</div>
-<!-- ================= QR CODE END ================= -->
 
+  <div class="panel" style="position:relative;z-index:3">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><h3 style="margin:0"><i class="fa-solid fa-eye"></i> Live Preview - Drag Only Inside QR</h3><div style="display:flex;gap:6px"><button type="button" class="btn small btn-fix" id="flipV6">Flip</button><span id="infoV6" style="font-size:10px;padding:6px 10px;border:1px solid var(--border);border-radius:20px">512x512</span></div></div>
+    <div class="canvas-qr-v6" style="margin-top:10px"><canvas id="qrCanvasV6" width="512" height="512"></canvas></div>
+    <div id="dataPrevV6" style="font-size:11px;color:var(--muted);word-break:break-all;margin-top:12px;background:rgba(10,18,48,0.6);border:1px solid var(--border);border-radius:10px;padding:8px;max-height:90px;overflow:auto">https://orbittroniz.com</div>
+    <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><span id="safeV6" style="font-size:10px;padding:4px 8px;border-radius:20px;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);color:#22c55e">✓ Safe</span><span id="lenV6" style="font-size:10px;padding:4px 8px;border-radius:20px;background:rgba(10,18,48,0.6);border:1px solid var(--border)">21 chars</span><span id="eccInfoV6" style="font-size:10px;padding:4px 8px;border-radius:20px;background:rgba(10,18,48,0.6);border:1px solid var(--border)">ECC M</span><span id="logoWarnV6" style="font-size:10px;padding:4px 8px;border-radius:20px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);color:#f59e0b;display:none">Logo needs H</span></div>
+  </div>
+</div>
+</div>
+
+<script>
+(function(){
+  // FIXED: All inside IIFE, no window listeners, no global dragTarget leaking
+  const cvs=document.getElementById('qrCanvasV6');
+  if(!cvs) return;
+  const ctx=cvs.getContext('2d');
+  let qrType='url', dot='square', eye='square', fg='#0a0f2a', bg='#ffffff', gradCol='#7c3aed', eyeCol='#0a0f2a', frameCol='#0a0f2a', frameTxtCol='#ffffff', gradOn=true, eyeColorOn=true, shadowOn=true, frameOn=true, centerTxtOn=false, size=512, margin=14, logoSize=22, radius=14, gap=1, ecc='M', frameText='Scan Me - Orbittroniz', frameStyle='bottom', centerTxt='', centerTxtCol='#0a0f2a', centerTxtSize=20, logoImg=null, centerPos={x:256,y:256}, qrData='https://orbittroniz.com', isDragging=false, dragOffset={x:0,y:0};
+
+  let libLoaded=false, tempDiv=null;
+  function loadLib(cb){
+    if(libLoaded){ cb(); return; }
+    if(typeof QRCode!=='undefined'){ libLoaded=true; cb(); return; }
+    const s=document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+    s.onload=()=>{ libLoaded=true; cb(); };
+    s.onerror=()=>{ const s2=document.createElement('script'); s2.src='https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js'; s2.onload=()=>{ libLoaded=true; cb(); }; document.head.appendChild(s2); };
+    document.head.appendChild(s);
+  }
+  function getBaseCanvas(text, eccLevel, sz){
+    if(!tempDiv){ tempDiv=document.createElement('div'); tempDiv.style.display='none'; document.body.appendChild(tempDiv); }
+    tempDiv.innerHTML='';
+    const qr=new QRCode(tempDiv, {text:text, width:sz, height:sz, colorDark:'#000000', colorLight:'#ffffff', correctLevel:QRCode.CorrectLevel[eccLevel]});
+    const canvas=tempDiv.querySelector('canvas'); if(canvas) return canvas;
+    const img=tempDiv.querySelector('img'); if(img){ const c=document.createElement('canvas'); c.width=sz; c.height=sz; c.getContext('2d').drawImage(img,0,0,sz,sz); return c; }
+    return null;
+  }
+
+  function buildData(){
+    let d='';
+    if(qrType==='url'){ d=(document.getElementById('urlV6').value||'').trim()||'https://orbittroniz.com'; if(document.getElementById('utmV6').checked && !d.includes('utm_')) d+=(d.includes('?')?'&':'?')+'utm_source=qr&utm_medium=orbittroniz'; }
+    else if(qrType==='text'){ d=document.getElementById('txtV6').value||'Hello'; }
+    else if(qrType==='whatsapp'){ const num=(document.getElementById('waNumV6').value||'').replace(/\D/g,''), msg=encodeURIComponent(document.getElementById('waMsgV6').value||'Hi'); d=num?`https://wa.me/${num}?text=${msg}`:'https://wa.me/'; }
+    else if(qrType==='upi'){ const pa=(document.getElementById('upiIdV6').value||'').trim(), pn=encodeURIComponent((document.getElementById('upiNameV6').value||'').trim()), am=(document.getElementById('upiAmtV6').value||'').trim(), tn=encodeURIComponent((document.getElementById('upiNoteV6').value||'').trim()); if(!pa){ d='upi://pay?pa=test@upi'; } else { d=`upi://pay?pa=${pa}`; if(pn) d+=`&pn=${pn}`; if(am) d+=`&am=${am}`; if(tn) d+=`&tn=${tn}`; d+=`&cu=INR`; } }
+    else if(qrType==='wifi'){ const ssid=document.getElementById('ssidV6').value, type=document.getElementById('wifiTypeV6').value, pass=document.getElementById('wifiPassV6').value; d=type==='nopass'?`WIFI:T:nopass;S:${ssid};;`:`WIFI:T:${type};S:${ssid};P:${pass};;`; }
+    else if(qrType==='email'){ const to=document.getElementById('emailToV6').value, sub=encodeURIComponent(document.getElementById('emailSubV6').value), body=encodeURIComponent(document.getElementById('emailBodyV6').value); d=`mailto:${to}?subject=${sub}&body=${body}`; }
+    else if(qrType==='phone'){ d=`tel:${document.getElementById('phoneV6').value}`; }
+    else if(qrType==='sms'){ d=`SMSTO:${document.getElementById('smsNumV6').value}:${document.getElementById('smsMsgV6').value}`; }
+    else if(qrType==='location'){ d=`https://maps.google.com/?q=${document.getElementById('latV6').value},${document.getElementById('lngV6').value}`; }
+    else if(qrType==='vcard'){ d=`BEGIN:VCARD\nVERSION:3.0\nFN:${document.getElementById('vcNameV6').value}\nORG:${document.getElementById('vcOrgV6').value}\nTEL:${document.getElementById('vcPhoneV6').value}\nEMAIL:${document.getElementById('vcEmailV6').value}\nEND:VCARD`; }
+    else if(qrType==='instagram'){ d=`https://instagram.com/${(document.getElementById('instaV6').value||'').replace('@','').trim()}`; }
+    else if(qrType==='youtube'){ d=document.getElementById('ytV6').value||'https://youtube.com'; }
+    qrData=d;
+    const prev=document.getElementById('dataPrevV6'); if(prev) prev.textContent=d;
+    const lenEl=document.getElementById('lenV6'); if(lenEl) lenEl.textContent=d.length+' chars';
+    const safeEl=document.getElementById('safeV6'); if(safeEl) safeEl.textContent=(d.startsWith('https://')||d.startsWith('upi://')||d.startsWith('WIFI:'))?'✓ Safe':'! Check';
+    const eccEl=document.getElementById('eccInfoV6'); if(eccEl) eccEl.textContent='ECC '+ecc;
+    const warnEl=document.getElementById('logoWarnV6'); if(warnEl) warnEl.style.display=logoImg && ecc!=='H'?'inline-block':'none';
+    drawQR();
+  }
+
+  function drawQR(){
+    if(typeof QRCode==='undefined'){ loadLib(()=>drawQR()); return; }
+    const w=size, frameH=frameOn? (frameStyle==='topBottom'?128:64):0;
+    cvs.width=w; cvs.height=w+frameH;
+    const base=getBaseCanvas(qrData, ecc, w-margin*2);
+    if(!base){ setTimeout(drawQR,150); return; }
+
+    ctx.clearRect(0,0,cvs.width,cvs.height);
+    ctx.save(); ctx.fillStyle=bg; ctx.beginPath(); ctx.roundRect(0,frameStyle==='topBottom'?64:0,w,w,radius); ctx.fill(); ctx.restore();
+
+    if(frameOn && frameStyle==='topBottom'){
+      ctx.save(); ctx.fillStyle=frameCol; ctx.beginPath(); ctx.roundRect(0,0,w,64,[radius,radius,0,0]); ctx.fill(); ctx.fillStyle=frameTxtCol; ctx.font='900 18px Arial'; ctx.textAlign='center'; ctx.fillText(frameText||'Scan Me', w/2, 40); ctx.restore();
+    }
+
+    const imgData=base.getContext('2d').getImageData(0,0,base.width,base.height).data;
+    const bw=base.width, eyeSize=Math.floor(bw*0.21);
+    function isEyeStrict(x,y){ return (x<eyeSize && y<eyeSize) || (x>bw-eyeSize && y<eyeSize) || (x<eyeSize && y>bw-eyeSize); }
+
+    ctx.save(); ctx.translate(margin, (frameStyle==='topBottom'?64:0)+margin);
+    const drawW=w-margin*2, drawH=w-margin*2;
+    let grad=null; if(gradOn){ grad=ctx.createLinearGradient(0,0,drawW,drawH); grad.addColorStop(0,fg); grad.addColorStop(1,gradCol); }
+
+    for(let y=0;y<bw;y++){
+      for(let x=0;x<bw;x++){
+        const idx=(y*bw+x)*4; if(imgData[idx]>128) continue; if(isEyeStrict(x,y)) continue;
+        const px=x/bw*drawW, py=y/bw*drawH, s=drawW/bw - gap*0.2; if(s<=0) continue;
+        ctx.fillStyle=grad||fg;
+        if(dot==='square') ctx.fillRect(px,py,s,s);
+        else if(dot==='rounded'){ ctx.beginPath(); ctx.roundRect(px,py,s,s,s*0.35); ctx.fill(); }
+        else if(dot==='dots'){ ctx.beginPath(); ctx.arc(px+s/2,py+s/2,s*0.46,0,Math.PI*2); ctx.fill(); }
+        else if(dot==='extraRounded'){ ctx.beginPath(); ctx.roundRect(px,py,s,s,s*0.9); ctx.fill(); }
+        else if(dot==='classy') ctx.fillRect(px,py,s,s*0.65);
+      }
+    }
+    function drawEye(ex,ey){
+      const es=eyeSize/bw*drawW, eX=ex/bw*drawW, eY=ey/bw*drawH;
+      const eyeFill=eyeColorOn?eyeCol:(grad||fg);
+      ctx.fillStyle=eyeFill;
+      if(eye==='square'){ ctx.fillRect(eX,eY,es,es); ctx.fillStyle=bg; ctx.fillRect(eX+es*0.18,eY+es*0.18,es*0.64,es*0.64); ctx.fillStyle=eyeFill; ctx.fillRect(eX+es*0.32,eY+es*0.32,es*0.36,es*0.36); }
+      else if(eye==='circle'){ ctx.beginPath(); ctx.arc(eX+es/2,eY+es/2,es/2,0,Math.PI*2); ctx.fill(); ctx.fillStyle=bg; ctx.beginPath(); ctx.arc(eX+es/2,eY+es/2,es*0.32,0,Math.PI*2); ctx.fill(); ctx.fillStyle=eyeFill; ctx.beginPath(); ctx.arc(eX+es/2,eY+es/2,es*0.18,0,Math.PI*2); ctx.fill(); }
+      else if(eye==='rounded'){ ctx.beginPath(); ctx.roundRect(eX,eY,es,es,es*0.22); ctx.fill(); ctx.fillStyle=bg; ctx.beginPath(); ctx.roundRect(eX+es*0.18,eY+es*0.18,es*0.64,es*0.64,es*0.12); ctx.fill(); ctx.fillStyle=eyeFill; ctx.beginPath(); ctx.roundRect(eX+es*0.32,eY+es*0.32,es*0.36,es*0.36,es*0.08); ctx.fill(); }
+      else if(eye==='leaf'){ ctx.beginPath(); ctx.moveTo(eX,eY+es); ctx.quadraticCurveTo(eX+es/2,eY, eX+es,eY+es); ctx.quadraticCurveTo(eX+es/2,eY+es*0.8, eX,eY+es); ctx.fill(); ctx.fillStyle=bg; ctx.beginPath(); ctx.arc(eX+es/2,eY+es/2+es*0.1,es*0.22,0,Math.PI*2); ctx.fill(); ctx.fillStyle=eyeFill; ctx.beginPath(); ctx.arc(eX+es/2,eY+es/2+es*0.1,es*0.12,0,Math.PI*2); ctx.fill(); }
+    }
+    drawEye(0,0); drawEye(bw-eyeSize,0); drawEye(0,bw-eyeSize);
+    ctx.restore();
+
+    if(logoImg){
+      const ls=w*logoSize/100, lx=centerPos.x-ls/2, ly=(frameStyle==='topBottom'?64:0)+centerPos.y-ls/2;
+      ctx.save(); if(shadowOn){ ctx.shadowColor='rgba(0,0,0,0.35)'; ctx.shadowBlur=18; ctx.shadowOffsetY=8; } ctx.fillStyle='#ffffff'; ctx.beginPath(); ctx.roundRect(lx-8,ly-8,ls+16,ls+16,16); ctx.fill(); ctx.clip(); ctx.drawImage(logoImg,lx,ly,ls,ls); ctx.restore();
+    }
+    if(centerTxtOn && centerTxt){
+      const ly=(frameStyle==='topBottom'?64:0)+centerPos.y+ (logoImg? w*logoSize/100/2+24 : 0);
+      ctx.save(); ctx.fillStyle=centerTxtCol; ctx.font=`900 ${centerTxtSize}px Arial`; ctx.textAlign='center'; ctx.fillText(centerTxt, centerPos.x, ly); ctx.restore();
+    }
+    if(frameOn){
+      const fy=frameStyle==='topBottom'? w+64 : w;
+      ctx.save(); ctx.fillStyle=frameCol;
+      if(frameStyle==='border'){ ctx.strokeStyle=frameCol; ctx.lineWidth=12; ctx.beginPath(); ctx.roundRect(6, (frameStyle==='topBottom'?64+6:6), w-12, w-12, radius); ctx.stroke(); }
+      else if(frameStyle==='badge'){ ctx.beginPath(); ctx.roundRect(w*0.2,fy, w*0.6,64,32); ctx.fill(); ctx.fillStyle=frameTxtCol; ctx.font='900 16px Arial'; ctx.textAlign='center'; ctx.fillText(frameText||'Scan Me', w/2, fy+38); }
+      else { ctx.beginPath(); ctx.roundRect(0,fy,w,64,[0,0,radius,radius]); ctx.fill(); ctx.fillStyle=frameTxtCol; ctx.font='900 18px Arial'; ctx.textAlign='center'; ctx.fillText(frameText||'Scan Me', w/2, fy+40); }
+      ctx.restore();
+    }
+    const info=document.getElementById('infoV6'); if(info) info.textContent=cvs.width+'x'+cvs.height+' • '+ecc;
+  }
+
+  // FIXED: Click handlers with type="button" + touch-action:manipulation + no window listeners
+  document.querySelectorAll('#qrTypeV6 .item').forEach(el=>{
+    el.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      document.querySelectorAll('#qrTypeV6 .item').forEach(x=>x.classList.remove('active')); el.classList.add('active');
+      qrType=el.dataset.type;
+      document.querySelectorAll('#qrInputsV6 > div').forEach(d=>d.style.display='none');
+      const t=document.getElementById('i-'+qrType+'6'); if(t) t.style.display='block';
+      buildData();
+    }, {passive:true});
+  });
+
+  // All inputs
+  document.querySelectorAll('#qrInputsV6 input, #qrInputsV6 textarea, #qrInputsV6 select').forEach(el=>el.addEventListener('input', buildData));
+  const utmEl=document.getElementById('utmV6'); if(utmEl) utmEl.addEventListener('change', buildData);
+
+  document.getElementById('fgV6').addEventListener('input',e=>{fg=e.target.value; drawQR();}); 
+  document.getElementById('bgV6').addEventListener('input',e=>{bg=e.target.value; drawQR();});
+  document.getElementById('gradV6').addEventListener('input',e=>{gradCol=e.target.value; drawQR();});
+  document.getElementById('eyeColV6').addEventListener('input',e=>{eyeCol=e.target.value; drawQR();});
+  document.getElementById('frameColV6').addEventListener('input',e=>{frameCol=e.target.value; drawQR();});
+  document.getElementById('frameTxtColV6').addEventListener('input',e=>{frameTxtCol=e.target.value; drawQR();});
+
+  document.querySelectorAll('[data-dot]').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('[data-dot]').forEach(x=>x.classList.remove('active')); b.classList.add('active'); dot=b.dataset.dot; drawQR(); }));
+  document.querySelectorAll('[data-eye]').forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll('[data-eye]').forEach(x=>x.classList.remove('active')); b.classList.add('active'); eye=b.dataset.eye; drawQR(); }));
+
+  const bindRange=(id, valId, cb)=>{ const el=document.getElementById(id); const v=document.getElementById(valId); if(!el) return; el.addEventListener('input',e=>{ const val=parseInt(e.target.value); if(v) v.textContent=el.type==='range' && id.includes('size')? val+'px' : (id.includes('logo')||id.includes('margin')||id.includes('radius')||id.includes('gap')? val+(id.includes('logo')?'%':'px'):val); cb(val); }); };
+  bindRange('sizeV6','sizeValV6',v=>{ size=v; centerPos={x:size/2,y:size/2}; drawQR(); });
+  bindRange('marginV6','marginValV6',v=>{ margin=v; drawQR(); });
+  bindRange('logoSizeV6','logoSizeValV6',v=>{ logoSize=v; drawQR(); });
+  bindRange('radiusV6','radiusValV6',v=>{ radius=v; drawQR(); });
+  bindRange('gapV6','gapValV6',v=>{ gap=v; drawQR(); });
+
+  document.getElementById('frameTextV6').addEventListener('input',e=>{ frameText=e.target.value; drawQR(); });
+  document.getElementById('frameStyleV6').addEventListener('change',e=>{ frameStyle=e.target.value; drawQR(); });
+  document.getElementById('gradOnV6').addEventListener('change',e=>{ gradOn=e.target.checked; drawQR(); });
+  document.getElementById('eyeColorOnV6').addEventListener('change',e=>{ eyeColorOn=e.target.checked; drawQR(); });
+  document.getElementById('shadowV6').addEventListener('change',e=>{ shadowOn=e.target.checked; drawQR(); });
+  document.getElementById('frameOnV6').addEventListener('change',e=>{ frameOn=e.target.checked; drawQR(); });
+  document.getElementById('centerTxtOnV6').addEventListener('change',e=>{ centerTxtOn=e.target.checked; const box=document.getElementById('centerTxtBoxV6'); if(box) box.style.display=centerTxtOn?'block':'none'; drawQR(); });
+  document.getElementById('centerTxtV6').addEventListener('input',e=>{ centerTxt=e.target.value; drawQR(); });
+  document.getElementById('centerTxtColV6').addEventListener('input',e=>{ centerTxtCol=e.target.value; drawQR(); });
+  document.getElementById('centerTxtSizeV6').addEventListener('change',e=>{ centerTxtSize=parseInt(e.target.value); drawQR(); });
+  document.getElementById('eccV6').addEventListener('change',e=>{ ecc=e.target.value; buildData(); });
+
+  document.getElementById('autoColV6').addEventListener('click',()=>{ fg='#0a0f2a'; bg='#ffffff'; gradCol='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0'); document.getElementById('fgV6').value=fg; document.getElementById('bgV6').value=bg; document.getElementById('gradV6').value=gradCol; drawQR(); });
+  document.getElementById('randV6').addEventListener('click',()=>{
+    const dots=['square','rounded','dots','extraRounded','classy']; dot=dots[Math.floor(Math.random()*dots.length)];
+    document.querySelectorAll('[data-dot]').forEach(x=>x.classList.toggle('active', x.dataset.dot===dot));
+    fg='#'+Math.floor(Math.random()*0x333333).toString(16).padStart(6,'0'); gradCol='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+    document.getElementById('fgV6').value=fg; document.getElementById('gradV6').value=gradCol; drawQR();
+  });
+  document.getElementById('invertV6').addEventListener('click',()=>{ const t=fg; fg=bg; bg=t; document.getElementById('fgV6').value=fg; document.getElementById('bgV6').value=bg; drawQR(); });
+  document.getElementById('resetV6').addEventListener('click',()=>{ fg='#0a0f2a'; bg='#ffffff'; gradCol='#7c3aed'; size=512; margin=14; logoSize=22; radius=14; gap=1; centerPos={x:size/2,y:size/2}; document.getElementById('fgV6').value=fg; document.getElementById('bgV6').value=bg; drawQR(); });
+  document.getElementById('flipV6').addEventListener('click',()=>{ const t=fg; fg=bg; bg=t; document.getElementById('fgV6').value=fg; document.getElementById('bgV6').value=bg; drawQR(); });
+  document.getElementById('myLocV6').addEventListener('click',()=>{ if(navigator.geolocation) navigator.geolocation.getCurrentPosition(p=>{ document.getElementById('latV6').value=p.coords.latitude.toFixed(6); document.getElementById('lngV6').value=p.coords.longitude.toFixed(6); buildData(); }); });
+
+  document.getElementById('logoV6').addEventListener('change',e=>{
+    const f=e.target.files[0]; if(!f) return;
+    const im=new Image(); im.onload=()=>{ logoImg=im; const prev=document.getElementById('logoPrevV6'); if(prev){ prev.src=im.src; prev.style.display='block'; } document.getElementById('eccV6').value='H'; ecc='H'; buildData(); }; im.src=URL.createObjectURL(f);
+  });
+
+  // FIXED DRAG: Only canvas pointer events, no window listeners, uses pointer capture, auto releases
+  cvs.addEventListener('pointerdown', e=>{
+    e.preventDefault();
+    const rect=cvs.getBoundingClientRect();
+    const sx=cvs.width/rect.width, sy=cvs.height/rect.height;
+    const px=(e.clientX-rect.left)*sx, py=(e.clientY-rect.top)*sy;
+    const dist=Math.hypot(px-centerPos.x, py-( (frameStyle==='topBottom'?64:0)+centerPos.y ));
+    if(dist<90 || (logoImg && dist<120)){
+      isDragging=true;
+      dragOffset.x=px-centerPos.x;
+      dragOffset.y=py-centerPos.y;
+      cvs.setPointerCapture(e.pointerId);
+      cvs.classList.add('dragging');
+    }
+  });
+  cvs.addEventListener('pointermove', e=>{
+    if(!isDragging) return;
+    e.preventDefault();
+    const rect=cvs.getBoundingClientRect();
+    const sx=cvs.width/rect.width, sy=cvs.height/rect.height;
+    const px=(e.clientX-rect.left)*sx, py=(e.clientY-rect.top)*sy;
+    centerPos.x=px-dragOffset.x;
+    centerPos.y=py-dragOffset.y - (frameStyle==='topBottom'?64:0);
+    // Clamp inside
+    centerPos.x=Math.max(60, Math.min(size-60, centerPos.x));
+    centerPos.y=Math.max(60, Math.min(size-60, centerPos.y));
+    drawQR();
+  });
+  cvs.addEventListener('pointerup', e=>{
+    if(isDragging){
+      isDragging=false;
+      cvs.releasePointerCapture(e.pointerId);
+      cvs.classList.remove('dragging');
+    }
+  });
+  cvs.addEventListener('pointercancel', ()=>{ isDragging=false; cvs.classList.remove('dragging'); });
+
+  document.getElementById('downV6').addEventListener('click',()=>{
+    const fmt=document.getElementById('fmtV6').value, scale=parseInt(document.getElementById('scaleV6').value)||2;
+    if(fmt==='svg'){
+      const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${cvs.width*scale}" height="${cvs.height*scale}"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml"><img src="${cvs.toDataURL('image/png')}" width="${cvs.width*scale}" height="${cvs.height*scale}"/></div></foreignObject></svg>`;
+      const blob=new Blob([svg],{type:'image/svg+xml'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`orbittroniz-qr-${Date.now()}.svg`; a.click(); return;
+    }
+    const exp=document.createElement('canvas'); exp.width=cvs.width*scale; exp.height=cvs.height*scale;
+    const ec=exp.getContext('2d'); ec.imageSmoothingEnabled=false; ec.drawImage(cvs,0,0,exp.width,exp.height);
+    let mime='image/png'; if(fmt==='jpeg') mime='image/jpeg'; if(fmt==='webp') mime='image/webp';
+    const a=document.createElement('a'); a.download=`orbittroniz-qr-${qrType}-${Date.now()}.${fmt}`; a.href=exp.toDataURL(mime,0.98); a.click();
+  });
+  document.getElementById('copyDataV6').addEventListener('click',()=>{
+    navigator.clipboard.writeText(qrData).then(()=>{ const b=document.getElementById('copyDataV6'); const o=b.textContent; b.textContent='Copied!'; setTimeout(()=>b.textContent=o,1200); });
+  });
+  document.getElementById('batchQrV6').addEventListener('click',()=>{
+    const base=(document.getElementById('urlV6').value||'').trim();
+    if(!base.includes(',')){ alert('For Batch: Enter URLs with commas - Ex: https://a.com,https://b.com'); return; }
+    const urls=base.split(',').map(s=>s.trim()).filter(Boolean).slice(0,5);
+    urls.forEach((u,i)=>{ setTimeout(()=>{ document.getElementById('urlV6').value=u; buildData(); setTimeout(()=>document.getElementById('downV6').click(),600); }, i*1300); });
+  });
+
+  // Init
+  loadLib(()=>buildData());
+})();
+</script>
+<!-- ================= QR END V6 FIXED ================= -->
 </div>
 
 <!-- ================= JAVASCRIPT START ================= -->
