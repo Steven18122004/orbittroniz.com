@@ -28,95 +28,30 @@ canvas{max-width:100%;border-radius:12px;background:#0a1224;display:block;touch-
 </head>
 <body>
 <div id="orbit-app">
-<!-- ================= HEADER START - THEME VISIBLE + LOGO DANCING LIVE - FINAL ================= -->
-<div id="orbit-header" style="position:relative;border:1px solid var(--border);border-radius:18px;overflow:hidden;isolation:isolate">
+<!-- ================= HEADER FINAL - BOTH FILES DONE - LOGO DANCING + THEME VISIBLE ================= -->
+<div id="orbit-header" style="position:relative;min-height:180px;display:flex;align-items:center;gap:18px;padding:20px 22px;background:#060a18;border:1px solid #1e2d5a;border-radius:18px;overflow:hidden;isolation:isolate">
 <style>
-#orbit-header{position:relative;min-height:175px;display:flex;align-items:center;gap:16px;padding:18px 20px;background:#060a18;overflow:hidden}
-#orbit-header .theme-bg{position:absolute;inset:0;z-index:0;background-color:#0a0f2a;background-image:url('https://steven1812004.github.io/orbittroniz.com/theme'), url('https://raw.githubusercontent.com/Steven1812004/orbittroniz.com/main/theme');background-position:center;background-size:cover;background-repeat:no-repeat;opacity:1;animation:themeZoom 12s ease-in-out infinite alternate}
-#orbit-header .theme-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg, rgba(6,10,24,0.88) 0%, rgba(6,10,24,0.55) 45%, rgba(6,10,24,0.25) 100%), linear-gradient(180deg, rgba(6,10,24,0.1) 0%, rgba(6,10,24,0.82) 100%)}
+#orbit-header .theme-bg{position:absolute;inset:0;z-index:0;background:url('https://steven1812004.github.io/orbittroniz.com/theme.jpg') center/cover no-repeat;animation:themeZoom 12s ease-in-out infinite alternate}
+#orbit-header .theme-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg, rgba(6,10,24,0.92) 0%, rgba(6,10,24,0.55) 25%, rgba(6,10,24,0.2) 100%), linear-gradient(180deg, rgba(6,10,24,0.1) 0%, rgba(6,10,24,0.88) 100%)}
 @keyframes themeZoom{0%{transform:scale(1)}100%{transform:scale(1.08)}}
-
-#orbit-header .header-content{position:relative;z-index:1;display:flex;align-items:center;gap:18px;width:100%;flex-wrap:wrap}
-#orbit-header .logo-box{width:80px;height:80px;border-radius:20px;background:rgba(0,0,0,0.65);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.22);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(124,58,237,0.5), 0 0 28px rgba(34,211,238,0.35);flex-shrink:0;animation:logoDance 2.2s ease-in-out infinite, logoGlow 1.8s ease-in-out infinite alternate}
-#orbit-header .logo-box img{width:68px;height:68px;object-fit:contain;border-radius:14px;background:#000;display:block;animation:logoSpin 4s ease-in-out infinite}
-@keyframes logoDance{0%,100%{transform:translateY(0) rotate(0deg) scale(1)} 25%{transform:translateY(-8px) rotate(2deg) scale(1.06)} 50%{transform:translateY(0) rotate(0deg) scale(1.02)} 75%{transform:translateY(-5px) rotate(-2deg) scale(1.05)}}
-@keyframes logoGlow{0%{box-shadow:0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(124,58,237,0.5), 0 0 18px rgba(34,211,238,0.25)} 100%{box-shadow:0 12px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(124,58,237,0.8), 0 0 36px rgba(124,58,237,0.6), 0 0 52px rgba(34,211,238,0.4)}}
-@keyframes logoSpin{0%,100%{transform:rotate(0deg)} 25%{transform:rotate(3deg)} 75%{transform:rotate(-3deg)}}
-
-#orbit-header h2{margin:0;font-size:25px;color:#fff;letter-spacing:0.5px;text-shadow:0 2px 14px rgba(124,58,237,0.8);line-height:1.1}
-#orbit-header .subtitle{margin:2px 0 0 0;font-size:11px;color:#c4b5fd;letter-spacing:3px;font-weight:900;text-transform:uppercase;animation:subtitlePulse 2s ease-in-out infinite}
-@keyframes subtitlePulse{0%,100%{opacity:1} 50%{opacity:0.7}}
-#orbit-header .tagline{margin:6px 0 0 0;font-size:11px;color:#cbd5e1;max-width:600px;line-height:1.4}
-#orbit-header .badge{display:inline-flex;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;padding:4px 12px;border-radius:20px;font-size:10px;font-weight:900;margin-left:10px;vertical-align:middle;box-shadow:0 4px 14px rgba(34,197,94,0.4);animation:badgeBounce 2s ease-in-out infinite}
-@keyframes badgeBounce{0%,100%{transform:translateY(0)} 50%{transform:translateY(-2px)}}
-@media(max-width:700px){#orbit-header{min-height:200px;padding:14px} #orbit-header .logo-box{width:66px;height:66px} #orbit-header .logo-box img{width:54px;height:54px} #orbit-header h2{font-size:19px}}
+#orbit-header .header-content{position:relative;z-index:1;display:flex;align-items:center;gap:20px;width:100%;flex-wrap:wrap}
+#orbit-header .logo-box{width:88px;height:88px;border-radius:22px;background:rgba(0,0,0,0.75);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.28);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 36px rgba(0,0,0,0.7), 0 0 0 1px rgba(124,58,237,0.6), 0 0 36px rgba(34,211,238,0.45);flex-shrink:0;overflow:hidden;animation:logoDance 2.2s ease-in-out infinite, logoGlow 1.8s ease-in-out infinite alternate}
+#orbit-header .logo-box img{width:100%;height:100%;object-fit:contain;padding:6px;display:block;background:#000;border-radius:16px;animation:logoSpin 4s ease-in-out infinite}
+@keyframes logoDance{0%,100%{transform:translateY(0) rotate(0deg) scale(1)} 25%{transform:translateY(-8px) rotate(3deg) scale(1.08)} 50%{transform:translateY(0) rotate(0deg) scale(1.03)} 75%{transform:translateY(-5px) rotate(-3deg) scale(1.06)}}
+@keyframes logoGlow{0%{box-shadow:0 10px 36px rgba(0,0,0,0.7), 0 0 0 1px rgba(124,58,237,0.5), 0 0 20px rgba(34,211,238,0.3)} 100%{box-shadow:0 16px 48px rgba(0,0,0,0.85), 0 0 0 1px rgba(124,58,237,0.95), 0 0 48px rgba(124,58,237,0.75), 0 0 72px rgba(34,211,238,0.6)}}
+@keyframes logoSpin{0%,100%{transform:rotate(0deg)} 25%{transform:rotate(4deg)} 75%{transform:rotate(-4deg)}}
 </style>
-
-<div class="theme-bg" id="themeBg"></div>
+<div class="theme-bg"></div>
 <div class="header-content">
-<div class="logo-box" id="logoBox">
-<img id="orbitLogoImg" src="https://steven1812004.github.io/orbittroniz.com/logo%20image" alt="Orbittroniz Logo">
+<div class="logo-box"><img src="https://steven1812004.github.io/orbittroniz.com/logo.png" alt="Orbittroniz Logo"></div>
+<div style="flex:1;min-width:240px">
+<h2 style="margin:0;font-size:26px;color:#fff;text-shadow:0 2px 16px rgba(124,58,237,0.9);letter-spacing:0.5px">Orbittroniz <span style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;padding:4px 12px;border-radius:20px;font-size:10px;font-weight:900;margin-left:10px;vertical-align:middle;box-shadow:0 4px 14px rgba(34,197,94,0.4)">20 TOOLS • LIVE</span></h2>
+<div style="font-size:11px;color:#c4b5fd;letter-spacing:3.5px;font-weight:900;margin-top:3px;text-transform:uppercase">BUSINESS TOOLS • TECHNOLOGY</div>
+<div style="font-size:11px;color:#cbd5e1;max-width:620px;margin-top:8px;line-height:1.5">20 tools - Resize, QR, PDF Merge, Scanner, BG Remover, Watermark, Border Frame, Compressor, Upscaler, Converter, Palette, Text2Poster, Barcode, E-Sign, BizCard, Invoice, Caption, Hashtag Pro - 100% offline - Files never leave phone</div>
 </div>
-<div style="flex:1;min-width:220px">
-<h2>Orbittroniz <span class="badge">20 TOOLS • LIVE</span></h2>
-<div class="subtitle">Business Tools • Technology</div>
-<div class="tagline">20 tools - Resize, QR, PDF Merge, Scanner, BG Remover, Watermark, Border Frame, Compressor, Upscaler, Converter, Palette, Text2Poster, Barcode, E-Sign, BizCard, Invoice, Caption, Hashtag Pro - 100% offline</div>
-</div>
-</div>
-
-<script>
-// AUTO FIX LOGO + THEME LOADING - TRIES ALL URLS - NO API
-(function(){
-const logoUrls=[
-'https://steven1812004.github.io/orbittroniz.com/logo%20image',
-'https://raw.githubusercontent.com/Steven1812004/orbittroniz.com/main/logo%20image',
-'https://steven1812004.github.io/orbittroniz.com/logo.png',
-'https://steven1812004.github.io/orbittroniz.com/logo.jpg',
-'https://steven1812004.github.io/orbittroniz.com/theme',
-'https://raw.githubusercontent.com/Steven1812004/orbittroniz.com/main/theme'
-];
-const themeUrls=[
-'https://steven1812004.github.io/orbittroniz.com/theme',
-'https://raw.githubusercontent.com/Steven1812004/orbittroniz.com/main/theme',
-'https://steven1812004.github.io/orbittroniz.com/logo%20image',
-'https://raw.githubusercontent.com/Steven1812004/orbittroniz.com/main/logo%20image'
-];
-const logoImg=document.getElementById('orbitLogoImg');
-const themeDiv=document.getElementById('themeBg');
-let logoIndex=0;
-function tryLogo(){
-if(logoIndex>=logoUrls.length){ 
-// All failed - show O with dancing animation still
-logoImg.style.display='none';
-const fallback=document.createElement('div');
-fallback.textContent='O';
-fallback.style.cssText='width:64px;height:64px;background:linear-gradient(135deg,#7c3aed,#22d3ee);border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:28px;animation:logoSpin 4s ease-in-out infinite';
-document.getElementById('logoBox').appendChild(fallback);
-return;
-}
-logoImg.src=logoUrls[logoIndex];
-}
-logoImg.onerror=function(){ logoIndex++; tryLogo(); };
-logoImg.onload=function(){ console.log('Logo loaded:', logoUrls[logoIndex]); };
-tryLogo();
-
-// Try theme
-let themeIndex=0;
-function tryTheme(){
-if(themeIndex>=themeUrls.length) return;
-const testImg=new Image();
-testImg.onload=function(){ themeDiv.style.backgroundImage=`url('${themeUrls[themeIndex]}')`; console.log('Theme loaded:', themeUrls[themeIndex]); };
-testImg.onerror=function(){ themeIndex++; tryTheme(); };
-testImg.src=themeUrls[themeIndex];
-}
-tryTheme();
-})();
-</script>
-
 </div>
 </div>
 <!-- ================= HEADER END ================= -->
-
 <!-- ================= BUTTON CONTROLS START ================= -->
 <div id="orbit-buttons">
 <button type="button" class="tab-btn active" data-target="tool-resize">1 Resize</button>
