@@ -28,11 +28,34 @@ canvas{max-width:100%;border-radius:12px;background:#0a1224;display:block;touch-
 </head>
 <body>
 <div id="orbit-app">
+<!-- ================= HEADER START - GITHUB THEME + LOGO - NO API ================= -->
+<div id="orbit-header" style="position:relative;border:1px solid var(--border);border-radius:18px;overflow:hidden;isolation:isolate">
+<style>
+#orbit-header{position:relative;min-height:165px;display:flex;align-items:center;gap:16px;padding:18px 20px;background:#060a18}
+#orbit-header .theme-bg{position:absolute;inset:0;z-index:0;background:url('https://raw.githubusercontent.com/Steven1812004/orbittroniz.com/main/IMG_20261031-WA4023.jpg') center/cover no-repeat;opacity:0.95}
+#orbit-header .theme-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg, rgba(6,10,24,0.92) 0%, rgba(6,10,24,0.65) 45%, rgba(6,10,24,0.35) 100%), linear-gradient(180deg, rgba(6,10,24,0.15) 0%, rgba(6,10,24,0.85) 100%)}
+#orbit-header .header-content{position:relative;z-index:1;display:flex;align-items:center;gap:16px;width:100%;flex-wrap:wrap}
+#orbit-header .logo-box{width:74px;height:74px;border-radius:18px;background:rgba(0,0,0,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,58,237,0.35);flex-shrink:0}
+#orbit-header .logo-box img{width:62px;height:62px;object-fit:contain;border-radius:12px;background:#000}
+#orbit-header h2{margin:0;font-size:23px;color:#fff;letter-spacing:0.5px;text-shadow:0 2px 14px rgba(124,58,237,0.7);line-height:1.1}
+#orbit-header .subtitle{margin:2px 0 0 0;font-size:11px;color:#c4b5fd;letter-spacing:3px;font-weight:800;text-transform:uppercase}
+#orbit-header .tagline{margin:6px 0 0 0;font-size:11px;color:#94a3b8;max-width:560px;line-height:1.4}
+#orbit-header .badge{display:inline-flex;background:#22c55e;color:#fff;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:800;margin-left:10px;vertical-align:middle}
+@media(max-width:700px){#orbit-header{min-height:190px} #orbit-header .logo-box{width:60px;height:60px} #orbit-header .logo-box img{width:50px;height:50px} #orbit-header h2{font-size:18px}}
+</style>
 
-<!-- ================= HEADER START ================= -->
-<div id="orbit-header" style="background:linear-gradient(145deg,#0a0f2a,#060a18);border:1px solid var(--border);border-radius:18px;padding:14px;display:flex;gap:12px;flex-wrap:wrap">
-<div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--cyan));display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff">O</div>
-<div style="flex:1"><h2 style="margin:0;font-size:14px;color:#fff">ORBITTRONIZ 20 TOOLS <span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:20px;font-size:10px">100% NO API - OFFLINE</span></h2><p style="margin:0;font-size:10px;color:var(--muted)">All tools offline - No API - No server upload - Files never leave phone - Works after page load</p></div>
+<div class="theme-bg"></div>
+<div class="header-content">
+<div class="logo-box">
+<img src="https://raw.githubusercontent.com/Steven1812004/orbittroniz.com/main/IMG_20261031-WA9742.jpg" alt="Orbittroniz Logo" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Steven1812004/orbittroniz.com/main/IMG_20261031-WA4023.jpg'">
+</div>
+<div style="flex:1;min-width:220px">
+<h2>Orbittroniz <span class="badge">20 TOOLS • NO API</span></h2>
+<div class="subtitle">Business Tools • Technology</div>
+<div class="tagline">20 tools - Resize, QR, PDF Merge, Scanner, BG Remover, Watermark, Border Frame, Compressor, Upscaler, Converter, Palette, Text2Poster, Barcode, E-Sign, BizCard, Invoice, Caption, Hashtag Pro - 100% offline</div>
+</div>
+</div>
+</div>
 </div>
 <!-- ================= HEADER END ================= -->
 
