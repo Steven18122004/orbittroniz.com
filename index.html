@@ -27,21 +27,152 @@ canvas { max-width: 100%; border-radius: 12px; background: #0a1224; display: blo
 </head>
 <body>
 <div id="orbit-app">
-
-<!-- ===================== DOCTYPE TO THEME + LOGO SECTION START ===================== -->
-<!-- LOGO SECTION - CHANGE ONLY LOGO URL HERE - Logo appears in O section with dancing -->
+<!-- ===================== LOGO FULL DETAIL CODE START - WITH YOUR ATTACHED LOGO IMAGE ===================== -->
+<!-- STEP 1: LOGO URL SECTION - Change only this line if you rename logo.png -->
 <script>
 const LOGO_URL = "https://steven1812004.github.io/orbittroniz.com/logo.png";
 const LOGO_URL_FALLBACK = "https://raw.githubusercontent.com/Steven1812004/orbittroniz.com/main/logo.png";
+// Your attached logo: O with purple/blue gradient + Orbittroniz text + BUSINESS TOOLS • TECHNOLOGY tagline
+// File name must be exactly: logo.png (lowercase, no space) in GitHub repo root
 </script>
 
-<!-- THEME SECTION - CHANGE ONLY THEME URL HERE - Theme appears as background with zoom -->
+<!-- STEP 2: LOGO STYLES - O Section + Full Logo + Dancing Animation -->
+<style>
+/* LOGO CONTAINER - O Section */
+#orbit-logo-section {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+/* O BOX - 90px box where your O logo dances */
+#orbit-logo-section .logo-box {
+  width: 90px;
+  height: 90px;
+  min-width: 90px;
+  border-radius: 22px;
+  background: rgba(0,0,0,0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 36px rgba(0,0,0,0.7),
+              0 0 0 1px rgba(124,58,237,0.6),
+              0 0 36px rgba(34,211,238,0.45);
+  flex-shrink: 0;
+  overflow: hidden;
+  animation: logoDance 2.2s ease-in-out infinite,
+             logoGlow 1.8s ease-in-out infinite alternate;
+}
+/* O IMAGE - Your attached logo image inside O box */
+#orbit-logo-section .logo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Keeps your O + Orbittroniz text not cropped */
+  padding: 6px;
+  background: #000; /* Black background like your logo */
+  border-radius: 16px;
+  display: block;
+  animation: logoSpin 4s ease-in-out infinite;
+}
+/* FULL LOGO IMAGE - If you want full logo with text beside O */
+#orbit-logo-section .full-logo-img {
+  height: 70px;
+  width: auto;
+  max-width: 280px;
+  object-fit: contain;
+  background: #000;
+  border-radius: 12px;
+  padding: 6px 10px;
+  display: block;
+}
+/* LOGO TEXT - Orbittroniz + Tagline */
+#orbit-logo-section .logo-text h2 {
+  margin: 0;
+  font-size: 26px;
+  color: #fff;
+  text-shadow: 0 2px 16px rgba(124,58,237,0.9);
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+}
+#orbit-logo-section .logo-text .tagline {
+  font-size: 11px;
+  color: #c4b5fd;
+  letter-spacing: 3.5px;
+  font-weight: 900;
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+/* DANCING ANIMATIONS */
+@keyframes logoDance {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  25% { transform: translateY(-8px) rotate(3deg) scale(1.08); }
+  50% { transform: translateY(0) rotate(0deg) scale(1.03); }
+  75% { transform: translateY(-5px) rotate(-3deg) scale(1.06); }
+}
+@keyframes logoGlow {
+  0% { box-shadow: 0 10px 36px rgba(0,0,0,0.7), 0 0 0 1px rgba(124,58,237,0.5), 0 0 20px rgba(34,211,238,0.3); }
+  100% { box-shadow: 0 16px 48px rgba(0,0,0,0.85), 0 0 0 1px rgba(124,58,237,0.95), 0 0 48px rgba(124,58,237,0.75), 0 0 72px rgba(34,211,238,0.6); }
+}
+@keyframes logoSpin {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(4deg); }
+  75% { transform: rotate(-4deg); }
+}
+/* Mobile - Logo smaller */
+@media (max-width: 600px) {
+  #orbit-logo-section .logo-box { width: 70px; height: 70px; min-width: 70px; }
+  #orbit-logo-section .logo-text h2 { font-size: 20px; }
+  #orbit-logo-section .full-logo-img { height: 50px; }
+}
+</style>
+
+<!-- STEP 3: LOGO HTML - O Section + Full Logo - Paste inside header -->
+<div id="orbit-logo-section">
+  <!-- O SECTION - Your O logo dances here -->
+  <div class="logo-box" id="logoBoxDiv">
+    <img id="orbitLogoImg" src="" alt="Orbittroniz Logo - O + Orbittroniz">
+  </div>
+  <!-- TEXT + FULL LOGO - Orbittroniz + BUSINESS TOOLS • TECHNOLOGY -->
+  <div class="logo-text" style="flex:1;min-width:240px">
+    <h2>Orbittroniz <span style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;padding:4px 12px;border-radius:20px;font-size:10px;font-weight:900;margin-left:10px;vertical-align:middle">20 TOOLS • LIVE</span></h2>
+    <div class="tagline">BUSINESS TOOLS • TECHNOLOGY</div>
+    <div style="font-size:11px;color:#cbd5e1;max-width:620px;margin-top:8px;line-height:1.5">Your attached logo: O gradient + Orbittroniz text - Dancing live in O section</div>
+  </div>
+  <!-- OPTIONAL: Full logo image with text (your attached image as full) - Uncomment if you want full logo image instead of text -->
+  <!-- <img id="orbitFullLogoImg" class="full-logo-img" src="" alt="Orbittroniz Full Logo"> -->
+</div>
+
+<!-- STEP 4: LOGO LOGIC - Insert logo image in O section - Don't change -->
 <script>
-const THEME_URL = "https://steven1812004.github.io/orbittroniz.com/theme.jpg";
-const THEME_URL_FALLBACK = "https://raw.githubusercontent.com/Steven1812004/orbittroniz.com/main/theme.jpg";
+(function(){
+  const logoImg = document.getElementById('orbitLogoImg');
+  // const fullLogoImg = document.getElementById('orbitFullLogoImg');
+  if(logoImg){
+    logoImg.src = LOGO_URL;
+    // If GitHub Pages fails, use raw GitHub fallback
+    logoImg.onerror = function(){
+      logoImg.src = LOGO_URL_FALLBACK;
+      logoImg.onerror = function(){
+        // If both fail, show O with gradient (your O style) - Dancing still works
+        logoImg.style.display = 'none';
+        const box = document.getElementById('logoBoxDiv');
+        if(box && !box.querySelector('.o-fallback')){
+          const fb = document.createElement('div');
+          fb.className = 'o-fallback';
+          fb.textContent = 'O';
+          fb.style.cssText = 'width:70px;height:70px;background:linear-gradient(135deg,#7c3aed,#22d3ee,#22d3ee);border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:28px;font-family:Arial;';
+          box.appendChild(fb);
+        }
+      };
+    };
+  }
+  // if(fullLogoImg){ fullLogoImg.src = LOGO_URL; }
+})();
 </script>
-<!-- DOCTYPE TO THEME + LOGO SECTION END -->
-
+<!-- ===================== LOGO FULL DETAIL CODE END ===================== -->
 <!-- ===================== HEADER START - O SECTION LOGO + THEME BACKGROUND ===================== -->
 <div id="orbit-header" style="position:relative;min-height:185px;display:flex;align-items:center;gap:18px;padding:20px 22px;background:#060a18;border:1px solid var(--border);border-radius:18px;overflow:hidden;isolation:isolate">
 <style>
