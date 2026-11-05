@@ -62,38 +62,6 @@ canvas { max-width: 100%; border-radius: 12px; background: #0a1224; display: blo
 })();
 </script>
 <!-- ===== ONLY LOGO CODE END ===== -->
-<!-- ===================== HEADER START - O SECTION LOGO + THEME BACKGROUND ===================== -->
-<div id="orbit-header" style="position:relative;min-height:185px;display:flex;align-items:center;gap:18px;padding:20px 22px;background:#060a18;border:1px solid var(--border);border-radius:18px;overflow:hidden;isolation:isolate">
-<style>
-#orbit-header .theme-bg { position: absolute; inset: 0; z-index: 0; background-position: center; background-size: cover; background-repeat: no-repeat; animation: themeZoom 12s ease-in-out infinite alternate; }
-#orbit-header .theme-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6,10,24,0.92) 0%, rgba(6,10,24,0.55) 25%, rgba(6,10,24,0.2) 100%), linear-gradient(180deg, rgba(6,10,24,0.1) 0%, rgba(6,10,24,0.88) 100%); }
-@keyframes themeZoom { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
-#orbit-header .header-content { position: relative; z-index: 1; display: flex; align-items: center; gap: 20px; width: 100%; flex-wrap: wrap; }
-#orbit-header .logo-box { width: 90px; height: 90px; border-radius: 22px; background: rgba(0,0,0,0.82); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.28); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 36px rgba(0,0,0,0.7), 0 0 0 1px rgba(124,58,237,0.6), 0 0 36px rgba(34,211,238,0.45); flex-shrink: 0; overflow: hidden; animation: logoDance 2.2s ease-in-out infinite, logoGlow 1.8s ease-in-out infinite alternate; }
-#orbit-header .logo-box img { width: 100%; height: 100%; object-fit: contain; padding: 6px; background: #000; border-radius: 16px; display: block; animation: logoSpin 4s ease-in-out infinite; }
-@keyframes logoDance { 0%,100% { transform: translateY(0) rotate(0deg) scale(1); } 25% { transform: translateY(-8px) rotate(3deg) scale(1.08); } 50% { transform: translateY(0) rotate(0deg) scale(1.03); } 75% { transform: translateY(-5px) rotate(-3deg) scale(1.06); } }
-@keyframes logoGlow { 0% { box-shadow: 0 10px 36px rgba(0,0,0,0.7), 0 0 0 1px rgba(124,58,237,0.5); } 100% { box-shadow: 0 16px 48px rgba(0,0,0,0.85), 0 0 0 1px rgba(124,58,237,0.95), 0 0 48px rgba(124,58,237,0.75), 0 0 72px rgba(34,211,238,0.6); } }
-@keyframes logoSpin { 0%,100% { transform: rotate(0deg); } 25% { transform: rotate(4deg); } 75% { transform: rotate(-4deg); } }
-</style>
-<div class="theme-bg" id="themeBgDiv"></div>
-<div class="header-content">
-<div class="logo-box" id="logoBoxDiv"><img id="orbitLogoImg" src="" alt="Orbittroniz Logo"></div>
-<div style="flex:1;min-width:240px">
-<h2 style="margin:0;font-size:26px;color:#fff;text-shadow:0 2px 16px rgba(124,58,237,0.9)">Orbittroniz <span style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;padding:4px 12px;border-radius:20px;font-size:10px;font-weight:900;margin-left:10px">20 TOOLS • LIVE</span></h2>
-<div style="font-size:11px;color:#c4b5fd;letter-spacing:3.5px;font-weight:900;margin-top:3px">BUSINESS TOOLS • TECHNOLOGY</div>
-<div style="font-size:11px;color:#cbd5e1;max-width:620px;margin-top:8px;line-height:1.5">20 Tools Separated - Logo Dancing Live in O Section - Theme Visible - 100% Offline - No API</div>
-</div>
-</div>
-</div>
-<script>
-(function(){
-  const themeDiv = document.getElementById('themeBgDiv');
-  const logoImg = document.getElementById('orbitLogoImg');
-  if(themeDiv){ themeDiv.style.backgroundImage = "url('" + THEME_URL + "')"; const t=new Image(); t.onerror=function(){ themeDiv.style.backgroundImage="url('"+THEME_URL_FALLBACK+"')"; }; t.src=THEME_URL; }
-  if(logoImg){ logoImg.src=LOGO_URL; logoImg.onerror=function(){ logoImg.src=LOGO_URL_FALLBACK; logoImg.onerror=function(){ logoImg.style.display='none'; const box=document.getElementById('logoBoxDiv'); const f=document.createElement('div'); f.textContent='O'; f.style.cssText='width:70px;height:70px;background:linear-gradient(135deg,#7c3aed,#22d3ee);border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:28px;'; box.appendChild(f); }; }; }
-})();
-</script>
-<!-- ===================== HEADER END ===================== -->
 
 <!-- ===================== BUTTON SECTION START - 20 TOOLS BUTTONS ===================== -->
 <div id="orbit-buttons">
