@@ -62,6 +62,35 @@ canvas { max-width: 100%; border-radius: 12px; background: #0a1224; display: blo
 })();
 </script>
 <!-- ===== ONLY LOGO CODE END ===== -->
+  <!-- ===== ATTRACTIVE HEADER - NO LOGO - SIMPLE - PASTE AT TOP OF BODY ===== -->
+<div id="orbit-header" style="position:relative;min-height:88px;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:linear-gradient(135deg,#0b1026 0%,#1e1b4b 45%,#0e7490 100%);border:1px solid rgba(34,211,238,0.35);border-radius:18px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.5), 0 0 30px rgba(124,58,237,0.25)">
+<style>
+#orbit-header .glow1{position:absolute;width:220px;height:220px;background:radial-gradient(circle, rgba(124,58,237,0.55) 0%, transparent 70%);top:-90px;right:-40px;filter:blur(8px)}
+#orbit-header .glow2{position:absolute;width:180px;height:180px;background:radial-gradient(circle, rgba(34,211,238,0.5) 0%, transparent 70%);bottom:-80px;left:-30px;filter:blur(8px)}
+#orbit-header .shine{position:absolute;inset:0;background:linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.12) 45%, transparent 60%);animation:shineMove 3.5s ease-in-out infinite}
+@keyframes shineMove{0%,100%{transform:translateX(-100%)}50%{transform:translateX(100%)}}
+#orbit-header .live-dot{width:9px;height:9px;background:#22c55e;border-radius:50%;box-shadow:0 0 0 0 rgba(34,197,94,0.7);animation:pulseDot 1.6s infinite;display:inline-block}
+@keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(34,197,94,0.7)}70%{box-shadow:0 0 0 10px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+@media(max-width:600px){ #orbit-header{padding:14px 14px;min-height:76px} #orbit-header .big{font-size:22px!important} #orbit-header .small{font-size:9px!important;letter-spacing:2px!important} #orbit-header .badge{font-size:9px!important;padding:4px 8px!important} }
+</style>
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div class="shine"></div>
+
+<div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:3px">
+<!-- DOMAIN NAME -->
+<div class="big" style="font-size:30px;font-weight:900;letter-spacing:-0.5px;line-height:1;color:#fff">orbittroniz<span style="background:linear-gradient(135deg,#22d3ee,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">.com</span></div>
+<!-- TAGLINE -->
+<div class="small" style="font-size:10px;letter-spacing:4px;font-weight:800;color:#c4b5fd">BUSINESS TOOLS • TECHNOLOGY</div>
+</div>
+
+<div style="position:relative;z-index:1;display:flex;align-items:center;gap:8px;flex-shrink:0">
+<span style="display:flex;align-items:center;gap:6px;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.18);padding:6px 10px;border-radius:20px;font-size:10px;font-weight:800;color:#fff;backdrop-filter:blur(6px)"><span class="live-dot"></span>LIVE</span>
+<span class="badge" style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:900;box-shadow:0 6px 20px rgba(34,197,94,0.4)">20 TOOLS</span>
+</div>
+</div>
+<!-- ===== HEADER END - NO LOGO - DO NOT PASTE AGAIN ===== -->
 
 <!-- ===================== BUTTON SECTION START - 20 TOOLS BUTTONS ===================== -->
 <div id="orbit-buttons">
