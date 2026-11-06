@@ -118,11 +118,260 @@ canvas { max-width: 100%; border-radius: 12px; background: #0a1224; display: blo
 <!-- BUTTON SECTION END -->
 
 <!-- ===================== 20 TOOLS DETAILED SECTIONS START ===================== -->
+<!-- ===== TOOL 1 V2 - RESIZE PRO - 3D ATTRACTIVE - BUG FREE - REPLACE OLD TOOL 1 ===== -->
+<div id="tool1" style="margin-top:14px;background:linear-gradient(160deg,#0f172a 0%,#1e1b4b 40%,#082f49 100%);border:1px solid rgba(34,211,238,0.25);border-radius:24px;padding:16px;box-shadow:0 25px 70px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.15);transform:perspective(1200px) rotateX(1.5deg)">
+<style>
+#tool1 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+#tool1 .t1-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+#tool1 .t1-title{font-size:16px;font-weight:900;color:#fff;display:flex;align-items:center;gap:8px}
+#tool1 .t1-badge{background:linear-gradient(135deg,#f59e0b,#ec4899);padding:5px 11px;border-radius:20px;font-size:10px;color:#fff;box-shadow:0 6px 18px rgba(236,72,153,0.4)}
+#tool1 .t1-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:14px;margin-top:12px}
+@media(max-width:760px){#tool1 .t1-grid{grid-template-columns:1fr}}
+#tool1 .card{background:linear-gradient(170deg,rgba(255,255,255,0.11),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:14px;box-shadow:0 15px 35px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.12)}
+#tool1 .drop{border:2px dashed rgba(34,211,238,0.65);border-radius:16px;padding:16px;text-align:center;cursor:pointer;background:rgba(34,211,238,0.07);transition:.2s;position:relative;overflow:hidden}
+#tool1 .drop.drag{background:rgba(34,211,238,0.18);transform:scale(1.01);border-color:#22d3ee}
+#tool1 .drop img{max-width:100%;max-height:180px;border-radius:12px;display:none;margin:0 auto;box-shadow:0 10px 30px rgba(0,0,0,0.5)}
+#tool1 .chip{padding:8px 11px;border-radius:20px;border:1px solid rgba(255,255,255,0.18);background:rgba(0,0,0,0.4);color:#e2e8f0;font-size:11px;font-weight:800;cursor:pointer;transition:.15s}
+#tool1 .chip:active{transform:scale(0.95)}
+#tool1 .chip.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(124,58,237,0.5)}
+#tool1 .chip2{padding:7px 11px;border-radius:11px;border:1px solid rgba(255,255,255,0.16);background:#0f172a;color:#cbd5e1;font-size:11px;font-weight:800;cursor:pointer}
+#tool1 .chip2.active{background:#22c55e;color:#fff;box-shadow:0 6px 16px rgba(34,197,94,0.4)}
+#tool1 input[type=number],#tool1 select{width:100%;padding:11px;border-radius:11px;border:1px solid rgba(255,255,255,0.18);background:#0b1226;color:#fff;font-weight:800;outline:none;font-size:14px}
+#tool1 input[type=range]{width:100%;accent-color:#22d3ee;height:28px}
+#tool1 input[type=color]{width:42px;height:38px;border:none;border-radius:10px;background:none;padding:0;cursor:pointer}
+#tool1 .lbl{font-size:11px;font-weight:900;color:#c4b5fd;letter-spacing:.6px;margin:12px 0 6px;display:flex;justify-content:space-between}
+#tool1 .lbl span{color:#fff}
+#tool1 .row{display:flex;gap:7px;flex-wrap:wrap}
+#tool1 .btn-main{background:linear-gradient(90deg,#7c3aed,#ec4899,#22d3ee);background-size:200% 100%;color:#fff;border:none;padding:13px;border-radius:14px;font-weight:900;width:100%;cursor:pointer;box-shadow:0 12px 28px rgba(124,58,237,0.45);font-size:14px;transition:.2s}
+#tool1 .btn-main:active{transform:scale(0.98)}
+#tool1 .btn-ghost{background:#1e293b;color:#fff;border:1px solid rgba(255,255,255,0.16);padding:11px 14px;border-radius:12px;font-weight:800;cursor:pointer}
+#tool1 .preview-box{background:#000;border-radius:14px;min-height:260px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid rgba(255,255,255,0.14);position:relative;touch-action:none;cursor:grab}
+#tool1 .preview-box:active{cursor:grabbing}
+#tool1 .preview-box canvas{max-width:100%;max-height:300px;border-radius:8px;pointer-events:none}
+#tool1 .stat{background:#0b1226;border-radius:12px;padding:9px;text-align:center;border:1px solid rgba(255,255,255,0.08)}
+#tool1 .seg{display:flex;background:#0b1226;border-radius:12px;padding:4px;gap:4px}
+#tool1 .seg button{flex:1;padding:8px;border:none;border-radius:9px;background:transparent;color:#94a3b8;font-weight:800;font-size:11px;cursor:pointer}
+#tool1 .seg button.active{background:#fff;color:#000}
+#tool1 .toggle{width:44px;height:24px;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+#tool1 .toggle::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s}
+#tool1 .toggle.on{background:#22c55e}
+#tool1 .toggle.on::after{left:23px}
+</style>
 
-<!-- TOOL 1: RESIZE -->
-<div class="tool active" id="tool-resize"><div class="grid-2"><div class="panel"><h3 style="margin:0">1 Resize Crop - Features: Drag, Zoom, 4K</h3><div class="drop" id="rs_drop"><b>Drop Image</b><input type="file" id="rs_file" accept="image/*" style="display:none"></div><div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap"><button class="btn rs-size" data-w="1080" data-h="1080">1:1 Post</button><button class="btn rs-size" data-w="1080" data-h="1350">4:5 Insta</button><button class="btn rs-size" data-w="1080" data-h="1920">9:16 Story</button><button class="btn rs-size" data-w="1280" data-h="720">16:9 YouTube</button></div><div style="display:flex;gap:6px;margin-top:8px"><input id="rs_w" class="input" type="number" value="1080" style="flex:1"><input id="rs_h" class="input" type="number" value="1080" style="flex:1"><button id="rs_do" class="btn primary">Set Size</button></div><div style="display:flex;gap:6px;margin-top:8px"><button class="btn" data-scale="0.5">50%</button><button class="btn" data-scale="1">100%</button><button class="btn" data-scale="2">200%</button><button class="btn" style="background:#22c55e;color:#fff" data-scale="4">400% 4K</button></div></div><div class="panel"><canvas id="rs_canvas" width="1080" height="1080" style="background:#0a1224"></canvas><div style="display:flex;gap:6px;margin-top:8px"><button id="rs_down" class="btn primary" style="width:100%">Download 4K PNG</button><button id="rs_reset" class="btn">Reset</button></div></div></div></div>
+<div class="t1-top">
+<div class="t1-title">✂️ Resize & Crop <span class="t1-badge">PRO • 4K • NEW</span></div>
+<div style="display:flex;gap:6px"><button class="chip2" id="t1BeforeBtn">👁️ Before</button><button class="chip2" id="t1UndoBtn">↩ Undo</button><button class="chip2" id="t1AutoBtn">✨ Auto Fix</button></div>
+</div>
 
-<!-- TOOL 2: QR -->
+<div class="t1-grid">
+<!-- LEFT -->
+<div class="card">
+<div class="drop" id="t1Drop">
+<input type="file" id="t1File" accept="image/*" hidden>
+<div id="t1DropText"><div style="font-size:34px">🖼️</div><b style="color:#fff">Drop Image Here</b><div style="font-size:11px;color:#94a3b8;margin-top:4px">or Click to Upload • JPG PNG WebP • Drag to Move after upload</div><div style="margin-top:11px"><span style="background:linear-gradient(135deg,#22d3ee,#7c3aed);color:#fff;padding:9px 18px;border-radius:20px;font-size:12px;font-weight:900;box-shadow:0 8px 20px rgba(34,211,238,0.4)">📁 CHOOSE IMAGE</span></div></div>
+<img id="t1OrigImg">
+</div>
+
+<div class="lbl">📐 PRESETS <span>1 Click</span></div>
+<div class="row" id="t1Presets">
+<button class="chip active" data-w="1080" data-h="1080">1:1 Post</button>
+<button class="chip" data-w="1080" data-h="1350">4:5 Insta</button>
+<button class="chip" data-w="1080" data-h="1920">9:16 Story</button>
+<button class="chip" data-w="1920" data-h="1080">16:9 YouTube</button>
+<button class="chip" data-w="1200" data-h="628">FB Cover</button>
+<button class="chip" data-w="1080" data-h="1080" data-circle="1">⭕ Circle DP</button>
+<button class="chip" data-w="1080" data-h="1080" data-blur="1">🌫️ Blur BG</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div><div class="lbl">Width</div><input type="number" id="t1W" value="1080" min="10" max="8000"></div>
+<div><div class="lbl">Height</div><input type="number" id="t1H" value="1080" min="10" max="8000"></div>
+</div>
+
+<div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+<span style="font-size:12px;color:#e2e8f0;font-weight:700">🔒 Lock Ratio</span><div class="toggle on" id="t1LockToggle"></div>
+</div>
+<input type="hidden" id="t1Lock" value="1">
+
+<div class="lbl">MODE <span id="t1ModeVal">Fill (Crop)</span></div>
+<div class="seg" id="t1ModeSeg"><button data-mode="fill" class="active">Fill - Crop</button><button data-mode="fit">Fit - Full</button><button data-mode="stretch">Stretch</button></div>
+
+<div class="lbl">🔍 ZOOM <span id="t1ZoomVal">100%</span></div>
+<input type="range" id="t1Zoom" min="10" max="300" value="100">
+<div class="lbl">↔️ MOVE X <span id="t1XVal">0</span> &nbsp; ↕ MOVE Y <span id="t1YVal">0</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input type="range" id="t1MoveX" min="-200" max="200" value="0"><input type="range" id="t1MoveY" min="-200" max="200" value="0"></div>
+<div style="font-size:10px;color:#94a3b8;margin-top:2px">💡 Tip: Drag preview image directly to move - Mouse + Touch works</div>
+
+<div class="lbl">🔄 ROTATE <span id="t1RotVal">0°</span></div>
+<input type="range" id="t1Rot" min="0" max="360" value="0">
+<div class="row" style="margin-top:8px"><button class="chip2" id="t1FlipH">↔ Flip H</button><button class="chip2" id="t1FlipV">↕ Flip V</button><button class="chip2" id="t1Rot90">⟳ 90°</button><button class="chip2" id="t1ResetPos">🎯 Center</button></div>
+
+<div class="lbl">🎨 FILTERS</div>
+<div class="row" id="t1Filters"><button class="chip active" data-f="none">None</button><button class="chip" data-f="bw">B&W</button><button class="chip" data-f="sepia">Sepia</button><button class="chip" data-f="vivid">Vivid</button><button class="chip" data-f="warm">Warm</button><button class="chip" data-f="cool">Cool</button></div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div><div class="lbl">Brightness <span id="t1BrightVal">100%</span></div><input type="range" id="t1Bright" min="50" max="180" value="100"></div>
+<div><div class="lbl">Contrast <span id="t1ContrastVal">100%</span></div><input type="range" id="t1Contrast" min="50" max="180" value="100"></div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end">
+<div><div class="lbl">Background Color (Fit Mode)</div><div style="display:flex;gap:6px;align-items:center"><input type="color" id="t1Bg" value="#ffffff"><span id="t1BgName" style="font-size:11px;color:#cbd5e1">White</span></div></div>
+<div><div class="lbl">Padding</div><input type="number" id="t1Pad" value="0" min="0" max="100" style="width:80px"></div>
+</div>
+
+<div class="lbl">⚡ OUTPUT SIZE <span id="t1SizeVal">100%</span></div>
+<div class="row" id="t1Sizes"><button class="chip2" data-s="0.5">50%</button><button class="chip2 active" data-s="1">100%</button><button class="chip2" data-s="2">200%</button><button class="chip2" data-s="4">400% 4K 🔥</button></div>
+
+<div class="lbl">🎨 QUALITY <span id="t1QVal">92%</span> &nbsp; FORMAT <span id="t1FmtVal">PNG</span></div>
+<input type="range" id="t1Quality" min="10" max="100" value="92">
+<div class="row" style="margin-top:8px"><select id="t1Format" style="flex:1"><option value="image/png">PNG - Best Quality</option><option value="image/jpeg">JPG - Small Size</option><option value="image/webp">WebP - Modern</option></select><input type="text" id="t1Watermark" placeholder="💧 Watermark text (optional)" style="flex:1"></div>
+
+<div style="margin-top:13px"><button class="btn-main" id="t1Apply">✨ APPLY & PREVIEW</button></div>
+</div>
+
+<!-- RIGHT -->
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center"><b style="color:#fff;font-size:13px">👁️ Live Preview - Drag to Move</b><span id="t1Info" style="font-size:11px;color:#94a3b8">No image</span></div>
+<div class="preview-box" id="t1PreviewBox"><div id="t1Empty" style="color:#64748b;font-size:12px;text-align:center">Preview here<br>Upload image first</div><canvas id="t1Canvas" style="display:none"></canvas><div id="t1Hint" style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:#fff;font-size:10px;padding:5px 10px;border-radius:20px;display:none">✋ Drag to Move • Pinch to Zoom</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px">
+<div class="stat"><div style="font-size:10px;color:#94a3b8">ORIGINAL</div><b id="t1OrigSize" style="color:#fff;font-size:12px">-</b></div>
+<div class="stat"><div style="font-size:10px;color:#94a3b8">NEW SIZE</div><b id="t1NewSize" style="color:#22d3ee;font-size:12px">-</b></div>
+<div class="stat"><div style="font-size:10px;color:#94a3b8">FILE SIZE</div><b id="t1FileSize" style="color:#22c55e;font-size:12px">-</b></div>
+</div>
+<div style="display:flex;gap:8px;margin-top:12px"><button id="t1Download" class="btn-main" style="flex:1">⬇️ Download <span id="t1DlLabel">PNG</span></button><button id="t1Reset" class="btn-ghost">Reset</button></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px"><button id="t1CopyBtn" class="btn-ghost" style="font-size:12px">📋 Copy Image</button><button id="t1ShareBtn" class="btn-ghost" style="font-size:12px">🔗 Share</button></div>
+<div style="font-size:11px;color:#94a3b8;text-align:center;margin-top:9px">✅ 100% Free • No Watermark (unless you add) • Offline • No Upload to Server</div>
+</div>
+</div>
+</div>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+let orig=null, flipH=false, flipV=false, scaleFactor=1, origW=0, origH=0, origRatio=1, mode='fill', filter='none', isCircle=false, isBlurBg=false, moveX=0, moveY=0, history=[];
+let isDragging=false, lastX=0, lastY=0;
+const file=$('t1File'), drop=$('t1Drop'), origImg=$('t1OrigImg'), dropText=$('t1DropText'), canvas=$('t1Canvas'), ctx=canvas.getContext('2d'), previewBox=$('t1PreviewBox');
+function safeInt(v, def){ const n=parseInt(v); return isNaN(n)||n<=0?def:n; }
+function saveHistory(){ if(!orig) return; try{ history.push(canvas.toDataURL()); if(history.length>10) history.shift(); }catch(e){} }
+function loadImage(src, name){
+  const im=new Image();
+  im.onload=()=>{
+    orig=im; origW=im.naturalWidth; origH=im.naturalHeight; origRatio=origW/origH;
+    origImg.src=src; origImg.style.display='block'; dropText.style.display='none'; $('t1Hint').style.display='block';
+    $('t1OrigSize').textContent=origW+' x '+origH; $('t1Info').textContent=(name||'Image')+' • '+origW+' x '+origH;
+    if(!$('t1W').value || $('t1W').value==='1080'){ $('t1W').value=1080; $('t1H').value=Math.round(1080/origRatio); }
+    render();
+  };
+  im.onerror=()=>alert('❌ Could not load image. Try JPG/PNG.');
+  im.src=src;
+}
+function handleFile(f){ if(!f) return; if(!f.type.startsWith('image/')) return alert('Please select an image file'); const r=new FileReader(); r.onload=e=>loadImage(e.target.result,f.name); r.readAsDataURL(f); }
+drop.onclick=()=>file.click();
+file.onchange=e=>{ handleFile(e.target.files[0]); file.value=''; };
+drop.ondragover=e=>{e.preventDefault(); drop.classList.add('drag')};
+drop.ondragleave=()=>drop.classList.remove('drag');
+drop.ondrop=e=>{e.preventDefault(); drop.classList.remove('drag'); handleFile(e.dataTransfer.files[0])};
+// Presets
+$('t1Presets').addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b) return;
+  document.querySelectorAll('#t1Presets .chip').forEach(c=>c.classList.remove('active')); b.classList.add('active');
+  isCircle=b.dataset.circle==='1'; isBlurBg=b.dataset.blur==='1';
+  $('t1W').value=safeInt(b.dataset.w,1080); $('t1H').value=safeInt(b.dataset.h,1080); render();
+});
+$('t1W').addEventListener('input',()=>{ if($('t1Lock').value==='1' && orig) $('t1H').value=Math.max(10,Math.round(safeInt($('t1W').value,1080)/origRatio)); render(); });
+$('t1H').addEventListener('input',()=>{ if($('t1Lock').value==='1' && orig) $('t1W').value=Math.max(10,Math.round(safeInt($('t1H').value,1080)*origRatio)); render(); });
+$('t1LockToggle').onclick=()=>{ const on=$('t1Lock').value!=='1'; $('t1Lock').value=on?'1':'0'; $('t1LockToggle').classList.toggle('on',on); };
+$('t1ModeSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; document.querySelectorAll('#t1ModeSeg button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); mode=b.dataset.mode; $('t1ModeVal').textContent=mode==='fill'?'Fill (Crop)':mode==='fit'?'Fit (Full)':'Stretch'; render(); });
+$('t1Filters').addEventListener('click',e=>{ const b=e.target.closest('.chip'); if(!b) return; document.querySelectorAll('#t1Filters .chip').forEach(c=>c.classList.remove('active')); b.classList.add('active'); filter=b.dataset.f; render(); });
+const bind=(id, valId, suffix, fn)=>{ $(id).addEventListener('input',()=>{ $(valId).textContent=$(id).value+suffix; if(fn) fn(); render(); }); };
+bind('t1Zoom','t1ZoomVal','%'); bind('t1Rot','t1RotVal','°');
+bind('t1Bright','t1BrightVal','%'); bind('t1Contrast','t1ContrastVal','%'); bind('t1Quality','t1QVal','%');
+$('t1MoveX').addEventListener('input',()=>{ moveX=parseInt($('t1MoveX').value)||0; $('t1XVal').textContent=moveX; render(); });
+$('t1MoveY').addEventListener('input',()=>{ moveY=parseInt($('t1MoveY').value)||0; $('t1YVal').textContent=moveY; render(); });
+$('t1Pad').addEventListener('input',render); $('t1Bg').addEventListener('input',()=>{ $('t1BgName').textContent=$('t1Bg').value; render(); });
+$('t1FlipH').onclick=()=>{flipH=!flipH; $('t1FlipH').classList.toggle('active',flipH); render();};
+$('t1FlipV').onclick=()=>{flipV=!flipV; $('t1FlipV').classList.toggle('active',flipV); render();};
+$('t1Rot90').onclick=()=>{ $('t1Rot').value=(safeInt($('t1Rot').value,0)+90)%360; $('t1RotVal').textContent=$('t1Rot').value+'°'; render(); };
+$('t1ResetPos').onclick=()=>{ moveX=0; moveY=0; $('t1MoveX').value=0; $('t1MoveY').value=0; $('t1XVal').textContent='0'; $('t1YVal').textContent='0'; render(); };
+$('t1Sizes').addEventListener('click',e=>{ const b=e.target.closest('.chip2'); if(!b) return; document.querySelectorAll('#t1Sizes .chip2').forEach(c=>c.classList.remove('active')); b.classList.add('active'); scaleFactor=parseFloat(b.dataset.s)||1; $('t1SizeVal').textContent=Math.round(scaleFactor*100)+'%'; render(); });
+$('t1Format').onchange=()=>{ $('t1DlLabel').textContent=$('t1Format').value==='image/png'?'PNG':$('t1Format').value==='image/jpeg'?'JPG':'WebP'; $('t1FmtVal').textContent=$('t1DlLabel').textContent; render(); };
+$('t1Apply').onclick=()=>{ if(!orig) return alert('⚠️ Please upload image first!'); saveHistory(); render(); alert('✅ Done! '+canvas.width+' x '+canvas.height+' - Click Download!'); };
+$('t1UndoBtn').onclick=()=>{ if(history.length===0) return alert('Nothing to undo'); const d=history.pop(); const im=new Image(); im.onload=()=>{ orig=im; origW=im.naturalWidth; origH=im.naturalHeight; render(); }; im.src=d; };
+$('t1AutoBtn').onclick=()=>{ if(!orig) return alert('Upload image first'); $('t1Bright').value=110; $('t1Contrast').value=110; $('t1BrightVal').textContent='110%'; $('t1ContrastVal').textContent='110%'; filter='vivid'; document.querySelectorAll('#t1Filters .chip').forEach(c=>c.classList.toggle('active',c.dataset.f==='vivid')); render(); alert('✨ Auto Fix Applied!'); };
+let showingBefore=false;
+$('t1BeforeBtn').onclick=()=>{ if(!orig) return; showingBefore=!showingBefore; if(showingBefore){ const t=document.createElement('canvas'); t.width=origW; t.height=origH; t.getContext('2d').drawImage(orig,0,0); canvas.width=t.width; canvas.height=t.height; ctx.drawImage(t,0,0); $('t1BeforeBtn').textContent='👁️ After'; } else { render(); $('t1BeforeBtn').textContent='👁️ Before'; } };
+$('t1Reset').onclick=()=>{ if(!orig) return; $('t1Zoom').value=100; $('t1Rot').value=0; $('t1Quality').value=92; $('t1Bright').value=100; $('t1Contrast').value=100; flipH=false; flipV=false; scaleFactor=1; moveX=0; moveY=0; filter='none'; isCircle=false; isBlurBg=false; $('t1W').value=1080; $('t1H').value=Math.round(1080/origRatio); render(); };
+// Drag to move - Mouse + Touch - BUG FIX: pointer events
+previewBox.addEventListener('pointerdown',e=>{ if(!orig) return; isDragging=true; lastX=e.clientX; lastY=e.clientY; previewBox.setPointerCapture(e.pointerId); });
+previewBox.addEventListener('pointermove',e=>{ if(!isDragging||!orig) return; const dx=e.clientX-lastX, dy=e.clientY-lastY; lastX=e.clientX; lastY=e.clientY; moveX=Math.max(-300,Math.min(300,moveX+dx)); moveY=Math.max(-300,Math.min(300,moveY+dy)); $('t1MoveX').value=moveX; $('t1MoveY').value=moveY; $('t1XVal').textContent=moveX; $('t1YVal').textContent=moveY; render(); });
+['pointerup','pointercancel','pointerleave'].forEach(ev=>previewBox.addEventListener(ev,()=>isDragging=false));
+
+function getFilterString(){
+  let f=`brightness(${safeInt($('t1Bright').value,100)}%) contrast(${safeInt($('t1Contrast').value,100)}%)`;
+  if(filter==='bw') f+=' grayscale(100%)'; if(filter==='sepia') f+=' sepia(100%)'; if(filter==='vivid') f+=' saturate(150%)'; if(filter==='warm') f+=' sepia(30%) hue-rotate(-10deg)'; if(filter==='cool') f+=' hue-rotate(15deg) saturate(120%)';
+  return f;
+}
+function render(){
+  if(!orig) return;
+  const targetW=safeInt($('t1W').value,1080), targetH=safeInt($('t1H').value,1080);
+  const zoom=safeInt($('t1Zoom').value,100)/100, rot=safeInt($('t1Rot').value,0)*Math.PI/180, pad=safeInt($('t1Pad').value,0);
+  const finalW=Math.max(10,Math.round(targetW*scaleFactor)), finalH=Math.max(10,Math.round(targetH*scaleFactor));
+  canvas.width=finalW; canvas.height=finalH;
+  ctx.save();
+  if(isCircle){ ctx.beginPath(); ctx.arc(finalW/2, finalH/2, Math.min(finalW,finalH)/2, 0, Math.PI*2); ctx.clip(); }
+  // Background
+  ctx.fillStyle=$('t1Bg').value||'#ffffff'; ctx.fillRect(0,0,finalW,finalH);
+  if(isBlurBg){ ctx.save(); ctx.filter='blur(25px) brightness(0.8)'; const bs=Math.max(finalW/origW, finalH/origH); ctx.drawImage(orig, (finalW-origW*bs)/2, (finalH-origH*bs)/2, origW*bs, origH*bs); ctx.restore(); }
+  ctx.save();
+  // Padding area
+  const innerW=finalW-pad*2*scaleFactor, innerH=finalH-pad*2*scaleFactor;
+  ctx.translate(finalW/2+moveX*scaleFactor, finalH/2+moveY*scaleFactor); ctx.rotate(rot); ctx.scale(flipH?-1:1, flipV?-1:1);
+  ctx.filter=getFilterString();
+  let s=1;
+  if(mode==='fill') s=Math.max(innerW/origW, innerH/origH)*zoom;
+  else if(mode==='fit') s=Math.min(innerW/origW, innerH/origH)*zoom;
+  else { // stretch
+    const dw=innerW*zoom, dh=innerH*zoom; ctx.drawImage(orig, -dw/2, -dh/2, dw, dh); ctx.filter='none'; ctx.restore(); drawExtras(finalW,finalH); return;
+  }
+  const dw=origW*s, dh=origH*s;
+  ctx.drawImage(orig, -dw/2, -dh/2, dw, dh);
+  ctx.filter='none'; ctx.restore();
+  drawExtras(finalW,finalH);
+}
+function drawExtras(finalW,finalH){
+  const wm=$('t1Watermark').value.trim();
+  if(wm){ ctx.save(); ctx.globalAlpha=0.6; ctx.fillStyle='#000'; ctx.font='bold '+Math.max(14,finalW*0.03)+'px Arial'; ctx.textAlign='right'; ctx.fillText(wm, finalW-12, finalH-12); ctx.restore(); }
+  ctx.restore();
+  canvas.style.display='block'; $('t1Empty').style.display='none';
+  $('t1NewSize').textContent=finalW+' x '+finalH;
+  // File size - async, no block
+  try{ canvas.toBlob(b=>{ if(b) $('t1FileSize').textContent=(b.size/1024).toFixed(1)+' KB'; }, $('t1Format').value, safeInt($('t1Quality').value,92)/100); }catch(e){}
+}
+$('t1Download').onclick=()=>{
+  if(!orig) return alert('⚠️ Upload image first!');
+  render();
+  const fmt=$('t1Format').value, ext=fmt==='image/png'?'png':fmt==='image/jpeg'?'jpg':'webp';
+  canvas.toBlob(b=>{
+    if(!b) return alert('Download failed, try PNG');
+    const url=URL.createObjectURL(b);
+    const a=document.createElement('a'); a.href=url; a.download='orbittroniz-resized-'+canvas.width+'x'+canvas.height+'.'+ext; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),2000);
+  }, fmt, safeInt($('t1Quality').value,92)/100);
+};
+$('t1CopyBtn').onclick=async()=>{
+  if(!orig) return alert('Upload first');
+  try{ const b=await new Promise(r=>canvas.toBlob(r,'image/png')); await navigator.clipboard.write([new ClipboardItem({'image/png':b})]); alert('📋 Copied!'); }catch(e){ alert('Copy not supported in this browser - Use Download'); }
+};
+$('t1ShareBtn').onclick=async()=>{
+  if(!orig) return alert('Upload first');
+  try{ const b=await new Promise(r=>canvas.toBlob(r,'image/png')); const f=new File([b],'resized.png',{type:'image/png'}); if(navigator.canShare && navigator.canShare({files:[f]})){ await navigator.share({files:[f], title:'Orbittroniz Resized'}); } else alert('Share not supported - Use Download'); }catch(e){}
+};
+})();
+</script>
+<!-- ===== TOOL 1 V2 END ===== -->
+
+
+<!-- TOOL 2: QR --
 <div class="tool" id="tool-qr"><div class="grid-2"><div class="panel"><h3 style="margin:0">2 QR Code - Features: UPI, WA, WiFi, Logo Drag</h3><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap" id="qr_types"><div class="qr-type active" data-t="url" style="border:1px solid var(--border);border-radius:10px;padding:8px;background:#162143;cursor:pointer">URL</div><div class="qr-type" data-t="upi" style="border:1px solid var(--border);border-radius:10px;padding:8px;background:#162143;cursor:pointer">UPI Payment</div><div class="qr-type" data-t="whatsapp" style="border:1px solid var(--border);border-radius:10px;padding:8px;background:#162143;cursor:pointer">WhatsApp</div><div class="qr-type" data-t="wifi" style="border:1px solid var(--border);border-radius:10px;padding:8px;background:#162143;cursor:pointer">WiFi</div></div><div id="qr_inputs" style="margin-top:8px"><div id="qi-url"><input id="qr_url" class="input" value="https://orbittroniz.com"></div><div id="qi-upi" style="display:none"><input id="qr_upi_id" class="input" value="yourname@okicici"><input id="qr_upi_amt" class="input" placeholder="Amount INR" style="margin-top:6px"></div><div id="qi-whatsapp" style="display:none"><input id="qr_wa_num" class="input" value="919999999999"><input id="qr_wa_msg" class="input" placeholder="Message" style="margin-top:6px" value="Hi Orbittroniz"></div><div id="qi-wifi" style="display:none"><input id="qr_ssid" class="input" value="Orbittroniz WiFi"><input id="qr_wifi_pass" class="input" placeholder="Password" style="margin-top:6px"></div></div><div style="display:flex;gap:6px;margin-top:8px"><input type="color" id="qr_fg" value="#0a0f2a" style="width:50px;height:36px"><input type="color" id="qr_bg" value="#ffffff" style="width:50px;height:36px"><input id="qr_ftext" class="input" value="Scan Me - Orbittroniz" style="flex:1"></div><div style="display:flex;gap:6px;margin-top:8px"><input type="file" id="qr_logo" accept="image/*" class="input" style="flex:1"><button id="qr_down" class="btn primary">Download 4K</button></div><div id="qr_data_prev" style="font-size:11px;color:var(--muted);margin-top:6px;background:#0a1224;border:1px solid var(--border);border-radius:8px;padding:6px;word-break:break-all">https://orbittroniz.com</div></div><div class="panel"><canvas id="qr_canvas" width="512" height="512" style="background:#fff"></canvas><div style="font-size:10px;color:var(--muted);margin-top:6px">Features: Drag logo inside QR - Change colors - Frame text - No API - 100% offline</div></div></div></div>
 
 <!-- TOOL 3: IMG2PDF -->
