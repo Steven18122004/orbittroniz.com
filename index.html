@@ -92,30 +92,77 @@ canvas { max-width: 100%; border-radius: 12px; background: #0a1224; display: blo
 </div>
 <!-- ===== HEADER END - NO LOGO - DO NOT PASTE AGAIN ===== -->
 
-<!-- ===================== BUTTON SECTION START - 20 TOOLS BUTTONS ===================== -->
-<div id="orbit-buttons">
-<button type="button" class="tab-btn active" data-target="tool-resize">1 Resize</button>
-<button type="button" class="tab-btn" data-target="tool-qr">2 QR</button>
-<button type="button" class="tab-btn" data-target="tool-img2pdf">3 Img2PDF</button>
-<button type="button" class="tab-btn" data-target="tool-pdfmerge">4 PDF Merge</button>
-<button type="button" class="tab-btn" data-target="tool-pdfsplit">5 PDF Split</button>
-<button type="button" class="tab-btn" data-target="tool-scanner">6 Scanner</button>
-<button type="button" class="tab-btn" data-target="tool-bg">7 BG Remover</button>
-<button type="button" class="tab-btn" data-target="tool-watermark">8 Watermark</button>
-<button type="button" class="tab-btn" data-target="tool-border">9 Border Frame</button>
-<button type="button" class="tab-btn" data-target="tool-compress">10 Compress</button>
-<button type="button" class="tab-btn" data-target="tool-upscaler">11 Upscaler 4K</button>
-<button type="button" class="tab-btn" data-target="tool-converter">12 Converter</button>
-<button type="button" class="tab-btn" data-target="tool-palette">13 Palette</button>
-<button type="button" class="tab-btn" data-target="tool-text2img">14 Text2Poster</button>
-<button type="button" class="tab-btn" data-target="tool-barcode">15 Barcode</button>
-<button type="button" class="tab-btn" data-target="tool-sign">16 E-Sign</button>
-<button type="button" class="tab-btn" data-target="tool-bizcard">17 BizCard</button>
-<button type="button" class="tab-btn" data-target="tool-invoice">18 Invoice</button>
-<button type="button" class="tab-btn" data-target="tool-caption">19 Caption+</button>
-<button type="button" class="tab-btn" data-target="tool-hashtag">20 Hashtag Pro</button>
+<!-- ===== ALL TOOLS BUTTONS - 3D GLASS - REPLACE YOUR OLD BUTTON ROW ===== -->
+<div id="toolButtons" style="margin-top:14px;padding:14px;background:linear-gradient(160deg,rgba(15,23,42,0.9),rgba(30,27,75,0.9));border:1px solid rgba(34,211,238,0.25);border-radius:22px;backdrop-filter:blur(12px);box-shadow:0 20px 50px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1)">
+<style>
+#toolButtons .btn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+#toolButtons .tbtn{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px 8px;border-radius:16px;background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.15);color:#e2e8f0;font-size:11px;font-weight:800;text-align:center;cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1);box-shadow:0 8px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);transform:perspective(600px) rotateX(5deg);user-select:none}
+#toolButtons .tbtn .icon{font-size:22px;filter:drop-shadow(0 4px 8px rgba(124,58,237,0.4))}
+#toolButtons .tbtn .num{position:absolute;top:6px;left:8px;font-size:9px;color:#94a3b8;font-weight:900}
+#toolButtons .tbtn:hover{transform:perspective(600px) rotateX(0deg) translateY(-4px) scale(1.04);background:linear-gradient(145deg,rgba(124,58,237,0.25),rgba(34,211,238,0.15));border-color:rgba(34,211,238,0.6);box-shadow:0 15px 35px rgba(124,58,237,0.4), 0 0 0 2px rgba(34,211,238,0.3);color:#fff}
+#toolButtons .tbtn:active{transform:perspective(600px) rotateX(0deg) translateY(-1px) scale(0.97)}
+#toolButtons .tbtn.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border-color:transparent;box-shadow:0 15px 40px rgba(124,58,237,0.6), 0 0 20px rgba(34,211,238,0.4);transform:perspective(600px) rotateX(0deg) translateY(-2px)}
+#toolButtons .tbtn.active .icon{filter:drop-shadow(0 0 12px rgba(255,255,255,0.6))}
+#toolButtons .tbtn .badge{position:absolute;top:-4px;right:-4px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:8px;font-weight:900;padding:2px 6px;border-radius:10px;box-shadow:0 4px 10px rgba(34,197,94,0.5)}
+@media(max-width:600px){#toolButtons .btn-grid{grid-template-columns:repeat(auto-fill,minmax(95px,1fr))} #toolButtons .tbtn{padding:10px 6px;font-size:10px}}
+</style>
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+<div style="font-size:13px;font-weight:900;color:#fff">⚡ 20 TOOLS - SELECT ONE</div>
+<div style="font-size:10px;color:#94a3b8">Click to Open Tool</div>
 </div>
-<!-- BUTTON SECTION END -->
+
+<div class="btn-grid">
+<!-- 1-10 -->
+<button class="tbtn active" data-tool="1"><span class="num">1</span><span class="icon">✂️</span>Resize Crop<span class="badge">NEW</span></button>
+<button class="tbtn" data-tool="2"><span class="num">2</span><span class="icon">📱</span>QR Generator</button>
+<button class="tbtn" data-tool="3"><span class="num">3</span><span class="icon">🖼️</span>JPG to PNG</button>
+<button class="tbtn" data-tool="4"><span class="num">4</span><span class="icon">📄</span>PDF Merge</button>
+<button class="tbtn" data-tool="5"><span class="num">5</span><span class="icon">✂️</span>PDF Split</button>
+<button class="tbtn" data-tool="6"><span class="num">6</span><span class="icon">📄</span>Image to PDF</button>
+<button class="tbtn" data-tool="7"><span class="num">7</span><span class="icon">🗑️</span>BG Remover</button>
+<button class="tbtn" data-tool="8"><span class="num">8</span><span class="icon">💧</span>Watermark</button>
+<button class="tbtn" data-tool="9"><span class="num">9</span><span class="icon">🖼️</span>Border Frame</button>
+<button class="tbtn" data-tool="10"><span class="num">10</span><span class="icon">🗜️</span>Compress</button>
+
+<!-- 11-20 -->
+<button class="tbtn" data-tool="11"><span class="num">11</span><span class="icon">🚀</span>Upscaler 4K</button>
+<button class="tbtn" data-tool="12"><span class="num">12</span><span class="icon">🔄</span>Converter</button>
+<button class="tbtn" data-tool="13"><span class="num">13</span><span class="icon">🎨</span>Color Palette</button>
+<button class="tbtn" data-tool="14"><span class="num">14</span><span class="icon">📝</span>Text to Poster</button>
+<button class="tbtn" data-tool="15"><span class="num">15</span><span class="icon">🎯</span>Logo Maker</button>
+<button class="tbtn" data-tool="16"><span class="num">16</span><span class="icon">🔗</span>Short URL</button>
+<button class="tbtn" data-tool="17"><span class="num">17</span><span class="icon">💳</span>BizCard</button>
+<button class="tbtn" data-tool="18"><span class="num">18</span><span class="icon">📑</span>Invoice</button>
+<button class="tbtn" data-tool="19"><span class="num">19</span><span class="icon">📸</span>Screen Capture</button>
+<button class="tbtn" data-tool="20"><span class="num">20</span><span class="icon">#️⃣</span>Hashtag Pro</button>
+</div>
+</div>
+
+<script>
+// BUTTON CLICK LOGIC - SHOW/HIDE TOOLS
+(function(){
+  const btns = document.querySelectorAll('#toolButtons .tbtn');
+  function showTool(n){
+    btns.forEach(b=>b.classList.remove('active'));
+    document.querySelector('#toolButtons .tbtn[data-tool="'+n+'"]').classList.add('active');
+    
+    // Hide all tools
+    document.querySelectorAll('[id^="tool"]').forEach(t=>t.style.display='none');
+    // Show selected tool
+    const tool = document.getElementById('tool'+n);
+    if(tool){ tool.style.display='block'; tool.scrollIntoView({behavior:'smooth', block:'start'}); }
+  }
+  
+  btns.forEach(btn=>{
+    btn.onclick=()=>{ showTool(btn.dataset.tool); }
+  });
+  
+  // Show Tool 1 by default
+  showTool(1);
+})();
+</script>
+<!-- ===== BUTTONS END ===== -->
 
 <!-- ===================== 20 TOOLS DETAILED SECTIONS START ===================== -->
 <!-- ===== TOOL 1 V2 - RESIZE PRO - 3D ATTRACTIVE - BUG FREE - REPLACE OLD TOOL 1 ===== -->
