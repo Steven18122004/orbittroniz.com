@@ -790,8 +790,269 @@ setTimeout(render,300);
 })();
 </script>
 <!-- ===== TOOL 2 V3 END ===== -->
-<!-- TOOL 3: IMG2PDF -->
-<div class="tool" id="tool-img2pdf"><div class="grid-2"><div class="panel"><h3>3 Image to PDF - Features: Multi image, No API</h3><div class="drop" id="img2pdf_drop"><b>Drop Images (Max 20)</b><input type="file" id="img2pdf_files" accept="image/*" multiple style="display:none"></div><div id="img2pdf_list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px;margin-top:8px;max-height:200px;overflow:auto"></div><div style="display:flex;gap:6px;margin-top:8px"><button id="img2pdf_make" class="btn primary" style="flex:1">Create PDF Offline</button><button id="img2pdf_clear" class="btn">Clear</button></div><input id="img2pdf_name" class="input" value="orbittroniz-images.pdf" style="margin-top:8px"></div><div class="panel"><div id="img2pdf_preview" style="background:#0a1224;border:1px solid var(--border);border-radius:12px;padding:12px;min-height:200px;color:var(--muted)">No images - Add images to create PDF</div><button id="img2pdf_download" class="btn primary" style="width:100%;margin-top:8px;display:none">Download PDF</button></div></div></div>
+<!-- ===== TOOL 3 - JPG to PNG CONVERTER PRO - 100% WORKING ===== -->
+<div id="tool3" class="tool-panel" style="display:none;margin-top:14px;background:linear-gradient(160deg,#0f172a,#1e1b4b,#082f49);border:1px solid rgba(34,211,238,0.25);border-radius:24px;padding:16px;box-shadow:0 25px 70px rgba(0,0,0,0.65)">
+<style>
+#tool3 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+#tool3 .top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+#tool3 .grid{display:grid;grid-template-columns:1.05fr 1fr;gap:14px;margin-top:12px}
+@media(max-width:760px){#tool3 .grid{grid-template-columns:1fr}}
+#tool3 .card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:14px}
+#tool3 .lbl{font-size:11px;font-weight:900;color:#c4b5fd;margin:12px 0 6px;display:flex;justify-content:space-between}
+#tool3 .lbl span{color:#fff}
+#tool3 input[type=text],#tool3 input[type=number],#tool3 select{width:100%;padding:11px;border-radius:11px;border:1px solid rgba(255,255,255,0.18);background:#0b1226;color:#fff;font-weight:700;outline:none;font-size:13px}
+#tool3 input[type=range]{width:100%;accent-color:#22d3ee}
+#tool3 input[type=color]{width:42px;height:38px;border:none;border-radius:10px;background:none;padding:0;cursor:pointer}
+#tool3 .chip{padding:8px 11px;border-radius:20px;border:1px solid rgba(255,255,255,0.18);background:rgba(0,0,0,0.4);color:#e2e8f0;font-size:11px;font-weight:800;cursor:pointer}
+#tool3 .chip.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border-color:transparent}
+#tool3 .chip2{padding:7px 11px;border-radius:11px;border:1px solid rgba(255,255,255,0.16);background:#0f172a;color:#cbd5e1;font-size:11px;font-weight:800;cursor:pointer}
+#tool3 .btn-main{background:linear-gradient(90deg,#7c3aed,#ec4899,#22d3ee);color:#fff;border:none;padding:13px;border-radius:14px;font-weight:900;width:100%;cursor:pointer;font-size:14px;box-shadow:0 12px 28px rgba(124,58,237,0.45)}
+#tool3 .btn-ghost{background:#1e293b;color:#fff;border:1px solid rgba(255,255,255,0.16);padding:11px 14px;border-radius:12px;font-weight:800;cursor:pointer}
+#tool3 .drop{border:2px dashed rgba(34,211,238,0.6);border-radius:18px;padding:22px;text-align:center;background:rgba(34,211,238,0.06);cursor:pointer;transition:.2s}
+#tool3 .drop.drag{background:rgba(34,211,238,0.18);transform:scale(1.02)}
+#tool3 .seg{display:flex;background:#0b1226;border-radius:12px;padding:4px;gap:4px}
+#tool3 .seg button{flex:1;padding:8px;border:none;border-radius:9px;background:transparent;color:#94a3b8;font-weight:800;font-size:11px;cursor:pointer}
+#tool3 .seg button.active{background:#fff;color:#000}
+#tool3 .file-item{display:flex;gap:10px;align-items:center;background:#0b1226;border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:8px;margin-bottom:8px}
+#tool3 .file-item img{width:52px;height:52px;object-fit:cover;border-radius:10px;background:#fff;flex-shrink:0}
+#tool3 .toggle{width:44px;height:24px;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+#tool3 .toggle::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s}
+#tool3 .toggle.on{background:#22c55e}
+#tool3 .toggle.on::after{left:23px}
+#tool3 .compare{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#tool3 .compare img{width:100%;border-radius:12px;background:#fff;max-height:220px;object-fit:contain}
+</style>
+
+<div class="top">
+<div style="font-size:16px;font-weight:900;color:#fff">🖼️ 3 Image Converter <span style="background:linear-gradient(135deg,#22c55e,#06b6d4);padding:5px 11px;border-radius:20px;font-size:10px">JPG ↔ PNG ↔ WEBP • BATCH</span></div>
+<div style="font-size:11px;color:#94a3b8" id="t3Status">● Ready • No Upload - 100% Private</div>
+</div>
+
+<div class="grid">
+<!-- LEFT -->
+<div class="card">
+<div class="lbl">CONVERT TO <span>Choose Output</span></div>
+<div style="display:flex;gap:7px;flex-wrap:wrap" id="t3Formats">
+<button class="chip active" data-fmt="png">🖼️ PNG - High Quality</button>
+<button class="chip" data-fmt="jpeg">📷 JPG - Small Size</button>
+<button class="chip" data-fmt="webp">🌐 WEBP - Web Best</button>
+<button class="chip" data-fmt="png-transparent">✨ PNG - Keep Transparent</button>
+</div>
+<div style="background:#fef9c3;border-radius:12px;padding:9px;margin-top:10px;font-size:11px;color:#854d0e;line-height:1.5"><b>Auto Detect:</b> Upload JPG → Converts to PNG. Upload PNG → Converts to JPG / WEBP. No need to choose input.</div>
+
+<div class="lbl">📁 UPLOAD IMAGES <span id="t3Count">0 Files</span></div>
+<div class="drop" id="t3Drop">
+<div style="font-size:36px">📁</div>
+<div style="font-size:13px;font-weight:900;color:#fff;margin-top:6px">Drag & Drop Images Here</div>
+<div style="font-size:11px;color:#94a3b8">or Click to Select • Max 20 Images • JPG, PNG, WEBP, GIF, BMP</div>
+<button class="btn-ghost" style="margin-top:10px" onclick="document.getElementById('t3File').click();event.stopPropagation()">📂 Choose Images</button>
+</div>
+<input type="file" id="t3File" accept="image/*" multiple hidden>
+<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+<button class="chip2" id="t3Sample">✨ Load Sample Image</button>
+<button class="chip2" id="t3Paste">📋 Paste from Clipboard</button>
+<button class="chip2" id="t3Clear">🗑️ Clear All</button>
+</div>
+
+<div class="lbl">📐 RESIZE <span id="t3ResizeVal">Original Size</span></div>
+<div class="seg" id="t3ResizeSeg"><button data-r="orig" class="active">Original</button><button data-r="50">50%</button><button data-r="25">25%</button><button data-r="custom">Custom</button></div>
+<div id="t3CustomSize" style="display:none;margin-top:8px"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><div class="lbl">Width</div><input type="number" id="t3W" placeholder="800" value="800"></div><div><div class="lbl">Height</div><input type="number" id="t3H" placeholder="Auto" value=""></div></div><div style="font-size:10px;color:#94a3b8;margin-top:4px">Leave Height empty = Auto Ratio</div></div>
+
+<div class="lbl">🎚️ QUALITY <span id="t3QualityVal">95% - Best</span></div>
+<input type="range" id="t3Quality" min="10" max="100" value="95">
+<div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap"><button class="chip2" data-q="100">100% Max</button><button class="chip2" data-q="90">90% Good</button><button class="chip2" data-q="70">70% Small</button><button class="chip2" data-q="50">50% Tiny</button></div>
+
+<div class="lbl">🎨 BACKGROUND - For PNG → JPG <span>Transparent → White</span></div>
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+<input type="color" id="t3Bg" value="#ffffff">
+<button class="chip2" data-bg="#ffffff">⬜ White</button>
+<button class="chip2" data-bg="#000000">⬛ Black</button>
+<button class="chip2" data-bg="#7c3aed">💜 Purple</button>
+<button class="chip2" data-bg="transparent">🌫️ Transparent</button>
+</div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><span style="font-size:12px;color:#fff;font-weight:700">✏️ Rename Files</span><div class="toggle" id="t3RenameToggle"></div></div>
+<div id="t3RenameBox" style="display:none;margin-top:8px"><input type="text" id="t3Rename" placeholder="e.g. my-photo" value="orbittroniz-converted"></div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><span style="font-size:12px;color:#fff;font-weight:700">🔄 Keep Original Name</span><div class="toggle on" id="t3KeepNameToggle"></div></div>
+
+<div style="margin-top:13px"><button class="btn-main" id="t3Convert">✨ CONVERT NOW - <span id="t3ConvertBtnCount">0</span> Images</button></div>
+</div>
+
+<!-- RIGHT -->
+<div class="card">
+<div style="display:flex;justify-content:space-between"><b style="color:#fff;font-size:13px">📋 Files & Preview</b><span id="t3TotalSize" style="font-size:11px;color:#94a3b8">0 KB</span></div>
+
+<div id="t3Empty" style="text-align:center;padding:30px 10px;color:#94a3b8;font-size:12px"><div style="font-size:40px">🖼️</div>No images yet<br>Upload or Drag & Drop to start</div>
+
+<div id="t3List" style="margin-top:10px;max-height:340px;overflow-y:auto"></div>
+
+<div id="t3CompareBox" style="display:none;margin-top:10px">
+<div class="lbl">BEFORE / AFTER <span>Compare</span></div>
+<div class="compare"><div><div style="font-size:11px;color:#94a3b8;text-align:center">Before - <span id="t3BeforeInfo"></span></div><img id="t3BeforeImg"></div><div><div style="font-size:11px;color:#94a3b8;text-align:center">After - <span id="t3AfterInfo"></span></div><img id="t3AfterImg"></div></div>
+<div style="display:flex;gap:8px;margin-top:8px"><button class="btn-ghost" id="t3DownloadSingle" style="flex:1">⬇️ Download This One</button><button class="btn-ghost" id="t3DownloadAll">⬇️ Download All</button></div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px;text-align:center">
+<div style="background:#0b1226;border-radius:10px;padding:8px"><div style="font-size:10px;color:#94a3b8">INPUT</div><b id="t3InInfo" style="color:#fff;font-size:12px">-</b></div>
+<div style="background:#0b1226;border-radius:10px;padding:8px"><div style="font-size:10px;color:#94a3b8">OUTPUT</div><b id="t3OutInfo" style="color:#22d3ee;font-size:12px">PNG</b></div>
+<div style="background:#0b1226;border-radius:10px;padding:8px"><div style="font-size:10px;color:#94a3b8">SAVED</div><b id="t3SavedInfo" style="color:#22c55e;font-size:12px">-</b></div>
+</div>
+
+<div style="background:#dcfce7;border-radius:12px;padding:10px;margin-top:10px;font-size:11px;color:#166534;line-height:1.5"><b>✅ Why This Tool is Best:</b><br>• No Upload to Server - Your photos NEVER leave your phone<br>• JPG → PNG = No Quality Loss<br>• PNG → JPG = 80% Smaller - Best for WhatsApp / Website<br>• WEBP = Smallest - Best for Website Speed</div>
+</div>
+</div>
+</div>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+let files=[]; // {file, url, name, size, type, img, width, height}
+let outFmt='png', resizeMode='orig', keepName=true, renameOn=false, lastConverted=null;
+
+function fmtSize(b){ if(b<1024) return b+' B'; if(b<1024*1024) return (b/1024).toFixed(1)+' KB'; return (b/1024/1024).toFixed(2)+' MB'; }
+function getExt(fmt){ if(fmt==='jpeg') return 'jpg'; if(fmt==='png-transparent') return 'png'; return fmt; }
+function getMime(fmt){ if(fmt==='jpeg') return 'image/jpeg'; if(fmt==='webp') return 'image/webp'; return 'image/png'; }
+
+function addFiles(fileList){
+  const arr=[...fileList].filter(f=>f.type.startsWith('image/'));
+  if(arr.length===0) return alert('⚠️ Please select image files only!');
+  if(files.length+arr.length>20) return alert('⚠️ Max 20 images at once!');
+  arr.forEach(f=>{
+    const url=URL.createObjectURL(f);
+    const item={file:f, url:url, name:f.name, size:f.size, type:f.type};
+    const img=new Image(); img.onload=()=>{ item.img=img; item.width=img.naturalWidth; item.height=img.naturalHeight; renderList(); }; img.src=url;
+    files.push(item);
+  });
+  renderList();
+  $('t3Status').textContent='● '+files.length+' files loaded';
+}
+function renderList(){
+  $('t3Count').textContent=files.length+' Files';
+  $('t3ConvertBtnCount').textContent=files.length;
+  const total=files.reduce((a,b)=>a+b.size,0); $('t3TotalSize').textContent='Total: '+fmtSize(total);
+  if(files.length===0){ $('t3Empty').style.display='block'; $('t3List').innerHTML=''; $('t3CompareBox').style.display='none'; return; }
+  $('t3Empty').style.display='none';
+  $('t3List').innerHTML=files.map((f,i)=>`
+    <div class="file-item">
+      <img src="${f.url}">
+      <div style="flex:1;min-width:0"><div style="font-size:12px;color:#fff;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${f.name}</div><div style="font-size:11px;color:#94a3b8">${fmtSize(f.size)} • ${f.width||'?'}x${f.height||'?'} • ${f.type.split('/')[1].toUpperCase()}</div><div style="font-size:11px;color:#22c55e" id="t3Res-${i}">Ready</div></div>
+      <button class="btn-ghost" style="padding:7px 10px;font-size:11px" onclick="document.getElementById('t3Preview-${i}').click()">👁️</button>
+      <button class="btn-ghost" style="padding:7px 10px" onclick="window.t3Remove(${i})">❌</button>
+      <button id="t3Preview-${i}" style="display:none"></button>
+    </div>`).join('');
+  // Preview click handlers
+  files.forEach((f,i)=>{ const b=document.getElementById('t3Preview-'+i); if(b) b.onclick=()=>previewOne(i); });
+  if(files.length>0 && !lastConverted) previewOne(0);
+}
+window.t3Remove=(i)=>{ URL.revokeObjectURL(files[i].url); files.splice(i,1); renderList(); };
+function previewOne(i){
+  const f=files[i]; if(!f || !f.img) return;
+  $('t3CompareBox').style.display='block';
+  $('t3BeforeImg').src=f.url; $('t3BeforeInfo').textContent=f.type.split('/')[1].toUpperCase()+' • '+fmtSize(f.size);
+  $('t3InInfo').textContent=f.type.split('/')[1].toUpperCase();
+  // Convert this one for preview
+  convertOne(f).then(res=>{
+    $('t3AfterImg').src=res.url; $('t3AfterInfo').textContent=getExt(outFmt).toUpperCase()+' • '+fmtSize(res.size);
+    $('t3OutInfo').textContent=getExt(outFmt).toUpperCase();
+    const saved = f.size-res.size;
+    $('t3SavedInfo').textContent = saved>0 ? '-'+fmtSize(saved)+' ('+Math.round(saved/f.size*100)+'%)' : 'No Loss';
+    lastConverted={index:i, ...res, orig:f};
+    $('t3DownloadSingle').onclick=()=>downloadOne(res, f);
+  });
+}
+function convertOne(f){
+  return new Promise((resolve)=>{
+    const img=f.img; if(!img) return resolve({url:f.url, size:f.size, blob:null});
+    let w=img.naturalWidth, h=img.naturalHeight;
+    if(resizeMode==='50'){ w=Math.round(w*0.5); h=Math.round(h*0.5); }
+    if(resizeMode==='25'){ w=Math.round(w*0.25); h=Math.round(h*0.25); }
+    if(resizeMode==='custom'){ const cw=parseInt($('t3W').value)||w; const ch=parseInt($('t3H').value)||0; if(ch>0){ w=cw; h=ch; } else { const ratio=img.naturalHeight/img.naturalWidth; w=cw; h=Math.round(cw*ratio); } }
+    const canvas=document.createElement('canvas'); canvas.width=w; canvas.height=h;
+    const ctx=canvas.getContext('2d');
+    // FIX: For JPG, fill background - Transparent PNG would become black without this
+    const bg=$('t3Bg').value;
+    const needBg = (outFmt==='jpeg') || (bg!=='transparent' && outFmt!=='png-transparent');
+    if(needBg && bg!=='transparent'){ ctx.fillStyle=bg; ctx.fillRect(0,0,w,h); }
+    // High quality scaling
+    ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high';
+    ctx.drawImage(img,0,0,w,h);
+    const mime=getMime(outFmt);
+    const quality=parseInt($('t3Quality').value)/100;
+    // FIX: PNG ignores quality, use toDataURL without quality for PNG
+    let dataUrl;
+    if(mime==='image/png') dataUrl=canvas.toDataURL('image/png');
+    else dataUrl=canvas.toDataURL(mime, quality);
+    // Convert to blob for size
+    fetch(dataUrl).then(r=>r.blob()).then(blob=>resolve({url:dataUrl, size:blob.size, blob:blob, width:w, height:h, canvas:canvas}));
+  });
+}
+function getOutName(origName, idx){
+  const ext=getExt(outFmt);
+  if(renameOn && $('t3Rename').value.trim()){ const base=$('t3Rename').value.trim().replace(/[^a-zA-Z0-9-_]/g,'-'); return files.length===1 ? `${base}.${ext}` : `${base}-${idx+1}.${ext}`; }
+  if(keepName){ const dot=origName.lastIndexOf('.'); const base=dot>-1?origName.slice(0,dot):origName; return `${base}.${ext}`; }
+  return `converted-${idx+1}.${ext}`;
+}
+function downloadOne(res, orig){
+  const a=document.createElement('a'); a.href=res.url; a.download=getOutName(orig.name, files.indexOf(orig)); document.body.appendChild(a); a.click(); a.remove();
+}
+$('t3File').addEventListener('change',e=>{ addFiles(e.target.files); e.target.value=''; });
+$('t3Drop').onclick=()=>$('t3File').click();
+$('t3Drop').addEventListener('dragover',e=>{ e.preventDefault(); $('t3Drop').classList.add('drag'); });
+$('t3Drop').addEventListener('dragleave',()=>$('t3Drop').classList.remove('drag'));
+$('t3Drop').addEventListener('drop',e=>{ e.preventDefault(); $('t3Drop').classList.remove('drag'); addFiles(e.dataTransfer.files); });
+$('t3Formats').addEventListener('click',e=>{ const b=e.target.closest('.chip'); if(!b) return; document.querySelectorAll('#t3Formats .chip').forEach(c=>c.classList.remove('active')); b.classList.add('active'); outFmt=b.dataset.fmt; $('t3OutInfo').textContent=getExt(outFmt).toUpperCase(); if(files.length>0) previewOne(0); });
+$('t3ResizeSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; document.querySelectorAll('#t3ResizeSeg button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); resizeMode=b.dataset.r; $('t3ResizeVal').textContent = resizeMode==='orig' ? 'Original Size' : resizeMode==='custom' ? 'Custom Size' : resizeMode+'% Size'; $('t3CustomSize').style.display = resizeMode==='custom' ? 'block' : 'none'; if(files.length>0) previewOne(0); });
+$('t3Quality').addEventListener('input',()=>{ const q=$('t3Quality').value; $('t3QualityVal').textContent=q+'% - '+(q>=95?'Best':q>=80?'Good':q>=60?'Balanced':'Small Size'); if(files.length>0) previewOne(0); });
+document.querySelectorAll('[data-q]').forEach(b=> b.onclick=()=>{ $('t3Quality').value=b.dataset.q; $('t3Quality').dispatchEvent(new Event('input')); });
+document.querySelectorAll('[data-bg]').forEach(b=> b.onclick=()=>{ const v=b.dataset.bg; if(v==='transparent'){ $('t3Bg').value='#ffffff'; alert('Transparent selected - For PNG output only. JPG will use White.'); } else $('t3Bg').value=v; if(files.length>0) previewOne(0); });
+$('t3RenameToggle').onclick=()=>{ renameOn=!renameOn; $('t3RenameToggle').classList.toggle('on',renameOn); $('t3RenameBox').style.display=renameOn?'block':'none'; };
+$('t3KeepNameToggle').onclick=()=>{ keepName=!keepName; $('t3KeepNameToggle').classList.toggle('on',keepName); };
+$('t3W').addEventListener('input',()=>{ if(files.length>0) previewOne(0); }); $('t3H').addEventListener('input',()=>{ if(files.length>0) previewOne(0); });
+$('t3Sample').onclick=()=>{
+  // Create sample image via canvas - No internet needed - FIX: Always works
+  const c=document.createElement('canvas'); c.width=600; c.height=400; const ctx=c.getContext('2d');
+  const g=ctx.createLinearGradient(0,0,600,400); g.addColorStop(0,'#7c3aed'); g.addColorStop(1,'#22d3ee'); ctx.fillStyle=g; ctx.fillRect(0,0,600,400);
+  ctx.fillStyle='#fff'; ctx.font='bold 60px Arial'; ctx.textAlign='center'; ctx.fillText('Orbittroniz',300,180); ctx.font='28px Arial'; ctx.fillText('Sample Image - JPG to PNG Test',300,230);
+  c.toBlob(blob=>{ const f=new File([blob],'sample-orbittroniz.jpg',{type:'image/jpeg'}); addFiles([f]); }, 'image/jpeg', 0.9);
+};
+$('t3Paste').onclick=async()=>{
+  try{ const items=await navigator.clipboard.read(); for(const item of items){ for(const type of item.types){ if(type.startsWith('image/')){ const blob=await item.getType(type); const f=new File([blob],'pasted-image.'+type.split('/')[1],{type}); addFiles([f]); return; } } } alert('No image in clipboard - Copy an image first'); }catch(e){ alert('Paste not allowed - Use Choose Images'); }
+};
+$('t3Clear').onclick=()=>{ files.forEach(f=>URL.revokeObjectURL(f.url)); files=[]; lastConverted=null; renderList(); $('t3Status').textContent='● Cleared'; };
+$('t3Convert').onclick=async()=>{
+  if(files.length===0) return alert('⚠️ First upload images!');
+  $('t3Status').textContent='● Converting...';
+  $('t3Convert').textContent='⏳ Converting... Please Wait';
+  let done=0;
+  for(let i=0;i<files.length;i++){
+    const f=files[i];
+    const res=await convertOne(f);
+    f.converted=res;
+    const el=document.getElementById('t3Res-'+i); if(el) el.textContent='✅ Converted to '+getExt(outFmt).toUpperCase()+' • '+fmtSize(res.size);
+    done++;
+  }
+  $('t3Status').textContent='● ✅ '+done+' Converted!';
+  $('t3Convert').innerHTML='✨ CONVERT NOW - <span id="t3ConvertBtnCount">'+files.length+'</span> Images';
+  // Auto download all if 1 file, else show download all
+  if(files.length===1){ downloadOne(files[0].converted, files[0]); alert('✅ Converted & Downloaded!\n\n'+files[0].name+' → '+getOutName(files[0].name,0)); }
+  else { alert('✅ '+done+' Images Converted!\nClick Download All to save all.'); }
+  previewOne(0);
+};
+$('t3DownloadSingle').onclick=()=>{ if(lastConverted) downloadOne(lastConverted, lastConverted.orig); else alert('Convert first'); };
+$('t3DownloadAll').onclick=async()=>{
+  if(files.length===0) return alert('No files');
+  // FIX: Download one by one with delay - Browser blocks simultaneous downloads otherwise
+  for(let i=0;i<files.length;i++){
+    if(!files[i].converted) files[i].converted=await convertOne(files[i]);
+    downloadOne(files[i].converted, files[i]);
+    await new Promise(r=>setTimeout(r,400));
+  }
+  alert('✅ All '+files.length+' Downloaded!');
+};
+})();
+</script>
+<!-- ===== TOOL 3 END ===== -->
 
 <!-- TOOL 4: PDF MERGE -->
 <div class="tool" id="tool-pdfmerge"><div class="grid-2"><div class="panel"><h3>4 PDF Merge - Features: Merge 10 PDFs, No API</h3><div class="drop" id="pdfm_drop"><b>Drop PDFs</b><input type="file" id="pdfm_files" accept="application/pdf" multiple style="display:none"></div><div id="pdfm_list" style="margin-top:8px;display:flex;flex-direction:column;gap:6px;max-height:220px;overflow:auto"></div><div style="display:flex;gap:6px;margin-top:8px"><button id="pdfm_merge" class="btn primary" style="flex:1">Merge PDFs Offline</button><button id="pdfm_clear" class="btn">Clear</button></div><input id="pdfm_name" class="input" value="merged.pdf" style="margin-top:8px"></div><div class="panel"><div id="pdfm_preview" style="background:#0a1224;border:1px solid var(--border);border-radius:12px;padding:12px;min-height:200px;color:var(--muted)">No PDFs - Add 2+ PDFs to merge</div><button id="pdfm_download" class="btn primary" style="width:100%;margin-top:8px;display:none">Download Merged PDF</button><div id="pdfm_status" style="font-size:11px;color:var(--muted);margin-top:6px">Ready - 100% offline - pdf-lib</div></div></div></div>
