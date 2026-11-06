@@ -92,77 +92,186 @@ canvas { max-width: 100%; border-radius: 12px; background: #0a1224; display: blo
 </div>
 <!-- ===== HEADER END - NO LOGO - DO NOT PASTE AGAIN ===== -->
 
-<!-- ===== ALL TOOLS BUTTONS - 3D GLASS - REPLACE YOUR OLD BUTTON ROW ===== -->
-<div id="toolButtons" style="margin-top:14px;padding:14px;background:linear-gradient(160deg,rgba(15,23,42,0.9),rgba(30,27,75,0.9));border:1px solid rgba(34,211,238,0.25);border-radius:22px;backdrop-filter:blur(12px);box-shadow:0 20px 50px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1)">
+<!-- ===== DASHBOARD V3 - FIXED + ATTRACTIVE + LOVED FEATURES ===== -->
+<div id="dashboardV3" style="margin-top:12px">
 <style>
-#toolButtons .btn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
-#toolButtons .tbtn{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px 8px;border-radius:16px;background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.15);color:#e2e8f0;font-size:11px;font-weight:800;text-align:center;cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1);box-shadow:0 8px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);transform:perspective(600px) rotateX(5deg);user-select:none}
-#toolButtons .tbtn .icon{font-size:22px;filter:drop-shadow(0 4px 8px rgba(124,58,237,0.4))}
-#toolButtons .tbtn .num{position:absolute;top:6px;left:8px;font-size:9px;color:#94a3b8;font-weight:900}
-#toolButtons .tbtn:hover{transform:perspective(600px) rotateX(0deg) translateY(-4px) scale(1.04);background:linear-gradient(145deg,rgba(124,58,237,0.25),rgba(34,211,238,0.15));border-color:rgba(34,211,238,0.6);box-shadow:0 15px 35px rgba(124,58,237,0.4), 0 0 0 2px rgba(34,211,238,0.3);color:#fff}
-#toolButtons .tbtn:active{transform:perspective(600px) rotateX(0deg) translateY(-1px) scale(0.97)}
-#toolButtons .tbtn.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border-color:transparent;box-shadow:0 15px 40px rgba(124,58,237,0.6), 0 0 20px rgba(34,211,238,0.4);transform:perspective(600px) rotateX(0deg) translateY(-2px)}
-#toolButtons .tbtn.active .icon{filter:drop-shadow(0 0 12px rgba(255,255,255,0.6))}
-#toolButtons .tbtn .badge{position:absolute;top:-4px;right:-4px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:8px;font-weight:900;padding:2px 6px;border-radius:10px;box-shadow:0 4px 10px rgba(34,197,94,0.5)}
-@media(max-width:600px){#toolButtons .btn-grid{grid-template-columns:repeat(auto-fill,minmax(95px,1fr))} #toolButtons .tbtn{padding:10px 6px;font-size:10px}}
+#dashboardV3 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+#dashboardV3 .topnav{position:sticky;top:8px;z-index:50;display:flex;align-items:center;gap:7px;padding:9px;background:rgba(15,23,42,0.92);backdrop-filter:blur(14px);border:1px solid rgba(34,211,238,0.35);border-radius:16px;box-shadow:0 14px 35px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.12)}
+#dashboardV3 .navbtn{display:flex;align-items:center;gap:5px;padding:9px 11px;border-radius:12px;border:1px solid rgba(255,255,255,0.15);background:linear-gradient(145deg,rgba(255,255,255,0.13),rgba(255,255,255,0.02));color:#fff;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap;transition:.2s}
+#dashboardV3 .navbtn:active{transform:scale(0.93)}
+#dashboardV3 .navbtn.active{background:linear-gradient(135deg,#7c3aed,#06b6d4);box-shadow:0 8px 22px rgba(124,58,237,0.55)}
+#dashboardV3 .search{flex:1;display:flex;align-items:center;gap:6px;background:#0b1226;border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:8px 10px;min-width:0}
+#dashboardV3 .search input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-size:13px;font-weight:600;min-width:0}
+#dashboardV3 .search input::placeholder{color:#64748b}
+#dashboardV3 .hero{margin-top:10px;background:linear-gradient(135deg,#7c3aed 0%,#ec4899 45%,#06b6d4 100%);background-size:200% 200%;animation:heroGrad 6s ease infinite;border-radius:20px;padding:15px;color:#fff;position:relative;overflow:hidden;box-shadow:0 18px 40px rgba(124,58,237,0.45)}
+@keyframes heroGrad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+#dashboardV3 .hero::after{content:'';position:absolute;width:160px;height:160px;background:rgba(255,255,255,0.18);border-radius:50%;right:-40px;top:-50px;filter:blur(2px)}
+#dashboardV3 .panel{margin-top:10px;background:linear-gradient(160deg,rgba(15,23,42,0.96),rgba(30,27,75,0.96));border:1px solid rgba(34,211,238,0.25);border-radius:20px;padding:13px;box-shadow:0 18px 45px rgba(0,0,0,0.6)}
+#dashboardV3 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:600px){#dashboardV3 .grid{grid-template-columns:repeat(3,1fr)} #dashboardV3 .navbtn span.txt{display:none}}
+#dashboardV3 .tbtn{position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;padding:13px 5px 11px;border-radius:17px;background:linear-gradient(145deg,rgba(255,255,255,0.13),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.15);color:#e2e8f0;font-size:11px;font-weight:800;cursor:pointer;transition:.2s;box-shadow:0 8px 18px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);transform:perspective(600px) rotateX(4deg)}
+#dashboardV3 .tbtn:hover{transform:translateY(-4px) scale(1.04);border-color:#22d3ee;box-shadow:0 15px 32px rgba(34,211,238,0.35)}
+#dashboardV3 .tbtn:active{transform:scale(0.95)}
+#dashboardV3 .tbtn.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;box-shadow:0 14px 32px rgba(124,58,237,0.6);border-color:transparent}
+#dashboardV3 .tbtn .ic{font-size:24px;line-height:1;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3))}
+#dashboardV3 .tbtn .heart{position:absolute;top:5px;right:6px;font-size:13px;cursor:pointer;z-index:2;opacity:0.6}
+#dashboardV3 .tbtn .heart.fav{opacity:1;transform:scale(1.2)}
+#dashboardV3 .tbtn .badge{position:absolute;top:-5px;left:6px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:8px;font-weight:900;padding:2px 6px;border-radius:10px}
+#dashboardV3 .chip{padding:7px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.16);background:#0b1226;color:#cbd5e1;font-size:11px;font-weight:800;cursor:pointer}
+#dashboardV3 .chip.active{background:#fff;color:#000}
+#dashboardV3 .recent{display:flex;gap:8px;overflow-x:auto;padding:4px 2px;scrollbar-width:none}
+#dashboardV3 .recent::-webkit-scrollbar{display:none}
+#dashboardV3 .recent-item{flex-shrink:0;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);padding:7px 11px;border-radius:20px;color:#fff;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}
 </style>
 
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-<div style="font-size:13px;font-weight:900;color:#fff">⚡ 20 TOOLS - SELECT ONE</div>
-<div style="font-size:10px;color:#94a3b8">Click to Open Tool</div>
+<!-- TOP NAV -->
+<div class="topnav">
+<button class="navbtn active" id="v3Home">🏠 <span class="txt">Home</span></button>
+<button class="navbtn" id="v3Menu">☰ <span class="txt">Menu</span></button>
+<div class="search"><span>🔍</span><input id="v3Search" placeholder="Search tool..."></div>
+<button class="navbtn" id="v3FavBtn">⭐ <span id="v3FavCount">0</span></button>
+<button class="navbtn" id="v3All">⚡ <span class="txt">All</span></button>
 </div>
 
-<div class="btn-grid">
-<!-- 1-10 -->
-<button class="tbtn active" data-tool="1"><span class="num">1</span><span class="icon">✂️</span>Resize Crop<span class="badge">NEW</span></button>
-<button class="tbtn" data-tool="2"><span class="num">2</span><span class="icon">📱</span>QR Generator</button>
-<button class="tbtn" data-tool="3"><span class="num">3</span><span class="icon">🖼️</span>JPG to PNG</button>
-<button class="tbtn" data-tool="4"><span class="num">4</span><span class="icon">📄</span>PDF Merge</button>
-<button class="tbtn" data-tool="5"><span class="num">5</span><span class="icon">✂️</span>PDF Split</button>
-<button class="tbtn" data-tool="6"><span class="num">6</span><span class="icon">📄</span>Image to PDF</button>
-<button class="tbtn" data-tool="7"><span class="num">7</span><span class="icon">🗑️</span>BG Remover</button>
-<button class="tbtn" data-tool="8"><span class="num">8</span><span class="icon">💧</span>Watermark</button>
-<button class="tbtn" data-tool="9"><span class="num">9</span><span class="icon">🖼️</span>Border Frame</button>
-<button class="tbtn" data-tool="10"><span class="num">10</span><span class="icon">🗜️</span>Compress</button>
+<!-- MENU -->
+<div id="v3MenuPanel" style="display:none;margin-top:10px;background:#0b1226;border:1px solid rgba(255,255,255,0.15);border-radius:16px;padding:12px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<button class="navbtn" style="justify-content:center" onclick="location.reload()">🔄 Refresh</button>
+<button class="navbtn" style="justify-content:center" id="v3Share">🔗 Share Site</button>
+<button class="navbtn" style="justify-content:center" id="v3Install">📲 Install App</button>
+<button class="navbtn" style="justify-content:center" id="v3CopyLink">📋 Copy Link</button>
+</div>
+<div style="text-align:center;font-size:11px;color:#94a3b8;margin-top:10px">orbittroniz.com • 20 Free Tools • No Login • No Watermark</div>
+</div>
 
-<!-- 11-20 -->
-<button class="tbtn" data-tool="11"><span class="num">11</span><span class="icon">🚀</span>Upscaler 4K</button>
-<button class="tbtn" data-tool="12"><span class="num">12</span><span class="icon">🔄</span>Converter</button>
-<button class="tbtn" data-tool="13"><span class="num">13</span><span class="icon">🎨</span>Color Palette</button>
-<button class="tbtn" data-tool="14"><span class="num">14</span><span class="icon">📝</span>Text to Poster</button>
-<button class="tbtn" data-tool="15"><span class="num">15</span><span class="icon">🎯</span>Logo Maker</button>
-<button class="tbtn" data-tool="16"><span class="num">16</span><span class="icon">🔗</span>Short URL</button>
-<button class="tbtn" data-tool="17"><span class="num">17</span><span class="icon">💳</span>BizCard</button>
-<button class="tbtn" data-tool="18"><span class="num">18</span><span class="icon">📑</span>Invoice</button>
-<button class="tbtn" data-tool="19"><span class="num">19</span><span class="icon">📸</span>Screen Capture</button>
-<button class="tbtn" data-tool="20"><span class="num">20</span><span class="icon">#️⃣</span>Hashtag Pro</button>
+<!-- HERO -->
+<div class="hero" id="v3Hero">
+<div style="position:relative;z-index:1;display:flex;justify-content:space-between;gap:10px;align-items:center">
+<div><div style="font-size:18px;font-weight:900">👋 Welcome Back!</div><div style="font-size:11px;opacity:0.92;margin-top:3px">20 Tools • Free Forever • <span id="v3Used">0</span> tools used today</div>
+<div style="display:flex;gap:6px;margin-top:9px;flex-wrap:wrap"><span style="background:rgba(0,0,0,0.28);padding:5px 10px;border-radius:20px;font-size:10px;font-weight:900">🔥 TRENDING: Resize</span><span style="background:#fff;color:#7c3aed;padding:5px 10px;border-radius:20px;font-size:10px;font-weight:900" id="v3Continue">▶ Continue Last Tool</span></div></div>
+<div style="font-size:36px;position:relative;z-index:1">🚀</div>
+</div>
+</div>
+
+<!-- RECENT + FAV -->
+<div class="panel" id="v3RecentPanel" style="display:none">
+<div style="font-size:12px;font-weight:900;color:#fff;margin-bottom:8px">🕒 Recently Used</div>
+<div class="recent" id="v3Recent"></div>
+</div>
+
+<!-- ALL TOOLS -->
+<div class="panel">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><b style="color:#fff;font-size:13px">🧰 All Tools</b><span style="font-size:11px;color:#94a3b8" id="v3Count">20 Tools</span></div>
+<div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px" id="v3Cats">
+<button class="chip active" data-cat="all">All</button><button class="chip" data-cat="image">🖼️ Image</button><button class="chip" data-cat="pdf">📄 PDF</button><button class="chip" data-cat="business">💼 Business</button><button class="chip" data-cat="ai">✨ AI</button><button class="chip" data-cat="fav">⭐ Favs</button>
+</div>
+<div class="grid" id="v3Grid">
+<button class="tbtn active" data-tool="1" data-cat="image" data-name="resize crop image"><span class="heart" data-heart="1">🤍</span><span class="badge">HOT</span><span class="ic">✂️</span>Resize Crop</button>
+<button class="tbtn" data-tool="2" data-cat="business" data-name="qr generator code"><span class="heart" data-heart="2">🤍</span><span class="ic">📱</span>QR Generator</button>
+<button class="tbtn" data-tool="3" data-cat="image" data-name="jpg png convert"><span class="heart" data-heart="3">🤍</span><span class="ic">🖼️</span>JPG to PNG</button>
+<button class="tbtn" data-tool="4" data-cat="pdf" data-name="pdf merge"><span class="heart" data-heart="4">🤍</span><span class="ic">📄</span>PDF Merge</button>
+<button class="tbtn" data-tool="5" data-cat="pdf" data-name="pdf split"><span class="heart" data-heart="5">🤍</span><span class="ic">✂️</span>PDF Split</button>
+<button class="tbtn" data-tool="6" data-cat="pdf" data-name="image pdf"><span class="heart" data-heart="6">🤍</span><span class="ic">📄</span>Image to PDF</button>
+<button class="tbtn" data-tool="7" data-cat="ai" data-name="bg remover background"><span class="heart" data-heart="7">🤍</span><span class="badge">AI</span><span class="ic">🗑️</span>BG Remover</button>
+<button class="tbtn" data-tool="8" data-cat="image" data-name="watermark"><span class="heart" data-heart="8">🤍</span><span class="ic">💧</span>Watermark</button>
+<button class="tbtn" data-tool="9" data-cat="image" data-name="border frame"><span class="heart" data-heart="9">🤍</span><span class="ic">🖼️</span>Border Frame</button>
+<button class="tbtn" data-tool="10" data-cat="image" data-name="compress size"><span class="heart" data-heart="10">🤍</span><span class="ic">🗜️</span>Compress</button>
+<button class="tbtn" data-tool="11" data-cat="ai" data-name="upscaler 4k enhance"><span class="heart" data-heart="11">🤍</span><span class="badge">4K</span><span class="ic">🚀</span>Upscaler 4K</button>
+<button class="tbtn" data-tool="12" data-cat="image" data-name="converter"><span class="heart" data-heart="12">🤍</span><span class="ic">🔄</span>Converter</button>
+<button class="tbtn" data-tool="13" data-cat="business" data-name="color palette"><span class="heart" data-heart="13">🤍</span><span class="ic">🎨</span>Color Palette</button>
+<button class="tbtn" data-tool="14" data-cat="business" data-name="text poster"><span class="heart" data-heart="14">🤍</span><span class="ic">📝</span>Text Poster</button>
+<button class="tbtn" data-tool="15" data-cat="business" data-name="logo maker"><span class="heart" data-heart="15">🤍</span><span class="ic">🎯</span>Logo Maker</button>
+<button class="tbtn" data-tool="16" data-cat="business" data-name="short url link"><span class="heart" data-heart="16">🤍</span><span class="ic">🔗</span>Short URL</button>
+<button class="tbtn" data-tool="17" data-cat="business" data-name="bizcard business card"><span class="heart" data-heart="17">🤍</span><span class="ic">💳</span>BizCard</button>
+<button class="tbtn" data-tool="18" data-cat="business" data-name="invoice bill"><span class="heart" data-heart="18">🤍</span><span class="ic">📑</span>Invoice</button>
+<button class="tbtn" data-tool="19" data-cat="image" data-name="screen capture screenshot"><span class="heart" data-heart="19">🤍</span><span class="ic">📸</span>Screen Capture</button>
+<button class="tbtn" data-tool="20" data-cat="business" data-name="hashtag"><span class="heart" data-heart="20">🤍</span><span class="ic">#️⃣</span>Hashtag Pro</button>
+</div>
+<div id="v3No" style="display:none;text-align:center;color:#94a3b8;font-size:12px;padding:14px">No tool found ❌<br><button onclick="document.getElementById('v3Search').value='';document.getElementById('v3Search').dispatchEvent(new Event('input'))" style="margin-top:8px;padding:7px 14px;border-radius:20px;border:none;background:#7c3aed;color:#fff;font-weight:800">Show All Tools</button></div>
 </div>
 </div>
 
 <script>
-// BUTTON CLICK LOGIC - SHOW/HIDE TOOLS
 (function(){
-  const btns = document.querySelectorAll('#toolButtons .tbtn');
+  const grid=document.getElementById('v3Grid');
+  const btns=[...grid.querySelectorAll('.tbtn')];
+  let favs=[]; try{ favs=JSON.parse(localStorage.getItem('orbit_favs')||'[]'); }catch(e){favs=[]}
+  let recent=[]; try{ recent=JSON.parse(localStorage.getItem('orbit_recent')||'[]'); }catch(e){recent=[]}
+  let used=parseInt(localStorage.getItem('orbit_used')||'0');
+
+  function save(){ try{ localStorage.setItem('orbit_favs', JSON.stringify(favs)); localStorage.setItem('orbit_recent', JSON.stringify(recent)); localStorage.setItem('orbit_used', used); }catch(e){} }
+  function renderFavs(){
+    document.querySelectorAll('#dashboardV3 .heart').forEach(h=>{
+      const id=h.dataset.heart;
+      h.textContent = favs.includes(id) ? '❤️' : '🤍';
+      h.classList.toggle('fav', favs.includes(id));
+    });
+    document.getElementById('v3FavCount').textContent=favs.length;
+    document.getElementById('v3Used').textContent=used;
+  }
+  function renderRecent(){
+    const box=document.getElementById('v3Recent');
+    if(recent.length===0){ document.getElementById('v3RecentPanel').style.display='none'; return; }
+    document.getElementById('v3RecentPanel').style.display='block';
+    box.innerHTML=recent.slice(0,6).map(id=>{
+      const b=btns.find(x=>x.dataset.tool===id); if(!b) return '';
+      const ic=b.querySelector('.ic').textContent; const name=b.textContent.replace('🤍','').replace('❤️','').replace('HOT','').replace('AI','').replace('4K','').trim();
+      return `<div class="recent-item" data-recent="${id}">${ic} ${name}</div>`;
+    }).join('');
+    box.querySelectorAll('[data-recent]').forEach(el=> el.onclick=()=> showTool(el.dataset.recent));
+  }
   function showTool(n){
     btns.forEach(b=>b.classList.remove('active'));
-    document.querySelector('#toolButtons .tbtn[data-tool="'+n+'"]').classList.add('active');
-    
-    // Hide all tools
-    document.querySelectorAll('[id^="tool"]').forEach(t=>t.style.display='none');
-    // Show selected tool
-    const tool = document.getElementById('tool'+n);
-    if(tool){ tool.style.display='block'; tool.scrollIntoView({behavior:'smooth', block:'start'}); }
+    const sel=grid.querySelector('.tbtn[data-tool="'+n+'"]'); if(sel) sel.classList.add('active');
+    // FIX: Only hide .tool-panel, never dashboard
+    document.querySelectorAll('.tool-panel').forEach(t=>t.style.display='none');
+    const tool=document.getElementById('tool'+n);
+    used++; save(); renderFavs();
+    // Recent - move to front, no duplicates
+    recent=recent.filter(x=>x!==String(n)); recent.unshift(String(n)); if(recent.length>6) recent=recent.slice(0,6); save(); renderRecent();
+    if(tool){ tool.style.display='block'; setTimeout(()=>tool.scrollIntoView({behavior:'smooth',block:'start'}),80); }
+    else { alert('Tool '+n+' coming soon! Tool 1 is ready. Tell me Tool '+n+' to build it next.'); document.getElementById('tool1').style.display='block'; }
+    document.getElementById('v3MenuPanel').style.display='none';
   }
-  
-  btns.forEach(btn=>{
-    btn.onclick=()=>{ showTool(btn.dataset.tool); }
+  // Click tool - ignore heart click
+  btns.forEach(b=>{
+    b.addEventListener('click',e=>{ if(e.target.classList.contains('heart')) return; showTool(b.dataset.tool); });
   });
-  
-  // Show Tool 1 by default
-  showTool(1);
+  // Heart fav toggle
+  document.querySelectorAll('#dashboardV3 .heart').forEach(h=>{
+    h.onclick=(e)=>{ e.stopPropagation(); const id=h.dataset.heart; favs=favs.includes(id)?favs.filter(x=>x!==id):[...favs,id]; save(); renderFavs(); };
+  });
+  // Home
+  document.getElementById('v3Home').onclick=()=>{
+    document.querySelectorAll('#dashboardV3 .navbtn').forEach(x=>x.classList.remove('active')); document.getElementById('v3Home').classList.add('active');
+    document.querySelectorAll('.tool-panel').forEach(t=>t.style.display='none'); document.getElementById('tool1').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+  document.getElementById('v3Menu').onclick=()=>{ const p=document.getElementById('v3MenuPanel'); p.style.display=p.style.display==='none'?'block':'none'; };
+  document.getElementById('v3All').onclick=()=>{ document.querySelector('.panel').scrollIntoView({behavior:'smooth'}); };
+  document.getElementById('v3FavBtn').onclick=()=>{ document.querySelector('#v3Cats [data-cat="fav"]').click(); document.querySelector('.panel').scrollIntoView({behavior:'smooth'}); };
+  document.getElementById('v3Continue').onclick=()=>{ if(recent.length>0) showTool(recent[0]); else showTool('1'); };
+  // Cats
+  document.getElementById('v3Cats').addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b) return;
+    document.querySelectorAll('#v3Cats button').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    const cat=b.dataset.cat; let c=0;
+    btns.forEach(btn=>{ let show=true; if(cat==='fav') show=favs.includes(btn.dataset.tool); else if(cat!=='all') show=btn.dataset.cat===cat; btn.style.display=show?'flex':'none'; if(show) c++; });
+    document.getElementById('v3Count').textContent=c+' Tools'; document.getElementById('v3No').style.display=c===0?'block':'none';
+  });
+  // Search - FIX: reset works
+  document.getElementById('v3Search').addEventListener('input',e=>{
+    const q=e.target.value.toLowerCase().trim(); let c=0;
+    btns.forEach(btn=>{ const show=!q||btn.dataset.name.includes(q); btn.style.display=show?'flex':'none'; if(show) c++; });
+    document.getElementById('v3Count').textContent=c+' Tools'; document.getElementById('v3No').style.display=c===0?'block':'none';
+  });
+  document.getElementById('v3Share').onclick=async()=>{ const txt='Check orbittroniz.com - 20 Free Tools!'; try{ if(navigator.share) await navigator.share({title:'Orbittroniz',text:txt,url:location.href}); else { await navigator.clipboard.writeText(location.href); alert('Link copied!'); } }catch(e){} };
+  document.getElementById('v3CopyLink').onclick=async()=>{ try{ await navigator.clipboard.writeText(location.href); alert('✅ Link Copied!'); }catch(e){ alert(location.href); } };
+  document.getElementById('v3Install').onclick=()=>alert('📲 To Install: Chrome Menu (⋮) > Add to Home Screen > Install orbittroniz.com');
+  renderFavs(); renderRecent();
 })();
 </script>
-<!-- ===== BUTTONS END ===== -->
+<!-- ===== DASHBOARD V3 END ===== -->
 
 <!-- ===================== 20 TOOLS DETAILED SECTIONS START ===================== -->
 <!-- ===== TOOL 1 V2 - RESIZE PRO - 3D ATTRACTIVE - BUG FREE - REPLACE OLD TOOL 1 ===== -->
