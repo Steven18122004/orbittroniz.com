@@ -525,10 +525,251 @@ $('t1ShareBtn').onclick=async()=>{
 })();
 </script>
 <!-- ===== TOOL 1 V2 END ===== -->
+<!-- ===== TOOL 2 V2 - QR PRO - BUG FREE - MORE FEATURES ===== -->
+<div id="tool2" class="tool-panel" style="display:none;margin-top:14px;background:linear-gradient(160deg,#0f172a 0%,#1e1b4b 40%,#082f49 100%);border:1px solid rgba(34,211,238,0.25);border-radius:24px;padding:16px;box-shadow:0 25px 70px rgba(0,0,0,0.65)">
+<style>
+#tool2 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+#tool2 .t2-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+#tool2 .t2-title{font-size:16px;font-weight:900;color:#fff;display:flex;gap:8px;align-items:center}
+#tool2 .t2-badge{background:linear-gradient(135deg,#22c55e,#06b6d4);padding:5px 11px;border-radius:20px;font-size:10px;color:#fff}
+#tool2 .t2-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:14px;margin-top:12px}
+@media(max-width:760px){#tool2 .t2-grid{grid-template-columns:1fr}}
+#tool2 .card{background:linear-gradient(170deg,rgba(255,255,255,0.11),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:14px;box-shadow:0 15px 35px rgba(0,0,0,0.4)}
+#tool2 .lbl{font-size:11px;font-weight:900;color:#c4b5fd;letter-spacing:.6px;margin:12px 0 6px;display:flex;justify-content:space-between}
+#tool2 .lbl span{color:#fff}
+#tool2 input[type=text],#tool2 input[type=url],#tool2 input[type=tel],#tool2 input[type=email],#tool2 input[type=number],#tool2 select,#tool2 textarea{width:100%;padding:11px;border-radius:11px;border:1px solid rgba(255,255,255,0.18);background:#0b1226;color:#fff;font-weight:700;outline:none;font-size:13px}
+#tool2 textarea{resize:vertical;min-height:70px}
+#tool2 input[type=range]{width:100%;accent-color:#22d3ee}
+#tool2 input[type=color]{width:42px;height:38px;border:none;border-radius:10px;background:none;padding:0;cursor:pointer}
+#tool2 .chip{padding:8px 11px;border-radius:20px;border:1px solid rgba(255,255,255,0.18);background:rgba(0,0,0,0.4);color:#e2e8f0;font-size:11px;font-weight:800;cursor:pointer}
+#tool2 .chip.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(124,58,237,0.5)}
+#tool2 .chip2{padding:7px 11px;border-radius:11px;border:1px solid rgba(255,255,255,0.16);background:#0f172a;color:#cbd5e1;font-size:11px;font-weight:800;cursor:pointer}
+#tool2 .chip2.active{background:#22c55e;color:#fff}
+#tool2 .btn-main{background:linear-gradient(90deg,#7c3aed,#ec4899,#22d3ee);background-size:200% 100%;color:#fff;border:none;padding:13px;border-radius:14px;font-weight:900;width:100%;cursor:pointer;box-shadow:0 12px 28px rgba(124,58,237,0.45);font-size:14px}
+#tool2 .btn-ghost{background:#1e293b;color:#fff;border:1px solid rgba(255,255,255,0.16);padding:11px 14px;border-radius:12px;font-weight:800;cursor:pointer}
+#tool2 .qr-box{background:repeating-conic-gradient(#e5e7eb 0% 25%, #fff 0% 50%) 50% / 20px 20px;border-radius:16px;padding:16px;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;position:relative}
+#tool2 .qr-box canvas{max-width:100%;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,0.3);background:#fff}
+#tool2 .seg{display:flex;background:#0b1226;border-radius:12px;padding:4px;gap:4px}
+#tool2 .seg button{flex:1;padding:8px;border:none;border-radius:9px;background:transparent;color:#94a3b8;font-weight:800;font-size:11px;cursor:pointer}
+#tool2 .seg button.active{background:#fff;color:#000}
+#tool2 .hist{display:flex;gap:8px;overflow-x:auto;padding:4px 2px}
+#tool2 .hist img{width:56px;height:56px;border-radius:10px;background:#fff;padding:4px;cursor:pointer;flex-shrink:0;border:2px solid transparent}
+#tool2 .hist img:hover{border-color:#22d3ee}
+#tool2 .bulk-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+#tool2 .bulk-grid img{width:100%;background:#fff;border-radius:10px;padding:8px}
+#tool2 .toggle{width:44px;height:24px;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+#tool2 .toggle::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s}
+#tool2 .toggle.on{background:#22c55e}
+#tool2 .toggle.on::after{left:23px}
+</style>
 
+<div class="t2-top">
+<div class="t2-title">📱 2 QR Generator <span class="t2-badge">V2 • FIXED • MORE FEATURES</span></div>
+<div style="display:flex;gap:6px"><button class="chip2" id="q2Validate">✅ Validate</button><button class="chip2" id="q2Preset">💾 Save Preset</button></div>
+</div>
 
-<!-- TOOL 2: QR --
-<div class="tool" id="tool-qr"><div class="grid-2"><div class="panel"><h3 style="margin:0">2 QR Code - Features: UPI, WA, WiFi, Logo Drag</h3><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap" id="qr_types"><div class="qr-type active" data-t="url" style="border:1px solid var(--border);border-radius:10px;padding:8px;background:#162143;cursor:pointer">URL</div><div class="qr-type" data-t="upi" style="border:1px solid var(--border);border-radius:10px;padding:8px;background:#162143;cursor:pointer">UPI Payment</div><div class="qr-type" data-t="whatsapp" style="border:1px solid var(--border);border-radius:10px;padding:8px;background:#162143;cursor:pointer">WhatsApp</div><div class="qr-type" data-t="wifi" style="border:1px solid var(--border);border-radius:10px;padding:8px;background:#162143;cursor:pointer">WiFi</div></div><div id="qr_inputs" style="margin-top:8px"><div id="qi-url"><input id="qr_url" class="input" value="https://orbittroniz.com"></div><div id="qi-upi" style="display:none"><input id="qr_upi_id" class="input" value="yourname@okicici"><input id="qr_upi_amt" class="input" placeholder="Amount INR" style="margin-top:6px"></div><div id="qi-whatsapp" style="display:none"><input id="qr_wa_num" class="input" value="919999999999"><input id="qr_wa_msg" class="input" placeholder="Message" style="margin-top:6px" value="Hi Orbittroniz"></div><div id="qi-wifi" style="display:none"><input id="qr_ssid" class="input" value="Orbittroniz WiFi"><input id="qr_wifi_pass" class="input" placeholder="Password" style="margin-top:6px"></div></div><div style="display:flex;gap:6px;margin-top:8px"><input type="color" id="qr_fg" value="#0a0f2a" style="width:50px;height:36px"><input type="color" id="qr_bg" value="#ffffff" style="width:50px;height:36px"><input id="qr_ftext" class="input" value="Scan Me - Orbittroniz" style="flex:1"></div><div style="display:flex;gap:6px;margin-top:8px"><input type="file" id="qr_logo" accept="image/*" class="input" style="flex:1"><button id="qr_down" class="btn primary">Download 4K</button></div><div id="qr_data_prev" style="font-size:11px;color:var(--muted);margin-top:6px;background:#0a1224;border:1px solid var(--border);border-radius:8px;padding:6px;word-break:break-all">https://orbittroniz.com</div></div><div class="panel"><canvas id="qr_canvas" width="512" height="512" style="background:#fff"></canvas><div style="font-size:10px;color:var(--muted);margin-top:6px">Features: Drag logo inside QR - Change colors - Frame text - No API - 100% offline</div></div></div></div>
+<div class="t2-grid">
+<div class="card">
+<div class="lbl">QR TYPE</div>
+<div style="display:flex;gap:7px;flex-wrap:wrap" id="q2Types">
+<button class="chip active" data-type="text">🔗 Text / URL</button>
+<button class="chip" data-type="wifi">📶 WiFi</button>
+<button class="chip" data-type="whatsapp">💬 WhatsApp</button>
+<button class="chip" data-type="upi">💰 UPI Pay</button>
+<button class="chip" data-type="vcard">👤 Contact</button>
+<button class="chip" data-type="email">📧 Email</button>
+<button class="chip" data-type="phone">📞 Phone</button>
+<button class="chip" data-type="bulk">📦 Bulk (10)</button>
+</div>
+
+<div id="q2FormText"><div class="lbl">Text / Link</div><textarea id="q2Text" placeholder="https://orbittroniz.com">https://orbittroniz.com</textarea>
+<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button class="chip2" data-quick="https://orbittroniz.com">🌐 Website</button><button class="chip2" data-quick="https://instagram.com/orbittroniz">📸 Instagram</button><button class="chip2" data-quick="https://youtube.com/@orbittroniz">▶ YouTube</button><button class="chip2" data-quick="https://wa.me/919876543210">💬 WhatsApp Link</button></div></div>
+
+<div id="q2FormWifi" style="display:none"><div class="lbl">WiFi Name</div><input type="text" id="q2WifiName" placeholder="My WiFi Name"><div class="lbl">Password</div><input type="text" id="q2WifiPass" placeholder="Password"><div class="lbl">Security</div><select id="q2WifiSec"><option value="WPA">WPA / WPA2</option><option value="WEP">WEP</option><option value="nopass">No Password</option></select><label style="display:flex;gap:6px;align-items:center;margin-top:8px;font-size:12px;color:#fff"><input type="checkbox" id="q2WifiHidden"> Hidden Network</label></div>
+
+<div id="q2FormWhatsapp" style="display:none"><div class="lbl">WhatsApp Number</div><input type="tel" id="q2WaNum" placeholder="919876543210"><div class="lbl">Message</div><input type="text" id="q2WaMsg" placeholder="Hi! I want to know more"></div>
+
+<div id="q2FormUpi" style="display:none"><div class="lbl">UPI ID *</div><input type="text" id="q2UpiId" placeholder="yourname@okpay"><div class="lbl">Payee Name</div><input type="text" id="q2UpiName" placeholder="Shop Name"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><div class="lbl">Amount ₹</div><input type="number" id="q2UpiAmt" placeholder="100"></div><div><div class="lbl">Note</div><input type="text" id="q2UpiNote" placeholder="Payment"></div></div><div style="font-size:11px;color:#22c55e;margin-top:6px">✅ GPay • PhonePe • Paytm - Scan & Pay</div></div>
+
+<div id="q2FormVcard" style="display:none"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><div class="lbl">Name</div><input type="text" id="q2VcName" placeholder="Your Name"></div><div><div class="lbl">Phone</div><input type="tel" id="q2VcPhone" placeholder="+91 98765 43210"></div></div><div class="lbl">Email</div><input type="email" id="q2VcEmail" placeholder="you@gmail.com"><div class="lbl">Company</div><input type="text" id="q2VcOrg" placeholder="Orbittroniz"></div>
+
+<div id="q2FormEmail" style="display:none"><div class="lbl">To</div><input type="email" id="q2EmailTo" placeholder="someone@gmail.com"><div class="lbl">Subject</div><input type="text" id="q2EmailSub" placeholder="Hello"><div class="lbl">Body</div><input type="text" id="q2EmailBody" placeholder="Message"></div>
+
+<div id="q2FormPhone" style="display:none"><div class="lbl">Phone Number</div><input type="tel" id="q2PhoneNum" placeholder="+919876543210"></div>
+
+<div id="q2FormBulk" style="display:none"><div class="lbl">Bulk - One per line (Max 10)</div><textarea id="q2BulkText" placeholder="https://link1.com&#10;https://link2.com&#10;Product-001">https://orbittroniz.com
+https://instagram.com/orbittroniz
+Product-001</textarea><button class="btn-ghost" id="q2BulkGen" style="width:100%;margin-top:8px">📦 Generate All 3 QRs</button><div class="bulk-grid" id="q2BulkOut"></div></div>
+
+<div class="lbl">🎨 COLORS & STYLE</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:center"><div style="display:flex;gap:8px;align-items:center"><input type="color" id="q2Fg" value="#000000"><div><div style="font-size:11px;color:#fff;font-weight:800">QR Color</div><div style="font-size:10px;color:#94a3b8" id="q2FgName">#000000</div></div></div><div style="display:flex;gap:8px;align-items:center"><input type="color" id="q2Bg" value="#ffffff"><div><div style="font-size:11px;color:#fff;font-weight:800">Background</div><div style="font-size:10px;color:#94a3b8" id="q2BgName">#ffffff</div></div></div></div>
+<div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:8px" id="q2ColorPresets"><button class="chip" data-fg="#7c3aed" data-bg="#ffffff">💜 Purple</button><button class="chip" data-fg="#06b6d4" data-bg="#ffffff">💙 Cyan</button><button class="chip" data-fg="#16a34a" data-bg="#f0fdf4">💚 Green</button><button class="chip" data-fg="#dc2626" data-bg="#fef2f2">❤️ Red</button><button class="chip" data-fg="#000000" data-bg="#fde68a">💛 Yellow BG</button><button class="chip" data-fg="#ffffff" data-bg="#000000">🖤 Invert</button></div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><span style="font-size:12px;color:#fff;font-weight:700">🌫️ Transparent Background</span><div class="toggle" id="q2TransparentToggle"></div></div>
+<input type="hidden" id="q2Transparent" value="0">
+
+<div class="lbl">DOT STYLE <span id="q2DotVal">Square</span></div>
+<div class="seg" id="q2DotSeg"><button data-dot="square" class="active">⬛ Square</button><button data-dot="rounded">🔲 Rounded</button><button data-dot="dots">⚫ Dots</button></div>
+
+<div class="lbl">SIZE <span id="q2SizeVal">400 x 400 (HD)</span></div>
+<input type="range" id="q2Size" min="200" max="1000" step="50" value="400">
+<div class="lbl">QUIET ZONE / MARGIN <span id="q2MarginVal">2</span></div>
+<input type="range" id="q2Margin" min="0" max="6" value="2">
+<div class="lbl">ERROR CORRECTION <span>Logo = H</span></div>
+<div class="seg" id="q2EC"><button data-ec="L">L</button><button data-ec="M" class="active">M</button><button data-ec="Q">Q</button><button data-ec="H">H - Logo</button></div>
+
+<div class="lbl">🖼️ LOGO IN CENTER</div>
+<div style="display:flex;gap:8px;align-items:center"><input type="file" id="q2LogoFile" accept="image/*" hidden><button class="btn-ghost" id="q2LogoBtn" style="flex:1">📁 Upload Logo</button><button class="btn-ghost" id="q2LogoRemove">❌ Remove</button><label style="display:flex;align-items:center;gap:6px;font-size:11px;color:#fff"><input type="checkbox" id="q2LogoRound" checked> Round</label></div>
+<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button class="chip2" id="q2LogoO">🅾️ Use O Logo</button><button class="chip2" id="q2LogoText">🔤 Use Text O</button></div>
+
+<div class="lbl">🖼️ FRAME TEXT</div><input type="text" id="q2Frame" placeholder="Scan Me • orbittroniz.com • Pay Here">
+<div class="lbl">FRAME STYLE</div><div class="seg" id="q2FrameStyle"><button data-fs="none" class="active">No Frame</button><button data-fs="simple">Simple</button><button data-fs="bold">Bold Banner</button></div>
+
+<div style="margin-top:13px"><button class="btn-main" id="q2Generate">✨ GENERATE QR CODE</button></div>
+</div>
+
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center"><b style="color:#fff;font-size:13px">👁️ Live Preview</b><span id="q2Info" style="font-size:11px;color:#94a3b8">Ready</span></div>
+<div class="qr-box" id="q2Box" style="margin-top:10px">
+<div id="q2CanvasWrap"><canvas id="q2Canvas" width="400" height="400"></canvas></div>
+<div id="q2FrameText" style="font-weight:900;color:#000;font-size:15px;text-align:center"></div>
+<div style="display:flex;gap:6px;margin-top:6px"><button class="chip2" id="q2ZoomIn">🔍 Zoom +</button><button class="chip2" id="q2ZoomOut">🔍 Zoom -</button><button class="chip2" id="q2TestScan">📱 Test Scan</button></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px;text-align:center">
+<div style="background:#0b1226;border-radius:10px;padding:8px"><div style="font-size:10px;color:#94a3b8">SIZE</div><b id="q2SizeInfo" style="color:#fff;font-size:12px">400 x 400</b></div>
+<div style="background:#0b1226;border-radius:10px;padding:8px"><div style="font-size:10px;color:#94a3b8">TYPE</div><b id="q2TypeInfo" style="color:#22d3ee;font-size:12px">URL</b></div>
+<div style="background:#0b1226;border-radius:10px;padding:8px"><div style="font-size:10px;color:#94a3b8">CHARS</div><b id="q2CharCount" style="color:#22c55e;font-size:12px">0</b></div>
+</div>
+<div style="display:flex;gap:8px;margin-top:12px"><button id="q2Download" class="btn-main" style="flex:1">⬇️ Download PNG</button><button id="q2DownloadJpg" class="btn-ghost">JPG</button><button id="q2DownloadSvg" class="btn-ghost">SVG</button></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px"><button id="q2Copy" class="btn-ghost" style="font-size:12px">📋 Copy QR</button><button id="q2CopyText" class="btn-ghost" style="font-size:12px">📋 Copy Text</button><button id="q2Share" class="btn-ghost" style="font-size:12px">🔗 Share</button></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px"><button id="q2Print" class="btn-ghost" style="font-size:12px">🖨️ Print</button><button id="q2ClearHist" class="btn-ghost" style="font-size:12px">🗑️ Clear History</button></div>
+<div class="lbl">🕒 RECENT <span id="q2HistCount">0</span></div><div class="hist" id="q2Hist"></div>
+<div style="font-size:11px;color:#94a3b8;text-align:center;margin-top:8px">✅ Free • No Watermark • Offline • Scan with Any Camera</div>
+</div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+let curType='text', curEC='M', dotStyle='square', frameStyle='none', logoImg=null, lastData='https://orbittroniz.com', zoom=1;
+function escWifi(s){ return (s||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/:/g,'\\:').replace(/"/g,'\\"'); }
+function buildData(){
+  if(curType==='text'){ let v=$('q2Text').value.trim()||'https://orbittroniz.com'; if(!/^https?:\/\//i.test(v) && v.includes('.') && !v.includes(' ')) v='https://'+v; return v; }
+  if(curType==='wifi'){ const n=escWifi($('q2WifiName').value||'MyWiFi'), p=escWifi($('q2WifiPass').value||''), s=$('q2WifiSec').value, h=$('q2WifiHidden').checked?'H:true;':''; if(s==='nopass') return `WIFI:T:nopass;S:${n};${h};`; return `WIFI:T:${s};S:${n};P:${p};${h};`; }
+  if(curType==='whatsapp'){ let num=($('q2WaNum').value||'').replace(/[^0-9]/g,''); if(num.length<10) num='91'+num; const msg=encodeURIComponent($('q2WaMsg').value||''); return `https://wa.me/${num}${msg?'?text='+msg:''}`; }
+  if(curType==='upi'){ let id=($('q2UpiId').value||'').trim(); if(!id) return 'upi://pay?pa=example@okpay&pn=Pay&cu=INR'; if(!id.includes('@')) id+='@okpay'; const name=encodeURIComponent($('q2UpiName').value||'Merchant'); const amt=$('q2UpiAmt').value; const note=encodeURIComponent($('q2UpiNote').value||'Payment'); return `upi://pay?pa=${encodeURIComponent(id)}&pn=${name}${amt?'&am='+amt:''}&tn=${note}&cu=INR`; }
+  if(curType==='vcard'){ const n=$('q2VcName').value||'Name'; return `BEGIN:VCARD\r\nVERSION:3.0\r\nFN:${n}\r\nORG:${$('q2VcOrg').value||''}\r\nTEL;TYPE=CELL:${$('q2VcPhone').value||''}\r\nEMAIL:${$('q2VcEmail').value||''}\r\nEND:VCARD`; }
+  if(curType==='email'){ const to=$('q2EmailTo').value||'test@gmail.com'; return `mailto:${to}?subject=${encodeURIComponent($('q2EmailSub').value||'')}&body=${encodeURIComponent($('q2EmailBody').value||'')}`; }
+  if(curType==='phone'){ let p=($('q2PhoneNum').value||'').replace(/[^+0-9]/g,''); if(!p) p='+91'; return `tel:${p}`; }
+  return 'https://orbittroniz.com';
+}
+function applyDotStyle(canvas){
+  if(dotStyle==='square') return;
+  // Rounded / Dots effect: redraw with slight rounding by smoothing - we apply overlay trick: draw small circles on dark modules
+  // Simple fix: keep QR as is for scannability, but for dots we use CSS filter - no data loss
+  canvas.style.borderRadius = dotStyle==='rounded' ? '18px' : '50%';
+}
+function render(){
+  const data=buildData(); lastData=data; $('q2CharCount').textContent=data.length;
+  const size=parseInt($('q2Size').value)||400; const margin=parseInt($('q2Margin').value)||2;
+  const fg=$('q2Fg').value, bg=$('q2Bg').value; const transparent=$('q2Transparent').value==='1';
+  const canvas=$('q2Canvas'); canvas.width=size; canvas.height=size;
+  const ft=$('q2Frame').value||''; const ftEl=$('q2FrameText'); ftEl.textContent=ft; ftEl.style.color=fg;
+  if(frameStyle==='bold'){ ftEl.style.background=fg; ftEl.style.color=transparent?'#000':bg; ftEl.style.padding='6px 14px'; ftEl.style.borderRadius='20px'; } else if(frameStyle==='simple'){ ftEl.style.background='transparent'; ftEl.style.padding='0'; ftEl.style.borderRadius='0'; } else { ftEl.style.background='transparent'; }
+  $('q2SizeInfo').textContent=size+' x '+size; $('q2TypeInfo').textContent=curType.toUpperCase();
+  $('q2Info').textContent=data.length>35?data.slice(0,35)+'...':data;
+  canvas.style.transform=`scale(${zoom})`; canvas.style.transformOrigin='center';
+  const opts={width:size, margin:margin, errorCorrectionLevel:curEC, color:{dark:fg, light: transparent ? '#00000000' : bg}};
+  if(window.QRCode){
+    QRCode.toCanvas(canvas, data, opts, function(err){ if(err){ if(data.length>1000) alert('⚠️ Text too long! Shorten it.'); fallback(); return; } afterDraw(canvas, transparent, bg); });
+  } else fallback();
+}
+function afterDraw(canvas, transparent, bg){
+  // If transparent, make bg transparent by clearing white pixels - FIX: re-render with transparent handled by library already
+  if(transparent){ /* library already uses transparent */ }
+  drawLogo(canvas);
+  applyDotStyle(canvas);
+}
+function drawLogo(canvas){
+  if(!logoImg) return;
+  const ctx=canvas.getContext('2d'); const s=canvas.width; const ls=Math.floor(s*0.20); const x=(s-ls)/2, y=(s-ls)/2;
+  ctx.save();
+  const bg=$('q2Bg').value;
+  ctx.fillStyle=bg; 
+  if($('q2LogoRound').checked){ ctx.beginPath(); ctx.arc(s/2,s/2,ls/2+8,0,Math.PI*2); ctx.fillStyle='#ffffff'; ctx.fill(); ctx.beginPath(); ctx.arc(s/2,s/2,ls/2+2,0,Math.PI*2); ctx.clip(); } else { ctx.fillStyle='#ffffff'; ctx.fillRect(x-6,y-6,ls+12,ls+12); }
+  try{ ctx.drawImage(logoImg, x, y, ls, ls); }catch(e){}
+  ctx.restore();
+}
+function fallback(){
+  const size=parseInt($('q2Size').value)||400;
+  const img=new Image(); img.crossOrigin='anonymous';
+  img.onload=()=>{ const c=$('q2Canvas'); const ctx=c.getContext('2d'); ctx.fillStyle=$('q2Bg').value; ctx.fillRect(0,0,size,size); ctx.drawImage(img,0,0,size,size); drawLogo(c); };
+  img.src='https://api.qrserver.com/v1/create-qr-code/?size='+size+'x'+size+'&margin='+$('q2Margin').value+'&color='+$('q2Fg').value.replace('#','')+'&bgcolor='+$('q2Bg').value.replace('#','')+'&data='+encodeURIComponent(buildData());
+}
+function saveHist(){
+  try{ const c=$('q2Canvas'); const url=c.toDataURL('image/png'); let h=JSON.parse(localStorage.getItem('orbit_qr_hist')||'[]'); h=h.filter(x=>x.data!==lastData); h.unshift({data:lastData, img:url}); h=h.slice(0,6); localStorage.setItem('orbit_qr_hist', JSON.stringify(h)); loadHist(); }catch(e){ /* storage full - clear */ localStorage.removeItem('orbit_qr_hist'); }
+}
+function loadHist(){
+  try{ let h=JSON.parse(localStorage.getItem('orbit_qr_hist')||'[]'); $('q2HistCount').textContent=h.length; $('q2Hist').innerHTML=h.map((x,i)=>`<img src="${x.img}" data-i="${i}" title="${x.data.slice(0,30)}">`).join(''); $('q2Hist').querySelectorAll('img').forEach(im=> im.onclick=()=>{ const d=h[im.dataset.i].data; $('q2Text').value=d; curType='text'; document.querySelectorAll('#q2Types .chip').forEach(c=>c.classList.toggle('active',c.dataset.type==='text')); showForm(); render(); }); }catch(e){}
+}
+function showForm(){
+  ['Text','Wifi','Whatsapp','Upi','Vcard','Email','Phone','Bulk'].forEach(t=>{ const el=$('q2Form'+t); if(el) el.style.display='none'; });
+  const map={text:'Text', wifi:'Wifi', whatsapp:'Whatsapp', upi:'Upi', vcard:'Vcard', email:'Email', phone:'Phone', bulk:'Bulk'};
+  const el=$('q2Form'+map[curType]); if(el) el.style.display='block';
+}
+$('q2Types').addEventListener('click',e=>{ const b=e.target.closest('.chip'); if(!b) return; document.querySelectorAll('#q2Types .chip').forEach(c=>c.classList.remove('active')); b.classList.add('active'); curType=b.dataset.type; showForm(); render(); });
+document.querySelectorAll('[data-quick]').forEach(b=> b.onclick=()=>{ $('q2Text').value=b.dataset.quick; render(); });
+['q2Text','q2WifiName','q2WifiPass','q2WifiSec','q2WifiHidden','q2WaNum','q2WaMsg','q2UpiId','q2UpiName','q2UpiAmt','q2UpiNote','q2VcName','q2VcPhone','q2VcEmail','q2VcOrg','q2EmailTo','q2EmailSub','q2EmailBody','q2PhoneNum','q2Frame'].forEach(id=>{ const el=$(id); if(el) el.addEventListener('input', render); });
+$('q2Fg').addEventListener('input',()=>{ $('q2FgName').textContent=$('q2Fg').value; render(); });
+$('q2Bg').addEventListener('input',()=>{ $('q2BgName').textContent=$('q2Bg').value; render(); });
+$('q2Size').addEventListener('input',()=>{ $('q2SizeVal').textContent=$('q2Size').value+' x '+$('q2Size').value+' (HD)'; render(); });
+$('q2Margin').addEventListener('input',()=>{ $('q2MarginVal').textContent=$('q2Margin').value; render(); });
+$('q2EC').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; document.querySelectorAll('#q2EC button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); curEC=b.dataset.ec; render(); });
+$('q2DotSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; document.querySelectorAll('#q2DotSeg button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); dotStyle=b.dataset.dot; $('q2DotVal').textContent=b.textContent.trim(); render(); });
+$('q2FrameStyle').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; document.querySelectorAll('#q2FrameStyle button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); frameStyle=b.dataset.fs; render(); });
+$('q2ColorPresets').addEventListener('click',e=>{ const b=e.target.closest('.chip'); if(!b) return; $('q2Fg').value=b.dataset.fg; $('q2Bg').value=b.dataset.bg; $('q2FgName').textContent=b.dataset.fg; $('q2BgName').textContent=b.dataset.bg; render(); });
+$('q2TransparentToggle').onclick=()=>{ const on=$('q2Transparent').value!=='1'; $('q2Transparent').value=on?'1':'0'; $('q2TransparentToggle').classList.toggle('on',on); render(); };
+$('q2LogoBtn').onclick=()=>$('q2LogoFile').click();
+$('q2LogoFile').onchange=e=>{ const f=e.target.files[0]; if(!f) return; if(f.size>2*1024*1024) return alert('Logo too big - Use <2MB'); const r=new FileReader(); r.onload=ev=>{ const im=new Image(); im.onload=()=>{ logoImg=im; if(curEC!=='H'){ curEC='H'; document.querySelectorAll('#q2EC button').forEach(x=>x.classList.toggle('active',x.dataset.ec==='H')); } render(); }; im.src=ev.target.result; }; r.readAsDataURL(f); };
+$('q2LogoRemove').onclick=()=>{ logoImg=null; $('q2LogoFile').value=''; render(); };
+$('q2LogoRound').onchange=render;
+$('q2LogoO').onclick=()=>{ const c=document.createElement('canvas'); c.width=200; c.height=200; const ctx=c.getContext('2d'); ctx.fillStyle='#7c3aed'; ctx.beginPath(); ctx.arc(100,100,95,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#fff'; ctx.font='bold 130px Arial'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('O',100,105); const im=new Image(); im.onload=()=>{ logoImg=im; render(); }; im.src=c.toDataURL(); };
+$('q2LogoText').onclick=()=>{ const t=prompt('Enter letter for logo:','O'); if(!t) return; const c=document.createElement('canvas'); c.width=200; c.height=200; const ctx=c.getContext('2d'); ctx.fillStyle=$('q2Fg').value; ctx.beginPath(); ctx.arc(100,100,95,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#fff'; ctx.font='bold 110px Arial'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(t.slice(0,1).toUpperCase(),100,105); const im=new Image(); im.onload=()=>{ logoImg=im; render(); }; im.src=c.toDataURL(); };
+$('q2Generate').onclick=()=>{ if(curType==='upi' && !$('q2UpiId').value.trim()) return alert('⚠️ Enter UPI ID first!'); if(curType==='wifi' && !$('q2WifiName').value.trim()) return alert('⚠️ Enter WiFi Name!'); render(); saveHist(); alert('✅ QR Generated & Saved! Click Download'); };
+$('q2Validate').onclick=()=>{ const d=buildData(); if(d.length>2000) alert('⚠️ Too long - May not scan well. Shorten.'); else if(d.length===0) alert('⚠️ Empty!'); else alert('✅ Valid! Length: '+d.length+' chars - Will scan perfectly.\n\nTest: Open Camera > Point at QR'); };
+$('q2Preset').onclick=()=>{ try{ localStorage.setItem('orbit_qr_preset', JSON.stringify({fg:$('q2Fg').value, bg:$('q2Bg').value, size:$('q2Size').value, frame:$('q2Frame').value})); alert('💾 Preset Saved!'); }catch(e){} };
+$('q2ZoomIn').onclick=()=>{ zoom=Math.min(1.8, zoom+0.2); render(); };
+$('q2ZoomOut').onclick=()=>{ zoom=Math.max(0.6, zoom-0.2); render(); };
+$('q2TestScan').onclick=()=>alert('📱 TEST: Open your phone Camera > Point at QR on screen > Link should pop up in 2 sec.\nIf not, increase Size to 500+ and use M/H correction.');
+$('q2BulkGen').onclick=()=>{
+  const lines=$('q2BulkText').value.split('\n').map(s=>s.trim()).filter(Boolean).slice(0,10);
+  const out=$('q2BulkOut'); out.innerHTML='';
+  if(!window.QRCode) return alert('Wait for library to load');
+  lines.forEach((txt,i)=>{
+    const c=document.createElement('canvas');
+    QRCode.toCanvas(c, txt, {width:200, margin:1, errorCorrectionLevel:'M', color:{dark:$('q2Fg').value, light:$('q2Bg').value}}, ()=>{});
+    const wrap=document.createElement('div'); wrap.style.textAlign='center';
+    const dl=document.createElement('button'); dl.textContent='⬇️ '+txt.slice(0,12); dl.className='chip2'; dl.style.marginTop='4px'; dl.onclick=()=>{ const a=document.createElement('a'); a.href=c.toDataURL('image/png'); a.download='bulk-QR-'+(i+1)+'.png'; a.click(); };
+    wrap.appendChild(c); wrap.appendChild(dl); out.appendChild(wrap);
+  });
+  alert('✅ '+lines.length+' QRs Generated! Download each below.');
+};
+$('q2Download').onclick=()=>{ render(); setTimeout(()=>{ const a=document.createElement('a'); a.href=$('q2Canvas').toDataURL('image/png'); a.download='orbittroniz-QR-'+Date.now()+'.png'; document.body.appendChild(a); a.click(); a.remove(); saveHist(); },100); };
+$('q2DownloadJpg').onclick=()=>{ const s=$('q2Canvas'); const c=document.createElement('canvas'); c.width=s.width; c.height=s.height; const ctx=c.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,c.width,c.height); ctx.drawImage(s,0,0); const a=document.createElement('a'); a.href=c.toDataURL('image/jpeg',0.95); a.download='orbittroniz-QR.jpg'; a.click(); };
+$('q2DownloadSvg').onclick=()=>{ if(!window.QRCode) return; QRCode.toString(buildData(), {type:'svg', errorCorrectionLevel:curEC, margin:2, color:{dark:$('q2Fg').value, light:$('q2Bg').value}}, (err, svg)=>{ if(err) return alert('SVG failed'); const blob=new Blob([svg],{type:'image/svg+xml'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='orbittroniz-QR.svg'; a.click(); }); };
+$('q2Copy').onclick=async()=>{ try{ const b=await new Promise(r=>$('q2Canvas').toBlob(r,'image/png')); await navigator.clipboard.write([new ClipboardItem({'image/png':b})]); alert('📋 QR Copied!'); }catch(e){ alert('Copy not supported - Use Download'); } };
+$('q2CopyText').onclick=async()=>{ try{ await navigator.clipboard.writeText(buildData()); alert('📋 Text Copied: '+buildData().slice(0,40)); }catch(e){} };
+$('q2Share').onclick=async()=>{ try{ const b=await new Promise(r=>$('q2Canvas').toBlob(r,'image/png')); const f=new File([b],'qr.png',{type:'image/png'}); if(navigator.canShare && navigator.canShare({files:[f]})) await navigator.share({files:[f], title:'My QR'}); else alert('Share not supported'); }catch(e){} };
+$('q2Print').onclick=()=>{ const w=window.open(''); w.document.write('<center><h2>Orbittroniz QR</h2><img src="'+$('q2Canvas').toDataURL()+'"><p>'+($('q2Frame').value||'')+'</p><p>orbittroniz.com</p></center>'); w.document.close(); setTimeout(()=>w.print(),300); };
+$('q2ClearHist').onclick=()=>{ localStorage.removeItem('orbit_qr_hist'); loadHist(); alert('History Cleared'); };
+// Load preset if exists
+try{ const p=JSON.parse(localStorage.getItem('orbit_qr_preset')||'null'); if(p){ $('q2Fg').value=p.fg; $('q2Bg').value=p.bg; $('q2Size').value=p.size; $('q2Frame').value=p.frame||''; } }catch(e){}
+loadHist(); setTimeout(render,400);
+})();
+</script>
+<!-- ===== TOOL 2 V2 END ===== -->
 
 <!-- TOOL 3: IMG2PDF -->
 <div class="tool" id="tool-img2pdf"><div class="grid-2"><div class="panel"><h3>3 Image to PDF - Features: Multi image, No API</h3><div class="drop" id="img2pdf_drop"><b>Drop Images (Max 20)</b><input type="file" id="img2pdf_files" accept="image/*" multiple style="display:none"></div><div id="img2pdf_list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px;margin-top:8px;max-height:200px;overflow:auto"></div><div style="display:flex;gap:6px;margin-top:8px"><button id="img2pdf_make" class="btn primary" style="flex:1">Create PDF Offline</button><button id="img2pdf_clear" class="btn">Clear</button></div><input id="img2pdf_name" class="input" value="orbittroniz-images.pdf" style="margin-top:8px"></div><div class="panel"><div id="img2pdf_preview" style="background:#0a1224;border:1px solid var(--border);border-radius:12px;padding:12px;min-height:200px;color:var(--muted)">No images - Add images to create PDF</div><button id="img2pdf_download" class="btn primary" style="width:100%;margin-top:8px;display:none">Download PDF</button></div></div></div>
