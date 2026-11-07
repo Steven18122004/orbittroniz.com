@@ -1357,9 +1357,314 @@ $('t4Share').onclick=async()=>{
 })();
 </script>
 <!-- ===== TOOL 4 END ===== -->
+<!-- ===== TOOL 5 - PDF SPLIT & EXTRACT PRO - 100% WORKING ===== -->
+<div id="tool5" class="tool-panel" style="display:none;margin-top:14px;background:linear-gradient(160deg,#0f172a,#1e1b4b,#082f49);border:1px solid rgba(34,211,238,0.25);border-radius:24px;padding:16px;box-shadow:0 25px 70px rgba(0,0,0,0.65)">
+<style>
+#tool5 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+#tool5 .top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+#tool5 .grid{display:grid;grid-template-columns:1.05fr 1fr;gap:14px;margin-top:12px}
+@media(max-width:760px){#tool5 .grid{grid-template-columns:1fr}}
+#tool5 .card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:14px}
+#tool5 .lbl{font-size:11px;font-weight:900;color:#c4b5fd;margin:12px 0 6px;display:flex;justify-content:space-between}
+#tool5 .lbl span{color:#fff}
+#tool5 input[type=text],#tool5 input[type=number]{width:100%;padding:11px;border-radius:11px;border:1px solid rgba(255,255,255,0.18);background:#0b1226;color:#fff;font-weight:700;outline:none;font-size:13px}
+#tool5 .chip{padding:8px 11px;border-radius:20px;border:1px solid rgba(255,255,255,0.18);background:rgba(0,0,0,0.4);color:#e2e8f0;font-size:11px;font-weight:800;cursor:pointer}
+#tool5 .chip.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border-color:transparent}
+#tool5 .chip2{padding:7px 11px;border-radius:11px;border:1px solid rgba(255,255,255,0.16);background:#0f172a;color:#cbd5e1;font-size:11px;font-weight:800;cursor:pointer}
+#tool5 .btn-main{background:linear-gradient(90deg,#7c3aed,#ec4899,#22d3ee);color:#fff;border:none;padding:13px;border-radius:14px;font-weight:900;width:100%;cursor:pointer;font-size:14px;box-shadow:0 12px 28px rgba(124,58,237,0.45)}
+#tool5 .btn-ghost{background:#1e293b;color:#fff;border:1px solid rgba(255,255,255,0.16);padding:11px 14px;border-radius:12px;font-weight:800;cursor:pointer}
+#tool5 .drop{border:2px dashed rgba(34,211,238,0.6);border-radius:18px;padding:22px;text-align:center;background:rgba(34,211,238,0.06);cursor:pointer}
+#tool5 .drop.drag{background:rgba(34,211,238,0.18);transform:scale(1.02)}
+#tool5 .seg{display:flex;background:#0b1226;border-radius:12px;padding:4px;gap:4px;flex-wrap:wrap}
+#tool5 .seg button{flex:1;padding:8px;border:none;border-radius:9px;background:transparent;color:#94a3b8;font-weight:800;font-size:11px;cursor:pointer;min-width:70px}
+#tool5 .seg button.active{background:#fff;color:#000}
+#tool5 .page-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-height:380px;overflow-y:auto;padding:2px}
+@media(max-width:500px){#tool5 .page-grid{grid-template-columns:repeat(3,1fr)}}
+#tool5 .page-card{background:#0b1226;border:2px solid rgba(255,255,255,0.12);border-radius:14px;padding:8px;text-align:center;cursor:pointer;position:relative;transition:.15s}
+#tool5 .page-card.selected{border-color:#22c55e;background:#14532d;transform:scale(1.03)}
+#tool5 .page-card.deleted{border-color:#ef4444;background:#450a0a;opacity:0.6}
+#tool5 .page-card.deleted::after{content:'🗑️ DELETED';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#ef4444;color:#fff;font-size:9px;font-weight:900;padding:3px 6px;border-radius:6px}
+#tool5 .page-card .thumb{width:100%;aspect-ratio:1/1.4;background:#fff;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:22px}
+#tool5 .toggle{width:44px;height:24px;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+#tool5 .toggle::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s}
+#tool5 .toggle.on{background:#22c55e}
+#tool5 .toggle.on::after{left:23px}
+#tool5 .prog{height:10px;background:#0b1226;border-radius:20px;overflow:hidden;margin-top:8px}
+#tool5 .prog div{height:100%;width:0%;background:linear-gradient(90deg,#7c3aed,#22d3ee);transition:width .3s}
+</style>
 
-<!-- TOOL 5: PDF SPLIT -->
-<div class="tool" id="tool-pdfsplit"><div class="grid-2"><div class="panel"><h3>5 PDF Split - Features: Split per page, No API</h3><div class="drop" id="split_drop"><b>Drop PDF to Split</b><input type="file" id="split_file" accept="application/pdf" style="display:none"></div><div id="split_info" style="margin-top:8px;background:#0a1224;border:1px solid var(--border);border-radius:10px;padding:8px;font-size:12px;display:none"></div><button id="split_do" class="btn primary" style="width:100%;margin-top:8px">Split All Pages (Download All)</button></div><div class="panel"><div id="split_list" style="display:flex;flex-direction:column;gap:6px;max-height:400px;overflow:auto"></div></div></div></div>
+<div class="top">
+<div style="font-size:16px;font-weight:900;color:#fff">✂️ 5 PDF Split & Extract <span style="background:linear-gradient(135deg,#22c55e,#06b6d4);padding:5px 11px;border-radius:20px;font-size:10px">SPLIT • EXTRACT • DELETE • ROTATE</span></div>
+<div style="font-size:11px;color:#94a3b8" id="t5Status">● Ready • 100% Private</div>
+</div>
+
+<div class="grid">
+<div class="card">
+<div class="lbl">📁 UPLOAD PDF <span id="t5FileInfo">No File</span></div>
+<div class="drop" id="t5Drop">
+<div style="font-size:36px">📄</div>
+<div style="font-size:13px;font-weight:900;color:#fff;margin-top:6px">Drop PDF Here or Click</div>
+<div style="font-size:11px;color:#94a3b8">Only 1 PDF at a time • Max 50 MB • Up to 200 Pages</div>
+<button class="btn-ghost" style="margin-top:10px" onclick="document.getElementById('t5File').click();event.stopPropagation()">📂 Choose PDF</button>
+</div>
+<input type="file" id="t5File" accept=".pdf,application/pdf" hidden>
+<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+<button class="chip2" id="t5Sample">✨ Create Sample PDF (6 Pages)</button>
+<button class="chip2" id="t5Clear">🗑️ Clear</button>
+</div>
+
+<div class="lbl">✂️ SPLIT MODE</div>
+<div class="seg" id="t5ModeSeg">
+<button data-mode="range" class="active">📑 Range</button>
+<button data-mode="every">🔢 Every N Pages</button>
+<button data-mode="extract">🎯 Extract Selected</button>
+<button data-mode="delete">🗑️ Delete Pages</button>
+</div>
+
+<div id="t5ModeRange">
+<div class="lbl">RANGE - Example: 1-3, 4-6</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><div class="lbl">From Page</div><input type="number" id="t5From" value="1" min="1"></div><div><div class="lbl">To Page</div><input type="number" id="t5To" value="3" min="1"></div></div>
+<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button class="chip2" data-range="1-1">Page 1 Only</button><button class="chip2" data-range="1-3">1-3</button><button class="chip2" data-range="first-half">First Half</button><button class="chip2" data-range="second-half">Second Half</button></div>
+<div class="lbl">CUSTOM RANGES - One per line</div>
+<input type="text" id="t5CustomRanges" placeholder="e.g. 1-2, 3-5, 6-8" value="1-2, 3-4">
+<div style="font-size:11px;color:#94a3b8;margin-top:4px">Will create separate PDF for each range</div>
+</div>
+
+<div id="t5ModeEvery" style="display:none">
+<div class="lbl">SPLIT EVERY N PAGES</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><button class="chip2" data-every="1">Every 1 Page = Each Page Separate</button><button class="chip2" data-every="2">Every 2 Pages</button><button class="chip2" data-every="5">Every 5 Pages</button></div>
+<div style="display:flex;gap:8px;align-items:center;margin-top:8px"><input type="number" id="t5EveryN" value="2" min="1" max="50" style="width:100px"><span style="color:#fff;font-size:12px;font-weight:700">pages per file</span></div>
+</div>
+
+<div id="t5ModeExtract" style="display:none">
+<div style="background:#dcfce7;border-radius:12px;padding:9px;font-size:11px;color:#166534;line-height:1.5"><b>🎯 Tap pages on right to select</b><br>Selected pages = Green. Click Split to get 1 PDF with only selected pages.</div>
+<div style="display:flex;gap:6px;margin-top:8px"><button class="chip2" id="t5SelectAll">✅ Select All</button><button class="chip2" id="t5SelectNone">❌ Deselect All</button><button class="chip2" id="t5SelectOdd">1,3,5 Odd</button><button class="chip2" id="t5SelectEven">2,4,6 Even</button></div>
+</div>
+
+<div id="t5ModeDelete" style="display:none">
+<div style="background:#fee2e2;border-radius:12px;padding:9px;font-size:11px;color:#991b1b;line-height:1.5"><b>🗑️ Tap pages on right to mark Delete</b><br>Red = Will be deleted. Remaining pages will be saved as new PDF.</div>
+<div style="display:flex;gap:6px;margin-top:8px"><button class="chip2" id="t5ClearDelete">Clear Delete Marks</button></div>
+</div>
+
+<div class="lbl">🔄 ROTATE SELECTED PAGES <span>Optional</span></div>
+<div class="seg" id="t5RotateSeg"><button data-rot="0" class="active">0° No Rotate</button><button data-rot="90">90° →</button><button data-rot="180">180°</button><button data-rot="270">270° ←</button></div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><span style="font-size:12px;color:#fff;font-weight:700">🔢 Add Page Numbers to Output</span><div class="toggle" id="t5NumToggle"></div></div>
+<div class="lbl">OUTPUT NAME</div>
+<input type="text" id="t5OutName" value="orbittroniz-split" placeholder="split-pdf-name">
+
+<div style="margin-top:13px"><button class="btn-main" id="t5Split">✂️ SPLIT PDF NOW</button></div>
+<div class="prog"><div id="t5ProgBar"></div></div>
+<div style="font-size:11px;color:#94a3b8;text-align:center;margin-top:4px" id="t5ProgText">Ready</div>
+</div>
+
+<div class="card">
+<div style="display:flex;justify-content:space-between"><b style="color:#fff;font-size:13px">📑 All Pages - Tap to Select / Delete</b><span id="t5TotalPages" style="font-size:11px;color:#94a3b8">0 Pages</span></div>
+<div id="t5Empty" style="text-align:center;padding:30px 10px;color:#94a3b8;font-size:12px"><div style="font-size:40px">📄</div>Upload PDF to see pages<br>Tap pages to select / delete / rotate</div>
+<div class="page-grid" id="t5PageGrid" style="margin-top:10px"></div>
+
+<div id="t5Result" style="display:none;margin-top:12px;background:#dcfce7;border-radius:14px;padding:12px">
+<div style="font-size:22px;text-align:center">✅</div>
+<div style="font-weight:900;color:#166534;font-size:13px;text-align:center">Split Done!</div>
+<div style="font-size:11px;color:#166534;text-align:center" id="t5ResultInfo"></div>
+<div id="t5DownloadList" style="margin-top:10px;display:flex;flex-direction:column;gap:6px"></div>
+<button id="t5DownloadAll" class="btn-main" style="margin-top:10px">⬇️ Download All Split PDFs</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px;text-align:center">
+<div style="background:#0b1226;border-radius:10px;padding:8px"><div style="font-size:10px;color:#94a3b8">TOTAL</div><b id="t5TotalInfo" style="color:#fff;font-size:12px">0</b></div>
+<div style="background:#0b1226;border-radius:10px;padding:8px"><div style="font-size:10px;color:#94a3b8">SELECTED</div><b id="t5SelInfo" style="color:#22c55e;font-size:12px">0</b></div>
+<div style="background:#0b1226;border-radius:10px;padding:8px"><div style="font-size:10px;color:#94a3b8">TO DELETE</div><b id="t5DelInfo" style="color:#ef4444;font-size:12px">0</b></div>
+</div>
+<div style="background:#fef9c3;border-radius:12px;padding:10px;margin-top:10px;font-size:11px;color:#854d0e;line-height:1.5"><b>💡 Examples:</b><br>• 10-page PDF → Split 1-3, 4-10 = 2 PDFs<br>• Extract Page 5 only = 1 PDF with Page 5<br>• Delete Page 1 (cover) = New PDF without cover</div>
+</div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+let srcDoc=null, srcBytes=null, srcName='', totalPages=0, mode='range', rotateDeg=0, addNum=false;
+let selected=new Set(), toDelete=new Set(), splitResults=[]; // {name, blob, url}
+
+function fmtSize(b){ if(b<1024) return b+' B'; if(b<1024*1024) return (b/1024).toFixed(1)+' KB'; return (b/1024/1024).toFixed(2)+' MB'; }
+function updateStats(){
+  $('t5TotalPages').textContent=totalPages+' Pages';
+  $('t5TotalInfo').textContent=totalPages;
+  $('t5SelInfo').textContent=selected.size;
+  $('t5DelInfo').textContent=toDelete.size;
+  $('t5FileInfo').textContent=srcName ? srcName+' • '+totalPages+' pages' : 'No File';
+}
+function renderGrid(){
+  updateStats();
+  if(totalPages===0){ $('t5Empty').style.display='block'; $('t5PageGrid').innerHTML=''; return; }
+  $('t5Empty').style.display='none';
+  $('t5PageGrid').innerHTML=Array.from({length:totalPages},(_,i)=>{
+    const p=i+1;
+    const isSel=selected.has(p), isDel=toDelete.has(p);
+    return `<div class="page-card ${isSel?'selected':''} ${isDel?'deleted':''}" data-p="${p}">
+      <div class="thumb"><div>📄</div><div style="font-size:11px;font-weight:900;color:#000">Page ${p}</div><div style="font-size:9px;color:#64748b">${isSel?'✅ Selected':isDel?'🗑️ Delete':'Tap to Select'}</div></div>
+      <div style="display:flex;gap:4px;margin-top:6px"><button class="btn-ghost" style="flex:1;padding:5px;font-size:10px" data-act="toggle">✓ Select</button><button class="btn-ghost" style="flex:1;padding:5px;font-size:10px" data-act="delete">🗑️ Delete</button><button class="btn-ghost" style="flex:1;padding:5px;font-size:10px" data-act="rotate">🔄 90°</button></div>
+    </div>`;
+  }).join('');
+  document.querySelectorAll('#tool5 .page-card').forEach(card=>{
+    const p=parseInt(card.dataset.p);
+    card.addEventListener('click',e=>{
+      const btn=e.target.closest('button');
+      if(btn && btn.dataset.act==='rotate'){ // Individual rotate - store in dataset
+        card.dataset.rot = (parseInt(card.dataset.rot||'0')+90)%360;
+        card.querySelector('.thumb').style.transform=`rotate(${card.dataset.rot}deg)`;
+        return;
+      }
+      if(btn && btn.dataset.act==='delete'){ if(toDelete.has(p)) toDelete.delete(p); else { toDelete.add(p); selected.delete(p); } renderGrid(); return; }
+      // Toggle select
+      if(selected.has(p)) selected.delete(p); else { selected.add(p); toDelete.delete(p); }
+      renderGrid();
+    });
+  });
+}
+async function loadPdf(buf, name){
+  if(!window.PDFLib) return alert('Library loading... Wait 2 sec');
+  if(buf.byteLength>50*1024*1024) return alert('⚠️ PDF too big - Max 50 MB');
+  try{
+    srcBytes=buf; srcName=name;
+    srcDoc=await PDFLib.PDFDocument.load(buf, {ignoreEncryption:true});
+    totalPages=srcDoc.getPageCount();
+    if(totalPages>200) return alert('⚠️ Too many pages - Max 200');
+    selected=new Set(); toDelete=new Set(); splitResults=[];
+    $('t5Result').style.display='none';
+    $('t5To').value=Math.min(3, totalPages);
+    $('t5From').value=1;
+    renderGrid();
+    $('t5Status').textContent='● ✅ Loaded '+totalPages+' pages';
+  }catch(e){ alert('❌ Cannot open PDF: '+e.message+'\nIf password protected, unlock first.'); }
+}
+$('t5File').addEventListener('change',async e=>{ const f=e.target.files[0]; if(!f) return; const buf=await f.arrayBuffer(); await loadPdf(buf, f.name); e.target.value=''; });
+$('t5Drop').onclick=()=>$('t5File').click();
+$('t5Drop').addEventListener('dragover',e=>{ e.preventDefault(); $('t5Drop').classList.add('drag'); });
+$('t5Drop').addEventListener('dragleave',()=>$('t5Drop').classList.remove('drag'));
+$('t5Drop').addEventListener('drop',async e=>{ e.preventDefault(); $('t5Drop').classList.remove('drag'); const f=e.dataTransfer.files[0]; if(!f) return; if(!f.name.toLowerCase().endsWith('.pdf')) return alert('Only PDF!'); await loadPdf(await f.arrayBuffer(), f.name); });
+$('t5Sample').onclick=async()=>{
+  if(!window.PDFLib) return alert('Wait for library');
+  const doc=await PDFLib.PDFDocument.create();
+  const colors=[ [0.48,0.23,0.93],[0.06,0.72,0.84],[0.13,0.63,0.29],[0.86,0.15,0.15],[0.9,0.6,0],[0.1,0.1,0.8] ];
+  for(let i=1;i<=6;i++){
+    const page=doc.addPage([595,842]);
+    page.drawText(`Sample Page ${i} / 6`, {x:150, y:700, size:28, color: PDFLib.rgb(...colors[i-1])});
+    page.drawText(`This is page ${i} - Test Split / Extract / Delete`, {x:120, y:650, size:14});
+    page.drawText(`Try: Split 1-2, 3-4, 5-6`, {x:120, y:620, size:12});
+  }
+  const bytes=await doc.save();
+  await loadPdf(bytes.buffer.slice(0), 'sample-6-pages.pdf');
+};
+$('t5Clear').onclick=()=>{ srcDoc=null; srcBytes=null; totalPages=0; selected.clear(); toDelete.clear(); splitResults=[]; $('t5Result').style.display='none'; renderGrid(); };
+$('t5ModeSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; document.querySelectorAll('#t5ModeSeg button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); mode=b.dataset.mode; ['Range','Every','Extract','Delete'].forEach(m=> $('t5Mode'+m).style.display='none'); $('t5Mode'+mode.charAt(0).toUpperCase()+mode.slice(1)).style.display='block'; });
+document.querySelectorAll('[data-range]').forEach(b=> b.onclick=()=>{
+  const v=b.dataset.range;
+  if(v==='first-half'){ $('t5From').value=1; $('t5To').value=Math.ceil(totalPages/2); $('t5CustomRanges').value=`1-${Math.ceil(totalPages/2)}, ${Math.ceil(totalPages/2)+1}-${totalPages}`; }
+  else if(v==='second-half'){ $('t5From').value=Math.ceil(totalPages/2)+1; $('t5To').value=totalPages; }
+  else { const [f,t]=v.split('-'); $('t5From').value=f; $('t5To').value=t; $('t5CustomRanges').value=v; }
+});
+document.querySelectorAll('[data-every]').forEach(b=> b.onclick=()=>{ $('t5EveryN').value=b.dataset.every; });
+$('t5SelectAll').onclick=()=>{ selected=new Set(Array.from({length:totalPages},(_,i)=>i+1)); toDelete.clear(); renderGrid(); };
+$('t5SelectNone').onclick=()=>{ selected.clear(); renderGrid(); };
+$('t5SelectOdd').onclick=()=>{ selected=new Set(Array.from({length:totalPages},(_,i)=>i+1).filter(p=>p%2===1)); renderGrid(); };
+$('t5SelectEven').onclick=()=>{ selected=new Set(Array.from({length:totalPages},(_,i)=>i+1).filter(p=>p%2===0)); renderGrid(); };
+$('t5ClearDelete').onclick=()=>{ toDelete.clear(); renderGrid(); };
+$('t5RotateSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; document.querySelectorAll('#t5RotateSeg button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); rotateDeg=parseInt(b.dataset.rot); });
+$('t5NumToggle').onclick=()=>{ addNum=!addNum; $('t5NumToggle').classList.toggle('on',addNum); };
+function setProg(p,t){ $('t5ProgBar').style.width=p+'%'; $('t5ProgText').textContent=t; }
+
+async function createPdfFromPages(pageNums, name){
+  const out=await PDFLib.PDFDocument.create();
+  const src=await PDFLib.PDFDocument.load(srcBytes, {ignoreEncryption:true});
+  // FIX: Validate page numbers
+  const valid=pageNums.filter(p=>p>=1 && p<=totalPages);
+  if(valid.length===0) throw new Error('No valid pages');
+  const copied=await out.copyPages(src, valid.map(p=>p-1));
+  copied.forEach((page, idx)=>{
+    // Rotate if needed
+    if(rotateDeg!==0) page.setRotation(PDFLib.degrees(rotateDeg));
+    // Individual rotate from grid
+    const card=document.querySelector(`#tool5 .page-card[data-p="${valid[idx]}"]`);
+    if(card && card.dataset.rot && parseInt(card.dataset.rot)!==0) page.setRotation(PDFLib.degrees(parseInt(card.dataset.rot)));
+    out.addPage(page);
+  });
+  if(addNum){
+    const pages=out.getPages(); const font=await out.embedFont(PDFLib.StandardFonts.HelveticaBold);
+    pages.forEach((p,idx)=>{ const {width}=p.getSize(); p.drawText(`${idx+1} / ${pages.length}`, {x:width/2-20, y:18, size:10, font:font, color: PDFLib.rgb(0.5,0.5,0.5)}); });
+  }
+  const bytes=await out.save();
+  const blob=new Blob([bytes], {type:'application/pdf'});
+  return {name, blob, url:URL.createObjectURL(blob), pages:valid.length};
+}
+function parseRanges(str){
+  // Support: "1-2, 3-5" and "1,3,5" and "1-3"
+  const ranges=[];
+  str.split(',').forEach(part=>{
+    part=part.trim(); if(!part) return;
+    if(part.includes('-')){ const [a,b]=part.split('-').map(s=>parseInt(s.trim())); if(isNaN(a)||isNaN(b)) return; const pages=[]; for(let p=Math.min(a,b); p<=Math.max(a,b); p++) pages.push(p); ranges.push(pages); }
+    else { const p=parseInt(part); if(!isNaN(p)) ranges.push([p]); }
+  });
+  return ranges;
+}
+$('t5Split').onclick=async()=>{
+  if(!srcDoc) return alert('⚠️ First upload a PDF!');
+  if(!window.PDFLib) return alert('Library loading...');
+  $('t5Split').textContent='⏳ Splitting...';
+  setProg(10,'Preparing...');
+  splitResults=[];
+  try{
+    let jobs=[]; // {pages, name}
+    if(mode==='range'){
+      const custom=$('t5CustomRanges').value.trim();
+      if(custom && custom.includes(',')){
+        const ranges=parseRanges(custom);
+        if(ranges.length===0) throw new Error('Invalid range format');
+        jobs=ranges.map((pages,idx)=>({pages, name:`${$('t5OutName').value||'split'}-part-${idx+1}-pages-${pages[0]}-${pages[pages.length-1]}.pdf`}));
+      } else {
+        const from=parseInt($('t5From').value)||1; const to=parseInt($('t5To').value)||totalPages;
+        if(from<1||to>totalPages||from>to) throw new Error(`Invalid range! PDF has 1 to ${totalPages} pages`);
+        const pages=[]; for(let p=from;p<=to;p++) pages.push(p);
+        jobs=[{pages, name:`${$('t5OutName').value||'split'}-pages-${from}-${to}.pdf`}];
+      }
+    } else if(mode==='every'){
+      const n=parseInt($('t5EveryN').value)||2; if(n<1) throw new Error('N must be >=1');
+      for(let s=1;s<=totalPages;s+=n){ const pages=[]; for(let p=s;p<Math.min(s+n, totalPages+1);p++) pages.push(p); jobs.push({pages, name:`${$('t5OutName').value||'split'}-pages-${pages[0]}-${pages[pages.length-1]}.pdf`}); }
+    } else if(mode==='extract'){
+      if(selected.size===0) throw new Error('Select at least 1 page on right! Tap pages to select.');
+      const pages=[...selected].sort((a,b)=>a-b);
+      jobs=[{pages, name:`${$('t5OutName').value||'split'}-extracted-${pages.join('-')}.pdf`}];
+    } else if(mode==='delete'){
+      if(toDelete.size===0) throw new Error('Mark at least 1 page to delete! Tap Delete on pages.');
+      if(toDelete.size>=totalPages) throw new Error('Cannot delete all pages!');
+      const pages=[]; for(let p=1;p<=totalPages;p++) if(!toDelete.has(p)) pages.push(p);
+      jobs=[{pages, name:`${$('t5OutName').value||'split'}-without-deleted.pdf`}];
+    }
+    for(let i=0;i<jobs.length;i++){
+      setProg(15+Math.round((i/jobs.length)*75), `Creating ${i+1}/${jobs.length}...`);
+      const res=await createPdfFromPages(jobs[i].pages, jobs[i].name);
+      splitResults.push(res);
+    }
+    setProg(100,'✅ Done!');
+    $('t5Result').style.display='block';
+    $('t5ResultInfo').textContent=`${splitResults.length} PDF(s) created • Total ${splitResults.reduce((a,r)=>a+r.pages,0)} pages`;
+    $('t5DownloadList').innerHTML=splitResults.map((r,i)=>`<button class="btn-ghost" style="text-align:left" onclick="window.t5Dl(${i})">📄 ${r.name} • ${r.pages} pages • ${fmtSize(r.blob.size)} ⬇️ Download</button>`).join('');
+    window.t5Dl=(i)=>{ const r=splitResults[i]; const a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); };
+    $('t5Split').textContent='✂️ SPLIT PDF NOW';
+    $('t5Result').scrollIntoView({behavior:'smooth', block:'nearest'});
+    if(splitResults.length===1) window.t5Dl(0);
+  }catch(e){ alert('❌ '+e.message); $('t5Split').textContent='✂️ SPLIT PDF NOW'; setProg(0,'Failed'); }
+};
+$('t5DownloadAll').onclick=async()=>{
+  if(splitResults.length===0) return alert('Split first!');
+  for(let i=0;i<splitResults.length;i++){ window.t5Dl(i); await new Promise(r=>setTimeout(r,500)); }
+  alert('✅ All '+splitResults.length+' PDFs Downloaded!');
+};
+})();
+</script>
+<!-- ===== TOOL 5 END ===== -->
 
 <!-- TOOL 6: SCANNER -->
 <div class="tool" id="tool-scanner"><div class="grid-2"><div class="panel"><h3>6 Document Scanner - Features: Gray, B&W, Enhance, Rotate</h3><div class="drop" id="scan_drop"><b>Drop Document Image</b><input type="file" id="scan_file" accept="image/*" style="display:none"></div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><button class="btn scan-filter active" data-f="original">Original</button><button class="btn scan-filter" data-f="gray">Gray</button><button class="btn scan-filter" data-f="bw">B&W High</button><button class="btn scan-filter" data-f="enhance">Enhance</button></div><div style="display:flex;gap:6px;margin-top:8px"><button id="scan_rotate" class="btn">Rotate 90°</button><button id="scan_reset" class="btn">Reset</button><button id="scan_auto_crop" class="btn">Auto Enhance</button></div></div><div class="panel"><canvas id="scan_canvas" width="800" height="1000" style="background:#fff"></canvas><div style="display:flex;gap:6px;margin-top:8px"><button id="scan_download" class="btn primary" style="width:100%">Download Scan PNG</button><button id="scan_pdf" class="btn" style="width:100%">Save as PDF</button></div></div></div></div>
