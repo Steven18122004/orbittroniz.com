@@ -145,254 +145,132 @@ canvas { max-width: 100%; border-radius: 12px; background: #0a1224; display: blo
 <button class="btn" id="backBtn" style="display:none;margin-top:10px" onclick="showDashboard()">⬅️ Back to Dashboard</button>
 
 <!-- TOOL 1 -->
-<!-- ===== TOOL 1 - ULTIMATE V2 - NO BUGS - PASTE IN TOOL 1 ===== -->
-<style>
-.t1-3d{perspective:1200px}
-.t1-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05) inset,0 0 30px rgba(124,58,237,.25);transform:rotateX(2deg)}
-.t1-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.t1-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
-.t1-label{font-size:11px;color:#cbd5e1;font-weight:800;margin:12px 0 5px;display:block}
-.t1-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
-.t1-input:focus{border-color:#22d3ee}
-.t1-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.t1-drop{border:2px dashed #22d3ee;border-radius:16px;padding:22px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
-.t1-drop.dragover{background:rgba(34,211,238,.25);transform:scale(1.02)}
-.t1-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
-.t1-item{position:relative;background:#060a18;border:1px solid #2a3a6a;border-radius:14px;overflow:hidden;box-shadow:0 10px 20px rgba(0,0,0,.5);cursor:grab}
-.t1-item.dragging{opacity:.4;border-color:#22d3ee}
-.t1-item img{width:100%;height:130px;object-fit:cover;display:block}
-.t1-item .no{position:absolute;top:5px;left:5px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;font-size:10px;font-weight:900;padding:3px 8px;border-radius:20px;z-index:2}
-.t1-item .del{position:absolute;top:5px;right:5px;background:#ef4444;color:#fff;border:none;width:26px;height:26px;border-radius:50%;font-weight:900;cursor:pointer;z-index:2}
-.t1-item .cap{width:100%;background:#0a1224;border:none;color:#fff;padding:8px;font-size:11px;outline:none;border-top:1px solid #2a3a6a}
-.t1-item .tools{display:flex;gap:4px;padding:6px}
-.t1-item .tools button{flex:1;background:#162143;color:#fff;border:1px solid #2a3a6a;border-radius:8px;padding:6px;font-size:11px;cursor:pointer}
-.t1-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px 12px;margin-top:8px}
-.t1-toggle input{width:44px;height:24px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer}
-.t1-toggle input:checked{background:#22c55e}
-.t1-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:.2s}
-.t1-toggle input:checked::after{left:23px}
-.t1-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
-.t1-btn3d:active{transform:translateY(3px)}
-.t1-btn2{width:100%;padding:12px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
-.t1-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
-.t1-prog{height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:10px;display:none;border:1px solid #2a3a6a}
-.t1-prog div{height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee);width:0%;transition:.3s}
-.t1-preview-modal{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:999;display:none;align-items:center;justify-content:center;padding:16px}
-.t1-preview-modal img{max-width:100%;max-height:85vh;border-radius:14px}
-</style>
+<!-- ===== TOOL 1 - ULTIMATE V2 - NO BUGS - PASTE IN TOOL 1 ===== --
+ <!-- ================= TOOL 1 - ONLY HTML - START ================= -->
+<div class="tool" id="tool-1">
+<div class="card3d">
 
-<div class="t1-3d"><div class="t1-card">
-<div class="t1-title">🖼️ Image to PDF Pro V2</div>
-<div class="t1-sub">Ultimate • Fast • Auto Save • Share • No API</div>
+<div class="title3d">🖼️ Image to PDF Pro V2</div>
+<div class="sub3d">Ultimate • Fast • Auto Save • Share • No API</div>
 
-<label class="t1-label">✏️ 1. PDF KA NAAM</label>
-<input type="text" id="t1Name" class="t1-input" placeholder="Jaise - My Photos, School Notes...">
-<div style="display:flex;gap:6px;margin-top:6px">
-<button class="t1-btn2" style="margin:0;flex:1" onclick="t1QuickName('Photos')">📸 Photos</button>
-<button class="t1-btn2" style="margin:0;flex:1" onclick="t1QuickName('Notes')">📝 Notes</button>
-<button class="t1-btn2" style="margin:0;flex:1" onclick="t1QuickName('Bills')">🧾 Bills</button>
-<button class="t1-btn2" style="margin:0;flex:1" onclick="t1QuickName('Docs')">📄 Docs</button>
+<label class="label">✏️ 1. PDF NAME</label>
+<input type="text" id="t1Name" class="input" placeholder="Example - My Photos, School Notes...">
+<div>
+<button class="btn2" onclick="t1QuickName('Photos')">📸 Photos</button>
+<button class="btn2" onclick="t1QuickName('Notes')">📝 Notes</button>
+<button class="btn2" onclick="t1QuickName('Bills')">🧾 Bills</button>
+<button class="btn2" onclick="t1QuickName('Docs')">📄 Docs</button>
 </div>
 
-<div class="t1-row">
-<div><label class="t1-label">📄 Page Size</label><select id="t1Page" class="t1-input"><option value="a4">A4 - Best</option><option value="letter">Letter</option><option value="a5">A5 - Chhota</option><option value="fit">Image Size</option></select></div>
-<div><label class="t1-label">↔️ Orientation</label><select id="t1Orient" class="t1-input"><option value="portrait">Portrait - Khada</option><option value="landscape">Landscape - Leta</option></select></div>
+<div class="row2">
+<div>
+<label class="label">📄 Page Size</label>
+<select id="t1Page" class="input">
+<option value="a4">A4 - Best</option>
+<option value="letter">Letter</option>
+<option value="a5">A5 - Small</option>
+<option value="fit">Image Size</option>
+</select>
+</div>
+<div>
+<label class="label">↔️ Orientation</label>
+<select id="t1Orient" class="input">
+<option value="portrait">Portrait - Vertical</option>
+<option value="landscape">Landscape - Horizontal</option>
+</select>
+</div>
 </div>
 
-<div class="t1-row">
-<div><label class="t1-label">🎨 Quality</label><select id="t1Quality" class="t1-input"><option value="0.95">High - Best</option><option value="0.8">Medium - Balance</option><option value="0.6">Low - Chhota Size</option></select></div>
-<div><label class="t1-label">⚡ Speed</label><select id="t1Speed" class="t1-input"><option value="fast">Fast Mode - ON ✅</option><option value="best">Best Quality - Slow</option></select></div>
+<div class="row2">
+<div>
+<label class="label">🎨 Quality</label>
+<select id="t1Quality" class="input">
+<option value="0.95">High - Best Quality</option>
+<option value="0.8">Medium - Balanced</option>
+<option value="0.6">Low - Small Size</option>
+</select>
+</div>
+<div>
+<label class="label">⚡ Speed</label>
+<select id="t1Speed" class="input">
+<option value="fast">Fast Mode - ON ✅</option>
+<option value="best">Best Quality - Slow</option>
+</select>
+</div>
 </div>
 
-<label class="t1-label">✨ 2. FILTER - Sab Photos Pe Ek Saath</label>
-<div style="display:flex;gap:6px">
-<button class="t1-btn2" style="margin:0;flex:1" onclick="t1SetFilter('none')">Original</button>
-<button class="t1-btn2" style="margin:0;flex:1" onclick="t1SetFilter('gray')">⚫ B&W</button>
-<button class="t1-btn2" style="margin:0;flex:1" onclick="t1SetFilter('bright')">☀️ Bright</button>
+<label class="label">✨ 2. FILTER - Apply to All Photos</label>
+<div>
+<button class="btn2" onclick="t1SetFilter('none')">Original</button>
+<button class="btn2" onclick="t1SetFilter('gray')">⚫ B&W</button>
+<button class="btn2" onclick="t1SetFilter('bright')">☀️ Bright</button>
 </div>
 
-<label class="t1-label">🖼️ 3. IMAGES ADD KARO - Drag Bhi Kar Sakte Ho</label>
-<div class="t1-drop" id="t1Drop" onclick="document.getElementById('t1Files').click()">
-<b style="font-size:16px;color:#22d3ee">+ Click Ya Drag Karke Daalo</b><br><small style="color:#94a3b8">JPG, PNG, WEBP - Kitni bhi</small><br><small style="color:#22d3ee" id="t1Count">0 Images</small><br><small style="color:#94a3b8">Tip: Photo ko pakad ke khinch ke order badlo</small>
+<label class="label">🖼️ 3. ADD IMAGES - Click or Drag & Drop</label>
+<div class="drop" id="t1Drop" onclick="document.getElementById('t1Files').click()">
+<b>+ Click or Drag Images Here</b>
+<br><small>JPG, PNG, WEBP - Unlimited</small>
+<br><small id="t1Count">0 Images</small>
+<br><small>Tip: Hold and drag photo to change order</small>
 </div>
 <input type="file" id="t1Files" accept="image/*" multiple hidden>
 
-<div style="display:flex;gap:6px;margin-top:10px">
-<button class="t1-btn2" style="margin:0;flex:1" onclick="t1Reverse()">🔃 Ulta Karo</button>
-<button class="t1-btn2" style="margin:0;flex:1" onclick="t1SortAZ()">🔤 A-Z Sort</button>
-<button class="t1-btn2" style="margin:0;flex:1" onclick="t1Clear()">🗑️ Clear</button>
+<div>
+<button class="btn2" onclick="t1Reverse()">🔃 Reverse</button>
+<button class="btn2" onclick="t1SortAZ()">🔤 Sort A-Z</button>
+<button class="btn2" onclick="t1Clear()">🗑️ Clear</button>
 </div>
 
-<div class="t1-grid" id="t1Preview"></div>
+<div class="grid2" id="t1Preview"></div>
 
-<div class="t1-toggle"><b>📄 Cover Page Lagana Hai? (Pehle Page Pe Title)</b><input type="checkbox" id="t1Cover" onchange="document.getElementById('t1CoverBox').style.display=this.checked?'block':'none'"></div>
-<div id="t1CoverBox" style="display:none"><input type="text" id="t1CoverText" class="t1-input" placeholder="Cover Title - Jaise MY SCHOOL NOTES" style="margin-top:8px"></div>
+<div class="toggle">
+<b>📄 Cover Page? (Title on First Page)</b>
+<input type="checkbox" id="t1Cover" onchange="document.getElementById('t1CoverBox').style.display=this.checked?'block':'none'">
+</div>
+<div id="t1CoverBox">
+<input type="text" id="t1CoverText" class="input" placeholder="Cover Title - Example MY SCHOOL NOTES">
+</div>
 
-<div class="t1-toggle"><b>💧 Watermark?</b><input type="checkbox" id="t1WmOn" checked onchange="document.getElementById('t1WmBox').style.display=this.checked?'block':'none'"></div>
-<div id="t1WmBox"><input type="text" id="t1WmText" class="t1-input" value="Orbittroniz.com" style="margin-top:8px"></div>
+<div class="toggle">
+<b>💧 Watermark?</b>
+<input type="checkbox" id="t1WmOn" checked onchange="document.getElementById('t1WmBox').style.display=this.checked?'block':'none'">
+</div>
+<div id="t1WmBox">
+<input type="text" id="t1WmText" class="input" value="Orbittroniz.com">
+</div>
 
-<div class="t1-toggle"><b>🔢 Page Number?</b><input type="checkbox" id="t1PageNo" checked></div>
-<div class="t1-toggle"><b>📝 Har Photo Ke Neeche Caption?</b><input type="checkbox" id="t1CaptionOn" checked></div>
-<div class="t1-toggle"><b>💾 Auto Save - Reload Pe Bhi Rahega?</b><input type="checkbox" id="t1AutoSave" checked></div>
+<div class="toggle">
+<b>🔢 Page Number?</b>
+<input type="checkbox" id="t1PageNo" checked>
+</div>
 
-<div class="t1-prog" id="t1Prog"><div id="t1Fill"></div></div>
-<div id="t1Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
-<div id="t1SizeInfo" style="text-align:center;font-size:11px;color:#94a3b8"></div>
+<div class="toggle">
+<b>📝 Caption Under Each Photo?</b>
+<input type="checkbox" id="t1CaptionOn" checked>
+</div>
 
-<button class="t1-btn2" id="t1FolderBtn">📁 Folder Select Karo (PC Me)</button>
-<div id="t1FolderName" style="text-align:center;font-size:11px;color:#94a3b8;margin-top:4px">Folder: Downloads (Default)</div>
+<div class="toggle">
+<b>💾 Auto Save - Stay After Reload?</b>
+<input type="checkbox" id="t1AutoSave" checked>
+</div>
 
-<button class="t1-btn3d" id="t1Download">⬇️ DOWNLOAD PDF - DIRECT</button>
-<button class="t1-btn-share" id="t1ShareBtn" onclick="t1Share()">📤 SHARE ON WHATSAPP / ANYWHERE</button>
-<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - Photo kabhi server pe nahi jati • Auto Save ON hai</p>
-</div></div>
+<div class="prog" id="t1Prog"><div id="t1Fill"></div></div>
+<div id="t1Status"></div>
+<div id="t1SizeInfo"></div>
 
-<div class="t1-preview-modal" id="t1Modal" onclick="this.style.display='none'"><img id="t1ModalImg"></div>
+<button class="btn2" id="t1FolderBtn">📁 Select Folder (PC Only)</button>
+<div id="t1FolderName">Folder: Downloads (Default)</div>
 
-<script>
-// ===== TOOL 1 V2 JS - NO BUGS =====
-let t1Images=[], t1Folder=null, t1Filter='none', t1LastBlob=null, t1LastName='Orbittroniz-PDF.pdf';
-// Auto Save load
-try{ let saved=localStorage.getItem('t1_autosave'); if(saved){ t1Images=JSON.parse(saved).slice(0,20); } }catch(e){ t1Images=[]; }
-function t1Save(){ try{ if(document.getElementById('t1AutoSave').checked) localStorage.setItem('t1_autosave', JSON.stringify(t1Images.slice(0,20))); }catch(e){} }
-function t1QuickName(n){ document.getElementById('t1Name').value=n+" - "+new Date().toLocaleDateString('en-IN'); }
-function t1SetFilter(f){ t1Filter=f; t1Render(); document.getElementById('t1Status').innerText="Filter lag gaya: "+(f==='none'?'Original':f==='gray'?'Black & White':'Bright'); }
-let t1DropEl=document.getElementById('t1Drop');
-if(t1DropEl){
-  t1DropEl.addEventListener('dragover',e=>{e.preventDefault();t1DropEl.classList.add('dragover')});
-  t1DropEl.addEventListener('dragleave',()=>t1DropEl.classList.remove('dragover'));
-  t1DropEl.addEventListener('drop',e=>{e.preventDefault();t1DropEl.classList.remove('dragover');t1AddFiles([...e.dataTransfer.files])});
-}
-document.getElementById('t1Files').onchange=(e)=>{t1AddFiles([...e.target.files]);e.target.value=""};
-function t1AddFiles(files){
-  let added=0;
-  files.forEach(file=>{
-    if(!file.type.startsWith('image/')) return;
-    if(file.size>15*1024*1024){ alert(file.name+" bahut badi hai (15MB+), chhoti photo use karo"); return; }
-    let r=new FileReader();
-    r.onload=ev=>{
-      let im=new Image();
-      im.onload=()=>{ t1Images.push({dataUrl:ev.target.result,name:file.name,caption:'',rotate:0}); added++; t1Render(); t1Save(); };
-      im.onerror=()=>{ document.getElementById('t1Status').innerText="⚠️ "+file.name+" load nahi hui, skip kar di"; };
-      im.src=ev.target.result;
-    };
-    r.onerror=()=>alert("File read nahi hui");
-    r.readAsDataURL(file);
-  });
-}
-function t1Render(){
-  let box=document.getElementById('t1Preview');
-  document.getElementById('t1Count').innerText=t1Images.length+" Images • Drag karke order badlo";
-  if(!t1Images.length){ box.innerHTML='<div style="grid-column:1/3;text-align:center;color:#94a3b8;padding:14px">Abhi koi image nahi hai 👆<br><small>Auto Save se purani photos wapas aa jayengi</small></div>'; return; }
-  let filt=t1Filter==='gray'?'grayscale(1)':t1Filter==='bright'?'brightness(1.25) contrast(1.1)':'none';
-  box.innerHTML=t1Images.map((im,i)=>`
-    <div class="t1-item" draggable="true" data-idx="${i}" ondragstart="t1DragStart(event,${i})" ondragover="event.preventDefault()" ondrop="t1DropOrder(event,${i})">
-      <span class="no">${i+1}</span><button class="del" onclick="t1Remove(${i})">✕</button>
-      <img src="${im.dataUrl}" style="filter:${filt};transform:rotate(${im.rotate||0}deg)" onclick="t1PreviewImg('${im.dataUrl}')">
-      <input class="cap" placeholder="Caption likho (optional)..." value="${(im.caption||'').replace(/"/g,'')}" oninput="t1Images[${i}].caption=this.value; t1Save()">
-      <div class="tools">
-        <button onclick="t1Rotate(${i})">🔄 Rotate</button>
-        <button onclick="t1Duplicate(${i})">📄 Copy</button>
-        <button onclick="t1Move(${i},-1)">⬆️</button>
-        <button onclick="t1Move(${i},1)">⬇️</button>
-      </div>
-    </div>`).join('');
-  let totalKB=t1Images.reduce((s,x)=>s+(x.dataUrl.length/1024),0);
-  document.getElementById('t1SizeInfo').innerText="Total Images Size: "+totalKB.toFixed(0)+" KB (Approx) • PDF usse chhota banega";
-}
-let t1DragIdx=null;
-function t1DragStart(e,i){ t1DragIdx=i; e.target.classList.add('dragging'); }
-function t1DropOrder(e,i){ e.preventDefault(); if(t1DragIdx===null||t1DragIdx===i) return; let m=t1Images.splice(t1DragIdx,1)[0]; t1Images.splice(i,0,m); t1DragIdx=null; t1Render(); t1Save(); }
-function t1PreviewImg(url){ document.getElementById('t1ModalImg').src=url; document.getElementById('t1Modal').style.display='flex'; }
-function t1Remove(i){ t1Images.splice(i,1); t1Render(); t1Save(); }
-function t1Move(i,d){ let j=i+d; if(j<0||j>=t1Images.length) return; [t1Images[i],t1Images[j]]=[t1Images[j],t1Images[i]]; t1Render(); t1Save(); }
-function t1Rotate(i){ t1Images[i].rotate=((t1Images[i].rotate||0)+90)%360; t1Render(); t1Save(); }
-function t1Duplicate(i){ let c=JSON.parse(JSON.stringify(t1Images[i])); t1Images.splice(i+1,0,c); t1Render(); t1Save(); }
-function t1Reverse(){ t1Images.reverse(); t1Render(); t1Save(); }
-function t1SortAZ(){ t1Images.sort((a,b)=>a.name.localeCompare(b.name)); t1Render(); t1Save(); }
-function t1Clear(){ if(!t1Images.length) return; if(!confirm("Saari images delete kar du?")) return; t1Images=[]; localStorage.removeItem('t1_autosave'); t1Render(); document.getElementById('t1Status').innerText="Clear ho gaya"; }
-document.getElementById('t1FolderBtn').onclick=async()=>{ try{ t1Folder=await window.showDirectoryPicker(); document.getElementById('t1FolderName').innerText="Folder: "+t1Folder.name+" ✅"; }catch(e){ alert("Mobile me Folder select nahi hota, Downloads me save hoga. Ye normal hai."); } };
-async function t1Share(){ if(!t1LastBlob) return alert("Pehle PDF download karo"); try{ let file=new File([t1LastBlob], t1LastName, {type:'application/pdf'}); if(navigator.canShare && navigator.canShare({files:[file]})){ await navigator.share({files:[file], title:t1LastName}); }else{ let url=URL.createObjectURL(t1LastBlob); let a=document.createElement('a'); a.href="https://wa.me/?text="+encodeURIComponent("Meri PDF dekho - Orbittroniz.com"); a.target="_blank"; a.click(); } }catch(e){ alert("Share cancel ho gaya, Download wala button use karo"); } }
-document.getElementById('t1Download').onclick=async()=>{
-  if(!t1Images.length) return alert("Pehle koi image add karo! Neeche drop box pe click karo.");
-  let name=(document.getElementById('t1Name').value.trim()||"Orbittroniz-PDF").replace(/[\\/:*?"<>|]/g,'').trim()||"Orbittroniz-PDF";
-  let page=document.getElementById('t1Page').value, orient=document.getElementById('t1Orient').value;
-  let quality=parseFloat(document.getElementById('t1Quality').value)||0.95;
-  let fast=document.getElementById('t1Speed').value==='fast';
-  let wmOn=document.getElementById('t1WmOn').checked, wmText=document.getElementById('t1WmText').value||"Orbittroniz.com";
-  let pageNo=document.getElementById('t1PageNo').checked, capOn=document.getElementById('t1CaptionOn').checked;
-  let coverOn=document.getElementById('t1Cover').checked, coverText=document.getElementById('t1CoverText').value||name;
-  document.getElementById('t1Status').innerText="PDF ban raha hai, ruko...";
-  document.getElementById('t1Prog').style.display='block'; document.getElementById('t1Fill').style.width="0%";
-  try{
-    const {jsPDF}=window.jspdf;
-    let fmt=page==='letter'?'letter':page==='a5'?'a5':'a4';
-    let pdf=new jsPDF({unit:'mm',format:page==='fit'?'a4':fmt,orientation:orient,compress:true});
-    let pageIdx=0;
-    // Cover Page
-    if(coverOn){
-      let pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight();
-      pdf.setFillColor(124,58,237); pdf.rect(0,0,pw,ph,'F');
-      pdf.setTextColor(255,255,255); pdf.setFontSize(28); pdf.setFont("helvetica","bold");
-      let lines=pdf.splitTextToSize(coverText, pw-30); pdf.text(lines, pw/2, ph/2-10, {align:'center'});
-      pdf.setFontSize(12); pdf.setFont("helvetica","normal"); pdf.text("Made with Orbittroniz.com", pw/2, ph/2+30, {align:'center'});
-      pdf.text("Total Photos: "+t1Images.length, pw/2, ph/2+45, {align:'center'});
-      pageIdx++;
-    }
-    for(let i=0;i<t1Images.length;i++){
-      let im=t1Images[i];
-      try{
-        let imgEl=new Image();
-        await new Promise((res,rej)=>{ imgEl.onload=res; imgEl.onerror=()=>rej(new Error("Image "+(i+1)+" kharab hai")); imgEl.src=im.dataUrl; });
-        if(pageIdx>0) pdf.addPage(fmt,orient);
-        pageIdx++;
-        let pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight();
-        let margin=10;
-        // Canvas - Rotate + Filter + Fast compress
-        let cv=document.createElement('canvas');
-        let w=imgEl.width, h=imgEl.height;
-        if(fast && Math.max(w,h)>1600){ let s=1600/Math.max(w,h); w=Math.floor(w*s); h=Math.floor(h*s); }
-        let rot=im.rotate||0;
-        if(rot===90||rot===270){ cv.width=h; cv.height=w; }else{ cv.width=w; cv.height=h; }
-        let ctx=cv.getContext('2d'); ctx.translate(cv.width/2,cv.height/2); ctx.rotate(rot*Math.PI/180);
-        if(t1Filter==='gray') ctx.filter='grayscale(1)'; else if(t1Filter==='bright') ctx.filter='brightness(1.25) contrast(1.1)';
-        ctx.drawImage(imgEl, -w/2, -h/2, w, h);
-        let finalUrl=cv.toDataURL('image/jpeg', quality);
-        let ratio=cv.width/cv.height;
-        let iw=pw-(margin*2), ih=iw/ratio;
-        if(ih>ph-(margin*2)-16){ ih=ph-(margin*2)-16; iw=ih*ratio; }
-        pdf.addImage(finalUrl,'JPEG',(pw-iw)/2, margin+((ph-margin*2-16-ih)/2), iw, ih);
-        if(capOn && im.caption){ pdf.setFontSize(11); pdf.setTextColor(80,80,80); pdf.text(im.caption, pw/2, ph-12, {align:'center'}); }
-        if(wmOn){ pdf.setFontSize(9); pdf.setTextColor(170,170,170); pdf.text(wmText, pw/2, ph-4, {align:'center'}); }
-        if(pageNo){ pdf.setFontSize(9); pdf.setTextColor(150,150,150); pdf.text(pageIdx+" / "+(t1Images.length+(coverOn?1:0)), pw-12, ph-4, {align:'right'}); }
-      }catch(imgErr){
-        console.warn("Skip image", i, imgErr);
-        document.getElementById('t1Status').innerText="⚠️ Photo "+(i+1)+" skip ki (kharab thi), baki ban rahi hai...";
-        continue;
-      }
-      document.getElementById('t1Fill').style.width=Math.round(((i+1)/t1Images.length)*100)+"%";
-      await new Promise(r=>setTimeout(r,10));
-    }
-    if(pageIdx===0) throw new Error("Koi valid photo nahi mili");
-    let blob=pdf.output('blob'); t1LastBlob=blob; t1LastName=name+".pdf";
-    document.getElementById('t1ShareBtn').style.display='block';
-    if(t1Folder){
-      try{ let hnd=await t1Folder.getFileHandle(t1LastName,{create:true}); let wr=await hnd.createWritable(); await wr.write(blob); await wr.close(); document.getElementById('t1Status').innerText="✅ Folder me save: "+t1LastName; }
-      catch(e){ /* fallback download */ }
-    }
-    if(!t1Folder || true){
-      // Agar folder me save ho gaya to bhi download bhi de do taaki user ko mile
-      if(!t1Folder){
-        let link=document.createElement('a'); link.href=URL.createObjectURL(blob); link.download=t1LastName; document.body.appendChild(link); link.click(); link.remove();
-      }
-    }
-    document.getElementById('t1Status').innerText="✅ Ho gaya! "+t1LastName+" ("+(blob.size/1024).toFixed(0)+" KB) • Ab Share bhi kar sakte ho 👇";
-    setTimeout(()=>{ document.getElementById('t1Prog').style.display='none'; },2000);
-  }catch(e){ console.error(e); alert("Error: "+e.message+" - Photo dobara add karke try karo"); document.getElementById('t1Status').innerText="❌ Error aaya, dobara try karo"; document.getElementById('t1Prog').style.display='none'; }
-};
-t1Render();
-</script>
-<!-- ===== TOOL 1 V2 END ===== -->
+<button class="btn3d" id="t1Download">⬇️ DOWNLOAD PDF - DIRECT</button>
+<button class="btn-share" id="t1ShareBtn" onclick="t1Share()">📤 SHARE ON WHATSAPP / ANYWHERE</button>
+
+<p>100% Private - Photos never go to server • Auto Save ON</p>
+
+</div>
+</div>
+<!-- ================= TOOL 1 - ONLY HTML - END ================= -->
+
+<div class="modal" id="t1Modal" onclick="this.style.display='none'"><img id="t1ModalImg"></div> 
   <!-- ===== TOOL 2 - PDF SPLIT V2 - NO BUGS - PASTE IN TOOL 2 ===== -->
 <style>
 .t2-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05) inset,0 0 30px rgba(124,58,237,.25)}
