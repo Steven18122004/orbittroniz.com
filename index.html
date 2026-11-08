@@ -333,226 +333,234 @@ document.getElementById('t1Download').onclick=async()=>{
 t1Render();
 </script>
 <!-- ================= TOOL 1 - WITH PREVIEW - END ================= -->
-  <!-- ===== TOOL 2 - PDF SPLIT V2 - NO BUGS - PASTE IN TOOL 2 ===== -->
+
+<!-- ================= TOOL 2 - WITH FULL PREVIEW - PREMIUM - START ================= -->
 <style>
-.t2-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05) inset,0 0 30px rgba(124,58,237,.25)}
-.t2-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.t2-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
-.t2-label{font-size:11px;color:#cbd5e1;font-weight:800;margin:12px 0 5px;display:block}
-.t2-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
-.t2-input:focus{border-color:#22d3ee}
-.t2-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.t2-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
-.t2-drop.dragover{background:rgba(34,211,238,.25);transform:scale(1.02)}
-.t2-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.t2-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:12px;font-size:12px;font-weight:700;cursor:pointer}
-.t2-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent;color:#fff;box-shadow:0 8px 20px rgba(124,58,237,.4)}
-.t2-chip{display:inline-block;background:#0a1224;border:1px solid #2a3a6a;padding:5px 10px;border-radius:20px;font-size:11px;margin:3px;cursor:pointer}
-.t2-chip.active{background:#22c55e;color:#fff;border-color:#22c55e}
-.t2-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
-.t2-btn3d:active{transform:translateY(3px)}
-.t2-btn2{width:100%;padding:12px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
-.t2-prog{height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:10px;display:none;border:1px solid #2a3a6a}
-.t2-prog div{height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee);width:0%;transition:.3s}
-.t2-out a{display:block;background:#060a18;border:1px solid #2a3a6a;padding:12px;border-radius:12px;margin-top:8px;color:#fff;text-decoration:none;font-size:13px;font-weight:700;text-align:center}
-.t2-out a small{display:block;color:#94a3b8;font-weight:400;font-size:11px;margin-top:3px}
+.card3d2{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.title3d2{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub3d2{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.row2x{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.drop2{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
+.drop2.dragover{background:rgba(34,211,238,.25);transform:scale(1.02)}
+.mode2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.mode2 button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:12px;font-size:12px;font-weight:700;cursor:pointer}.mode2 button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent;box-shadow:0 8px 20px rgba(124,58,237,.4)}
+.chip2x{display:inline-block;background:#0a1224;border:1px solid #2a3a6a;padding:5px 10px;border-radius:20px;font-size:11px;margin:3px;cursor:pointer}
+.chip2x.active{background:#22c55e;color:#fff;border-color:#22c55e}
+.toggle2{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px 12px;margin-top:8px}
+.toggle2 input{width:44px;height:24px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer}
+.toggle2 input:checked{background:#22c55e}.toggle2 input::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:.2s}.toggle2 input:checked::after{left:23px}
+.btn3d2{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.btn3d2:active{transform:translateY(3px)}
+.btn2x{width:100%;padding:12px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.btn-preview2{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;box-shadow:0 10px 25px rgba(245,158,11,.4)}
+.btn-share2{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
+.prog2{height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:10px;display:none;border:1px solid #2a3a6a}.prog2 div{height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee);width:0%}
+.out2 a{display:block;background:#060a18;border:1px solid #2a3a6a;padding:12px;border-radius:12px;margin-top:8px;color:#fff;text-decoration:none;font-size:13px;font-weight:700;text-align:center}
+.out2 a small{display:block;color:#94a3b8;font-weight:400;font-size:11px}
+.pages-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.page-card{background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px;text-align:center;cursor:pointer;position:relative}
+.page-card.selected{border-color:#22c55e;background:rgba(34,197,94,.15);box-shadow:0 0 0 2px rgba(34,197,94,.3)}
+.page-card.removed{opacity:.35;border-color:#ef4444;text-decoration:line-through}
+.page-card .num{font-size:18px}.page-card b{font-size:11px;display:block}.page-card small{font-size:9px;color:#94a3b8}
+.modal2{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column}
+.modal2 canvas{max-width:95%;max-height:70vh;background:#fff;border-radius:10px}
+.modal-nav2{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.modal-nav2 button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer}
+.modal-nav2 button.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none}
 </style>
 
-<div class="t2-card">
-<div class="t2-title">✂️ PDF Split Pro V2</div>
-<div class="t2-sub">Ultimate • Custom Range • Preview • Fast • No API</div>
+<div class="tool active" id="tool-2"><div class="card3d2">
+<div class="title3d2">✂️ PDF Split Pro V3 - With Preview</div><div class="sub3d2">Premium • Live Preview • Smart Split • Remove Pages • No API</div>
 
-<label class="t2-label">📄 1. PDF SELECT KARO</label>
-<div class="t2-drop" id="t2Drop" onclick="document.getElementById('t2File').click()">
-<b style="font-size:15px;color:#22d3ee">+ Click Ya Drag Karke PDF Daalo</b><br><small style="color:#94a3b8">Sirf PDF File - Kitni bhi badi</small><br><small style="color:#22d3ee" id="t2FileName">Koi PDF nahi hai</small>
-</div>
+<label class="label">📄 1. SELECT PDF</label>
+<div class="drop2" id="t2Drop" onclick="document.getElementById('t2File').click()"><b style="font-size:15px;color:#22d3ee">+ Click or Drag PDF Here</b><br><small style="color:#94a3b8">PDF File Only - Any Size</small><br><small style="color:#22d3ee" id="t2FileName">No PDF Selected</small></div>
 <input type="file" id="t2File" accept=".pdf,application/pdf" hidden>
 
-<div id="t2Info" style="display:none;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
-<div style="font-size:22px">📄</div><b id="t2InfoName" style="font-size:13px"></b><br><small id="t2InfoMeta" style="color:#94a3b8"></small><br><small id="t2InfoPages" style="color:#22d3ee;font-weight:700"></small>
-</div>
+<div id="t2Info" style="display:none;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center"><div style="font-size:22px">📄</div><b id="t2InfoName" style="font-size:13px"></b><br><small id="t2InfoMeta" style="color:#94a3b8"></small><br><small id="t2InfoPages" style="color:#22d3ee;font-weight:700"></small><br><small id="t2InfoRemoved" style="color:#ef4444;font-weight:700"></small></div>
 
-<label class="t2-label">✂️ 2. KAISE SPLIT KARNA HAI?</label>
-<div class="t2-mode" id="t2Modes">
-<button class="active" data-mode="all" onclick="t2SetMode('all',this)">📄 Har Page Alag</button>
+<button class="btn-preview2" onclick="t2OpenPreview()" id="t2PreviewBtn" style="display:none">👀 PREVIEW PDF - See All Pages Before Split</button>
+
+<label class="label">📑 2. SELECT PAGES - Tap to Select / Remove</label>
+<div style="display:flex;gap:6px;flex-wrap:wrap">
+<button class="btn2x" style="margin:0;flex:1" onclick="t2SelectAll()">✅ Select All</button>
+<button class="btn2x" style="margin:0;flex:1" onclick="t2DeselectAll()">❌ Deselect All</button>
+<button class="btn2x" style="margin:0;flex:1" onclick="t2SelectEven()">🔢 Even Only</button>
+<button class="btn2x" style="margin:0;flex:1" onclick="t2SelectOdd()">🔢 Odd Only</button>
+</div>
+<div class="pages-grid" id="t2PagesGrid"></div>
+<div id="t2PagesHint" style="text-align:center;font-size:11px;color:#94a3b8;margin-top:6px">Select PDF first to see pages here</div>
+
+<label class="label">✂️ 3. HOW TO SPLIT?</label>
+<div class="mode2" id="t2Modes">
+<button class="active" data-mode="all" onclick="t2SetMode('all',this)">📄 Every Page Separate</button>
 <button data-mode="range" onclick="t2SetMode('range',this)">🎯 Custom Range</button>
-<button data-mode="every" onclick="t2SetMode('every',this)">📦 Har N Page Pe</button>
-<button data-mode="firstlast" onclick="t2SetMode('firstlast',this)">⭐ Pehla + Aakhri</button>
+<button data-mode="every" onclick="t2SetMode('every',this)">📦 Every N Pages</button>
+<button data-mode="selected" onclick="t2SetMode('selected',this)">✅ Selected Pages Only</button>
+<button data-mode="firstlast" onclick="t2SetMode('firstlast',this)">⭐ First + Last</button>
+<button data-mode="evenodd" onclick="t2SetMode('evenodd',this)">🔢 Even / Odd Split</button>
 </div>
 
-<!-- RANGE BOX -->
-<div id="t2RangeBox" style="display:none">
-<label class="t2-label">🎯 Range Likho - Jaise: 1-3, 5, 7-9</label>
-<input type="text" id="t2Range" class="t2-input" placeholder="1-3, 5, 7-9" value="1-3, 5">
-<div style="margin-top:8px"><small style="color:#94a3b8">Quick:</small>
-<span class="t2-chip" onclick="t2SetRange('1-2')">1-2</span>
-<span class="t2-chip" onclick="t2SetRange('1-3')">1-3</span>
-<span class="t2-chip" onclick="t2SetRange('1-5')">1-5</span>
-<span class="t2-chip" onclick="t2SetRange('1')">Sirf 1</span>
-</div>
-</div>
+<div id="t2RangeBox" style="display:none"><label class="label">🎯 Write Range - Example: 1-3, 5, 7-9</label><input type="text" id="t2Range" class="input" placeholder="1-3, 5, 7-9" value="1-3, 5"><div style="margin-top:8px"><small style="color:#94a3b8">Quick:</small><span class="chip2x" onclick="t2SetRange('1-2')">1-2</span><span class="chip2x" onclick="t2SetRange('1-3')">1-3</span><span class="chip2x" onclick="t2SetRange('1-5')">1-5</span><span class="chip2x" onclick="t2SetRange('1')">Only 1</span></div></div>
+<div id="t2EveryBox" style="display:none"><label class="label">📦 Split After How Many Pages?</label><div class="row2x"><select id="t2Every" class="input"><option value="2">Every 2 Pages</option><option value="3">Every 3 Pages</option><option value="5">Every 5 Pages</option><option value="10">Every 10 Pages</option></select><input type="number" id="t2EveryCustom" class="input" placeholder="Or write your own"></div></div>
+<div id="t2FirstLastBox" style="display:none"><label class="label">⭐ What Do You Need?</label><select id="t2FL" class="input"><option value="both">First + Last Both</option><option value="first">Only First Page</option><option value="last">Only Last Page</option><option value="first3">First 3 Pages</option><option value="last3">Last 3 Pages</option></select></div>
+<div id="t2EvenOddBox" style="display:none"><label class="label">🔢 Even or Odd?</label><select id="t2EO" class="input"><option value="both">Even + Odd - 2 PDFs</option><option value="even">Only Even Pages</option><option value="odd">Only Odd Pages</option></select></div>
 
-<!-- EVERY BOX -->
-<div id="t2EveryBox" style="display:none">
-<label class="t2-label">📦 Har Kitne Page Pe Ek PDF?</label>
-<div class="t2-row"><select id="t2Every" class="t2-input"><option value="2">Har 2 Page</option><option value="3">Har 3 Page</option><option value="5">Har 5 Page</option><option value="10">Har 10 Page</option></select><input type="number" id="t2EveryCustom" class="t2-input" placeholder="Ya apna likho"></div>
-</div>
+<label class="label">✏️ 4. SPLIT PDF NAME (Prefix)</label>
+<input type="text" id="t2Prefix" class="input" placeholder="Split - Orbittroniz" value="Split - Orbittroniz">
+<div style="display:flex;gap:6px;margin-top:6px"><button class="btn2x" style="margin:0;flex:1" onclick="t2QuickPrefix('My Notes')">📝 My Notes</button><button class="btn2x" style="margin:0;flex:1" onclick="t2QuickPrefix('Bills')">🧾 Bills</button><button class="btn2x" style="margin:0;flex:1" onclick="t2QuickPrefix('Chapters')">📖 Chapters</button></div>
 
-<!-- FIRST/LAST BOX -->
-<div id="t2FirstLastBox" style="display:none">
-<label class="t2-label">⭐ Kya Chahiye?</label>
-<select id="t2FL" class="t2-input"><option value="both">Pehla + Aakhri Dono</option><option value="first">Sirf Pehla Page</option><option value="last">Sirf Aakhri Page</option><option value="first3">Pehle 3 Page</option><option value="last3">Aakhri 3 Page</option></select>
-</div>
+<div class="toggle2"><b>📦 Download All Together?</b><input type="checkbox" id="t2AutoAll" checked></div>
+<div class="toggle2"><b>🔢 Add Page Numbers in File Name?</b><input type="checkbox" id="t2NameWithPages" checked></div>
+<div class="toggle2"><b>🗜️ Compress Split PDFs?</b><input type="checkbox" id="t2Compress"></div>
 
-<label class="t2-label">✏️ 3. SPLIT PDF KA NAAM (Prefix)</label>
-<input type="text" id="t2Prefix" class="t2-input" placeholder="Split - Orbittroniz" value="Split - Orbittroniz">
-<div style="display:flex;gap:6px;margin-top:6px">
-<button class="t2-btn2" style="margin:0;flex:1" onclick="t2QuickPrefix('My Notes')">📝 My Notes</button>
-<button class="t2-btn2" style="margin:0;flex:1" onclick="t2QuickPrefix('Bills')">🧾 Bills</button>
-<button class="t2-btn2" style="margin:0;flex:1" onclick="t2QuickPrefix('Chapters')">📖 Chapters</button>
-</div>
-
-<div style="display:flex;gap:8px;margin-top:10px;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px 12px">
-<b style="font-size:12px">📦 Sab Ek Saath Download Karna Hai?</b><input type="checkbox" id="t2AutoAll" checked style="width:44px;height:24px;appearance:none;background:#22c55e;border-radius:20px;position:relative;cursor:pointer">
-</div>
-
-<div class="t2-prog" id="t2Prog"><div id="t2Fill"></div></div>
+<div class="prog2" id="t2Prog"><div id="t2Fill"></div></div>
 <div id="t2Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
+<button class="btn3d2" id="t2SplitBtn" onclick="t2Split()">✂️ SPLIT PDF - START</button>
+<button class="btn2x" onclick="t2DownloadAll()" id="t2AllBtn" style="display:none">⬇️ Download All Together</button>
+<button class="btn-share2" id="t2ShareBtn" onclick="t2ShareFirst()">📤 SHARE FIRST PDF</button>
+<button class="btn2x" onclick="t2Reset()">🗑️ Clear / New PDF</button>
+<div class="out2" id="t2Out"></div>
+<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - PDF never goes to server • Preview Available</p>
+</div></div>
+<!-- ================= TOOL 2 - END ================= -->
 
-<button class="t2-btn3d" id="t2SplitBtn" onclick="t2Split()">✂️ SPLIT PDF - START</button>
-<button class="t2-btn2" onclick="t2DownloadAll()" id="t2AllBtn" style="display:none">⬇️ Sab Ek Saath Download Karo</button>
-<button class="t2-btn2" onclick="t2Reset()">🗑️ Clear / Naya PDF</button>
-
-<div class="t2-out" id="t2Out"></div>
-<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - PDF kabhi server pe nahi jati</p>
+<!-- ===== TOOL 2 PREVIEW MODAL ===== -->
+<div class="modal2" id="t2Modal">
+<div id="t2ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Preview</div>
+<canvas id="t2PreviewCanvas"></canvas>
+<div id="t2ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div>
+<div class="modal-nav2">
+<button onclick="t2PrevPage()">⬅️ Prev</button>
+<button onclick="t2NextPage()">Next ➡️</button>
+<button onclick="t2RemoveFromPreview()" style="background:#ef4444">🗑️ Remove This Page</button>
+<button onclick="t2ToggleSelectPreview()" style="background:#22c55e">✅ Select / Unselect</button>
+<button class="primary" onclick="t2ClosePreview()">✅ Close</button>
+</div>
+<div style="margin-top:10px"><button onclick="t2ClosePreview();document.getElementById('t2SplitBtn').click()" style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;padding:11px 18px;border:none;border-radius:20px;font-weight:900;cursor:pointer">✂️ Looks Good - Split Now</button></div>
 </div>
 
 <script>
-// ===== TOOL 2 V2 JS - NO BUGS =====
-let t2File=null, t2PdfDoc=null, t2PageCount=0, t2Mode='all', t2Results=[];
+// ===== TOOL 2 V3 JS - WITH PREVIEW - NO BUGS =====
+let t2File=null, t2PdfDoc=null, t2PageCount=0, t2Mode='all', t2Results=[], t2Selected=new Set(), t2Removed=new Set(), t2PreviewIdx=0, t2PdfBytes=null;
 let t2DropEl=document.getElementById('t2Drop');
-if(t2DropEl){
-  t2DropEl.addEventListener('dragover',e=>{e.preventDefault();t2DropEl.classList.add('dragover')});
-  t2DropEl.addEventListener('dragleave',()=>t2DropEl.classList.remove('dragover'));
-  t2DropEl.addEventListener('drop',e=>{e.preventDefault();t2DropEl.classList.remove('dragover');let f=[...e.dataTransfer.files][0]; if(f) t2LoadFile(f);});
-}
-document.getElementById('t2File').onchange=(e)=>{ if(e.target.files[0]) t2LoadFile(e.target.files[0]); e.target.value=""; };
-function t2SetMode(m,btn){
-  t2Mode=m;
-  document.querySelectorAll('#t2Modes button').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  document.getElementById('t2RangeBox').style.display=m==='range'?'block':'none';
-  document.getElementById('t2EveryBox').style.display=m==='every'?'block':'none';
-  document.getElementById('t2FirstLastBox').style.display=m==='firstlast'?'block':'none';
-}
-function t2SetRange(v){ document.getElementById('t2Range').value=v; }
-function t2QuickPrefix(n){ document.getElementById('t2Prefix').value=n+" - "+new Date().toLocaleDateString('en-IN'); }
+if(t2DropEl){t2DropEl.addEventListener('dragover',e=>{e.preventDefault();t2DropEl.classList.add('dragover')});t2DropEl.addEventListener('dragleave',()=>t2DropEl.classList.remove('dragover'));t2DropEl.addEventListener('drop',e=>{e.preventDefault();t2DropEl.classList.remove('dragover');let f=[...e.dataTransfer.files][0];if(f)t2LoadFile(f);});}
+document.getElementById('t2File').onchange=(e)=>{if(e.target.files[0])t2LoadFile(e.target.files[0]);e.target.value="";};
+function t2SetMode(m,btn){t2Mode=m;document.querySelectorAll('#t2Modes button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');document.getElementById('t2RangeBox').style.display=m==='range'?'block':'none';document.getElementById('t2EveryBox').style.display=m==='every'?'block':'none';document.getElementById('t2FirstLastBox').style.display=m==='firstlast'?'block':'none';document.getElementById('t2EvenOddBox').style.display=m==='evenodd'?'block':'none';}
+function t2SetRange(v){document.getElementById('t2Range').value=v;}
+function t2QuickPrefix(n){document.getElementById('t2Prefix').value=n+" - "+new Date().toLocaleDateString('en-IN');}
 async function t2LoadFile(f){
-  if(!f.name.toLowerCase().endsWith('.pdf')){ alert("Sirf PDF file daalo!"); return; }
-  if(f.size>50*1024*1024){ if(!confirm("PDF bahut badi hai (50MB+), thoda time lagega. Continue karu?")) return; }
-  t2File=f; t2Results=[]; document.getElementById('t2Out').innerHTML=""; document.getElementById('t2AllBtn').style.display='none';
-  document.getElementById('t2FileName').innerText=f.name+" ✅";
-  document.getElementById('t2Status').innerText="PDF padh raha hu...";
+  if(!f.name.toLowerCase().endsWith('.pdf')){alert("Please select only PDF file!");return;}
+  if(f.size>50*1024*1024){if(!confirm("PDF is very large (50MB+), it will take time. Continue?"))return;}
+  t2File=f; t2Results=[]; t2Selected=new Set(); t2Removed=new Set(); t2PreviewIdx=0;
+  document.getElementById('t2Out').innerHTML=""; document.getElementById('t2AllBtn').style.display='none'; document.getElementById('t2ShareBtn').style.display='none';
+  document.getElementById('t2FileName').innerText=f.name+" ✅"; document.getElementById('t2Status').innerText="Reading PDF...";
   try{
-    let buf=await f.arrayBuffer();
+    let buf=await f.arrayBuffer(); t2PdfBytes=buf.slice(0);
     t2PdfDoc=await PDFLib.PDFDocument.load(buf,{ignoreEncryption:true});
     t2PageCount=t2PdfDoc.getPageCount();
+    for(let i=0;i<t2PageCount;i++) t2Selected.add(i);
     document.getElementById('t2Info').style.display='block';
     document.getElementById('t2InfoName').innerText=f.name;
     document.getElementById('t2InfoMeta').innerText="Size: "+(f.size/1024).toFixed(0)+" KB • Type: PDF";
-    document.getElementById('t2InfoPages').innerText="Total Pages: "+t2PageCount+" 📄";
-    document.getElementById('t2Status').innerText="✅ Ready! "+t2PageCount+" pages mili. Ab Split dabao.";
-    // Auto range suggestion
+    document.getElementById('t2InfoPages').innerText="Total Pages: "+t2PageCount+" 📄 • All Selected ✅";
+    document.getElementById('t2PreviewBtn').style.display='block';
+    document.getElementById('t2Status').innerText="✅ Ready! Found "+t2PageCount+" pages. Preview karke split karo.";
     if(!document.getElementById('t2Range').value) document.getElementById('t2Range').value="1-"+Math.min(3,t2PageCount);
-  }catch(e){ alert("Ye PDF kharab hai ya password lagi hai. Dusri PDF try karo. Error: "+e.message); document.getElementById('t2Status').innerText="❌ PDF load nahi hui"; t2File=null; }
+    t2RenderPages();
+  }catch(e){alert("This PDF is broken or password protected. Try another PDF. Error: "+e.message);document.getElementById('t2Status').innerText="❌ PDF failed to load";t2File=null;}
 }
-function t2ParseRange(str, max){
-  // "1-3, 5, 7-9" -> [[0,2],[4,4],[6,8]]
-  let groups=[];
-  str.split(',').forEach(part=>{
-    part=part.trim(); if(!part) return;
-    if(part.includes('-')){
-      let [a,b]=part.split('-').map(x=>parseInt(x.trim()));
-      if(isNaN(a)||isNaN(b)) return;
-      a=Math.max(1,Math.min(a,max)); b=Math.max(1,Math.min(b,max));
-      if(a>b) [a,b]=[b,a];
-      let arr=[]; for(let i=a;i<=b;i++) arr.push(i-1); groups.push(arr);
-    }else{
-      let n=parseInt(part); if(isNaN(n)) return; n=Math.max(1,Math.min(n,max)); groups.push([n-1]);
-    }
-  });
-  return groups;
+function t2RenderPages(){
+  let grid=document.getElementById('t2PagesGrid');
+  if(!t2PageCount){grid.innerHTML="";document.getElementById('t2PagesHint').innerText="Select PDF first to see pages here";return;}
+  document.getElementById('t2PagesHint').innerText="Tap page to Select/Unselect • Long tap = Preview • Removed pages will NOT be in split";
+  grid.innerHTML=Array.from({length:t2PageCount},(_,i)=>{
+    let sel=t2Selected.has(i), rem=t2Removed.has(i);
+    return `<div class="page-card ${sel&&!rem?'selected':''} ${rem?'removed':''}" onclick="t2TogglePage(${i})" ondblclick="t2OpenPreview(${i})"><div class="num">📄</div><b>Page ${i+1}</b><small>${rem?'Removed ❌':sel?'Selected ✅':'Not Selected'}</small><br><small style="color:#22d3ee" onclick="event.stopPropagation();t2OpenPreview(${i})">👀 Preview</small> <small style="color:#ef4444" onclick="event.stopPropagation();t2RemovePage(${i})">🗑️ Remove</small></div>`;
+  }).join('');
+  let remCount=t2Removed.size;
+  document.getElementById('t2InfoRemoved').innerText=remCount?("Removed: "+remCount+" pages - Will not split"):"";
 }
-async function t2Split(){
-  if(!t2File || !t2PdfDoc) return alert("Pehle PDF select karo!");
-  if(t2PageCount===0) return alert("Is PDF me koi page nahi hai");
-  let prefix=(document.getElementById('t2Prefix').value.trim()||"Split - Orbittroniz").replace(/[\\/:*?"<>|]/g,'');
-  let groups=[];
-  if(t2Mode==='all'){ for(let i=0;i<t2PageCount;i++) groups.push([i]); }
-  else if(t2Mode==='range'){
-    groups=t2ParseRange(document.getElementById('t2Range').value||"1", t2PageCount);
-    if(!groups.length) return alert("Range sahi se likho - Jaise 1-3, 5");
-  }
-  else if(t2Mode==='every'){
-    let n=parseInt(document.getElementById('t2EveryCustom').value)||parseInt(document.getElementById('t2Every').value)||2;
-    n=Math.max(1,Math.min(n,t2PageCount));
-    for(let s=0;s<t2PageCount;s+=n){ let g=[]; for(let i=s;i<Math.min(s+n,t2PageCount);i++) g.push(i); groups.push(g); }
-  }
-  else if(t2Mode==='firstlast'){
-    let v=document.getElementById('t2FL').value;
-    if(v==='both') groups=[[0],[t2PageCount-1]];
-    else if(v==='first') groups=[[0]];
-    else if(v==='last') groups=[[t2PageCount-1]];
-    else if(v==='first3') groups=[Array.from({length:Math.min(3,t2PageCount)},(_,i)=>i)];
-    else if(v==='last3') groups=[Array.from({length:Math.min(3,t2PageCount)},(_,i)=>t2PageCount-Math.min(3,t2PageCount)+i)];
-  }
-  document.getElementById('t2Status').innerText="Split ho raha hai... "+groups.length+" files banengi";
-  document.getElementById('t2Prog').style.display='block'; document.getElementById('t2Fill').style.width="0%";
-  document.getElementById('t2Out').innerHTML=""; t2Results=[];
-  try{
-    for(let gi=0; gi<groups.length; gi++){
-      let idxs=groups[gi];
-      try{
-        let nd=await PDFLib.PDFDocument.create();
-        let pages=await nd.copyPages(t2PdfDoc, idxs);
-        pages.forEach(p=>nd.addPage(p));
-        nd.setTitle(prefix+" - Part "+(gi+1));
-        nd.setAuthor("Orbittroniz.com");
-        let bytes=await nd.save();
-        let blob=new Blob([bytes],{type:'application/pdf'});
-        let label=idxs.length===1?("Page "+(idxs[0]+1)):("Pages "+(idxs[0]+1)+"-"+(idxs[idxs.length-1]+1));
-        let fname=prefix+" - "+label+".pdf";
-        t2Results.push({blob, name:fname, label});
-        let a=document.createElement('a');
-        a.href=URL.createObjectURL(blob); a.download=fname;
-        a.innerHTML="⬇️ "+fname+"<small>"+label+" • "+(blob.size/1024).toFixed(0)+" KB • Click karke download</small>";
-        document.getElementById('t2Out').appendChild(a);
-      }catch(perr){ console.warn("Skip group",gi,perr); }
-      document.getElementById('t2Fill').style.width=Math.round(((gi+1)/groups.length)*100)+"%";
-      await new Promise(r=>setTimeout(r,15));
-    }
-    document.getElementById('t2Status').innerText="✅ Ho gaya! "+t2Results.length+" PDF ban gayi. Neeche se download karo.";
-    document.getElementById('t2AllBtn').style.display=t2Results.length>1?'block':'none';
-    setTimeout(()=>{ document.getElementById('t2Prog').style.display='none'; },1500);
-    if(document.getElementById('t2AutoAll').checked && t2Results.length>1){
-      // Auto download nahi karenge browser block karta hai, user ko button dikha diya
-      document.getElementById('t2Status').innerText+=" • Sab Ek Saath wala button dabao 👇";
-    }
-  }catch(e){ alert("Split me error aaya: "+e.message); document.getElementById('t2Status').innerText="❌ Error aaya"; }
-}
-function t2DownloadAll(){
-  if(!t2Results.length) return alert("Pehle Split karo");
-  if(!confirm(t2Results.length+" files download karu? Browser ek-ek karke puchega, Allow kar dena.")) return;
-  t2Results.forEach((r,i)=>{
-    setTimeout(()=>{
-      let a=document.createElement('a'); a.href=URL.createObjectURL(r.blob); a.download=r.name; document.body.appendChild(a); a.click(); a.remove();
-    }, i*600);
-  });
-}
-function t2Reset(){ t2File=null; t2PdfDoc=null; t2PageCount=0; t2Results=[]; document.getElementById('t2Out').innerHTML=""; document.getElementById('t2Info').style.display='none'; document.getElementById('t2FileName').innerText="Koi PDF nahi hai"; document.getElementById('t2Status').innerText=""; document.getElementById('t2AllBtn').style.display='none'; }
-</script>
-<!-- ===== TOOL 2 V2 END ===== -->
+function t2TogglePage(i){ if(t2Removed.has(i)){ t2Removed.delete(i); t2Selected.add(i); } else if(t2Selected.has(i)){ t2Selected.delete(i); } else { t2Selected.add(i); } t2RenderPages(); }
+function t2RemovePage(i){ if(t2Removed.has(i)){ t2Removed.delete(i); t2Selected.add(i); } else { t2Removed.add(i); t2Selected.delete(i); } t2RenderPages(); document.getElementById('t2Status').innerText="Page "+(i+1)+" removed. It will NOT be in split."; }
+function t2SelectAll(){ for(let i=0;i<t2PageCount;i++){ if(!t2Removed.has(i)) t2Selected.add(i); } t2RenderPages(); }
+function t2DeselectAll(){ t2Selected.clear(); t2RenderPages(); }
+function t2SelectEven(){ t2Selected.clear(); for(let i=1;i<t2PageCount;i+=2){ if(!t2Removed.has(i)) t2Selected.add(i); } t2RenderPages(); }
+function t2SelectOdd(){ t2Selected.clear(); for(let i=0;i<t2PageCount;i+=2){ if(!t2Removed.has(i)) t2Selected.add(i); } t2RenderPages(); }
 
+// ===== PREVIEW SYSTEM =====
+async function t2OpenPreview(startIdx){
+  if(!t2File) return alert("First select a PDF to preview!");
+  t2PreviewIdx = (typeof startIdx==='number') ? startIdx : 0;
+  await t2ShowPreview();
+  document.getElementById('t2Modal').style.display='flex';
+}
+async function t2ShowPreview(){
+  if(t2PreviewIdx<0) t2PreviewIdx=t2PageCount-1;
+  if(t2PreviewIdx>=t2PageCount) t2PreviewIdx=0;
+  document.getElementById('t2ModalTitle').innerText="Preview - Page "+(t2PreviewIdx+1)+" / "+t2PageCount+" • "+(t2File?t2File.name:"");
+  document.getElementById('t2ModalCap').innerText=(t2Removed.has(t2PreviewIdx)?"❌ This page is REMOVED - Will not split • ":"")+(t2Selected.has(t2PreviewIdx)?"✅ Selected":"Not Selected")+" • Tap Remove to delete this page from split";
+  try{
+    // Use pdf.js if available, else fallback to pdf-lib info
+    if(window['pdfjsLib']){
+      let pdf=await pdfjsLib.getDocument({data:t2PdfBytes.slice(0)}).promise;
+      let page=await pdf.getPage(t2PreviewIdx+1);
+      let canvas=document.getElementById('t2PreviewCanvas');
+      let viewport=page.getViewport({scale:1.5});
+      canvas.width=viewport.width; canvas.height=viewport.height;
+      await page.render({canvasContext:canvas.getContext('2d'),viewport}).promise;
+    }else{
+      let canvas=document.getElementById('t2PreviewCanvas');
+      let ctx=canvas.getContext('2d'); canvas.width=400; canvas.height=550;
+      ctx.fillStyle='#fff'; ctx.fillRect(0,0,400,550);
+      ctx.fillStyle='#111'; ctx.font='bold 28px Arial'; ctx.textAlign='center';
+      ctx.fillText("Page "+(t2PreviewIdx+1),200,260);
+      ctx.font='14px Arial'; ctx.fillStyle='#666'; ctx.fillText("Preview image needs pdf.js",200,290);
+      ctx.fillText("But Split will work 100%",200,315);
+    }
+  }catch(e){
+    let canvas=document.getElementById('t2PreviewCanvas');
+    let ctx=canvas.getContext('2d'); canvas.width=400; canvas.height=550;
+    ctx.fillStyle='#fff'; ctx.fillRect(0,0,400,550);
+    ctx.fillStyle='#111'; ctx.font='bold 24px Arial'; ctx.textAlign='center'; ctx.fillText("Page "+(t2PreviewIdx+1),200,260);
+  }
+}
+async function t2NextPage(){ t2PreviewIdx++; await t2ShowPreview(); }
+async function t2PrevPage(){ t2PreviewIdx--; await t2ShowPreview(); }
+function t2RemoveFromPreview(){ t2RemovePage(t2PreviewIdx); t2ShowPreview(); }
+function t2ToggleSelectPreview(){ t2TogglePage(t2PreviewIdx); t2ShowPreview(); }
+function t2ClosePreview(){ document.getElementById('t2Modal').style.display='none'; }
+document.addEventListener('keydown',e=>{ if(document.getElementById('t2Modal') && document.getElementById('t2Modal').style.display==='flex'){ if(e.key==='ArrowRight') t2NextPage(); if(e.key==='ArrowLeft') t2PrevPage(); if(e.key==='Escape') t2ClosePreview(); }});
+
+function t2ParseRange(str,max){let groups=[];str.split(',').forEach(part=>{part=part.trim();if(!part)return;if(part.includes('-')){let [a,b]=part.split('-').map(x=>parseInt(x.trim()));if(isNaN(a)||isNaN(b))return;a=Math.max(1,Math.min(a,max));b=Math.max(1,Math.min(b,max));if(a>b)[a,b]=[b,a];let arr=[];for(let i=a;i<=b;i++)arr.push(i-1);groups.push(arr);}else{let n=parseInt(part);if(isNaN(n))return;n=Math.max(1,Math.min(n,max));groups.push([n-1]);}});return groups;}
+async function t2Split(){
+  if(!t2File||!t2PdfDoc)return alert("First select a PDF!");
+  if(t2PageCount===0)return alert("This PDF has no pages");
+  // Valid pages = not removed
+  let validPages=[]; for(let i=0;i<t2PageCount;i++){ if(!t2Removed.has(i)) validPages.push(i); }
+  if(!validPages.length) return alert("All pages are removed! Un-remove at least 1 page.");
+  let prefix=(document.getElementById('t2Prefix').value.trim()||"Split - Orbittroniz").replace(/[\\/:*?"<>|]/g,'');
+  let withPages=document.getElementById('t2NameWithPages').checked;
+  let groups=[];
+  if(t2Mode==='all'){ validPages.forEach(i=>groups.push([i])); }
+  else if(t2Mode==='range'){ groups=t2ParseRange(document.getElementById('t2Range').value||"1",t2PageCount).map(g=>g.filter(i=>!t2Removed.has(i))).filter(g=>g.length); if(!groups.length)return alert("Write range correctly - Example 1-3, 5"); }
+  else if(t2Mode==='every'){ let n=parseInt(document.getElementById('t2EveryCustom').value)||parseInt(document.getElementById('t2Every').value)||2; n=Math.max(1,Math.min(n,validPages.length)); for(let s=0;s<validPages.length;s+=n){ groups.push(validPages.slice(s,s+n)); } }
+  else if(t2Mode==='selected'){ let sel=[...t2Selected].filter(i=>!t2Removed.has(i)).sort((a,b)=>a-b); if(!sel.length) return alert("No page selected! Tap pages to select."); groups.push(sel); }
+  else if(t2Mode==='firstlast'){ let v=document.getElementById('t2FL').value; let first=validPages[0], last=validPages[validPages.length-1]; if(v==='both') groups=[[first],[last]]; else if(v==='first') groups=[[first]]; else if(v==='last') groups=[[last]]; else if(v==='first3') groups=[validPages.slice(0,3)]; else if(v==='last3') groups=[validPages.slice(-3)]; }
+  else if(t2Mode==='evenodd'){ let v=document.getElementById('t2EO').value; let ev=validPages.filter(i=>(i+1)%2===0), od=validPages.filter(i=>(i+1)%2===1); if(v==='both'){ if(ev.length) groups.push(ev); if(od.length) groups.push(od); } else if(v==='even'){ if(!ev.length) return alert("No even pages"); groups=[ev]; } else { if(!od.length) return alert("No odd pages"); groups=[od]; } }
+  document.getElementById('t2Status').innerText="Splitting... "+groups.length+" files will be created (Removed pages skipped)"; document.getElementById('t2Prog').style.display='block'; document.getElementById('t2Fill').style.width="0%"; document.getElementById('t2Out').innerHTML=""; t2Results=[];
+  try{
+    for(let gi=0;gi<groups.length;gi++){ let idxs=groups[gi]; try{ let nd=await PDFLib.PDFDocument.create(); let pages=await nd.copyPages(t2PdfDoc,idxs); pages.forEach(p=>nd.addPage(p)); nd.setTitle(prefix+" - Part "+(gi+1)); nd.setAuthor("Orbittroniz.com"); let bytes=await nd.save(); let blob=new Blob([bytes],{type:'application/pdf'}); let label=idxs.length===1?("Page "+(idxs[0]+1)):("Pages "+(idxs[0]+1)+"-"+(idxs[idxs.length-1]+1)); let fname=withPages? (prefix+" - "+label+".pdf") : (prefix+" - Part "+(gi+1)+".pdf"); t2Results.push({blob,name:fname,label}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=fname; a.innerHTML="⬇️ "+fname+"<small>"+label+" • "+(blob.size/1024).toFixed(0)+" KB • Click to download</small>"; document.getElementById('t2Out').appendChild(a); }catch(perr){ console.warn("Skip group",gi,perr); } document.getElementById('t2Fill').style.width=Math.round(((gi+1)/groups.length)*100)+"%"; await new Promise(r=>setTimeout(r,15)); }
+    document.getElementById('t2Status').innerText="✅ Done! "+t2Results.length+" PDFs created. Removed pages skipped. Download from below.";
+    document.getElementById('t2AllBtn').style.display=t2Results.length>1?'block':'none';
+    document.getElementById('t2ShareBtn').style.display=t2Results.length?'block':'none';
+    setTimeout(()=>{document.getElementById('t2Prog').style.display='none';},1500);
+    if(document.getElementById('t2AutoAll').checked&&t2Results.length>1){document.getElementById('t2Status').innerText+=" • Press Download All button 👇";}
+  }catch(e){alert("Split error: "+e.message);document.getElementById('t2Status').innerText="❌ Error";}
+}
+function t2DownloadAll(){if(!t2Results.length)return alert("First press Split");if(!confirm(t2Results.length+" files will download one by one. Allow it in browser."))return;t2Results.forEach((r,i)=>{setTimeout(()=>{let a=document.createElement('a');a.href=URL.createObjectURL(r.blob);a.download=r.name;document.body.appendChild(a);a.click();a.remove();},i*600);});}
+async function t2ShareFirst(){ if(!t2Results.length) return alert("First split the PDF"); try{ let r=t2Results[0]; let file=new File([r.blob],r.name,{type:'application/pdf'}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:r.name}); }else{ let a=document.createElement('a'); a.href="https://wa.me/?text="+encodeURIComponent("Check my split PDF - Orbittroniz.com"); a.target="_blank"; a.click(); } }catch(e){ alert("Share cancelled, use Download"); } }
+function t2Reset(){ t2File=null; t2PdfDoc=null; t2PageCount=0; t2Results=[]; t2Selected.clear(); t2Removed.clear(); document.getElementById('t2Out').innerHTML=""; document.getElementById('t2Info').style.display='none'; document.getElementById('t2FileName').innerText="No PDF Selected"; document.getElementById('t2Status').innerText=""; document.getElementById('t2AllBtn').style.display='none'; document.getElementById('t2ShareBtn').style.display='none'; document.getElementById('t2PreviewBtn').style.display='none'; document.getElementById('t2PagesGrid').innerHTML=""; document.getElementById('t2PagesHint').innerText="Select PDF first to see pages here"; }
+</script>
+<!-- ================= TOOL 2 - WITH PREVIEW - END ================= -->
 <!-- TOOL 3 -->
 <div class="tool" id="tool-3"><div class="panel"><h3>📄 Tool 3 - PDF Merge</h3>
 <!-- YAHAN TOOL 3 KA CODE PASTE KARO -->
