@@ -1773,7 +1773,29 @@ $('t5DownloadAll').onclick=async()=>{ if(splitResults.length===0) return alert('
 
 <div class="modal" id="t6Modal"><div style="text-align:center"><img id="t6ModalImg"><div style="margin-top:10px"><button class="btn-ghost" onclick="document.getElementById('t6Modal').style.display='none'">✖️ Close</button></div></div></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<!-- ===== PDF-LIB LOADER - 403 FIX - 3 CDN Fallback ===== -->
+<script>
+(function(){
+  var cdns = [
+    "https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js",
+    "https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"
+  ];
+  var i = 0;
+  function loadNext(){
+    if(i >= cdns.length){
+      console.error("All PDFLib CDN failed");
+      return;
+    }
+    var s = document.createElement("script");
+    s.src = cdns[i];
+    s.onload = function(){ console.log("PDFLib loaded from: " + cdns[i]); };
+    s.onerror = function(){ console.log("CDN failed: " + cdns[i] + " -> trying next"); i++; loadNext(); };
+    document.head.appendChild(s);
+  }
+  loadNext();
+})();
+</script>
 <script>
 (function(){
 const $=id=>document.getElementById(id);
