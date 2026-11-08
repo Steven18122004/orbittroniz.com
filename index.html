@@ -1651,6 +1651,197 @@ $('t5DownloadAll').onclick=async()=>{ if(splitResults.length===0) return alert('
 })();
 </script>
 <!-- ===== TOOL 5 V2 END ===== --> 
+  <!-- ===== TOOL 6 V5 - SIMPLE + PREMIUM LITE - NO CDN - NO BUG ===== -->
+<div id="tool6" style="background:linear-gradient(160deg,#0f172a,#1e1b4b);border-radius:20px;padding:16px;margin-top:14px;color:#fff;font-family:Arial">
+<style>
+#tool6 *{box-sizing:border-box}
+#tool6 input[type=text],#tool6 select{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:#0b1226;color:#fff;font-weight:700;outline:none}
+#tool6 .seg{display:flex;background:#0b1226;border-radius:10px;padding:4px;gap:4px}
+#tool6 .seg button{flex:1;padding:8px;border:none;border-radius:8px;background:transparent;color:#94a3b8;font-weight:800;cursor:pointer}
+#tool6 .seg button.active{background:#fff;color:#000}
+#tool6 .btn-main{width:100%;padding:14px;background:linear-gradient(90deg,#7c3aed,#ec4899,#22d3ee);color:#fff;border:none;border-radius:12px;font-weight:900;font-size:15px;cursor:pointer}
+#tool6 .btn-ghost{background:#1e293b;color:#fff;border:1px solid rgba(255,255,255,.2);padding:7px 10px;border-radius:8px;font-weight:700;cursor:pointer;font-size:12px}
+#tool6 .card-item{background:#0b1226;border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:8px}
+#tool6 .card-item img{width:100%;height:110px;object-fit:cover;border-radius:8px;background:#fff}
+</style>
+
+<div style="display:flex;justify-content:space-between;align-items:center">
+<b style="font-size:16px">🖼️➡️📄 Image to PDF</b>
+<span style="background:#22c55e;color:#fff;padding:4px 10px;border-radius:20px;font-size:10px;font-weight:900">V5 • NO CDN • PREMIUM LITE</span>
+</div>
+
+<!-- 1. ADD -->
+<div style="margin-top:12px;font-size:12px;font-weight:900;color:#c4b5fd">📁 1. ADD IMAGES <span id="t6Count">0 Images</span></div>
+<input type="file" id="t6File" accept="image/*" multiple style="width:100%;padding:10px;background:#fff;color:#000;border-radius:10px;margin-top:6px">
+<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+<button class="btn-ghost" id="t6Sample">✨ Sample (3)</button>
+<button class="btn-ghost" id="t6Clear">🗑️ Clear All</button>
+</div>
+
+<!-- 2. LIST -->
+<div id="t6List" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px"></div>
+<div id="t6Empty" style="text-align:center;color:#94a3b8;padding:20px;font-size:12px">🖼️ Koi image nahi hai<br>Upar se images chuno</div>
+
+<!-- 3. SETTINGS -->
+<div style="margin-top:14px;font-size:12px;font-weight:900;color:#c4b5fd">⚙️ 2. SETTINGS</div>
+
+<div style="font-size:11px;margin:10px 0 5px;color:#cbd5e1">🖼️ Images Per Page</div>
+<div class="seg" id="t6PerPage">
+<button data-per="1" class="active">1 - Full Page</button>
+<button data-per="2">2</button>
+<button data-per="4">4 - Collage</button>
+</div>
+
+<div style="font-size:11px;margin:10px 0 5px;color:#cbd5e1">📐 Page Size</div>
+<div class="seg" id="t6PageSize">
+<button data-ps="A4" class="active">A4</button>
+<button data-ps="Letter">Letter</button>
+<button data-ps="A5">A5</button>
+</div>
+
+<div style="font-size:11px;margin:10px 0 5px;color:#cbd5e1">💧 Watermark (Premium)</div>
+<input type="text" id="t6Wm" placeholder="e.g. Orbittroniz - Khali chhodo to nahi ayega" value="">
+<input type="text" id="t6Header" placeholder="Header (optional) - e.g. My Documents" value="" style="margin-top:8px">
+<input type="text" id="t6Footer" placeholder="Footer (optional) - e.g. orbittroniz.com" value="orbittroniz.com" style="margin-top:8px">
+
+<label style="display:flex;gap:8px;align-items:center;margin-top:10px;font-size:12px"><input type="checkbox" id="t6ShowCaption" checked> ✍️ Caption PDF me dikhaye</label>
+<label style="display:flex;gap:8px;align-items:center;margin-top:6px;font-size:12px"><input type="checkbox" id="t6ShowNum" checked> 🔢 Page Number dikhaye</label>
+
+<!-- 4. CONVERT -->
+<button class="btn-main" id="t6Convert" style="margin-top:14px">🖨️ CREATE PDF - <span id="t6BtnCount">0</span> IMAGES</button>
+<p style="font-size:11px;color:#fbbf24;text-align:center;margin:8px 0 0">Print khulega → Destination = <b>Save as PDF</b> → Save</p>
+</div>
+
+<script>
+(function(){
+var items = []; // {url, name, caption}
+var perPage = 1, pageSize = 'A4';
+var $ = function(id){ return document.getElementById(id); };
+
+function render(){
+  $('t6Count').textContent = items.length + ' Images';
+  $('t6BtnCount').textContent = items.length;
+  if(items.length === 0){ $('t6Empty').style.display = 'block'; $('t6List').innerHTML = ''; return; }
+  $('t6Empty').style.display = 'none';
+  var html = '';
+  items.forEach(function(it, i){
+    html += '<div class="card-item">'
+      + '<div style="font-size:10px;color:#94a3b8">Page ' + (i+1) + '</div>'
+      + '<img src="' + it.url + '">'
+      + '<input type="text" placeholder="✍️ Caption likho..." value="' + (it.caption || '').replace(/"/g,'') + '" oninput="window.t6SetCap(' + i + ', this.value)" style="margin-top:6px;padding:7px;font-size:12px">'
+      + '<div style="display:flex;gap:4px;margin-top:6px"><button class="btn-ghost" style="flex:1" onclick="window.t6Move(' + i + ',-1)">⬆️</button><button class="btn-ghost" style="flex:1" onclick="window.t6Move(' + i + ',1)">⬇️</button><button class="btn-ghost" style="flex:1" onclick="window.t6Del(' + i + ')">❌</button></div>'
+      + '</div>';
+  });
+  $('t6List').innerHTML = html;
+}
+window.t6SetCap = function(i, v){ items[i].caption = v; };
+window.t6Move = function(i, dir){
+  var ni = i + dir;
+  if(ni < 0 || ni >= items.length) return;
+  var t = items[i]; items[i] = items[ni]; items[ni] = t;
+  render();
+};
+window.t6Del = function(i){ URL.revokeObjectURL(items[i].url); items.splice(i,1); render(); };
+
+function addFiles(list){
+  var arr = Array.from(list).filter(function(f){ return f.type.indexOf('image/') === 0; });
+  if(arr.length === 0){ alert('Sirf image chuno!'); return; }
+  arr.forEach(function(f){
+    var url = URL.createObjectURL(f);
+    items.push({ url: url, name: f.name, caption: '' });
+  });
+  render();
+}
+$('t6File').addEventListener('change', function(e){ addFiles(e.target.files); e.target.value = ''; });
+$('t6Clear').addEventListener('click', function(){ items.forEach(function(it){ URL.revokeObjectURL(it.url); }); items = []; render(); });
+
+// Sample
+$('t6Sample').addEventListener('click', function(){
+  var cols = [['#7c3aed','#ec4899','Sample 1'],['#06b6d4','#22c55e','Sample 2'],['#f59e0b','#ef4444','Sample 3']];
+  cols.forEach(function(c){
+    var cv = document.createElement('canvas'); cv.width = 800; cv.height = 1000;
+    var ctx = cv.getContext('2d'); var g = ctx.createLinearGradient(0,0,800,1000);
+    g.addColorStop(0,c[0]); g.addColorStop(1,c[1]); ctx.fillStyle = g; ctx.fillRect(0,0,800,1000);
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 48px Arial'; ctx.textAlign = 'center'; ctx.fillText(c[2],400,480);
+    ctx.font = '22px Arial'; ctx.fillText('Orbittroniz - Image to PDF',400,530);
+    cv.toBlob(function(blob){ var f = new File([blob],'sample.jpg',{type:'image/jpeg'}); addFiles([f]); },'image/jpeg',0.9);
+  });
+});
+
+// Seg buttons
+function seg(id, cb){
+  $(id).addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b) return;
+    var all = $(id).querySelectorAll('button'); all.forEach(function(x){ x.classList.remove('active'); });
+    b.classList.add('active'); cb(b);
+  });
+}
+seg('t6PerPage', function(b){ perPage = parseInt(b.getAttribute('data-per')); });
+seg('t6PageSize', function(b){ pageSize = b.getAttribute('data-ps'); });
+
+// CONVERT - No CDN, Browser Print
+$('t6Convert').addEventListener('click', function(){
+  if(items.length === 0){ alert('Pehle images chuno!'); return; }
+  var win = window.open('', '_blank');
+  if(!win){ alert('Popup blocked hai - Browser me Popup Allow karo'); return; }
+
+  var pageW = '210mm', pageH = '297mm';
+  if(pageSize === 'Letter'){ pageW = '216mm'; pageH = '279mm'; }
+  if(pageSize === 'A5'){ pageW = '148mm'; pageH = '210mm'; }
+
+  var wmText = $('t6Wm').value.trim();
+  var header = $('t6Header').value.trim();
+  var footer = $('t6Footer').value.trim();
+  var showCap = $('t6ShowCaption').checked;
+  var showNum = $('t6ShowNum').checked;
+
+  var css = '<style>'
+    + '@page{size:' + pageSize + ' auto;margin:0} body{margin:0;font-family:Arial}'
+    + '.page{width:' + pageW + ';height:' + pageH + ';position:relative;page-break-after:always;overflow:hidden;background:#fff}'
+    + '.page:last-child{page-break-after:auto}'
+    + '.head{font-size:11px;color:#666;padding:10px 12px;display:flex;justify-content:space-between;border-bottom:1px solid #eee}'
+    + '.foot{position:absolute;bottom:0;left:0;right:0;font-size:10px;color:#888;padding:10px 12px;display:flex;justify-content:space-between;border-top:1px solid #eee}'
+    + '.grid{display:grid;gap:8px;padding:12px;height:calc(100% - 70px)}'
+    + '.cell{text-align:center;overflow:hidden}'
+    + '.cell img{width:100%;height:100%;object-fit:contain;display:block}'
+    + '.cap{font-size:12px;color:#333;margin-top:4px}'
+    + '.wm{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:40px;font-weight:900;color:rgba(255,0,0,0.12);white-space:nowrap;pointer-events:none}'
+    + '</style>';
+
+  win.document.write('<html><head><title>Images to PDF</title>' + css + '</head><body>');
+
+  // Groups banayo - perPage ke hisaab se
+  var groups = [];
+  for(var i = 0; i < items.length; i += perPage){ groups.push(items.slice(i, i + perPage)); }
+
+  groups.forEach(function(group, gi){
+    var cols = 1, rows = 1;
+    if(perPage === 2){ cols = 1; rows = 2; }
+    if(perPage === 4){ cols = 2; rows = 2; }
+    var gridStyle = 'grid-template-columns:repeat(' + cols + ',1fr);grid-template-rows:repeat(' + rows + ',1fr);';
+    var html = '<div class="page">';
+    if(wmText) html += '<div class="wm">' + wmText + '</div>';
+    if(header) html += '<div class="head"><span>' + header + '</span><span>Page ' + (gi+1) + '</span></div>';
+    html += '<div class="grid" style="' + gridStyle + '">';
+    group.forEach(function(it){
+      html += '<div class="cell"><img src="' + it.url + '">';
+      if(showCap && it.caption) html += '<div class="cap">' + it.caption + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+    if(footer || showNum) html += '<div class="foot"><span>' + footer + '</span><span>' + (showNum ? ('Page ' + (gi+1) + ' / ' + groups.length) : '') + '</span></div>';
+    html += '</div>';
+    win.document.write(html);
+  });
+
+  win.document.write('</body></html>');
+  win.document.close();
+  setTimeout(function(){ win.print(); }, 600);
+});
+render();
+})();
+</script>
+<!-- ===== TOOL 6 V5 END ===== -->
 
 
 <!-- TOOL 7: BG REMOVER -->
