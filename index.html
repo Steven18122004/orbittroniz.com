@@ -1651,6 +1651,347 @@ $('t5DownloadAll').onclick=async()=>{ if(splitResults.length===0) return alert('
 })();
 </script>
 <!-- ===== TOOL 5 V2 END ===== --> 
+  <!-- ===== TOOL 6 V3 - IMAGE TO PDF PRO MAX - BUG FREE ===== -->
+<div id="tool6" class="tool-panel" style="display:none;margin-top:14px;background:linear-gradient(160deg,#0f172a,#1e1b4b,#082f49);border:1px solid rgba(34,211,238,0.25);border-radius:24px;padding:16px;box-shadow:0 25px 70px rgba(0,0,0,0.65)">
+<style>
+#tool6 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+#tool6 .top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+#tool6 .grid{display:grid;grid-template-columns:1.05fr 1fr;gap:14px;margin-top:12px}
+@media(max-width:760px){#tool6 .grid{grid-template-columns:1fr}}
+#tool6 .card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:14px}
+#tool6 .lbl{font-size:11px;font-weight:900;color:#c4b5fd;margin:12px 0 6px;display:flex;justify-content:space-between}
+#tool6 .lbl span{color:#fff}
+#tool6 input[type=text],#tool6 input[type=number],#tool6 select,#tool6 textarea{width:100%;padding:11px;border-radius:11px;border:1px solid rgba(255,255,255,0.18);background:#0b1226;color:#fff;font-weight:700;outline:none;font-size:13px}
+#tool6 input[type=range]{width:100%;accent-color:#22d3ee}
+#tool6 input[type=color]{width:42px;height:38px;border:none;border-radius:10px;background:none;padding:0;cursor:pointer}
+#tool6 .chip{padding:8px 11px;border-radius:20px;border:1px solid rgba(255,255,255,0.18);background:rgba(0,0,0,0.4);color:#e2e8f0;font-size:11px;font-weight:800;cursor:pointer}
+#tool6 .chip.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border-color:transparent}
+#tool6 .chip2{padding:7px 11px;border-radius:11px;border:1px solid rgba(255,255,255,0.16);background:#0f172a;color:#cbd5e1;font-size:11px;font-weight:800;cursor:pointer}
+#tool6 .btn-main{background:linear-gradient(90deg,#7c3aed,#ec4899,#22d3ee);color:#fff;border:none;padding:13px;border-radius:14px;font-weight:900;width:100%;cursor:pointer;font-size:14px;box-shadow:0 12px 28px rgba(124,58,237,0.45)}
+#tool6 .btn-ghost{background:#1e293b;color:#fff;border:1px solid rgba(255,255,255,0.16);padding:11px 14px;border-radius:12px;font-weight:800;cursor:pointer}
+#tool6 .drop{border:2px dashed rgba(34,211,238,0.6);border-radius:18px;padding:22px;text-align:center;background:rgba(34,211,238,0.06);cursor:pointer}
+#tool6 .drop.drag{background:rgba(34,211,238,0.18);transform:scale(1.02)}
+#tool6 .seg{display:flex;background:#0b1226;border-radius:12px;padding:4px;gap:4px;flex-wrap:wrap}
+#tool6 .seg button{flex:1;padding:8px;border:none;border-radius:9px;background:transparent;color:#94a3b8;font-weight:800;font-size:11px;cursor:pointer;min-width:70px}
+#tool6 .seg button.active{background:#fff;color:#000}
+#tool6 .img-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-height:420px;overflow-y:auto;padding:2px}
+@media(max-width:500px){#tool6 .img-grid{grid-template-columns:repeat(2,1fr)}}
+#tool6 .img-card{background:#0b1226;border:2px solid rgba(255,255,255,0.12);border-radius:14px;padding:7px;text-align:center;position:relative}
+#tool6 .img-card img{width:100%;aspect-ratio:1/1.2;object-fit:cover;border-radius:8px;background:#fff;cursor:zoom-in}
+#tool6 .img-card.text-page{border-color:#f59e0b}
+#tool6 .img-card.blank-page{border-color:#94a3b8;border-style:dashed}
+#tool6 .toggle{width:44px;height:24px;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+#tool6 .toggle::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s}
+#tool6 .toggle.on{background:#22c55e}
+#tool6 .toggle.on::after{left:23px}
+#tool6 .prog{height:10px;background:#0b1226;border-radius:20px;overflow:hidden;margin-top:8px}
+#tool6 .prog div{height:100%;width:0%;background:linear-gradient(90deg,#7c3aed,#22d3ee);transition:width .3s}
+#tool6 .tab{display:flex;gap:6px;flex-wrap:wrap}
+#tool6 .tab button{padding:8px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.16);background:#0b1226;color:#cbd5e1;font-size:11px;font-weight:800;cursor:pointer}
+#tool6 .tab button.active{background:#fff;color:#000}
+#tool6 .modal{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;display:none;align-items:center;justify-content:center;padding:16px}
+#tool6 .modal img{max-width:95%;max-height:80%;border-radius:12px;background:#fff}
+#tool6 .preview-page{background:#fff;border-radius:12px;padding:10px;margin-top:10px;color:#000;min-height:200px;display:flex;align-items:center;justify-content:center;flex-direction:column}
+#tool6 .preview-page img{max-width:100%;max-height:260px;object-fit:contain}
+</style>
+
+<div class="top">
+<div style="font-size:16px;font-weight:900;color:#fff">🖼️➡️📄 6 Image to PDF <span style="background:linear-gradient(135deg,#22c55e,#06b6d4);padding:5px 11px;border-radius:20px;font-size:10px">V3 • BUG FREE • CAPTION • COLLAGE</span></div>
+<div style="font-size:11px;color:#94a3b8" id="t6Status">● Ready</div>
+</div>
+
+<div class="tab" id="t6Tabs" style="margin-top:12px">
+<button data-tab="main" class="active">🖼️ Images</button>
+<button data-tab="layout">📐 Layout</button>
+<button data-tab="style">✨ Style</button>
+<button data-tab="meta">📑 Meta & TOC</button>
+</div>
+
+<div class="grid">
+<div class="card">
+<div id="t6TabMain">
+<div class="lbl">📁 ADD IMAGES <span id="t6Count">0 Items</span></div>
+<div class="drop" id="t6Drop"><div style="font-size:36px">🖼️</div><div style="font-size:13px;font-weight:900;color:#fff;margin-top:6px">Drag & Drop Images</div><div style="font-size:11px;color:#94a3b8">JPG, PNG, WEBP • Max 50 • Max 20MB Each</div><button class="btn-ghost" style="margin-top:10px" onclick="document.getElementById('t6File').click();event.stopPropagation()">📂 Choose Images</button></div>
+<input type="file" id="t6File" accept="image/*" multiple hidden>
+<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button class="chip2" id="t6Camera">📷 Camera</button><button class="chip2" id="t6Sample">✨ Sample (4)</button><button class="chip2" id="t6Paste">📋 Paste</button><button class="chip2" id="t6AddTextPage">📝 Add Text Page</button><button class="chip2" id="t6AddBlank">➕ Add Blank Page</button><button class="chip2" id="t6Clear">🗑️ Clear</button></div>
+<input type="file" id="t6CameraFile" accept="image/*" capture="environment" hidden>
+<div style="background:#dcfce7;border-radius:12px;padding:9px;margin-top:8px;font-size:11px;color:#166534;line-height:1.5"><b>✅ V3 Fixed: Blank PDF Bug Solved • Drag to reorder • Click image to Zoom • ✍️ Caption = Text under image</b></div>
+<div class="lbl">📐 PAGE SIZE</div>
+<div class="seg" id="t6PageSize"><button data-ps="A4" class="active">A4</button><button data-ps="Letter">Letter</button><button data-ps="A5">A5</button><button data-ps="Fit">Fit Image</button><button data-ps="Custom">Custom</button></div>
+<div id="t6CustomSize" style="display:none;margin-top:8px"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input type="number" id="t6CustomW" placeholder="Width pt - e.g. 595" value="595"><input type="number" id="t6CustomH" placeholder="Height pt - e.g. 842" value="842"></div></div>
+<div class="lbl">ORIENTATION</div>
+<div class="seg" id="t6Orient"><button data-orient="portrait" class="active">📄 Portrait</button><button data-orient="landscape">📄 Landscape</button><button data-orient="auto">🤖 Auto</button></div>
+<div class="lbl">🖼️ IMAGES PER PAGE - Collage</div>
+<div class="seg" id="t6PerPage"><button data-per="1" class="active">1</button><button data-per="2">2</button><button data-per="4">4</button><button data-per="6">6</button><button data-per="9">9 - Collage</button></div>
+</div>
+
+<div id="t6TabLayout" style="display:none">
+<div class="lbl">📏 MARGIN</div><input type="range" id="t6Margin" min="0" max="80" value="20"><div style="text-align:center;color:#fff;font-size:12px;font-weight:800" id="t6MarginVal">Margin 20px</div>
+<div class="lbl">🖼️ IMAGE FIT</div><div class="seg" id="t6Fit"><button data-fit="contain" class="active">Contain - No Crop</button><button data-fit="cover">Cover - Fill</button><button data-fit="stretch">Stretch</button></div>
+<div class="lbl">🎨 PAGE BACKGROUND</div><div style="display:flex;gap:8px;align-items:center"><input type="color" id="t6Bg" value="#ffffff"><button class="chip2" data-bg="#ffffff">⬜ White</button><button class="chip2" data-bg="#000000">⬛ Black</button><button class="chip2" data-bg="#fef9c3">🟨 Yellow</button></div>
+<div class="lbl">🎨 FILTER - Apply to All</div><div class="seg" id="t6Filter"><button data-filter="none" class="active">Original</button><button data-filter="gray">⬛ Grayscale</button><button data-filter="bw">⚫ B&W</button><button data-filter="sepia">🟤 Sepia</button></div>
+<div class="lbl">📐 QUALITY</div><div class="seg" id="t6Quality"><button data-q="1">HD - Best</button><button data-q="0.85" class="active">Balanced 85%</button><button data-q="0.6">Small 60%</button></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><span style="font-size:12px;color:#fff;font-weight:700">🖼️ Border to Images</span><div class="toggle" id="t6BorderToggle"></div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><span style="font-size:12px;color:#fff;font-weight:700">✍️ Show Caption Under Image</span><div class="toggle on" id="t6CaptionToggle"></div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><span style="font-size:12px;color:#fff;font-weight:700">📅 Show Date on Each Page</span><div class="toggle" id="t6DateToggle"></div></div>
+</div>
+
+<div id="t6TabStyle" style="display:none">
+<div class="lbl">💧 WATERMARK</div><input type="text" id="t6WmText" placeholder="e.g. Orbittroniz" value=""><div style="display:flex;gap:8px;align-items:center;margin-top:8px"><input type="color" id="t6WmColor" value="#ff0000"><span style="color:#fff;font-size:12px">Color</span><input type="number" id="t6WmSize" value="28" min="10" max="80" style="width:80px"><span style="color:#fff;font-size:12px">Size</span></div><div style="display:flex;gap:6px;margin-top:8px"><button class="chip2" data-wm="Orbittroniz">Orbittroniz</button><button class="chip2" data-wm="CONFIDENTIAL">CONFIDENTIAL</button><button class="chip2" data-wm="SAMPLE">SAMPLE</button></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><span style="font-size:12px;color:#fff;font-weight:700">💧 Add Watermark</span><div class="toggle" id="t6WmToggle"></div></div>
+<div class="lbl">✍️ HEADER / FOOTER / TITLE</div><input type="text" id="t6Header" placeholder="Header" value=""><input type="text" id="t6Footer" placeholder="Footer" value="orbittroniz.com" style="margin-top:8px"><input type="text" id="t6Title" placeholder="PDF Title" value="Orbittroniz - Images to PDF" style="margin-top:8px">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><span style="font-size:12px;color:#fff;font-weight:700">🔢 Page Numbers</span><div class="toggle on" id="t6PageNumToggle"></div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><span style="font-size:12px;color:#fff;font-weight:700">📑 Cover Page</span><div class="toggle" id="t6CoverToggle"></div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><span style="font-size:12px;color:#fff;font-weight:700">🗜️ Compress PDF</span><div class="toggle" id="t6CompressToggle"></div></div>
+</div>
+
+<div id="t6TabMeta" style="display:none">
+<div class="lbl">📑 PDF METADATA</div><input type="text" id="t6MetaTitle" placeholder="PDF Title" value="Orbittroniz Images to PDF"><input type="text" id="t6MetaAuthor" placeholder="Author" value="Orbittroniz" style="margin-top:8px"><input type="text" id="t6MetaKeywords" placeholder="Keywords" value="images to pdf, orbittroniz" style="margin-top:8px">
+<div class="lbl">📑 TABLE OF CONTENTS</div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;color:#fff;font-weight:700">Add TOC Page - Lists all images</span><div class="toggle" id="t6TocToggle"></div></div>
+<div class="lbl">📝 TEXT PAGE CONTENT</div><textarea id="t6TextPageContent" rows="4" placeholder="Write text for new Text Page...">My Notes - Created with Orbittroniz
+1. First Point
+2. Second Point
+3. Third Point</textarea>
+<div class="lbl">✍️ SIGNATURE TEXT</div><input type="text" id="t6SignText" placeholder="e.g. Signed by: Rahul Sharma" value="">
+</div>
+
+<div class="lbl">📄 OUTPUT NAME</div><input type="text" id="t6OutName" value="orbittroniz-images-to-pdf">
+<div style="margin-top:13px"><button class="btn-main" id="t6Convert">✨ CONVERT <span id="t6ConvertCount">0</span> ITEMS TO PDF</button></div>
+<div class="prog"><div id="t6ProgBar"></div></div><div style="font-size:11px;color:#94a3b8;text-align:center;margin-top:4px" id="t6ProgText">Ready</div>
+</div>
+
+<div class="card">
+<div style="display:flex;justify-content:space-between"><b style="color:#fff;font-size:13px">🖼️ Items - Drag / Zoom</b><span id="t6TotalPages" style="font-size:11px;color:#94a3b8">0 Pages</span></div>
+<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button class="chip2" id="t6Reverse">🔁 Reverse</button><button class="chip2" id="t6SortName">🔤 Sort Name</button><button class="chip2" id="t6PreviewBtn">👁️ Preview PDF</button></div>
+<div id="t6Empty" style="text-align:center;padding:30px 10px;color:#94a3b8;font-size:12px"><div style="font-size:40px">🖼️</div>No images yet</div>
+<div class="img-grid" id="t6ImgGrid" style="margin-top:10px"></div>
+<div id="t6PreviewBox" class="preview-page" style="display:none"><b style="font-size:12px">👁️ Live Preview - Page 1</b><img id="t6PreviewImg" src=""><div id="t6PreviewCap" style="font-size:11px;color:#666"></div></div>
+<div id="t6Result" style="display:none;margin-top:12px;background:#dcfce7;border-radius:14px;padding:12px;text-align:center"><div style="font-size:22px">✅</div><div style="font-weight:900;color:#166534;font-size:13px">PDF Ready!</div><div style="font-size:11px;color:#166534" id="t6ResultInfo"></div><div style="display:flex;gap:8px;margin-top:10px"><button id="t6Download" class="btn-main" style="flex:1">⬇️ Download PDF</button><button id="t6Preview" class="btn-ghost">👁️ Preview</button></div><button id="t6Share" class="btn-ghost" style="width:100%;margin-top:8px">🔗 Share PDF</button></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px;text-align:center"><div style="background:#0b1226;border-radius:10px;padding:8px"><div style="font-size:10px;color:#94a3b8">ITEMS</div><b id="t6ImgInfo" style="color:#fff;font-size:12px">0</b></div><div style="background:#0b1226;border-radius:10px;padding:8px"><div style="font-size:10px;color:#94a3b8">PAGES</div><b id="t6PagesInfo" style="color:#22d3ee;font-size:12px">0</b></div><div style="background:#0b1226;border-radius:10px;padding:8px"><div style="font-size:10px;color:#94a3b8">SIZE</div><b id="t6SizeInfo" style="color:#22c55e;font-size:12px">0 KB</b></div></div>
+</div>
+</div>
+</div>
+
+<div class="modal" id="t6Modal"><div style="text-align:center"><img id="t6ModalImg"><div style="margin-top:10px"><button class="btn-ghost" onclick="document.getElementById('t6Modal').style.display='none'">✖️ Close</button></div></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+let items=[]; // {kind:'image'|'text'|'blank', file, url, name, size, img, caption, text, filter, loaded}
+let pageSize='A4', orient='portrait', perPage=1, fitMode='contain', quality=0.85, margin=20, bgColor='#ffffff', addBorder=false, wmOn=false, pageNum=true, coverOn=false, compressOn=false, filterMode='none', captionOn=true, dateOn=false, tocOn=false;
+function fmtSize(b){ if(!b) return '0 KB'; if(b<1024) return b+' B'; if(b<1024*1024) return (b/1024).toFixed(1)+' KB'; return (b/1024/1024).toFixed(2)+' MB'; }
+function hexToRgb(hex){ hex=hex.replace('#',''); return {r:parseInt(hex.slice(0,2),16)/255, g:parseInt(hex.slice(2,4),16)/255, b:parseInt(hex.slice(4,6),16)/255}; }
+function getPageDims(img){
+  let w=595,h=842;
+  if(pageSize==='Letter'){w=612;h=792;} else if(pageSize==='A5'){w=420;h=595;}
+  else if(pageSize==='Custom'){w=parseInt($('t6CustomW').value)||595; h=parseInt($('t6CustomH').value)||842;}
+  else if(pageSize==='Fit' && img){ w=img.naturalWidth; h=img.naturalHeight; const sc=Math.min(595/w,842/h,1); w=Math.round(w*sc); h=Math.round(h*sc); }
+  if(orient==='landscape'){ return {w:h,h:w}; }
+  if(orient==='auto' && img && img.naturalWidth>img.naturalHeight){ return {w:h,h:w}; }
+  return {w,h};
+}
+// FIX 1: Wait for image to fully load
+function loadImage(url){
+  return new Promise((res,rej)=>{
+    const im=new Image();
+    im.onload=()=>res(im);
+    im.onerror=()=>rej(new Error('Image load failed'));
+    im.src=url;
+  });
+}
+function updateStats(){
+  const pages=Math.ceil(items.filter(i=>i.kind==='image').length/Math.max(1,perPage)) + items.filter(i=>i.kind!=='image').length + (coverOn?1:0) + (tocOn?1:0);
+  $('t6Count').textContent=items.length+' Items'; $('t6ConvertCount').textContent=items.length; $('t6TotalPages').textContent='~'+pages+' Pages'; $('t6ImgInfo').textContent=items.length; $('t6PagesInfo').textContent=pages; $('t6SizeInfo').textContent=fmtSize(items.reduce((a,b)=>a+(b.size||0),0));
+  // Live preview
+  const first=items.find(i=>i.kind==='image');
+  if(first){ $('t6PreviewBox').style.display='flex'; $('t6PreviewImg').src=first.url; $('t6PreviewCap').textContent=first.caption||first.name; } else { $('t6PreviewBox').style.display='none'; }
+}
+function renderGrid(){
+  updateStats();
+  if(items.length===0){ $('t6Empty').style.display='block'; $('t6ImgGrid').innerHTML=''; return; }
+  $('t6Empty').style.display='none';
+  $('t6ImgGrid').innerHTML=items.map((f,i)=>{
+    if(f.kind==='text') return `<div class="img-card text-page" draggable="true" data-idx="${i}"><div style="font-size:10px;color:#f59e0b">📝 Text Page ${i+1}</div><div style="background:#fff;border-radius:8px;padding:10px;font-size:11px;color:#000;white-space:pre-wrap;text-align:left;min-height:100px;overflow:hidden">${(f.text||'').slice(0,120)}</div><div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap"><button class="btn-ghost" style="flex:1;padding:5px;font-size:10px" onclick="window.t6Move(${i},-1)">⬆️</button><button class="btn-ghost" style="flex:1;padding:5px;font-size:10px" onclick="window.t6Move(${i},1)">⬇️</button><button class="btn-ghost" style="flex:1;padding:5px;font-size:10px" onclick="window.t6EditText(${i})">✏️</button><button class="btn-ghost" style="flex:1;padding:5px;font-size:10px" onclick="window.t6Remove(${i})">❌</button></div></div>`;
+    if(f.kind==='blank') return `<div class="img-card blank-page" draggable="true" data-idx="${i}"><div style="font-size:10px;color:#94a3b8">➕ Blank Page ${i+1}</div><div style="background:#fff;border-radius:8px;min-height:100px;display:flex;align-items:center;justify-content:center;font-size:30px">📄</div><div style="display:flex;gap:4px;margin-top:6px"><button class="btn-ghost" style="flex:1;padding:5px" onclick="window.t6Move(${i},-1)">⬆️</button><button class="btn-ghost" style="flex:1;padding:5px" onclick="window.t6Move(${i},1)">⬇️</button><button class="btn-ghost" style="flex:1;padding:5px" onclick="window.t6Remove(${i})">❌</button></div></div>`;
+    return `<div class="img-card" draggable="true" data-idx="${i}"><div style="font-size:10px;color:#94a3b8">Page ${i+1} ${f.loaded?'✅':'⏳'} ${f.filter&&f.filter!=='none'?'• '+f.filter:''}</div><img src="${f.url}" onclick="window.t6Zoom('${f.url}')"><div style="font-size:10px;color:#fff;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:4px">${f.name}</div><div style="font-size:9px;color:#94a3b8">${f.w||'?'}x${f.h||'?'} • ${fmtSize(f.size)}</div><div style="font-size:9px;color:#fbbf24;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${f.caption||'No caption'}</div><div style="display:flex;gap:3px;margin-top:6px;flex-wrap:wrap"><button class="btn-ghost" style="flex:1;padding:5px;font-size:10px" onclick="window.t6Move(${i},-1)">⬆️</button><button class="btn-ghost" style="flex:1;padding:5px;font-size:10px" onclick="window.t6Move(${i},1)">⬇️</button><button class="btn-ghost" style="flex:1;padding:5px;font-size:10px" onclick="window.t6Rotate(${i})">🔄</button><button class="btn-ghost" style="flex:1;padding:5px;font-size:10px" onclick="window.t6Caption(${i})">✍️</button><button class="btn-ghost" style="flex:1;padding:5px;font-size:10px" onclick="window.t6Duplicate(${i})">📄+</button><button class="btn-ghost" style="flex:1;padding:5px;font-size:10px" onclick="window.t6FilterOne(${i})">🎨</button><button class="btn-ghost" style="flex:1;padding:5px;font-size:10px" onclick="window.t6Remove(${i})">❌</button></div></div>`;
+  }).join('');
+  let dragIdx=null;
+  document.querySelectorAll('#tool6 .img-card').forEach(card=>{ card.addEventListener('dragstart',e=>{ dragIdx=parseInt(card.dataset.idx); }); card.addEventListener('dragover',e=>{ e.preventDefault(); }); card.addEventListener('drop',e=>{ e.preventDefault(); const dropIdx=parseInt(card.dataset.idx); if(dragIdx!==null && dragIdx!==dropIdx){ const m=items.splice(dragIdx,1)[0]; items.splice(dropIdx,0,m); renderGrid(); } }); });
+}
+window.t6Zoom=(url)=>{ $('t6ModalImg').src=url; $('t6Modal').style.display='flex'; };
+window.t6Move=(i,dir)=>{ const ni=i+dir; if(ni<0||ni>=items.length) return; const t=items[i]; items[i]=items[ni]; items[ni]=t; renderGrid(); };
+window.t6Remove=(i)=>{ if(items[i].url) URL.revokeObjectURL(items[i].url); items.splice(i,1); renderGrid(); };
+window.t6Caption=(i)=>{ const c=prompt('✍️ Caption (shows under image in PDF):', items[i].caption||''); if(c!==null){ items[i].caption=c; renderGrid(); } };
+window.t6EditText=(i)=>{ const t=prompt('📝 Edit Text Page:', items[i].text||''); if(t!==null){ items[i].text=t; renderGrid(); } };
+window.t6Duplicate=(i)=>{ const src=items[i]; if(src.kind!=='image') return; const copy={...src, name:src.name.replace(/(\.[^.]+)$/,'-copy$1')}; items.splice(i+1,0,copy); renderGrid(); };
+window.t6FilterOne=(i)=>{ const f=items[i]; const cur=f.filter||'none'; const next=cur==='none'?'gray':cur==='gray'?'bw':cur==='bw'?'sepia':'none'; f.filter=next; renderGrid(); };
+window.t6Rotate=async(i)=>{
+  const it=items[i]; if(!it.img) return;
+  const c=document.createElement('canvas'); c.width=it.img.naturalHeight; c.height=it.img.naturalWidth;
+  const ctx=c.getContext('2d'); ctx.translate(c.width/2,c.height/2); ctx.rotate(Math.PI/2); ctx.drawImage(it.img,-it.img.naturalWidth/2,-it.img.naturalHeight/2);
+  const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',0.92));
+  const url=URL.createObjectURL(blob); URL.revokeObjectURL(it.url); it.url=url; it.size=blob.size; it.img=await loadImage(url); it.w=it.img.naturalWidth; it.h=it.img.naturalHeight; renderGrid();
+};
+async function addFiles(list){
+  const arr=[...list].filter(f=>f.type.startsWith('image/'));
+  if(arr.length===0) return alert('⚠️ Select image only!');
+  if(items.length+arr.length>50) return alert('⚠️ Max 50!');
+  for(const f of arr){
+    if(f.size>20*1024*1024){ alert('Skip '+f.name+' - Max 20MB'); continue; }
+    const url=URL.createObjectURL(f);
+    const item={kind:'image', file:f, url, name:f.name, size:f.size, caption:'', filter:'none', loaded:false, w:0, h:0};
+    items.push(item); renderGrid();
+    try{ const im=await loadImage(url); item.img=im; item.w=im.naturalWidth; item.h=im.naturalHeight; item.loaded=true; }catch(e){ item.loaded=false; }
+    renderGrid();
+  }
+  $('t6Status').textContent='● '+items.length+' items loaded';
+}
+$('t6File').addEventListener('change',e=>{ addFiles(e.target.files); e.target.value=''; });
+$('t6CameraFile').addEventListener('change',e=>{ addFiles(e.target.files); e.target.value=''; });
+$('t6Camera').onclick=()=>$('t6CameraFile').click();
+$('t6Drop').onclick=()=>$('t6File').click();
+$('t6Drop').addEventListener('dragover',e=>{ e.preventDefault(); $('t6Drop').classList.add('drag'); });
+$('t6Drop').addEventListener('dragleave',()=>$('t6Drop').classList.remove('drag'));
+$('t6Drop').addEventListener('drop',e=>{ e.preventDefault(); $('t6Drop').classList.remove('drag'); addFiles(e.dataTransfer.files); });
+$('t6Sample').onclick=()=>{ const colors=[['#7c3aed','#ec4899','Sample 1 - Notes'],['#06b6d4','#22c55e','Sample 2 - Receipt'],['#f59e0b','#ef4444','Sample 3 - ID Card'],['#0ea5e9','#8b5cf6','Sample 4 - Photo']]; colors.forEach((c,idx)=>{ const cv=document.createElement('canvas'); cv.width=800; cv.height=1000; const ctx=cv.getContext('2d'); const g=ctx.createLinearGradient(0,0,800,1000); g.addColorStop(0,c[0]); g.addColorStop(1,c[1]); ctx.fillStyle=g; ctx.fillRect(0,0,800,1000); ctx.fillStyle='#fff'; ctx.font='bold 50px Arial'; ctx.textAlign='center'; ctx.fillText(c[2],400,480); ctx.font='24px Arial'; ctx.fillText('Orbittroniz - Image to PDF',400,530); cv.toBlob(blob=>{ const f=new File([blob],'sample-'+(idx+1)+'.jpg',{type:'image/jpeg'}); addFiles([f]); },'image/jpeg',0.9); }); };
+$('t6Paste').onclick=async()=>{ try{ const cl=await navigator.clipboard.read(); for(const it of cl){ for(const type of it.types){ if(type.startsWith('image/')){ const blob=await it.getType(type); addFiles([new File([blob],'pasted.'+type.split('/')[1],{type})]); return; } } } alert('No image in clipboard'); }catch(e){ alert('Paste not allowed - Use Choose Images'); } };
+$('t6AddTextPage').onclick=()=>{ items.push({kind:'text', text:$('t6TextPageContent').value||'My Notes', size:0}); renderGrid(); };
+$('t6AddBlank').onclick=()=>{ items.push({kind:'blank', size:0}); renderGrid(); };
+$('t6Clear').onclick=()=>{ items.forEach(f=>{ if(f.url) URL.revokeObjectURL(f.url); }); items=[]; $('t6Result').style.display='none'; renderGrid(); };
+$('t6Reverse').onclick=()=>{ items.reverse(); renderGrid(); };
+$('t6SortName').onclick=()=>{ items.sort((a,b)=>(a.name||'').localeCompare(b.name||'')); renderGrid(); };
+$('t6Tabs').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; document.querySelectorAll('#t6Tabs button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); ['Main','Layout','Style','Meta'].forEach(t=> $('t6Tab'+t).style.display='none'); $('t6Tab'+b.dataset.tab.charAt(0).toUpperCase()+b.dataset.tab.slice(1)).style.display='block'; });
+$('t6PageSize').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; document.querySelectorAll('#t6PageSize button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); pageSize=b.dataset.ps; $('t6CustomSize').style.display=pageSize==='Custom'?'block':'none'; });
+$('t6Orient').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; document.querySelectorAll('#t6Orient button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); orient=b.dataset.orient; });
+$('t6PerPage').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; document.querySelectorAll('#t6PerPage button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); perPage=parseInt(b.dataset.per); renderGrid(); });
+$('t6Fit').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; document.querySelectorAll('#t6Fit button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); fitMode=b.dataset.fit; });
+$('t6Quality').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; document.querySelectorAll('#t6Quality button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); quality=parseFloat(b.dataset.q); });
+$('t6Filter').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; document.querySelectorAll('#t6Filter button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); filterMode=b.dataset.filter; });
+$('t6Margin').addEventListener('input',()=>{ margin=parseInt($('t6Margin').value); $('t6MarginVal').textContent='Margin '+margin+'px'; });
+$('t6Bg').addEventListener('input',()=> bgColor=$('t6Bg').value );
+document.querySelectorAll('[data-bg]').forEach(b=> b.onclick=()=>{ bgColor=b.dataset.bg; $('t6Bg').value=bgColor; });
+document.querySelectorAll('[data-wm]').forEach(b=> b.onclick=()=> $('t6WmText').value=b.dataset.wm );
+function bindToggle(id,cb){ $(id).onclick=()=>{ const el=$(id); el.classList.toggle('on'); cb(el.classList.contains('on')); }; }
+bindToggle('t6BorderToggle',v=>addBorder=v); bindToggle('t6CaptionToggle',v=>captionOn=v); bindToggle('t6DateToggle',v=>dateOn=v); bindToggle('t6WmToggle',v=>wmOn=v); bindToggle('t6PageNumToggle',v=>pageNum=v); bindToggle('t6CoverToggle',v=>{coverOn=v;renderGrid();}); bindToggle('t6CompressToggle',v=>compressOn=v); bindToggle('t6TocToggle',v=>{tocOn=v;renderGrid();});
+function setProg(p,t){ $('t6ProgBar').style.width=p+'%'; $('t6ProgText').textContent=t; }
+
+// FIX 2: Always via Canvas - WEBP/PNG sab chalega, kabhi blank nahi
+async function imageToEmbed(f, doc){
+  const filt=f.filter && f.filter!=='none' ? f.filter : filterMode;
+  const canvas=document.createElement('canvas');
+  canvas.width=f.img.naturalWidth; canvas.height=f.img.naturalHeight;
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  if(filt==='gray') ctx.filter='grayscale(1)';
+  else if(filt==='bw') ctx.filter='grayscale(1) contrast(1.4)';
+  else if(filt==='sepia') ctx.filter='sepia(0.8)';
+  else ctx.filter='none';
+  ctx.drawImage(f.img,0,0);
+  const dataUrl=canvas.toDataURL('image/jpeg', quality);
+  const buf=await (await fetch(dataUrl)).arrayBuffer();
+  return await doc.embedJpg(buf);
+}
+let finalBlob=null, finalUrl=null;
+$('t6Convert').onclick=async()=>{
+  if(items.length===0) return alert('⚠️ First add images!');
+  if(!window.PDFLib) return alert('⚠️ Library loading... Wait 3 sec');
+  // FIX 3: Ensure all images loaded before convert
+  const notLoaded=items.filter(i=>i.kind==='image' && !i.loaded);
+  if(notLoaded.length){ setProg(5,'Loading images... Please wait'); await new Promise(r=>setTimeout(r,600)); const still=items.filter(i=>i.kind==='image' && !i.img); if(still.length) return alert('⚠️ Images still loading, 1 sec ruk ke phir Convert dabao'); }
+  $('t6Convert').textContent='⏳ Converting...'; $('t6Status').textContent='● Converting...'; setProg(5,'Creating PDF...');
+  try{
+    const doc=await PDFLib.PDFDocument.create();
+    doc.setTitle($('t6MetaTitle').value||$('t6Title').value||'Orbittroniz Images to PDF');
+    doc.setAuthor($('t6MetaAuthor').value||'Orbittroniz');
+    doc.setSubject('Images to PDF - Orbittroniz');
+    doc.setKeywords(($('t6MetaKeywords').value||'').split(','));
+    doc.setCreator('Orbittroniz - orbittroniz.com');
+    const font=await doc.embedFont(PDFLib.StandardFonts.Helvetica);
+    const fontB=await doc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+    const drawCenter=(page,text,y,size,w)=>{ const tw=font.widthOfTextAtSize(text,size); page.drawText(text,{x:(w-tw)/2,y,size,font}); };
+    if(coverOn){
+      const {w,h}=getPageDims(null); const cover=doc.addPage([w,h]);
+      const bgC=hexToRgb(bgColor); cover.drawRectangle({x:0,y:0,width:w,height:h,color:PDFLib.rgb(bgC.r,bgC.g,bgC.b)});
+      const title=$('t6Title').value||'Orbittroniz - Images to PDF';
+      drawCenter(cover,title,h-140,22,w); drawCenter(cover,items.length+' Items • '+new Date().toLocaleDateString(),h-180,12,w); drawCenter(cover,'Created with orbittroniz.com - Free Tools',h-210,11,w);
+    }
+    if(tocOn){
+      const {w,h}=getPageDims(null); const toc=doc.addPage([w,h]);
+      toc.drawText('Table of Contents',{x:40,y:h-80,size:22,font:fontB,color:PDFLib.rgb(0.48,0.23,0.93)});
+      let y=h-130;
+      items.forEach((it,idx)=>{ if(y<60) return; const label=it.kind==='image'?(it.caption||it.name):it.kind==='text'?'Text Page':'Blank Page'; toc.drawText(`${idx+1}. ${label.slice(0,48)}`,{x:40,y,size:12,font}); y-=28; });
+    }
+    let groups=[]; let cur=[];
+    items.forEach(it=>{ if(it.kind!=='image'){ if(cur.length){groups.push(cur);cur=[];} groups.push([it]); } else { cur.push(it); if(cur.length>=perPage){groups.push(cur);cur=[];} } });
+    if(cur.length) groups.push(cur);
+    for(let gi=0;gi<groups.length;gi++){
+      setProg(10+Math.round((gi/groups.length)*80), `Adding page ${gi+1}/${groups.length}...`);
+      const group=groups[gi];
+      const firstImg=group.find(g=>g.kind==='image');
+      const {w,h}=getPageDims(firstImg?firstImg.img:null);
+      const page=doc.addPage([w,h]);
+      const bgC=hexToRgb(bgColor); page.drawRectangle({x:0,y:0,width:w,height:h,color:PDFLib.rgb(bgC.r,bgC.g,bgC.b)});
+      const header=$('t6Header').value||''; const footer=$('t6Footer').value||'';
+      if(header) page.drawText(header,{x:margin,y:h-18,size:9,font,color:PDFLib.rgb(0.4,0.4,0.4)});
+      if(footer) page.drawText(footer,{x:margin,y:12,size:8,font,color:PDFLib.rgb(0.5,0.5,0.5)});
+      if(dateOn) page.drawText(new Date().toLocaleDateString(),{x:w-90,y:h-18,size:9,font,color:PDFLib.rgb(0.4,0.4,0.4)});
+      const topReserve=header?30:margin;
+      const bottomReserve=footer||pageNum?30:margin;
+      const usableH=h-topReserve-bottomReserve;
+      const usableW=w-margin*2;
+      if(group[0].kind==='text'){
+        page.drawText('Notes',{x:margin,y:h-topReserve-30,size:20,font:fontB,color:PDFLib.rgb(0.48,0.23,0.93)});
+        let y=h-topReserve-70; (group[0].text||'').split('\n').forEach(line=>{ if(y<bottomReserve+20) return; page.drawText(line.slice(0,85),{x:margin,y,size:12,font,color:PDFLib.rgb(0.1,0.1,0.1)}); y-=22; });
+      } else if(group[0].kind==='blank'){
+        drawCenter(page,'Blank Page',h/2,14,w);
+      } else {
+        // FIX 1: CORRECT LAYOUT MATH - Image ab page ke andar rahegi
+        let cols=1,rows=1;
+        if(perPage===2){cols=1;rows=2;} else if(perPage===4){cols=2;rows=2;} else if(perPage===6){cols=2;rows=3;} else if(perPage===9){cols=3;rows=3;}
+        const gap=10;
+        const cellW=(usableW-(cols-1)*gap)/cols;
+        const cellH=(usableH-(rows-1)*gap)/rows;
+        for(let k=0;k<group.length;k++){
+          const f=group[k];
+          const embed=await imageToEmbed(f,doc);
+          let dw,dh;
+          if(fitMode==='stretch'){ dw=cellW; dh=cellH-18; }
+          else if(fitMode==='cover'){ const sc=Math.max(cellW/embed.width,(cellH-18)/embed.height); dw=embed.width*sc; dh=embed.height*sc; }
+          else { const sc=Math.min(cellW/embed.width,(cellH-18)/embed.height); dw=embed.width*sc; dh=embed.height*sc; }
+          const col=k%cols, row=Math.floor(k/cols);
+          // CORRECT: Top se calculate karo, bottom se nahi
+          const cellTopY=h-topReserve-row*(cellH+gap); // cell ka top
+          const cellBottomY=cellTopY-cellH; // cell ka bottom
+          const x=margin+col*(cellW+gap)+(cellW-dw)/2;
+          // Image ko cell ke andar center me rakho, caption ke liye 18px chhodo
+          const y=cellBottomY+18+(cellH-18-dh)/2;
+          // Cover me clip karne ke liye - simple draw, overflow nahi hoga kyunki dw/dh cell se bade nahi (contain/stretch me)
+          page.drawImage(embed,{x,y,width:dw,height:dh});
+          if(addBorder) page.drawRectangle({x,y,width:dw,height:dh,borderColor:PDFLib.rgb(0,0,0),borderWidth:1});
+          if(captionOn && f.caption){ const cap=f.caption.slice(0,48); const tw=font.widthOfTextAtSize(cap,9); page.drawText(cap,{x:margin+col*(cellW+gap)+(cellW-tw)/2,y:cellBottomY+4,size:9,font,color:PDFLib.rgb(0.2,0.2,0.2)}); }
+        }
+      }
+      await new Promise(r=>setTimeout(r,10));
+    }
+    if($('t6SignText').value.trim()){
+      const pages=doc.getPages(); const last=pages[pages.length-1]; last.drawText('________________',{x:40,y:55,size:12,font}); last.drawText($('t6SignText').value,{x:40,y:40,size:12,font,color:PDFLib.rgb(0.1,0.1,0.1)});
+    }
+    const pages=doc.getPages();
+    const wmText=$('t6WmText').value||''; const wmC=hexToRgb($('t6WmColor').value);
+    pages.forEach((p,idx)=>{ const {width,height}=p.getSize(); if(wmOn && wmText) p.drawText(wmText,{x:width/2-90,y:height/2,size:parseInt($('t6WmSize').value)||28,font:fontB,color:PDFLib.rgb(wmC.r,wmC.g,wmC.b),opacity:0.25,rotate:PDFLib.degrees(35)}); if(pageNum) p.drawText(`${idx+1} / ${pages.length}`,{x:width/2-20,y:12,size:10,font:fontB,color:PDFLib.rgb(0.5,0.5,0.5)}); });
+    setProg(95,'Saving...');
+    const bytes=await doc.save({useObjectStreams:compressOn, addDefaultPage:false});
+    finalBlob=new Blob([bytes],{type:'application/pdf'}); if(finalUrl) URL.revokeObjectURL(finalUrl); finalUrl=URL.createObjectURL(finalBlob);
+    setProg(100,'✅ Done!'); $('t6Result').style.display='block'; $('t6ResultInfo').textContent=`${items.length} items • ${pages.length} pages • ${fmtSize(finalBlob.size)}`; $('t6Status').textContent='● ✅ PDF Ready!'; $('t6Convert').textContent='✨ CONVERT '+items.length+' ITEMS TO PDF'; $('t6Result').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }catch(e){ console.error(e); alert('❌ Failed: '+e.message); $('t6Convert').textContent='✨ CONVERT '+items.length+' ITEMS TO PDF'; setProg(0,'Failed'); }
+};
+$('t6Download').onclick=()=>{ if(!finalBlob) return alert('Convert first!'); const name=($('t6OutName').value.trim()||'orbittroniz-images-to-pdf').replace(/[^a-zA-Z0-9-_]/g,'-')+'.pdf'; const a=document.createElement('a'); a.href=finalUrl; a.download=name; document.body.appendChild(a); a.click(); a.remove(); };
+$('t6Preview').onclick=()=>{ if(!finalUrl) return alert('Convert first!'); window.open(finalUrl,'_blank'); };
+$('t6PreviewBtn').onclick=()=>{ if(!finalUrl) return alert('Convert first!'); window.open(finalUrl,'_blank'); };
+$('t6Share').onclick=async()=>{ if(!finalBlob) return; try{ const file=new File([finalBlob],($('t6OutName').value||'images')+'.pdf',{type:'application/pdf'}); if(navigator.canShare && navigator.canShare({files:[file]})) await navigator.share({files:[file],title:'Images to PDF - Orbittroniz'}); else alert('Share not supported'); }catch(e){} };
+})();
+</script>
+<!-- ===== TOOL 6 V3 END ===== -->
 
 <!-- TOOL 7: BG REMOVER -->
 <div class="tool" id="tool-bg"><div class="grid-2"><div class="panel"><h3>7 BG Remover - Features: White BG to Transparent</h3><div class="drop" id="bg_drop"><b>Drop Image with White BG</b><input type="file" id="bg_file" accept="image/*" style="display:none"></div><div style="display:flex;gap:6px;margin-top:8px;align-items:center"><label class="label">Threshold</lbg_thresh" type="range" min="0" max="100" value="30" style="flex:1"><span id="bg_thresh_v" style="font-size:11px">30</span></div><div style="display:flex;gap:6px;margin-top:8px"><button id="bg_remove" class="btn primary" style="flex:1">Remove White BG → Transparent</button><button id="bg_white" class="btn">Add White BG</button></div></div><div class="panel"><canvas id="bg_canvas" width="800" height="800" style="background:repeating-conic-gradient(#1a1a1a 0% 25%, #2a2a2a 0% 50%) 0 0 / 20px 20px"></canvas><button id="bg_download" class="btn primary" style="width:100%;margin-top:8px">Download PNG Transparent</button></div></div></div>
