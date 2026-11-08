@@ -562,11 +562,132 @@ function t2Reset(){ t2File=null; t2PdfDoc=null; t2PageCount=0; t2Results=[]; t2S
 </script>
 <!-- ================= TOOL 2 - WITH PREVIEW - END ================= -->
 <!-- TOOL 3 -->
-<div class="tool" id="tool-3"><div class="panel"><h3>📄 Tool 3 - PDF Merge</h3>
-<!-- YAHAN TOOL 3 KA CODE PASTE KARO -->
-<p style="font-size:12px;color:#94a3b8">Yaha Tool 3 ka feature code aayega...</p>
-</div></div>
+<!-- ================= TOOL 3 - ONLY HTML - PDF MERGE - PREMIUM - START ================= -->
+<div class="tool" id="tool-3">
+<div class="card3d3">
 
+<div class="title3d3">📄 PDF Merge Pro V3 - With Preview</div>
+<div class="sub3d3">Premium • Merge Unlimited PDFs • Reorder • Preview • No API</div>
+
+<label class="label">✏️ 1. MERGED PDF NAME</label>
+<input type="text" id="t3Name" class="input" placeholder="Example - All Notes, Final Project, Bills 2026...">
+<div>
+<button class="btn2x3" onclick="t3QuickName('All Notes')">📝 All Notes</button>
+<button class="btn2x3" onclick="t3QuickName('Final Project')">🎓 Final Project</button>
+<button class="btn2x3" onclick="t3QuickName('All Bills')">🧾 All Bills</button>
+<button class="btn2x3" onclick="t3QuickName('Chapters')">📖 Chapters</button>
+</div>
+
+<label class="label">📄 2. ADD PDFs - Click or Drag & Drop</label>
+<div class="drop3" id="t3Drop" onclick="document.getElementById('t3Files').click()">
+<b>+ Click or Drag PDFs Here</b>
+<br><small>PDF Only - Unlimited Files - Any Size</small>
+<br><small id="t3Count">0 PDFs Added</small>
+<br><small>Tip: Hold and drag to change order • Click PDF to preview</small>
+</div>
+<input type="file" id="t3Files" accept=".pdf,application/pdf" multiple hidden>
+
+<div>
+<button class="btn2x3" onclick="t3Reverse()">🔃 Reverse Order</button>
+<button class="btn2x3" onclick="t3SortAZ()">🔤 Sort A-Z</button>
+<button class="btn2x3" onclick="t3SortBySize()">📦 Sort By Size</button>
+<button class="btn2x3" onclick="t3Clear()">🗑️ Clear All</button>
+</div>
+
+<label class="label">📑 3. YOUR PDFs - Reorder / Preview / Edit</label>
+<div id="t3List"></div>
+<div id="t3Empty" style="text-align:center;color:#94a3b8;padding:14px">No PDF yet 👆<br><small>Add 2 or more PDFs to merge</small></div>
+
+<label class="label">📄 4. COVER PAGE - First Page Title</label>
+<div class="toggle3">
+<b>📄 Add Cover Page?</b>
+<input type="checkbox" id="t3Cover" onchange="document.getElementById('t3CoverBox').style.display=this.checked?'block':'none'">
+</div>
+<div id="t3CoverBox">
+<input type="text" id="t3CoverTitle" class="input" placeholder="Cover Title - Example MY FINAL NOTES">
+<input type="text" id="t3CoverSub" class="input" placeholder="Subtitle - Example Class 10 • Made by Me">
+</div>
+
+<label class="label">📑 5. PAGE OPTIONS</label>
+<div class="toggle3">
+<b>📑 Add Bookmark / Divider Page Between PDFs?</b>
+<input type="checkbox" id="t3Divider" checked>
+</div>
+<div class="toggle3">
+<b>🔢 Add Page Numbers to Merged PDF?</b>
+<input type="checkbox" id="t3PageNo" checked>
+</div>
+<div class="toggle3">
+<b>💧 Add Watermark to All Pages?</b>
+<input type="checkbox" id="t3WmOn" onchange="document.getElementById('t3WmBox').style.display=this.checked?'block':'none'">
+</div>
+<div id="t3WmBox">
+<input type="text" id="t3WmText" class="input" value="Orbittroniz.com">
+</div>
+<div class="toggle3">
+<b>📝 Add Table of Contents on Cover?</b>
+<input type="checkbox" id="t3TOC" checked>
+</div>
+<div class="toggle3">
+<b>🗜️ Compress Merged PDF?</b>
+<input type="checkbox" id="t3Compress">
+</div>
+
+<label class="label">📄 6. PAGE RANGE - Select Pages From Each PDF (Advanced)</label>
+<div>
+<small style="color:#94a3b8">Example: If you want only Page 1-3 from first PDF, click Edit on that PDF and write 1-3</small>
+</div>
+
+<label class="label">📊 MERGE SUMMARY</label>
+<div id="t3Summary">
+<div id="t3TotalPages">Total PDFs: 0 • Total Pages: 0</div>
+<div id="t3TotalSize">Total Size: 0 KB</div>
+<div id="t3EstSize">Estimated Merged Size: 0 KB</div>
+</div>
+
+<div class="prog3" id="t3Prog"><div id="t3Fill"></div></div>
+<div id="t3Status"></div>
+
+<button class="btn-preview3" onclick="t3OpenPreview()">👀 PREVIEW MERGED PDF - See Order Before Merge</button>
+<button class="btn2x3" id="t3FolderBtn">📁 Select Folder (PC Only)</button>
+<div id="t3FolderName">Folder: Downloads (Default)</div>
+<button class="btn3d3" id="t3MergeBtn">📄 MERGE PDFs - DOWNLOAD</button>
+<button class="btn-share3" id="t3ShareBtn" onclick="t3Share()">📤 SHARE ON WHATSAPP / ANYWHERE</button>
+<button class="btn2x3" onclick="t3DownloadList()">📋 Download List as Text</button>
+
+<p>100% Private - PDFs never go to server • Preview Available • Unlimited Merge</p>
+
+</div>
+</div>
+<!-- ================= TOOL 3 - ONLY HTML - END ================= -->
+
+<div class="modal3" id="t3Modal" onclick="this.style.display='none'">
+<div id="t3ModalTitle">Preview</div>
+<canvas id="t3PreviewCanvas"></canvas>
+<div id="t3ModalCap"></div>
+<div class="modal-nav3">
+<button onclick="t3PrevPage()">⬅️ Prev</button>
+<button onclick="t3NextPage()">Next ➡️</button>
+<button onclick="t3RemoveFromPreview()">🗑️ Remove This PDF</button>
+<button onclick="t3ClosePreview()">✅ Close</button>
+</div>
+<div>
+<button onclick="t3ClosePreview();document.getElementById('t3MergeBtn').click()">📄 Looks Good - Merge Now</button>
+</div>
+</div>
+
+<div class="modal3" id="t3EditModal">
+<div>Edit PDF Pages</div>
+<div id="t3EditName"></div>
+<label class="label">🎯 Pages to Keep - Example: 1-3, 5</label>
+<input type="text" id="t3EditRange" class="input" placeholder="Leave empty = All Pages • Example 1-3, 5">
+<label class="label">✏️ Custom Title for Divider Page</label>
+<input type="text" id="t3EditTitle" class="input" placeholder="Example Chapter 1 - Maths">
+<div>
+<button onclick="t3SaveEdit()">✅ Save</button>
+<button onclick="t3CloseEdit()">❌ Cancel</button>
+</div>
+</div>
 <!-- TOOL 4 -->
 <div class="tool" id="tool-4"><div class="panel"><h3>🖼️ Tool 4 - PDF to Image</h3>
 <!-- YAHAN TOOL 4 KA CODE PASTE KARO -->
