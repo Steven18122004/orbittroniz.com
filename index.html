@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Orbittroniz - 30 Tools - No API - Full Detailed</title>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body { margin: 0; background: #060a18; color: #e2e8f0; font-family: Inter, system-ui, sans-serif; padding: 12px; }
+:root { --panel: #121d3a; --border: #1e2d5a; --text: #e2e8f0; --muted: #94a3b8; --cyan: #22d3ee; --purple: #7c3aed; }
+.input, .select, textarea { width: 100%; background: #0a1224; border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 10px; font-size: 13px; outline: none; }
+.btn { border: 1px solid var(--border); background: #162143; color: var(--text); padding: 9px 14px; border-radius: 24px; font-weight: 700; cursor: pointer; pointer-events: auto !important; touch-action: manipulation; font-size: 12px; }
+.btn.primary { background: linear-gradient(135deg, var(--purple), var(--cyan)); color: #fff; border-color: transparent; }
+.panel { background: linear-gradient(145deg, #121d3a, #0a1224); border: 1px solid var(--border); border-radius: 18px; padding: 14px; margin-top: 12px; }
+.label { font-size: 11px; color: var(--muted); font-weight: 700; display: block; margin: 6px 0 4px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; } @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+.tool { display: none; } .tool.active { display: block; }
+.drop { border: 2px dashed var(--border); border-radius: 14px; padding: 18px; text-align: center; cursor: pointer; margin-top: 10px; }
+#orbit-buttons { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; position: sticky; top: 8px; z-index: 99; background: rgba(6,10,24,0.92); backdrop-filter: blur(12px); padding: 8px; border-radius: 14px; border: 1px solid var(--border); }
+#orbit-buttons .tab-btn { pointer-events: auto !important; border: 1px solid var(--border); background: #162143; color: #cbd5e1; padding: 7px 11px; border-radius: 20px; font-size: 11px; font-weight: 700; cursor: pointer; }
+#orbit-buttons .tab-btn.active { background: linear-gradient(135deg, var(--purple), var(--cyan)); color: #fff; border-color: transparent; }
+canvas { max-width: 100%; border-radius: 12px; background: #0a1224; display: block; touch-action: none; }
+/* DASHBOARD EXTRA */
+.grid-tools{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tcard{background:linear-gradient(145deg,#121d3a,#0a1224);border:1px solid var(--border);border-radius:16px;padding:12px 6px;text-align:center;cursor:pointer;position:relative}
+.tcard span{font-size:26px;display:block}
+.tcard b{font-size:11px;display:block;margin-top:6px;line-height:1.2}
+.tcard small{font-size:9px;color:var(--muted)}
+.tcard .fav{position:absolute;top:4px;right:6px;font-size:14px;z-index:2}
+.cat-btn{border:1px solid var(--border);background:#162143;color:#cbd5e1;padding:7px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer}
+.cat-btn.active{background:linear-gradient(135deg,var(--purple),var(--cyan));color:#fff}
+.topbar{display:flex;gap:8px;align-items:center;margin-top:12px}
+.search{flex:1;display:flex;align-items:center;gap:8px;background:#0a1224;border:1px solid var(--border);border-radius:20px;padding:9px 12px}
+.search input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-size:13px}
+.chip{flex:1;background:#121d3a;border:1px solid var(--border);border-radius:12px;padding:10px;text-align:center}
+.chip b{font-size:15px;display:block}
+.chip small{font-size:10px;color:var(--muted)}
+.recent{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.recent div{white-space:nowrap;background:#121d3a;border:1px solid var(--border);padding:7px 12px;border-radius:20px;font-size:11px;cursor:pointer}
+</style>
+</head>
+<body>
+<div id="orbit-app">
+<!-- ===== ONLY LOGO CODE - EDIT ONLY THIS - PASTE INSIDE HEADER - DELETE OTHER LOGO CODE ===== -->
+<style>
+#orbit-logo-box{width:90px;height:90px;min-width:90px;min-height:90px;aspect-ratio:1/1;border-radius:22px;background:#000;border:1px solid rgba(255,255,255,0.28);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;animation:logoDance 2.2s ease-in-out infinite, logoGlow 1.8s ease-in-out infinite alternate}
+#orbit-logo-box img{width:100%;height:100%;object-fit:contain;object-position:center;padding:0;margin:0;background:#000;border-radius:16px;display:block;animation:logoSpin 4s ease-in-out infinite}
+@keyframes logoDance{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}25%{transform:translateY(-8px) rotate(3deg) scale(1.08)}50%{transform:translateY(0) scale(1.03)}75%{transform:translateY(-5px) rotate(-3deg) scale(1.06)}}
+@keyframes logoGlow{0%{box-shadow:0 10px 36px rgba(0,0,0,0.7)}100%{box-shadow:0 16px 48px rgba(0,0,0,0.85), 0 0 48px rgba(124,58,237,0.75), 0 0 72px rgba(34,211,238,0.6)}}
+@keyframes logoSpin{0%,100%{transform:rotate(0deg)}25%{transform:rotate(4deg)}75%{transform:rotate(-4deg)}}
+@media(max-width:600px){#orbit-logo-box{width:70px;height:70px;min-width:70px;min-height:70px}}
+</style>
+
+<!-- LOGO O - O-ONLY IMAGE - NO TEXT INSIDE - USE O-ONLY AS logo.png -->
+<div id="orbit-logo-box"><img id="orbitLogoImg" src="logo.png?v=1002" alt="O Logo"></div>
+
+<script>
+// LOGO LOAD - EDIT ONLY URL HERE IF NEEDED
+(function(){
+  const img = document.getElementById('orbitLogoImg');
+  const urls = ["logo.png?v=1002","https://steven1812004.github.io/orbittroniz.com/logo.png?v=1002","https://raw.githubusercontent.com/Steven1812004/orbittroniz.com/main/logo.png?v=1002"];
+  let i = 0;
+  function tryNext(){
+    if(i >= urls.length){
+      img.style.display='none';
+      const fb=document.createElement('div');
+      fb.textContent='O';
+      fb.style.cssText='width:100%;height:100%;background:linear-gradient(135deg,#7c3aed,#22d3ee);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:32px;border-radius:16px;';
+      img.parentElement.appendChild(fb);
+      return;
+    }
+    img.src=urls[i]; i++;
+  }
+  img.onerror=tryNext;
+  img.src=urls[0];
+})();
+</script>
+<!-- ===== ONLY LOGO CODE END ===== -->
+  <!-- ===== ATTRACTIVE HEADER - NO LOGO - SIMPLE - PASTE AT TOP OF BODY ===== -->
+<div id="orbit-header" style="position:relative;min-height:88px;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:linear-gradient(135deg,#0b1026 0%,#1e1b4b 45%,#0e7490 100%);border:1px solid rgba(34,211,238,0.35);border-radius:18px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.5), 0 0 30px rgba(124,58,237,0.25)">
+<style>
+#orbit-header .glow1{position:absolute;width:220px;height:220px;background:radial-gradient(circle, rgba(124,58,237,0.55) 0%, transparent 70%);top:-90px;right:-40px;filter:blur(8px)}
+#orbit-header .glow2{position:absolute;width:180px;height:180px;background:radial-gradient(circle, rgba(34,211,238,0.5) 0%, transparent 70%);bottom:-80px;left:-30px;filter:blur(8px)}
+#orbit-header .shine{position:absolute;inset:0;background:linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.12) 45%, transparent 60%);animation:shineMove 3.5s ease-in-out infinite}
+@keyframes shineMove{0%,100%{transform:translateX(-100%)}50%{transform:translateX(100%)}}
+#orbit-header .live-dot{width:9px;height:9px;background:#22c55e;border-radius:50%;box-shadow:0 0 0 0 rgba(34,197,94,0.7);animation:pulseDot 1.6s infinite;display:inline-block}
+@keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(34,197,94,0.7)}70%{box-shadow:0 0 0 10px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+@media(max-width:600px){ #orbit-header{padding:14px 14px;min-height:76px} #orbit-header .big{font-size:22px!important} #orbit-header .small{font-size:9px!important;letter-spacing:2px!important} #orbit-header .badge{font-size:9px!important;padding:4px 8px!important} }
+</style>
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div class="shine"></div>
+
+<div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:3px">
+<!-- DOMAIN NAME -->
+<div class="big" style="font-size:30px;font-weight:900;letter-spacing:-0.5px;line-height:1;color:#fff">orbittroniz<span style="background:linear-gradient(135deg,#22d3ee,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">.com</span></div>
+<!-- TAGLINE -->
+<div class="small" style="font-size:10px;letter-spacing:4px;font-weight:800;color:#c4b5fd">BUSINESS TOOLS • TECHNOLOGY</div>
+</div>
+
+<div style="position:relative;z-index:1;display:flex;align-items:center;gap:8px;flex-shrink:0">
+<span style="display:flex;align-items:center;gap:6px;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.18);padding:6px 10px;border-radius:20px;font-size:10px;font-weight:800;color:#fff;backdrop-filter:blur(6px)"><span class="live-dot"></span>LIVE</span>
+<span class="badge" style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:900;box-shadow:0 6px 20px rgba(34,197,94,0.4)">30 TOOLS</span>
+</div>
+</div>
+<!-- ===== HEADER END - NO LOGO - DO NOT PASTE AGAIN ===== -->
+
+<!-- ===== DASHBOARD - BUTTON FEATURES ===== -->
+<div class="topbar">
+<div class="search">🔍 <input id="searchInput" placeholder="Search tool..." oninput="filterTools()"></div>
+<button class="btn" onclick="showFavs()">⭐ <span id="favCount">0</span></button>
+<button class="btn" onclick="showDashboard()">🏠 Home</button>
+</div>
+
+<div style="display:flex;gap:8px;margin-top:12px">
+<div class="chip"><b>30</b><small>Total Tools</small></div>
+<div class="chip"><b id="favCount2">0</b><small>Favorites</small></div>
+<div class="chip"><b>100%</b><small>Free - No API</small></div>
+</div>
+
+<div style="margin-top:14px"><b style="font-size:13px">🕐 Recently Used</b><div class="recent" id="recentBox"></div></div>
+
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px">
+<button class="cat-btn active" onclick="setCat('all',this)">All</button>
+<button class="cat-btn" onclick="setCat('PDF',this)">📄 PDF</button>
+<button class="cat-btn" onclick="setCat('Image',this)">🖼️ Image</button>
+<button class="cat-btn" onclick="setCat('Business',this)">💼 Business</button>
+<button class="cat-btn" onclick="setCat('Daily',this)">🧮 Daily</button>
+<button class="cat-btn" onclick="setCat('Favs',this)">⭐ Favs</button>
+</div>
+
+<!-- ===== DASHBOARD - 30 TOOLS LIST - SIRF LIST HAI, CODE BAAD ME DALNA HAI ===== -->
+<div id="dashboard">
+<div style="display:flex;justify-content:space-between;align-items:center;margin:14px 0 10px"><b>🧰 All Tools</b><small style="color:#94a3b8">30 Tools</small></div>
+<div class="grid-tools" id="toolsGrid"></div>
+</div>
+
+<!-- ===== TOOLS AREA - HAR TOOL KA KHAALI BOX - TU YAHI EDIT KAREGA ===== -->
+<div id="toolsArea">
+<button class="btn" id="backBtn" style="display:none;margin-top:10px" onclick="showDashboard()">⬅️ Back to Dashboard</button>
+
+<!-- TOOL 1 -->
+<div class="tool" id="tool-1"><div class="panel"><h3>🖼️ Tool 1 - Image to PDF</h3>
+<!-- YAHAN TOOL 1 KA CODE PASTE KARO - Jaise: Naam input, Upload, Download button -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 1 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 2 -->
+<div class="tool" id="tool-2"><div class="panel"><h3>✂️ Tool 2 - PDF Split</h3>
+<!-- YAHAN TOOL 2 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 2 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 3 -->
+<div class="tool" id="tool-3"><div class="panel"><h3>📄 Tool 3 - PDF Merge</h3>
+<!-- YAHAN TOOL 3 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 3 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 4 -->
+<div class="tool" id="tool-4"><div class="panel"><h3>🖼️ Tool 4 - PDF to Image</h3>
+<!-- YAHAN TOOL 4 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 4 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 5 -->
+<div class="tool" id="tool-5"><div class="panel"><h3>🗜️ Tool 5 - PDF Compressor</h3>
+<!-- YAHAN TOOL 5 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 5 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 6 -->
+<div class="tool" id="tool-6"><div class="panel"><h3>💧 Tool 6 - PDF Watermark</h3>
+<!-- YAHAN TOOL 6 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 6 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 7 -->
+<div class="tool" id="tool-7"><div class="panel"><h3>🖼️ Tool 7 - BG Remover</h3>
+<!-- YAHAN TOOL 7 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 7 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 8 -->
+<div class="tool" id="tool-8"><div class="panel"><h3>🗜️ Tool 8 - Image Compress</h3>
+<!-- YAHAN TOOL 8 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 8 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 9 -->
+<div class="tool" id="tool-9"><div class="panel"><h3>🔄 Tool 9 - Image Converter</h3>
+<!-- YAHAN TOOL 9 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 9 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 10 -->
+<div class="tool" id="tool-10"><div class="panel"><h3>🚀 Tool 10 - Upscaler 4K</h3>
+<!-- YAHAN TOOL 10 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 10 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 11 -->
+<div class="tool" id="tool-11"><div class="panel"><h3>💧 Tool 11 - Watermark</h3>
+<!-- YAHAN TOOL 11 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 11 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 12 -->
+<div class="tool" id="tool-12"><div class="panel"><h3>🖼️ Tool 12 - Border Frame</h3>
+<!-- YAHAN TOOL 12 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 12 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 13 -->
+<div class="tool" id="tool-13"><div class="panel"><h3>✂️ Tool 13 - Image Cropper</h3>
+<!-- YAHAN TOOL 13 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 13 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 14 -->
+<div class="tool" id="tool-14"><div class="panel"><h3>🎨 Tool 14 - Color Palette</h3>
+<!-- YAHAN TOOL 14 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 14 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 15 -->
+<div class="tool" id="tool-15"><div class="panel"><h3>✍️ Tool 15 - Text Poster</h3>
+<!-- YAHAN TOOL 15 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 15 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 16 -->
+<div class="tool" id="tool-16"><div class="panel"><h3>🎯 Tool 16 - Logo Maker</h3>
+<!-- YAHAN TOOL 16 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 16 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 17 -->
+<div class="tool" id="tool-17"><div class="panel"><h3>💳 Tool 17 - BizCard Maker</h3>
+<!-- YAHAN TOOL 17 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 17 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 18 -->
+<div class="tool" id="tool-18"><div class="panel"><h3>🧾 Tool 18 - Invoice Maker</h3>
+<!-- YAHAN TOOL 18 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 18 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 19 -->
+<div class="tool" id="tool-19"><div class="panel"><h3>📷 Tool 19 - QR Generator</h3>
+<!-- YAHAN TOOL 19 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 19 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 20 -->
+<div class="tool" id="tool-20"><div class="panel"><h3>📊 Tool 20 - Barcode Generator</h3>
+<!-- YAHAN TOOL 20 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 20 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 21 -->
+<div class="tool" id="tool-21"><div class="panel"><h3>🔗 Tool 21 - Short URL</h3>
+<!-- YAHAN TOOL 21 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 21 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 22 -->
+<div class="tool" id="tool-22"><div class="panel"><h3>📄 Tool 22 - Resume Maker</h3>
+<!-- YAHAN TOOL 22 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 22 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 23 -->
+<div class="tool" id="tool-23"><div class="panel"><h3>✍️ Tool 23 - Signature Maker</h3>
+<!-- YAHAN TOOL 23 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 23 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 24 -->
+<div class="tool" id="tool-24"><div class="panel"><h3>🎂 Tool 24 - Age Calculator</h3>
+<!-- YAHAN TOOL 24 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 24 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 25 -->
+<div class="tool" id="tool-25"><div class="panel"><h3>⚖️ Tool 25 - BMI Calculator</h3>
+<!-- YAHAN TOOL 25 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 25 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 26 -->
+<div class="tool" id="tool-26"><div class="panel"><h3>📝 Tool 26 - Word Counter</h3>
+<!-- YAHAN TOOL 26 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 26 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 27 -->
+<div class="tool" id="tool-27"><div class="panel"><h3>🔐 Tool 27 - Password Generator</h3>
+<!-- YAHAN TOOL 27 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 27 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 28 -->
+<div class="tool" id="tool-28"><div class="panel"><h3>💰 Tool 28 - EMI Calculator</h3>
+<!-- YAHAN TOOL 28 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 28 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 29 -->
+<div class="tool" id="tool-29"><div class="panel"><h3>🔄 Tool 29 - Unit Converter</h3>
+<!-- YAHAN TOOL 29 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 29 ka feature code aayega...</p>
+</div></div>
+
+<!-- TOOL 30 -->
+<div class="tool" id="tool-30"><div class="panel"><h3>📸 Tool 30 - Scanner</h3>
+<!-- YAHAN TOOL 30 KA CODE PASTE KARO -->
+<p style="font-size:12px;color:#94a3b8">Yaha Tool 30 ka feature code aayega...</p>
+</div></div>
+
+</div>
+<div style="text-align:center;font-size:11px;color:#94a3b8;margin-top:20px">© 2026 Orbittroniz.com - All Tools Free - No API</div>
+</div>
+
+<script>
+// ===== DASHBOARD - 30 TOOLS LIST - SIRF LIST, CODE NAHI =====
+const TOOLS=[
+{id:1,name:"Image to PDF",icon:"🖼️",cat:"PDF",desc:"Images to PDF"},
+{id:2,name:"PDF Split",icon:"✂️",cat:"PDF",desc:"Pages Alag Karo"},
+{id:3,name:"PDF Merge",icon:"📄",cat:"PDF",desc:"PDF Jodo"},
+{id:4,name:"PDF to Image",icon:"🖼️",cat:"PDF",desc:"PDF to JPG"},
+{id:5,name:"PDF Compressor",icon:"🗜️",cat:"PDF",desc:"Size Chhota"},
+{id:6,name:"PDF Watermark",icon:"💧",cat:"PDF",desc:"PDF Pe Naam"},
+{id:7,name:"BG Remover",icon:"🖼️",cat:"Image",desc:"BG Hatayo"},
+{id:8,name:"Image Compress",icon:"🗜️",cat:"Image",desc:"Size Kam"},
+{id:9,name:"Image Converter",icon:"🔄",cat:"Image",desc:"PNG JPG WEBP"},
+{id:10,name:"Upscaler 4K",icon:"🚀",cat:"Image",desc:"2x Sharp"},
+{id:11,name:"Watermark",icon:"💧",cat:"Image",desc:"Photo Pe Naam"},
+{id:12,name:"Border Frame",icon:"🖼️",cat:"Image",desc:"Photo Frame"},
+{id:13,name:"Image Cropper",icon:"✂️",cat:"Image",desc:"Photo Kaato"},
+{id:14,name:"Color Palette",icon:"🎨",cat:"Image",desc:"Color Nikalo"},
+{id:15,name:"Text Poster",icon:"✍️",cat:"Image",desc:"Poster Banao"},
+{id:16,name:"Logo Maker",icon:"🎯",cat:"Image",desc:"Logo Banao"},
+{id:17,name:"BizCard",icon:"💳",cat:"Business",desc:"Visiting Card"},
+{id:18,name:"Invoice",icon:"🧾",cat:"Business",desc:"Bill Banao"},
+{id:19,name:"QR Generator",icon:"📷",cat:"Business",desc:"Link to QR"},
+{id:20,name:"Barcode Gen",icon:"📊",cat:"Business",desc:"Barcode Banao"},
+{id:21,name:"Short URL",icon:"🔗",cat:"Business",desc:"Short Link"},
+{id:22,name:"Resume Maker",icon:"📄",cat:"Business",desc:"CV Banao"},
+{id:23,name:"Signature",icon:"✍️",cat:"Business",desc:"Sign Banao"},
+{id:24,name:"Age Calculator",icon:"🎂",cat:"Daily",desc:"Age Nikalo"},
+{id:25,name:"BMI Calculator",icon:"⚖️",cat:"Daily",desc:"BMI Check"},
+{id:26,name:"Word Counter",icon:"📝",cat:"Daily",desc:"Words Gino"},
+{id:27,name:"Password Gen",icon:"🔐",cat:"Daily",desc:"Strong Pass"},
+{id:28,name:"EMI Calculator",icon:"💰",cat:"Daily",desc:"Loan EMI"},
+{id:29,name:"Unit Converter",icon:"🔄",cat:"Daily",desc:"Kg Km Inch"},
+{id:30,name:"Scanner",icon:"📸",cat:"Daily",desc:"Doc Scan"},
+];
+let favs=JSON.parse(localStorage.getItem('orbit_favs')||'[]');
+let recent=JSON.parse(localStorage.getItem('orbit_recent')||'[]');
+let curCat='all';
+
+function renderTools(){
+  let list=TOOLS.filter(t=>{
+    if(curCat==='Favs') return favs.includes(t.id);
+    if(curCat!=='all' && curCat!=='Favs' && t.cat!==curCat) return false;
+    let q=document.getElementById('searchInput').value.toLowerCase();
+    if(q && !t.name.toLowerCase().includes(q)) return false;
+    return true;
+  });
+  document.getElementById('toolsGrid').innerHTML=list.map(t=>`
+    <div class="tcard" onclick="openTool(${t.id})">
+      <span class="fav" onclick="event.stopPropagation();toggleFav(${t.id})">${favs.includes(t.id)?'⭐':'☆'}</span>
+      <span>${t.icon}</span><b>${t.name}</b><small>${t.desc}</small>
+    </div>`).join('');
+  document.getElementById('favCount').innerText=favs.length;
+  document.getElementById('favCount2').innerText=favs.length;
+  document.getElementById('recentBox').innerHTML=recent.length?recent.map(id=>{let t=TOOLS.find(x=>x.id==id);return t?`<div onclick="openTool(${t.id})">${t.icon} ${t.name}</div>`:''}).join(''):'<div style="color:#94a3b8">Abhi koi recent nahi</div>';
+}
+function toggleFav(id){ if(favs.includes(id)) favs=favs.filter(x=>x!==id); else favs.push(id); localStorage.setItem('orbit_favs',JSON.stringify(favs)); renderTools(); }
+function setCat(c,el){ curCat=c; document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active')); el.classList.add('active'); renderTools(); }
+function filterTools(){ renderTools(); }
+function showFavs(){ curCat='Favs'; renderTools(); document.getElementById('dashboard').scrollIntoView({behavior:'smooth'}); }
+function showDashboard(){ document.querySelectorAll('.tool').forEach(t=>t.classList.remove('active')); document.getElementById('dashboard').style.display='block'; document.getElementById('backBtn').style.display='none'; document.getElementById('dashboard').scrollIntoView({behavior:'smooth'}); }
+function openTool(id){
+  document.querySelectorAll('.tool').forEach(t=>t.classList.remove('active'));
+  document.getElementById('dashboard').style.display='none';
+  document.getElementById('backBtn').style.display='block';
+  let el=document.getElementById('tool-'+id);
+  if(el){ el.classList.add('active'); el.scrollIntoView({behavior:'smooth'}); }
+  recent=[id,...recent.filter(x=>x!==id)].slice(0,5);
+  localStorage.setItem('orbit_recent',JSON.stringify(recent));
+  renderTools();
+}
+// ===== YAHAN SE TU HAR TOOL KA APNA JS LIKHEGA =====
+// Example - Tool 1 ka JS yaha aayega
+// function tool1Function(){ ... }
+
+renderTools();
+</script>
+</body>
+</html>
