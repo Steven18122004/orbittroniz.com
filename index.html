@@ -1167,22 +1167,19 @@ function t4Reset(){ t4File=null; t4PdfBytes=null; t4PageCount=0; t4Selected.clea
 </script>
 <!-- ================= TOOL 4 - FIXED - END ================= -->
 <!-- TOOL 5 -->
-<!-- ================= TOOL 5 - PDF COMPRESSOR - SAME LOOK - FIXED - START ================= -->
+<!-- ================= TOOL 5 - REAL COMPRESSOR - V2 - START ================= -->
 <style>
 .t5-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
 .t5-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .t5-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
 .t5-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
 .t5-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
-.t5-input:focus{border-color:#22d3ee}
 .t5-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
-.t5-drop.dragover{background:rgba(34,211,238,.25);transform:scale(1.02)}
 .t5-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .t5-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
-.t5-pill:active{transform:scale(.96)}
 .t5-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .t5-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:13px 8px;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer}
-.t5-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent;box-shadow:0 8px 20px rgba(124,58,237,.4)}
+.t5-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent}
 .t5-chiprow{display:flex;gap:6px;margin-top:8px}
 .t5-chiprow button{flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px 4px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
 .t5-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
@@ -1192,7 +1189,6 @@ function t4Reset(){ t4File=null; t4PdfBytes=null; t4PageCount=0; t4Selected.clea
 .t5-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
 .t5-toggle input:checked::after{left:23px}
 .t5-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
-.t5-btn3d:active{transform:translateY(3px)}
 .t5-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
 .t5-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
 .t5-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
@@ -1207,13 +1203,13 @@ function t4Reset(){ t4File=null; t4PdfBytes=null; t4PageCount=0; t4Selected.clea
 </style>
 
 <div class="tool active" id="tool-5"><div class="t5-card">
-<div class="t5-title">🗜️ PDF Compressor Pro V3 - With Preview</div>
-<div class="t5-sub">Premium • Reduce Size Up To 90% • Keep Quality • No API</div>
+<div class="t5-title">🗜️ PDF Compressor Pro V2 - REAL Compress</div>
+<div class="t5-sub">Real • Image Re-Compress • Reduce Up To 90% • No API</div>
 
 <label class="t5-label">📄 1. SELECT PDF TO COMPRESS</label>
 <div class="t5-drop" id="t5Drop" onclick="document.getElementById('t5File').click()">
 <b style="font-size:15px;color:#22d3ee">+ Click or Drag PDF Here</b><br>
-<small style="color:#94a3b8">PDF Only - Any Size - Up To 100MB</small><br>
+<small style="color:#94a3b8">PDF Only - Best for Image / Scan PDFs</small><br>
 <small style="color:#22d3ee" id="t5FileName">No PDF Selected</small>
 </div>
 <input type="file" id="t5File" accept=".pdf,application/pdf" hidden>
@@ -1222,7 +1218,7 @@ function t4Reset(){ t4File=null; t4PdfBytes=null; t4PageCount=0; t4Selected.clea
 <div style="font-size:22px">📄</div><b id="t5InfoName" style="font-size:13px"></b><br>
 <small id="t5InfoMeta" style="color:#94a3b8"></small><br>
 <small id="t5InfoPages" style="color:#22d3ee;font-weight:700"></small><br>
-<small id="t5InfoBefore" style="color:#f59e0b;font-weight:700"></small>
+<small style="color:#f59e0b">⚠️ Note: Text PDFs already small hote hai, Image / Scan PDFs me sabse zyada fark dikhega</small>
 </div>
 
 <label class="t5-label">📑 2. SELECT PAGES - Tap to Remove / Keep</label>
@@ -1235,12 +1231,12 @@ function t4Reset(){ t4File=null; t4PdfBytes=null; t4PageCount=0; t4Selected.clea
 <div id="t5PagesHint" style="text-align:center;font-size:11px;color:#94a3b8;margin-top:6px">Select PDF first to see pages here</div>
 <div id="t5PagesGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px"></div>
 
-<label class="t5-label">🗜️ 3. HOW MUCH TO COMPRESS?</label>
+<label class="t5-label">🗜️ 3. HOW MUCH TO COMPRESS? - REAL</label>
 <div class="t5-mode" id="t5Modes">
-<button data-mode="extreme" onclick="t5SetMode('extreme',this)">🔥 Extreme - 90% Small</button>
-<button class="active" data-mode="balanced" onclick="t5SetMode('balanced',this)">⚖️ Balanced - Best</button>
-<button data-mode="light" onclick="t5SetMode('light',this)">✨ Light - High Quality</button>
-<button data-mode="target" onclick="t5SetMode('target',this)">🎯 Target Size</button>
+<button data-mode="extreme" onclick="t5SetMode('extreme',this)">🔥 Extreme - 90% Small<br><small>Quality 35% • Size 1.0x</small></button>
+<button class="active" data-mode="balanced" onclick="t5SetMode('balanced',this)">⚖️ Balanced - Best<br><small>Quality 65% • Size 1.5x</small></button>
+<button data-mode="light" onclick="t5SetMode('light',this)">✨ Light - High Quality<br><small>Quality 85% • Size 2x</small></button>
+<button data-mode="target" onclick="t5SetMode('target',this)">🎯 Target Size<br><small>Auto Try - Under 1MB</small></button>
 </div>
 
 <div id="t5TargetBox" style="display:none">
@@ -1254,8 +1250,8 @@ function t4Reset(){ t4File=null; t4PdfBytes=null; t4PageCount=0; t4Selected.clea
 </select>
 </div>
 
-<label class="t5-label">🎚️ 4. QUALITY SLIDER - Move To Adjust</label>
-<input type="range" id="t5Quality" class="t5-range" min="10" max="95" value="65" oninput="document.getElementById('t5QualityVal').innerText=this.value+'% • '+(this.value>70?'High Quality':this.value>40?'Good Quality':'Small Size')">
+<label class="t5-label">🎚️ 4. QUALITY SLIDER - Lower = Smaller Size</label>
+<input type="range" id="t5Quality" class="t5-range" min="10" max="95" value="65" oninput="document.getElementById('t5QualityVal').innerText=this.value+'% • '+(this.value>70?'High Quality - Bigger Size':this.value>40?'Good Quality - Medium Size':'Small Size - Low Quality')">
 <div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8"><span>10% = Very Small</span><span id="t5QualityVal" style="color:#22d3ee;font-weight:800">65% • Good Quality</span><span>95% = Best</span></div>
 
 <label class="t5-label">✏️ 5. COMPRESSED PDF NAME</label>
@@ -1267,7 +1263,6 @@ function t4Reset(){ t4File=null; t4PdfBytes=null; t4PageCount=0; t4Selected.clea
 </div>
 
 <div class="t5-toggle"><b>🧹 Remove Hidden / Extra Data?</b><input type="checkbox" id="t5Clean" checked></div>
-<div class="t5-toggle"><b>📄 Remove Blank Pages?</b><input type="checkbox" id="t5RemoveBlank"></div>
 <div class="t5-toggle"><b>🔢 Keep Page Numbers?</b><input type="checkbox" id="t5PageNo" checked></div>
 <div class="t5-toggle"><b>💧 Add Watermark After Compress?</b><input type="checkbox" id="t5WmOn" onchange="document.getElementById('t5WmBox').style.display=this.checked?'block':'none'"></div>
 <div id="t5WmBox" style="display:none"><input type="text" id="t5WmText" class="t5-input" value="Orbittroniz.com" style="margin-top:8px"></div>
@@ -1277,19 +1272,19 @@ function t4Reset(){ t4File=null; t4PdfBytes=null; t4PageCount=0; t4Selected.clea
 <b id="t5CompareAfter" style="font-size:13px;color:#22c55e">After: Not Compressed Yet</b><br>
 <small id="t5Saved" style="color:#f59e0b;font-weight:700">Saved: 0%</small>
 <div style="height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:8px"><div id="t5SavedBar" style="height:100%;width:0%;background:linear-gradient(90deg,#22c55e,#22d3ee)"></div></div>
+<small id="t5RealNote" style="color:#94a3b8">Real Method: Page ko Image bana ke fir se JPEG Compress kiya jayega</small>
 </div>
 
 <div class="t5-prog" id="t5Prog"><div id="t5Fill"></div></div>
 <div id="t5Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
 
 <button class="t5-btn-preview" onclick="t5OpenPreview()">👀 PREVIEW - Before / After Quality Check</button>
-<button class="t5-btn3d" id="t5CompressBtn" onclick="t5Compress()">🗜️ COMPRESS PDF - START</button>
+<button class="t5-btn3d" id="t5CompressBtn" onclick="t5Compress()">🗜️ COMPRESS PDF - REAL START</button>
 <button class="t5-btn-share" id="t5ShareBtn" onclick="t5Share()">📤 SHARE COMPRESSED PDF</button>
 <button class="t5-btn2" onclick="t5ResetAll()">🗑️ Clear / New PDF</button>
 <div id="t5Out"></div>
-<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - PDF never goes to server • Preview Available</p>
+<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private • Real Image Re-Compress • Preview Available</p>
 </div></div>
-<!-- ================= TOOL 5 - END ================= -->
 
 <div class="t5-modal" id="t5Modal">
 <div id="t5ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Preview</div>
@@ -1308,21 +1303,18 @@ function t4Reset(){ t4File=null; t4PdfBytes=null; t4PageCount=0; t4Selected.clea
 </div>
 
 <script>
-// ===== TOOL 5 JS - FIXED - AUTO LOAD PDF-LIB + PDF.JS - NO ERROR =====
-let t5File=null, t5PdfDoc=null, t5PageCount=0, t5Mode='balanced', t5Removed=new Set(), t5PreviewIdx=0, t5ShowAfter=false, t5PdfBytes=null, t5LastBlob=null, t5LastName='Compressed - Orbittroniz.pdf', t5CompressedBlob=null;
+// ===== TOOL 5 V2 - REAL COMPRESS - RENDER PAGE TO JPEG =====
+let t5File=null, t5PageCount=0, t5Mode='balanced', t5Removed=new Set(), t5PreviewIdx=0, t5ShowAfter=false, t5PdfBytes=null, t5LastBlob=null, t5LastName='Compressed - Orbittroniz.pdf', t5CompressedBlob=null;
 let t5LibLoading=null, t5JsLoading=null;
-
-// --- AUTO LOADER 1: PDF-LIB (for Compress) ---
 function t5EnsurePdfLib(){
   if(window['PDFLib']) return Promise.resolve(true);
   if(t5LibLoading) return t5LibLoading;
   t5LibLoading=new Promise((res,rej)=>{
-    let urls=['https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js','https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js','https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js'];
+    let urls=['https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js','https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js'];
     let i=0; function next(){ if(i>=urls.length){rej(new Error("pdf-lib blocked"));return;} let s=document.createElement('script'); s.src=urls[i]; s.onload=()=>{ if(window['PDFLib']) res(true); else {i++;next();} }; s.onerror=()=>{i++;next();}; document.head.appendChild(s); } next();
   });
   return t5LibLoading;
 }
-// --- AUTO LOADER 2: PDF.JS (for Preview) ---
 function t5EnsurePdfJs(){
   if(window['pdfjsLib']){ try{pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';}catch(e){} return Promise.resolve(true); }
   if(t5JsLoading) return t5JsLoading;
@@ -1333,64 +1325,58 @@ function t5EnsurePdfJs(){
   return t5JsLoading;
 }
 t5EnsurePdfLib().catch(()=>{}); t5EnsurePdfJs().catch(()=>{});
-
 let t5DropEl=document.getElementById('t5Drop');
 if(t5DropEl){t5DropEl.addEventListener('dragover',e=>{e.preventDefault();t5DropEl.classList.add('dragover')});t5DropEl.addEventListener('dragleave',()=>t5DropEl.classList.remove('dragover'));t5DropEl.addEventListener('drop',e=>{e.preventDefault();t5DropEl.classList.remove('dragover');let f=[...e.dataTransfer.files][0];if(f)t5LoadFile(f);});}
 document.getElementById('t5File').onchange=(e)=>{if(e.target.files[0])t5LoadFile(e.target.files[0]);e.target.value="";};
-function t5SetMode(m,btn){t5Mode=m;document.querySelectorAll('#t5Modes button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');document.getElementById('t5TargetBox').style.display=m==='target'?'block':'none';if(m==='extreme'){document.getElementById('t5Quality').value=30;document.getElementById('t5QualityVal').innerText="30% • Small Size";}else if(m==='balanced'){document.getElementById('t5Quality').value=65;document.getElementById('t5QualityVal').innerText="65% • Good Quality";}else if(m==='light'){document.getElementById('t5Quality').value=85;document.getElementById('t5QualityVal').innerText="85% • High Quality";}}
+function t5SetMode(m,btn){t5Mode=m;document.querySelectorAll('#t5Modes button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');document.getElementById('t5TargetBox').style.display=m==='target'?'block':'none';if(m==='extreme'){document.getElementById('t5Quality').value=35;document.getElementById('t5QualityVal').innerText="35% • Small Size";}else if(m==='balanced'){document.getElementById('t5Quality').value=65;document.getElementById('t5QualityVal').innerText="65% • Good Quality";}else if(m==='light'){document.getElementById('t5Quality').value=85;document.getElementById('t5QualityVal').innerText="85% • High Quality";}}
 function t5QuickPrefix(n){document.getElementById('t5Prefix').value=n+" - "+new Date().toLocaleDateString('en-IN');}
 async function t5LoadFile(f){
   if(!f.name.toLowerCase().endsWith('.pdf')){alert("Please select only PDF!");return;}
-  document.getElementById('t5Status').innerText="Loading PDF Engine, please wait... (First time 2 sec)";
+  document.getElementById('t5Status').innerText="Loading PDF Engine...";
   document.getElementById('t5FileName').innerText=f.name+" - Loading...";
-  try{ await t5EnsurePdfLib(); await t5EnsurePdfJs(); }catch(e){ alert("Internet slow ya AdBlock ON hai. AdBlock OFF karo aur Refresh karo.\n"+e.message); document.getElementById('t5Status').innerText="❌ Engine failed - Refresh, AdBlock OFF"; return; }
+  try{ await t5EnsurePdfLib(); await t5EnsurePdfJs(); }catch(e){ alert("AdBlock OFF karo aur Refresh karo. "+e.message); return; }
   t5File=f; t5Removed.clear(); t5PreviewIdx=0; t5ShowAfter=false; t5CompressedBlob=null;
   document.getElementById('t5Out').innerHTML=""; document.getElementById('t5ShareBtn').style.display='none';
   document.getElementById('t5FileName').innerText=f.name+" ✅";
-  document.getElementById('t5Status').innerText="Reading PDF...";
   try{
     let buf=await f.arrayBuffer(); t5PdfBytes=buf.slice(0);
-    t5PdfDoc=await PDFLib.PDFDocument.load(buf,{ignoreEncryption:true});
-    t5PageCount=t5PdfDoc.getPageCount();
+    let pdf=await pdfjsLib.getDocument({data:buf.slice(0)}).promise;
+    t5PageCount=pdf.numPages;
     document.getElementById('t5Info').style.display='block';
     document.getElementById('t5InfoName').innerText=f.name;
-    document.getElementById('t5InfoMeta').innerText="Size: "+(f.size/1024).toFixed(0)+" KB • Type: PDF";
+    document.getElementById('t5InfoMeta').innerText="Size: "+(f.size/1024).toFixed(0)+" KB • Pages: "+t5PageCount;
     document.getElementById('t5InfoPages').innerText="Total Pages: "+t5PageCount+" 📄";
-    document.getElementById('t5InfoBefore').innerText="Original Size: "+(f.size/1024).toFixed(0)+" KB - Will become smaller after compress";
     document.getElementById('t5CompareBefore').innerText="Before: "+(f.size/1024).toFixed(0)+" KB";
-    document.getElementById('t5CompareAfter').innerText="After: Not Compressed Yet - Press Compress";
-    document.getElementById('t5Saved').innerText="Saved: 0% - Compress to see magic ✨";
+    document.getElementById('t5CompareAfter').innerText="After: Not Compressed Yet";
+    document.getElementById('t5Saved').innerText="Saved: 0% - Compress to see real saving ✨";
     document.getElementById('t5SavedBar').style.width="0%";
-    document.getElementById('t5Status').innerText="✅ Ready! "+t5PageCount+" pages found. Select compress level and press Compress.";
+    document.getElementById('t5Status').innerText="✅ Ready! "+t5PageCount+" pages. Balanced select hai, Compress dabao.";
     t5RenderPages();
-  }catch(e){alert("PDF is broken or password protected. Try another PDF.");document.getElementById('t5Status').innerText="❌ Failed";}
+  }catch(e){alert("PDF broken or password protected.");}
 }
 function t5RenderPages(){
   let grid=document.getElementById('t5PagesGrid');
-  if(!t5PageCount){grid.innerHTML="";document.getElementById('t5PagesHint').innerText="Select PDF first to see pages here";return;}
-  document.getElementById('t5PagesHint').innerText="Tap page to Remove / Keep • Removed pages will NOT be in compressed PDF";
+  if(!t5PageCount){grid.innerHTML="";document.getElementById('t5PagesHint').innerText="Select PDF first";return;}
+  document.getElementById('t5PagesHint').innerText="Tap page to Remove / Keep";
   grid.innerHTML=Array.from({length:t5PageCount},(_,i)=>{
     let rem=t5Removed.has(i);
-    return `<div onclick="t5TogglePage(${i})" style="background:${rem?'#1a0a0a':'#060a18'};border:1px solid ${rem?'#ef4444':'#2a3a6a'};border-radius:12px;padding:10px;text-align:center;cursor:pointer;opacity:${rem?'0.5':1}"><div style="font-size:18px">📄</div><b style="font-size:11px">Page ${i+1}</b><br><small style="font-size:9px;color:#94a3b8">${rem?'Removed ❌':'Keep ✅'}</small><br><small style="font-size:9px;color:#22d3ee" onclick="event.stopPropagation();t5OpenPreview(${i})">👀 Preview</small></div>`;
+    return `<div onclick="t5TogglePage(${i})" style="background:${rem?'#1a0a0a':'#060a18'};border:1px solid ${rem?'#ef4444':'#2a3a6a'};border-radius:12px;padding:10px;text-align:center;cursor:pointer;opacity:${rem?'0.5':1}"><div style="font-size:18px">📄</div><b style="font-size:11px">Page ${i+1}</b><br><small style="font-size:9px;color:#94a3b8">${rem?'Removed ❌':'Keep ✅'}</small></div>`;
   }).join('');
 }
 function t5TogglePage(i){ if(t5Removed.has(i)) t5Removed.delete(i); else t5Removed.add(i); t5RenderPages(); }
-function t5SelectAllPages(){ t5Removed.clear(); t5RenderPages(); document.getElementById('t5Status').innerText="All pages will be kept ✅"; }
-function t5RemoveLastPage(){ if(!t5PageCount) return alert("First select PDF"); t5Removed.add(t5PageCount-1); t5RenderPages(); document.getElementById('t5Status').innerText="Last page removed 🗑️"; }
-function t5KeepFirst5(){ t5Removed.clear(); for(let i=5;i<t5PageCount;i++) t5Removed.add(i); t5RenderPages(); document.getElementById('t5Status').innerText="Only first 5 pages will be kept ⭐"; }
+function t5SelectAllPages(){ t5Removed.clear(); t5RenderPages(); }
+function t5RemoveLastPage(){ if(!t5PageCount) return alert("First select PDF"); t5Removed.add(t5PageCount-1); t5RenderPages(); }
+function t5KeepFirst5(){ t5Removed.clear(); for(let i=5;i<t5PageCount;i++) t5Removed.add(i); t5RenderPages(); }
 async function t5OpenPreview(startIdx){
   if(!t5File) return alert("First select a PDF!");
-  try{ await t5EnsurePdfJs(); }catch(e){ alert("Engine loading... 2 sec wait karke fir Preview dabao"); return; }
-  t5PreviewIdx = (typeof startIdx==='number') ? startIdx : 0;
-  t5ShowAfter=false;
-  await t5ShowPreview();
+  try{ await t5EnsurePdfJs(); }catch(e){ alert("Engine loading, 2 sec wait karo"); return; }
+  t5PreviewIdx = (typeof startIdx==='number') ? startIdx : 0; t5ShowAfter=false; await t5ShowPreview();
   document.getElementById('t5Modal').style.display='flex';
 }
 async function t5ShowPreview(){
-  if(t5PreviewIdx<0) t5PreviewIdx=t5PageCount-1;
-  if(t5PreviewIdx>=t5PageCount) t5PreviewIdx=0;
-  document.getElementById('t5ModalTitle').innerText=(t5ShowAfter?"AFTER Compress - ":"BEFORE Compress - ")+"Page "+(t5PreviewIdx+1)+" / "+t5PageCount+" • "+t5File.name;
-  document.getElementById('t5ModalCap').innerText=(t5Removed.has(t5PreviewIdx)?"❌ Removed - Will NOT be in compressed PDF • ":"✅ Will be compressed • ")+(t5ShowAfter?"Showing compressed version (if compressed)":"Showing original - Press 'Show After' after compress to compare quality");
+  if(t5PreviewIdx<0) t5PreviewIdx=t5PageCount-1; if(t5PreviewIdx>=t5PageCount) t5PreviewIdx=0;
+  document.getElementById('t5ModalTitle').innerText=(t5ShowAfter?"AFTER Compress - ":"BEFORE Compress - ")+"Page "+(t5PreviewIdx+1)+" / "+t5PageCount;
+  document.getElementById('t5ModalCap').innerText=(t5Removed.has(t5PreviewIdx)?"❌ Removed • ":"✅ Will compress • ")+(t5ShowAfter?"Compressed version":"Original");
   document.getElementById('t5BeforeAfterBtn').innerText=t5ShowAfter?"🔄 Show Before (Original)":"🔄 Show After Compress";
   try{
     let bytesToShow = (t5ShowAfter && t5CompressedBlob) ? await t5CompressedBlob.arrayBuffer() : t5PdfBytes.slice(0);
@@ -1398,50 +1384,77 @@ async function t5ShowPreview(){
     let pageNum=Math.min(t5PreviewIdx+1, pdf.numPages);
     let page=await pdf.getPage(pageNum);
     let canvas=document.getElementById('t5PreviewCanvas');
-    let vp=page.getViewport({scale:1.5});
-    canvas.width=vp.width; canvas.height=vp.height;
+    let vp=page.getViewport({scale:1.5}); canvas.width=vp.width; canvas.height=vp.height;
     await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
-  }catch(e){ let c=document.getElementById('t5PreviewCanvas'); let ctx=c.getContext('2d'); c.width=400; c.height=550; ctx.fillStyle='#fff'; ctx.fillRect(0,0,400,550); ctx.fillStyle='#111'; ctx.font='bold 20px Arial'; ctx.textAlign='center'; ctx.fillText("Page "+(t5PreviewIdx+1),200,260); }
+  }catch(e){}
 }
-async function t5ToggleBeforeAfter(){ if(!t5CompressedBlob && t5ShowAfter===false){ alert("First compress the PDF, then you can compare Before / After"); return; } t5ShowAfter=!t5ShowAfter; await t5ShowPreview(); }
+async function t5ToggleBeforeAfter(){ if(!t5CompressedBlob){ alert("First compress, then compare"); return; } t5ShowAfter=!t5ShowAfter; await t5ShowPreview(); }
 async function t5NextPage(){t5PreviewIdx++;await t5ShowPreview();}
 async function t5PrevPage(){t5PreviewIdx--;await t5ShowPreview();}
 function t5RemovePagePreview(){t5TogglePage(t5PreviewIdx);t5ShowPreview();t5RenderPages();}
 function t5ClosePreview(){document.getElementById('t5Modal').style.display='none';}
-document.addEventListener('keydown',e=>{let m=document.getElementById('t5Modal');if(m&&m.style.display==='flex'){if(e.key==='ArrowRight')t5NextPage();if(e.key==='ArrowLeft')t5PrevPage();if(e.key==='Escape')t5ClosePreview();}});
+
+// ===== REAL COMPRESS - PAGE -> CANVAS -> JPEG -> NEW PDF =====
 async function t5Compress(){
-  if(!t5File||!t5PdfDoc) return alert("First select a PDF!");
-  try{ await t5EnsurePdfLib(); }catch(e){ alert("Engine loading... 2 sec wait karke fir Compress dabao"); return; }
+  if(!t5File) return alert("First select a PDF!");
+  try{ await t5EnsurePdfLib(); await t5EnsurePdfJs(); }catch(e){ alert("Engine loading, 2 sec wait karo"); return; }
   let validPages=[]; for(let i=0;i<t5PageCount;i++){ if(!t5Removed.has(i)) validPages.push(i); }
-  if(!validPages.length) return alert("All pages removed! Keep at least 1 page.");
+  if(!validPages.length) return alert("All pages removed!");
   let prefix=(document.getElementById('t5Prefix').value.trim()||"Compressed - Orbittroniz").replace(/[\\/:*?"<>|]/g,'');
   let quality=parseInt(document.getElementById('t5Quality').value)||65;
   let targetKB = t5Mode==='target' ? parseInt(document.getElementById('t5Target').value)||1024 : 0;
-  let wmOn=document.getElementById('t5WmOn').checked, wmText=document.getElementById('t5WmText').value||"Orbittroniz.com";
-  let pageNo=document.getElementById('t5PageNo').checked;
-  document.getElementById('t5Status').innerText="Compressing... Please wait, this is real compression";
+  // Target mode me auto quality adjust: agar target chhota hai to quality aur scale kam karo
+  let scale = t5Mode==='extreme' ? 1.0 : t5Mode==='light' ? 2.0 : 1.5;
+  let jpegQ = quality/100;
+  if(t5Mode==='target' && targetKB<=100){ jpegQ=0.30; scale=0.9; }
+  else if(t5Mode==='target' && targetKB<=500){ jpegQ=0.50; scale=1.1; }
+  else if(t5Mode==='target' && targetKB<=1024){ jpegQ=0.65; scale=1.4; }
+
+  document.getElementById('t5Status').innerText="Real Compressing... Page ko Image bana ke chhota kar raha hu, thoda time lagega...";
   document.getElementById('t5Prog').style.display='block'; document.getElementById('t5Fill').style.width="0%";
   try{
+    let srcPdf=await pdfjsLib.getDocument({data:t5PdfBytes.slice(0)}).promise;
     let newDoc=await PDFLib.PDFDocument.create();
-    let pages=await newDoc.copyPages(t5PdfDoc, validPages);
-    pages.forEach(p=>newDoc.addPage(p));
+    for(let si=0; si<validPages.length; si++){
+      let pIdx=validPages[si];
+      let page=await srcPdf.getPage(pIdx+1);
+      let vp=page.getViewport({scale:scale});
+      let canvas=document.createElement('canvas'); canvas.width=vp.width; canvas.height=vp.height;
+      let ctx=canvas.getContext('2d'); ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,canvas.width,canvas.height);
+      await page.render({canvasContext:ctx,viewport:vp}).promise;
+      // Watermark if ON
+      let wmOn=document.getElementById('t5WmOn').checked;
+      if(wmOn){ ctx.font='bold '+Math.floor(canvas.width/25)+'px Arial'; ctx.fillStyle='rgba(150,150,150,0.5)'; ctx.textAlign='center'; ctx.fillText(document.getElementById('t5WmText').value||"Orbittroniz.com", canvas.width/2, canvas.height-12); }
+      // Canvas -> JPEG Blob -> Bytes (REAL SIZE REDUCTION YAHI HOTA HAI)
+      let blob=await new Promise(res=>canvas.toBlob(res,'image/jpeg',jpegQ));
+      let arrBuf=await blob.arrayBuffer();
+      let jpg=await newDoc.embedJpg(new Uint8Array(arrBuf));
+      let newPage=newDoc.addPage([vp.width, vp.height]);
+      newPage.drawImage(jpg,{x:0,y:0,width:vp.width,height:vp.height});
+      if(document.getElementById('t5PageNo').checked){
+        newPage.drawText((si+1)+" / "+validPages.length,{x:vp.width-70,y:12,size:9,color:PDFLib.rgb(0.6,0.6,0.6)});
+      }
+      document.getElementById('t5Fill').style.width=Math.round(((si+1)/validPages.length)*100)+"%";
+      document.getElementById('t5Status').innerText="Compressing Page "+(si+1)+" / "+validPages.length+" ...";
+      await new Promise(r=>setTimeout(r,10));
+    }
     newDoc.setTitle(prefix); newDoc.setAuthor("Orbittroniz.com");
-    let bytes=await newDoc.save({useObjectStreams:true, addDefaultPage:false});
+    let bytes=await newDoc.save({useObjectStreams:true});
     let blob=new Blob([bytes],{type:'application/pdf'});
     t5CompressedBlob=blob; t5LastBlob=blob; t5LastName=prefix+".pdf";
     let beforeKB=t5File.size/1024, afterKB=blob.size/1024;
-    let savedPct = beforeKB>0 ? Math.max(0, Math.round(((beforeKB-afterKB)/beforeKB)*100)) : 0;
+    let savedPct = beforeKB>0 ? Math.round(((beforeKB-afterKB)/beforeKB)*100) : 0;
+    if(savedPct<0) savedPct=0;
     document.getElementById('t5CompareBefore').innerText="Before: "+beforeKB.toFixed(0)+" KB";
-    document.getElementById('t5CompareAfter').innerText="After: "+afterKB.toFixed(0)+" KB ✅";
+    document.getElementById('t5CompareAfter').innerText="After: "+afterKB.toFixed(0)+" KB ✅ REAL";
     document.getElementById('t5Saved').innerText="Saved: "+savedPct+"% • You saved "+Math.max(0,beforeKB-afterKB).toFixed(0)+" KB 🎉";
-    document.getElementById('t5SavedBar').style.width=savedPct+"%";
+    document.getElementById('t5SavedBar').style.width=Math.max(0,Math.min(100,savedPct))+"%";
     document.getElementById('t5ShareBtn').style.display='block';
     let link=document.createElement('a'); link.href=URL.createObjectURL(blob); link.download=t5LastName; document.body.appendChild(link); link.click(); link.remove();
-    document.getElementById('t5Status').innerText="✅ Done! "+t5LastName+" - Saved "+savedPct+"% • Now Preview Before / After";
-    document.getElementById('t5Out').innerHTML=`<div style="background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;text-align:center;margin-top:8px">✅ Compressed Successfully<br><small>Before ${beforeKB.toFixed(0)} KB → After ${afterKB.toFixed(0)} KB • Saved ${savedPct}%</small><br><button onclick="t5OpenPreview()" style="margin-top:8px;background:#f59e0b;color:#fff;border:none;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer">👀 Compare Before / After</button></div>`;
-    if(targetKB && afterKB>targetKB){ document.getElementById('t5Status').innerText+=" • Note: Still above target "+targetKB+" KB, try Extreme mode"; }
+    document.getElementById('t5Status').innerText="✅ REAL Done! "+t5LastName+" - Saved "+savedPct+"% • Before "+beforeKB.toFixed(0)+" KB → After "+afterKB.toFixed(0)+" KB";
+    document.getElementById('t5Out').innerHTML=`<div style="background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;text-align:center;margin-top:8px">✅ Real Compressed<br><small>Before ${beforeKB.toFixed(0)} KB → After ${afterKB.toFixed(0)} KB • Saved ${savedPct}%</small><br><button onclick="t5OpenPreview()" style="margin-top:8px;background:#f59e0b;color:#fff;border:none;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer">👀 Compare Before / After</button></div>`;
+    if(targetKB && afterKB>targetKB){ document.getElementById('t5Status').innerText+=" • Target se bada hai, Extreme try karo ya Quality slider 30% pe karo"; }
     setTimeout(()=>{document.getElementById('t5Prog').style.display='none';},1500);
-    document.getElementById('t5Fill').style.width="100%";
   }catch(e){alert("Compress Error: "+e.message);document.getElementById('t5Status').innerText="❌ Error";document.getElementById('t5Prog').style.display='none';}
 }
 async function t5Share(){
@@ -1449,11 +1462,11 @@ async function t5Share(){
   try{ let file=new File([t5LastBlob],t5LastName,{type:'application/pdf'}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:t5LastName}); }else{ let a=document.createElement('a'); a.href="https://wa.me/?text="+encodeURIComponent("Check my compressed PDF - Orbittroniz.com"); a.target="_blank"; a.click(); } }catch(e){ alert("Share cancelled"); }
 }
 function t5ResetAll(){
-  t5File=null; t5PdfDoc=null; t5PageCount=0; t5Removed.clear(); t5CompressedBlob=null; t5LastBlob=null;
-  document.getElementById('t5Out').innerHTML=""; document.getElementById('t5Info').style.display='none'; document.getElementById('t5FileName').innerText="No PDF Selected"; document.getElementById('t5Status').innerText=""; document.getElementById('t5ShareBtn').style.display='none'; document.getElementById('t5PagesGrid').innerHTML=""; document.getElementById('t5PagesHint').innerText="Select PDF first to see pages here"; document.getElementById('t5CompareAfter').innerText="After: Not Compressed Yet"; document.getElementById('t5Saved').innerText="Saved: 0%"; document.getElementById('t5SavedBar').style.width="0%";
+  t5File=null; t5PageCount=0; t5Removed.clear(); t5CompressedBlob=null; t5LastBlob=null;
+  document.getElementById('t5Out').innerHTML=""; document.getElementById('t5Info').style.display='none'; document.getElementById('t5FileName').innerText="No PDF Selected"; document.getElementById('t5Status').innerText=""; document.getElementById('t5ShareBtn').style.display='none'; document.getElementById('t5PagesGrid').innerHTML=""; document.getElementById('t5PagesHint').innerText="Select PDF first"; document.getElementById('t5CompareAfter').innerText="After: Not Compressed Yet"; document.getElementById('t5Saved').innerText="Saved: 0%"; document.getElementById('t5SavedBar').style.width="0%";
 }
 </script>
-<!-- ================= TOOL 5 - END ================= -->
+<!-- ================= TOOL 5 - REAL COMPRESSOR - V2 - END ================= -->
 
 <!-- TOOL 6 -->
 <div class="tool" id="tool-6"><div class="panel"><h3>💧 Tool 6 - PDF Watermark</h3>
