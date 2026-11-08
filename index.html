@@ -872,22 +872,19 @@ t3Render();
 </script>
 <!-- ================= TOOL 3 - SAME AS SCREENSHOT - END ================= -->
 <!-- TOOL 4 -->
-<!-- ================= TOOL 4 - CORRECT - PDF TO IMAGE - SAME LOOK - START ================= -->
+<!-- ================= TOOL 4 - FIXED - PDF TO IMAGE - AUTO LOAD PDF.JS - START ================= -->
 <style>
 .t4-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
 .t4-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .t4-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
 .t4-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
 .t4-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
-.t4-input:focus{border-color:#22d3ee}
 .t4-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
-.t4-drop.dragover{background:rgba(34,211,238,.25);transform:scale(1.02)}
 .t4-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .t4-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
-.t4-pill:active{transform:scale(.96)}
 .t4-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .t4-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:13px 8px;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer}
-.t4-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent;box-shadow:0 8px 20px rgba(124,58,237,.4)}
+.t4-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent}
 .t4-chiprow{display:flex;gap:6px;margin-top:8px}
 .t4-chiprow button{flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px 4px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
 .t4-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
@@ -897,7 +894,6 @@ t3Render();
 .t4-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
 .t4-toggle input:checked::after{left:23px}
 .t4-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
-.t4-btn3d:active{transform:translateY(3px)}
 .t4-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
 .t4-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
 .t4-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
@@ -993,7 +989,6 @@ t3Render();
 <div id="t4OutEmpty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">No images yet - Convert to see here</div>
 <p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - PDF never goes to server • Preview Available</p>
 </div></div>
-<!-- ================= TOOL 4 - CORRECT - END ================= -->
 
 <div class="t4-modal" id="t4Modal">
 <div id="t4ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Preview</div>
@@ -1010,8 +1005,32 @@ t3Render();
 </div>
 
 <script>
-// ===== TOOL 4 CORRECT JS - PDF TO IMAGE - NO BUGS =====
+// ===== TOOL 4 FIXED JS - AUTO LOAD PDF.JS - NO ERROR ANYMORE =====
 let t4File=null, t4PdfBytes=null, t4PageCount=0, t4Selected=new Set(), t4Format='jpeg', t4QualityScale=2, t4PreviewIdx=0, t4Results=[];
+let t4PdfJsReady=false, t4PdfJsLoading=null;
+
+// --- AUTO LOADER: Agar pdf.js head me nahi hai, to khud load karega ---
+function t4EnsurePdfJs(){
+  if(window['pdfjsLib']){ t4PdfJsReady=true; try{pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';}catch(e){} return Promise.resolve(true); }
+  if(t4PdfJsLoading) return t4PdfJsLoading;
+  t4PdfJsLoading=new Promise((resolve,reject)=>{
+    let urls=[
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
+      'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js',
+      'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.min.js'
+    ];
+    let tryIdx=0;
+    function tryNext(){
+      if(tryIdx>=urls.length){ reject(new Error("pdf.js CDN blocked. Check internet / AdBlock OFF karo")); return; }
+      let s=document.createElement('script'); s.src=urls[tryIdx]; s.onload=()=>{ try{ if(window['pdfjsLib']){ pdfjsLib.GlobalWorkerOptions.workerSrc=urls[tryIdx].replace('pdf.min.js','pdf.worker.min.js'); t4PdfJsReady=true; resolve(true); }else{ tryIdx++; tryNext(); } }catch(e){ tryIdx++; tryNext(); } }; s.onerror=()=>{ tryIdx++; tryNext(); }; document.head.appendChild(s);
+    }
+    tryNext();
+  });
+  return t4PdfJsLoading;
+}
+// Page load hote hi background me pdf.js load kar lo, taaki click karte hi ready ho
+t4EnsurePdfJs().catch(()=>{});
+
 let t4DropEl=document.getElementById('t4Drop');
 if(t4DropEl){t4DropEl.addEventListener('dragover',e=>{e.preventDefault();t4DropEl.classList.add('dragover')});t4DropEl.addEventListener('dragleave',()=>t4DropEl.classList.remove('dragover'));t4DropEl.addEventListener('drop',e=>{e.preventDefault();t4DropEl.classList.remove('dragover');let f=[...e.dataTransfer.files][0];if(f)t4LoadFile(f);});}
 document.getElementById('t4File').onchange=(e)=>{if(e.target.files[0])t4LoadFile(e.target.files[0]);e.target.value="";};
@@ -1027,12 +1046,20 @@ function t4UpdateEst(){
 async function t4LoadFile(f){
   if(!f.name.toLowerCase().endsWith('.pdf')){alert("Please select only PDF!");return;}
   if(f.size>50*1024*1024){if(!confirm("PDF is very large (50MB+), it will take time. Continue?"))return;}
+  document.getElementById('t4Status').innerText="Loading PDF Engine, please wait... (First time 2 sec)";
+  document.getElementById('t4FileName').innerText=f.name+" - Loading...";
+  try{
+    await t4EnsurePdfJs(); // <-- Yahi FIX hai, pehle pdf.js load karega, fir PDF padhega
+  }catch(e){
+    alert("Internet slow hai ya AdBlock ON hai. AdBlock OFF karo aur page refresh karo.\nError: "+e.message);
+    document.getElementById('t4Status').innerText="❌ PDF Engine failed - Refresh page, AdBlock OFF karo";
+    return;
+  }
   t4File=f; t4Results=[]; t4Selected.clear(); t4PreviewIdx=0;
   document.getElementById('t4Out').innerHTML=""; document.getElementById('t4OutEmpty').style.display='block'; document.getElementById('t4AllBtn').style.display='none'; document.getElementById('t4ShareBtn').style.display='none';
   document.getElementById('t4FileName').innerText=f.name+" ✅"; document.getElementById('t4Status').innerText="Reading PDF...";
   try{
     let buf=await f.arrayBuffer(); t4PdfBytes=buf.slice(0);
-    if(!window['pdfjsLib']) throw new Error("pdf.js not loaded - check head script");
     let pdf=await pdfjsLib.getDocument({data:buf.slice(0)}).promise;
     t4PageCount=pdf.numPages;
     for(let i=0;i<t4PageCount;i++) t4Selected.add(i);
@@ -1042,7 +1069,7 @@ async function t4LoadFile(f){
     document.getElementById('t4InfoPages').innerText="Total Pages: "+t4PageCount+" 📄 • All Selected ✅";
     document.getElementById('t4Status').innerText="✅ Ready! "+t4PageCount+" pages found. Preview karke convert karo.";
     t4RenderPages(); t4UpdateEst();
-  }catch(e){alert("PDF failed: "+e.message);document.getElementById('t4Status').innerText="❌ Failed";}
+  }catch(e){alert("PDF failed: "+e.message+"\nTry another PDF, this one may be password protected");document.getElementById('t4Status').innerText="❌ Failed - Try another PDF";}
 }
 function t4RenderPages(){
   let grid=document.getElementById('t4PagesGrid');
@@ -1058,10 +1085,9 @@ function t4SelectAll(){ for(let i=0;i<t4PageCount;i++) t4Selected.add(i); t4Rend
 function t4DeselectAll(){ t4Selected.clear(); t4RenderPages(); t4UpdateEst(); }
 function t4SelectEven(){ t4Selected.clear(); for(let i=1;i<t4PageCount;i+=2) t4Selected.add(i); t4RenderPages(); t4UpdateEst(); }
 function t4SelectOdd(){ t4Selected.clear(); for(let i=0;i<t4PageCount;i+=2) t4Selected.add(i); t4RenderPages(); t4UpdateEst(); }
-
-// ===== PREVIEW =====
 async function t4OpenPreview(startIdx){
   if(!t4File) return alert("First select a PDF!");
+  try{ await t4EnsurePdfJs(); }catch(e){ alert("PDF Engine loading... 2 sec wait karke fir Preview dabao"); return; }
   t4PreviewIdx=(typeof startIdx==='number')?startIdx:0;
   await t4ShowPreview();
   document.getElementById('t4Modal').style.display='flex';
@@ -1086,9 +1112,9 @@ function t4RemoveFromPreview(){ t4Selected.delete(t4PreviewIdx); t4RenderPages()
 function t4ToggleSelectPreview(){ t4TogglePage(t4PreviewIdx); t4ShowPreview(); }
 function t4ClosePreview(){document.getElementById('t4Modal').style.display='none';}
 document.addEventListener('keydown',e=>{let m=document.getElementById('t4Modal');if(m&&m.style.display==='flex'){if(e.key==='ArrowRight')t4NextPage();if(e.key==='ArrowLeft')t4PrevPage();if(e.key==='Escape')t4ClosePreview();}});
-
 async function t4Convert(){
   if(!t4File) return alert("First select a PDF!");
+  try{ await t4EnsurePdfJs(); }catch(e){ alert("PDF Engine loading... 2 sec wait karke fir Convert dabao"); return; }
   let sel=[...t4Selected].sort((a,b)=>a-b);
   if(!sel.length) return alert("No page selected! Tap pages to select.");
   let prefix=(document.getElementById('t4Prefix').value.trim()||"Page - Orbittroniz").replace(/[\\/:*?"<>|]/g,'');
@@ -1120,7 +1146,7 @@ async function t4Convert(){
           let url=URL.createObjectURL(blob);
           t4Results.push({blob,name:fname,url,page:pIdx+1});
           let card=document.createElement('div'); card.className='t4-imgcard';
-          card.innerHTML=`<span class="no">Page ${pIdx+1}</span><img src="${url}" onclick="document.getElementById('t4ModalImg').src='${url}';document.getElementById('t4ModalTitle').innerText='Image - Page ${pIdx+1}';document.getElementById('t4ModalCap').innerText='${fname} • ${ext.toUpperCase()}';document.getElementById('t4Modal').style.display='flex';"><div style="padding:6px;text-align:center;font-size:11px;font-weight:700">${fname}<br><small style="color:#94a3b8">${(blob.size/1024).toFixed(0)} KB • ${ext.toUpperCase()}</small></div><div class="tools"><button onclick="t4DownloadOne(${t4Results.length-1})">⬇️ Download</button><button onclick="t4ShareOne(${t4Results.length-1})">📤 Share</button></div>`;
+          card.innerHTML=`<span class="no">Page ${pIdx+1}</span><img src="${url}"><div style="padding:6px;text-align:center;font-size:11px;font-weight:700">${fname}<br><small style="color:#94a3b8">${(blob.size/1024).toFixed(0)} KB • ${ext.toUpperCase()}</small></div><div class="tools"><button onclick="t4DownloadOne(${t4Results.length-1})">⬇️ Download</button><button onclick="t4ShareOne(${t4Results.length-1})">📤 Share</button></div>`;
           document.getElementById('t4Out').appendChild(card);
         }
       }catch(perr){ console.warn("Skip page",pIdx,perr); }
@@ -1131,7 +1157,6 @@ async function t4Convert(){
     document.getElementById('t4AllBtn').style.display=t4Results.length>1?'block':'none';
     document.getElementById('t4ShareBtn').style.display=t4Results.length?'block':'none';
     setTimeout(()=>{document.getElementById('t4Prog').style.display='none';},1500);
-    if(document.getElementById('t4AutoAll').checked && t4Results.length>1){document.getElementById('t4Status').innerText+=" • Press Download All 👇";}
   }catch(e){alert("Convert Error: "+e.message);document.getElementById('t4Status').innerText="❌ Error";document.getElementById('t4Prog').style.display='none';}
 }
 function t4DownloadOne(i){ if(!t4Results[i]) return; let r=t4Results[i]; let a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }
@@ -1140,8 +1165,7 @@ async function t4ShareOne(i){ if(!t4Results[i]) return; try{ let r=t4Results[i];
 async function t4ShareFirst(){ if(!t4Results.length) return alert("First convert"); await t4ShareOne(0); }
 function t4Reset(){ t4File=null; t4PdfBytes=null; t4PageCount=0; t4Selected.clear(); t4Results=[]; document.getElementById('t4Out').innerHTML=""; document.getElementById('t4OutEmpty').style.display='block'; document.getElementById('t4Info').style.display='none'; document.getElementById('t4FileName').innerText="No PDF Selected"; document.getElementById('t4Status').innerText=""; document.getElementById('t4AllBtn').style.display='none'; document.getElementById('t4ShareBtn').style.display='none'; document.getElementById('t4PagesGrid').innerHTML=""; document.getElementById('t4PagesHint').innerText="Select PDF first to see pages here"; t4UpdateEst(); }
 </script>
-<!-- ================= TOOL 4 - CORRECT - PDF TO IMAGE - END ================= -->
-
+<!-- ================= TOOL 4 - FIXED - END ================= -->
 <!-- TOOL 5 -->
 <!-- ================= TOOL 4 - PDF COMPRESS - SAME LOOK AS SCREENSHOT - START ================= -->
 <style>
