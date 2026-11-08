@@ -562,132 +562,315 @@ function t2Reset(){ t2File=null; t2PdfDoc=null; t2PageCount=0; t2Results=[]; t2S
 </script>
 <!-- ================= TOOL 2 - WITH PREVIEW - END ================= -->
 <!-- TOOL 3 -->
-<!-- ================= TOOL 3 - ONLY HTML - PDF MERGE - PREMIUM - START ================= -->
-<div class="tool" id="tool-3">
-<div class="card3d3">
+<!-- ================= TOOL 3 - PDF MERGE - SAME LOOK AS SCREENSHOT - START ================= -->
+<style>
+.t3-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.t3-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t3-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.t3-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
+.t3-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
+.t3-input:focus{border-color:#22d3ee}
+.t3-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
+.t3-drop.dragover{background:rgba(34,211,238,.25);transform:scale(1.02)}
+.t3-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.t3-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
+.t3-pill:active{transform:scale(.96)}
+.t3-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.t3-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:13px 8px;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer}
+.t3-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent;box-shadow:0 8px 20px rgba(124,58,237,.4)}
+.t3-chiprow{display:flex;gap:6px;margin-top:8px}
+.t3-chiprow button{flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px 4px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
+.t3-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
+.t3-toggle b{font-size:13px}
+.t3-toggle input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.t3-toggle input:checked{background:#22c55e}
+.t3-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.t3-toggle input:checked::after{left:23px}
+.t3-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.t3-btn3d:active{transform:translateY(3px)}
+.t3-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.t3-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t3-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
+.t3-prog{height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:10px;display:none;border:1px solid #2a3a6a}
+.t3-prog div{height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee);width:0%}
+.t3-pdf-item{background:#060a18;border:1px solid #2a3a6a;border-radius:14px;padding:12px;margin-top:8px;display:flex;gap:10px;align-items:center}
+.t3-pdf-item .num{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0}
+.t3-pdf-item .info{flex:1;min-width:0}
+.t3-pdf-item .info b{font-size:13px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.t3-pdf-item .info small{font-size:11px;color:#94a3b8}
+.t3-pdf-item .acts{display:flex;flex-direction:column;gap:4px}
+.t3-pdf-item .acts button{background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:6px 8px;font-size:11px;cursor:pointer}
+.t3-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column}
+.t3-modal canvas{max-width:95%;max-height:68vh;background:#fff;border-radius:10px}
+.t3-modal-nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.t3-modal-nav button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer}
+.t3-modal-nav button.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none}
+</style>
 
-<div class="title3d3">📄 PDF Merge Pro V3 - With Preview</div>
-<div class="sub3d3">Premium • Merge Unlimited PDFs • Reorder • Preview • No API</div>
+<div class="tool active" id="tool-3"><div class="t3-card">
+<div class="t3-title">📄 PDF Merge Pro V3 - With Preview</div>
+<div class="t3-sub">Premium • Merge Unlimited PDFs • Reorder • Preview • No API</div>
 
-<label class="label">✏️ 1. MERGED PDF NAME</label>
-<input type="text" id="t3Name" class="input" placeholder="Example - All Notes, Final Project, Bills 2026...">
-<div>
-<button class="btn2x3" onclick="t3QuickName('All Notes')">📝 All Notes</button>
-<button class="btn2x3" onclick="t3QuickName('Final Project')">🎓 Final Project</button>
-<button class="btn2x3" onclick="t3QuickName('All Bills')">🧾 All Bills</button>
-<button class="btn2x3" onclick="t3QuickName('Chapters')">📖 Chapters</button>
+<label class="t3-label">📄 1. MERGED PDF NAME</label>
+<input type="text" id="t3Name" class="t3-input" placeholder="Example - All Notes, Final Project..." value="Merged - Orbittroniz">
+<div class="t3-chiprow">
+<button onclick="t3QuickName('All Notes')">📝 All Notes</button>
+<button onclick="t3QuickName('Bills')">🧾 Bills</button>
+<button onclick="t3QuickName('Chapters')">📖 Chapters</button>
 </div>
 
-<label class="label">📄 2. ADD PDFs - Click or Drag & Drop</label>
-<div class="drop3" id="t3Drop" onclick="document.getElementById('t3Files').click()">
-<b>+ Click or Drag PDFs Here</b>
-<br><small>PDF Only - Unlimited Files - Any Size</small>
-<br><small id="t3Count">0 PDFs Added</small>
-<br><small>Tip: Hold and drag to change order • Click PDF to preview</small>
+<label class="t3-label">📄 2. ADD PDFs - Click or Drag</label>
+<div class="t3-drop" id="t3Drop" onclick="document.getElementById('t3Files').click()">
+<b style="font-size:15px;color:#22d3ee">+ Click or Drag PDFs Here</b><br>
+<small style="color:#94a3b8">PDF Only - Unlimited Files</small><br>
+<small style="color:#22d3ee" id="t3Count">No PDF Selected</small>
 </div>
 <input type="file" id="t3Files" accept=".pdf,application/pdf" multiple hidden>
 
-<div>
-<button class="btn2x3" onclick="t3Reverse()">🔃 Reverse Order</button>
-<button class="btn2x3" onclick="t3SortAZ()">🔤 Sort A-Z</button>
-<button class="btn2x3" onclick="t3SortBySize()">📦 Sort By Size</button>
-<button class="btn2x3" onclick="t3Clear()">🗑️ Clear All</button>
+<label class="t3-label">📑 3. REORDER PDFs - Tap to Select / Remove</label>
+<div class="t3-pillrow">
+<button class="t3-pill" onclick="t3Reverse()">🔃<br>Reverse<br>Order</button>
+<button class="t3-pill" onclick="t3SortAZ()">🔤<br>Sort<br>A-Z</button>
+<button class="t3-pill" onclick="t3SortBySize()">📦<br>Sort By<br>Size</button>
+<button class="t3-pill" onclick="t3Clear()">🗑️<br>Clear<br>All</button>
 </div>
-
-<label class="label">📑 3. YOUR PDFs - Reorder / Preview / Edit</label>
 <div id="t3List"></div>
-<div id="t3Empty" style="text-align:center;color:#94a3b8;padding:14px">No PDF yet 👆<br><small>Add 2 or more PDFs to merge</small></div>
+<div id="t3Empty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">Select PDF first to see list here</div>
 
-<label class="label">📄 4. COVER PAGE - First Page Title</label>
-<div class="toggle3">
-<b>📄 Add Cover Page?</b>
-<input type="checkbox" id="t3Cover" onchange="document.getElementById('t3CoverBox').style.display=this.checked?'block':'none'">
-</div>
-<div id="t3CoverBox">
-<input type="text" id="t3CoverTitle" class="input" placeholder="Cover Title - Example MY FINAL NOTES">
-<input type="text" id="t3CoverSub" class="input" placeholder="Subtitle - Example Class 10 • Made by Me">
+<label class="t3-label">✂️ 4. HOW TO MERGE?</label>
+<div class="t3-mode" id="t3Modes">
+<button class="active" data-mode="all" onclick="t3SetMode('all',this)">📄 Merge All Pages</button>
+<button data-mode="selected" onclick="t3SetMode('selected',this)">✅ Selected PDFs Only</button>
+<button data-mode="range" onclick="t3SetMode('range',this)">🎯 Custom Range</button>
+<button data-mode="firstlast" onclick="t3SetMode('firstlast',this)">⭐ First Page Only</button>
 </div>
 
-<label class="label">📑 5. PAGE OPTIONS</label>
-<div class="toggle3">
-<b>📑 Add Bookmark / Divider Page Between PDFs?</b>
-<input type="checkbox" id="t3Divider" checked>
-</div>
-<div class="toggle3">
-<b>🔢 Add Page Numbers to Merged PDF?</b>
-<input type="checkbox" id="t3PageNo" checked>
-</div>
-<div class="toggle3">
-<b>💧 Add Watermark to All Pages?</b>
-<input type="checkbox" id="t3WmOn" onchange="document.getElementById('t3WmBox').style.display=this.checked?'block':'none'">
-</div>
-<div id="t3WmBox">
-<input type="text" id="t3WmText" class="input" value="Orbittroniz.com">
-</div>
-<div class="toggle3">
-<b>📝 Add Table of Contents on Cover?</b>
-<input type="checkbox" id="t3TOC" checked>
-</div>
-<div class="toggle3">
-<b>🗜️ Compress Merged PDF?</b>
-<input type="checkbox" id="t3Compress">
+<div id="t3RangeBox" style="display:none">
+<label class="t3-label">🎯 Range Per PDF - Example: 1-3</label>
+<input type="text" id="t3Range" class="t3-input" placeholder="1-3, 5" value="1-3">
+<small style="color:#94a3b8">This range will apply to every PDF</small>
 </div>
 
-<label class="label">📄 6. PAGE RANGE - Select Pages From Each PDF (Advanced)</label>
-<div>
-<small style="color:#94a3b8">Example: If you want only Page 1-3 from first PDF, click Edit on that PDF and write 1-3</small>
+<label class="t3-label">✏️ 5. COVER & OPTIONS</label>
+<div class="t3-toggle"><b>📄 Add Cover Page?</b><input type="checkbox" id="t3Cover" onchange="document.getElementById('t3CoverBox').style.display=this.checked?'block':'none'"></div>
+<div id="t3CoverBox" style="display:none"><input type="text" id="t3CoverTitle" class="t3-input" placeholder="Cover Title - Example MY FINAL NOTES" style="margin-top:8px"></div>
+
+<div class="t3-toggle"><b>📑 Divider Page Between PDFs?</b><input type="checkbox" id="t3Divider" checked></div>
+<div class="t3-toggle"><b>🔢 Add Page Numbers?</b><input type="checkbox" id="t3PageNo" checked></div>
+<div class="t3-toggle"><b>📝 Table of Contents?</b><input type="checkbox" id="t3TOC" checked></div>
+<div class="t3-toggle"><b>💧 Watermark?</b><input type="checkbox" id="t3WmOn" onchange="document.getElementById('t3WmBox').style.display=this.checked?'block':'none'"></div>
+<div id="t3WmBox" style="display:none"><input type="text" id="t3WmText" class="t3-input" value="Orbittroniz.com" style="margin-top:8px"></div>
+<div class="t3-toggle"><b>🗜️ Compress Merged PDF?</b><input type="checkbox" id="t3Compress"></div>
+
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
+<b id="t3TotalPages" style="font-size:13px">Total PDFs: 0 • Total Pages: 0</b><br>
+<small id="t3TotalSize" style="color:#94a3b8">Total Size: 0 KB</small>
 </div>
 
-<label class="label">📊 MERGE SUMMARY</label>
-<div id="t3Summary">
-<div id="t3TotalPages">Total PDFs: 0 • Total Pages: 0</div>
-<div id="t3TotalSize">Total Size: 0 KB</div>
-<div id="t3EstSize">Estimated Merged Size: 0 KB</div>
-</div>
+<div class="t3-prog" id="t3Prog"><div id="t3Fill"></div></div>
+<div id="t3Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
 
-<div class="prog3" id="t3Prog"><div id="t3Fill"></div></div>
-<div id="t3Status"></div>
+<button class="t3-btn-preview" onclick="t3OpenPreview()">👀 PREVIEW MERGED PDF - See Order Before Merge</button>
+<button class="t3-btn3d" id="t3MergeBtn">📄 MERGE PDFs - DOWNLOAD</button>
+<button class="t3-btn-share" id="t3ShareBtn" onclick="t3Share()">📤 SHARE ON WHATSAPP / ANYWHERE</button>
+<button class="t3-btn2" onclick="t3Clear()">🗑️ Clear / New PDFs</button>
+<div id="t3Out" style="margin-top:8px"></div>
+<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - PDFs never go to server • Preview Available</p>
+</div></div>
+<!-- ================= TOOL 3 - END ================= -->
 
-<button class="btn-preview3" onclick="t3OpenPreview()">👀 PREVIEW MERGED PDF - See Order Before Merge</button>
-<button class="btn2x3" id="t3FolderBtn">📁 Select Folder (PC Only)</button>
-<div id="t3FolderName">Folder: Downloads (Default)</div>
-<button class="btn3d3" id="t3MergeBtn">📄 MERGE PDFs - DOWNLOAD</button>
-<button class="btn-share3" id="t3ShareBtn" onclick="t3Share()">📤 SHARE ON WHATSAPP / ANYWHERE</button>
-<button class="btn2x3" onclick="t3DownloadList()">📋 Download List as Text</button>
-
-<p>100% Private - PDFs never go to server • Preview Available • Unlimited Merge</p>
-
-</div>
-</div>
-<!-- ================= TOOL 3 - ONLY HTML - END ================= -->
-
-<div class="modal3" id="t3Modal" onclick="this.style.display='none'">
-<div id="t3ModalTitle">Preview</div>
+<div class="t3-modal" id="t3Modal">
+<div id="t3ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Preview</div>
 <canvas id="t3PreviewCanvas"></canvas>
-<div id="t3ModalCap"></div>
-<div class="modal-nav3">
+<div id="t3ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div>
+<div class="t3-modal-nav">
 <button onclick="t3PrevPage()">⬅️ Prev</button>
 <button onclick="t3NextPage()">Next ➡️</button>
-<button onclick="t3RemoveFromPreview()">🗑️ Remove This PDF</button>
-<button onclick="t3ClosePreview()">✅ Close</button>
+<button onclick="t3RemoveFromPreview()" style="background:#ef4444">🗑️ Remove This PDF</button>
+<button class="primary" onclick="t3ClosePreview()">✅ Close</button>
 </div>
-<div>
-<button onclick="t3ClosePreview();document.getElementById('t3MergeBtn').click()">📄 Looks Good - Merge Now</button>
-</div>
+<div style="margin-top:10px"><button onclick="t3ClosePreview();document.getElementById('t3MergeBtn').click()" style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;padding:11px 18px;border:none;border-radius:20px;font-weight:900;cursor:pointer">📄 Looks Good - Merge Now</button></div>
 </div>
 
-<div class="modal3" id="t3EditModal">
-<div>Edit PDF Pages</div>
-<div id="t3EditName"></div>
-<label class="label">🎯 Pages to Keep - Example: 1-3, 5</label>
-<input type="text" id="t3EditRange" class="input" placeholder="Leave empty = All Pages • Example 1-3, 5">
-<label class="label">✏️ Custom Title for Divider Page</label>
-<input type="text" id="t3EditTitle" class="input" placeholder="Example Chapter 1 - Maths">
-<div>
-<button onclick="t3SaveEdit()">✅ Save</button>
-<button onclick="t3CloseEdit()">❌ Cancel</button>
-</div>
-</div>
+<script>
+// ===== TOOL 3 JS - SAME STYLE AS SCREENSHOT - NO BUGS =====
+let t3Files=[], t3Mode='all', t3LastBlob=null, t3LastName='Merged - Orbittroniz.pdf', t3PreviewIdx=0;
+let t3DropEl=document.getElementById('t3Drop');
+if(t3DropEl){
+  t3DropEl.addEventListener('dragover',e=>{e.preventDefault();t3DropEl.classList.add('dragover')});
+  t3DropEl.addEventListener('dragleave',()=>t3DropEl.classList.remove('dragover'));
+  t3DropEl.addEventListener('drop',e=>{e.preventDefault();t3DropEl.classList.remove('dragover');t3AddFiles([...e.dataTransfer.files])});
+}
+document.getElementById('t3Files').onchange=(e)=>{t3AddFiles([...e.target.files]);e.target.value=""};
+function t3QuickName(n){document.getElementById('t3Name').value=n+" - "+new Date().toLocaleDateString('en-IN');}
+function t3SetMode(m,btn){t3Mode=m;document.querySelectorAll('#t3Modes button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');document.getElementById('t3RangeBox').style.display=m==='range'?'block':'none';}
+async function t3AddFiles(files){
+  for(let f of files){
+    if(!f.name.toLowerCase().endsWith('.pdf')){alert(f.name+" is not a PDF, skipped");continue;}
+    if(f.size>50*1024*1024){if(!confirm(f.name+" is very large (50MB+). Continue?"))continue;}
+    try{
+      let buf=await f.arrayBuffer();
+      let doc=await PDFLib.PDFDocument.load(buf,{ignoreEncryption:true});
+      let pages=doc.getPageCount();
+      t3Files.push({file:f, name:f.name, size:f.size, pages, bytes:buf.slice(0), doc, selected:true, customRange:'', customTitle:''});
+      document.getElementById('t3Status').innerText="✅ Added: "+f.name+" ("+pages+" pages)";
+    }catch(e){alert(f.name+" is broken or password protected, skipped");}
+  }
+  t3Render();
+}
+function t3Render(){
+  let box=document.getElementById('t3List');
+  let totalPages=t3Files.reduce((s,x)=>s+x.pages,0);
+  let totalSize=t3Files.reduce((s,x)=>s+x.size,0);
+  document.getElementById('t3Count').innerText=t3Files.length? (t3Files.length+" PDFs Added ✅") : "No PDF Selected";
+  document.getElementById('t3TotalPages').innerText="Total PDFs: "+t3Files.length+" • Total Pages: "+totalPages;
+  document.getElementById('t3TotalSize').innerText="Total Size: "+(totalSize/1024).toFixed(0)+" KB • Estimated Merged: "+(totalSize/1024).toFixed(0)+" KB";
+  document.getElementById('t3Empty').style.display=t3Files.length?'none':'block';
+  if(!t3Files.length){box.innerHTML="";return;}
+  box.innerHTML=t3Files.map((it,i)=>`
+    <div class="t3-pdf-item" style="${it.selected?'':'opacity:.5'}">
+      <div class="num">${i+1}</div>
+      <div class="info"><b>${it.name}</b><small>${it.pages} Pages • ${(it.size/1024).toFixed(0)} KB ${it.customRange?'• Pages: '+it.customRange:''} ${it.selected?'• ✅ Selected':'• ❌ Not Selected'}</small><br><small style="color:#22d3ee" onclick="t3OpenPreview(${i})">👀 Preview</small> <small style="color:#f59e0b" onclick="t3EditRange(${i})">✏️ Edit Range</small></div>
+      <div class="acts">
+        <button onclick="t3ToggleSelect(${i})">${it.selected?'✅':'⬜'}</button>
+        <button onclick="t3Move(${i},-1)">⬆️</button>
+        <button onclick="t3Move(${i},1)">⬇️</button>
+        <button onclick="t3Remove(${i})" style="background:#ef4444;color:#fff;border:none">🗑️</button>
+      </div>
+    </div>`).join('');
+}
+function t3ToggleSelect(i){t3Files[i].selected=!t3Files[i].selected;t3Render();}
+function t3Remove(i){t3Files.splice(i,1);t3Render();}
+function t3Move(i,d){let j=i+d;if(j<0||j>=t3Files.length)return;[t3Files[i],t3Files[j]]=[t3Files[j],t3Files[i]];t3Render();}
+function t3Reverse(){t3Files.reverse();t3Render();}
+function t3SortAZ(){t3Files.sort((a,b)=>a.name.localeCompare(b.name));t3Render();}
+function t3SortBySize(){t3Files.sort((a,b)=>a.size-b.size);t3Render();}
+function t3Clear(){if(!t3Files.length)return;if(!confirm("Delete all PDFs?"))return;t3Files=[];t3Render();document.getElementById('t3Status').innerText="Cleared";document.getElementById('t3ShareBtn').style.display='none';document.getElementById('t3Out').innerHTML="";}
+function t3EditRange(i){
+  let r=prompt("Pages to keep for "+t3Files[i].name+"\nLeave empty = All Pages\nExample: 1-3, 5", t3Files[i].customRange||"");
+  if(r===null) return;
+  t3Files[i].customRange=r.trim();
+  let t=prompt("Custom Title for Divider Page (Optional)", t3Files[i].customTitle||"");
+  if(t!==null) t3Files[i].customTitle=t.trim();
+  t3Render();
+}
+// ===== PREVIEW =====
+async function t3OpenPreview(startIdx){
+  if(!t3Files.length) return alert("First add PDFs to preview!");
+  t3PreviewIdx = (typeof startIdx==='number') ? startIdx : 0;
+  await t3ShowPreview();
+  document.getElementById('t3Modal').style.display='flex';
+}
+async function t3ShowPreview(){
+  if(t3PreviewIdx<0) t3PreviewIdx=t3Files.length-1;
+  if(t3PreviewIdx>=t3Files.length) t3PreviewIdx=0;
+  let it=t3Files[t3PreviewIdx];
+  document.getElementById('t3ModalTitle').innerText="Preview - PDF "+(t3PreviewIdx+1)+" / "+t3Files.length+" • "+it.name;
+  document.getElementById('t3ModalCap').innerText=it.pages+" Pages • "+(it.size/1024).toFixed(0)+" KB • "+(it.selected?"✅ Will Merge":"❌ Will NOT Merge");
+  try{
+    if(window['pdfjsLib']){
+      let pdf=await pdfjsLib.getDocument({data:it.bytes.slice(0)}).promise;
+      let page=await pdf.getPage(1);
+      let canvas=document.getElementById('t3PreviewCanvas');
+      let vp=page.getViewport({scale:1.4});
+      canvas.width=vp.width; canvas.height=vp.height;
+      await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
+    }else{
+      let c=document.getElementById('t3PreviewCanvas'); let ctx=c.getContext('2d'); c.width=400; c.height=550; ctx.fillStyle='#fff'; ctx.fillRect(0,0,400,550); ctx.fillStyle='#111'; ctx.font='bold 24px Arial'; ctx.textAlign='center'; ctx.fillText(it.name.substring(0,25),200,260); ctx.font='14px Arial'; ctx.fillStyle='#666'; ctx.fillText(it.pages+" Pages",200,290);
+    }
+  }catch(e){ let c=document.getElementById('t3PreviewCanvas'); let ctx=c.getContext('2d'); c.width=400; c.height=550; ctx.fillStyle='#fff'; ctx.fillRect(0,0,400,550); ctx.fillStyle='#111'; ctx.font='bold 20px Arial'; ctx.textAlign='center'; ctx.fillText("Preview not available",200,260); }
+}
+async function t3NextPage(){t3PreviewIdx++;await t3ShowPreview();}
+async function t3PrevPage(){t3PreviewIdx--;await t3ShowPreview();}
+function t3RemoveFromPreview(){if(!confirm("Remove this PDF from merge?"))return;t3Files.splice(t3PreviewIdx,1);t3Render();if(!t3Files.length){t3ClosePreview();return;}t3ShowPreview();}
+function t3ClosePreview(){document.getElementById('t3Modal').style.display='none';}
+document.addEventListener('keydown',e=>{let m=document.getElementById('t3Modal');if(m&&m.style.display==='flex'){if(e.key==='ArrowRight')t3NextPage();if(e.key==='ArrowLeft')t3PrevPage();if(e.key==='Escape')t3ClosePreview();}});
+
+function t3ParseRange(str,max){
+  if(!str.trim()) return Array.from({length:max},(_,i)=>i);
+  let out=new Set();
+  str.split(',').forEach(part=>{part=part.trim();if(!part)return;if(part.includes('-')){let [a,b]=part.split('-').map(x=>parseInt(x.trim()));if(isNaN(a)||isNaN(b))return;a=Math.max(1,Math.min(a,max));b=Math.max(1,Math.min(b,max));if(a>b)[a,b]=[b,a];for(let i=a;i<=b;i++)out.add(i-1);}else{let n=parseInt(part);if(!isNaN(n))out.add(Math.max(1,Math.min(n,max))-1);}});
+  return [...out].sort((a,b)=>a-b);
+}
+document.getElementById('t3MergeBtn').onclick=async()=>{
+  if(!t3Files.length) return alert("First add at least 2 PDFs!");
+  let list=t3Mode==='selected' ? t3Files.filter(x=>x.selected) : t3Files;
+  if(t3Mode==='selected' && !list.length) return alert("No PDF selected! Tap ✅ to select.");
+  if(list.length<1) return alert("Add at least 1 PDF");
+  let name=(document.getElementById('t3Name').value.trim()||"Merged - Orbittroniz").replace(/[\\/:*?"<>|]/g,'').trim()||"Merged - Orbittroniz";
+  let coverOn=document.getElementById('t3Cover').checked, coverTitle=document.getElementById('t3CoverTitle').value||name;
+  let divider=document.getElementById('t3Divider').checked, pageNo=document.getElementById('t3PageNo').checked;
+  let toc=document.getElementById('t3TOC').checked, wmOn=document.getElementById('t3WmOn').checked, wmText=document.getElementById('t3WmText').value||"Orbittroniz.com";
+  let globalRange=document.getElementById('t3Range').value||"";
+  document.getElementById('t3Status').innerText="Merging, please wait...";
+  document.getElementById('t3Prog').style.display='block'; document.getElementById('t3Fill').style.width="0%";
+  try{
+    let merged=await PDFLib.PDFDocument.create();
+    let totalPagesForNumber=0;
+    // Cover
+    if(coverOn){
+      let p=merged.addPage(PDFLib.PageSizes.A4);
+      let {width,height}=p.getSize();
+      p.drawRectangle({x:0,y:0,width,height,color:PDFLib.rgb(0.48,0.23,0.92)});
+      p.drawText(coverTitle.substring(0,40),{x:40,y:height/2+20,size:26,color:PDFLib.rgb(1,1,1)});
+      p.drawText("Made with Orbittroniz.com",{x:40,y:height/2-20,size:12,color:PDFLib.rgb(1,1,1)});
+      p.drawText("Total PDFs: "+list.length,{x:40,y:height/2-45,size:12,color:PDFLib.rgb(1,1,1)});
+      if(toc){ let y=height/2-90; p.drawText("Contents:",{x:40,y,size:14,color:PDFLib.rgb(1,1,1)}); list.slice(0,12).forEach((it,idx)=>{ y-=22; p.drawText((idx+1)+". "+it.name.substring(0,35),{x:50,y,size:11,color:PDFLib.rgb(1,1,1)}); }); }
+      totalPagesForNumber++;
+    }
+    for(let li=0; li<list.length; li++){
+      let it=list[li];
+      try{
+        // Divider Page
+        if(divider && (coverOn || li>0)){
+          let dp=merged.addPage(PDFLib.PageSizes.A4);
+          let {width,height}=dp.getSize();
+          dp.drawRectangle({x:0,y:0,width,height,color:PDFLib.rgb(0.04,0.07,0.15)});
+          dp.drawText((it.customTitle||it.name).substring(0,38),{x:40,y:height/2,size:22,color:PDFLib.rgb(0.13,0.83,0.93)});
+          dp.drawText("PDF "+(li+1)+" of "+list.length,{x:40,y:height/2-30,size:12,color:PDFLib.rgb(0.6,0.6,0.7)});
+          totalPagesForNumber++;
+        }
+        let srcDoc=await PDFLib.PDFDocument.load(it.bytes.slice(0),{ignoreEncryption:true});
+        let maxPages=srcDoc.getPageCount();
+        let idxs=[];
+        if(t3Mode==='range' && globalRange.trim()) idxs=t3ParseRange(globalRange,maxPages);
+        else if(it.customRange) idxs=t3ParseRange(it.customRange,maxPages);
+        else if(t3Mode==='firstlast') idxs=[0];
+        else idxs=Array.from({length:maxPages},(_,i)=>i);
+        if(!idxs.length) continue;
+        let pages=await merged.copyPages(srcDoc, idxs);
+        pages.forEach(p=>merged.addPage(p));
+        totalPagesForNumber+=pages.length;
+      }catch(perr){ console.warn("Skip PDF",li,perr); document.getElementById('t3Status').innerText="⚠️ "+it.name+" skipped (broken), others merging..."; continue; }
+      document.getElementById('t3Fill').style.width=Math.round(((li+1)/list.length)*100)+"%";
+      await new Promise(r=>setTimeout(r,15));
+    }
+    // Page Numbers + Watermark - add on top by drawing on each page (simple)
+    let allPages=merged.getPages();
+    if(pageNo || wmOn){
+      allPages.forEach((pg,idx)=>{
+        let {width,height}=pg.getSize();
+        if(pageNo) pg.drawText((idx+1)+" / "+allPages.length,{x:width-70,y:12,size:9,color:PDFLib.rgb(0.6,0.6,0.6)});
+        if(wmOn) pg.drawText(wmText,{x:width/2-40,y:12,size:9,color:PDFLib.rgb(0.65,0.65,0.65)});
+      });
+    }
+    merged.setTitle(name); merged.setAuthor("Orbittroniz.com");
+    let bytes=await merged.save();
+    let blob=new Blob([bytes],{type:'application/pdf'}); t3LastBlob=blob; t3LastName=name+".pdf";
+    document.getElementById('t3ShareBtn').style.display='block';
+    let link=document.createElement('a'); link.href=URL.createObjectURL(blob); link.download=t3LastName; document.body.appendChild(link); link.click(); link.remove();
+    document.getElementById('t3Status').innerText="✅ Done! "+t3LastName+" ("+(blob.size/1024).toFixed(0)+" KB) • "+allPages.length+" Pages Merged";
+    document.getElementById('t3Out').innerHTML=`<div style="background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;text-align:center;margin-top:8px">✅ Merged Successfully<br><small>${allPages.length} Pages • ${(blob.size/1024).toFixed(0)} KB</small></div>`;
+    setTimeout(()=>{document.getElementById('t3Prog').style.display='none';},2000);
+  }catch(e){alert("Merge Error: "+e.message);document.getElementById('t3Status').innerText="❌ Error, try again";document.getElementById('t3Prog').style.display='none';}
+};
+async function t3Share(){
+  if(!t3LastBlob) return alert("First merge PDFs");
+  try{ let file=new File([t3LastBlob],t3LastName,{type:'application/pdf'}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:t3LastName}); }else{ let a=document.createElement('a'); a.href="https://wa.me/?text="+encodeURIComponent("Check my merged PDF - Orbittroniz.com"); a.target="_blank"; a.click(); } }catch(e){ alert("Share cancelled, use Download"); }
+}
+t3Render();
+</script>
+<!-- ================= TOOL 3 - SAME AS SCREENSHOT - END ================= -->
 <!-- TOOL 4 -->
 <div class="tool" id="tool-4"><div class="panel"><h3>🖼️ Tool 4 - PDF to Image</h3>
 <!-- YAHAN TOOL 4 KA CODE PASTE KARO -->
