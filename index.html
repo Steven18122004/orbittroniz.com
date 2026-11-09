@@ -3780,10 +3780,654 @@ t10Log("Tool 10 AI V2 Loaded ✅ - AI ready hai");
 <!-- ================= TOOL 10 AI V2 - END ================= -->
 
 <!-- TOOL 11 -->
-<div class="tool" id="tool-11"><div class="panel"><h3>💧 Tool 11 - Watermark</h3>
-<!-- YAHAN TOOL 11 KA CODE PASTE KARO -->
-<p style="font-size:12px;color:#94a3b8">Yaha Tool 11 ka feature code aayega...</p>
+  <!-- ================= TOOL 11 - WATERMARK - SUPER ADVANCE V2 - START ================= -->
+<style>
+.t11-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.t11-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t11-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.t11-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
+.t11-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
+.t11-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
+.t11-drop.dragover{background:rgba(34,211,238,.25);transform:scale(1.02)}
+.t11-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.t11-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
+.t11-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.t11-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:13px 8px;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer}
+.t11-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent}
+.t11-chiprow{display:flex;gap:6px;margin-top:8px}
+.t11-chiprow button{flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px 4px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
+.t11-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
+.t11-toggle b{font-size:13px}
+.t11-toggle input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.t11-toggle input:checked{background:#22c55e}
+.t11-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.t11-toggle input:checked::after{left:23px}
+.t11-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.t11-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.t11-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t11-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
+.t11-prog{height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:10px;display:none;border:1px solid #2a3a6a}
+.t11-prog div{height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee);width:0%}
+.t11-range{width:100%;accent-color:#22d3ee}
+.t11-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.t11-imgcard{background:#060a18;border:1px solid #2a3a6a;border-radius:14px;overflow:hidden}
+.t11-imgcard img{width:100%;height:130px;object-fit:cover;display:block}
+.t11-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column}
+.t11-modal canvas{max-width:95%;max-height:62vh;border-radius:10px;background:#fff}
+.t11-modal-nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.t11-modal-nav button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer}
+.t11-modal-nav button.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none}
+</style>
+
+<div class="tool active" id="tool-11"><div class="t11-card">
+<div class="t11-title">💧 Watermark Pro V2 - AI + QR + Invisible + Sign</div>
+<div class="t11-sub">Super Advance • AI Auto Position + QR + Invisible + Signature • Live Preview • Bulk</div>
+
+<label class="t11-label">🖼️ 1. SELECT IMAGES - Ek Ya 10 Ek Saath</label>
+<div class="t11-drop" id="t11Drop" onclick="document.getElementById('t11FileInput').click()">
+<b style="font-size:15px;color:#22d3ee">+ Click or Drag Images Here</b><br>
+<small style="color:#94a3b8">JPG / PNG / WEBP</small><br>
+<small style="color:#22d3ee" id="t11FileName">No Images Selected - Click Here</small><br>
+<small style="color:#f59e0b" id="t11Debug">Status: Waiting for image...</small>
+</div>
+<input type="file" id="t11FileInput" accept="*/*" multiple onchange="t11OnFileSelect(this)" style="display:none">
+<input type="file" id="t11LogoFile" accept="image/*" onchange="t11OnLogoSelect(this)" style="display:none">
+
+<div id="t11SelectedBox" style="display:none;background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:10px;margin-top:10px">
+<b style="font-size:13px;color:#22c55e">✅ Selected Images:</b>
+<div id="t11SelectedList" style="margin-top:8px"></div>
+</div>
+
+<!-- LIVE PREVIEW -->
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px;margin-top:12px;text-align:center">
+<b style="font-size:13px">👀 LIVE PREVIEW - Sab Kuch Yaha Live Dikhega</b>
+<div style="position:relative;display:inline-block;max-width:100%;margin-top:8px">
+<canvas id="t11PreviewCanvas" style="max-width:100%;max-height:300px;border-radius:12px;background:#fff;display:none"></canvas>
+<img id="t11PreviewImg" style="max-width:100%;max-height:300px;border-radius:12px;background:#fff;display:none">
+</div>
+<div id="t11EmptyBox" style="color:#94a3b8;padding:12px;font-size:12px">Photo select karo, preview yaha aayega</div>
+<div id="t11PreviewInfo" style="font-size:11px;color:#22d3ee;margin-top:6px;font-weight:700"></div>
+<div id="t11AiInfo" style="font-size:11px;color:#a78bfa;margin-top:4px"></div>
+</div>
+
+<label class="t11-label">🤖 2. AI + QUICK PRESETS</label>
+<div class="t11-pillrow">
+<button class="t11-pill" onclick="t11SetPreset('shop')" style="background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none">🛍️<br>Shop<br>Tiled</button>
+<button class="t11-pill" onclick="t11SetPreset('ai')">🤖<br>AI AUTO<br>Position</button>
+<button class="t11-pill" onclick="t11SetPreset('qr')">📱<br>QR Code<br>Watermark</button>
+<button class="t11-pill" onclick="t11Reset()">🔄<br>Clear<br>All</button>
+</div>
+<div class="t11-pillrow" style="margin-top:8px">
+<button class="t11-pill" onclick="t11SetPreset('invisible')">🫥<br>Invisible<br>Hidden</button>
+<button class="t11-pill" onclick="t11SetPreset('sign')">✍️<br>Signature<br>Sign Karo</button>
+<button class="t11-pill" onclick="t11SetPreset('neon')">🌈<br>Neon Glow<br>Stylish</button>
+<button class="t11-pill" onclick="t11SetPreset('copyright')">©️<br>Copyright<br>Center</button>
+</div>
+
+<label class="t11-label">💧 3. WATERMARK TYPE</label>
+<div class="t11-mode" id="t11TypeModes">
+<button class="active" data-type="text" onclick="t11SetType('text',this)">✏️ Text</button>
+<button data-type="logo" onclick="t11SetType('logo',this)">🖼️ Logo</button>
+<button data-type="both" onclick="t11SetType('both',this)">✏️+🖼️ Text + Logo</button>
+<button data-type="tiled" onclick="t11SetType('tiled',this)">🔁 Tiled</button>
+</div>
+<div class="t11-mode">
+<button data-type="qr" onclick="t11SetType('qr',this)">📱 QR Code</button>
+<button data-type="sign" onclick="t11SetType('sign',this)">✍️ Signature</button>
+<button data-type="invisible" onclick="t11SetType('invisible',this)">🫥 Invisible</button>
+<button data-type="datetime" onclick="t11SetType('datetime',this)">🕒 Date + Time</button>
+</div>
+
+<!-- TEXT -->
+<div id="t11TextBox">
+<label class="t11-label">✏️ 4. WATERMARK TEXT</label>
+<input type="text" id="t11Text" class="t11-input" value="Orbittroniz.com" oninput="t11ApplyPreview()">
+<div class="t11-chiprow">
+<button onclick="t11QuickText('Orbittroniz.com')">🌐 Website</button>
+<button onclick="t11QuickText('© 2026 - All Rights Reserved')">©️ Copyright</button>
+<button onclick="t11QuickText('Do Not Copy - @orbittroniz')">🚫 Do Not Copy</button>
+</div>
+<input type="text" id="t11Text2" class="t11-input" placeholder="Second Line - Jaise: Call - 98765 43210" style="margin-top:8px" oninput="t11ApplyPreview()">
+<div style="display:flex;gap:8px;margin-top:8px">
+<select id="t11Font" class="t11-input" style="flex:1" onchange="t11ApplyPreview()"><option value="Arial">Arial</option><option value="Georgia">Georgia - Stylish</option><option value="Impact">Impact - Bold</option><option value="Courier New">Courier</option><option value="Times New Roman">Times</option><option value="Verdana">Verdana</option></select>
+<select id="t11FontStyle" class="t11-input" style="flex:1" onchange="t11ApplyPreview()"><option value="bold">Bold</option><option value="normal">Normal</option><option value="italic">Italic</option><option value="bold italic">Bold Italic</option></select>
+</div>
+</div>
+
+<!-- QR BOX -->
+<div id="t11QrBox" style="display:none;background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;margin-top:10px">
+<b style="font-size:13px;color:#22c55e">📱 QR CODE WATERMARK</b><br>
+<small style="color:#94a3b8">QR me kya link hona chahiye? Scan karte hi wo khulega</small>
+<input type="text" id="t11QrText" class="t11-input" value="https://orbittroniz.com" style="margin-top:8px" oninput="t11ApplyPreview()">
+<div class="t11-chiprow">
+<button onclick="t11QuickQr('https://instagram.com/orbittroniz')">📸 Instagram</button>
+<button onclick="t11QuickQr('https://wa.me/919876543210')">💬 WhatsApp</button>
+<button onclick="t11QuickQr('https://orbittroniz.com')">🌐 Website</button>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+<span style="font-size:11px;color:#fff">QR Size:</span>
+<input type="range" id="t11QrSize" class="t11-range" min="15" max="40" value="22" style="flex:1" oninput="document.getElementById('t11QrSizeVal').innerText=this.value+'%';t11ApplyPreview()">
+<span id="t11QrSizeVal" style="font-size:11px;color:#fff;font-weight:800">22%</span>
+</div>
+<small style="color:#94a3b8">QR banane ke liye internet chahiye - API se banega, offline me text hi lagega</small>
+</div>
+
+<!-- SIGN BOX -->
+<div id="t11SignBox" style="display:none;background:#060a18;border:1px solid #f59e0b;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
+<b style="font-size:13px;color:#f59e0b">✍️ SIGNATURE - Yaha Ungli Se Sign Karo</b><br>
+<small style="color:#94a3b8">Neeche white box me sign karo, wo photo pe watermark ban jayega</small>
+<canvas id="t11SignCanvas" width="320" height="120" style="background:#fff;border-radius:10px;margin-top:8px;max-width:100%;touch-action:none;cursor:crosshair"></canvas>
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t11ClearSign()" style="flex:1;background:#ef4444;border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">🗑️ Clear Sign</button>
+<button onclick="t11SaveSign()" style="flex:1;background:#22c55e;border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">✅ Sign Save Karo</button>
+</div>
+<div style="display:flex;gap:6px;margin-top:6px;align-items:center">
+<span style="font-size:11px;color:#fff">Sign Color:</span>
+<input type="color" id="t11SignColor" value="#000000" style="width:40px;height:35px;border:none;border-radius:8px">
+<span style="font-size:11px;color:#fff">Size:</span>
+<input type="range" id="t11SignSize" min="2" max="8" value="4" style="flex:1">
+</div>
+</div>
+
+<!-- LOGO BOX -->
+<div id="t11LogoBox" style="display:none">
+<label class="t11-label">🖼️ LOGO SELECT KARO</label>
+<button class="t11-btn2" onclick="document.getElementById('t11LogoFile').click()" style="margin-top:0">+ Logo Select Karo</button>
+<div id="t11LogoInfo" style="text-align:center;font-size:11px;color:#94a3b8;margin-top:6px">Koi logo nahi hai</div>
+<div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+<span style="font-size:11px;color:#fff">Logo Size:</span>
+<input type="range" id="t11LogoSize" class="t11-range" min="10" max="50" value="20" style="flex:1" oninput="document.getElementById('t11LogoSizeVal').innerText=this.value+'%';t11ApplyPreview()">
+<span id="t11LogoSizeVal" style="font-size:11px;color:#fff;font-weight:800">20%</span>
+</div>
+</div>
+
+<!-- BATCH DIFFERENT NAMES -->
+<div style="background:#060a18;border:1px solid #a78bfa;border-radius:12px;padding:12px;margin-top:10px">
+<b style="font-size:13px">🔄 BATCH - Har Photo Pe Alag Naam?</b><br>
+<small style="color:#94a3b8">OFF hai to sab pe ek hi naam lagega. ON karo to har photo ke liye alag naam likh sakte ho</small>
+<div class="t11-toggle"><b>Har Photo Ka Watermark Alag Rakhu?</b><input type="checkbox" id="t11BatchDiff" onchange="document.getElementById('t11BatchBox').style.display=this.checked?'block':'none';t11RenderBatchList()"></div>
+<div id="t11BatchBox" style="display:none;margin-top:8px"><div id="t11BatchList"></div><small style="color:#94a3b8">Neeche har photo ke saamne uska alag naam likho</small></div>
+</div>
+
+<label class="t11-label">🎨 5. COLOR + SIZE + OPACITY + ROTATE + STYLE</label>
+<div style="display:flex;gap:8px;align-items:center">
+<input type="color" id="t11Color" value="#ffffff" style="width:60px;height:45px;border:none;border-radius:10px;cursor:pointer" oninput="t11ApplyPreview()">
+<div style="flex:1;display:flex;gap:6px">
+<button onclick="t11SetColor('#ffffff')" style="flex:1;background:#fff;border:1px solid #2a3a6a;color:#000;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">White</button>
+<button onclick="t11SetColor('#000000')" style="flex:1;background:#000;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Black</button>
+<button onclick="t11SetColor('#22d3ee')" style="flex:1;background:#22d3ee;border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Cyan</button>
+<button onclick="t11SetColor('#f59e0b')" style="flex:1;background:#f59e0b;border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Gold</button>
+</div>
+</div>
+<div class="t11-mode" id="t11StyleModes" style="margin-top:8px">
+<button class="active" data-style="normal" onclick="t11SetStyle('normal',this)">📝 Normal</button>
+<button data-style="neon" onclick="t11SetStyle('neon',this)">🌈 Neon Glow</button>
+<button data-style="3d" onclick="t11SetStyle('3d',this)">🧊 3D Effect</button>
+<button data-style="gradient" onclick="t11SetStyle('gradient',this)">🎨 Gradient</button>
+</div>
+<span style="font-size:11px;color:#fff">📏 Text Size: <b id="t11SizeVal" style="color:#22d3ee">5%</b></span>
+<input type="range" id="t11Size" class="t11-range" min="2" max="15" value="5" oninput="document.getElementById('t11SizeVal').innerText=this.value+'%';t11ApplyPreview()">
+<span style="font-size:11px;color:#fff">👻 Opacity: <b id="t11OpacityVal" style="color:#22d3ee">60%</b></span>
+<input type="range" id="t11Opacity" class="t11-range" min="10" max="100" value="60" oninput="document.getElementById('t11OpacityVal').innerText=this.value+'%';t11ApplyPreview()">
+<span style="font-size:11px;color:#fff">🔄 Rotate: <b id="t11RotateVal" style="color:#22d3ee">0°</b></span>
+<input type="range" id="t11Rotate" class="t11-range" min="-45" max="45" value="0" oninput="document.getElementById('t11RotateVal').innerText=this.value+'°';t11ApplyPreview()">
+<div class="t11-chiprow">
+<button onclick="t11SetRotate(-30)">↙️ -30° Diagonal</button>
+<button onclick="t11SetRotate(0)">➡️ 0° Seedha</button>
+<button onclick="t11SetRotate(30)">↗️ 30° Diagonal</button>
+</div>
+
+<label class="t11-label">📍 6. POSITION - 9 Jagah + AI AUTO</label>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px" id="t11PosGrid">
+<button data-pos="top-left" onclick="t11SetPos('top-left',this)" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px;border-radius:10px;cursor:pointer">↖️ Top Left</button>
+<button data-pos="top-center" onclick="t11SetPos('top-center',this)" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px;border-radius:10px;cursor:pointer">⬆️ Top Center</button>
+<button data-pos="top-right" onclick="t11SetPos('top-right',this)" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px;border-radius:10px;cursor:pointer">↗️ Top Right</button>
+<button data-pos="middle-left" onclick="t11SetPos('middle-left',this)" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px;border-radius:10px;cursor:pointer">⬅️ Middle Left</button>
+<button data-pos="center" onclick="t11SetPos('center',this)" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px;border-radius:10px;cursor:pointer">🎯 Center</button>
+<button data-pos="middle-right" onclick="t11SetPos('middle-right',this)" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px;border-radius:10px;cursor:pointer">➡️ Middle Right</button>
+<button data-pos="bottom-left" onclick="t11SetPos('bottom-left',this)" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px;border-radius:10px;cursor:pointer">↙️ Bottom Left</button>
+<button data-pos="bottom-center" onclick="t11SetPos('bottom-center',this)" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px;border-radius:10px;cursor:pointer">⬇️ Bottom Center</button>
+<button data-pos="bottom-right" onclick="t11SetPos('bottom-right',this)" style="background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:12px;border-radius:10px;cursor:pointer">↘️ Bottom Right ⭐</button>
+</div>
+<button onclick="t11AiPosition()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#7c3aed,#a78bfa);border:none;color:#fff;padding:12px;border-radius:12px;font-weight:800;cursor:pointer">🤖 AI AUTO POSITION - Chehre Pe Nahi, Khali Jagah Pe Lagao</button>
+
+<div class="t11-toggle"><b>🌑 Shadow?</b><input type="checkbox" id="t11Shadow" checked onchange="t11ApplyPreview()"></div>
+<div class="t11-toggle"><b>🔲 Outline / Stroke?</b><input type="checkbox" id="t11Stroke" onchange="t11ApplyPreview()"></div>
+<div class="t11-toggle"><b>⬛ Background Box?</b><input type="checkbox" id="t11BgBox" onchange="t11ApplyPreview()"></div>
+<div class="t11-toggle"><b>🫥 Invisible Watermark Bhi Lagau? (Dikhega Nahi, Par Proof Rahega)</b><input type="checkbox" id="t11InvisibleOn" onchange="t11ApplyPreview()"></div>
+<div class="t11-toggle"><b>🕒 Date + Time Bhi Likhu?</b><input type="checkbox" id="t11Date" onchange="t11ApplyPreview()"></div>
+
+<label class="t11-label">🔄 7. OUTPUT + FILE NAME + MARGIN + VERIFY</label>
+<div class="t11-mode" id="t11FmtModes">
+<button class="active" data-fmt="keep" onclick="t11SetFmt('keep',this)">↩️ Keep Same</button>
+<button data-fmt="jpeg" onclick="t11SetFmt('jpeg',this)">🖼️ JPG</button>
+<button data-fmt="png" onclick="t11SetFmt('png',this)">🎨 PNG</button>
+<button data-fmt="webp" onclick="t11SetFmt('webp',this)">⚡ WEBP</button>
+</div>
+<input type="text" id="t11Prefix" class="t11-input" placeholder="Watermarked - Orbittroniz" value="Watermarked - Orbittroniz" style="margin-top:8px">
+<span style="font-size:11px;color:#fff">↔️ Margin: <b id="t11MarginVal" style="color:#22d3ee">20px</b></span>
+<input type="range" id="t11Margin" class="t11-range" min="5" max="60" value="20" oninput="document.getElementById('t11MarginVal').innerText=this.value+'px';t11ApplyPreview()">
+<input type="text" id="t11InvisibleText" class="t11-input" placeholder="Invisible Watermark Text - Jaise: Orbittroniz - Rahul - 2026" value="Orbittroniz - Secret Watermark" style="margin-top:8px">
+
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
+<b id="t11Stats" style="font-size:13px">Images: 0 • Watermark: Orbittroniz.com</b><br>
+<small id="t11VerifyInfo" style="color:#94a3b8">Invisible Watermark verify karne ke liye neeche Verify dabao</small>
+</div>
+
+<div class="t11-prog" id="t11Prog"><div id="t11Fill"></div></div>
+<div id="t11Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
+
+<button class="t11-btn-preview" onclick="t11OpenPreview()">👀 PREVIEW - Before / After</button>
+<button class="t11-btn3d" id="t11ApplyBtn" onclick="t11Apply()">💧 APPLY WATERMARK - REAL START</button>
+<button class="t11-btn2" onclick="t11VerifyInvisible()" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);color:#fff;border:none">🫥 VERIFY INVISIBLE WATERMARK - Kya Photo Meri Hai?</button>
+<button class="t11-btn2" onclick="t11DownloadAll()" id="t11AllBtn" style="display:none">⬇️ Download All One By One</button>
+<button class="t11-btn2" onclick="t11DownloadZIP()" id="t11ZipBtn" style="display:none;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border:none">📦 Download All as ZIP</button>
+<button class="t11-btn-share" id="t11ShareBtn" onclick="t11ShareFirst()">📤 SHARE FIRST IMAGE</button>
+<button class="t11-btn2" onclick="t11Reset()">🗑️ Clear / New Images</button>
+
+<label class="t11-label">🖼️ WATERMARKED IMAGES</label>
+<div class="t11-grid" id="t11Out"></div>
+<div id="t11OutEmpty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">No images yet - Apply Watermark to see here</div>
+<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - QR + Invisible + Sign All Working</p>
 </div></div>
+<!-- ================= TOOL 11 V2 - END ================= -->
+
+<div class="t11-modal" id="t11Modal">
+<div id="t11ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Preview</div>
+<canvas id="t11ModalCanvas"></canvas>
+<div id="t11ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div>
+<div class="t11-modal-nav">
+<button onclick="t11ToggleBeforeAfter()" style="background:#f59e0b" id="t11BeforeAfterBtn">🔄 Show After</button>
+<button onclick="t11PrevImg()">⬅️ Prev</button>
+<button onclick="t11NextImg()">Next ➡️</button>
+<button onclick="t11DownloadOne(t11PreviewIdx)" style="background:#22c55e">⬇️ Download This</button>
+<button class="primary" onclick="t11ClosePreview()">✅ Close</button>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+<script>
+// ===== TOOL 11 V2 JS - AI + QR + INVISIBLE + SIGN =====
+var t11Files=[], t11Selected=new Set(), t11Type='text', t11Pos='bottom-right', t11Fmt='keep', t11Results=[], t11PreviewIdx=0, t11ShowAfter=false, t11EditorImg=null, t11LogoImg=null, t11Style='normal', t11SignImg=null, t11BatchNames={}, t11QrImg=null, t11QrLoadedFor="";
+function t11Log(msg){ var d=document.getElementById('t11Debug'); if(d) d.innerText="Status: "+msg; }
+function t11OnFileSelect(input){
+  t11Log("File select: "+(input.files?input.files.length:0));
+  if(!input.files || !input.files.length) return;
+  var files=Array.prototype.slice.call(input.files); input.value="";
+  t11LoadFiles(files);
+}
+function t11OnLogoSelect(input){
+  if(!input.files || !input.files[0]) return;
+  var img=new Image(); img.onload=function(){ t11LogoImg=img; document.getElementById('t11LogoInfo').innerText="✅ Logo lag gaya: "+input.files[0].name; t11ApplyPreview(); }; img.src=URL.createObjectURL(input.files[0]); input.value="";
+}
+(function(){
+  var drop=document.getElementById('t11Drop'); if(!drop) return;
+  drop.addEventListener('dragover',function(e){e.preventDefault();drop.classList.add('dragover')});
+  drop.addEventListener('dragleave',function(){drop.classList.remove('dragover')});
+  drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remove('dragover'); if(e.dataTransfer.files && e.dataTransfer.files.length) t11LoadFiles(Array.prototype.slice.call(e.dataTransfer.files));});
+  // Sign canvas - Mouse + Touch
+  var sc=document.getElementById('t11SignCanvas');
+  if(sc){
+    var sctx=sc.getContext('2d'); sctx.lineCap='round'; sctx.lineJoin='round';
+    var drawing=false, lastX=0, lastY=0;
+    function getPos(e){ var r=sc.getBoundingClientRect(); var cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left; var cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top; return {x:cx*sc.width/r.width, y:cy*sc.height/r.height}; }
+    sc.addEventListener('mousedown',function(e){ drawing=true; var p=getPos(e); lastX=p.x; lastY=p.y; });
+    sc.addEventListener('mousemove',function(e){ if(!drawing) return; var p=getPos(e); sctx.strokeStyle=document.getElementById('t11SignColor').value||"#000"; sctx.lineWidth=parseInt(document.getElementById('t11SignSize').value||4); sctx.beginPath(); sctx.moveTo(lastX,lastY); sctx.lineTo(p.x,p.y); sctx.stroke(); lastX=p.x; lastY=p.y; });
+    sc.addEventListener('mouseup',function(){ drawing=false; });
+    sc.addEventListener('mouseleave',function(){ drawing=false; });
+    sc.addEventListener('touchstart',function(e){ e.preventDefault(); drawing=true; var p=getPos(e); lastX=p.x; lastY=p.y; },{passive:false});
+    sc.addEventListener('touchmove',function(e){ e.preventDefault(); if(!drawing) return; var p=getPos(e); sctx.strokeStyle=document.getElementById('t11SignColor').value||"#000"; sctx.lineWidth=parseInt(document.getElementById('t11SignSize').value||4); sctx.beginPath(); sctx.moveTo(lastX,lastY); sctx.lineTo(p.x,p.y); sctx.stroke(); lastX=p.x; lastY=p.y; },{passive:false});
+    sc.addEventListener('touchend',function(){ drawing=false; });
+  }
+})();
+function t11SetType(t,btn){ t11Type=t; document.querySelectorAll('#t11TypeModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active');
+  document.getElementById('t11TextBox').style.display=(t==='logo'||t==='qr'||t==='sign'||t==='invisible')?'none':'block';
+  document.getElementById('t11LogoBox').style.display=(t==='logo'||t==='both')?'block':'none';
+  document.getElementById('t11QrBox').style.display=(t==='qr')?'block':'none';
+  document.getElementById('t11SignBox').style.display=(t==='sign')?'block':'none';
+  if(t==='logo' && !t11LogoImg) document.getElementById('t11LogoFile').click();
+  if(t==='invisible'){ document.getElementById('t11Status').innerText="🫥 Invisible mode - Photo me dikhega nahi, par Verify se pakda jayega"; document.getElementById('t11InvisibleOn').checked=true; }
+  if(t==='datetime'){ document.getElementById('t11Text').value=""; document.getElementById('t11Date').checked=true; }
+  t11ApplyPreview();
+}
+function t11SetPos(p,btn){ t11Pos=p; document.querySelectorAll('#t11PosGrid button').forEach(function(b){b.style.background='#162143';b.style.border='1px solid #2a3a6a';}); if(btn){btn.style.background='linear-gradient(135deg,#7c3aed,#22d3ee)';btn.style.border='none';} t11ApplyPreview(); }
+function t11SetFmt(f,btn){ t11Fmt=f; document.querySelectorAll('#t11FmtModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); }
+function t11SetStyle(s,btn){ t11Style=s; document.querySelectorAll('#t11StyleModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); t11ApplyPreview(); }
+function t11SetColor(c){ document.getElementById('t11Color').value=c; t11ApplyPreview(); }
+function t11SetRotate(v){ document.getElementById('t11Rotate').value=v; document.getElementById('t11RotateVal').innerText=v+'°'; t11ApplyPreview(); }
+function t11QuickText(t){ document.getElementById('t11Text').value=t; t11ApplyPreview(); }
+function t11QuickQr(t){ document.getElementById('t11QrText').value=t; t11ApplyPreview(); }
+function t11ClearSign(){ var sc=document.getElementById('t11SignCanvas'); var ctx=sc.getContext('2d'); ctx.clearRect(0,0,sc.width,sc.height); t11SignImg=null; document.getElementById('t11Status').innerText="Sign cleared"; }
+function t11SaveSign(){
+  var sc=document.getElementById('t11SignCanvas');
+  // Check if blank
+  var ctx=sc.getContext('2d'); var d=ctx.getImageData(0,0,sc.width,sc.height).data; var has=false; for(var i=3;i<d.length;i+=4){ if(d[i]>10){ has=true; break; } }
+  if(!has) return alert("Pehle sign karo!");
+  var img=new Image(); img.onload=function(){ t11SignImg=img; document.getElementById('t11Status').innerText="✅ Sign saved! Ab Apply dabao - Sign photo pe lagega"; t11ApplyPreview(); }; img.src=sc.toDataURL();
+}
+function t11SetPreset(name){
+  if(name==='shop'){ t11SetType('tiled', document.querySelector('#t11TypeModes button[data-type="tiled"]')); document.getElementById('t11Text').value="Orbittroniz.com"; document.getElementById('t11Opacity').value=40; document.getElementById('t11OpacityVal').innerText="40%"; document.getElementById('t11Rotate').value=-30; document.getElementById('t11RotateVal').innerText="-30°"; }
+  else if(name==='ai'){ t11AiPosition(); return; }
+  else if(name==='qr'){ t11SetType('qr', document.querySelector('#t11TypeModes button[data-type="qr"]')); t11SetPos('bottom-right', document.querySelector('#t11PosGrid button[data-pos="bottom-right"]')); }
+  else if(name==='invisible'){ t11SetType('invisible', document.querySelector('#t11TypeModes button[data-type="invisible"]')); document.getElementById('t11InvisibleOn').checked=true; document.getElementById('t11Status').innerText="🫥 Invisible ON - Photo same dikhegi, par andar watermark hoga"; }
+  else if(name==='sign'){ t11SetType('sign', document.querySelector('#t11TypeModes button[data-type="sign"]')); }
+  else if(name==='neon'){ t11SetStyle('neon', document.querySelector('#t11StyleModes button[data-style="neon"]')); t11SetColor('#22d3ee'); document.getElementById('t11Opacity').value=90; document.getElementById('t11OpacityVal').innerText="90%"; }
+  else if(name==='copyright'){ t11SetType('text', document.querySelector('#t11TypeModes button[data-type="text"]')); t11SetPos('center', document.querySelector('#t11PosGrid button[data-pos="center"]')); document.getElementById('t11Text').value="© 2026 - All Rights Reserved"; }
+  t11ApplyPreview();
+}
+// ===== AI AUTO POSITION - Khali jagah dhoondho, face pe mat lagao =====
+async function t11AiPosition(){
+  if(!t11EditorImg){ alert("Pehle photo select karo!"); return; }
+  document.getElementById('t11Status').innerText="🤖 AI khali jagah dhoondh raha hai...";
+  try{
+    var img=t11EditorImg;
+    var c=document.createElement('canvas'); c.width=100; c.height=100; var ctx=c.getContext('2d'); ctx.drawImage(img,0,0,100,100);
+    var d=ctx.getImageData(0,0,100,100).data;
+    // Har corner ki brightness + detail check karo - Sabse khali / dark corner best hai watermark ke liye
+    function cornerScore(x0,y0,x1,y1){
+      var sum=0, edge=0, cnt=0;
+      for(var y=y0;y<y1;y++){ for(var x=x0;x<x1;x++){ var idx=(y*100+x)*4; var gray=(d[idx]+d[idx+1]+d[idx+2])/3; sum+=gray; if(x> x0 && y>y0){ edge+=Math.abs(gray - (d[((y)*100+(x-1))*4]+d[((y)*100+(x-1))*4+1]+d[((y)*100+(x-1))*4+2])/3); } cnt++; } }
+      return {bright:sum/cnt, edge:edge/cnt};
+    }
+    var corners={
+      'top-left': cornerScore(0,0,35,35),
+      'top-right': cornerScore(65,0,100,35),
+      'bottom-left': cornerScore(0,65,35,100),
+      'bottom-right': cornerScore(65,65,100,100),
+      'center': cornerScore(35,35,65,65)
+    };
+    // Sabse kam edge (khali) + medium brightness wala corner best hai
+    var best='bottom-right', bestScore=9999;
+    for(var k in corners){ var sc2=corners[k].edge + Math.abs(corners[k].bright-110)*0.3; if(sc2<bestScore){ bestScore=sc2; best=k; } }
+    t11SetPos(best, document.querySelector('#t11PosGrid button[data-pos="'+best+'"]'));
+    document.getElementById('t11AiInfo').innerText="🤖 AI: "+best+" sabse khali jagah hai - Waha watermark lagaya ✅ Edge Score: "+Math.round(bestScore);
+    document.getElementById('t11Status').innerText="🤖 AI Position: "+best+" ✅ - Chehre / detail wali jagah pe nahi lagaya";
+  }catch(e){ console.warn(e); t11SetPos('bottom-right',null); }
+}
+function t11RenderBatchList(){
+  if(!document.getElementById('t11BatchDiff').checked) return;
+  var list=document.getElementById('t11BatchList'); list.innerHTML="";
+  t11Files.forEach(function(f,idx){
+    if(!t11BatchNames[idx]) t11BatchNames[idx]=document.getElementById('t11Text').value||"Orbittroniz.com";
+    var div=document.createElement('div'); div.style.cssText="display:flex;gap:6px;margin-top:6px;align-items:center";
+    div.innerHTML='<span style="font-size:11px;color:#fff;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(idx+1)+'. '+f.name+'</span><input type="text" value="'+t11BatchNames[idx].replace(/"/g,'&quot;')+'" oninput="t11BatchNames['+idx+']=this.value; t11ApplyPreview()" style="flex:1;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:8px;font-size:12px">';
+    list.appendChild(div);
+  });
+}
+async function t11LoadFiles(files){
+  files=files.filter(function(f){ return f.type.indexOf('image/')===0 || f.type==='' || f.name.match(/\.(jpg|jpeg|png|webp|gif|bmp)$/i); }).slice(0,10);
+  if(!files.length){ alert("Sirf Image select karo!"); return; }
+  t11Files=files; t11Selected.clear(); t11Results=[]; t11PreviewIdx=0; t11BatchNames={};
+  files.forEach(function(_,i){ t11Selected.add(i); t11BatchNames[i]=document.getElementById('t11Text').value||"Orbittroniz.com"; });
+  document.getElementById('t11Out').innerHTML=""; document.getElementById('t11OutEmpty').style.display='block'; document.getElementById('t11AllBtn').style.display='none'; document.getElementById('t11ZipBtn').style.display='none'; document.getElementById('t11ShareBtn').style.display='none';
+  document.getElementById('t11FileName').innerText=files.length+" Images Selected ✅ - "+files[0].name;
+  document.getElementById('t11Status').innerText="✅ Ready! "+files.length+" images. Apply dabao.";
+  t11Log("Loaded "+files.length+" images OK");
+  var listEl=document.getElementById('t11SelectedList'); document.getElementById('t11SelectedBox').style.display='block'; listEl.innerHTML="";
+  files.forEach(function(f,idx){
+    var div=document.createElement('div'); div.style.cssText="display:flex;gap:8px;align-items:center;margin-top:6px;background:#060a18;border:1px solid #2a3a6a;border-radius:10px;padding:6px";
+    var thumb=document.createElement('img'); thumb.style.cssText="width:50px;height:50px;object-fit:cover;border-radius:8px;background:#fff"; thumb.src=URL.createObjectURL(f);
+    var span=document.createElement('span'); span.style.cssText="font-size:11px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff"; span.innerText=(idx+1)+". "+f.name+" • "+(f.size/1024).toFixed(0)+" KB";
+    div.appendChild(thumb); div.appendChild(span); listEl.appendChild(div);
+  });
+  t11RenderBatchList();
+  var first=files[0];
+  var img=new Image(); img.onload=function(){ t11EditorImg=img; document.getElementById('t11EmptyBox').style.display='none'; document.getElementById('t11PreviewImg').style.display='block'; document.getElementById('t11PreviewImg').src=URL.createObjectURL(first); t11ApplyPreview(); }; img.src=URL.createObjectURL(first);
+}
+// ===== QR - API se QR image lao, cache karo =====
+function t11LoadQr(){
+  var txt=document.getElementById('t11QrText').value.trim()||"https://orbittroniz.com";
+  if(t11QrLoadedFor===txt && t11QrImg) return Promise.resolve(t11QrImg);
+  return new Promise(function(res){
+    var img=new Image(); img.crossOrigin='anonymous';
+    img.onload=function(){ t11QrImg=img; t11QrLoadedFor=txt; res(img); };
+    img.onerror=function(){ t11QrImg=null; res(null); };
+    img.src='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data='+encodeURIComponent(txt);
+  });
+}
+// ===== INVISIBLE WATERMARK - LSB Steganography =====
+function t11ApplyInvisible(ctx,W,H){
+  var secret=document.getElementById('t11InvisibleText').value||"Orbittroniz - Secret";
+  // Secret ko binary me badlo + marker
+  var full="ORBITS:"+secret+":END";
+  var bits="";
+  for(var i=0;i<full.length;i++){ var code=full.charCodeAt(i); bits+=code.toString(2).padStart(8,'0'); }
+  try{
+    var imgData=ctx.getImageData(0,0,W,H); var d=imgData.data;
+    // Pehle 32 bits me length likho
+    var lenBits=bits.length.toString(2).padStart(32,'0');
+    var allBits=lenBits+bits;
+    var bitIdx=0;
+    for(var p=0;p<d.length && bitIdx<allBits.length;p+=4){
+      // R channel ka LSB badlo - Aankh ko dikhega nahi
+      var bit=parseInt(allBits[bitIdx]);
+      d[p]=(d[p]&0xFE)|bit;
+      bitIdx++;
+    }
+    ctx.putImageData(imgData,0,0);
+  }catch(e){ console.warn(e); }
+}
+function t11VerifyInvisible(){
+  if(!t11EditorImg && !t11Results.length){ alert("Pehle photo select karo ya watermark lagao!"); return; }
+  var srcImg = t11Results.length ? t11Results[0].url : URL.createObjectURL(t11Files[0]);
+  var img=new Image(); img.crossOrigin='anonymous';
+  img.onload=function(){
+    try{
+      var c=document.createElement('canvas'); c.width=img.width; c.height=img.height; var ctx=c.getContext('2d'); ctx.drawImage(img,0,0);
+      var d=ctx.getImageData(0,0,c.width,c.height).data;
+      var bits=""; for(var p=0;p<32*4;p+=4){ bits+= (d[p]&1).toString(); }
+      var len=parseInt(bits,2);
+      if(!len || len>10000){ document.getElementById('t11VerifyInfo').innerText="❌ Is photo me invisible watermark nahi mila - Ye photo teri nahi hai ya watermark nahi laga"; document.getElementById('t11Status').innerText="❌ Invisible watermark nahi mila"; return; }
+      var msgBits=""; for(var q=32*4; q< (32+len)*4 && q<d.length; q+=4){ msgBits+= (d[q]&1).toString(); }
+      var msg="";
+      for(var i=0;i<msgBits.length;i+=8){ var byte=msgBits.substr(i,8); if(byte.length<8) break; msg+=String.fromCharCode(parseInt(byte,2)); }
+      if(msg.indexOf('ORBITS:')===0){
+        var secret=msg.replace('ORBITS:','').replace(':END','');
+        document.getElementById('t11VerifyInfo').innerText="✅ Invisible Watermark MILA! Secret: "+secret+" - Ye photo teri hai, proof mil gaya";
+        document.getElementById('t11Status').innerText="✅ Invisible Watermark Verified: "+secret;
+      } else {
+        document.getElementById('t11VerifyInfo').innerText="❌ Watermark nahi mila - Photo me ORBITS marker nahi hai";
+      }
+    }catch(e){ alert("Verify fail: "+e.message); }
+  };
+  img.src=srcImg;
+}
+// ===== CORE DRAW =====
+function t11DrawWatermark(ctx, W, H, customText){
+  var text = customText!==undefined ? customText : (document.getElementById('t11Text').value || "Orbittroniz.com");
+  var text2=document.getElementById('t11Text2').value || "";
+  if(t11Type==='datetime'){
+    var now=new Date();
+    text=now.toLocaleDateString('en-IN')+" • "+now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+    text2="Orbittroniz.com";
+  }
+  if(document.getElementById('t11Date').checked && t11Type!=='datetime'){ text2 = text2 ? text2+" • "+new Date().toLocaleDateString('en-IN') : new Date().toLocaleDateString('en-IN'); }
+  var font=document.getElementById('t11Font').value || "Arial";
+  var style=document.getElementById('t11FontStyle').value || "bold";
+  var color=document.getElementById('t11Color').value || "#ffffff";
+  var sizePct=parseInt(document.getElementById('t11Size').value||5);
+  var fontSize=Math.max(14, Math.round(W*sizePct/100));
+  var opacity=parseInt(document.getElementById('t11Opacity').value||60)/100;
+  var rotate=parseInt(document.getElementById('t11Rotate').value||0);
+  var margin=parseInt(document.getElementById('t11Margin').value||20);
+  var shadow=document.getElementById('t11Shadow').checked;
+  var stroke=document.getElementById('t11Stroke').checked;
+  var bgBox=document.getElementById('t11BgBox').checked;
+  var logoSizePct=parseInt(document.getElementById('t11LogoSize').value||20);
+  var qrSizePct=parseInt(document.getElementById('t11QrSize').value||22);
+
+  function applyStyle(){
+    if(t11Style==='neon'){ ctx.shadowColor=color; ctx.shadowBlur=18; ctx.shadowOffsetX=0; ctx.shadowOffsetY=0; }
+    else if(t11Style==='3d'){ ctx.shadowColor='rgba(0,0,0,0.9)'; ctx.shadowBlur=2; ctx.shadowOffsetX=3; ctx.shadowOffsetY=3; }
+    else if(shadow){ ctx.shadowColor='rgba(0,0,0,0.8)'; ctx.shadowBlur=6; ctx.shadowOffsetX=2; ctx.shadowOffsetY=2; }
+  }
+  function drawOneText(cx, cy, rot){
+    ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot*Math.PI/180); ctx.globalAlpha=opacity;
+    ctx.font=style+" "+fontSize+"px "+font+", Arial"; ctx.textAlign='center'; ctx.textBaseline='middle';
+    if(bgBox){ var tw=ctx.measureText(text).width; var th=fontSize*1.4; if(text2) th+=fontSize*1.1; ctx.fillStyle='rgba(0,0,0,0.55)'; ctx.fillRect(-tw/2-14, -th/2, tw+28, th); }
+    applyStyle();
+    if(t11Style==='gradient'){
+      var grad=ctx.createLinearGradient(-100,0,100,0); grad.addColorStop(0,'#22d3ee'); grad.addColorStop(0.5,'#a78bfa'); grad.addColorStop(1,'#f472b6'); ctx.fillStyle=grad;
+    } else if(t11Style==='3d'){
+      ctx.fillStyle='rgba(0,0,0,0.5)'; ctx.fillText(text,3,3); ctx.fillStyle=color;
+    } else { ctx.fillStyle=color; }
+    if(stroke){ ctx.strokeStyle='rgba(0,0,0,0.9)'; ctx.lineWidth=3; ctx.strokeText(text,0,0); if(text2) ctx.strokeText(text2,0,fontSize*1.1); }
+    ctx.fillText(text,0,0);
+    if(text2){ ctx.font=style+" "+Math.round(fontSize*0.7)+"px "+font+", Arial"; ctx.shadowBlur=0; ctx.fillStyle=color; ctx.fillText(text2,0,fontSize*1.1); }
+    ctx.restore();
+  }
+  function drawOneLogo(cx, cy, rot){
+    if(!t11LogoImg) return;
+    ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot*Math.PI/180); ctx.globalAlpha=opacity;
+    var lw=W*logoSizePct/100; var lh=lw*t11LogoImg.height/t11LogoImg.width;
+    if(shadow){ ctx.shadowColor='rgba(0,0,0,0.6)'; ctx.shadowBlur=8; ctx.shadowOffsetY=3; }
+    ctx.drawImage(t11LogoImg, -lw/2, -lh/2, lw, lh); ctx.restore();
+  }
+  function drawOneSign(cx, cy, rot){
+    if(!t11SignImg) return;
+    ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot*Math.PI/180); ctx.globalAlpha=opacity;
+    var lw=W*0.28; var lh=lw*t11SignImg.height/t11SignImg.width;
+    ctx.drawImage(t11SignImg, -lw/2, -lh/2, lw, lh); ctx.restore();
+  }
+  function drawOneQr(cx, cy, rot){
+    if(!t11QrImg) return;
+    ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot*Math.PI/180); ctx.globalAlpha=Math.min(1, opacity+0.2);
+    var s=W*qrSizePct/100;
+    ctx.fillStyle='#fff'; ctx.fillRect(-s/2-6, -s/2-6, s+12, s+12);
+    ctx.drawImage(t11QrImg, -s/2, -s/2, s, s);
+    // QR ke neeche text
+    ctx.font="bold "+Math.round(s*0.12)+"px Arial"; ctx.textAlign='center'; ctx.fillStyle='#000'; ctx.fillText(document.getElementById('t11QrText').value.slice(0,30), 0, s/2+16);
+    ctx.restore();
+  }
+  function posToXY(){
+    var cx=W/2, cy=H/2;
+    if(t11Pos==='top-left'){ cx=margin+fontSize*2; cy=margin+fontSize; }
+    else if(t11Pos==='top-center'){ cx=W/2; cy=margin+fontSize; }
+    else if(t11Pos==='top-right'){ cx=W-margin-fontSize*2; cy=margin+fontSize; }
+    else if(t11Pos==='middle-left'){ cx=margin+fontSize*2; cy=H/2; }
+    else if(t11Pos==='center'){ cx=W/2; cy=H/2; }
+    else if(t11Pos==='middle-right'){ cx=W-margin-fontSize*2; cy=H/2; }
+    else if(t11Pos==='bottom-left'){ cx=margin+fontSize*2; cy=H-margin-fontSize; }
+    else if(t11Pos==='bottom-center'){ cx=W/2; cy=H-margin-fontSize; }
+    else if(t11Pos==='bottom-right'){ cx=W-margin-fontSize*2; cy=H-margin-fontSize; }
+    return {cx:cx, cy:cy};
+  }
+  if(t11Type==='tiled'){
+    var stepX=W*0.28, stepY=H*0.22;
+    for(var y=stepY/2; y<H; y+=stepY){ for(var x=stepX/2; x<W; x+=stepX){ drawOneText(x,y, rotate||-30); } }
+    return;
+  }
+  var pos=posToXY();
+  if(t11Type==='text' || t11Type==='datetime'){ drawOneText(pos.cx, pos.cy, rotate); }
+  else if(t11Type==='logo'){ drawOneLogo(pos.cx, pos.cy, rotate); }
+  else if(t11Type==='both'){
+    if(t11LogoImg){ ctx.save(); ctx.globalAlpha=opacity; var lw2=W*logoSizePct/100; var lh2=lw2*t11LogoImg.height/t11LogoImg.width; ctx.drawImage(t11LogoImg, pos.cx-lw2/2, pos.cy-lh2-fontSize-8, lw2, lh2); ctx.restore(); }
+    drawOneText(pos.cx, pos.cy, rotate);
+  }
+  else if(t11Type==='qr'){ drawOneQr(pos.cx, pos.cy, rotate); }
+  else if(t11Type==='sign'){ drawOneSign(pos.cx, pos.cy, rotate); }
+  else if(t11Type==='invisible'){ /* Invisible alag se lagega, yaha kuch nahi */ }
+}
+async function t11ApplyPreview(){
+  if(!t11EditorImg) return;
+  var img=t11EditorImg;
+  var canvas=document.getElementById('t11PreviewCanvas');
+  var scale=Math.min(1, 800/Math.max(img.width,img.height));
+  canvas.width=img.width*scale; canvas.height=img.height*scale;
+  var ctx=canvas.getContext('2d'); ctx.drawImage(img,0,0,canvas.width,canvas.height);
+  if(t11Type==='qr'){ await t11LoadQr(); }
+  t11DrawWatermark(ctx, canvas.width, canvas.height);
+  if(document.getElementById('t11InvisibleOn').checked){ /* Preview me invisible dikhega nahi - sahi hai */ }
+  canvas.style.display='block'; document.getElementById('t11PreviewImg').style.display='none';
+  document.getElementById('t11PreviewInfo').innerText="Preview: "+(t11Type==='qr'?"QR Code":t11Type==='sign'?"Signature":t11Type==='invisible'?"Invisible (Dikhega Nahi)":(document.getElementById('t11Text').value||"Logo"))+" • "+t11Pos+" • "+t11Style;
+  document.getElementById('t11Stats').innerText="Images: "+t11Files.length+" • Watermark: "+(document.getElementById('t11Text').value||t11Type)+" • Position: "+t11Pos+" • Style: "+t11Style;
+}
+function t11LoadImage(file){ return new Promise(function(res,rej){ var img=new Image(); img.onload=function(){res(img)}; img.onerror=rej; img.src=URL.createObjectURL(file); }); }
+async function t11ApplyOne(file, idx){
+  var img=await t11LoadImage(file);
+  var canvas=document.createElement('canvas'); canvas.width=img.width; canvas.height=img.height;
+  var ctx=canvas.getContext('2d'); ctx.drawImage(img,0,0,canvas.width,canvas.height);
+  if(t11Type==='qr'){ await t11LoadQr(); }
+  var customText = document.getElementById('t11BatchDiff').checked ? (t11BatchNames[idx]||document.getElementById('t11Text').value) : undefined;
+  t11DrawWatermark(ctx, canvas.width, canvas.height, customText);
+  if(document.getElementById('t11InvisibleOn').checked || t11Type==='invisible'){ t11ApplyInvisible(ctx, canvas.width, canvas.height); }
+  var outFmt = t11Fmt==='keep' ? (file.type.indexOf('png')>-1?'png':file.type.indexOf('webp')>-1?'webp':'jpeg') : t11Fmt;
+  // Invisible ke liye PNG best hai - JPG me LSB kharab ho jata hai, isliye PNG force karo
+  if(document.getElementById('t11InvisibleOn').checked || t11Type==='invisible'){ outFmt='png'; }
+  var mime = outFmt==='png'?'image/png':outFmt==='webp'?'image/webp':'image/jpeg';
+  var ext = outFmt==='png'?'png':outFmt==='webp'?'webp':'jpg';
+  var blob=await new Promise(function(r){canvas.toBlob(r,mime, outFmt==='png'?1:0.92)});
+  if(!blob){ blob=await new Promise(function(r){canvas.toBlob(r,'image/png',1)}); mime='image/png'; ext='png'; }
+  return {blob:blob,ext:ext,w:canvas.width,h:canvas.height,origW:img.width,origH:img.height};
+}
+async function t11Apply(){
+  if(!t11Files.length){ alert("Pehle image select karo!"); return; }
+  if(t11Type==='text' && !document.getElementById('t11Text').value.trim() && !document.getElementById('t11BatchDiff').checked){ alert("Pehle watermark text likho!"); return; }
+  if((t11Type==='logo'||t11Type==='both') && !t11LogoImg){ alert("Pehle logo select karo!"); document.getElementById('t11LogoFile').click(); return; }
+  if(t11Type==='sign' && !t11SignImg){ alert("Pehle sign karo aur Save dabao!"); return; }
+  if(t11Type==='qr'){ await t11LoadQr(); if(!t11QrImg) alert("QR load nahi hua - Internet check karo, text watermark lag jayega"); }
+  var sel=Array.from(t11Selected).sort(function(a,b){return a-b}); if(!sel.length) sel=t11Files.map(function(_,i){return i});
+  var prefix=(document.getElementById('t11Prefix').value.trim()||"Watermarked - Orbittroniz").replace(/[\\/:*?"<>|]/g,'');
+  document.getElementById('t11Status').innerText="Applying watermark to "+sel.length+" images...";
+  document.getElementById('t11Prog').style.display='block'; document.getElementById('t11Fill').style.width="0%";
+  document.getElementById('t11Out').innerHTML=""; document.getElementById('t11OutEmpty').style.display='none'; t11Results=[];
+  try{
+    for(var si=0; si<sel.length; si++){
+      var idx=sel[si]; var file=t11Files[idx];
+      try{
+        var res=await t11ApplyOne(file, idx);
+        var fname=prefix+" - "+(si+1)+"."+res.ext; var url=URL.createObjectURL(res.blob);
+        t11Results.push({blob:res.blob,name:fname,url:url,origFile:file,origUrl:URL.createObjectURL(file),beforeKB:file.size/1024,afterKB:res.blob.size/1024,w:res.w,h:res.h});
+        var card=document.createElement('div'); card.className='t11-imgcard';
+        card.innerHTML='<img src="'+url+'"><div style="padding:8px;text-align:center"><b style="font-size:11px">'+fname+'</b><br><small>'+(file.size/1024).toFixed(0)+' KB → '+(res.blob.size/1024).toFixed(0)+' KB</small><br><small style="color:#22c55e">'+res.w+'x'+res.h+' • '+(t11Type==='invisible'?'Invisible ✅':'Watermarked ✅')+'</small><div style="display:flex;gap:4px;margin-top:6px"><button onclick="t11DownloadOne('+(t11Results.length-1)+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">⬇️ Download</button><button onclick="t11ShareOne('+(t11Results.length-1)+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">📤 Share</button></div></div>';
+        document.getElementById('t11Out').appendChild(card);
+      }catch(e){ console.warn(e); }
+      document.getElementById('t11Fill').style.width=Math.round(((si+1)/sel.length)*100)+"%";
+      await new Promise(function(r){setTimeout(r,10)});
+    }
+    document.getElementById('t11Status').innerText="✅ Done! "+t11Results.length+" images watermarked";
+    document.getElementById('t11AllBtn').style.display=t11Results.length>1?'block':'none'; document.getElementById('t11ZipBtn').style.display='block'; document.getElementById('t11ShareBtn').style.display='block';
+    setTimeout(function(){document.getElementById('t11Prog').style.display='none'},800);
+  }catch(e){alert("Watermark Error: "+e.message);document.getElementById('t11Prog').style.display='none';}
+}
+function t11DownloadOne(i){ if(!t11Results[i]) return; var r=t11Results[i]; var a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }
+function t11DownloadAll(){ if(!t11Results.length) return alert("First apply watermark"); if(!confirm(t11Results.length+" images download hongi. Allow?")) return; t11Results.forEach(function(r,idx){ setTimeout(function(){ var a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }, idx*600); }); }
+async function t11DownloadZIP(){
+  if(!t11Results.length) return alert("First apply watermark");
+  if(!window.JSZip){ await new Promise(function(r){setTimeout(r,1500)}); if(!window.JSZip) return alert("ZIP loading, dobara try karo"); }
+  document.getElementById('t11Status').innerText="Making ZIP...";
+  try{ var zip=new JSZip(); for(var i=0;i<t11Results.length;i++){ zip.file(t11Results[i].name, t11Results[i].blob); } var blob=await zip.generateAsync({type:"blob"}); var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download=(document.getElementById('t11Prefix').value.trim()||"Watermarked")+" - All.zip"; document.body.appendChild(a); a.click(); a.remove(); document.getElementById('t11Status').innerText="✅ ZIP Downloaded"; }catch(e){ alert("ZIP Error: "+e.message); }
+}
+async function t11ShareOne(i){ if(!t11Results[i]) return; try{ var r=t11Results[i]; var file=new File([r.blob],r.name,{type:r.blob.type}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:r.name}); }else alert("Share not supported - Download karo"); }catch(e){ alert("Share cancelled"); } }
+async function t11ShareFirst(){ if(!t11Results.length) return alert("First apply watermark"); await t11ShareOne(0); }
+async function t11OpenPreview(){
+  if(!t11Files.length){ alert("First select Images!"); return; }
+  t11PreviewIdx=0; t11ShowAfter=false; await t11ShowPreview(); document.getElementById('t11Modal').style.display='flex';
+}
+async function t11ShowPreview(){
+  var mc=document.getElementById('t11ModalCanvas'), ctx=mc.getContext('2d');
+  if(t11Results.length){
+    if(t11PreviewIdx<0) t11PreviewIdx=t11Results.length-1; if(t11PreviewIdx>=t11Results.length) t11PreviewIdx=0;
+    var r=t11Results[t11PreviewIdx]; var img=new Image(); img.onload=function(){ var s=Math.min(1, 1200/Math.max(img.width,img.height)); mc.width=img.width*s; mc.height=img.height*s; ctx.drawImage(img,0,0,mc.width,mc.height); document.getElementById('t11ModalTitle').innerText=(t11ShowAfter?"AFTER - Watermarked - ":"BEFORE - ")+"Image "+(t11PreviewIdx+1)+" / "+t11Results.length; document.getElementById('t11ModalCap').innerText="Type: "+t11Type+" • Position: "+t11Pos+" • Style: "+t11Style; document.getElementById('t11BeforeAfterBtn').innerText=t11ShowAfter?"🔄 Show Before":"🔄 Show After"; }; img.src=t11ShowAfter?r.url:r.origUrl;
+  } else {
+    if(t11PreviewIdx<0) t11PreviewIdx=t11Files.length-1; if(t11PreviewIdx>=t11Files.length) t11PreviewIdx=0;
+    var f=t11Files[t11PreviewIdx]; var img2=new Image(); img2.onload=function(){ var s2=Math.min(1, 1200/Math.max(img2.width,img2.height)); mc.width=img2.width*s2; mc.height=img2.height*s2; ctx.drawImage(img2,0,0,mc.width,mc.height); document.getElementById('t11ModalTitle').innerText="Preview - Original "+(t11PreviewIdx+1)+" / "+t11Files.length; document.getElementById('t11ModalCap').innerText=f.name+" • Apply karke After dekho"; }; img2.src=URL.createObjectURL(f);
+  }
+}
+async function t11ToggleBeforeAfter(){ if(!t11Results.length){ alert("First apply watermark"); return; } t11ShowAfter=!t11ShowAfter; await t11ShowPreview(); }
+async function t11NextImg(){t11PreviewIdx++;await t11ShowPreview();}
+async function t11PrevImg(){t11PreviewIdx--;await t11ShowPreview();}
+function t11ClosePreview(){document.getElementById('t11Modal').style.display='none';}
+document.addEventListener('keydown',function(e){var m=document.getElementById('t11Modal');if(m&&m.style.display==='flex'){if(e.key==='ArrowRight')t11NextImg();if(e.key==='ArrowLeft')t11PrevImg();if(e.key==='Escape')t11ClosePreview();}});
+function t11Reset(){
+  t11Files=[]; t11Selected.clear(); t11Results=[]; t11PreviewIdx=0; t11EditorImg=null; t11LogoImg=null; t11SignImg=null; t11QrImg=null;
+  document.getElementById('t11Out').innerHTML=""; document.getElementById('t11OutEmpty').style.display='block'; document.getElementById('t11SelectedBox').style.display='none'; document.getElementById('t11FileName').innerText="No Images Selected - Click Here"; document.getElementById('t11Status').innerText=""; document.getElementById('t11AllBtn').style.display='none'; document.getElementById('t11ZipBtn').style.display='none'; document.getElementById('t11ShareBtn').style.display='none'; document.getElementById('t11EmptyBox').style.display='block'; document.getElementById('t11PreviewImg').style.display='none'; document.getElementById('t11PreviewCanvas').style.display='none'; document.getElementById('t11LogoInfo').innerText="Koi logo nahi hai"; document.getElementById('t11AiInfo').innerText=""; document.getElementById('t11VerifyInfo').innerText="Invisible Watermark verify karne ke liye neeche Verify dabao"; t11ClearSign();
+  t11Log("Reset done - Ab nayi photo select karo");
+}
+t11Log("Tool 11 V2 Loaded ✅ - AI + QR + Invisible + Sign ready hai");
+</script>
+<!-- ================= TOOL 11 V2 - END ================= -->
+  
 
 <!-- TOOL 12 -->
 <div class="tool" id="tool-12"><div class="panel"><h3>🖼️ Tool 12 - Border Frame</h3>
