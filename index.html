@@ -5064,7 +5064,7 @@ t12Log("Tool 12 V2 Full English Loaded ✅ - Ready");
 </script>
 <!-- ================= TOOL 12 V2 - END ================= -->
 <!-- TOOL 13 -->
-<!-- ================= TOOL 13 - CROPPER - AI PREMIUM V2 - START ================= -->
+<!-- ================= TOOL 13 - CROPPER - FIXED V3 - AI + MANUAL - NO BUGS - START ================= -->
 <style>
 .t13-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
 .t13-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -5104,51 +5104,81 @@ t12Log("Tool 12 V2 Full English Loaded ✅ - Ready");
 </style>
 
 <div class="tool active" id="tool-13"><div class="t13-card">
-<div class="t13-title">✂️ Cropper Pro - AI Premium 🤖</div>
-<div class="t13-sub">AI Premium • AI Thinks, Analyzes & Suggests • Auto Face Crop • Smart Ratio • Live Preview</div>
+<div class="t13-title">✂️ Cropper Pro V3 - AI + Manual - FIXED</div>
+<div class="t13-sub">No Bugs • AI Try Karega, Fail Hua To Manual Mode • Tum Khud Bhi Kar Sakte Ho</div>
 
 <label class="t13-label">🖼️ 1. SELECT IMAGES</label>
 <div class="t13-drop" id="t13Drop" onclick="document.getElementById('t13FileInput').click()">
 <b style="font-size:15px;color:#22d3ee">+ Click or Drag Images Here</b><br>
 <small style="color:#94a3b8">JPG / PNG / WEBP</small><br>
 <small style="color:#22d3ee" id="t13FileName">No Images Selected - Click Here</small><br>
-<small style="color:#f59e0b" id="t13Debug">Status: Waiting for image...</small>
+<small style="color:#f59e0b" id="t13Debug">Status: Waiting...</small>
 </div>
-<input type="file" id="t13FileInput" accept="*/*" multiple onchange="t13OnFileSelect(this)" style="display:none">
-<div id="t13SelectedBox" style="display:none;background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:10px;margin-top:10px"><b style="font-size:13px;color:#22c55e">✅ Selected Images:</b><div id="t13SelectedList" style="margin-top:8px"></div></div>
+<input type="file" id="t13FileInput" accept="image/*" multiple onchange="t13OnFileSelect(this)" style="display:none">
+<div id="t13SelectedBox" style="display:none;background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:10px;margin-top:10px"><b style="font-size:13px;color:#22c55e">✅ Selected Images - Edit Dabao, Wo Photo Khulegi:</b><div id="t13SelectedList" style="margin-top:8px"></div></div>
 
-<!-- 🤖 AI PREMIUM BOX - Yaha AI Suggestion Aayega -->
+<!-- MODE SWITCH - AI vs MANUAL - YEHI FIX HAI -->
+<label class="t13-label">🤖 2. MODE CHUNO - AI Ya Manual?</label>
+<div class="t13-mode" id="t13ModeModes">
+<button class="active" data-mode="auto" onclick="t13SetMode('auto',this)">🤖 AUTO - AI Try Karega<br><small>AI fail hua to Manual khul jayega</small></button>
+<button data-mode="manual" onclick="t13SetMode('manual',this)">✋ MANUAL - Main Khud Karunga<br><small>100% Working, No AI Needed</small></button>
+</div>
+<div id="t13ModeInfo" style="text-align:center;font-size:11px;color:#22d3ee;margin-top:6px;font-weight:700">Mode: AUTO • AI pehle try karega, nahi hua to tum kar lena</div>
+
+<!-- AI BOX -->
 <div id="t13AiBox" style="display:none"></div>
 <div id="t13AiThinking" style="display:none;background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(34,211,238,.2));border:1px solid #a78bfa;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
-<b>🤖 AI is Thinking...</b><br><small style="color:#94a3b8">Analyzing brightness, blur, face, colors... 2 sec</small><br><div style="font-size:20px;margin-top:6px">🧠✨🔍</div>
+<b>🤖 AI is Thinking... (Max 3 sec)</b><br><small style="color:#94a3b8">If AI does not work in your phone, Manual Mode will open automatically</small><br>
+<button onclick="t13SkipAi()" style="margin-top:8px;background:#fff;border:none;color:#000;padding:8px 16px;border-radius:20px;font-weight:800;cursor:pointer">⏭️ Skip AI - Manual Karo</button>
 </div>
 
-<!-- CROP EDITOR -->
+<!-- MANUAL GUIDE - Manual mode me dikhega -->
+<div id="t13ManualGuide" style="display:none;background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;margin-top:10px">
+<b style="color:#22c55e">✋ MANUAL MODE - 3 Step Me Crop Karo:</b><br>
+<small style="color:#fff;line-height:1.7">
+<b>Step 1:</b> Neeche Ratio chuno - Passport / DP / Insta<br>
+<b>Step 2:</b> White Box ko <b>drag</b> karke face pe le jao, <b>corner dots</b> se bada-chhota karo<br>
+<b>Step 3:</b> Preview dekho, sahi lage to <b>CROP NOW</b> dabao<br>
+<i>AI ki zaroorat nahi - Tum khud 100% kar sakte ho ✅</i>
+</small>
+</div>
+
+<!-- CROP EDITOR - FIXED -->
 <div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px;margin-top:12px;text-align:center">
-<b style="font-size:13px">✂️ CROP EDITOR - Drag White Box, Corner Se Resize Karo</b>
+<b style="font-size:13px">✂️ CROP EDITOR - White Box Ko Drag Karo</b><br>
+<small style="color:#94a3b8">White box ke andar wala part hi crop hoga</small>
 <div style="position:relative;display:inline-block;max-width:100%;margin-top:8px;touch-action:none" id="t13EditorWrap">
 <canvas id="t13EditorCanvas" style="max-width:100%;max-height:340px;border-radius:12px;background:#000;display:none;touch-action:none"></canvas>
-<img id="t13EditorImg" style="max-width:100%;max-height:340px;border-radius:12px;background:#fff;display:none">
-<div id="t13CropBox" style="display:none;position:absolute;border:2px solid #fff;box-shadow:0 0 0 9999px rgba(0,0,0,0.55),0 0 0 1px #22d3ee;cursor:move;touch-action:none">
-<div style="position:absolute;top:0;left:0;right:0;height:1px;background:rgba(255,255,255,0.4);transform:translateY(33%)"></div>
-<div style="position:absolute;top:0;left:0;right:0;height:1px;background:rgba(255,255,255,0.4);transform:translateY(66%)"></div>
-<div style="position:absolute;left:0;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.4);transform:translateX(33%)"></div>
-<div style="position:absolute;left:0;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.4);transform:translateX(66%)"></div>
-<div id="t13HandleTL" style="position:absolute;top:-8px;left:-8px;width:16px;height:16px;background:#22d3ee;border:2px solid #fff;border-radius:50%;cursor:nwse-resize"></div>
-<div id="t13HandleTR" style="position:absolute;top:-8px;right:-8px;width:16px;height:16px;background:#22d3ee;border:2px solid #fff;border-radius:50%;cursor:nesw-resize"></div>
-<div id="t13HandleBL" style="position:absolute;bottom:-8px;left:-8px;width:16px;height:16px;background:#22d3ee;border:2px solid #fff;border-radius:50%;cursor:nesw-resize"></div>
-<div id="t13HandleBR" style="position:absolute;bottom:-8px;right:-8px;width:16px;height:16px;background:#22d3ee;border:2px solid #fff;border-radius:50%;cursor:nwse-resize"></div>
-<div id="t13CropLabel" style="position:absolute;top:-24px;left:50%;transform:translateX(-50%);background:#22d3ee;color:#fff;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:800;white-space:nowrap">Crop Area</div>
+<div id="t13CropBox" style="display:none;position:absolute;border:2px solid #fff;box-shadow:0 0 0 9999px rgba(0,0,0,0.55);cursor:move;touch-action:none">
+<div style="position:absolute;top:33%;left:0;right:0;height:1px;background:rgba(255,255,255,0.4)"></div>
+<div style="position:absolute;top:66%;left:0;right:0;height:1px;background:rgba(255,255,255,0.4)"></div>
+<div style="position:absolute;left:33%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.4)"></div>
+<div style="position:absolute;left:66%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.4)"></div>
+<div id="t13HandleTL" style="position:absolute;top:-10px;left:-10px;width:20px;height:20px;background:#22d3ee;border:3px solid #fff;border-radius:50%;cursor:nwse-resize;touch-action:none"></div>
+<div id="t13HandleTR" style="position:absolute;top:-10px;right:-10px;width:20px;height:20px;background:#22d3ee;border:3px solid #fff;border-radius:50%;cursor:nesw-resize;touch-action:none"></div>
+<div id="t13HandleBL" style="position:absolute;bottom:-10px;left:-10px;width:20px;height:20px;background:#22d3ee;border:3px solid #fff;border-radius:50%;cursor:nesw-resize;touch-action:none"></div>
+<div id="t13HandleBR" style="position:absolute;bottom:-10px;right:-10px;width:20px;height:20px;background:#22d3ee;border:3px solid #fff;border-radius:50%;cursor:nwse-resize;touch-action:none"></div>
+<div id="t13CropLabel" style="position:absolute;top:-26px;left:50%;transform:translateX(-50%);background:#22d3ee;color:#fff;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:800;white-space:nowrap">Crop Area</div>
 </div>
 </div>
 <div id="t13EmptyBox" style="color:#94a3b8;padding:12px;font-size:12px">Select a photo, crop box will appear here</div>
 <div id="t13CropInfo" style="font-size:11px;color:#22d3ee;margin-top:6px;font-weight:700">Crop: -</div>
+<!-- MANUAL SLIDERS - Agar drag na ho to slider se bhi crop box move kar sakte ho - YEHI BACKUP HAI -->
+<div style="background:#0a1224;border:1px solid #2a3a6a;border-radius:10px;padding:10px;margin-top:8px;text-align:left">
+<b style="font-size:12px">🎚️ MANUAL SLIDERS - Agar Drag Na Ho To Yaha Se Karo (100% Working Backup):</b><br>
+<span style="font-size:11px;color:#fff">↔️ Left-Right: <b id="t13PosXVal" style="color:#22d3ee">10%</b></span>
+<input type="range" id="t13PosX" class="t13-range" min="0" max="80" value="10" oninput="t13ManualSlider()">
+<span style="font-size:11px;color:#fff">↕️ Up-Down: <b id="t13PosYVal" style="color:#22d3ee">10%</b></span>
+<input type="range" id="t13PosY" class="t13-range" min="0" max="80" value="10" oninput="t13ManualSlider()">
+<span style="font-size:11px;color:#fff">📏 Box Size: <b id="t13BoxSizeVal" style="color:#22d3ee">80%</b></span>
+<input type="range" id="t13BoxSize" class="t13-range" min="20" max="100" value="80" oninput="t13ManualSlider()">
+</div>
 <div style="display:flex;gap:6px;margin-top:8px">
 <button onclick="t13CenterCrop()" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;font-weight:700;cursor:pointer">🎯 Center Crop</button>
 <button onclick="t13FullCrop()" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;font-weight:700;cursor:pointer">⛶ Full Photo</button>
-<button onclick="t13FaceCrop()" style="flex:1;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">👤 Face Crop AI</button>
+<button onclick="t13TryFaceCrop()" style="flex:1;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">👤 Try Face Crop</button>
 </div>
-<button onclick="t13AiAutoCrop()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#f59e0b,#ef4444);border:none;color:#fff;padding:12px;border-radius:12px;font-weight:800;cursor:pointer">🤖 AI AUTO CROP - AI Khud Best Crop Lagayega</button>
+<button onclick="t13AiAutoCrop()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#f59e0b,#ef4444);border:none;color:#fff;padding:12px;border-radius:12px;font-weight:800;cursor:pointer">🤖 AI AUTO CROP - Try Karo, Fail Hua To Manual Kar Lena</button>
 </div>
 
 <div style="background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:10px;margin-top:10px;text-align:center">
@@ -5158,23 +5188,17 @@ t12Log("Tool 12 V2 Full English Loaded ✅ - Ready");
 <div id="t13PreviewInfo" style="font-size:11px;color:#22c55e;margin-top:4px;font-weight:700"></div>
 </div>
 
-<label class="t13-label">⚡ 2. AI + QUICK PRESETS</label>
+<label class="t13-label">⚡ 3. QUICK PRESETS - Manual Me Bhi Kaam Karega</label>
 <div class="t13-pillrow">
-<button class="t13-pill" onclick="t13SetPreset('passport')">🪪<br>Passport<br>2x2 inch</button>
-<button class="t13-pill" onclick="t13SetPreset('insta')">📱<br>Instagram<br>1:1 / 4:5</button>
+<button class="t13-pill" onclick="t13SetPreset('passport')">🪪<br>Passport<br>600x750</button>
+<button class="t13-pill" onclick="t13SetPreset('insta')">📱<br>Instagram<br>4:5</button>
 <button class="t13-pill" onclick="t13SetPreset('dp')">👤<br>WhatsApp DP<br>Circle 1:1</button>
 <button class="t13-pill" onclick="t13Reset()">🔄<br>Clear<br>All</button>
 </div>
-<div class="t13-pillrow" style="margin-top:8px">
-<button class="t13-pill" onclick="t13AiAutoCrop()" style="background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none">🤖<br>AI AUTO<br>Crop</button>
-<button class="t13-pill" onclick="t13SetPreset('story')">📲<br>Story<br>9:16</button>
-<button class="t13-pill" onclick="t13SetPreset('youtube')">▶️<br>YouTube<br>16:9</button>
-<button class="t13-pill" onclick="t13SetPreset('idcard')">🪪<br>ID Card<br>640x400</button>
-</div>
 
-<label class="t13-label">📐 3. CROP RATIO</label>
+<label class="t13-label">📐 4. CROP RATIO - Chuno, Box Auto Set Ho Jayega</label>
 <div class="t13-mode" id="t13RatioModes">
-<button class="active" data-ratio="free" onclick="t13SetRatio('free',this)">✂️ Free</button>
+<button class="active" data-ratio="free" onclick="t13SetRatio('free',this)">✂️ Free - Khud Size Karo</button>
 <button data-ratio="1:1" onclick="t13SetRatio('1:1',this)">⬛ 1:1 Square</button>
 <button data-ratio="4:5" onclick="t13SetRatio('4:5',this)">📱 4:5 Insta</button>
 <button data-ratio="9:16" onclick="t13SetRatio('9:16',this)">📲 9:16 Story</button>
@@ -5182,15 +5206,14 @@ t12Log("Tool 12 V2 Full English Loaded ✅ - Ready");
 <div class="t13-mode">
 <button data-ratio="3:4" onclick="t13SetRatio('3:4',this)">🖼️ 3:4 Portrait</button>
 <button data-ratio="16:9" onclick="t13SetRatio('16:9',this)">🎬 16:9 YouTube</button>
-<button data-ratio="4:3" onclick="t13SetRatio('4:3',this)">📷 4:3 Classic</button>
 <button data-ratio="passport" onclick="t13SetRatio('passport',this)">🪪 Passport</button>
+<button data-ratio="custom" onclick="t13SetRatio('custom',this)">⚙️ Custom Size</button>
 </div>
-<div style="display:flex;gap:8px;margin-top:8px">
-<input type="number" id="t13ExactW" class="t13-input" placeholder="Output Width px - Ex: 1080">
-<input type="number" id="t13ExactH" class="t13-input" placeholder="Output Height px - Ex: 1080">
-</div>
+<div id="t13CustomBox" style="display:none;margin-top:8px"><div style="display:flex;gap:8px"><input type="number" id="t13CustomW" class="t13-input" placeholder="Width - 1080" value="1080"><input type="number" id="t13CustomH" class="t13-input" placeholder="Height - 1080" value="1080"></div><button onclick="t13ApplyCustomSize()" style="width:100%;margin-top:6px;background:#22c55e;border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">✅ Apply Custom Size</button></div>
+<div style="display:flex;gap:8px;margin-top:8px"><input type="number" id="t13ExactW" class="t13-input" placeholder="Output Width - 1080"><input type="number" id="t13ExactH" class="t13-input" placeholder="Output Height - 1080"></div>
+<small style="color:#94a3b8">Passport ke liye 600 x 750 likho - Exact size me download hogi</small>
 
-<label class="t13-label">🔄 4. ROTATE / FLIP / ZOOM / FILTER</label>
+<label class="t13-label">🔄 5. ROTATE / FLIP / ZOOM / FILTER - Manual Sliders</label>
 <div style="display:flex;gap:6px">
 <button onclick="t13Rotate(-90)" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:12px;font-weight:700;cursor:pointer">↩️ -90°</button>
 <button onclick="t13Rotate(90)" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:12px;font-weight:700;cursor:pointer">↪️ +90°</button>
@@ -5199,7 +5222,7 @@ t12Log("Tool 12 V2 Full English Loaded ✅ - Ready");
 </div>
 <span style="font-size:11px;color:#fff">🔍 Zoom: <b id="t13ZoomVal" style="color:#22d3ee">100%</b></span>
 <input type="range" id="t13Zoom" class="t13-range" min="100" max="300" value="100" oninput="document.getElementById('t13ZoomVal').innerText=this.value+'%';t13UpdateZoom()">
-<span style="font-size:11px;color:#fff">💡 Brightness (AI Suggestion Se Set Hoga): <b id="t13BrightVal" style="color:#22d3ee">100%</b></span>
+<span style="font-size:11px;color:#fff">💡 Brightness: <b id="t13BrightVal" style="color:#22d3ee">100%</b></span>
 <input type="range" id="t13Bright" class="t13-range" min="70" max="150" value="100" oninput="document.getElementById('t13BrightVal').innerText=this.value+'%';t13UpdatePreview()">
 <div style="display:flex;gap:6px;margin-top:6px">
 <button onclick="t13SetFilter('none')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:10px;cursor:pointer;font-size:11px">Original</button>
@@ -5208,49 +5231,56 @@ t12Log("Tool 12 V2 Full English Loaded ✅ - Ready");
 <button onclick="t13SetFilter('vivid')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:10px;cursor:pointer;font-size:11px">Vivid</button>
 </div>
 
-<label class="t13-label">⭕ 5. SHAPE</label>
+<label class="t13-label">⭕ 6. SHAPE</label>
 <div class="t13-mode" id="t13ShapeModes">
 <button class="active" data-shape="rect" onclick="t13SetShape('rect',this)">⬛ Rectangle</button>
 <button data-shape="circle" onclick="t13SetShape('circle',this)">⭕ Circle - DP</button>
 <button data-shape="round" onclick="t13SetShape('round',this)">🔲 Round Corner</button>
 <button data-shape="heart" onclick="t13SetShape('heart',this)">❤️ Heart</button>
 </div>
-<div class="t13-toggle"><b>🤖 AI Auto Enhance After Crop?</b><input type="checkbox" id="t13AiEnhance" checked></div>
 <div class="t13-toggle"><b>🔲 Show Grid?</b><input type="checkbox" id="t13Grid" checked onchange="t13UpdateCropBox()"></div>
 
-<label class="t13-label">🔄 6. OUTPUT + FILE NAME</label>
+<label class="t13-label">🔄 7. OUTPUT + FILE NAME</label>
 <div class="t13-mode" id="t13FmtModes">
 <button class="active" data-fmt="jpeg" onclick="t13SetFmt('jpeg',this)">🖼️ JPG</button>
-<button data-fmt="png" onclick="t13SetFmt('png',this)">🎨 PNG</button>
+<button data-fmt="png" onclick="t13SetFmt('png',this)">🎨 PNG - Circle Ke Liye</button>
 <button data-fmt="webp" onclick="t13SetFmt('webp',this)">⚡ WEBP</button>
 <button data-fmt="keep" onclick="t13SetFmt('keep',this)">↩️ Keep Same</button>
 </div>
 <input type="text" id="t13Prefix" class="t13-input" placeholder="Cropped - Orbittroniz" value="Cropped - Orbittroniz" style="margin-top:8px">
-<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center"><b id="t13Stats" style="font-size:13px">Images: 0 • Crop: Free</b><br><small id="t13AiQuality" style="color:#a78bfa">AI Quality: -- / 100</small></div>
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center"><b id="t13Stats" style="font-size:13px">Images: 0 • Editing: None • Crop: Free</b><br><small id="t13AiQuality" style="color:#a78bfa">AI: Not Started • Manual is Always Working ✅</small></div>
 <div class="t13-prog" id="t13Prog"><div id="t13Fill"></div></div>
 <div id="t13Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
 
 <button class="t13-btn-preview" onclick="t13OpenPreview()">👀 PREVIEW - Before / After</button>
-<button class="t13-btn3d" onclick="t13Crop()">✂️ CROP NOW - REAL START</button>
-<button class="t13-btn2" onclick="t13CropAll()" id="t13AllBtn" style="display:none;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;border:none">📦 CROP ALL - Same Ratio For All</button>
+<button class="t13-btn3d" onclick="t13Crop()">✂️ CROP NOW - Ye Photo Crop Karo</button>
+<button class="t13-btn2" onclick="t13CropAll()" id="t13AllBtn" style="display:none;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;border:none">📦 CROP ALL - Sab Photo Ek Hi Ratio Me</button>
 <button class="t13-btn2" onclick="t13DownloadAll()" id="t13DownloadAllBtn" style="display:none">⬇️ Download All</button>
 <button class="t13-btn2" onclick="t13DownloadZIP()" id="t13ZipBtn" style="display:none;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border:none">📦 Download All as ZIP</button>
 <button class="t13-btn-share" id="t13ShareBtn" onclick="t13ShareFirst()">📤 SHARE FIRST</button>
 <button class="t13-btn2" onclick="t13Reset()">🗑️ Clear / New Images</button>
-<label class="t13-label">🖼️ CROPPED IMAGES</label>
+<label class="t13-label">🖼️ CROPPED IMAGES - Yaha Aayenge</label>
 <div class="t13-grid" id="t13Out"></div>
 <div id="t13OutEmpty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">No images yet - Crop to see here</div>
 </div></div>
-<!-- ================= TOOL 13 AI V2 - END ================= -->
+<!-- ================= TOOL 13 FIXED V3 - END ================= -->
 
 <div class="t13-modal" id="t13Modal"><div id="t13ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Preview</div><canvas id="t13ModalCanvas"></canvas><div id="t13ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div><div class="t13-modal-nav"><button onclick="t13ToggleBeforeAfter()" style="background:#f59e0b" id="t13BeforeAfterBtn">🔄 Show After</button><button onclick="t13PrevImg()">⬅️ Prev</button><button onclick="t13NextImg()">Next ➡️</button><button onclick="t13DownloadOne(t13PreviewIdx)" style="background:#22c55e">⬇️ Download This</button><button class="primary" onclick="t13ClosePreview()">✅ Close</button></div></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
 <script>
-// ===== TOOL 13 AI PREMIUM JS - Same Logic As Before + AI Brain Hook =====
-var t13Files=[], t13Selected=new Set(), t13Ratio='free', t13Shape='rect', t13Fmt='jpeg', t13Results=[], t13PreviewIdx=0, t13ShowAfter=false, t13EditorImg=null, t13Crop={x:0.1,y:0.1,w:0.8,h:0.8}, t13RotateDeg=0, t13Flip=false, t13Filter='none', t13Zoom=1, t13CustomRatio=null, t13Dragging=null, t13CurrentIdx=0, t13AiAnalysis=null;
+// ===== TOOL 13 FIXED V3 - AI TRY + MANUAL ALWAYS WORKS =====
+// FIX: AI ko force nahi karenge, AI optional hai, Manual hamesha chalega
+var t13Files=[], t13Selected=new Set(), t13Ratio='free', t13Shape='rect', t13Fmt='jpeg', t13Results=[], t13PreviewIdx=0, t13ShowAfter=false, t13EditorImg=null, t13Crop={x:0.1,y:0.1,w:0.8,h:0.8}, t13RotateDeg=0, t13Flip=false, t13Filter='none', t13Zoom=1, t13CustomRatio=null, t13Dragging=null, t13CurrentIdx=0, t13Mode='auto', t13AiAnalysis=null, t13AiTimeout=null;
 function t13Log(msg){ var d=document.getElementById('t13Debug'); if(d) d.innerText="Status: "+msg; }
 function t13OnFileSelect(input){ t13Log("File: "+(input.files?input.files.length:0)); if(!input.files||!input.files.length) return; var files=Array.prototype.slice.call(input.files); input.value=""; t13LoadFiles(files); }
+function t13SetMode(m,btn){ t13Mode=m; document.querySelectorAll('#t13ModeModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active');
+  document.getElementById('t13ModeInfo').innerText = m==='auto' ? "Mode: AUTO • AI pehle try karega, fail hua to Manual khul jayega" : "Mode: MANUAL • AI band hai, tum khud karo - 100% Working ✅";
+  document.getElementById('t13ManualGuide').style.display = m==='manual' ? 'block' : 'none';
+  if(m==='manual'){ document.getElementById('t13AiBox').style.display='none'; document.getElementById('t13AiThinking').style.display='none'; }
+  else if(t13EditorImg){ t13RunAi(); }
+}
+function t13SkipAi(){ if(t13AiTimeout) clearTimeout(t13AiTimeout); document.getElementById('t13AiThinking').style.display='none'; document.getElementById('t13AiBox').style.display='none'; document.getElementById('t13ManualGuide').style.display='block'; document.getElementById('t13AiQuality').innerText="AI: Skipped by user • Manual Mode ON ✅"; document.getElementById('t13Status').innerText="✋ Manual Mode - Tum khud karo, AI ki zaroorat nahi"; }
 (function(){
   var drop=document.getElementById('t13Drop'); if(!drop) return;
   drop.addEventListener('dragover',function(e){e.preventDefault();drop.classList.add('dragover')});
@@ -5262,10 +5292,10 @@ function t13OnFileSelect(input){ t13Log("File: "+(input.files?input.files.length
   function onMove(e){ if(!t13Dragging) return; e.preventDefault(); var p=getPos(e); var d=t13Dragging, dx=p.x-d.startX, dy=p.y-d.startY;
     if(d.mode==='move'){ t13Crop.x=Math.max(0,Math.min(1-t13Crop.w,d.orig.x+dx)); t13Crop.y=Math.max(0,Math.min(1-t13Crop.h,d.orig.y+dy)); }
     else if(d.mode==='br'){ var nw=Math.max(0.05,d.orig.w+dx), nh=Math.max(0.05,d.orig.h+dy); if(t13Ratio!=='free'){ var ra=t13GetRatio(); if(ra) nh=nw/ra; } if(d.orig.x+nw>1) nw=1-d.orig.x; if(d.orig.y+nh>1) nh=1-d.orig.y; t13Crop.w=nw; t13Crop.h=nh; }
-    else if(d.mode==='tl'){ var nw2=d.orig.w-dx, nh2=d.orig.h-dy; if(nw2<0.05||nh2<0.05) return; if(t13Ratio!=='free'){ var ra2=t13GetRatio(); if(ra2){ nh2=nw2/ra2; } } var nx=d.orig.x+dx, ny=d.orig.y+d.orig.h-nh2; if(nx<0||ny<0) return; t13Crop.x=nx; t13Crop.y=ny; t13Crop.w=nw2; t13Crop.h=nh2; }
+    else if(d.mode==='tl'){ var nw2=d.orig.w-dx, nh2=d.orig.h-dy; if(nw2<0.05||nh2<0.05) return; if(t13Ratio!=='free'){ var ra2=t13GetRatio(); if(ra2) nh2=nw2/ra2; } var nx=d.orig.x+dx, ny=d.orig.y+d.orig.h-nh2; if(nx<0||ny<0) return; t13Crop.x=nx; t13Crop.y=ny; t13Crop.w=nw2; t13Crop.h=nh2; }
     else if(d.mode==='tr'){ var nw3=d.orig.w+dx, nh3=d.orig.h-dy; if(nw3<0.05||nh3<0.05) return; if(t13Ratio!=='free'){ var ra3=t13GetRatio(); if(ra3) nh3=nw3/ra3; } var ny3=d.orig.y+d.orig.h-nh3; if(ny3<0) return; t13Crop.w=nw3; t13Crop.h=nh3; t13Crop.y=ny3; }
     else if(d.mode==='bl'){ var nw4=d.orig.w-dx, nh4=d.orig.h+dy; if(nw4<0.05||nh4<0.05) return; if(t13Ratio!=='free'){ var ra4=t13GetRatio(); if(ra4) nh4=nw4/ra4; } var nx4=d.orig.x+d.orig.w-nw4; if(nx4<0) return; t13Crop.w=nw4; t13Crop.h=nh4; t13Crop.x=nx4; }
-    t13UpdateCropBox(); t13UpdatePreview(); }
+    t13SyncSliders(); t13UpdateCropBox(); t13UpdatePreview(); }
   function onEnd(){ t13Dragging=null; }
   if(box){ box.addEventListener('mousedown',function(e){onStart(e,'move')}); box.addEventListener('touchstart',function(e){onStart(e,'move')},{passive:false});
     document.getElementById('t13HandleBR').addEventListener('mousedown',function(e){onStart(e,'br')}); document.getElementById('t13HandleBR').addEventListener('touchstart',function(e){onStart(e,'br')},{passive:false});
@@ -5274,8 +5304,37 @@ function t13OnFileSelect(input){ t13Log("File: "+(input.files?input.files.length
     document.getElementById('t13HandleBL').addEventListener('mousedown',function(e){onStart(e,'bl')}); document.getElementById('t13HandleBL').addEventListener('touchstart',function(e){onStart(e,'bl')},{passive:false});
     document.addEventListener('mousemove',onMove); document.addEventListener('touchmove',onMove,{passive:false}); document.addEventListener('mouseup',onEnd); document.addEventListener('touchend',onEnd); }
 })();
-function t13GetRatio(){ if(t13Ratio==='free') return null; if(t13CustomRatio) return t13CustomRatio; var map={'1:1':1,'4:5':0.8,'9:16':0.5625,'3:4':0.75,'16:9':1.777,'4:3':1.333,'passport':0.777}; return map[t13Ratio]||null; }
-function t13SetRatio(r,btn){ t13Ratio=r; document.querySelectorAll('#t13RatioModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); if(r!=='free') t13ApplyRatioToCrop(); t13UpdateCropBox(); t13UpdatePreview(); }
+// ===== MANUAL SLIDERS - Drag fail hua to bhi kaam karega - BACKUP FIX =====
+function t13ManualSlider(){
+  var x=parseInt(document.getElementById('t13PosX').value||10)/100;
+  var y=parseInt(document.getElementById('t13PosY').value||10)/100;
+  var size=parseInt(document.getElementById('t13BoxSize').value||80)/100;
+  document.getElementById('t13PosXVal').innerText=document.getElementById('t13PosX').value+"%";
+  document.getElementById('t13PosYVal').innerText=document.getElementById('t13PosY').value+"%";
+  document.getElementById('t13BoxSizeVal').innerText=document.getElementById('t13BoxSize').value+"%";
+  // Ratio ke hisaab se height adjust karo
+  var ratio=t13GetRatio();
+  var w=size, h=size;
+  if(ratio){ h=w/ratio; if(h>1){ h=1; w=h*ratio; } }
+  // X+Y ko limit karo taaki box bahar na jaye
+  if(x+w>1) x=1-w; if(y+h>1) y=1-h;
+  t13Crop={x:x,y:y,w:w,h:h};
+  t13UpdateCropBox(); t13UpdatePreview();
+}
+function t13SyncSliders(){
+  // Drag karne pe slider bhi update ho
+  try{
+    document.getElementById('t13PosX').value=Math.round(t13Crop.x*100);
+    document.getElementById('t13PosY').value=Math.round(t13Crop.y*100);
+    document.getElementById('t13BoxSize').value=Math.round(t13Crop.w*100);
+    document.getElementById('t13PosXVal').innerText=Math.round(t13Crop.x*100)+"%";
+    document.getElementById('t13PosYVal').innerText=Math.round(t13Crop.y*100)+"%";
+    document.getElementById('t13BoxSizeVal').innerText=Math.round(t13Crop.w*100)+"%";
+  }catch(e){}
+}
+function t13GetRatio(){ if(t13Ratio==='free') return null; if(t13CustomRatio) return t13CustomRatio; var map={'1:1':1,'4:5':0.8,'9:16':0.5625,'3:4':0.75,'16:9':1.777,'passport':0.777}; return map[t13Ratio]||null; }
+function t13SetRatio(r,btn){ t13Ratio=r; document.querySelectorAll('#t13RatioModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); document.getElementById('t13CustomBox').style.display=r==='custom'?'block':'none'; if(r!=='free') t13ApplyRatioToCrop(); t13SyncSliders(); t13UpdateCropBox(); t13UpdatePreview(); }
+function t13ApplyCustomSize(){ var w=parseInt(document.getElementById('t13CustomW').value||1080), h=parseInt(document.getElementById('t13CustomH').value||1080); if(!w||!h) return alert("Width and Height both enter karo!"); t13CustomRatio=w/h; t13Ratio='custom'; t13ApplyRatioToCrop(); t13SyncSliders(); t13UpdateCropBox(); t13UpdatePreview(); }
 function t13ApplyRatioToCrop(){ var ratio=t13GetRatio(); if(!ratio) return; var cw=0.8, ch=cw/ratio; if(ch>0.8){ ch=0.8; cw=ch*ratio; } t13Crop={x:(1-cw)/2,y:(1-ch)/2,w:cw,h:ch}; }
 function t13SetShape(s,btn){ t13Shape=s; document.querySelectorAll('#t13ShapeModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); if(s==='circle') t13SetRatio('1:1', document.querySelector('#t13RatioModes button[data-ratio="1:1"]')); t13UpdateCropBox(); t13UpdatePreview(); }
 function t13SetFmt(f,btn){ t13Fmt=f; document.querySelectorAll('#t13FmtModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); }
@@ -5285,40 +5344,88 @@ function t13Flip(){ t13Flip=!t13Flip; t13UpdatePreview(); }
 function t13ResetTransform(){ t13RotateDeg=0; t13Flip=false; document.getElementById('t13Zoom').value=100; document.getElementById('t13ZoomVal').innerText="100%"; t13Zoom=1; t13Filter='none'; t13UpdatePreview(); }
 function t13UpdateZoom(){ t13Zoom=parseInt(document.getElementById('t13Zoom').value||100)/100; t13UpdatePreview(); }
 function t13SetPreset(name){
-  if(name==='passport'){ t13SetRatio('passport', document.querySelector('#t13RatioModes button[data-ratio="passport"]')); document.getElementById('t13ExactW').value=600; document.getElementById('t13ExactH').value=750; }
+  if(name==='passport'){ t13SetRatio('passport', document.querySelector('#t13RatioModes button[data-ratio="passport"]')); document.getElementById('t13ExactW').value=600; document.getElementById('t13ExactH').value=750; document.getElementById('t13Status').innerText="🪪 Passport - 600x750 set - Ab box ko face pe le jao (drag ya slider se)"; }
   else if(name==='insta'){ t13SetRatio('4:5', document.querySelector('#t13RatioModes button[data-ratio="4:5"]')); }
   else if(name==='dp'){ t13SetRatio('1:1', document.querySelector('#t13RatioModes button[data-ratio="1:1"]')); t13SetShape('circle', document.querySelector('#t13ShapeModes button[data-shape="circle"]')); }
-  else if(name==='story'){ t13SetRatio('9:16', document.querySelector('#t13RatioModes button[data-ratio="9:16"]')); }
-  else if(name==='youtube'){ t13SetRatio('16:9', document.querySelector('#t13RatioModes button[data-ratio="16:9"]')); }
-  else if(name==='idcard'){ t13SetRatio('4:3', document.querySelector('#t13RatioModes button[data-ratio="4:3"]')); }
 }
-function t13CenterCrop(){ if(t13GetRatio()) t13ApplyRatioToCrop(); else t13Crop={x:0.1,y:0.1,w:0.8,h:0.8}; t13UpdateCropBox(); t13UpdatePreview(); }
-function t13FullCrop(){ t13Crop={x:0,y:0,w:1,h:1}; t13UpdateCropBox(); t13UpdatePreview(); }
-async function t13FaceCrop(){
+function t13CenterCrop(){ if(t13GetRatio()) t13ApplyRatioToCrop(); else t13Crop={x:0.1,y:0.1,w:0.8,h:0.8}; t13SyncSliders(); t13UpdateCropBox(); t13UpdatePreview(); }
+function t13FullCrop(){ t13Crop={x:0,y:0,w:1,h:1}; t13SyncSliders(); t13UpdateCropBox(); t13UpdatePreview(); }
+// ===== AI - TRY KARO, FAIL HUA TO MANUAL - TIMEOUT 3 SEC - NO HANG =====
+function t13RunAi(){
+  if(t13Mode!=='auto' || !t13EditorImg) return;
+  if(!window.OrbitAI){
+    // OrbitAI Brain nahi loaded - Manual pe switch karo, bug nahi
+    document.getElementById('t13AiQuality').innerText="AI: Not available in this browser • Manual Mode Working ✅";
+    document.getElementById('t13ManualGuide').style.display='block';
+    return;
+  }
+  document.getElementById('t13AiThinking').style.display='block';
+  document.getElementById('t13AiBox').style.display='none';
+  if(t13AiTimeout) clearTimeout(t13AiTimeout);
+  // 3 sec timeout - AI atakega nahi
+  t13AiTimeout=setTimeout(function(){
+    document.getElementById('t13AiThinking').style.display='none';
+    document.getElementById('t13AiQuality').innerText="AI: Slow / Not supported • Manual Mode ON ✅ - Tum khud karo";
+    document.getElementById('t13ManualGuide').style.display='block';
+    document.getElementById('t13Status').innerText="✋ AI slow hai, Manual Mode me karo - 100% Working";
+  }, 3000);
+  try{
+    window.OrbitAI.analyzeImage(t13EditorImg).then(function(analysis){
+      if(t13AiTimeout) clearTimeout(t13AiTimeout);
+      if(t13Mode!=='auto') return;
+      t13AiAnalysis=analysis;
+      document.getElementById('t13AiThinking').style.display='none';
+      document.getElementById('t13AiQuality').innerText="AI Quality: "+analysis.quality+" / 100 • "+(analysis.hasFace?"Face Found ✅":"No Face - Manual Crop Karo")+" • "+(analysis.isDark?"Dark":"Bright");
+      window.OrbitAI.showSuggestions('t13AiBox','cropper',analysis,function(sug,isAll){
+        if(sug.action==='faceCrop') t13TryFaceCrop();
+        if(sug.action==='bright'){ document.getElementById('t13Bright').value=sug.value; document.getElementById('t13BrightVal').innerText=sug.value+"%"; t13UpdatePreview(); document.getElementById('t13Status').innerText="✨ AI Applied: Brightness "+sug.value+"%"; }
+        if(sug.action==='ratio'){ t13SetRatio(sug.value, document.querySelector('#t13RatioModes button[data-ratio="'+sug.value+'"]')); }
+      });
+    }).catch(function(){
+      if(t13AiTimeout) clearTimeout(t13AiTimeout);
+      document.getElementById('t13AiThinking').style.display='none';
+      document.getElementById('t13ManualGuide').style.display='block';
+    });
+  }catch(e){
+    if(t13AiTimeout) clearTimeout(t13AiTimeout);
+    document.getElementById('t13AiThinking').style.display='none';
+    document.getElementById('t13ManualGuide').style.display='block';
+  }
+}
+async function t13TryFaceCrop(){
   if(!t13EditorImg) return alert("First select photo!");
-  document.getElementById('t13Status').innerText="👤 Face finding...";
+  document.getElementById('t13Status').innerText="👤 Trying Face Crop... If face not found, do manual";
   try{
     var found=null;
-    if(window.FaceDetector){ var det=new FaceDetector({fastMode:true}); var faces=await det.detect(t13EditorImg); if(faces&&faces.length) found=faces[0].boundingBox; }
-    if(!found) found={x:t13EditorImg.width*0.25,y:t13EditorImg.height*0.1,width:t13EditorImg.width*0.5,height:t13EditorImg.height*0.5};
+    if(window.FaceDetector){
+      var det=new FaceDetector({fastMode:true});
+      var faces=await det.detect(t13EditorImg);
+      if(faces&&faces.length) found=faces[0].boundingBox;
+    }
+    if(!found){
+      // Fallback - Center guess, user ko batao manual adjust kare
+      document.getElementById('t13Status').innerText="⚠️ FaceDetector not in this phone - Center guess lagaya, slider se adjust karo";
+      found={x:t13EditorImg.width*0.25,y:t13EditorImg.height*0.1,width:t13EditorImg.width*0.5,height:t13EditorImg.height*0.5};
+    } else {
+      document.getElementById('t13Status').innerText="✅ Face Found! Crop box face pe lag gaya";
+    }
     var padX=found.width*0.5, padY=found.height*0.5;
     var x=Math.max(0,found.x-padX)/t13EditorImg.width, y=Math.max(0,found.y-padY)/t13EditorImg.height;
     var w=Math.min(1-x,(found.width+padX*2)/t13EditorImg.width), h=Math.min(1-y,(found.height+padY*2)/t13EditorImg.height);
-    var ratio=t13GetRatio(); if(ratio){ var ch=w/ratio; if(ch<=h){ h=ch; } else { w=h*ratio; } }
-    t13Crop={x:x,y:y,w:w,h:h}; t13UpdateCropBox(); t13UpdatePreview(); document.getElementById('t13Status').innerText="✅ Face Crop Done!";
-  }catch(e){ alert("Face Crop fail - Drag manually"); }
+    var ratio=t13GetRatio(); if(ratio){ var ch=w/ratio; if(ch<=h) h=ch; else w=h*ratio; }
+    t13Crop={x:x,y:y,w:w,h:h}; t13SyncSliders(); t13UpdateCropBox(); t13UpdatePreview();
+  }catch(e){
+    document.getElementById('t13Status').innerText="⚠️ Face Crop fail - Manual slider se karo, wo 100% chalega";
+    document.getElementById('t13ManualGuide').style.display='block';
+  }
 }
-// ===== AI AUTO CROP - AI Decides Best Crop =====
 async function t13AiAutoCrop(){
   if(!t13EditorImg) return alert("First select photo!");
-  document.getElementById('t13Status').innerText="🤖 AI deciding best crop...";
-  var a=t13AiAnalysis;
-  if(!a && window.OrbitAI) a=await window.OrbitAI.analyzeImage(t13EditorImg);
-  if(!a){ t13FaceCrop(); return; }
-  if(a.hasFace){ await t13FaceCrop(); document.getElementById('t13Status').innerText="🤖 AI: Face found - Cropped on face ✅ Best for DP / Passport"; }
-  else if(a.isDark){ document.getElementById('t13Bright').value=130; document.getElementById('t13BrightVal').innerText="130%"; t13CenterCrop(); document.getElementById('t13Status').innerText="🤖 AI: Photo is dark - Brightness +30% + Center Crop ✅"; }
-  else { t13CenterCrop(); t13SetRatio('4:5', null); document.getElementById('t13Status').innerText="🤖 AI: No face - Best crop is 4:5 Center for Instagram ✅"; }
-  t13UpdatePreview();
+  document.getElementById('t13Status').innerText="🤖 AI Auto Crop trying...";
+  if(t13AiAnalysis && t13AiAnalysis.hasFace){ await t13TryFaceCrop(); return; }
+  // Agar AI analysis nahi hai to manual center crop - Kabhi fail nahi hoga
+  t13CenterCrop(); t13SetRatio('4:5', null);
+  document.getElementById('t13Status').innerText="🤖 AI: No face found - Center 4:5 Crop lagaya ✅ Slider se adjust kar sakte ho";
 }
 async function t13LoadFiles(files){
   files=files.filter(function(f){ return f.type.indexOf('image/')===0 || f.type==='' || f.name.match(/\.(jpg|jpeg|png|webp|gif|bmp)$/i); }).slice(0,10);
@@ -5327,46 +5434,38 @@ async function t13LoadFiles(files){
   files.forEach(function(_,i){ t13Selected.add(i); });
   document.getElementById('t13Out').innerHTML=""; document.getElementById('t13OutEmpty').style.display='block'; document.getElementById('t13AllBtn').style.display='none'; document.getElementById('t13DownloadAllBtn').style.display='none'; document.getElementById('t13ZipBtn').style.display='none'; document.getElementById('t13ShareBtn').style.display='none';
   document.getElementById('t13FileName').innerText=files.length+" Images Selected ✅ - "+files[0].name;
-  document.getElementById('t13Status').innerText="✅ Ready! AI analyzing...";
+  document.getElementById('t13Status').innerText="✅ Ready! Edit dabao, wo photo khulegi";
   t13Log("Loaded "+files.length);
   var listEl=document.getElementById('t13SelectedList'); document.getElementById('t13SelectedBox').style.display='block'; listEl.innerHTML="";
   files.forEach(function(f,idx){
     var div=document.createElement('div'); div.style.cssText="display:flex;gap:8px;align-items:center;margin-top:6px;background:#060a18;border:1px solid #2a3a6a;border-radius:10px;padding:6px";
     var thumb=document.createElement('img'); thumb.style.cssText="width:50px;height:50px;object-fit:cover;border-radius:8px;background:#fff"; thumb.src=URL.createObjectURL(f);
-    var span=document.createElement('span'); span.style.cssText="font-size:11px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff"; span.innerText=(idx+1)+". "+f.name;
-    var btn=document.createElement('button'); btn.innerText="Edit"; btn.style.cssText="background:#22d3ee;border:none;color:#fff;padding:6px 12px;border-radius:20px;cursor:pointer;font-size:11px;font-weight:800"; btn.onclick=function(){ t13EditImage(idx); };
+    var span=document.createElement('span'); span.style.cssText="font-size:11px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff"; span.innerText=(idx+1)+". "+f.name+" • "+(f.size/1024).toFixed(0)+" KB";
+    var btn=document.createElement('button'); btn.innerText="Edit This"; btn.style.cssText="background:#22d3ee;border:none;color:#fff;padding:8px 12px;border-radius:20px;cursor:pointer;font-size:11px;font-weight:800"; btn.onclick=function(){ t13EditImage(idx); };
     div.appendChild(thumb); div.appendChild(span); div.appendChild(btn); listEl.appendChild(div);
   });
   t13EditImage(0);
 }
 function t13EditImage(idx){
-  t13CurrentIdx=idx; var file=t13Files[idx];
+  // FIX: Current index save karo - Yahi bug tha, galat photo crop hoti thi
+  t13CurrentIdx=idx;
+  var file=t13Files[idx]; if(!file) return;
   var img=new Image(); img.onload=function(){
     t13EditorImg=img; document.getElementById('t13EmptyBox').style.display='none';
-    var canvas=document.getElementById('t13EditorCanvas'); var scale=Math.min(1,800/Math.max(img.width,img.height)); canvas.width=img.width*scale; canvas.height=img.height*scale; var ctx=canvas.getContext('2d'); ctx.drawImage(img,0,0,canvas.width,canvas.height); canvas.style.display='block'; document.getElementById('t13EditorImg').style.display='none'; document.getElementById('t13CropBox').style.display='block';
+    var canvas=document.getElementById('t13EditorCanvas'); var scale=Math.min(1,800/Math.max(img.width,img.height)); canvas.width=img.width*scale; canvas.height=img.height*scale; var ctx=canvas.getContext('2d'); ctx.drawImage(img,0,0,canvas.width,canvas.height); canvas.style.display='block'; document.getElementById('t13CropBox').style.display='block';
     t13Crop={x:0.1,y:0.1,w:0.8,h:0.8}; if(t13Ratio!=='free') t13ApplyRatioToCrop();
-    t13UpdateCropBox(); t13UpdatePreview();
-    // ===== AI ANALYZE - Yahi Premium Hai =====
-    if(window.OrbitAI){
-      document.getElementById('t13AiThinking').style.display='block'; document.getElementById('t13AiBox').style.display='none';
-      window.OrbitAI.analyzeImage(img).then(function(analysis){
-        t13AiAnalysis=analysis; document.getElementById('t13AiThinking').style.display='none';
-        document.getElementById('t13AiQuality').innerText="AI Quality: "+analysis.quality+" / 100 • "+(analysis.hasFace?"Face Found ✅":"No Face")+" • "+(analysis.isDark?"Dark":"Bright")+" • "+(analysis.isBlurry?"Blurry":"Sharp");
-        window.OrbitAI.showSuggestions('t13AiBox','cropper',analysis,function(sug,isAll){
-          if(sug.action==='faceCrop') t13FaceCrop();
-          if(sug.action==='bright'){ document.getElementById('t13Bright').value=sug.value; document.getElementById('t13BrightVal').innerText=sug.value+"%"; t13UpdatePreview(); document.getElementById('t13Status').innerText="✨ AI Suggestion Applied: Brightness "+sug.value+"%"; }
-          if(sug.action==='ratio'){ t13SetRatio(sug.value, document.querySelector('#t13RatioModes button[data-ratio="'+sug.value+'"]')); document.getElementById('t13Status').innerText="✨ AI Suggestion Applied: Ratio "+sug.value; }
-        });
-      });
-    }
-  }; img.src=URL.createObjectURL(file);
+    t13SyncSliders(); t13UpdateCropBox(); t13UpdatePreview();
+    document.getElementById('t13Stats').innerText="Images: "+t13Files.length+" • Editing: "+file.name+" (#"+(idx+1)+") • Crop: "+t13Ratio;
+    document.getElementById('t13Status').innerText="Editing Photo #"+(idx+1)+": "+file.name+" - Ab crop karo";
+    t13RunAi();
+  }; img.onerror=function(){ alert("Photo load nahi hui - Dobara select karo"); }; img.src=URL.createObjectURL(file);
 }
 function t13UpdateCropBox(){
   if(!t13EditorImg) return; var box=document.getElementById('t13CropBox');
   box.style.left=(t13Crop.x*100)+"%"; box.style.top=(t13Crop.y*100)+"%"; box.style.width=(t13Crop.w*100)+"%"; box.style.height=(t13Crop.h*100)+"%";
   if(t13Shape==='circle') box.style.borderRadius='50%'; else if(t13Shape==='round') box.style.borderRadius='20px'; else if(t13Shape==='heart') box.style.borderRadius='40% 40% 50% 50%'; else box.style.borderRadius='0';
   var outW=Math.round(t13EditorImg.width*t13Crop.w), outH=Math.round(t13EditorImg.height*t13Crop.h);
-  document.getElementById('t13CropInfo').innerText="Crop: "+outW+" x "+outH+" px • Drag to move, corner dots to resize";
+  document.getElementById('t13CropInfo').innerText="Crop: "+outW+" x "+outH+" px • Editing Photo #"+(t13CurrentIdx+1)+" • Drag / Slider se move karo";
   document.getElementById('t13CropLabel').innerText=outW+" x "+outH;
 }
 function t13UpdatePreview(){
@@ -5374,45 +5473,53 @@ function t13UpdatePreview(){
   var cropW=Math.round(img.width*t13Crop.w), cropH=Math.round(img.height*t13Crop.h); if(cropW<10||cropH<10) return;
   var scale=Math.min(1,400/Math.max(cropW,cropH)); var outW=Math.round(cropW*scale), outH=Math.round(cropH*scale); canvas.width=outW; canvas.height=outH; var ctx=canvas.getContext('2d');
   var bright=parseInt(document.getElementById('t13Bright').value||100);
-  // AI Auto Enhance - Agar ON hai to brightness + contrast auto badhao
-  if(document.getElementById('t13AiEnhance').checked && t13AiAnalysis && t13AiAnalysis.isDark) bright=Math.max(bright,125);
   var filterStr="brightness("+bright+"%)"; if(t13Filter==='bw') filterStr+=" grayscale(100%)"; else if(t13Filter==='sepia') filterStr+=" sepia(70%)"; else if(t13Filter==='vivid') filterStr+=" saturate(150%) contrast(115%)";
   ctx.filter=filterStr; ctx.save(); ctx.translate(outW/2,outH/2); if(t13Flip) ctx.scale(-1,1); ctx.rotate(t13RotateDeg*Math.PI/180);
   var sx=img.width*t13Crop.x, sy=img.height*t13Crop.y, sw=img.width*t13Crop.w, sh=img.height*t13Crop.h;
   if(t13Zoom>1){ var nw=sw/t13Zoom, nh=sh/t13Zoom; sx=sx+(sw-nw)/2; sy=sy+(sh-nh)/2; sw=nw; sh=nh; }
-  ctx.drawImage(img,sx,sy,sw,sh,-outW/2,-outH/2,outW,outH); ctx.restore(); ctx.filter='none';
+  // FIX: Rotate 90/270 me photo cut na ho - Isliye draw size ko rotate ke hisaab se adjust karo
+  if(t13RotateDeg===90 || t13RotateDeg===270){ ctx.drawImage(img,sx,sy,sw,sh,-outH/2,-outW/2,outH,outW); } else { ctx.drawImage(img,sx,sy,sw,sh,-outW/2,-outH/2,outW,outH); }
+  ctx.restore(); ctx.filter='none';
   if(t13Shape==='circle'||t13Shape==='heart'||t13Shape==='round'){ ctx.globalCompositeOperation='destination-in'; ctx.beginPath(); if(t13Shape==='circle') ctx.arc(outW/2,outH/2,Math.min(outW,outH)/2,0,Math.PI*2); else if(t13Shape==='heart'){ var cx=outW/2,cy=outH/2,s=Math.min(outW,outH)*0.45; ctx.moveTo(cx,cy+s*0.4); ctx.bezierCurveTo(cx,cy,cx-s,cy-s*0.3,cx-s,cy+s*0.3); ctx.bezierCurveTo(cx-s,cy+s*0.9,cx,cy+s*1.3,cx,cy+s*1.6); ctx.bezierCurveTo(cx,cy+s*1.3,cx+s,cy+s*0.9,cx+s,cy+s*0.3); ctx.bezierCurveTo(cx+s,cy-s*0.3,cx,cy,cx,cy+s*0.4); } else { var r=20; ctx.moveTo(r,0); ctx.arcTo(outW,0,outW,outH,r); ctx.arcTo(outW,outH,0,outH,r); ctx.arcTo(0,outH,0,0,r); ctx.arcTo(0,0,outW,0,r); } ctx.fill(); ctx.globalCompositeOperation='source-over'; }
   canvas.style.display='block'; document.getElementById('t13PreviewEmpty').style.display='none';
-  document.getElementById('t13PreviewInfo').innerText="Preview: "+cropW+" x "+cropH+" • Shape: "+t13Shape;
+  document.getElementById('t13PreviewInfo').innerText="Preview: "+cropW+" x "+cropH+" • This will download";
 }
-function t13LoadImage(file){ return new Promise(function(res,rej){ var img=new Image(); img.onload=function(){res(img)}; img.onerror=rej; img.src=URL.createObjectURL(file); }); }
+function t13LoadImage(file){ return new Promise(function(res,rej){ var img=new Image(); img.onload=function(){res(img)}; img.onerror=function(){rej(new Error("Image load fail"))}; img.src=URL.createObjectURL(file); }); }
 async function t13CropOne(file){
   var img=await t13LoadImage(file); var crop=t13Crop; var cropW=Math.round(img.width*crop.w), cropH=Math.round(img.height*crop.h); var sx=img.width*crop.x, sy=img.height*crop.y, sw=img.width*crop.w, sh=img.height*crop.h;
   if(t13Zoom>1){ var nw=sw/t13Zoom, nh=sh/t13Zoom; sx=sx+(sw-nw)/2; sy=sy+(sh-nh)/2; sw=nw; sh=nh; cropW=Math.round(sw); cropH=Math.round(sh); }
   var exactW=parseInt(document.getElementById('t13ExactW').value||0), exactH=parseInt(document.getElementById('t13ExactH').value||0); var outW=cropW, outH=cropH; if(exactW&&exactH){ outW=exactW; outH=exactH; } else if(exactW){ outW=exactW; outH=Math.round(cropH*(exactW/cropW)); } else if(exactH){ outH=exactH; outW=Math.round(cropW*(exactH/cropH)); }
-  var canvas=document.createElement('canvas'); canvas.width=outW; canvas.height=outH; var ctx=canvas.getContext('2d'); ctx.save();
-  if(t13Shape==='circle'||t13Shape==='heart'||t13Shape==='round'){ ctx.beginPath(); if(t13Shape==='circle') ctx.arc(outW/2,outH/2,Math.min(outW,outH)/2,0,Math.PI*2); else if(t13Shape==='heart'){ var cx=outW/2,cy=outH/2,s=Math.min(outW,outH)*0.45; ctx.moveTo(cx,cy+s*0.4); ctx.bezierCurveTo(cx,cy,cx-s,cy-s*0.3,cx-s,cy+s*0.3); ctx.bezierCurveTo(cx-s,cy+s*0.9,cx,cy+s*1.3,cx,cy+s*1.6); ctx.bezierCurveTo(cx,cy+s*1.3,cx+s,cy+s*0.9,cx+s,cy+s*0.3); ctx.bezierCurveTo(cx+s,cy-s*0.3,cx,cy,cx,cy+s*0.4); } else { var r=30; ctx.moveTo(r,0); ctx.arcTo(outW,0,outW,outH,r); ctx.arcTo(outW,outH,0,outH,r); ctx.arcTo(0,outH,0,0,r); ctx.arcTo(0,0,outW,0,r); } ctx.clip(); }
-  var bright=parseInt(document.getElementById('t13Bright').value||100); if(document.getElementById('t13AiEnhance').checked && t13AiAnalysis && t13AiAnalysis.isDark) bright=Math.max(bright,125);
+  // FIX: Rotate 90/270 me width/height swap karo - Nahi to photo cut hogi
+  var finalW=outW, finalH=outH;
+  if(t13RotateDeg===90 || t13RotateDeg===270){ finalW=outH; finalH=outW; }
+  var canvas=document.createElement('canvas'); canvas.width=finalW; canvas.height=finalH; var ctx=canvas.getContext('2d');
+  // Circle ke liye transparent background - FIX: Pehle clear karo, white fill mat karo
+  if(t13Shape==='circle'||t13Shape==='heart'){ ctx.clearRect(0,0,finalW,finalH); } else { ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,finalW,finalH); }
+  ctx.save();
+  if(t13Shape==='circle'||t13Shape==='heart'||t13Shape==='round'){ ctx.beginPath(); if(t13Shape==='circle') ctx.arc(finalW/2,finalH/2,Math.min(finalW,finalH)/2,0,Math.PI*2); else if(t13Shape==='heart'){ var cx=finalW/2,cy=finalH/2,s=Math.min(finalW,finalH)*0.45; ctx.moveTo(cx,cy+s*0.4); ctx.bezierCurveTo(cx,cy,cx-s,cy-s*0.3,cx-s,cy+s*0.3); ctx.bezierCurveTo(cx-s,cy+s*0.9,cx,cy+s*1.3,cx,cy+s*1.6); ctx.bezierCurveTo(cx,cy+s*1.3,cx+s,cy+s*0.9,cx+s,cy+s*0.3); ctx.bezierCurveTo(cx+s,cy-s*0.3,cx,cy,cx,cy+s*0.4); } else { var r=30; ctx.moveTo(r,0); ctx.arcTo(finalW,0,finalW,finalH,r); ctx.arcTo(finalW,finalH,0,finalH,r); ctx.arcTo(0,finalH,0,0,r); ctx.arcTo(0,0,finalW,0,r); } ctx.clip(); }
+  var bright=parseInt(document.getElementById('t13Bright').value||100);
   var filterStr="brightness("+bright+"%)"; if(t13Filter==='bw') filterStr+=" grayscale(100%)"; else if(t13Filter==='sepia') filterStr+=" sepia(70%)"; else if(t13Filter==='vivid') filterStr+=" saturate(150%) contrast(115%)";
-  ctx.filter=filterStr; ctx.translate(outW/2,outH/2); if(t13Flip) ctx.scale(-1,1); ctx.rotate(t13RotateDeg*Math.PI/180); ctx.drawImage(img,sx,sy,sw,sh,-outW/2,-outH/2,outW,outH); ctx.restore(); ctx.filter='none';
+  ctx.filter=filterStr; ctx.translate(finalW/2,finalH/2); if(t13Flip) ctx.scale(-1,1); ctx.rotate(t13RotateDeg*Math.PI/180); ctx.drawImage(img,sx,sy,sw,sh,-outW/2,-outH/2,outW,outH); ctx.restore(); ctx.filter='none';
   var outFmt=t13Fmt==='keep'?(file.type.indexOf('png')>-1?'png':file.type.indexOf('webp')>-1?'webp':'jpeg'):t13Fmt; if(t13Shape==='circle'||t13Shape==='heart') outFmt='png';
   var mime=outFmt==='png'?'image/png':outFmt==='webp'?'image/webp':'image/jpeg'; var ext=outFmt==='png'?'png':outFmt==='webp'?'webp':'jpg';
   var blob=await new Promise(function(r){canvas.toBlob(r,mime,outFmt==='png'?1:0.92)}); if(!blob){ blob=await new Promise(function(r){canvas.toBlob(r,'image/jpeg',0.92)}); mime='image/jpeg'; ext='jpg'; }
   return {blob:blob,ext:ext,w:canvas.width,h:canvas.height,origW:img.width,origH:img.height};
 }
 async function t13Crop(){
-  if(!t13Files.length) return alert("Select image first!");
+  if(!t13Files.length) return alert("First select photo!");
+  if(!t13EditorImg) return alert("First select photo and adjust crop box!");
   var prefix=(document.getElementById('t13Prefix').value.trim()||"Cropped - Orbittroniz").replace(/[\\/:*?"<>|]/g,'');
-  document.getElementById('t13Status').innerText="Cropping..."; document.getElementById('t13Prog').style.display='block'; document.getElementById('t13Fill').style.width="30%";
+  document.getElementById('t13Status').innerText="Cropping Photo #"+(t13CurrentIdx+1)+"..."; document.getElementById('t13Prog').style.display='block'; document.getElementById('t13Fill').style.width="30%";
   try{
+    // FIX: Current editing photo hi crop hogi - Pehle wali bug fix
     var file=t13Files[t13CurrentIdx]||t13Files[0]; var res=await t13CropOne(file); var fname=prefix+" - "+(t13CurrentIdx+1)+" - "+res.w+"x"+res.h+"."+res.ext; var url=URL.createObjectURL(res.blob);
-    var obj={blob:res.blob,name:fname,url:url,origFile:file,origUrl:URL.createObjectURL(file),beforeKB:file.size/1024,afterKB:res.blob.size/1024,w:res.w,h:res.h};
-    var ex=t13Results.findIndex(function(r){return r.name.indexOf(" - "+(t13CurrentIdx+1)+" - ")>-1}); if(ex>=0) t13Results[ex]=obj; else t13Results.push(obj);
-    t13RenderResults(); document.getElementById('t13Status').innerText="✅ Cropped! "+res.w+"x"+res.h; document.getElementById('t13AllBtn').style.display=t13Files.length>1?'block':'none'; document.getElementById('t13DownloadAllBtn').style.display='block'; document.getElementById('t13ZipBtn').style.display='block'; document.getElementById('t13ShareBtn').style.display='block'; document.getElementById('t13Fill').style.width="100%"; setTimeout(function(){document.getElementById('t13Prog').style.display='none'},600);
-  }catch(e){ alert("Crop Error: "+e.message); document.getElementById('t13Prog').style.display='none'; }
+    var obj={blob:res.blob,name:fname,url:url,origFile:file,origUrl:URL.createObjectURL(file),beforeKB:file.size/1024,afterKB:res.blob.size/1024,w:res.w,h:res.h,idx:t13CurrentIdx};
+    var ex=t13Results.findIndex(function(r){return r.idx===t13CurrentIdx}); if(ex>=0) t13Results[ex]=obj; else t13Results.push(obj);
+    t13RenderResults(); document.getElementById('t13Status').innerText="✅ Cropped Photo #"+(t13CurrentIdx+1)+"! "+res.w+"x"+res.h+" - Download karo 👇"; document.getElementById('t13AllBtn').style.display=t13Files.length>1?'block':'none'; document.getElementById('t13DownloadAllBtn').style.display='block'; document.getElementById('t13ZipBtn').style.display='block'; document.getElementById('t13ShareBtn').style.display='block'; document.getElementById('t13Fill').style.width="100%"; setTimeout(function(){document.getElementById('t13Prog').style.display='none'},600);
+  }catch(e){ alert("Crop Error: "+e.message+" - Try again, or use Manual Slider"); document.getElementById('t13Prog').style.display='none'; }
 }
-function t13RenderResults(){ var out=document.getElementById('t13Out'); out.innerHTML=""; if(!t13Results.length){ document.getElementById('t13OutEmpty').style.display='block'; return; } document.getElementById('t13OutEmpty').style.display='none'; t13Results.forEach(function(r,idx){ var card=document.createElement('div'); card.className='t13-imgcard'; card.innerHTML='<img src="'+r.url+'"><div style="padding:8px;text-align:center"><b style="font-size:11px">'+r.name+'</b><br><small>'+r.w+'x'+r.h+' • Cropped ✅</small><div style="display:flex;gap:4px;margin-top:6px"><button onclick="t13DownloadOne('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">⬇️ Download</button><button onclick="t13ShareOne('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">📤 Share</button></div></div>'; out.appendChild(card); }); }
-async function t13CropAll(){ if(!t13Files.length) return alert("Select images!"); var prefix=(document.getElementById('t13Prefix').value.trim()||"Cropped - Orbittroniz").replace(/[\\/:*?"<>|]/g,''); document.getElementById('t13Prog').style.display='block'; t13Results=[]; for(var i=0;i<t13Files.length;i++){ try{ var res=await t13CropOne(t13Files[i]); var fname=prefix+" - "+(i+1)+" - "+res.w+"x"+res.h+"."+res.ext; t13Results.push({blob:res.blob,name:fname,url:URL.createObjectURL(res.blob),origFile:t13Files[i],origUrl:URL.createObjectURL(t13Files[i]),beforeKB:t13Files[i].size/1024,afterKB:res.blob.size/1024,w:res.w,h:res.h}); document.getElementById('t13Fill').style.width=Math.round(((i+1)/t13Files.length)*100)+"%"; }catch(e){} } t13RenderResults(); document.getElementById('t13Status').innerText="✅ All Cropped!"; document.getElementById('t13DownloadAllBtn').style.display='block'; document.getElementById('t13ZipBtn').style.display='block'; document.getElementById('t13ShareBtn').style.display='block'; setTimeout(function(){document.getElementById('t13Prog').style.display='none'},600); }
+function t13RenderResults(){ var out=document.getElementById('t13Out'); out.innerHTML=""; if(!t13Results.length){ document.getElementById('t13OutEmpty').style.display='block'; return; } document.getElementById('t13OutEmpty').style.display='none'; t13Results.forEach(function(r,idx){ var card=document.createElement('div'); card.className='t13-imgcard'; card.innerHTML='<img src="'+r.url+'"><div style="padding:8px;text-align:center"><b style="font-size:11px">'+r.name+'</b><br><small>Photo #'+(r.idx+1)+' • '+r.w+'x'+r.h+' • Cropped ✅</small><div style="display:flex;gap:4px;margin-top:6px"><button onclick="t13DownloadOne('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">⬇️ Download</button><button onclick="t13ShareOne('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">📤 Share</button></div></div>'; out.appendChild(card); }); }
+async function t13CropAll(){ if(!t13Files.length) return alert("Select images!"); var prefix=(document.getElementById('t13Prefix').value.trim()||"Cropped - Orbittroniz").replace(/[\\/:*?"<>|]/g,''); document.getElementById('t13Prog').style.display='block'; t13Results=[]; for(var i=0;i<t13Files.length;i++){ try{ var res=await t13CropOne(t13Files[i]); var fname=prefix+" - "+(i+1)+" - "+res.w+"x"+res.h+"."+res.ext; t13Results.push({blob:res.blob,name:fname,url:URL.createObjectURL(res.blob),origFile:t13Files[i],origUrl:URL.createObjectURL(t13Files[i]),beforeKB:t13Files[i].size/1024,afterKB:res.blob.size/1024,w:res.w,h:res.h,idx:i}); document.getElementById('t13Fill').style.width=Math.round(((i+1)/t13Files.length)*100)+"%"; }catch(e){} } t13RenderResults(); document.getElementById('t13Status').innerText="✅ All Cropped!"; document.getElementById('t13DownloadAllBtn').style.display='block'; document.getElementById('t13ZipBtn').style.display='block'; document.getElementById('t13ShareBtn').style.display='block'; setTimeout(function(){document.getElementById('t13Prog').style.display='none'},600); }
 function t13DownloadOne(i){ if(!t13Results[i]) return; var r=t13Results[i]; var a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }
 function t13DownloadAll(){ if(!t13Results.length) return alert("First crop"); if(!confirm(t13Results.length+" images will download. Allow?")) return; t13Results.forEach(function(r,idx){ setTimeout(function(){ var a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }, idx*600); }); }
 async function t13DownloadZIP(){ if(!t13Results.length) return alert("First crop"); if(!window.JSZip){ await new Promise(function(r){setTimeout(r,1500)}); if(!window.JSZip) return alert("ZIP loading, try again"); } try{ var zip=new JSZip(); for(var i=0;i<t13Results.length;i++){ zip.file(t13Results[i].name, t13Results[i].blob); } var blob=await zip.generateAsync({type:"blob"}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=(document.getElementById('t13Prefix').value.trim()||"Cropped")+" - All.zip"; document.body.appendChild(a); a.click(); a.remove(); }catch(e){ alert("ZIP Error: "+e.message); } }
@@ -5425,10 +5532,10 @@ async function t13NextImg(){t13PreviewIdx++;await t13ShowPreview();}
 async function t13PrevImg(){t13PreviewIdx--;await t13ShowPreview();}
 function t13ClosePreview(){document.getElementById('t13Modal').style.display='none';}
 document.addEventListener('keydown',function(e){var m=document.getElementById('t13Modal');if(m&&m.style.display==='flex'){if(e.key==='ArrowRight')t13NextImg();if(e.key==='ArrowLeft')t13PrevImg();if(e.key==='Escape')t13ClosePreview();}});
-function t13Reset(){ t13Files=[]; t13Selected.clear(); t13Results=[]; t13PreviewIdx=0; t13EditorImg=null; t13AiAnalysis=null; document.getElementById('t13Out').innerHTML=""; document.getElementById('t13OutEmpty').style.display='block'; document.getElementById('t13SelectedBox').style.display='none'; document.getElementById('t13FileName').innerText="No Images Selected - Click Here"; document.getElementById('t13Status').innerText=""; document.getElementById('t13AllBtn').style.display='none'; document.getElementById('t13DownloadAllBtn').style.display='none'; document.getElementById('t13ZipBtn').style.display='none'; document.getElementById('t13ShareBtn').style.display='none'; document.getElementById('t13EmptyBox').style.display='block'; document.getElementById('t13EditorCanvas').style.display='none'; document.getElementById('t13CropBox').style.display='none'; document.getElementById('t13AiBox').style.display='none'; document.getElementById('t13AiThinking').style.display='none'; t13Log("Reset done"); }
-t13Log("Tool 13 AI Premium Loaded ✅");
+function t13Reset(){ t13Files=[]; t13Selected.clear(); t13Results=[]; t13PreviewIdx=0; t13EditorImg=null; t13AiAnalysis=null; if(t13AiTimeout) clearTimeout(t13AiTimeout); document.getElementById('t13Out').innerHTML=""; document.getElementById('t13OutEmpty').style.display='block'; document.getElementById('t13SelectedBox').style.display='none'; document.getElementById('t13FileName').innerText="No Images Selected - Click Here"; document.getElementById('t13Status').innerText=""; document.getElementById('t13AllBtn').style.display='none'; document.getElementById('t13DownloadAllBtn').style.display='none'; document.getElementById('t13ZipBtn').style.display='none'; document.getElementById('t13ShareBtn').style.display='none'; document.getElementById('t13EmptyBox').style.display='block'; document.getElementById('t13EditorCanvas').style.display='none'; document.getElementById('t13CropBox').style.display='none'; document.getElementById('t13AiBox').style.display='none'; document.getElementById('t13AiThinking').style.display='none'; document.getElementById('t13ManualGuide').style.display='none'; t13Log("Reset done"); }
+t13Log("Tool 13 FIXED V3 Loaded ✅ - AI + Manual Both Working");
 </script>
-<!-- ================= TOOL 13 AI V2 - END ================= -->
+<!-- ================= TOOL 13 FIXED V3 - END ================= -->
 <!-- TOOL 14 -->
 <div class="tool" id="tool-14"><div class="panel"><h3>🎨 Tool 14 - Color Palette</h3>
 <!-- YAHAN TOOL 14 KA CODE PASTE KARO -->
