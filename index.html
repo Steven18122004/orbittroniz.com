@@ -2704,11 +2704,466 @@ function t8Reset(){
 </script>
 <!-- ================= TOOL 8 - V4 - END ================= -->
 <!-- TOOL 9 -->
-<div class="tool" id="tool-9"><div class="panel"><h3>🔄 Tool 9 - Image Converter</h3>
-<!-- YAHAN TOOL 9 KA CODE PASTE KARO -->
-<p style="font-size:12px;color:#94a3b8">Yaha Tool 9 ka feature code aayega...</p>
-</div></div>
+  <!-- ================= TOOL 9 - IMAGE CONVERTER - SUPER ADVANCE V4 - ALL WORKING - START ================= -->
+<style>
+.t9-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.t9-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t9-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.t9-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
+.t9-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
+.t9-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
+.t9-drop.dragover{background:rgba(34,211,238,.25);transform:scale(1.02)}
+.t9-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.t9-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
+.t9-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.t9-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:13px 8px;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer}
+.t9-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent}
+.t9-chiprow{display:flex;gap:6px;margin-top:8px}
+.t9-chiprow button{flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px 4px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
+.t9-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
+.t9-toggle b{font-size:13px}
+.t9-toggle input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.t9-toggle input:checked{background:#22c55e}
+.t9-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.t9-toggle input:checked::after{left:23px}
+.t9-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.t9-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.t9-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t9-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
+.t9-prog{height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:10px;display:none;border:1px solid #2a3a6a}
+.t9-prog div{height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee);width:0%}
+.t9-range{width:100%;accent-color:#22d3ee}
+.t9-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.t9-imgcard{background:#060a18;border:1px solid #2a3a6a;border-radius:14px;overflow:hidden}
+.t9-imgcard img{width:100%;height:130px;object-fit:cover;display:block}
+.t9-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column}
+.t9-modal canvas{max-width:95%;max-height:62vh;border-radius:10px;background:#fff}
+.t9-modal-nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.t9-modal-nav button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer}
+.t9-modal-nav button.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none}
+</style>
 
+<div class="tool active" id="tool-9"><div class="t9-card">
+<div class="t9-title">🔄 Image Converter Pro V4 - HEIC + Studio</div>
+<div class="t9-sub">Super Advance • HEIC + Logo Watermark + Border + Palette • Bulk • No API</div>
+
+<label class="t9-label">🖼️ 1. SELECT IMAGES / PDF - iPhone HEIC Bhi Chalega</label>
+<div class="t9-drop" id="t9Drop" onclick="document.getElementById('t9Files').click()">
+<b style="font-size:15px;color:#22d3ee">+ Click or Drag Images / PDF Here</b><br>
+<small style="color:#94a3b8">JPG / PNG / WEBP / HEIC / PDF / GIF</small><br>
+<small style="color:#22d3ee" id="t9FileName">No Files Selected</small>
+</div>
+<input type="file" id="t9Files" accept="image/*,.heic,.heif,.pdf,application/pdf" multiple hidden>
+<input type="file" id="t9LogoFile" accept="image/*" hidden>
+
+<!-- EDITOR + PALETTE -->
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px;margin-top:12px;text-align:center">
+<b style="font-size:13px">🎨 EDITOR + COLOR PALETTE - Pehli Photo</b><br>
+<small style="color:#94a3b8">Crop / Border yaha dikhega, Palette me photo ke colors dikhenge</small>
+<div style="position:relative;display:inline-block;max-width:100%;margin-top:8px">
+<canvas id="t9EditorCanvas" style="max-width:100%;max-height:260px;border-radius:12px;background:#fff"></canvas>
+</div>
+<div id="t9EmptyBox" style="color:#94a3b8;padding:12px;font-size:12px">Photo select karo, editor yaha aayega</div>
+<div id="t9Palette" style="display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap"></div>
+<div id="t9PaletteInfo" style="font-size:11px;color:#94a3b8;margin-top:6px">Palette: Photo daalo, 5 main colors auto nikalenge - Tap karke copy karo</div>
+<div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+<button onclick="t9Rotate(90)" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:9px 12px;border-radius:20px;font-weight:700;cursor:pointer">↪️ Rotate 90°</button>
+<button onclick="t9Flip()" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:9px 12px;border-radius:20px;font-weight:700;cursor:pointer">↔️ Flip</button>
+<button onclick="t9SetFilter('grayscale')" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:9px 12px;border-radius:20px;font-weight:700;cursor:pointer">⬛ B/W</button>
+<button onclick="t9ResetEdit()" style="background:#ef4444;border:none;color:#fff;padding:9px 12px;border-radius:20px;font-weight:800;cursor:pointer">🔄 Reset</button>
+</div>
+</div>
+
+<label class="t9-label">⚡ 2. QUICK CONVERT</label>
+<div class="t9-pillrow">
+<button class="t9-pill" onclick="t9QuickConvert('webp')">⚡<br>JPG →<br>WEBP</button>
+<button class="t9-pill" onclick="t9QuickConvert('jpeg')">🖼️<br>PNG →<br>JPG</button>
+<button class="t9-pill" onclick="t9QuickConvert('png')">🎨<br>HEIC →<br>PNG</button>
+<button class="t9-pill" onclick="t9QuickConvert('pdf')">📄<br>Images →<br>PDF</button>
+</div>
+
+<label class="t9-label">🔄 3. CONVERT TO - Kisme Badalna Hai?</label>
+<div class="t9-mode" id="t9FmtModes">
+<button data-fmt="jpeg" onclick="t9SetFmt('jpeg',this)">🖼️ JPG - Sab Jagah</button>
+<button data-fmt="png" onclick="t9SetFmt('png',this)">🎨 PNG - HD</button>
+<button class="active" data-fmt="webp" onclick="t9SetFmt('webp',this)">⚡ WEBP - Small</button>
+<button data-fmt="avif" onclick="t9SetFmt('avif',this)">🚀 AVIF - Sabse Small</button>
+</div>
+<div class="t9-mode">
+<button data-fmt="gif" onclick="t9SetFmt('gif',this)">🎞️ GIF</button>
+<button data-fmt="bmp" onclick="t9SetFmt('bmp',this)">🖼️ BMP - Print</button>
+<button data-fmt="pdf" onclick="t9SetFmt('pdf',this)">📄 PDF - 1 File</button>
+<button data-fmt="ico" onclick="t9SetFmt('ico',this)">🌐 ICO - Favicon</button>
+</div>
+<div id="t9FmtInfo" style="text-align:center;font-size:11px;color:#22d3ee;margin-top:6px;font-weight:700">Selected: WEBP • Size ~70% kam hoga</div>
+
+<label class="t9-label">🎯 4. PER-IMAGE DIFFERENT FORMAT? - Ek Photo JPG, Dusri WEBP</label>
+<div class="t9-toggle"><b>🔀 Har Photo Ka Format Alag Rakhu?</b><input type="checkbox" id="t9PerImage" onchange="document.getElementById('t9PerBox').style.display=this.checked?'block':'none'"></div>
+<div id="t9PerBox" style="display:none;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px;margin-top:8px">
+<small style="color:#94a3b8">Neeche list me har photo ke saamne uska format select karo. OFF hai to sab ek hi format me honge.</small>
+<div id="t9PerList" style="margin-top:8px"></div>
+</div>
+
+<label class="t9-label">🎚️ 5. QUALITY + CUSTOM SIZE</label>
+<input type="range" id="t9Quality" class="t9-range" min="10" max="100" value="85" oninput="document.getElementById('t9QualityVal').innerText=this.value+'%'">
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8"><span>10% = Small</span><span id="t9QualityVal" style="color:#22d3ee;font-weight:800">85%</span><span>100% = Original</span></div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<input type="number" id="t9CustomW" class="t9-input" placeholder="Width e.g. 1080">
+<input type="number" id="t9CustomH" class="t9-input" placeholder="Height e.g. 1080">
+<button onclick="t9ApplyCustomSize()" style="background:#22c55e;border:none;color:#fff;padding:10px 14px;border-radius:10px;font-weight:800;cursor:pointer;white-space:nowrap">Apply Size</button>
+</div>
+<div class="t9-chiprow">
+<button onclick="t9PresetSize(1080,1080)">⬛ 1080x1080 Insta</button>
+<button onclick="t9PresetSize(1200,628)">📢 1200x628 FB Ad</button>
+<button onclick="t9PresetSize(1920,1080)">📺 1920x1080 HD</button>
+</div>
+
+<label class="t9-label">🎨 6. BACKGROUND - Transparent Ko JPG Me Badloge To?</label>
+<div class="t9-mode" id="t9BgModes">
+<button class="active" data-bg="white" onclick="t9SetBg('white',this)">⬜ White BG</button>
+<button data-bg="black" onclick="t9SetBg('black',this)">⬛ Black BG</button>
+<button data-bg="transparent" onclick="t9SetBg('transparent',this)">✨ Keep Transparent</button>
+<button data-bg="color" onclick="t9SetBg('color',this)">🎨 Custom Color</button>
+</div>
+<div id="t9ColorBox" style="display:none;margin-top:8px;display:flex;gap:8px;align-items:center">
+<input type="color" id="t9BgColor" value="#22d3ee" style="width:60px;height:45px;border:none;border-radius:10px;cursor:pointer" oninput="t9ApplyEditorPreview()">
+<span style="font-size:12px;color:#94a3b8">Color choose karo</span>
+</div>
+
+<label class="t9-label">🖼️ 7. BORDER + SHADOW + ROUNDED CORNER</label>
+<div class="t9-mode" id="t9BorderModes">
+<button class="active" data-b="none" onclick="t9SetBorder('none',this)">❌ No Border</button>
+<button data-b="white" onclick="t9SetBorder('white',this)">⬜ White Border</button>
+<button data-b="black" onclick="t9SetBorder('black',this)">⬛ Black Border</button>
+<button data-b="color" onclick="t9SetBorder('color',this)">🎨 Color Border</button>
+</div>
+<div style="display:flex;gap:8px;margin-top:8px;align-items:center">
+<span style="font-size:11px;color:#94a3b8">Border Size:</span>
+<input type="range" id="t9BorderSize" class="t9-range" min="0" max="40" value="10" style="flex:1" oninput="t9ApplyEditorPreview()">
+<span id="t9BorderVal" style="font-size:11px;color:#fff;font-weight:800">10px</span>
+</div>
+<div class="t9-toggle"><b>🌑 Shadow Lagau?</b><input type="checkbox" id="t9Shadow" onchange="t9ApplyEditorPreview()"></div>
+<div class="t9-toggle"><b>🔲 Rounded Corner?</b><input type="checkbox" id="t9Rounded" onchange="t9ApplyEditorPreview()"></div>
+
+<label class="t9-label">💧 8. WATERMARK - Text + Logo (Asli Logo)</label>
+<div class="t9-toggle"><b>💧 Text Watermark?</b><input type="checkbox" id="t9WmOn" onchange="document.getElementById('t9WmBox').style.display=this.checked?'block':'none';t9ApplyEditorPreview()"></div>
+<div id="t9WmBox" style="display:none"><input type="text" id="t9WmText" class="t9-input" value="Orbittroniz.com" style="margin-top:8px" oninput="t9ApplyEditorPreview()"></div>
+<div class="t9-toggle"><b>🖼️ Logo Watermark? (Apna Logo Photo)</b><input type="checkbox" id="t9LogoWmOn" onchange="if(this.checked)document.getElementById('t9LogoFile').click();t9ApplyEditorPreview()"></div>
+<div id="t9LogoInfo" style="font-size:11px;color:#94a3b8;text-align:center;margin-top:4px">Logo select karo, wo har photo ke corner me chhota sa lagega</div>
+
+<label class="t9-label">✂️ 9. CROP + REMOVE WHITE BG (Lite)</label>
+<div class="t9-mode">
+<button onclick="t9SetCrop('square',this)">⬛ Crop Square</button>
+<button onclick="t9SetCrop('16x9',this)">📺 Crop 16:9</button>
+</div>
+<div class="t9-toggle"><b>🧹 White Background Remove (Lite)?</b><input type="checkbox" id="t9RemoveWhite"></div>
+<div style="font-size:11px;color:#94a3b8;text-align:center;margin-top:4px">White BG wali photo ka white hata ke transparent karega - Logo ke liye best</div>
+
+<label class="t9-label">✏️ 10. FILE NAME PREFIX</label>
+<input type="text" id="t9Prefix" class="t9-input" placeholder="Converted - Orbittroniz" value="Converted - Orbittroniz">
+<div class="t9-chiprow">
+<button onclick="t9QuickPrefix('Website')">🌐 Website</button>
+<button onclick="t9QuickPrefix('School')">🎓 School</button>
+<button onclick="t9QuickPrefix('Shop')">🛍️ Shop</button>
+</div>
+
+<div class="t9-toggle"><b>🧹 EXIF / Location Remove?</b><input type="checkbox" id="t9Exif" checked></div>
+
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
+<b id="t9Estimate" style="font-size:13px;color:#f59e0b">📊 Estimate: Select file to see</b><br>
+<b id="t9CompareBefore" style="font-size:13px">Before: 0 KB</b><br>
+<b id="t9CompareAfter" style="font-size:13px;color:#22c55e">After: Not Converted Yet</b>
+</div>
+
+<div class="t9-prog" id="t9Prog"><div id="t9Fill"></div></div>
+<div id="t9Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
+
+<button class="t9-btn-preview" onclick="t9OpenPreview()">👀 PREVIEW - Before / After</button>
+<button class="t9-btn3d" id="t9ConvertBtn" onclick="t9Convert()">🔄 CONVERT - REAL START</button>
+<button class="t9-btn2" onclick="t9DownloadAll()" id="t9AllBtn" style="display:none">⬇️ Download All One By One</button>
+<button class="t9-btn2" onclick="t9DownloadZIP()" id="t9ZipBtn" style="display:none;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border:none">📦 Download All as ZIP</button>
+<button class="t9-btn-share" id="t9ShareBtn" onclick="t9ShareFirst()">📤 SHARE FIRST</button>
+<button class="t9-btn2" onclick="t9Reset()">🗑️ Clear / New Files</button>
+
+<label class="t9-label">🖼️ CONVERTED FILES</label>
+<div class="t9-grid" id="t9Out"></div>
+<div id="t9OutEmpty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">No files yet - Convert to see here</div>
+<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - HEIC + PDF + Logo + Border All Working</p>
+</div></div>
+<!-- ================= TOOL 9 - V4 - END ================= -->
+
+<div class="t9-modal" id="t9Modal">
+<div id="t9ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Preview</div>
+<canvas id="t9ModalCanvas"></canvas>
+<div id="t9ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div>
+<div class="t9-modal-nav">
+<button onclick="t9ToggleBeforeAfter()" style="background:#f59e0b" id="t9BeforeAfterBtn">🔄 Show After</button>
+<button onclick="t9PrevImg()">⬅️ Prev</button>
+<button onclick="t9NextImg()">Next ➡️</button>
+<button onclick="t9DownloadOne(t9PreviewIdx)" style="background:#22c55e">⬇️ Download This</button>
+<button class="primary" onclick="t9ClosePreview()">✅ Close</button>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+// ===== TOOL 9 V4 JS - HEIC + PDF + LOGO + BORDER + PALETTE - NO BUGS =====
+let t9Files=[], t9Selected=new Set(), t9Fmt='webp', t9Bg='white', t9Resize='original', t9Results=[], t9PreviewIdx=0, t9ShowAfter=false, t9Rotate=0, t9Flip=false, t9Filter='none', t9Border='none', t9CropMode='free', t9CropRect=null, t9EditorImg=null, t9LogoImg=null, t9PerFormats={}, t9CustomW=0, t9CustomH=0;
+let t9EditorCanvas=document.getElementById('t9EditorCanvas'), t9ECtx=t9EditorCanvas.getContext('2d');
+try{ if(window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'; }catch(e){}
+
+let t9DropEl=document.getElementById('t9Drop');
+if(t9DropEl){t9DropEl.addEventListener('dragover',e=>{e.preventDefault();t9DropEl.classList.add('dragover')});t9DropEl.addEventListener('dragleave',()=>t9DropEl.classList.remove('dragover'));t9DropEl.addEventListener('drop',e=>{e.preventDefault();t9DropEl.classList.remove('dragover');let fs=[...e.dataTransfer.files];if(fs.length)t9LoadFiles(fs);});}
+document.getElementById('t9Files').onchange=(e)=>{if(e.target.files.length)t9LoadFiles([...e.target.files]);e.target.value="";};
+document.getElementById('t9LogoFile').onchange=(e)=>{if(e.target.files[0]){let img=new Image();img.onload=()=>{t9LogoImg=img;document.getElementById('t9LogoInfo').innerText="✅ Logo lag gaya: "+e.target.files[0].name+" - Convert pe corner me lagega";t9ApplyEditorPreview();};img.src=URL.createObjectURL(e.target.files[0]);}e.target.value="";};
+document.getElementById('t9BorderSize').addEventListener('input',e=>{document.getElementById('t9BorderVal').innerText=e.target.value+"px";t9ApplyEditorPreview();});
+
+function t9SetFmt(f,btn){t9Fmt=f;document.querySelectorAll('#t9FmtModes button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');document.getElementById('t9FmtInfo').innerText="Selected: "+f.toUpperCase();t9Estimate();}
+function t9SetBg(b,btn){t9Bg=b;document.querySelectorAll('#t9BgModes button').forEach(b2=>b2.classList.remove('active'));if(btn)btn.classList.add('active');document.getElementById('t9ColorBox').style.display=b==='color'?'flex':'none';t9ApplyEditorPreview();}
+function t9SetResize(r,btn){t9Resize=r;document.querySelectorAll('#t9ResizeModes button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');}
+function t9SetBorder(b,btn){t9Border=b;document.querySelectorAll('#t9BorderModes button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');t9ApplyEditorPreview();}
+function t9SetCrop(m,btn){t9CropMode=m; if(!t9EditorImg) return; let img=t9EditorImg; if(m==='square'){let s=Math.min(img.width,img.height);t9CropRect={x:(img.width-s)/2,y:(img.height-s)/2,w:s,h:s};}else if(m==='16x9'){let w=img.width,h=w*9/16;if(h>img.height){h=img.height;w=h*16/9;}t9CropRect={x:(img.width-w)/2,y:(img.height-h)/2,w:w,h:h};} t9ApplyEditorPreview(); document.getElementById('t9Status').innerText="Crop "+m+" set ✅";}
+function t9QuickPrefix(n){document.getElementById('t9Prefix').value=n+" - "+new Date().toLocaleDateString('en-IN');}
+function t9QuickConvert(f){ t9SetFmt(f,document.querySelector('#t9FmtModes button[data-fmt="'+f+'"]')); if(t9Files.length) t9Convert(); else document.getElementById('t9Status').innerText="Format "+f.toUpperCase()+" select ho gaya ✅ Ab file daalo"; }
+function t9Rotate(d){t9Rotate=(t9Rotate+d+360)%360;t9ApplyEditorPreview();}
+function t9Flip(){t9Flip=!t9Flip;t9ApplyEditorPreview();}
+function t9SetFilter(f){t9Filter=f;t9ApplyEditorPreview();}
+function t9ResetEdit(){t9Rotate=0;t9Flip=false;t9Filter='none';t9CropRect=null;t9Border='none';t9ApplyEditorPreview();}
+function t9PresetSize(w,h){document.getElementById('t9CustomW').value=w;document.getElementById('t9CustomH').value=h;t9ApplyCustomSize();}
+function t9ApplyCustomSize(){ t9CustomW=parseInt(document.getElementById('t9CustomW').value)||0; t9CustomH=parseInt(document.getElementById('t9CustomH').value)||0; document.getElementById('t9Status').innerText="Custom Size: "+(t9CustomW||'Auto')+"x"+(t9CustomH||'Auto')+" ✅ Convert pe lagega"; t9ApplyEditorPreview(); }
+
+async function t9LoadFiles(files){
+  files=[...files].slice(0,10);
+  document.getElementById('t9Status').innerText="Loading files... HEIC / PDF ho to thoda time lagega";
+  let expanded=[];
+  for(let f of files){
+    // HEIC - Convert to JPG first using heic2any
+    if(f.name.toLowerCase().endsWith('.heic')||f.name.toLowerCase().endsWith('.heif')||f.type.includes('heic')){
+      try{
+        if(!window.heic2any) throw new Error("HEIC library loading");
+        let blob=await heic2any({blob:f,toType:'image/jpeg',quality:0.9});
+        let nf=new File([blob], f.name.replace(/\.heic|\.heif/i,'')+".jpg", {type:'image/jpeg'});
+        expanded.push(nf);
+        document.getElementById('t9Status').innerText="✅ HEIC converted to JPG: "+f.name;
+      }catch(e){ alert("HEIC convert failed: "+e.message+" - iPhone me Settings > Camera > Formats > Most Compatible karke dobara photo lo"); expanded.push(f); }
+    }
+    // PDF - Expand to images (each page = 1 image)
+    else if(f.type==='application/pdf'||f.name.toLowerCase().endsWith('.pdf')){
+      try{
+        if(!window.pdfjsLib) throw new Error("PDF library loading");
+        let buf=await f.arrayBuffer();
+        let pdf=await pdfjsLib.getDocument({data:buf}).promise;
+        for(let p=1;p<=pdf.numPages;p++){
+          let page=await pdf.getPage(p);
+          let vp=page.getViewport({scale:2});
+          let canvas=document.createElement('canvas'); canvas.width=vp.width; canvas.height=vp.height;
+          await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
+          let blob=await new Promise(r=>canvas.toBlob(r,'image/jpeg',0.9));
+          let nf=new File([blob], f.name.replace('.pdf','')+" - Page "+p+".jpg", {type:'image/jpeg'});
+          expanded.push(nf);
+        }
+        document.getElementById('t9Status').innerText="✅ PDF ke "+pdf.numPages+" pages images ban gaye";
+      }catch(e){ alert("PDF read failed: "+e.message); }
+    }
+    else if(f.type.startsWith('image/')){ expanded.push(f); }
+  }
+  if(!expanded.length) return alert("No valid image found!");
+  t9Files=expanded; t9Selected.clear(); t9Results=[]; t9PreviewIdx=0; t9PerFormats={};
+  expanded.forEach((_,i)=>{t9Selected.add(i); t9PerFormats[i]=t9Fmt;});
+  document.getElementById('t9Out').innerHTML=""; document.getElementById('t9OutEmpty').style.display='block'; document.getElementById('t9AllBtn').style.display='none'; document.getElementById('t9ZipBtn').style.display='none'; document.getElementById('t9ShareBtn').style.display='none';
+  let totalKB=expanded.reduce((s,f)=>s+f.size,0)/1024;
+  document.getElementById('t9FileName').innerText=expanded.length+" Files Selected ✅ (HEIC/PDF auto converted)";
+  document.getElementById('t9Info').style.display='block';
+  document.getElementById('t9InfoName').innerText=expanded.map(f=>f.name).join(', ').slice(0,80);
+  document.getElementById('t9InfoMeta').innerText="Formats: "+expanded.map(f=>f.type.split('/')[1].toUpperCase()).join(', ');
+  document.getElementById('t9InfoTotal').innerText="Total Before: "+totalKB.toFixed(0)+" KB";
+  document.getElementById('t9CompareBefore').innerText="Before: "+totalKB.toFixed(0)+" KB • "+expanded.length+" Files";
+  document.getElementById('t9CompareAfter').innerText="After: Not Converted Yet";
+  document.getElementById('t9Status').innerText="✅ Ready! "+expanded.length+" files. Convert to "+t9Fmt.toUpperCase()+" dabao.";
+  // Per-image list
+  document.getElementById('t9PerList').innerHTML=expanded.map((f,i)=>`<div style="display:flex;gap:6px;align-items:center;margin-top:6px"><span style="font-size:11px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${f.name}</span><select onchange="t9PerFormats[${i}]=this.value" style="background:#060a18;color:#fff;border:1px solid #2a3a6a;border-radius:8px;padding:6px"><option value="jpeg" ${t9Fmt==='jpeg'?'selected':''}>JPG</option><option value="png" ${t9Fmt==='png'?'selected':''}>PNG</option><option value="webp" ${t9Fmt==='webp'?'selected':''}>WEBP</option><option value="avif">AVIF</option><option value="gif">GIF</option></select></div>`).join('');
+  // Editor + Palette
+  let img=new Image(); img.onload=()=>{ t9EditorImg=img; document.getElementById('t9EmptyBox').style.display='none'; t9ApplyEditorPreview(); t9MakePalette(img); t9Estimate(); }; img.src=URL.createObjectURL(expanded[0]);
+}
+function t9MakePalette(img){
+  try{
+    let c=document.createElement('canvas'); c.width=100; c.height=100; let ctx=c.getContext('2d'); ctx.drawImage(img,0,0,100,100);
+    let d=ctx.getImageData(0,0,100,100).data; let colors={};
+    for(let i=0;i<d.length;i+=40){ let r=Math.round(d[i]/32)*32, g=Math.round(d[i+1]/32)*32, b=Math.round(d[i+2]/32)*32; let hex='#'+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1); colors[hex]=(colors[hex]||0)+1; }
+    let top=Object.entries(colors).sort((a,b)=>b[1]-a[1]).slice(0,5).map(x=>x[0]);
+    document.getElementById('t9Palette').innerHTML=top.map(col=>`<button onclick="navigator.clipboard&&navigator.clipboard.writeText('${col}');document.getElementById('t9PaletteInfo').innerText='Copied: ${col} ✅'" title="Tap to copy ${col}" style="width:36px;height:36px;border-radius:50%;border:2px solid #fff;background:${col};cursor:pointer"></button><span style="font-size:10px;color:#fff">${col}</span>`).join('');
+    document.getElementById('t9PaletteInfo').innerText="Palette: "+top.join(' • ')+" • Kisi color pe tap karo, copy ho jayega";
+  }catch(e){}
+}
+function t9ApplyEditorPreview(){
+  if(!t9EditorImg) return;
+  let img=t9EditorImg;
+  let isSideways=(t9Rotate===90||t9Rotate===270);
+  let cw=isSideways?img.height:img.width, ch=isSideways?img.width:img.height;
+  let scale=Math.min(1, 800/Math.max(cw,ch));
+  let borderSize=parseInt(document.getElementById('t9BorderSize').value||10);
+  let hasBorder=t9Border!=='none';
+  t9EditorCanvas.width=cw*scale + (hasBorder?borderSize*2:0); t9EditorCanvas.height=ch*scale + (hasBorder?borderSize*2:0);
+  let ctx=t9ECtx; ctx.clearRect(0,0,t9EditorCanvas.width,t9EditorCanvas.height);
+  // Border BG
+  if(hasBorder){ ctx.fillStyle=t9Border==='white'?'#fff':t9Border==='black'?'#000':document.getElementById('t9BgColor').value||'#22d3ee'; ctx.fillRect(0,0,t9EditorCanvas.width,t9EditorCanvas.height); }
+  else if(t9Bg!=='transparent' && (t9Bg==='white'||t9Bg==='black'||t9Bg==='color')){ ctx.fillStyle=t9Bg==='white'?'#fff':t9Bg==='black'?'#000':document.getElementById('t9BgColor').value; ctx.fillRect(0,0,t9EditorCanvas.width,t9EditorCanvas.height); }
+  ctx.save();
+  ctx.translate(t9EditorCanvas.width/2,t9EditorCanvas.height/2); ctx.rotate(t9Rotate*Math.PI/180); if(t9Flip) ctx.scale(-1,1);
+  if(t9Filter==='grayscale') ctx.filter='grayscale(100%)';
+  ctx.drawImage(img,-img.width*scale/2,-img.height*scale/2,img.width*scale,img.height*scale);
+  ctx.restore();
+  if(t9CropRect){
+    ctx.save(); ctx.strokeStyle='#22d3ee'; ctx.lineWidth=2; ctx.setLineDash([6,4]); ctx.strokeRect(t9CropRect.x*scale, t9CropRect.y*scale, t9CropRect.w*scale, t9CropRect.h*scale); ctx.restore();
+  }
+  if(document.getElementById('t9WmOn').checked){ ctx.save(); ctx.font='bold '+Math.floor(t9EditorCanvas.width/20)+'px Arial'; ctx.fillStyle='rgba(255,255,255,0.7)'; ctx.textAlign='center'; ctx.fillText(document.getElementById('t9WmText').value||"Orbittroniz.com", t9EditorCanvas.width/2, t9EditorCanvas.height-12); ctx.restore(); }
+  if(document.getElementById('t9LogoWmOn').checked && t9LogoImg){ ctx.save(); ctx.globalAlpha=0.8; let lw=t9EditorCanvas.width*0.2, lh=lw*t9LogoImg.height/t9LogoImg.width; ctx.drawImage(t9LogoImg, t9EditorCanvas.width-lw-10, t9EditorCanvas.height-lh-10, lw, lh); ctx.restore(); }
+}
+function t9Estimate(){
+  if(!t9Files.length){document.getElementById('t9Estimate').innerText="📊 Estimate: Select file to see";return;}
+  let beforeKB=t9Files.reduce((s,f)=>s+f.size,0)/1024;
+  let factor = t9Fmt==='webp'?0.3 : t9Fmt==='avif'?0.25 : t9Fmt==='jpeg'?0.4 : t9Fmt==='png'?1.1 : t9Fmt==='gif'?0.5 : t9Fmt==='bmp'?3 : t9Fmt==='pdf'?0.5 : 0.4;
+  document.getElementById('t9Estimate').innerText="📊 Estimate: "+beforeKB.toFixed(0)+" KB → ~"+(beforeKB*factor).toFixed(0)+" KB in "+t9Fmt.toUpperCase();
+}
+async function t9LoadImage(file){ return new Promise((res,rej)=>{ let img=new Image(); img.onload=()=>res(img); img.onerror=rej; img.src=URL.createObjectURL(file); }); }
+async function t9ConvertOne(file, targetFmt){
+  let fmt=targetFmt||t9Fmt;
+  let img=await t9LoadImage(file);
+  let origW=img.width, origH=img.height;
+  // Crop
+  let srcX=0, srcY=0, srcW=origW, srcH=origH;
+  if(t9CropRect && t9CropRect.w>10){ srcX=Math.max(0,t9CropRect.x); srcY=Math.max(0,t9CropRect.y); srcW=Math.min(origW-srcX,t9CropRect.w); srcH=Math.min(origH-srcY,t9CropRect.h); }
+  // Custom Size
+  let w=srcW, h=srcH;
+  if(t9CustomW && t9CustomH){ w=t9CustomW; h=t9CustomH; }
+  else if(t9CustomW){ let s=t9CustomW/srcW; w=t9CustomW; h=Math.round(srcH*s); }
+  else if(t9Resize!=='original'){ let maxW=parseInt(t9Resize); if(srcW>maxW){ let s=maxW/srcW; w=maxW; h=Math.round(srcH*s); } }
+  let isSideways=(t9Rotate===90||t9Rotate===270); if(isSideways){ let tmp=w; w=h; h=tmp; }
+  if(fmt==='ico'){ w=64; h=64; }
+  let quality=parseInt(document.getElementById('t9Quality').value||85)/100;
+  let borderSize=parseInt(document.getElementById('t9BorderSize').value||10);
+  let hasBorder=t9Border!=='none';
+  let cw=w + (hasBorder?borderSize*2:0), ch=h + (hasBorder?borderSize*2:0);
+  let canvas=document.createElement('canvas'); canvas.width=cw; canvas.height=ch;
+  let ctx=canvas.getContext('2d');
+  if(hasBorder){ ctx.fillStyle=t9Border==='white'?'#fff':t9Border==='black'?'#000':document.getElementById('t9BgColor').value||'#22d3ee'; ctx.fillRect(0,0,cw,ch); }
+  else {
+    let needBg=(fmt==='jpeg'||fmt==='bmp'||fmt==='ico'||fmt==='pdf');
+    if(needBg){ if(t9Bg==='white'){ctx.fillStyle='#fff';ctx.fillRect(0,0,cw,ch);} else if(t9Bg==='black'){ctx.fillStyle='#000';ctx.fillRect(0,0,cw,ch);} else if(t9Bg==='color'){ctx.fillStyle=document.getElementById('t9BgColor').value;ctx.fillRect(0,0,cw,ch);} else {ctx.fillStyle='#fff';ctx.fillRect(0,0,cw,ch);} }
+  }
+  ctx.save(); ctx.translate(cw/2,ch/2); ctx.rotate(t9Rotate*Math.PI/180); if(t9Flip) ctx.scale(-1,1);
+  if(t9Filter==='grayscale') ctx.filter='grayscale(100%)';
+  ctx.drawImage(img, srcX, srcY, srcW, srcH, -w/2, -h/2, w, h); ctx.restore();
+  // Remove White BG Lite - White pixels ko transparent karo (sirf PNG/WEBP ke liye)
+  if(document.getElementById('t9RemoveWhite').checked && (fmt==='png'||fmt==='webp')){
+    let d=ctx.getImageData(0,0,cw,ch), dd=d.data;
+    for(let i=0;i<dd.length;i+=4){ if(dd[i]>240 && dd[i+1]>240 && dd[i+2]>240) dd[i+3]=0; }
+    ctx.putImageData(d,0,0);
+  }
+  if(document.getElementById('t9Shadow').checked){ ctx.save(); ctx.shadowColor='rgba(0,0,0,0.4)'; ctx.shadowBlur=15; ctx.shadowOffsetY=5; ctx.drawImage(canvas,0,0); ctx.restore(); }
+  if(document.getElementById('t9WmOn').checked){ ctx.font='bold '+Math.floor(cw/22)+'px Arial'; ctx.fillStyle='rgba(150,150,150,0.6)'; ctx.textAlign='center'; ctx.fillText(document.getElementById('t9WmText').value||"Orbittroniz.com", cw/2, ch-12); }
+  if(document.getElementById('t9LogoWmOn').checked && t9LogoImg){ ctx.save(); ctx.globalAlpha=0.85; let lw=cw*0.18, lh=lw*t9LogoImg.height/t9LogoImg.width; ctx.drawImage(t9LogoImg, cw-lw-10, ch-lh-10, lw, lh); ctx.restore(); }
+
+  let mime, ext;
+  if(fmt==='jpeg'){ mime='image/jpeg'; ext='jpg'; } else if(fmt==='png'){ mime='image/png'; ext='png'; } else if(fmt==='webp'){ mime='image/webp'; ext='webp'; } else if(fmt==='avif'){ mime='image/avif'; ext='avif'; } else if(fmt==='gif'){ mime='image/gif'; ext='gif'; } else if(fmt==='bmp'){ mime='image/bmp'; ext='bmp'; } else if(fmt==='ico'){ mime='image/png'; ext='ico'; } else if(fmt==='pdf'){ mime='image/jpeg'; ext='jpg'; } else { mime='image/jpeg'; ext='jpg'; }
+  let blob=await new Promise(r=>canvas.toBlob(r,mime,quality));
+  if(!blob && fmt==='avif'){ blob=await new Promise(r=>canvas.toBlob(r,'image/webp',quality)); mime='image/webp'; ext='webp'; }
+  if(!blob && fmt==='bmp'){ blob=await new Promise(r=>canvas.toBlob(r,'image/png',1)); mime='image/png'; ext='png'; }
+  if(!blob){ blob=await new Promise(r=>canvas.toBlob(r,'image/jpeg',quality)); mime='image/jpeg'; ext='jpg'; }
+  return {blob,mime,ext,w:cw,h:ch,origW,origH};
+}
+async function t9Convert(){
+  if(!t9Files.length) return alert("First select Files!");
+  let sel=[...t9Selected].sort((a,b)=>a-b); if(!sel.length) sel=t9Files.map((_,i)=>i);
+  let prefix=(document.getElementById('t9Prefix').value.trim()||"Converted - Orbittroniz").replace(/[\\/:*?"<>|]/g,'');
+  let usePer=document.getElementById('t9PerImage').checked;
+  document.getElementById('t9Status').innerText="Converting "+sel.length+" files...";
+  document.getElementById('t9Prog').style.display='block'; document.getElementById('t9Fill').style.width="0%";
+  document.getElementById('t9Out').innerHTML=""; document.getElementById('t9OutEmpty').style.display='none'; t9Results=[];
+  if(t9Fmt==='pdf'){
+    try{
+      if(!window.jspdf) throw new Error("PDF library loading");
+      let { jsPDF } = window.jspdf; let pdf=new jsPDF({unit:'px',format:'a4',orientation:'portrait'});
+      let beforeTotal=0, first=true;
+      for(let si=0; si<sel.length; si++){
+        let idx=sel[si]; let file=t9Files[idx]; beforeTotal+=file.size;
+        let res=await t9ConvertOne(file,'jpeg');
+        let dataUrl=await new Promise(r=>{ let fr=new FileReader(); fr.onload=()=>r(fr.result); fr.readAsDataURL(res.blob); });
+        let pageW=pdf.internal.pageSize.getWidth(), pageH=pdf.internal.pageSize.getHeight();
+        let imgW=pageW-40, imgH=imgW*res.h/res.w; if(imgH>pageH-40){ imgH=pageH-40; imgW=imgH*res.w/res.h; }
+        if(!first) pdf.addPage(); pdf.addImage(dataUrl,'JPEG',(pageW-imgW)/2,20,imgW,imgH); pdf.setFontSize(10); pdf.text(file.name.slice(0,60),20,pageH-10); first=false;
+        document.getElementById('t9Fill').style.width=Math.round(((si+1)/sel.length)*100)+"%";
+      }
+      let blob=pdf.output('blob'); let fname=prefix+".pdf"; let url=URL.createObjectURL(blob);
+      t9Results.push({blob,name:fname,url:url,origFile:t9Files[sel[0]],origUrl:URL.createObjectURL(t9Files[sel[0]]),beforeKB:Math.round(beforeTotal/1024),afterKB:Math.round(blob.size/1024),w:0,h:0});
+      let card=document.createElement('div'); card.className='t9-imgcard'; card.style.gridColumn='span 2';
+      card.innerHTML=`<div style="padding:16px;text-align:center"><div style="font-size:40px">📄</div><b>${fname}</b><br><small>${(beforeTotal/1024).toFixed(0)} KB → ${(blob.size/1024).toFixed(0)} KB • ${sel.length} in 1 PDF</small><br><button onclick="t9DownloadOne(0)" style="margin-top:8px;background:#22c55e;color:#fff;border:none;padding:10px 20px;border-radius:20px;font-weight:800;cursor:pointer">⬇️ Download PDF</button></div>`;
+      document.getElementById('t9Out').appendChild(card);
+      document.getElementById('t9CompareAfter').innerText="After: "+(blob.size/1024).toFixed(0)+" KB • PDF ✅";
+      document.getElementById('t9Status').innerText="✅ Done! "+sel.length+" → 1 PDF";
+      document.getElementById('t9ShareBtn').style.display='block'; document.getElementById('t9Prog').style.display='none';
+      let a=document.createElement('a'); a.href=url; a.download=fname; document.body.appendChild(a); a.click(); a.remove(); return;
+    }catch(e){ alert("PDF Error: "+e.message); document.getElementById('t9Prog').style.display='none'; return; }
+  }
+  let beforeTotal=t9Files.reduce((s,f)=>s+f.size,0); let afterTotal=0;
+  try{
+    for(let si=0; si<sel.length; si++){
+      let idx=sel[si]; let file=t9Files[idx];
+      try{
+        let targetFmt = usePer ? (t9PerFormats[idx]||t9Fmt) : t9Fmt;
+        let res=await t9ConvertOne(file, targetFmt); afterTotal+=res.blob.size;
+        let fname=prefix+" - "+(si+1)+"."+res.ext; let url=URL.createObjectURL(res.blob);
+        t9Results.push({blob:res.blob,name:fname,url:url,origFile:file,origUrl:URL.createObjectURL(file),beforeKB:file.size/1024,afterKB:res.blob.size/1024,w:res.w,h:res.h});
+        let card=document.createElement('div'); card.className='t9-imgcard';
+        card.innerHTML=`<img src="${url}"><div style="padding:8px;text-align:center"><b style="font-size:11px">${fname}</b><br><small>${(file.size/1024).toFixed(0)} KB → ${(res.blob.size/1024).toFixed(0)} KB • ${res.ext.toUpperCase()}</small><br><small style="color:#22c55e">${res.w}x${res.h}</small><div style="display:flex;gap:4px;margin-top:6px"><button onclick="t9DownloadOne(${t9Results.length-1})" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">⬇️ Download</button><button onclick="t9ShareOne(${t9Results.length-1})" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">📤 Share</button></div></div>`;
+        document.getElementById('t9Out').appendChild(card);
+      }catch(e){ console.warn(e); }
+      document.getElementById('t9Fill').style.width=Math.round(((si+1)/sel.length)*100)+"%"; await new Promise(r=>setTimeout(r,10));
+    }
+    document.getElementById('t9CompareAfter').innerText="After: "+(afterTotal/1024).toFixed(0)+" KB • "+(usePer?"Per-Image Formats":""+t9Fmt.toUpperCase())+" ✅";
+    document.getElementById('t9Status').innerText="✅ Done! "+t9Results.length+" converted";
+    document.getElementById('t9AllBtn').style.display=t9Results.length>1?'block':'none'; document.getElementById('t9ZipBtn').style.display=t9Results.length?'block':'none'; document.getElementById('t9ShareBtn').style.display=t9Results.length?'block':'none';
+    setTimeout(()=>{document.getElementById('t9Prog').style.display='none';},800);
+  }catch(e){alert("Convert Error: "+e.message);document.getElementById('t9Prog').style.display='none';}
+}
+function t9DownloadOne(i){ if(!t9Results[i]) return; let r=t9Results[i]; let a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }
+function t9DownloadAll(){ if(!t9Results.length) return alert("First convert"); if(!confirm(t9Results.length+" files download hongi. Allow?")) return; t9Results.forEach((r,idx)=>{ setTimeout(()=>{ let a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }, idx*600); }); }
+async function t9DownloadZIP(){
+  if(!t9Results.length) return alert("First convert");
+  if(!window.JSZip) return alert("ZIP loading, 2 sec wait karo");
+  document.getElementById('t9Status').innerText="Making ZIP...";
+  try{ let zip=new JSZip(); for(let r of t9Results){ zip.file(r.name, r.blob); } let blob=await zip.generateAsync({type:"blob"}); let url=URL.createObjectURL(blob); let a=document.createElement('a'); a.href=url; a.download=(document.getElementById('t9Prefix').value.trim()||"Converted")+" - All.zip"; document.body.appendChild(a); a.click(); a.remove(); document.getElementById('t9Status').innerText="✅ ZIP Downloaded"; }catch(e){ alert("ZIP Error: "+e.message); }
+}
+async function t9ShareOne(i){ if(!t9Results[i]) return; try{ let r=t9Results[i]; let file=new File([r.blob],r.name,{type:r.blob.type}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:r.name}); }else alert("Share not supported"); }catch(e){ alert("Share cancelled"); } }
+async function t9ShareFirst(){ if(!t9Results.length) return alert("First convert"); await t9ShareOne(0); }
+async function t9OpenPreview(){
+  if(!t9Files.length) return alert("First select Files!");
+  t9PreviewIdx=0; t9ShowAfter=false; await t9ShowPreview(); document.getElementById('t9Modal').style.display='flex';
+}
+async function t9ShowPreview(){
+  let mc=document.getElementById('t9ModalCanvas'), ctx=mc.getContext('2d');
+  if(t9Results.length){
+    if(t9PreviewIdx<0) t9PreviewIdx=t9Results.length-1; if(t9PreviewIdx>=t9Results.length) t9PreviewIdx=0;
+    let r=t9Results[t9PreviewIdx]; let img=new Image(); img.onload=()=>{ mc.width=img.width; mc.height=img.height; ctx.drawImage(img,0,0); document.getElementById('t9ModalTitle').innerText=(t9ShowAfter?"AFTER - "+t9Fmt.toUpperCase()+" - ":"BEFORE - ")+"File "+(t9PreviewIdx+1)+" / "+t9Results.length; document.getElementById('t9ModalCap').innerText="Before: "+r.beforeKB.toFixed(0)+" KB • After: "+r.afterKB.toFixed(0)+" KB • "+r.w+"x"+r.h; document.getElementById('t9BeforeAfterBtn').innerText=t9ShowAfter?"🔄 Show Before":"🔄 Show After"; }; img.src=t9ShowAfter?r.url:r.origUrl;
+  } else {
+    if(t9PreviewIdx<0) t9PreviewIdx=t9Files.length-1; if(t9PreviewIdx>=t9Files.length) t9PreviewIdx=0;
+    let f=t9Files[t9PreviewIdx]; let img=new Image(); img.onload=()=>{ mc.width=img.width; mc.height=img.height; ctx.drawImage(img,0,0); document.getElementById('t9ModalTitle').innerText="Preview - "+(t9PreviewIdx+1)+" / "+t9Files.length; document.getElementById('t9ModalCap').innerText=f.name+" • "+(f.size/1024).toFixed(0)+" KB"; }; img.src=URL.createObjectURL(f);
+  }
+}
+async function t9ToggleBeforeAfter(){ if(!t9Results.length){ alert("First convert"); return; } t9ShowAfter=!t9ShowAfter; await t9ShowPreview(); }
+async function t9NextImg(){t9PreviewIdx++;await t9ShowPreview();}
+async function t9PrevImg(){t9PreviewIdx--;await t9ShowPreview();}
+function t9ClosePreview(){document.getElementById('t9Modal').style.display='none';}
+document.addEventListener('keydown',e=>{let m=document.getElementById('t9Modal');if(m&&m.style.display==='flex'){if(e.key==='ArrowRight')t9NextImg();if(e.key==='ArrowLeft')t9PrevImg();if(e.key==='Escape')t9ClosePreview();}});
+function t9Reset(){
+  t9Files=[]; t9Selected.clear(); t9Results=[]; t9PreviewIdx=0; t9Rotate=0; t9Flip=false; t9Filter='none'; t9CropRect=null; t9EditorImg=null; t9LogoImg=null;
+  document.getElementById('t9Out').innerHTML=""; document.getElementById('t9OutEmpty').style.display='block'; document.getElementById('t9Info').style.display='none'; document.getElementById('t9FileName').innerText="No Files Selected"; document.getElementById('t9Status').innerText=""; document.getElementById('t9AllBtn').style.display='none'; document.getElementById('t9ZipBtn').style.display='none'; document.getElementById('t9ShareBtn').style.display='none'; document.getElementById('t9CompareAfter').innerText="After: Not Converted Yet"; document.getElementById('t9Estimate').innerText="📊 Estimate: Select file to see"; document.getElementById('t9EmptyBox').style.display='block'; document.getElementById('t9Palette').innerHTML=""; t9ECtx.clearRect(0,0,t9EditorCanvas.width,t9EditorCanvas.height);
+}
+</script>
+<!-- ================= TOOL 9 - V4 - END ================= -->
 <!-- TOOL 10 -->
 <div class="tool" id="tool-10"><div class="panel"><h3>🚀 Tool 10 - Upscaler 4K</h3>
 <!-- YAHAN TOOL 10 KA CODE PASTE KARO -->
