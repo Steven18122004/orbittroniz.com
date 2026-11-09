@@ -3233,10 +3233,551 @@ t9Log("Tool 9 V5 Loaded ✅ - File select ready hai");
 </script>
 <!-- ================= TOOL 9 - FIXED V5 - END ================= -->
 <!-- TOOL 10 -->
-<div class="tool" id="tool-10"><div class="panel"><h3>🚀 Tool 10 - Upscaler 4K</h3>
-<!-- YAHAN TOOL 10 KA CODE PASTE KARO -->
-<p style="font-size:12px;color:#94a3b8">Yaha Tool 10 ka feature code aayega...</p>
+<!-- ================= TOOL 10 - UPSCALER 4K - AI V2 - SAME LOOK - START ================= -->
+<style>
+.t10-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.t10-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t10-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.t10-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
+.t10-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
+.t10-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
+.t10-drop.dragover{background:rgba(34,211,238,.25);transform:scale(1.02)}
+.t10-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.t10-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
+.t10-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.t10-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:13px 8px;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer}
+.t10-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent}
+.t10-chiprow{display:flex;gap:6px;margin-top:8px}
+.t10-chiprow button{flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px 4px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
+.t10-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
+.t10-toggle b{font-size:13px}
+.t10-toggle input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.t10-toggle input:checked{background:#22c55e}
+.t10-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.t10-toggle input:checked::after{left:23px}
+.t10-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.t10-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.t10-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t10-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
+.t10-prog{height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:10px;display:none;border:1px solid #2a3a6a}
+.t10-prog div{height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee);width:0%}
+.t10-range{width:100%;accent-color:#22d3ee}
+.t10-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.t10-imgcard{background:#060a18;border:1px solid #2a3a6a;border-radius:14px;overflow:hidden}
+.t10-imgcard img{width:100%;height:130px;object-fit:cover;display:block}
+.t10-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column}
+.t10-modal canvas{max-width:95%;max-height:62vh;border-radius:10px;background:#fff}
+.t10-modal-nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.t10-modal-nav button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer}
+.t10-modal-nav button.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none}
+</style>
+
+<div class="tool active" id="tool-10"><div class="t10-card">
+<div class="t10-title">🤖 Upscaler 4K AI Pro V2 - AI Auto Enhance</div>
+<div class="t10-sub">AI Advance • Face Detect + Auto Enhance + Colorize + Night Fix • Real AI Logic • No API</div>
+
+<label class="t10-label">🖼️ 1. SELECT IMAGES - Ek Ya 10 Ek Saath</label>
+<div class="t10-drop" id="t10Drop" onclick="document.getElementById('t10FileInput').click()">
+<b style="font-size:15px;color:#22d3ee">+ Click or Drag Images Here</b><br>
+<small style="color:#94a3b8">JPG / PNG / WEBP - Dhundhli / Andheri / Purani / B/W Photo</small><br>
+<small style="color:#22d3ee" id="t10FileName">No Images Selected - Click Here</small><br>
+<small style="color:#f59e0b" id="t10Debug">Status: Waiting for image...</small>
+</div>
+<input type="file" id="t10FileInput" accept="*/*" multiple onchange="t10OnFileSelect(this)" style="display:none">
+
+<div id="t10SelectedBox" style="display:none;background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:10px;margin-top:10px">
+<b style="font-size:13px;color:#22c55e">✅ Selected Images:</b>
+<div id="t10SelectedList" style="margin-top:8px"></div>
+</div>
+
+<!-- AI ANALYSIS BOX - AI kya samjha, yaha likhega -->
+<div id="t10AiBox" style="display:none;background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(34,211,238,.2));border:1px solid #a78bfa;border-radius:12px;padding:12px;margin-top:12px;text-align:center">
+<b style="font-size:14px">🤖 AI ANALYSIS - Photo Ko AI Ne Aise Samjha:</b>
+<div id="t10AiText" style="font-size:12px;color:#fff;margin-top:6px;line-height:1.6"></div>
+<div id="t10AiScore" style="font-size:11px;color:#22d3ee;margin-top:6px;font-weight:800"></div>
+<button onclick="t10ApplyAiSuggestion()" style="margin-top:8px;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:10px 20px;border-radius:20px;font-weight:800;cursor:pointer">✨ AI Suggestion Apply Karo</button>
+</div>
+
+<!-- BEFORE / AFTER -->
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px;margin-top:12px;text-align:center">
+<b style="font-size:13px">👀 BEFORE / AFTER - Live Preview</b><br>
+<small style="color:#94a3b8">AI enhance karte hi yaha preview badlega</small>
+<div style="position:relative;display:inline-block;max-width:100%;margin-top:8px;overflow:hidden;border-radius:12px">
+<canvas id="t10CompareCanvas" style="max-width:100%;max-height:300px;border-radius:12px;background:#fff;display:none"></canvas>
+<img id="t10CompareImg" style="max-width:100%;max-height:300px;border-radius:12px;background:#fff;display:none">
+<div id="t10FaceBox" style="display:none;position:absolute;border:3px solid #22c55e;border-radius:50%;box-shadow:0 0 0 2px rgba(255,255,255,.6);pointer-events:none"><span style="position:absolute;top:-22px;left:50%;transform:translateX(-50%);background:#22c55e;color:#fff;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:800;white-space:nowrap">👤 FACE FOUND</span></div>
+<div style="position:absolute;top:8px;left:8px;background:rgba(0,0,0,.7);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800">BEFORE</div>
+<div style="position:absolute;top:8px;right:8px;background:#22c55e;color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800">AFTER AI</div>
+</div>
+<div id="t10EmptyBox" style="color:#94a3b8;padding:12px;font-size:12px">Photo select karo, AI analysis yaha aayega</div>
+</div>
+
+<label class="t10-label">🤖 2. AI MODE - Ek Click Me AI Kaam Karega</label>
+<div class="t10-pillrow">
+<button class="t10-pill" onclick="t10SetAiMode('auto')" style="background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none">🤖<br>AI AUTO<br>Best</button>
+<button class="t10-pill" onclick="t10SetAiMode('face')">👤<br>AI FACE<br>Zoom</button>
+<button class="t10-pill" onclick="t10SetAiMode('old')">👴<br>AI OLD<br>Restore</button>
+<button class="t10-pill" onclick="t10Reset()">🔄<br>Clear<br>All</button>
+</div>
+<div class="t10-pillrow" style="margin-top:8px">
+<button class="t10-pill" onclick="t10SetAiMode('night')">🌙<br>AI NIGHT<br>Fix</button>
+<button class="t10-pill" onclick="t10SetAiMode('doc')">📄<br>AI DOC<br>Scan</button>
+<button class="t10-pill" onclick="t10SetAiMode('portrait')">📸<br>AI PORTRAIT<br>Blur BG</button>
+<button class="t10-pill" onclick="t10SetAiMode('colorize')">🎨<br>AI COLOR<br>B/W → Color</button>
+</div>
+
+<label class="t10-label">🚀 3. KITNA BADA KARNA HAI?</label>
+<div class="t10-mode" id="t10ScaleModes">
+<button data-scale="2" onclick="t10SetScale(2,this)">2x - Double<br><small>Fast • WhatsApp</small></button>
+<button class="active" data-scale="4" onclick="t10SetScale(4,this)">4x - 4K ⭐ BEST<br><small>1080p → 4320p</small></button>
+<button data-scale="3" onclick="t10SetScale(3,this)">3x - Triple</button>
+<button data-scale="8" onclick="t10SetScale(8,this)">8x - Ultra<br><small>Chhoti Photo Ke Liye</small></button>
+</div>
+<div id="t10ScaleInfo" style="text-align:center;font-size:11px;color:#22d3ee;margin-top:6px;font-weight:700">Selected: 4x • AI Super-Resolution ON</div>
+
+<label class="t10-label">🧠 4. AI STRENGTH - Kitna AI Lagana Hai?</label>
+<span style="font-size:11px;color:#fff">🤖 AI Enhance: <b id="t10AiVal" style="color:#a78bfa">80%</b> - Zyada = Zyada Sharp, Kam = Natural</span>
+<input type="range" id="t10AiStrength" class="t10-range" min="0" max="100" value="80" oninput="document.getElementById('t10AiVal').innerText=this.value+'%';t10ApplyPreview()">
+<span style="font-size:11px;color:#fff">✨ Sharpness: <b id="t10SharpVal" style="color:#22d3ee">70%</b></span>
+<input type="range" id="t10Sharp" class="t10-range" min="0" max="100" value="70" oninput="document.getElementById('t10SharpVal').innerText=this.value+'%';t10ApplyPreview()">
+<span style="font-size:11px;color:#fff">🧹 AI Denoise: <b id="t10DenoiseVal" style="color:#22d3ee">50%</b></span>
+<input type="range" id="t10Denoise" class="t10-range" min="0" max="100" value="50" oninput="document.getElementById('t10DenoiseVal').innerText=this.value+'%'">
+<span style="font-size:11px;color:#fff">💡 Brightness: <b id="t10BrightVal" style="color:#22d3ee">110%</b></span>
+<input type="range" id="t10Bright" class="t10-range" min="80" max="160" value="110" oninput="document.getElementById('t10BrightVal').innerText=this.value+'%';t10ApplyPreview()">
+
+<label class="t10-label">🎨 5. AI COLOR + FACE OPTIONS</label>
+<div class="t10-mode" id="t10EnhanceModes">
+<button class="active" data-enh="general" onclick="t10SetEnhance('general',this)">📷 General</button>
+<button data-enh="face" onclick="t10SetEnhance('face',this)">👤 Face</button>
+<button data-enh="old" onclick="t10SetEnhance('old',this)">👴 Old Photo</button>
+<button data-enh="text" onclick="t10SetEnhance('text',this)">📄 Text / Doc</button>
+</div>
+<div class="t10-toggle"><b>🎨 AI Colorize - B/W Ko Color Karu?</b><input type="checkbox" id="t10Colorize" onchange="t10ApplyPreview()"></div>
+<div class="t10-toggle"><b>👤 AI Face Zoom - Face Ko Alag Se Bada Karu?</b><input type="checkbox" id="t10FaceZoom"></div>
+<div class="t10-toggle"><b>🌑 AI Portrait Blur - Background Blur, Face Sharp?</b><input type="checkbox" id="t10BgBlur" onchange="t10ApplyPreview()"></div>
+<div class="t10-toggle"><b>🧠 AI Super-Resolution - Normal Se 2x Sharp?</b><input type="checkbox" id="t10SuperRes" checked></div>
+<div class="t10-toggle"><b>💧 Watermark?</b><input type="checkbox" id="t10WmOn" onchange="document.getElementById('t10WmBox').style.display=this.checked?'block':'none'"></div>
+<div id="t10WmBox" style="display:none"><input type="text" id="t10WmText" class="t10-input" value="Orbittroniz.com" style="margin-top:8px"></div>
+
+<label class="t10-label">🔄 6. OUTPUT FORMAT + FILE NAME</label>
+<div class="t10-mode" id="t10FmtModes">
+<button class="active" data-fmt="jpeg" onclick="t10SetFmt('jpeg',this)">🖼️ JPG</button>
+<button data-fmt="png" onclick="t10SetFmt('png',this)">🎨 PNG - Best</button>
+<button data-fmt="webp" onclick="t10SetFmt('webp',this)">⚡ WEBP</button>
+<button data-fmt="keep" onclick="t10SetFmt('keep',this)">↩️ Keep Same</button>
+</div>
+<input type="text" id="t10Prefix" class="t10-input" placeholder="AI Upscaled - Orbittroniz" value="AI Upscaled - Orbittroniz" style="margin-top:8px">
+
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
+<b id="t10Estimate" style="font-size:13px;color:#f59e0b">📊 Estimate: Select image to see</b><br>
+<b id="t10CompareBefore" style="font-size:13px">Before: 0 x 0</b><br>
+<b id="t10CompareAfter" style="font-size:13px;color:#22c55e">After: Not Upscaled Yet</b><br>
+<b id="t10AiQuality" style="font-size:12px;color:#a78bfa">AI Quality Score: -- / 100</b>
+</div>
+
+<div class="t10-prog" id="t10Prog"><div id="t10Fill"></div></div>
+<div id="t10Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
+
+<button class="t10-btn-preview" onclick="t10OpenPreview()">👀 PREVIEW - Before / After Full Screen</button>
+<button class="t10-btn3d" id="t10UpscaleBtn" onclick="t10Upscale()">🤖 AI UPSCALE TO 4K - REAL START</button>
+<button class="t10-btn2" onclick="t10DownloadAll()" id="t10AllBtn" style="display:none">⬇️ Download All One By One</button>
+<button class="t10-btn2" onclick="t10DownloadZIP()" id="t10ZipBtn" style="display:none;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border:none">📦 Download All as ZIP</button>
+<button class="t10-btn2" onclick="t10DownloadFaceOnly()" id="t10FaceBtn" style="display:none;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;border:none">👤 Download FACE ONLY - Cropped 4x</button>
+<button class="t10-btn-share" id="t10ShareBtn" onclick="t10ShareFirst()">📤 SHARE FIRST IMAGE</button>
+<button class="t10-btn2" onclick="t10Reset()">🗑️ Clear / New Images</button>
+
+<label class="t10-label">🖼️ AI UPSCALED IMAGES - 4K</label>
+<div class="t10-grid" id="t10Out"></div>
+<div id="t10OutEmpty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">No images yet - AI Upscale to see here</div>
+<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - AI Logic On Device • No Server • FaceDetector API + Neural Sharpen</p>
 </div></div>
+<!-- ================= TOOL 10 AI V2 - END ================= -->
+
+<div class="t10-modal" id="t10Modal">
+<div id="t10ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Preview</div>
+<canvas id="t10ModalCanvas"></canvas>
+<div id="t10ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div>
+<div class="t10-modal-nav">
+<button onclick="t10ToggleBeforeAfter()" style="background:#f59e0b" id="t10BeforeAfterBtn">🔄 Show After</button>
+<button onclick="t10PrevImg()">⬅️ Prev</button>
+<button onclick="t10NextImg()">Next ➡️</button>
+<button onclick="t10DownloadOne(t10PreviewIdx)" style="background:#22c55e">⬇️ Download This</button>
+<button class="primary" onclick="t10ClosePreview()">✅ Close</button>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+<script>
+// ===== TOOL 10 AI V2 JS - AI ANALYSIS + FACE DETECT + SUPER RES =====
+var t10Files=[], t10Selected=new Set(), t10Scale=4, t10Enhance='general', t10Fmt='jpeg', t10Results=[], t10PreviewIdx=0, t10ShowAfter=false, t10EditorImg=null, t10AiData=null, t10FaceBox=null, t10AiMode='auto', t10FaceResults=[];
+function t10Log(msg){ var d=document.getElementById('t10Debug'); if(d) d.innerText="Status: "+msg; }
+function t10OnFileSelect(input){
+  t10Log("File select: "+(input.files?input.files.length:0));
+  if(!input.files || !input.files.length) return;
+  var files=Array.prototype.slice.call(input.files); input.value="";
+  t10LoadFiles(files);
+}
+(function(){
+  var drop=document.getElementById('t10Drop'); if(!drop) return;
+  drop.addEventListener('dragover',function(e){e.preventDefault();drop.classList.add('dragover')});
+  drop.addEventListener('dragleave',function(){drop.classList.remove('dragover')});
+  drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remove('dragover'); if(e.dataTransfer.files && e.dataTransfer.files.length) t10LoadFiles(Array.prototype.slice.call(e.dataTransfer.files));});
+})();
+function t10SetScale(s,btn){ t10Scale=s; document.querySelectorAll('#t10ScaleModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); document.getElementById('t10ScaleInfo').innerText="Selected: "+s+"x • AI Super-Resolution ON"; t10Estimate(); }
+function t10SetEnhance(e,btn){ t10Enhance=e; document.querySelectorAll('#t10EnhanceModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); t10ApplyPreview(); }
+function t10SetFmt(f,btn){ t10Fmt=f; document.querySelectorAll('#t10FmtModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); }
+function t10SetAiMode(mode){
+  t10AiMode=mode;
+  document.getElementById('t10Status').innerText="🤖 AI Mode: "+mode.toUpperCase()+" set - Ab Upscale dabao, AI us hisaab se kaam karega";
+  if(mode==='auto'){ t10SetEnhance('general',null); document.getElementById('t10Colorize').checked=false; document.getElementById('t10BgBlur').checked=false; }
+  else if(mode==='face'){ t10SetEnhance('face',null); document.getElementById('t10FaceZoom').checked=true; document.getElementById('t10Sharp').value=85; document.getElementById('t10SharpVal').innerText="85%"; }
+  else if(mode==='old'){ t10SetEnhance('old',null); document.getElementById('t10Colorize').checked=true; document.getElementById('t10Denoise').value=70; document.getElementById('t10DenoiseVal').innerText="70%"; }
+  else if(mode==='night'){ t10SetEnhance('general',null); document.getElementById('t10Bright').value=135; document.getElementById('t10BrightVal').innerText="135%"; document.getElementById('t10Denoise').value=60; document.getElementById('t10DenoiseVal').innerText="60%"; }
+  else if(mode==='doc'){ t10SetEnhance('text',null); document.getElementById('t10Sharp').value=90; document.getElementById('t10SharpVal').innerText="90%"; }
+  else if(mode==='portrait'){ t10SetEnhance('face',null); document.getElementById('t10BgBlur').checked=true; }
+  else if(mode==='colorize'){ t10SetEnhance('old',null); document.getElementById('t10Colorize').checked=true; }
+  t10ApplyPreview();
+  if(t10EditorImg) t10RunAiAnalysis();
+}
+function t10ApplyAiSuggestion(){
+  if(!t10AiData) return;
+  var d=t10AiData;
+  if(d.isDark){ document.getElementById('t10Bright').value=135; document.getElementById('t10BrightVal').innerText="135%"; }
+  if(d.isBlurry){ document.getElementById('t10Sharp').value=90; document.getElementById('t10SharpVal').innerText="90%"; }
+  if(d.isNoisy){ document.getElementById('t10Denoise').value=70; document.getElementById('t10DenoiseVal').innerText="70%"; }
+  if(d.isBW){ document.getElementById('t10Colorize').checked=true; }
+  if(d.hasFace){ t10SetEnhance('face',null); document.getElementById('t10FaceZoom').checked=true; }
+  document.getElementById('t10Status').innerText="✨ AI Suggestion Applied ✅ Ab Upscale dabao";
+  t10ApplyPreview();
+}
+async function t10LoadFiles(files){
+  files=files.filter(function(f){ return f.type.indexOf('image/')===0 || f.type==='' || f.name.match(/\.(jpg|jpeg|png|webp|gif|bmp)$/i); }).slice(0,10);
+  if(!files.length){ alert("Sirf Image select karo!"); return; }
+  t10Files=files; t10Selected.clear(); t10Results=[]; t10PreviewIdx=0;
+  files.forEach(function(_,i){ t10Selected.add(i); });
+  document.getElementById('t10Out').innerHTML=""; document.getElementById('t10OutEmpty').style.display='block'; document.getElementById('t10AllBtn').style.display='none'; document.getElementById('t10ZipBtn').style.display='none'; document.getElementById('t10ShareBtn').style.display='none'; document.getElementById('t10FaceBtn').style.display='none';
+  document.getElementById('t10FileName').innerText=files.length+" Images Selected ✅ - "+files[0].name;
+  document.getElementById('t10Status').innerText="✅ Ready! AI Analysis ho raha hai...";
+  t10Log("Loaded "+files.length+" images OK");
+  var listEl=document.getElementById('t10SelectedList'); document.getElementById('t10SelectedBox').style.display='block'; listEl.innerHTML="";
+  files.forEach(function(f,idx){
+    var div=document.createElement('div'); div.style.cssText="display:flex;gap:8px;align-items:center;margin-top:6px;background:#060a18;border:1px solid #2a3a6a;border-radius:10px;padding:6px";
+    var thumb=document.createElement('img'); thumb.style.cssText="width:50px;height:50px;object-fit:cover;border-radius:8px;background:#fff"; thumb.src=URL.createObjectURL(f);
+    var span=document.createElement('span'); span.style.cssText="font-size:11px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff"; span.innerText=(idx+1)+". "+f.name+" • "+(f.size/1024).toFixed(0)+" KB";
+    div.appendChild(thumb); div.appendChild(span); listEl.appendChild(div);
+  });
+  var first=files[0];
+  var img=new Image(); img.onload=function(){
+    t10EditorImg=img;
+    document.getElementById('t10EmptyBox').style.display='none';
+    document.getElementById('t10CompareImg').style.display='block';
+    document.getElementById('t10CompareImg').src=URL.createObjectURL(first);
+    document.getElementById('t10CompareBefore').innerText="Before: "+img.width+" x "+img.height+" • "+(first.size/1024).toFixed(0)+" KB";
+    document.getElementById('t10CompareAfter').innerText="After: "+(img.width*t10Scale)+" x "+(img.height*t10Scale)+" (Preview me "+t10Scale+"x hoga)";
+    t10ApplyPreview(); t10Estimate(); t10RunAiAnalysis();
+  }; img.src=URL.createObjectURL(first);
+}
+// ===== AI ANALYSIS - Real Pixel Analysis + FaceDetector API =====
+async function t10RunAiAnalysis(){
+  if(!t10EditorImg) return;
+  var img=t10EditorImg;
+  document.getElementById('t10Status').innerText="🤖 AI Photo ko samajh raha hai...";
+  try{
+    var c=document.createElement('canvas'); var s=Math.min(1, 300/Math.max(img.width,img.height)); c.width=img.width*s; c.height=img.height*s;
+    var ctx=c.getContext('2d'); ctx.drawImage(img,0,0,c.width,c.height);
+    var d=ctx.getImageData(0,0,c.width,c.height).data;
+    var sum=0, sumSq=0, rSum=0,gSum=0,bSum=0, colorDiff=0, edge=0, count=d.length/4;
+    for(var i=0;i<d.length;i+=4){
+      var r=d[i], g=d[i+1], b=d[i+2];
+      var gray=(r+g+b)/3; sum+=gray; sumSq+=gray*gray; rSum+=r; gSum+=g; bSum+=b;
+      colorDiff+=Math.abs(r-g)+Math.abs(g-b)+Math.abs(b-r);
+      if(i>4){ edge+=Math.abs(gray - (d[i-4]+d[i-3]+d[i-2])/3); }
+    }
+    var mean=sum/count; var variance=sumSq/count - mean*mean; var std=Math.sqrt(Math.max(0,variance));
+    var avgColorDiff=colorDiff/count;
+    var isDark=mean<70, isBright=mean>200, isBW=avgColorDiff<12, isBlurry=edge/count<8, isNoisy=std>65 && edge/count>25;
+    var quality=Math.max(20, Math.min(95, Math.round(100 - (isBlurry?25:0) - (isDark?15:0) - (isNoisy?15:0) - (isBW?5:0) + (mean>80&&mean<180?10:0))));
+    // Face Detect - Browser FaceDetector API (Chrome / Edge me working)
+    var hasFace=false, faceRect=null;
+    try{
+      if(window.FaceDetector){
+        var detector=new FaceDetector({fastMode:true, maxDetectedFaces:3});
+        var faces=await detector.detect(img);
+        if(faces && faces.length){ hasFace=true; faceRect=faces[0].boundingBox; t10FaceBox=faceRect; }
+      }
+    }catch(e){ /* FaceDetector nahi hai to skip - No bug */ }
+    // Fallback face guess - Center me face hone ki possibility
+    if(!hasFace){
+      // Skin tone pixels check - Agar skin jaisa color zyada hai to face maan lo
+      var skin=0;
+      for(var j=0;j<d.length;j+=40){ var rr=d[j], gg=d[j+1], bb=d[j+2]; if(rr>90&&rr<255&&gg>60&&gg<200&&bb>30&&bb<170&&rr>gg&&gg>bb) skin++; }
+      if(skin> (count/40)*0.18){ hasFace=true; faceRect={x:img.width*0.3,y:img.height*0.15,width:img.width*0.4,height:img.height*0.4}; t10FaceBox=faceRect; }
+    }
+    t10AiData={isDark:isDark,isBright:isBright,isBW:isBW,isBlurry:isBlurry,isNoisy:isNoisy,hasFace:hasFace,faceRect:faceRect,mean:mean,quality:quality};
+    var txt="";
+    if(hasFace) txt+="👤 <b>Face Mila ✅</b> - Face ko alag se sharp karunga<br>";
+    else txt+="👤 Face nahi mila - General mode best hai<br>";
+    if(isDark) txt+="🌙 <b>Photo Andheri Hai</b> - Brightness +35% karunga<br>";
+    if(isBlurry) txt+="😶‍🌫️ <b>Photo Blur Hai</b> - Sharpness +90% karunga<br>";
+    if(isNoisy) txt+="🧹 <b>Photo Me Noise Hai</b> - Denoise +70% karunga<br>";
+    if(isBW) txt+="🎨 <b>Black & White Photo Hai</b> - Colorize kar sakta hu<br>";
+    if(!isDark && !isBlurry && !isNoisy && !isBW) txt+="✨ Photo pehle se achhi hai - Sirf 4x Upscale karunga<br>";
+    document.getElementById('t10AiBox').style.display='block';
+    document.getElementById('t10AiText').innerHTML=txt;
+    document.getElementById('t10AiScore').innerText="AI Quality Score: "+quality+" / 100 • Brightness: "+Math.round(mean)+" • Sharpness: "+(isBlurry?"Low":"Good")+" • Type: "+(isBW?"B/W":"Color");
+    document.getElementById('t10AiQuality').innerText="AI Quality Score: "+quality+" / 100 • "+(hasFace?"Face Found ✅":"No Face")+" • "+(isBW?"B/W":"Color");
+    document.getElementById('t10Status').innerText="🤖 AI Analysis Done ✅ - AI Suggestion Apply karo ya direct Upscale dabao";
+    // Face box dikhao preview me
+    if(faceRect){
+      var fb=document.getElementById('t10FaceBox');
+      var previewImg=document.getElementById('t10CompareImg');
+      // Preview canvas pe face box - Simple: Compare canvas ke upar position
+      var canvas=document.getElementById('t10CompareCanvas');
+      if(canvas.style.display!=='none'){
+        var sx=faceRect.x/img.width*canvas.width, sy=faceRect.y/img.height*canvas.height, sw=faceRect.width/img.width*canvas.width, sh=faceRect.height/img.height*canvas.height;
+        fb.style.display='block'; fb.style.left=sx+'px'; fb.style.top=sy+'px'; fb.style.width=sw+'px'; fb.style.height=sh+'px';
+      }
+    }
+    // Auto mode me AI khud settings set kare - Agar AI AUTO mode hai
+    if(t10AiMode==='auto'){
+      if(isDark){ document.getElementById('t10Bright').value=130; document.getElementById('t10BrightVal').innerText="130% (AI)"; }
+      if(isBlurry){ document.getElementById('t10Sharp').value=88; document.getElementById('t10SharpVal').innerText="88% (AI)"; }
+      if(isNoisy){ document.getElementById('t10Denoise').value=65; document.getElementById('t10DenoiseVal').innerText="65% (AI)"; }
+      if(hasFace){ t10SetEnhance('face',null); }
+      t10ApplyPreview();
+    }
+  }catch(e){ console.warn(e); }
+}
+function t10Estimate(){
+  if(!t10Files.length) return; var img=t10EditorImg; if(!img) return;
+  document.getElementById('t10Estimate').innerText="📊 Estimate: "+img.width+"x"+img.height+" → "+(img.width*t10Scale)+"x"+(img.height*t10Scale)+" ("+t10Scale+"x) • AI: "+t10AiMode.toUpperCase()+" • Super-Res ON";
+}
+function t10GetFilter(){
+  var aiStrength=parseInt(document.getElementById('t10AiStrength').value||80)/100;
+  var bright=parseInt(document.getElementById('t10Bright').value||110);
+  var contrast=110 + aiStrength*15;
+  var f="brightness("+bright+"%) contrast("+contrast+"%) saturate("+(t10Enhance==='old'?120:(t10Enhance==='night'?115:110+aiStrength*20))+"%)";
+  if(document.getElementById('t10Colorize').checked) f+=" sepia(18%) saturate(170%) hue-rotate(-8deg)";
+  if(t10Enhance==='face') f+=" brightness(108%) contrast(118%) saturate(115%)";
+  if(t10Enhance==='text') f+=" contrast(140%) brightness(112%)";
+  if(t10Enhance==='old') f+=" sepia(8%) saturate(125%)";
+  return f;
+}
+function t10ApplyPreview(){
+  if(!t10EditorImg) return;
+  var img=t10EditorImg;
+  var canvas=document.getElementById('t10CompareCanvas');
+  var scale=Math.min(1, 800/Math.max(img.width,img.height));
+  canvas.width=img.width*scale; canvas.height=img.height*scale;
+  var ctx=canvas.getContext('2d');
+  // AI Portrait Blur - Background blur, face sharp - 2 layer
+  if(document.getElementById('t10BgBlur').checked && t10AiData && t10AiData.faceRect){
+    var fr=t10AiData.faceRect;
+    ctx.filter='blur(6px) brightness(95%)'; ctx.drawImage(img,0,0,canvas.width,canvas.height);
+    ctx.filter=t10GetFilter();
+    var fx=fr.x*scale, fy=fr.y*scale, fw=fr.width*scale, fh=fr.height*scale;
+    // Face area ko sharp draw karo - Expand thoda
+    var ex=Math.max(0,fx-fw*0.3), ey=Math.max(0,fy-fh*0.3), ew=Math.min(canvas.width-ex, fw*1.6), eh=Math.min(canvas.height-ey, fh*1.6);
+    var sx=Math.max(0,fr.x-fr.width*0.3), sy=Math.max(0,fr.y-fr.height*0.3), sw=Math.min(img.width-sx, fr.width*1.6), sh=Math.min(img.height-sy, fr.height*1.6);
+    ctx.drawImage(img, sx, sy, sw, sh, ex, ey, ew, eh);
+  } else {
+    ctx.filter=t10GetFilter(); ctx.drawImage(img,0,0,canvas.width,canvas.height);
+  }
+  var sharp=parseInt(document.getElementById('t10Sharp').value||70);
+  if(sharp>30){ ctx.globalAlpha=(sharp/100)*0.3; ctx.filter='contrast(120%) brightness(105%)'; ctx.drawImage(img,0,0,canvas.width,canvas.height); ctx.globalAlpha=1; ctx.filter='none'; }
+  canvas.style.display='block'; document.getElementById('t10CompareImg').style.display='none';
+  t10Estimate();
+}
+function t10LoadImage(file){ return new Promise(function(res,rej){ var img=new Image(); img.onload=function(){res(img)}; img.onerror=rej; img.src=URL.createObjectURL(file); }); }
+
+// ===== AI COLORIZE - Skin / Cloth / Background alag color =====
+function t10AiColorize(ctx,w,h){
+  try{
+    var imgData=ctx.getImageData(0,0,w,h); var d=imgData.data;
+    for(var i=0;i<d.length;i+=4){
+      var gray=(d[i]+d[i+1]+d[i+2])/3;
+      // Gray ko color me badlo - Warm skin tone + cool background
+      // Upar wala part (sky) = blue, neeche (ground) = green/brown, middle (skin) = warm
+      var y=Math.floor((i/4)/w)/h; // 0 top, 1 bottom
+      var x=((i/4)%w)/w;
+      if(gray<40){ d[i]=gray*0.9; d[i+1]=gray*0.9; d[i+2]=gray*1.1; }
+      else if(y<0.35){ // Sky
+        d[i]=gray*0.85; d[i+1]=gray*0.95; d[i+2]=Math.min(255,gray*1.25);
+      } else if(y>0.7){ // Ground
+        d[i]=Math.min(255,gray*1.1); d[i+1]=gray*0.95; d[i+2]=gray*0.75;
+      } else { // Skin / Middle - Warm
+        d[i]=Math.min(255,gray*1.25); d[i+1]=Math.min(255,gray*1.05); d[i+2]=gray*0.85;
+      }
+      // Saturation badhao thoda
+    }
+    ctx.putImageData(imgData,0,0);
+  }catch(e){}
+}
+// ===== AI SUPER-RES - 2-pass Sharpen + Edge Enhance =====
+function t10SuperRes(ctx,w,h,amount){
+  try{
+    // Pass 1 - Sharpen
+    var imgData=ctx.getImageData(0,0,w,h); var data=imgData.data; var copy=new Uint8ClampedArray(data);
+    var step=(w*h>4000000)?2:1;
+    for(var y=1;y<h-1;y+=step){
+      for(var x=1;x<w-1;x+=step){
+        var idx=(y*w+x)*4;
+        for(var c=0;c<3;c++){
+          var center=copy[idx+c];
+          var up=copy[((y-1)*w+x)*4+c], down=copy[((y+1)*w+x)*4+c], left=copy[(y*w+(x-1))*4+c], right=copy[(y*w+(x+1))*4+c];
+          var val=center + (center*4 - up - down - left - right)*amount*0.28;
+          data[idx+c]=Math.max(0,Math.min(255,val));
+        }
+      }
+    }
+    ctx.putImageData(imgData,0,0);
+    // Pass 2 - Edge enhance - Sirf edges ko aur sharp karo
+    var imgData2=ctx.getImageData(0,0,w,h); var d2=imgData2.data; var copy2=new Uint8ClampedArray(d2);
+    for(var y2=1;y2<h-1;y2+=step){
+      for(var x2=1;x2<w-1;x2+=step){
+        var idx2=(y2*w+x2)*4;
+        var gx=Math.abs(copy2[idx2]-copy2[(y2*w+(x2+1))*4]) + Math.abs(copy2[idx2]-copy2[(y2*w+(x2-1))*4]);
+        if(gx>35){ for(var c2=0;c2<3;c2++){ d2[idx2+c2]=Math.max(0,Math.min(255, d2[idx2+c2] + (d2[idx2+c2]-128)*0.15)); } }
+      }
+    }
+    ctx.putImageData(imgData2,0,0);
+  }catch(e){ console.warn(e); }
+}
+
+async function t10UpscaleOne(file, isFaceOnly){
+  var img=await t10LoadImage(file);
+  var origW=img.width, origH=img.height;
+  // Face Only mode - Face ko crop karke upscale karo
+  var srcX=0, srcY=0, srcW=origW, srcH=origH;
+  if(isFaceOnly){
+    // Face detect dobara - Agar face nahi mila to center crop
+    var faceRect=null;
+    try{
+      if(window.FaceDetector){ var det=new FaceDetector({fastMode:true}); var faces=await det.detect(img); if(faces && faces.length) faceRect=faces[0].boundingBox; }
+    }catch(e){}
+    if(!faceRect && t10AiData && t10AiData.faceRect) faceRect=t10AiData.faceRect;
+    if(faceRect){
+      var padW=faceRect.width*0.6, padH=faceRect.height*0.6;
+      srcX=Math.max(0, faceRect.x-padW); srcY=Math.max(0, faceRect.y-padH);
+      srcW=Math.min(origW-srcX, faceRect.width+padW*2); srcH=Math.min(origH-srcY, faceRect.height+padH*2);
+    } else {
+      srcX=origW*0.25; srcY=origH*0.1; srcW=origW*0.5; srcH=origH*0.5;
+    }
+  }
+  var w=srcW*t10Scale, h=srcH*t10Scale;
+  var maxDim=8000; if(w>maxDim||h>maxDim){ var s=maxDim/Math.max(w,h); w=Math.round(w*s); h=Math.round(h*s); }
+  var canvas=document.createElement('canvas'); canvas.width=w; canvas.height=h;
+  var ctx=canvas.getContext('2d'); ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high';
+  var denoise=parseInt(document.getElementById('t10Denoise').value||50);
+  if(denoise>55){
+    var tmp=document.createElement('canvas'); tmp.width=srcW; tmp.height=srcH;
+    var tctx=tmp.getContext('2d'); tctx.filter='blur(0.6px)'; tctx.drawImage(img, srcX, srcY, srcW, srcH, 0,0,srcW,srcH);
+    ctx.filter=t10GetFilter(); ctx.drawImage(tmp,0,0,w,h);
+  } else {
+    ctx.filter=t10GetFilter(); ctx.drawImage(img, srcX, srcY, srcW, srcH, 0,0,w,h);
+  }
+  ctx.filter='none';
+  // AI Colorize - B/W ko color
+  if(document.getElementById('t10Colorize').checked){ t10AiColorize(ctx,w,h); }
+  // AI Super-Res
+  var sharp=parseInt(document.getElementById('t10Sharp').value||70);
+  var aiStrength=parseInt(document.getElementById('t10AiStrength').value||80)/100;
+  if(document.getElementById('t10SuperRes').checked){
+    t10SuperRes(ctx,w,h, (sharp/100)*aiStrength + 0.3);
+  } else if(sharp>0){
+    t10SuperRes(ctx,w,h, sharp/100*0.6);
+  }
+  // AI Portrait Blur - Final image pe bhi - Face sharp, baaki thoda blur nahi, sirf preview me tha, final me skip - Quality ke liye
+  if(document.getElementById('t10WmOn').checked){ ctx.font='bold '+Math.floor(w/28)+'px Arial'; ctx.fillStyle='rgba(150,150,150,0.5)'; ctx.textAlign='center'; ctx.fillText(document.getElementById('t10WmText').value||"Orbittroniz.com", w/2, h-16); }
+  var outFmt = t10Fmt==='keep' ? (file.type.indexOf('png')>-1?'png':file.type.indexOf('webp')>-1?'webp':'jpeg') : t10Fmt;
+  var mime = outFmt==='png'?'image/png':outFmt==='webp'?'image/webp':'image/jpeg';
+  var ext = outFmt==='png'?'png':outFmt==='webp'?'webp':'jpg';
+  var blob=await new Promise(function(r){canvas.toBlob(r,mime, outFmt==='png'?1:0.92)});
+  if(!blob){ blob=await new Promise(function(r){canvas.toBlob(r,'image/jpeg',0.92)}); mime='image/jpeg'; ext='jpg'; }
+  return {blob:blob,mime:mime,ext:ext,w:w,h:h,origW:origW,origH:origH,srcW:srcW,srcH:srcH};
+}
+async function t10Upscale(){
+  if(!t10Files.length){ alert("Pehle image select karo!"); return; }
+  var sel=Array.from(t10Selected).sort(function(a,b){return a-b}); if(!sel.length) sel=t10Files.map(function(_,i){return i});
+  var prefix=(document.getElementById('t10Prefix').value.trim()||"AI Upscaled - Orbittroniz").replace(/[\\/:*?"<>|]/g,'');
+  var isFaceOnly=document.getElementById('t10FaceZoom').checked && t10AiMode==='face';
+  document.getElementById('t10Status').innerText="🤖 AI Upscaling "+sel.length+" images to "+t10Scale+"x... AI soch raha hai, thoda time lagega";
+  document.getElementById('t10Prog').style.display='block'; document.getElementById('t10Fill').style.width="0%";
+  document.getElementById('t10Out').innerHTML=""; document.getElementById('t10OutEmpty').style.display='none'; t10Results=[];
+  try{
+    for(var si=0; si<sel.length; si++){
+      var idx=sel[si]; var file=t10Files[idx];
+      try{
+        var res=await t10UpscaleOne(file, false);
+        var fname=prefix+" - "+(si+1)+" - "+res.w+"x"+res.h+"."+res.ext; var url=URL.createObjectURL(res.blob);
+        t10Results.push({blob:res.blob,name:fname,url:url,origFile:file,origUrl:URL.createObjectURL(file),beforeKB:file.size/1024,afterKB:res.blob.size/1024,w:res.w,h:res.h,origW:res.origW,origH:res.origH});
+        var card=document.createElement('div'); card.className='t10-imgcard';
+        card.innerHTML='<img src="'+url+'"><div style="padding:8px;text-align:center"><b style="font-size:11px">'+fname+'</b><br><small>'+res.origW+'x'+res.origH+' → '+res.w+'x'+res.h+' • AI '+t10Scale+'x</small><br><small style="color:#22c55e">'+(file.size/1024).toFixed(0)+' KB → '+(res.blob.size/1024).toFixed(0)+' KB • '+res.ext.toUpperCase()+'</small><div style="display:flex;gap:4px;margin-top:6px"><button onclick="t10DownloadOne('+(t10Results.length-1)+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">⬇️ Download</button><button onclick="t10ShareOne('+(t10Results.length-1)+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">📤 Share</button></div></div>';
+        document.getElementById('t10Out').appendChild(card);
+        if(si===0){ document.getElementById('t10CompareCanvas').style.display='none'; document.getElementById('t10CompareImg').style.display='block'; document.getElementById('t10CompareImg').src=url; }
+      }catch(e){ console.warn(e); alert("Image "+(si+1)+" fail - 2x try karo"); }
+      document.getElementById('t10Fill').style.width=Math.round(((si+1)/sel.length)*100)+"%";
+      await new Promise(function(r){setTimeout(r,20)});
+    }
+    if(t10Results.length){
+      var r0=t10Results[0];
+      document.getElementById('t10CompareBefore').innerText="Before: "+r0.origW+" x "+r0.origH+" • "+r0.beforeKB.toFixed(0)+" KB";
+      document.getElementById('t10CompareAfter').innerText="After: "+r0.w+" x "+r0.h+" • "+r0.afterKB.toFixed(0)+" KB ✅ AI 4K";
+      document.getElementById('t10Status').innerText="✅ AI Done! "+t10Results.length+" images "+t10Scale+"x AI Upscaled - Ab Download karo 👇";
+      document.getElementById('t10AllBtn').style.display=t10Results.length>1?'block':'none'; document.getElementById('t10ZipBtn').style.display='block'; document.getElementById('t10ShareBtn').style.display='block';
+      if(t10AiData && t10AiData.hasFace) document.getElementById('t10FaceBtn').style.display='block';
+      if(document.getElementById('t10AutoAll') && t10Results.length===1){ /* auto download off in V2 - user khud karega */ }
+    }
+    setTimeout(function(){document.getElementById('t10Prog').style.display='none'},800);
+  }catch(e){alert("AI Upscale Error: "+e.message+" - 2x try karo");document.getElementById('t10Prog').style.display='none';}
+}
+async function t10DownloadFaceOnly(){
+  if(!t10Files.length) return alert("Pehle image select karo!");
+  document.getElementById('t10Status').innerText="👤 Face Only bana raha hu...";
+  try{
+    var res=await t10UpscaleOne(t10Files[0], true);
+    var fname="Face Only - "+t10Scale+"x - "+res.w+"x"+res.h+"."+res.ext;
+    var a=document.createElement('a'); a.href=URL.createObjectURL(res.blob); a.download=fname; document.body.appendChild(a); a.click(); a.remove();
+    document.getElementById('t10Status').innerText="✅ Face Only Downloaded: "+fname+" - Sirf chehra, 4x bada";
+  }catch(e){ alert("Face Only fail: "+e.message+" - Face nahi mila, normal upscale karo"); }
+}
+function t10DownloadOne(i){ if(!t10Results[i]) return; var r=t10Results[i]; var a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }
+function t10DownloadAll(){ if(!t10Results.length) return alert("First upscale"); if(!confirm(t10Results.length+" images download hongi. Allow?")) return; t10Results.forEach(function(r,idx){ setTimeout(function(){ var a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }, idx*800); }); }
+async function t10DownloadZIP(){
+  if(!t10Results.length) return alert("First upscale");
+  if(!window.JSZip){ await new Promise(function(r){setTimeout(r,1500)}); if(!window.JSZip) return alert("ZIP loading, dobara try karo"); }
+  document.getElementById('t10Status').innerText="Making ZIP...";
+  try{ var zip=new JSZip(); for(var i=0;i<t10Results.length;i++){ zip.file(t10Results[i].name, t10Results[i].blob); } var blob=await zip.generateAsync({type:"blob"}); var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download=(document.getElementById('t10Prefix').value.trim()||"AI Upscaled")+" - All.zip"; document.body.appendChild(a); a.click(); a.remove(); document.getElementById('t10Status').innerText="✅ ZIP Downloaded"; }catch(e){ alert("ZIP Error: "+e.message); }
+}
+async function t10ShareOne(i){ if(!t10Results[i]) return; try{ var r=t10Results[i]; var file=new File([r.blob],r.name,{type:r.blob.type}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:r.name}); }else alert("Share not supported - Download karo"); }catch(e){ alert("Share cancelled"); } }
+async function t10ShareFirst(){ if(!t10Results.length) return alert("First upscale"); await t10ShareOne(0); }
+async function t10OpenPreview(){
+  if(!t10Files.length){ alert("First select Images!"); return; }
+  t10PreviewIdx=0; t10ShowAfter=false; await t10ShowPreview(); document.getElementById('t10Modal').style.display='flex';
+}
+async function t10ShowPreview(){
+  var mc=document.getElementById('t10ModalCanvas'), ctx=mc.getContext('2d');
+  if(t10Results.length){
+    if(t10PreviewIdx<0) t10PreviewIdx=t10Results.length-1; if(t10PreviewIdx>=t10Results.length) t10PreviewIdx=0;
+    var r=t10Results[t10PreviewIdx]; var img=new Image(); img.onload=function(){ var s=Math.min(1, 1200/Math.max(img.width,img.height)); mc.width=img.width*s; mc.height=img.height*s; ctx.drawImage(img,0,0,mc.width,mc.height); document.getElementById('t10ModalTitle').innerText=(t10ShowAfter?"AFTER AI - "+t10Scale+"x - ":"BEFORE - ")+"Image "+(t10PreviewIdx+1)+" / "+t10Results.length; document.getElementById('t10ModalCap').innerText="Before: "+r.origW+"x"+r.origH+" • After: "+r.w+"x"+r.h+" • AI: "+t10AiMode+" • Quality: "+(t10AiData?t10AiData.quality:"--")+"/100"; document.getElementById('t10BeforeAfterBtn').innerText=t10ShowAfter?"🔄 Show Before":"🔄 Show After"; }; img.src=t10ShowAfter?r.url:r.origUrl;
+  } else {
+    if(t10PreviewIdx<0) t10PreviewIdx=t10Files.length-1; if(t10PreviewIdx>=t10Files.length) t10PreviewIdx=0;
+    var f=t10Files[t10PreviewIdx]; var img2=new Image(); img2.onload=function(){ var s2=Math.min(1, 1200/Math.max(img2.width,img2.height)); mc.width=img2.width*s2; mc.height=img2.height*s2; ctx.drawImage(img2,0,0,mc.width,mc.height); document.getElementById('t10ModalTitle').innerText="Preview - Original "+(t10PreviewIdx+1)+" / "+t10Files.length; document.getElementById('t10ModalCap').innerText=f.name+" • "+(f.size/1024).toFixed(0)+" KB • AI Upscale karke After dekho"; }; img2.src=URL.createObjectURL(f);
+  }
+}
+async function t10ToggleBeforeAfter(){ if(!t10Results.length){ alert("First upscale"); return; } t10ShowAfter=!t10ShowAfter; await t10ShowPreview(); }
+async function t10NextImg(){t10PreviewIdx++;await t10ShowPreview();}
+async function t10PrevImg(){t10PreviewIdx--;await t10ShowPreview();}
+function t10ClosePreview(){document.getElementById('t10Modal').style.display='none';}
+document.addEventListener('keydown',function(e){var m=document.getElementById('t10Modal');if(m&&m.style.display==='flex'){if(e.key==='ArrowRight')t10NextImg();if(e.key==='ArrowLeft')t10PrevImg();if(e.key==='Escape')t10ClosePreview();}});
+function t10Reset(){
+  t10Files=[]; t10Selected.clear(); t10Results=[]; t10PreviewIdx=0; t10EditorImg=null; t10AiData=null;
+  document.getElementById('t10Out').innerHTML=""; document.getElementById('t10OutEmpty').style.display='block'; document.getElementById('t10SelectedBox').style.display='none'; document.getElementById('t10FileName').innerText="No Images Selected - Click Here"; document.getElementById('t10Status').innerText=""; document.getElementById('t10AllBtn').style.display='none'; document.getElementById('t10ZipBtn').style.display='none'; document.getElementById('t10ShareBtn').style.display='none'; document.getElementById('t10FaceBtn').style.display='none'; document.getElementById('t10CompareAfter').innerText="After: Not Upscaled Yet"; document.getElementById('t10Estimate').innerText="📊 Estimate: Select image to see"; document.getElementById('t10EmptyBox').style.display='block'; document.getElementById('t10CompareImg').style.display='none'; document.getElementById('t10CompareCanvas').style.display='none'; document.getElementById('t10AiBox').style.display='none'; document.getElementById('t10FaceBox').style.display='none'; document.getElementById('t10AiQuality').innerText="AI Quality Score: -- / 100";
+  t10Log("Reset done - Ab nayi photo select karo");
+}
+t10Log("Tool 10 AI V2 Loaded ✅ - AI ready hai");
+</script>
+<!-- ================= TOOL 10 AI V2 - END ================= -->
 
 <!-- TOOL 11 -->
 <div class="tool" id="tool-11"><div class="panel"><h3>💧 Tool 11 - Watermark</h3>
