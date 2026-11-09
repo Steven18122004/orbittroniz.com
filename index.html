@@ -189,11 +189,125 @@ async function shareEdit1(){if(EDIT_IDX1<0)return;let r=R1[EDIT_IDX1];let res=aw
 function r1(){R1=[];F1=null;document.getElementById('f1').value="";document.getElementById('o1').innerHTML="";document.getElementById('s1').innerText=""}
 </script>
 <!-- TOOL 1 - PDF TO IMAGE - END -->
-  
-<!-- ================= TOOL 2 - IMAGE TO PDF - START ================= -->
-<div class="tool panel" id="tool-2"><h3>📑 2. Image To PDF</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(2)">⬇️ Download</button><button class="btn" onclick="editSinglePage(2)">✏️ Edit Single Page</button><button class="btn" onclick="printTool(2)">🖨️ Print</button></div><p style="font-size:11px;color:#cbd5e1">Upload multiple images - Make one PDF.</p><label class="label">Upload Images (Multiple)</label><input type="file" id="f2imgs" accept="image/*" multiple class="input"><label class="label">PDF Title</label><input type="text" id="t2title" class="input" value="My Images - Orbittroniz"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t2MakePdf()">📑 Make PDF</button><div class="out" id="out2"></div></div>
-<!-- ================= TOOL 2 - IMAGE TO PDF - END ================= -->
+<!-- TOOL 2 - IMAGE TO PDF - START -->
+<div id="t2" style="background:#121d3a;border:1px solid #1e2d5a;border-radius:16px;padding:14px;color:#fff;font-family:system-ui">
+<h3 style="margin:0;text-align:center">📑 Image To PDF Pro</h3>
+<p style="font-size:11px;color:#94a3b8;text-align:center">Upload Images - Reorder - Set Page Size - Make PDF</p>
 
+<!-- UPLOAD -->
+<input type="file" id="f2" accept="image/*" multiple style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<div id="s2" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:6px"></div>
+
+<!-- IMAGE LIST - REORDER + EDIT SINGLE PAGE -->
+<div id="list2" style="margin-top:10px"></div>
+
+<!-- PAGE SIZE - A4 / LETTER / PHOTO -->
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">PAGE SIZE - Choose One</label>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px">
+<button onclick="setPageSize2('a4',this)" data-ps="a4" style="padding:11px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border:none;cursor:pointer">📄 A4<br><small>Best - Print</small></button>
+<button onclick="setPageSize2('letter',this)" data-ps="letter" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">📃 Letter<br><small>US Size</small></button>
+<button onclick="setPageSize2('photo',this)" data-ps="photo" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">🖼️ Photo<br><small>Full Image</small></button>
+</div>
+
+<!-- ORIENTATION -->
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">ORIENTATION</label>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px">
+<button onclick="setOrient2('portrait',this)" data-or="portrait" style="padding:11px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border:none;cursor:pointer">⬆️ Portrait - Vertical</button>
+<button onclick="setOrient2('landscape',this)" data-or="landscape" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">➡️ Landscape - Horizontal</button>
+</div>
+
+<!-- FIT -->
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">IMAGE FIT ON PAGE</label>
+<select id="fit2" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<option value="fit">Fit To Page - No Cut - Best</option>
+<option value="fill">Fill Full Page - May Cut Edges</option>
+<option value="original">Original Size - Small</option>
+</select>
+
+<!-- PAGE NO + WATERMARK + MARGIN -->
+<label style="display:flex;justify-content:space-between;margin-top:10px;font-size:12px;background:#0a1224;padding:10px;border-radius:10px">🔢 Page Number On PDF <input type="checkbox" id="pn2" checked></label>
+<label style="display:flex;justify-content:space-between;margin-top:8px;font-size:12px;background:#0a1224;padding:10px;border-radius:10px">💧 Watermark On PDF <input type="checkbox" id="wm2"></label>
+<input type="text" id="wmTxt2" value="orbittroniz.com" placeholder="Watermark Text" style="width:100%;margin-top:8px;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">PDF FILE NAME</label>
+<input type="text" id="name2" value="My Images - Orbittroniz" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">PDF TITLE - Shows On First Page</label>
+<input type="text" id="title2" value="" placeholder="Example: Sharma Jewellers - Product Photos" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+
+<button onclick="makePdf2()" style="width:100%;margin-top:10px;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;font-weight:900;cursor:pointer">📑 MAKE PDF - START</button>
+<button onclick="downloadPdf2()" style="width:100%;margin-top:8px;padding:12px;border-radius:12px;background:#22c55e;color:#fff;font-weight:800;border:none;cursor:pointer">⬇️ DOWNLOAD PDF</button>
+<button onclick="sharePdf2()" style="width:100%;margin-top:8px;padding:12px;border-radius:12px;background:#2563eb;color:#fff;font-weight:800;border:none;cursor:pointer">📤 SHARE PDF - WhatsApp</button>
+<button onclick="clear2()" style="width:100%;margin-top:8px;padding:10px;border-radius:12px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">Clear / New PDF</button>
+
+<!-- EDIT SINGLE PAGE - EDIT ONE IMAGE -->
+<div id="edit2" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;padding:12px;overflow:auto">
+<div style="display:flex;justify-content:space-between;align-items:center;background:#121d3a;padding:12px;border-radius:12px"><b id="editTitle2">Edit Single Page</b><button onclick="closeEdit2()" style="background:#fff;color:#111;border:none;padding:8px 14px;border-radius:20px;font-weight:900;cursor:pointer">✕ Close</button></div>
+<img id="editImg2" style="width:100%;margin-top:10px;border-radius:12px;background:#fff">
+<input type="text" id="editText2" placeholder="Add Caption / Text On This Image" style="width:100%;margin-top:10px;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+<button onclick="applyEdit2()" style="padding:12px;background:#f59e0b;color:#fff;border:none;border-radius:10px;font-weight:800;cursor:pointer">✏️ Apply Caption</button>
+<button onclick="closeEdit2()" style="padding:12px;background:#162143;color:#fff;border:1px solid #1e2d5a;border-radius:10px;font-weight:800;cursor:pointer">Back To List</button>
+</div>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+let IMGS2=[], PDF_BLOB2=null, PAGE_SIZE2='a4', ORIENT2='portrait', EDIT_IDX2=-1;
+document.getElementById('f2').onchange=async e=>{
+let files=[...e.target.files]; if(!files.length) return;
+for(let f of files){ let r=new FileReader(); r.onload=ev=>{ IMGS2.push({src:ev.target.result,name:f.name}); renderList2() }; r.readAsDataURL(f); }
+};
+function renderList2(){
+let box=document.getElementById('list2'); box.innerHTML=""; document.getElementById('s2').innerText=IMGS2.length+" Images Added - Reorder With Up / Down";
+IMGS2.forEach((im,i)=>{
+let d=document.createElement('div'); d.style.cssText="display:flex;gap:8px;align-items:center;background:#0a1224;border:1px solid #1e2d5a;border-radius:12px;padding:8px;margin-top:6px";
+d.innerHTML='<img src="'+im.src+'" style="width:60px;height:60px;object-fit:cover;border-radius:8px;background:#fff"><div style="flex:1"><b style="font-size:12px">Page '+(i+1)+' - '+im.name+'</b><br><small style="color:#94a3b8">Tap Up / Down To Reorder</small></div><div style="display:flex;flex-direction:column;gap:4px"><button onclick="move2('+i+',-1)" style="background:#162143;color:#fff;border:1px solid #1e2d5a;padding:6px 10px;border-radius:8px;cursor:pointer">⬆️</button><button onclick="move2('+i+',1)" style="background:#162143;color:#fff;border:1px solid #1e2d5a;padding:6px 10px;border-radius:8px;cursor:pointer">⬇️</button></div><button onclick="editOne2('+i+')" style="background:#f59e0b;color:#fff;border:none;padding:8px;border-radius:8px;cursor:pointer">✏️ Edit</button><button onclick="delOne2('+i+')" style="background:#ef4444;color:#fff;border:none;padding:8px;border-radius:8px;cursor:pointer">✕</button>';
+box.appendChild(d);
+});
+}
+function move2(i,dir){ let j=i+dir; if(j<0||j>=IMGS2.length) return; let t=IMGS2[i]; IMGS2[i]=IMGS2[j]; IMGS2[j]=t; renderList2(); }
+function delOne2(i){ IMGS2.splice(i,1); renderList2(); }
+function setPageSize2(s,btn){ PAGE_SIZE2=s; document.querySelectorAll('[data-ps]').forEach(b=>{b.style.background='#162143';b.style.border='1px solid #1e2d5a'}); btn.style.background='linear-gradient(135deg,#7c3aed,#22d3ee)'; btn.style.border='none'; }
+function setOrient2(o,btn){ ORIENT2=o; document.querySelectorAll('[data-or]').forEach(b=>{b.style.background='#162143';b.style.border='1px solid #1e2d5a'}); btn.style.background='linear-gradient(135deg,#7c3aed,#22d3ee)'; btn.style.border='none'; }
+function editOne2(i){ EDIT_IDX2=i; document.getElementById('editTitle2').innerText="Edit Single Page - Page "+(i+1); document.getElementById('editImg2').src=IMGS2[i].src; document.getElementById('edit2').style.display='block'; }
+function closeEdit2(){ document.getElementById('edit2').style.display='none'; }
+function applyEdit2(){
+let im=IMGS2[EDIT_IDX2]; if(!im) return; let txt=document.getElementById('editText2').value; if(!txt) return alert("Type caption first");
+let img=new Image(); img.onload=()=>{ let cv=document.createElement('canvas'); cv.width=img.width; cv.height=img.height; let ctx=cv.getContext('2d'); ctx.drawImage(img,0,0); ctx.fillStyle="rgba(0,0,0,.6)"; ctx.fillRect(0,cv.height-50,cv.width,50); ctx.fillStyle="#fff"; ctx.font="900 28px Arial"; ctx.textAlign='center'; ctx.fillText(txt,cv.width/2,cv.height-15); im.src=cv.toDataURL('image/jpeg',.9); document.getElementById('editImg2').src=im.src; renderList2(); alert("Caption Added"); }; img.src=im.src;
+}
+async function makePdf2(){
+if(!IMGS2.length) return alert("Upload Images First");
+try{
+let {jsPDF}=window.jspdf; let format=PAGE_SIZE2=='a4'?'a4':PAGE_SIZE2=='letter'?'letter':[210,297];
+let pdf=new jsPDF({orientation:ORIENT2, unit:'mm', format:format});
+let title=document.getElementById('title2').value.trim();
+let wm=document.getElementById('wm2').checked, wmTxt=document.getElementById('wmTxt2').value||"orbittroniz.com", showPn=document.getElementById('pn2').checked, fit=document.getElementById('fit2').value;
+for(let idx=0; idx<IMGS2.length; idx++){
+if(idx>0) pdf.addPage(format, ORIENT2);
+let W=pdf.internal.pageSize.getWidth(), H=pdf.internal.pageSize.getHeight();
+let img=new Image(); img.src=IMGS2[idx].src; await new Promise(r=>img.onload=r);
+let iw=img.width, ih=img.height, ratio=Math.min(W/iw, H/ih);
+let dw, dh, dx, dy;
+if(fit=='fill'){ dw=W; dh=H; dx=0; dy=0; }
+else if(fit=='original'){ dw=Math.min(iw*0.264, W); dh=dw*ih/iw; dx=(W-dw)/2; dy=(H-dh)/2; }
+else { dw=iw*ratio; dh=ih*ratio; dx=(W-dw)/2; dy=(H-dh)/2; if(title && idx==0) dy+=10; }
+if(title && idx==0){ pdf.setFontSize(16); pdf.setTextColor(0,0,0); pdf.text(title, W/2, 12, {align:'center'}); }
+pdf.addImage(IMGS2[idx].src, 'JPEG', dx, dy, dw, dh);
+if(showPn){ pdf.setFontSize(10); pdf.setTextColor(100,100,100); pdf.text("Page "+(idx+1)+" / "+IMGS2.length, W-12, H-6, {align:'right'}); }
+if(wm){ pdf.setFontSize(28); pdf.setTextColor(200,200,200); pdf.setGState(new pdf.GState({opacity:0.2})); pdf.text(wmTxt, W/2, H/2, {align:'center', angle:-30}); pdf.setGState(new pdf.GState({opacity:1})); }
+}
+PDF_BLOB2=pdf.output('blob');
+document.getElementById('s2').innerText="PDF Ready - "+IMGS2.length+" Pages - Size: "+PAGE_SIZE2.toUpperCase()+" - "+ORIENT2+" - Click Download";
+alert("PDF Ready - "+IMGS2.length+" Pages");
+}catch(e){ alert("PDF Error: "+e.message); }
+}
+function downloadPdf2(){ if(!PDF_BLOB2) return alert("First Click MAKE PDF"); let a=document.createElement('a'); a.href=URL.createObjectURL(PDF_BLOB2); a.download=(document.getElementById('name2').value||"My Images")+".pdf"; a.click(); }
+async function sharePdf2(){
+if(!PDF_BLOB2) return alert("First Click MAKE PDF");
+try{ let f=new File([PDF_BLOB2], (document.getElementById('name2').value||"My Images")+".pdf", {type:'application/pdf'}); if(navigator.canShare && navigator.canShare({files:[f]})){ await navigator.share({files:[f], text:"PDF - Made with orbittroniz.com"}) } else { downloadPdf2() } }catch(e){ downloadPdf2() }
+}
+function clear2(){ IMGS2=[]; PDF_BLOB2=null; document.getElementById('f2').value=""; document.getElementById('list2').innerHTML=""; document.getElementById('s2').innerText=""; }
+</script>
+<!-- TOOL 2 - IMAGE TO PDF - END -->  
 <!-- ================= TOOL 3 - QR GENERATOR - START ================= -->
 <div class="tool panel" id="tool-3"><h3>📱 3. QR Generator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(3)">⬇️ Download</button><button class="btn" onclick="editSinglePage(3)">✏️ Edit Single Page</button></div><label class="label">QR Type</label><select id="t3type" class="select" onchange="t3Change()"><option value="link">Website Link</option><option value="upi">UPI Payment</option><option value="whatsapp">WhatsApp</option><option value="wifi">WiFi</option><option value="text">Text</option></select><div id="t3fields"></div><label class="label">Shop / Label</label><input type="text" id="t3label" class="input" value="Sharma Jewellers"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t3Generate()">Generate QR</button><div id="qr3" style="margin-top:10px;background:#fff;padding:12px;display:inline-block;border-radius:12px"></div><div class="out" id="out3"></div></div>
 <!-- ================= TOOL 3 - QR GENERATOR - END ================= -->
