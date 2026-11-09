@@ -5537,11 +5537,464 @@ t13Log("Tool 13 FIXED V3 Loaded ✅ - AI + Manual Both Working");
 </script>
 <!-- ================= TOOL 13 FIXED V3 - END ================= -->
 <!-- TOOL 14 -->
-<div class="tool" id="tool-14"><div class="panel"><h3>🎨 Tool 14 - Color Palette</h3>
-<!-- YAHAN TOOL 14 KA CODE PASTE KARO -->
-<p style="font-size:12px;color:#94a3b8">Yaha Tool 14 ka feature code aayega...</p>
-</div></div>
+<!-- ================= TOOL 14 - COLOR PALETTE - ENGLISH ONLY - NO BUGS - START ================= -->
+<style>
+.t14-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.t14-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t14-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.t14-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
+.t14-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
+.t14-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
+.t14-drop.dragover{background:rgba(34,211,238,.25);transform:scale(1.02)}
+.t14-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.t14-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
+.t14-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.t14-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:13px 8px;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer}
+.t14-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent}
+.t14-chiprow{display:flex;gap:6px;margin-top:8px}
+.t14-chiprow button{flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px 4px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
+.t14-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
+.t14-toggle b{font-size:13px}
+.t14-toggle input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.t14-toggle input:checked{background:#22c55e}
+.t14-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.t14-toggle input:checked::after{left:23px}
+.t14-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.t14-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.t14-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t14-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
+.t14-prog{height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:10px;display:none;border:1px solid #2a3a6a}
+.t14-prog div{height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee);width:0%}
+.t14-range{width:100%;accent-color:#22d3ee}
+.t14-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.t14-imgcard{background:#060a18;border:1px solid #2a3a6a;border-radius:14px;overflow:hidden}
+.t14-imgcard img{width:100%;height:130px;object-fit:cover;display:block}
+.t14-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column}
+.t14-modal canvas{max-width:95%;max-height:62vh;border-radius:10px;background:#fff}
+.t14-modal-nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.t14-modal-nav button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer}
+.t14-modal-nav button.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none}
+</style>
 
+<div class="tool active" id="tool-14"><div class="t14-card">
+<div class="t14-title">🎨 Color Palette Pro - Extract Colors</div>
+<div class="t14-sub">English Only • Extract From Photo • Pick Color • Generator • Gradient • Copy HEX • Export</div>
+
+<label class="t14-label">🖼️ 1. SELECT IMAGE - Extract Colors From Photo (Optional)</label>
+<div class="t14-drop" id="t14Drop" onclick="document.getElementById('t14FileInput').click()">
+<b style="font-size:15px;color:#22d3ee">+ Click or Drag Image Here</b><br>
+<small style="color:#94a3b8">JPG / PNG / WEBP - Any Photo - Or Skip, Use Generator Below</small><br>
+<small style="color:#22d3ee" id="t14FileName">No Image Selected - You Can Use Generator Without Photo</small><br>
+<small style="color:#f59e0b" id="t14Debug">Status: Waiting...</small>
+</div>
+<input type="file" id="t14FileInput" accept="image/*" onchange="t14OnFileSelect(this)" style="display:none">
+
+<!-- PHOTO + CLICK TO PICK -->
+<div id="t14PhotoBox" style="display:none;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px;margin-top:12px;text-align:center">
+<b style="font-size:13px">👆 CLICK ON PHOTO TO PICK THAT COLOR - Eyedropper</b><br>
+<small style="color:#94a3b8">Photo pe kahi bhi click karo, wo color neeche palette me add ho jayega</small>
+<div style="position:relative;display:inline-block;max-width:100%;margin-top:8px">
+<canvas id="t14PhotoCanvas" style="max-width:100%;max-height:280px;border-radius:12px;background:#fff;cursor:crosshair;display:block"></canvas>
+</div>
+<div id="t14PickedInfo" style="font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700">Picked: None - Click on photo</div>
+<div style="display:flex;gap:8px;margin-top:8px;align-items:center;justify-content:center">
+<div id="t14PickedSwatch" style="width:50px;height:50px;border-radius:12px;background:#fff;border:2px solid #fff"></div>
+<div style="text-align:left"><b id="t14PickedHex" style="font-size:14px">#FFFFFF</b><br><small id="t14PickedRgb" style="color:#94a3b8">RGB(255, 255, 255)</small></div>
+<button onclick="t14AddPicked()" style="background:#22c55e;border:none;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer">+ Add To Palette</button>
+<button onclick="t14CopyPicked()" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer">📋 Copy</button>
+</div>
+</div>
+
+<!-- MODE -->
+<label class="t14-label">🤖 2. MODE - AI Or Manual?</label>
+<div class="t14-mode" id="t14ModeModes">
+<button class="active" data-mode="auto" onclick="t14SetMode('auto',this)">🤖 AUTO - AI Will Suggest<br><small>If AI fails, Manual will open</small></button>
+<button data-mode="manual" onclick="t14SetMode('manual',this)">✋ MANUAL - I Will Pick Myself<br><small>100% Working, No AI Needed</small></button>
+</div>
+<div id="t14ModeInfo" style="text-align:center;font-size:11px;color:#22d3ee;margin-top:6px;font-weight:700">Mode: AUTO • AI will try first, if not available Manual works</div>
+<div id="t14AiBox" style="display:none"></div>
+<div id="t14AiThinking" style="display:none;background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(34,211,238,.2));border:1px solid #a78bfa;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
+<b>🤖 AI is Thinking... (Max 3 sec)</b><br><small style="color:#94a3b8">If AI does not work, Manual Mode will open</small><br>
+<button onclick="t14SkipAi()" style="margin-top:8px;background:#fff;border:none;color:#000;padding:8px 16px;border-radius:20px;font-weight:800;cursor:pointer">⏭️ Skip AI - Do Manual</button>
+</div>
+<div id="t14ManualGuide" style="display:none;background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;margin-top:10px">
+<b style="color:#22c55e">✋ MANUAL MODE - 3 Steps:</b><br>
+<small style="color:#fff;line-height:1.7">
+<b>Step 1:</b> Below Generator se palette banao ya Color Picker se color chuno<br>
+<b>Step 2:</b> Color pe click karo to copy hoga, + dabao to palette me add hoga<br>
+<b>Step 3:</b> Export dabao to PNG / CSS download hogi<br>
+<i>No AI needed - You can do 100% yourself ✅</i>
+</small>
+</div>
+
+<!-- EXTRACTED PALETTE -->
+<label class="t14-label">🎨 3. YOUR PALETTE - Click Color To Copy HEX</label>
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px">
+<div id="t14PaletteRow" style="display:flex;gap:0;border-radius:12px;overflow:hidden;height:90px"></div>
+<div id="t14PaletteList" style="margin-top:10px"></div>
+<div id="t14PaletteEmpty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">No palette yet - Select photo OR click Generate below</div>
+<div style="display:flex;gap:6px;margin-top:10px">
+<button onclick="t14CopyAllHex()" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:10px;font-weight:700;cursor:pointer">📋 Copy All HEX</button>
+<button onclick="t14CopyCss()" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:10px;font-weight:700;cursor:pointer">🎨 Copy CSS</button>
+<button onclick="t14ShufflePalette()" style="flex:1;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🔀 Shuffle</button>
+</div>
+</div>
+
+<label class="t14-label">⚡ 4. PALETTE GENERATOR - One Click Themes</label>
+<div class="t14-pillrow">
+<button class="t14-pill" onclick="t14Generate('random')">🎲<br>Random<br>New Palette</button>
+<button class="t14-pill" onclick="t14Generate('pastel')">🌸<br>Pastel<br>Soft Colors</button>
+<button class="t14-pill" onclick="t14Generate('neon')">🌈<br>Neon<br>Bright</button>
+<button class="t14-pill" onclick="t14Reset()">🔄<br>Clear<br>All</button>
+</div>
+<div class="t14-pillrow" style="margin-top:8px">
+<button class="t14-pill" onclick="t14Generate('wedding')">💍<br>Wedding<br>Gold + Pink</button>
+<button class="t14-pill" onclick="t14Generate('sunset')">🌅<br>Sunset<br>Orange</button>
+<button class="t14-pill" onclick="t14Generate('ocean')">🌊<br>Ocean<br>Blue</button>
+<button class="t14-pill" onclick="t14Generate('nature')">🌿<br>Nature<br>Green</button>
+</div>
+<div class="t14-pillrow" style="margin-top:8px">
+<button class="t14-pill" onclick="t14Generate('dark')">🌑<br>Dark Mode<br>App Colors</button>
+<button class="t14-pill" onclick="t14Generate('baby')">👶<br>Baby<br>Soft Pink Blue</button>
+<button class="t14-pill" onclick="t14Generate('instagram')">📸<br>Instagram<br>Trendy</button>
+<button class="t14-pill" onclick="t14Generate('brand')">🏢<br>Brand<br>Professional</button>
+</div>
+
+<label class="t14-label">🎨 5. COLOR PICKER - Pick Any Color Yourself (Manual)</label>
+<div style="display:flex;gap:8px;align-items:center;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px">
+<input type="color" id="t14ColorPicker" value="#22d3ee" style="width:70px;height:55px;border:none;border-radius:10px;cursor:pointer" oninput="t14PickerChanged()">
+<div style="flex:1">
+<b id="t14PickerHex" style="font-size:16px">#22D3EE</b><br>
+<small id="t14PickerRgb" style="color:#94a3b8">RGB(34, 211, 238) • HSL(187, 85%, 53%)</small><br>
+<small id="t14PickerName" style="color:#a78bfa">Color Name: Cyan</small>
+</div>
+<button onclick="t14AddPickerColor()" style="background:#22c55e;border:none;color:#fff;padding:11px 16px;border-radius:20px;font-weight:800;cursor:pointer">+ Add</button>
+</div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t14SetPicker('#ffffff')" style="flex:1;background:#fff;border:1px solid #2a3a6a;color:#000;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">White</button>
+<button onclick="t14SetPicker('#000000')" style="flex:1;background:#000;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Black</button>
+<button onclick="t14SetPicker('#ef4444')" style="flex:1;background:#ef4444;border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Red</button>
+<button onclick="t14SetPicker('#f59e0b')" style="flex:1;background:#f59e0b;border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Gold</button>
+</div>
+<div style="margin-top:8px">
+<span style="font-size:11px;color:#fff">How Many Colors To Extract From Photo? <b id="t14CountVal" style="color:#22d3ee">6 Colors</b></span>
+<input type="range" id="t14Count" class="t14-range" min="3" max="10" value="6" oninput="document.getElementById('t14CountVal').innerText=this.value+' Colors';if(t14EditorImg) t14ExtractFromPhoto()">
+</div>
+
+<label class="t14-label">🌈 6. GRADIENT MAKER - 2 Colors Se Gradient Banao</label>
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px">
+<div style="display:flex;gap:8px;align-items:center">
+<input type="color" id="t14Grad1" value="#7c3aed" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t14UpdateGradient()">
+<span style="color:#fff;font-weight:800">→</span>
+<input type="color" id="t14Grad2" value="#22d3ee" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t14UpdateGradient()">
+<select id="t14GradDir" class="t14-input" style="flex:1" onchange="t14UpdateGradient()"><option value="135deg">Diagonal ↘️</option><option value="90deg">Left To Right →</option><option value="180deg">Top To Bottom ↓</option><option value="45deg">Diagonal ↗️</option></select>
+</div>
+<div id="t14GradPreview" style="height:70px;border-radius:12px;margin-top:10px;background:linear-gradient(135deg,#7c3aed,#22d3ee)"></div>
+<div id="t14GradCss" style="font-size:11px;color:#94a3b8;margin-top:8px;background:#0a1224;padding:8px;border-radius:8px;word-break:break-all">background: linear-gradient(135deg, #7c3aed, #22d3ee);</div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t14CopyGradient()" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:10px;font-weight:700;cursor:pointer">📋 Copy Gradient CSS</button>
+<button onclick="t14RandomGradient()" style="flex:1;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🎲 Random Gradient</button>
+</div>
+</div>
+
+<label class="t14-label">🎨 7. HARMONY - Is Color Ke Saath Kaunsa Color Achha Lagega?</label>
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px">
+<div style="display:flex;gap:8px;align-items:center">
+<input type="color" id="t14BaseColor" value="#22d3ee" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t14UpdateHarmony()">
+<select id="t14HarmonyType" class="t14-input" style="flex:1" onchange="t14UpdateHarmony()"><option value="complementary">Complementary - Opposite Color</option><option value="analogous">Analogous - Side Colors</option><option value="triadic">Triadic - 3 Colors</option><option value="monochrome">Monochrome - Same Color Light/Dark</option></select>
+</div>
+<div id="t14HarmonyRow" style="display:flex;gap:0;border-radius:12px;overflow:hidden;height:60px;margin-top:10px"></div>
+<div id="t14HarmonyInfo" style="font-size:11px;color:#94a3b8;margin-top:8px;text-align:center">Pick base color, harmony colors will show</div>
+<button onclick="t14UseHarmony()" style="width:100%;margin-top:8px;background:#22c55e;border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">✅ Use These Colors As Palette</button>
+</div>
+
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
+<b id="t14Stats" style="font-size:13px">Palette: 0 Colors • Click color to copy</b><br>
+<small id="t14AiQuality" style="color:#a78bfa">AI: Not Started • Manual Always Works ✅</small>
+</div>
+<div id="t14Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
+
+<button class="t14-btn-preview" onclick="t14OpenPreview()">👀 PREVIEW - Palette Full Screen</button>
+<button class="t14-btn3d" onclick="t14ExtractFromPhoto()">🎨 EXTRACT COLORS FROM PHOTO - REAL START</button>
+<button class="t14-btn2" onclick="t14DownloadPalettePng()" style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;border:none">🖼️ Download Palette As Image (PNG)</button>
+<button class="t14-btn2" onclick="t14DownloadCss()">📄 Download CSS File</button>
+<button class="t14-btn2" onclick="t14Reset()">🗑️ Clear / New</button>
+
+<label class="t14-label">💾 SAVED PALETTES</label>
+<div id="t14SavedList"></div>
+<div id="t14SavedEmpty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">No saved palettes - Save current palette to see here</div>
+<button class="t14-btn2" onclick="t14SavePalette()">💾 Save Current Palette</button>
+<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private • No Server • Colors Stay In Your Phone</p>
+</div></div>
+<!-- ================= TOOL 14 COLOR PALETTE - END ================= -->
+
+<div class="t14-modal" id="t14Modal"><div id="t14ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Palette Preview</div><canvas id="t14ModalCanvas"></canvas><div id="t14ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div><div class="t14-modal-nav"><button onclick="t14CopyAllHex()" style="background:#22c55e">📋 Copy All HEX</button><button onclick="t14DownloadPalettePng()" style="background:#f59e0b">⬇️ Download PNG</button><button class="primary" onclick="t14ClosePreview()">✅ Close</button></div></div>
+
+<script>
+// ===== TOOL 14 JS - COLOR PALETTE - NO BUGS - AI TRY + MANUAL ALWAYS =====
+var t14Palette=[], t14EditorImg=null, t14CurrentFile=null, t14Mode='auto', t14AiTimeout=null, t14PickedColor='#ffffff', t14Saved=[];
+function t14Log(msg){ var d=document.getElementById('t14Debug'); if(d) d.innerText="Status: "+msg; }
+function t14OnFileSelect(input){ t14Log("File: "+(input.files?input.files.length:0)); if(!input.files||!input.files[0]) return; var f=input.files[0]; input.value=""; t14LoadFile(f); }
+(function(){
+  var drop=document.getElementById('t14Drop'); if(!drop) return;
+  drop.addEventListener('dragover',function(e){e.preventDefault();drop.classList.add('dragover')});
+  drop.addEventListener('dragleave',function(){drop.classList.remove('dragover')});
+  drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remove('dragover'); if(e.dataTransfer.files&&e.dataTransfer.files[0]) t14LoadFile(e.dataTransfer.files[0]);});
+  var pc=document.getElementById('t14PhotoCanvas');
+  if(pc){
+    pc.addEventListener('click',function(e){
+      if(!t14EditorImg) return;
+      var rect=pc.getBoundingClientRect();
+      var x=(e.clientX-rect.left)*pc.width/rect.width;
+      var y=(e.clientY-rect.top)*pc.height/rect.height;
+      var ctx=pc.getContext('2d');
+      try{
+        var d=ctx.getImageData(Math.floor(x),Math.floor(y),1,1).data;
+        var hex=t14RgbToHex(d[0],d[1],d[2]);
+        t14PickedColor=hex;
+        document.getElementById('t14PickedSwatch').style.background=hex;
+        document.getElementById('t14PickedHex').innerText=hex.toUpperCase();
+        document.getElementById('t14PickedRgb').innerText="RGB("+d[0]+", "+d[1]+", "+d[2]+")";
+        document.getElementById('t14PickedInfo').innerText="Picked: "+hex.toUpperCase()+" - Click Add To Palette or Copy";
+        document.getElementById('t14Status').innerText="👆 Picked "+hex.toUpperCase()+" from photo";
+      }catch(err){ alert("Cannot pick - Try again"); }
+    });
+  }
+})();
+function t14RgbToHex(r,g,b){ return "#"+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1); }
+function t14HexToRgb(hex){ hex=hex.replace('#',''); return {r:parseInt(hex.substr(0,2),16), g:parseInt(hex.substr(2,2),16), b:parseInt(hex.substr(4,2),16)}; }
+function t14RgbToHsl(r,g,b){ r/=255; g/=255; b/=255; var max=Math.max(r,g,b), min=Math.min(r,g,b), h=0, s=0, l=(max+min)/2; if(max!==min){ var d=max-min; s=l>0.5?d/(2-max-min):d/(max+min); if(max===r) h=(g-b)/d+(g<b?6:0); else if(max===g) h=(b-r)/d+2; else h=(r-g)/d+4; h*=60; } return {h:Math.round(h),s:Math.round(s*100),l:Math.round(l*100)}; }
+function t14HslToHex(h,s,l){ h=h/360; s=s/100; l=l/100; var r,g,b; if(s===0){ r=g=b=l; } else { var q=l<0.5?l*(1+s):l+s-l*s; var p=2*l-q; function hue(p,q,t){ if(t<0) t+=1; if(t>1) t-=1; if(t<1/6) return p+(q-p)*6*t; if(t<1/2) return q; if(t<2/3) return p+(q-p)*(2/3-t)*6; return p; } r=hue(p,q,h+1/3); g=hue(p,q,h); b=hue(p,q,h-1/3); } return t14RgbToHex(Math.round(r*255),Math.round(g*255),Math.round(b*255)); }
+function t14ColorName(hex){
+  var map={'#ffffff':'White','#000000':'Black','#ef4444':'Red','#f59e0b':'Gold / Amber','#22c55e':'Green','#22d3ee':'Cyan','#3b82f6':'Blue','#a855f7':'Purple','#ec4899':'Pink','#f97316':'Orange','#eab308':'Yellow'};
+  if(map[hex.toLowerCase()]) return map[hex.toLowerCase()];
+  var rgb=t14HexToRgb(hex); var hsl=t14RgbToHsl(rgb.r,rgb.g,rgb.b);
+  if(hsl.s<10) return hsl.l>80?'Light Gray':hsl.l<20?'Dark Gray':'Gray';
+  if(hsl.h<15||hsl.h>=345) return 'Red';
+  if(hsl.h<45) return 'Orange';
+  if(hsl.h<70) return 'Yellow';
+  if(hsl.h<160) return 'Green';
+  if(hsl.h<200) return 'Cyan';
+  if(hsl.h<260) return 'Blue';
+  if(hsl.h<300) return 'Purple';
+  return 'Pink';
+}
+function t14SetMode(m,btn){ t14Mode=m; document.querySelectorAll('#t14ModeModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active');
+  document.getElementById('t14ModeInfo').innerText = m==='auto' ? "Mode: AUTO • AI will try first" : "Mode: MANUAL • AI off, you pick yourself - 100% Working ✅";
+  document.getElementById('t14ManualGuide').style.display = m==='manual' ? 'block' : 'none';
+  if(m==='manual'){ document.getElementById('t14AiBox').style.display='none'; document.getElementById('t14AiThinking').style.display='none'; }
+  else if(t14EditorImg) t14RunAi();
+}
+function t14SkipAi(){ if(t14AiTimeout) clearTimeout(t14AiTimeout); document.getElementById('t14AiThinking').style.display='none'; document.getElementById('t14AiBox').style.display='none'; document.getElementById('t14ManualGuide').style.display='block'; document.getElementById('t14Status').innerText="✋ Manual Mode - You pick colors yourself"; }
+function t14LoadFile(file){
+  if(!file || file.type.indexOf('image/')!==0){ alert("Please select only image!"); return; }
+  t14CurrentFile=file; document.getElementById('t14FileName').innerText="Selected ✅ - "+file.name;
+  document.getElementById('t14Status').innerText="✅ Photo loaded - Extracting colors...";
+  t14Log("Loaded "+file.name);
+  var img=new Image(); img.onload=function(){
+    t14EditorImg=img;
+    document.getElementById('t14PhotoBox').style.display='block';
+    var canvas=document.getElementById('t14PhotoCanvas');
+    var scale=Math.min(1, 800/Math.max(img.width,img.height));
+    canvas.width=img.width*scale; canvas.height=img.height*scale;
+    var ctx=canvas.getContext('2d'); ctx.drawImage(img,0,0,canvas.width,canvas.height);
+    t14ExtractFromPhoto(); t14RunAi();
+  }; img.onerror=function(){ alert("Photo failed to load - Try another photo"); }; img.src=URL.createObjectURL(file);
+}
+function t14RunAi(){
+  if(t14Mode!=='auto' || !t14EditorImg) return;
+  if(!window.OrbitAI){
+    document.getElementById('t14AiQuality').innerText="AI: Not available • Manual Mode Working ✅";
+    document.getElementById('t14ManualGuide').style.display='block'; return;
+  }
+  document.getElementById('t14AiThinking').style.display='block'; document.getElementById('t14AiBox').style.display='none';
+  if(t14AiTimeout) clearTimeout(t14AiTimeout);
+  t14AiTimeout=setTimeout(function(){
+    document.getElementById('t14AiThinking').style.display='none';
+    document.getElementById('t14AiQuality').innerText="AI: Slow / Not supported • Manual ON ✅";
+    document.getElementById('t14ManualGuide').style.display='block';
+  }, 3000);
+  try{
+    window.OrbitAI.analyzeImage(t14EditorImg).then(function(a){
+      if(t14AiTimeout) clearTimeout(t14AiTimeout); if(t14Mode!=='auto') return;
+      document.getElementById('t14AiThinking').style.display='none';
+      document.getElementById('t14AiQuality').innerText="AI Quality: "+a.quality+" / 100 • "+(a.isBW?"Black & White Photo":"Colorful Photo")+" • "+(a.isDark?"Dark Photo":"Bright Photo");
+      var html='<div style="background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(34,211,238,.2));border:1px solid #a78bfa;border-radius:12px;padding:12px;margin-top:10px;text-align:center"><b>🤖 AI ANALYZED - Quality: '+a.quality+'/100</b><br><small style="color:#94a3b8">AI suggests these palettes for your photo:</small>';
+      if(a.isBW) html+='<div style="margin-top:8px"><button onclick="t14Generate(\'dark\')" style="background:#000;border:1px solid #fff;color:#fff;padding:8px 14px;border-radius:20px;font-weight:800;cursor:pointer">🌑 Try Dark Palette</button> <button onclick="t14Generate(\'pastel\')" style="background:#fbcfe8;border:none;color:#000;padding:8px 14px;border-radius:20px;font-weight:800;cursor:pointer">🌸 Try Pastel Palette</button></div>';
+      else if(a.isDark) html+='<div style="margin-top:8px"><button onclick="t14Generate(\'neon\')" style="background:#22d3ee;border:none;color:#fff;padding:8px 14px;border-radius:20px;font-weight:800;cursor:pointer">🌈 Try Neon Palette</button> <button onclick="t14Generate(\'sunset\')" style="background:#f59e0b;border:none;color:#fff;padding:8px 14px;border-radius:20px;font-weight:800;cursor:pointer">🌅 Try Sunset Palette</button></div>';
+      else html+='<div style="margin-top:8px"><button onclick="t14Generate(\'nature\')" style="background:#22c55e;border:none;color:#fff;padding:8px 14px;border-radius:20px;font-weight:800;cursor:pointer">🌿 Try Nature Palette</button> <button onclick="t14Generate(\'ocean\')" style="background:#2563eb;border:none;color:#fff;padding:8px 14px;border-radius:20px;font-weight:800;cursor:pointer">🌊 Try Ocean Palette</button></div>';
+      html+='</div>';
+      var box=document.getElementById('t14AiBox'); box.innerHTML=html; box.style.display='block';
+    }).catch(function(){ if(t14AiTimeout) clearTimeout(t14AiTimeout); document.getElementById('t14AiThinking').style.display='none'; document.getElementById('t14ManualGuide').style.display='block'; });
+  }catch(e){ if(t14AiTimeout) clearTimeout(t14AiTimeout); document.getElementById('t14AiThinking').style.display='none'; document.getElementById('t14ManualGuide').style.display='block'; }
+}
+// ===== EXTRACT - Real K-Means Lite - No Bug - Works On All Phones =====
+function t14ExtractFromPhoto(){
+  if(!t14EditorImg){ alert("First select a photo! Or use Generator below - No photo needed"); return; }
+  try{
+    var count=parseInt(document.getElementById('t14Count').value||6);
+    var c=document.createElement('canvas');
+    var s=Math.min(1, 200/Math.max(t14EditorImg.width,t14EditorImg.height));
+    c.width=Math.max(10,Math.round(t14EditorImg.width*s)); c.height=Math.max(10,Math.round(t14EditorImg.height*s));
+    var ctx=c.getContext('2d'); ctx.drawImage(t14EditorImg,0,0,c.width,c.height);
+    var d=ctx.getImageData(0,0,c.width,c.height).data;
+    var pixels=[];
+    for(var i=0;i<d.length;i+=16){ // Sample every 4th pixel - Fast, no hang
+      pixels.push([d[i],d[i+1],d[i+2]]);
+    }
+    if(!pixels.length) return alert("Photo too small - Try another");
+    // Simple clustering - Pick distinct colors
+    var clusters=[];
+    // Init - First N distinct pixels
+    for(var p=0;p<pixels.length && clusters.length<count;p++){
+      var px=pixels[p]; var exists=false;
+      for(var k=0;k<clusters.length;k++){ var cl=clusters[k]; var dist=Math.abs(cl[0]-px[0])+Math.abs(cl[1]-px[1])+Math.abs(cl[2]-px[2]); if(dist<40){ exists=true; break; } }
+      if(!exists) clusters.push([px[0],px[1],px[2],1]);
+    }
+    // Assign + average - 3 iterations only - Fast
+    for(var iter=0;iter<3;iter++){
+      var sums=clusters.map(function(){ return [0,0,0,0]; });
+      for(var j=0;j<pixels.length;j++){
+        var pix=pixels[j]; var best=0, bestDist=999999;
+        for(var m=0;m<clusters.length;m++){ var cc=clusters[m]; var dd=Math.abs(cc[0]-pix[0])+Math.abs(cc[1]-pix[1])+Math.abs(cc[2]-pix[2]); if(dd<bestDist){ bestDist=dd; best=m; } }
+        sums[best][0]+=pix[0]; sums[best][1]+=pix[1]; sums[best][2]+=pix[2]; sums[best][3]++;
+      }
+      for(var n=0;n<clusters.length;n++){ if(sums[n][3]>0){ clusters[n]=[Math.round(sums[n][0]/sums[n][3]), Math.round(sums[n][1]/sums[n][3]), Math.round(sums[n][2]/sums[n][3]), sums[n][3]]; } }
+    }
+    // Sort by count - Most used color first
+    clusters.sort(function(a,b){ return b[3]-a[3]; });
+    t14Palette=clusters.map(function(cl){ return t14RgbToHex(cl[0],cl[1],cl[2]); });
+    t14RenderPalette();
+    document.getElementById('t14Status').innerText="✅ Extracted "+t14Palette.length+" colors from photo - Click any color to copy";
+  }catch(e){ alert("Extract Error: "+e.message+" - Try Generator below, it always works"); }
+}
+function t14RenderPalette(){
+  var row=document.getElementById('t14PaletteRow'); var list=document.getElementById('t14PaletteList');
+  row.innerHTML=""; list.innerHTML="";
+  if(!t14Palette.length){ document.getElementById('t14PaletteEmpty').style.display='block'; document.getElementById('t14Stats').innerText="Palette: 0 Colors"; return; }
+  document.getElementById('t14PaletteEmpty').style.display='none';
+  t14Palette.forEach(function(hex,idx){
+    var div=document.createElement('div'); div.style.cssText="flex:1;background:"+hex+";cursor:pointer;position:relative"; div.title=hex+" - Click to copy";
+    div.onclick=function(){ t14CopyText(hex.toUpperCase(), "Copied "+hex.toUpperCase()); };
+    row.appendChild(div);
+    var item=document.createElement('div'); item.style.cssText="display:flex;gap:8px;align-items:center;background:#0a1224;border:1px solid #2a3a6a;border-radius:10px;padding:8px;margin-top:6px";
+    var rgb=t14HexToRgb(hex); var hsl=t14RgbToHsl(rgb.r,rgb.g,rgb.b);
+    item.innerHTML='<div style="width:40px;height:40px;border-radius:10px;background:'+hex+';border:1px solid #fff;flex-shrink:0"></div><div style="flex:1"><b style="font-size:13px">'+hex.toUpperCase()+'</b><br><small style="color:#94a3b8">RGB('+rgb.r+', '+rgb.g+', '+rgb.b+') • HSL('+hsl.h+', '+hsl.s+'%, '+hsl.l+'%) • '+t14ColorName(hex)+'</small></div><button onclick="t14CopyText(\''+hex.toUpperCase()+'\',\'Copied '+hex.toUpperCase()+'\')" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px 12px;border-radius:20px;cursor:pointer;font-size:11px;font-weight:800">📋 Copy</button><button onclick="t14RemoveColor('+idx+')" style="background:#ef4444;border:none;color:#fff;padding:8px 10px;border-radius:20px;cursor:pointer;font-size:11px;font-weight:800">✕</button>';
+    list.appendChild(item);
+  });
+  document.getElementById('t14Stats').innerText="Palette: "+t14Palette.length+" Colors • Click any color to copy HEX";
+}
+function t14RemoveColor(idx){ t14Palette.splice(idx,1); t14RenderPalette(); }
+function t14AddPicked(){ if(!t14PickedColor) return; t14Palette.push(t14PickedColor); t14RenderPalette(); document.getElementById('t14Status').innerText="✅ Added "+t14PickedColor+" to palette"; }
+function t14AddPickerColor(){ var hex=document.getElementById('t14ColorPicker').value; t14Palette.push(hex); t14RenderPalette(); document.getElementById('t14Status').innerText="✅ Added "+hex+" to palette"; }
+function t14PickerChanged(){ var hex=document.getElementById('t14ColorPicker').value; var rgb=t14HexToRgb(hex); var hsl=t14RgbToHsl(rgb.r,rgb.g,rgb.b); document.getElementById('t14PickerHex').innerText=hex.toUpperCase(); document.getElementById('t14PickerRgb').innerText="RGB("+rgb.r+", "+rgb.g+", "+rgb.b+") • HSL("+hsl.h+", "+hsl.s+"%, "+hsl.l+"%)"; document.getElementById('t14PickerName').innerText="Color Name: "+t14ColorName(hex); }
+function t14SetPicker(hex){ document.getElementById('t14ColorPicker').value=hex; t14PickerChanged(); }
+function t14CopyPicked(){ t14CopyText(t14PickedColor.toUpperCase(), "Copied "+t14PickedColor); }
+function t14CopyText(text, msg){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){ document.getElementById('t14Status').innerText="✅ "+(msg||"Copied: "+text); }).catch(function(){ t14FallbackCopy(text,msg); });
+  } else { t14FallbackCopy(text,msg); }
+}
+function t14FallbackCopy(text,msg){ var ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); document.getElementById('t14Status').innerText="✅ "+(msg||"Copied"); }catch(e){ alert("Copy this: "+text); } ta.remove(); }
+function t14CopyAllHex(){ if(!t14Palette.length) return alert("Palette is empty - Generate first"); t14CopyText(t14Palette.map(function(h){return h.toUpperCase()}).join(', '), "✅ Copied all HEX: "+t14Palette.join(', ')); }
+function t14CopyCss(){ if(!t14Palette.length) return alert("Palette is empty"); var css="/* Orbittroniz Color Palette */\n:root {\n"+t14Palette.map(function(h,i){ return "  --color-"+(i+1)+": "+h+";"; }).join("\n")+"\n}\n\n/* Gradient */\nbackground: linear-gradient(135deg, "+t14Palette[0]+", "+t14Palette[t14Palette.length-1]+");"; t14CopyText(css, "✅ CSS Copied - Paste in your website"); }
+function t14ShufflePalette(){ if(t14Palette.length<2) return alert("Need at least 2 colors to shuffle"); t14Palette.sort(function(){ return Math.random()-0.5; }); t14RenderPalette(); document.getElementById('t14Status').innerText="🔀 Palette Shuffled"; }
+function t14Generate(type){
+  var palettes={
+    random: null, pastel: ['#FBCFE8','#BFDBFE','#FEF3C7','#D1FAE5','#EDE9FE','#FECACA'],
+    neon: ['#22D3EE','#A855F7','#EC4899','#FACC15','#22C55E','#F97316'],
+    wedding: ['#F59E0B','#FBCFE8','#FFF7ED','#F472B6','#FEF3C7','#FFFFFF'],
+    sunset: ['#F59E0B','#EF4444','#F97316','#FACC15','#7C3AED','#FEF3C7'],
+    ocean: ['#0EA5E9','#2563EB','#22D3EE','#0F766E','#BFDBFE','#FFFFFF'],
+    nature: ['#22C55E','#16A34A','#A3E635','#FEF3C7','#78350F','#FFFFFF'],
+    dark: ['#0F172A','#1E293B','#334155','#22D3EE','#A78BFA','#FFFFFF'],
+    baby: ['#FBCFE8','#BFDBFE','#FEF9C3','#FCE7F3','#E0E7FF','#FFFFFF'],
+    instagram: ['#F58529','#DD2A7B','#8134AF','#515BD4','#FEDA77','#FFFFFF'],
+    brand: ['#1E3A8A','#2563EB','#22D3EE','#F59E0B','#111827','#FFFFFF']
+  };
+  if(type==='random'){
+    t14Palette=[];
+    for(var i=0;i<6;i++){ var h=Math.floor(Math.random()*360); t14Palette.push(t14HslToHex(h, 70, 60)); }
+  } else {
+    t14Palette=palettes[type] ? palettes[type].slice() : palettes['random'];
+  }
+  t14RenderPalette(); document.getElementById('t14Status').innerText="✅ Generated "+type+" palette - Click any color to copy";
+  if(t14Palette.length){ document.getElementById('t14BaseColor').value=t14Palette[0]; t14UpdateHarmony(); }
+}
+function t14UpdateGradient(){
+  var c1=document.getElementById('t14Grad1').value, c2=document.getElementById('t14Grad2').value, dir=document.getElementById('t14GradDir').value;
+  document.getElementById('t14GradPreview').style.background="linear-gradient("+dir+", "+c1+", "+c2+")";
+  document.getElementById('t14GradCss').innerText="background: linear-gradient("+dir+", "+c1+", "+c2+");";
+}
+function t14CopyGradient(){ t14CopyText(document.getElementById('t14GradCss').innerText, "✅ Gradient CSS Copied"); }
+function t14RandomGradient(){
+  var h1=Math.floor(Math.random()*360), h2=(h1+120)%360;
+  var c1=t14HslToHex(h1,80,60), c2=t14HslToHex(h2,80,60);
+  document.getElementById('t14Grad1').value=c1; document.getElementById('t14Grad2').value=c2; t14UpdateGradient();
+}
+function t14UpdateHarmony(){
+  var base=document.getElementById('t14BaseColor').value; var type=document.getElementById('t14HarmonyType').value;
+  var rgb=t14HexToRgb(base); var hsl=t14RgbToHsl(rgb.r,rgb.g,rgb.b); var colors=[];
+  if(type==='complementary'){ colors=[base, t14HslToHex((hsl.h+180)%360, hsl.s, hsl.l)]; }
+  else if(type==='analogous'){ colors=[t14HslToHex((hsl.h-30+360)%360,hsl.s,hsl.l), base, t14HslToHex((hsl.h+30)%360,hsl.s,hsl.l)]; }
+  else if(type==='triadic'){ colors=[base, t14HslToHex((hsl.h+120)%360,hsl.s,hsl.l), t14HslToHex((hsl.h+240)%360,hsl.s,hsl.l)]; }
+  else if(type==='monochrome'){ colors=[t14HslToHex(hsl.h,hsl.s,Math.max(10,hsl.l-30)), t14HslToHex(hsl.h,hsl.s,hsl.l), t14HslToHex(hsl.h,hsl.s,Math.min(90,hsl.l+25))]; }
+  var row=document.getElementById('t14HarmonyRow'); row.innerHTML="";
+  colors.forEach(function(hex){ var d=document.createElement('div'); d.style.cssText="flex:1;background:"+hex+";cursor:pointer"; d.title=hex; d.onclick=function(){ t14CopyText(hex.toUpperCase(), "Copied "+hex); }; row.appendChild(d); });
+  document.getElementById('t14HarmonyInfo').innerText="Harmony: "+colors.map(function(c){return c.toUpperCase()}).join(' • ')+" - Click color to copy";
+  t14UpdateHarmony._colors=colors;
+}
+function t14UseHarmony(){ var cols=t14UpdateHarmony._colors; if(!cols||!cols.length){ t14UpdateHarmony(); cols=t14UpdateHarmony._colors; } t14Palette=cols.slice(); t14RenderPalette(); document.getElementById('t14Status').innerText="✅ Harmony colors used as palette"; }
+function t14SavePalette(){
+  if(!t14Palette.length) return alert("Palette is empty - Generate first");
+  t14Saved.push(t14Palette.slice());
+  t14RenderSaved(); document.getElementById('t14Status').innerText="✅ Palette Saved - Total saved: "+t14Saved.length;
+}
+function t14RenderSaved(){
+  var list=document.getElementById('t14SavedList'); list.innerHTML="";
+  if(!t14Saved.length){ document.getElementById('t14SavedEmpty').style.display='block'; return; }
+  document.getElementById('t14SavedEmpty').style.display='none';
+  t14Saved.forEach(function(pal,idx){
+    var div=document.createElement('div'); div.style.cssText="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px;margin-top:8px";
+    var rowHtml='<div style="display:flex;gap:0;height:50px;border-radius:8px;overflow:hidden">'+pal.map(function(h){ return '<div style="flex:1;background:'+h+'" title="'+h+'"></div>'; }).join('')+'</div>';
+    div.innerHTML=rowHtml+'<div style="display:flex;gap:6px;margin-top:8px"><button onclick="t14LoadSaved('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:8px;cursor:pointer;font-weight:700">↩️ Load</button><button onclick="t14DeleteSaved('+idx+')" style="flex:1;background:#ef4444;border:none;color:#fff;padding:8px;border-radius:8px;cursor:pointer;font-weight:700">Delete</button></div><small style="color:#94a3b8">Palette '+(idx+1)+' • '+pal.join(', ')+'</small>';
+    list.appendChild(div);
+  });
+}
+function t14LoadSaved(idx){ t14Palette=t14Saved[idx].slice(); t14RenderPalette(); document.getElementById('t14Status').innerText="✅ Loaded saved palette "+(idx+1); }
+function t14DeleteSaved(idx){ t14Saved.splice(idx,1); t14RenderSaved(); }
+function t14DownloadPalettePng(){
+  if(!t14Palette.length) return alert("Palette is empty - Generate first");
+  var canvas=document.createElement('canvas'); canvas.width=1200; canvas.height=400; var ctx=canvas.getContext('2d');
+  var w=canvas.width/t14Palette.length;
+  t14Palette.forEach(function(hex,i){
+    ctx.fillStyle=hex; ctx.fillRect(i*w,0,w,canvas.height);
+    ctx.fillStyle='#00000088'; ctx.fillRect(i*w,canvas.height-90,w,90);
+    ctx.fillStyle='#ffffff'; ctx.font="bold 28px Arial"; ctx.textAlign='center'; ctx.fillText(hex.toUpperCase(), i*w+w/2, canvas.height-50);
+    ctx.font="18px Arial"; ctx.fillText(t14ColorName(hex), i*w+w/2, canvas.height-22);
+  });
+  canvas.toBlob(function(blob){ var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download="Color-Palette - Orbittroniz.png"; document.body.appendChild(a); a.click(); a.remove(); document.getElementById('t14Status').innerText="✅ Palette PNG Downloaded"; }, 'image/png');
+}
+function t14DownloadCss(){
+  if(!t14Palette.length) return alert("Palette is empty");
+  var css="/* Orbittroniz Color Palette - Generated */\n:root {\n"+t14Palette.map(function(h,i){ return "  --color-"+(i+1)+": "+h+"; /* "+t14ColorName(h)+" */"; }).join("\n")+"\n}\n\n/* Usage: background: var(--color-1); */\n/* Gradient: background: linear-gradient(135deg, "+t14Palette[0]+", "+t14Palette[t14Palette.length-1]+"); */\n";
+  var blob=new Blob([css],{type:'text/css'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download="palette - Orbittroniz.css"; document.body.appendChild(a); a.click(); a.remove(); document.getElementById('t14Status').innerText="✅ CSS File Downloaded";
+}
+function t14OpenPreview(){
+  if(!t14Palette.length) return alert("First generate palette!");
+  var canvas=document.getElementById('t14ModalCanvas'); canvas.width=900; canvas.height=500; var ctx=canvas.getContext('2d');
+  var h=canvas.height/t14Palette.length;
+  t14Palette.forEach(function(hex,i){ ctx.fillStyle=hex; ctx.fillRect(0,i*h,canvas.width,h); ctx.fillStyle='rgba(0,0,0,0.5)'; ctx.fillRect(0,i*h,canvas.width,30); ctx.fillStyle='#fff'; ctx.font="bold 20px Arial"; ctx.textAlign='left'; ctx.fillText(hex.toUpperCase()+" • "+t14ColorName(hex), 20, i*h+22); });
+  document.getElementById('t14ModalTitle').innerText="Palette Preview - "+t14Palette.length+" Colors";
+  document.getElementById('t14ModalCap').innerText=t14Palette.map(function(c){return c.toUpperCase()}).join(' • ');
+  document.getElementById('t14Modal').style.display='flex';
+}
+function t14ClosePreview(){ document.getElementById('t14Modal').style.display='none'; }
+function t14Reset(){ t14Palette=[]; t14EditorImg=null; t14CurrentFile=null; t14PickedColor='#ffffff'; document.getElementById('t14PhotoBox').style.display='none'; document.getElementById('t14FileName').innerText="No Image Selected - You Can Use Generator Without Photo"; document.getElementById('t14Status').innerText=""; document.getElementById('t14AiBox').style.display='none'; document.getElementById('t14AiThinking').style.display='none'; document.getElementById('t14ManualGuide').style.display='none'; t14RenderPalette(); t14Log("Reset done"); }
+t14PickerChanged(); t14UpdateGradient(); t14UpdateHarmony();
+t14Log("Tool 14 Color Palette Loaded ✅ - No Photo Needed, Generator Works");
+</script>
+<!-- ================= TOOL 14 COLOR PALETTE - END ================= -->
 <!-- TOOL 15 -->
 <div class="tool" id="tool-15"><div class="panel"><h3>✍️ Tool 15 - Text Poster</h3>
 <!-- YAHAN TOOL 15 KA CODE PASTE KARO -->
