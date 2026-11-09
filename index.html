@@ -7459,10 +7459,597 @@ setTimeout(function(){ t17AiGenerate8(false); }, 600);
 </script>
 <!-- ================= TOOL 17 V2 - END ================= --> 
 <!-- TOOL 18 -->
-<div class="tool" id="tool-18"><div class="panel"><h3>🧾 Tool 18 - Invoice Maker</h3>
-<!-- YAHAN TOOL 18 KA CODE PASTE KARO -->
-<p style="font-size:12px;color:#94a3b8">Yaha Tool 18 ka feature code aayega...</p>
+  <!-- ================= TOOL 18 V2 - INVOICE - PREMIUM LOOK - MORE ADVANCE - START ================= -->
+<style>
+.t18-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.t18-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t18-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.t18-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
+.t18-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
+.t18-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.t18-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
+.t18-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.t18-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:13px 8px;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer}
+.t18-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent}
+.t18-chiprow{display:flex;gap:6px;margin-top:8px}
+.t18-chiprow button{flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px 4px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
+.t18-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
+.t18-toggle b{font-size:13px}
+.t18-toggle input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.t18-toggle input:checked{background:#22c55e}
+.t18-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.t18-toggle input:checked::after{left:23px}
+.t18-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.t18-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.t18-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t18-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
+.t18-range{width:100%;accent-color:#22d3ee}
+.t18-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.t18-imgcard{background:#060a18;border:1px solid #2a3a6a;border-radius:14px;overflow:hidden}
+.t18-imgcard img{width:100%;height:130px;object-fit:cover;display:block}
+.t18-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column}
+.t18-modal canvas{max-width:95%;max-height:62vh;border-radius:10px;background:#fff}
+.t18-modal-nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.t18-modal-nav button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer}
+.t18-modal-nav button.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none}
+</style>
+
+<div class="tool active" id="tool-18"><div class="t18-card">
+<div class="t18-title">🧾 Invoice Pro V2 - Premium Look 💎</div>
+<div class="t18-sub">English Only • 10 Premium Templates • Partial Payment • Due Date • Round Off • Watermark • Bank + UPI Box • Signature • WhatsApp Message</div>
+
+<!-- STEP 1 - WRITE -->
+<label class="t18-label">✍️ STEP 1 - WRITE SOMETHING - AI Will Make 10 Premium Bills</label>
+<div style="background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(34,211,238,.25));border:1px solid #a78bfa;border-radius:14px;padding:12px">
+<textarea id="t18Prompt" class="t18-input" rows="2">Sharma Jewellers, Solapur, Gold Ring 25000, customer Priya Sharma, phone 98765 43210, paid 10000</textarea>
+<div style="display:flex;gap:8px;margin-top:8px">
+<input type="text" id="t18ShopName" class="t18-input" placeholder="Shop Name - Sharma Jewellers" value="Sharma Jewellers" style="flex:1">
+<input type="text" id="t18CustName" class="t18-input" placeholder="Customer Name - Priya Sharma" value="Priya Sharma" style="flex:1">
+</div>
+<div class="t18-chiprow">
+<button onclick="t18FillPrompt('Sharma Jewellers, Solapur, Gold Ring 25000, customer Priya Sharma, paid 10000')">💎 Jewellers + Partial</button>
+<button onclick="t18FillPrompt('Saree House, Solapur, Saree 5000, customer Priya Sharma')">🛍️ Saree</button>
+<button onclick="t18FillPrompt('Power Gym, Solapur, 1 Year Membership 12000, customer Amit Patil, paid 5000')">🏋️ Gym + Partial</button>
+</div>
+<div class="t18-chiprow">
+<button onclick="t18FillPrompt('Orbittroniz, Business Tools, Website 15000, customer Rahul Sharma')">🪐 Orbittroniz</button>
+<button onclick="t18FillPrompt('Sweet Bakery, Cake 800, customer Priya Sharma')">🍰 Bakery</button>
+<button onclick="t18FillPrompt('Mobile World, Mobile Repair 1500, customer Amit Patil')">📱 Mobile</button>
+</div>
+<button onclick="t18AiGenerate10()" style="width:100%;margin-top:10px;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:16px;border-radius:12px;font-weight:900;cursor:pointer;font-size:15px">✨ AI GENERATE 10 BILLS - Create My Premium Bills</button>
+<button onclick="t18AiGenerate10(true)" style="width:100%;margin-top:8px;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px;border-radius:12px;font-weight:800;cursor:pointer">🎲 GENERATE AGAIN - 10 New Bills</button>
+<div id="t18AiThinking" style="display:none;text-align:center;margin-top:8px"><b>🤖 AI is Thinking...</b><br><small style="color:#94a3b8">Reading, calculating partial payment, due date, designing 10 premium bills...</small><br><div style="font-size:24px;margin-top:4px">🧠✨🧾💎</div></div>
+<div id="t18AiResult" style="display:none;margin-top:8px;background:#060a18;border-radius:10px;padding:10px;text-align:left"></div>
+</div>
+
+<!-- AI + HUMAN -->
+<label class="t18-label">🧠 STEP 1B - AI + HUMAN BOTH THINK</label>
+<div style="display:flex;gap:10px">
+<div style="flex:1;background:linear-gradient(135deg,rgba(34,211,238,.18),rgba(124,58,237,.18));border:1px solid #22d3ee;border-radius:14px;padding:12px">
+<b style="font-size:13px;color:#22d3ee">👤 HUMAN (YOU)</b>
+<textarea id="t18Human" class="t18-input" rows="2" style="margin-top:8px">My bill should look royal, gold, premium. Customer should trust my shop.</textarea>
+</div>
+<div style="flex:1;background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(236,72,153,.18));border:1px solid #f59e0b;border-radius:14px;padding:12px">
+<b style="font-size:13px;color:#f59e0b">🤖 AI (ME)</b>
+<div id="t18AiThinkBox" style="background:#060a18;border-radius:10px;padding:10px;margin-top:8px;font-size:12px;color:#fff;line-height:1.6;min-height:68px">Click AI Think...</div>
+<button onclick="t18AiThink()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#f59e0b,#ec4899);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">🤖 AI THINK</button>
+</div>
+</div>
+<div id="t18MergeBox" style="display:none;margin-top:10px;background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;text-align:left"></div>
+
+<!-- SHOP + CUSTOMER + PAYMENT ADVANCE -->
+<label class="t18-label">🏪 STEP 2 - SHOP + CUSTOMER + PAYMENT - Advance</label>
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px">
+<div style="display:flex;gap:8px">
+<input type="text" id="t18ShopPhone" class="t18-input" placeholder="Shop Phone" value="98765 43210" style="flex:1">
+<input type="text" id="t18ShopAddr" class="t18-input" placeholder="Shop Address" value="Main Road, Solapur" style="flex:1">
+</div>
+<div style="display:flex;gap:8px;margin-top:8px">
+<input type="text" id="t18CustPhone" class="t18-input" placeholder="Customer Phone" value="98765 43210" style="flex:1">
+<input type="text" id="t18InvNo" class="t18-input" placeholder="Invoice No" value="INV-001" style="flex:1">
+<input type="date" id="t18Date" class="t18-input" style="flex:1">
+</div>
+<div style="display:flex;gap:8px;margin-top:8px">
+<input type="date" id="t18DueDate" class="t18-input" style="flex:1" onchange="t18UpdateAll()">
+<select id="t18PayMode" class="t18-input" style="flex:1" onchange="t18UpdateAll()"><option value="Cash">💵 Cash</option><option value="UPI">📱 UPI</option><option value="Card">💳 Card</option><option value="Bank Transfer">🏦 Bank Transfer</option><option value="Pending">⏳ Pending / Udhaar</option></select>
+<select id="t18PayStatus" class="t18-input" style="flex:1" onchange="t18UpdateAll()"><option value="PAID">✅ PAID</option><option value="PARTIAL" selected>⚠️ PARTIAL PAID</option><option value="UNPAID">❌ UNPAID</option></select>
+</div>
+<div style="background:#0a1224;border:1px solid #f59e0b;border-radius:10px;padding:10px;margin-top:10px">
+<b style="font-size:12px;color:#f59e0b">💰 PARTIAL PAYMENT - Premium Feature - Customer Ne Kitna Diya?</b>
+<div style="display:flex;gap:8px;margin-top:8px">
+<div style="flex:1"><small style="color:#94a3b8">Amount Paid ₹</small><input type="number" id="t18Paid" class="t18-input" placeholder="Paid - Example: 10000" value="10000" oninput="t18UpdateAll()"></div>
+<div style="flex:1"><small style="color:#94a3b8">Balance Auto</small><input type="text" id="t18BalanceShow" class="t18-input" placeholder="Balance Auto" value="₹15750" readonly style="background:#1a2a55;color:#22c55e;font-weight:900"></div>
+</div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t18SetPaidFull()" style="flex:1;background:#22c55e;border:none;color:#fff;padding:9px;border-radius:8px;font-weight:800;cursor:pointer">✅ Full Paid</button>
+<button onclick="t18SetPaidHalf()" style="flex:1;background:#f59e0b;border:none;color:#fff;padding:9px;border-radius:8px;font-weight:800;cursor:pointer">➗ Half Paid</button>
+<button onclick="t18SetPaidZero()" style="flex:1;background:#ef4444;border:none;color:#fff;padding:9px;border-radius:8px;font-weight:800;cursor:pointer">❌ Nothing Paid</button>
+</div>
+<small style="color:#94a3b8">Due Date auto = Today + 7 days for Udhaar. Change it above if you want.</small>
+</div>
+<div style="display:flex;gap:8px;margin-top:10px">
+<input type="text" id="t18BankName" class="t18-input" placeholder="Bank Name - Example: HDFC Bank" value="HDFC Bank" style="flex:1" oninput="t18UpdateAll()">
+<input type="text" id="t18UpiId" class="t18-input" placeholder="UPI ID - Example: sharma@upi" value="sharma@upi" style="flex:1" oninput="t18UpdateAll()">
+</div>
+<div style="display:flex;gap:8px;margin-top:8px">
+<input type="text" id="t18AccNo" class="t18-input" placeholder="Account No - 50100..." value="50100012345678" style="flex:1" oninput="t18UpdateAll()">
+<input type="text" id="t18Ifsc" class="t18-input" placeholder="IFSC - HDFC0001234" value="HDFC0001234" style="flex:1" oninput="t18UpdateAll()">
+</div>
+<textarea id="t18Note" class="t18-input" placeholder="Note - Thank you message" rows="2" style="margin-top:8px" oninput="t18UpdateAll()">Thank you for shopping! Visit again. Gold • Trust • Since 1990</textarea>
+<input type="text" id="t18Terms" class="t18-input" placeholder="Terms - Example: Goods once sold will not be taken back. 7 days return." value="Goods once sold will not be taken back. 7 days return policy." style="margin-top:8px" oninput="t18UpdateAll()">
+</div>
+
+<!-- ITEMS -->
+<label class="t18-label">🛒 STEP 3 - ITEMS - Auto GST + Discount + Round Off + Total</label>
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px">
+<div id="t18Items"></div>
+<button onclick="t18AddItem()" style="width:100%;background:linear-gradient(135deg,#22c55e,#16a34a);border:none;color:#fff;padding:12px;border-radius:10px;font-weight:800;cursor:pointer;margin-top:8px">➕ ADD ITEM</button>
+<div style="display:flex;gap:8px;margin-top:10px">
+<div style="flex:1"><small style="color:#94a3b8">Discount %</small><input type="number" id="t18Discount" class="t18-input" placeholder="0" value="0" oninput="t18UpdateAll()"></div>
+<div style="flex:1"><small style="color:#94a3b8">GST %</small><select id="t18Gst" class="t18-input" onchange="t18UpdateAll()"><option value="0">GST 0%</option><option value="3" selected>GST 3% - Gold</option><option value="5">GST 5%</option><option value="12">GST 12%</option><option value="18">GST 18%</option><option value="28">GST 28%</option></select></div>
+<div style="flex:1"><small style="color:#94a3b8">Delivery ₹</small><input type="number" id="t18Extra" class="t18-input" placeholder="0" value="0" oninput="t18UpdateAll()"></div>
+</div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t18SetGst(3)" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:9px;border-radius:8px;cursor:pointer;font-size:11px">3% Gold</button>
+<button onclick="t18SetGst(5)" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:9px;border-radius:8px;cursor:pointer;font-size:11px">5% Saree</button>
+<button onclick="t18SetGst(18)" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:9px;border-radius:8px;cursor:pointer;font-size:11px">18% Tech</button>
+<button onclick="t18ToggleRoundOff()" id="t18RoundBtn" style="flex:1;background:linear-gradient(135deg,#ec4899,#f59e0b);border:none;color:#fff;padding:9px;border-radius:8px;cursor:pointer;font-size:11px">🔄 Round Off: OFF</button>
+</div>
+<div id="t18Totals" style="background:#0a1224;border:1px solid #22d3ee;border-radius:10px;padding:12px;margin-top:10px;text-align:right;font-size:13px;line-height:1.8"></div>
+<div id="t18AmountWords" style="text-align:center;font-size:12px;color:#a78bfa;margin-top:8px;font-weight:700"></div>
+<div id="t18PaymentBox" style="background:#0a1224;border:1px solid #f59e0b;border-radius:10px;padding:10px;margin-top:8px;text-align:center;font-size:13px"></div>
+</div>
+
+<!-- 10 GALLERY -->
+<label class="t18-label">🖼️ STEP 4 - YOUR 10 PREMIUM BILLS - Select Best</label>
+<div id="t18Gallery" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px"></div>
+<div id="t18GalleryEmpty" style="text-align:center;color:#94a3b8;padding:16px;font-size:12px;background:#060a18;border-radius:12px">No bills yet - Write something and click AI GENERATE 10 BILLS</div>
+
+<!-- SELECTED EDITOR -->
+<div id="t18Editor" style="display:none;background:#060a18;border:1px solid #22d3ee;border-radius:12px;padding:12px;margin-top:12px">
+<b style="font-size:13px;color:#22d3ee">✏️ STEP 5 - EDIT SELECTED BILL - <span id="t18EditorName">Bill 1</span></b>
+<div style="text-align:center;margin-top:10px;background:#fff;border-radius:12px;padding:8px">
+<canvas id="t18EditCanvas" style="max-width:100%;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.3)"></canvas>
+</div>
+<div style="display:flex;gap:8px;margin-top:10px">
+<input type="color" id="t18Color1" value="#f59e0b" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t18UpdateSelected()">
+<input type="color" id="t18Color2" value="#92400e" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t18UpdateSelected()">
+<div style="flex:1"><small style="color:#94a3b8">Change colors of selected bill only</small></div>
+</div>
+<div class="t18-mode" id="t18EffectModes">
+<button data-effect="gold" onclick="t18SetEffect('gold',this)" class="active">👑 Gold Foil</button>
+<button data-effect="gradient" onclick="t18SetEffect('gradient',this)">🌈 Gradient</button>
+<button data-effect="glass" onclick="t18SetEffect('glass',this)">💎 Glass Premium</button>
+<button data-effect="minimal" onclick="t18SetEffect('minimal',this)">⚪ Minimal</button>
+</div>
+<div class="t18-toggle"><b>💧 Show Watermark? (Shop name behind bill - Anti Copy)</b><input type="checkbox" id="t18Watermark" checked onchange="t18UpdateSelected()"></div>
+<div class="t18-toggle"><b>🏦 Show Bank + UPI Box?</b><input type="checkbox" id="t18ShowBank" checked onchange="t18UpdateSelected()"></div>
+<div class="t18-toggle"><b>✍️ Show Signature? (Cursive signature from your name)</b><input type="checkbox" id="t18ShowSign" checked onchange="t18UpdateSelected()"></div>
+<div class="t18-toggle"><b>📱 Show QR For Payment?</b><input type="checkbox" id="t18ShowQr" checked onchange="t18UpdateSelected()"></div>
+<div class="t18-toggle"><b>📊 Show CGST + SGST Breakdown?</b><input type="checkbox" id="t18ShowTaxBreak" checked onchange="t18UpdateSelected()"></div>
+<div style="display:flex;gap:6px;margin-top:10px">
+<button onclick="t18DownloadSelected()" style="flex:1;background:linear-gradient(135deg,#22c55e,#16a34a);border:none;color:#fff;padding:13px;border-radius:12px;font-weight:900;cursor:pointer">📥 Download Bill</button>
+<button onclick="t18PrintSelected()" style="flex:1;background:linear-gradient(135deg,#2563eb,#1e40af);border:none;color:#fff;padding:13px;border-radius:12px;font-weight:900;cursor:pointer">🖨️ Print Bill</button>
+</div>
+</div>
+
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
+<b id="t18Stats" style="font-size:13px">Bills: 0 • Premium Look</b><br>
+<small id="t18AiQuality" style="color:#a78bfa">AI: Ready • Write 1 Line ✅</small>
+</div>
+<div id="t18Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
+
+<button class="t18-btn-preview" onclick="t18OpenPreview()">👀 PREVIEW - Selected Bill Full Screen</button>
+<button class="t18-btn3d" onclick="t18DownloadAll()">📥 DOWNLOAD ALL 10 BILLS</button>
+<button class="t18-btn2" onclick="t18AiRemix()" style="background:linear-gradient(135deg,#ec4899,#f59e0b);color:#fff;border:none">🎲 AI REMIX - Mix 2 Best Bills</button>
+<button class="t18-btn-share" id="t18ShareBtn" onclick="t18ShareSelected()" style="display:block">📤 SHARE ON WHATSAPP - With Paid / Balance Message</button>
+<button class="t18-btn2" onclick="t18Reset()">🗑️ Clear / Next Customer - New Bill</button>
+
+<label class="t18-label">🖼️ DOWNLOADED BILLS</label>
+<div class="t18-grid" id="t18Out"></div>
+<div id="t18OutEmpty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">No downloads yet</div>
 </div></div>
+<!-- ================= TOOL 18 V2 - END ================= -->
+
+<div class="t18-modal" id="t18Modal"><div id="t18ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Bill Preview</div><canvas id="t18ModalCanvas"></canvas><div id="t18ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div><div class="t18-modal-nav"><button onclick="t18PrintSelected()" style="background:#2563eb">🖨️ Print</button><button onclick="t18DownloadSelected()" style="background:#22c55e">⬇️ Download</button><button onclick="t18ShareSelected()" style="background:#22c55e">📤 WhatsApp</button><button class="primary" onclick="t18ClosePreview()">✅ Close</button></div></div>
+
+<script>
+// ===== TOOL 18 V2 - PREMIUM LOOK - MORE ADVANCE =====
+var t18Invoices=[], t18SelectedIdx=0, t18Results=[], t18Effect='gold', t18GenCount=0, t18InvCounter=1, t18RoundOff=false;
+var t18Templates=[
+  {id:"gold", label:"Royal Gold", desc:"Black + Gold Foil", c1:"#f59e0b", c2:"#92400e", bg:"#ffffff", headerBg:"#000000", score:94, badge:"💎 Premium"},
+  {id:"orbit", label:"Orbit", desc:"Orbittroniz Purple-Blue", c1:"#a78bfa", c2:"#22d3ee", bg:"#ffffff", headerBg:"#0a1224", score:92, badge:"🪐 Future"},
+  {id:"luxury", label:"Luxury Black", desc:"Black + Silver", c1:"#e2e8f0", c2:"#94a3b8", bg:"#ffffff", headerBg:"#000000", score:93, badge:"🌑 Luxury"},
+  {id:"minimal", label:"Apple Minimal", desc:"White + Clean", c1:"#111827", c2:"#64748b", bg:"#ffffff", headerBg:"#ffffff", score:91, badge:"🍎 Minimal"},
+  {id:"rose", label:"Rose Gold", desc:"Pink + Gold - Beauty", c1:"#fbcfe8", c2:"#ec4899", bg:"#ffffff", headerBg:"#9d174d", score:88, badge:"🌸 Rose"},
+  {id:"emerald", label:"Emerald Green", desc:"Deep Green + Gold", c1:"#059669", c2:"#f59e0b", bg:"#ffffff", headerBg:"#064e3b", score:90, badge:"💚 Emerald"},
+  {id:"royalblue", label:"Royal Blue", desc:"Blue + Gold Line", c1:"#2563eb", c2:"#f59e0b", bg:"#ffffff", headerBg:"#1e40af", score:89, badge:"💙 Royal"},
+  {id:"vintage", label:"Vintage", desc:"Brown + Old Paper", c1:"#92400e", c2:"#78350f", bg:"#fffbeb", headerBg:"#78350f", score:86, badge:"📜 Vintage"},
+  {id:"neon", label:"Neon Night", desc:"Dark + Neon Cyan", c1:"#22d3ee", c2:"#a855f7", bg:"#ffffff", headerBg:"#0f172a", score:87, badge:"💡 Neon"},
+  {id:"marble", label:"Marble White", desc:"White + Grey Marble", c1:"#94a3b8", c2:"#334155", bg:"#ffffff", headerBg:"#f8fafc", score:85, badge:"⚪ Marble"}
+];
+function t18FillPrompt(p){ document.getElementById('t18Prompt').value=p; }
+function t18AiThink(){
+  var human=(document.getElementById('t18Human').value||"").toLowerCase();
+  var reasons=[];
+  if(human.indexOf('royal')>-1 || human.indexOf('gold')>-1) reasons.push("You said <b>royal / gold</b> - AI thinks <b>Gold header + Watermark = Premium</b>. Customer will trust.");
+  else if(human.indexOf('modern')>-1) reasons.push("You said <b>modern</b> - AI thinks <b>Orbit / Neon</b> - Future feel.");
+  else reasons.push("AI read your words - Best is <b>Royal Gold + Glass</b> - Works for any business.");
+  reasons.push("AI will auto calculate <b>Partial Payment + Balance + Due Date</b> - You don't need diary for udhaar.");
+  document.getElementById('t18AiThinkBox').innerHTML="<b>🤖 AI Thinking:</b><br>"+reasons.join("<br><br>");
+  var merge=document.getElementById('t18MergeBox');
+  merge.innerHTML='<b style="color:#22c55e">✅ MERGED IDEA - Human + AI:</b><br><small style="color:#fff">Human: "<i>'+(document.getElementById('t18Human').value||"")+'</i>"<br>AI added: Premium header + Watermark + Partial Payment.<br><b>Final Bill:</b> Premium look + Auto calculation.</small>';
+  merge.style.display='block';
+}
+function t18GetItems(){
+  var items=[];
+  document.querySelectorAll('.t18-item-row').forEach(function(row){
+    var name=row.querySelector('.t18-item-name').value||"Item";
+    var qty=parseFloat(row.querySelector('.t18-item-qty').value)||1;
+    var rate=parseFloat(row.querySelector('.t18-item-rate').value)||0;
+    items.push({name:name, qty:qty, rate:rate, total:qty*rate});
+  });
+  return items;
+}
+function t18Calc(){
+  var items=t18GetItems();
+  var sub=items.reduce(function(s,it){ return s+it.total; },0);
+  var discPct=parseFloat(document.getElementById('t18Discount').value)||0;
+  var discAmt=sub*discPct/100;
+  var afterDisc=sub-discAmt;
+  var gstPct=parseFloat(document.getElementById('t18Gst').value)||0;
+  var gstAmt=afterDisc*gstPct/100;
+  var extra=parseFloat(document.getElementById('t18Extra').value)||0;
+  var grandRaw=afterDisc+gstAmt+extra;
+  var roundAmt=0, grand=grandRaw;
+  if(t18RoundOff){ grand=Math.round(grandRaw); roundAmt=grand-grandRaw; }
+  var paid=parseFloat(document.getElementById('t18Paid').value)||0;
+  var balance=Math.max(0, grand-paid);
+  // Auto status based on paid
+  var statusEl=document.getElementById('t18PayStatus');
+  if(paid>=grand && grand>0) statusEl.value="PAID";
+  else if(paid>0) statusEl.value="PARTIAL";
+  else if(paid===0 && grand>0) statusEl.value="UNPAID";
+  return {items:items, sub:sub, discPct:discPct, discAmt:discAmt, afterDisc:afterDisc, gstPct:gstPct, gstAmt:gstAmt, cgst:gstAmt/2, sgst:gstAmt/2, extra:extra, grandRaw:grandRaw, roundAmt:roundAmt, grand:grand, paid:paid, balance:balance};
+}
+function t18UpdateTotals(){
+  var c=t18Calc();
+  document.getElementById('t18BalanceShow').value="₹"+c.balance.toFixed(2);
+  var html='<div style="text-align:left">Subtotal: <b>₹'+c.sub.toFixed(2)+'</b><br>';
+  if(c.discPct>0) html+='Discount ('+c.discPct+'%): <b style="color:#ef4444">- ₹'+c.discAmt.toFixed(2)+'</b><br>';
+  html+='After Discount: <b>₹'+c.afterDisc.toFixed(2)+'</b><br>';
+  if(c.gstPct>0) html+='GST ('+c.gstPct+'%): <b>₹'+c.gstAmt.toFixed(2)+'</b> <small>CGST '+(c.gstPct/2)+'% ₹'+c.cgst.toFixed(2)+' + SGST '+(c.gstPct/2)+'% ₹'+c.sgst.toFixed(2)+'</small><br>';
+  if(c.extra>0) html+='Delivery: <b>₹'+c.extra.toFixed(2)+'</b><br>';
+  if(t18RoundOff) html+='Round Off: <b>'+(c.roundAmt>=0?"+":"")+'₹'+c.roundAmt.toFixed(2)+'</b><br>';
+  html+='<div style="font-size:18px;margin-top:6px;border-top:1px solid #2a3a6a;padding-top:6px">Grand Total: <b style="color:#22c55e;font-size:22px">₹'+c.grand.toFixed(2)+'</b></div></div>';
+  document.getElementById('t18Totals').innerHTML=html;
+  document.getElementById('t18AmountWords').innerText="In Words: "+t18NumToWords(Math.round(c.grand))+" Rupees Only";
+  var payBox=document.getElementById('t18PaymentBox');
+  var due=document.getElementById('t18DueDate').value||"";
+  payBox.innerHTML='Paid: <b style="color:#22c55e">₹'+c.paid.toFixed(2)+'</b> &nbsp;|&nbsp; Balance: <b style="color:'+(c.balance>0?"#ef4444":"#22c55e")+'">₹'+c.balance.toFixed(2)+'</b> &nbsp;|&nbsp; Due Date: <b>'+(due?new Date(due).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}):"")+'</b> &nbsp;|&nbsp; Status: <b>'+document.getElementById('t18PayStatus').value+'</b>';
+  return c;
+}
+function t18NumToWords(n){
+  if(n===0) return "Zero";
+  var ones=["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
+  var tens=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
+  function two(x){ if(x<20) return ones[x]; return tens[Math.floor(x/10)]+(x%10?" "+ones[x%10]:""); }
+  function three(x){ var h=Math.floor(x/100), r=x%100; return (h?ones[h]+" Hundred":"")+(h&&r?" ":"")+(r?two(r):""); }
+  var out="";
+  if(n>=10000000){ out+=three(Math.floor(n/10000000))+" Crore "; n%=10000000; }
+  if(n>=100000){ out+=three(Math.floor(n/100000))+" Lakh "; n%=100000; }
+  if(n>=1000){ out+=three(Math.floor(n/1000))+" Thousand "; n%=1000; }
+  if(n>0) out+=three(n);
+  return out.trim();
+}
+function t18AddItem(name, qty, rate){
+  var wrap=document.getElementById('t18Items');
+  var div=document.createElement('div'); div.className='t18-item-row'; div.style.cssText="display:flex;gap:6px;margin-top:8px";
+  div.innerHTML='<input type="text" class="t18-input t18-item-name" placeholder="Item Name" value="'+(name||"")+'" oninput="t18UpdateAll()" style="flex:2"><input type="number" class="t18-input t18-item-qty" placeholder="Qty" value="'+(qty||1)+'" oninput="t18UpdateAll()" style="flex:1"><input type="number" class="t18-input t18-item-rate" placeholder="Rate ₹" value="'+(rate||"")+'" oninput="t18UpdateAll()" style="flex:1"><button onclick="this.parentElement.remove();t18UpdateAll()" style="background:#ef4444;border:none;color:#fff;padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:800">✕</button>';
+  wrap.appendChild(div);
+}
+function t18SetGst(v){ document.getElementById('t18Gst').value=v; t18UpdateAll(); }
+function t18ToggleRoundOff(){ t18RoundOff=!t18RoundOff; document.getElementById('t18RoundBtn').innerText="🔄 Round Off: "+(t18RoundOff?"ON":"OFF"); t18UpdateAll(); }
+function t18SetPaidFull(){ var c=t18Calc(); document.getElementById('t18Paid').value=Math.round(c.grand); t18UpdateAll(); }
+function t18SetPaidHalf(){ var c=t18Calc(); document.getElementById('t18Paid').value=Math.round(c.grand/2); t18UpdateAll(); }
+function t18SetPaidZero(){ document.getElementById('t18Paid').value=0; t18UpdateAll(); }
+function t18UpdateAll(){ t18UpdateTotals(); t18UpdateSelected(); }
+function t18ParsePrompt(){
+  var prompt=(document.getElementById('t18Prompt').value||"").toLowerCase();
+  var shop=document.getElementById('t18ShopName').value||"My Shop";
+  var cust=document.getElementById('t18CustName').value||"Customer";
+  var items=[]; var gst="3"; var bizType="general"; var paid=null;
+  var priceMatch=prompt.match(/(\d{3,6})/); var price=priceMatch?parseFloat(priceMatch[1]):1000;
+  var paidMatch=prompt.match(/paid\s+(\d+)/); if(paidMatch) paid=parseFloat(paidMatch[1]);
+  if(prompt.indexOf('jeweller')>-1 || prompt.indexOf('gold')>-1){ shop="Sharma Jewellers"; items=[{name:"Gold Ring", qty:1, rate:price}]; gst="3"; bizType="jewellery"; }
+  else if(prompt.indexOf('saree')>-1){ shop="Saree House"; items=[{name:"Designer Saree", qty:1, rate:price}]; gst="5"; bizType="saree"; }
+  else if(prompt.indexOf('gym')>-1){ shop="Power Gym"; items=[{name:"1 Year Membership", qty:1, rate:price}]; gst="18"; bizType="gym"; }
+  else if(prompt.indexOf('orbit')>-1 || prompt.indexOf('website')>-1){ shop="Orbittroniz"; items=[{name:"Website / Business Tools", qty:1, rate:price}]; gst="18"; bizType="tech"; }
+  else if(prompt.indexOf('bakery')>-1 || prompt.indexOf('cake')>-1){ shop="Sweet Bakery"; items=[{name:"Cake", qty:1, rate:price}]; gst="5"; bizType="bakery"; }
+  else if(prompt.indexOf('mobile')>-1){ shop="Mobile World"; items=[{name:"Mobile Repair", qty:1, rate:price}]; gst="18"; bizType="mobile"; }
+  else { var words=prompt.split(',')[0].trim().split(' '); if(words.length>=2) shop=words.slice(0,2).map(function(w){ return w.charAt(0).toUpperCase()+w.slice(1); }).join(' '); items=[{name:"Product / Service", qty:1, rate:price}]; }
+  var custMatch=prompt.match(/customer\s+([a-z ]+)/); if(custMatch) cust=custMatch[1].trim().split(' ').map(function(w){ return w.charAt(0).toUpperCase()+w.slice(1); }).join(' ');
+  return {shop:shop, cust:cust, items:items, gst:gst, bizType:bizType, price:price, paid:paid};
+}
+function t18AiGenerate10(isRegen){
+  var prompt=(document.getElementById('t18Prompt').value||"").trim();
+  if(!prompt) return alert("First write something!");
+  document.getElementById('t18AiThinking').style.display='block'; document.getElementById('t18AiResult').style.display='none';
+  t18GenCount++;
+  setTimeout(function(){
+    document.getElementById('t18AiThinking').style.display='none';
+    var data=t18ParsePrompt();
+    document.getElementById('t18ShopName').value=data.shop;
+    document.getElementById('t18CustName').value=data.cust;
+    document.getElementById('t18Gst').value=data.gst;
+    document.getElementById('t18Items').innerHTML=""; data.items.forEach(function(it){ t18AddItem(it.name, it.qty, it.rate); });
+    // Paid from prompt or keep
+    if(data.paid!==null && data.paid!==undefined) document.getElementById('t18Paid').value=data.paid;
+    t18UpdateTotals();
+    var ordered=t18Templates.slice();
+    if(data.bizType==='jewellery') ordered.sort(function(a,b){ return (a.id==='gold'?-1:0)-(b.id==='gold'?-1:0); });
+    else if(data.bizType==='tech') ordered.sort(function(a,b){ return (a.id==='orbit'?-1:0)-(b.id==='orbit'?-1:0); });
+    else if(data.bizType==='saree') ordered.sort(function(a,b){ return (a.id==='rose'?-1:0)-(b.id==='rose'?-1:0); });
+    if(isRegen){ var first=ordered[0]; var rest=ordered.slice(1); rest.sort(function(){ return Math.random()-0.5; }); ordered=[first].concat(rest); }
+    t18Invoices=ordered.map(function(t,idx){ return {template:JSON.parse(JSON.stringify(t)), idx:idx, effect:t.id==='gold'?'gold':'glass'}; });
+    t18SelectedIdx=0; t18RenderGallery(); t18LoadSelected(0);
+    var best=ordered[0]; var calc=t18Calc();
+    var box=document.getElementById('t18AiResult');
+    box.innerHTML='<b>✅ AI Generated 10 Premium Bills For "'+data.shop+'"!</b><br><small style="color:#94a3b8">Shop = <b style="color:#22d3ee">'+data.shop+'</b> • Customer = '+data.cust+' • Item = '+data.items[0].name+' ₹'+data.items[0].rate+'<br>⭐ <b>AI Best: '+best.label+'</b> - '+best.desc+' - Score: '+best.score+'/100<br>Grand Total: <b style="color:#22c55e">₹'+calc.grand.toFixed(2)+'</b> • Paid: ₹'+calc.paid.toFixed(2)+' • Balance: <b style="color:#ef4444">₹'+calc.balance.toFixed(2)+'</b> • Due: '+(document.getElementById('t18DueDate').value||"")+'<br>In Words: '+t18NumToWords(Math.round(calc.grand))+' Rupees Only</small>';
+    box.style.display='block';
+    document.getElementById('t18Stats').innerText="Bills: 10 • Shop: "+data.shop+" • Total: ₹"+calc.grand.toFixed(2)+" • Balance: ₹"+calc.balance.toFixed(2);
+    document.getElementById('t18Status').innerText="✅ 10 Premium Bills Ready! Select best 👇";
+  }, 900);
+}
+function t18RenderGallery(){
+  var g=document.getElementById('t18Gallery'); g.innerHTML="";
+  if(!t18Invoices.length){ document.getElementById('t18GalleryEmpty').style.display='block'; return; }
+  document.getElementById('t18GalleryEmpty').style.display='none';
+  t18Invoices.forEach(function(inv, idx){
+    var wrap=document.createElement('div');
+    wrap.style.cssText="background:#060a18;border:"+(idx===t18SelectedIdx?"2px solid #22d3ee":"1px solid #2a3a6a")+";border-radius:14px;overflow:hidden;cursor:pointer;position:relative";
+    wrap.onclick=function(){ t18LoadSelected(idx); };
+    if(idx===0){ var badge=document.createElement('div'); badge.style.cssText="position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#f59e0b,#92400e);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;z-index:2"; badge.innerText="⭐ AI BEST"; wrap.appendChild(badge); }
+    if(idx===t18SelectedIdx){ var sel=document.createElement('div'); sel.style.cssText="position:absolute;top:8px;right:8px;background:#22c55e;color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;z-index:2"; sel.innerText="✅ SELECTED"; wrap.appendChild(sel); }
+    var canvas=document.createElement('canvas'); canvas.width=600; canvas.height=800; canvas.style.cssText="width:100%;display:block;background:#fff";
+    var ctx=canvas.getContext('2d'); t18DrawInvoice(ctx,600,800,inv);
+    wrap.appendChild(canvas);
+    var foot=document.createElement('div'); foot.style.cssText="padding:8px;text-align:center";
+    foot.innerHTML='<b style="font-size:12px">'+inv.template.label+' • Score: '+inv.template.score+'/100</b><br><small style="color:#94a3b8">'+inv.template.desc+'</small><br><small style="color:#a78bfa">'+inv.template.badge+'</small><br><div style="display:flex;gap:4px;margin-top:6px"><button onclick="event.stopPropagation();t18LoadSelected('+idx+');t18DownloadSelected()" style="flex:1;background:#22c55e;border:none;color:#fff;border-radius:8px;padding:8px;font-size:11px;font-weight:800;cursor:pointer">⬇️ Download</button><button onclick="event.stopPropagation();t18LoadSelected('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:8px;font-size:11px;cursor:pointer">✏️ Select</button></div>';
+    wrap.appendChild(foot); g.appendChild(wrap);
+  });
+}
+function t18LoadSelected(idx){
+  t18SelectedIdx=idx; var inv=t18Invoices[idx]; if(!inv) return;
+  t18RenderGallery();
+  document.getElementById('t18Editor').style.display='block';
+  document.getElementById('t18EditorName').innerText=inv.template.label+" - "+document.getElementById('t18ShopName').value+" • Score: "+inv.template.score+"/100";
+  document.getElementById('t18Color1').value=inv.template.c1;
+  document.getElementById('t18Color2').value=inv.template.c2;
+  t18Effect=inv.effect;
+  document.querySelectorAll('#t18EffectModes button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-effect')===t18Effect); });
+  t18UpdateSelected();
+  setTimeout(function(){ document.getElementById('t18Editor').scrollIntoView({behavior:'smooth', block:'start'}); }, 200);
+}
+function t18UpdateSelected(){
+  var inv=t18Invoices[t18SelectedIdx]; if(!inv) return;
+  inv.template.c1=document.getElementById('t18Color1').value;
+  inv.template.c2=document.getElementById('t18Color2').value;
+  inv.effect=t18Effect;
+  var canvas=document.getElementById('t18EditCanvas'); canvas.width=750; canvas.height=1000; var ctx=canvas.getContext('2d'); t18DrawInvoice(ctx,750,1000,inv);
+}
+function t18SetEffect(eff,btn){ t18Effect=eff; document.querySelectorAll('#t18EffectModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); var inv=t18Invoices[t18SelectedIdx]; if(inv) inv.effect=eff; t18UpdateSelected(); }
+function t18AiRemix(){
+  if(t18Invoices.length<2) return alert("First generate bills!");
+  var a=t18Invoices[0], b=t18Invoices[1];
+  var newTemplate={id:"remix", label:"Remix - AI Mixed Bill", desc:"Mix of "+a.template.label+" + "+b.template.label, c1:a.template.c1, c2:b.template.c2, bg:"#ffffff", headerBg:a.template.headerBg, score:95, badge:"🎲 AI Remix - Unique"};
+  t18Invoices.unshift({template:newTemplate, idx:0, effect:"glass"}); t18SelectedIdx=0; t18RenderGallery(); t18LoadSelected(0);
+  document.getElementById('t18Status').innerText="🎲 AI Remix Done! New premium bill from 2 best bills";
+}
+// ===== CORE DRAW - PREMIUM LOOK =====
+function t18DrawInvoice(ctx, W, H, inv){
+  var t=inv.template, effect=inv.effect||"gold";
+  var shop=document.getElementById('t18ShopName').value||"My Shop";
+  var cust=document.getElementById('t18CustName').value||"Customer";
+  var shopPhone=document.getElementById('t18ShopPhone').value||"";
+  var shopAddr=document.getElementById('t18ShopAddr').value||"";
+  var custPhone=document.getElementById('t18CustPhone').value||"";
+  var invNo=document.getElementById('t18InvNo').value||"INV-001";
+  var dateVal=document.getElementById('t18Date').value||"";
+  var dueVal=document.getElementById('t18DueDate').value||"";
+  var payMode=document.getElementById('t18PayMode').value||"Cash";
+  var payStatus=document.getElementById('t18PayStatus').value||"PARTIAL";
+  var note=document.getElementById('t18Note').value||"Thank you!";
+  var terms=document.getElementById('t18Terms').value||"";
+  var bankName=document.getElementById('t18BankName').value||"";
+  var upiId=document.getElementById('t18UpiId').value||"";
+  var accNo=document.getElementById('t18AccNo').value||"";
+  var ifsc=document.getElementById('t18Ifsc').value||"";
+  var showBank=document.getElementById('t18ShowBank').checked;
+  var showSign=document.getElementById('t18ShowSign').checked;
+  var showQr=document.getElementById('t18ShowQr').checked;
+  var showTaxBreak=document.getElementById('t18ShowTaxBreak').checked;
+  var watermark=document.getElementById('t18Watermark').checked;
+  var calc=t18Calc();
+  var scale=W/750;
+  ctx.fillStyle="#ffffff"; ctx.fillRect(0,0,W,H);
+  // Watermark - Behind everything - Premium anti-copy
+  if(watermark){
+    ctx.save(); ctx.translate(W/2, H/2); ctx.rotate(-0.5); ctx.globalAlpha=0.06; ctx.fillStyle=t.c1; ctx.font="900 "+Math.round(90*scale)+"px Arial"; ctx.textAlign='center'; ctx.fillText(shop.toUpperCase(), 0, 0); ctx.font="700 "+Math.round(28*scale)+"px Arial"; ctx.fillText("✦  PREMIUM INVOICE  ✦", 0, 40*scale); ctx.restore(); ctx.globalAlpha=1;
+  }
+  // Glass effect - Subtle gradient overlay on whole page
+  if(effect==='glass'){
+    var glassGrad=ctx.createLinearGradient(0,0,0,H); glassGrad.addColorStop(0, "rgba(255,255,255,0)"); glassGrad.addColorStop(0.5, "rgba(255,255,255,0)"); glassGrad.addColorStop(1, t.c1+"14"); ctx.fillStyle=glassGrad; ctx.fillRect(0,0,W,H);
+  }
+  // Header
+  var headerH=150*scale;
+  var headerGrad=ctx.createLinearGradient(0,0,W,headerH); headerGrad.addColorStop(0, t.headerBg); headerGrad.addColorStop(1, t.c1);
+  ctx.fillStyle=headerGrad; ctx.fillRect(0,0,W,headerH);
+  // Gold line under header - Premium
+  ctx.fillStyle=t.c1; ctx.fillRect(0, headerH, W, 4*scale);
+  ctx.fillStyle="rgba(255,255,255,0.35)"; ctx.fillRect(0, headerH+4*scale, W, 1*scale);
+  // Shop name
+  ctx.textAlign='left'; ctx.textBaseline='middle';
+  ctx.fillStyle=t.headerBg==="#ffffff" || t.headerBg==="#f8fafc"?"#111827":"#ffffff";
+  ctx.font="900 "+Math.round(38*scale)+"px Arial";
+  if(effect==='gold' && t.headerBg!=="#ffffff" && t.headerBg!=="#f8fafc"){ var g=ctx.createLinearGradient(30*scale,0,400*scale,0); g.addColorStop(0,'#fde68a'); g.addColorStop(0.5,'#f59e0b'); g.addColorStop(1,'#92400e'); ctx.fillStyle=g; }
+  ctx.fillText(shop.toUpperCase(), 30*scale, 52*scale);
+  ctx.font="600 "+Math.round(18*scale)+"px Arial"; ctx.fillStyle=t.headerBg==="#ffffff"||t.headerBg==="#f8fafc"?"#64748b":"rgba(255,255,255,0.85)";
+  ctx.fillText(shopAddr, 30*scale, 92*scale);
+  ctx.fillText("📞 "+shopPhone, 30*scale, 119*scale);
+  // Right - INVOICE
+  ctx.textAlign='right';
+  ctx.fillStyle=t.headerBg==="#ffffff"||t.headerBg==="#f8fafc"?t.c1:"#ffffff"; ctx.font="900 "+Math.round(42*scale)+"px Arial"; ctx.fillText("INVOICE", W-30*scale, 52*scale);
+  ctx.font="700 "+Math.round(18*scale)+"px Arial"; ctx.fillStyle=t.headerBg==="#ffffff"||t.headerBg==="#f8fafc"?t.c1:"rgba(255,255,255,0.9)";
+  ctx.fillText(invNo, W-30*scale, 92*scale);
+  ctx.font="600 "+Math.round(16*scale)+"px Arial"; ctx.fillText(dateVal ? new Date(dateVal).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}) : new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}), W-30*scale, 119*scale);
+  // Stamp + Due Date
+  var stampColor=payStatus==="PAID"?"#22c55e":payStatus==="UNPAID"?"#ef4444":"#f59e0b";
+  ctx.save(); ctx.translate(W-115*scale, 188*scale); ctx.rotate(-0.12); ctx.strokeStyle=stampColor; ctx.lineWidth=3*scale; ctx.strokeRect(-58*scale,-18*scale,116*scale,36*scale); ctx.fillStyle=stampColor; ctx.font="900 "+Math.round(19*scale)+"px Arial"; ctx.textAlign='center'; ctx.fillText(payStatus, 0, 0); ctx.restore();
+  // Due date pill
+  if(dueVal && payStatus!=="PAID"){
+    ctx.fillStyle="#fef3c7"; ctx.fillRect(30*scale, 172*scale, 240*scale, 32*scale);
+    ctx.fillStyle="#92400e"; ctx.font="700 "+Math.round(15*scale)+"px Arial"; ctx.textAlign='left'; ctx.fillText("⏰ Due: "+new Date(dueVal).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}), 40*scale, 188*scale);
+  }
+  // Bill To
+  ctx.textAlign='left';
+  var y=215*scale;
+  ctx.font="700 "+Math.round(16*scale)+"px Arial"; ctx.fillStyle=t.c1; ctx.fillText("BILL TO:", 30*scale, y);
+  ctx.font="900 "+Math.round(26*scale)+"px Arial"; ctx.fillStyle="#111827"; ctx.fillText(cust, 30*scale, y+32*scale);
+  ctx.font="600 "+Math.round(18*scale)+"px Arial"; ctx.fillStyle="#64748b"; ctx.fillText("📞 "+custPhone, 30*scale, y+62*scale);
+  ctx.textAlign='right';
+  ctx.font="700 "+Math.round(16*scale)+"px Arial"; ctx.fillStyle=t.c1; ctx.fillText("PAYMENT:", W-30*scale, y);
+  ctx.font="600 "+Math.round(20*scale)+"px Arial"; ctx.fillStyle="#111827"; ctx.fillText(payMode, W-30*scale, y+32*scale);
+  ctx.font="600 "+Math.round(16*scale)+"px Arial"; ctx.fillStyle="#64748b"; ctx.fillText("Date: "+(dateVal?new Date(dateVal).toLocaleDateString('en-IN'):new Date().toLocaleDateString('en-IN')), W-30*scale, y+62*scale);
+  // Table
+  var tableY=y+100*scale;
+  // Table header with gradient
+  var thGrad=ctx.createLinearGradient(30*scale,tableY,W-30*scale,tableY); thGrad.addColorStop(0,t.c1); thGrad.addColorStop(1,t.c2);
+  ctx.fillStyle=thGrad; ctx.fillRect(30*scale, tableY, W-60*scale, 42*scale);
+  ctx.fillStyle="#ffffff"; ctx.font="700 "+Math.round(16*scale)+"px Arial"; ctx.textAlign='left'; ctx.fillText("ITEM", 45*scale, tableY+21*scale);
+  ctx.textAlign='center'; ctx.fillText("QTY", W-280*scale, tableY+21*scale);
+  ctx.fillText("RATE", W-180*scale, tableY+21*scale);
+  ctx.textAlign='right'; ctx.fillText("AMOUNT", W-45*scale, tableY+21*scale);
+  var rowY=tableY+42*scale;
+  calc.items.forEach(function(it, idx){
+    if(idx%2===0){ ctx.fillStyle="#f8fafc"; ctx.fillRect(30*scale, rowY, W-60*scale, 44*scale); }
+    ctx.fillStyle="#111827"; ctx.font="600 "+Math.round(18*scale)+"px Arial"; ctx.textAlign='left'; ctx.fillText(it.name, 45*scale, rowY+22*scale);
+    ctx.textAlign='center'; ctx.fillText(String(it.qty), W-280*scale, rowY+22*scale);
+    ctx.fillText("₹"+it.rate.toFixed(0), W-180*scale, rowY+22*scale);
+    ctx.textAlign='right'; ctx.fillText("₹"+it.total.toFixed(2), W-45*scale, rowY+22*scale);
+    rowY+=44*scale;
+    ctx.strokeStyle="#e2e8f0"; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(30*scale, rowY); ctx.lineTo(W-30*scale, rowY); ctx.stroke();
+  });
+  if(calc.items.length===0){ ctx.fillStyle="#94a3b8"; ctx.font="600 "+Math.round(18*scale)+"px Arial"; ctx.textAlign='center'; ctx.fillText("No items", W/2, rowY+22*scale); rowY+=44*scale; }
+  // Totals
+  var totY=rowY+18*scale;
+  ctx.textAlign='left'; ctx.font="600 "+Math.round(18*scale)+"px Arial";
+  function totalLine(label, value, bold, color){
+    ctx.fillStyle="#64748b"; ctx.fillText(label, W-320*scale, totY);
+    ctx.fillStyle=color||"#111827"; ctx.font=(bold?"900 ":"600 ")+Math.round((bold?20:18)*scale)+"px Arial"; ctx.textAlign='right'; ctx.fillText(value, W-45*scale, totY); ctx.textAlign='left'; ctx.font="600 "+Math.round(18*scale)+"px Arial";
+    totY+=30*scale;
+  }
+  totalLine("Subtotal:", "₹"+calc.sub.toFixed(2));
+  if(calc.discPct>0) totalLine("Discount ("+calc.discPct+"%):", "- ₹"+calc.discAmt.toFixed(2), false, "#ef4444");
+  if(calc.gstPct>0){
+    if(showTaxBreak){ totalLine("CGST ("+(calc.gstPct/2)+"%):", "₹"+calc.cgst.toFixed(2)); totalLine("SGST ("+(calc.gstPct/2)+"%):", "₹"+calc.sgst.toFixed(2)); }
+    else totalLine("GST ("+calc.gstPct+"%):", "₹"+calc.gstAmt.toFixed(2));
+  }
+  if(calc.extra>0) totalLine("Delivery:", "₹"+calc.extra.toFixed(2));
+  if(t18RoundOff) totalLine("Round Off:", (calc.roundAmt>=0?"+":"")+"₹"+calc.roundAmt.toFixed(2));
+  // Grand Total Box - Premium gradient
+  var gtGrad=ctx.createLinearGradient(W-350*scale,totY,W-30*scale,totY); gtGrad.addColorStop(0,t.c1); gtGrad.addColorStop(1,t.c2);
+  ctx.fillStyle=gtGrad; ctx.fillRect(W-350*scale, totY, 320*scale, 52*scale);
+  // Glass shine on total box
+  ctx.fillStyle="rgba(255,255,255,0.18)"; ctx.fillRect(W-350*scale, totY, 320*scale, 12*scale);
+  ctx.fillStyle="#ffffff"; ctx.font="900 "+Math.round(20*scale)+"px Arial"; ctx.textAlign='left'; ctx.fillText("GRAND TOTAL:", W-335*scale, totY+26*scale);
+  ctx.textAlign='right'; ctx.font="900 "+Math.round(24*scale)+"px Arial"; ctx.fillText("₹"+calc.grand.toFixed(2), W-45*scale, totY+26*scale);
+  totY+=70*scale;
+  // In Words + Paid / Balance Box
+  ctx.textAlign='left'; ctx.font="600 "+Math.round(15*scale)+"px Arial"; ctx.fillStyle="#64748b"; ctx.fillText("In Words: "+t18NumToWords(Math.round(calc.grand))+" Rupees Only", 30*scale, totY);
+  totY+=28*scale;
+  // Paid / Balance - Highlight box
+  ctx.fillStyle=calc.balance>0?"#fef3c7":"#dcfce7"; ctx.fillRect(30*scale, totY, W-60*scale, 42*scale);
+  ctx.fillStyle="#111827"; ctx.font="700 "+Math.round(17*scale)+"px Arial"; ctx.textAlign='left'; ctx.fillText("Paid: ₹"+calc.paid.toFixed(2), 45*scale, totY+21*scale);
+  ctx.fillStyle=calc.balance>0?"#dc2626":"#16a34a"; ctx.font="900 "+Math.round(17*scale)+"px Arial"; ctx.textAlign='right'; ctx.fillText(calc.balance>0?"Balance Due: ₹"+calc.balance.toFixed(2)+"  •  Due: "+(dueVal?new Date(dueVal).toLocaleDateString('en-IN',{day:'2-digit',month:'short'}):""):"✅ Fully Paid - Thank You!", W-45*scale, totY+21*scale);
+  totY+=62*scale;
+  // Bank + QR
+  if(showBank){
+    ctx.font="700 "+Math.round(16*scale)+"px Arial"; ctx.fillStyle=t.c1; ctx.textAlign='left'; ctx.fillText("BANK DETAILS:", 30*scale, totY);
+    ctx.font="600 "+Math.round(15*scale)+"px Arial"; ctx.fillStyle="#64748b"; ctx.fillText(bankName+"  •  A/c: "+accNo+"  •  IFSC: "+ifsc+"  •  UPI: "+upiId, 30*scale, totY+22*scale);
+    totY+=45*scale;
+  }
+  if(showQr){
+    var qx=W-130*scale, qy=totY-10*scale, qs=88*scale;
+    ctx.fillStyle="#ffffff"; ctx.strokeStyle="#e2e8f0"; ctx.lineWidth=1; ctx.strokeRect(qx, qy, qs, qs);
+    ctx.fillStyle="#000000"; var seed=0; for(var s=0;s<shopPhone.length;s++) seed+=shopPhone.charCodeAt(s);
+    for(var r=0;r<6;r++){ for(var col=0;col<6;col++){ var v=(seed + r*5 + col*7)%2; if(v===0) ctx.fillRect(qx+8*scale+col*12*scale, qy+8*scale+r*12*scale, 10*scale, 10*scale); } }
+    ctx.font="600 "+Math.round(12*scale)+"px Arial"; ctx.fillStyle="#64748b"; ctx.textAlign='center'; ctx.fillText("SCAN TO PAY", qx+qs/2, qy+qs+16*scale);
+    ctx.textAlign='left';
+  }
+  // Note + Terms
+  ctx.font="600 "+Math.round(14*scale)+"px Arial"; ctx.fillStyle="#64748b"; ctx.fillText("Note: "+note, 30*scale, H-115*scale);
+  ctx.font="600 "+Math.round(13*scale)+"px Arial"; ctx.fillStyle="#94a3b8"; ctx.fillText("Terms: "+terms, 30*scale, H-95*scale);
+  // Signature - Cursive style - From shop owner name
+  if(showSign){
+    var owner=document.getElementById('t18CustName').value||"Owner";
+    ctx.textAlign='right'; ctx.strokeStyle="#111827"; ctx.lineWidth=1.5*scale; ctx.beginPath(); ctx.moveTo(W-220*scale, H-85*scale); ctx.lineTo(W-40*scale, H-85*scale); ctx.stroke();
+    ctx.font="italic 700 "+Math.round(24*scale)+"px Georgia, serif"; ctx.fillStyle="#111827"; ctx.fillText(owner, W-40*scale, H-92*scale);
+    ctx.font="600 "+Math.round(13*scale)+"px Arial"; ctx.fillStyle="#64748b"; ctx.fillText("Authorised Signature  •  For "+shop, W-40*scale, H-62*scale);
+  }
+  // Footer
+  ctx.fillStyle=t.c1; ctx.fillRect(0, H-28*scale, W, 28*scale);
+  ctx.fillStyle="#ffffff"; ctx.font="700 "+Math.round(13*scale)+"px Arial"; ctx.textAlign='center'; ctx.fillText("✦  "+shop.toUpperCase()+"  •  "+shopPhone+"  •  THANK YOU FOR YOUR BUSINESS  ✦", W/2, H-14*scale);
+}
+function t18DownloadInvoice(inv){
+  var canvas=document.createElement('canvas'); canvas.width=750; canvas.height=1000; var ctx=canvas.getContext('2d'); t18DrawInvoice(ctx,750,1000,inv);
+  return new Promise(function(resolve){
+    canvas.toBlob(function(blob){ if(!blob){ resolve(null); return; } var shop=document.getElementById('t18ShopName').value||"Invoice"; var fname="Invoice - "+shop+" - "+inv.template.label+" - "+(document.getElementById('t18InvNo').value||"INV-001")+".png"; var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download=fname; document.body.appendChild(a); a.click(); a.remove(); t18Results.push({blob:blob,name:fname,url:url,w:750,h:1000}); t18RenderResults(); resolve(blob); }, 'image/png');
+  });
+}
+async function t18DownloadSelected(){
+  var inv=t18Invoices[t18SelectedIdx]; if(!inv) return alert("First generate bills!");
+  await t18DownloadInvoice(inv);
+  document.getElementById('t18Status').innerText="✅ Bill Downloaded! "+inv.template.label+" • Total: ₹"+t18Calc().grand.toFixed(2)+" • Balance: ₹"+t18Calc().balance.toFixed(2);
+  var cur=document.getElementById('t18InvNo').value||"INV-001"; var num=parseInt(cur.replace(/\D/g,''))||1; document.getElementById('t18InvNo').value="INV-"+String(num+1).padStart(3,'0');
+}
+async function t18DownloadAll(){
+  if(!t18Invoices.length) return alert("First generate bills!");
+  for(var i=0;i<t18Invoices.length;i++){ await t18DownloadInvoice(t18Invoices[i]); await new Promise(function(r){ setTimeout(r, 400); }); }
+  document.getElementById('t18Status').innerText="✅ All 10 Bills Downloaded!";
+}
+function t18PrintSelected(){
+  var inv=t18Invoices[t18SelectedIdx]; if(!inv) return alert("First generate bills!");
+  var canvas=document.createElement('canvas'); canvas.width=750; canvas.height=1000; var ctx=canvas.getContext('2d'); t18DrawInvoice(ctx,750,1000,inv);
+  var dataUrl=canvas.toDataURL('image/png');
+  var w=window.open('','_blank'); if(!w){ alert("Allow popup to print"); return; }
+  w.document.write('<html><head><title>Invoice - Print</title></head><body style="margin:0;text-align:center"><img src="'+dataUrl+'" style="width:100%;max-width:750px"><script>window.onload=function(){window.print()}<\/script></body></html>'); w.document.close();
+}
+function t18RenderResults(){ var out=document.getElementById('t18Out'); out.innerHTML=""; if(!t18Results.length){ document.getElementById('t18OutEmpty').style.display='block'; return; } document.getElementById('t18OutEmpty').style.display='none'; t18Results.forEach(function(r,idx){ var card=document.createElement('div'); card.className='t18-imgcard'; card.innerHTML='<img src="'+r.url+'"><div style="padding:8px;text-align:center"><b style="font-size:11px">'+r.name+'</b><br><small style="color:#22c55e">'+r.w+'x'+r.h+' • Bill ✅</small><div style="display:flex;gap:4px;margin-top:6px"><button onclick="t18DownloadOne('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">⬇️ Download</button><button onclick="t18ShareOne('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">📤 Share</button></div></div>'; out.appendChild(card); }); }
+function t18DownloadOne(i){ if(!t18Results[i]) return; var r=t18Results[i]; var a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }
+async function t18ShareOne(i){ if(!t18Results[i]) return; try{ var r=t18Results[i]; var calc=t18Calc(); var due=document.getElementById('t18DueDate').value?new Date(document.getElementById('t18DueDate').value).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}):""; var text="🧾 Invoice from "+document.getElementById('t18ShopName').value+"\nInvoice: "+document.getElementById('t18InvNo').value+"\nTotal: ₹"+calc.grand.toFixed(2)+"\nPaid: ₹"+calc.paid.toFixed(2)+"\nBalance: ₹"+calc.balance.toFixed(2)+(due?"\nDue Date: "+due:"")+"\nPay on UPI: "+document.getElementById('t18UpiId').value+"\nThank you!"; var file=new File([r.blob],r.name,{type:r.blob.type}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file], text:text, title:r.name}); } else if(navigator.share){ await navigator.share({text:text}); } else { alert("Share not supported - Download and send on WhatsApp"); } }catch(e){} }
+async function t18ShareSelected(){ if(!t18Results.length){ await t18DownloadSelected(); setTimeout(function(){ if(t18Results.length) t18ShareOne(t18Results.length-1); }, 600); return; } await t18ShareOne(t18Results.length-1); }
+function t18OpenPreview(){ var inv=t18Invoices[t18SelectedIdx]; if(!inv) return alert("First generate bills!"); var mc=document.getElementById('t18ModalCanvas'); mc.width=750; mc.height=1000; var ctx=mc.getContext('2d'); t18DrawInvoice(ctx,750,1000,inv); document.getElementById('t18ModalTitle').innerText="Premium Bill Preview - "+inv.template.label+" - "+document.getElementById('t18ShopName').value; document.getElementById('t18ModalCap').innerText="Total: ₹"+t18Calc().grand.toFixed(2)+" • Paid: ₹"+t18Calc().paid.toFixed(2)+" • Balance: ₹"+t18Calc().balance.toFixed(2); document.getElementById('t18Modal').style.display='flex'; }
+function t18ClosePreview(){ document.getElementById('t18Modal').style.display='none'; }
+function t18Reset(){
+  t18Invoices=[]; t18SelectedIdx=0; t18Results=[]; t18InvCounter++; t18RoundOff=false; document.getElementById('t18RoundBtn').innerText="🔄 Round Off: OFF";
+  document.getElementById('t18Gallery').innerHTML=""; document.getElementById('t18GalleryEmpty').style.display='block'; document.getElementById('t18Editor').style.display='none'; document.getElementById('t18Out').innerHTML=""; document.getElementById('t18OutEmpty').style.display='block'; document.getElementById('t18Status').innerText="";
+  document.getElementById('t18Prompt').value="Sharma Jewellers, Solapur, Gold Ring 25000, customer Priya Sharma, phone 98765 43210, paid 10000";
+  document.getElementById('t18ShopName').value="Sharma Jewellers"; document.getElementById('t18CustName').value="Priya Sharma";
+  document.getElementById('t18InvNo').value="INV-"+String(t18InvCounter).padStart(3,'0');
+  document.getElementById('t18Items').innerHTML=""; t18AddItem("Gold Ring",1,25000); document.getElementById('t18Paid').value=10000;
+  var today=new Date(); var yyyy=today.getFullYear(), mm=String(today.getMonth()+1).padStart(2,'0'), dd=String(today.getDate()).padStart(2,'0'); document.getElementById('t18Date').value=yyyy+"-"+mm+"-"+dd;
+  var due=new Date(today.getTime()+7*24*60*60*1000); document.getElementById('t18DueDate').value=due.getFullYear()+"-"+String(due.getMonth()+1).padStart(2,'0')+"-"+String(due.getDate()).padStart(2,'0');
+  t18UpdateAll();
+}
+(function(){
+  var today=new Date(); var yyyy=today.getFullYear(), mm=String(today.getMonth()+1).padStart(2,'0'), dd=String(today.getDate()).padStart(2,'0'); document.getElementById('t18Date').value=yyyy+"-"+mm+"-"+dd;
+  var due=new Date(today.getTime()+7*24*60*60*1000); document.getElementById('t18DueDate').value=due.getFullYear()+"-"+String(due.getMonth()+1).padStart(2,'0')+"-"+String(due.getDate()).padStart(2,'0');
+  t18AddItem("Gold Ring",1,25000); t18UpdateAll(); t18AiThink();
+  setTimeout(function(){ t18AiGenerate10(false); }, 600);
+})();
+</script>
+<!-- ================= TOOL 18 V2 - END ================= -->
 
 <!-- TOOL 19 -->
 <div class="tool" id="tool-19"><div class="panel"><h3>📷 Tool 19 - QR Generator</h3>
