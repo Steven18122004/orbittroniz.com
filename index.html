@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbittroniz.com - AI Tools - Free</title>
+
+<!-- ================= LIBRARY START ================= -->
+<!-- You Don't Need To Edit This - For PDF / QR / OCR -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<!-- ================= LIBRARY END ================= -->
+
+<style>
+/* ===================================================== */
+/* ================= THEME START ======================= */
+/* ===================================================== */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:radial-gradient(600px 300px at 10% 0%,rgba(124,58,237,.35),transparent 60%),
+             radial-gradient(600px 300px at 90% 20%,rgba(34,211,238,.28),transparent 60%),
+             radial-gradient(500px 300px at 50% 100%,rgba(236,72,153,.22),transparent 60%),
+             #04061A;
+  background-attachment:fixed;
+  color:#fff;font-family:system-ui,Arial,sans-serif;padding-bottom:92px;overflow-x:hidden
+}
+/* FLOATING AI ORBS - BACKGROUND LIVE */
+.orb{position:fixed;border-radius:50%;filter:blur(55px);opacity:.55;z-index:-1;animation:orbF 9s ease-in-out infinite}
+.orb1{width:200px;height:200px;background:#7C3AED;top:-50px;left:-50px}
+.orb2{width:170px;height:170px;background:#0EA5E9;top:240px;right:-60px;animation-delay:1s}
+.orb3{width:160px;height:160px;background:#EC4899;bottom:120px;left:30%;animation-delay:2s}
+.orb4{width:120px;height:120px;background:#F59E0B;top:450px;left:-30px;animation-delay:3s}
+@keyframes orbF{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-28px) scale(1.14)}}
+/* ================= THEME END ======================= */
+
+/* ===================================================== */
+/* ================= HEADER THEME START ================= */
+/* ===================================================== */
+.header{
+  background:linear-gradient(135deg,rgba(8,8,35,.95),rgba(30,27,75,.9),rgba(76,29,149,.9),rgba(14,165,233,.85),rgba(236,72,153,.7));
+  background-size:350% 350%;animation:flow 8s ease infinite;
+  padding:16px 14px 20px;border-radius:0 0 32px 32px;
+  position:sticky;top:0;z-index:100;
+  border:1px solid rgba(255,255,255,.22);border-top:none;
+  backdrop-filter:blur(14px);box-shadow:0 18px 45px rgba(124,58,237,.5), inset 0 1px 0 rgba(255,255,255,.3)
+}
+@keyframes flow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.top{display:flex;align-items:center;justify-content:space-between}
+.logo-box{display:flex;align-items:center;gap:11px}
+.logo-text b{font-size:22px;background:linear-gradient(90deg,#fff,#C4B5FD,#67E8F9,#F0ABFC,#FDE68A,#fff);background-size:300% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shine 3s linear infinite}
+@keyframes shine{to{background-position:300% center}}
+.logo-text small{display:block;font-size:11px;color:#E0E7FF;margin-top:3px}
+.ai-badge{background:linear-gradient(135deg,#EC4899,#8B5CF6);font-size:9px;font-weight:900;padding:5px 9px;border-radius:20px;animation:bp 1.5s infinite}
+@keyframes bp{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+/* ================= HEADER THEME END ================= */
+
+/* ===================================================== */
+/* ================= LOGO - LIVE ROTATING START ========= */
+/* ============ KEEP SAME - DON'T EDIT ================ */
+/* ===================================================== */
+.logo-wrap{width:68px;height:68px;position:relative;perspective:1000px;flex-shrink:0;background:transparent}
+.logo-img{
+  width:100%;height:100%;object-fit:contain;background:transparent;border:none;border-radius:50%;
+  filter:drop-shadow(0 16px 26px rgba(124,58,237,.65)) drop-shadow(0 0 16px rgba(34,211,238,.55));
+  animation:myLogo 5s ease-in-out infinite;transform-style:preserve-3d
+}
+@keyframes myLogo{
+  0%,100%{transform:rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateY(0) scale(1)}
+  20%{transform:rotateY(32deg) rotateX(10deg) rotateZ(-5deg) translateY(-7px) translateX(3px) scale(1.10)}
+  40%{transform:rotateY(0deg) scale(1.04)}
+  60%{transform:rotateY(-32deg) rotateX(-10deg) rotateZ(5deg) translateY(-7px) translateX(-3px) scale(1.10)}
+  80%{transform:rotateY(360deg) scale(1.06)}
+}
+/* ================= LOGO - LIVE ROTATING END =========== */
+
+/* ===================================================== */
+/* ================= SEARCH BAR START =================== */
+/* ===================================================== */
+.search{margin-top:14px;background:rgba(255,255,255,.96);border-radius:18px;display:flex;padding:4px 4px 4px 14px;box-shadow:0 12px 28px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.8);border:1px solid rgba(124,58,237,.3)}
+.search input{flex:1;border:none;outline:none;padding:11px 4px;font-size:14px;color:#111;background:transparent}
+.search button{border-radius:14px !important;padding:12px 20px !important;font-size:13px !important}
+/* ================= SEARCH BAR END ===================== */
+
+/* ===================================================== */
+/* ================= HERO / BANNER START ================ */
+/* ===================================================== */
+.hero{margin:14px;padding:16px;background:linear-gradient(135deg,rgba(124,58,237,.35),rgba(34,211,238,.25),rgba(236,72,153,.25));border:1px solid rgba(255,255,255,.2);border-radius:22px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transform:skewX(-20deg);animation:heroShine 3s ease infinite}
+@keyframes heroShine{0%{left:-70%}70%,100%{left:130%}}
+.hero h2{font-size:19px;line-height:1.3}
+.hero p{font-size:12px;color:#E0E7FF;margin-top:6px}
+.hero-btns{display:flex;gap:8px;margin-top:12px}
+.hero-btns button{flex:1;padding:11px;border:none;border-radius:16px;font-weight:800;cursor:pointer;color:#fff}
+.hb1{background:linear-gradient(135deg,#7C3AED,#EC4899,#F59E0B);background-size:200% 200%;animation:flow 3s ease infinite;box-shadow:0 12px 28px rgba(236,72,153,.5)}
+.hb2{background:#fff !important;color:#111 !important;box-shadow:0 12px 28px rgba(0,0,0,.35)}
+/* ================= HERO / BANNER END ================== */
+
+/* ===================================================== */
+/* ================= BUTTON START ======================= */
+/* ===== ALL BUTTONS - SUPER ATTRACTIVE - DON'T EDIT ==== */
+/* ===================================================== */
+.btn, .open-btn, .search button{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#7C3AED,#EC4899 45%,#22D3EE);
+  background-size:200% 200%;animation:flow 3s ease infinite;
+  border:none;border-radius:16px;padding:14px;
+  font-size:14px;font-weight:900;letter-spacing:.4px;color:#fff;cursor:pointer;
+  box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4C1D95;
+  transition:.2s;text-shadow:0 1px 2px rgba(0,0,0,.3)
+}
+.btn::after, .open-btn::after, .search button::after{
+  content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:skewX(-20deg);animation:btnShine 2.8s ease infinite
+}
+@keyframes btnShine{0%{left:-80%}60%,100%{left:130%}}
+.btn:active, .open-btn:active{transform:translateY(3px) scale(.98);box-shadow:0 4px 12px rgba(124,58,237,.4)}
+.btn:hover, .open-btn:hover{box-shadow:0 14px 32px rgba(236,72,153,.55),0 0 20px rgba(34,211,238,.4);transform:translateY(-1px)}
+/* BUTTON COLOURS - USE CLASS */
+.btn.green{background:linear-gradient(135deg,#16A34A,#22C55E,#84CC16);box-shadow:0 10px 25px rgba(34,197,94,.45),0 4px 0 #166534}
+.btn.blue{background:linear-gradient(135deg,#1D4ED8,#3B82F6,#22D3EE);box-shadow:0 10px 25px rgba(59,130,246,.45),0 4px 0 #1E40AF}
+.btn.pink{background:linear-gradient(135deg,#DB2777,#EC4899,#F472B6);box-shadow:0 10px 25px rgba(236,72,153,.5),0 4px 0 #9D174D}
+.btn.orange{background:linear-gradient(135deg,#D97706,#F59E0B,#FDE68A);box-shadow:0 10px 25px rgba(245,158,11,.5),0 4px 0 #92400E}
+.btn.dark{background:rgba(255,255,255,.12) !important;border:1px solid rgba(255,255,255,.3) !important;box-shadow:none !important;animation:none !important}
+.btn.dark::after{display:none}
+.open-btn{padding:10px !important;font-size:12.5px !important;border-radius:12px !important}
+.close{float:right;background:#fff;color:#111;border:none;width:32px;height:32px;border-radius:50%;font-weight:900;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+/* ================= BUTTON END ========================= */
+
+/* ===================================================== */
+/* ================= CHIP / FILTER START ================ */
+/* ===================================================== */
+.chip-row{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.chip{white-space:nowrap;background:#0F1630;border:1px solid rgba(139,92,246,.45);padding:9px 14px;border-radius:22px;font-size:12px;cursor:pointer;color:#CBD5E1;font-weight:700;transition:.2s}
+.chip.active{background:linear-gradient(135deg,#7C3AED,#EC4899,#22D3EE);background-size:200% 200%;animation:flow 3s ease infinite;border:none;color:#fff;box-shadow:0 8px 20px rgba(124,58,237,.5);transform:scale(1.05)}
+.chip2{display:inline-block;background:#0A1224;border:1px solid #1E2D5A;padding:8px 12px;border-radius:20px;font-size:11px;margin:4px 4px 0 0;cursor:pointer}
+.chip2.active{background:linear-gradient(135deg,#7C3AED,#22D3EE);border:none;color:#fff}
+/* ================= CHIP / FILTER END ================== */
+
+/* ===================================================== */
+/* ================= CARD / DASHBOARD THEME START ======= */
+/* ===================================================== */
+.wrap{padding:0 14px 14px}
+.sec{display:flex;justify-content:space-between;margin:14px 2px 10px;align-items:center}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.card{
+  background:linear-gradient(145deg,rgba(22,33,68,.98),rgba(12,18,42,.98));
+  border:1px solid rgba(139,92,246,.55);border-radius:24px;padding:16px;cursor:pointer;
+  position:relative;overflow:hidden;box-shadow:0 14px 28px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08)
+}
+.card:active{transform:scale(.96)}
+.card:hover{border-color:#22D3EE;box-shadow:0 18px 34px rgba(34,211,238,.25),0 0 22px rgba(124,58,237,.35);transform:translateY(-3px)}
+.card::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:skewX(-20deg);animation:cardShine 3.8s ease infinite}
+@keyframes cardShine{0%{left:-70%}60%,100%{left:130%}}
+.card .ic{font-size:32px;animation:floatI 2.6s ease-in-out infinite}
+@keyframes floatI{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.card b{display:block;font-size:13.5px;margin-top:9px;line-height:1.3}
+.card p{font-size:11px;color:#94A3B8;margin-top:4px;line-height:1.4}
+.card .feat{font-size:10px;color:#67E8F9;margin-top:7px;font-weight:700}
+.card .open-btn{margin-top:10px;width:100%}
+.card .fav{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.15);border:none;color:#fff;padding:5px 8px;border-radius:20px;cursor:pointer;z-index:2;font-size:13px}
+.card .fav.on{color:#FDE047;text-shadow:0 0 12px #F59E0B}
+.badge{position:absolute;top:8px;left:8px;background:#22C55E;color:#fff;font-size:9px;font-weight:800;padding:4px 9px;border-radius:20px;z-index:2;box-shadow:0 4px 12px rgba(0,0,0,.35);letter-spacing:.4px}
+.badge.hot{background:linear-gradient(135deg,#F59E0B,#F97316)}
+.badge.new{background:#2563EB}
+.badge.ai{background:linear-gradient(135deg,#EC4899,#8B5CF6)}
+.wide{grid-column:span 2;background:linear-gradient(135deg,#7C3AED,#EC4899,#22D3EE,#F59E0B);background-size:250% 250%;animation:flow 5s ease infinite;border:none;box-shadow:0 18px 34px rgba(236,72,153,.4)}
+.wide p{color:#fff}.wide .feat{color:#fff}
+/* ================= CARD / DASHBOARD THEME END ========= */
+
+/* ===================================================== */
+/* ================= TOOL BOX THEME START ================ */
+/* ===================================================== */
+.tool{display:none;background:linear-gradient(180deg,rgba(20,30,60,.99),rgba(12,18,42,.99));border:1px solid rgba(139,92,246,.55);border-radius:24px;padding:16px;margin-top:16px;box-shadow:0 20px 40px rgba(0,0,0,.45)}
+.tool h3{text-align:center;font-size:17px}
+.tool .tool-hint{font-size:11px;color:#94A3B8;text-align:center;margin-top:6px}
+.tool label{font-size:11px;font-weight:800;display:block;margin-top:12px}
+.tool input,.tool select,.tool textarea{width:100%;background:#0A1224;color:#fff;padding:12px;border-radius:14px;border:1px solid rgba(139,92,246,.35);margin-top:4px}
+.tool input:focus,.tool select:focus{border-color:#22D3EE;box-shadow:0 0 0 3px rgba(34,211,238,.25);outline:none}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.row3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:6px;margin-top:6px}
+.out{margin-top:10px;text-align:center;font-size:12px;color:#22D3EE;word-break:break-word}
+.out img{max-width:100%;border-radius:12px;margin-top:8px;background:#fff}
+/* ================= TOOL BOX THEME END ================= */
+
+/* ===================================================== */
+/* ================= TEMPLATES START ==================== */
+/* ===== USE THESE CLASSES INSIDE ANY TOOL ============= */
+/* ===================================================== */
+.template-purple{--tpl:#7C3AED}
+.template-blue{--tpl:#1D4ED8}
+.template-pink{--tpl:#DB2777}
+.template-green{--tpl:#16A34A}
+.tpl{width:38px;height:38px;border-radius:50%;cursor:pointer;border:3px solid transparent;display:inline-block}
+.tpl.active{border-color:#fff;transform:scale(1.15);box-shadow:0 0 14px rgba(255,255,255,.5)}
+.feature-box{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px;text-align:center}
+.feature-box div{background:#0A1224;border:1px solid #1E2D5A;padding:10px 4px;border-radius:12px;font-size:11px}
+.feature-box b{display:block;font-size:16px}
+/* ================= TEMPLATES END ====================== */
+
+/* ===================================================== */
+/* ================= BOTTOM NAV START =================== */
+/* ===================================================== */
+.bottom{position:fixed;bottom:0;left:0;right:0;background:rgba(10,14,35,.96);backdrop-filter:blur(16px);border-top:1px solid rgba(139,92,246,.45);display:grid;grid-template-columns:1fr 1fr 1fr 1fr;padding:8px 0;z-index:100;box-shadow:0 -10px 30px rgba(0,0,0,.4);border-radius:20px 20px 0 0}
+.bottom button{background:none;border:none;color:#94A3B8;font-size:11px;cursor:pointer;position:relative}
+.bottom button.active{color:#fff;background:linear-gradient(135deg,rgba(124,58,237,.35),rgba(34,211,238,.25));border-radius:14px;margin:2px 4px;padding:4px 0}
+.bottom button span{display:block;font-size:21px}
+.bottom button.active span{filter:drop-shadow(0 0 8px #22D3EE)}
+.bottom .dot{position:absolute;top:2px;right:28%;width:7px;height:7px;background:#F59E0B;border-radius:50%}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#fff;color:#111;padding:10px 16px;border-radius:20px;font-size:12px;font-weight:800;display:none;z-index:200;box-shadow:0 10px 25px rgba(0,0,0,.4)}
+canvas{display:none}
+/* ================= BOTTOM NAV END ===================== */
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND ORBS - DON'T EDIT -->
+<div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div><div class="orb orb4"></div>
+
+<!-- ================= HEADER START ================= -->
+<div class="header">
+<div class="top">
+<div class="logo-box">
+<!-- LOGO - LIVE ROTATING - KEEP SAME -->
+<div class="logo-wrap"><img src="logo.png" class="logo-img" alt="Orbittroniz"></div>
+<div class="logo-text"><b>ORBITTRONIZ</b><small>AI Tools • Free For Every Shop</small></div>
+</div>
+<div style="display:flex;gap:6px;align-items:center"><span class="ai-badge">✨ AI PRO</span><button style="background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);color:#fff;padding:8px 12px;border-radius:20px;cursor:pointer" onclick="showToast('Menu - Home • Tools • About • Contact')">☰</button></div>
+</div>
+<!-- SEARCH START -->
+<div class="search"><input id="searchInput" placeholder="Search AI Tool - Invoice, QR, PDF, Photo..." oninput="searchTool()"><button onclick="searchTool()">Search</button></div>
+<!-- SEARCH END -->
+<p style="text-align:center;font-size:11px;margin-top:10px;font-weight:700">✨ Real AI Look • 100% Free • No Login • Files Never Upload 🇮🇳</p>
+</div>
+<!-- ================= HEADER END ================= -->
+
+<div class="wrap">
+
+<!-- ================= HERO START ================= -->
+<div class="hero">
+<h2>🚀 Your Shop, Your Tools,<br>All In One App</h2>
+<p>Invoice • QR • PDF • Photo • Link - All Free, No App Needed</p>
+<div class="hero-btns"><button class="hb1" onclick="showTool('tInvoice')">🧾 Make Invoice</button><button class="hb2" onclick="showTool('tQR')">📱 Make QR</button></div>
+</div>
+<!-- ================= HERO END ================= -->
+
+<!-- ===================================================== -->
+<!-- ================= DASHBOARD START ===================== -->
+<!-- ===================================================== -->
+<div class="sec"><b>🔥 Most Used AI Tools</b><span style="font-size:11px;color:#22D3EE">11 Tools</span></div>
+
+<!-- FILTER CHIPS START -->
+<div class="chip-row">
+<span class="chip active" onclick="filterCat('all',this)">✨ All</span>
+<span class="chip" onclick="filterCat('pdf',this)">📄 PDF</span>
+<span class="chip" onclick="filterCat('photo',this)">🖼️ Photo</span>
+<span class="chip" onclick="filterCat('shop',this)">🏪 Shop</span>
+<span class="chip" onclick="filterCat('fav',this)">⭐ Favourite</span>
+</div>
+<!-- FILTER CHIPS END -->
+
+<!-- DASHBOARD CARDS START -->
+<div class="grid" id="toolGrid">
+
+<!-- DASHBOARD CARD 1 - INVOICE - EDIT ONLY TEXT HERE -->
+<div class="card wide" data-cat="shop" data-name="Invoice Maker GST Bill" onclick="showTool('tInvoice')">
+<button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge hot">HOT</span>
+<div class="ic">🧾</div><b>Invoice Maker - GST Bill</b><p>GST + Discount + WhatsApp Share</p><div class="feat">★ DIFFERENT: Auto Total + Share Bill Text</div><button class="open-btn">Open Tool →</button>
+</div>
+<!-- DASHBOARD CARD 1 END -->
+
+<!-- DASHBOARD CARD 2 - QR -->
+<div class="card" data-cat="shop" data-name="QR Generator UPI WhatsApp Link" onclick="showTool('tQR')">
+<button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge ai">AI</span>
+<div class="ic">📱</div><b>QR Generator</b><p>UPI / WhatsApp / Link</p><div class="feat">★ UPI With Amount</div><button class="open-btn">Open →</button>
+</div>
+<!-- DASHBOARD CARD 2 END -->
+
+<!-- DASHBOARD CARD 3 - PDF MERGE -->
+<div class="card" data-cat="pdf" data-name="PDF Merge" onclick="showTool('tMerge')">
+<button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge new">NEW</span>
+<div class="ic">📚</div><b>PDF Merge</b><p>2+ PDFs To 1 PDF</p><div class="feat">★ Keep Order</div><button class="open-btn">Open →</button>
+</div>
+<!-- DASHBOARD CARD 3 END -->
+
+<!-- DASHBOARD CARD 4 - SHORT URL -->
+<div class="card" data-cat="shop" data-name="Short URL Link" onclick="showTool('tShort')">
+<button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge ai">AI</span>
+<div class="ic">🔗</div><b>Short URL</b><p>Long To Short Link</p><div class="feat">★ 1 Click Copy</div><button class="open-btn">Open →</button>
+</div>
+<!-- DASHBOARD CARD 4 END -->
+
+<!-- DASHBOARD CARD 5 - RESIZER -->
+<div class="card" data-cat="photo" data-name="Image Resizer Passport Instagram" onclick="showTool('tResize')">
+<button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge hot">HOT</span>
+<div class="ic">📐</div><b>Image Resizer</b><p>Passport / Insta / Shop</p><div class="feat">★ Preset Sizes</div><button class="open-btn">Open →</button>
+</div>
+<!-- DASHBOARD CARD 5 END -->
+
+<!-- DASHBOARD CARD 6 - IMAGE TO PDF -->
+<div class="card" data-cat="pdf" data-name="Image To PDF Photo" onclick="showTool('tImgPdf')">
+<button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge">FREE</span>
+<div class="ic">🖼️➡️📄</div><b>Image To PDF</b><p>Photo To PDF</p><div class="feat">★ Multi Image 1 PDF</div><button class="open-btn">Open →</button>
+</div>
+<!-- DASHBOARD CARD 6 END -->
+
+<!-- DASHBOARD CARD 7 - PDF TO IMAGE -->
+<div class="card" data-cat="pdf" data-name="PDF To Image PNG" onclick="showTool('tPdfImg')">
+<button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge">FREE</span>
+<div class="ic">📄➡️🖼️</div><b>PDF To Image</b><p>PDF Page To PNG</p><div class="feat">★ Any Page</div><button class="open-btn">Open →</button>
+</div>
+<!-- DASHBOARD CARD 7 END -->
+
+<!-- DASHBOARD CARD 8 - IMAGE TO TEXT -->
+<div class="card" data-cat="photo" data-name="Image To Text OCR Hindi English" onclick="showTool('tImgText')">
+<button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge ai">AI</span>
+<div class="ic">🔤</div><b>Image To Text</b><p>Photo Text - OCR</p><div class="feat">★ Hindi + English</div><button class="open-btn">Open →</button>
+</div>
+<!-- DASHBOARD CARD 8 END -->
+
+<!-- DASHBOARD CARD 9 - BG REMOVER -->
+<div class="card" data-cat="photo" data-name="BG Remover Background" onclick="showTool('tBg')">
+<button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge hot">HOT</span>
+<div class="ic">✂️</div><b>BG Remover</b><p>White BG To Transparent</p><div class="feat">★ Tolerance Slider</div><button class="open-btn">Open →</button>
+</div>
+<!-- DASHBOARD CARD 9 END -->
+
+<!-- DASHBOARD CARD 10 - PDF COMPRESS -->
+<div class="card" data-cat="pdf" data-name="PDF Compress Reduce Size" onclick="showTool('tPdfComp')">
+<button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge">FREE</span>
+<div class="ic">📉</div><b>PDF Compress</b><p>Reduce PDF Size</p><div class="feat">★ WhatsApp Size</div><button class="open-btn">Open →</button>
+</div>
+<!-- DASHBOARD CARD 10 END -->
+
+<!-- DASHBOARD CARD 11 - IMAGE COMPRESS -->
+<div class="card" data-cat="photo" data-name="Image Compress Reduce KB" onclick="showTool('tImgComp')">
+<button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge">FREE</span>
+<div class="ic">🗜️</div><b>Image Compress</b><p>Reduce KB Size</p><div class="feat">★ See KB Saved</div><button class="open-btn">Open →</button>
+</div>
+<!-- DASHBOARD CARD 11 END -->
+
+</div>
+<!-- DASHBOARD CARDS END -->
+<!-- ================= DASHBOARD END ======================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= ALL TOOLS START ===================== -->
+<!-- ===== YOU EDIT ONLY INSIDE EACH TOOL START / END ==== -->
+<!-- ===================================================== -->
+
+<!-- ================= TOOL 1 START - INVOICE ================= -->
+<div class="tool" id="tInvoice">
+<button class="close" onclick="hideTools()">✕</button>
+<h3>🧾 Invoice Maker</h3><p class="tool-hint">Tool 1 - Edit Your Detail Code Here</p>
+<!-- ===== TOOL 1 - DETAIL CODE START - EDIT HERE ===== -->
+<label>SHOP NAME</label><input id="invShop" value="My Shop">
+<label>CUSTOMER NAME</label><input id="invCust" value="Customer Name">
+<div class="row"><div><label>DISCOUNT ₹</label><input type="number" id="invDisc" value="0"></div><div><label>GST %</label><input type="number" id="invGst" value="3"></div></div>
+<!-- BUTTON START -->
+<button class="btn" onclick="showToast('Paste Tool 1 Detail Code Here')">✨ Calculate Total</button>
+<button class="btn green" onclick="showToast('Paste PDF Code Here')">⬇️ Download PDF</button>
+<button class="btn pink" onclick="showToast('Paste WhatsApp Code Here')">📤 Share On WhatsApp</button>
+<!-- BUTTON END -->
+<div class="out" id="invOut"></div>
+<!-- ===== TOOL 1 - DETAIL CODE END ===== -->
+</div>
+<!-- ================= TOOL 1 END - INVOICE ================= -->
+
+<!-- ================= TOOL 2 START - QR ================= -->
+<div class="tool" id="tQR">
+<button class="close" onclick="hideTools()">✕</button>
+<h3>📱 QR Generator</h3><p class="tool-hint">Tool 2 - Edit Your Detail Code Here</p>
+<!-- ===== TOOL 2 - DETAIL CODE START - EDIT HERE ===== -->
+<label>TYPE</label><select><option>Link</option><option>UPI Payment</option><option>WhatsApp</option><option>Text</option></select>
+<label>VALUE</label><input value="https://orbittroniz.com">
+<button class="btn" onclick="showToast('Paste Tool 2 Detail Code Here')">✨ Make QR</button>
+<button class="btn green" onclick="showToast('Paste Download QR Code Here')">⬇️ Download QR</button>
+<div class="out" id="qrOut"></div>
+<!-- ===== TOOL 2 - DETAIL CODE END ===== -->
+</div>
+<!-- ================= TOOL 2 END - QR ================= -->
+
+<!-- ================= TOOL 3 START - PDF MERGE ================= -->
+<div class="tool" id="tMerge">
+<button class="close" onclick="hideTools()">✕</button>
+<h3>📚 PDF Merge</h3><p class="tool-hint">Tool 3 - Edit Your Detail Code Here</p>
+<!-- ===== TOOL 3 - DETAIL CODE START - EDIT HERE ===== -->
+<label>SELECT PDFs - MULTIPLE</label><input type="file" accept="application/pdf" multiple>
+<button class="btn" onclick="showToast('Paste Tool 3 Detail Code Here')">✨ Merge PDFs</button>
+<div class="out" id="mgOut"></div>
+<!-- ===== TOOL 3 - DETAIL CODE END ===== -->
+</div>
+<!-- ================= TOOL 3 END - PDF MERGE ================= -->
+
+<!-- ================= TOOL 4 START - SHORT URL ================= -->
+<div class="tool" id="tShort">
+<button class="close" onclick="hideTools()">✕</button>
+<h3>🔗 Short URL</h3><p class="tool-hint">Tool 4 - Edit Your Detail Code Here</p>
+<!-- ===== TOOL 4 - DETAIL CODE START - EDIT HERE ===== -->
+<label>LONG URL</label><input value="https://orbittroniz.com/very-long-link">
+<button class="btn" onclick="showToast('Paste Tool 4 Detail Code Here')">✨ Make Short Link</button>
+<button class="btn blue" onclick="showToast('Paste Copy Code Here')">📋 Copy Short Link</button>
+<div class="out" id="shortOut"></div>
+<!-- ===== TOOL 4 - DETAIL CODE END ===== -->
+</div>
+<!-- ================= TOOL 4 END - SHORT URL ================= -->
+
+<!-- ================= TOOL 5 START - RESIZER ================= -->
+<div class="tool" id="tResize">
+<button class="close" onclick="hideTools()">✕</button>
+<h3>📐 Image Resizer</h3><p class="tool-hint">Tool 5 - Edit Your Detail Code Here</p>
+<!-- ===== TOOL 5 - DETAIL CODE START - EDIT HERE ===== -->
+<label>SELECT IMAGE</label><input type="file" accept="image/*">
+<div class="row"><div><label>WIDTH</label><input type="number" value="800"></div><div><label>HEIGHT</label><input type="number" value="800"></div></div>
+<button class="btn" onclick="showToast('Paste Tool 5 Detail Code Here')">✨ Resize Image</button>
+<div class="out" id="rOut"></div>
+<!-- ===== TOOL 5 - DETAIL CODE END ===== -->
+</div>
+<!-- ================= TOOL 5 END - RESIZER ================= -->
+
+<!-- ================= TOOL 6 START - IMAGE TO PDF ================= -->
+<div class="tool" id="tImgPdf">
+<button class="close" onclick="hideTools()">✕</button>
+<h3>🖼️ Image To PDF</h3><p class="tool-hint">Tool 6 - Edit Your Detail Code Here</p>
+<!-- ===== TOOL 6 - DETAIL CODE START - EDIT HERE ===== -->
+<label>SELECT IMAGES - MULTIPLE</label><input type="file" accept="image/*" multiple>
+<button class="btn" onclick="showToast('Paste Tool 6 Detail Code Here')">✨ Make PDF</button>
+<div class="out" id="ipOut"></div>
+<!-- ===== TOOL 6 - DETAIL CODE END ===== -->
+</div>
+<!-- ================= TOOL 6 END - IMAGE TO PDF ================= -->
+
+<!-- ================= TOOL 7 START - PDF TO IMAGE ================= -->
+<div class="tool" id="tPdfImg">
+<button class="close" onclick="hideTools()">✕</button>
+<h3>📄 PDF To Image</h3><p class="tool-hint">Tool 7 - Edit Your Detail Code Here</p>
+<!-- ===== TOOL 7 - DETAIL CODE START - EDIT HERE ===== -->
+<label>SELECT PDF</label><input type="file" accept="application/pdf">
+<label>PAGE NUMBER</label><input type="number" value="1">
+<button class="btn" onclick="showToast('Paste Tool 7 Detail Code Here')">✨ Convert To Image</button>
+<div class="out" id="piOut"></div>
+<!-- ===== TOOL 7 - DETAIL CODE END ===== -->
+</div>
+<!-- ================= TOOL 7 END - PDF TO IMAGE ================= -->
+
+<!-- ================= TOOL 8 START - IMAGE TO TEXT ================= -->
+<div class="tool" id="tImgText">
+<button class="close" onclick="hideTools()">✕</button>
+<h3>🔤 Image To Text</h3><p class="tool-hint">Tool 8 - Edit Your Detail Code Here</p>
+<!-- ===== TOOL 8 - DETAIL CODE START - EDIT HERE ===== -->
+<label>SELECT IMAGE</label><input type="file" accept="image/*">
+<label>LANGUAGE</label><select><option>English</option><option>Hindi</option><option>English + Hindi</option></select>
+<button class="btn" onclick="showToast('Paste Tool 8 Detail Code Here')">✨ Extract Text</button>
+<div class="out" id="itOut"></div>
+<!-- ===== TOOL 8 - DETAIL CODE END ===== -->
+</div>
+<!-- ================= TOOL 8 END - IMAGE TO TEXT ================= -->
+
+<!-- ================= TOOL 9 START - BG REMOVER ================= -->
+<div class="tool" id="tBg">
+<button class="close" onclick="hideTools()">✕</button>
+<h3>✂️ BG Remover</h3><p class="tool-hint">Tool 9 - Edit Your Detail Code Here</p>
+<!-- ===== TOOL 9 - DETAIL CODE START - EDIT HERE ===== -->
+<label>SELECT IMAGE</label><input type="file" accept="image/*">
+<label>TOLERANCE</label><input type="range" min="10" max="120" value="60">
+<button class="btn" onclick="showToast('Paste Tool 9 Detail Code Here')">✨ Remove Background</button>
+<div class="out" id="bgOut"></div>
+<!-- ===== TOOL 9 - DETAIL CODE END ===== -->
+</div>
+<!-- ================= TOOL 9 END - BG REMOVER ================= -->
+
+<!-- ================= TOOL 10 START - PDF COMPRESS ================= -->
+<div class="tool" id="tPdfComp">
+<button class="close" onclick="hideTools()">✕</button>
+<h3>📉 PDF Compress</h3><p class="tool-hint">Tool 10 - Edit Your Detail Code Here</p>
+<!-- ===== TOOL 10 - DETAIL CODE START - EDIT HERE ===== -->
+<label>SELECT PDF</label><input type="file" accept="application/pdf">
+<label>QUALITY</label><select><option>High Quality</option><option>Medium</option><option>High Compress - WhatsApp Size</option></select>
+<button class="btn" onclick="showToast('Paste Tool 10 Detail Code Here')">✨ Compress PDF</button>
+<div class="out" id="pcOut"></div>
+<!-- ===== TOOL 10 - DETAIL CODE END ===== -->
+</div>
+<!-- ================= TOOL 10 END - PDF COMPRESS ================= -->
+
+<!-- ================= TOOL 11 START - IMAGE COMPRESS ================= -->
+<div class="tool" id="tImgComp">
+<button class="close" onclick="hideTools()">✕</button>
+<h3>🗜️ Image Compress</h3><p class="tool-hint">Tool 11 - Edit Your Detail Code Here</p>
+<!-- ===== TOOL 11 - DETAIL CODE START - EDIT HERE ===== -->
+<label>SELECT IMAGE</label><input type="file" accept="image/*">
+<label>QUALITY</label><input type="range" min="10" max="90" value="60">
+<button class="btn" onclick="showToast('Paste Tool 11 Detail Code Here')">✨ Compress Image</button>
+<div class="out" id="icOut"></div>
+<!-- ===== TOOL 11 - DETAIL CODE END ===== -->
+</div>
+<!-- ================= TOOL 11 END - IMAGE COMPRESS ================= -->
+
+<!-- ================= ALL TOOLS END ======================= -->
+<!-- ===================================================== -->
+
+<!-- ================= WHY BOX START ================= -->
+<div style="background:rgba(18,29,58,.92);border:1px solid rgba(139,92,246,.35);border-radius:20px;padding:15px;margin-top:16px">
+<b>⭐ Why Orbittroniz.com?</b>
+<div class="feature-box"><div><b>⚡</b>Fast<br>No App</div><div><b>🔒</b>Private<br>No Upload</div><div><b>💯</b>Free<br>No Login</div></div>
+<p style="font-size:12px;color:#CBD5E1;line-height:1.8;margin-top:10px">✅ AI Look UI • Live 3D Logo<br>✅ Works On Mobile - No App Needed<br>✅ No Watermark - Clean Tools<br>✅ Made For Small Shops - Solapur, India</p>
+</div>
+<!-- ================= WHY BOX END ================= -->
+
+<div style="text-align:center;font-size:11px;color:#64748B;margin-top:14px;line-height:1.6"><b style="color:#fff;font-size:13px">ORBITTRONIZ.COM</b><br>Free AI Tools - For Every Shop<br>Made With ❤️ In India</div>
+</div>
+
+<!-- ================= BOTTOM NAV START ================= -->
+<div class="bottom">
+<button class="active" onclick="goHome(this)"><span>🏠</span>Home</button>
+<button onclick="showTool('tInvoice');setActive(this)"><span>🧾</span>Invoice<span class="dot"></span></button>
+<button onclick="showTool('tQR');setActive(this)"><span>📱</span>QR</button>
+<button onclick="showTool('tMerge');setActive(this)"><span>📚</span>Merge</button>
+</div>
+<!-- ================= BOTTOM NAV END ================= -->
+<div class="toast" id="toast"></div>
+
+<!-- ===================================================== -->
+<!-- ================= JAVASCRIPT START ==================== -->
+<!-- ===== DON'T EDIT - DASHBOARD LOGIC =================== -->
+<!-- ===================================================== -->
+<script>
+function showTool(id){document.querySelectorAll('.tool').forEach(t=>t.style.display='none');let el=document.getElementById(id);el.style.display='block';el.scrollIntoView({behavior:'smooth'});}
+function hideTools(){document.querySelectorAll('.tool').forEach(t=>t.style.display='none');}
+function goHome(b){hideTools();setActive(b);window.scrollTo({top:0,behavior:'smooth'});}
+function setActive(b){document.querySelectorAll('.bottom button').forEach(x=>x.classList.remove('active'));b.classList.add('active');}
+function searchTool(){let q=(document.getElementById('searchInput').value||"").toLowerCase();document.querySelectorAll('#toolGrid .card').forEach(c=>{let txt=(c.getAttribute('data-name')||"").toLowerCase();c.style.display=(!q||txt.includes(q))?'block':'none';});}
+function filterCat(cat,el){document.querySelectorAll('.chip-row .chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');document.querySelectorAll('#toolGrid .card').forEach(c=>{if(cat=='all')c.style.display='block';else if(cat=='fav'){c.style.display=c.querySelector('.fav').classList.contains('on')?'block':'none';}else c.style.display=c.getAttribute('data-cat')==cat?'block':'none';});}
+function fav(btn){btn.classList.toggle('on');btn.innerText=btn.classList.contains('on')?'★':'☆';showToast(btn.classList.contains('on')?'Added To Favourite ⭐':'Removed From Favourite');}
+function showToast(msg){let t=document.getElementById('toast');t.innerText=msg;t.style.display='block';setTimeout(()=>{t.style.display='none';},2200);}
+</script>
+<!-- ================= JAVASCRIPT END ====================== -->
+
+<!-- ===================================================== -->
+<!-- ================= YOUR TOOL JS START =================== -->
+<!-- ===== PASTE EACH TOOL JS HERE - TOOL 1 JS, TOOL 2 JS == -->
+<!-- ===================================================== -->
+<script>
+// ===== TOOL 1 JS START - INVOICE - EDIT HERE =====
+// Paste Your Invoice JS Here - calc, PDF, WhatsApp
+// ===== TOOL 1 JS END =====
+
+// ===== TOOL 2 JS START - QR - EDIT HERE =====
+// Paste Your QR JS Here
+// ===== TOOL 2 JS END =====
+
+// ===== TOOL 3 JS START - PDF MERGE - EDIT HERE =====
+// ===== TOOL 3 JS END =====
+
+// ===== TOOL 4 JS START - SHORT URL - EDIT HERE =====
+// ===== TOOL 4 JS END =====
+
+// ===== TOOL 5 JS START - RESIZER - EDIT HERE =====
+// ===== TOOL 5 JS END =====
+
+// ===== TOOL 6 JS START - IMAGE TO PDF - EDIT HERE =====
+// ===== TOOL 6 JS END =====
+
+// ===== TOOL 7 JS START - PDF TO IMAGE - EDIT HERE =====
+// ===== TOOL 7 JS END =====
+
+// ===== TOOL 8 JS START - IMAGE TO TEXT - EDIT HERE =====
+// ===== TOOL 8 JS END =====
+
+// ===== TOOL 9 JS START - BG REMOVER - EDIT HERE =====
+// ===== TOOL 9 JS END =====
+
+// ===== TOOL 10 JS START - PDF COMPRESS - EDIT HERE =====
+// ===== TOOL 10 JS END =====
+
+// ===== TOOL 11 JS START - IMAGE COMPRESS - EDIT HERE =====
+// ===== TOOL 11 JS END =====
+</script>
+<!-- ================= YOUR TOOL JS END ===================== -->
+
+</body>
+</html>
