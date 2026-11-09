@@ -405,10 +405,176 @@ renderFields3();
 setTimeout(gen3, 500);
 </script>
 <!-- TOOL 3 - QR GENERATOR - FIXED - END -->
-<!-- ================= TOOL 4 - BARCODE GENERATOR - START ================= -->
-<div class="tool panel" id="tool-4"><h3>🏷️ 4. Barcode Generator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(4)">⬇️ Download</button><button class="btn" onclick="editSinglePage(4)">✏️ Edit Single Page</button></div><label class="label">Product Name</label><input type="text" id="t4prod" class="input" value="Gold Ring"><label class="label">Barcode Code - Unique</label><input type="text" id="t4code" class="input" value="890123456789"><button class="btn" onclick="t4Random()">🎲 New Unique Code</button><label class="label">Price ₹</label><input type="number" id="t4price" class="input" value="799"><label class="label">MRP ₹</label><input type="number" id="t4mrp" class="input" value="999"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t4Generate()">Generate Barcode</button><svg id="svg4" style="background:#fff;width:100%;height:80px;margin-top:10px"></svg><div class="out" id="out4"></div></div>
-<!-- ================= TOOL 4 - BARCODE GENERATOR - END ================= -->
+  <!-- TOOL 4 - BARCODE GENERATOR - FIXED - START -->
+<div id="t4" style="background:#121d3a;border:1px solid #1e2d5a;border-radius:16px;padding:14px;color:#fff;font-family:system-ui">
+<h3 style="margin:0;text-align:center">🏷️ Barcode Generator Pro</h3>
+<p style="font-size:11px;color:#94a3b8;text-align:center">Product Barcode - Scan In Any Shop - Works With Scanner</p>
 
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">PRODUCT NAME</label>
+<input type="text" id="prod4" value="Gold Ring" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">BARCODE CODE - Unique</label>
+<div style="display:flex;gap:6px;margin-top:6px">
+<input type="text" id="code4" value="890123456789" style="flex:1;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<button onclick="newCode4()" style="background:#f59e0b;color:#fff;border:none;padding:10px 14px;border-radius:10px;font-weight:800;cursor:pointer">🎲 New Code</button>
+</div>
+<small style="color:#94a3b8">Code must be numbers only - 12 digits best for scanner</small>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+<div><label style="font-size:11px;font-weight:800">PRICE ₹ - Selling Price</label><input type="number" id="price4" value="799" oninput="updateDisc4()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a"></div>
+<div><label style="font-size:11px;font-weight:800">MRP ₹</label><input type="number" id="mrp4" value="999" oninput="updateDisc4()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a"></div>
+</div>
+<div id="disc4" style="text-align:center;background:#22c55e;color:#fff;padding:8px;border-radius:10px;margin-top:8px;font-weight:800;font-size:12px">Discount: 20% OFF - You Save ₹200</div>
+
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">CHOOSE SIZE - Small Or Large</label>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px">
+<button onclick="setSize4('small',this)" data-sz4="small" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">📱 SMALL<br><small>Small Sticker</small></button>
+<button onclick="setSize4('large',this)" data-sz4="large" style="padding:11px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border:none;cursor:pointer">💎 LARGE<br><small>Big Box / Print</small></button>
+</div>
+
+<label style="display:flex;justify-content:space-between;margin-top:10px;font-size:12px;background:#0a1224;padding:10px;border-radius:10px">💧 Watermark - Shop Name On Barcode <input type="checkbox" id="wm4"></label>
+<input type="text" id="wmTxt4" value="orbittroniz.com" placeholder="Watermark Text" style="width:100%;margin-top:8px;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+
+<button onclick="gen4()" style="width:100%;margin-top:10px;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;font-weight:900;cursor:pointer">✨ GENERATE BARCODE</button>
+
+<!-- BARCODE PREVIEW - WHITE CARD LIKE REAL STICKER -->
+<div style="text-align:center;margin-top:12px;background:#fff;border-radius:14px;padding:14px;color:#111">
+<div id="prodName4" style="font-weight:900;font-size:16px">Gold Ring</div>
+<div id="priceLine4" style="font-size:13px;margin-top:4px">Price: ₹799 <span style="text-decoration:line-through;color:#888">MRP ₹999</span> <span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:10px;font-size:11px">20% OFF</span></div>
+<svg id="svg4" style="width:100%;max-width:400px;height:80px;margin-top:8px;display:block"></svg>
+<img id="img4" src="" alt="" style="width:100%;max-width:400px;display:none">
+<div id="codeText4" style="font-weight:800;letter-spacing:2px">890123456789</div>
+<div id="wmShow4" style="font-size:11px;color:#888;margin-top:4px"></div>
+</div>
+
+<button onclick="dl4()" style="width:100%;margin-top:10px;padding:12px;border-radius:12px;background:#22c55e;color:#fff;font-weight:800;border:none;cursor:pointer">⬇️ DOWNLOAD BARCODE IMAGE</button>
+<button onclick="sh4()" style="width:100%;margin-top:8px;padding:12px;border-radius:12px;background:#2563eb;color:#fff;font-weight:800;border:none;cursor:pointer">📤 SHARE BARCODE - WhatsApp</button>
+<button onclick="edit4()" style="width:100%;margin-top:8px;padding:12px;border-radius:12px;background:#f59e0b;color:#fff;font-weight:800;border:none;cursor:pointer">✏️ EDIT SINGLE PAGE - Change Price / MRP</button>
+<button onclick="print4()" style="width:100%;margin-top:8px;padding:11px;border-radius:12px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">🖨️ Print Barcode</button>
+<div id="s4" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px"></div>
+
+<!-- EDIT SINGLE PAGE -->
+<div id="edit4" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;padding:12px;overflow:auto">
+<div style="display:flex;justify-content:space-between;align-items:center;background:#121d3a;padding:12px;border-radius:12px"><b>Edit Single Page - Barcode</b><button onclick="closeEdit4()" style="background:#fff;color:#111;border:none;padding:8px 14px;border-radius:20px;font-weight:900;cursor:pointer">✕ Close</button></div>
+<div style="background:#fff;border-radius:14px;padding:14px;margin-top:10px;text-align:center;color:#111">
+<div id="editProd4" style="font-weight:900;font-size:18px">Gold Ring</div>
+<div id="editPrice4" style="margin-top:6px">Price ₹799</div>
+<svg id="editSvg4" style="width:100%;height:90px;margin-top:8px"></svg>
+</div>
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">Edit Product Name</label>
+<input type="text" id="editName4" value="Gold Ring" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+<input type="number" id="editPriceIn4" value="799" placeholder="New Price" style="background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<input type="number" id="editMrpIn4" value="999" placeholder="New MRP" style="background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+<button onclick="applyEdit4()" style="padding:12px;background:#f59e0b;color:#fff;border:none;border-radius:10px;font-weight:800;cursor:pointer">✏️ Apply Changes</button>
+<button onclick="dl4()" style="padding:12px;background:#22c55e;color:#fff;border:none;border-radius:10px;font-weight:800;cursor:pointer">⬇️ Download Edited</button>
+</div>
+<button onclick="closeEdit4()" style="width:100%;margin-top:8px;padding:12px;background:#162143;color:#fff;border:1px solid #1e2d5a;border-radius:10px;font-weight:800;cursor:pointer">Back To List</button>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+<script>
+let SIZE4='large', CODE4='890123456789';
+function updateDisc4(){
+let p=+document.getElementById('price4').value||0, m=+document.getElementById('mrp4').value||0;
+if(m>p && m>0){ let d=Math.round((m-p)/m*100); document.getElementById('disc4').innerText="Discount: "+d+"% OFF - You Save ₹"+(m-p); document.getElementById('disc4').style.background="#22c55e"; }
+else { document.getElementById('disc4').innerText="Price: ₹"+p+" - No Discount"; document.getElementById('disc4').style.background="#64748b"; }
+}
+function newCode4(){
+let c="890"; for(let i=0;i<9;i++) c+=Math.floor(Math.random()*10);
+document.getElementById('code4').value=c; CODE4=c; gen4();
+}
+function setSize4(s,btn){ SIZE4=s; document.querySelectorAll('[data-sz4]').forEach(b=>{b.style.background='#162143';b.style.border='1px solid #1e2d5a'}); btn.style.background='linear-gradient(135deg,#7c3aed,#22d3ee)'; btn.style.border='none'; gen4(); }
+function drawBarcode(svgId, code){
+let svg=document.getElementById(svgId); if(!svg) return false;
+try{
+if(typeof JsBarcode!=='undefined'){
+JsBarcode("#"+svgId, code, {format:"CODE128", lineColor:"#000", background:"#fff", displayValue:true, width: SIZE4=='small'?1.5:2.5, height: SIZE4=='small'?50:70, margin:5, fontSize:14});
+return true;
+}
+}catch(e){}
+return false;
+}
+function fallbackImg(code){
+let img=document.getElementById('img4'); let svg=document.getElementById('svg4');
+img.style.display='block'; svg.style.display='none';
+img.src="https://barcode.tec-it.com/barcode.ashx?data="+encodeURIComponent(code)+"&code=Code128&dpi=96&dataseparator=";
+}
+function gen4(){
+let code=(document.getElementById('code4').value||"").replace(/\D/g,'');
+if(!code) return alert("Enter Barcode Code - Numbers Only");
+if(code.length<6) return alert("Code Too Short - Enter At Least 6 Digits - Example: 890123456789");
+CODE4=code;
+let prod=document.getElementById('prod4').value||"Product";
+let price=+document.getElementById('price4').value||0, mrp=+document.getElementById('mrp4').value||0;
+let disc=(mrp>price&&mrp>0)?Math.round((mrp-price)/mrp*100):0;
+document.getElementById('prodName4').innerText=prod;
+document.getElementById('priceLine4').innerHTML="Price: ₹"+price+" <span style='text-decoration:line-through;color:#888'>MRP ₹"+mrp+"</span> "+(disc>0?"<span style='background:#22c55e;color:#fff;padding:2px 8px;border-radius:10px;font-size:11px'>"+disc+"% OFF</span>":"");
+document.getElementById('codeText4').innerText=code;
+document.getElementById('wmShow4').innerText=document.getElementById('wm4').checked?(document.getElementById('wmTxt4').value||"orbittroniz.com"):"";
+document.getElementById('s4').innerText="Barcode Ready - Size: "+SIZE4.toUpperCase()+" - Code: "+code+" - Scan With Scanner";
+let ok=drawBarcode('svg4', code);
+if(!ok){ fallbackImg(code); document.getElementById('s4').innerText="Barcode Ready - Using Backup - Scan Will Work"; }
+else { document.getElementById('img4').style.display='none'; document.getElementById('svg4').style.display='block'; }
+}
+function makeCanvas4(){
+return new Promise((resolve)=>{
+let prod=document.getElementById('prod4').value||"Product";
+let price=+document.getElementById('price4').value||0, mrp=+document.getElementById('mrp4').value||0;
+let disc=(mrp>price&&mrp>0)?Math.round((mrp-price)/mrp*100):0;
+let svg=document.getElementById('svg4');
+let xml=new XMLSerializer().serializeToString(svg);
+let img=new Image();
+img.onload=()=>{
+let cv=document.createElement('canvas'); cv.width=600; cv.height=320; let ctx=cv.getContext('2d'); ctx.fillStyle="#fff"; ctx.fillRect(0,0,600,320);
+ctx.fillStyle="#111"; ctx.font="900 28px Arial"; ctx.textAlign='center'; ctx.fillText(prod,300,40);
+ctx.font="700 20px Arial"; ctx.fillText("Price: Rs."+price+"  MRP: Rs."+mrp+(disc>0?"  "+disc+"% OFF":""),300,75);
+ctx.drawImage(img,50,90,500,140);
+ctx.font="700 18px Arial"; ctx.fillText(CODE4,300,260);
+if(document.getElementById('wm4').checked){ ctx.font="600 14px Arial"; ctx.fillStyle="#888"; ctx.fillText(document.getElementById('wmTxt4').value||"orbittroniz.com",300,290); }
+resolve(cv);
+};
+img.onerror=()=>{ // Fallback - draw without svg
+let cv=document.createElement('canvas'); cv.width=600; cv.height=320; let ctx=cv.getContext('2d'); ctx.fillStyle="#fff"; ctx.fillRect(0,0,600,320); ctx.fillStyle="#111"; ctx.font="900 28px Arial"; ctx.textAlign='center'; ctx.fillText(prod,300,40); ctx.font="700 20px Arial"; ctx.fillText("Price: Rs."+price+" MRP: Rs."+mrp,300,80); ctx.font="900 24px Arial"; ctx.fillText("|| "+CODE4+" ||",300,180); resolve(cv);
+};
+img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(xml);
+});
+}
+async function dl4(){
+if(!CODE4) return alert("Generate Barcode First");
+let cv=await makeCanvas4(); let a=document.createElement('a'); a.href=cv.toDataURL('image/png'); a.download="Barcode-"+CODE4+".png"; a.click(); document.getElementById('s4').innerText="Barcode Downloaded";
+}
+async function sh4(){
+try{ let cv=await makeCanvas4(); let blob=await new Promise(r=>cv.toBlob(r,'image/png')); let file=new File([blob],"Barcode-"+CODE4+".png",{type:'image/png'}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],text:"Barcode - "+(document.getElementById('prod4').value||"")+" - Price Rs."+(document.getElementById('price4').value||"")}); } else { dl4(); } }catch(e){ dl4(); }
+}
+function edit4(){
+document.getElementById('editName4').value=document.getElementById('prod4').value;
+document.getElementById('editPriceIn4').value=document.getElementById('price4').value;
+document.getElementById('editMrpIn4').value=document.getElementById('mrp4').value;
+document.getElementById('editProd4').innerText=document.getElementById('prod4').value;
+document.getElementById('editPrice4').innerText="Price ₹"+document.getElementById('price4').value+" - MRP ₹"+document.getElementById('mrp4').value;
+drawBarcode('editSvg4', CODE4);
+document.getElementById('edit4').style.display='block';
+}
+function closeEdit4(){ document.getElementById('edit4').style.display='none'; }
+function applyEdit4(){
+document.getElementById('prod4').value=document.getElementById('editName4').value||"Product";
+document.getElementById('price4').value=document.getElementById('editPriceIn4').value||0;
+document.getElementById('mrp4').value=document.getElementById('editMrpIn4').value||0;
+updateDisc4(); gen4(); closeEdit4(); alert("Changes Applied - New Barcode Ready");
+}
+function print4(){
+let w=window.open('','_blank'); if(!w) return alert("Allow Popup");
+let prod=document.getElementById('prod4').value, price=document.getElementById('price4').value, mrp=document.getElementById('mrp4').value;
+let svg=document.getElementById('svg4').outerHTML;
+w.document.write('<html><body style="text-align:center;font-family:Arial"><h2>'+prod+'</h2><p>Price: Rs.'+price+' MRP: Rs.'+mrp+'</p>'+svg+'<p>'+CODE4+'</p><script>window.onload=function(){window.print()}<\/script></body></html>'); w.document.close();
+}
+updateDisc4();
+setTimeout(gen4, 600);
+</script>
+<!-- TOOL 4 - BARCODE GENERATOR - FIXED - END -->
 <!-- ================= TOOL 5 - INVOICE MAKER - START ================= -->
 <div class="tool panel" id="tool-5"><h3>🧾 5. Invoice Maker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(5)">⬇️ Download</button><button class="btn" onclick="editSinglePage(5)">✏️ Edit Single Page</button></div><label class="label">Shop Name</label><input type="text" id="t5shop" class="input" value="Sharma Jewellers"><label class="label">Customer Name</label><input type="text" id="t5cust" class="input" value="Priya Sharma"><label class="label">Item</label><input type="text" id="t5item" class="input" value="Gold Ring"><div class="grid-2"><div><label class="label">Price ₹</label><input type="number" id="t5price" class="input" value="25000"></div><div><label class="label">GST %</label><input type="number" id="t5gst" class="input" value="3"></div></div><button class="btn primary" style="width:100%;margin-top:10px" onclick="t5Make()">Make Invoice</button><canvas id="cv5" style="margin-top:10px"></canvas><div class="out" id="out5"></div></div>
 <!-- ================= TOOL 5 - INVOICE MAKER - END ================= -->
