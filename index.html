@@ -782,10 +782,194 @@ window.scrollTo({top:0,behavior:'smooth'});
 calc5();
 </script>
 <!-- TOOL 5 - INVOICE MAKER - END -->
-<!-- ================= TOOL 6 - BIZCARD MAKER - START ================= -->
-<div class="tool panel" id="tool-6"><h3>💳 6. BizCard Maker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(6)">⬇️ Download</button><button class="btn" onclick="editSinglePage(6)">✏️ Edit Single Page</button></div><label class="label">Name</label><input type="text" id="t6name" class="input" value="Rahul Sharma"><label class="label">Business</label><input type="text" id="t6biz" class="input" value="Sharma Jewellers"><label class="label">Phone</label><input type="text" id="t6phone" class="input" value="98765 43210"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t6Make()">Make Card</button><canvas id="cv6" style="margin-top:10px"></canvas><div class="out" id="out6"></div></div>
-<!-- ================= TOOL 6 - BIZCARD MAKER - END ================= -->
+<!-- TOOL 6 - BIZCARD MAKER - START -->
+<div id="t6" style="background:#121d3a;border:1px solid #1e2d5a;border-radius:16px;padding:14px;color:#fff;font-family:system-ui">
+<h3 style="margin:0;text-align:center">💳 BizCard Maker Pro</h3>
+<p style="font-size:11px;color:#94a3b8;text-align:center">Visiting Card - Professional - Print Ready</p>
 
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">YOUR NAME</label>
+<input type="text" id="name6" value="Rahul Sharma" oninput="preview6()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">BUSINESS NAME</label>
+<input type="text" id="biz6" value="Sharma Jewellers" oninput="preview6()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">YOUR POST - Example: Owner, Manager</label>
+<input type="text" id="post6" value="Owner" oninput="preview6()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+<div><label style="font-size:11px;font-weight:800">PHONE</label><input type="text" id="phone6" value="98765 43210" oninput="preview6()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a"></div>
+<div><label style="font-size:11px;font-weight:800">WHATSAPP - Optional</label><input type="text" id="wa6" value="98765 43210" oninput="preview6()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a"></div>
+</div>
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">EMAIL - Optional</label>
+<input type="text" id="email6" value="sharma@gmail.com" oninput="preview6()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">ADDRESS / CITY</label>
+<input type="text" id="addr6" value="Main Road, Solapur" oninput="preview6()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">DESIGN TEMPLATE - Choose One</label>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px">
+<button onclick="setDesign6('classic',this)" data-ds="classic" style="padding:11px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border:none;cursor:pointer">🪐 Classic<br><small>Purple-Blue</small></button>
+<button onclick="setDesign6('gold',this)" data-ds="gold" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">👑 Gold<br><small>Premium</small></button>
+<button onclick="setDesign6('green',this)" data-ds="green" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">💚 Green<br><small>Fresh</small></button>
+</div>
+
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">CARD SIDE - Front Or Back</label>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px">
+<button onclick="setSide6('front',this)" data-side="front" style="padding:11px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border:none;cursor:pointer">FRONT - Name + Business</button>
+<button onclick="setSide6('back',this)" data-side="back" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">BACK - Contact Only</button>
+</div>
+
+<label style="display:flex;justify-content:space-between;margin-top:10px;font-size:12px;background:#0a1224;padding:10px;border-radius:10px">💧 Watermark On Card <input type="checkbox" id="wm6" onchange="preview6()"></label>
+
+<button onclick="make6()" style="width:100%;margin-top:10px;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;font-weight:900;cursor:pointer">✨ MAKE BIZCARD</button>
+
+<!-- CARD PREVIEW -->
+<div style="margin-top:12px">
+<div id="cardPreview6" style="background:linear-gradient(135deg,#1e1b4b,#7c3aed);border-radius:14px;padding:18px;min-height:180px;position:relative;overflow:hidden">
+<div style="position:absolute;right:-20px;top:-20px;width:120px;height:120px;background:rgba(255,255,255,.15);border-radius:50%"></div>
+<div style="display:flex;gap:12px;align-items:center">
+<div id="initial6" style="width:60px;height:60px;border-radius:50%;background:#f59e0b;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:#fff;flex-shrink:0">R</div>
+<div><div id="pvName6" style="font-size:20px;font-weight:900">Rahul Sharma</div><div id="pvPost6" style="font-size:12px;color:#fde68a">Owner</div></div>
+</div>
+<div id="pvBiz6" style="font-size:18px;font-weight:900;margin-top:14px">Sharma Jewellers</div>
+<div id="pvContact6" style="font-size:12px;margin-top:8px;line-height:1.7">📞 98765 43210<br>💬 WhatsApp: 98765 43210<br>✉️ sharma@gmail.com<br>📍 Main Road, Solapur</div>
+<div id="pvWm6" style="font-size:10px;color:rgba(255,255,255,.6);margin-top:8px"></div>
+</div>
+</div>
+
+<button onclick="dl6()" style="width:100%;margin-top:10px;padding:12px;border-radius:12px;background:#22c55e;color:#fff;font-weight:800;border:none;cursor:pointer">⬇️ DOWNLOAD BIZCARD IMAGE</button>
+<button onclick="sh6()" style="width:100%;margin-top:8px;padding:12px;border-radius:12px;background:#2563eb;color:#fff;font-weight:800;border:none;cursor:pointer">📤 SHARE BIZCARD - WhatsApp</button>
+<button onclick="edit6()" style="width:100%;margin-top:8px;padding:12px;border-radius:12px;background:#f59e0b;color:#fff;font-weight:800;border:none;cursor:pointer">✏️ EDIT SINGLE PAGE - Change Phone / Name</button>
+<button onclick="print6()" style="width:100%;margin-top:8px;padding:11px;border-radius:12px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">🖨️ Print BizCard</button>
+<div id="s6" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px"></div>
+
+<!-- EDIT SINGLE PAGE -->
+<div id="edit6" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;padding:12px;overflow:auto">
+<div style="display:flex;justify-content:space-between;align-items:center;background:#121d3a;padding:12px;border-radius:12px"><b>Edit Single Page - BizCard</b><button onclick="closeEdit6()" style="background:#fff;color:#111;border:none;padding:8px 14px;border-radius:20px;font-weight:900;cursor:pointer">✕ Close</button></div>
+<p style="font-size:12px;color:#cbd5e1">Change Phone / Name / Business Here - Then Apply</p>
+<label style="font-size:11px;font-weight:800">Name</label><input type="text" id="eName6" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a;margin-top:4px">
+<label style="font-size:11px;font-weight:800;display:block;margin-top:8px">Phone</label><input type="text" id="ePhone6" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a;margin-top:4px">
+<label style="font-size:11px;font-weight:800;display:block;margin-top:8px">Business</label><input type="text" id="eBiz6" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a;margin-top:4px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+<button onclick="applyEdit6()" style="padding:12px;background:#f59e0b;color:#fff;border:none;border-radius:10px;font-weight:800;cursor:pointer">✏️ Apply Changes</button>
+<button onclick="closeEdit6()" style="padding:12px;background:#162143;color:#fff;border:1px solid #1e2d5a;border-radius:10px;font-weight:800;cursor:pointer">Back</button>
+</div>
+</div>
+<canvas id="cv6" style="display:none"></canvas>
+</div>
+<script>
+let DESIGN6='classic', SIDE6='front';
+function setDesign6(d,btn){DESIGN6=d;document.querySelectorAll('[data-ds]').forEach(b=>{b.style.background='#162143';b.style.border='1px solid #1e2d5a'});btn.style.background='linear-gradient(135deg,#7c3aed,#22d3ee)';btn.style.border='none';preview6();}
+function setSide6(s,btn){SIDE6=s;document.querySelectorAll('[data-side]').forEach(b=>{b.style.background='#162143';b.style.border='1px solid #1e2d5a'});btn.style.background='linear-gradient(135deg,#7c3aed,#22d3ee)';btn.style.border='none';preview6();}
+function getColors6(){
+if(DESIGN6=='gold') return {bg1:'#92400e',bg2:'#f59e0b',accent:'#fef3c7'};
+if(DESIGN6=='green') return {bg1:'#064e3b',bg2:'#059669',accent:'#d1fae5'};
+return {bg1:'#1e1b4b',bg2:'#7c3aed',accent:'#c4b5fd'};
+}
+function preview6(){
+let name=document.getElementById('name6').value||"Your Name";
+let biz=document.getElementById('biz6').value||"Your Business";
+let post=document.getElementById('post6').value||"";
+let phone=document.getElementById('phone6').value||"";
+let wa=document.getElementById('wa6').value||"";
+let email=document.getElementById('email6').value||"";
+let addr=document.getElementById('addr6').value||"";
+let c=getColors6();
+let card=document.getElementById('cardPreview6');
+card.style.background='linear-gradient(135deg,'+c.bg1+','+c.bg2+')';
+if(SIDE6=='front'){
+document.getElementById('pvName6').innerText=name;
+document.getElementById('pvPost6').innerText=post;
+document.getElementById('pvPost6').style.display='block';
+document.getElementById('pvBiz6').innerText=biz;
+document.getElementById('initial6').style.display='flex';
+document.getElementById('pvContact6').innerHTML="📞 "+phone+"<br>💬 WhatsApp: "+wa+"<br>✉️ "+email+"<br>📍 "+addr;
+} else {
+document.getElementById('pvName6').innerText=biz;
+document.getElementById('pvPost6').innerText="Contact Us - Visit Our Shop";
+document.getElementById('pvPost6').style.display='block';
+document.getElementById('pvBiz6').innerText="📞 "+phone;
+document.getElementById('initial6').style.display='none';
+document.getElementById('pvContact6').innerHTML="💬 WhatsApp: "+wa+"<br>✉️ "+email+"<br>📍 "+addr+"<br>👤 Contact: "+name;
+}
+document.getElementById('initial6').innerText=name.trim().charAt(0).toUpperCase()||"O";
+document.getElementById('initial6').style.background=DESIGN6=='gold'?"#fff":"#f59e0b";
+document.getElementById('initial6').style.color=DESIGN6=='gold'?"#92400e":"#fff";
+document.getElementById('pvWm6').innerText=document.getElementById('wm6').checked?"orbittroniz.com":"";
+}
+function drawCanvas6(){
+let name=document.getElementById('name6').value||"Your Name";
+let biz=document.getElementById('biz6').value||"Your Business";
+let post=document.getElementById('post6').value||"";
+let phone=document.getElementById('phone6').value||"";
+let wa=document.getElementById('wa6').value||"";
+let email=document.getElementById('email6').value||"";
+let addr=document.getElementById('addr6').value||"";
+let c=getColors6();
+let cv=document.getElementById('cv6'); cv.width=800; cv.height=450; let ctx=cv.getContext('2d');
+let g=ctx.createLinearGradient(0,0,800,450); g.addColorStop(0,c.bg1); g.addColorStop(1,c.bg2);
+ctx.fillStyle=g; ctx.fillRect(0,0,800,450);
+ctx.fillStyle="rgba(255,255,255,.15)"; ctx.beginPath(); ctx.arc(750,0,120,0,Math.PI*2); ctx.fill();
+if(SIDE6=='front'){
+ctx.fillStyle="#f59e0b"; ctx.beginPath(); ctx.arc(90,100,55,0,Math.PI*2); ctx.fill();
+ctx.fillStyle="#fff"; ctx.font="900 48px Arial"; ctx.textAlign='center'; ctx.fillText(name.trim().charAt(0).toUpperCase()||"O",90,117);
+ctx.textAlign='left'; ctx.fillStyle="#fff"; ctx.font="900 32px Arial"; ctx.fillText(name,170,90);
+ctx.fillStyle=c.accent; ctx.font="600 18px Arial"; ctx.fillText(post,170,120);
+ctx.fillStyle="#fff"; ctx.font="900 28px Arial"; ctx.fillText(biz,40,210);
+ctx.font="600 18px Arial"; ctx.fillText("Phone: "+phone,40,260);
+ctx.fillText("WhatsApp: "+wa,40,290);
+ctx.fillText("Email: "+email,40,320);
+ctx.fillText("Address: "+addr,40,350);
+} else {
+ctx.fillStyle="#fff"; ctx.font="900 36px Arial"; ctx.textAlign='center'; ctx.fillText(biz,400,120);
+ctx.font="600 20px Arial"; ctx.fillText("Contact Us - Visit Our Shop",400,160);
+ctx.fillText("Phone: "+phone,400,220);
+ctx.fillText("WhatsApp: "+wa,400,255);
+ctx.fillText("Email: "+email,400,290);
+ctx.fillText("Address: "+addr,400,325);
+ctx.font="600 16px Arial"; ctx.fillText("Contact Person: "+name,400,365);
+}
+if(document.getElementById('wm6').checked){ ctx.fillStyle="rgba(255,255,255,.6)"; ctx.font="600 14px Arial"; ctx.textAlign='center'; ctx.fillText("orbittroniz.com",400,430); }
+return cv;
+}
+function make6(){
+preview6();
+document.getElementById('s6').innerText="BizCard Ready - Design: "+DESIGN6+" - Side: "+SIDE6+" - Click Download";
+document.getElementById('cardPreview6').scrollIntoView({behavior:'smooth'});
+}
+function dl6(){
+let cv=drawCanvas6();
+let a=document.createElement('a'); a.href=cv.toDataURL('image/png'); a.download="BizCard-"+(document.getElementById('name6').value||"Card")+".png"; a.click();
+document.getElementById('s6').innerText="BizCard Downloaded";
+}
+async function sh6(){
+let cv=drawCanvas6();
+try{
+let blob=await new Promise(r=>cv.toBlob(r,'image/png'));
+let file=new File([blob],"BizCard.png",{type:'image/png'});
+if(navigator.canShare && navigator.canShare({files:[file]})){ await navigator.share({files:[file], text:"My Visiting Card - "+(document.getElementById('biz6').value||"")+" - "+(document.getElementById('phone6').value||"")}); }
+else { dl6(); }
+}catch(e){ dl6(); }
+}
+function print6(){
+let w=window.open('','_blank'); if(!w) return alert("Allow Popup To Print");
+let cv=drawCanvas6(); let url=cv.toDataURL('image/png');
+w.document.write('<html><body style="text-align:center;font-family:Arial"><h2>BizCard - Print</h2><img src="'+url+'" style="width:600px;max-width:100%"><script>window.onload=function(){window.print()}<\/script></body></html>'); w.document.close();
+}
+function edit6(){
+document.getElementById('eName6').value=document.getElementById('name6').value;
+document.getElementById('ePhone6').value=document.getElementById('phone6').value;
+document.getElementById('eBiz6').value=document.getElementById('biz6').value;
+document.getElementById('edit6').style.display='block';
+}
+function closeEdit6(){ document.getElementById('edit6').style.display='none'; }
+function applyEdit6(){
+document.getElementById('name6').value=document.getElementById('eName6').value||"Your Name";
+document.getElementById('phone6').value=document.getElementById('ePhone6').value||"";
+document.getElementById('biz6').value=document.getElementById('eBiz6').value||"Your Business";
+preview6(); closeEdit6();
+document.getElementById('s6').innerText="BizCard Updated";
+}
+preview6();
+</script>
+<!-- TOOL 6 - BIZCARD MAKER - END -->
 <!-- ================= TOOL 7 - LOGO MAKER - START ================= -->
 <div class="tool panel" id="tool-7"><h3>🎨 7. Logo Maker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(7)">⬇️ Download</button><button class="btn" onclick="editSinglePage(7)">✏️ Edit Single Page</button></div><label class="label">Business Name</label><input type="text" id="t7name" class="input" value="Orbittroniz"><label class="label">Style</label><select id="t7style" class="select"><option value="orbit">Orbit Purple-Blue</option><option value="gold">Gold Premium</option><option value="green">Green Fresh</option></select><button class="btn primary" style="width:100%;margin-top:10px" onclick="t7Make()">Make Logo</button><canvas id="cv7" style="margin-top:10px"></canvas><div class="out" id="out7"></div></div>
 <!-- ================= TOOL 7 - LOGO MAKER - END ================= -->
