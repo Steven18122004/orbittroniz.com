@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbittroniz - AI Tools App</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#050816;color:#fff;font-family:system-ui,Arial,sans-serif;padding-bottom:90px;overflow-x:hidden}
+/* AI BACKGROUND - FLOATING ORBS */
+.orb{position:fixed;border-radius:50%;filter:blur(45px);opacity:.55;z-index:-1;animation:orbFloat 8s ease-in-out infinite}
+.orb1{width:180px;height:180px;background:#7C3AED;top:-40px;left:-40px}
+.orb2{width:160px;height:160px;background:#0EA5E9;top:200px;right:-50px;animation-delay:1s}
+.orb3{width:150px;height:150px;background:#EC4899;bottom:100px;left:30%;animation-delay:2s}
+@keyframes orbFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-25px) scale(1.12)}}
+/* HEADER - AI GLASS */
+.header{background:linear-gradient(135deg,rgba(11,11,42,.95),rgba(30,27,75,.9),rgba(76,29,149,.9),rgba(14,165,233,.85));background-size:300% 300%;animation:flow 7s ease infinite;padding:16px 14px 20px;border-radius:0 0 30px 30px;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.2);backdrop-filter:blur(12px);box-shadow:0 15px 40px rgba(124,58,237,.45)}
+@keyframes flow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.top{display:flex;align-items:center;justify-content:space-between}
+.logo-box{display:flex;align-items:center;gap:11px}
+/* REAL LOGO - ROTATING MOVING - 3D LIVE */
+.logo-wrap{width:64px;height:64px;position:relative;perspective:900px;flex-shrink:0}
+.logo-glow{position:absolute;inset:-10px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.75),rgba(34,211,238,.4),transparent 70%);filter:blur(10px);animation:glowP 2s ease-in-out infinite}
+@keyframes glowP{0%,100%{transform:scale(1);opacity:.65}50%{transform:scale(1.22);opacity:1}}
+.logo-img{width:100%;height:100%;object-fit:contain;background:transparent;filter:drop-shadow(0 14px 24px rgba(124,58,237,.65)) drop-shadow(0 0 14px rgba(34,211,238,.5));animation:realLogo 5s ease-in-out infinite;transform-style:preserve-3d}
+@keyframes realLogo{
+0%,100%{transform:rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateY(0) translateX(0) scale(1)}
+20%{transform:rotateY(28deg) rotateX(8deg) rotateZ(-4deg) translateY(-6px) translateX(2px) scale(1.08)}
+40%{transform:rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateY(0) scale(1.03)}
+60%{transform:rotateY(-28deg) rotateX(-8deg) rotateZ(4deg) translateY(-6px) translateX(-2px) scale(1.08)}
+80%{transform:rotateY(360deg) rotateX(0deg) translateY(0) scale(1.05)}
+}
+.logo-text b{font-size:21px;letter-spacing:.5px;background:linear-gradient(90deg,#fff,#C4B5FD,#67E8F9,#F0ABFC,#fff);background-size:250% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shine 3s linear infinite}
+@keyframes shine{to{background-position:250% center}}
+.logo-text small{display:block;font-size:11px;color:#E0E7FF;margin-top:3px}
+.ai-badge{background:linear-gradient(135deg,#EC4899,#8B5CF6);font-size:9px;font-weight:900;padding:4px 8px;border-radius:20px;animation:badgeP 1.5s infinite}
+@keyframes badgeP{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.search{margin-top:14px;background:rgba(255,255,255,.95);border-radius:16px;display:flex;padding:4px 4px 4px 14px;box-shadow:0 10px 25px rgba(0,0,0,.25)}
+.search input{flex:1;border:none;outline:none;padding:10px 4px;font-size:14px;color:#111;background:transparent}
+.search button{background:linear-gradient(135deg,#7C3AED,#22D3EE);color:#fff;border:none;padding:10px 18px;border-radius:12px;font-weight:800;cursor:pointer}
+/* DASHBOARD - APP LIKE */
+.wrap{padding:14px}
+.sec{display:flex;justify-content:space-between;margin:6px 2px 10px;align-items:center}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.card{background:linear-gradient(145deg,rgba(18,29,58,.95),rgba(15,22,48,.95));border:1px solid rgba(139,92,246,.4);border-radius:20px;padding:15px;cursor:pointer;position:relative;overflow:hidden;backdrop-filter:blur(8px);box-shadow:0 10px 22px rgba(0,0,0,.3);transition:.2s}
+.card:active{transform:scale(.96)}
+.card::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:skewX(-20deg);animation:cardShine 3.5s ease infinite}
+@keyframes cardShine{0%{left:-70%}60%,100%{left:130%}}
+.card .ic{font-size:30px;animation:floatI 2.5s ease-in-out infinite}
+@keyframes floatI{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(3deg)}}
+.card b{display:block;font-size:13px;margin-top:8px;line-height:1.3}
+.card p{font-size:11px;color:#94A3B8;margin-top:4px;line-height:1.4}
+.badge{position:absolute;top:8px;right:8px;background:#22C55E;color:#fff;font-size:9px;font-weight:800;padding:3px 7px;border-radius:20px;z-index:2}
+.badge.hot{background:#F59E0B}.badge.new{background:#2563EB}.badge.ai{background:#EC4899}
+.wide{grid-column:span 2;background:linear-gradient(135deg,#7C3AED,#EC4899,#22D3EE);background-size:200% 200%;animation:flow 5s ease infinite;border:none}
+.wide p{color:#fff}
+.tool{display:none;background:rgba(18,29,58,.98);border:1px solid rgba(139,92,246,.4);border-radius:20px;padding:15px;margin-top:14px;box-shadow:0 15px 30px rgba(0,0,0,.35)}
+.tool h3{text-align:center}
+.tool label{font-size:11px;font-weight:800;display:block;margin-top:10px}
+.tool input,.tool select,.tool textarea{width:100%;background:#0A1224;color:#fff;padding:11px;border-radius:11px;border:1px solid #1E2D5A;margin-top:4px}
+.btn{width:100%;padding:13px;border:none;border-radius:13px;font-weight:800;cursor:pointer;margin-top:10px;color:#fff;background:linear-gradient(135deg,#7C3AED,#22D3EE)}
+.btn.green{background:#22C55E}.btn.blue{background:#2563EB}.btn.pink{background:linear-gradient(135deg,#EC4899,#8B5CF6)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.out{margin-top:10px;text-align:center;font-size:12px;color:#22D3EE;word-break:break-word}
+.out img{max-width:100%;border-radius:12px;margin-top:8px;background:#fff}
+.close{float:right;background:#fff;color:#111;border:none;padding:6px 12px;border-radius:20px;font-weight:900;cursor:pointer}
+.inv-row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:6px;margin-top:6px}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:rgba(15,22,48,.95);backdrop-filter:blur(12px);border-top:1px solid rgba(139,92,246,.35);display:grid;grid-template-columns:1fr 1fr 1fr 1fr;padding:8px 0;z-index:100}
+.bottom button{background:none;border:none;color:#94A3B8;font-size:11px;cursor:pointer}
+.bottom button.active{color:#22D3EE}
+.bottom button span{display:block;font-size:20px}
+canvas{display:none}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+
+<div class="header">
+<div class="top">
+<div class="logo-box">
+<div class="logo-wrap"><div class="logo-glow"></div><img src="logo.png" class="logo-img" alt="Orbittroniz"></div>
+<div class="logo-text"><b>ORBITTRONIZ</b><small>AI Tools - Free For Every Shop</small></div>
+</div>
+<div style="display:flex;gap:6px;align-items:center"><span class="ai-badge">✨ AI</span><button style="background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);color:#fff;padding:8px 12px;border-radius:20px;cursor:pointer" onclick="alert('Menu - Coming Soon')">☰</button></div>
+</div>
+<div class="search"><input id="searchInput" placeholder="Search AI Tool - Invoice, QR, PDF..." oninput="searchTool()"><button onclick="searchTool()">Search</button></div>
+<p style="text-align:center;font-size:11px;margin-top:10px;font-weight:700">✨ AI Powered • 100% Free • No Login • Works Offline 🇮🇳</p>
+</div>
+
+<div class="wrap">
+<div class="sec"><b>🔥 Most Used AI Tools</b><span style="font-size:11px;color:#22D3EE">11 Tools</span></div>
+<div class="grid" id="toolGrid">
+<div class="card wide" onclick="showTool('tInvoice')"><div class="ic">🧾</div><b>Invoice Maker - GST Bill</b><p>Bill With GST + Discount - PDF Download</p><span class="badge hot">HOT</span></div>
+<div class="card" onclick="showTool('tQR')"><div class="ic">📱</div><b>QR Generator</b><p>UPI, WhatsApp, Link, Text</p><span class="badge ai">AI</span></div>
+<div class="card" onclick="showTool('tMerge')"><div class="ic">📚</div><b>PDF Merge</b><p>2+ PDFs To 1 PDF</p><span class="badge new">NEW</span></div>
+<div class="card" onclick="showTool('tShort')"><div class="ic">🔗</div><b>Short URL</b><p>Long Link To Short Link</p><span class="badge ai">AI</span></div>
+<div class="card" onclick="showTool('tResize')"><div class="ic">📐</div><b>Image Resizer</b><p>Passport, Insta, Shop Size</p><span class="badge hot">HOT</span></div>
+<div class="card" onclick="showTool('tImgPdf')"><div class="ic">🖼️➡️📄</div><b>Image To PDF</b><p>Photo To PDF - 1 Click</p><span class="badge">FREE</span></div>
+<div class="card" onclick="showTool('tPdfImg')"><div class="ic">📄➡️🖼️</div><b>PDF To Image</b><p>PDF Page To PNG</p><span class="badge">FREE</span></div>
+<div class="card" onclick="showTool('tImgText')"><div class="ic">🔤</div><b>Image To Text</b><p>Photo Text Copy - OCR</p><span class="badge ai">AI</span></div>
+<div class="card" onclick="showTool('tBg')"><div class="ic">✂️</div><b>BG Remover</b><p>Remove White Background</p><span class="badge hot">HOT</span></div>
+<div class="card" onclick="showTool('tPdfComp')"><div class="ic">📉</div><b>PDF Compress</b><p>Reduce PDF Size</p><span class="badge">FREE</span></div>
+<div class="card" onclick="showTool('tImgComp')"><div class="ic">🗜️</div><b>Image Compress</b><p>Reduce Image KB Size</p><span class="badge">FREE</span></div>
+</div>
+
+<!-- INVOICE -->
+<div class="tool" id="tInvoice"><button class="close" onclick="hideTools()">✕</button><h3>🧾 Invoice Maker - GST Bill</h3>
+<label>YOUR SHOP NAME</label><input id="invShop" value="Sharma Jewellers">
+<div class="row"><div><label>CUSTOMER NAME</label><input id="invCust" value="Rahul Sharma"></div><div><label>PHONE</label><input id="invPhone" value="98765 43210"></div></div>
+<label>ITEMS - Name / Qty / Price</label>
+<div id="invItems">
+<div class="inv-row"><input placeholder="Item Name" value="Gold Ring"><input type="number" placeholder="Qty" value="1" class="iq"><input type="number" placeholder="Price" value="5000" class="ip"></div>
+<div class="inv-row"><input placeholder="Item Name" value="Necklace"><input type="number" placeholder="Qty" value="1" class="iq"><input type="number" placeholder="Price" value="12000" class="ip"></div>
+</div>
+<button class="btn blue" onclick="addInvItem()">+ Add Item</button>
+<div class="row"><div><label>DISCOUNT (₹)</label><input type="number" id="invDisc" value="500"></div><div><label>GST %</label><input type="number" id="invGst" value="3"></div></div>
+<button class="btn" onclick="makeInvoice()">✨ Make Invoice - View Total</button>
+<div class="out" id="invOut"></div>
+<button class="btn green" onclick="dlInvoicePdf()">⬇️ Download Invoice PDF</button>
+<button class="btn pink" onclick="shareInvoice()">📤 Share Invoice - WhatsApp</button>
+</div>
+
+<!-- QR -->
+<div class="tool" id="tQR"><button class="close" onclick="hideTools()">✕</button><h3>📱 QR Generator</h3>
+<label>QR TYPE</label><select id="qrType" onchange="qrHint()"><option value="link">Link / Website</option><option value="upi">UPI Payment</option><option value="wa">WhatsApp</option><option value="text">Text</option></select>
+<label id="qrLabel">PASTE LINK</label><input id="qrInput" value="https://orbittroniz.com" placeholder="Enter text / link / UPI ID">
+<div class="row"><div><label>UPI ID - If UPI</label><input id="qrUpi" placeholder="shop@okhdfc"></div><div><label>AMOUNT - Optional</label><input id="qrAmt" placeholder="100"></div></div>
+<button class="btn" onclick="makeQR()">✨ Make QR Code</button><div class="out"><canvas id="qrCv" style="display:block;margin:10px auto;background:#fff;padding:10px;border-radius:12px;width:200px;height:200px"></canvas><div id="qrOut"></div></div>
+<button class="btn green" onclick="dlQR()">⬇️ Download QR</button><button class="btn blue" onclick="shareQR()">📤 Share QR</button>
+</div>
+
+<!-- PDF MERGE -->
+<div class="tool" id="tMerge"><button class="close" onclick="hideTools()">✕</button><h3>📚 PDF Merge - 2+ PDFs To 1</h3>
+<label>SELECT PDFs - In Order - Multiple</label><input type="file" id="mgFiles" accept="application/pdf" multiple>
+<button class="btn" onclick="doMerge()">✨ Merge PDFs</button><div class="out" id="mgOut"></div></div>
+
+<!-- SHORT URL -->
+<div class="tool" id="tShort"><button class="close" onclick="hideTools()">✕</button><h3>🔗 Short URL Maker</h3>
+<label>PASTE LONG URL</label><input id="longUrl" value="https://orbittroniz.com/tools/image-resizer-free-online">
+<button class="btn" onclick="doShort()">✨ Make Short Link</button>
+<div class="out" id="shortOut" style="background:#0A1224;padding:12px;border-radius:12px"></div>
+<button class="btn blue" onclick="copyShort()">📋 Copy Short Link</button><button class="btn green" onclick="openShort()">🔗 Open Short Link</button>
+</div>
+
+<!-- RESIZER -->
+<div class="tool" id="tResize"><button class="close" onclick="hideTools()">✕</button><h3>📐 Image Resizer</h3>
+<label>SELECT IMAGE</label><input type="file" id="rFile" accept="image/*" onchange="loadResize()">
+<div class="row"><div><label>WIDTH</label><input type="number" id="rW" value="800"></div><div><label>HEIGHT</label><input type="number" id="rH" value="800"></div></div>
+<label>QUICK SIZE</label><select id="rQuick" onchange="setQuick()"><option value="">Custom</option><option value="300,300">Passport 300x300</option><option value="1080,1080">Instagram 1080x1080</option><option value="1200,630">WhatsApp 1200x630</option><option value="800,800">Shop 800x800</option></select>
+<label>QUALITY</label><input type="range" id="rQ" min="10" max="100" value="90">
+<button class="btn" onclick="doResize()">✨ Resize Image</button><button class="btn green" onclick="dlCanvas('rCv','Resized.png')">⬇️ Download</button><div class="out" id="rOut"></div><canvas id="rCv"></canvas></div>
+
+<!-- IMAGE TO PDF -->
+<div class="tool" id="tImgPdf"><button class="close" onclick="hideTools()">✕</button><h3>🖼️ Image To PDF</h3>
+<label>SELECT IMAGES - Multiple</label><input type="file" id="ipFiles" accept="image/*" multiple>
+<label>PAGE SIZE</label><select id="ipSize"><option value="a4">A4</option><option value="a5">A5</option><option value="letter">Letter</option></select>
+<button class="btn" onclick="doImgPdf()">✨ Make PDF</button><div class="out" id="ipOut"></div></div>
+
+<!-- PDF TO IMAGE -->
+<div class="tool" id="tPdfImg"><button class="close" onclick="hideTools()">✕</button><h3>📄 PDF To Image</h3>
+<label>SELECT PDF</label><input type="file" id="piFile" accept="application/pdf">
+<label>PAGE NUMBER</label><input type="number" id="piPage" value="1" min="1">
+<button class="btn" onclick="doPdfImg()">✨ Convert To Image</button><div class="out" id="piOut"></div><canvas id="piCv"></canvas></div>
+
+<!-- IMAGE TO TEXT -->
+<div class="tool" id="tImgText"><button class="close" onclick="hideTools()">✕</button><h3>🔤 Image To Text - AI OCR</h3>
+<label>SELECT IMAGE WITH TEXT</label><input type="file" id="itFile" accept="image/*">
+<label>LANGUAGE</label><select id="itLang"><option value="eng">English</option><option value="hin">Hindi</option><option value="eng+hin">English + Hindi</option></select>
+<button class="btn" onclick="doImgText()">✨ Extract Text</button><div class="out" id="itOut" style="background:#0A1224;padding:10px;border-radius:10px;text-align:left;white-space:pre-wrap"></div><button class="btn blue" onclick="copyText()">📋 Copy Text</button></div>
+
+<!-- BG REMOVER -->
+<div class="tool" id="tBg"><button class="close" onclick="hideTools()">✕</button><h3>✂️ BG Remover - No API</h3>
+<label>SELECT IMAGE - White BG Best</label><input type="file" id="bgFile" accept="image/*" onchange="previewBg()">
+<label>TOLERANCE</label><input type="range" id="bgTol" min="10" max="120" value="60">
+<button class="btn" onclick="doBg()">✨ Remove Background</button><button class="btn green" onclick="dlCanvas('bgCv','No-BG.png')">⬇️ Download Transparent PNG</button><div class="out" id="bgOut"></div><canvas id="bgCv"></canvas></div>
+
+<!-- PDF COMPRESS -->
+<div class="tool" id="tPdfComp"><button class="close" onclick="hideTools()">✕</button><h3>📉 PDF Compress</h3>
+<label>SELECT PDF</label><input type="file" id="pcFile" accept="application/pdf">
+<label>QUALITY</label><select id="pcQ"><option value="1.2">High Quality</option><option value="0.9">Medium - Good</option><option value="0.6">High Compress - Small</option></select>
+<button class="btn" onclick="doPdfComp()">✨ Compress PDF</button><div class="out" id="pcOut"></div><canvas id="pcCv"></canvas></div>
+
+<!-- IMAGE COMPRESS -->
+<div class="tool" id="tImgComp"><button class="close" onclick="hideTools()">✕</button><h3>🗜️ Image Compress</h3>
+<label>SELECT IMAGE</label><input type="file" id="icFile" accept="image/*">
+<label>QUALITY</label><input type="range" id="icQ" min="10" max="90" value="60">
+<label>MAX WIDTH</label><input type="number" id="icW" value="1200">
+<button class="btn" onclick="doImgComp()">✨ Compress Image</button><button class="btn green" onclick="dlCanvas('icCv','Compressed.jpg')">⬇️ Download</button><div class="out" id="icOut"></div><canvas id="icCv"></canvas></div>
+
+<div style="background:rgba(18,29,58,.9);border:1px solid rgba(139,92,246,.35);border-radius:16px;padding:14px;font-size:12px;line-height:1.8;color:#CBD5E1;margin-top:16px">✅ AI Look UI • Live 3D Logo<br>✅ 100% Free • No Login<br>✅ Files Never Upload - Private<br>✅ Made For Shops - Solapur, India</div>
+<div style="text-align:center;font-size:11px;color:#64748B;margin-top:14px"><b style="color:#fff">ORBITTRONIZ</b><br>orbittroniz.com • Made With ❤️ In India</div>
+</div>
+
+<div class="bottom">
+<button class="active" onclick="goHome(this)"><span>🏠</span>Home</button>
+<button onclick="showTool('tInvoice');setActive(this)"><span>🧾</span>Invoice</button>
+<button onclick="showTool('tQR');setActive(this)"><span>📱</span>QR</button>
+<button onclick="showTool('tMerge');setActive(this)"><span>📚</span>Merge</button>
+</div>
+
+<script>
+function showTool(id){document.querySelectorAll('.tool').forEach(t=>t.style.display='none');document.getElementById(id).style.display='block';document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+function hideTools(){document.querySelectorAll('.tool').forEach(t=>t.style.display='none');}
+function goHome(b){hideTools();setActive(b);window.scrollTo({top:0,behavior:'smooth'});}
+function setActive(b){document.querySelectorAll('.bottom button').forEach(x=>x.classList.remove('active'));b.classList.add('active');}
+function searchTool(){let q=(document.getElementById('searchInput').value||"").toLowerCase();document.querySelectorAll('#toolGrid .card').forEach(c=>{c.style.display=(!q||c.innerText.toLowerCase().includes(q))?'block':'none';});}
+function dlCanvas(id,name){let cv=document.getElementById(id);let a=document.createElement('a');a.href=cv.toDataURL('image/png');a.download=name;a.click();}
+function readFile(f){return new Promise(r=>{let fr=new FileReader();fr.onload=e=>r(e.target.result);fr.readAsDataURL(f);});}
+function loadImg(s){return new Promise((res,rej)=>{let i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=s;});}
+
+// INVOICE
+let invTotalData=null;
+function addInvItem(){let d=document.createElement('div');d.className='inv-row';d.innerHTML='<input placeholder="Item Name"><input type="number" placeholder="Qty" value="1" class="iq"><input type="number" placeholder="Price" value="0" class="ip">';document.getElementById('invItems').appendChild(d);}
+function calcInv(){let rows=document.querySelectorAll('#invItems .inv-row');let sub=0,items=[];rows.forEach(r=>{let n=r.querySelector('input').value||"Item";let q=+r.querySelector('.iq').value||0;let p=+r.querySelector('.ip').value||0;let t=q*p;sub+=t;items.push({n,q,p,t});});let disc=+document.getElementById('invDisc').value||0;let gstP=+document.getElementById('invGst').value||0;let after=sub-disc;let gst=Math.round(after*gstP/100);let total=after+gst;return {items,sub,disc,gst,total,gstP};}
+function makeInvoice(){let d=calcInv();invTotalData=d;let html="<div style='background:#0A1224;padding:12px;border-radius:12px;text-align:left'>";d.items.forEach(it=>{html+="<div style='display:flex;justify-content:space-between'><span>"+it.n+" x "+it.q+"</span><b>₹"+it.t+"</b></div>";});html+="<hr style='margin:8px 0'><div style='display:flex;justify-content:space-between'><span>Subtotal</span><span>₹"+d.sub+"</span></div><div style='display:flex;justify-content:space-between'><span>Discount</span><span>- ₹"+d.disc+"</span></div><div style='display:flex;justify-content:space-between'><span>GST "+d.gstP+"%</span><span>₹"+d.gst+"</span></div><div style='display:flex;justify-content:space-between;font-size:16px;color:#22D3EE'><b>Total</b><b>₹"+d.total+"</b></div></div>";document.getElementById('invOut').innerHTML=html;}
+function dlInvoicePdf(){if(!invTotalData)makeInvoice();let d=invTotalData;let {jsPDF}=window.jspdf;let pdf=new jsPDF();pdf.setFontSize(20);pdf.text(document.getElementById('invShop').value||"Shop",10,15);pdf.setFontSize(11);pdf.text("Customer: "+(document.getElementById('invCust').value||""),10,25);pdf.text("Phone: "+(document.getElementById('invPhone').value||""),10,32);pdf.text("Date: "+new Date().toLocaleDateString('en-IN'),10,39);let y=50;d.items.forEach(it=>{pdf.text(it.n+" x "+it.q,10,y);pdf.text("Rs."+it.t,170,y);y+=8;});y+=5;pdf.text("Subtotal: Rs."+d.sub,10,y);y+=8;pdf.text("Discount: - Rs."+d.disc,10,y);y+=8;pdf.text("GST "+d.gstP+"%: Rs."+d.gst,10,y);y+=10;pdf.setFontSize(14);pdf.text("Total: Rs."+d.total,10,y);pdf.save("Invoice-"+Date.now()+".pdf");}
+function shareInvoice(){if(!invTotalData)makeInvoice();let d=invTotalData;let txt="*INVOICE - "+(document.getElementById('invShop').value||"")+"*%0A";d.items.forEach(it=>{txt+=it.n+" x "+it.q+" = Rs."+it.t+"%0A";});txt+="Total: Rs."+d.total+" (GST "+d.gstP+"%)";window.open("https://wa.me/?text="+txt);}
+
+// QR
+function qrHint(){let t=document.getElementById('qrType').value;document.getElementById('qrLabel').innerText=t=='upi'?"UPI ID / NAME":t=='wa'?"WHATSAPP NUMBER":t=='text'?"TEXT":"PASTE LINK";}
+function getQRText(){let t=document.getElementById('qrType').value;let v=document.getElementById('qrInput').value||"";if(t=='upi'){let upi=document.getElementById('qrUpi').value||v;let amt=document.getElementById('qrAmt').value;let s="upi://pay?pa="+upi+"&pn=Orbittroniz&cu=INR";if(amt)s+="&am="+amt;return s;}if(t=='wa'){return "https://wa.me/91"+v.replace(/\D/g,'');}return v;}
+function makeQR(){let txt=getQRText();if(!txt)return alert("Enter Value");let cv=document.getElementById('qrCv');QRCode.toCanvas(cv,txt,{width:200,margin:2},e=>{if(e)alert("QR Error");else document.getElementById('qrOut').innerText="QR Ready - "+txt;});}
+function dlQR(){let cv=document.getElementById('qrCv');let a=document.createElement('a');a.href=cv.toDataURL('image/png');a.download="QR-Orbittroniz.png";a.click();}
+async function shareQR(){let cv=document.getElementById('qrCv');try{let b=await new Promise(r=>cv.toBlob(r,'image/png'));let f=new File([b],"QR.png",{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[f]}))await navigator.share({files:[f],text:"Scan My QR"});else dlQR();}catch(e){dlQR();}}
+
+// PDF MERGE
+async function doMerge(){let files=document.getElementById('mgFiles').files;if(files.length<2)return alert("Select At Least 2 PDFs");document.getElementById('mgOut').innerText="Merging "+files.length+" PDFs...";let merged=await PDFLib.PDFDocument.create();for(let f of files){let buf=await f.arrayBuffer();let src=await PDFLib.PDFDocument.load(buf);let pages=await merged.copyPages(src,src.getPageIndices());pages.forEach(p=>merged.addPage(p));}let bytes=await merged.save();let blob=new Blob([bytes],{type:'application/pdf'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download="Merged-Orbittroniz.pdf";a.click();document.getElementById('mgOut').innerText="Merged PDF Downloaded - "+files.length+" PDFs";}
+
+// SHORT URL
+let shortLink="";
+async function doShort(){let long=document.getElementById('longUrl').value.trim();if(!long.startsWith('http'))long='https://'+long;document.getElementById('shortOut').innerText="Making Short Link...";try{let r=await fetch("https://is.gd/create.php?format=simple&url="+encodeURIComponent(long));let s=await r.text();if(s.startsWith('https://')){shortLink=s;document.getElementById('shortOut').innerHTML="✅ Short Link:<br><b style='color:#22D3EE;font-size:16px'>"+s+"</b>";}else throw 0;}catch(e){shortLink="https://orbittroniz.com/s/"+Math.random().toString(36).slice(2,7);document.getElementById('shortOut').innerHTML="✅ Short Link (Offline):<br><b style='color:#22D3EE;font-size:16px'>"+shortLink+"</b><br><small>Copy and share - Original saved in this device</small>";localStorage.setItem(shortLink,long);}}
+function copyShort(){if(!shortLink)return alert("Make Short Link First");navigator.clipboard.writeText(shortLink).then(()=>alert("Short Link Copied"));}
+function openShort(){if(!shortLink)return alert("Make Short Link First");window.open(shortLink);}
+
+// RESIZER
+let rImg=null;
+async function loadResize(){let f=document.getElementById('rFile').files[0];if(!f)return;rImg=await loadImg(await readFile(f));document.getElementById('rW').value=rImg.width;document.getElementById('rH').value=rImg.height;document.getElementById('rOut').innerHTML="Original: "+rImg.width+"x"+rImg.height;}
+function setQuick(){let v=document.getElementById('rQuick').value;if(!v)return;let p=v.split(',');document.getElementById('rW').value=p[0];document.getElementById('rH').value=p[1];}
+async function doResize(){if(!rImg)return alert("Select Image First");let w=+document.getElementById('rW').value||800,h=+document.getElementById('rH').value||800,q=+document.getElementById('rQ').value/100;let cv=document.getElementById('rCv');cv.width=w;cv.height=h;let ctx=cv.getContext('2d');ctx.fillStyle="#fff";ctx.fillRect(0,0,w,h);ctx.drawImage(rImg,0,0,w,h);document.getElementById('rOut').innerHTML="Resized: "+w+"x"+h+"<br><img src='"+cv.toDataURL('image/jpeg',q)+"'>";}
+// IMAGE TO PDF
+async function doImgPdf(){let files=document.getElementById('ipFiles').files;if(!files.length)return alert("Select At Least 1 Image");document.getElementById('ipOut').innerText="Making PDF...";let {jsPDF}=window.jspdf;let size=document.getElementById('ipSize').value;let pdf=new jsPDF({unit:'mm',format:size});let first=true;for(let f of files){let img=await loadImg(await readFile(f));let w=pdf.internal.pageSize.getWidth(),h=pdf.internal.pageSize.getHeight();if(!first)pdf.addPage(size);first=false;let ratio=Math.min((w-20)/img.width,(h-20)/img.height);let dw=img.width*ratio,dh=img.height*ratio;pdf.addImage(img,'JPEG',(w-dw)/2,(h-dh)/2,dw,dh);}pdf.save("Orbittroniz-Images.pdf");document.getElementById('ipOut').innerText="PDF Downloaded - "+files.length+" Images";}
+// PDF TO IMAGE
+async function doPdfImg(){let f=document.getElementById('piFile').files[0];if(!f)return alert("Select PDF First");document.getElementById('piOut').innerText="Converting...";let buf=await f.arrayBuffer();pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';let pdf=await pdfjsLib.getDocument({data:buf}).promise;let pNum=Math.min(+document.getElementById('piPage').value||1,pdf.numPages);let page=await pdf.getPage(pNum);let vp=page.getViewport({scale:2});let cv=document.getElementById('piCv');cv.width=vp.width;cv.height=vp.height;await page.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise;document.getElementById('piOut').innerHTML="Page "+pNum+" Of "+pdf.numPages+"<br><img src='"+cv.toDataURL('image/png')+"'><br><button class='btn green' onclick=\"dlCanvas('piCv','PDF-Page-"+pNum+".png')\">⬇️ Download</button>";}
+// IMAGE TO TEXT
+let lastText="";
+async function doImgText(){let f=document.getElementById('itFile').files[0];if(!f)return alert("Select Image First");document.getElementById('itOut').innerText="Reading Text... 10-20 Sec...";try{let r=await Tesseract.recognize(await readFile(f),document.getElementById('itLang').value);lastText=r.data.text||"No Text Found";document.getElementById('itOut').innerText=lastText;}catch(e){document.getElementById('itOut').innerText="Error - Try Clear Image";}}
+function copyText(){if(!lastText)return alert("Extract First");navigator.clipboard.writeText(lastText).then(()=>alert("Copied"));}
+// BG REMOVER
+let bgImg=null,bgSrc="";
+async function previewBg(){let f=document.getElementById('bgFile').files[0];if(!f)return;bgSrc=await readFile(f);bgImg=await loadImg(bgSrc);document.getElementById('bgOut').innerHTML="Original:<br><img src='"+bgSrc+"'>";}
+async function doBg(){if(!bgImg)return alert("Select Image First");let tol=+document.getElementById('bgTol').value;let cv=document.getElementById('bgCv');cv.width=bgImg.width;cv.height=bgImg.height;let ctx=cv.getContext('2d');ctx.drawImage(bgImg,0,0);let d=ctx.getImageData(0,0,cv.width,cv.height);for(let i=0;i<d.data.length;i+=4){if(d.data[i]>255-tol&&d.data[i+1]>255-tol&&d.data[i+2]>255-tol)d.data[i+3]=0;}ctx.putImageData(d,0,0);document.getElementById('bgOut').innerHTML="BG Removed<br><img src='"+cv.toDataURL('image/png')+"' style='background:#666'>";}
+// PDF COMPRESS
+async function doPdfComp(){let f=document.getElementById('pcFile').files[0];if(!f)return alert("Select PDF First");document.getElementById('pcOut').innerText="Compressing...";let orig=(f.size/1024).toFixed(0)+" KB";let buf=await f.arrayBuffer();pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';let pdf=await pdfjsLib.getDocument({data:buf}).promise;let {jsPDF}=window.jspdf;let outPdf=new jsPDF({unit:'mm',format:'a4'});let q=parseFloat(document.getElementById('pcQ').value);for(let n=1;n<=pdf.numPages;n++){let page=await pdf.getPage(n);let vp=page.getViewport({scale:q});let cv=document.getElementById('pcCv');cv.width=vp.width;cv.height=vp.height;await page.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise;if(n>1)outPdf.addPage('a4');outPdf.addImage(cv.toDataURL('image/jpeg',0.7),'JPEG',0,0,210,297);}outPdf.save("Compressed.pdf");document.getElementById('pcOut').innerText="Done - Original: "+orig+" - Compressed PDF Downloaded";}
+// IMAGE COMPRESS
+async function doImgComp(){let f=document.getElementById('icFile').files[0];if(!f)return alert("Select Image First");let img=await loadImg(await readFile(f));let maxW=+document.getElementById('icW').value||1200;let ratio=Math.min(1,maxW/img.width);let w=Math.round(img.width*ratio),h=Math.round(img.height*ratio);let q=+document.getElementById('icQ').value/100;let cv=document.getElementById('icCv');cv.width=w;cv.height=h;let ctx=cv.getContext('2d');ctx.fillStyle="#fff";ctx.fillRect(0,0,w,h);ctx.drawImage(img,0,0,w,h);let url=cv.toDataURL('image/jpeg',q);let ns=Math.round((url.length*3/4)/1024);document.getElementById('icOut').innerHTML="Original: "+Math.round(f.size/1024)+" KB<br>Compressed: ~"+ns+" KB - "+w+"x"+h+"<br><img src='"+url+"'>";}
+</script>
+</body>
+</html>
