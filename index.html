@@ -4430,11 +4430,639 @@ t11Log("Tool 11 V2 Loaded ✅ - AI + QR + Invisible + Sign ready hai");
   
 
 <!-- TOOL 12 -->
-<div class="tool" id="tool-12"><div class="panel"><h3>🖼️ Tool 12 - Border Frame</h3>
-<!-- YAHAN TOOL 12 KA CODE PASTE KARO -->
-<p style="font-size:12px;color:#94a3b8">Yaha Tool 12 ka feature code aayega...</p>
-</div></div>
+<!-- ================= TOOL 12 - BORDER FRAME - FULL FEATURE V2 - ENGLISH - START ================= -->
+<style>
+.t12-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.t12-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t12-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.t12-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
+.t12-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
+.t12-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
+.t12-drop.dragover{background:rgba(34,211,238,.25);transform:scale(1.02)}
+.t12-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.t12-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
+.t12-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.t12-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:13px 8px;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer}
+.t12-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent}
+.t12-chiprow{display:flex;gap:6px;margin-top:8px}
+.t12-chiprow button{flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px 4px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
+.t12-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
+.t12-toggle b{font-size:13px}
+.t12-toggle input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.t12-toggle input:checked{background:#22c55e}
+.t12-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.t12-toggle input:checked::after{left:23px}
+.t12-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.t12-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.t12-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t12-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
+.t12-prog{height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:10px;display:none;border:1px solid #2a3a6a}
+.t12-prog div{height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee);width:0%}
+.t12-range{width:100%;accent-color:#22d3ee}
+.t12-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.t12-imgcard{background:#060a18;border:1px solid #2a3a6a;border-radius:14px;overflow:hidden}
+.t12-imgcard img{width:100%;height:130px;object-fit:cover;display:block}
+.t12-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column}
+.t12-modal canvas{max-width:95%;max-height:62vh;border-radius:10px;background:#fff}
+.t12-modal-nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.t12-modal-nav button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer}
+.t12-modal-nav button.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none}
+</style>
 
+<div class="tool active" id="tool-12"><div class="t12-card">
+<div class="t12-title">🖼️ Border Frame Pro V2 - Full Feature</div>
+<div class="t12-sub">Premium • 30+ Frames • Social Templates • Magazine Style • Live Preview • Bulk</div>
+
+<label class="t12-label">🖼️ 1. SELECT IMAGES - One Or 10 At Once</label>
+<div class="t12-drop" id="t12Drop" onclick="document.getElementById('t12FileInput').click()">
+<b style="font-size:15px;color:#22d3ee">+ Click or Drag Images Here</b><br>
+<small style="color:#94a3b8">JPG / PNG / WEBP - Any Photo</small><br>
+<small style="color:#22d3ee" id="t12FileName">No Images Selected - Click Here</small><br>
+<small style="color:#f59e0b" id="t12Debug">Status: Waiting for image...</small>
+</div>
+<input type="file" id="t12FileInput" accept="*/*" multiple onchange="t12OnFileSelect(this)" style="display:none">
+
+<div id="t12SelectedBox" style="display:none;background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:10px;margin-top:10px">
+<b style="font-size:13px;color:#22c55e">✅ Selected Images:</b>
+<div id="t12SelectedList" style="margin-top:8px"></div>
+</div>
+
+<!-- LIVE PREVIEW -->
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px;margin-top:12px;text-align:center">
+<b style="font-size:13px">👀 LIVE PREVIEW - Frame Shows Here Instantly</b>
+<div style="position:relative;display:inline-block;max-width:100%;margin-top:8px">
+<canvas id="t12PreviewCanvas" style="max-width:100%;max-height:320px;border-radius:12px;background:#fff;display:none"></canvas>
+<img id="t12PreviewImg" style="max-width:100%;max-height:320px;border-radius:12px;background:#fff;display:none">
+</div>
+<div id="t12EmptyBox" style="color:#94a3b8;padding:12px;font-size:12px">Select a photo, frame preview will appear here</div>
+<div id="t12PreviewInfo" style="font-size:11px;color:#22d3ee;margin-top:6px;font-weight:700"></div>
+</div>
+
+<label class="t12-label">⚡ 2. QUICK TEMPLATES - One Click</label>
+<div class="t12-pillrow">
+<button class="t12-pill" onclick="t12SetPreset('polaroid')">📸<br>Polaroid<br>Classic</button>
+<button class="t12-pill" onclick="t12SetPreset('insta')">📱<br>Instagram<br>1:1 Post</button>
+<button class="t12-pill" onclick="t12SetPreset('wedding')">💍<br>Wedding<br>Gold</button>
+<button class="t12-pill" onclick="t12Reset()">🔄<br>Clear<br>All</button>
+</div>
+<div class="t12-pillrow" style="margin-top:8px">
+<button class="t12-pill" onclick="t12SetPreset('neon')">🌈<br>Neon<br>Glow</button>
+<button class="t12-pill" onclick="t12SetPreset('magazine')">📰<br>Magazine<br>Cover</button>
+<button class="t12-pill" onclick="t12SetPreset('baby')">👶<br>Baby<br>Soft Pink</button>
+<button class="t12-pill" onclick="t12SetPreset('travel')">✈️<br>Travel<br>Passport Style</button>
+</div>
+
+<label class="t12-label">🖼️ 3. FRAME STYLE - Choose Your Frame</label>
+<div class="t12-mode" id="t12FrameModes">
+<button class="active" data-frame="simple" onclick="t12SetFrame('simple',this)">⬜ Simple Border</button>
+<button data-frame="polaroid" onclick="t12SetFrame('polaroid',this)">📸 Polaroid</button>
+<button data-frame="round" onclick="t12SetFrame('round',this)">⭕ Circle</button>
+<button data-frame="neon" onclick="t12SetFrame('neon',this)">🌈 Neon Glow</button>
+</div>
+<div class="t12-mode">
+<button data-frame="gold" onclick="t12SetFrame('gold',this)">🥇 Gold Double</button>
+<button data-frame="double" onclick="t12SetFrame('double',this)">🖼️ Double Border</button>
+<button data-frame="shadow" onclick="t12SetFrame('shadow',this)">🌑 Shadow 3D</button>
+<button data-frame="film" onclick="t12SetFrame('film',this)">🎞️ Film Strip</button>
+</div>
+<div class="t12-mode">
+<button data-frame="vintage" onclick="t12SetFrame('vintage',this)">🏛️ Vintage Brown</button>
+<button data-frame="heart" onclick="t12SetFrame('heart',this)">❤️ Heart Corner</button>
+<button data-frame="dots" onclick="t12SetFrame('dots',this)">⚪ Dots Pattern</button>
+<button data-frame="glass" onclick="t12SetFrame('glass',this)">💎 Glass Effect</button>
+</div>
+<div class="t12-mode">
+<button data-frame="gradient" onclick="t12SetFrame('gradient',this)">🌈 Gradient Border</button>
+<button data-frame="wood" onclick="t12SetFrame('wood',this)">🪵 Wood Frame</button>
+<button data-frame="certificate" onclick="t12SetFrame('certificate',this)">🏆 Certificate</button>
+<button data-frame="none" onclick="t12SetFrame('none',this)">❌ No Frame - Caption Only</button>
+</div>
+<div id="t12FrameInfo" style="text-align:center;font-size:11px;color:#22d3ee;margin-top:6px;font-weight:700">Selected: Simple Border • Clean white border</div>
+
+<label class="t12-label">🎨 4. BORDER COLOR + PATTERN + SIZE + CORNER</label>
+<div style="display:flex;gap:8px;align-items:center">
+<input type="color" id="t12Color" value="#ffffff" style="width:60px;height:45px;border:none;border-radius:10px;cursor:pointer" oninput="t12ApplyPreview()">
+<div style="flex:1;display:flex;gap:6px">
+<button onclick="t12SetColor('#ffffff')" style="flex:1;background:#fff;border:1px solid #2a3a6a;color:#000;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">White</button>
+<button onclick="t12SetColor('#000000')" style="flex:1;background:#000;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Black</button>
+<button onclick="t12SetColor('#f59e0b')" style="flex:1;background:#f59e0b;border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Gold</button>
+<button onclick="t12SetColor('#ec4899')" style="flex:1;background:#ec4899;border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Pink</button>
+</div>
+</div>
+<div class="t12-mode" id="t12PatternModes" style="margin-top:8px">
+<button class="active" data-pattern="solid" onclick="t12SetPattern('solid',this)">⬜ Solid Color</button>
+<button data-pattern="rainbow" onclick="t12SetPattern('rainbow',this)">🌈 Rainbow</button>
+<button data-pattern="sunset" onclick="t12SetPattern('sunset',this)">🌅 Sunset</button>
+<button data-pattern="ocean" onclick="t12SetPattern('ocean',this)">🌊 Ocean</button>
+</div>
+<span style="font-size:11px;color:#fff">📏 Border Size: <b id="t12BorderVal" style="color:#22d3ee">30px</b></span>
+<input type="range" id="t12Border" class="t12-range" min="5" max="120" value="30" oninput="document.getElementById('t12BorderVal').innerText=this.value+'px';t12ApplyPreview()">
+<span style="font-size:11px;color:#fff">⭕ Corner Round: <b id="t12RadiusVal" style="color:#22d3ee">10px</b></span>
+<input type="range" id="t12Radius" class="t12-range" min="0" max="100" value="10" oninput="document.getElementById('t12RadiusVal').innerText=this.value+'px';t12ApplyPreview()">
+<span style="font-size:11px;color:#fff">🌑 Shadow: <b id="t12ShadowVal" style="color:#22d3ee">20%</b></span>
+<input type="range" id="t12Shadow" class="t12-range" min="0" max="100" value="20" oninput="document.getElementById('t12ShadowVal').innerText=this.value+'%';t12ApplyPreview()">
+
+<label class="t12-label">🔄 5. PHOTO INSIDE FRAME - Rotate / Zoom / Flip</label>
+<div style="display:flex;gap:6px">
+<button onclick="t12RotatePhoto(-90)" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:12px;font-weight:700;cursor:pointer">↩️ Rotate Left</button>
+<button onclick="t12RotatePhoto(90)" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:12px;font-weight:700;cursor:pointer">↪️ Rotate Right</button>
+<button onclick="t12FlipPhoto()" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:12px;font-weight:700;cursor:pointer">🔄 Flip</button>
+<button onclick="t12ResetPhoto()" style="flex:1;background:#ef4444;border:none;color:#fff;padding:11px;border-radius:12px;font-weight:800;cursor:pointer">Reset Photo</button>
+</div>
+<span style="font-size:11px;color:#fff">🔍 Zoom Photo: <b id="t12ZoomVal" style="color:#22d3ee">100%</b></span>
+<input type="range" id="t12Zoom" class="t12-range" min="100" max="200" value="100" oninput="document.getElementById('t12ZoomVal').innerText=this.value+'%';t12ApplyPreview()">
+<div style="display:flex;gap:6px;margin-top:6px">
+<span style="font-size:11px;color:#fff">Photo Filter:</span>
+<button onclick="t12SetFilter('none')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:10px;cursor:pointer;font-size:11px">Original</button>
+<button onclick="t12SetFilter('bw')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:10px;cursor:pointer;font-size:11px">B/W</button>
+<button onclick="t12SetFilter('sepia')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:10px;cursor:pointer;font-size:11px">Vintage</button>
+<button onclick="t12SetFilter('vivid')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:10px;cursor:pointer;font-size:11px">Vivid</button>
+</div>
+
+<label class="t12-label">✏️ 6. TITLE + CAPTION + DATE - Magazine Style</label>
+<input type="text" id="t12Title" class="t12-input" placeholder="Top Title - Example: MY TRAVEL DIARY" value="" oninput="t12ApplyPreview()">
+<input type="text" id="t12Caption" class="t12-input" placeholder="Bottom Caption - Example: Best Day Ever ❤️" value="" oninput="t12ApplyPreview()" style="margin-top:8px">
+<div class="t12-chiprow">
+<button onclick="t12QuickCaption('Best Day Ever ❤️')">❤️ Best Day</button>
+<button onclick="t12QuickCaption('Happy Birthday 🎂')">🎂 Birthday</button>
+<button onclick="t12QuickCaption('Memories 📸')">📸 Memories</button>
+</div>
+<input type="text" id="t12Caption2" class="t12-input" placeholder="Second Line - Example: @orbittroniz • Solapur" style="margin-top:8px" oninput="t12ApplyPreview()">
+<div style="display:flex;gap:8px;margin-top:8px">
+<select id="t12CapFont" class="t12-input" style="flex:1" onchange="t12ApplyPreview()"><option value="Georgia">Georgia - Stylish</option><option value="Arial">Arial - Simple</option><option value="Impact">Impact - Bold</option><option value="Courier New">Courier</option><option value="Times New Roman">Times</option></select>
+<select id="t12CapColor" class="t12-input" style="flex:1" onchange="t12ApplyPreview()"><option value="#000000">Black Text</option><option value="#ffffff">White Text</option><option value="#ec4899">Pink Text</option><option value="#2563eb">Blue Text</option><option value="#f59e0b">Gold Text</option></select>
+</div>
+<div class="t12-toggle"><b>📅 Add Date? (Shows Today's Date)</b><input type="checkbox" id="t12Date" onchange="t12ApplyPreview()"></div>
+<div class="t12-toggle"><b>📍 Add Location? (Example: Solapur, Maharashtra)</b><input type="checkbox" id="t12LocationOn" onchange="document.getElementById('t12LocBox').style.display=this.checked?'block':'none';t12ApplyPreview()"></div>
+<div id="t12LocBox" style="display:none"><input type="text" id="t12Location" class="t12-input" value="Solapur, Maharashtra" style="margin-top:8px" oninput="t12ApplyPreview()"></div>
+<div class="t12-toggle"><b>💧 Add Watermark? (Corner Name)</b><input type="checkbox" id="t12WmOn" onchange="document.getElementById('t12WmBox').style.display=this.checked?'block':'none';t12ApplyPreview()"></div>
+<div id="t12WmBox" style="display:none"><input type="text" id="t12WmText" class="t12-input" value="Orbittroniz.com" style="margin-top:8px" oninput="t12ApplyPreview()"></div>
+
+<label class="t12-label">📐 7. SOCIAL SIZE - Instagram / WhatsApp / YouTube</label>
+<div class="t12-mode" id="t12RatioModes">
+<button class="active" data-ratio="keep" onclick="t12SetRatio('keep',this)">↩️ Original Size</button>
+<button data-ratio="1:1" onclick="t12SetRatio('1:1',this)">⬛ 1:1 - Insta Post</button>
+<button data-ratio="4:5" onclick="t12SetRatio('4:5',this)">📱 4:5 - Insta Best</button>
+<button data-ratio="9:16" onclick="t12SetRatio('9:16',this)">📲 9:16 - Story / Status</button>
+</div>
+<div class="t12-mode">
+<button data-ratio="3:4" onclick="t12SetRatio('3:4',this)">🖼️ 3:4 - Portrait</button>
+<button data-ratio="16:9" onclick="t12SetRatio('16:9',this)">🎬 16:9 - YouTube</button>
+<button data-ratio="4:3" onclick="t12SetRatio('4:3',this)">📷 4:3 - Classic</button>
+<button data-ratio="passport" onclick="t12SetRatio('passport',this)">🪪 Passport Size</button>
+</div>
+<div class="t12-mode">
+<button data-ratio="fbcover" onclick="t12SetRatio('fbcover',this)">📘 FB Cover - 820x312</button>
+<button data-ratio="ytthumb" onclick="t12SetRatio('ytthumb',this)">▶️ YT Thumbnail - 1280x720</button>
+<button data-ratio="a4" onclick="t12SetRatio('a4',this)">📄 A4 Print</button>
+<button data-ratio="idcard" onclick="t12SetRatio('idcard',this)">🪪 ID Card</button>
+</div>
+
+<label class="t12-label">🖼️ 8. COLLAGE - 2 / 3 / 4 / 6 Photos In One Frame?</label>
+<div class="t12-mode" id="t12CollageModes">
+<button class="active" data-collage="single" onclick="t12SetCollage('single',this)">🖼️ Single - 1 Photo</button>
+<button data-collage="2" onclick="t12SetCollage('2',this)">👥 2 Photos - Side By Side</button>
+<button data-collage="4" onclick="t12SetCollage('4',this)">🔲 4 Photos - Grid</button>
+<button data-collage="3" onclick="t12SetCollage('3',this)">🔳 3 Photos - L Shape</button>
+</div>
+<div class="t12-mode">
+<button data-collage="6" onclick="t12SetCollage('6',this)">🔲 6 Photos - Grid 3x2</button>
+<button data-collage="strip" onclick="t12SetCollage('strip',this)">🎞️ Strip - Vertical 4 Photos</button>
+<button data-collage="beforeafter" onclick="t12SetCollage('beforeafter',this)">↔️ Before / After</button>
+<button data-collage="single" onclick="t12SetCollage('single',this)">↩️ Back To Single</button>
+</div>
+<div id="t12CollageInfo" style="text-align:center;font-size:11px;color:#f59e0b;margin-top:6px">Collage needs at least 2 photos - I will use first 2-6 photos</div>
+
+<label class="t12-label">🔄 9. OUTPUT FORMAT + FILE NAME</label>
+<div class="t12-mode" id="t12FmtModes">
+<button class="active" data-fmt="jpeg" onclick="t12SetFmt('jpeg',this)">🖼️ JPG</button>
+<button data-fmt="png" onclick="t12SetFmt('png',this)">🎨 PNG - Best Quality</button>
+<button data-fmt="webp" onclick="t12SetFmt('webp',this)">⚡ WEBP - Small Size</button>
+<button data-fmt="keep" onclick="t12SetFmt('keep',this)">↩️ Keep Same</button>
+</div>
+<input type="text" id="t12Prefix" class="t12-input" placeholder="Framed - Orbittroniz" value="Framed - Orbittroniz" style="margin-top:8px">
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
+<b id="t12Stats" style="font-size:13px">Images: 0 • Frame: Simple • Caption: -</b>
+</div>
+<div class="t12-prog" id="t12Prog"><div id="t12Fill"></div></div>
+<div id="t12Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
+
+<button class="t12-btn-preview" onclick="t12OpenPreview()">👀 PREVIEW - Before / After Full Screen</button>
+<button class="t12-btn3d" id="t12ApplyBtn" onclick="t12Apply()">🖼️ APPLY FRAME - REAL START</button>
+<button class="t12-btn2" onclick="t12DownloadAll()" id="t12AllBtn" style="display:none">⬇️ Download All One By One</button>
+<button class="t12-btn2" onclick="t12DownloadZIP()" id="t12ZipBtn" style="display:none;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border:none">📦 Download All as ZIP</button>
+<button class="t12-btn-share" id="t12ShareBtn" onclick="t12ShareFirst()">📤 SHARE FIRST IMAGE</button>
+<button class="t12-btn2" onclick="t12Reset()">🗑️ Clear / New Images</button>
+
+<label class="t12-label">🖼️ FRAMED IMAGES</label>
+<div class="t12-grid" id="t12Out"></div>
+<div id="t12OutEmpty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">No images yet - Apply Frame to see here</div>
+<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - Real Canvas Frame • No Server</p>
+</div></div>
+<!-- ================= TOOL 12 V2 - END ================= -->
+
+<div class="t12-modal" id="t12Modal">
+<div id="t12ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Preview</div>
+<canvas id="t12ModalCanvas"></canvas>
+<div id="t12ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div>
+<div class="t12-modal-nav">
+<button onclick="t12ToggleBeforeAfter()" style="background:#f59e0b" id="t12BeforeAfterBtn">🔄 Show After</button>
+<button onclick="t12PrevImg()">⬅️ Prev</button>
+<button onclick="t12NextImg()">Next ➡️</button>
+<button onclick="t12DownloadOne(t12PreviewIdx)" style="background:#22c55e">⬇️ Download This</button>
+<button class="primary" onclick="t12ClosePreview()">✅ Close</button>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+<script>
+// ===== TOOL 12 V2 JS - FULL FEATURE - ENGLISH =====
+var t12Files=[], t12Selected=new Set(), t12Frame='simple', t12Ratio='keep', t12Collage='single', t12Fmt='jpeg', t12Results=[], t12PreviewIdx=0, t12ShowAfter=false, t12EditorImg=null, t12EditorImgs=[], t12Pattern='solid', t12PhotoRotate=0, t12PhotoFlip=false, t12PhotoFilter='none';
+function t12Log(msg){ var d=document.getElementById('t12Debug'); if(d) d.innerText="Status: "+msg; }
+function t12OnFileSelect(input){
+  t12Log("File select: "+(input.files?input.files.length:0));
+  if(!input.files || !input.files.length) return;
+  var files=Array.prototype.slice.call(input.files); input.value="";
+  t12LoadFiles(files);
+}
+(function(){
+  var drop=document.getElementById('t12Drop'); if(!drop) return;
+  drop.addEventListener('dragover',function(e){e.preventDefault();drop.classList.add('dragover')});
+  drop.addEventListener('dragleave',function(){drop.classList.remove('dragover')});
+  drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remove('dragover'); if(e.dataTransfer.files && e.dataTransfer.files.length) t12LoadFiles(Array.prototype.slice.call(e.dataTransfer.files));});
+})();
+function t12SetFrame(f,btn){ t12Frame=f; document.querySelectorAll('#t12FrameModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active');
+  var info={simple:"Simple Border • Clean",polaroid:"Polaroid • Big white bottom + caption",round:"Circle • Round frame",neon:"Neon Glow • Glowing",gold:"Gold Double • Wedding style",double:"Double Border • 2 lines",shadow:"Shadow 3D • Raised",film:"Film Strip • Top-bottom black strip",vintage:"Vintage Brown • Old style",heart:"Heart Corner • Hearts on corners",dots:"Dots Pattern • Small dots",glass:"Glass Effect • Shiny",gradient:"Gradient Border • Colorful",wood:"Wood Frame • Brown wood",certificate:"Certificate • Formal border",none:"No Frame - Caption Only"};
+  document.getElementById('t12FrameInfo').innerText="Selected: "+f+" • "+(info[f]||"");
+  t12ApplyPreview();
+}
+function t12SetPattern(p,btn){ t12Pattern=p; document.querySelectorAll('#t12PatternModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); t12ApplyPreview(); }
+function t12SetRatio(r,btn){ t12Ratio=r; document.querySelectorAll('#t12RatioModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); t12ApplyPreview(); }
+function t12SetCollage(c,btn){ t12Collage=c; document.querySelectorAll('#t12CollageModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); if(c!=='single' && t12Files.length<2) document.getElementById('t12Status').innerText="Collage needs at least 2 photos"; t12ApplyPreview(); }
+function t12SetFmt(f,btn){ t12Fmt=f; document.querySelectorAll('#t12FmtModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); }
+function t12SetColor(c){ document.getElementById('t12Color').value=c; t12ApplyPreview(); }
+function t12QuickCaption(t){ document.getElementById('t12Caption').value=t; t12ApplyPreview(); }
+function t12RotatePhoto(deg){ t12PhotoRotate=(t12PhotoRotate+deg+360)%360; t12ApplyPreview(); document.getElementById('t12Status').innerText="Photo Rotated: "+t12PhotoRotate+"°"; }
+function t12FlipPhoto(){ t12PhotoFlip=!t12PhotoFlip; t12ApplyPreview(); document.getElementById('t12Status').innerText=t12PhotoFlip?"Photo Flipped ✅":"Flip Off"; }
+function t12ResetPhoto(){ t12PhotoRotate=0; t12PhotoFlip=false; document.getElementById('t12Zoom').value=100; document.getElementById('t12ZoomVal').innerText="100%"; t12SetFilter('none'); t12ApplyPreview(); }
+function t12SetFilter(f){ t12PhotoFilter=f; t12ApplyPreview(); }
+function t12SetPreset(name){
+  if(name==='polaroid'){ t12SetFrame('polaroid', document.querySelector('#t12FrameModes button[data-frame="polaroid"]')); document.getElementById('t12Color').value="#ffffff"; document.getElementById('t12Border').value=30; document.getElementById('t12BorderVal').innerText="30px"; document.getElementById('t12Caption').value="Memories 📸"; }
+  else if(name==='insta'){ t12SetFrame('simple', document.querySelector('#t12FrameModes button[data-frame="simple"]')); t12SetRatio('1:1', document.querySelector('#t12RatioModes button[data-ratio="1:1"]')); document.getElementById('t12Color').value="#ffffff"; document.getElementById('t12Border').value=20; document.getElementById('t12BorderVal').innerText="20px"; }
+  else if(name==='wedding'){ t12SetFrame('gold', document.querySelector('#t12FrameModes button[data-frame="gold"]')); document.getElementById('t12Color').value="#f59e0b"; document.getElementById('t12Border').value=40; document.getElementById('t12BorderVal').innerText="40px"; document.getElementById('t12Caption').value="Happy Wedding 💍"; }
+  else if(name==='neon'){ t12SetFrame('neon', document.querySelector('#t12FrameModes button[data-frame="neon"]')); document.getElementById('t12Color').value="#22d3ee"; }
+  else if(name==='magazine'){ t12SetFrame('simple', document.querySelector('#t12FrameModes button[data-frame="simple"]')); document.getElementById('t12Title').value="MY TRAVEL DIARY"; document.getElementById('t12Caption').value="Best Trip Ever"; document.getElementById('t12Caption2').value="@orbittroniz • Solapur"; }
+  else if(name==='baby'){ t12SetFrame('round', document.querySelector('#t12FrameModes button[data-frame="round"]')); document.getElementById('t12Color').value="#fbcfe8"; document.getElementById('t12Caption').value="My Little Angel 👶"; }
+  else if(name==='travel'){ t12SetFrame('vintage', document.querySelector('#t12FrameModes button[data-frame="vintage"]')); document.getElementById('t12Caption').value="Travel Memories ✈️"; }
+  t12ApplyPreview();
+}
+async function t12LoadFiles(files){
+  files=files.filter(function(f){ return f.type.indexOf('image/')===0 || f.type==='' || f.name.match(/\.(jpg|jpeg|png|webp|gif|bmp)$/i); }).slice(0,10);
+  if(!files.length){ alert("Please select only images!"); return; }
+  t12Files=files; t12Selected.clear(); t12Results=[]; t12PreviewIdx=0; t12EditorImgs=[];
+  files.forEach(function(_,i){ t12Selected.add(i); });
+  document.getElementById('t12Out').innerHTML=""; document.getElementById('t12OutEmpty').style.display='block'; document.getElementById('t12AllBtn').style.display='none'; document.getElementById('t12ZipBtn').style.display='none'; document.getElementById('t12ShareBtn').style.display='none';
+  document.getElementById('t12FileName').innerText=files.length+" Images Selected ✅ - "+files[0].name;
+  document.getElementById('t12Status').innerText="✅ Ready! "+files.length+" images. Click Apply Frame.";
+  t12Log("Loaded "+files.length+" images OK");
+  var listEl=document.getElementById('t12SelectedList'); document.getElementById('t12SelectedBox').style.display='block'; listEl.innerHTML="";
+  files.forEach(function(f,idx){
+    var div=document.createElement('div'); div.style.cssText="display:flex;gap:8px;align-items:center;margin-top:6px;background:#060a18;border:1px solid #2a3a6a;border-radius:10px;padding:6px";
+    var thumb=document.createElement('img'); thumb.style.cssText="width:50px;height:50px;object-fit:cover;border-radius:8px;background:#fff"; thumb.src=URL.createObjectURL(f);
+    var span=document.createElement('span'); span.style.cssText="font-size:11px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff"; span.innerText=(idx+1)+". "+f.name+" • "+(f.size/1024).toFixed(0)+" KB";
+    div.appendChild(thumb); div.appendChild(span); listEl.appendChild(div);
+  });
+  var promises=files.map(function(f){ return new Promise(function(res){ var img=new Image(); img.onload=function(){res(img)}; img.src=URL.createObjectURL(f); }); });
+  t12EditorImgs=await Promise.all(promises);
+  t12EditorImg=t12EditorImgs[0];
+  document.getElementById('t12EmptyBox').style.display='none';
+  document.getElementById('t12PreviewImg').style.display='block';
+  document.getElementById('t12PreviewImg').src=URL.createObjectURL(files[0]);
+  t12ApplyPreview();
+}
+function t12RoundRect(ctx,x,y,w,h,r){ r=Math.min(r, w/2, h/2); ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+function t12GetBorderFill(ctx,W,H,borderColor){
+  if(t12Pattern==='rainbow'){ var g=ctx.createLinearGradient(0,0,W,0); g.addColorStop(0,'#ef4444'); g.addColorStop(0.2,'#f59e0b'); g.addColorStop(0.4,'#22c55e'); g.addColorStop(0.6,'#22d3ee'); g.addColorStop(0.8,'#a78bfa'); g.addColorStop(1,'#ec4899'); return g; }
+  if(t12Pattern==='sunset'){ var g2=ctx.createLinearGradient(0,0,W,H); g2.addColorStop(0,'#f59e0b'); g2.addColorStop(0.5,'#ef4444'); g2.addColorStop(1,'#7c3aed'); return g2; }
+  if(t12Pattern==='ocean'){ var g3=ctx.createLinearGradient(0,0,W,H); g3.addColorStop(0,'#22d3ee'); g3.addColorStop(0.5,'#2563eb'); g3.addColorStop(1,'#0ea5e9'); return g3; }
+  return borderColor;
+}
+// ===== CORE FRAME DRAW =====
+function t12DrawFrame(ctx, img, W, H){
+  var border=parseInt(document.getElementById('t12Border').value||30);
+  var radius=parseInt(document.getElementById('t12Radius').value||10);
+  var shadowPct=parseInt(document.getElementById('t12Shadow').value||20);
+  var borderColor=document.getElementById('t12Color').value||"#ffffff";
+  var title=document.getElementById('t12Title').value||"";
+  var caption=document.getElementById('t12Caption').value||"";
+  var caption2=document.getElementById('t12Caption2').value||"";
+  if(document.getElementById('t12Date').checked){ caption2 = caption2 ? caption2+" • "+new Date().toLocaleDateString('en-IN') : new Date().toLocaleDateString('en-IN'); }
+  if(document.getElementById('t12LocationOn').checked){ var loc=document.getElementById('t12Location').value||"Solapur"; caption2 = caption2 ? caption2+" • 📍 "+loc : "📍 "+loc; }
+  var capFont=document.getElementById('t12CapFont').value||"Georgia";
+  var capColor=document.getElementById('t12CapColor').value||"#000000";
+  var wmOn=document.getElementById('t12WmOn').checked;
+  var wmText=document.getElementById('t12WmText').value||"Orbittroniz.com";
+  var zoom=parseInt(document.getElementById('t12Zoom').value||100)/100;
+
+  var hasTop = !!title;
+  var hasBottom = !!(caption||caption2);
+  var topExtra = hasTop ? 55 : 0;
+  var bottomExtra = 0;
+  if(t12Frame==='polaroid') bottomExtra = border*2 + (hasBottom?60:50);
+  else if(hasBottom) bottomExtra = 75;
+  else bottomExtra = 0;
+
+  // Background
+  ctx.fillStyle=t12GetBorderFill(ctx,W,H,borderColor); ctx.fillRect(0,0,W,H);
+  if(t12Frame==='gold'){ ctx.fillStyle='#f59e0b'; ctx.fillRect(0,0,W,H); ctx.fillStyle='#fff7ed'; ctx.fillRect(6,6,W-12,H-12); }
+  else if(t12Frame==='vintage'){ ctx.fillStyle='#8b5a2b'; ctx.fillRect(0,0,W,H); ctx.fillStyle='#f5e6c8'; ctx.fillRect(border*0.4,border*0.4,W-border*0.8,H-border*0.8); }
+  else if(t12Frame==='film'){ ctx.fillStyle='#000'; ctx.fillRect(0,0,W,H); }
+  else if(t12Frame==='wood'){ ctx.fillStyle='#92400e'; ctx.fillRect(0,0,W,H); ctx.fillStyle='#b45309'; ctx.fillRect(5,5,W-10,H-10); ctx.fillStyle='#d97706'; ctx.fillRect(10,10,W-20,H-20); }
+  else if(t12Frame==='certificate'){ ctx.fillStyle='#fffbeb'; ctx.fillRect(0,0,W,H); ctx.strokeStyle='#f59e0b'; ctx.lineWidth=6; ctx.strokeRect(10,10,W-20,H-20); ctx.strokeStyle='#92400e'; ctx.lineWidth=2; ctx.strokeRect(20,20,W-40,H-40); }
+  else if(t12Frame==='glass'){ ctx.fillStyle='#e0f2fe'; ctx.fillRect(0,0,W,H); }
+  else if(t12Frame==='neon'){ ctx.fillStyle='#0a0a0a'; ctx.fillRect(0,0,W,H); ctx.shadowColor=borderColor; ctx.shadowBlur=25; ctx.strokeStyle=borderColor; ctx.lineWidth=border*0.5; ctx.strokeRect(border/2,border/2,W-border,H-border); ctx.shadowBlur=0; }
+  else if(t12Frame==='double'){ ctx.fillStyle=t12GetBorderFill(ctx,W,H,borderColor); ctx.fillRect(0,0,W,H); ctx.strokeStyle='rgba(0,0,0,0.2)'; ctx.lineWidth=3; ctx.strokeRect(border*0.35,border*0.35,W-border*0.7,H-border*0.7); }
+
+  // Photo Area
+  var photoX=border, photoY=border+topExtra, photoW=W-border*2, photoH=H-border*2-topExtra-bottomExtra;
+  if(t12Frame==='film'){ photoY=border+20+topExtra; photoH=H-border*2-40-topExtra-bottomExtra; photoX=border+15; photoW=W-border*2-30; }
+  if(t12Frame==='gold'){ photoX=border+6; photoY=border+6+topExtra; photoW=W-(border+6)*2; photoH=H-(border+6)*2-topExtra-bottomExtra; }
+  if(t12Frame==='vintage'){ photoX=border*0.4+8; photoY=border*0.4+8+topExtra; photoW=W-(border*0.4+8)*2; photoH=H-(border*0.4+8)*2-topExtra-bottomExtra; }
+
+  // Top Title
+  if(hasTop){
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.font="bold "+Math.round(W*0.05)+"px "+capFont+", Arial"; ctx.fillStyle=capColor;
+    ctx.fillText(title.toUpperCase(), W/2, border/2 + 18);
+  }
+
+  ctx.save();
+  if(t12Frame==='round'){ t12RoundRect(ctx, photoX, photoY, photoW, photoH, Math.min(photoW,photoH)/2); ctx.clip(); }
+  else if(radius>0){ t12RoundRect(ctx, photoX, photoY, photoW, photoH, radius); ctx.clip(); }
+  // Filter
+  if(t12PhotoFilter==='bw') ctx.filter='grayscale(100%)';
+  else if(t12PhotoFilter==='sepia') ctx.filter='sepia(70%) contrast(110%)';
+  else if(t12PhotoFilter==='vivid') ctx.filter='saturate(150%) contrast(115%)';
+  else ctx.filter='none';
+  // Rotate / Flip / Zoom - Draw photo in center with transform
+  var imgW=img.width, imgH=img.height;
+  // Cover fit calculation
+  var imgRatio=imgW/imgH, boxRatio=photoW/photoH;
+  var sx=0, sy=0, sw=imgW, sh=imgH;
+  if(imgRatio>boxRatio){ sw=imgH*boxRatio; sx=(imgW-sw)/2; } else { sh=imgW/boxRatio; sy=(imgH-sh)/2; }
+  ctx.translate(photoX+photoW/2, photoY+photoH/2);
+  if(t12PhotoFlip) ctx.scale(-1,1);
+  ctx.rotate(t12PhotoRotate*Math.PI/180);
+  ctx.scale(zoom, zoom);
+  // If rotated 90/270, swap width/height logic - Simple: draw with photoW/photoH, rotation will handle
+  ctx.drawImage(img, sx, sy, sw, sh, -photoW/2, -photoH/2, photoW, photoH);
+  ctx.restore();
+  ctx.filter='none';
+
+  if(shadowPct>0 && t12Frame!=='neon'){ ctx.save(); ctx.shadowColor='rgba(0,0,0,0.3)'; ctx.shadowBlur=shadowPct*0.5; ctx.shadowOffsetY=4; ctx.strokeStyle='rgba(0,0,0,0.15)'; ctx.lineWidth=1; ctx.strokeRect(photoX,photoY,photoW,photoH); ctx.restore(); }
+  if(t12Frame==='dots'){
+    ctx.fillStyle=borderColor;
+    for(var x=10;x<W;x+=30){ ctx.beginPath(); ctx.arc(x, border/2, 4, 0, Math.PI*2); ctx.fill(); ctx.beginPath(); ctx.arc(x, H-border/2, 4, 0, Math.PI*2); ctx.fill(); }
+  }
+  if(t12Frame==='heart'){
+    function heart(cx,cy,s){ ctx.save(); ctx.fillStyle='#ec4899'; ctx.beginPath(); ctx.moveTo(cx, cy+s*0.3); ctx.bezierCurveTo(cx, cy, cx-s, cy-s*0.2, cx-s, cy+s*0.3); ctx.bezierCurveTo(cx-s, cy+s*0.8, cx, cy+s*1.2, cx, cy+s*1.5); ctx.bezierCurveTo(cx, cy+s*1.2, cx+s, cy+s*0.8, cx+s, cy+s*0.3); ctx.bezierCurveTo(cx+s, cy-s*0.2, cx, cy, cx, cy+s*0.3); ctx.fill(); ctx.restore(); }
+    heart(border/2, border/2, border*0.3); heart(W-border/2, border/2, border*0.3); heart(border/2, H-border/2, border*0.3); heart(W-border/2, H-border/2, border*0.3);
+  }
+  if(t12Frame==='film'){ ctx.fillStyle='#fff'; for(var fx=20; fx<W-20; fx+=35){ ctx.fillRect(fx, 8, 18, 12); ctx.fillRect(fx, H-20, 18, 12); } }
+
+  if(caption || caption2){
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    var capY = H - bottomExtra + 28;
+    if(t12Frame==='polaroid') capY = H - bottomExtra + 38;
+    if(caption){ ctx.font="bold "+Math.round(W*0.045)+"px "+capFont+", Arial"; ctx.fillStyle=capColor; ctx.fillText(caption, W/2, capY); }
+    if(caption2){ ctx.font=Math.round(W*0.032)+"px Arial"; ctx.fillStyle=capColor; ctx.globalAlpha=0.7; ctx.fillText(caption2, W/2, capY + (caption?28:0)); ctx.globalAlpha=1; }
+  }
+  if(wmOn){ ctx.save(); ctx.globalAlpha=0.6; ctx.font="bold "+Math.round(W*0.03)+"px Arial"; ctx.textAlign='right'; ctx.fillStyle='#ffffff'; ctx.shadowColor='rgba(0,0,0,0.8)'; ctx.shadowBlur=4; ctx.fillText(wmText, photoX+photoW-10, photoY+photoH-12); ctx.restore(); }
+  return {photoX:photoX, photoY:photoY, photoW:photoW, photoH:photoH, bottomExtra:bottomExtra, topExtra:topExtra};
+}
+function t12CalcSize(img){
+  var border=parseInt(document.getElementById('t12Border').value||30);
+  var title=document.getElementById('t12Title').value||"";
+  var caption=document.getElementById('t12Caption').value||"";
+  var caption2=document.getElementById('t12Caption2').value||"";
+  var hasTop=!!title, hasBottom=!!(caption||caption2||document.getElementById('t12Date').checked||document.getElementById('t12LocationOn').checked);
+  var topExtra=hasTop?55:0;
+  var bottomExtra = t12Frame==='polaroid' ? border*2 + (hasBottom?60:50) : (hasBottom?75:0);
+  var w=img.width, h=img.height;
+  if(t12Ratio==='1:1'){ var s=Math.min(w,h); w=s; h=s; }
+  else if(t12Ratio==='4:5'){ if(w/h>0.8){ w=h*0.8; } else { h=w/0.8; } }
+  else if(t12Ratio==='9:16'){ if(w/h>0.5625){ w=h*0.5625; } else { h=w/0.5625; } }
+  else if(t12Ratio==='3:4'){ if(w/h>0.75){ w=h*0.75; } else { h=w/0.75; } }
+  else if(t12Ratio==='16:9'){ if(w/h<1.777){ h=w/1.777; } else { w=h*1.777; } }
+  else if(t12Ratio==='4:3'){ if(w/h<1.333){ h=w/1.333; } else { w=h*1.333; } }
+  else if(t12Ratio==='passport'){ w=600; h=750; }
+  else if(t12Ratio==='fbcover'){ w=820; h=312; }
+  else if(t12Ratio==='ytthumb'){ w=1280; h=720; }
+  else if(t12Ratio==='a4'){ w=1240; h=1754; }
+  else if(t12Ratio==='idcard'){ w=640; h=400; }
+  var maxW=2000; if(w>maxW){ var sc=maxW/w; w=Math.round(w*sc); h=Math.round(h*sc); }
+  var finalW=Math.round(w + border*2);
+  var finalH=Math.round(h + border*2 + topExtra + bottomExtra);
+  return {w:w, h:h, finalW:finalW, finalH:finalH, bottomExtra:bottomExtra, topExtra:topExtra};
+}
+function t12ApplyPreview(){
+  if(!t12EditorImg) return;
+  var img=t12EditorImg;
+  if(t12Collage!=='single' && t12EditorImgs.length>=2){ t12DrawCollagePreview(); return; }
+  var sz=t12CalcSize(img);
+  var canvas=document.getElementById('t12PreviewCanvas');
+  var scale=Math.min(1, 700/Math.max(sz.finalW, sz.finalH));
+  canvas.width=Math.round(sz.finalW*scale); canvas.height=Math.round(sz.finalH*scale);
+  var ctx=canvas.getContext('2d');
+  var full=document.createElement('canvas'); full.width=sz.finalW; full.height=sz.finalH;
+  var fctx=full.getContext('2d');
+  var cropped=t12GetCroppedImg(img, sz);
+  t12DrawFrame(fctx, cropped, sz.finalW, sz.finalH);
+  ctx.drawImage(full,0,0,canvas.width,canvas.height);
+  canvas.style.display='block'; document.getElementById('t12PreviewImg').style.display='none';
+  document.getElementById('t12PreviewInfo').innerText="Preview: "+t12Frame+" • "+t12Ratio+" • "+sz.finalW+"x"+sz.finalH+" • Title: "+(document.getElementById('t12Title').value||"-")+" • Caption: "+(document.getElementById('t12Caption').value||"-");
+  document.getElementById('t12Stats').innerText="Images: "+t12Files.length+" • Frame: "+t12Frame+" • Ratio: "+t12Ratio+" • Caption: "+(document.getElementById('t12Caption').value||"-");
+}
+function t12GetCroppedImg(img, sz){
+  var w=img.width, h=img.height;
+  var targetW=sz.w, targetH=sz.h;
+  if(t12Ratio==='passport'){ targetW=600; targetH=750; }
+  if(t12Ratio==='fbcover'){ targetW=820; targetH=312; }
+  if(t12Ratio==='ytthumb'){ targetW=1280; targetH=720; }
+  if(t12Ratio==='a4'){ targetW=1240; targetH=1754; }
+  if(t12Ratio==='idcard'){ targetW=640; targetH=400; }
+  var imgRatio=w/h, boxRatio=targetW/targetH;
+  var sx=0, sy=0, sw=w, sh=h;
+  if(t12Ratio!=='keep'){ if(imgRatio>boxRatio){ sw=h*boxRatio; sx=(w-sw)/2; } else { sh=w/boxRatio; sy=(h-sh)/2; } }
+  var c=document.createElement('canvas'); c.width=targetW; c.height=targetH;
+  var ctx=c.getContext('2d'); ctx.drawImage(img, sx, sy, sw, sh, 0,0,targetW,targetH);
+  return c;
+}
+function t12DrawCollagePreview(){
+  var isStrip=t12Collage==='strip', isBA=t12Collage==='beforeafter';
+  var count = isStrip?4 : isBA?2 : (t12Collage==='2'?2 : t12Collage==='3'?3 : t12Collage==='6'?6 : 4);
+  var imgs=t12EditorImgs.slice(0,count);
+  var canvas=document.getElementById('t12PreviewCanvas');
+  var border=parseInt(document.getElementById('t12Border').value||30);
+  var borderColor=document.getElementById('t12Color').value||"#ffffff";
+  var W=700, H=700;
+  canvas.width=W; canvas.height=H;
+  var ctx=canvas.getContext('2d'); ctx.fillStyle=borderColor; ctx.fillRect(0,0,W,H);
+  var gap=10;
+  function drawCover(im, x,y,w,h){
+    var r=im.width/im.height, br=w/h; var sx=0,sy=0,sw=im.width,sh=im.height;
+    if(r>br){ sw=im.height*br; sx=(im.width-sw)/2; } else { sh=im.width/br; sy=(im.height-sh)/2; }
+    ctx.drawImage(im, sx,sy,sw,sh, x,y,w,h);
+  }
+  if(isBA){
+    // Before / After - Left original, Right filtered
+    var w2=(W-border*2-gap)/2, h2=H-border*2;
+    drawCover(imgs[0], border, border, w2, h2);
+    ctx.save(); ctx.filter='saturate(150%) contrast(115%)'; drawCover(imgs[0], border+w2+gap, border, w2, h2); ctx.restore();
+    ctx.fillStyle='#000'; ctx.font="bold 18px Arial"; ctx.textAlign='center'; ctx.fillText("BEFORE", border+w2/2, border+28); ctx.fillText("AFTER", border+w2+gap+w2/2, border+28);
+  } else if(isStrip){
+    var sh2=(H-border*2-gap*3)/4, sw2=W-border*2;
+    imgs.forEach(function(im,idx){ drawCover(im, border, border+idx*(sh2+gap), sw2, sh2); });
+  } else if(count===2){
+    imgs.forEach(function(im,idx){ var w=(W-border*2-gap)/2, h=H-border*2; drawCover(im, border+idx*(w+gap), border, w,h); });
+  } else if(count===4){
+    imgs.forEach(function(im,idx){ var col=idx%2, row=Math.floor(idx/2); var w=(W-border*2-gap)/2, h=(H-border*2-gap)/2; drawCover(im, border+col*(w+gap), border+row*(h+gap), w,h); });
+  } else if(count===6){
+    imgs.forEach(function(im,idx){ var col=idx%3, row=Math.floor(idx/3); var w=(W-border*2-gap*2)/3, h=(H-border*2-gap)/2; drawCover(im, border+col*(w+gap), border+row*(h+gap), w,h); });
+  } else if(count===3){
+    var topH=(H-border*2)*0.6, botH=(H-border*2)*0.4-gap; var w0=W-border*2; drawCover(imgs[0], border,border,w0,topH);
+    [imgs[1],imgs[2]].forEach(function(im,idx){ var w=(W-border*2-gap)/2; drawCover(im, border+idx*(w+gap), border+topH+gap, w, botH); });
+  }
+  var caption=document.getElementById('t12Caption').value||"";
+  if(caption){ ctx.font="bold 22px Georgia"; ctx.textAlign='center'; ctx.fillStyle='#000'; }
+  canvas.style.display='block'; document.getElementById('t12PreviewImg').style.display='none';
+  document.getElementById('t12PreviewInfo').innerText="Collage Preview: "+count+" photos • Frame: "+t12Frame;
+}
+function t12LoadImage(file){ return new Promise(function(res,rej){ var img=new Image(); img.onload=function(){res(img)}; img.onerror=rej; img.src=URL.createObjectURL(file); }); }
+async function t12ApplyOne(file){
+  var img=await t12LoadImage(file);
+  var sz=t12CalcSize(img);
+  var cropped=t12GetCroppedImg(img, sz);
+  var canvas=document.createElement('canvas'); canvas.width=sz.finalW; canvas.height=sz.finalH;
+  var ctx=canvas.getContext('2d');
+  t12DrawFrame(ctx, cropped, sz.finalW, sz.finalH);
+  var outFmt = t12Fmt==='keep' ? (file.type.indexOf('png')>-1?'png':file.type.indexOf('webp')>-1?'webp':'jpeg') : t12Fmt;
+  var mime = outFmt==='png'?'image/png':outFmt==='webp'?'image/webp':'image/jpeg';
+  var ext = outFmt==='png'?'png':outFmt==='webp'?'webp':'jpg';
+  var blob=await new Promise(function(r){canvas.toBlob(r,mime, outFmt==='png'?1:0.92)});
+  if(!blob){ blob=await new Promise(function(r){canvas.toBlob(r,'image/jpeg',0.92)}); mime='image/jpeg'; ext='jpg'; }
+  return {blob:blob,ext:ext,w:sz.finalW,h:sz.finalH,origW:img.width,origH:img.height,canvas:canvas};
+}
+async function t12ApplyCollage(){
+  var isStrip=t12Collage==='strip', isBA=t12Collage==='beforeafter';
+  var count = isStrip?4 : isBA?2 : (t12Collage==='2'?2 : t12Collage==='3'?3 : t12Collage==='6'?6 : 4);
+  if(!isBA && t12Files.length<count) return alert("Collage needs at least "+count+" photos!");
+  if(isBA && t12Files.length<1) return alert("Need at least 1 photo for Before/After");
+  var imgs=[];
+  if(isBA){ imgs=[await t12LoadImage(t12Files[0])]; }
+  else { for(var i=0;i<count;i++){ imgs.push(await t12LoadImage(t12Files[i])); } }
+  var border=parseInt(document.getElementById('t12Border').value||30);
+  var borderColor=document.getElementById('t12Color').value||"#ffffff";
+  var W=1200, H=1200;
+  var canvas=document.createElement('canvas'); canvas.width=W; canvas.height=H;
+  var ctx=canvas.getContext('2d'); ctx.fillStyle=borderColor; ctx.fillRect(0,0,W,H);
+  var gap=12;
+  function drawCover(im, x,y,w,h){
+    var r=im.width/im.height, br=w/h; var sx=0,sy=0,sw=im.width,sh=im.height;
+    if(r>br){ sw=im.height*br; sx=(im.width-sw)/2; } else { sh=im.width/br; sy=(im.height-sh)/2; }
+    ctx.drawImage(im, sx,sy,sw,sh, x,y,w,h);
+  }
+  if(isBA){
+    var w2=(W-border*2-gap)/2, h2=H-border*2;
+    drawCover(imgs[0], border, border, w2, h2);
+    ctx.save(); ctx.filter='saturate(150%) contrast(115%)'; drawCover(imgs[0], border+w2+gap, border, w2, h2); ctx.restore();
+    ctx.fillStyle='#000'; ctx.font="bold 28px Arial"; ctx.textAlign='center'; ctx.fillText("BEFORE", border+w2/2, border+32); ctx.fillText("AFTER", border+w2+gap+w2/2, border+32);
+  } else if(isStrip){
+    var sh2=(H-border*2-gap*3)/4, sw2=W-border*2;
+    imgs.forEach(function(im,idx){ drawCover(im, border, border+idx*(sh2+gap), sw2, sh2); });
+  } else if(count===2){ imgs.forEach(function(im,idx){ var w=(W-border*2-gap)/2, h=H-border*2; drawCover(im, border+idx*(w+gap), border, w,h); }); }
+  else if(count===4){ imgs.forEach(function(im,idx){ var col=idx%2, row=Math.floor(idx/2); var w=(W-border*2-gap)/2, h=(H-border*2-gap)/2; drawCover(im, border+col*(w+gap), border+row*(h+gap), w,h); }); }
+  else if(count===6){ imgs.forEach(function(im,idx){ var col=idx%3, row=Math.floor(idx/3); var w=(W-border*2-gap*2)/3, h=(H-border*2-gap)/2; drawCover(im, border+col*(w+gap), border+row*(h+gap), w,h); }); }
+  else if(count===3){ var topH=(H-border*2)*0.6, botH=(H-border*2)*0.4-gap; var w0=W-border*2; drawCover(imgs[0], border,border,w0,topH); [imgs[1],imgs[2]].forEach(function(im,idx){ var w=(W-border*2-gap)/2; drawCover(im, border+idx*(w+gap), border+topH+gap, w, botH); }); }
+  var outFmt = t12Fmt==='keep'?'jpeg':t12Fmt;
+  var mime = outFmt==='png'?'image/png':outFmt==='webp'?'image/webp':'image/jpeg';
+  var ext = outFmt==='png'?'png':outFmt==='webp'?'webp':'jpg';
+  var blob=await new Promise(function(r){canvas.toBlob(r,mime,0.92)});
+  return {blob:blob,ext:ext,w:W,h:H,canvas:canvas};
+}
+async function t12Apply(){
+  if(!t12Files.length){ alert("Please select image first!"); return; }
+  var prefix=(document.getElementById('t12Prefix').value.trim()||"Framed - Orbittroniz").replace(/[\\/:*?"<>|]/g,'');
+  document.getElementById('t12Status').innerText="Applying frame to "+t12Files.length+" images...";
+  document.getElementById('t12Prog').style.display='block'; document.getElementById('t12Fill').style.width="0%";
+  document.getElementById('t12Out').innerHTML=""; document.getElementById('t12OutEmpty').style.display='none'; t12Results=[];
+  try{
+    if(t12Collage!=='single'){
+      var res=await t12ApplyCollage();
+      var fname=prefix+" - Collage "+t12Collage+"."+res.ext; var url=URL.createObjectURL(res.blob);
+      t12Results.push({blob:res.blob,name:fname,url:url,origFile:t12Files[0],origUrl:URL.createObjectURL(t12Files[0]),beforeKB:t12Files[0].size/1024,afterKB:res.blob.size/1024,w:res.w,h:res.h});
+      var card=document.createElement('div'); card.className='t12-imgcard'; card.innerHTML='<img src="'+url+'"><div style="padding:8px;text-align:center"><b style="font-size:11px">'+fname+'</b><br><small style="color:#22c55e">'+res.w+'x'+res.h+' • Collage ✅</small><div style="display:flex;gap:4px;margin-top:6px"><button onclick="t12DownloadOne(0)" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">⬇️ Download</button><button onclick="t12ShareOne(0)" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">📤 Share</button></div></div>';
+      document.getElementById('t12Out').appendChild(card);
+      document.getElementById('t12Status').innerText="✅ Collage Done! "+t12Collage+" photos in one frame";
+      document.getElementById('t12ZipBtn').style.display='block'; document.getElementById('t12ShareBtn').style.display='block';
+      document.getElementById('t12Prog').style.display='none'; return;
+    }
+    var sel=Array.from(t12Selected).sort(function(a,b){return a-b}); if(!sel.length) sel=t12Files.map(function(_,i){return i});
+    for(var si=0; si<sel.length; si++){
+      var idx=sel[si]; var file=t12Files[idx];
+      try{
+        var res2=await t12ApplyOne(file);
+        var fname2=prefix+" - "+(si+1)+"."+res2.ext; var url2=URL.createObjectURL(res2.blob);
+        t12Results.push({blob:res2.blob,name:fname2,url:url2,origFile:file,origUrl:URL.createObjectURL(file),beforeKB:file.size/1024,afterKB:res2.blob.size/1024,w:res2.w,h:res2.h});
+        var card2=document.createElement('div'); card2.className='t12-imgcard';
+        card2.innerHTML='<img src="'+url2+'"><div style="padding:8px;text-align:center"><b style="font-size:11px">'+fname2+'</b><br><small>'+(file.size/1024).toFixed(0)+' KB → '+(res2.blob.size/1024).toFixed(0)+' KB</small><br><small style="color:#22c55e">'+res2.w+'x'+res2.h+' • Framed ✅</small><div style="display:flex;gap:4px;margin-top:6px"><button onclick="t12DownloadOne('+(t12Results.length-1)+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">⬇️ Download</button><button onclick="t12ShareOne('+(t12Results.length-1)+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">📤 Share</button></div></div>';
+        document.getElementById('t12Out').appendChild(card2);
+      }catch(e){ console.warn(e); }
+      document.getElementById('t12Fill').style.width=Math.round(((si+1)/sel.length)*100)+"%";
+      await new Promise(function(r){setTimeout(r,10)});
+    }
+    document.getElementById('t12Status').innerText="✅ Done! "+t12Results.length+" images framed - Download now 👇";
+    document.getElementById('t12AllBtn').style.display=t12Results.length>1?'block':'none'; document.getElementById('t12ZipBtn').style.display='block'; document.getElementById('t12ShareBtn').style.display='block';
+    setTimeout(function(){document.getElementById('t12Prog').style.display='none'},800);
+  }catch(e){alert("Frame Error: "+e.message);document.getElementById('t12Prog').style.display='none';}
+}
+function t12DownloadOne(i){ if(!t12Results[i]) return; var r=t12Results[i]; var a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }
+function t12DownloadAll(){ if(!t12Results.length) return alert("First apply frame"); if(!confirm(t12Results.length+" images will download. Allow?")) return; t12Results.forEach(function(r,idx){ setTimeout(function(){ var a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }, idx*600); }); }
+async function t12DownloadZIP(){
+  if(!t12Results.length) return alert("First apply frame");
+  if(!window.JSZip){ await new Promise(function(r){setTimeout(r,1500)}); if(!window.JSZip) return alert("ZIP loading, try again"); }
+  document.getElementById('t12Status').innerText="Making ZIP...";
+  try{ var zip=new JSZip(); for(var i=0;i<t12Results.length;i++){ zip.file(t12Results[i].name, t12Results[i].blob); } var blob=await zip.generateAsync({type:"blob"}); var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download=(document.getElementById('t12Prefix').value.trim()||"Framed")+" - All.zip"; document.body.appendChild(a); a.click(); a.remove(); document.getElementById('t12Status').innerText="✅ ZIP Downloaded"; }catch(e){ alert("ZIP Error: "+e.message); }
+}
+async function t12ShareOne(i){ if(!t12Results[i]) return; try{ var r=t12Results[i]; var file=new File([r.blob],r.name,{type:r.blob.type}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:r.name}); }else alert("Share not supported - Download it"); }catch(e){ alert("Share cancelled"); } }
+async function t12ShareFirst(){ if(!t12Results.length) return alert("First apply frame"); await t12ShareOne(0); }
+async function t12OpenPreview(){
+  if(!t12Files.length){ alert("First select Images!"); return; }
+  t12PreviewIdx=0; t12ShowAfter=false; await t12ShowPreview(); document.getElementById('t12Modal').style.display='flex';
+}
+async function t12ShowPreview(){
+  var mc=document.getElementById('t12ModalCanvas'), ctx=mc.getContext('2d');
+  if(t12Results.length){
+    if(t12PreviewIdx<0) t12PreviewIdx=t12Results.length-1; if(t12PreviewIdx>=t12Results.length) t12PreviewIdx=0;
+    var r=t12Results[t12PreviewIdx]; var img=new Image(); img.onload=function(){ var s=Math.min(1, 1200/Math.max(img.width,img.height)); mc.width=img.width*s; mc.height=img.height*s; ctx.drawImage(img,0,0,mc.width,mc.height); document.getElementById('t12ModalTitle').innerText=(t12ShowAfter?"AFTER - Framed - ":"BEFORE - ")+"Image "+(t12PreviewIdx+1)+" / "+t12Results.length; document.getElementById('t12ModalCap').innerText="Frame: "+t12Frame+" • Ratio: "+t12Ratio+" • "+r.w+"x"+r.h; document.getElementById('t12BeforeAfterBtn').innerText=t12ShowAfter?"🔄 Show Before":"🔄 Show After"; }; img.src=t12ShowAfter?r.url:r.origUrl;
+  } else {
+    if(t12PreviewIdx<0) t12PreviewIdx=t12Files.length-1; if(t12PreviewIdx>=t12Files.length) t12PreviewIdx=0;
+    var f=t12Files[t12PreviewIdx]; var img2=new Image(); img2.onload=function(){ var s2=Math.min(1, 1200/Math.max(img2.width,img2.height)); mc.width=img2.width*s2; mc.height=img2.height*s2; ctx.drawImage(img2,0,0,mc.width,mc.height); document.getElementById('t12ModalTitle').innerText="Preview - Original "+(t12PreviewIdx+1)+" / "+t12Files.length; document.getElementById('t12ModalCap').innerText=f.name+" • Apply Frame to see After"; }; img2.src=URL.createObjectURL(f);
+  }
+}
+async function t12ToggleBeforeAfter(){ if(!t12Results.length){ alert("First apply frame"); return; } t12ShowAfter=!t12ShowAfter; await t12ShowPreview(); }
+async function t12NextImg(){t12PreviewIdx++;await t12ShowPreview();}
+async function t12PrevImg(){t12PreviewIdx--;await t12ShowPreview();}
+function t12ClosePreview(){document.getElementById('t12Modal').style.display='none';}
+document.addEventListener('keydown',function(e){var m=document.getElementById('t12Modal');if(m&&m.style.display==='flex'){if(e.key==='ArrowRight')t12NextImg();if(e.key==='ArrowLeft')t12PrevImg();if(e.key==='Escape')t12ClosePreview();}});
+function t12Reset(){
+  t12Files=[]; t12Selected.clear(); t12Results=[]; t12PreviewIdx=0; t12EditorImg=null; t12EditorImgs=[]; t12PhotoRotate=0; t12PhotoFlip=false; t12PhotoFilter='none';
+  document.getElementById('t12Out').innerHTML=""; document.getElementById('t12OutEmpty').style.display='block'; document.getElementById('t12SelectedBox').style.display='none'; document.getElementById('t12FileName').innerText="No Images Selected - Click Here"; document.getElementById('t12Status').innerText=""; document.getElementById('t12AllBtn').style.display='none'; document.getElementById('t12ZipBtn').style.display='none'; document.getElementById('t12ShareBtn').style.display='none'; document.getElementById('t12EmptyBox').style.display='block'; document.getElementById('t12PreviewImg').style.display='none'; document.getElementById('t12PreviewCanvas').style.display='none';
+  t12Log("Reset done - Select new photo");
+}
+t12Log("Tool 12 V2 Full English Loaded ✅ - Ready");
+</script>
+<!-- ================= TOOL 12 V2 - END ================= -->
 <!-- TOOL 13 -->
 <div class="tool" id="tool-13"><div class="panel"><h3>✂️ Tool 13 - Image Cropper</h3>
 <!-- YAHAN TOOL 13 KA CODE PASTE KARO -->
