@@ -88,6 +88,260 @@ body{background:#04061A;color:#fff;font-family:system-ui,Arial,sans-serif;paddin
 canvas{display:none}
 .chip2{display:inline-block;background:#0A1224;border:1px solid #1E2D5A;padding:6px 10px;border-radius:20px;font-size:11px;margin:4px 4px 0 0;cursor:pointer}
 .chip2.active{background:linear-gradient(135deg,#7C3AED,#22D3EE);border:none}
+  <!-- MORE ATTRACTIVE BUTTON + THEME - PASTE THIS - START -->
+<style>
+/* ===== SUPER ATTRACTIVE THEME - ORBITTRONIZ ===== */
+:root{
+  --purple:#7C3AED;
+  --pink:#EC4899;
+  --cyan:#22D3EE;
+  --gold:#F59E0B;
+  --bg:#04061A;
+}
+body{
+  background:radial-gradient(600px 300px at 10% 0%,rgba(124,58,237,.35),transparent 60%),
+             radial-gradient(600px 300px at 90% 20%,rgba(34,211,238,.28),transparent 60%),
+             radial-gradient(500px 300px at 50% 100%,rgba(236,72,153,.22),transparent 60%),
+             #04061A !important;
+  background-attachment:fixed;
+}
+
+/* ===== HEADER - GLASS + NEON BORDER ===== */
+.header{
+  background:linear-gradient(135deg,rgba(12,12,45,.92),rgba(76,29,149,.88),rgba(14,165,233,.82)) !important;
+  border:1px solid rgba(255,255,255,.25) !important;
+  border-top:none !important;
+  box-shadow:0 20px 50px rgba(124,58,237,.55), inset 0 1px 0 rgba(255,255,255,.3) !important;
+  backdrop-filter:blur(16px) !important;
+}
+
+/* ===== ALL BUTTONS - SUPER ATTRACTIVE ===== */
+.btn, .open-btn, .search button, .hero-btns button{
+  position:relative !important;
+  overflow:hidden !important;
+  background:linear-gradient(135deg,#7C3AED,#EC4899 45%,#22D3EE) !important;
+  background-size:200% 200% !important;
+  animation:btnFlow 3s ease infinite !important;
+  border:none !important;
+  border-radius:16px !important;
+  padding:14px !important;
+  font-size:14px !important;
+  font-weight:900 !important;
+  letter-spacing:.4px !important;
+  color:#fff !important;
+  cursor:pointer !important;
+  box-shadow:0 10px 25px rgba(124,58,237,.45), 0 4px 0 #4C1D95 !important;
+  transition:.2s !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.3) !important;
+}
+@keyframes btnFlow{
+  0%{ background-position:0% 50%; }
+  50%{ background-position:100% 50%; }
+  100%{ background-position:0% 50%; }
+}
+/* Shine Moving On Button */
+.btn::after, .open-btn::after, .search button::after, .hero-btns button::after{
+  content:"" !important;
+  position:absolute !important;
+  top:0; left:-80% !important;
+  width:50%; height:100% !important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent) !important;
+  transform:skewX(-20deg) !important;
+  animation:btnShine 2.8s ease infinite !important;
+}
+@keyframes btnShine{
+  0%{ left:-80%; }
+  60%,100%{ left:130%; }
+}
+/* Press Effect - Real Button Feel */
+.btn:active, .open-btn:active, .search button:active, .hero-btns button:active{
+  transform:translateY(3px) scale(.98) !important;
+  box-shadow:0 4px 12px rgba(124,58,237,.4), 0 1px 0 #4C1D95 !important;
+}
+/* Hover - Glow Bigger */
+.btn:hover, .open-btn:hover, .search button:hover{
+  box-shadow:0 14px 32px rgba(236,72,153,.55), 0 0 20px rgba(34,211,238,.4) !important;
+  transform:translateY(-1px) !important;
+}
+
+/* ===== DIFFERENT COLOR FOR EACH BUTTON TYPE ===== */
+.btn.green{
+  background:linear-gradient(135deg,#16A34A,#22C55E,#84CC16) !important;
+  box-shadow:0 10px 25px rgba(34,197,94,.45), 0 4px 0 #166534 !important;
+}
+.btn.blue{
+  background:linear-gradient(135deg,#1D4ED8,#3B82F6,#22D3EE) !important;
+  box-shadow:0 10px 25px rgba(59,130,246,.45), 0 4px 0 #1E40AF !important;
+}
+.btn.pink{
+  background:linear-gradient(135deg,#DB2777,#EC4899,#F472B6) !important;
+  box-shadow:0 10px 25px rgba(236,72,153,.5), 0 4px 0 #9D174D !important;
+}
+.btn.orange{
+  background:linear-gradient(135deg,#D97706,#F59E0B,#FDE68A) !important;
+  box-shadow:0 10px 25px rgba(245,158,11,.5), 0 4px 0 #92400E !important;
+  color:#fff !important;
+}
+.btn.dark{
+  background:rgba(255,255,255,.12) !important;
+  border:1px solid rgba(255,255,255,.3) !important;
+  box-shadow:none !important;
+  backdrop-filter:blur(8px) !important;
+}
+
+/* ===== SEARCH BUTTON - PILL SHAPE ===== */
+.search button{
+  border-radius:14px !important;
+  padding:12px 20px !important;
+  font-size:13px !important;
+}
+.search{
+  border:1px solid rgba(124,58,237,.3) !important;
+  box-shadow:0 12px 28px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.8) !important;
+  border-radius:18px !important;
+}
+
+/* ===== CARD OPEN BUTTON - SMALL + NEON ===== */
+.card .open-btn{
+  padding:10px !important;
+  font-size:12.5px !important;
+  border-radius:12px !important;
+  background:linear-gradient(135deg,#7C3AED,#22D3EE) !important;
+  box-shadow:0 6px 18px rgba(34,211,238,.35) !important;
+}
+.card .open-btn:hover{
+  background:linear-gradient(135deg,#EC4899,#7C3AED) !important;
+}
+
+/* ===== HERO BUTTONS - BIG PREMIUM ===== */
+.hero-btns .hb1{
+  background:linear-gradient(135deg,#7C3AED,#EC4899,#F59E0B) !important;
+  background-size:200% 200% !important;
+  animation:btnFlow 3s ease infinite !important;
+  border-radius:16px !important;
+  padding:13px !important;
+  box-shadow:0 12px 28px rgba(236,72,153,.5) !important;
+}
+.hero-btns .hb2{
+  background:#fff !important;
+  color:#111 !important;
+  border-radius:16px !important;
+  padding:13px !important;
+  box-shadow:0 12px 28px rgba(0,0,0,.35) !important;
+}
+.hero-btns .hb2::after{ display:none !important; }
+
+/* ===== CHIP BUTTONS - PILL + ACTIVE GLOW ===== */
+.chip, .chip2{
+  border-radius:22px !important;
+  padding:9px 14px !important;
+  font-weight:700 !important;
+  transition:.2s !important;
+  border:1px solid rgba(139,92,246,.45) !important;
+  background:rgba(15,22,48,.9) !important;
+}
+.chip.active, .chip2.active{
+  background:linear-gradient(135deg,#7C3AED,#EC4899,#22D3EE) !important;
+  background-size:200% 200% !important;
+  animation:btnFlow 3s ease infinite !important;
+  border:none !important;
+  color:#fff !important;
+  box-shadow:0 8px 20px rgba(124,58,237,.5) !important;
+  transform:scale(1.05) !important;
+}
+.chip:active, .chip2:active{ transform:scale(.95) !important; }
+
+/* ===== CLOSE BUTTON - ROUND PREMIUM ===== */
+.close{
+  background:#fff !important;
+  color:#111 !important;
+  border-radius:50% !important;
+  width:32px; height:32px !important;
+  padding:0 !important;
+  font-size:14px !important;
+  box-shadow:0 6px 16px rgba(0,0,0,.3) !important;
+  line-height:32px !important;
+  text-align:center !important;
+}
+.close:active{ transform:scale(.9) !important; }
+
+/* ===== CARD - MORE ATTRACTIVE THEME ===== */
+.card{
+  border:1px solid rgba(139,92,246,.55) !important;
+  box-shadow:0 14px 28px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08) !important;
+  border-radius:24px !important;
+  background:linear-gradient(145deg,rgba(22,33,68,.98),rgba(12,18,42,.98)) !important;
+}
+.card:hover{
+  border-color:#22D3EE !important;
+  box-shadow:0 18px 34px rgba(34,211,238,.25), 0 0 22px rgba(124,58,237,.35) !important;
+  transform:translateY(-3px) !important;
+}
+.card.wide{
+  box-shadow:0 18px 34px rgba(236,72,153,.4) !important;
+  border:none !important;
+}
+
+/* ===== TOOL BOX - GLASS ===== */
+.tool{
+  border:1px solid rgba(139,92,246,.55) !important;
+  border-radius:24px !important;
+  box-shadow:0 20px 40px rgba(0,0,0,.45) !important;
+  background:linear-gradient(180deg,rgba(20,30,60,.99),rgba(12,18,42,.99)) !important;
+}
+.tool input, .tool select, .tool textarea{
+  border-radius:14px !important;
+  border:1px solid rgba(139,92,246,.35) !important;
+  background:#0A1224 !important;
+  padding:12px !important;
+}
+.tool input:focus, .tool select:focus{
+  border-color:#22D3EE !important;
+  box-shadow:0 0 0 3px rgba(34,211,238,.25) !important;
+  outline:none !important;
+}
+
+/* ===== BOTTOM NAV - GLASS + ACTIVE GLOW ===== */
+.bottom{
+  background:rgba(10,14,35,.95) !important;
+  backdrop-filter:blur(16px) !important;
+  border-top:1px solid rgba(139,92,246,.45) !important;
+  box-shadow:0 -10px 30px rgba(0,0,0,.4) !important;
+  border-radius:20px 20px 0 0 !important;
+}
+.bottom button.active{
+  color:#fff !important;
+  background:linear-gradient(135deg,rgba(124,58,237,.35),rgba(34,211,238,.25)) !important;
+  border-radius:14px !important;
+  margin:2px 4px !important;
+  padding:4px 0 !important;
+}
+.bottom button.active span{
+  filter:drop-shadow(0 0 8px #22D3EE) !important;
+}
+
+/* ===== BADGE - NEON ===== */
+.badge{
+  box-shadow:0 4px 12px rgba(0,0,0,.35) !important;
+  padding:4px 9px !important;
+  font-size:9.5px !important;
+  letter-spacing:.4px !important;
+}
+.badge.hot{
+  background:linear-gradient(135deg,#F59E0B,#F97316) !important;
+}
+.badge.ai{
+  background:linear-gradient(135deg,#EC4899,#8B5CF6) !important;
+}
+
+/* ===== FAV STAR - GOLD GLOW ===== */
+.card .fav.on{
+  color:#FDE047 !important;
+  text-shadow:0 0 12px #F59E0B !important;
+  transform:scale(1.15) !important;
+}
+</style>
+<!-- MORE ATTRACTIVE BUTTON + THEME - END -->
 </style>
 </head>
 <body>
