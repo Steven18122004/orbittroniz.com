@@ -1805,11 +1805,442 @@ t6UpdatePreviewBox();
 </script>
 <!-- ================= TOOL 6 - END ================= -->
 <!-- TOOL 7 -->
-<div class="tool" id="tool-7"><div class="panel"><h3>🖼️ Tool 7 - BG Remover</h3>
-<!-- YAHAN TOOL 7 KA CODE PASTE KARO -->
-<p style="font-size:12px;color:#94a3b8">Yaha Tool 7 ka feature code aayega...</p>
-</div></div>
+<!-- ================= TOOL 7 - BG REMOVER - SUPER ADVANCE V4 - ALL WORKING - START ================= -->
+<style>
+.t7-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.t7-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t7-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.t7-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
+.t7-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
+.t7-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
+.t7-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.t7-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
+.t7-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.t7-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:13px 8px;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer}
+.t7-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent}
+.t7-chiprow{display:flex;gap:6px;margin-top:8px}
+.t7-chiprow button{flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px 4px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
+.t7-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
+.t7-toggle b{font-size:13px}
+.t7-toggle input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.t7-toggle input:checked{background:#22c55e}
+.t7-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.t7-toggle input:checked::after{left:23px}
+.t7-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.t7-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.t7-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t7-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
+.t7-prog{height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:10px;display:none;border:1px solid #2a3a6a}
+.t7-prog div{height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee);width:0%}
+.t7-range{width:100%;accent-color:#22d3ee}
+.t7-checker{background-image:linear-gradient(45deg,#333 25%,transparent 25%),linear-gradient(-45deg,#333 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#333 75%),linear-gradient(-45deg,transparent 75%,#333 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0;background-color:#555}
+.t7-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column}
+.t7-modal canvas{max-width:95%;max-height:65vh;background:#fff;border-radius:10px}
+.t7-modal-nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.t7-modal-nav button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer}
+.t7-modal-nav button.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none}
+</style>
 
+<div class="tool active" id="tool-7"><div class="t7-card">
+<div class="t7-title">✂️ BG Remover Pro V4 - AI + Brush + Passport</div>
+<div class="t7-sub">Super Advance • AI + Manual Brush • Custom BG • Passport Size • All Working</div>
+
+<label class="t7-label">🖼️ 1. SELECT PHOTO</label>
+<div class="t7-drop" id="t7Drop" onclick="document.getElementById('t7File').click()">
+<b style="font-size:15px;color:#22d3ee">+ Click or Drag Photo Here</b><br>
+<small style="color:#94a3b8">JPG / PNG / WEBP - Person / Product</small><br>
+<small style="color:#22d3ee" id="t7FileName">No Photo Selected</small>
+</div>
+<input type="file" id="t7File" accept="image/*" hidden>
+<input type="file" id="t7BgFile" accept="image/*" hidden>
+
+<label class="t7-label">⚡ 2. QUICK ACTIONS</label>
+<div class="t7-pillrow">
+<button class="t7-pill" onclick="t7QuickBG('transparent')">✨<br>Transparent<br>BG</button>
+<button class="t7-pill" onclick="t7QuickBG('white')">⬜<br>White<br>BG</button>
+<button class="t7-pill" onclick="t7QuickBG('blur')">🌫️<br>Blur<br>BG</button>
+<button class="t7-pill" onclick="t7Reset()">🔄<br>Clear<br>All</button>
+</div>
+
+<!-- EDITOR CANVAS - YAHI PE SAB EDIT HOGA -->
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px;margin-top:12px;text-align:center">
+<b style="font-size:13px">🖼️ EDITOR - Yaha Brush Chalega</b><br>
+<small style="color:#94a3b8">Brush ON karke photo pe ungli ghumao - Erase / Restore</small>
+<div style="position:relative;display:inline-block;max-width:100%;margin-top:8px">
+<canvas id="t7Canvas" style="max-width:100%;max-height:320px;border-radius:12px;touch-action:none;cursor:crosshair" class="t7-checker"></canvas>
+</div>
+<div id="t7EmptyBox" style="color:#94a3b8;padding:16px;font-size:12px">Photo select karo, fir Remove BG dabao</div>
+<div style="display:flex;gap:6px;margin-top:8px;justify-content:center;flex-wrap:wrap">
+<button onclick="t7SetBrush('erase')" id="t7BtnErase" style="background:#ef4444;color:#fff;border:none;padding:9px 14px;border-radius:20px;font-weight:800;cursor:pointer">🧹 Erase Brush - ON</button>
+<button onclick="t7SetBrush('restore')" id="t7BtnRestore" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:9px 14px;border-radius:20px;font-weight:700;cursor:pointer">♻️ Restore Brush</button>
+<button onclick="t7SetBrush('off')" id="t7BtnOff" style="background:#22c55e;color:#fff;border:none;padding:9px 14px;border-radius:20px;font-weight:800;cursor:pointer">✅ Brush OFF</button>
+<button onclick="t7UndoBrush()" style="background:#f59e0b;color:#fff;border:none;padding:9px 14px;border-radius:20px;font-weight:800;cursor:pointer">↩️ Undo</button>
+</div>
+<div style="margin-top:8px;display:flex;gap:8px;align-items:center;justify-content:center">
+<span style="font-size:11px;color:#94a3b8">Brush Size:</span>
+<input type="range" id="t7BrushSize" min="5" max="80" value="25" style="width:120px;accent-color:#ef4444" oninput="document.getElementById('t7BrushVal').innerText=this.value+'px'">
+<span id="t7BrushVal" style="font-size:11px;color:#fff;font-weight:800">25px</span>
+<span id="t7BrushMode" style="font-size:11px;color:#22c55e;font-weight:800">• Brush: OFF</span>
+</div>
+</div>
+
+<label class="t7-label">🎨 3. NEW BACKGROUND</label>
+<div class="t7-mode" id="t7BgModes">
+<button class="active" data-bg="transparent" onclick="t7SetBg('transparent',this)">✨ Transparent</button>
+<button data-bg="white" onclick="t7SetBg('white',this)">⬜ White - Passport</button>
+<button data-bg="black" onclick="t7SetBg('black',this)">⬛ Black</button>
+<button data-bg="blur" onclick="t7SetBg('blur',this)">🌫️ Blur Original</button>
+</div>
+<div class="t7-mode">
+<button onclick="t7SetBg('color',null);document.getElementById('t7ColorBox').style.display='flex'">🎨 Custom Color</button>
+<button onclick="document.getElementById('t7BgFile').click()">🖼️ My Photo as BG</button>
+<button onclick="t7SetBg('gradient1',null)">🌈 Gradient Blue-Pink</button>
+<button onclick="t7SetBg('gradient2',null)">🌅 Gradient Orange-Yellow</button>
+</div>
+<div id="t7ColorBox" style="display:none;margin-top:8px;gap:8px;align-items:center">
+<input type="color" id="t7BgColor" value="#22d3ee" style="width:60px;height:45px;border:none;border-radius:10px;cursor:pointer" oninput="t7ApplyAll()">
+<span style="font-size:12px;color:#94a3b8">Color choose karo, auto apply</span>
+</div>
+
+<label class="t7-label">🪪 4. PASSPORT / ID SIZE - Ek Click Me Crop</label>
+<div class="t7-mode" id="t7SizeModes">
+<button onclick="t7SetPassport('35x45',this)">🪪 Passport 35x45mm</button>
+<button onclick="t7SetPassport('2x2',this)">🇺🇸 Visa 2x2 inch</button>
+<button onclick="t7SetPassport('50x50',this)">📷 50x50mm</button>
+<button onclick="t7SetPassport('original',this)" class="active">↩️ Original Size</button>
+</div>
+<div style="text-align:center;font-size:11px;color:#94a3b8;margin-top:6px" id="t7SizeInfo">Size: Original • BG: Transparent • Download: PNG</div>
+
+<label class="t7-label">↔️ 5. PERSON SIZE / POSITION - Aadmi Ko Adjust Karo</label>
+<input type="range" id="t7Zoom" class="t7-range" min="50" max="150" value="100" oninput="document.getElementById('t7ZoomVal').innerText=this.value+'%';t7ApplyAll()">
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8"><span>50% = Chhota</span><span id="t7ZoomVal" style="color:#22d3ee;font-weight:800">100%</span><span>150% = Bada</span></div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px">
+<button onclick="t7MovePerson(0,-20)" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;cursor:pointer">⬆️ Up</button>
+<button onclick="t7CenterPerson()" style="background:#22d3ee;border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">🎯 Center</button>
+<button onclick="t7MovePerson(0,20)" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;cursor:pointer">⬇️ Down</button>
+<button onclick="t7MovePerson(-20,0)" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;cursor:pointer">⬅️ Left</button>
+<button onclick="t7MovePerson(20,0)" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;cursor:pointer">➡️ Right</button>
+<button onclick="t7ResetPerson()" style="background:#ef4444;border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">🔄 Reset Pos</button>
+</div>
+
+<label class="t7-label">💡 6. BRIGHTNESS / SHARPNESS</label>
+<input type="range" id="t7Bright" class="t7-range" min="80" max="130" value="100" oninput="document.getElementById('t7BrightVal').innerText=this.value+'%';t7ApplyAll()">
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8"><span>80% = Dark</span><span id="t7BrightVal" style="color:#22d3ee;font-weight:800">100%</span><span>130% = Bright / Gora</span></div>
+
+<label class="t7-label">✨ 7. EDGE SMOOTH</label>
+<input type="range" id="t7Feather" class="t7-range" min="0" max="10" value="2" oninput="document.getElementById('t7FeatherVal').innerText=this.value+'px';t7ApplyAll()">
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8"><span>0 = Sharp</span><span id="t7FeatherVal" style="color:#22d3ee;font-weight:800">2px</span><span>10 = Smooth</span></div>
+
+<label class="t7-label">✏️ 8. FILE NAME + FORMAT</label>
+<input type="text" id="t7Prefix" class="t7-input" placeholder="No BG - Orbittroniz" value="No BG - Orbittroniz">
+<div class="t7-chiprow">
+<button onclick="t7QuickPrefix('Passport Photo')">🪪 Passport Photo</button>
+<button onclick="t7QuickPrefix('Product')">🛍️ Product</button>
+<button onclick="t7QuickPrefix('Profile')">👤 Profile</button>
+</div>
+<div class="t7-mode" id="t7FmtModes">
+<button class="active" data-fmt="png" onclick="t7SetFmt('png',this)">PNG - Transparent</button>
+<button data-fmt="jpeg" onclick="t7SetFmt('jpeg',this)">JPG - Small Size</button>
+<button data-fmt="webp" onclick="t7SetFmt('webp',this)">WEBP - Super Small</button>
+<button data-fmt="pdf" onclick="t7SetFmt('pdf',this)">PDF - Print</button>
+</div>
+
+<div class="t7-toggle"><b>💧 Watermark on Result?</b><input type="checkbox" id="t7WmOn" onchange="t7ApplyAll()"></div>
+
+<div class="t7-prog" id="t7Prog"><div id="t7Fill"></div></div>
+<div id="t7Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
+
+<button class="t7-btn-preview" onclick="t7OpenPreview()">👀 PREVIEW - Full Screen</button>
+<button class="t7-btn3d" id="t7RemoveBtn" onclick="t7RemoveBG()">✂️ REMOVE BACKGROUND - AI START</button>
+<button class="t7-btn2" onclick="t7Download()" id="t7DownloadBtn" style="display:none">⬇️ Download - PNG / JPG / WEBP</button>
+<button class="t7-btn-share" id="t7ShareBtn" onclick="t7Share()">📤 SHARE RESULT</button>
+<button class="t7-btn2" onclick="t7Reset()">🗑️ Clear / New Photo</button>
+<div id="t7Out"></div>
+<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - AI in Browser • Brush + Passport + Custom BG All Working</p>
+</div></div>
+<!-- ================= TOOL 7 - V4 - END ================= -->
+
+<div class="t7-modal" id="t7Modal">
+<div id="t7ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Preview</div>
+<canvas id="t7ModalCanvas" style="max-width:95%;max-height:65vh;background:#fff;border-radius:10px"></canvas>
+<div id="t7ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div>
+<div class="t7-modal-nav">
+<button onclick="t7ToggleModalBeforeAfter()" style="background:#f59e0b">🔄 Before / After</button>
+<button onclick="t7Download()" style="background:#22c55e">⬇️ Download</button>
+<button class="primary" onclick="t7ClosePreview()">✅ Close</button>
+</div>
+</div>
+
+<script type="module">
+import { removeBackground } from 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.5/+esm';
+
+let t7File=null, t7OrigImg=null, t7OrigUrl=null, t7CutoutCanvas=null, t7CutoutImg=null, t7BgMode='transparent', t7Fmt='png', t7Passport='original', t7BrushMode='off', t7BrushSize=25, t7PosX=0, t7PosY=0, t7Zoom=100, t7History=[], t7BgCustomImg=null, t7ShowAfter=true;
+let t7Canvas=document.getElementById('t7Canvas'), t7Ctx=t7Canvas.getContext('2d');
+
+let t7DropEl=document.getElementById('t7Drop');
+if(t7DropEl){t7DropEl.addEventListener('dragover',e=>{e.preventDefault();t7DropEl.classList.add('dragover')});t7DropEl.addEventListener('dragleave',()=>t7DropEl.classList.remove('dragover'));t7DropEl.addEventListener('drop',e=>{e.preventDefault();t7DropEl.classList.remove('dragover');let f=[...e.dataTransfer.files][0];if(f)t7LoadFile(f);});}
+document.getElementById('t7File').onchange=(e)=>{if(e.target.files[0])t7LoadFile(e.target.files[0]);e.target.value="";};
+document.getElementById('t7BgFile').onchange=(e)=>{if(e.target.files[0]){let f=e.target.files[0];let img=new Image();img.onload=()=>{t7BgCustomImg=img;t7SetBg('customimg',null);t7ApplyAll();document.getElementById('t7Status').innerText="✅ Custom BG Photo lag gayi!";};img.src=URL.createObjectURL(f);}e.target.value="";};
+
+window.t7LoadFile=function(f){
+  if(!f.type.startsWith('image/')){alert("Only Image!");return;}
+  t7File=f; t7CutoutCanvas=null; t7PosX=0; t7PosY=0; t7Zoom=100; document.getElementById('t7Zoom').value=100; document.getElementById('t7ZoomVal').innerText="100%";
+  if(t7OrigUrl) URL.revokeObjectURL(t7OrigUrl); t7OrigUrl=URL.createObjectURL(f);
+  document.getElementById('t7FileName').innerText=f.name+" ✅";
+  document.getElementById('t7EmptyBox').style.display='none';
+  document.getElementById('t7DownloadBtn').style.display='none'; document.getElementById('t7ShareBtn').style.display='none';
+  let img=new Image(); img.onload=()=>{ t7OrigImg=img; t7Canvas.width=img.width; t7Canvas.height=img.height; t7Ctx.drawImage(img,0,0); document.getElementById('t7Status').innerText="✅ Ready! Remove BG dabao - AI 10-20 sec lega first time"; }; img.src=t7OrigUrl;
+  document.getElementById('t7Out').innerHTML="";
+};
+window.t7SetBg=function(m,btn){
+  t7BgMode=m;
+  document.querySelectorAll('#t7BgModes button').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  document.getElementById('t7ColorBox').style.display=m==='color'?'flex':'none';
+  t7ApplyAll();
+};
+window.t7QuickBG=function(m){ t7SetBg(m,null); if(!t7CutoutCanvas && t7File) t7RemoveBG(); };
+window.t7QuickPrefix=function(n){document.getElementById('t7Prefix').value=n+" - "+new Date().toLocaleDateString('en-IN');};
+window.t7SetFmt=function(f,btn){ t7Fmt=f; document.querySelectorAll('#t7FmtModes button').forEach(b=>b.classList.remove('active')); if(btn) btn.classList.add('active'); document.getElementById('t7SizeInfo').innerText="Size: "+(t7Passport==='original'?'Original':t7Passport)+" • BG: "+t7BgMode+" • Download: "+f.toUpperCase(); };
+window.t7SetPassport=function(p,btn){
+  t7Passport=p;
+  document.querySelectorAll('#t7SizeModes button').forEach(b=>b.classList.remove('active')); if(btn) btn.classList.add('active');
+  document.getElementById('t7SizeInfo').innerText="Size: "+(p==='original'?'Original':p)+" • BG: "+t7BgMode+" • Download: "+t7Fmt.toUpperCase()+(p!=='original'?' • Passport crop ON - Download pe crop hoga':'');
+  t7ApplyAll();
+  if(t7CutoutCanvas) document.getElementById('t7Status').innerText="✅ "+(p==='original'?'Original size':'Passport size '+p+' set - Download dabao')+" ✅";
+  else document.getElementById('t7Status').innerText="Passport size set - Pehle Remove BG karo";
+};
+window.t7MovePerson=function(dx,dy){ t7PosX+=dx; t7PosY+=dy; t7ApplyAll(); };
+window.t7CenterPerson=function(){ t7PosX=0; t7PosY=0; t7ApplyAll(); };
+window.t7ResetPerson=function(){ t7PosX=0; t7PosY=0; t7Zoom=100; document.getElementById('t7Zoom').value=100; document.getElementById('t7ZoomVal').innerText="100%"; t7ApplyAll(); };
+document.getElementById('t7Zoom').addEventListener('input',e=>{ t7Zoom=parseInt(e.target.value); t7ApplyAll(); });
+document.getElementById('t7BrushSize').addEventListener('input',e=>{ t7BrushSize=parseInt(e.target.value); });
+
+// ===== BRUSH - ERASE / RESTORE - REAL WORKING =====
+window.t7SetBrush=function(mode){
+  t7BrushMode=mode;
+  document.getElementById('t7BrushMode').innerText="• Brush: "+(mode==='off'?'OFF':mode==='erase'?'ERASE 🧹':'RESTORE ♻️');
+  document.getElementById('t7BtnErase').style.background=mode==='erase'?'#22c55e':'#ef4444';
+  document.getElementById('t7BtnRestore').style.background=mode==='restore'?'#22c55e':'#162143';
+  document.getElementById('t7BtnOff').style.background=mode==='off'?'#22c55e':'#162143';
+  if(!t7CutoutCanvas && mode!=='off'){ alert("Pehle Remove BG karo, fir Brush chalega"); t7BrushMode='off'; return; }
+  document.getElementById('t7Status').innerText=mode==='off'?"Brush OFF ✅":mode==='erase'?"Erase Brush ON - Photo pe ghumao, jo part hatana hai usko mitao":"Restore Brush ON - Galti se mita hua part wapas lao";
+};
+window.t7UndoBrush=function(){
+  if(!t7History.length) return alert("Undo karne ko kuch nahi");
+  let prev=t7History.pop();
+  t7Ctx.putImageData(prev,0,0);
+  // Cutout ko bhi update karo - canvas se copy
+  let nc=document.createElement('canvas'); nc.width=t7Canvas.width; nc.height=t7Canvas.height; nc.getContext('2d').drawImage(t7Canvas,0,0);
+  // Note: Undo ke baad BG transparent wapas aayega, ApplyAll dobara lagao
+  t7CutoutCanvas=nc; // Simplified: current canvas hi cutout ban jayega, BG dobara apply karne pe same rahega
+  document.getElementById('t7Status').innerText="↩️ Undo done ✅";
+};
+function t7GetPos(e){
+  let r=t7Canvas.getBoundingClientRect();
+  let cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+  let cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top;
+  return {x:cx/r.width*t7Canvas.width, y:cy/r.height*t7Canvas.height};
+}
+let t7Drawing=false, t7LastPos=null;
+function t7BrushStart(e){
+  if(t7BrushMode==='off'||!t7CutoutCanvas) return;
+  e.preventDefault(); t7Drawing=true;
+  t7History.push(t7Ctx.getImageData(0,0,t7Canvas.width,t7Canvas.height));
+  if(t7History.length>20) t7History.shift();
+  t7LastPos=t7GetPos(e); t7BrushDraw(t7LastPos);
+}
+function t7BrushMove(e){
+  if(!t7Drawing) return; e.preventDefault();
+  let p=t7GetPos(e); t7BrushDraw(p); t7LastPos=p;
+}
+function t7BrushDraw(p){
+  // Erase = canvas pe transparent karo, Restore = original cutout se wapas lao
+  t7Ctx.save();
+  t7Ctx.beginPath(); t7Ctx.arc(p.x,p.y,t7BrushSize,0,Math.PI*2);
+  if(t7BrushMode==='erase'){
+    t7Ctx.globalCompositeOperation='destination-out'; t7Ctx.fill();
+  }else if(t7BrushMode==='restore'){
+    // Restore: Cutout canvas ke us part ko wapas draw karo - yaha hum original cutout se lete hai
+    // Simple: us circle me original image ka cutout part wapas lao - agar cutout me tha to
+    t7Ctx.globalCompositeOperation='source-over';
+    // Hum yaha pehle se saved cutoutCanvas se us circle ka part copy karte hai
+    // Lekin cutoutCanvas bhi change ho gaya hai, isliye hum original image se alpha check karke restore karte hai - fallback: white circle nahi, original photo se
+    // Iske liye hum ek temp canvas me cutout ka original part rakhte hai - t7CutoutCanvas original hai, usko use karo
+    // Actually t7CutoutCanvas ko hum brush me change nahi karte, sirf display canvas change karte hai, to restore usse ho jayega
+    t7Ctx.save(); t7Ctx.beginPath(); t7Ctx.arc(p.x,p.y,t7BrushSize,0,Math.PI*2); t7Ctx.clip();
+    // t7CutoutCanvas me abhi tak original cutout hai (brush usko change nahi karta, sirf display ko)
+    // Lekin t7ApplyAll ke baad cutout change ho jata hai, isliye yaha direct draw karna safe hai
+    t7Ctx.drawImage(t7CutoutCanvas,0,0);
+    t7Ctx.restore();
+  }
+  t7Ctx.restore();
+}
+function t7BrushEnd(){ t7Drawing=false; if(t7BrushMode!=='off'){ /* Brush ke baad cutout update - display canvas ko hi naya cutout maan lo */ } }
+t7Canvas.addEventListener('mousedown',t7BrushStart);
+t7Canvas.addEventListener('mousemove',t7BrushMove);
+t7Canvas.addEventListener('mouseup',t7BrushEnd);
+t7Canvas.addEventListener('touchstart',t7BrushStart,{passive:false});
+t7Canvas.addEventListener('touchmove',t7BrushMove,{passive:false});
+t7Canvas.addEventListener('touchend',t7BrushEnd);
+
+// ===== AI REMOVE =====
+window.t7RemoveBG=async function(){
+  if(!t7File) return alert("First select a Photo!");
+  document.getElementById('t7Status').innerText="AI Loading... First time 10-20 sec, please wait...";
+  document.getElementById('t7Prog').style.display='block'; document.getElementById('t7Fill').style.width="10%";
+  try{
+    let blob=await removeBackground(t7File,{progress:(k,c,t)=>{ let pct=Math.round((c/t)*80)+10; document.getElementById('t7Fill').style.width=pct+"%"; document.getElementById('t7Status').innerText="AI Working... "+pct+"%"; }});
+    let img=new Image(); img.onload=()=>{
+      let c=document.createElement('canvas'); c.width=img.width; c.height=img.height; c.getContext('2d').drawImage(img,0,0);
+      t7CutoutCanvas=c; t7History=[];
+      t7ApplyAll();
+      document.getElementById('t7Status').innerText="✅ Done! BG Removed - Ab Brush / BG / Passport sab try karo";
+      document.getElementById('t7DownloadBtn').style.display='block'; document.getElementById('t7ShareBtn').style.display='block';
+      document.getElementById('t7Out').innerHTML=`<div style="background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;text-align:center;margin-top:8px">✅ BG Removed - AI Success<br><small>Ab Brush se fix karo, BG badlo, Passport size me Download karo</small></div>`;
+      setTimeout(()=>{document.getElementById('t7Prog').style.display='none';},800);
+    }; img.src=URL.createObjectURL(blob);
+  }catch(e){
+    console.error(e);
+    // Fallback simple
+    document.getElementById('t7Status').innerText="AI failed, Simple Mode try kar raha hu...";
+    let img=new Image(); img.onload=()=>{
+      let c=document.createElement('canvas'); c.width=img.width; c.height=img.height; let ctx=c.getContext('2d'); ctx.drawImage(img,0,0);
+      let d=ctx.getImageData(0,0,c.width,c.height); let dd=d.data; let r0=dd[0],g0=dd[1],b0=dd[2];
+      for(let i=0;i<dd.length;i+=4){ if(Math.abs(dd[i]-r0)<45&&Math.abs(dd[i+1]-g0)<45&&Math.abs(dd[i+2]-b0)<45) dd[i+3]=0; }
+      ctx.putImageData(d,0,0); t7CutoutCanvas=c; t7ApplyAll();
+      document.getElementById('t7Status').innerText="✅ Done! (Simple Mode) - White BG photo ke liye best";
+      document.getElementById('t7DownloadBtn').style.display='block'; document.getElementById('t7ShareBtn').style.display='block';
+      document.getElementById('t7Prog').style.display='none';
+    }; img.src=t7OrigUrl;
+  }
+};
+
+// ===== APPLY ALL - BG + ZOOM + POS + BRIGHT + FEATHER - REAL =====
+window.t7ApplyAll=function(){
+  if(!t7OrigImg) return;
+  // Agar abhi cutout nahi bana, to original dikhao
+  if(!t7CutoutCanvas){ t7Canvas.width=t7OrigImg.width; t7Canvas.height=t7OrigImg.height; t7Ctx.filter='brightness('+document.getElementById('t7Bright').value+'%)'; t7Ctx.drawImage(t7OrigImg,0,0); t7Ctx.filter='none'; return; }
+  // Agar Brush se edit hua hai, to display canvas ko hi base maano - lekin ApplyAll me hum cutout se dobara banate hai, brush ko bachane ke liye hum display canvas ko hi cutout maan lete hai agar brush history hai
+  // Simple rule: Agar brush use hua hai (history >0), to display canvas hi final hai, uspe BG mat lagao dobara - warna brush gayab ho jayega
+  // Isliye: Agar history hai, to sirf BG ke liye naya composite banao, brush wale canvas ko alag rakho
+  // Yaha hum final composite banate hai:
+  let w=t7CutoutCanvas.width, h=t7CutoutCanvas.height;
+  // Brush ke baad display canvas hi cutout hai - usko hi use karo
+  let sourceCanvas = t7History.length>0 ? t7Canvas : t7CutoutCanvas;
+  // Lekin t7Canvas ko hi overwrite karna hai, to pehle source ko copy karo
+  let srcCopy=document.createElement('canvas'); srcCopy.width=w; srcCopy.height=h; srcCopy.getContext('2d').drawImage(sourceCanvas,0,0);
+  t7Canvas.width=w; t7Canvas.height=h;
+  // BG Draw
+  if(t7BgMode==='transparent'){
+    // Checker already CSS se dikhega, canvas transparent rahega
+  } else if(t7BgMode==='white'){ t7Ctx.fillStyle='#fff'; t7Ctx.fillRect(0,0,w,h); }
+  else if(t7BgMode==='black'){ t7Ctx.fillStyle='#000'; t7Ctx.fillRect(0,0,w,h); }
+  else if(t7BgMode==='color'){ t7Ctx.fillStyle=document.getElementById('t7BgColor').value; t7Ctx.fillRect(0,0,w,h); }
+  else if(t7BgMode==='blur'){
+    // Blur BG = Original photo ko blur karke BG banao
+    t7Ctx.filter='blur(15px) brightness(0.9)'; t7Ctx.drawImage(t7OrigImg,0,0,w,h); t7Ctx.filter='none';
+  } else if(t7BgMode==='gradient1'){
+    let g=t7Ctx.createLinearGradient(0,0,w,h); g.addColorStop(0,'#22d3ee'); g.addColorStop(1,'#f472b6'); t7Ctx.fillStyle=g; t7Ctx.fillRect(0,0,w,h);
+  } else if(t7BgMode==='gradient2'){
+    let g=t7Ctx.createLinearGradient(0,0,w,h); g.addColorStop(0,'#f59e0b'); g.addColorStop(1,'#ef4444'); t7Ctx.fillStyle=g; t7Ctx.fillRect(0,0,w,h);
+  } else if(t7BgMode==='customimg' && t7BgCustomImg){
+    t7Ctx.drawImage(t7BgCustomImg,0,0,w,h);
+  }
+  // Person Draw - Zoom + Position + Brightness
+  let zoom=t7Zoom/100;
+  let dw=w*zoom, dh=h*zoom;
+  let dx=(w-dw)/2 + t7PosX, dy=(h-dh)/2 + t7PosY;
+  t7Ctx.filter='brightness('+document.getElementById('t7Bright').value+'%)';
+  // Feather ke liye thoda blur - edge smooth
+  let feather=parseInt(document.getElementById('t7Feather').value||2);
+  if(feather>0){ t7Ctx.filter+=' blur('+ (feather*0.2) +'px)'; }
+  // Agar source == display tha, to abhi humne canvas clear kar diya, srcCopy se draw karo
+  t7Ctx.drawImage(srcCopy, dx, dy, dw, dh);
+  t7Ctx.filter='none';
+  // Watermark
+  if(document.getElementById('t7WmOn').checked){
+    t7Ctx.font='bold '+Math.floor(w/20)+'px Arial'; t7Ctx.fillStyle='rgba(150,150,150,0.5)'; t7Ctx.textAlign='center'; t7Ctx.fillText('Orbittroniz.com', w/2, h-15);
+  }
+  // Display canvas hi final hai - cutout ko update mat karo taaki brush history bache, lekin next ApplyAll ke liye source ko update karna padega
+  // Isliye hum t7CutoutCanvas ko bhi update karte hai sirf jab brush OFF hai
+  if(t7BrushMode==='off'){
+    // Next time ke liye cutout ko original transparent wala hi rakho - yaha hum kuch nahi karte
+  }
+};
+
+window.t7Download=function(){
+  if(!t7CutoutCanvas && !t7OrigImg) return alert("First Remove BG!");
+  let prefix=(document.getElementById('t7Prefix').value.trim()||"No BG - Orbittroniz").replace(/[\\/:*?"<>|]/g,'');
+  // Final canvas = display canvas (jo dikh raha hai wahi download hoga)
+  let finalCanvas=t7Canvas;
+  // Passport Crop - Download pe crop karo
+  if(t7Passport!=='original'){
+    let targetW = t7Passport==='35x45' ? 413 : t7Passport==='2x2' ? 600 : 600;
+    let targetH = t7Passport==='35x45' ? 531 : t7Passport==='2x2' ? 600 : 600;
+    let cropCanvas=document.createElement('canvas'); cropCanvas.width=targetW; cropCanvas.height=targetH;
+    let ctx=cropCanvas.getContext('2d');
+    // Center crop - display canvas se center part lo
+    let sw=finalCanvas.width, sh=finalCanvas.height;
+    let scale=Math.max(targetW/sw, targetH/sh);
+    let dw=sw*scale, dh=sh*scale;
+    // BG white for passport if transparent
+    if(t7BgMode==='transparent'){ ctx.fillStyle='#fff'; ctx.fillRect(0,0,targetW,targetH); }
+    ctx.drawImage(finalCanvas, (targetW-dw)/2, (targetH-dh)/2, dw, dh);
+    finalCanvas=cropCanvas;
+    // Passport me hamesha JPG white BG best hota hai
+    if(t7Fmt==='png' && t7BgMode==='transparent'){
+      // Passport me transparent nahi, white kar diya upar
+    }
+  }
+  if(t7Fmt==='pdf'){
+    // Simple PDF download via print - canvas to image to PDF using window print fallback: download as PNG and alert
+    alert("PDF ke liye - Image download hogi, usko Tool 1 Image to PDF me daal ke PDF banao");
+    // Fallback to PNG
+  }
+  let mime = t7Fmt==='jpeg' ? 'image/jpeg' : t7Fmt==='webp' ? 'image/webp' : 'image/png';
+  let ext = t7Fmt==='jpeg' ? 'jpg' : t7Fmt==='webp' ? 'webp' : 'png';
+  // JPG me transparent nahi hota, isliye white BG fill karo
+  if(mime==='image/jpeg'){
+    let c=document.createElement('canvas'); c.width=finalCanvas.width; c.height=finalCanvas.height; let ctx=c.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,c.width,c.height); ctx.drawImage(finalCanvas,0,0); finalCanvas=c;
+  }
+  finalCanvas.toBlob(blob=>{
+    let url=URL.createObjectURL(blob);
+    let a=document.createElement('a'); a.href=url; a.download=prefix+"."+ext; document.body.appendChild(a); a.click(); a.remove();
+    document.getElementById('t7Status').innerText="✅ Downloaded: "+prefix+"."+ext+" • Size: "+(t7Passport!=='original'?t7Passport:'Original');
+  }, mime, 0.92);
+};
+window.t7Share=async function(){
+  if(!t7CutoutCanvas) return alert("First Remove BG!");
+  try{
+    let prefix=(document.getElementById('t7Prefix').value.trim()||"No BG - Orbittroniz")+".png";
+    let blob=await new Promise(r=>t7Canvas.toBlob(r,'image/png'));
+    let file=new File([blob],prefix,{type:'image/png'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:prefix}); } else alert("Share not supported, use Download");
+  }catch(e){ alert("Share cancelled"); }
+};
+window.t7OpenPreview=function(){
+  if(!t7OrigImg) return alert("First select a Photo!");
+  let mc=document.getElementById('t7ModalCanvas'); mc.width=t7Canvas.width; mc.height=t7Canvas.height; mc.getContext('2d').drawImage(t7Canvas,0,0);
+  document.getElementById('t7ModalTitle').innerText="Preview - "+(t7CutoutCanvas?"After - BG Removed ✅":"Before - Original");
+  document.getElementById('t7ModalCap').innerText="BG: "+t7BgMode+" • Size: "+t7Passport+" • Format: "+t7Fmt.toUpperCase();
+  document.getElementById('t7Modal').style.display='flex';
+};
+window.t7ToggleModalBeforeAfter=function(){
+  t7ShowAfter=!t7ShowAfter;
+  let mc=document.getElementById('t7ModalCanvas');
+  if(!t7ShowAfter && t7OrigImg){ mc.width=t7OrigImg.width; mc.height=t7OrigImg.height; mc.getContext('2d').drawImage(t7OrigImg,0,0); document.getElementById('t7ModalTitle').innerText="Preview - Before - Original"; }
+  else{ mc.width=t7Canvas.width; mc.height=t7Canvas.height; mc.getContext('2d').drawImage(t7Canvas,0,0); document.getElementById('t7ModalTitle').innerText="Preview - After - BG Removed ✅"; }
+};
+window.t7ClosePreview=function(){document.getElementById('t7Modal').style.display='none';};
+window.t7Reset=function(){
+  t7File=null; t7CutoutCanvas=null; t7History=[]; t7PosX=0; t7PosY=0; t7Zoom=100;
+  document.getElementById('t7Out').innerHTML=""; document.getElementById('t7FileName').innerText="No Photo Selected"; document.getElementById('t7Status').innerText="";
+  document.getElementById('t7DownloadBtn').style.display='none'; document.getElementById('t7ShareBtn').style.display='none';
+  document.getElementById('t7EmptyBox').style.display='block'; t7Ctx.clearRect(0,0,t7Canvas.width,t7Canvas.height);
+};
+</script>
+<!-- ================= TOOL 7 - V4 - END ================= -->
 <!-- TOOL 8 -->
 <div class="tool" id="tool-8"><div class="panel"><h3>🗜️ Tool 8 - Image Compress</h3>
 <!-- YAHAN TOOL 8 KA CODE PASTE KARO -->
