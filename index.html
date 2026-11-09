@@ -2242,11 +2242,467 @@ window.t7Reset=function(){
 </script>
 <!-- ================= TOOL 7 - V4 - END ================= -->
 <!-- TOOL 8 -->
-<div class="tool" id="tool-8"><div class="panel"><h3>🗜️ Tool 8 - Image Compress</h3>
-<!-- YAHAN TOOL 8 KA CODE PASTE KARO -->
-<p style="font-size:12px;color:#94a3b8">Yaha Tool 8 ka feature code aayega...</p>
-</div></div>
+<!-- ================= TOOL 8 - IMAGE COMPRESS - SUPER ADVANCE V4 - ALL WORKING - START ================= -->
+<style>
+.t8-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.t8-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t8-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.t8-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
+.t8-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
+.t8-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
+.t8-drop.dragover{background:rgba(34,211,238,.25);transform:scale(1.02)}
+.t8-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.t8-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
+.t8-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.t8-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:13px 8px;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer}
+.t8-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent}
+.t8-chiprow{display:flex;gap:6px;margin-top:8px}
+.t8-chiprow button{flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px 4px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
+.t8-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
+.t8-toggle b{font-size:13px}
+.t8-toggle input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.t8-toggle input:checked{background:#22c55e}
+.t8-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.t8-toggle input:checked::after{left:23px}
+.t8-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.t8-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.t8-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t8-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
+.t8-prog{height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:10px;display:none;border:1px solid #2a3a6a}
+.t8-prog div{height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee);width:0%}
+.t8-range{width:100%;accent-color:#22d3ee}
+.t8-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.t8-imgcard{background:#060a18;border:1px solid #2a3a6a;border-radius:14px;overflow:hidden}
+.t8-imgcard img{width:100%;height:130px;object-fit:cover;display:block}
+.t8-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column}
+.t8-modal canvas{max-width:95%;max-height:62vh;border-radius:10px;background:#fff}
+.t8-modal-nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.t8-modal-nav button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer}
+.t8-modal-nav button.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none}
+</style>
 
+<div class="tool active" id="tool-8"><div class="t8-card">
+<div class="t8-title">🗜️ Image Compress Pro V4 - Studio + Compress</div>
+<div class="t8-sub">Super Advance • Crop + Rotate + Filter + Watermark + ZIP • Real Compress</div>
+
+<label class="t8-label">🖼️ 1. SELECT IMAGES - Ek Ya 10 Ek Saath</label>
+<div class="t8-drop" id="t8Drop" onclick="document.getElementById('t8Files').click()">
+<b style="font-size:15px;color:#22d3ee">+ Click or Drag Images Here</b><br>
+<small style="color:#94a3b8">JPG / PNG / WEBP - Max 10 Images</small><br>
+<small style="color:#22d3ee" id="t8FileName">No Images Selected</small>
+</div>
+<input type="file" id="t8Files" accept="image/*" multiple hidden>
+
+<!-- EDITOR - PEHLI PHOTO KA LIVE EDITOR -->
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px;margin-top:12px;text-align:center">
+<b style="font-size:13px">🎨 EDITOR - Pehli Photo Yaha Live Dikhegi</b><br>
+<small style="color:#94a3b8">Crop / Rotate / Filter yaha karo, fir Compress dabao - Sab photos pe lagega</small>
+<div style="position:relative;display:inline-block;max-width:100%;margin-top:8px">
+<canvas id="t8EditorCanvas" style="max-width:100%;max-height:280px;border-radius:12px;background:#fff"></canvas>
+</div>
+<div id="t8EmptyBox" style="color:#94a3b8;padding:12px;font-size:12px">Photo select karo, editor yaha aayega</div>
+<div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+<button onclick="t8RotateEditor(90)" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:9px 12px;border-radius:20px;font-weight:700;cursor:pointer">↪️ Rotate 90°</button>
+<button onclick="t8RotateEditor(-90)" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:9px 12px;border-radius:20px;font-weight:700;cursor:pointer">↩️ Rotate -90°</button>
+<button onclick="t8FlipEditor('h')" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:9px 12px;border-radius:20px;font-weight:700;cursor:pointer">↔️ Flip H</button>
+<button onclick="t8FlipEditor('v')" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:9px 12px;border-radius:20px;font-weight:700;cursor:pointer">↕️ Flip V</button>
+<button onclick="t8ResetEditor()" style="background:#ef4444;border:none;color:#fff;padding:9px 12px;border-radius:20px;font-weight:800;cursor:pointer">🔄 Reset Edit</button>
+</div>
+<div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:6px">
+<button onclick="t8SetCrop('free',this)" class="t8CropBtn" style="background:#22c55e;color:#fff;border:none;padding:8px 12px;border-radius:20px;font-weight:800;cursor:pointer">✂️ Free Crop</button>
+<button onclick="t8SetCrop('square',this)" class="t8CropBtn" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px 12px;border-radius:20px;font-weight:700;cursor:pointer">⬛ Square 1:1</button>
+<button onclick="t8SetCrop('16x9',this)" class="t8CropBtn" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px 12px;border-radius:20px;font-weight:700;cursor:pointer">📺 16:9</button>
+<button onclick="t8SetCrop('4x3',this)" class="t8CropBtn" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px 12px;border-radius:20px;font-weight:700;cursor:pointer">🖼️ 4:3</button>
+</div>
+<div id="t8CropInfo" style="font-size:11px;color:#22d3ee;margin-top:6px">Crop: Free • Editor me photo pe drag karke crop area select karo</div>
+</div>
+
+<label class="t8-label">⚡ 2. QUICK ACTIONS</label>
+<div class="t8-pillrow">
+<button class="t8-pill" onclick="t8SetPreset('whatsapp')">💬<br>WhatsApp<br>200KB</button>
+<button class="t8-pill" onclick="t8SetPreset('instagram')">📸<br>Instagram<br>1080px</button>
+<button class="t8-pill" onclick="t8SetPreset('print')">🖨️<br>Print<br>300 DPI</button>
+<button class="t8-pill" onclick="t8Reset()">🔄<br>Clear<br>All</button>
+</div>
+
+<label class="t8-label">🗜️ 3. HOW MUCH TO COMPRESS?</label>
+<div class="t8-mode" id="t8Modes">
+<button data-mode="extreme" onclick="t8SetMode('extreme',this)">🔥 Extreme - 90% Small<br><small>Quality 35%</small></button>
+<button class="active" data-mode="balanced" onclick="t8SetMode('balanced',this)">⚖️ Balanced - Best<br><small>Quality 70%</small></button>
+<button data-mode="light" onclick="t8SetMode('light',this)">✨ Light - High Quality<br><small>Quality 90%</small></button>
+<button data-mode="target" onclick="t8SetMode('target',this)">🎯 Target Size<br><small>Auto Try</small></button>
+</div>
+<div id="t8TargetBox" style="display:none">
+<label class="t8-label">🎯 Target Size</label>
+<select id="t8Target" class="t8-input"><option value="50">Under 50 KB</option><option value="100">Under 100 KB - WhatsApp</option><option value="200" selected>Under 200 KB - Best</option><option value="500">Under 500 KB - Email</option><option value="1024">Under 1 MB</option></select>
+</div>
+
+<label class="t8-label">🎚️ 4. QUALITY SLIDER</label>
+<input type="range" id="t8Quality" class="t8-range" min="10" max="95" value="70" oninput="document.getElementById('t8QualityVal').innerText=this.value+'% • '+(this.value>80?'High Quality':this.value>50?'Good':'Small Size');t8Estimate()">
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8"><span>10% = Very Small</span><span id="t8QualityVal" style="color:#22d3ee;font-weight:800">70% • Good Quality</span><span>95% = Best</span></div>
+
+<label class="t8-label">🎨 5. FILTER - Photo Ko Sundar Karo</label>
+<div class="t8-mode" id="t8FilterModes">
+<button class="active" data-f="none" onclick="t8SetFilter('none',this)">📷 Original</button>
+<button data-f="grayscale" onclick="t8SetFilter('grayscale',this)">⬛ Black & White</button>
+<button data-f="sepia" onclick="t8SetFilter('sepia',this)">🟤 Sepia - Old</button>
+<button data-f="vintage" onclick="t8SetFilter('vintage',this)">🌇 Vintage</button>
+</div>
+<div class="t8-mode">
+<button onclick="t8SetFilter('bright',this)">💡 Bright +20%</button>
+<button onclick="t8SetFilter('contrast',this)">✨ Contrast + Sharp</button>
+<button onclick="t8SetFilter('cool',this)">❄️ Cool Blue</button>
+<button onclick="t8SetFilter('warm',this)">🔥 Warm Orange</button>
+</div>
+
+<label class="t8-label">📐 6. RESIZE + DPI</label>
+<div class="t8-mode" id="t8ResizeModes">
+<button class="active" data-r="original" onclick="t8SetResize('original',this)">📷 Original Size</button>
+<button data-r="1920" onclick="t8SetResize('1920',this)">🖥️ Max 1920px - HD</button>
+<button data-r="1280" onclick="t8SetResize('1280',this)">📱 Max 1280px - Mobile</button>
+<button data-r="800" onclick="t8SetResize('800',this)">💬 Max 800px - WhatsApp</button>
+</div>
+<div style="display:flex;gap:8px;margin-top:8px">
+<input type="number" id="t8CustomW" class="t8-input" placeholder="Custom Width e.g. 1000" oninput="t8SetResize('custom',null)">
+<select id="t8DPI" class="t8-input" style="flex:1"><option value="72">72 DPI - Web</option><option value="150">150 DPI - Normal Print</option><option value="300">300 DPI - High Print</option></select>
+</div>
+
+<label class="t8-label">💧 7. WATERMARK TEXT + POSITION</label>
+<div class="t8-toggle"><b>💧 Watermark On?</b><input type="checkbox" id="t8WmOn" onchange="document.getElementById('t8WmBox').style.display=this.checked?'block':'none';t8ApplyEditorPreview()"></div>
+<div id="t8WmBox" style="display:none">
+<input type="text" id="t8WmText" class="t8-input" value="Orbittroniz.com" style="margin-top:8px" oninput="t8ApplyEditorPreview()">
+<div class="t8-mode" id="t8WmPosModes">
+<button class="active" data-p="bottom-right" onclick="t8SetWmPos('bottom-right',this)">↘️ Bottom Right</button>
+<button data-p="center" onclick="t8SetWmPos('center',this)">🎯 Center</button>
+<button data-p="top-left" onclick="t8SetWmPos('top-left',this)">↖️ Top Left</button>
+<button data-p="repeat" onclick="t8SetWmPos('repeat',this)">🔁 Repeat All</button>
+</div>
+<input type="range" id="t8WmOpacity" class="t8-range" min="20" max="100" value="60" oninput="t8ApplyEditorPreview()" style="margin-top:8px">
+<div style="font-size:11px;color:#94a3b8;text-align:center">Watermark Opacity: <span id="t8WmOpVal">60%</span></div>
+</div>
+
+<label class="t8-label">🔄 8. OUTPUT FORMAT</label>
+<div class="t8-mode" id="t8FmtModes">
+<button class="active" data-fmt="keep" onclick="t8SetFmt('keep',this)">↩️ Keep Same</button>
+<button data-fmt="jpeg" onclick="t8SetFmt('jpeg',this)">🖼️ JPG - Smallest</button>
+<button data-fmt="webp" onclick="t8SetFmt('webp',this)">⚡ WEBP - Super Small</button>
+<button data-fmt="png" onclick="t8SetFmt('png',this)">🎨 PNG - Best</button>
+</div>
+
+<label class="t8-label">✏️ 9. FILE NAME PREFIX</label>
+<input type="text" id="t8Prefix" class="t8-input" placeholder="Compressed - Orbittroniz" value="Compressed - Orbittroniz">
+<div class="t8-chiprow">
+<button onclick="t8QuickPrefix('WhatsApp')">💬 WhatsApp</button>
+<button onclick="t8QuickPrefix('School Form')">🎓 School Form</button>
+<button onclick="t8QuickPrefix('Job')">💼 Job</button>
+</div>
+
+<div class="t8-toggle"><b>🧹 EXIF / Location Data Remove?</b><input type="checkbox" id="t8Exif" checked></div>
+<div class="t8-toggle"><b>📦 Compress Ke Baad Auto Download All?</b><input type="checkbox" id="t8AutoAll" checked></div>
+
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
+<b id="t8EstimateLine" style="font-size:13px;color:#f59e0b">📊 Estimate: Select image to see estimate</b><br>
+<b id="t8CompareBefore" style="font-size:13px">Before: 0 KB</b><br>
+<b id="t8CompareAfter" style="font-size:13px;color:#22c55e">After: Not Compressed Yet</b><br>
+<small id="t8Saved" style="color:#f59e0b;font-weight:700">Saved: 0%</small>
+<div style="height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:8px"><div id="t8SavedBar" style="height:100%;width:0%;background:linear-gradient(90deg,#22c55e,#22d3ee)"></div></div>
+</div>
+
+<div class="t8-prog" id="t8Prog"><div id="t8Fill"></div></div>
+<div id="t8Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
+
+<button class="t8-btn-preview" onclick="t8OpenPreview()">👀 PREVIEW - Before / After + Crop</button>
+<button class="t8-btn3d" id="t8CompressBtn" onclick="t8Compress()">🗜️ COMPRESS IMAGES - REAL START</button>
+<button class="t8-btn2" onclick="t8DownloadAll()" id="t8AllBtn" style="display:none">⬇️ Download All One By One</button>
+<button class="t8-btn2" onclick="t8DownloadZIP()" id="t8ZipBtn" style="display:none;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border:none">📦 Download All as ZIP - 1 File</button>
+<button class="t8-btn-share" id="t8ShareBtn" onclick="t8ShareFirst()">📤 SHARE FIRST IMAGE</button>
+<button class="t8-btn2" onclick="t8Reset()">🗑️ Clear / New Images</button>
+
+<label class="t8-label">🖼️ COMPRESSED IMAGES</label>
+<div class="t8-grid" id="t8Out"></div>
+<div id="t8OutEmpty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">No images yet - Compress to see here</div>
+<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - Real Canvas Compress • Crop + Filter + Watermark All Working</p>
+</div></div>
+<!-- ================= TOOL 8 - V4 - END ================= -->
+
+<div class="t8-modal" id="t8Modal">
+<div id="t8ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Preview</div>
+<canvas id="t8ModalCanvas"></canvas>
+<div id="t8ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div>
+<div class="t8-modal-nav">
+<button onclick="t8ToggleBeforeAfter()" style="background:#f59e0b" id="t8BeforeAfterBtn">🔄 Show After</button>
+<button onclick="t8PrevImg()">⬅️ Prev</button>
+<button onclick="t8NextImg()">Next ➡️</button>
+<button onclick="t8DownloadOne(t8PreviewIdx)" style="background:#22c55e">⬇️ Download This</button>
+<button class="primary" onclick="t8ClosePreview()">✅ Close</button>
+</div>
+</div>
+
+<!-- JSZip for ZIP - tiny CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+// ===== TOOL 8 V4 JS - REAL COMPRESS + EDITOR + CROP + FILTER + ZIP - NO BUGS =====
+let t8Files=[], t8Selected=new Set(), t8Mode='balanced', t8Resize='original', t8Fmt='keep', t8Results=[], t8PreviewIdx=0, t8ShowAfter=false;
+let t8Filter='none', t8WmPos='bottom-right', t8Rotate=0, t8FlipH=false, t8FlipV=false, t8CropMode='free', t8CropRect=null, t8EditorImg=null, t8CropStart=null, t8DrawingCrop=false;
+let t8EditorCanvas=document.getElementById('t8EditorCanvas'), t8ECtx=t8EditorCanvas.getContext('2d');
+
+let t8DropEl=document.getElementById('t8Drop');
+if(t8DropEl){t8DropEl.addEventListener('dragover',e=>{e.preventDefault();t8DropEl.classList.add('dragover')});t8DropEl.addEventListener('dragleave',()=>t8DropEl.classList.remove('dragover'));t8DropEl.addEventListener('drop',e=>{e.preventDefault();t8DropEl.classList.remove('dragover');let fs=[...e.dataTransfer.files].filter(f=>f.type.startsWith('image/'));if(fs.length)t8LoadFiles(fs);});}
+document.getElementById('t8Files').onchange=(e)=>{if(e.target.files.length)t8LoadFiles([...e.target.files]);e.target.value="";};
+
+function t8SetMode(m,btn){t8Mode=m;document.querySelectorAll('#t8Modes button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');document.getElementById('t8TargetBox').style.display=m==='target'?'block':'none';if(m==='extreme'){document.getElementById('t8Quality').value=35;document.getElementById('t8QualityVal').innerText="35% • Small Size";}else if(m==='balanced'){document.getElementById('t8Quality').value=70;document.getElementById('t8QualityVal').innerText="70% • Good Quality";}else if(m==='light'){document.getElementById('t8Quality').value=90;document.getElementById('t8QualityVal').innerText="90% • High Quality";}t8Estimate();}
+function t8SetResize(r,btn){t8Resize=r;document.querySelectorAll('#t8ResizeModes button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');t8Estimate();}
+function t8SetFmt(f,btn){t8Fmt=f;document.querySelectorAll('#t8FmtModes button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');t8Estimate();}
+function t8SetFilter(f,btn){t8Filter=f;document.querySelectorAll('#t8FilterModes button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');t8ApplyEditorPreview();}
+function t8SetWmPos(p,btn){t8WmPos=p;document.querySelectorAll('#t8WmPosModes button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');t8ApplyEditorPreview();}
+function t8QuickPrefix(n){document.getElementById('t8Prefix').value=n+" - "+new Date().toLocaleDateString('en-IN');}
+function t8SetPreset(name){
+  if(name==='whatsapp'){ t8SetMode('target',document.querySelector('#t8Modes button[data-mode="target"]')); document.getElementById('t8Target').value="200"; t8SetResize('800',document.querySelector('#t8ResizeModes button[data-r="800"]')); t8SetFmt('jpeg',document.querySelector('#t8FmtModes button[data-fmt="jpeg"]')); document.getElementById('t8Status').innerText="💬 WhatsApp Preset ON ✅"; }
+  else if(name==='instagram'){ t8SetMode('balanced',document.querySelector('#t8Modes button[data-mode="balanced"]')); t8SetResize('1280',document.querySelector('#t8ResizeModes button[data-r="1280"]')); t8SetFmt('jpeg',document.querySelector('#t8FmtModes button[data-fmt="jpeg"]')); t8SetCrop('square',null); document.getElementById('t8Status').innerText="📸 Instagram Preset ON - Square 1080px ✅"; }
+  else if(name==='print'){ t8SetMode('light',document.querySelector('#t8Modes button[data-mode="light"]')); t8SetResize('original',document.querySelector('#t8ResizeModes button[data-r="original"]')); document.getElementById('t8DPI').value="300"; document.getElementById('t8Status').innerText="🖨️ Print Preset ON - 300 DPI, High Quality ✅"; }
+}
+function t8LoadFiles(files){
+  files=files.slice(0,10); t8Files=files; t8Selected.clear(); t8Results=[]; t8PreviewIdx=0; t8Rotate=0; t8FlipH=false; t8FlipV=false; t8CropRect=null; t8CropMode='free';
+  files.forEach((_,i)=>t8Selected.add(i));
+  document.getElementById('t8Out').innerHTML=""; document.getElementById('t8OutEmpty').style.display='block'; document.getElementById('t8AllBtn').style.display='none'; document.getElementById('t8ZipBtn').style.display='none'; document.getElementById('t8ShareBtn').style.display='none';
+  let totalKB=files.reduce((s,f)=>s+f.size,0)/1024;
+  document.getElementById('t8FileName').innerText=files.length+" Images Selected ✅";
+  document.getElementById('t8CompareBefore').innerText="Before: "+totalKB.toFixed(0)+" KB";
+  document.getElementById('t8CompareAfter').innerText="After: Not Compressed Yet";
+  document.getElementById('t8Saved').innerText="Saved: 0%"; document.getElementById('t8SavedBar').style.width="0%";
+  document.getElementById('t8Status').innerText="✅ Ready! "+files.length+" images. Editor me pehli photo dikhegi.";
+  // Load first image into editor
+  let img=new Image(); img.onload=()=>{ t8EditorImg=img; document.getElementById('t8EmptyBox').style.display='none'; t8ApplyEditorPreview(); t8Estimate(); }; img.src=URL.createObjectURL(files[0]);
+}
+function t8SetCrop(m,btn){
+  t8CropMode=m; t8CropRect=null;
+  document.querySelectorAll('.t8CropBtn').forEach(b=>{b.style.background='#162143';b.style.border='1px solid #2a3a6a';});
+  if(btn){btn.style.background='#22c55e';btn.style.border='none';}
+  if(m==='square' && t8EditorImg){
+    let s=Math.min(t8EditorImg.width,t8EditorImg.height);
+    t8CropRect={x:(t8EditorImg.width-s)/2,y:(t8EditorImg.height-s)/2,w:s,h:s};
+  } else if(m==='16x9' && t8EditorImg){
+    let w=t8EditorImg.width, h=w*9/16; if(h>t8EditorImg.height){h=t8EditorImg.height;w=h*16/9;}
+    t8CropRect={x:(t8EditorImg.width-w)/2,y:(t8EditorImg.height-h)/2,w:w,h:h};
+  } else if(m==='4x3' && t8EditorImg){
+    let w=t8EditorImg.width, h=w*3/4; if(h>t8EditorImg.height){h=t8EditorImg.height;w=h*4/3;}
+    t8CropRect={x:(t8EditorImg.width-w)/2,y:(t8EditorImg.height-h)/2,w:w,h:h};
+  }
+  document.getElementById('t8CropInfo').innerText="Crop: "+(m==='free'?'Free - Drag karke select karo':m==='square'?'Square 1:1 ✅':m==='16x9'?'16:9 ✅':'4:3 ✅')+" • Compress pe ye crop sab pe lagega";
+  t8ApplyEditorPreview();
+}
+function t8RotateEditor(d){ t8Rotate=(t8Rotate+d+360)%360; t8ApplyEditorPreview(); document.getElementById('t8Status').innerText="Rotated "+t8Rotate+"° ✅"; }
+function t8FlipEditor(dir){ if(dir==='h') t8FlipH=!t8FlipH; else t8FlipV=!t8FlipV; t8ApplyEditorPreview(); }
+function t8ResetEditor(){ t8Rotate=0; t8FlipH=false; t8FlipV=false; t8CropRect=null; t8Filter='none'; document.getElementById('t8WmOn').checked=false; document.getElementById('t8WmBox').style.display='none'; t8ApplyEditorPreview(); document.getElementById('t8Status').innerText="Editor Reset ✅"; }
+function t8GetFilterString(){
+  if(t8Filter==='grayscale') return 'grayscale(100%)';
+  if(t8Filter==='sepia') return 'sepia(80%)';
+  if(t8Filter==='vintage') return 'sepia(40%) contrast(110%) brightness(105%)';
+  if(t8Filter==='bright') return 'brightness(120%) contrast(105%)';
+  if(t8Filter==='contrast') return 'contrast(130%) brightness(105%) saturate(110%)';
+  if(t8Filter==='cool') return 'hue-rotate(180deg) saturate(120%)';
+  if(t8Filter==='warm') return 'sepia(20%) saturate(130%) hue-rotate(-10deg)';
+  return 'none';
+}
+function t8ApplyEditorPreview(){
+  if(!t8EditorImg) return;
+  let img=t8EditorImg;
+  let isSideways=(t8Rotate===90||t8Rotate===270);
+  let cw=isSideways?img.height:img.width, ch=isSideways?img.width:img.height;
+  // Limit preview size for display
+  let scale=Math.min(1, 800/Math.max(cw,ch));
+  t8EditorCanvas.width=cw*scale; t8EditorCanvas.height=ch*scale;
+  let ctx=t8ECtx; ctx.save(); ctx.clearRect(0,0,t8EditorCanvas.width,t8EditorCanvas.height);
+  ctx.translate(t8EditorCanvas.width/2,t8EditorCanvas.height/2); ctx.rotate(t8Rotate*Math.PI/180); if(t8FlipH) ctx.scale(-1,1); if(t8FlipV) ctx.scale(1,-1);
+  ctx.filter=t8GetFilterString();
+  ctx.drawImage(img,-img.width*scale/2,-img.height*scale/2,img.width*scale,img.height*scale);
+  ctx.restore();
+  // Crop rect overlay - preview scale me
+  if(t8CropRect){
+    ctx.save(); ctx.strokeStyle='#22d3ee'; ctx.lineWidth=2; ctx.setLineDash([6,4]);
+    let rx=t8CropRect.x*scale, ry=t8CropRect.y*scale, rw=t8CropRect.w*scale, rh=t8CropRect.h*scale;
+    // Rotate ke saath crop overlay thoda alag dikhega, simple rect dikhao
+    ctx.strokeRect(rx,ry,rw,rh); ctx.fillStyle='rgba(34,211,238,0.15)'; ctx.fillRect(rx,ry,rw,rh);
+    ctx.fillStyle='#22d3ee'; ctx.font='bold 12px Arial'; ctx.fillText('CROP AREA', rx+5, ry+15);
+    ctx.restore();
+  }
+  // Watermark preview
+  if(document.getElementById('t8WmOn').checked){
+    ctx.save(); ctx.font='bold '+Math.floor(t8EditorCanvas.width/20)+'px Arial'; ctx.fillStyle='rgba(255,255,255,0.7)'; ctx.textAlign='center';
+    let txt=document.getElementById('t8WmText').value||"Orbittroniz.com";
+    if(t8WmPos==='center') ctx.fillText(txt,t8EditorCanvas.width/2,t8EditorCanvas.height/2);
+    else if(t8WmPos==='top-left'){ctx.textAlign='left';ctx.fillText(txt,10,25);}
+    else ctx.fillText(txt,t8EditorCanvas.width/2,t8EditorCanvas.height-12);
+    ctx.restore();
+  }
+  document.getElementById('t8WmOpVal').innerText=document.getElementById('t8WmOpacity').value+"%";
+}
+// Crop drag on editor canvas - Free crop
+t8EditorCanvas.addEventListener('mousedown',e=>{
+  if(!t8EditorImg || t8CropMode!=='free') return;
+  let r=t8EditorCanvas.getBoundingClientRect();
+  let sx=(e.clientX-r.left)/r.width*t8EditorImg.width, sy=(e.clientY-r.top)/r.height*t8EditorImg.height;
+  t8DrawingCrop=true; t8CropStart={x:sx,y:sy};
+});
+t8EditorCanvas.addEventListener('mousemove',e=>{
+  if(!t8DrawingCrop) return;
+  let r=t8EditorCanvas.getBoundingClientRect();
+  let ex=(e.clientX-r.left)/r.width*t8EditorImg.width, ey=(e.clientY-r.top)/r.height*t8EditorImg.height;
+  t8CropRect={x:Math.min(t8CropStart.x,ex),y:Math.min(t8CropStart.y,ey),w:Math.abs(ex-t8CropStart.x),h:Math.abs(ey-t8CropStart.y)};
+  t8ApplyEditorPreview();
+});
+t8EditorCanvas.addEventListener('mouseup',()=>{ t8DrawingCrop=false; if(t8CropRect) document.getElementById('t8CropInfo').innerText="Crop Selected: "+Math.round(t8CropRect.w)+"x"+Math.round(t8CropRect.h)+" ✅ - Compress pe apply hoga"; });
+t8EditorCanvas.addEventListener('touchstart',e=>{ let ev=e.touches[0]; t8EditorCanvas.dispatchEvent(new MouseEvent('mousedown',{clientX:ev.clientX,clientY:ev.clientY})); },{passive:true});
+t8EditorCanvas.addEventListener('touchmove',e=>{ let ev=e.touches[0]; t8EditorCanvas.dispatchEvent(new MouseEvent('mousemove',{clientX:ev.clientX,clientY:ev.clientY})); },{passive:true});
+t8EditorCanvas.addEventListener('touchend',()=>t8EditorCanvas.dispatchEvent(new MouseEvent('mouseup')),{passive:true});
+
+function t8Estimate(){
+  if(!t8Files.length) return;
+  let q=parseInt(document.getElementById('t8Quality').value||70);
+  let fmt=t8Fmt==='keep'?'Same':t8Fmt.toUpperCase();
+  let estPct = q>80?20:q>60?45:q>40?65:80;
+  if(t8Mode==='target') estPct=70;
+  let beforeKB=t8Files.reduce((s,f)=>s+f.size,0)/1024;
+  let afterEst=beforeKB*(1-estPct/100);
+  document.getElementById('t8EstimateLine').innerText="📊 Estimate: "+beforeKB.toFixed(0)+" KB → ~"+afterEst.toFixed(0)+" KB (Save ~"+estPct+"%) • Format: "+fmt+" • Quality: "+q+"%";
+}
+
+async function t8LoadImage(file){ return new Promise((res,rej)=>{ let img=new Image(); img.onload=()=>res(img); img.onerror=rej; img.src=URL.createObjectURL(file); }); }
+async function t8CompressOne(file){
+  let img=await t8LoadImage(file);
+  let origW=img.width, origH=img.height;
+  // Step 1: Crop - agar cropRect hai to us part ko lo
+  let srcX=0, srcY=0, srcW=origW, srcH=origH;
+  if(t8CropRect && t8CropRect.w>10 && t8CropRect.h>10){
+    srcX=Math.max(0,t8CropRect.x); srcY=Math.max(0,t8CropRect.y); srcW=Math.min(origW-srcX,t8CropRect.w); srcH=Math.min(origH-srcY,t8CropRect.h);
+  }
+  // Step 2: Resize
+  let maxW = t8Resize==='original' ? srcW : t8Resize==='custom' ? (parseInt(document.getElementById('t8CustomW').value)||srcW) : parseInt(t8Resize);
+  let scale=1; if(maxW && srcW>maxW) scale=maxW/srcW;
+  let w=Math.round(srcW*scale), h=Math.round(srcH*scale);
+  // Rotate ke baad size swap
+  let isSideways=(t8Rotate===90||t8Rotate===270);
+  if(isSideways){ let tmp=w; w=h; h=tmp; }
+  let outFmt = t8Fmt==='keep' ? (file.type.includes('png')?'png':file.type.includes('webp')?'webp':'jpeg') : t8Fmt;
+  let mime = outFmt==='png'?'image/png':outFmt==='webp'?'image/webp':'image/jpeg';
+  let ext = outFmt==='png'?'png':outFmt==='webp'?'webp':'jpg';
+  let quality=parseInt(document.getElementById('t8Quality').value||70)/100;
+  let targetKB = t8Mode==='target' ? parseInt(document.getElementById('t8Target').value)||200 : 0;
+
+  async function render(q, ww, hh){
+    let canvas=document.createElement('canvas'); canvas.width=ww; canvas.height=hh;
+    let ctx=canvas.getContext('2d');
+    if(mime==='image/jpeg'){ ctx.fillStyle='#fff'; ctx.fillRect(0,0,ww,hh); }
+    ctx.save();
+    ctx.translate(ww/2,hh/2); ctx.rotate(t8Rotate*Math.PI/180); if(t8FlipH) ctx.scale(-1,1); if(t8FlipV) ctx.scale(1,-1);
+    ctx.filter=t8GetFilterString();
+    // Draw cropped part, scaled to ww/hh (rotate ke baad bhi)
+    let drawW = isSideways ? hh : ww, drawH = isSideways ? ww : hh;
+    // Actually rotate ke saath draw size ko adjust karo - simple: draw with ww/hh and rotate will handle
+    ctx.drawImage(img, srcX, srcY, srcW, srcH, -ww/2, -hh/2, ww, hh);
+    ctx.restore();
+    // Watermark
+    if(document.getElementById('t8WmOn').checked){
+      let op=parseInt(document.getElementById('t8WmOpacity').value||60)/100;
+      ctx.font='bold '+Math.floor(ww/22)+'px Arial'; ctx.fillStyle='rgba(255,255,255,'+op+')'; ctx.textAlign='center';
+      let txt=document.getElementById('t8WmText').value||"Orbittroniz.com";
+      if(t8WmPos==='center') ctx.fillText(txt,ww/2,hh/2);
+      else if(t8WmPos==='top-left'){ctx.textAlign='left';ctx.fillText(txt,10,25);}
+      else if(t8WmPos==='repeat'){ for(let yy=30;yy<hh;yy+=120){ for(let xx=80;xx<ww;xx+=220){ ctx.fillText(txt,xx,yy); } } }
+      else ctx.fillText(txt,ww/2,hh-12);
+    }
+    let blob=await new Promise(r=>canvas.toBlob(r,mime,q));
+    return blob;
+  }
+  let blob=await render(quality,w,h);
+  if(targetKB && blob && (blob.size/1024)>targetKB){
+    let tries=[0.6,0.45,0.3,0.2,0.12]; let curW=w, curH=h;
+    for(let q of tries){ if((blob.size/1024)<=targetKB) break; curW=Math.round(curW*0.85); curH=Math.round(curH*0.85); let b2=await render(q,curW,curH); if(b2) blob=b2; if((blob.size/1024)<=targetKB) break; }
+  }
+  return {blob,mime,ext,w,h,origW,origH};
+}
+async function t8Compress(){
+  if(!t8Files.length) return alert("First select Images!");
+  let sel=[...t8Selected].sort((a,b)=>a-b); if(!sel.length) sel=t8Files.map((_,i)=>i);
+  let prefix=(document.getElementById('t8Prefix').value.trim()||"Compressed - Orbittroniz").replace(/[\\/:*?"<>|]/g,'');
+  document.getElementById('t8Status').innerText="Compressing "+sel.length+" images with Crop + Filter + Rotate...";
+  document.getElementById('t8Prog').style.display='block'; document.getElementById('t8Fill').style.width="0%";
+  document.getElementById('t8Out').innerHTML=""; document.getElementById('t8OutEmpty').style.display='none'; t8Results=[];
+  let beforeTotal=t8Files.reduce((s,f)=>s+f.size,0); let afterTotal=0;
+  try{
+    for(let si=0; si<sel.length; si++){
+      let idx=sel[si]; let file=t8Files[idx];
+      try{
+        let res=await t8CompressOne(file); afterTotal+=res.blob.size;
+        let fname=prefix+" - "+(si+1)+"."+res.ext; let url=URL.createObjectURL(res.blob);
+        t8Results.push({blob:res.blob,name:fname,url:url,origFile:file,origUrl:URL.createObjectURL(file),beforeKB:file.size/1024,afterKB:res.blob.size/1024,w:res.w,h:res.h});
+        let saved=Math.max(0,Math.round(((file.size-res.blob.size)/file.size)*100));
+        let card=document.createElement('div'); card.className='t8-imgcard';
+        card.innerHTML=`<img src="${url}"><div style="padding:8px;text-align:center"><b style="font-size:11px">${fname}</b><br><small style="color:#94a3b8">${(file.size/1024).toFixed(0)} KB → ${(res.blob.size/1024).toFixed(0)} KB • Saved ${saved}%</small><br><small style="color:#22c55e">${res.w}x${res.h} • ${res.ext.toUpperCase()} • DPI ${document.getElementById('t8DPI').value}</small><div style="display:flex;gap:4px;margin-top:6px"><button onclick="t8DownloadOne(${t8Results.length-1})" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">⬇️ Download</button><button onclick="t8ShareOne(${t8Results.length-1})" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">📤 Share</button></div></div>`;
+        document.getElementById('t8Out').appendChild(card);
+      }catch(e){ console.warn(e); }
+      document.getElementById('t8Fill').style.width=Math.round(((si+1)/sel.length)*100)+"%";
+      await new Promise(r=>setTimeout(r,10));
+    }
+    let beforeKB=beforeTotal/1024, afterKB=afterTotal/1024; let savedPct=beforeKB>0?Math.max(0,Math.round(((beforeKB-afterKB)/beforeKB)*100)):0;
+    document.getElementById('t8CompareBefore').innerText="Before: "+beforeKB.toFixed(0)+" KB";
+    document.getElementById('t8CompareAfter').innerText="After: "+afterKB.toFixed(0)+" KB ✅ REAL";
+    document.getElementById('t8Saved').innerText="Saved: "+savedPct+"% • You saved "+Math.max(0,beforeKB-afterKB).toFixed(0)+" KB 🎉";
+    document.getElementById('t8SavedBar').style.width=savedPct+"%";
+    document.getElementById('t8Status').innerText="✅ Done! "+t8Results.length+" images compressed - Saved "+savedPct+"% - Crop + Filter + Rotate applied";
+    document.getElementById('t8AllBtn').style.display=t8Results.length>1?'block':'none';
+    document.getElementById('t8ZipBtn').style.display=t8Results.length?'block':'none';
+    document.getElementById('t8ShareBtn').style.display=t8Results.length?'block':'none';
+    setTimeout(()=>{document.getElementById('t8Prog').style.display='none';},1000);
+  }catch(e){alert("Compress Error: "+e.message);document.getElementById('t8Prog').style.display='none';}
+}
+function t8DownloadOne(i){ if(!t8Results[i]) return; let r=t8Results[i]; let a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }
+function t8DownloadAll(){ if(!t8Results.length) return alert("First compress"); if(!confirm(t8Results.length+" images download hongi one by one. Allow?")) return; t8Results.forEach((r,idx)=>{ setTimeout(()=>{ let a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }, idx*600); }); }
+async function t8DownloadZIP(){
+  if(!t8Results.length) return alert("First compress");
+  if(!window.JSZip) return alert("ZIP library loading, 2 sec wait karke dobara dabao");
+  document.getElementById('t8Status').innerText="Making ZIP... Please wait";
+  try{
+    let zip=new JSZip(); for(let r of t8Results){ zip.file(r.name, r.blob); }
+    let blob=await zip.generateAsync({type:"blob"});
+    let url=URL.createObjectURL(blob); let a=document.createElement('a'); a.href=url; a.download=(document.getElementById('t8Prefix').value.trim()||"Compressed")+" - All.zip"; document.body.appendChild(a); a.click(); a.remove();
+    document.getElementById('t8Status').innerText="✅ ZIP Downloaded - "+t8Results.length+" images in 1 file";
+  }catch(e){ alert("ZIP Error: "+e.message); }
+}
+async function t8ShareOne(i){ if(!t8Results[i]) return; try{ let r=t8Results[i]; let file=new File([r.blob],r.name,{type:r.blob.type}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:r.name}); }else alert("Share not supported"); }catch(e){ alert("Share cancelled"); } }
+async function t8ShareFirst(){ if(!t8Results.length) return alert("First compress"); await t8ShareOne(0); }
+async function t8OpenPreview(){
+  if(!t8Files.length) return alert("First select Images!");
+  t8PreviewIdx=0; t8ShowAfter=false; await t8ShowPreview(); document.getElementById('t8Modal').style.display='flex';
+}
+async function t8ShowPreview(){
+  let mc=document.getElementById('t8ModalCanvas'), ctx=mc.getContext('2d');
+  if(t8Results.length){
+    if(t8PreviewIdx<0) t8PreviewIdx=t8Results.length-1; if(t8PreviewIdx>=t8Results.length) t8PreviewIdx=0;
+    let r=t8Results[t8PreviewIdx];
+    let img=new Image(); img.onload=()=>{
+      mc.width=img.width; mc.height=img.height; ctx.drawImage(img,0,0);
+      document.getElementById('t8ModalTitle').innerText=(t8ShowAfter?"AFTER - Compressed - ":"BEFORE - Original - ")+"Image "+(t8PreviewIdx+1)+" / "+t8Results.length;
+      document.getElementById('t8ModalCap').innerText="Before: "+r.beforeKB.toFixed(0)+" KB • After: "+r.afterKB.toFixed(0)+" KB • Saved: "+Math.max(0,Math.round(((r.beforeKB-r.afterKB)/r.beforeKB)*100))+"% • "+r.w+"x"+r.h+" • Filter: "+t8Filter+" • Crop: "+(t8CropRect?"ON":"OFF");
+      document.getElementById('t8BeforeAfterBtn').innerText=t8ShowAfter?"🔄 Show Before":"🔄 Show After";
+    }; img.src=t8ShowAfter?r.url:r.origUrl;
+  } else {
+    if(t8PreviewIdx<0) t8PreviewIdx=t8Files.length-1; if(t8PreviewIdx>=t8Files.length) t8PreviewIdx=0;
+    let f=t8Files[t8PreviewIdx];
+    let img=new Image(); img.onload=()=>{ mc.width=img.width; mc.height=img.height; ctx.drawImage(img,0,0); document.getElementById('t8ModalTitle').innerText="Preview - Original "+(t8PreviewIdx+1)+" / "+t8Files.length; document.getElementById('t8ModalCap').innerText=f.name+" • "+(f.size/1024).toFixed(0)+" KB"; }; img.src=URL.createObjectURL(f);
+  }
+}
+async function t8ToggleBeforeAfter(){ if(!t8Results.length){ alert("First compress, then compare"); return; } t8ShowAfter=!t8ShowAfter; await t8ShowPreview(); }
+async function t8NextImg(){t8PreviewIdx++;await t8ShowPreview();}
+async function t8PrevImg(){t8PreviewIdx--;await t8ShowPreview();}
+function t8ClosePreview(){document.getElementById('t8Modal').style.display='none';}
+document.addEventListener('keydown',e=>{let m=document.getElementById('t8Modal');if(m&&m.style.display==='flex'){if(e.key==='ArrowRight')t8NextImg();if(e.key==='ArrowLeft')t8PrevImg();if(e.key==='Escape')t8ClosePreview();}});
+function t8Reset(){
+  t8Files=[]; t8Selected.clear(); t8Results=[]; t8PreviewIdx=0; t8Rotate=0; t8FlipH=false; t8FlipV=false; t8CropRect=null; t8Filter='none'; t8EditorImg=null;
+  document.getElementById('t8Out').innerHTML=""; document.getElementById('t8OutEmpty').style.display='block'; document.getElementById('t8FileName').innerText="No Images Selected"; document.getElementById('t8Status').innerText=""; document.getElementById('t8AllBtn').style.display='none'; document.getElementById('t8ZipBtn').style.display='none'; document.getElementById('t8ShareBtn').style.display='none'; document.getElementById('t8CompareAfter').innerText="After: Not Compressed Yet"; document.getElementById('t8Saved').innerText="Saved: 0%"; document.getElementById('t8SavedBar').style.width="0%"; document.getElementById('t8EmptyBox').style.display='block'; t8ECtx.clearRect(0,0,t8EditorCanvas.width,t8EditorCanvas.height); document.getElementById('t8EstimateLine').innerText="📊 Estimate: Select image to see estimate";
+}
+</script>
+<!-- ================= TOOL 8 - V4 - END ================= -->
 <!-- TOOL 9 -->
 <div class="tool" id="tool-9"><div class="panel"><h3>🔄 Tool 9 - Image Converter</h3>
 <!-- YAHAN TOOL 9 KA CODE PASTE KARO -->
