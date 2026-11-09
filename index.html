@@ -575,10 +575,213 @@ updateDisc4();
 setTimeout(gen4, 600);
 </script>
 <!-- TOOL 4 - BARCODE GENERATOR - FIXED - END -->
-<!-- ================= TOOL 5 - INVOICE MAKER - START ================= -->
-<div class="tool panel" id="tool-5"><h3>🧾 5. Invoice Maker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(5)">⬇️ Download</button><button class="btn" onclick="editSinglePage(5)">✏️ Edit Single Page</button></div><label class="label">Shop Name</label><input type="text" id="t5shop" class="input" value="Sharma Jewellers"><label class="label">Customer Name</label><input type="text" id="t5cust" class="input" value="Priya Sharma"><label class="label">Item</label><input type="text" id="t5item" class="input" value="Gold Ring"><div class="grid-2"><div><label class="label">Price ₹</label><input type="number" id="t5price" class="input" value="25000"></div><div><label class="label">GST %</label><input type="number" id="t5gst" class="input" value="3"></div></div><button class="btn primary" style="width:100%;margin-top:10px" onclick="t5Make()">Make Invoice</button><canvas id="cv5" style="margin-top:10px"></canvas><div class="out" id="out5"></div></div>
-<!-- ================= TOOL 5 - INVOICE MAKER - END ================= -->
+<!-- TOOL 5 - INVOICE MAKER - START -->
+<div id="t5" style="background:#121d3a;border:1px solid #1e2d5a;border-radius:16px;padding:14px;color:#fff;font-family:system-ui">
+<h3 style="margin:0;text-align:center">🧾 Invoice Maker Pro</h3>
+<p style="font-size:11px;color:#94a3b8;text-align:center">Make Bill With GST - Professional Invoice - In 30 Seconds</p>
 
+<div style="display:flex;justify-content:space-between;background:#0a1224;padding:10px;border-radius:10px;margin-top:10px;font-size:12px">
+<span>Invoice No: <b id="invNo5">INV-1001</b></span><span>Date: <b id="invDate5"></b></span>
+</div>
+
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">SHOP NAME</label>
+<input type="text" id="shop5" value="Sharma Jewellers" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">SHOP ADDRESS / PHONE - Optional</label>
+<input type="text" id="shopAddr5" value="Main Road, Solapur - 98765 43210" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">CUSTOMER NAME</label>
+<input type="text" id="cust5" value="Priya Sharma" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">CUSTOMER PHONE - Optional</label>
+<input type="text" id="custPhone5" value="98765 12345" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">ITEM 1</label>
+<input type="text" id="item1_5" value="Gold Ring" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+<div><label style="font-size:11px;font-weight:800">Price ₹</label><input type="number" id="price1_5" value="25000" oninput="calc5()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a"></div>
+<div><label style="font-size:11px;font-weight:800">Qty</label><input type="number" id="qty1_5" value="1" oninput="calc5()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a"></div>
+</div>
+
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">ITEM 2 - Optional - Leave Empty If Only 1 Item</label>
+<input type="text" id="item2_5" value="" placeholder="Example: Gold Chain" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+<div><label style="font-size:11px;font-weight:800">Price ₹</label><input type="number" id="price2_5" value="" placeholder="0" oninput="calc5()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a"></div>
+<div><label style="font-size:11px;font-weight:800">Qty</label><input type="number" id="qty2_5" value="" placeholder="0" oninput="calc5()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a"></div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+<div><label style="font-size:11px;font-weight:800">GST % - Premium</label>
+<select id="gst5" onchange="calc5()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a"><option value="0">0% - No GST</option><option value="3" selected>3% - Gold</option><option value="5">5%</option><option value="12">12%</option><option value="18">18%</option><option value="28">28%</option></select></div>
+<div><label style="font-size:11px;font-weight:800">Discount % - Premium</label><input type="number" id="disc5" value="0" oninput="calc5()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a"></div>
+</div>
+
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">PAYMENT METHOD - Premium</label>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px">
+<button onclick="setPay5('Cash',this)" data-pay="Cash" style="padding:10px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border:none;cursor:pointer">💵 Cash</button>
+<button onclick="setPay5('UPI',this)" data-pay="UPI" style="padding:10px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">📱 UPI</button>
+<button onclick="setPay5('Card',this)" data-pay="Card" style="padding:10px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">💳 Card</button>
+</div>
+
+<label style="display:flex;justify-content:space-between;margin-top:10px;font-size:12px;background:#0a1224;padding:10px;border-radius:10px">💧 Watermark On Invoice <input type="checkbox" id="wm5"></label>
+
+<!-- LIVE TOTAL -->
+<div id="totalBox5" style="background:#22c55e;color:#fff;padding:12px;border-radius:12px;margin-top:10px;text-align:center;font-weight:900">Total: ₹0</div>
+
+<button onclick="make5()" style="width:100%;margin-top:10px;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;font-weight:900;cursor:pointer">✨ MAKE INVOICE</button>
+
+<!-- INVOICE PREVIEW - WHITE CARD LIKE REAL BILL -->
+<div id="preview5" style="display:none;margin-top:12px;background:#fff;color:#111;border-radius:14px;padding:16px">
+<div style="display:flex;justify-content:space-between;border-bottom:2px solid #f59e0b;padding-bottom:10px"><div><b id="pvShop5" style="font-size:18px">Sharma Jewellers</b><br><small id="pvAddr5" style="color:#666"></small></div><div style="text-align:right"><b style="font-size:18px;color:#f59e0b">INVOICE</b><br><small id="pvInv5"></small><br><small id="pvDate5"></small></div></div>
+<div style="margin-top:10px"><b>Bill To:</b> <span id="pvCust5"></span><br><small id="pvCustPhone5" style="color:#666"></small></div>
+<div id="pvItems5" style="margin-top:10px"></div>
+<div id="pvTotals5" style="margin-top:10px;border-top:1px solid #ddd;padding-top:10px;text-align:right"></div>
+<div style="margin-top:10px;display:flex;justify-content:space-between"><span><b>Payment:</b> <span id="pvPay5">Cash</span></span><span id="pvWm5" style="color:#aaa;font-size:11px"></span></div>
+<div style="text-align:center;margin-top:14px;font-size:11px;color:#888">Thank You For Your Business! 🙏</div>
+</div>
+
+<button onclick="dl5()" style="width:100%;margin-top:10px;padding:12px;border-radius:12px;background:#22c55e;color:#fff;font-weight:800;border:none;cursor:pointer">⬇️ DOWNLOAD INVOICE IMAGE</button>
+<button onclick="sh5()" style="width:100%;margin-top:8px;padding:12px;border-radius:12px;background:#2563eb;color:#fff;font-weight:800;border:none;cursor:pointer">📤 SHARE INVOICE - WhatsApp</button>
+<button onclick="edit5()" style="width:100%;margin-top:8px;padding:12px;border-radius:12px;background:#f59e0b;color:#fff;font-weight:800;border:none;cursor:pointer">✏️ EDIT SINGLE PAGE - Change Price / Qty</button>
+<button onclick="print5()" style="width:100%;margin-top:8px;padding:11px;border-radius:12px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">🖨️ Print Invoice</button>
+<button onclick="newInv5()" style="width:100%;margin-top:8px;padding:10px;border-radius:12px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">🆕 New Invoice - New Number</button>
+<div id="s5" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px"></div>
+
+<!-- EDIT SINGLE PAGE -->
+<div id="edit5" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;padding:12px;overflow:auto">
+<div style="display:flex;justify-content:space-between;align-items:center;background:#121d3a;padding:12px;border-radius:12px"><b>Edit Single Page - Invoice</b><button onclick="closeEdit5()" style="background:#fff;color:#111;border:none;padding:8px 14px;border-radius:20px;font-weight:900;cursor:pointer">✕ Close</button></div>
+<p style="font-size:12px;color:#cbd5e1">Change Price / Qty / GST / Discount Here - Then Click Apply</p>
+<label style="font-size:11px;font-weight:800">Item 1 Price ₹</label><input type="number" id="ePrice1_5" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a;margin-top:4px">
+<label style="font-size:11px;font-weight:800;display:block;margin-top:8px">Item 1 Qty</label><input type="number" id="eQty1_5" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a;margin-top:4px">
+<label style="font-size:11px;font-weight:800;display:block;margin-top:8px">GST %</label><input type="number" id="eGst5" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a;margin-top:4px">
+<label style="font-size:11px;font-weight:800;display:block;margin-top:8px">Discount %</label><input type="number" id="eDisc5" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a;margin-top:4px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+<button onclick="applyEdit5()" style="padding:12px;background:#f59e0b;color:#fff;border:none;border-radius:10px;font-weight:800;cursor:pointer">✏️ Apply Changes</button>
+<button onclick="closeEdit5()" style="padding:12px;background:#162143;color:#fff;border:1px solid #1e2d5a;border-radius:10px;font-weight:800;cursor:pointer">Back</button>
+</div>
+</div>
+<canvas id="cv5" style="display:none"></canvas>
+</div>
+<script>
+let PAY5='Cash', INV_NUM5=1001, LAST_CANVAS5=null;
+document.getElementById('invDate5').innerText=new Date().toLocaleDateString('en-IN');
+function setPay5(p,btn){PAY5=p;document.querySelectorAll('[data-pay]').forEach(b=>{b.style.background='#162143';b.style.border='1px solid #1e2d5a'});btn.style.background='linear-gradient(135deg,#7c3aed,#22d3ee)';btn.style.border='none';}
+function getTotals5(){
+let p1=+document.getElementById('price1_5').value||0, q1=+document.getElementById('qty1_5').value||0;
+let p2=+document.getElementById('price2_5').value||0, q2=+document.getElementById('qty2_5').value||0;
+let sub=p1*q1+p2*q2;
+let discPct=+document.getElementById('disc5').value||0;
+let discAmt=sub*discPct/100;
+let afterDisc=sub-discAmt;
+let gstPct=+document.getElementById('gst5').value||0;
+let gstAmt=afterDisc*gstPct/100;
+let total=afterDisc+gstAmt;
+return {p1,q1,p2,q2,sub,discPct,discAmt,afterDisc,gstPct,gstAmt,total};
+}
+function calc5(){
+let t=getTotals5();
+document.getElementById('totalBox5').innerHTML="Subtotal ₹"+t.sub.toFixed(0)+" • Discount ₹"+t.discAmt.toFixed(0)+" • GST ₹"+t.gstAmt.toFixed(0)+"<br><span style='font-size:18px'>Total: ₹"+t.total.toFixed(0)+"</span>";
+return t;
+}
+function make5(){
+let t=calc5();
+let shop=document.getElementById('shop5').value||"Shop";
+let addr=document.getElementById('shopAddr5').value||"";
+let cust=document.getElementById('cust5').value||"Customer";
+let custPhone=document.getElementById('custPhone5').value||"";
+let item1=document.getElementById('item1_5').value||"Item 1";
+let item2=document.getElementById('item2_5').value||"";
+let dateStr=new Date().toLocaleDateString('en-IN');
+document.getElementById('pvShop5').innerText=shop;
+document.getElementById('pvAddr5').innerText=addr;
+document.getElementById('pvCust5').innerText=cust;
+document.getElementById('pvCustPhone5').innerText=custPhone?("Phone: "+custPhone):"";
+document.getElementById('pvInv5').innerText="No: INV-"+INV_NUM5;
+document.getElementById('pvDate5').innerText="Date: "+dateStr;
+document.getElementById('invNo5').innerText="INV-"+INV_NUM5;
+let itemsHtml='<table style="width:100%;border-collapse:collapse;font-size:13px"><tr style="background:#fef3c7"><th style="text-align:left;padding:8px">Item</th><th style="padding:8px">Price</th><th style="padding:8px">Qty</th><th style="text-align:right;padding:8px">Amount</th></tr>';
+itemsHtml+='<tr><td style="padding:8px;border-bottom:1px solid #eee">'+item1+'</td><td style="padding:8px;text-align:center">₹'+t.p1+'</td><td style="padding:8px;text-align:center">'+t.q1+'</td><td style="padding:8px;text-align:right">₹'+(t.p1*t.q1).toFixed(0)+'</td></tr>';
+if(item2 && t.p2>0){ itemsHtml+='<tr><td style="padding:8px;border-bottom:1px solid #eee">'+item2+'</td><td style="padding:8px;text-align:center">₹'+t.p2+'</td><td style="padding:8px;text-align:center">'+t.q2+'</td><td style="padding:8px;text-align:right">₹'+(t.p2*t.q2).toFixed(0)+'</td></tr>'; }
+itemsHtml+='</table>';
+document.getElementById('pvItems5').innerHTML=itemsHtml;
+document.getElementById('pvTotals5').innerHTML="Subtotal: ₹"+t.sub.toFixed(0)+"<br>Discount ("+t.discPct+"%): -₹"+t.discAmt.toFixed(0)+"<br>GST ("+t.gstPct+"%): +₹"+t.gstAmt.toFixed(0)+"<br><b style='font-size:18px;color:#16a34a'>Total: ₹"+t.total.toFixed(0)+"</b>";
+document.getElementById('pvPay5').innerText=PAY5;
+document.getElementById('pvWm5').innerText=document.getElementById('wm5').checked?"orbittroniz.com":"";
+document.getElementById('preview5').style.display='block';
+document.getElementById('s5').innerText="Invoice Ready - INV-"+INV_NUM5+" - Total ₹"+t.total.toFixed(0);
+drawCanvas5();
+document.getElementById('preview5').scrollIntoView({behavior:'smooth'});
+}
+function drawCanvas5(){
+let t=calc5();
+let cv=document.getElementById('cv5'); cv.width=700; cv.height=800; let ctx=cv.getContext('2d');
+ctx.fillStyle="#fff"; ctx.fillRect(0,0,700,800);
+ctx.fillStyle="#f59e0b"; ctx.fillRect(0,0,700,90);
+ctx.fillStyle="#fff"; ctx.font="900 28px Arial"; ctx.textAlign='left'; ctx.fillText((document.getElementById('shop5').value||"Shop").toUpperCase(),20,55);
+ctx.fillStyle="#111"; ctx.font="900 22px Arial"; ctx.textAlign='right'; ctx.fillText("INVOICE",680,55);
+ctx.font="600 14px Arial"; ctx.textAlign='left'; ctx.fillText("Invoice No: INV-"+INV_NUM5,20,120); ctx.fillText("Date: "+new Date().toLocaleDateString('en-IN'),20,145);
+ctx.fillText("Bill To: "+(document.getElementById('cust5').value||"Customer"),20,175);
+ctx.fillText("Phone: "+(document.getElementById('custPhone5').value||""),20,200);
+ctx.fillText((document.getElementById('shopAddr5').value||""),20,225);
+ctx.font="700 14px Arial"; ctx.fillText("Item",20,270); ctx.fillText("Price",300,270); ctx.fillText("Qty",450,270); ctx.fillText("Amount",580,270);
+ctx.fillRect(20,280,660,2);
+let y=310;
+ctx.font="600 14px Arial";
+ctx.fillText((document.getElementById('item1_5').value||"Item 1"),20,y); ctx.fillText("₹"+t.p1,300,y); ctx.fillText(""+t.q1,450,y); ctx.fillText("₹"+(t.p1*t.q1).toFixed(0),580,y); y+=30;
+let item2=document.getElementById('item2_5').value||"";
+if(item2 && t.p2>0){ ctx.fillText(item2,20,y); ctx.fillText("₹"+t.p2,300,y); ctx.fillText(""+t.q2,450,y); ctx.fillText("₹"+(t.p2*t.q2).toFixed(0),580,y); y+=30; }
+y+=20; ctx.textAlign='right';
+ctx.fillText("Subtotal: ₹"+t.sub.toFixed(0),680,y); y+=28;
+ctx.fillText("Discount ("+t.discPct+"%): -₹"+t.discAmt.toFixed(0),680,y); y+=28;
+ctx.fillText("GST ("+t.gstPct+"%): +₹"+t.gstAmt.toFixed(0),680,y); y+=35;
+ctx.fillStyle="#16a34a"; ctx.font="900 24px Arial"; ctx.fillText("Total: ₹"+t.total.toFixed(0),680,y); y+=40;
+ctx.fillStyle="#111"; ctx.font="600 14px Arial"; ctx.fillText("Payment: "+PAY5,680,y);
+if(document.getElementById('wm5').checked){ ctx.fillStyle="#aaa"; ctx.font="600 12px Arial"; ctx.textAlign='center'; ctx.fillText("orbittroniz.com",350,780); }
+LAST_CANVAS5=cv;
+}
+function dl5(){
+if(document.getElementById('preview5').style.display=='none') make5();
+drawCanvas5();
+let a=document.createElement('a'); a.href=document.getElementById('cv5').toDataURL('image/png'); a.download="Invoice-INV-"+INV_NUM5+".png"; a.click();
+document.getElementById('s5').innerText="Invoice Downloaded - INV-"+INV_NUM5;
+}
+async function sh5(){
+if(document.getElementById('preview5').style.display=='none') make5();
+drawCanvas5();
+try{
+let blob=await new Promise(r=>document.getElementById('cv5').toBlob(r,'image/png'));
+let file=new File([blob],"Invoice-INV-"+INV_NUM5+".png",{type:'image/png'});
+if(navigator.canShare && navigator.canShare({files:[file]})){ await navigator.share({files:[file], text:"Invoice INV-"+INV_NUM5+" - Total ₹"+calc5().total.toFixed(0)+" - "+(document.getElementById('shop5').value||"")}); }
+else { dl5(); }
+}catch(e){ dl5(); }
+}
+function print5(){
+if(document.getElementById('preview5').style.display=='none') make5();
+let w=window.open('','_blank'); if(!w) return alert("Allow Popup To Print");
+w.document.write('<html><body style="font-family:Arial;padding:20px">'+document.getElementById('preview5').innerHTML+'<script>window.onload=function(){window.print()}<\/script></body></html>'); w.document.close();
+}
+function edit5(){
+document.getElementById('ePrice1_5').value=document.getElementById('price1_5').value;
+document.getElementById('eQty1_5').value=document.getElementById('qty1_5').value;
+document.getElementById('eGst5').value=document.getElementById('gst5').value;
+document.getElementById('eDisc5').value=document.getElementById('disc5').value;
+document.getElementById('edit5').style.display='block';
+}
+function closeEdit5(){ document.getElementById('edit5').style.display='none'; }
+function applyEdit5(){
+document.getElementById('price1_5').value=document.getElementById('ePrice1_5').value||0;
+document.getElementById('qty1_5').value=document.getElementById('eQty1_5').value||1;
+document.getElementById('gst5').value=document.getElementById('eGst5').value||0;
+document.getElementById('disc5').value=document.getElementById('eDisc5').value||0;
+calc5(); make5(); closeEdit5();
+}
+function newInv5(){
+INV_NUM5++; document.getElementById('invNo5').innerText="INV-"+INV_NUM5;
+document.getElementById('preview5').style.display='none';
+document.getElementById('s5').innerText="New Invoice - INV-"+INV_NUM5+" - Fill Details And Make Invoice";
+window.scrollTo({top:0,behavior:'smooth'});
+}
+calc5();
+</script>
+<!-- TOOL 5 - INVOICE MAKER - END -->
 <!-- ================= TOOL 6 - BIZCARD MAKER - START ================= -->
 <div class="tool panel" id="tool-6"><h3>💳 6. BizCard Maker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(6)">⬇️ Download</button><button class="btn" onclick="editSinglePage(6)">✏️ Edit Single Page</button></div><label class="label">Name</label><input type="text" id="t6name" class="input" value="Rahul Sharma"><label class="label">Business</label><input type="text" id="t6biz" class="input" value="Sharma Jewellers"><label class="label">Phone</label><input type="text" id="t6phone" class="input" value="98765 43210"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t6Make()">Make Card</button><canvas id="cv6" style="margin-top:10px"></canvas><div class="out" id="out6"></div></div>
 <!-- ================= TOOL 6 - BIZCARD MAKER - END ================= -->
