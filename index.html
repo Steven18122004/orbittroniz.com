@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Orbittroniz - 50 Tools - Full Detail - English Only</title>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;color:#fff;font-family:Inter,system-ui,sans-serif;padding:12px;background:linear-gradient(135deg,#060a18,#1e1b4b,#0e7490,#060a18);background-size:400% 400%;animation:bgMove 12s ease infinite}
+@keyframes bgMove{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+body[data-theme="gold"]{background:linear-gradient(135deg,#1a0f00,#92400e,#f59e0b,#1a0f00);background-size:400% 400%;animation:bgMove 12s ease infinite}
+body[data-theme="neon"]{background:linear-gradient(135deg,#020617,#06b6d4,#a855f7,#020617);background-size:400% 400%;animation:bgMove 12s ease infinite}
+body[data-theme="rose"]{background:linear-gradient(135deg,#1a0010,#9d174d,#ec4899,#1a0010);background-size:400% 400%;animation:bgMove 12s ease infinite}
+body[data-theme="emerald"]{background:linear-gradient(135deg,#01110a,#064e3b,#059669,#01110a);background-size:400% 400%;animation:bgMove 12s ease infinite}
+:root{--border:rgba(255,255,255,.18)}
+.input,.select,textarea{width:100%;background:rgba(0,0,0,.45);border:1px solid var(--border);color:#fff;padding:12px;border-radius:12px;font-size:13px;outline:none}
+.input:focus{border-color:#22d3ee;box-shadow:0 0 0 3px rgba(34,211,238,.25)}
+.btn{border:1px solid var(--border);background:rgba(255,255,255,.12);color:#fff;padding:10px 14px;border-radius:24px;font-weight:800;cursor:pointer;font-size:12px;position:relative;overflow:hidden;transform-style:preserve-3d;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s}
+.btn:hover{transform:translateY(-3px) rotateX(6deg) rotateY(-4deg) scale(1.03);box-shadow:0 14px 30px rgba(34,211,238,.45),0 6px 0 rgba(0,0,0,.35)}
+.btn:active{transform:translateY(2px) scale(.97)}
+.btn.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee,#f59e0b,#7c3aed);background-size:300% 300%;animation:btnGradient 4s ease infinite;border:none;box-shadow:0 10px 25px rgba(124,58,237,.5),0 4px 0 #4c1d95}
+@keyframes btnGradient{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.btn.primary::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(110deg,transparent,rgba(255,255,255,.5),transparent);animation:btnShine 2.5s infinite}
+@keyframes btnShine{0%{left:-100%}60%,100%{left:130%}}
+.panel{background:rgba(255,255,255,.08);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px;padding:16px;margin-top:12px;box-shadow:0 16px 40px rgba(0,0,0,.4)}
+.label{font-size:11px;color:#e2e8f0;font-weight:800;display:block;margin:8px 0 5px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:900px){.grid-2{grid-template-columns:1fr}}
+.tool{display:none}.tool.active{display:block}
+canvas{max-width:100%;border-radius:12px;background:#fff;display:block}
+.grid-tools{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tcard{background:rgba(255,255,255,.1);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:18px;padding:14px 6px;text-align:center;cursor:pointer;position:relative;box-shadow:0 10px 25px rgba(0,0,0,.35);transition:transform .2s}
+.tcard:hover{transform:translateY(-6px) rotateX(8deg) rotateY(6deg) scale(1.03);box-shadow:0 20px 40px rgba(34,211,238,.4);border-color:#22d3ee}
+.tcard span{font-size:28px;display:block}.tcard b{font-size:12px;display:block;margin-top:6px}.tcard small{font-size:9px;color:#cbd5e1}
+.tcard .fav{position:absolute;top:4px;right:6px;font-size:14px}
+.tcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7c3aed,#22d3ee,#f59e0b);border-radius:18px 18px 0 0}
+.cat-btn{border:1px solid var(--border);background:rgba(255,255,255,.12);color:#fff;padding:8px 13px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer}
+.cat-btn.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff}
+.topbar{display:flex;gap:8px;align-items:center;margin-top:12px}
+.search{flex:1;display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.45);border:1px solid var(--border);border-radius:20px;padding:10px 12px}
+.search input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-size:13px}
+.chip{flex:1;background:rgba(255,255,255,.1);border:1px solid var(--border);border-radius:14px;padding:10px;text-align:center}.chip b{font-size:16px;display:block}.chip small{font-size:10px;color:#cbd5e1}
+.recent{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}.recent div{white-space:nowrap;background:rgba(255,255,255,.12);border:1px solid var(--border);padding:7px 12px;border-radius:20px;font-size:11px;cursor:pointer}
+.wm-bar{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.12);border:1px solid var(--border);border-radius:14px;padding:12px;margin-top:12px}
+.wm-bar input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer}
+.wm-bar input:checked{background:#22c55e}.wm-bar input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}.wm-bar input:checked::after{left:23px}
+.out img{max-width:100%;border-radius:12px;margin-top:8px;background:#fff}
+.tool-actions{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;padding:10px;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:12px}
+.single-bar{position:sticky;top:8px;z-index:100;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;padding:12px;border-radius:14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:900}
+.single-bar button{background:#fff;color:#111;border:none;padding:8px 14px;border-radius:20px;font-weight:900;cursor:pointer}
+#orbit-logo-box{width:90px;height:90px;border-radius:22px;background:#000;border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;overflow:hidden;animation:logoFloat3D 3s ease-in-out infinite,logoGlow 1.8s ease-in-out infinite alternate;position:relative;transform-style:preserve-3d}
+#orbit-logo-box img{width:100%;height:100%;object-fit:contain;background:#000;border-radius:16px;animation:logoSpin3D 5s ease-in-out infinite}
+#orbit-logo-box::before{content:'';position:absolute;inset:-8px;border-radius:28px;border:2px dashed rgba(34,211,238,.7);animation:logoRing 5s linear infinite;z-index:-1}
+@keyframes logoFloat3D{0%,100%{transform:translateY(0) rotateX(0deg) rotateY(0deg) scale(1)}25%{transform:translateY(-8px) rotateX(8deg) rotateY(10deg) scale(1.06)}50%{transform:translateY(0) scale(1.02)}75%{transform:translateY(-5px) rotateX(-6deg) rotateY(-8deg) scale(1.05)}}
+@keyframes logoGlow{0%{box-shadow:0 10px 36px rgba(0,0,0,.7)}100%{box-shadow:0 16px 48px rgba(0,0,0,.85),0 0 48px rgba(124,58,237,.8),0 0 72px rgba(34,211,238,.6)}}
+@keyframes logoSpin3D{0%,100%{transform:rotateY(0deg)}50%{transform:rotateY(18deg) rotateX(6deg)}}
+@keyframes logoRing{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.orb{position:fixed;width:220px;height:220px;border-radius:50%;filter:blur(60px);opacity:.35;pointer-events:none;z-index:0;animation:floatOrb 8s ease-in-out infinite}
+@keyframes floatOrb{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
+</style>
+</head>
+<body data-theme="orbit">
+<div class="orb" style="background:#7c3aed;top:10%;right:-40px"></div>
+<div class="orb" style="background:#22d3ee;bottom:20%;left:-40px"></div>
+<div id="orbit-app" style="position:relative;z-index:1">
+<div id="orbit-logo-box"><img id="orbitLogoImg" src="logo.png?v=1002" alt="O"></div>
+<script>(function(){var img=document.getElementById('orbitLogoImg');var urls=["logo.png?v=1002","https://steven1812004.github.io/orbittroniz.com/logo.png?v=1002"];var i=0;function nxt(){if(i>=urls.length){img.style.display='none';var fb=document.createElement('div');fb.textContent='O';fb.style.cssText='width:100%;height:100%;background:linear-gradient(135deg,#7c3aed,#22d3ee);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:32px';img.parentElement.appendChild(fb);return;}img.src=urls[i];i++;}img.onerror=nxt;img.src=urls[0];})();</script>
+
+<div style="position:relative;min-height:92px;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:linear-gradient(135deg,#0b1026,#1e1b4b,#0e7490,#7c3aed,#0b1026);background-size:300% 300%;animation:bgMove 6s ease infinite;border:1px solid rgba(255,255,255,.25);border-radius:20px;overflow:hidden;margin-top:12px">
+<div style="position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.15) 45%,transparent 60%);animation:btnShine 3s infinite"></div>
+<div style="position:relative"><div style="font-size:30px;font-weight:900;color:#fff">orbittroniz<span style="background:linear-gradient(135deg,#22d3ee,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent">.com</span></div><div style="font-size:10px;letter-spacing:4px;font-weight:800;color:#c4b5fd">BUSINESS TOOLS • TECHNOLOGY • 50 TOOLS</div><div style="font-size:10px;color:#22c55e;font-weight:800;margin-top:4px">✨ NEW: 3D Live Motion • AI Website Look</div></div>
+<div style="position:relative;display:flex;gap:8px"><span style="background:rgba(0,0,0,.4);padding:6px 10px;border-radius:20px;font-size:10px;font-weight:800">🟢 LIVE</span><span style="background:linear-gradient(135deg,#22c55e,#16a34a);padding:7px 12px;border-radius:20px;font-size:11px;font-weight:900">50 TOOLS</span></div>
+</div>
+
+<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;background:rgba(255,255,255,.1);border:1px solid var(--border);border-radius:14px;padding:10px;margin-top:12px"><b style="font-size:11px">🎨 Theme:</b>
+<button class="btn" onclick="setTheme('orbit')" style="background:linear-gradient(135deg,#7c3aed,#22d3ee)">🪐 Orbit</button>
+<button class="btn" onclick="setTheme('gold')" style="background:linear-gradient(135deg,#f59e0b,#92400e)">👑 Gold</button>
+<button class="btn" onclick="setTheme('neon')" style="background:linear-gradient(135deg,#06b6d4,#a855f7)">💡 Neon</button>
+<button class="btn" onclick="setTheme('rose')" style="background:linear-gradient(135deg,#ec4899,#f59e0b)">🌸 Rose</button>
+<button class="btn" onclick="setTheme('emerald')" style="background:linear-gradient(135deg,#059669,#f59e0b)">💚 Emerald</button>
+</div>
+
+<div class="wm-bar"><div><b>💧 Watermark For All Tools</b><br><small style="color:#cbd5e1;font-size:10px">ON = orbittroniz.com watermark on every download • OFF = Clean</small></div><div style="display:flex;gap:8px;align-items:center"><span id="wmState">OFF</span><input type="checkbox" id="globalWatermark" onchange="toggleWM()"></div></div>
+<div style="display:flex;gap:8px;margin-top:8px"><input type="text" id="wmText" class="input" value="orbittroniz.com" oninput="updateWMText()"><input type="color" id="wmColor" value="#ffffff" style="width:50px;height:40px;border:none;border-radius:10px" onchange="updateWMText()"></div>
+
+<div class="topbar"><div class="search">🔍 <input id="searchInput" placeholder="Search tool - Example: QR, Invoice, PDF..." oninput="filterTools()"></div><button class="btn" onclick="showFavs()">⭐ <span id="favCount">0</span></button><button class="btn" onclick="showDashboard()">🏠 Home</button></div>
+<div style="display:flex;gap:8px;margin-top:12px"><div class="chip"><b>50</b><small>Total Tools</small></div><div class="chip"><b id="favCount2">0</b><small>Favorites</small></div><div class="chip"><b>100%</b><small>Free - No API</small></div></div>
+<div style="margin-top:14px"><b>🕐 Recently Used</b><div class="recent" id="recentBox"><small>No recent yet</small></div></div>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px"><button class="cat-btn active" onclick="setCat('all',this)">All</button><button class="cat-btn" onclick="setCat('PDF',this)">📄 PDF</button><button class="cat-btn" onclick="setCat('Image',this)">🖼️ Image</button><button class="cat-btn" onclick="setCat('Business',this)">💼 Business</button><button class="cat-btn" onclick="setCat('Daily',this)">🧮 Daily</button><button class="cat-btn" onclick="setCat('Favs',this)">⭐ Favs</button></div>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;justify-content:center"><button class="btn primary" onclick="setCat('all',null)">🏠 All 50</button><button class="btn" onclick="setCat('PDF',null)">📄 PDF</button><button class="btn" onclick="setCat('Image',null)">🖼️ Image</button><button class="btn" onclick="setCat('Business',null)">💼 Business</button><button class="btn" onclick="showRandomTool()">🎲 Random Tool</button></div>
+
+<div id="dashboard"><div style="display:flex;justify-content:space-between;margin:14px 0 10px"><b>🧰 All Tools - Tap Any Card</b><small>50 Tools</small></div><div class="grid-tools" id="toolsGrid"></div><div id="toolsFallback" style="display:none;text-align:center;padding:20px;background:rgba(0,0,0,.3);border-radius:14px;margin-top:10px">Loading tools... Scroll down - All tools are below 👇<br><button class="btn primary" onclick="showAllToolsList()">👇 Show All 50 Tools List</button></div></div>
+
+<div id="toolsArea"><button class="btn" id="backBtn" style="display:none;margin-top:10px" onclick="showDashboard()">⬅️ Back to Dashboard</button>
+<div id="allTools">
+
+<!-- ================= TOOL 1 - PDF TO IMAGE - START ================= -->
+<div class="tool panel" id="tool-1"><h3>📄 1. PDF To Image Pro</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(1)">⬇️ Download</button><button class="btn" onclick="editSinglePage(1)">✏️ Edit Single Page</button><button class="btn" onclick="printTool(1)">🖨️ Print</button><button class="btn" onclick="shareTool(1)">📤 Share</button></div><p style="font-size:11px;color:#cbd5e1">Upload PDF - Every page becomes an image. Watermark ON/OFF supported.</p><div style="border:2px dashed rgba(34,211,238,.6);border-radius:16px;padding:20px;text-align:center;cursor:pointer" onclick="document.getElementById('f1pdf').click()"><div style="font-size:36px">📄</div><b>Tap To Upload PDF</b><br><small>Max 20MB - Every page becomes image</small><input type="file" id="f1pdf" accept=".pdf" style="display:none" onchange="t1FileSelected(this)"></div><div id="t1FileName" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div><label class="label">Quality</label><select id="t1Quality" class="select"><option value="1">Low - Fast</option><option value="1.5" selected>Medium - Best</option><option value="2.2">High - HD</option></select><label class="label">Format</label><select id="t1Format" class="select"><option value="png">PNG - Best</option><option value="jpeg">JPG - Small</option><option value="webp">WEBP</option></select><label class="label">File Name Prefix</label><input type="text" id="t1Prefix" class="input" value="My PDF - Orbittroniz"><div style="display:flex;gap:6px;margin-top:8px"><label style="flex:1;display:flex;justify-content:space-between;background:rgba(0,0,0,.3);padding:10px;border-radius:10px"><span>💧 Watermark</span><input type="checkbox" id="t1Watermark"></label><label style="flex:1;display:flex;justify-content:space-between;background:rgba(0,0,0,.3);padding:10px;border-radius:10px"><span>🔢 Page Number</span><input type="checkbox" id="t1PageNum" checked></label></div><button class="btn primary" style="width:100%;margin-top:10px" onclick="t1Convert()">✨ CONVERT PDF TO IMAGES</button><button class="btn" style="width:100%;margin-top:8px" onclick="t1DownloadAll()">📥 Download All Images</button><button class="btn" style="width:100%;margin-top:8px" onclick="t1PrintAll()">🖨️ Print All</button><div id="t1Preview" style="margin-top:10px;text-align:center;color:#94a3b8">No PDF yet - Upload PDF above</div><div class="out" id="out1"></div></div>
+<!-- ================= TOOL 1 - PDF TO IMAGE - END ================= -->
+
+<!-- ================= TOOL 2 - IMAGE TO PDF - START ================= -->
+<div class="tool panel" id="tool-2"><h3>📑 2. Image To PDF</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(2)">⬇️ Download</button><button class="btn" onclick="editSinglePage(2)">✏️ Edit Single Page</button><button class="btn" onclick="printTool(2)">🖨️ Print</button></div><p style="font-size:11px;color:#cbd5e1">Upload multiple images - Make one PDF.</p><label class="label">Upload Images (Multiple)</label><input type="file" id="f2imgs" accept="image/*" multiple class="input"><label class="label">PDF Title</label><input type="text" id="t2title" class="input" value="My Images - Orbittroniz"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t2MakePdf()">📑 Make PDF</button><div class="out" id="out2"></div></div>
+<!-- ================= TOOL 2 - IMAGE TO PDF - END ================= -->
+
+<!-- ================= TOOL 3 - QR GENERATOR - START ================= -->
+<div class="tool panel" id="tool-3"><h3>📱 3. QR Generator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(3)">⬇️ Download</button><button class="btn" onclick="editSinglePage(3)">✏️ Edit Single Page</button></div><label class="label">QR Type</label><select id="t3type" class="select" onchange="t3Change()"><option value="link">Website Link</option><option value="upi">UPI Payment</option><option value="whatsapp">WhatsApp</option><option value="wifi">WiFi</option><option value="text">Text</option></select><div id="t3fields"></div><label class="label">Shop / Label</label><input type="text" id="t3label" class="input" value="Sharma Jewellers"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t3Generate()">Generate QR</button><div id="qr3" style="margin-top:10px;background:#fff;padding:12px;display:inline-block;border-radius:12px"></div><div class="out" id="out3"></div></div>
+<!-- ================= TOOL 3 - QR GENERATOR - END ================= -->
+
+<!-- ================= TOOL 4 - BARCODE GENERATOR - START ================= -->
+<div class="tool panel" id="tool-4"><h3>🏷️ 4. Barcode Generator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(4)">⬇️ Download</button><button class="btn" onclick="editSinglePage(4)">✏️ Edit Single Page</button></div><label class="label">Product Name</label><input type="text" id="t4prod" class="input" value="Gold Ring"><label class="label">Barcode Code - Unique</label><input type="text" id="t4code" class="input" value="890123456789"><button class="btn" onclick="t4Random()">🎲 New Unique Code</button><label class="label">Price ₹</label><input type="number" id="t4price" class="input" value="799"><label class="label">MRP ₹</label><input type="number" id="t4mrp" class="input" value="999"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t4Generate()">Generate Barcode</button><svg id="svg4" style="background:#fff;width:100%;height:80px;margin-top:10px"></svg><div class="out" id="out4"></div></div>
+<!-- ================= TOOL 4 - BARCODE GENERATOR - END ================= -->
+
+<!-- ================= TOOL 5 - INVOICE MAKER - START ================= -->
+<div class="tool panel" id="tool-5"><h3>🧾 5. Invoice Maker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(5)">⬇️ Download</button><button class="btn" onclick="editSinglePage(5)">✏️ Edit Single Page</button></div><label class="label">Shop Name</label><input type="text" id="t5shop" class="input" value="Sharma Jewellers"><label class="label">Customer Name</label><input type="text" id="t5cust" class="input" value="Priya Sharma"><label class="label">Item</label><input type="text" id="t5item" class="input" value="Gold Ring"><div class="grid-2"><div><label class="label">Price ₹</label><input type="number" id="t5price" class="input" value="25000"></div><div><label class="label">GST %</label><input type="number" id="t5gst" class="input" value="3"></div></div><button class="btn primary" style="width:100%;margin-top:10px" onclick="t5Make()">Make Invoice</button><canvas id="cv5" style="margin-top:10px"></canvas><div class="out" id="out5"></div></div>
+<!-- ================= TOOL 5 - INVOICE MAKER - END ================= -->
+
+<!-- ================= TOOL 6 - BIZCARD MAKER - START ================= -->
+<div class="tool panel" id="tool-6"><h3>💳 6. BizCard Maker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(6)">⬇️ Download</button><button class="btn" onclick="editSinglePage(6)">✏️ Edit Single Page</button></div><label class="label">Name</label><input type="text" id="t6name" class="input" value="Rahul Sharma"><label class="label">Business</label><input type="text" id="t6biz" class="input" value="Sharma Jewellers"><label class="label">Phone</label><input type="text" id="t6phone" class="input" value="98765 43210"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t6Make()">Make Card</button><canvas id="cv6" style="margin-top:10px"></canvas><div class="out" id="out6"></div></div>
+<!-- ================= TOOL 6 - BIZCARD MAKER - END ================= -->
+
+<!-- ================= TOOL 7 - LOGO MAKER - START ================= -->
+<div class="tool panel" id="tool-7"><h3>🎨 7. Logo Maker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(7)">⬇️ Download</button><button class="btn" onclick="editSinglePage(7)">✏️ Edit Single Page</button></div><label class="label">Business Name</label><input type="text" id="t7name" class="input" value="Orbittroniz"><label class="label">Style</label><select id="t7style" class="select"><option value="orbit">Orbit Purple-Blue</option><option value="gold">Gold Premium</option><option value="green">Green Fresh</option></select><button class="btn primary" style="width:100%;margin-top:10px" onclick="t7Make()">Make Logo</button><canvas id="cv7" style="margin-top:10px"></canvas><div class="out" id="out7"></div></div>
+<!-- ================= TOOL 7 - LOGO MAKER - END ================= -->
+
+<!-- ================= TOOL 8 - BG REMOVER - START ================= -->
+<div class="tool panel" id="tool-8"><h3>✂️ 8. BG Remover</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(8)">⬇️ Download</button><button class="btn" onclick="editSinglePage(8)">✏️ Edit Single Page</button></div><label class="label">Upload Image - White Background Works Best</label><input type="file" id="f8" accept="image/*" class="input"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t8Remove()">Remove White Background</button><canvas id="cv8" style="margin-top:10px"></canvas><div class="out" id="out8"></div></div>
+<!-- ================= TOOL 8 - BG REMOVER - END ================= -->
+
+<!-- ================= TOOL 9 - TEXT TO IMAGE - START ================= -->
+<div class="tool panel" id="tool-9"><h3>🖼️ 9. Text To Image</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(9)">⬇️ Download</button><button class="btn" onclick="editSinglePage(9)">✏️ Edit Single Page</button></div><label class="label">Text</label><textarea id="t9text" class="input" rows="2">Welcome to Orbittroniz</textarea><button class="btn primary" style="width:100%;margin-top:10px" onclick="t9Make()">Make Poster</button><canvas id="cv9" style="margin-top:10px"></canvas><div class="out" id="out9"></div></div>
+<!-- ================= TOOL 9 - TEXT TO IMAGE - END ================= -->
+
+<!-- ================= TOOL 10 - CALCULATOR - START ================= -->
+<div class="tool panel" id="tool-10"><h3>🧮 10. Calculator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(10)">⬇️ Download</button><button class="btn" onclick="editSinglePage(10)">✏️ Edit Single Page</button></div><label class="label">Expression - Example: 25*4+10</label><input type="text" id="t10exp" class="input" value="25*4+10"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t10Calc()">Calculate</button><div id="r10" style="font-size:22px;font-weight:900;margin-top:10px"></div><div class="out" id="out10"></div></div>
+<!-- ================= TOOL 10 - CALCULATOR - END ================= -->
+
+<!-- ================= TOOL 11 - AGE CALCULATOR - START ================= -->
+<div class="tool panel" id="tool-11"><h3>🎂 11. Age Calculator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(11)">⬇️ Download</button><button class="btn" onclick="editSinglePage(11)">✏️ Edit Single Page</button></div><label class="label">Date of Birth</label><input type="date" id="t11dob" class="input"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t11Calc()">Calculate Age</button><div id="r11" style="margin-top:10px;font-weight:800"></div><div class="out" id="out11"></div></div>
+<!-- ================= TOOL 11 - AGE CALCULATOR - END ================= -->
+
+<!-- ================= TOOL 12 - EMI CALCULATOR - START ================= -->
+<div class="tool panel" id="tool-12"><h3>🏦 12. EMI Calculator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(12)">⬇️ Download</button><button class="btn" onclick="editSinglePage(12)">✏️ Edit Single Page</button></div><label class="label">Loan Amount ₹</label><input type="number" id="t12loan" class="input" value="100000"><label class="label">Interest % Per Year</label><input type="number" id="t12rate" class="input" value="10"><label class="label">Months</label><input type="number" id="t12months" class="input" value="12"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t12Calc()">Calculate EMI</button><div id="r12" style="margin-top:10px;font-weight:800"></div><div class="out" id="out12"></div></div>
+<!-- ================= TOOL 12 - EMI CALCULATOR - END ================= -->
+
+<!-- ================= TOOL 13 - GST CALCULATOR - START ================= -->
+<div class="tool panel" id="tool-13"><h3>🧾 13. GST Calculator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(13)">⬇️ Download</button><button class="btn" onclick="editSinglePage(13)">✏️ Edit Single Page</button></div><label class="label">Amount ₹ Without GST</label><input type="number" id="t13amt" class="input" value="1000"><label class="label">GST %</label><input type="number" id="t13gst" class="input" value="18"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t13Calc()">Calculate GST</button><div id="r13" style="margin-top:10px;font-weight:800"></div><div class="out" id="out13"></div></div>
+<!-- ================= TOOL 13 - GST CALCULATOR - END ================= -->
+
+<!-- ================= TOOL 14 - DISCOUNT CALCULATOR - START ================= -->
+<div class="tool panel" id="tool-14"><h3>💰 14. Discount Calculator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(14)">⬇️ Download</button><button class="btn" onclick="editSinglePage(14)">✏️ Edit Single Page</button></div><label class="label">MRP ₹</label><input type="number" id="t14mrp" class="input" value="999"><label class="label">Discount %</label><input type="number" id="t14disc" class="input" value="20"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t14Calc()">Calculate Price</button><div id="r14" style="margin-top:10px;font-weight:800"></div><div class="out" id="out14"></div></div>
+<!-- ================= TOOL 14 - DISCOUNT CALCULATOR - END ================= -->
+
+<!-- ================= TOOL 15 - WORD COUNTER - START ================= -->
+<div class="tool panel" id="tool-15"><h3>🔤 15. Word Counter</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(15)">⬇️ Download</button><button class="btn" onclick="editSinglePage(15)">✏️ Edit Single Page</button></div><textarea id="t15text" class="input" rows="4">Hello Orbittroniz</textarea><button class="btn primary" style="width:100%;margin-top:10px" onclick="t15Count()">Count Words</button><div id="r15" style="margin-top:10px;font-weight:800"></div><div class="out" id="out15"></div></div>
+<!-- ================= TOOL 15 - WORD COUNTER - END ================= -->
+
+<!-- ================= TOOL 16 - PASSWORD GENERATOR - START ================= -->
+<div class="tool panel" id="tool-16"><h3>🔑 16. Password Generator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(16)">⬇️ Download</button><button class="btn" onclick="editSinglePage(16)">✏️ Edit Single Page</button></div><label class="label">Length</label><input type="number" id="t16len" class="input" value="12"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t16Gen()">Generate Password</button><div id="r16" style="margin-top:10px;font-weight:900;font-size:18px;word-break:break-all"></div><button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('r16').innerText);alert('Copied')">Copy Password</button><div class="out" id="out16"></div></div>
+<!-- ================= TOOL 16 - PASSWORD GENERATOR - END ================= -->
+
+<!-- ================= TOOL 17 - COLOR PICKER - START ================= -->
+<div class="tool panel" id="tool-17"><h3>🎨 17. Color Picker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(17)">⬇️ Download</button><button class="btn" onclick="editSinglePage(17)">✏️ Edit Single Page</button></div><input type="color" id="t17color" value="#7c3aed" style="width:100%;height:60px;border:none;border-radius:10px" oninput="document.getElementById('r17').innerText=this.value;document.getElementById('r17').style.background=this.value"><div id="r17" style="margin-top:10px;padding:14px;border-radius:10px;font-weight:900">#7c3aed</div><button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('t17color').value);alert('Copied Hex')">Copy Hex</button><div class="out" id="out17"></div></div>
+<!-- ================= TOOL 17 - COLOR PICKER - END ================= -->
+
+<!-- ================= TOOL 18 - UNIT CONVERTER - START ================= -->
+<div class="tool panel" id="tool-18"><h3>📏 18. Unit Converter</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(18)">⬇️ Download</button><button class="btn" onclick="editSinglePage(18)">✏️ Edit Single Page</button></div><label class="label">Value</label><input type="number" id="t18val" class="input" value="1"><label class="label">Type</label><select id="t18type" class="select"><option value="kg">Kg to Grams</option><option value="km">Km to Meters</option><option value="c">Celsius to Fahrenheit</option></select><button class="btn primary" style="width:100%;margin-top:10px" onclick="t18Convert()">Convert</button><div id="r18" style="margin-top:10px;font-weight:800"></div><div class="out" id="out18"></div></div>
+<!-- ================= TOOL 18 - UNIT CONVERTER - END ================= -->
+
+<!-- ================= TOOL 19 - BMI CALCULATOR - START ================= -->
+<div class="tool panel" id="tool-19"><h3>⚖️ 19. BMI Calculator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(19)">⬇️ Download</button><button class="btn" onclick="editSinglePage(19)">✏️ Edit Single Page</button></div><label class="label">Height (cm)</label><input type="number" id="t19h" class="input" value="170"><label class="label">Weight (kg)</label><input type="number" id="t19w" class="input" value="70"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t19Calc()">Calculate BMI</button><div id="r19" style="margin-top:10px;font-weight:800"></div><div class="out" id="out19"></div></div>
+<!-- ================= TOOL 19 - BMI CALCULATOR - END ================= -->
+
+<!-- ================= TOOL 20 - RESUME MAKER - START ================= -->
+<div class="tool panel" id="tool-20"><h3>📄 20. Resume Maker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(20)">⬇️ Download</button><button class="btn" onclick="editSinglePage(20)">✏️ Edit Single Page</button></div><label class="label">Name</label><input type="text" id="t20name" class="input" value="Rahul Sharma"><label class="label">Skills</label><input type="text" id="t20skills" class="input" value="Sales, Computer"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t20Make()">Make Resume</button><canvas id="cv20" style="margin-top:10px"></canvas><div class="out" id="out20"></div></div>
+<!-- ================= TOOL 20 - RESUME MAKER - END ================= -->
+
+<!-- ================= TOOL 21 - CERTIFICATE MAKER - START ================= -->
+<div class="tool panel" id="tool-21"><h3>🏆 21. Certificate Maker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(21)">⬇️ Download</button><button class="btn" onclick="editSinglePage(21)">✏️ Edit Single Page</button></div><label class="label">Name</label><input type="text" id="t21name" class="input" value="Priya Sharma"><label class="label">Award</label><input type="text" id="t21award" class="input" value="Best Student"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t21Make()">Make Certificate</button><canvas id="cv21" style="margin-top:10px"></canvas><div class="out" id="out21"></div></div>
+<!-- ================= TOOL 21 - CERTIFICATE MAKER - END ================= -->
+
+<!-- ================= TOOL 22 - POSTER MAKER - START ================= -->
+<div class="tool panel" id="tool-22"><h3>🖼️ 22. Poster Maker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(22)">⬇️ Download</button><button class="btn" onclick="editSinglePage(22)">✏️ Edit Single Page</button></div><label class="label">Title</label><input type="text" id="t22title" class="input" value="SALE 50% OFF"><label class="label">Subtitle</label><input type="text" id="t22sub" class="input" value="Sharma Jewellers, Solapur"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t22Make()">Make Poster</button><canvas id="cv22" style="margin-top:10px"></canvas><div class="out" id="out22"></div></div>
+<!-- ================= TOOL 22 - POSTER MAKER - END ================= -->
+
+<!-- ================= TOOL 23 - SIGNATURE MAKER - START ================= -->
+<div class="tool panel" id="tool-23"><h3>✍️ 23. Signature Maker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(23)">⬇️ Download</button><button class="btn" onclick="editSinglePage(23)">✏️ Edit Single Page</button></div><label class="label">Your Name</label><input type="text" id="t23name" class="input" value="Rahul Sharma"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t23Make()">Make Signature</button><canvas id="cv23" style="margin-top:10px"></canvas><div class="out" id="out23"></div></div>
+<!-- ================= TOOL 23 - SIGNATURE MAKER - END ================= -->
+
+<!-- ================= TOOL 24 - WATERMARK TOOL - START ================= -->
+<div class="tool panel" id="tool-24"><h3>💧 24. Watermark Tool</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(24)">⬇️ Download</button><button class="btn" onclick="editSinglePage(24)">✏️ Edit Single Page</button></div><label class="label">Upload Image</label><input type="file" id="f24" accept="image/*" class="input"><label class="label">Watermark Text</label><input type="text" id="t24wm" class="input" value="orbittroniz.com"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t24Make()">Add Watermark</button><canvas id="cv24" style="margin-top:10px"></canvas><div class="out" id="out24"></div></div>
+<!-- ================= TOOL 24 - WATERMARK TOOL - END ================= -->
+
+<!-- ================= TOOL 25 - IMAGE RESIZER - START ================= -->
+<div class="tool panel" id="tool-25"><h3>📐 25. Image Resizer</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(25)">⬇️ Download</button><button class="btn" onclick="editSinglePage(25)">✏️ Edit Single Page</button></div><label class="label">Upload Image</label><input type="file" id="f25" accept="image/*" class="input"><label class="label">Width</label><input type="number" id="t25w" class="input" value="800"><label class="label">Height</label><input type="number" id="t25h" class="input" value="600"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t25Resize()">Resize</button><canvas id="cv25" style="margin-top:10px"></canvas><div class="out" id="out25"></div></div>
+<!-- ================= TOOL 25 - IMAGE RESIZER - END ================= -->
+
+<!-- ================= TOOL 26 - IMAGE CROPPER - START ================= -->
+<div class="tool panel" id="tool-26"><h3>✂️ 26. Image Cropper</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(26)">⬇️ Download</button><button class="btn" onclick="editSinglePage(26)">✏️ Edit Single Page</button></div><label class="label">Upload Image</label><input type="file" id="f26" accept="image/*" class="input"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t26Crop()">Crop Center Square</button><canvas id="cv26" style="margin-top:10px"></canvas><div class="out" id="out26"></div></div>
+<!-- ================= TOOL 26 - IMAGE CROPPER - END ================= -->
+
+<!-- ================= TOOL 27 - IMAGE ROTATOR - START ================= -->
+<div class="tool panel" id="tool-27"><h3>🔄 27. Image Rotator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(27)">⬇️ Download</button><button class="btn" onclick="editSinglePage(27)">✏️ Edit Single Page</button></div><label class="label">Upload Image</label><input type="file" id="f27" accept="image/*" class="input"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t27Rotate()">Rotate 90 Degrees</button><canvas id="cv27" style="margin-top:10px"></canvas><div class="out" id="out27"></div></div>
+<!-- ================= TOOL 27 - IMAGE ROTATOR - END ================= -->
+
+<!-- ================= TOOL 28 - IMAGE COMPRESSOR - START ================= -->
+<div class="tool panel" id="tool-28"><h3>🖼️ 28. Image Compressor</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(28)">⬇️ Download</button><button class="btn" onclick="editSinglePage(28)">✏️ Edit Single Page</button></div><label class="label">Upload Image</label><input type="file" id="f28" accept="image/*" class="input"><label class="label">Quality</label><input type="range" id="t28q" min="10" max="100" value="70" class="input"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t28Compress()">Compress + Download</button><div class="out" id="out28"></div></div>
+<!-- ================= TOOL 28 - IMAGE COMPRESSOR - END ================= -->
+
+<!-- ================= TOOL 29 - MERGE PDF - START ================= -->
+<div class="tool panel" id="tool-29"><h3>📚 29. Merge PDF</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(29)">⬇️ Download</button><button class="btn" onclick="editSinglePage(29)">✏️ Edit Single Page</button></div><label class="label">Upload 2 PDFs</label><input type="file" id="f29" accept=".pdf" multiple class="input"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t29Merge()">Merge PDFs</button><div id="r29" style="margin-top:10px"></div><div class="out" id="out29"></div></div>
+<!-- ================= TOOL 29 - MERGE PDF - END ================= -->
+
+<!-- ================= TOOL 30 - SPLIT PDF - START ================= -->
+<div class="tool panel" id="tool-30"><h3>✂️ 30. Split PDF</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(30)">⬇️ Download</button><button class="btn" onclick="editSinglePage(30)">✏️ Edit Single Page</button></div><label class="label">Upload PDF</label><input type="file" id="f30" accept=".pdf" class="input"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t30Split()">Check Pages</button><div id="r30" style="margin-top:10px"></div><div class="out" id="out30"></div></div>
+<!-- ================= TOOL 30 - SPLIT PDF - END ================= -->
+
+<!-- ================= TOOL 31 - COMPRESS PDF - START ================= -->
+<div class="tool panel" id="tool-31"><h3>🗜️ 31. Compress PDF Info</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(31)">⬇️ Download</button><button class="btn" onclick="editSinglePage(31)">✏️ Edit Single Page</button></div><label class="label">Upload PDF</label><input type="file" id="f31" accept=".pdf" class="input"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t31Check()">Check Size</button><div id="r31" style="margin-top:10px"></div><div class="out" id="out31"></div></div>
+<!-- ================= TOOL 31 - COMPRESS PDF - END ================= -->
+
+<!-- ================= TOOL 32 - IMAGE TO TEXT - START ================= -->
+<div class="tool panel" id="tool-32"><h3>📝 32. Image To Text</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(32)">⬇️ Download</button><button class="btn" onclick="editSinglePage(32)">✏️ Edit Single Page</button></div><label class="label">Upload Image</label><input type="file" id="f32" accept="image/*" class="input"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t32Show()">Show Image</button><div id="r32"></div><textarea id="t32text" class="input" rows="3" placeholder="Type text from image here..."></textarea><button class="btn" onclick="downloadText(document.getElementById('t32text').value,'text.txt')">Download Text</button><div class="out" id="out32"></div></div>
+<!-- ================= TOOL 32 - IMAGE TO TEXT - END ================= -->
+
+<!-- ================= TOOL 33 - CURRENCY CONVERTER - START ================= -->
+<div class="tool panel" id="tool-33"><h3>💱 33. Currency Converter</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(33)">⬇️ Download</button><button class="btn" onclick="editSinglePage(33)">✏️ Edit Single Page</button></div><label class="label">Amount</label><input type="number" id="t33amt" class="input" value="100"><label class="label">From To</label><select id="t33type" class="select"><option value="usd-inr">USD to INR (83)</option><option value="inr-usd">INR to USD</option><option value="eur-inr">EUR to INR (90)</option></select><button class="btn primary" style="width:100%;margin-top:10px" onclick="t33Convert()">Convert</button><div id="r33" style="margin-top:10px;font-weight:800"></div><div class="out" id="out33"></div></div>
+<!-- ================= TOOL 33 - CURRENCY CONVERTER - END ================= -->
+
+<!-- ================= TOOL 34 - DATE CALCULATOR - START ================= -->
+<div class="tool panel" id="tool-34"><h3>📅 34. Date Calculator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(34)">⬇️ Download</button><button class="btn" onclick="editSinglePage(34)">✏️ Edit Single Page</button></div><label class="label">From Date</label><input type="date" id="t34a" class="input"><label class="label">To Date</label><input type="date" id="t34b" class="input"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t34Calc()">Days Between</button><div id="r34" style="margin-top:10px;font-weight:800"></div><div class="out" id="out34"></div></div>
+<!-- ================= TOOL 34 - DATE CALCULATOR - END ================= -->
+
+<!-- ================= TOOL 35 - TIMER - START ================= -->
+<div class="tool panel" id="tool-35"><h3>⏱️ 35. Timer</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(35)">⬇️ Download</button><button class="btn" onclick="editSinglePage(35)">✏️ Edit Single Page</button></div><label class="label">Seconds</label><input type="number" id="t35sec" class="input" value="60"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t35Start()">Start Timer</button><div id="r35" style="margin-top:10px;font-size:24px;font-weight:900"></div><div class="out" id="out35"></div></div>
+<!-- ================= TOOL 35 - TIMER - END ================= -->
+
+<!-- ================= TOOL 36 - STOPWATCH - START ================= -->
+<div class="tool panel" id="tool-36"><h3>⏱️ 36. Stopwatch</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(36)">⬇️ Download</button><button class="btn" onclick="editSinglePage(36)">✏️ Edit Single Page</button></div><button class="btn primary" onclick="swStart()">Start</button> <button class="btn" onclick="swStop()">Stop</button> <button class="btn" onclick="swReset()">Reset</button><div id="r36" style="margin-top:10px;font-size:24px;font-weight:900">0.0s</div><div class="out" id="out36"></div></div>
+<!-- ================= TOOL 36 - STOPWATCH - END ================= -->
+
+<!-- ================= TOOL 37 - NOTES - START ================= -->
+<div class="tool panel" id="tool-37"><h3>📝 37. Notes</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(37)">⬇️ Download</button><button class="btn" onclick="editSinglePage(37)">✏️ Edit Single Page</button></div><textarea id="t37notes" class="input" rows="4" placeholder="Write notes..."></textarea><button class="btn primary" onclick="try{localStorage.setItem('orbit_notes',document.getElementById('t37notes').value);alert('Saved')}catch(e){alert('Saved')}">Save Notes</button> <button class="btn" onclick="try{document.getElementById('t37notes').value=localStorage.getItem('orbit_notes')||''}catch(e){}">Load Notes</button><div class="out" id="out37"></div></div>
+<!-- ================= TOOL 37 - NOTES - END ================= -->
+
+<!-- ================= TOOL 38 - TODO LIST - START ================= -->
+<div class="tool panel" id="tool-38"><h3>✅ 38. Todo List</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(38)">⬇️ Download</button><button class="btn" onclick="editSinglePage(38)">✏️ Edit Single Page</button></div><input type="text" id="t38task" class="input" placeholder="New task..."><button class="btn primary" style="margin-top:8px" onclick="t38Add()">Add Task</button><div id="r38" style="margin-top:10px"></div><div class="out" id="out38"></div></div>
+<!-- ================= TOOL 38 - TODO LIST - END ================= -->
+
+<!-- ================= TOOL 39 - EXPENSE TRACKER - START ================= -->
+<div class="tool panel" id="tool-39"><h3>💸 39. Expense Tracker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(39)">⬇️ Download</button><button class="btn" onclick="editSinglePage(39)">✏️ Edit Single Page</button></div><label class="label">Item</label><input type="text" id="t39item" class="input" placeholder="Tea"><label class="label">Amount ₹</label><input type="number" id="t39amt" class="input" placeholder="20"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t39Add()">Add Expense</button><div id="r39" style="margin-top:10px"></div><div class="out" id="out39"></div></div>
+<!-- ================= TOOL 39 - EXPENSE TRACKER - END ================= -->
+
+<!-- ================= TOOL 40 - QR SCANNER - START ================= -->
+<div class="tool panel" id="tool-40"><h3>📷 40. QR Scanner - Show QR</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(40)">⬇️ Download</button><button class="btn" onclick="editSinglePage(40)">✏️ Edit Single Page</button></div><label class="label">Upload QR Image</label><input type="file" id="f40" accept="image/*" class="input"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t40Show()">Show QR Image</button><div id="r40"></div><p style="font-size:11px;color:#cbd5e1">Tip: Open phone camera, point on QR to scan it.</p><div class="out" id="out40"></div></div>
+<!-- ================= TOOL 40 - QR SCANNER - END ================= -->
+
+<!-- ================= TOOL 41 - TEXT TO SPEECH - START ================= -->
+<div class="tool panel" id="tool-41"><h3>🔊 41. Text To Speech</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(41)">⬇️ Download</button><button class="btn" onclick="editSinglePage(41)">✏️ Edit Single Page</button></div><textarea id="t41text" class="input" rows="2">Hello, welcome to Orbittroniz</textarea><button class="btn primary" style="width:100%;margin-top:10px" onclick="try{speechSynthesis.speak(new SpeechSynthesisUtterance(document.getElementById('t41text').value))}catch(e){alert('Not supported')}">Speak</button><div class="out" id="out41"></div></div>
+<!-- ================= TOOL 41 - TEXT TO SPEECH - END ================= -->
+
+<!-- ================= TOOL 42 - SPEECH TO TEXT - START ================= -->
+<div class="tool panel" id="tool-42"><h3>🎤 42. Speech To Text</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(42)">⬇️ Download</button><button class="btn" onclick="editSinglePage(42)">✏️ Edit Single Page</button></div><button class="btn primary" style="width:100%" onclick="t42Listen()">Start Listening</button><div id="r42" style="margin-top:10px"></div><div class="out" id="out42"></div></div>
+<!-- ================= TOOL 42 - SPEECH TO TEXT - END ================= -->
+
+<!-- ================= TOOL 43 - MEME MAKER - START ================= -->
+<div class="tool panel" id="tool-43"><h3>😂 43. Meme Maker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(43)">⬇️ Download</button><button class="btn" onclick="editSinglePage(43)">✏️ Edit Single Page</button></div><label class="label">Upload Image</label><input type="file" id="f43" accept="image/*" class="input"><label class="label">Top Text</label><input type="text" id="t43top" class="input" value="WHEN YOU SEE"><label class="label">Bottom Text</label><input type="text" id="t43bot" class="input" value="ORBITTRONIZ"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t43Make()">Make Meme</button><canvas id="cv43" style="margin-top:10px"></canvas><div class="out" id="out43"></div></div>
+<!-- ================= TOOL 43 - MEME MAKER - END ================= -->
+
+<!-- ================= TOOL 44 - PHOTO COLLAGE - START ================= -->
+<div class="tool panel" id="tool-44"><h3>🖼️ 44. Photo Collage</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(44)">⬇️ Download</button><button class="btn" onclick="editSinglePage(44)">✏️ Edit Single Page</button></div><label class="label">Upload 2 Images</label><input type="file" id="f44" accept="image/*" multiple class="input"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t44Make()">Make Collage</button><canvas id="cv44" style="margin-top:10px"></canvas><div class="out" id="out44"></div></div>
+<!-- ================= TOOL 44 - PHOTO COLLAGE - END ================= -->
+
+<!-- ================= TOOL 45 - PHOTO FILTER - START ================= -->
+<div class="tool panel" id="tool-45"><h3>🌫️ 45. Photo Filter</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(45)">⬇️ Download</button><button class="btn" onclick="editSinglePage(45)">✏️ Edit Single Page</button></div><label class="label">Upload Image</label><input type="file" id="f45" accept="image/*" class="input"><select id="t45filter" class="select"><option value="gray">Grayscale</option><option value="blur">Blur</option><option value="bright">Bright</option></select><button class="btn primary" style="width:100%;margin-top:10px" onclick="t45Apply()">Apply Filter</button><canvas id="cv45" style="margin-top:10px"></canvas><div class="out" id="out45"></div></div>
+<!-- ================= TOOL 45 - PHOTO FILTER - END ================= -->
+
+<!-- ================= TOOL 46 - PASSPORT PHOTO - START ================= -->
+<div class="tool panel" id="tool-46"><h3>🪪 46. Passport Photo</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(46)">⬇️ Download</button><button class="btn" onclick="editSinglePage(46)">✏️ Edit Single Page</button></div><label class="label">Upload Photo</label><input type="file" id="f46" accept="image/*" class="input"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t46Make()">Make Passport Size</button><canvas id="cv46" style="margin-top:10px"></canvas><div class="out" id="out46"></div></div>
+<!-- ================= TOOL 46 - PASSPORT PHOTO - END ================= -->
+
+<!-- ================= TOOL 47 - BUSINESS NAME - START ================= -->
+<div class="tool panel" id="tool-47"><h3>💼 47. Business Name Generator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(47)">⬇️ Download</button><button class="btn" onclick="editSinglePage(47)">✏️ Edit Single Page</button></div><label class="label">Your Word</label><input type="text" id="t47word" class="input" value="Sharma"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t47Gen()">Generate Names</button><div id="r47" style="margin-top:10px;font-weight:800;line-height:1.8"></div><div class="out" id="out47"></div></div>
+<!-- ================= TOOL 47 - BUSINESS NAME - END ================= -->
+
+<!-- ================= TOOL 48 - BILL SPLITTER - START ================= -->
+<div class="tool panel" id="tool-48"><h3>📊 48. Bill Splitter</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(48)">⬇️ Download</button><button class="btn" onclick="editSinglePage(48)">✏️ Edit Single Page</button></div><label class="label">Total Bill ₹</label><input type="number" id="t48total" class="input" value="1000"><label class="label">People</label><input type="number" id="t48people" class="input" value="4"><label class="label">Tip %</label><input type="number" id="t48tip" class="input" value="10"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t48Split()">Split Bill</button><div id="r48" style="margin-top:10px;font-weight:800"></div><div class="out" id="out48"></div></div>
+<!-- ================= TOOL 48 - BILL SPLITTER - END ================= -->
+
+<!-- ================= TOOL 49 - NUMBER TO WORDS - START ================= -->
+<div class="tool panel" id="tool-49"><h3>🔢 49. Number To Words</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(49)">⬇️ Download</button><button class="btn" onclick="editSinglePage(49)">✏️ Edit Single Page</button></div><label class="label">Number</label><input type="number" id="t49num" class="input" value="25750"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t49Convert()">Convert</button><div id="r49" style="margin-top:10px;font-weight:800"></div><div class="out" id="out49"></div></div>
+<!-- ================= TOOL 49 - NUMBER TO WORDS - END ================= -->
+
+<!-- ================= TOOL 50 - RANDOM PICKER - START ================= -->
+<div class="tool panel" id="tool-50"><h3>🎲 50. Random Picker</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(50)">⬇️ Download</button><button class="btn" onclick="editSinglePage(50)">✏️ Edit Single Page</button></div><label class="label">Names - Comma Separated</label><textarea id="t50names" class="input" rows="2">Rahul, Priya, Amit, Sneha</textarea><button class="btn primary" style="width:100%;margin-top:10px" onclick="t50Pick()">Pick Random</button><div id="r50" style="margin-top:10px;font-size:22px;font-weight:900"></div><div class="out" id="out50"></div></div>
+<!-- ================= TOOL 50 - RANDOM PICKER - END ================= -->
+
+</div>
+</div>
+</div>
+
+<script>
+// ===== GLOBAL - SAFE - NO CRASH =====
+var WM_ON=false, WM_TEXT="orbittroniz.com", WM_COLOR="#ffffff";
+function toggleWM(){ WM_ON=document.getElementById('globalWatermark').checked; document.getElementById('wmState').innerText=WM_ON?"ON":"OFF"; }
+function updateWMText(){ WM_TEXT=document.getElementById('wmText').value||"orbittroniz.com"; WM_COLOR=document.getElementById('wmColor').value||"#ffffff"; }
+function setTheme(t){ document.body.setAttribute('data-theme',t); try{localStorage.setItem('orbit_theme',t)}catch(e){} }
+try{var s=localStorage.getItem('orbit_theme'); if(s) document.body.setAttribute('data-theme',s);}catch(e){}
+function addWatermark(canvas){ if(!WM_ON||!canvas||!canvas.width) return; try{var ctx=canvas.getContext('2d'); ctx.save(); ctx.globalAlpha=0.35; ctx.fillStyle=WM_COLOR; ctx.font="900 "+Math.round(canvas.width*0.04)+"px Arial"; ctx.textAlign='center'; ctx.translate(canvas.width/2,canvas.height/2); ctx.rotate(-0.4); ctx.fillText(WM_TEXT,0,0); ctx.restore();}catch(e){} }
+function downloadCanvas(canvas,name){ try{ if(!canvas||!canvas.width) return alert("First generate result"); var c=document.createElement('canvas'); c.width=canvas.width; c.height=canvas.height; c.getContext('2d').drawImage(canvas,0,0); addWatermark(c); var a=document.createElement('a'); a.href=c.toDataURL('image/png'); a.download=name+".png"; a.click(); }catch(e){alert(e.message)} }
+function downloadText(text,name){ try{var b=new Blob([text],{type:'text/plain'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click();}catch(e){alert(e.message)} }
+function readFile(f){ return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(r.result)};r.onerror=rej;r.readAsDataURL(f);}); }
+function loadImage(src){ return new Promise(function(res,rej){var im=new Image();im.onload=function(){res(im)};im.onerror=rej;im.src=src;}); }
+function safeNum(id,def){var v=parseFloat(document.getElementById(id).value);return isNaN(v)?(def||0):v;}
+function getVal(id){ var el=document.getElementById(id); return el?el.value:""; }
+
+var TOOLS=[
+{id:1,icon:"📄",name:"PDF To Image",cat:"PDF",desc:"PDF to Image"},
+{id:2,icon:"📑",name:"Image To PDF",cat:"PDF",desc:"Images to PDF"},
+{id:3,icon:"📱",name:"QR Generator",cat:"Business",desc:"QR Code"},
+{id:4,icon:"🏷️",name:"Barcode Generator",cat:"Business",desc:"Barcode"},
+{id:5,icon:"🧾",name:"Invoice Maker",cat:"Business",desc:"Bill with GST"},
+{id:6,icon:"💳",name:"BizCard Maker",cat:"Business",desc:"Visiting Card"},
+{id:7,icon:"🎨",name:"Logo Maker",cat:"Business",desc:"Logo"},
+{id:8,icon:"✂️",name:"BG Remover",cat:"Image",desc:"BG Remove"},
+{id:9,icon:"🖼️",name:"Text To Image",cat:"Image",desc:"Text Poster"},
+{id:10,icon:"🧮",name:"Calculator",cat:"Daily",desc:"Calculator"},
+{id:11,icon:"🎂",name:"Age Calculator",cat:"Daily",desc:"Age"},
+{id:12,icon:"🏦",name:"EMI Calculator",cat:"Daily",desc:"EMI"},
+{id:13,icon:"🧾",name:"GST Calculator",cat:"Business",desc:"GST"},
+{id:14,icon:"💰",name:"Discount Calculator",cat:"Business",desc:"Discount"},
+{id:15,icon:"🔤",name:"Word Counter",cat:"Daily",desc:"Words"},
+{id:16,icon:"🔑",name:"Password Generator",cat:"Daily",desc:"Password"},
+{id:17,icon:"🎨",name:"Color Picker",cat:"Image",desc:"Color"},
+{id:18,icon:"📏",name:"Unit Converter",cat:"Daily",desc:"Units"},
+{id:19,icon:"⚖️",name:"BMI Calculator",cat:"Daily",desc:"BMI"},
+{id:20,icon:"📄",name:"Resume Maker",cat:"Business",desc:"Resume"},
+{id:21,icon:"🏆",name:"Certificate Maker",cat:"Business",desc:"Certificate"},
+{id:22,icon:"🖼️",name:"Poster Maker",cat:"Image",desc:"Poster"},
+{id:23,icon:"✍️",name:"Signature Maker",cat:"Business",desc:"Signature"},
+{id:24,icon:"💧",name:"Watermark Tool",cat:"Image",desc:"Watermark"},
+{id:25,icon:"📐",name:"Image Resizer",cat:"Image",desc:"Resize"},
+{id:26,icon:"✂️",name:"Image Cropper",cat:"Image",desc:"Crop"},
+{id:27,icon:"🔄",name:"Image Rotator",cat:"Image",desc:"Rotate"},
+{id:28,icon:"🖼️",name:"Image Compressor",cat:"Image",desc:"Compress"},
+{id:29,icon:"📚",name:"Merge PDF",cat:"PDF",desc:"Merge PDF"},
+{id:30,icon:"✂️",name:"Split PDF",cat:"PDF",desc:"Split PDF"},
+{id:31,icon:"🗜️",name:"Compress PDF",cat:"PDF",desc:"PDF Info"},
+{id:32,icon:"📝",name:"Image To Text",cat:"Image",desc:"Manual Text"},
+{id:33,icon:"💱",name:"Currency Converter",cat:"Daily",desc:"Currency"},
+{id:34,icon:"📅",name:"Date Calculator",cat:"Daily",desc:"Dates"},
+{id:35,icon:"⏱️",name:"Timer",cat:"Daily",desc:"Timer"},
+{id:36,icon:"⏱️",name:"Stopwatch",cat:"Daily",desc:"Stopwatch"},
+{id:37,icon:"📝",name:"Notes",cat:"Daily",desc:"Notes"},
+{id:38,icon:"✅",name:"Todo List",cat:"Daily",desc:"Todo"},
+{id:39,icon:"💸",name:"Expense Tracker",cat:"Business",desc:"Expense"},
+{id:40,icon:"📷",name:"QR Scanner",cat:"Business",desc:"Show QR"},
+{id:41,icon:"🔊",name:"Text To Speech",cat:"Daily",desc:"Speak"},
+{id:42,icon:"🎤",name:"Speech To Text",cat:"Daily",desc:"Voice"},
+{id:43,icon:"😂",name:"Meme Maker",cat:"Image",desc:"Meme"},
+{id:44,icon:"🖼️",name:"Photo Collage",cat:"Image",desc:"Collage"},
+{id:45,icon:"🌫️",name:"Photo Filter",cat:"Image",desc:"Filter"},
+{id:46,icon:"🪪",name:"Passport Photo",cat:"Image",desc:"Passport"},
+{id:47,icon:"💼",name:"Business Name",cat:"Business",desc:"Name Ideas"},
+{id:48,icon:"📊",name:"Bill Splitter",cat:"Daily",desc:"Split Bill"},
+{id:49,icon:"🔢",name:"Number To Words",cat:"Daily",desc:"Words"},
+{id:50,icon:"🎲",name:"Random Picker",cat:"Daily",desc:"Random"}
+];
+var favs=[]; try{favs=JSON.parse(localStorage.getItem('orbit_favs')||"[]")}catch(e){favs=[]}
+var recents=[]; try{recents=JSON.parse(localStorage.getItem('orbit_recent')||"[]")}catch(e){recents=[]}
+var currentCat='all', showOnlyFav=false;
+function renderTools(){
+  try{
+    var grid=document.getElementById('toolsGrid'); if(!grid) return; grid.innerHTML="";
+    var q=(document.getElementById('searchInput').value||"").toLowerCase(); var shown=0;
+    TOOLS.forEach(function(t){
+      if(showOnlyFav && favs.indexOf(t.id)===-1) return;
+      if(!showOnlyFav && currentCat!=='all' && t.cat!==currentCat) return;
+      if(q && t.name.toLowerCase().indexOf(q)===-1) return;
+      shown++; var d=document.createElement('div'); d.className='tcard';
+      d.innerHTML='<span class="fav" onclick="event.stopPropagation();toggleFav('+t.id+')">'+(favs.indexOf(t.id)>-1?"⭐":"☆")+'</span><span>'+t.icon+'</span><b>'+t.id+'. '+t.name+'</b><small>'+t.desc+' • '+t.cat+'</small>';
+      d.onclick=function(){ openTool(t.id); }; grid.appendChild(d);
+    });
+    document.getElementById('toolsFallback').style.display=shown===0?'block':'none';
+    document.getElementById('favCount').innerText=favs.length; document.getElementById('favCount2').innerText=favs.length;
+    var rb=document.getElementById('recentBox'); rb.innerHTML=""; if(!recents.length) rb.innerHTML='<small>No recent yet</small>';
+    recents.slice(0,8).forEach(function(id){ var t=TOOLS.find(function(x){return x.id===id}); if(t){ var s=document.createElement('div'); s.innerText=t.icon+" "+t.name; s.onclick=function(){openTool(id)}; rb.appendChild(s); } });
+  }catch(e){}
+}
+function toggleFav(id){ var i=favs.indexOf(id); if(i>-1) favs.splice(i,1); else favs.push(id); try{localStorage.setItem('orbit_favs',JSON.stringify(favs))}catch(e){} renderTools(); }
+function setCat(c,btn){ currentCat=c; showOnlyFav=(c==='Favs'); document.querySelectorAll('.cat-btn').forEach(function(b){b.classList.remove('active')}); if(btn) btn.classList.add('active'); renderTools(); }
+function showFavs(){ showOnlyFav=true; renderTools(); }
+function showDashboard(){ document.getElementById('dashboard').style.display='block'; document.getElementById('toolsArea').style.display='none'; document.querySelectorAll('.tool').forEach(function(t){t.classList.remove('active'); t.style.display='';}); document.getElementById('backBtn').style.display='none'; var b=document.getElementById('singleBar'); if(b) b.remove(); }
+function filterTools(){ renderTools(); }
+function showRandomTool(){ openTool(TOOLS[Math.floor(Math.random()*TOOLS.length)].id); }
+function showAllToolsList(){ document.getElementById('dashboard').style.display='none'; document.getElementById('toolsArea').style.display='block'; document.getElementById('backBtn').style.display='block'; document.querySelectorAll('.tool').forEach(function(t){t.classList.add('active'); t.style.display='block';}); }
+function openTool(id){
+  try{ recents=[id].concat(recents.filter(function(x){return x!==id})).slice(0,10); localStorage.setItem('orbit_recent',JSON.stringify(recents)); }catch(e){}
+  document.getElementById('dashboard').style.display='none'; document.getElementById('toolsArea').style.display='block'; document.getElementById('backBtn').style.display='block';
+  document.querySelectorAll('.tool').forEach(function(x){x.classList.remove('active'); x.style.display='';});
+  var el=document.getElementById('tool-'+id); if(el){ el.classList.add('active'); el.scrollIntoView({behavior:'smooth'}); }
+  renderTools();
+}
+function editSinglePage(id){
+  document.getElementById('dashboard').style.display='none'; document.getElementById('toolsArea').style.display='block'; document.getElementById('backBtn').style.display='block';
+  document.querySelectorAll('.tool').forEach(function(t){t.classList.remove('active'); t.style.display='none';});
+  var el=document.getElementById('tool-'+id); el.classList.add('active'); el.style.display='block';
+  var old=document.getElementById('singleBar'); if(old) old.remove();
+  var bar=document.createElement('div'); bar.id='singleBar'; bar.className='single-bar';
+  bar.innerHTML='<span>✏️ Editing Single Page - Tool '+id+'</span><span style="display:flex;gap:6px"><button onclick="downloadToolResult('+id+')">⬇️ Download</button><button onclick="exitSinglePage()">✕ Close</button></span>';
+  el.insertBefore(bar, el.firstChild); window.scrollTo({top:0,behavior:'smooth'});
+}
+function exitSinglePage(){ var b=document.getElementById('singleBar'); if(b) b.remove(); showDashboard(); }
+function downloadToolResult(id){
+  try{
+    var tool=document.getElementById('tool-'+id); if(!tool) return;
+    var canvas=tool.querySelector('canvas');
+    if(canvas && canvas.width>10){ downloadCanvas(canvas,'Orbittroniz-Tool-'+id); alert('Downloaded Image - Tool '+id); return; }
+    if(tool.querySelector('#qr3 img') && id===3){ var q=tool.querySelector('#qr3 img'); var a=document.createElement('a'); a.href=q.src; a.download='QR.png'; a.click(); alert('QR Downloaded'); return; }
+    var txt="Orbittroniz - Tool "+id+" Result\n\n"+(tool.innerText||"")+"\n\nMade with orbittroniz.com";
+    downloadText(txt,'Orbittroniz-Tool-'+id+'.txt'); alert('Text Result Downloaded');
+  }catch(e){ alert(e.message); }
+}
+function printTool(id){ try{ var tool=document.getElementById('tool-'+id); var w=window.open('','_blank'); if(!w) return alert('Allow popup'); w.document.write('<html><body style="font-family:Arial;padding:20px"><h2>Orbittroniz Tool '+id+'</h2>'+tool.innerHTML+'<script>window.onload=function(){window.print()}<\/script></body></html>'); w.document.close(); }catch(e){alert(e.message)} }
+function shareTool(id){ var text="Check Orbittroniz Tool "+id+" - 50 Free Tools - orbittroniz.com"; if(navigator.share){navigator.share({text:text}).catch(function(){});} else if(navigator.clipboard){navigator.clipboard.writeText(text).then(function(){alert('Link Copied');});} else alert(text); }
+
+// ===== TOOL 1 LOGIC =====
+var t1PdfFile=null, t1Results=[];
+function t1FileSelected(input){ var f=input.files[0]; if(!f) return; if(!f.name.toLowerCase().endsWith('.pdf')){ alert("Upload PDF only"); input.value=""; return; } t1PdfFile=f; document.getElementById('t1FileName').innerText="Selected: "+f.name+" • "+(f.size/1024).toFixed(1)+" KB"; }
+async function t1Convert(){
+  if(!t1PdfFile){ alert("First upload PDF"); return; }
+  document.getElementById('out1').innerHTML='Converting... Please wait';
+  try{
+    if(typeof pdfjsLib==='undefined'){ alert("PDF library loading - Refresh page"); return; }
+    pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    var buf=await t1PdfFile.arrayBuffer(); var pdf=await pdfjsLib.getDocument({data:buf}).promise;
+    var scale=parseFloat(document.getElementById('t1Quality').value)||1.5;
+    var fmt=document.getElementById('t1Format').value||"png"; var mime=fmt==='png'?'image/png':fmt==='webp'?'image/webp':'image/jpeg'; var ext=fmt==='png'?'png':fmt==='webp'?'webp':'jpg';
+    var wmOn=document.getElementById('t1Watermark').checked||WM_ON; var showNum=document.getElementById('t1PageNum').checked;
+    var prefix=(document.getElementById('t1Prefix').value.trim()||"My PDF").replace(/[\\/:*?"<>|]/g,'');
+    t1Results=[]; var out=document.getElementById('out1'); out.innerHTML='<b>Pages: '+pdf.numPages+'</b>'; document.getElementById('t1Preview').innerHTML='';
+    for(var i=1;i<=pdf.numPages;i++){
+      var page=await pdf.getPage(i); var vp=page.getViewport({scale:scale}); var c=document.createElement('canvas'); c.width=vp.width; c.height=vp.height; var ctx=c.getContext('2d'); ctx.fillStyle="#fff"; ctx.fillRect(0,0,c.width,c.height); await page.render({canvasContext:ctx,viewport:vp}).promise;
+      if(wmOn){ ctx.save(); ctx.globalAlpha=0.3; ctx.fillStyle="#000"; ctx.font="900 28px Arial"; ctx.textAlign='center'; ctx.translate(c.width/2,c.height/2); ctx.rotate(-0.4); ctx.fillText(WM_TEXT,0,0); ctx.restore(); }
+      if(showNum){ ctx.fillStyle="rgba(0,0,0,.7)"; ctx.font="700 16px Arial"; ctx.textAlign='left'; ctx.fillText("Page "+i+" / "+pdf.numPages,12,c.height-12); }
+      var blob=await new Promise(function(res){ c.toBlob(res,mime,0.92); }); var url=URL.createObjectURL(blob); var fname=prefix+" - Page "+i+"."+ext; t1Results.push({blob:blob,url:url,name:fname,page:i});
+      if(i===1){ var im=document.createElement('img'); im.src=url; im.style.maxWidth='100%'; document.getElementById('t1Preview').appendChild(im); }
+      out.appendChild(c); var b=document.createElement('button'); b.className='btn'; b.innerText='Download Page '+i; (function(u,n){ b.onclick=function(){ var a=document.createElement('a'); a.href=u; a.download=n; a.click(); }; })(url,fname); out.appendChild(b);
+    }
+    out.innerHTML+='<p>Done - '+pdf.numPages+' images ready</p>';
+  }catch(e){ document.getElementById('out1').innerHTML='Error: '+e.message; }
+}
+async function t1DownloadAll(){ if(!t1Results.length) return alert("First convert PDF"); for(var i=0;i<t1Results.length;i++){ var r=t1Results[i]; var a=document.createElement('a'); a.href=r.url; a.download=r.name; a.click(); await new Promise(function(res){setTimeout(res,400)}); } alert("All downloaded"); }
+function t1PrintAll(){ if(!t1Results.length) return alert("First convert"); var w=window.open('','_blank'); if(!w) return alert("Allow popup"); var h='<html><body style="text-align:center">'; t1Results.forEach(function(r){ h+='<img src="'+r.url+'" style="max-width:100%"><p>Page '+r.page+'</p>'; }); h+='<script>window.onload=function(){window.print()}<\/script></body></html>'; w.document.write(h); w.document.close(); }
+
+// ===== TOOL 2 LOGIC =====
+async function t2MakePdf(){ try{ var files=document.getElementById('f2imgs').files; if(!files.length) return alert("Upload images"); var jsPDF=window.jspdf.jsPDF; var pdf=new jsPDF(); var first=true; for(var i=0;i<files.length;i++){ var src=await readFile(files[i]); if(!first) pdf.addPage(); first=false; pdf.addImage(src,'JPEG',10,10,190,0); if(WM_ON) pdf.text(WM_TEXT,10,290); } pdf.save('Images.pdf'); document.getElementById('out2').innerHTML='PDF Downloaded'; }catch(e){alert(e.message)} }
+
+// ===== TOOL 3 LOGIC =====
+function t3Change(){
+  var type=document.getElementById('t3type').value; var f=document.getElementById('t3fields');
+  if(type==='link') f.innerHTML='<label class="label">Website Link</label><input type="text" id="t3link" class="input" value="https://orbittroniz.com">';
+  else if(type==='upi') f.innerHTML='<label class="label">UPI ID</label><input type="text" id="t3upi" class="input" value="sharma@upi"><label class="label">Payee Name</label><input type="text" id="t3name" class="input" value="Sharma Jewellers"><label class="label">Amount ₹</label><input type="number" id="t3amt" class="input" value="500">';
+  else if(type==='whatsapp') f.innerHTML='<label class="label">WhatsApp Number</label><input type="text" id="t3phone" class="input" value="9876543210"><label class="label">Message</label><input type="text" id="t3msg" class="input" value="Hello">';
+  else if(type==='wifi') f.innerHTML='<label class="label">WiFi Name</label><input type="text" id="t3ssid" class="input" value="SharmaWiFi"><label class="label">Password</label><input type="text" id="t3pass" class="input" value="12345678">';
+  else f.innerHTML='<label class="label">Text</label><textarea id="t3text" class="input" rows="2">Hello, Welcome to Sharma Jewellers</textarea>';
+}
+function t3GetData(){
+  var type=document.getElementById('t3type').value;
+  if(type==='link'){ var u=getVal('t3link')||"https://orbittroniz.com"; if(!u.startsWith('http')) u="https://"+u; return u; }
+  if(type==='upi'){ var upi=getVal('t3upi')||"sharma@upi"; var nm=getVal('t3name')||"Shop"; var am=getVal('t3amt')||""; var d="upi://pay?pa="+encodeURIComponent(upi)+"&pn="+encodeURIComponent(nm)+"&cu=INR"; if(am) d+="&am="+am; return d; }
+  if(type==='whatsapp'){ var ph=(getVal('t3phone')||"9876543210").replace(/\D/g,''); if(ph.length===10) ph="91"+ph; return "https://wa.me/"+ph+"?text="+encodeURIComponent(getVal('t3msg')||"Hello"); }
+  if(type==='wifi'){ return "WIFI:T:WPA;S:"+(getVal('t3ssid')||"WiFi")+";P:"+(getVal('t3pass')||"")+ ";;"; }
+  return getVal('t3text')||"Hello";
+}
+function t3Generate(){
+  try{
+    var data=t3GetData(); var box=document.getElementById('qr3'); box.innerHTML=""; if(typeof QRCode==='undefined') return alert("QR library loading - Refresh");
+    new QRCode(box,{text:data,width:180,height:180,colorDark:"#000",colorLight:"#fff",correctLevel:QRCode.CorrectLevel.H});
+    document.getElementById('out3').innerHTML='QR Ready - Type: '+document.getElementById('t3type').value+' - Label: '+getVal('t3label')+' - Scan with phone camera<br>Data: '+data;
+  }catch(e){ alert(e.message); }
+}
+
+// ===== TOOL 4 LOGIC =====
+function t4Random(){ var code="890"; for(var i=0;i<9;i++) code+=Math.floor(Math.random()*10); document.getElementById('t4code').value=code; }
+function t4Generate(){ try{ var code=getVal('t4code')||"890123456789"; if(typeof JsBarcode==='undefined') return alert("Barcode library loading - Refresh"); JsBarcode("#svg4",code,{format:"CODE128",lineColor:"#000",background:"#fff",displayValue:true}); var price=safeNum('t4price',0), mrp=safeNum('t4mrp',0); var disc=mrp>price?Math.round((mrp-price)/mrp*100):0; document.getElementById('out4').innerHTML='Barcode: '+code+' - Product: '+getVal('t4prod')+' - Price ₹'+price+' - MRP ₹'+mrp+' - Discount '+disc+'% OFF'; }catch(e){ document.getElementById('out4').innerHTML='Invalid code'; } }
+
+// ===== TOOL 5-9 LOGIC =====
+function t5Make(){ try{ var c=document.getElementById('cv5'); c.width=600; c.height=750; var ctx=c.getContext('2d'); ctx.fillStyle="#fff"; ctx.fillRect(0,0,600,750); var shop=getVal('t5shop'), cust=getVal('t5cust'), item=getVal('t5item'), price=safeNum('t5price',0), gst=safeNum('t5gst',0); var gstAmt=price*gst/100, total=price+gstAmt; ctx.fillStyle="#000"; ctx.fillRect(0,0,600,100); ctx.fillStyle="#f59e0b"; ctx.font="900 28px Arial"; ctx.textAlign='left'; ctx.fillText(shop.toUpperCase(),20,60); ctx.fillStyle="#fff"; ctx.font="900 24px Arial"; ctx.textAlign='right'; ctx.fillText("INVOICE",580,60); ctx.fillStyle="#111"; ctx.font="700 18px Arial"; ctx.textAlign='left'; ctx.fillText("Bill To: "+cust,20,140); ctx.fillText("Item: "+item,20,175); ctx.fillText("Price: ₹"+price,20,210); ctx.fillText("GST: ₹"+gstAmt.toFixed(2),20,245); ctx.fillStyle="#22c55e"; ctx.font="900 26px Arial"; ctx.fillText("Total: ₹"+total.toFixed(2),20,290); addWatermark(c); document.getElementById('out5').innerHTML='Invoice Total ₹'+total.toFixed(2); }catch(e){alert(e.message)} }
+function t6Make(){ try{ var c=document.getElementById('cv6'); c.width=700; c.height=400; var ctx=c.getContext('2d'); ctx.fillStyle="#000"; ctx.fillRect(0,0,700,400); ctx.fillStyle="#f59e0b"; ctx.beginPath(); ctx.arc(120,200,70,0,Math.PI*2); ctx.fill(); ctx.fillStyle="#fff"; ctx.font="900 60px Arial"; ctx.textAlign='center'; ctx.fillText((getVal('t6name')||"R").charAt(0),120,220); ctx.fillStyle="#fff"; ctx.font="900 28px Arial"; ctx.textAlign='left'; ctx.fillText(getVal('t6biz'),230,180); ctx.fillStyle="#94a3b8"; ctx.font="600 18px Arial"; ctx.fillText(getVal('t6name'),230,215); ctx.fillStyle="#f59e0b"; ctx.fillText("Phone: "+getVal('t6phone'),230,250); addWatermark(c); document.getElementById('out6').innerHTML='BizCard Ready'; }catch(e){alert(e.message)} }
+function t7Make(){ try{ var c=document.getElementById('cv7'); c.width=500; c.height=500; var ctx=c.getContext('2d'); var style=getVal('t7style'); var g=ctx.createLinearGradient(0,0,500,500); if(style==='gold'){ g.addColorStop(0,"#f59e0b"); g.addColorStop(1,"#92400e"); } else if(style==='green'){ g.addColorStop(0,"#22c55e"); g.addColorStop(1,"#14532d"); } else { g.addColorStop(0,"#a78bfa"); g.addColorStop(1,"#22d3ee"); } ctx.fillStyle=g; ctx.beginPath(); ctx.arc(250,250,140,0,Math.PI*2); ctx.fill(); ctx.fillStyle="#000"; ctx.beginPath(); ctx.arc(250,250,110,0,Math.PI*2); ctx.fill(); ctx.fillStyle="#fff"; ctx.font="900 28px Arial"; ctx.textAlign='center'; ctx.fillText(getVal('t7name'),250,450); addWatermark(c); }catch(e){alert(e.message)} }
+async function t8Remove(){ try{ var f=document.getElementById('f8').files[0]; if(!f) return alert("Upload image"); var src=await readFile(f); var im=await loadImage(src); var c=document.getElementById('cv8'); c.width=im.width; c.height=im.height; var ctx=c.getContext('2d'); ctx.drawImage(im,0,0); var d=ctx.getImageData(0,0,c.width,c.height); for(var i=0;i<d.data.length;i+=4){ if(d.data[i]>240&&d.data[i+1]>240&&d.data[i+2]>240) d.data[i+3]=0; } ctx.putImageData(d,0,0); document.getElementById('out8').innerHTML='White Background Removed'; }catch(e){alert(e.message)} }
+function t9Make(){ try{ var c=document.getElementById('cv9'); c.width=700; c.height=400; var ctx=c.getContext('2d'); var g=ctx.createLinearGradient(0,0,700,400); g.addColorStop(0,"#7c3aed"); g.addColorStop(1,"#22d3ee"); ctx.fillStyle=g; ctx.fillRect(0,0,700,400); ctx.fillStyle="#fff"; ctx.font="900 36px Arial"; ctx.textAlign='center'; ctx.fillText((getVal('t9text')||"").substring(0,30),350,200); addWatermark(c); }catch(e){alert(e.message)} }
+
+// ===== TOOLS 10-19 LOGIC =====
+function t10Calc(){ try{ document.getElementById('r10').innerText="Result: "+eval(getVal('t10exp')); }catch(e){ document.getElementById('r10').innerText="Invalid Expression"; } }
+function t11Calc(){ try{ var d=new Date(getVal('t11dob')); if(isNaN(d)) return alert("Select DOB"); var now=new Date(); var age=now.getFullYear()-d.getFullYear(); if(now.getMonth()<d.getMonth()||(now.getMonth()===d.getMonth()&&now.getDate()<d.getDate())) age--; document.getElementById('r11').innerText="Age: "+age+" years"; }catch(e){alert(e.message)} }
+function t12Calc(){ var P=safeNum('t12loan',0), r=safeNum('t12rate',0)/1200, n=safeNum('t12months',1); if(!P) return alert("Enter loan"); var emi=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1); document.getElementById('r12').innerText="EMI: ₹"+emi.toFixed(2)+" • Total ₹"+(emi*n).toFixed(2); }
+function t13Calc(){ var a=safeNum('t13amt',0), g=safeNum('t13gst',0); var gst=a*g/100; document.getElementById('r13').innerText="GST ₹"+gst.toFixed(2)+" • Total ₹"+(a+gst).toFixed(2); }
+function t14Calc(){ var m=safeNum('t14mrp',0), d=safeNum('t14disc',0); var p=m-(m*d/100); document.getElementById('r14').innerText="You Pay ₹"+p.toFixed(2)+" • Save ₹"+(m-p).toFixed(2); }
+function t15Count(){ var t=getVal('t15text').trim(); document.getElementById('r15').innerText="Words: "+(t?t.split(/\s+/).length:0)+" • Chars: "+t.length; }
+function t16Gen(){ var chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%"; var len=parseInt(getVal('t16len'))||12; var p=""; for(var i=0;i<len;i++) p+=chars[Math.floor(Math.random()*chars.length)]; document.getElementById('r16').innerText=p; }
+function t18Convert(){ var v=safeNum('t18val',0), ty=getVal('t18type'); var r=""; if(ty==='kg') r=v+" Kg = "+(v*1000)+" Grams"; else if(ty==='km') r=v+" Km = "+(v*1000)+" Meters"; else r=v+"°C = "+((v*9/5)+32).toFixed(1)+"°F"; document.getElementById('r18').innerText=r; }
+function t19Calc(){ var h=safeNum('t19h',0)/100, w=safeNum('t19w',0); if(!h) return alert("Enter height"); var bmi=w/(h*h); document.getElementById('r19').innerText="BMI: "+bmi.toFixed(1); }
+
+// ===== TOOLS 20-28 LOGIC =====
+function t20Make(){ try{ var c=document.getElementById('cv20'); c.width=600; c.height=750; var ctx=c.getContext('2d'); ctx.fillStyle="#fff"; ctx.fillRect(0,0,600,750); ctx.fillStyle="#111"; ctx.font="900 28px Arial"; ctx.textAlign='left'; ctx.fillText(getVal('t20name'),30,60); ctx.font="600 16px Arial"; ctx.fillStyle="#64748b"; ctx.fillText("Skills: "+getVal('t20skills'),30,100); addWatermark(c); }catch(e){alert(e.message)} }
+function t21Make(){ try{ var c=document.getElementById('cv21'); c.width=700; c.height=500; var ctx=c.getContext('2d'); ctx.fillStyle="#fffbeb"; ctx.fillRect(0,0,700,500); ctx.strokeStyle="#f59e0b"; ctx.lineWidth=6; ctx.strokeRect(15,15,670,470); ctx.fillStyle="#92400e"; ctx.font="900 32px Arial"; ctx.textAlign='center'; ctx.fillText("CERTIFICATE",350,90); ctx.fillStyle="#111"; ctx.font="900 30px Georgia"; ctx.fillText(getVal('t21name'),350,190); ctx.font="600 18px Arial"; ctx.fillText(getVal('t21award'),350,230); addWatermark(c); }catch(e){alert(e.message)} }
+function t22Make(){ try{ var c=document.getElementById('cv22'); c.width=700; c.height=700; var ctx=c.getContext('2d'); var g=ctx.createLinearGradient(0,0,700,700); g.addColorStop(0,"#ef4444"); g.addColorStop(1,"#f59e0b"); ctx.fillStyle=g; ctx.fillRect(0,0,700,700); ctx.fillStyle="#fff"; ctx.font="900 52px Arial"; ctx.textAlign='center'; ctx.fillText(getVal('t22title'),350,320); ctx.font="600 22px Arial"; ctx.fillText(getVal('t22sub'),350,370); addWatermark(c); }catch(e){alert(e.message)} }
+function t23Make(){ try{ var c=document.getElementById('cv23'); c.width=600; c.height=200; var ctx=c.getContext('2d'); ctx.fillStyle="#fff"; ctx.fillRect(0,0,600,200); ctx.fillStyle="#111"; ctx.font="italic 700 56px Georgia"; ctx.textAlign='center'; ctx.fillText(getVal('t23name'),300,120); addWatermark(c); }catch(e){alert(e.message)} }
+async function t24Make(){ try{ var f=document.getElementById('f24').files[0]; if(!f) return alert("Upload image"); var src=await readFile(f); var im=await loadImage(src); var c=document.getElementById('cv24'); c.width=im.width; c.height=im.height; var ctx=c.getContext('2d'); ctx.drawImage(im,0,0); ctx.save(); ctx.globalAlpha=0.4; ctx.fillStyle="#fff"; ctx.font="900 32px Arial"; ctx.textAlign='center'; ctx.translate(c.width/2,c.height/2); ctx.rotate(-0.4); ctx.fillText(getVal('t24wm'),0,0); ctx.restore(); }catch(e){alert(e.message)} }
+async function t25Resize(){ try{ var f=document.getElementById('f25').files[0]; if(!f) return alert("Upload image"); var src=await readFile(f); var im=await loadImage(src); var c=document.getElementById('cv25'); c.width=parseInt(getVal('t25w'))||800; c.height=parseInt(getVal('t25h'))||600; c.getContext('2d').drawImage(im,0,0,c.width,c.height); addWatermark(c); }catch(e){alert(e.message)} }
+async function t26Crop(){ try{ var f=document.getElementById('f26').files[0]; if(!f) return alert("Upload image"); var src=await readFile(f); var im=await loadImage(src); var s=Math.min(im.width,im.height); var c=document.getElementById('cv26'); c.width=s; c.height=s; c.getContext('2d').drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,s,s); addWatermark(c); }catch(e){alert(e.message)} }
+async function t27Rotate(){ try{ var f=document.getElementById('f27').files[0]; if(!f) return alert("Upload image"); var src=await readFile(f); var im=await loadImage(src); var c=document.getElementById('cv27'); c.width=im.height; c.height=im.width; var ctx=c.getContext('2d'); ctx.translate(c.width/2,c.height/2); ctx.rotate(Math.PI/2); ctx.drawImage(im,-im.width/2,-im.height/2); addWatermark(c); }catch(e){alert(e.message)} }
+async function t28Compress(){ try{ var f=document.getElementById('f28').files[0]; if(!f) return alert("Upload image"); var src=await readFile(f); var im=await loadImage(src); var q=parseInt(getVal('t28q'))/100||0.7; var c=document.createElement('canvas'); c.width=im.width; c.height=im.height; c.getContext('2d').drawImage(im,0,0); document.getElementById('out28').innerHTML='Compressed Preview:'; document.getElementById('out28').appendChild(c); var btn=document.createElement('button'); btn.className='btn primary'; btn.innerText='Download Compressed'; btn.onclick=function(){ c.toBlob(function(b){ var a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='compressed.jpg'; a.click(); }); }; document.getElementById('out28').appendChild(btn); }catch(e){alert(e.message)} }
+
+// ===== TOOLS 29-35 LOGIC =====
+async function t29Merge(){ try{ var files=document.getElementById('f29').files; if(files.length<2) return alert("Upload 2 PDFs"); var merged=await PDFLib.PDFDocument.create(); for(var i=0;i<files.length;i++){ var buf=await files[i].arrayBuffer(); var pdf=await PDFLib.PDFDocument.load(buf); var pages=await merged.copyPages(pdf,pdf.getPageIndices()); pages.forEach(function(p){merged.addPage(p)}); } var bytes=await merged.save(); var b=new Blob([bytes],{type:'application/pdf'}); var a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='Merged.pdf'; a.click(); document.getElementById('r29').innerText='Merged PDF Downloaded'; }catch(e){alert(e.message)} }
+async function t30Split(){ try{ var f=document.getElementById('f30').files[0]; if(!f) return alert("Upload PDF"); var buf=await f.arrayBuffer(); var pdf=await PDFLib.PDFDocument.load(buf); document.getElementById('r30').innerText='Pages: '+pdf.getPageCount()+' • Size: '+(f.size/1024).toFixed(1)+' KB'; }catch(e){alert(e.message)} }
+async function t31Check(){ try{ var f=document.getElementById('f31').files[0]; if(!f) return alert("Upload PDF"); document.getElementById('r31').innerText='Size: '+(f.size/1024).toFixed(1)+' KB • Tip: Compress images first then Image to PDF'; }catch(e){alert(e.message)} }
+async function t32Show(){ try{ var f=document.getElementById('f32').files[0]; if(!f) return alert("Upload image"); var src=await readFile(f); document.getElementById('r32').innerHTML='<img src="'+src+'" style="max-width:100%"><p>Type its text below</p>'; }catch(e){alert(e.message)} }
+function t33Convert(){ var a=safeNum('t33amt',0), ty=getVal('t33type'); var r=""; if(ty==='usd-inr') r=a+" USD = ₹"+(a*83).toFixed(2); else if(ty==='inr-usd') r="₹"+a+" = $"+(a/83).toFixed(2); else r=a+" EUR = ₹"+(a*90).toFixed(2); document.getElementById('r33').innerText=r; }
+function t34Calc(){ var d1=new Date(getVal('t34a')), d2=new Date(getVal('t34b')); if(isNaN(d1)||isNaN(d2)) return alert("Select both dates"); document.getElementById('r34').innerText="Days: "+(Math.abs(d2-d1)/(1000*60*60*24)); }
+var t35Int=null; function t35Start(){ var s=parseInt(getVal('t35sec'))||60; clearInterval(t35Int); var el=document.getElementById('r35'); el.innerText=s+"s"; t35Int=setInterval(function(){ s--; el.innerText=s+"s"; if(s<=0){ clearInterval(t35Int); el.innerText="Time Up!"; } },1000); }
+
+// ===== TOOLS 36-50 LOGIC =====
+var swStart=0, swInt=null, swElapsed=0; function swStart(){ if(swInt) return; swStart=Date.now()-swElapsed; swInt=setInterval(function(){ swElapsed=Date.now()-swStart; document.getElementById('r36').innerText=(swElapsed/1000).toFixed(1)+"s"; },100); } function swStop(){ clearInterval(swInt); swInt=null; } function swReset(){ swStop(); swElapsed=0; document.getElementById('r36').innerText="0.0s"; }
+var todos=[]; function t38Add(){ var t=getVal('t38task').trim(); if(!t) return; todos.push(t); document.getElementById('t38task').value=""; var h=""; todos.forEach(function(tt,i){ h+='<div style="display:flex;justify-content:space-between;background:rgba(0,0,0,.3);padding:10px;border-radius:10px;margin-top:6px"><span>'+tt+'</span><button class="btn" onclick="todos.splice('+i+',1);t38Render()">Done</button></div>'; }); document.getElementById('r38').innerHTML=h; } function t38Render(){ var h=""; todos.forEach(function(tt,i){ h+='<div style="display:flex;justify-content:space-between;background:rgba(0,0,0,.3);padding:10px;border-radius:10px;margin-top:6px"><span>'+tt+'</span><button class="btn" onclick="todos.splice('+i+',1);t38Render()">Done</button></div>'; }); document.getElementById('r38').innerHTML=h||'No tasks'; }
+var expenses=[]; function t39Add(){ var it=getVal('t39item')||"Item"; var am=safeNum('t39amt',0); expenses.push({it:it,am:am}); var total=expenses.reduce(function(s,e){return s+e.am},0); var h=""; expenses.forEach(function(e){ h+='<div>'+e.it+' - ₹'+e.am+'</div>'; }); document.getElementById('r39').innerHTML=h+'<b>Total ₹'+total+'</b>'; }
+async function t40Show(){ try{ var f=document.getElementById('f40').files[0]; if(!f) return alert("Upload QR"); var src=await readFile(f); document.getElementById('r40').innerHTML='<img src="'+src+'" style="max-width:100%"><p>QR shown - Scan with phone camera</p>'; }catch(e){alert(e.message)} }
+function t42Listen(){ try{ var Rec=window.SpeechRecognition||window.webkitSpeechRecognition; if(!Rec) return alert("Use Chrome for Speech"); var rec=new Rec(); rec.lang='en-IN'; rec.onresult=function(e){ document.getElementById('r42').innerText=e.results[0][0].transcript; }; rec.start(); document.getElementById('r42').innerText='Listening... Speak now'; }catch(e){alert("Not supported")} }
+async function t43Make(){ try{ var f=document.getElementById('f43').files[0]; if(!f) return alert("Upload image"); var src=await readFile(f); var im=await loadImage(src); var c=document.getElementById('cv43'); c.width=600; c.height=600; var ctx=c.getContext('2d'); ctx.drawImage(im,0,0,600,600); ctx.fillStyle="#fff"; ctx.strokeStyle="#000"; ctx.lineWidth=4; ctx.font="900 36px Arial"; ctx.textAlign='center'; ctx.strokeText(getVal('t43top'),300,50); ctx.fillText(getVal('t43top'),300,50); ctx.strokeText(getVal('t43bot'),300,570); ctx.fillText(getVal('t43bot'),300,570); addWatermark(c); }catch(e){alert(e.message)} }
+async function t44Make(){ try{ var files=document.getElementById('f44').files; if(files.length<2) return alert("Upload 2 images"); var s1=await readFile(files[0]); var s2=await readFile(files[1]); var im1=await loadImage(s1); var im2=await loadImage(s2); var c=document.getElementById('cv44'); c.width=800; c.height=400; var ctx=c.getContext('2d'); ctx.drawImage(im1,0,0,400,400); ctx.drawImage(im2,400,0,400,400); addWatermark(c); }catch(e){alert(e.message)} }
+async function t45Apply(){ try{ var f=document.getElementById('f45').files[0]; if(!f) return alert("Upload image"); var src=await readFile(f); var im=await loadImage(src); var c=document.getElementById('cv45'); c.width=im.width; c.height=im.height; var ctx=c.getContext('2d'); var flt=getVal('t45filter'); if(flt==='gray') ctx.filter='grayscale(1)'; else if(flt==='blur') ctx.filter='blur(5px)'; else ctx.filter='brightness(1.3)'; ctx.drawImage(im,0,0); addWatermark(c); }catch(e){alert(e.message)} }
+async function t46Make(){ try{ var f=document.getElementById('f46').files[0]; if(!f) return alert("Upload photo"); var src=await readFile(f); var im=await loadImage(src); var c=document.getElementById('cv46'); c.width=300; c.height=400; var ctx=c.getContext('2d'); ctx.fillStyle="#fff"; ctx.fillRect(0,0,300,400); ctx.drawImage(im,0,0,300,400); addWatermark(c); }catch(e){alert(e.message)} }
+function t47Gen(){ var w=getVal('t47word')||"Sharma"; document.getElementById('r47').innerHTML=[w+" Jewellers",w+" Mart",w+" Enterprises",w+" Fashion",w+" Foods",w+" Tech","Shree "+w,w+" & Sons"].join('<br>'); }
+function t48Split(){ var t=safeNum('t48total',0), p=safeNum('t48people',1), tip=safeNum('t48tip',0); if(!p) return alert("Enter people"); var total=t+(t*tip/100); document.getElementById('r48').innerText="Total with Tip: ₹"+total.toFixed(2)+" • Each: ₹"+(total/p).toFixed(2); }
+function t49Convert(){ var n=parseInt(getVal('t49num'))||0; var ones=["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"]; var tens=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"]; function two(x){ if(x<20) return ones[x]; return tens[Math.floor(x/10)]+(x%10?" "+ones[x%10]:""); } function three(x){ var h=Math.floor(x/100), r=x%100; return (h?ones[h]+" Hundred":"")+(h&&r?" ":"")+(r?two(r):""); } var out=""; var num=n; if(num>=10000000){ out+=three(Math.floor(num/10000000))+" Crore "; num%=10000000; } if(num>=100000){ out+=three(Math.floor(num/100000))+" Lakh "; num%=100000; } if(num>=1000){ out+=three(Math.floor(num/1000))+" Thousand "; num%=1000; } if(num>0) out+=three(num); document.getElementById('r49').innerText=(out||"Zero")+" Rupees Only"; }
+function t50Pick(){ var names=getVal('t50names').split(',').map(function(s){return s.trim()}).filter(function(s){return s}); if(!names.length) return alert("Enter names"); document.getElementById('r50').innerText="Winner: "+names[Math.floor(Math.random()*names.length)]; }
+
+// ===== INIT =====
+t3Change();
+renderTools();
+(function(){ var hash=location.hash; if(hash && hash.indexOf('tool-')>-1){ var id=parseInt(hash.replace('#tool-','')); if(id>=1&&id<=50) setTimeout(function(){ editSinglePage(id); },800); } })();
+</script>
+</body>
+</html>
