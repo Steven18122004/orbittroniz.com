@@ -5996,10 +5996,599 @@ t14Log("Tool 14 Color Palette Loaded ✅ - No Photo Needed, Generator Works");
 </script>
 <!-- ================= TOOL 14 COLOR PALETTE - END ================= -->
 <!-- TOOL 15 -->
-<div class="tool" id="tool-15"><div class="panel"><h3>✍️ Tool 15 - Text Poster</h3>
-<!-- YAHAN TOOL 15 KA CODE PASTE KARO -->
-<p style="font-size:12px;color:#94a3b8">Yaha Tool 15 ka feature code aayega...</p>
+<!-- ================= TOOL 15 - TEXT POSTER - AI SUPER ADVANCE V2 - START ================= -->
+<style>
+.t15-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.t15-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t15-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.t15-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
+.t15-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
+.t15-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
+.t15-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.t15-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
+.t15-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.t15-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:13px 8px;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer}
+.t15-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent}
+.t15-chiprow{display:flex;gap:6px;margin-top:8px}
+.t15-chiprow button{flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px 4px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
+.t15-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
+.t15-toggle b{font-size:13px}
+.t15-toggle input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.t15-toggle input:checked{background:#22c55e}
+.t15-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.t15-toggle input:checked::after{left:23px}
+.t15-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.t15-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.t15-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t15-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
+.t15-prog{height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:10px;display:none;border:1px solid #2a3a6a}
+.t15-prog div{height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee);width:0%}
+.t15-range{width:100%;accent-color:#22d3ee}
+.t15-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.t15-imgcard{background:#060a18;border:1px solid #2a3a6a;border-radius:14px;overflow:hidden}
+.t15-imgcard img{width:100%;height:130px;object-fit:cover;display:block}
+.t15-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column}
+.t15-modal canvas{max-width:95%;max-height:62vh;border-radius:10px;background:#fff}
+.t15-modal-nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.t15-modal-nav button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer}
+.t15-modal-nav button.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none}
+</style>
+
+<div class="tool active" id="tool-15"><div class="t15-card">
+<div class="t15-title">📝 Text Poster Pro - AI SUPER ADVANCE 🤖</div>
+<div class="t15-sub">AI Prompt To Poster • AI Text Writer • AI Color Expert • AI Design Score • AI Caption • Live Preview</div>
+
+<!-- LIVE PREVIEW -->
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px;text-align:center">
+<b style="font-size:13px">👀 LIVE POSTER PREVIEW</b>
+<div style="display:inline-block;margin-top:8px;max-width:100%">
+<canvas id="t15PreviewCanvas" style="max-width:100%;max-height:380px;border-radius:12px;background:#fff;display:block"></canvas>
+</div>
+<div id="t15PreviewInfo" style="font-size:11px;color:#22d3ee;margin-top:6px;font-weight:700">Poster: 1080 x 1080</div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t15AiRedesign()" style="flex:1;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🤖 AI Re-Design - New Look</button>
+<button onclick="t15AiScore()" style="flex:1;background:linear-gradient(135deg,#f59e0b,#ef4444);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">⭐ AI Check Score</button>
+</div>
+<div id="t15AiScoreBox" style="display:none;margin-top:8px;background:#0a1224;border:1px solid #f59e0b;border-radius:10px;padding:10px;text-align:left"></div>
+</div>
+
+<!-- 🤖 AI PROMPT TO POSTER - MAIN AI FEATURE -->
+<label class="t15-label">🤖 1. AI PROMPT TO POSTER - Bas Likh Do, AI Pura Poster Bana Dega</label>
+<div style="background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(34,211,238,.25));border:1px solid #a78bfa;border-radius:14px;padding:12px">
+<b style="font-size:13px">✨ Example: <span style="color:#22d3ee">Sale for saree shop, 50% off, Solapur</span> / <span style="color:#f59e0b">Birthday for my daughter Aanya, 5 years</span> / <span style="color:#ec4899">Gym opening offer, first month free</span></b>
+<textarea id="t15AiPrompt" class="t15-input" placeholder="Describe your poster in one line... Example: Sale for saree shop, 50% off, in Solapur, call 98765 43210" rows="2" style="margin-top:8px">Sale for saree shop, 50% off, in Solapur</textarea>
+<div class="t15-chiprow">
+<button onclick="t15AiPromptFill('Sale for saree shop, 50% off, in Solapur')">🛍️ Saree Sale</button>
+<button onclick="t15AiPromptFill('Birthday for my daughter Aanya, 5 years old, cake party')">🎂 Birthday</button>
+<button onclick="t15AiPromptFill('Gym opening, first month free, join now')">🏋️ Gym</button>
+</div>
+<button onclick="t15AiGenerateFromPrompt()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:14px;border-radius:12px;font-weight:900;cursor:pointer;font-size:14px">🤖 AI GENERATE POSTER - Make My Poster</button>
+<div id="t15AiThinking" style="display:none;text-align:center;margin-top:8px"><b>🤖 AI is Thinking...</b><br><small style="color:#94a3b8">Reading your prompt, choosing colors, writing headline...</small><br><div style="font-size:22px;margin-top:4px">🧠✨🎨</div></div>
+<div id="t15AiResult" style="display:none;margin-top:8px;background:#060a18;border-radius:10px;padding:10px;text-align:left"></div>
+</div>
+
+<!-- AI TEXT WRITER -->
+<label class="t15-label">🧠 2. AI TEXT WRITER - AI 5 Headline Likhega, Tum Ek Chuno</label>
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px">
+<div style="display:flex;gap:6px">
+<select id="t15AiTone" class="t15-input" style="flex:1"><option value="sale">🔥 Sale / Urgent Tone</option><option value="fun">😄 Fun / Happy Tone</option><option value="premium">💎 Premium / Luxury Tone</option><option value="emotional">❤️ Emotional Tone</option><option value="short">⚡ Short & Punchy</option></select>
+<button onclick="t15AiWriteHeadlines()" style="background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:12px 16px;border-radius:12px;font-weight:800;cursor:pointer;white-space:nowrap">✍️ Write 5 Headlines</button>
+</div>
+<div id="t15HeadlineList" style="margin-top:8px"></div>
+<div id="t15HeadlineEmpty" style="text-align:center;color:#94a3b8;font-size:12px;padding:8px">Click Write Headlines - AI will write 5 options based on your title</div>
+</div>
+
+<!-- AI CAPTION -->
+<label class="t15-label">📱 3. AI CAPTION + HASHTAGS - Instagram Ke Liye</label>
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px">
+<div id="t15CaptionBox" style="font-size:12px;color:#fff;line-height:1.6;background:#0a1224;padding:10px;border-radius:10px">Click Generate Caption - AI will write Instagram caption + hashtags for this poster</div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t15AiCaption()" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:10px;font-weight:700;cursor:pointer">✍️ Generate Caption</button>
+<button onclick="t15CopyCaption()" style="flex:1;background:#22c55e;border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">📋 Copy Caption</button>
+</div>
+</div>
+
+<!-- MODE -->
+<label class="t15-label">🤖 4. MODE - AI Or Manual?</label>
+<div class="t15-mode" id="t15ModeModes">
+<button class="active" data-mode="auto" onclick="t15SetMode('auto',this)">🤖 AUTO - AI Will Suggest<br><small>If AI fails, Manual works</small></button>
+<button data-mode="manual" onclick="t15SetMode('manual',this)">✋ MANUAL - I Will Design<br><small>100% Working, No AI Needed</small></button>
+</div>
+<div id="t15ModeInfo" style="text-align:center;font-size:11px;color:#22d3ee;margin-top:6px;font-weight:700">Mode: AUTO</div>
+<div id="t15AiBox" style="display:none"></div>
+<div id="t15ManualGuide" style="display:none;background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;margin-top:10px">
+<b style="color:#22c55e">✋ MANUAL MODE - 3 Steps:</b><br>
+<small style="color:#fff;line-height:1.7"><b>Step 1:</b> Text likho - Title + Subtitle + Bottom<br><b>Step 2:</b> Template + Background + Font chuno<br><b>Step 3:</b> Preview dekho, Download dabao<br><i>No AI needed ✅</i></small>
+</div>
+
+<label class="t15-label">⚡ 5. QUICK TEMPLATES</label>
+<div class="t15-pillrow">
+<button class="t15-pill" onclick="t15SetTemplate('sale')">🔥<br>Big Sale<br>50% OFF</button>
+<button class="t15-pill" onclick="t15SetTemplate('offer')">💰<br>Offer<br>Buy 1 Get 1</button>
+<button class="t15-pill" onclick="t15SetTemplate('motivation')">💪<br>Motivation<br>Quote</button>
+<button class="t15-pill" onclick="t15Reset()">🔄<br>Clear<br>All</button>
+</div>
+<div class="t15-pillrow" style="margin-top:8px">
+<button class="t15-pill" onclick="t15SetTemplate('birthday')">🎂<br>Birthday<br>Happy Birthday</button>
+<button class="t15-pill" onclick="t15SetTemplate('wedding')">💍<br>Wedding<br>Invitation</button>
+<button class="t15-pill" onclick="t15SetTemplate('shop')">🛍️<br>Shop Opening<br>Grand Opening</button>
+<button class="t15-pill" onclick="t15SetTemplate('festival')">🪔<br>Festival<br>Diwali Offer</button>
+</div>
+
+<label class="t15-label">✏️ 6. YOUR TEXT - Title + Subtitle + Bottom</label>
+<input type="text" id="t15TopText" class="t15-input" placeholder="Top Small Text - Example: GRAND OPENING" value="GRAND OPENING" oninput="t15UpdatePreview()">
+<input type="text" id="t15Title" class="t15-input" placeholder="Main Title - Example: BIG SALE 50% OFF" value="BIG SALE" oninput="t15UpdatePreview();t15RunAiDebounced()" style="margin-top:8px;font-weight:800">
+<input type="text" id="t15Title2" class="t15-input" placeholder="Second Line - Example: 50% OFF" value="50% OFF" oninput="t15UpdatePreview()" style="margin-top:8px">
+<textarea id="t15Subtitle" class="t15-input" placeholder="Subtitle - Example: All Dresses, Sarees & Kurtis On Sale" rows="2" oninput="t15UpdatePreview()" style="margin-top:8px;resize:vertical">All Dresses, Sarees & Kurtis On Sale. Visit Today!</textarea>
+<input type="text" id="t15Bottom" class="t15-input" placeholder="Bottom - Example: 📞 Call: 98765 43210 • 📍 Solapur" value="📞 Call: 98765 43210 • 📍 Solapur" oninput="t15UpdatePreview()" style="margin-top:8px">
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t15AiImproveText()" style="flex:1;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🤖 AI Improve My Text</button>
+<button onclick="t15AiTranslate()" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:10px;font-weight:700;cursor:pointer">🌐 Make It Hinglish</button>
+</div>
+
+<label class="t15-label">🎨 7. TEXT STYLE - AI Font Pairing</label>
+<div style="display:flex;gap:8px">
+<select id="t15Font" class="t15-input" style="flex:1" onchange="t15UpdatePreview()"><option value="Arial">Arial - Clean</option><option value="Impact">Impact - Bold Poster</option><option value="Georgia">Georgia - Stylish</option><option value="Times New Roman">Times - Classic</option><option value="Courier New">Courier - Typewriter</option><option value="Verdana">Verdana - Modern</option></select>
+<button onclick="t15AiFont()" style="background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:12px 14px;border-radius:12px;font-weight:800;cursor:pointer;white-space:nowrap">🤖 AI Pick Font</button>
+</div>
+<div style="display:flex;gap:8px;margin-top:8px;align-items:center">
+<input type="color" id="t15TitleColor" value="#ffffff" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t15UpdatePreview()">
+<div style="flex:1;display:flex;gap:6px">
+<button onclick="t15SetTitleColor('#ffffff')" style="flex:1;background:#fff;border:1px solid #2a3a6a;color:#000;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">White</button>
+<button onclick="t15SetTitleColor('#facc15')" style="flex:1;background:#facc15;border:none;color:#000;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Yellow</button>
+<button onclick="t15SetTitleColor('#22d3ee')" style="flex:1;background:#22d3ee;border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Cyan</button>
+<button onclick="t15SetTitleColor('#ec4899')" style="flex:1;background:#ec4899;border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Pink</button>
+</div>
+</div>
+<button onclick="t15AiColor()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#ec4899,#f59e0b);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🎨 AI Pick Best Colors For My Text</button>
+<span style="font-size:11px;color:#fff">📏 Title Size (AI Auto Adjusts If Text Is Long): <b id="t15TitleSizeVal" style="color:#22d3ee">110px</b></span>
+<input type="range" id="t15TitleSize" class="t15-range" min="40" max="180" value="110" oninput="document.getElementById('t15TitleSizeVal').innerText=this.value+'px';t15UpdatePreview()">
+<div class="t15-toggle"><b>🤖 AI Smart Layout? (AI will auto adjust font if text is long)</b><input type="checkbox" id="t15AiLayout" checked onchange="t15UpdatePreview()"></div>
+<div class="t15-mode" id="t15TextStyleModes">
+<button class="active" data-tstyle="normal" onclick="t15SetTextStyle('normal',this)">📝 Normal</button>
+<button data-tstyle="outline" onclick="t15SetTextStyle('outline',this)">🔲 Outline</button>
+<button data-tstyle="shadow" onclick="t15SetTextStyle('shadow',this)">🌑 Shadow 3D</button>
+<button data-tstyle="gradient" onclick="t15SetTextStyle('gradient',this)">🌈 Gradient Text</button>
+</div>
+<div class="t15-toggle"><b>🔲 Text Background Box?</b><input type="checkbox" id="t15TextBg" onchange="t15UpdatePreview()"></div>
+<div class="t15-toggle"><b>✨ Decorations? (⭐ ✨ 🎉)</b><input type="checkbox" id="t15Decor" checked onchange="t15UpdatePreview()"></div>
+
+<label class="t15-label">🖼️ 8. BACKGROUND - AI Background</label>
+<div class="t15-mode" id="t15BgModes">
+<button class="active" data-bg="gradient" onclick="t15SetBg('gradient',this)">🌈 Gradient</button>
+<button data-bg="solid" onclick="t15SetBg('solid',this)">⬜ Solid</button>
+<button data-bg="photo" onclick="t15SetBg('photo',this)">🖼️ Photo BG</button>
+<button data-bg="pattern" onclick="t15SetBg('pattern',this)">⚪ Pattern</button>
+</div>
+<div id="t15BgGradientBox">
+<div style="display:flex;gap:8px;margin-top:8px;align-items:center">
+<input type="color" id="t15Bg1" value="#7c3aed" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t15UpdatePreview()">
+<input type="color" id="t15Bg2" value="#ef4444" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t15UpdatePreview()">
+<div style="flex:1;display:flex;gap:4px">
+<button onclick="t15SetGradient('#7c3aed','#ef4444')" style="flex:1;background:linear-gradient(135deg,#7c3aed,#ef4444);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Purple-Red</button>
+<button onclick="t15SetGradient('#2563eb','#22d3ee')" style="flex:1;background:linear-gradient(135deg,#2563eb,#22d3ee);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Blue-Cyan</button>
+<button onclick="t15SetGradient('#f59e0b','#ef4444')" style="flex:1;background:linear-gradient(135deg,#f59e0b,#ef4444);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Sunset</button>
+</div>
+</div>
+<button onclick="t15AiBackground()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#22c55e,#22d3ee);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🤖 AI Pick Background For My Text</button>
+</div>
+<div id="t15BgPhotoBox" style="display:none;margin-top:8px">
+<button class="t15-btn2" onclick="document.getElementById('t15BgFile').click()" style="margin-top:0">+ Select Background Photo</button>
+<input type="file" id="t15BgFile" accept="image/*" onchange="t15OnBgSelect(this)" style="display:none">
+<div id="t15BgInfo" style="text-align:center;font-size:11px;color:#94a3b8;margin-top:6px">No background photo</div>
+<span style="font-size:11px;color:#fff">🌑 Dark Overlay: <b id="t15OverlayVal" style="color:#22d3ee">50%</b></span>
+<input type="range" id="t15Overlay" class="t15-range" min="0" max="80" value="50" oninput="document.getElementById('t15OverlayVal').innerText=this.value+'%';t15UpdatePreview()">
+</div>
+<div class="t15-toggle"><b>🖼️ Border Frame?</b><input type="checkbox" id="t15BorderOn" onchange="t15UpdatePreview()"></div>
+<div class="t15-toggle"><b>🏷️ Price Badge? (50% OFF Circle)</b><input type="checkbox" id="t15BadgeOn" onchange="document.getElementById('t15BadgeBox').style.display=this.checked?'block':'none';t15UpdatePreview()"></div>
+<div id="t15BadgeBox" style="display:none"><input type="text" id="t15BadgeText" class="t15-input" value="50% OFF" style="margin-top:8px" oninput="t15UpdatePreview()"></div>
+
+<label class="t15-label">📐 9. POSTER SIZE</label>
+<div class="t15-mode" id="t15SizeModes">
+<button class="active" data-size="1080x1080" onclick="t15SetSize('1080x1080',this)">⬛ 1080x1080 - Insta Post</button>
+<button data-size="1080x1920" onclick="t15SetSize('1080x1920',this)">📲 1080x1920 - Story</button>
+<button data-size="1080x1350" onclick="t15SetSize('1080x1350',this)">📱 1080x1350 - Insta 4:5</button>
+<button data-size="1280x720" onclick="t15SetSize('1280x720',this)">▶️ 1280x720 - YouTube</button>
+</div>
+<div class="t15-mode">
+<button data-size="820x312" onclick="t15SetSize('820x312',this)">📘 FB Cover</button>
+<button data-size="1200x628" onclick="t15SetSize('1200x628',this)">📣 Ad Poster</button>
+<button data-size="1080x1080" onclick="t15SetSize('1080x1080',this)">↩️ Back To Square</button>
+<button data-size="custom" onclick="t15SetSize('custom',this)">⚙️ Custom</button>
+</div>
+<div id="t15CustomSizeBox" style="display:none;margin-top:8px"><div style="display:flex;gap:8px"><input type="number" id="t15CustomW" class="t15-input" placeholder="Width - 1080" value="1080"><input type="number" id="t15CustomH" class="t15-input" placeholder="Height - 1080" value="1080"></div><button onclick="t15ApplyCustomSize()" style="width:100%;margin-top:6px;background:#22c55e;border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">✅ Apply Custom Size</button></div>
+
+<label class="t15-label">🔄 10. OUTPUT + FILE NAME</label>
+<div class="t15-mode" id="t15FmtModes">
+<button class="active" data-fmt="png" onclick="t15SetFmt('png',this)">🎨 PNG - Best</button>
+<button data-fmt="jpeg" onclick="t15SetFmt('jpeg',this)">🖼️ JPG - Small</button>
+<button data-fmt="webp" onclick="t15SetFmt('webp',this)">⚡ WEBP</button>
+<button data-fmt="jpeg" onclick="t15SetFmt('jpeg',this)">↩️ JPG Again</button>
+</div>
+<input type="text" id="t15Prefix" class="t15-input" placeholder="Poster - Orbittroniz" value="Poster - Orbittroniz" style="margin-top:8px">
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
+<b id="t15Stats" style="font-size:13px">Poster: 1080 x 1080</b><br>
+<small id="t15AiQuality" style="color:#a78bfa">AI: Ready • Manual Always Works ✅</small>
+</div>
+<div id="t15Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
+
+<button class="t15-btn-preview" onclick="t15OpenPreview()">👀 PREVIEW - Full Screen</button>
+<button class="t15-btn3d" onclick="t15Download()">📥 DOWNLOAD POSTER - REAL START</button>
+<button class="t15-btn2" onclick="t15DownloadVariation()" style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;border:none">🎲 Download 3 Variations - AI Will Make 3 Different Designs</button>
+<button class="t15-btn-share" id="t15ShareBtn" onclick="t15Share()" style="display:block">📤 SHARE POSTER</button>
+<button class="t15-btn2" onclick="t15Reset()">🗑️ Clear / New Poster</button>
+
+<label class="t15-label">🖼️ YOUR POSTERS</label>
+<div class="t15-grid" id="t15Out"></div>
+<div id="t15OutEmpty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">No posters yet - Download to see here</div>
 </div></div>
+<!-- ================= TOOL 15 AI V2 - END ================= -->
+
+<div class="t15-modal" id="t15Modal"><div id="t15ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Poster Preview</div><canvas id="t15ModalCanvas"></canvas><div id="t15ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div><div class="t15-modal-nav"><button onclick="t15Download()" style="background:#22c55e">⬇️ Download</button><button onclick="t15Share()" style="background:#2563eb">📤 Share</button><button class="primary" onclick="t15ClosePreview()">✅ Close</button></div></div>
+
+<script>
+// ===== TOOL 15 AI V2 JS - AI PROMPT + AI WRITER + AI SCORE - NO API, NO BUG =====
+var t15Bg='gradient', t15TextStyle='normal', t15Size='1080x1080', t15Fmt='png', t15Mode='auto', t15AiTimeout=null, t15BgImg=null, t15Results=[], t15AiDebounce=null, t15CustomSize=null, t15LastCaption="";
+function t15SetMode(m,btn){ t15Mode=m; document.querySelectorAll('#t15ModeModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active');
+  document.getElementById('t15ModeInfo').innerText = m==='auto' ? "Mode: AUTO • AI will suggest" : "Mode: MANUAL • AI off, you design - 100% Working ✅";
+  document.getElementById('t15ManualGuide').style.display = m==='manual' ? 'block' : 'none';
+  if(m==='manual') document.getElementById('t15AiBox').style.display='none';
+}
+function t15AiPromptFill(txt){ document.getElementById('t15AiPrompt').value=txt; }
+// ===== AI PROMPT TO POSTER - Main AI Brain - Keyword Based, Never Fails =====
+function t15AiGenerateFromPrompt(){
+  var prompt=(document.getElementById('t15AiPrompt').value||"").toLowerCase();
+  if(!prompt.trim()) return alert("First write what poster you want! Example: Sale for saree shop");
+  document.getElementById('t15AiThinking').style.display='block';
+  document.getElementById('t15AiResult').style.display='none';
+  setTimeout(function(){
+    document.getElementById('t15AiThinking').style.display='none';
+    var result=t15AiBrain(prompt);
+    // Apply result
+    document.getElementById('t15TopText').value=result.top;
+    document.getElementById('t15Title').value=result.title;
+    document.getElementById('t15Title2').value=result.title2;
+    document.getElementById('t15Subtitle').value=result.sub;
+    document.getElementById('t15Bottom').value=result.bottom;
+    document.getElementById('t15Bg1').value=result.bg1;
+    document.getElementById('t15Bg2').value=result.bg2;
+    document.getElementById('t15TitleColor').value=result.color;
+    document.getElementById('t15Font').value=result.font;
+    document.getElementById('t15BadgeOn').checked=result.badge;
+    document.getElementById('t15BadgeBox').style.display=result.badge?'block':'none';
+    if(result.badge) document.getElementById('t15BadgeText').value=result.badgeText;
+    t15SetBg('gradient', document.querySelector('#t15BgModes button[data-bg="gradient"]'));
+    t15UpdatePreview();
+    var box=document.getElementById('t15AiResult');
+    box.innerHTML='<b>✅ AI Created Your Poster!</b><br><small style="color:#94a3b8">AI understood: <b style="color:#22d3ee">'+result.detected+'</b><br>Template: '+result.template+' • Colors: '+result.bg1+' + '+result.bg2+' • Font: '+result.font+'<br>Reason: '+result.reason+'</small><br><button onclick="t15AiRedesign()" style="margin-top:6px;background:#7c3aed;border:none;color:#fff;padding:7px 14px;border-radius:20px;font-weight:800;cursor:pointer">🎲 Try Another Design</button>';
+    box.style.display='block';
+    document.getElementById('t15Status').innerText="✅ AI Poster Ready! Check preview - Edit if you want";
+    t15AiCaption();
+  }, 900);
+}
+function t15AiBrain(prompt){
+  // Extract numbers - 50% , 999, etc
+  var numMatch=prompt.match(/(\d+)\s*%/);
+  var priceMatch=prompt.match(/(?:rs\.?|₹)\s*(\d+)/);
+  var off = numMatch ? numMatch[1]+"% OFF" : "50% OFF";
+  var offNum = numMatch ? numMatch[1] : "50";
+  var place="Solapur";
+  if(prompt.indexOf('pune')>-1) place="Pune";
+  else if(prompt.indexOf('mumbai')>-1) place="Mumbai";
+  else if(prompt.indexOf('nashik')>-1) place="Nashik";
+  else if(prompt.indexOf('kolhapur')>-1) place="Kolhapur";
+  var phoneMatch=prompt.match(/(\d{10})/);
+  var phone=phoneMatch ? phoneMatch[1] : "98765 43210";
+  var nameMatch=prompt.match(/(?:for|my)\s+([a-z]+)/);
+  var name = nameMatch ? nameMatch[1] : "";
+  // Category detect
+  if(prompt.indexOf('saree')>-1 || prompt.indexOf('sari')>-1 || prompt.indexOf('dress')>-1 || prompt.indexOf('boutique')>-1 || prompt.indexOf('cloth')>-1){
+    return {detected:"Saree / Dress Shop Sale", template:"Sale", top:"MEGA SALE IS LIVE", title:"SAREE SALE", title2:off, sub:"Beautiful Sarees, Dresses & Kurtis At Unbelievable Prices. New Collection Just Arrived. Visit Today!", bottom:"📞 Call: "+phone+" • 📍 "+place, bg1:"#7c3aed", bg2:"#ef4444", color:"#ffffff", font:"Impact", badge:true, badgeText:off, reason:"Saree shop = Purple-Red gradient grabs attention, Impact font looks like sale poster"};
+  }
+  if(prompt.indexOf('birthday')>-1 || prompt.indexOf('bday')>-1){
+    var person = name ? name.charAt(0).toUpperCase()+name.slice(1) : "My Love";
+    var ageMatch=prompt.match(/(\d+)\s*(?:years|year|yrs)/); var age=ageMatch?ageMatch[1]:"";
+    return {detected:"Birthday Poster for "+person, template:"Birthday", top:"HAPPY BIRTHDAY", title:"HAPPY", title2:"BIRTHDAY "+person.toUpperCase(), sub:(age?"Turning "+age+" Today! ":"")+"Wishing You A Day Full Of Love, Laughter, Cake & Happiness. Have A Wonderful Year Ahead!", bottom:"❤️ With Love From Family • 🎂 Cake Party", bg1:"#ec4899", bg2:"#a855f7", color:"#ffffff", font:"Georgia", badge:true, badgeText:"🎂", reason:"Birthday = Pink-Purple, soft Georgia font feels warm"};
+  }
+  if(prompt.indexOf('gym')>-1 || prompt.indexOf('fitness')>-1 || prompt.indexOf('yoga')>-1){
+    return {detected:"Gym / Fitness Opening", template:"Gym", top:"NO PAIN NO GAIN", title:"JOIN GYM", title2:"FIRST MONTH FREE", sub:"Get Fit, Stay Strong. Modern Equipment, Expert Trainers. Join Today And Transform Your Body!", bottom:"🏋️ Call: "+phone+" • 📍 "+place, bg1:"#111827", bg2:"#ef4444", color:"#facc15", font:"Impact", badge:true, badgeText:"FREE", reason:"Gym = Black-Red looks strong, Yellow title stands out"};
+  }
+  if(prompt.indexOf('wedding')>-1 || prompt.indexOf('marriage')>-1 || prompt.indexOf('shaadi')>-1){
+    return {detected:"Wedding Invitation", template:"Wedding", top:"YOU ARE INVITED", title:"WEDDING", title2:"INVITATION 💍", sub:"Two Hearts, One Love. Join Us To Celebrate Our Special Day. Your Presence Is Our Biggest Gift.", bottom:"💍 Save The Date • 📍 "+place, bg1:"#f59e0b", bg2:"#92400e", color:"#fff7ed", font:"Georgia", badge:false, badgeText:"", reason:"Wedding = Gold gradient looks premium, Georgia feels royal"};
+  }
+  if(prompt.indexOf('food')>-1 || prompt.indexOf('pizza')>-1 || prompt.indexOf('burger')>-1 || prompt.indexOf('restaurant')>-1 || prompt.indexOf('cafe')>-1 || prompt.indexOf('hotel')>-1){
+    return {detected:"Food / Restaurant Offer", template:"Food", top:"TASTY & FRESH", title:"YUMMY FOOD", title2:off, sub:"Hot & Fresh Food At Your Doorstep. Order Now And Enjoy Delicious Taste With Your Family.", bottom:"📞 Order: "+phone+" • Free Delivery in "+place, bg1:"#ef4444", bg2:"#f59e0b", color:"#ffffff", font:"Impact", badge:true, badgeText:off, reason:"Food = Red-Orange makes people hungry, proven in food ads"};
+  }
+  if(prompt.indexOf('beauty')>-1 || prompt.indexOf('salon')>-1 || prompt.indexOf('parlour')>-1 || prompt.indexOf('makeup')>-1){
+    return {detected:"Beauty Salon Offer", template:"Beauty", top:"BEAUTY SALON", title:"GLOW", title2:"LIKE NEVER BEFORE", sub:"Hair • Makeup • Facial • Manicure. Book Your Appointment Today And Feel Beautiful.", bottom:"💅 Call: "+phone+" • 📍 "+place, bg1:"#ec4899", bg2:"#f472b6", color:"#ffffff", font:"Georgia", badge:false, badgeText:"", reason:"Beauty = Pink gradient, soft font"};
+  }
+  if(prompt.indexOf('diwali')>-1 || prompt.indexOf('festival')>-1 || prompt.indexOf('offer')>-1 || prompt.indexOf('sale')>-1){
+    return {detected:"Festival / Sale Offer", template:"Sale", top:"DHAMAKA OFFER", title:"MEGA SALE", title2:off, sub:"Biggest Sale Of The Season! All Items At Best Price. Hurry, Offer Valid For Limited Time Only.", bottom:"📞 Call: "+phone+" • 📍 "+place, bg1:"#f59e0b", bg2:"#ef4444", color:"#ffffff", font:"Impact", badge:true, badgeText:off, reason:"Sale = Orange-Red = Urgency, people click fast"};
+  }
+  if(prompt.indexOf('opening')>-1 || prompt.indexOf('new shop')>-1 || prompt.indexOf('launch')>-1){
+    return {detected:"Shop Opening", template:"Shop", top:"GRAND OPENING", title:"WE ARE OPEN", title2:"VISIT TODAY 🛍️", sub:"We Are Open! Best Collection At Best Price. Come And Celebrate Our Opening With Us.", bottom:"📍 "+place+" • 📞 "+phone, bg1:"#22c55e", bg2:"#0ea5e9", color:"#ffffff", font:"Impact", badge:true, badgeText:"NEW", reason:"Opening = Green-Blue = Fresh, New feeling"};
+  }
+  // Default - Use prompt words as title
+  var clean=prompt.replace(/[^a-z0-9 ]/gi,'').trim().split(' ').slice(0,3).join(' ').toUpperCase() || "YOUR POSTER";
+  return {detected:"Custom Poster - "+prompt.slice(0,40), template:"Custom", top:"SPECIAL POSTER", title:clean, title2:"CHECK IT OUT", sub:"This Is A Special Poster Made Just For You. Contact Us For More Details.", bottom:"📞 Call: "+phone+" • 📍 "+place, bg1:"#2563eb", bg2:"#22d3ee", color:"#ffffff", font:"Arial", badge:false, badgeText:"", reason:"Custom = Blue-Cyan, clean and professional"};
+}
+function t15AiWriteHeadlines(){
+  var title=document.getElementById('t15Title').value||"Sale";
+  var tone=document.getElementById('t15AiTone').value||"sale";
+  var base=title.toUpperCase();
+  var lists={
+    sale:["🔥 "+base+" - DON'T MISS THIS!", "⚡ "+base+" - TODAY ONLY!", "💰 "+base+" - SAVE BIG TODAY!", "🎉 MEGA "+base+" - LIMITED TIME!", "🚨 HURRY! "+base+" ENDS SOON!"],
+    fun:["😄 "+base+" - FUN STARTS HERE!", "🎉 "+base+" - LET'S CELEBRATE!", "🥳 "+base+" - HAPPY VIBES ONLY!", "✨ "+base+" - SOMETHING SPECIAL!", "💃 "+base+" - JOIN THE FUN!"],
+    premium:["💎 "+base+" - LUXURY REDEFINED", "✨ "+base+" - PREMIUM EXPERIENCE", "👑 "+base+" - FOR THOSE WHO DESERVE BEST", "🌟 "+base+" - ELEGANCE MEETS STYLE", "💎 "+base+" - EXCLUSIVE COLLECTION"],
+    emotional:["❤️ "+base+" - MADE WITH LOVE", "🥺 "+base+" - FOR YOU, WITH LOVE", "💖 "+base+" - BECAUSE YOU MATTER", "🤗 "+base+" - TOGETHER FOREVER", "❤️ "+base+" - FROM OUR HEART"],
+    short:["🔥 "+base, "⚡ "+base+"!", "✨ "+base, "🎯 "+base, "💥 "+base+"!"]
+  };
+  var arr=lists[tone]||lists['sale'];
+  var html="";
+  arr.forEach(function(h,idx){
+    html+='<div style="display:flex;gap:8px;align-items:center;background:#0a1224;border:1px solid #2a3a6a;border-radius:10px;padding:10px;margin-top:6px"><span style="flex:1;font-size:13px;font-weight:700">'+h+'</span><button onclick="t15UseHeadline(\''+h.replace(/'/g,"\\'")+'\')" style="background:#22c55e;border:none;color:#fff;padding:8px 14px;border-radius:20px;font-weight:800;cursor:pointer;font-size:11px">Use This ✅</button></div>';
+  });
+  document.getElementById('t15HeadlineList').innerHTML=html;
+  document.getElementById('t15HeadlineEmpty').style.display='none';
+}
+function t15UseHeadline(h){
+  // Remove emoji for title, keep clean
+  var clean=h.replace(/[🔥⚡💰🎉🚨😄🥳✨💃💎👑🌟❤️🥺💖🤗🎯💥]/g,'').trim();
+  var parts=clean.split(' - ');
+  document.getElementById('t15Title').value=parts[0]||clean;
+  if(parts[1]) document.getElementById('t15Title2').value=parts[1];
+  t15UpdatePreview();
+  document.getElementById('t15Status').innerText="✅ Headline Applied: "+clean;
+}
+function t15AiImproveText(){
+  var sub=document.getElementById('t15Subtitle').value||"";
+  if(!sub) return alert("First write subtitle!");
+  var improved=sub.trim();
+  // Simple improve - Capitalize, add power words
+  improved=improved.charAt(0).toUpperCase()+improved.slice(1);
+  if(improved.indexOf('!')===-1) improved+=" Don't Miss This!";
+  if(improved.indexOf('Visit')===-1 && improved.indexOf('Call')===-1) improved+=" Visit Today!";
+  document.getElementById('t15Subtitle').value=improved;
+  t15UpdatePreview();
+  document.getElementById('t15Status').innerText="✅ AI Improved Your Text - Added power words";
+}
+function t15AiTranslate(){
+  var title=document.getElementById('t15Title').value||"";
+  var map={'BIG SALE':'BADI SALE','HAPPY BIRTHDAY':'HAPPY BIRTHDAY','WEDDING':'SHADI','JOIN GYM':'GYM JOIN KARO','MEGA SALE':'MEGA SALE'};
+  if(map[title.toUpperCase()]) document.getElementById('t15Title').value=map[title.toUpperCase()];
+  var sub=document.getElementById('t15Subtitle').value||"";
+  sub=sub.replace(/Visit Today/gi,'Aaj Hi Aao').replace(/Call:/gi,'Call Karo:').replace(/Limited Time/gi,'Limited Time Offer');
+  document.getElementById('t15Subtitle').value=sub;
+  t15UpdatePreview();
+  document.getElementById('t15Status').innerText="✅ Made It Hinglish - Mixed Hindi + English";
+}
+function t15AiFont(){
+  var title=(document.getElementById('t15Title').value||"").toLowerCase();
+  var font="Arial";
+  if(title.indexOf('sale')>-1||title.indexOf('off')>-1||title.indexOf('gym')>-1) font="Impact";
+  else if(title.indexOf('wedding')>-1||title.indexOf('birthday')>-1) font="Georgia";
+  else if(title.indexOf('quote')>-1||title.indexOf('believe')>-1) font="Times New Roman";
+  else font="Arial";
+  document.getElementById('t15Font').value=font;
+  t15UpdatePreview();
+  document.getElementById('t15Status').innerText="🤖 AI Picked Font: "+font+" - Best for your text";
+}
+function t15AiColor(){
+  var title=(document.getElementById('t15Title').value||"").toLowerCase();
+  if(title.indexOf('sale')>-1||title.indexOf('off')>-1) t15SetGradient('#ef4444','#f59e0b');
+  else if(title.indexOf('birthday')>-1) t15SetGradient('#ec4899','#a855f7');
+  else if(title.indexOf('wedding')>-1) t15SetGradient('#f59e0b','#92400e');
+  else if(title.indexOf('gym')>-1) t15SetGradient('#111827','#ef4444');
+  else t15SetGradient('#2563eb','#22d3ee');
+  document.getElementById('t15Status').innerText="🎨 AI Picked Best Colors For Your Text";
+}
+function t15AiBackground(){ t15AiColor(); }
+function t15AiCaption(){
+  var title=document.getElementById('t15Title').value||"Sale";
+  var sub=document.getElementById('t15Subtitle').value||"";
+  var bottom=document.getElementById('t15Bottom').value||"";
+  var cap="🔥 "+title+" "+(document.getElementById('t15Title2').value||"")+"\n\n"+sub+"\n\n"+bottom+"\n\n✨ Don't miss this amazing offer! Share with your friends & family.\n\n#Orbittroniz #Solapur #Sale #Offer #Shopping #NewCollection #BestDeal #MustVisit #SupportLocal #ShopNow";
+  t15LastCaption=cap;
+  document.getElementById('t15CaptionBox').innerText=cap;
+  document.getElementById('t15Status').innerText="✅ AI Caption Ready - Copy karke Instagram pe daalo";
+}
+function t15CopyCaption(){
+  if(!t15LastCaption) t15AiCaption();
+  if(navigator.clipboard) navigator.clipboard.writeText(t15LastCaption).then(function(){ document.getElementById('t15Status').innerText="✅ Caption Copied - Paste on Instagram!"; }).catch(function(){ alert(t15LastCaption); });
+  else alert(t15LastCaption);
+}
+function t15AiScore(){
+  var title=document.getElementById('t15Title').value||"";
+  var sub=document.getElementById('t15Subtitle').value||"";
+  var bottom=document.getElementById('t15Bottom').value||"";
+  var score=60, tips=[];
+  if(title.length>=3 && title.length<=20){ score+=15; } else if(title.length>20){ score-=10; tips.push("⚠️ Title is too long - Make it short (under 20 letters) for big impact"); } else { tips.push("⚠️ Title is too short - Add more words"); }
+  if(sub.length>20){ score+=10; } else { tips.push("⚠️ Subtitle is too short - Add details like price, date, offer"); }
+  if(bottom.indexOf('Call')>-1 || bottom.indexOf('📞')>-1){ score+=10; } else { tips.push("⚠️ Add phone number in bottom - Customer cannot contact you"); }
+  if(document.getElementById('t15BadgeOn').checked){ score+=5; } else { tips.push("💡 Add Price Badge - Posters with badge get more clicks"); }
+  if(document.getElementById('t15Decor').checked){ score+=5; } else { tips.push("💡 Turn ON Decorations - Makes poster look festive"); }
+  if(score>95) score=95;
+  var box=document.getElementById('t15AiScoreBox');
+  var color=score>=85?"#22c55e":score>=70?"#f59e0b":"#ef4444";
+  box.innerHTML='<b style="font-size:16px;color:'+color+'">⭐ AI Design Score: '+score+' / 100</b><br><div style="height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:6px"><div style="height:100%;background:'+color+';width:'+score+'%"></div></div><div style="margin-top:8px;font-size:12px;color:#fff;line-height:1.6">'+(tips.length? tips.join('<br>') : '✅ Perfect Poster! Title is short, subtitle has details, phone number is there, badge is ON. Ready to post! 🎉')+'</div><button onclick="t15AiFixScore()" style="margin-top:8px;background:#22c55e;border:none;color:#fff;padding:9px 16px;border-radius:20px;font-weight:800;cursor:pointer">🤖 AI Fix All Issues</button>';
+  box.style.display='block';
+  document.getElementById('t15Status').innerText="⭐ AI Score: "+score+"/100 - Check tips above";
+}
+function t15AiFixScore(){
+  if(!document.getElementById('t15BadgeOn').checked){ document.getElementById('t15BadgeOn').checked=true; document.getElementById('t15BadgeBox').style.display='block'; }
+  if(!document.getElementById('t15Decor').checked) document.getElementById('t15Decor').checked=true;
+  var bottom=document.getElementById('t15Bottom').value||"";
+  if(bottom.indexOf('Call')===-1 && bottom.indexOf('📞')===-1) document.getElementById('t15Bottom').value="📞 Call: 98765 43210 • "+bottom;
+  t15UpdatePreview(); t15AiScore();
+  document.getElementById('t15Status').innerText="✅ AI Fixed All Issues - Score improved!";
+}
+function t15AiRedesign(){
+  var templates=['sale','birthday','wedding','gym','food','festival'];
+  var cur=document.getElementById('t15Title').value||"";
+  var next=templates[Math.floor(Math.random()*templates.length)];
+  // Keep user's title, change only design
+  var oldTitle=document.getElementById('t15Title').value, oldTitle2=document.getElementById('t15Title2').value, oldSub=document.getElementById('t15Subtitle').value, oldBottom=document.getElementById('t15Bottom').value;
+  t15SetTemplate(next);
+  document.getElementById('t15Title').value=oldTitle; document.getElementById('t15Title2').value=oldTitle2; document.getElementById('t15Subtitle').value=oldSub; document.getElementById('t15Bottom').value=oldBottom;
+  t15ShuffleDesign();
+  t15UpdatePreview();
+  document.getElementById('t15Status').innerText="🤖 AI Re-Design Done! New colors + font - Your text is same";
+}
+function t15SetTemplate(name){
+  var data={
+    sale:{top:"MEGA SALE IS LIVE", title:"BIG SALE", title2:"50% OFF", sub:"All Dresses, Sarees & Kurtis On Sale. Visit Today! Limited Time Offer.", bottom:"📞 Call: 98765 43210 • 📍 Solapur", bg1:"#7c3aed", bg2:"#ef4444", color:"#ffffff", badge:true, badgeText:"50% OFF"},
+    offer:{top:"SPECIAL OFFER", title:"BUY 1 GET 1", title2:"FREE", sub:"Buy Any 1 Dress, Get 1 Absolutely FREE. Offer Valid Till Sunday.", bottom:"📞 Call: 98765 43210 • Visit Our Shop", bg1:"#f59e0b", bg2:"#ef4444", color:"#ffffff", badge:true, badgeText:"BOGO"},
+    motivation:{top:"DAILY MOTIVATION", title:"NEVER GIVE UP", title2:"YOU CAN DO IT", sub:"Success comes to those who never stop trying. Keep going, your time will come.", bottom:"✨ Orbittroniz • Stay Positive", bg1:"#0f172a", bg2:"#2563eb", color:"#facc15", badge:false},
+    birthday:{top:"HAPPY BIRTHDAY", title:"HAPPY", title2:"BIRTHDAY 🎂", sub:"Wishing You A Day Full Of Love, Laughter & Happiness. Have A Wonderful Year Ahead!", bottom:"❤️ From Your Family & Friends", bg1:"#ec4899", bg2:"#a855f7", color:"#ffffff", badge:true, badgeText:"🎂"},
+    wedding:{top:"YOU ARE INVITED", title:"WEDDING", title2:"INVITATION 💍", sub:"Rahul Weds Priya • 15th December 2026 • Solapur. Join Us To Celebrate Love.", bottom:"💍 Save The Date • 15 Dec 2026", bg1:"#f59e0b", bg2:"#92400e", color:"#fff7ed", badge:false},
+    shop:{top:"GRAND OPENING", title:"NEW SHOP", title2:"OPEN NOW 🛍️", sub:"We Are Open! Visit Our New Shop For Best Collection At Best Price.", bottom:"📍 Main Road, Solapur • 📞 98765 43210", bg1:"#22c55e", bg2:"#0ea5e9", color:"#ffffff", badge:true, badgeText:"NEW"},
+    festival:{top:"HAPPY DIWALI 🪔", title:"DIWALI", title2:"DHAMAKA OFFER", sub:"Celebrate Diwali With Big Discounts. Upto 60% OFF On All Items.", bottom:"🪔 Happy Diwali From Orbittroniz", bg1:"#f97316", bg2:"#7c2d12", color:"#facc15", badge:true, badgeText:"60% OFF"},
+    food:{top:"TASTY & FRESH", title:"YUMMY", title2:"FOOD 🍔", sub:"Hot & Fresh Food At Your Doorstep. Order Now, Get 20% OFF On First Order.", bottom:"📞 Order: 98765 43210 • Free Delivery", bg1:"#ef4444", bg2:"#f59e0b", color:"#ffffff", badge:true, badgeText:"20% OFF"},
+    gym:{top:"NO PAIN NO GAIN", title:"JOIN GYM", title2:"TODAY 🏋️", sub:"Get Fit, Stay Strong. Monthly Plan Starting At Just ₹999. Join Now!", bottom:"🏋️ Call: 98765 43210 • Solapur Gym", bg1:"#111827", bg2:"#ef4444", color:"#facc15", badge:true, badgeText:"₹999"}
+  };
+  var d=data[name]||data['sale'];
+  document.getElementById('t15TopText').value=d.top; document.getElementById('t15Title').value=d.title; document.getElementById('t15Title2').value=d.title2; document.getElementById('t15Subtitle').value=d.sub; document.getElementById('t15Bottom').value=d.bottom; document.getElementById('t15Bg1').value=d.bg1; document.getElementById('t15Bg2').value=d.bg2; document.getElementById('t15TitleColor').value=d.color; document.getElementById('t15BadgeOn').checked=d.badge; document.getElementById('t15BadgeBox').style.display=d.badge?'block':'none'; if(d.badge) document.getElementById('t15BadgeText').value=d.badgeText;
+  t15SetBg('gradient', document.querySelector('#t15BgModes button[data-bg="gradient"]')); t15UpdatePreview();
+  document.getElementById('t15Status').innerText="✅ Template: "+name;
+}
+function t15SetTitleColor(c){ document.getElementById('t15TitleColor').value=c; t15UpdatePreview(); }
+function t15SetTextStyle(s,btn){ t15TextStyle=s; document.querySelectorAll('#t15TextStyleModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); t15UpdatePreview(); }
+function t15SetBg(b,btn){ t15Bg=b; document.querySelectorAll('#t15BgModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); document.getElementById('t15BgGradientBox').style.display=(b==='gradient'||b==='solid'||b==='pattern')?'block':'none'; document.getElementById('t15BgPhotoBox').style.display=b==='photo'?'block':'none'; if(b==='photo' && !t15BgImg) document.getElementById('t15BgFile').click(); t15UpdatePreview(); }
+function t15SetGradient(c1,c2){ document.getElementById('t15Bg1').value=c1; document.getElementById('t15Bg2').value=c2; t15UpdatePreview(); }
+function t15OnBgSelect(input){ if(!input.files||!input.files[0]) return; var img=new Image(); img.onload=function(){ t15BgImg=img; document.getElementById('t15BgInfo').innerText="✅ Background: "+input.files[0].name; t15UpdatePreview(); }; img.src=URL.createObjectURL(input.files[0]); input.value=""; }
+function t15SetSize(s,btn){ t15Size=s; document.querySelectorAll('#t15SizeModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); document.getElementById('t15CustomSizeBox').style.display=s==='custom'?'block':'none'; t15UpdatePreview(); }
+function t15ApplyCustomSize(){ var w=parseInt(document.getElementById('t15CustomW').value||1080), h=parseInt(document.getElementById('t15CustomH').value||1080); if(!w||!h) return alert("Enter width and height!"); t15CustomSize={w:w,h:h}; t15UpdatePreview(); }
+function t15SetFmt(f,btn){ t15Fmt=f; document.querySelectorAll('#t15FmtModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); }
+function t15GetSize(){ if(t15Size==='custom' && t15CustomSize) return t15CustomSize; var p=t15Size.split('x'); return {w:parseInt(p[0])||1080, h:parseInt(p[1])||1080}; }
+function t15ShuffleDesign(){ var h1=Math.floor(Math.random()*360), h2=(h1+120)%360; function hsl(h){ var s=80,l=55; h=h/360; var q=l<0.5?l*(1+s/100):l+s/100-l*s/100; var p=2*l-q; function hue(p,q,t){ if(t<0)t+=1; if(t>1)t-=1; if(t<1/6)return p+(q-p)*6*t; if(t<1/2)return q; if(t<2/3)return p+(q-p)*(2/3-t)*6; return p; } var r=hue(p,q,h+1/3), g=hue(p,q,h), b=hue(p,q,h-1/3); function toHex(v){ var hex=Math.round(v*255).toString(16); return hex.length===1?'0'+hex:hex; } return '#'+toHex(r)+toHex(g)+toHex(b); } document.getElementById('t15Bg1').value=hsl(h1); document.getElementById('t15Bg2').value=hsl(h2); var fonts=['Arial','Impact','Georgia','Times New Roman','Verdana']; document.getElementById('t15Font').value=fonts[Math.floor(Math.random()*fonts.length)]; t15UpdatePreview(); }
+function t15RunAiDebounced(){ if(t15AiDebounce) clearTimeout(t15AiDebounce); t15AiDebounce=setTimeout(function(){ t15RunAi(); }, 900); }
+function t15RunAi(){
+  if(t15Mode!=='auto') return;
+  var title=(document.getElementById('t15Title').value||"").toLowerCase();
+  var suggest=null;
+  if(title.indexOf('sale')>-1||title.indexOf('off')>-1) suggest={label:"🔥 AI: SALE poster", desc:"Red + Yellow gets more clicks for sale", action:"sale"};
+  else if(title.indexOf('birthday')>-1) suggest={label:"🎂 AI: BIRTHDAY poster", desc:"Pink + Purple is best", action:"birthday"};
+  else if(title.indexOf('wedding')>-1) suggest={label:"💍 AI: WEDDING poster", desc:"Gold looks premium", action:"wedding"};
+  else if(title.indexOf('gym')>-1) suggest={label:"🏋️ AI: GYM poster", desc:"Black + Red is strong", action:"gym"};
+  else return;
+  var box=document.getElementById('t15AiBox');
+  box.innerHTML='<div style="background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(34,211,238,.2));border:1px solid #a78bfa;border-radius:12px;padding:12px;margin-top:10px;text-align:center"><b>'+suggest.label+'</b><br><small style="color:#94a3b8">'+suggest.desc+'</small><br><button onclick="t15AiApply(\''+suggest.action+'\')" style="margin-top:8px;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:9px 18px;border-radius:20px;font-weight:800;cursor:pointer">Apply AI Design ✨</button></div>';
+  box.style.display='block';
+}
+function t15AiApply(action){ if(action==='sale') t15SetGradient('#ef4444','#f59e0b'); else if(action==='birthday') t15SetGradient('#ec4899','#a855f7'); else if(action==='wedding') t15SetGradient('#f59e0b','#92400e'); else if(action==='gym') t15SetGradient('#111827','#ef4444'); document.getElementById('t15Status').innerText="✨ AI Design Applied"; }
+function t15WrapText(ctx, text, maxWidth){ var words=text.split(' '); var lines=[]; var line=''; for(var i=0;i<words.length;i++){ var test=line?line+' '+words[i]:words[i]; if(ctx.measureText(test).width>maxWidth && line){ lines.push(line); line=words[i]; } else { line=test; } } if(line) lines.push(line); return lines; }
+function t15DrawPoster(ctx, W, H){
+  var top=document.getElementById('t15TopText').value||"";
+  var title=document.getElementById('t15Title').value||"YOUR TITLE";
+  var title2=document.getElementById('t15Title2').value||"";
+  var sub=document.getElementById('t15Subtitle').value||"";
+  var bottom=document.getElementById('t15Bottom').value||"";
+  var font=document.getElementById('t15Font').value||"Arial";
+  var align='center';
+  var titleColor=document.getElementById('t15TitleColor').value||"#ffffff";
+  var titleSize=parseInt(document.getElementById('t15TitleSize').value||110);
+  var spacing=parseInt(document.getElementById('t15Spacing')?document.getElementById('t15Spacing').value||2:2);
+  var bg1=document.getElementById('t15Bg1').value||"#7c3aed";
+  var bg2=document.getElementById('t15Bg2').value||"#ef4444";
+  var textBg=document.getElementById('t15TextBg').checked;
+  var decor=document.getElementById('t15Decor').checked;
+  var borderOn=document.getElementById('t15BorderOn').checked;
+  var badgeOn=document.getElementById('t15BadgeOn').checked;
+  var badgeText=document.getElementById('t15BadgeText').value||"50% OFF";
+  var aiLayout=document.getElementById('t15AiLayout') ? document.getElementById('t15AiLayout').checked : true;
+  var scale=W/1080;
+  var ts=titleSize*scale;
+  if(H>1500) ts=ts*0.9;
+  // AI Smart Layout - If title is long, auto shrink font so it never goes out
+  if(aiLayout){
+    var totalLen=title.length+title2.length;
+    if(totalLen>30) ts=ts*0.75;
+    else if(totalLen>20) ts=ts*0.85;
+  }
+  if(t15Bg==='photo' && t15BgImg){
+    var ir=t15BgImg.width/t15BgImg.height, br=W/H; var sx=0, sy=0, sw=t15BgImg.width, sh=t15BgImg.height;
+    if(ir>br){ sw=t15BgImg.height*br; sx=(t15BgImg.width-sw)/2; } else { sh=t15BgImg.width/br; sy=(t15BgImg.height-sh)/2; }
+    ctx.drawImage(t15BgImg, sx,sy,sw,sh, 0,0,W,H);
+    var overlay=parseInt(document.getElementById('t15Overlay').value||50)/100; ctx.fillStyle='rgba(0,0,0,'+overlay+')'; ctx.fillRect(0,0,W,H);
+  } else if(t15Bg==='solid'){ ctx.fillStyle=bg1; ctx.fillRect(0,0,W,H); }
+  else if(t15Bg==='pattern'){ ctx.fillStyle=bg1; ctx.fillRect(0,0,W,H); ctx.fillStyle='rgba(255,255,255,0.08)'; for(var y=20*scale;y<H;y+=60*scale){ for(var x=20*scale;x<W;x+=60*scale){ ctx.beginPath(); ctx.arc(x,y,6*scale,0,Math.PI*2); ctx.fill(); } } }
+  else { var grad=ctx.createLinearGradient(0,0,W,H); grad.addColorStop(0,bg1); grad.addColorStop(1,bg2); ctx.fillStyle=grad; ctx.fillRect(0,0,W,H); }
+  if(borderOn){ ctx.strokeStyle='rgba(255,255,255,0.9)'; ctx.lineWidth=8*scale; ctx.strokeRect(20*scale,20*scale,W-40*scale,H-40*scale); ctx.strokeStyle='rgba(255,255,255,0.4)'; ctx.lineWidth=2*scale; ctx.strokeRect(35*scale,35*scale,W-70*scale,H-70*scale); }
+  if(decor){ ctx.font=Math.round(40*scale)+"px Arial"; ctx.textAlign='center'; ctx.fillText("✨ ⭐ ✨", W/2, 70*scale); }
+  var cx=W/2; ctx.textAlign='center'; ctx.textBaseline='middle';
+  var curY=H*0.18;
+  if(top){ ctx.font="bold "+Math.round(28*scale)+"px "+font+", Arial"; ctx.fillStyle='rgba(255,255,255,0.9)'; if(textBg){ var tw=ctx.measureText(top).width; ctx.fillStyle='rgba(0,0,0,0.35)'; ctx.fillRect(cx-tw/2-20*scale, curY-25*scale, tw+40*scale, 50*scale); ctx.fillStyle='#ffffff'; } ctx.fillText(top, cx, curY); curY+=60*scale; }
+  ctx.font="900 "+Math.round(ts)+"px "+font+", Arial";
+  var titleLines=t15WrapText(ctx, title, W-140*scale);
+  while(titleLines.length>2 && ts>50){ ts-=10; ctx.font="900 "+Math.round(ts)+"px "+font+", Arial"; titleLines=t15WrapText(ctx, title, W-140*scale); }
+  var titleH=titleLines.length*ts*1.05; var titleY=curY+titleH/2;
+  titleLines.forEach(function(line, idx){ var ly=titleY + (idx - (titleLines.length-1)/2)*ts*1.05; t15DrawStyledText(ctx, line, cx, ly, titleColor, ts, font, align); });
+  curY+=titleH+20*scale;
+  if(title2){ var ts2=ts*0.75; ctx.font="900 "+Math.round(ts2)+"px "+font+", Arial"; var t2Lines=t15WrapText(ctx, title2, W-140*scale); var t2Y=curY+ts2/2; t2Lines.forEach(function(line, idx){ var ly=t2Y + (idx - (t2Lines.length-1)/2)*ts2*1.1; var c2=titleColor.toLowerCase()==='#ffffff'?'#facc15':'#ffffff'; t15DrawStyledText(ctx, line, cx, ly, c2, ts2, font, align); }); curY+=t2Lines.length*ts2*1.1+20*scale; }
+  ctx.fillStyle='rgba(255,255,255,0.6)'; ctx.fillRect(cx-60*scale, curY, 120*scale, 4*scale); curY+=40*scale;
+  if(sub){ ctx.font=Math.round(30*scale)+"px "+font+", Arial"; var subLines=t15WrapText(ctx, sub, W-180*scale).slice(0,4); subLines.forEach(function(line, idx){ ctx.fillStyle='rgba(255,255,255,0.95)'; ctx.fillText(line, cx, curY+idx*42*scale); }); curY+=subLines.length*42*scale+30*scale; }
+  if(bottom){ ctx.font="bold "+Math.round(26*scale)+"px Arial"; var bw=ctx.measureText(bottom).width+60*scale; var bx2=cx-bw/2; var by=H-90*scale; ctx.fillStyle='rgba(0,0,0,0.45)'; var r=30*scale; ctx.beginPath(); ctx.moveTo(bx2+r,by-30*scale); ctx.arcTo(bx2+bw,by-30*scale,bx2+bw,by+30*scale,r); ctx.arcTo(bx2+bw,by+30*scale,bx2,by+30*scale,r); ctx.arcTo(bx2,by+30*scale,bx2,by-30*scale,r); ctx.arcTo(bx2,by-30*scale,bx2+bw,by-30*scale,r); ctx.closePath(); ctx.fill(); ctx.fillStyle='#ffffff'; ctx.fillText(bottom, cx, by); }
+  if(badgeOn){ var bx3=W-110*scale, by3=110*scale, br=85*scale; ctx.save(); ctx.translate(bx3,by3); ctx.rotate(-12*Math.PI/180); ctx.fillStyle='#facc15'; ctx.beginPath(); ctx.arc(0,0,br,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='#fff'; ctx.lineWidth=4*scale; ctx.stroke(); ctx.fillStyle='#000'; ctx.font="900 "+Math.round(28*scale)+"px Arial"; ctx.textAlign='center'; var badgeLines=t15WrapText(ctx, badgeText, br*1.6); badgeLines.slice(0,2).forEach(function(line,i){ ctx.fillText(line, 0, (i-0.5)*32*scale); }); ctx.restore(); }
+  if(decor){ ctx.font=Math.round(32*scale)+"px Arial"; ctx.textAlign='center'; ctx.fillStyle='rgba(255,255,255,0.7)'; ctx.fillText("✦  ✦  ✦", W/2, H-30*scale); }
+}
+function t15DrawStyledText(ctx, text, x, y, color, size, font, align){
+  ctx.save(); ctx.font="900 "+Math.round(size)+"px "+font+", Arial"; ctx.textAlign=align; ctx.textBaseline='middle';
+  if(t15TextStyle==='shadow'){ ctx.fillStyle='rgba(0,0,0,0.6)'; ctx.fillText(text, x+4, y+4); ctx.fillStyle=color; ctx.fillText(text, x, y); }
+  else if(t15TextStyle==='outline'){ ctx.strokeStyle='rgba(0,0,0,0.9)'; ctx.lineWidth=Math.max(2, size*0.08); ctx.strokeText(text, x, y); ctx.fillStyle=color; ctx.fillText(text, x, y); }
+  else if(t15TextStyle==='gradient'){ var g=ctx.createLinearGradient(x-200,y,x+200,y); g.addColorStop(0,'#facc15'); g.addColorStop(0.5,'#ffffff'); g.addColorStop(1,'#22d3ee'); ctx.fillStyle=g; ctx.fillText(text, x, y); }
+  else { ctx.shadowColor='rgba(0,0,0,0.4)'; ctx.shadowBlur=8; ctx.shadowOffsetY=3; ctx.fillStyle=color; ctx.fillText(text, x, y); ctx.shadowBlur=0; ctx.shadowOffsetY=0; }
+  ctx.restore();
+}
+function t15UpdatePreview(){
+  var sz=t15GetSize(); if(!sz.w||!sz.h) return;
+  var canvas=document.getElementById('t15PreviewCanvas');
+  var scale=Math.min(1, 500/Math.max(sz.w,sz.h));
+  canvas.width=Math.round(sz.w*scale); canvas.height=Math.round(sz.h*scale);
+  var ctx=canvas.getContext('2d');
+  var full=document.createElement('canvas'); full.width=sz.w; full.height=sz.h; var fctx=full.getContext('2d'); t15DrawPoster(fctx, sz.w, sz.h);
+  ctx.drawImage(full,0,0,canvas.width,canvas.height);
+  document.getElementById('t15PreviewInfo').innerText="Poster: "+sz.w+" x "+sz.h+" • "+(document.getElementById('t15Title').value||"");
+  document.getElementById('t15Stats').innerText="Poster: "+sz.w+" x "+sz.h+" • Font: "+document.getElementById('t15Font').value;
+}
+function t15Download(){
+  var sz=t15GetSize(); var canvas=document.createElement('canvas'); canvas.width=sz.w; canvas.height=sz.h; var ctx=canvas.getContext('2d'); t15DrawPoster(ctx, sz.w, sz.h);
+  var mime=t15Fmt==='png'?'image/png':t15Fmt==='webp'?'image/webp':'image/jpeg'; var ext=t15Fmt==='png'?'png':t15Fmt==='webp'?'webp':'jpg';
+  canvas.toBlob(function(blob){
+    if(!blob){ alert("Download failed - Try again"); return; }
+    var prefix=(document.getElementById('t15Prefix').value.trim()||"Poster - Orbittroniz").replace(/[\\/:*?"<>|]/g,'');
+    var title=(document.getElementById('t15Title').value||"Poster").replace(/[\\/:*?"<>|]/g,'').slice(0,30);
+    var fname=prefix+" - "+title+" - "+sz.w+"x"+sz.h+"."+ext; var url=URL.createObjectURL(blob);
+    var a=document.createElement('a'); a.href=url; a.download=fname; document.body.appendChild(a); a.click(); a.remove();
+    t15Results.push({blob:blob,name:fname,url:url,w:sz.w,h:sz.h}); t15RenderResults();
+    document.getElementById('t15Status').innerText="✅ Poster Downloaded! "+sz.w+"x"+sz.h+" • "+(blob.size/1024).toFixed(0)+" KB";
+  }, mime, t15Fmt==='png'?1:0.92);
+}
+function t15DownloadVariation(){
+  // AI will make 3 different designs - Download one by one
+  var oldBg1=document.getElementById('t15Bg1').value, oldBg2=document.getElementById('t15Bg2').value, oldFont=document.getElementById('t15Font').value;
+  var variations=[['#ef4444','#f59e0b','Impact'], ['#2563eb','#22d3ee','Georgia'], ['#111827','#facc15','Arial']];
+  var i=0;
+  function next(){
+    if(i>=variations.length){ document.getElementById('t15Bg1').value=oldBg1; document.getElementById('t15Bg2').value=oldBg2; document.getElementById('t15Font').value=oldFont; t15UpdatePreview(); document.getElementById('t15Status').innerText="✅ 3 Variations Downloaded! Choose best one"; return; }
+    document.getElementById('t15Bg1').value=variations[i][0]; document.getElementById('t15Bg2').value=variations[i][1]; document.getElementById('t15Font').value=variations[i][2];
+    t15UpdatePreview();
+    setTimeout(function(){ t15Download(); i++; setTimeout(next, 800); }, 300);
+  }
+  next();
+}
+function t15RenderResults(){
+  var out=document.getElementById('t15Out'); out.innerHTML=""; if(!t15Results.length){ document.getElementById('t15OutEmpty').style.display='block'; return; } document.getElementById('t15OutEmpty').style.display='none';
+  t15Results.forEach(function(r,idx){ var card=document.createElement('div'); card.className='t15-imgcard'; card.innerHTML='<img src="'+r.url+'"><div style="padding:8px;text-align:center"><b style="font-size:11px">'+r.name+'</b><br><small style="color:#22c55e">'+r.w+'x'+r.h+' • Poster ✅</small><div style="display:flex;gap:4px;margin-top:6px"><button onclick="t15DownloadOne('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">⬇️ Download</button><button onclick="t15ShareOne('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">📤 Share</button></div></div>'; out.appendChild(card); });
+}
+function t15DownloadOne(i){ if(!t15Results[i]) return; var r=t15Results[i]; var a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }
+async function t15ShareOne(i){ if(!t15Results[i]) return; try{ var r=t15Results[i]; var file=new File([r.blob],r.name,{type:r.blob.type}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:r.name}); } }catch(e){} }
+async function t15Share(){ if(!t15Results.length){ t15Download(); setTimeout(function(){ if(t15Results.length) t15ShareOne(0); }, 600); return; } await t15ShareOne(t15Results.length-1); }
+function t15OpenPreview(){ var sz=t15GetSize(); var mc=document.getElementById('t15ModalCanvas'); mc.width=sz.w; mc.height=sz.h; var ctx=mc.getContext('2d'); t15DrawPoster(ctx, sz.w, sz.h); document.getElementById('t15ModalTitle').innerText="Poster Preview - "+sz.w+"x"+sz.h; document.getElementById('t15ModalCap').innerText=document.getElementById('t15Title').value+" • "+document.getElementById('t15Subtitle').value; document.getElementById('t15Modal').style.display='flex'; }
+function t15ClosePreview(){ document.getElementById('t15Modal').style.display='none'; }
+function t15Reset(){ document.getElementById('t15AiPrompt').value="Sale for saree shop, 50% off, in Solapur"; document.getElementById('t15TopText').value="GRAND OPENING"; document.getElementById('t15Title').value="BIG SALE"; document.getElementById('t15Title2').value="50% OFF"; document.getElementById('t15Subtitle').value="All Dresses, Sarees & Kurtis On Sale. Visit Today!"; document.getElementById('t15Bottom').value="📞 Call: 98765 43210 • 📍 Solapur"; t15BgImg=null; t15Results=[]; document.getElementById('t15Out').innerHTML=""; document.getElementById('t15OutEmpty').style.display='block'; document.getElementById('t15Status').innerText=""; document.getElementById('t15AiResult').style.display='none'; document.getElementById('t15AiScoreBox').style.display='none'; t15UpdatePreview(); }
+t15SetTemplate('sale'); t15UpdatePreview();
+</script>
+<!-- ================= TOOL 15 AI V2 - END ================= -->  
 
 <!-- TOOL 16 -->
 <div class="tool" id="tool-16"><div class="panel"><h3>🎯 Tool 16 - Logo Maker</h3>
