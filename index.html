@@ -970,162 +970,112 @@ document.getElementById('s6').innerText="BizCard Updated";
 preview6();
 </script>
 <!-- TOOL 6 - BIZCARD MAKER - END -->
-<!-- TOOL 7 - LOGO MAKER - START -->
-<div id="t7" style="background:#121d3a;border:1px solid #1e2d5a;border-radius:16px;padding:14px;color:#fff;font-family:system-ui">
-<h3 style="margin:0;text-align:center">🎨 Logo Maker Pro</h3>
-<p style="font-size:11px;color:#94a3b8;text-align:center">Shop Logo - For Board, WhatsApp DP, Bill, Card</p>
+<!-- LOGO WITHOUT API - PURE CANVAS - START -->
+<div style="background:#121d3a;border:1px solid #1e2d5a;border-radius:16px;padding:14px;color:#fff;font-family:system-ui">
+<h3 style="margin:0;text-align:center">🎨 Logo Maker - WITHOUT API</h3>
+<p style="font-size:11px;color:#94a3b8;text-align:center">No API - No Internet Needed - Browser Draws Logo</p>
 
-<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">BUSINESS NAME</label>
-<input type="text" id="biz7" value="Sharma Jewellers" oninput="preview7()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
-<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">TAGLINE - Small Line Below Logo</label>
-<input type="text" id="tag7" value="Trust Since 1995" oninput="preview7()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
-<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">LOGO LETTER - Leave Empty For Auto First Letter</label>
-<input type="text" id="letter7" value="S" maxlength="2" oninput="preview7()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<label style="font-size:11px;font-weight:800">BUSINESS NAME</label>
+<input type="text" id="bizX" value="Sharma Jewellers" oninput="drawLogoX()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">TAGLINE</label>
+<input type="text" id="tagX" value="Trust Since 1995" oninput="drawLogoX()" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
 
-<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">LOGO SHAPE - Choose One</label>
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">SHAPE - How Apps Draw Shape</label>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px">
-<button onclick="setShape7('circle',this)" data-sh7="circle" style="padding:11px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border:none;cursor:pointer">⭕ Circle<br><small>Best For DP</small></button>
-<button onclick="setShape7('square',this)" data-sh7="square" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">⬛ Square<br><small>Board</small></button>
-<button onclick="setShape7('shield',this)" data-sh7="shield" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">🛡️ Shield<br><small>Premium</small></button>
+<button onclick="setShapeX('circle',this)" data-shX="circle" style="padding:10px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border:none;cursor:pointer">⭕ Circle</button>
+<button onclick="setShapeX('square',this)" data-shX="square" style="padding:10px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">⬛ Square</button>
+<button onclick="setShapeX('shield',this)" data-shX="shield" style="padding:10px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">🛡️ Shield</button>
 </div>
 
-<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">LOGO COLOR - Brand Color</label>
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">COLOR - How Apps Change Color</label>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-top:6px">
-<button onclick="setColor7('gold',this)" data-cl7="gold" style="padding:10px;border-radius:10px;background:#f59e0b;color:#fff;border:2px solid #22d3ee;cursor:pointer">Gold</button>
-<button onclick="setColor7('purple',this)" data-cl7="purple" style="padding:10px;border-radius:10px;background:#7c3aed;color:#fff;border:1px solid #1e2d5a;cursor:pointer">Purple</button>
-<button onclick="setColor7('green',this)" data-cl7="green" style="padding:10px;border-radius:10px;background:#059669;color:#fff;border:1px solid #1e2d5a;cursor:pointer">Green</button>
-<button onclick="setColor7('blue',this)" data-cl7="blue" style="padding:10px;border-radius:10px;background:#2563eb;color:#fff;border:1px solid #1e2d5a;cursor:pointer">Blue</button>
+<button onclick="setColorX('#f59e0b','#92400e',this)" style="padding:10px;border-radius:10px;background:#f59e0b;color:#fff;border:2px solid #22d3ee;cursor:pointer">Gold</button>
+<button onclick="setColorX('#7c3aed','#4c1d95',this)" style="padding:10px;border-radius:10px;background:#7c3aed;color:#fff;border:1px solid #1e2d5a;cursor:pointer">Purple</button>
+<button onclick="setColorX('#059669','#064e3b',this)" style="padding:10px;border-radius:10px;background:#059669;color:#fff;border:1px solid #1e2d5a;cursor:pointer">Green</button>
+<button onclick="setColorX('#2563eb','#1e40af',this)" style="padding:10px;border-radius:10px;background:#2563eb;color:#fff;border:1px solid #1e2d5a;cursor:pointer">Blue</button>
 </div>
 
-<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">FONT STYLE</label>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px">
-<button onclick="setFont7('bold',this)" data-ft7="bold" style="padding:11px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border:none;cursor:pointer">BOLD</button>
-<button onclick="setFont7('classic',this)" data-ft7="classic" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">Classic</button>
-<button onclick="setFont7('stylish',this)" data-ft7="stylish" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">Stylish</button>
-</div>
+<!-- THIS CANVAS IS THE LOGO - APPS DO SAME -->
+<canvas id="cvX" width="500" height="500" style="width:100%;max-width:300px;display:block;margin:14px auto;background:#fff;border-radius:16px"></canvas>
 
-<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">BACKGROUND</label>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px">
-<button onclick="setBg7('white',this)" data-bg7="white" style="padding:11px;border-radius:10px;background:#fff;color:#111;border:none;cursor:pointer">⬜ White<br><small>For Bill</small></button>
-<button onclick="setBg7('dark',this)" data-bg7="dark" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">⬛ Dark<br><small>For DP</small></button>
-<button onclick="setBg7('color',this)" data-bg7="color" style="padding:11px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border:none;cursor:pointer">🎨 Color<br><small>Full Color</small></button>
-</div>
-
-<label style="display:flex;justify-content:space-between;margin-top:10px;font-size:12px;background:#0a1224;padding:10px;border-radius:10px">💧 Watermark On Logo <input type="checkbox" id="wm7" onchange="preview7()"></label>
-
-<button onclick="make7()" style="width:100%;margin-top:10px;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;font-weight:900;cursor:pointer">✨ MAKE LOGO</button>
-
-<!-- LOGO PREVIEW -->
-<div style="text-align:center;margin-top:12px">
-<div id="logoPreview7" style="display:inline-block;background:#fff;border-radius:50%;width:220px;height:220px;position:relative;overflow:hidden;border:4px solid #f59e0b">
-<div id="logoInner7" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12px">
-<div id="pvLetter7" style="font-size:70px;font-weight:900;line-height:1;color:#92400e">S</div>
-<div id="pvBiz7" style="font-size:16px;font-weight:900;color:#111;margin-top:6px;line-height:1.2">Sharma Jewellers</div>
-<div id="pvTag7" style="font-size:11px;color:#666;margin-top:4px">Trust Since 1995</div>
-</div>
-</div>
-<div id="pvWm7" style="font-size:11px;color:#94a3b8;margin-top:6px"></div>
-</div>
-
-<button onclick="dl7()" style="width:100%;margin-top:10px;padding:12px;border-radius:12px;background:#22c55e;color:#fff;font-weight:800;border:none;cursor:pointer">⬇️ DOWNLOAD LOGO IMAGE</button>
-<button onclick="sh7()" style="width:100%;margin-top:8px;padding:12px;border-radius:12px;background:#2563eb;color:#fff;font-weight:800;border:none;cursor:pointer">📤 SHARE LOGO - WhatsApp</button>
-<button onclick="edit7()" style="width:100%;margin-top:8px;padding:12px;border-radius:12px;background:#f59e0b;color:#fff;font-weight:800;border:none;cursor:pointer">✏️ EDIT SINGLE PAGE - Change Name / Tagline</button>
-<button onclick="print7()" style="width:100%;margin-top:8px;padding:11px;border-radius:12px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">🖨️ Print Logo</button>
-<div id="s7" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px"></div>
-
-<!-- EDIT SINGLE PAGE -->
-<div id="edit7" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;padding:12px;overflow:auto">
-<div style="display:flex;justify-content:space-between;align-items:center;background:#121d3a;padding:12px;border-radius:12px"><b>Edit Single Page - Logo</b><button onclick="closeEdit7()" style="background:#fff;color:#111;border:none;padding:8px 14px;border-radius:20px;font-weight:900;cursor:pointer">✕ Close</button></div>
-<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">Business Name</label><input type="text" id="eBiz7" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a;margin-top:4px">
-<label style="font-size:11px;font-weight:800;display:block;margin-top:8px">Tagline</label><input type="text" id="eTag7" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a;margin-top:4px">
-<label style="font-size:11px;font-weight:800;display:block;margin-top:8px">Logo Letter</label><input type="text" id="eLetter7" maxlength="2" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a;margin-top:4px">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
-<button onclick="applyEdit7()" style="padding:12px;background:#f59e0b;color:#fff;border:none;border-radius:10px;font-weight:800;cursor:pointer">✏️ Apply Changes</button>
-<button onclick="closeEdit7()" style="padding:12px;background:#162143;color:#fff;border:1px solid #1e2d5a;border-radius:10px;font-weight:800;cursor:pointer">Back</button>
-</div>
-</div>
-<canvas id="cv7" style="display:none"></canvas>
+<button onclick="dlX()" style="width:100%;padding:12px;border-radius:12px;background:#22c55e;color:#fff;font-weight:800;border:none;cursor:pointer">⬇️ DOWNLOAD LOGO - No API</button>
+<button onclick="shX()" style="width:100%;margin-top:8px;padding:12px;border-radius:12px;background:#2563eb;color:#fff;font-weight:800;border:none;cursor:pointer">📤 SHARE LOGO</button>
 </div>
 <script>
-let SHAPE7='circle', COLOR7='gold', FONT7='bold', BG7='white';
-function setShape7(s,btn){SHAPE7=s;document.querySelectorAll('[data-sh7]').forEach(b=>{b.style.background='#162143';b.style.border='1px solid #1e2d5a'});btn.style.background='linear-gradient(135deg,#7c3aed,#22d3ee)';btn.style.border='none';preview7();}
-function setColor7(c,btn){COLOR7=c;document.querySelectorAll('[data-cl7]').forEach(b=>b.style.border='1px solid #1e2d5a');btn.style.border='2px solid #22d3ee';preview7();}
-function setFont7(f,btn){FONT7=f;document.querySelectorAll('[data-ft7]').forEach(b=>{b.style.background='#162143';b.style.border='1px solid #1e2d5a'});btn.style.background='linear-gradient(135deg,#7c3aed,#22d3ee)';btn.style.border='none';preview7();}
-function setBg7(b,btn){BG7=b;document.querySelectorAll('[data-bg7]').forEach(x=>{x.style.border='1px solid #1e2d5a'});btn.style.border='2px solid #22d3ee';preview7();}
-function getColorSet7(){
-if(COLOR7=='gold') return {main:'#f59e0b',dark:'#92400e',light:'#fef3c7'};
-if(COLOR7=='green') return {main:'#059669',dark:'#064e3b',light:'#d1fae5'};
-if(COLOR7=='blue') return {main:'#2563eb',dark:'#1e40af',light:'#dbeafe'};
-return {main:'#7c3aed',dark:'#4c1d95',light:'#ede9fe'};
-}
-function getFont7(){
-if(FONT7=='classic') return 'Georgia, serif';
-if(FONT7=='stylish') return 'Verdana, sans-serif';
-return 'Arial, sans-serif';
-}
-function preview7(){
-let biz=document.getElementById('biz7').value||"Your Business";
-let tag=document.getElementById('tag7').value||"";
-let letter=(document.getElementById('letter7').value||"").trim()||biz.trim().charAt(0).toUpperCase()||"S";
-let c=getColorSet7();
-let box=document.getElementById('logoPreview7');
-let inner=document.getElementById('logoInner7');
-if(SHAPE7=='circle'){ box.style.borderRadius='50%'; }
-else if(SHAPE7=='square'){ box.style.borderRadius='16px'; }
-else { box.style.borderRadius='50% 50% 50% 50% / 20% 20% 80% 80%'; }
-box.style.border='4px solid '+c.main;
-if(BG7=='white'){ box.style.background='#fff'; inner.style.color='#111'; }
-else if(BG7=='dark'){ box.style.background='#111827'; inner.style.color='#fff'; }
-else { box.style.background='linear-gradient(135deg,'+c.dark+','+c.main+')'; inner.style.color='#fff'; }
-let lt=document.getElementById('pvLetter7');
-lt.innerText=letter;
-lt.style.color=BG7=='color'?'#fff':c.dark;
-lt.style.fontFamily=getFont7();
-let bz=document.getElementById('pvBiz7');
-bz.innerText=biz; bz.style.color=BG7=='color'?'#fff':'#111';
-if(BG7=='dark') bz.style.color='#fff';
-bz.style.fontFamily=getFont7();
-let tg=document.getElementById('pvTag7');
-tg.innerText=tag; tg.style.color=BG7=='dark'?'#d1d5db':BG7=='color'?'#fff':'#666';
-document.getElementById('pvWm7').innerText=document.getElementById('wm7').checked?"orbittroniz.com":"";
-}
-function drawCanvas7(){
-let biz=document.getElementById('biz7').value||"Your Business";
-let tag=document.getElementById('tag7').value||"";
-let letter=(document.getElementById('letter7').value||"").trim()||biz.trim().charAt(0).toUpperCase()||"S";
-let c=getColorSet7();
-let cv=document.getElementById('cv7'); cv.width=600; cv.height=600; let ctx=cv.getContext('2d');
-if(BG7=='white'){ ctx.fillStyle="#fff"; }
-else if(BG7=='dark'){ ctx.fillStyle="#111827"; }
-else { let g=ctx.createLinearGradient(0,0,600,600); g.addColorStop(0,c.dark); g.addColorStop(1,c.main); ctx.fillStyle=g; }
-if(SHAPE7=='circle'){
-ctx.beginPath(); ctx.arc(300,300,280,0,Math.PI*2); ctx.fill();
-ctx.lineWidth=10; ctx.strokeStyle=c.main; ctx.beginPath(); ctx.arc(300,300,280,0,Math.PI*2); ctx.stroke();
-} else if(SHAPE7=='square'){
-ctx.fillRect(20,20,560,560); ctx.lineWidth=10; ctx.strokeStyle=c.main; ctx.strokeRect(20,20,560,560);
+let SHAPEX='circle', C1='#f59e0b', C2='#92400e';
+function setShapeX(s,btn){SHAPEX=s;document.querySelectorAll('[data-shX]').forEach(b=>{b.style.background='#162143';b.style.border='1px solid #1e2d5a'});btn.style.background='linear-gradient(135deg,#7c3aed,#22d3ee)';btn.style.border='none';drawLogoX();}
+function setColorX(c1,c2,btn){C1=c1;C2=c2;drawLogoX();}
+
+// THIS IS HOW APPS MAKE LOGO - 4 STEPS ONLY
+function drawLogoX(){
+let biz=document.getElementById('bizX').value||"Your Business";
+let tag=document.getElementById('tagX').value||"";
+let letter=biz.trim().charAt(0).toUpperCase()||"S";
+let cv=document.getElementById('cvX');
+let ctx=cv.getContext('2d');
+
+// STEP 1 - CLEAR OLD LOGO
+ctx.clearRect(0,0,500,500);
+
+// STEP 2 - BACKGROUND + SHAPE
+// Apps use gradient - Not flat color - Looks premium
+let g=ctx.createLinearGradient(0,0,500,500);
+g.addColorStop(0,C2); g.addColorStop(1,C1);
+ctx.fillStyle=g;
+if(SHAPEX=='circle'){
+// Circle = arc()
+ctx.beginPath(); ctx.arc(250,250,230,0,Math.PI*2); ctx.fill();
+ctx.lineWidth=8; ctx.strokeStyle="#fff"; ctx.beginPath(); ctx.arc(250,250,215,0,Math.PI*2); ctx.stroke();
+} else if(SHAPEX=='square'){
+// Square = fillRect()
+ctx.fillRect(20,20,460,460);
+ctx.lineWidth=8; ctx.strokeStyle="#fff"; ctx.strokeRect(35,35,430,430);
 } else {
-ctx.beginPath(); ctx.moveTo(300,40); ctx.lineTo(540,120); ctx.lineTo(540,350); ctx.quadraticCurveTo(540,520,300,560); ctx.quadraticCurveTo(60,520,60,350); ctx.lineTo(60,120); ctx.closePath(); ctx.fill(); ctx.lineWidth=10; ctx.strokeStyle=c.main; ctx.stroke();
+// Shield = path() - moveTo + lineTo + curve
+ctx.beginPath();
+ctx.moveTo(250,30); ctx.lineTo(450,100); ctx.lineTo(450,280);
+ctx.quadraticCurveTo(450,430,250,470);
+ctx.quadraticCurveTo(50,430,50,280);
+ctx.lineTo(50,100); ctx.closePath(); ctx.fill();
+ctx.lineWidth=8; ctx.strokeStyle="#fff"; ctx.stroke();
 }
-let txtColor=BG7=='color'?'#fff':BG7=='dark'?'#fff':'#111';
-let letterColor=BG7=='color'?'#fff':c.dark;
-ctx.textAlign='center';
-ctx.fillStyle=letterColor; ctx.font="900 160px "+getFont7(); ctx.fillText(letter,300,280);
-ctx.fillStyle=txtColor; ctx.font="900 42px "+getFont7();
-let words=biz.split(' '); if(biz.length>18 && words.length>1){ let mid=Math.ceil(words.length/2); ctx.fillText(words.slice(0,mid).join(' '),300,360); ctx.fillText(words.slice(mid).join(' '),300,410); } else { ctx.fillText(biz,300,380); }
-if(tag){ ctx.fillStyle=BG7=='dark'?'#d1d5db':BG7=='color'?'#fff':'#666'; ctx.font="600 22px Arial"; ctx.fillText(tag,300,440); }
-if(document.getElementById('wm7').checked){ ctx.fillStyle="rgba(120,120,120,.8)"; ctx.font="600 14px Arial"; ctx.fillText("orbittroniz.com",300,580); }
-return cv;
+
+// STEP 3 - LETTER - Big First Letter
+ctx.fillStyle="#fff"; ctx.textAlign='center';
+ctx.font="900 150px Arial";
+ctx.fillText(letter,250,260);
+
+// STEP 4 - BUSINESS NAME + TAGLINE - Small Text Below
+ctx.font="900 32px Arial";
+// If name long, split into 2 lines - Like apps do
+if(biz.length>16){
+let w=biz.split(' '); let mid=Math.ceil(w.length/2);
+ctx.fillText(w.slice(0,mid).join(' '),250,340);
+ctx.fillText(w.slice(mid).join(' '),250,380);
+} else {
+ctx.fillText(biz,250,350);
 }
-function make7(){ preview7(); document.getElementById('s7').innerText="Logo Ready - Shape: "+SHAPE7+" - Color: "+COLOR7+" - Click Download"; document.getElementById('logoPreview7').scrollIntoView({behavior:'smooth'}); }
-function dl7(){ let cv=drawCanvas7(); let a=document.createElement('a'); a.href=cv.toDataURL('image/png'); a.download="Logo-"+(document.getElementById('biz7').value||"Logo")+".png"; a.click(); document.getElementById('s7').innerText="Logo Downloaded"; }
-async function sh7(){ let cv=drawCanvas7(); try{ let blob=await new Promise(r=>cv.toBlob(r,'image/png')); let file=new File([blob],"Logo.png",{type:'image/png'}); if(navigator.canShare && navigator.canShare({files:[file]})){ await navigator.share({files:[file], text:"My Shop Logo - "+(document.getElementById('biz7').value||"")}); } else { dl7(); } }catch(e){ dl7(); } }
-function print7(){ let cv=drawCanvas7(); let w=window.open('','_blank'); if(!w) return alert("Allow Popup To Print"); w.document.write('<html><body style="text-align:center;font-family:Arial"><h2>Logo - Print</h2><img src="'+cv.toDataURL('image/png')+'" style="width:400px"><script>window.onload=function(){window.print()}<\/script></body></html>'); w.document.close(); }
-function edit7(){ document.getElementById('eBiz7').value=document.getElementById('biz7').value; document.getElementById('eTag7').value=document.getElementById('tag7').value; document.getElementById('eLetter7').value=document.getElementById('letter7').value; document.getElementById('edit7').style.display='block'; }
-function closeEdit7(){ document.getElementById('edit7').style.display='none'; }
-function applyEdit7(){ document.getElementById('biz7').value=document.getElementById('eBiz7').value||"Your Business"; document.getElementById('tag7').value=document.getElementById('eTag7').value||""; document.getElementById('letter7').value=document.getElementById('eLetter7').value||""; preview7(); closeEdit7(); document.getElementById('s7').innerText="Logo Updated"; }
-preview7();
+if(tag){
+ctx.font="600 18px Arial"; ctx.fillStyle="rgba(255,255,255,.9)";
+ctx.fillText(tag,250,410);
+}
+}
+function dlX(){
+let cv=document.getElementById('cvX');
+let a=document.createElement('a'); a.href=cv.toDataURL('image/png'); a.download="Logo.png"; a.click();
+}
+async function shX(){
+let cv=document.getElementById('cvX');
+try{
+let blob=await new Promise(r=>cv.toBlob(r,'image/png'));
+let file=new File([blob],"Logo.png",{type:'image/png'});
+if(navigator.canShare && navigator.canShare({files:[file]})){ await navigator.share({files:[file], text:"My Logo"}); }
+else { dlX(); }
+}catch(e){ dlX(); }
+}
+drawLogoX();
 </script>
-<!-- TOOL 7 - LOGO MAKER - END -->  
+<!-- LOGO WITHOUT API - END -->
 <!-- ================= TOOL 8 - BG REMOVER - START ================= -->
 <div class="tool panel" id="tool-8"><h3>✂️ 8. BG Remover</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(8)">⬇️ Download</button><button class="btn" onclick="editSinglePage(8)">✏️ Edit Single Page</button></div><label class="label">Upload Image - White Background Works Best</label><input type="file" id="f8" accept="image/*" class="input"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t8Remove()">Remove White Background</button><canvas id="cv8" style="margin-top:10px"></canvas><div class="out" id="out8"></div></div>
 <!-- ================= TOOL 8 - BG REMOVER - END ================= -->
