@@ -5064,11 +5064,371 @@ t12Log("Tool 12 V2 Full English Loaded ✅ - Ready");
 </script>
 <!-- ================= TOOL 12 V2 - END ================= -->
 <!-- TOOL 13 -->
-<div class="tool" id="tool-13"><div class="panel"><h3>✂️ Tool 13 - Image Cropper</h3>
-<!-- YAHAN TOOL 13 KA CODE PASTE KARO -->
-<p style="font-size:12px;color:#94a3b8">Yaha Tool 13 ka feature code aayega...</p>
-</div></div>
+<!-- ================= TOOL 13 - CROPPER - AI PREMIUM V2 - START ================= -->
+<style>
+.t13-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.t13-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t13-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.t13-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
+.t13-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
+.t13-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
+.t13-drop.dragover{background:rgba(34,211,238,.25);transform:scale(1.02)}
+.t13-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.t13-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
+.t13-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.t13-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:13px 8px;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer}
+.t13-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent}
+.t13-chiprow{display:flex;gap:6px;margin-top:8px}
+.t13-chiprow button{flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px 4px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
+.t13-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
+.t13-toggle b{font-size:13px}
+.t13-toggle input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.t13-toggle input:checked{background:#22c55e}
+.t13-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.t13-toggle input:checked::after{left:23px}
+.t13-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.t13-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.t13-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t13-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
+.t13-prog{height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:10px;display:none;border:1px solid #2a3a6a}
+.t13-prog div{height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee);width:0%}
+.t13-range{width:100%;accent-color:#22d3ee}
+.t13-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.t13-imgcard{background:#060a18;border:1px solid #2a3a6a;border-radius:14px;overflow:hidden}
+.t13-imgcard img{width:100%;height:130px;object-fit:cover;display:block}
+.t13-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column}
+.t13-modal canvas{max-width:95%;max-height:62vh;border-radius:10px;background:#fff}
+.t13-modal-nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.t13-modal-nav button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer}
+.t13-modal-nav button.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none}
+</style>
 
+<div class="tool active" id="tool-13"><div class="t13-card">
+<div class="t13-title">✂️ Cropper Pro - AI Premium 🤖</div>
+<div class="t13-sub">AI Premium • AI Thinks, Analyzes & Suggests • Auto Face Crop • Smart Ratio • Live Preview</div>
+
+<label class="t13-label">🖼️ 1. SELECT IMAGES</label>
+<div class="t13-drop" id="t13Drop" onclick="document.getElementById('t13FileInput').click()">
+<b style="font-size:15px;color:#22d3ee">+ Click or Drag Images Here</b><br>
+<small style="color:#94a3b8">JPG / PNG / WEBP</small><br>
+<small style="color:#22d3ee" id="t13FileName">No Images Selected - Click Here</small><br>
+<small style="color:#f59e0b" id="t13Debug">Status: Waiting for image...</small>
+</div>
+<input type="file" id="t13FileInput" accept="*/*" multiple onchange="t13OnFileSelect(this)" style="display:none">
+<div id="t13SelectedBox" style="display:none;background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:10px;margin-top:10px"><b style="font-size:13px;color:#22c55e">✅ Selected Images:</b><div id="t13SelectedList" style="margin-top:8px"></div></div>
+
+<!-- 🤖 AI PREMIUM BOX - Yaha AI Suggestion Aayega -->
+<div id="t13AiBox" style="display:none"></div>
+<div id="t13AiThinking" style="display:none;background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(34,211,238,.2));border:1px solid #a78bfa;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
+<b>🤖 AI is Thinking...</b><br><small style="color:#94a3b8">Analyzing brightness, blur, face, colors... 2 sec</small><br><div style="font-size:20px;margin-top:6px">🧠✨🔍</div>
+</div>
+
+<!-- CROP EDITOR -->
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px;margin-top:12px;text-align:center">
+<b style="font-size:13px">✂️ CROP EDITOR - Drag White Box, Corner Se Resize Karo</b>
+<div style="position:relative;display:inline-block;max-width:100%;margin-top:8px;touch-action:none" id="t13EditorWrap">
+<canvas id="t13EditorCanvas" style="max-width:100%;max-height:340px;border-radius:12px;background:#000;display:none;touch-action:none"></canvas>
+<img id="t13EditorImg" style="max-width:100%;max-height:340px;border-radius:12px;background:#fff;display:none">
+<div id="t13CropBox" style="display:none;position:absolute;border:2px solid #fff;box-shadow:0 0 0 9999px rgba(0,0,0,0.55),0 0 0 1px #22d3ee;cursor:move;touch-action:none">
+<div style="position:absolute;top:0;left:0;right:0;height:1px;background:rgba(255,255,255,0.4);transform:translateY(33%)"></div>
+<div style="position:absolute;top:0;left:0;right:0;height:1px;background:rgba(255,255,255,0.4);transform:translateY(66%)"></div>
+<div style="position:absolute;left:0;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.4);transform:translateX(33%)"></div>
+<div style="position:absolute;left:0;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.4);transform:translateX(66%)"></div>
+<div id="t13HandleTL" style="position:absolute;top:-8px;left:-8px;width:16px;height:16px;background:#22d3ee;border:2px solid #fff;border-radius:50%;cursor:nwse-resize"></div>
+<div id="t13HandleTR" style="position:absolute;top:-8px;right:-8px;width:16px;height:16px;background:#22d3ee;border:2px solid #fff;border-radius:50%;cursor:nesw-resize"></div>
+<div id="t13HandleBL" style="position:absolute;bottom:-8px;left:-8px;width:16px;height:16px;background:#22d3ee;border:2px solid #fff;border-radius:50%;cursor:nesw-resize"></div>
+<div id="t13HandleBR" style="position:absolute;bottom:-8px;right:-8px;width:16px;height:16px;background:#22d3ee;border:2px solid #fff;border-radius:50%;cursor:nwse-resize"></div>
+<div id="t13CropLabel" style="position:absolute;top:-24px;left:50%;transform:translateX(-50%);background:#22d3ee;color:#fff;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:800;white-space:nowrap">Crop Area</div>
+</div>
+</div>
+<div id="t13EmptyBox" style="color:#94a3b8;padding:12px;font-size:12px">Select a photo, crop box will appear here</div>
+<div id="t13CropInfo" style="font-size:11px;color:#22d3ee;margin-top:6px;font-weight:700">Crop: -</div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t13CenterCrop()" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;font-weight:700;cursor:pointer">🎯 Center Crop</button>
+<button onclick="t13FullCrop()" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;font-weight:700;cursor:pointer">⛶ Full Photo</button>
+<button onclick="t13FaceCrop()" style="flex:1;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">👤 Face Crop AI</button>
+</div>
+<button onclick="t13AiAutoCrop()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#f59e0b,#ef4444);border:none;color:#fff;padding:12px;border-radius:12px;font-weight:800;cursor:pointer">🤖 AI AUTO CROP - AI Khud Best Crop Lagayega</button>
+</div>
+
+<div style="background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:10px;margin-top:10px;text-align:center">
+<b style="font-size:13px">👀 CROPPED PREVIEW - Yehi Download Hoga</b>
+<div style="display:inline-block;margin-top:8px"><canvas id="t13PreviewCanvas" style="max-width:100%;max-height:200px;border-radius:12px;background:#fff;display:none"></canvas></div>
+<div id="t13PreviewEmpty" style="color:#94a3b8;padding:8px;font-size:12px">Crop box move karte hi preview update hoga</div>
+<div id="t13PreviewInfo" style="font-size:11px;color:#22c55e;margin-top:4px;font-weight:700"></div>
+</div>
+
+<label class="t13-label">⚡ 2. AI + QUICK PRESETS</label>
+<div class="t13-pillrow">
+<button class="t13-pill" onclick="t13SetPreset('passport')">🪪<br>Passport<br>2x2 inch</button>
+<button class="t13-pill" onclick="t13SetPreset('insta')">📱<br>Instagram<br>1:1 / 4:5</button>
+<button class="t13-pill" onclick="t13SetPreset('dp')">👤<br>WhatsApp DP<br>Circle 1:1</button>
+<button class="t13-pill" onclick="t13Reset()">🔄<br>Clear<br>All</button>
+</div>
+<div class="t13-pillrow" style="margin-top:8px">
+<button class="t13-pill" onclick="t13AiAutoCrop()" style="background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none">🤖<br>AI AUTO<br>Crop</button>
+<button class="t13-pill" onclick="t13SetPreset('story')">📲<br>Story<br>9:16</button>
+<button class="t13-pill" onclick="t13SetPreset('youtube')">▶️<br>YouTube<br>16:9</button>
+<button class="t13-pill" onclick="t13SetPreset('idcard')">🪪<br>ID Card<br>640x400</button>
+</div>
+
+<label class="t13-label">📐 3. CROP RATIO</label>
+<div class="t13-mode" id="t13RatioModes">
+<button class="active" data-ratio="free" onclick="t13SetRatio('free',this)">✂️ Free</button>
+<button data-ratio="1:1" onclick="t13SetRatio('1:1',this)">⬛ 1:1 Square</button>
+<button data-ratio="4:5" onclick="t13SetRatio('4:5',this)">📱 4:5 Insta</button>
+<button data-ratio="9:16" onclick="t13SetRatio('9:16',this)">📲 9:16 Story</button>
+</div>
+<div class="t13-mode">
+<button data-ratio="3:4" onclick="t13SetRatio('3:4',this)">🖼️ 3:4 Portrait</button>
+<button data-ratio="16:9" onclick="t13SetRatio('16:9',this)">🎬 16:9 YouTube</button>
+<button data-ratio="4:3" onclick="t13SetRatio('4:3',this)">📷 4:3 Classic</button>
+<button data-ratio="passport" onclick="t13SetRatio('passport',this)">🪪 Passport</button>
+</div>
+<div style="display:flex;gap:8px;margin-top:8px">
+<input type="number" id="t13ExactW" class="t13-input" placeholder="Output Width px - Ex: 1080">
+<input type="number" id="t13ExactH" class="t13-input" placeholder="Output Height px - Ex: 1080">
+</div>
+
+<label class="t13-label">🔄 4. ROTATE / FLIP / ZOOM / FILTER</label>
+<div style="display:flex;gap:6px">
+<button onclick="t13Rotate(-90)" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:12px;font-weight:700;cursor:pointer">↩️ -90°</button>
+<button onclick="t13Rotate(90)" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:12px;font-weight:700;cursor:pointer">↪️ +90°</button>
+<button onclick="t13Flip()" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:12px;font-weight:700;cursor:pointer">🔄 Flip</button>
+<button onclick="t13ResetTransform()" style="flex:1;background:#ef4444;border:none;color:#fff;padding:11px;border-radius:12px;font-weight:800;cursor:pointer">Reset</button>
+</div>
+<span style="font-size:11px;color:#fff">🔍 Zoom: <b id="t13ZoomVal" style="color:#22d3ee">100%</b></span>
+<input type="range" id="t13Zoom" class="t13-range" min="100" max="300" value="100" oninput="document.getElementById('t13ZoomVal').innerText=this.value+'%';t13UpdateZoom()">
+<span style="font-size:11px;color:#fff">💡 Brightness (AI Suggestion Se Set Hoga): <b id="t13BrightVal" style="color:#22d3ee">100%</b></span>
+<input type="range" id="t13Bright" class="t13-range" min="70" max="150" value="100" oninput="document.getElementById('t13BrightVal').innerText=this.value+'%';t13UpdatePreview()">
+<div style="display:flex;gap:6px;margin-top:6px">
+<button onclick="t13SetFilter('none')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:10px;cursor:pointer;font-size:11px">Original</button>
+<button onclick="t13SetFilter('bw')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:10px;cursor:pointer;font-size:11px">B/W</button>
+<button onclick="t13SetFilter('sepia')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:10px;cursor:pointer;font-size:11px">Vintage</button>
+<button onclick="t13SetFilter('vivid')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:10px;cursor:pointer;font-size:11px">Vivid</button>
+</div>
+
+<label class="t13-label">⭕ 5. SHAPE</label>
+<div class="t13-mode" id="t13ShapeModes">
+<button class="active" data-shape="rect" onclick="t13SetShape('rect',this)">⬛ Rectangle</button>
+<button data-shape="circle" onclick="t13SetShape('circle',this)">⭕ Circle - DP</button>
+<button data-shape="round" onclick="t13SetShape('round',this)">🔲 Round Corner</button>
+<button data-shape="heart" onclick="t13SetShape('heart',this)">❤️ Heart</button>
+</div>
+<div class="t13-toggle"><b>🤖 AI Auto Enhance After Crop?</b><input type="checkbox" id="t13AiEnhance" checked></div>
+<div class="t13-toggle"><b>🔲 Show Grid?</b><input type="checkbox" id="t13Grid" checked onchange="t13UpdateCropBox()"></div>
+
+<label class="t13-label">🔄 6. OUTPUT + FILE NAME</label>
+<div class="t13-mode" id="t13FmtModes">
+<button class="active" data-fmt="jpeg" onclick="t13SetFmt('jpeg',this)">🖼️ JPG</button>
+<button data-fmt="png" onclick="t13SetFmt('png',this)">🎨 PNG</button>
+<button data-fmt="webp" onclick="t13SetFmt('webp',this)">⚡ WEBP</button>
+<button data-fmt="keep" onclick="t13SetFmt('keep',this)">↩️ Keep Same</button>
+</div>
+<input type="text" id="t13Prefix" class="t13-input" placeholder="Cropped - Orbittroniz" value="Cropped - Orbittroniz" style="margin-top:8px">
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center"><b id="t13Stats" style="font-size:13px">Images: 0 • Crop: Free</b><br><small id="t13AiQuality" style="color:#a78bfa">AI Quality: -- / 100</small></div>
+<div class="t13-prog" id="t13Prog"><div id="t13Fill"></div></div>
+<div id="t13Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
+
+<button class="t13-btn-preview" onclick="t13OpenPreview()">👀 PREVIEW - Before / After</button>
+<button class="t13-btn3d" onclick="t13Crop()">✂️ CROP NOW - REAL START</button>
+<button class="t13-btn2" onclick="t13CropAll()" id="t13AllBtn" style="display:none;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;border:none">📦 CROP ALL - Same Ratio For All</button>
+<button class="t13-btn2" onclick="t13DownloadAll()" id="t13DownloadAllBtn" style="display:none">⬇️ Download All</button>
+<button class="t13-btn2" onclick="t13DownloadZIP()" id="t13ZipBtn" style="display:none;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border:none">📦 Download All as ZIP</button>
+<button class="t13-btn-share" id="t13ShareBtn" onclick="t13ShareFirst()">📤 SHARE FIRST</button>
+<button class="t13-btn2" onclick="t13Reset()">🗑️ Clear / New Images</button>
+<label class="t13-label">🖼️ CROPPED IMAGES</label>
+<div class="t13-grid" id="t13Out"></div>
+<div id="t13OutEmpty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">No images yet - Crop to see here</div>
+</div></div>
+<!-- ================= TOOL 13 AI V2 - END ================= -->
+
+<div class="t13-modal" id="t13Modal"><div id="t13ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Preview</div><canvas id="t13ModalCanvas"></canvas><div id="t13ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div><div class="t13-modal-nav"><button onclick="t13ToggleBeforeAfter()" style="background:#f59e0b" id="t13BeforeAfterBtn">🔄 Show After</button><button onclick="t13PrevImg()">⬅️ Prev</button><button onclick="t13NextImg()">Next ➡️</button><button onclick="t13DownloadOne(t13PreviewIdx)" style="background:#22c55e">⬇️ Download This</button><button class="primary" onclick="t13ClosePreview()">✅ Close</button></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+<script>
+// ===== TOOL 13 AI PREMIUM JS - Same Logic As Before + AI Brain Hook =====
+var t13Files=[], t13Selected=new Set(), t13Ratio='free', t13Shape='rect', t13Fmt='jpeg', t13Results=[], t13PreviewIdx=0, t13ShowAfter=false, t13EditorImg=null, t13Crop={x:0.1,y:0.1,w:0.8,h:0.8}, t13RotateDeg=0, t13Flip=false, t13Filter='none', t13Zoom=1, t13CustomRatio=null, t13Dragging=null, t13CurrentIdx=0, t13AiAnalysis=null;
+function t13Log(msg){ var d=document.getElementById('t13Debug'); if(d) d.innerText="Status: "+msg; }
+function t13OnFileSelect(input){ t13Log("File: "+(input.files?input.files.length:0)); if(!input.files||!input.files.length) return; var files=Array.prototype.slice.call(input.files); input.value=""; t13LoadFiles(files); }
+(function(){
+  var drop=document.getElementById('t13Drop'); if(!drop) return;
+  drop.addEventListener('dragover',function(e){e.preventDefault();drop.classList.add('dragover')});
+  drop.addEventListener('dragleave',function(){drop.classList.remove('dragover')});
+  drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remove('dragover'); if(e.dataTransfer.files&&e.dataTransfer.files.length) t13LoadFiles(Array.prototype.slice.call(e.dataTransfer.files));});
+  var box=document.getElementById('t13CropBox'); var wrap=document.getElementById('t13EditorWrap');
+  function getPos(e){ var r=wrap.getBoundingClientRect(); return {x:((e.touches?e.touches[0].clientX:e.clientX)-r.left)/r.width, y:((e.touches?e.touches[0].clientY:e.clientY)-r.top)/r.height}; }
+  function onStart(e,mode){ if(!t13EditorImg) return; e.preventDefault(); e.stopPropagation(); var p=getPos(e); t13Dragging={mode:mode,startX:p.x,startY:p.y,orig:{x:t13Crop.x,y:t13Crop.y,w:t13Crop.w,h:t13Crop.h}}; }
+  function onMove(e){ if(!t13Dragging) return; e.preventDefault(); var p=getPos(e); var d=t13Dragging, dx=p.x-d.startX, dy=p.y-d.startY;
+    if(d.mode==='move'){ t13Crop.x=Math.max(0,Math.min(1-t13Crop.w,d.orig.x+dx)); t13Crop.y=Math.max(0,Math.min(1-t13Crop.h,d.orig.y+dy)); }
+    else if(d.mode==='br'){ var nw=Math.max(0.05,d.orig.w+dx), nh=Math.max(0.05,d.orig.h+dy); if(t13Ratio!=='free'){ var ra=t13GetRatio(); if(ra) nh=nw/ra; } if(d.orig.x+nw>1) nw=1-d.orig.x; if(d.orig.y+nh>1) nh=1-d.orig.y; t13Crop.w=nw; t13Crop.h=nh; }
+    else if(d.mode==='tl'){ var nw2=d.orig.w-dx, nh2=d.orig.h-dy; if(nw2<0.05||nh2<0.05) return; if(t13Ratio!=='free'){ var ra2=t13GetRatio(); if(ra2){ nh2=nw2/ra2; } } var nx=d.orig.x+dx, ny=d.orig.y+d.orig.h-nh2; if(nx<0||ny<0) return; t13Crop.x=nx; t13Crop.y=ny; t13Crop.w=nw2; t13Crop.h=nh2; }
+    else if(d.mode==='tr'){ var nw3=d.orig.w+dx, nh3=d.orig.h-dy; if(nw3<0.05||nh3<0.05) return; if(t13Ratio!=='free'){ var ra3=t13GetRatio(); if(ra3) nh3=nw3/ra3; } var ny3=d.orig.y+d.orig.h-nh3; if(ny3<0) return; t13Crop.w=nw3; t13Crop.h=nh3; t13Crop.y=ny3; }
+    else if(d.mode==='bl'){ var nw4=d.orig.w-dx, nh4=d.orig.h+dy; if(nw4<0.05||nh4<0.05) return; if(t13Ratio!=='free'){ var ra4=t13GetRatio(); if(ra4) nh4=nw4/ra4; } var nx4=d.orig.x+d.orig.w-nw4; if(nx4<0) return; t13Crop.w=nw4; t13Crop.h=nh4; t13Crop.x=nx4; }
+    t13UpdateCropBox(); t13UpdatePreview(); }
+  function onEnd(){ t13Dragging=null; }
+  if(box){ box.addEventListener('mousedown',function(e){onStart(e,'move')}); box.addEventListener('touchstart',function(e){onStart(e,'move')},{passive:false});
+    document.getElementById('t13HandleBR').addEventListener('mousedown',function(e){onStart(e,'br')}); document.getElementById('t13HandleBR').addEventListener('touchstart',function(e){onStart(e,'br')},{passive:false});
+    document.getElementById('t13HandleTL').addEventListener('mousedown',function(e){onStart(e,'tl')}); document.getElementById('t13HandleTL').addEventListener('touchstart',function(e){onStart(e,'tl')},{passive:false});
+    document.getElementById('t13HandleTR').addEventListener('mousedown',function(e){onStart(e,'tr')}); document.getElementById('t13HandleTR').addEventListener('touchstart',function(e){onStart(e,'tr')},{passive:false});
+    document.getElementById('t13HandleBL').addEventListener('mousedown',function(e){onStart(e,'bl')}); document.getElementById('t13HandleBL').addEventListener('touchstart',function(e){onStart(e,'bl')},{passive:false});
+    document.addEventListener('mousemove',onMove); document.addEventListener('touchmove',onMove,{passive:false}); document.addEventListener('mouseup',onEnd); document.addEventListener('touchend',onEnd); }
+})();
+function t13GetRatio(){ if(t13Ratio==='free') return null; if(t13CustomRatio) return t13CustomRatio; var map={'1:1':1,'4:5':0.8,'9:16':0.5625,'3:4':0.75,'16:9':1.777,'4:3':1.333,'passport':0.777}; return map[t13Ratio]||null; }
+function t13SetRatio(r,btn){ t13Ratio=r; document.querySelectorAll('#t13RatioModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); if(r!=='free') t13ApplyRatioToCrop(); t13UpdateCropBox(); t13UpdatePreview(); }
+function t13ApplyRatioToCrop(){ var ratio=t13GetRatio(); if(!ratio) return; var cw=0.8, ch=cw/ratio; if(ch>0.8){ ch=0.8; cw=ch*ratio; } t13Crop={x:(1-cw)/2,y:(1-ch)/2,w:cw,h:ch}; }
+function t13SetShape(s,btn){ t13Shape=s; document.querySelectorAll('#t13ShapeModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); if(s==='circle') t13SetRatio('1:1', document.querySelector('#t13RatioModes button[data-ratio="1:1"]')); t13UpdateCropBox(); t13UpdatePreview(); }
+function t13SetFmt(f,btn){ t13Fmt=f; document.querySelectorAll('#t13FmtModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); }
+function t13SetFilter(f){ t13Filter=f; t13UpdatePreview(); }
+function t13Rotate(deg){ t13RotateDeg=(t13RotateDeg+deg+360)%360; t13UpdatePreview(); }
+function t13Flip(){ t13Flip=!t13Flip; t13UpdatePreview(); }
+function t13ResetTransform(){ t13RotateDeg=0; t13Flip=false; document.getElementById('t13Zoom').value=100; document.getElementById('t13ZoomVal').innerText="100%"; t13Zoom=1; t13Filter='none'; t13UpdatePreview(); }
+function t13UpdateZoom(){ t13Zoom=parseInt(document.getElementById('t13Zoom').value||100)/100; t13UpdatePreview(); }
+function t13SetPreset(name){
+  if(name==='passport'){ t13SetRatio('passport', document.querySelector('#t13RatioModes button[data-ratio="passport"]')); document.getElementById('t13ExactW').value=600; document.getElementById('t13ExactH').value=750; }
+  else if(name==='insta'){ t13SetRatio('4:5', document.querySelector('#t13RatioModes button[data-ratio="4:5"]')); }
+  else if(name==='dp'){ t13SetRatio('1:1', document.querySelector('#t13RatioModes button[data-ratio="1:1"]')); t13SetShape('circle', document.querySelector('#t13ShapeModes button[data-shape="circle"]')); }
+  else if(name==='story'){ t13SetRatio('9:16', document.querySelector('#t13RatioModes button[data-ratio="9:16"]')); }
+  else if(name==='youtube'){ t13SetRatio('16:9', document.querySelector('#t13RatioModes button[data-ratio="16:9"]')); }
+  else if(name==='idcard'){ t13SetRatio('4:3', document.querySelector('#t13RatioModes button[data-ratio="4:3"]')); }
+}
+function t13CenterCrop(){ if(t13GetRatio()) t13ApplyRatioToCrop(); else t13Crop={x:0.1,y:0.1,w:0.8,h:0.8}; t13UpdateCropBox(); t13UpdatePreview(); }
+function t13FullCrop(){ t13Crop={x:0,y:0,w:1,h:1}; t13UpdateCropBox(); t13UpdatePreview(); }
+async function t13FaceCrop(){
+  if(!t13EditorImg) return alert("First select photo!");
+  document.getElementById('t13Status').innerText="👤 Face finding...";
+  try{
+    var found=null;
+    if(window.FaceDetector){ var det=new FaceDetector({fastMode:true}); var faces=await det.detect(t13EditorImg); if(faces&&faces.length) found=faces[0].boundingBox; }
+    if(!found) found={x:t13EditorImg.width*0.25,y:t13EditorImg.height*0.1,width:t13EditorImg.width*0.5,height:t13EditorImg.height*0.5};
+    var padX=found.width*0.5, padY=found.height*0.5;
+    var x=Math.max(0,found.x-padX)/t13EditorImg.width, y=Math.max(0,found.y-padY)/t13EditorImg.height;
+    var w=Math.min(1-x,(found.width+padX*2)/t13EditorImg.width), h=Math.min(1-y,(found.height+padY*2)/t13EditorImg.height);
+    var ratio=t13GetRatio(); if(ratio){ var ch=w/ratio; if(ch<=h){ h=ch; } else { w=h*ratio; } }
+    t13Crop={x:x,y:y,w:w,h:h}; t13UpdateCropBox(); t13UpdatePreview(); document.getElementById('t13Status').innerText="✅ Face Crop Done!";
+  }catch(e){ alert("Face Crop fail - Drag manually"); }
+}
+// ===== AI AUTO CROP - AI Decides Best Crop =====
+async function t13AiAutoCrop(){
+  if(!t13EditorImg) return alert("First select photo!");
+  document.getElementById('t13Status').innerText="🤖 AI deciding best crop...";
+  var a=t13AiAnalysis;
+  if(!a && window.OrbitAI) a=await window.OrbitAI.analyzeImage(t13EditorImg);
+  if(!a){ t13FaceCrop(); return; }
+  if(a.hasFace){ await t13FaceCrop(); document.getElementById('t13Status').innerText="🤖 AI: Face found - Cropped on face ✅ Best for DP / Passport"; }
+  else if(a.isDark){ document.getElementById('t13Bright').value=130; document.getElementById('t13BrightVal').innerText="130%"; t13CenterCrop(); document.getElementById('t13Status').innerText="🤖 AI: Photo is dark - Brightness +30% + Center Crop ✅"; }
+  else { t13CenterCrop(); t13SetRatio('4:5', null); document.getElementById('t13Status').innerText="🤖 AI: No face - Best crop is 4:5 Center for Instagram ✅"; }
+  t13UpdatePreview();
+}
+async function t13LoadFiles(files){
+  files=files.filter(function(f){ return f.type.indexOf('image/')===0 || f.type==='' || f.name.match(/\.(jpg|jpeg|png|webp|gif|bmp)$/i); }).slice(0,10);
+  if(!files.length){ alert("Select only images!"); return; }
+  t13Files=files; t13Selected.clear(); t13Results=[]; t13PreviewIdx=0;
+  files.forEach(function(_,i){ t13Selected.add(i); });
+  document.getElementById('t13Out').innerHTML=""; document.getElementById('t13OutEmpty').style.display='block'; document.getElementById('t13AllBtn').style.display='none'; document.getElementById('t13DownloadAllBtn').style.display='none'; document.getElementById('t13ZipBtn').style.display='none'; document.getElementById('t13ShareBtn').style.display='none';
+  document.getElementById('t13FileName').innerText=files.length+" Images Selected ✅ - "+files[0].name;
+  document.getElementById('t13Status').innerText="✅ Ready! AI analyzing...";
+  t13Log("Loaded "+files.length);
+  var listEl=document.getElementById('t13SelectedList'); document.getElementById('t13SelectedBox').style.display='block'; listEl.innerHTML="";
+  files.forEach(function(f,idx){
+    var div=document.createElement('div'); div.style.cssText="display:flex;gap:8px;align-items:center;margin-top:6px;background:#060a18;border:1px solid #2a3a6a;border-radius:10px;padding:6px";
+    var thumb=document.createElement('img'); thumb.style.cssText="width:50px;height:50px;object-fit:cover;border-radius:8px;background:#fff"; thumb.src=URL.createObjectURL(f);
+    var span=document.createElement('span'); span.style.cssText="font-size:11px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff"; span.innerText=(idx+1)+". "+f.name;
+    var btn=document.createElement('button'); btn.innerText="Edit"; btn.style.cssText="background:#22d3ee;border:none;color:#fff;padding:6px 12px;border-radius:20px;cursor:pointer;font-size:11px;font-weight:800"; btn.onclick=function(){ t13EditImage(idx); };
+    div.appendChild(thumb); div.appendChild(span); div.appendChild(btn); listEl.appendChild(div);
+  });
+  t13EditImage(0);
+}
+function t13EditImage(idx){
+  t13CurrentIdx=idx; var file=t13Files[idx];
+  var img=new Image(); img.onload=function(){
+    t13EditorImg=img; document.getElementById('t13EmptyBox').style.display='none';
+    var canvas=document.getElementById('t13EditorCanvas'); var scale=Math.min(1,800/Math.max(img.width,img.height)); canvas.width=img.width*scale; canvas.height=img.height*scale; var ctx=canvas.getContext('2d'); ctx.drawImage(img,0,0,canvas.width,canvas.height); canvas.style.display='block'; document.getElementById('t13EditorImg').style.display='none'; document.getElementById('t13CropBox').style.display='block';
+    t13Crop={x:0.1,y:0.1,w:0.8,h:0.8}; if(t13Ratio!=='free') t13ApplyRatioToCrop();
+    t13UpdateCropBox(); t13UpdatePreview();
+    // ===== AI ANALYZE - Yahi Premium Hai =====
+    if(window.OrbitAI){
+      document.getElementById('t13AiThinking').style.display='block'; document.getElementById('t13AiBox').style.display='none';
+      window.OrbitAI.analyzeImage(img).then(function(analysis){
+        t13AiAnalysis=analysis; document.getElementById('t13AiThinking').style.display='none';
+        document.getElementById('t13AiQuality').innerText="AI Quality: "+analysis.quality+" / 100 • "+(analysis.hasFace?"Face Found ✅":"No Face")+" • "+(analysis.isDark?"Dark":"Bright")+" • "+(analysis.isBlurry?"Blurry":"Sharp");
+        window.OrbitAI.showSuggestions('t13AiBox','cropper',analysis,function(sug,isAll){
+          if(sug.action==='faceCrop') t13FaceCrop();
+          if(sug.action==='bright'){ document.getElementById('t13Bright').value=sug.value; document.getElementById('t13BrightVal').innerText=sug.value+"%"; t13UpdatePreview(); document.getElementById('t13Status').innerText="✨ AI Suggestion Applied: Brightness "+sug.value+"%"; }
+          if(sug.action==='ratio'){ t13SetRatio(sug.value, document.querySelector('#t13RatioModes button[data-ratio="'+sug.value+'"]')); document.getElementById('t13Status').innerText="✨ AI Suggestion Applied: Ratio "+sug.value; }
+        });
+      });
+    }
+  }; img.src=URL.createObjectURL(file);
+}
+function t13UpdateCropBox(){
+  if(!t13EditorImg) return; var box=document.getElementById('t13CropBox');
+  box.style.left=(t13Crop.x*100)+"%"; box.style.top=(t13Crop.y*100)+"%"; box.style.width=(t13Crop.w*100)+"%"; box.style.height=(t13Crop.h*100)+"%";
+  if(t13Shape==='circle') box.style.borderRadius='50%'; else if(t13Shape==='round') box.style.borderRadius='20px'; else if(t13Shape==='heart') box.style.borderRadius='40% 40% 50% 50%'; else box.style.borderRadius='0';
+  var outW=Math.round(t13EditorImg.width*t13Crop.w), outH=Math.round(t13EditorImg.height*t13Crop.h);
+  document.getElementById('t13CropInfo').innerText="Crop: "+outW+" x "+outH+" px • Drag to move, corner dots to resize";
+  document.getElementById('t13CropLabel').innerText=outW+" x "+outH;
+}
+function t13UpdatePreview(){
+  if(!t13EditorImg) return; var img=t13EditorImg; var canvas=document.getElementById('t13PreviewCanvas');
+  var cropW=Math.round(img.width*t13Crop.w), cropH=Math.round(img.height*t13Crop.h); if(cropW<10||cropH<10) return;
+  var scale=Math.min(1,400/Math.max(cropW,cropH)); var outW=Math.round(cropW*scale), outH=Math.round(cropH*scale); canvas.width=outW; canvas.height=outH; var ctx=canvas.getContext('2d');
+  var bright=parseInt(document.getElementById('t13Bright').value||100);
+  // AI Auto Enhance - Agar ON hai to brightness + contrast auto badhao
+  if(document.getElementById('t13AiEnhance').checked && t13AiAnalysis && t13AiAnalysis.isDark) bright=Math.max(bright,125);
+  var filterStr="brightness("+bright+"%)"; if(t13Filter==='bw') filterStr+=" grayscale(100%)"; else if(t13Filter==='sepia') filterStr+=" sepia(70%)"; else if(t13Filter==='vivid') filterStr+=" saturate(150%) contrast(115%)";
+  ctx.filter=filterStr; ctx.save(); ctx.translate(outW/2,outH/2); if(t13Flip) ctx.scale(-1,1); ctx.rotate(t13RotateDeg*Math.PI/180);
+  var sx=img.width*t13Crop.x, sy=img.height*t13Crop.y, sw=img.width*t13Crop.w, sh=img.height*t13Crop.h;
+  if(t13Zoom>1){ var nw=sw/t13Zoom, nh=sh/t13Zoom; sx=sx+(sw-nw)/2; sy=sy+(sh-nh)/2; sw=nw; sh=nh; }
+  ctx.drawImage(img,sx,sy,sw,sh,-outW/2,-outH/2,outW,outH); ctx.restore(); ctx.filter='none';
+  if(t13Shape==='circle'||t13Shape==='heart'||t13Shape==='round'){ ctx.globalCompositeOperation='destination-in'; ctx.beginPath(); if(t13Shape==='circle') ctx.arc(outW/2,outH/2,Math.min(outW,outH)/2,0,Math.PI*2); else if(t13Shape==='heart'){ var cx=outW/2,cy=outH/2,s=Math.min(outW,outH)*0.45; ctx.moveTo(cx,cy+s*0.4); ctx.bezierCurveTo(cx,cy,cx-s,cy-s*0.3,cx-s,cy+s*0.3); ctx.bezierCurveTo(cx-s,cy+s*0.9,cx,cy+s*1.3,cx,cy+s*1.6); ctx.bezierCurveTo(cx,cy+s*1.3,cx+s,cy+s*0.9,cx+s,cy+s*0.3); ctx.bezierCurveTo(cx+s,cy-s*0.3,cx,cy,cx,cy+s*0.4); } else { var r=20; ctx.moveTo(r,0); ctx.arcTo(outW,0,outW,outH,r); ctx.arcTo(outW,outH,0,outH,r); ctx.arcTo(0,outH,0,0,r); ctx.arcTo(0,0,outW,0,r); } ctx.fill(); ctx.globalCompositeOperation='source-over'; }
+  canvas.style.display='block'; document.getElementById('t13PreviewEmpty').style.display='none';
+  document.getElementById('t13PreviewInfo').innerText="Preview: "+cropW+" x "+cropH+" • Shape: "+t13Shape;
+}
+function t13LoadImage(file){ return new Promise(function(res,rej){ var img=new Image(); img.onload=function(){res(img)}; img.onerror=rej; img.src=URL.createObjectURL(file); }); }
+async function t13CropOne(file){
+  var img=await t13LoadImage(file); var crop=t13Crop; var cropW=Math.round(img.width*crop.w), cropH=Math.round(img.height*crop.h); var sx=img.width*crop.x, sy=img.height*crop.y, sw=img.width*crop.w, sh=img.height*crop.h;
+  if(t13Zoom>1){ var nw=sw/t13Zoom, nh=sh/t13Zoom; sx=sx+(sw-nw)/2; sy=sy+(sh-nh)/2; sw=nw; sh=nh; cropW=Math.round(sw); cropH=Math.round(sh); }
+  var exactW=parseInt(document.getElementById('t13ExactW').value||0), exactH=parseInt(document.getElementById('t13ExactH').value||0); var outW=cropW, outH=cropH; if(exactW&&exactH){ outW=exactW; outH=exactH; } else if(exactW){ outW=exactW; outH=Math.round(cropH*(exactW/cropW)); } else if(exactH){ outH=exactH; outW=Math.round(cropW*(exactH/cropH)); }
+  var canvas=document.createElement('canvas'); canvas.width=outW; canvas.height=outH; var ctx=canvas.getContext('2d'); ctx.save();
+  if(t13Shape==='circle'||t13Shape==='heart'||t13Shape==='round'){ ctx.beginPath(); if(t13Shape==='circle') ctx.arc(outW/2,outH/2,Math.min(outW,outH)/2,0,Math.PI*2); else if(t13Shape==='heart'){ var cx=outW/2,cy=outH/2,s=Math.min(outW,outH)*0.45; ctx.moveTo(cx,cy+s*0.4); ctx.bezierCurveTo(cx,cy,cx-s,cy-s*0.3,cx-s,cy+s*0.3); ctx.bezierCurveTo(cx-s,cy+s*0.9,cx,cy+s*1.3,cx,cy+s*1.6); ctx.bezierCurveTo(cx,cy+s*1.3,cx+s,cy+s*0.9,cx+s,cy+s*0.3); ctx.bezierCurveTo(cx+s,cy-s*0.3,cx,cy,cx,cy+s*0.4); } else { var r=30; ctx.moveTo(r,0); ctx.arcTo(outW,0,outW,outH,r); ctx.arcTo(outW,outH,0,outH,r); ctx.arcTo(0,outH,0,0,r); ctx.arcTo(0,0,outW,0,r); } ctx.clip(); }
+  var bright=parseInt(document.getElementById('t13Bright').value||100); if(document.getElementById('t13AiEnhance').checked && t13AiAnalysis && t13AiAnalysis.isDark) bright=Math.max(bright,125);
+  var filterStr="brightness("+bright+"%)"; if(t13Filter==='bw') filterStr+=" grayscale(100%)"; else if(t13Filter==='sepia') filterStr+=" sepia(70%)"; else if(t13Filter==='vivid') filterStr+=" saturate(150%) contrast(115%)";
+  ctx.filter=filterStr; ctx.translate(outW/2,outH/2); if(t13Flip) ctx.scale(-1,1); ctx.rotate(t13RotateDeg*Math.PI/180); ctx.drawImage(img,sx,sy,sw,sh,-outW/2,-outH/2,outW,outH); ctx.restore(); ctx.filter='none';
+  var outFmt=t13Fmt==='keep'?(file.type.indexOf('png')>-1?'png':file.type.indexOf('webp')>-1?'webp':'jpeg'):t13Fmt; if(t13Shape==='circle'||t13Shape==='heart') outFmt='png';
+  var mime=outFmt==='png'?'image/png':outFmt==='webp'?'image/webp':'image/jpeg'; var ext=outFmt==='png'?'png':outFmt==='webp'?'webp':'jpg';
+  var blob=await new Promise(function(r){canvas.toBlob(r,mime,outFmt==='png'?1:0.92)}); if(!blob){ blob=await new Promise(function(r){canvas.toBlob(r,'image/jpeg',0.92)}); mime='image/jpeg'; ext='jpg'; }
+  return {blob:blob,ext:ext,w:canvas.width,h:canvas.height,origW:img.width,origH:img.height};
+}
+async function t13Crop(){
+  if(!t13Files.length) return alert("Select image first!");
+  var prefix=(document.getElementById('t13Prefix').value.trim()||"Cropped - Orbittroniz").replace(/[\\/:*?"<>|]/g,'');
+  document.getElementById('t13Status').innerText="Cropping..."; document.getElementById('t13Prog').style.display='block'; document.getElementById('t13Fill').style.width="30%";
+  try{
+    var file=t13Files[t13CurrentIdx]||t13Files[0]; var res=await t13CropOne(file); var fname=prefix+" - "+(t13CurrentIdx+1)+" - "+res.w+"x"+res.h+"."+res.ext; var url=URL.createObjectURL(res.blob);
+    var obj={blob:res.blob,name:fname,url:url,origFile:file,origUrl:URL.createObjectURL(file),beforeKB:file.size/1024,afterKB:res.blob.size/1024,w:res.w,h:res.h};
+    var ex=t13Results.findIndex(function(r){return r.name.indexOf(" - "+(t13CurrentIdx+1)+" - ")>-1}); if(ex>=0) t13Results[ex]=obj; else t13Results.push(obj);
+    t13RenderResults(); document.getElementById('t13Status').innerText="✅ Cropped! "+res.w+"x"+res.h; document.getElementById('t13AllBtn').style.display=t13Files.length>1?'block':'none'; document.getElementById('t13DownloadAllBtn').style.display='block'; document.getElementById('t13ZipBtn').style.display='block'; document.getElementById('t13ShareBtn').style.display='block'; document.getElementById('t13Fill').style.width="100%"; setTimeout(function(){document.getElementById('t13Prog').style.display='none'},600);
+  }catch(e){ alert("Crop Error: "+e.message); document.getElementById('t13Prog').style.display='none'; }
+}
+function t13RenderResults(){ var out=document.getElementById('t13Out'); out.innerHTML=""; if(!t13Results.length){ document.getElementById('t13OutEmpty').style.display='block'; return; } document.getElementById('t13OutEmpty').style.display='none'; t13Results.forEach(function(r,idx){ var card=document.createElement('div'); card.className='t13-imgcard'; card.innerHTML='<img src="'+r.url+'"><div style="padding:8px;text-align:center"><b style="font-size:11px">'+r.name+'</b><br><small>'+r.w+'x'+r.h+' • Cropped ✅</small><div style="display:flex;gap:4px;margin-top:6px"><button onclick="t13DownloadOne('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">⬇️ Download</button><button onclick="t13ShareOne('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">📤 Share</button></div></div>'; out.appendChild(card); }); }
+async function t13CropAll(){ if(!t13Files.length) return alert("Select images!"); var prefix=(document.getElementById('t13Prefix').value.trim()||"Cropped - Orbittroniz").replace(/[\\/:*?"<>|]/g,''); document.getElementById('t13Prog').style.display='block'; t13Results=[]; for(var i=0;i<t13Files.length;i++){ try{ var res=await t13CropOne(t13Files[i]); var fname=prefix+" - "+(i+1)+" - "+res.w+"x"+res.h+"."+res.ext; t13Results.push({blob:res.blob,name:fname,url:URL.createObjectURL(res.blob),origFile:t13Files[i],origUrl:URL.createObjectURL(t13Files[i]),beforeKB:t13Files[i].size/1024,afterKB:res.blob.size/1024,w:res.w,h:res.h}); document.getElementById('t13Fill').style.width=Math.round(((i+1)/t13Files.length)*100)+"%"; }catch(e){} } t13RenderResults(); document.getElementById('t13Status').innerText="✅ All Cropped!"; document.getElementById('t13DownloadAllBtn').style.display='block'; document.getElementById('t13ZipBtn').style.display='block'; document.getElementById('t13ShareBtn').style.display='block'; setTimeout(function(){document.getElementById('t13Prog').style.display='none'},600); }
+function t13DownloadOne(i){ if(!t13Results[i]) return; var r=t13Results[i]; var a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }
+function t13DownloadAll(){ if(!t13Results.length) return alert("First crop"); if(!confirm(t13Results.length+" images will download. Allow?")) return; t13Results.forEach(function(r,idx){ setTimeout(function(){ var a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }, idx*600); }); }
+async function t13DownloadZIP(){ if(!t13Results.length) return alert("First crop"); if(!window.JSZip){ await new Promise(function(r){setTimeout(r,1500)}); if(!window.JSZip) return alert("ZIP loading, try again"); } try{ var zip=new JSZip(); for(var i=0;i<t13Results.length;i++){ zip.file(t13Results[i].name, t13Results[i].blob); } var blob=await zip.generateAsync({type:"blob"}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=(document.getElementById('t13Prefix').value.trim()||"Cropped")+" - All.zip"; document.body.appendChild(a); a.click(); a.remove(); }catch(e){ alert("ZIP Error: "+e.message); } }
+async function t13ShareOne(i){ if(!t13Results[i]) return; try{ var r=t13Results[i]; var file=new File([r.blob],r.name,{type:r.blob.type}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:r.name}); } }catch(e){} }
+async function t13ShareFirst(){ if(!t13Results.length) return alert("First crop"); await t13ShareOne(0); }
+async function t13OpenPreview(){ if(!t13Files.length) return alert("Select Images!"); t13PreviewIdx=0; t13ShowAfter=false; await t13ShowPreview(); document.getElementById('t13Modal').style.display='flex'; }
+async function t13ShowPreview(){ var mc=document.getElementById('t13ModalCanvas'), ctx=mc.getContext('2d'); if(t13Results.length){ if(t13PreviewIdx<0) t13PreviewIdx=t13Results.length-1; if(t13PreviewIdx>=t13Results.length) t13PreviewIdx=0; var r=t13Results[t13PreviewIdx]; var img=new Image(); img.onload=function(){ var s=Math.min(1,1200/Math.max(img.width,img.height)); mc.width=img.width*s; mc.height=img.height*s; ctx.drawImage(img,0,0,mc.width,mc.height); document.getElementById('t13ModalTitle').innerText=(t13ShowAfter?"AFTER - ":"BEFORE - ")+"Image "+(t13PreviewIdx+1); document.getElementById('t13ModalCap').innerText=r.w+"x"+r.h; document.getElementById('t13BeforeAfterBtn').innerText=t13ShowAfter?"🔄 Show Before":"🔄 Show After"; }; img.src=t13ShowAfter?r.url:r.origUrl; } else { var f=t13Files[t13PreviewIdx]; var img2=new Image(); img2.onload=function(){ var s2=Math.min(1,1200/Math.max(img2.width,img2.height)); mc.width=img2.width*s2; mc.height=img2.height*s2; ctx.drawImage(img2,0,0,mc.width,mc.height); }; img2.src=URL.createObjectURL(f); } }
+async function t13ToggleBeforeAfter(){ if(!t13Results.length) return alert("First crop"); t13ShowAfter=!t13ShowAfter; await t13ShowPreview(); }
+async function t13NextImg(){t13PreviewIdx++;await t13ShowPreview();}
+async function t13PrevImg(){t13PreviewIdx--;await t13ShowPreview();}
+function t13ClosePreview(){document.getElementById('t13Modal').style.display='none';}
+document.addEventListener('keydown',function(e){var m=document.getElementById('t13Modal');if(m&&m.style.display==='flex'){if(e.key==='ArrowRight')t13NextImg();if(e.key==='ArrowLeft')t13PrevImg();if(e.key==='Escape')t13ClosePreview();}});
+function t13Reset(){ t13Files=[]; t13Selected.clear(); t13Results=[]; t13PreviewIdx=0; t13EditorImg=null; t13AiAnalysis=null; document.getElementById('t13Out').innerHTML=""; document.getElementById('t13OutEmpty').style.display='block'; document.getElementById('t13SelectedBox').style.display='none'; document.getElementById('t13FileName').innerText="No Images Selected - Click Here"; document.getElementById('t13Status').innerText=""; document.getElementById('t13AllBtn').style.display='none'; document.getElementById('t13DownloadAllBtn').style.display='none'; document.getElementById('t13ZipBtn').style.display='none'; document.getElementById('t13ShareBtn').style.display='none'; document.getElementById('t13EmptyBox').style.display='block'; document.getElementById('t13EditorCanvas').style.display='none'; document.getElementById('t13CropBox').style.display='none'; document.getElementById('t13AiBox').style.display='none'; document.getElementById('t13AiThinking').style.display='none'; t13Log("Reset done"); }
+t13Log("Tool 13 AI Premium Loaded ✅");
+</script>
+<!-- ================= TOOL 13 AI V2 - END ================= -->
 <!-- TOOL 14 -->
 <div class="tool" id="tool-14"><div class="panel"><h3>🎨 Tool 14 - Color Palette</h3>
 <!-- YAHAN TOOL 14 KA CODE PASTE KARO -->
