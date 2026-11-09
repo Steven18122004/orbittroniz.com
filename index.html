@@ -308,10 +308,113 @@ try{ let f=new File([PDF_BLOB2], (document.getElementById('name2').value||"My Im
 function clear2(){ IMGS2=[]; PDF_BLOB2=null; document.getElementById('f2').value=""; document.getElementById('list2').innerHTML=""; document.getElementById('s2').innerText=""; }
 </script>
 <!-- TOOL 2 - IMAGE TO PDF - END -->  
-<!-- ================= TOOL 3 - QR GENERATOR - START ================= -->
-<div class="tool panel" id="tool-3"><h3>📱 3. QR Generator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(3)">⬇️ Download</button><button class="btn" onclick="editSinglePage(3)">✏️ Edit Single Page</button></div><label class="label">QR Type</label><select id="t3type" class="select" onchange="t3Change()"><option value="link">Website Link</option><option value="upi">UPI Payment</option><option value="whatsapp">WhatsApp</option><option value="wifi">WiFi</option><option value="text">Text</option></select><div id="t3fields"></div><label class="label">Shop / Label</label><input type="text" id="t3label" class="input" value="Sharma Jewellers"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t3Generate()">Generate QR</button><div id="qr3" style="margin-top:10px;background:#fff;padding:12px;display:inline-block;border-radius:12px"></div><div class="out" id="out3"></div></div>
-<!-- ================= TOOL 3 - QR GENERATOR - END ================= -->
+<!-- TOOL 3 - QR GENERATOR - START -->
+<div id="t3" style="background:#121d3a;border:1px solid #1e2d5a;border-radius:16px;padding:14px;color:#fff;font-family:system-ui">
+<h3 style="margin:0;text-align:center">📱 QR Generator Pro</h3>
+<p style="font-size:11px;color:#94a3b8;text-align:center">Make QR For Payment, WhatsApp, WiFi, Link - Free</p>
 
+<!-- QR TYPE -->
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">QR TYPE - Choose One</label>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px">
+<button onclick="setType3('link',this)" data-ty="link" style="padding:11px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border:none;cursor:pointer">🔗 Link<br><small>Website</small></button>
+<button onclick="setType3('upi',this)" data-ty="upi" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">💰 UPI<br><small>Payment</small></button>
+<button onclick="setType3('whatsapp',this)" data-ty="whatsapp" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">💬 WhatsApp<br><small>Chat</small></button>
+<button onclick="setType3('wifi',this)" data-ty="wifi" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">📶 WiFi<br><small>Connect</small></button>
+</div>
+<button onclick="setType3('text',this)" data-ty="text" style="width:100%;margin-top:6px;padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">📝 Text QR - Any Text</button>
+
+<!-- FIELDS - CHANGE BY TYPE -->
+<div id="fields3" style="margin-top:10px"></div>
+
+<!-- LABEL + COLOR + SIZE -->
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">SHOP / LABEL - Shows Below QR</label>
+<input type="text" id="label3" value="Sharma Jewellers" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">QR COLOR - Shop Brand Color</label>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-top:6px">
+<button onclick="setColor3('#000000',this)" data-cl="#000000" style="padding:10px;border-radius:10px;background:#000;color:#fff;border:2px solid #22d3ee;cursor:pointer">Black</button>
+<button onclick="setColor3('#1e40af',this)" data-cl="#1e40af" style="padding:10px;border-radius:10px;background:#1e40af;color:#fff;border:1px solid #1e2d5a;cursor:pointer">Blue</button>
+<button onclick="setColor3('#166534',this)" data-cl="#166534" style="padding:10px;border-radius:10px;background:#166534;color:#fff;border:1px solid #1e2d5a;cursor:pointer">Green</button>
+<button onclick="setColor3('#7c3aed',this)" data-cl="#7c3aed" style="padding:10px;border-radius:10px;background:#7c3aed;color:#fff;border:1px solid #1e2d5a;cursor:pointer">Purple</button>
+</div>
+<label style="font-size:11px;font-weight:800;display:block;margin-top:10px">QR SIZE - Choose Which Size You Want</label>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px">
+<button onclick="setSize3('small',this)" data-sz3="small" style="padding:11px;border-radius:10px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">📱 SMALL<br><small>WhatsApp</small></button>
+<button onclick="setSize3('large',this)" data-sz3="large" style="padding:11px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;border:none;cursor:pointer">💎 LARGE<br><small>Print - Shop</small></button>
+</div>
+
+<button onclick="gen3()" style="width:100%;margin-top:10px;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#22d3ee);color:#fff;font-weight:900;cursor:pointer">✨ GENERATE QR - START</button>
+<button onclick="edit3()" style="width:100%;margin-top:8px;padding:11px;border-radius:12px;background:#f59e0b;color:#fff;border:none;font-weight:800;cursor:pointer">✏️ Edit / Regenerate QR</button>
+
+<!-- QR PREVIEW -->
+<div style="text-align:center;margin-top:12px;background:#fff;border-radius:14px;padding:14px">
+<div id="qrBox3" style="display:inline-block"></div>
+<div id="qrLabel3" style="color:#111;font-weight:900;margin-top:8px">Sharma Jewellers</div>
+<div id="qrInfo3" style="color:#666;font-size:11px">Scan With Phone Camera</div>
+</div>
+
+<button onclick="dl3()" style="width:100%;margin-top:10px;padding:12px;border-radius:12px;background:#22c55e;color:#fff;font-weight:800;border:none;cursor:pointer">⬇️ DOWNLOAD QR IMAGE</button>
+<button onclick="sh3()" style="width:100%;margin-top:8px;padding:12px;border-radius:12px;background:#2563eb;color:#fff;font-weight:800;border:none;cursor:pointer">📤 SHARE QR - WhatsApp</button>
+<button onclick="print3()" style="width:100%;margin-top:8px;padding:11px;border-radius:12px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">🖨️ Print QR</button>
+<button onclick="clear3()" style="width:100%;margin-top:8px;padding:10px;border-radius:12px;background:#162143;color:#fff;border:1px solid #1e2d5a;cursor:pointer">Clear / New QR</button>
+<div id="s3" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+let TYPE3='link', COLOR3='#000000', SIZE3='large', DATA3='';
+function setType3(t,btn){ TYPE3=t; document.querySelectorAll('[data-ty]').forEach(b=>{b.style.background='#162143';b.style.border='1px solid #1e2d5a'}); btn.style.background='linear-gradient(135deg,#7c3aed,#22d3ee)'; btn.style.border='none'; renderFields3(); }
+function setColor3(c,btn){ COLOR3=c; document.querySelectorAll('[data-cl]').forEach(b=>b.style.border='1px solid #1e2d5a'); btn.style.border='2px solid #22d3ee'; if(DATA3) gen3(); }
+function setSize3(s,btn){ SIZE3=s; document.querySelectorAll('[data-sz3]').forEach(b=>{b.style.background='#162143';b.style.border='1px solid #1e2d5a'}); btn.style.background='linear-gradient(135deg,#7c3aed,#22d3ee)'; btn.style.border='none'; if(DATA3) gen3(); }
+function renderFields3(){
+let f=document.getElementById('fields3');
+if(TYPE3=='link') f.innerHTML='<label style="font-size:11px;font-weight:800">Website Link</label><input type="text" id="inLink3" value="https://orbittroniz.com" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">';
+else if(TYPE3=='upi') f.innerHTML='<label style="font-size:11px;font-weight:800">UPI ID - Example: sharma@upi</label><input type="text" id="inUpi3" value="sharma@upi" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a"><label style="font-size:11px;font-weight:800;display:block;margin-top:8px">Payee Name - Shop Name</label><input type="text" id="inName3" value="Sharma Jewellers" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a"><label style="font-size:11px;font-weight:800;display:block;margin-top:8px">Amount ₹ - Leave Empty For Any Amount</label><input type="number" id="inAmt3" value="500" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">';
+else if(TYPE3=='whatsapp') f.innerHTML='<label style="font-size:11px;font-weight:800">WhatsApp Number - 10 Digit</label><input type="text" id="inPhone3" value="9876543210" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a"><label style="font-size:11px;font-weight:800;display:block;margin-top:8px">Message - Customer Sees This</label><input type="text" id="inMsg3" value="Hello, I Want To Buy" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">';
+else if(TYPE3=='wifi') f.innerHTML='<label style="font-size:11px;font-weight:800">WiFi Name - SSID</label><input type="text" id="inSsid3" value="SharmaWiFi" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a"><label style="font-size:11px;font-weight:800;display:block;margin-top:8px">WiFi Password</label><input type="text" id="inPass3" value="12345678" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">';
+else f.innerHTML='<label style="font-size:11px;font-weight:800">Any Text</label><textarea id="inText3" rows="2" style="width:100%;background:#0a1224;color:#fff;padding:10px;border-radius:10px;border:1px solid #1e2d5a">Hello, Welcome to Sharma Jewellers</textarea>';
+}
+function getData3(){
+if(TYPE3=='link'){ let u=document.getElementById('inLink3').value.trim()||"https://orbittroniz.com"; if(!u.startsWith('http')) u="https://"+u; return u; }
+if(TYPE3=='upi'){ let upi=document.getElementById('inUpi3').value.trim()||"sharma@upi"; let nm=document.getElementById('inName3').value.trim()||"Shop"; let am=document.getElementById('inAmt3').value.trim(); let d="upi://pay?pa="+encodeURIComponent(upi)+"&pn="+encodeURIComponent(nm)+"&cu=INR"; if(am) d+="&am="+am; return d; }
+if(TYPE3=='whatsapp'){ let ph=(document.getElementById('inPhone3').value||"").replace(/\D/g,''); if(ph.length==10) ph="91"+ph; if(ph.length!=12) return null; return "https://wa.me/"+ph+"?text="+encodeURIComponent(document.getElementById('inMsg3').value||"Hello"); }
+if(TYPE3=='wifi'){ return "WIFI:T:WPA;S:"+(document.getElementById('inSsid3').value||"WiFi")+";P:"+(document.getElementById('inPass3').value||"")+ ";;"; }
+return document.getElementById('inText3').value||"Hello";
+}
+function gen3(){
+try{
+let data=getData3(); if(data===null) return alert("Enter Valid 10 Digit WhatsApp Number");
+if(!data) return alert("Enter Data First");
+DATA3=data; let box=document.getElementById('qrBox3'); box.innerHTML="";
+if(typeof QRCode=='undefined') return alert("QR Library Loading - Refresh Page");
+let size=SIZE3=='small'?160:240;
+new QRCode(box,{text:data,width:size,height:size,colorDark:COLOR3,colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
+document.getElementById('qrLabel3').innerText=document.getElementById('label3').value||"Orbittroniz";
+document.getElementById('qrInfo3').innerText="Type: "+TYPE3.toUpperCase()+" - Size: "+SIZE3.toUpperCase()+" - Scan With Phone Camera";
+document.getElementById('s3').innerText="QR Ready - Type: "+TYPE3+" - Scan To Test";
+}catch(e){ alert("QR Error: "+e.message); }
+}
+function edit3(){ document.getElementById('qrBox3').innerHTML=""; document.getElementById('s3').innerText="Edit Data Above And Click Generate Again"; window.scrollTo({top:0,behavior:'smooth'}); }
+function dl3(){
+let img=document.querySelector('#qrBox3 img')||document.querySelector('#qrBox3 canvas');
+if(!img) return alert("Generate QR First");
+if(img.tagName=='CANVAS'){ let a=document.createElement('a'); a.href=img.toDataURL('image/png'); a.download="QR-"+TYPE3+".png"; a.click(); }
+else { let a=document.createElement('a'); a.href=img.src; a.download="QR-"+TYPE3+".png"; a.click(); }
+document.getElementById('s3').innerText="QR Downloaded";
+}
+async function sh3(){
+let img=document.querySelector('#qrBox3 img')||document.querySelector('#qrBox3 canvas');
+if(!img) return alert("Generate QR First");
+try{
+let blob; if(img.tagName=='CANVAS'){ blob=await new Promise(r=>img.toBlob(r,'image/png')); } else { let res=await fetch(img.src); blob=await res.blob(); }
+let file=new File([blob],"QR-"+TYPE3+".png",{type:'image/png'});
+if(navigator.canShare && navigator.canShare({files:[file]})){ await navigator.share({files:[file], text:"Scan This QR - "+(document.getElementById('label3').value||"")+" - orbittroniz.com"}); }
+else { dl3(); }
+}catch(e){ dl3(); }
+}
+function print3(){ if(!DATA3) return alert("Generate QR First"); let w=window.open('','_blank'); if(!w) return alert("Allow Popup"); let img=document.querySelector('#qrBox3 img'); let src=img?img.src:""; w.document.write('<html><body style="text-align:center;font-family:Arial"><h2>'+(document.getElementById('label3').value||"")+'</h2><img src="'+src+'" style="width:300px"><p>Scan With Phone Camera</p><script>window.onload=function(){window.print()}<\/script></body></html>'); w.document.close(); }
+function clear3(){ document.getElementById('qrBox3').innerHTML=""; document.getElementById('s3').innerText=""; DATA3=""; }
+renderFields3();
+</script>
+<!-- TOOL 3 - QR GENERATOR - END -->
 <!-- ================= TOOL 4 - BARCODE GENERATOR - START ================= -->
 <div class="tool panel" id="tool-4"><h3>🏷️ 4. Barcode Generator</h3><div class="tool-actions"><button class="btn primary" onclick="downloadToolResult(4)">⬇️ Download</button><button class="btn" onclick="editSinglePage(4)">✏️ Edit Single Page</button></div><label class="label">Product Name</label><input type="text" id="t4prod" class="input" value="Gold Ring"><label class="label">Barcode Code - Unique</label><input type="text" id="t4code" class="input" value="890123456789"><button class="btn" onclick="t4Random()">🎲 New Unique Code</button><label class="label">Price ₹</label><input type="number" id="t4price" class="input" value="799"><label class="label">MRP ₹</label><input type="number" id="t4mrp" class="input" value="999"><button class="btn primary" style="width:100%;margin-top:10px" onclick="t4Generate()">Generate Barcode</button><svg id="svg4" style="background:#fff;width:100%;height:80px;margin-top:10px"></svg><div class="out" id="out4"></div></div>
 <!-- ================= TOOL 4 - BARCODE GENERATOR - END ================= -->
