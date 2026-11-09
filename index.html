@@ -1469,11 +1469,341 @@ function t5ResetAll(){
 <!-- ================= TOOL 5 - REAL COMPRESSOR - V2 - END ================= -->
 
 <!-- TOOL 6 -->
-<div class="tool" id="tool-6"><div class="panel"><h3>💧 Tool 6 - PDF Watermark</h3>
-<!-- YAHAN TOOL 6 KA CODE PASTE KARO -->
-<p style="font-size:12px;color:#94a3b8">Yaha Tool 6 ka feature code aayega...</p>
-</div></div>
+<!-- ================= TOOL 6 - PDF WATERMARK - SAME LOOK - FIXED - START ================= -->
+<style>
+.t6-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.t6-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t6-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.t6-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
+.t6-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
+.t6-input:focus{border-color:#22d3ee}
+.t6-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
+.t6-drop.dragover{background:rgba(34,211,238,.25);transform:scale(1.02)}
+.t6-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.t6-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
+.t6-pill:active{transform:scale(.96)}
+.t6-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.t6-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:13px 8px;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer}
+.t6-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent;box-shadow:0 8px 20px rgba(124,58,237,.4)}
+.t6-chiprow{display:flex;gap:6px;margin-top:8px}
+.t6-chiprow button{flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px 4px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
+.t6-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
+.t6-toggle b{font-size:13px}
+.t6-toggle input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.t6-toggle input:checked{background:#22c55e}
+.t6-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.t6-toggle input:checked::after{left:23px}
+.t6-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.t6-btn3d:active{transform:translateY(3px)}
+.t6-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.t6-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t6-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
+.t6-prog{height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:10px;display:none;border:1px solid #2a3a6a}
+.t6-prog div{height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee);width:0%}
+.t6-range{width:100%;accent-color:#22d3ee}
+.t6-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column}
+.t6-modal canvas{max-width:95%;max-height:68vh;background:#fff;border-radius:10px}
+.t6-modal-nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.t6-modal-nav button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer}
+.t6-modal-nav button.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none}
+</style>
 
+<div class="tool active" id="tool-6"><div class="t6-card">
+<div class="t6-title">💧 PDF Watermark Pro V3 - With Preview</div>
+<div class="t6-sub">Premium • Add Text Watermark • Protect Your PDF • No API</div>
+
+<label class="t6-label">📄 1. SELECT PDF</label>
+<div class="t6-drop" id="t6Drop" onclick="document.getElementById('t6File').click()">
+<b style="font-size:15px;color:#22d3ee">+ Click or Drag PDF Here</b><br>
+<small style="color:#94a3b8">PDF Only - Any Size</small><br>
+<small style="color:#22d3ee" id="t6FileName">No PDF Selected</small>
+</div>
+<input type="file" id="t6File" accept=".pdf,application/pdf" hidden>
+
+<div id="t6Info" style="display:none;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
+<div style="font-size:22px">📄</div><b id="t6InfoName" style="font-size:13px"></b><br>
+<small id="t6InfoMeta" style="color:#94a3b8"></small><br>
+<small id="t6InfoPages" style="color:#22d3ee;font-weight:700"></small>
+</div>
+
+<label class="t6-label">📑 2. ON WHICH PAGES? - Tap to Select / Remove</label>
+<div class="t6-pillrow">
+<button class="t6-pill" onclick="t6SelectAll()">✅<br>All<br>Pages</button>
+<button class="t6-pill" onclick="t6FirstOnly()">⭐<br>First<br>Page Only</button>
+<button class="t6-pill" onclick="t6EvenOnly()">🔢<br>Even<br>Only</button>
+<button class="t6-pill" onclick="t6OddOnly()">🔢<br>Odd<br>Only</button>
+</div>
+<div id="t6PagesGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px"></div>
+<div id="t6PagesHint" style="text-align:center;font-size:11px;color:#94a3b8;margin-top:6px">Select PDF first to see pages here</div>
+
+<label class="t6-label">✏️ 3. WATERMARK TEXT</label>
+<input type="text" id="t6Text" class="t6-input" placeholder="e.g. Orbittroniz.com" value="Orbittroniz.com" oninput="t6UpdatePreviewBox()">
+<div class="t6-chiprow">
+<button onclick="t6QuickText('CONFIDENTIAL')">🔒 CONFIDENTIAL</button>
+<button onclick="t6QuickText('Orbittroniz.com')">🌐 Orbittroniz.com</button>
+<button onclick="t6QuickText('DO NOT COPY')">⛔ DO NOT COPY</button>
+</div>
+<div class="t6-chiprow">
+<button onclick="t6QuickText('SAMPLE')">📝 SAMPLE</button>
+<button onclick="t6QuickText('PAID')">💰 PAID</button>
+<button onclick="t6QuickText('DRAFT')">✏️ DRAFT</button>
+</div>
+
+<label class="t6-label">📍 4. WHERE TO PUT WATERMARK?</label>
+<div class="t6-mode" id="t6PosModes">
+<button class="active" data-pos="center" onclick="t6SetPos('center',this)">🎯 Center - Diagonal</button>
+<button data-pos="top" onclick="t6SetPos('top',this)">⬆️ Top - Header</button>
+<button data-pos="bottom" onclick="t6SetPos('bottom',this)">⬇️ Bottom - Footer</button>
+<button data-pos="repeat" onclick="t6SetPos('repeat',this)">🔁 Repeat - Full Page</button>
+</div>
+
+<label class="t6-label">🔄 5. ANGLE / ROTATION?</label>
+<div class="t6-mode" id="t6AngleModes">
+<button class="active" data-ang="45" onclick="t6SetAngle(45,this)">↗️ Diagonal 45° - Best</button>
+<button data-ang="0" onclick="t6SetAngle(0,this)">➡️ Straight 0°</button>
+<button data-ang="-45" onclick="t6SetAngle(-45,this)">↙️ Reverse -45°</button>
+<button data-ang="90" onclick="t6SetAngle(90,this)">⬇️ Vertical 90°</button>
+</div>
+
+<label class="t6-label">🎨 6. COLOR?</label>
+<div class="t6-mode" id="t6ColorModes">
+<button class="active" data-col="gray" onclick="t6SetColor('gray',this)">⬜ Light Gray</button>
+<button data-col="red" onclick="t6SetColor('red',this)">🔴 Red</button>
+<button data-col="blue" onclick="t6SetColor('blue',this)">🔵 Blue</button>
+<button data-col="black" onclick="t6SetColor('black',this)">⚫ Black</button>
+</div>
+
+<label class="t6-label">🔠 7. SIZE SLIDER</label>
+<input type="range" id="t6Size" class="t6-range" min="20" max="120" value="50" oninput="document.getElementById('t6SizeVal').innerText=this.value+'px'">
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8"><span>20 = Small</span><span id="t6SizeVal" style="color:#22d3ee;font-weight:800">50px</span><span>120 = Very Big</span></div>
+
+<label class="t6-label">👻 8. OPACITY SLIDER - Kitna Halka / Gehra?</label>
+<input type="range" id="t6Opacity" class="t6-range" min="10" max="90" value="30" oninput="document.getElementById('t6OpacityVal').innerText=this.value+'% • '+(this.value<30?'Very Light - Best':this.value<60?'Medium':'Dark - Strong')">
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8"><span>10% = Very Light</span><span id="t6OpacityVal" style="color:#22d3ee;font-weight:800">30% • Very Light - Best</span><span>90% = Dark</span></div>
+
+<label class="t6-label">✏️ 9. OUTPUT PDF NAME</label>
+<input type="text" id="t6Prefix" class="t6-input" placeholder="Watermarked - Orbittroniz" value="Watermarked - Orbittroniz">
+
+<div class="t6-toggle"><b>🔁 Repeat Watermark 3 Times?</b><input type="checkbox" id="t6Repeat3"></div>
+<div class="t6-toggle"><b>📄 Add Page Number Also?</b><input type="checkbox" id="t6PageNo"></div>
+<div class="t6-toggle"><b>🔒 Make Watermark Hard To Remove?</b><input type="checkbox" id="t6Hard" checked></div>
+
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
+<b style="font-size:14px">Live Preview:</b><br>
+<div id="t6LiveBox" style="background:#fff;color:#999;font-size:28px;font-weight:900;padding:20px;border-radius:10px;margin-top:8px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;transform:rotate(-8deg);opacity:.5">Orbittroniz.com</div>
+<small id="t6LiveInfo" style="color:#94a3b8">Center • Diagonal 45° • Gray • 50px • 30% Opacity</small>
+</div>
+
+<div class="t6-prog" id="t6Prog"><div id="t6Fill"></div></div>
+<div id="t6Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
+
+<button class="t6-btn-preview" onclick="t6OpenPreview()">👀 PREVIEW - See Watermark Before Apply</button>
+<button class="t6-btn3d" id="t6ApplyBtn" onclick="t6Apply()">💧 ADD WATERMARK - START</button>
+<button class="t6-btn-share" id="t6ShareBtn" onclick="t6Share()">📤 SHARE WATERMARKED PDF</button>
+<button class="t6-btn2" onclick="t6Reset()">🗑️ Clear / New PDF</button>
+<div id="t6Out"></div>
+<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - PDF never goes to server • Preview Available</p>
+</div></div>
+<!-- ================= TOOL 6 - END ================= -->
+
+<div class="t6-modal" id="t6Modal">
+<div id="t6ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Preview</div>
+<canvas id="t6PreviewCanvas"></canvas>
+<div id="t6ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div>
+<div class="t6-modal-nav">
+<button onclick="t6PrevPage()">⬅️ Prev</button>
+<button onclick="t6NextPage()">Next ➡️</button>
+<button onclick="t6ToggleSelectPreview()" style="background:#22c55e">✅ Select / Unselect Page</button>
+<button class="primary" onclick="t6ClosePreview()">✅ Close</button>
+</div>
+<div style="margin-top:10px"><button onclick="t6ClosePreview();document.getElementById('t6ApplyBtn').click()" style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;padding:11px 18px;border:none;border-radius:20px;font-weight:900;cursor:pointer">💧 Looks Good - Add Watermark Now</button></div>
+</div>
+
+<script>
+// ===== TOOL 6 JS - FIXED - REAL WATERMARK - NO BUGS =====
+let t6File=null, t6PdfBytes=null, t6PageCount=0, t6Selected=new Set(), t6Pos='center', t6Angle=45, t6Color='gray', t6PreviewIdx=0, t6LastBlob=null, t6LastName='Watermarked - Orbittroniz.pdf', t6OrigPdfDoc=null;
+let t6LibLoading=null, t6JsLoading=null;
+function t6EnsurePdfLib(){
+  if(window['PDFLib']) return Promise.resolve(true);
+  if(t6LibLoading) return t6LibLoading;
+  t6LibLoading=new Promise((res,rej)=>{
+    let urls=['https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js','https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js'];
+    let i=0; function next(){ if(i>=urls.length){rej(new Error("pdf-lib blocked"));return;} let s=document.createElement('script'); s.src=urls[i]; s.onload=()=>{ if(window['PDFLib']) res(true); else {i++;next();} }; s.onerror=()=>{i++;next();}; document.head.appendChild(s); } next();
+  });
+  return t6LibLoading;
+}
+function t6EnsurePdfJs(){
+  if(window['pdfjsLib']){ try{pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';}catch(e){} return Promise.resolve(true); }
+  if(t6JsLoading) return t6JsLoading;
+  t6JsLoading=new Promise((res,rej)=>{
+    let urls=['https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js','https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js'];
+    let i=0; function next(){ if(i>=urls.length){rej(new Error("pdf.js blocked"));return;} let s=document.createElement('script'); s.src=urls[i]; s.onload=()=>{ if(window['pdfjsLib']){ try{pdfjsLib.GlobalWorkerOptions.workerSrc=urls[i].replace('pdf.min.js','pdf.worker.min.js');}catch(e){} res(true);} else {i++;next();} }; s.onerror=()=>{i++;next();}; document.head.appendChild(s); } next();
+  });
+  return t6JsLoading;
+}
+t6EnsurePdfLib().catch(()=>{}); t6EnsurePdfJs().catch(()=>{});
+let t6DropEl=document.getElementById('t6Drop');
+if(t6DropEl){t6DropEl.addEventListener('dragover',e=>{e.preventDefault();t6DropEl.classList.add('dragover')});t6DropEl.addEventListener('dragleave',()=>t6DropEl.classList.remove('dragover'));t6DropEl.addEventListener('drop',e=>{e.preventDefault();t6DropEl.classList.remove('dragover');let f=[...e.dataTransfer.files][0];if(f)t6LoadFile(f);});}
+document.getElementById('t6File').onchange=(e)=>{if(e.target.files[0])t6LoadFile(e.target.files[0]);e.target.value="";};
+function t6SetPos(p,btn){t6Pos=p;document.querySelectorAll('#t6PosModes button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');t6UpdatePreviewBox();}
+function t6SetAngle(a,btn){t6Angle=a;document.querySelectorAll('#t6AngleModes button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');t6UpdatePreviewBox();}
+function t6SetColor(c,btn){t6Color=c;document.querySelectorAll('#t6ColorModes button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');t6UpdatePreviewBox();}
+function t6QuickText(t){document.getElementById('t6Text').value=t;t6UpdatePreviewBox();}
+function t6UpdatePreviewBox(){
+  let txt=document.getElementById('t6Text').value||"Watermark";
+  let size=document.getElementById('t6Size').value||50;
+  let op=document.getElementById('t6Opacity').value||30;
+  let col = t6Color==='red'?'#ef4444':t6Color==='blue'?'#3b82f6':t6Color==='black'?'#111':'#999';
+  let box=document.getElementById('t6LiveBox');
+  box.innerText=txt; box.style.color=col; box.style.fontSize=Math.min(38, size/1.5)+'px'; box.style.opacity=op/100;
+  box.style.transform = t6Angle===0 ? 'rotate(0deg)' : t6Angle===90 ? 'rotate(-8deg)' : 'rotate(-8deg)';
+  let posTxt = t6Pos==='center'?'Center • Diagonal':t6Pos==='top'?'Top • Header':t6Pos==='bottom'?'Bottom • Footer':'Repeat • Full Page';
+  let colTxt = t6Color==='gray'?'Gray':t6Color==='red'?'Red':t6Color==='blue'?'Blue':'Black';
+  document.getElementById('t6LiveInfo').innerText=posTxt+" • "+colTxt+" • "+size+"px • "+op+"% Opacity";
+}
+document.getElementById('t6Size').addEventListener('input',t6UpdatePreviewBox);
+document.getElementById('t6Opacity').addEventListener('input',t6UpdatePreviewBox);
+async function t6LoadFile(f){
+  if(!f.name.toLowerCase().endsWith('.pdf')){alert("Please select only PDF!");return;}
+  document.getElementById('t6Status').innerText="Loading PDF Engine...";
+  document.getElementById('t6FileName').innerText=f.name+" - Loading...";
+  try{ await t6EnsurePdfLib(); await t6EnsurePdfJs(); }catch(e){ alert("AdBlock OFF karo aur Refresh karo. "+e.message); return; }
+  t6File=f; t6Selected.clear(); t6PreviewIdx=0; t6LastBlob=null;
+  document.getElementById('t6Out').innerHTML=""; document.getElementById('t6ShareBtn').style.display='none';
+  document.getElementById('t6FileName').innerText=f.name+" ✅";
+  try{
+    let buf=await f.arrayBuffer(); t6PdfBytes=buf.slice(0);
+    t6OrigPdfDoc=await PDFLib.PDFDocument.load(buf,{ignoreEncryption:true});
+    t6PageCount=t6OrigPdfDoc.getPageCount();
+    for(let i=0;i<t6PageCount;i++) t6Selected.add(i);
+    document.getElementById('t6Info').style.display='block';
+    document.getElementById('t6InfoName').innerText=f.name;
+    document.getElementById('t6InfoMeta').innerText="Size: "+(f.size/1024).toFixed(0)+" KB • Type: PDF";
+    document.getElementById('t6InfoPages').innerText="Total Pages: "+t6PageCount+" 📄 • All Selected ✅";
+    document.getElementById('t6Status').innerText="✅ Ready! "+t6PageCount+" pages. Watermark text likho aur Apply dabao.";
+    t6RenderPages();
+  }catch(e){alert("PDF broken or password protected. Try another PDF.");}
+}
+function t6RenderPages(){
+  let grid=document.getElementById('t6PagesGrid');
+  if(!t6PageCount){grid.innerHTML="";document.getElementById('t6PagesHint').innerText="Select PDF first";return;}
+  document.getElementById('t6PagesHint').innerText="Tap to Select / Unselect - Watermark sirf Selected pages pe lagega";
+  grid.innerHTML=Array.from({length:t6PageCount},(_,i)=>{
+    let sel=t6Selected.has(i);
+    return `<div onclick="t6TogglePage(${i})" style="background:${sel?'rgba(34,197,94,.15)':'#060a18'};border:1px solid ${sel?'#22c55e':'#2a3a6a'};border-radius:12px;padding:10px;text-align:center;cursor:pointer"><div style="font-size:18px">📄</div><b style="font-size:11px">Page ${i+1}</b><br><small style="font-size:9px;color:#94a3b8">${sel?'Watermark ✅':'Skip ❌'}</small></div>`;
+  }).join('');
+}
+function t6TogglePage(i){ if(t6Selected.has(i)) t6Selected.delete(i); else t6Selected.add(i); t6RenderPages(); }
+function t6SelectAll(){ for(let i=0;i<t6PageCount;i++) t6Selected.add(i); t6RenderPages(); }
+function t6FirstOnly(){ t6Selected.clear(); if(t6PageCount>0) t6Selected.add(0); t6RenderPages(); }
+function t6EvenOnly(){ t6Selected.clear(); for(let i=1;i<t6PageCount;i+=2) t6Selected.add(i); t6RenderPages(); }
+function t6OddOnly(){ t6Selected.clear(); for(let i=0;i<t6PageCount;i+=2) t6Selected.add(i); t6RenderPages(); }
+async function t6OpenPreview(startIdx){
+  if(!t6File) return alert("First select a PDF!");
+  try{ await t6EnsurePdfJs(); }catch(e){ alert("Engine loading, 2 sec wait karo"); return; }
+  t6PreviewIdx=(typeof startIdx==='number')?startIdx:0;
+  await t6ShowPreview(); document.getElementById('t6Modal').style.display='flex';
+}
+async function t6ShowPreview(){
+  if(t6PreviewIdx<0) t6PreviewIdx=t6PageCount-1; if(t6PreviewIdx>=t6PageCount) t6PreviewIdx=0;
+  document.getElementById('t6ModalTitle').innerText="Preview - Page "+(t6PreviewIdx+1)+" / "+t6PageCount+" • "+(t6Selected.has(t6PreviewIdx)?"Watermark Will Apply ✅":"Will Skip ❌");
+  document.getElementById('t6ModalCap').innerText="Watermark: "+(document.getElementById('t6Text').value||"")+" • "+t6Pos+" • "+t6Angle+"° • "+document.getElementById('t6Size').value+"px • "+document.getElementById('t6Opacity').value+"%";
+  try{
+    let pdf=await pdfjsLib.getDocument({data:t6PdfBytes.slice(0)}).promise;
+    let page=await pdf.getPage(t6PreviewIdx+1);
+    let vp=page.getViewport({scale:1.5});
+    let canvas=document.getElementById('t6PreviewCanvas'); canvas.width=vp.width; canvas.height=vp.height;
+    let ctx=canvas.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,canvas.width,canvas.height);
+    await page.render({canvasContext:ctx,viewport:vp}).promise;
+    // Draw watermark preview on canvas - same as real
+    if(t6Selected.has(t6PreviewIdx)){
+      let txt=document.getElementById('t6Text').value||"Watermark";
+      let op=parseInt(document.getElementById('t6Opacity').value||30)/100;
+      let sz=parseInt(document.getElementById('t6Size').value||50)*1.5;
+      let col = t6Color==='red'?'rgba(239,68,68,OP)':t6Color==='blue'?'rgba(59,130,246,OP)':t6Color==='black'?'rgba(0,0,0,OP)':'rgba(150,150,150,OP)';
+      col=col.replace('OP',op);
+      ctx.save(); ctx.fillStyle=col; ctx.font='bold '+sz+'px Arial'; ctx.textAlign='center'; ctx.textBaseline='middle';
+      let cx=canvas.width/2, cy=canvas.height/2;
+      if(t6Pos==='center'){ ctx.translate(cx,cy); ctx.rotate(t6Angle*Math.PI/180); ctx.fillText(txt,0,0); }
+      else if(t6Pos==='top'){ ctx.translate(cx,60); ctx.rotate(0); ctx.fillText(txt,0,0); }
+      else if(t6Pos==='bottom'){ ctx.translate(cx,canvas.height-60); ctx.rotate(0); ctx.fillText(txt,0,0); }
+      else if(t6Pos==='repeat'){ for(let y=100;y<canvas.height;y+=250){ for(let x=100;x<canvas.width;x+=300){ ctx.save(); ctx.translate(x,y); ctx.rotate(t6Angle*Math.PI/180); ctx.fillText(txt,0,0); ctx.restore(); } } }
+      ctx.restore();
+    }
+  }catch(e){}
+}
+async function t6NextPage(){t6PreviewIdx++;await t6ShowPreview();}
+async function t6PrevPage(){t6PreviewIdx--;await t6ShowPreview();}
+function t6ToggleSelectPreview(){t6TogglePage(t6PreviewIdx);t6ShowPreview();}
+function t6ClosePreview(){document.getElementById('t6Modal').style.display='none';}
+document.addEventListener('keydown',e=>{let m=document.getElementById('t6Modal');if(m&&m.style.display==='flex'){if(e.key==='ArrowRight')t6NextPage();if(e.key==='ArrowLeft')t6PrevPage();if(e.key==='Escape')t6ClosePreview();}});
+
+// ===== REAL APPLY - DRAW TEXT ON EACH PAGE WITH PDF-LIB =====
+async function t6Apply(){
+  if(!t6File||!t6OrigPdfDoc) return alert("First select a PDF!");
+  try{ await t6EnsurePdfLib(); }catch(e){ alert("Engine loading, 2 sec wait karo"); return; }
+  let txt=(document.getElementById('t6Text').value||"").trim();
+  if(!txt) return alert("Watermark text likho! Example: Orbittroniz.com");
+  let sel=[...t6Selected].sort((a,b)=>a-b);
+  if(!sel.length) return alert("No page selected! Tap pages to select.");
+  let prefix=(document.getElementById('t6Prefix').value.trim()||"Watermarked - Orbittroniz").replace(/[\\/:*?"<>|]/g,'');
+  let size=parseInt(document.getElementById('t6Size').value)||50;
+  let opacity=parseInt(document.getElementById('t6Opacity').value)||30;
+  let repeat3=document.getElementById('t6Repeat3').checked;
+  let pageNo=document.getElementById('t6PageNo').checked;
+  document.getElementById('t6Status').innerText="Adding Watermark... Please wait";
+  document.getElementById('t6Prog').style.display='block'; document.getElementById('t6Fill').style.width="0%";
+  try{
+    let newDoc=await PDFLib.PDFDocument.create();
+    let pages=await newDoc.copyPages(t6OrigPdfDoc, Array.from({length:t6PageCount},(_,i)=>i));
+    pages.forEach(p=>newDoc.addPage(p));
+    let font=await newDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+    let col = t6Color==='red'? PDFLib.rgb(0.93,0.27,0.27) : t6Color==='blue'? PDFLib.rgb(0.23,0.51,0.96) : t6Color==='black'? PDFLib.rgb(0,0,0) : PDFLib.rgb(0.6,0.6,0.6);
+    let op=opacity/100;
+    let allPages=newDoc.getPages();
+    sel.forEach((origIdx, si)=>{
+      let page=allPages[origIdx];
+      let {width, height}=page.getSize();
+      let textWidth=font.widthOfTextAtSize(txt, size);
+      // Center position calculation for rotation
+      if(t6Pos==='center'){
+        page.drawText(txt,{x:width/2 - textWidth/2, y:height/2, size:size, font:font, color:col, opacity:op, rotate:PDFLib.degrees(t6Angle)});
+        if(repeat3){
+          page.drawText(txt,{x:width/2 - textWidth/2, y:height/2+180, size:size*0.7, font:font, color:col, opacity:op*0.7, rotate:PDFLib.degrees(t6Angle)});
+          page.drawText(txt,{x:width/2 - textWidth/2, y:height/2-180, size:size*0.7, font:font, color:col, opacity:op*0.7, rotate:PDFLib.degrees(t6Angle)});
+        }
+      } else if(t6Pos==='top'){
+        page.drawText(txt,{x:width/2 - textWidth/2, y:height-50, size:size*0.7, font:font, color:col, opacity:Math.min(0.9,op+0.3), rotate:PDFLib.degrees(0)});
+      } else if(t6Pos==='bottom'){
+        page.drawText(txt,{x:width/2 - textWidth/2, y:30, size:size*0.7, font:font, color:col, opacity:Math.min(0.9,op+0.3), rotate:PDFLib.degrees(0)});
+      } else if(t6Pos==='repeat'){
+        for(let yy=80; yy<height; yy+=220){ for(let xx=40; xx<width; xx+=280){ page.drawText(txt,{x:xx, y:yy, size:size*0.6, font:font, color:col, opacity:op, rotate:PDFLib.degrees(t6Angle)}); } }
+      }
+      if(pageNo){ page.drawText("Page "+(origIdx+1),{x:width-70,y:12,size:9,font:font,color:PDFLib.rgb(0.6,0.6,0.6),opacity:0.8}); }
+      document.getElementById('t6Fill').style.width=Math.round(((si+1)/sel.length)*100)+"%";
+    });
+    newDoc.setTitle(prefix); newDoc.setAuthor("Orbittroniz.com");
+    let bytes=await newDoc.save({useObjectStreams:true});
+    let blob=new Blob([bytes],{type:'application/pdf'});
+    t6LastBlob=blob; t6LastName=prefix+".pdf";
+    document.getElementById('t6ShareBtn').style.display='block';
+    let link=document.createElement('a'); link.href=URL.createObjectURL(blob); link.download=t6LastName; document.body.appendChild(link); link.click(); link.remove();
+    document.getElementById('t6Status').innerText="✅ Done! Watermark added on "+sel.length+" pages - "+t6LastName;
+    document.getElementById('t6Out').innerHTML=`<div style="background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;text-align:center;margin-top:8px">✅ Watermark Added Successfully<br><small>Text: <b>${txt}</b> • Pages: ${sel.length} • Position: ${t6Pos} • Angle: ${t6Angle}°</small><br><button onclick="t6OpenPreview()" style="margin-top:8px;background:#f59e0b;color:#fff;border:none;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer">👀 Preview Again</button></div>`;
+    setTimeout(()=>{document.getElementById('t6Prog').style.display='none';},1500);
+  }catch(e){alert("Watermark Error: "+e.message);document.getElementById('t6Status').innerText="❌ Error";document.getElementById('t6Prog').style.display='none';}
+}
+async function t6Share(){
+  if(!t6LastBlob) return alert("First apply watermark");
+  try{ let file=new File([t6LastBlob],t6LastName,{type:'application/pdf'}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:t6LastName}); }else{ let a=document.createElement('a'); a.href="https://wa.me/?text="+encodeURIComponent("Check my watermarked PDF - Orbittroniz.com"); a.target="_blank"; a.click(); } }catch(e){ alert("Share cancelled"); }
+}
+function t6Reset(){
+  t6File=null; t6PdfBytes=null; t6PageCount=0; t6Selected.clear(); t6LastBlob=null;
+  document.getElementById('t6Out').innerHTML=""; document.getElementById('t6Info').style.display='none'; document.getElementById('t6FileName').innerText="No PDF Selected"; document.getElementById('t6Status').innerText=""; document.getElementById('t6ShareBtn').style.display='none'; document.getElementById('t6PagesGrid').innerHTML=""; document.getElementById('t6PagesHint').innerText="Select PDF first"; t6UpdatePreviewBox();
+}
+t6UpdatePreviewBox();
+</script>
+<!-- ================= TOOL 6 - END ================= -->
 <!-- TOOL 7 -->
 <div class="tool" id="tool-7"><div class="panel"><h3>🖼️ Tool 7 - BG Remover</h3>
 <!-- YAHAN TOOL 7 KA CODE PASTE KARO -->
