@@ -6591,10 +6591,628 @@ t15SetTemplate('sale'); t15UpdatePreview();
 <!-- ================= TOOL 15 AI V2 - END ================= -->  
 
 <!-- TOOL 16 -->
-<div class="tool" id="tool-16"><div class="panel"><h3>🎯 Tool 16 - Logo Maker</h3>
-<!-- YAHAN TOOL 16 KA CODE PASTE KARO -->
-<p style="font-size:12px;color:#94a3b8">Yaha Tool 16 ka feature code aayega...</p>
+  <!-- ================= TOOL 16 - LOGO MAKER - PREMIUM V2 - 20 TEMPLATES - START ================= -->
+<style>
+.t16-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.t16-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t16-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.t16-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
+.t16-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:13px;border-radius:12px;font-size:14px;outline:none}
+.t16-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
+.t16-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.t16-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
+.t16-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.t16-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:13px 8px;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer}
+.t16-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent}
+.t16-chiprow{display:flex;gap:6px;margin-top:8px}
+.t16-chiprow button{flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px 4px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
+.t16-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
+.t16-toggle b{font-size:13px}
+.t16-toggle input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.t16-toggle input:checked{background:#22c55e}
+.t16-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.t16-toggle input:checked::after{left:23px}
+.t16-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.t16-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.t16-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t16-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
+.t16-range{width:100%;accent-color:#22d3ee}
+.t16-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.t16-imgcard{background:#060a18;border:1px solid #2a3a6a;border-radius:14px;overflow:hidden}
+.t16-imgcard img{width:100%;height:130px;object-fit:cover;display:block}
+.t16-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column}
+.t16-modal canvas{max-width:95%;max-height:62vh;border-radius:10px;background:#fff}
+.t16-modal-nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.t16-modal-nav button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px 16px;border-radius:20px;font-weight:800;cursor:pointer}
+.t16-modal-nav button.primary{background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none}
+</style>
+
+<div class="tool active" id="tool-16"><div class="t16-card">
+<div class="t16-title">🎨 Logo Maker Pro - PREMIUM V2 💎</div>
+<div class="t16-sub">English Only • 20+ Templates • Premium Effects • Mockup • Logo Pack • AI • Transparent PNG</div>
+
+<!-- PREMIUM LIVE PREVIEW + MOCKUP -->
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;text-align:center">
+<b style="font-size:13px">👀 LIVE LOGO PREVIEW + MOCKUP - Logo Real Life Me Kaisa Lagega?</b>
+<div style="display:flex;gap:8px;margin-top:8px">
+<div style="flex:1;background:#fff;border-radius:10px;padding:10px"><small style="color:#000;font-weight:700">On White</small><br><canvas id="t16PreviewWhite" style="max-width:100%;max-height:140px;margin-top:6px"></canvas></div>
+<div style="flex:1;background:#000;border-radius:10px;padding:10px"><small style="color:#fff;font-weight:700">On Black</small><br><canvas id="t16PreviewBlack" style="max-width:100%;max-height:140px;margin-top:6px"></canvas></div>
+<div style="flex:1;background:repeating-conic-gradient(#ddd 0% 25%, #fff 0% 50%) 0 0/20px 20px;border-radius:10px;padding:10px"><small style="color:#000;font-weight:700">Transparent</small><br><canvas id="t16PreviewTrans" style="max-width:100%;max-height:140px;margin-top:6px"></canvas></div>
+</div>
+<!-- MOCKUP ROW -->
+<div style="display:flex;gap:8px;margin-top:8px">
+<div style="flex:1;background:linear-gradient(135deg,#1e293b,#334155);border-radius:10px;padding:10px;position:relative;overflow:hidden"><small style="color:#fff;font-weight:700">👕 T-Shirt</small><br><div style="font-size:50px;margin-top:6px">👕</div><div style="position:absolute;top:52%;left:50%;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;overflow:hidden;background:#fff"><canvas id="t16MockShirt" width="42" height="42" style="width:100%;height:100%"></canvas></div></div>
+<div style="flex:1;background:linear-gradient(135deg,#f59e0b,#92400e);border-radius:10px;padding:10px"><small style="color:#fff;font-weight:700">🏪 Shop Board</small><br><div style="background:#fff;border-radius:8px;padding:6px;margin-top:6px"><canvas id="t16MockBoard" style="max-width:100%;max-height:60px"></canvas></div></div>
+<div style="flex:1;background:linear-gradient(135deg,#ec4899,#a855f7);border-radius:10px;padding:10px"><small style="color:#fff;font-weight:700">💳 Visiting Card</small><br><div style="background:#fff;border-radius:8px;padding:6px;margin-top:6px;display:flex;gap:6px;align-items:center"><canvas id="t16MockCard" style="width:42px;height:42px"></canvas><div style="text-align:left"><b id="t16MockCardName" style="font-size:11px;color:#000">Orbittroniz</b><br><small style="font-size:9px;color:#666" id="t16MockCardTag">Saree • Dress • Fashion</small></div></div></div>
+</div>
+<div id="t16PreviewInfo" style="font-size:11px;color:#22d3ee;margin-top:8px;font-weight:700">Logo: 1024 x 1024</div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t16AiRedesign()" style="flex:1;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🤖 AI Re-Design</button>
+<button onclick="t16AiScore()" style="flex:1;background:linear-gradient(135deg,#f59e0b,#ef4444);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">⭐ AI Check Score</button>
+<button onclick="t16ShufflePremium()" style="flex:1;background:linear-gradient(135deg,#ec4899,#f59e0b);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🎲 Shuffle Premium</button>
+</div>
+<div id="t16AiScoreBox" style="display:none;margin-top:8px;background:#0a1224;border:1px solid #f59e0b;border-radius:10px;padding:10px;text-align:left"></div>
+</div>
+
+<!-- AI PROMPT -->
+<label class="t16-label">🤖 1. AI PROMPT TO LOGO</label>
+<div style="background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(34,211,238,.25));border:1px solid #a78bfa;border-radius:14px;padding:12px">
+<b style="font-size:13px">✨ Example: <span style="color:#22d3ee">Logo for jewellery shop, gold, royal</span> / <span style="color:#f59e0b">Logo for bakery, pink, cute</span> / <span style="color:#ec4899">Logo for school, blue, trusted</span></b>
+<textarea id="t16AiPrompt" class="t16-input" placeholder="Describe your logo... Example: Logo for jewellery shop, gold, royal, Solapur" rows="2" style="margin-top:8px">Logo for jewellery shop, gold, royal</textarea>
+<div class="t16-chiprow">
+<button onclick="t16AiPromptFill('Logo for jewellery shop, gold, royal')">💎 Jewellery</button>
+<button onclick="t16AiPromptFill('Logo for bakery, pink, cute')">🍰 Bakery</button>
+<button onclick="t16AiPromptFill('Logo for school, blue, trusted')">🎓 School</button>
+</div>
+<button onclick="t16AiGenerateFromPrompt()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:14px;border-radius:12px;font-weight:900;cursor:pointer;font-size:14px">🤖 AI GENERATE LOGO - Make My Logo</button>
+<div id="t16AiThinking" style="display:none;text-align:center;margin-top:8px"><b>🤖 AI is Thinking...</b><br><small style="color:#94a3b8">Choosing icon, premium colors, font...</small><br><div style="font-size:22px;margin-top:4px">🧠✨🎨</div></div>
+<div id="t16AiResult" style="display:none;margin-top:8px;background:#060a18;border-radius:10px;padding:10px;text-align:left"></div>
+</div>
+
+<!-- AI NAME TO LOGO -->
+<label class="t16-label">🧠 2. AI NAME TO LOGO - Business Name Se 5 Styles</label>
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px">
+<div style="display:flex;gap:8px">
+<input type="text" id="t16BusinessName" class="t16-input" placeholder="Your Business Name - Example: Sharma Jewellers" value="Sharma Jewellers" style="flex:1">
+<button onclick="t16AiSuggestStyles()" style="background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:12px 16px;border-radius:12px;font-weight:800;cursor:pointer;white-space:nowrap">✨ Suggest 5 Styles</button>
+</div>
+<div id="t16StyleList" style="margin-top:8px"></div>
+<div id="t16StyleEmpty" style="text-align:center;color:#94a3b8;font-size:12px;padding:8px">Click Suggest Styles - AI will suggest 5 premium styles</div>
+</div>
+
+<!-- MODE -->
+<label class="t16-label">🤖 3. MODE</label>
+<div class="t16-mode" id="t16ModeModes">
+<button class="active" data-mode="auto" onclick="t16SetMode('auto',this)">🤖 AUTO - AI Will Suggest</button>
+<button data-mode="manual" onclick="t16SetMode('manual',this)">✋ MANUAL - I Will Design<br><small>100% Working</small></button>
+</div>
+<div id="t16ModeInfo" style="text-align:center;font-size:11px;color:#22d3ee;margin-top:6px;font-weight:700">Mode: AUTO</div>
+<div id="t16ManualGuide" style="display:none;background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;margin-top:10px">
+<b style="color:#22c55e">✋ MANUAL MODE:</b><br><small style="color:#fff;line-height:1.7"><b>Step 1:</b> Name + Tagline likho<br><b>Step 2:</b> Icon + Shape + Premium Effect chuno<br><b>Step 3:</b> Download dabao<br><i>No AI needed ✅</i></small>
+</div>
+
+<!-- 20+ TEMPLATES -->
+<label class="t16-label">💎 4. PREMIUM TEMPLATES - 20+ Different Businesses - One Click</label>
+<div class="t16-pillrow">
+<button class="t16-pill" onclick="t16SetTemplate('saree')">🛍️<br>Saree Shop<br>Pink Elegant</button>
+<button class="t16-pill" onclick="t16SetTemplate('jewellery')">💎<br>Jewellery<br>Gold Royal</button>
+<button class="t16-pill" onclick="t16SetTemplate('gym')">🏋️<br>Gym<br>Black Strong</button>
+<button class="t16-pill" onclick="t16Reset()">🔄<br>Clear<br>All</button>
+</div>
+<div class="t16-pillrow" style="margin-top:8px">
+<button class="t16-pill" onclick="t16SetTemplate('beauty')">💅<br>Beauty Salon<br>Gold Premium</button>
+<button class="t16-pill" onclick="t16SetTemplate('bakery')">🍰<br>Bakery<br>Pink Cute</button>
+<button class="t16-pill" onclick="t16SetTemplate('cafe')">☕<br>Cafe<br>Brown Cozy</button>
+<button class="t16-pill" onclick="t16SetTemplate('food')">🍔<br>Food<br>Orange Tasty</button>
+</div>
+<div class="t16-pillrow" style="margin-top:8px">
+<button class="t16-pill" onclick="t16SetTemplate('tech')">💻<br>Tech<br>Blue Modern</button>
+<button class="t16-pill" onclick="t16SetTemplate('school')">🎓<br>School<br>Blue Trusted</button>
+<button class="t16-pill" onclick="t16SetTemplate('hospital')">🏥<br>Hospital<br>Green Care</button>
+<button class="t16-pill" onclick="t16SetTemplate('baby')">👶<br>Baby<br>Soft Pastel</button>
+</div>
+<div class="t16-pillrow" style="margin-top:8px">
+<button class="t16-pill" onclick="t16SetTemplate('travel')">✈️<br>Travel<br>Sky Blue</button>
+<button class="t16-pill" onclick="t16SetTemplate('wedding')">💍<br>Wedding<br>Gold Royal</button>
+<button class="t16-pill" onclick="t16SetTemplate('realestate')">🏠<br>Real Estate<br>Gold Luxury</button>
+<button class="t16-pill" onclick="t16SetTemplate('fashion')">👗<br>Fashion<br>Black Chic</button>
+</div>
+<div class="t16-pillrow" style="margin-top:8px">
+<button class="t16-pill" onclick="t16SetTemplate('electronics')">📱<br>Electronics<br>Neon Blue</button>
+<button class="t16-pill" onclick="t16SetTemplate('grocery')">🛒<br>Grocery<br>Green Fresh</button>
+<button class="t16-pill" onclick="t16SetTemplate('photography')">📸<br>Photography<br>Black Pro</button>
+<button class="t16-pill" onclick="t16SetTemplate('yoga')">🧘<br>Yoga<br>Calm Green</button>
+</div>
+<div style="background:#060a18;border:1px solid #f59e0b;border-radius:12px;padding:10px;margin-top:8px;text-align:center">
+<b style="font-size:12px;color:#f59e0b">💎 PREMIUM TEMPLATES - Tap Any Template - Full Logo Will Change In 1 Click</b><br>
+<small style="color:#94a3b8">Each template has different Icon + Shape + Colors + Font + Premium Effect - Handpicked by AI</small>
+</div>
+
+<label class="t16-label">✏️ 5. BUSINESS NAME + TAGLINE + INITIAL</label>
+<input type="text" id="t16Name" class="t16-input" placeholder="Business Name - Example: Sharma Jewellers" value="Sharma Jewellers" oninput="t16UpdatePreview()">
+<input type="text" id="t16Tagline" class="t16-input" placeholder="Tagline - Example: Gold • Diamond • Trust Since 1990" value="Gold • Diamond • Trust Since 1990" oninput="t16UpdatePreview()" style="margin-top:8px">
+<input type="text" id="t16Initial" class="t16-input" placeholder="Initial Letter - Example: S" value="S" oninput="t16UpdatePreview()" style="margin-top:8px">
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t16AiImproveName()" style="flex:1;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🤖 AI Improve Tagline</button>
+<button onclick="t16AutoInitial()" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:10px;font-weight:700;cursor:pointer">🔤 Auto Initial</button>
+</div>
+
+<label class="t16-label">🎨 6. ICON - 80+ Icons - Click To Select</label>
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px">
+<div id="t16IconGrid" style="display:grid;grid-template-columns:repeat(8,1fr);gap:6px"></div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t16FilterIcons('all')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:8px;cursor:pointer;font-size:11px">All</button>
+<button onclick="t16FilterIcons('shop')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:8px;cursor:pointer;font-size:11px">Shop</button>
+<button onclick="t16FilterIcons('food')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:8px;cursor:pointer;font-size:11px">Food</button>
+<button onclick="t16FilterIcons('beauty')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:8px;cursor:pointer;font-size:11px">Beauty</button>
+<button onclick="t16FilterIcons('fitness')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px;border-radius:8px;cursor:pointer;font-size:11px">Fitness</button>
+<button onclick="t16FilterIcons('premium')" style="flex:1;background:linear-gradient(135deg,#f59e0b,#92400e);border:none;color:#fff;padding:8px;border-radius:8px;cursor:pointer;font-size:11px">💎 Premium</button>
+</div>
+<div style="display:flex;gap:6px;margin-top:6px">
+<input type="text" id="t16CustomIcon" class="t16-input" placeholder="Or type your own emoji - Example: 💎" style="flex:1">
+<button onclick="t16UseCustomIcon()" style="background:#22c55e;border:none;color:#fff;padding:11px 16px;border-radius:12px;font-weight:800;cursor:pointer">Use Emoji</button>
+</div>
+<div id="t16SelectedIconInfo" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700">Selected Icon: 💎</div>
+</div>
+
+<label class="t16-label">🔲 7. LOGO SHAPE + LAYOUT</label>
+<div class="t16-mode" id="t16ShapeModes">
+<button data-shape="circle" onclick="t16SetShape('circle',this)">⭕ Circle<br>Popular</button>
+<button class="active" data-shape="shield" onclick="t16SetShape('shield',this)">🛡️ Shield<br>Premium</button>
+<button data-shape="square" onclick="t16SetShape('square',this)">⬛ Square<br>Modern</button>
+<button data-shape="badge" onclick="t16SetShape('badge',this)">🏷️ Badge<br>Stamp</button>
+</div>
+<div class="t16-mode">
+<button data-shape="hexagon" onclick="t16SetShape('hexagon',this)">⬡ Hexagon<br>Tech</button>
+<button data-shape="star" onclick="t16SetShape('star',this)">⭐ Star<br>Best Rated</button>
+<button data-shape="diamond" onclick="t16SetShape('diamond',this)">💎 Diamond<br>Luxury</button>
+<button data-shape="monogram" onclick="t16SetShape('monogram',this)">🔤 Monogram<br>Letter Only</button>
+</div>
+<div class="t16-mode">
+<button data-shape="none" onclick="t16SetShape('none',this)">❌ No Shape<br>Icon + Text</button>
+<button data-shape="double" onclick="t16SetShape('double',this)">⭕⭕ Double Circle<br>Premium Ring</button>
+<button data-shape="ribbon" onclick="t16SetShape('ribbon',this)">🎀 Ribbon<br>Vintage</button>
+<button data-shape="crown" onclick="t16SetShape('crown',this)">👑 Crown Shape<br>Royal</button>
+</div>
+<div class="t16-mode" id="t16LayoutModes">
+<button class="active" data-layout="icon-top" onclick="t16SetLayout('icon-top',this)">⬆️ Icon Top<br>Name Below</button>
+<button data-layout="icon-left" onclick="t16SetLayout('icon-left',this)">⬅️ Icon Left<br>Name Right</button>
+<button data-layout="icon-only" onclick="t16SetLayout('icon-only',this)">🎨 Icon Only</button>
+<button data-layout="text-only" onclick="t16SetLayout('text-only',this)">🔤 Text Only</button>
+</div>
+
+<!-- PREMIUM EFFECTS -->
+<label class="t16-label">✨ 8. PREMIUM EFFECTS - One Click Premium Look 💎</label>
+<div class="t16-mode" id="t16EffectModes">
+<button class="active" data-effect="none" onclick="t16SetEffect('none',this)">📝 Normal<br>Clean</button>
+<button data-effect="3d" onclick="t16SetEffect('3d',this)">🧊 3D Shadow<br>Depth</button>
+<button data-effect="gold" onclick="t16SetEffect('gold',this)">👑 Gold Foil<br>Luxury</button>
+<button data-effect="neon" onclick="t16SetEffect('neon',this)">💡 Neon Glow<br>Night Shop</button>
+</div>
+<div class="t16-mode">
+<button data-effect="emboss" onclick="t16SetEffect('emboss',this)">🔲 Emboss<br>Stamp</button>
+<button data-effect="outline" onclick="t16SetEffect('outline',this)">🔲 Outline<br>Border Only</button>
+<button data-effect="metal" onclick="t16SetEffect('metal',this)">⚙️ Metallic<br>Silver Shine</button>
+<button data-effect="vintage" onclick="t16SetEffect('vintage',this)">📜 Vintage<br>Old Style</button>
+</div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t16SetEffect('gold')" style="flex:1;background:linear-gradient(135deg,#f59e0b,#92400e);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">👑 Try Gold Foil</button>
+<button onclick="t16SetEffect('neon')" style="flex:1;background:linear-gradient(135deg,#22d3ee,#a855f7);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">💡 Try Neon</button>
+<button onclick="t16SetEffect('3d')" style="flex:1;background:linear-gradient(135deg,#111827,#334155);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🧊 Try 3D</button>
+</div>
+
+<label class="t16-label">🎨 9. PREMIUM COLORS - Luxury Palettes</label>
+<div style="display:flex;gap:8px;align-items:center">
+<input type="color" id="t16Color1" value="#f59e0b" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t16UpdatePreview()">
+<input type="color" id="t16Color2" value="#92400e" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t16UpdatePreview()">
+<input type="color" id="t16TextColor" value="#92400e" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t16UpdatePreview()">
+<div style="flex:1"><small style="color:#94a3b8">C1 = Shape • C2 = Gradient • C3 = Text</small></div>
+</div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t16SetColors('#f59e0b','#92400e','#92400e')" style="flex:1;background:linear-gradient(135deg,#f59e0b,#92400e);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">👑 Royal Gold</button>
+<button onclick="t16SetColors('#fbcfe8','#ec4899','#9d174d')" style="flex:1;background:linear-gradient(135deg,#fbcfe8,#ec4899);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">🌸 Rose Gold</button>
+<button onclick="t16SetColors('#111827','#334155','#111827')" style="flex:1;background:linear-gradient(135deg,#111827,#334155);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">🌑 Midnight Black</button>
+<button onclick="t16SetColors('#0ea5e9','#0f766e','#0f766e')" style="flex:1;background:linear-gradient(135deg,#0ea5e9,#0f766e);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">🌊 Ocean</button>
+</div>
+<div style="display:flex;gap:6px;margin-top:6px">
+<button onclick="t16SetColors('#ec4899','#a855f7','#111827')" style="flex:1;background:linear-gradient(135deg,#ec4899,#a855f7);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Pink-Purple</button>
+<button onclick="t16SetColors('#22c55e','#0ea5e9','#14532d')" style="flex:1;background:linear-gradient(135deg,#22c55e,#0ea5e9);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Forest</button>
+<button onclick="t16SetColors('#ef4444','#f59e0b','#111827')" style="flex:1;background:linear-gradient(135deg,#ef4444,#f59e0b);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Fire</button>
+<button onclick="t16SetColors('#a855f7','#22d3ee','#4c1d95')" style="flex:1;background:linear-gradient(135deg,#a855f7,#22d3ee);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">Cosmic</button>
+</div>
+<button onclick="t16AiColor()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#ec4899,#f59e0b);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🎨 AI Pick Best Premium Colors</button>
+<div class="t16-toggle"><b>🌈 Gradient Shape?</b><input type="checkbox" id="t16GradientOn" checked onchange="t16UpdatePreview()"></div>
+<div class="t16-toggle"><b>🖼️ Transparent Background? (For Card / Poster)</b><input type="checkbox" id="t16Transparent" checked onchange="t16UpdatePreview()"></div>
+<div class="t16-toggle"><b>🔲 Show Safe Zone Grid? (Professional)</b><input type="checkbox" id="t16SafeZone" onchange="t16UpdatePreview()"></div>
+<div class="t16-toggle"><b>✨ Add Sparkles Around Logo?</b><input type="checkbox" id="t16Sparkle" onchange="t16UpdatePreview()"></div>
+
+<label class="t16-label">✏️ 10. FONT - AI Font Pairing</label>
+<div style="display:flex;gap:8px">
+<select id="t16Font" class="t16-input" style="flex:1" onchange="t16UpdatePreview()"><option value="Arial">Arial - Clean</option><option value="Impact">Impact - Bold</option><option value="Georgia">Georgia - Elegant / Royal</option><option value="Times New Roman">Times - Classic</option><option value="Courier New">Courier - Typewriter</option><option value="Verdana">Verdana - Modern</option></select>
+<select id="t16TagFont" class="t16-input" style="flex:1" onchange="t16UpdatePreview()"><option value="Arial">Tagline: Arial</option><option value="Georgia">Tagline: Georgia</option><option value="Times New Roman">Tagline: Times</option><option value="Verdana">Tagline: Verdana</option></select>
+<button onclick="t16AiFont()" style="background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:12px 14px;border-radius:12px;font-weight:800;cursor:pointer;white-space:nowrap">🤖 AI Font</button>
+</div>
+<span style="font-size:11px;color:#fff">📏 Icon Size: <b id="t16IconSizeVal" style="color:#22d3ee">120px</b></span>
+<input type="range" id="t16IconSize" class="t16-range" min="60" max="200" value="120" oninput="document.getElementById('t16IconSizeVal').innerText=this.value+'px';t16UpdatePreview()">
+<span style="font-size:11px;color:#fff">🔤 Name Size: <b id="t16NameSizeVal" style="color:#22d3ee">70px</b></span>
+<input type="range" id="t16NameSize" class="t16-range" min="30" max="120" value="70" oninput="document.getElementById('t16NameSizeVal').innerText=this.value+'px';t16UpdatePreview()">
+<span style="font-size:11px;color:#fff">↔️ Letter Spacing: <b id="t16SpacingVal" style="color:#22d3ee">2px</b></span>
+<input type="range" id="t16Spacing" class="t16-range" min="0" max="15" value="2" oninput="document.getElementById('t16SpacingVal').innerText=this.value+'px';t16UpdatePreview()">
+
+<label class="t16-label">📐 11. LOGO SIZE + FORMAT + LOGO PACK</label>
+<div class="t16-mode" id="t16SizeModes">
+<button class="active" data-size="1024" onclick="t16SetSize('1024',this)">⬛ 1024x1024 - Best</button>
+<button data-size="512" onclick="t16SetSize('512',this)">📱 512x512 - DP</button>
+<button data-size="2048" onclick="t16SetSize('2048',this)">🖨️ 2048 - Print</button>
+<button data-size="512" onclick="t16SetSize('512',this)">↩️ Back 512</button>
+</div>
+<div class="t16-mode" id="t16FmtModes">
+<button class="active" data-fmt="png" onclick="t16SetFmt('png',this)">🎨 PNG - Transparent</button>
+<button data-fmt="jpeg" onclick="t16SetFmt('jpeg',this)">🖼️ JPG - White BG</button>
+<button data-fmt="webp" onclick="t16SetFmt('webp',this)">⚡ WEBP</button>
+<button data-fmt="png" onclick="t16SetFmt('png',this)">↩️ PNG Again</button>
+</div>
+<input type="text" id="t16Prefix" class="t16-input" placeholder="Logo - Orbittroniz" value="Logo - Orbittroniz" style="margin-top:8px">
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
+<b id="t16Stats" style="font-size:13px">Logo: 1024 x 1024 • Shape: Shield • Effect: Gold</b><br>
+<small id="t16AiQuality" style="color:#a78bfa">AI: Ready • Premium Features Working ✅</small>
+</div>
+<div id="t16Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
+
+<button class="t16-btn-preview" onclick="t16OpenPreview()">👀 PREVIEW - Full Screen Logo</button>
+<button class="t16-btn3d" onclick="t16Download()">📥 DOWNLOAD LOGO - REAL START</button>
+<button class="t16-btn2" onclick="t16DownloadPack()" style="background:linear-gradient(135deg,#f59e0b,#92400e);color:#fff;border:none">💎 DOWNLOAD LOGO PACK - 4 Versions (Main + Icon Only + Black + White)</button>
+<button class="t16-btn2" onclick="t16DownloadVariations()" style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;border:none">🎲 Download 3 Variations - AI Will Make 3 Different Logos</button>
+<button class="t16-btn-share" id="t16ShareBtn" onclick="t16Share()" style="display:block">📤 SHARE LOGO</button>
+<button class="t16-btn2" onclick="t16Reset()">🗑️ Clear / New Logo</button>
+
+<label class="t16-label">🖼️ YOUR LOGOS</label>
+<div class="t16-grid" id="t16Out"></div>
+<div id="t16OutEmpty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">No logos yet - Download to see here</div>
 </div></div>
+<!-- ================= TOOL 16 PREMIUM V2 - END ================= -->
+
+<div class="t16-modal" id="t16Modal"><div id="t16ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Logo Preview</div><canvas id="t16ModalCanvas"></canvas><div id="t16ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div><div class="t16-modal-nav"><button onclick="t16Download()" style="background:#22c55e">⬇️ Download</button><button onclick="t16DownloadPack()" style="background:#f59e0b">💎 Logo Pack</button><button onclick="t16Share()" style="background:#2563eb">📤 Share</button><button class="primary" onclick="t16ClosePreview()">✅ Close</button></div></div>
+
+<script>
+// ===== TOOL 16 PREMIUM V2 JS =====
+var t16Shape='shield', t16Layout='icon-top', t16Size='1024', t16Fmt='png', t16Mode='auto', t16Icon='💎', t16IconCat='all', t16Effect='gold', t16Results=[];
+var t16Icons=[
+  {e:'🛍️',c:'shop'},{e:'👗',c:'shop'},{e:'👘',c:'shop'},{e:'🧵',c:'shop'},{e:'✂️',c:'shop'},{e:'👠',c:'shop'},{e:'👜',c:'shop'},{e:'💍',c:'shop'},
+  {e:'🍔',c:'food'},{e:'🍕',c:'food'},{e:'🍰',c:'food'},{e:'☕',c:'food'},{e:'🍦',c:'food'},{e:'🥘',c:'food'},{e:'🍩',c:'food'},{e:'🧁',c:'food'},
+  {e:'💅',c:'beauty'},{e:'💄',c:'beauty'},{e:'✨',c:'beauty'},{e:'💇',c:'beauty'},{e:'🧴',c:'beauty'},{e:'🌸',c:'beauty'},{e:'💐',c:'beauty'},{e:'🦋',c:'beauty'},
+  {e:'🏋️',c:'fitness'},{e:'💪',c:'fitness'},{e:'🧘',c:'fitness'},{e:'🏃',c:'fitness'},{e:'⚽',c:'fitness'},{e:'🥊',c:'fitness'},{e:'🚴',c:'fitness'},{e:'🏆',c:'fitness'},
+  {e:'💎',c:'premium'},{e:'👑',c:'premium'},{e:'🏆',c:'premium'},{e:'🌟',c:'premium'},{e:'🔱',c:'premium'},{e:'🦁',c:'premium'},{e:'🦅',c:'premium'},{e:'⚜️',c:'premium'},
+  {e:'👶',c:'shop'},{e:'🧸',c:'shop'},{e:'✈️',c:'shop'},{e:'🏠',c:'shop'},{e:'🚗',c:'shop'},{e:'📱',c:'shop'},{e:'💻',c:'shop'},{e:'🎓',c:'shop'},
+  {e:'🎨',c:'shop'},{e:'📸',c:'shop'},{e:'🎵',c:'shop'},{e:'📚',c:'shop'},{e:'🌿',c:'shop'},{e:'🔥',c:'shop'},{e:'⭐',c:'shop'},{e:'❤️',c:'shop'},
+  {e:'🏥',c:'shop'},{e:'💊',c:'shop'},{e:'🩺',c:'shop'},{e:'📚',c:'shop'},{e:'✏️',c:'shop'},{e:'🏫',c:'shop'},{e:'🛒',c:'shop'},{e:'🥦',c:'shop'}
+];
+function t16SetMode(m,btn){ t16Mode=m; document.querySelectorAll('#t16ModeModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active');
+  document.getElementById('t16ModeInfo').innerText = m==='auto' ? "Mode: AUTO • AI will suggest" : "Mode: MANUAL • AI off, you design - 100% Working ✅";
+  document.getElementById('t16ManualGuide').style.display = m==='manual' ? 'block' : 'none';
+}
+function t16AiPromptFill(txt){ document.getElementById('t16AiPrompt').value=txt; }
+function t16RenderIcons(){
+  var grid=document.getElementById('t16IconGrid'); grid.innerHTML="";
+  var list=t16Icons.filter(function(it){ return t16IconCat==='all' || it.c===t16IconCat; });
+  list.forEach(function(it){
+    var b=document.createElement('button'); b.innerText=it.e; b.style.cssText="background:"+(t16Icon===it.e?"linear-gradient(135deg,#7c3aed,#22d3ee)":"#162143")+";border:1px solid #2a3a6a;color:#fff;padding:10px 4px;border-radius:10px;font-size:20px;cursor:pointer";
+    b.onclick=function(){ t16Icon=it.e; document.getElementById('t16SelectedIconInfo').innerText="Selected Icon: "+it.e; t16RenderIcons(); t16UpdatePreview(); };
+    grid.appendChild(b);
+  });
+}
+function t16FilterIcons(cat){ t16IconCat=cat; t16RenderIcons(); }
+function t16UseCustomIcon(){ var v=document.getElementById('t16CustomIcon').value.trim(); if(!v) return alert("First type an emoji! Example: 💎"); t16Icon=v; document.getElementById('t16SelectedIconInfo').innerText="Selected Icon: "+v+" • Custom"; t16RenderIcons(); t16UpdatePreview(); }
+function t16AutoInitial(){ var name=document.getElementById('t16Name').value||"S"; document.getElementById('t16Initial').value=name.trim().charAt(0).toUpperCase(); t16UpdatePreview(); }
+function t16SetEffect(eff,btn){ t16Effect=eff; document.querySelectorAll('#t16EffectModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); t16UpdatePreview(); document.getElementById('t16Status').innerText="✨ Premium Effect: "+eff; }
+function t16ShufflePremium(){ var effects=['gold','neon','3d','metal','vintage']; var eff=effects[Math.floor(Math.random()*effects.length)]; t16SetEffect(eff, document.querySelector('#t16EffectModes button[data-effect="'+eff+'"]')); var colors=[['#f59e0b','#92400e'],['#ec4899','#a855f7'],['#2563eb','#22d3ee'],['#22c55e','#0ea5e9']]; var c=colors[Math.floor(Math.random()*colors.length)]; t16SetColors(c[0],c[1],document.getElementById('t16TextColor').value); }
+// AI BRAIN - Extended for 20 templates
+function t16AiGenerateFromPrompt(){
+  var prompt=(document.getElementById('t16AiPrompt').value||"").toLowerCase();
+  if(!prompt.trim()) return alert("First write what logo you want!");
+  document.getElementById('t16AiThinking').style.display='block'; document.getElementById('t16AiResult').style.display='none';
+  setTimeout(function(){
+    document.getElementById('t16AiThinking').style.display='none';
+    var r=t16AiBrain(prompt);
+    if(r.name) document.getElementById('t16Name').value=r.name;
+    if(r.tagline) document.getElementById('t16Tagline').value=r.tagline;
+    t16Icon=r.icon; document.getElementById('t16SelectedIconInfo').innerText="Selected Icon: "+r.icon;
+    t16SetShape(r.shape, document.querySelector('#t16ShapeModes button[data-shape="'+r.shape+'"]'));
+    t16SetLayout(r.layout, document.querySelector('#t16LayoutModes button[data-layout="'+r.layout+'"]'));
+    document.getElementById('t16Color1').value=r.c1; document.getElementById('t16Color2').value=r.c2; document.getElementById('t16TextColor').value=r.textColor; document.getElementById('t16Font').value=r.font;
+    if(r.effect) t16SetEffect(r.effect, document.querySelector('#t16EffectModes button[data-effect="'+r.effect+'"]'));
+    document.getElementById('t16Initial').value=(r.name||"S").charAt(0).toUpperCase();
+    t16RenderIcons(); t16UpdatePreview();
+    var box=document.getElementById('t16AiResult');
+    box.innerHTML='<b>✅ AI Created Your Premium Logo!</b><br><small style="color:#94a3b8">AI understood: <b style="color:#22d3ee">'+r.detected+'</b><br>Icon: '+r.icon+' • Shape: '+r.shape+' • Effect: '+r.effect+' • Colors: '+r.c1+' + '+r.c2+' • Font: '+r.font+'<br>Reason: '+r.reason+'</small><br><button onclick="t16AiRedesign()" style="margin-top:6px;background:#7c3aed;border:none;color:#fff;padding:7px 14px;border-radius:20px;font-weight:800;cursor:pointer">🎲 Try Another Design</button>';
+    box.style.display='block'; document.getElementById('t16Status').innerText="✅ AI Premium Logo Ready!";
+    t16AiSuggestStyles();
+  }, 800);
+}
+function t16AiBrain(prompt){
+  if(prompt.indexOf('jewellery')>-1||prompt.indexOf('jewelry')>-1||prompt.indexOf('gold')>-1||prompt.indexOf('diamond')>-1) return {detected:"Jewellery - Royal Gold", name:"Sharma Jewellers", tagline:"Gold • Diamond • Trust Since 1990", icon:"💎", shape:"shield", layout:"icon-top", c1:"#f59e0b", c2:"#92400e", textColor:"#92400e", font:"Georgia", effect:"gold", reason:"Jewellery = Royal Gold + Gold Foil effect = Luxury, Shield = Trust"};
+  if(prompt.indexOf('bakery')>-1||prompt.indexOf('cake')>-1) return {detected:"Bakery - Cute Pink", name:"Sweet Bakery", tagline:"Fresh • Sweet • Yummy", icon:"🍰", shape:"circle", layout:"icon-top", c1:"#fbcfe8", c2:"#ec4899", textColor:"#9d174d", font:"Georgia", effect:"none", reason:"Bakery = Soft Pink, cute circle"};
+  if(prompt.indexOf('cafe')>-1||prompt.indexOf('coffee')>-1) return {detected:"Cafe - Cozy Brown", name:"Coffee House", tagline:"Coffee • Peace • Love", icon:"☕", shape:"circle", layout:"icon-top", c1:"#92400e", c2:"#78350f", textColor:"#78350f", font:"Georgia", effect:"vintage", reason:"Cafe = Brown + Vintage = Cozy"};
+  if(prompt.indexOf('school')>-1||prompt.indexOf('college')>-1||prompt.indexOf('education')>-1) return {detected:"School - Trusted Blue", name:"Bright School", tagline:"Learn • Grow • Shine", icon:"🎓", shape:"shield", layout:"icon-top", c1:"#2563eb", c2:"#1e40af", textColor:"#1e40af", font:"Georgia", effect:"none", reason:"School = Blue Shield = Trust + Education"};
+  if(prompt.indexOf('hospital')>-1||prompt.indexOf('clinic')>-1||prompt.indexOf('doctor')>-1) return {detected:"Hospital - Care Green", name:"City Hospital", tagline:"Care • Cure • Compassion", icon:"🏥", shape:"circle", layout:"icon-top", c1:"#22c55e", c2:"#0ea5e9", textColor:"#14532d", font:"Arial", effect:"none", reason:"Hospital = Green-Blue = Care"};
+  if(prompt.indexOf('real estate')>-1||prompt.indexOf('property')>-1||prompt.indexOf('builder')>-1) return {detected:"Real Estate - Luxury Gold", name:"Dream Homes", tagline:"Dream • Build • Live", icon:"🏠", shape:"shield", layout:"icon-top", c1:"#f59e0b", c2:"#92400e", textColor:"#92400e", font:"Georgia", effect:"gold", reason:"Real Estate = Gold Shield = Luxury + Trust"};
+  if(prompt.indexOf('saree')>-1||prompt.indexOf('dress')>-1||prompt.indexOf('boutique')>-1) return {detected:"Saree Shop", name:"Saree House", tagline:"Saree • Dress • Fashion", icon:"🛍️", shape:"circle", layout:"icon-top", c1:"#ec4899", c2:"#a855f7", textColor:"#111827", font:"Georgia", effect:"none", reason:"Saree = Pink-Purple elegant"};
+  if(prompt.indexOf('gym')>-1||prompt.indexOf('fitness')>-1) return {detected:"Gym", name:"Power Gym", tagline:"No Pain • No Gain", icon:"💪", shape:"shield", layout:"icon-top", c1:"#111827", c2:"#ef4444", textColor:"#111827", font:"Impact", effect:"3d", reason:"Gym = Black-Red + 3D = Strong"};
+  if(prompt.indexOf('beauty')>-1||prompt.indexOf('salon')>-1) return {detected:"Beauty Salon", name:"Glow Beauty", tagline:"Beauty • Makeup • Salon", icon:"💅", shape:"circle", layout:"icon-top", c1:"#f59e0b", c2:"#ec4899", textColor:"#92400e", font:"Georgia", effect:"gold", reason:"Beauty = Gold-Pink premium"};
+  if(prompt.indexOf('food')>-1||prompt.indexOf('restaurant')>-1) return {detected:"Food", name:"Tasty Food", tagline:"Fresh • Tasty • Yummy", icon:"🍔", shape:"circle", layout:"icon-top", c1:"#ef4444", c2:"#f59e0b", textColor:"#111827", font:"Impact", effect:"none", reason:"Food = Red-Orange hungry"};
+  if(prompt.indexOf('tech')>-1||prompt.indexOf('computer')>-1) return {detected:"Tech", name:"Tech Solutions", tagline:"Innovation • Future", icon:"💻", shape:"hexagon", layout:"icon-top", c1:"#2563eb", c2:"#22d3ee", textColor:"#111827", font:"Verdana", effect:"neon", reason:"Tech = Blue + Neon = Modern"};
+  if(prompt.indexOf('baby')>-1) return {detected:"Baby", name:"Little Angels", tagline:"Baby Care • Love", icon:"👶", shape:"circle", layout:"icon-top", c1:"#fbcfe8", c2:"#bfdbfe", textColor:"#111827", font:"Georgia", effect:"none", reason:"Baby = Pastel soft"};
+  if(prompt.indexOf('travel')>-1) return {detected:"Travel", name:"Travel World", tagline:"Explore • Dream • Discover", icon:"✈️", shape:"circle", layout:"icon-top", c1:"#2563eb", c2:"#22d3ee", textColor:"#111827", font:"Arial", effect:"none", reason:"Travel = Sky Blue"};
+  if(prompt.indexOf('wedding')>-1) return {detected:"Wedding", name:"Royal Wedding", tagline:"Love • Forever", icon:"💍", shape:"badge", layout:"icon-top", c1:"#f59e0b", c2:"#92400e", textColor:"#92400e", font:"Georgia", effect:"gold", reason:"Wedding = Gold Badge royal"};
+  if(prompt.indexOf('grocery')>-1||prompt.indexOf('kirana')>-1) return {detected:"Grocery", name:"Fresh Grocery", tagline:"Fresh • Daily • Best Price", icon:"🛒", shape:"circle", layout:"icon-top", c1:"#22c55e", c2:"#0ea5e9", textColor:"#14532d", font:"Arial", effect:"none", reason:"Grocery = Green fresh"};
+  if(prompt.indexOf('photography')>-1||prompt.indexOf('photo')>-1) return {detected:"Photography", name:"Lens Studio", tagline:"Capture • Memories", icon:"📸", shape:"circle", layout:"icon-top", c1:"#111827", c2:"#334155", textColor:"#111827", font:"Arial", effect:"3d", reason:"Photography = Black pro"};
+  if(prompt.indexOf('yoga')>-1||prompt.indexOf('meditation')>-1) return {detected:"Yoga", name:"Peace Yoga", tagline:"Calm • Peace • Balance", icon:"🧘", shape:"circle", layout:"icon-top", c1:"#22c55e", c2:"#0ea5e9", textColor:"#14532d", font:"Georgia", effect:"none", reason:"Yoga = Calm Green"};
+  if(prompt.indexOf('electronics')>-1||prompt.indexOf('mobile')>-1) return {detected:"Electronics", name:"Mobile World", tagline:"Best Price • Best Quality", icon:"📱", shape:"hexagon", layout:"icon-top", c1:"#2563eb", c2:"#22d3ee", textColor:"#111827", font:"Verdana", effect:"neon", reason:"Electronics = Neon Blue modern"};
+  if(prompt.indexOf('fashion')>-1) return {detected:"Fashion", name:"Fashion Hub", tagline:"Style • Trend • You", icon:"👗", shape:"diamond", layout:"icon-top", c1:"#111827", c2:"#ec4899", textColor:"#111827", font:"Georgia", effect:"metal", reason:"Fashion = Black-Pink chic + Diamond shape"};
+  return {detected:"General Business", name:"Orbittroniz", tagline:"Quality • Trust • Best Service", icon:"⭐", shape:"circle", layout:"icon-top", c1:"#2563eb", c2:"#22d3ee", textColor:"#111827", font:"Arial", effect:"none", reason:"General = Blue professional"};
+}
+function t16AiSuggestStyles(){
+  var name=document.getElementById('t16BusinessName').value||document.getElementById('t16Name').value||"My Business";
+  var base=t16AiBrain(name.toLowerCase());
+  var styles=[
+    {label:"💎 Premium Gold", c1:"#f59e0b", c2:"#92400e", font:"Georgia", shape:"badge", effect:"gold", desc:"Gold + Gold Foil - Luxury"},
+    {label:"🔥 Bold Modern", c1:"#111827", c2:"#ef4444", font:"Impact", shape:"shield", effect:"3d", desc:"Black-Red + 3D - Strong"},
+    {label:"🌸 Soft Pastel", c1:"#fbcfe8", c2:"#a855f7", font:"Georgia", shape:"circle", effect:"none", desc:"Pink-Purple + Circle - Soft"},
+    {label:"💙 Tech Blue Neon", c1:"#2563eb", c2:"#22d3ee", font:"Verdana", shape:"hexagon", effect:"neon", desc:"Blue + Neon - Modern Tech"},
+    {label:"⚙️ Metallic Silver", c1:"#94a3b8", c2:"#334155", font:"Arial", shape:"diamond", effect:"metal", desc:"Silver + Metallic - Premium"}
+  ];
+  var html="";
+  styles.forEach(function(s,idx){ html+='<div style="display:flex;gap:8px;align-items:center;background:#0a1224;border:1px solid #2a3a6a;border-radius:10px;padding:10px;margin-top:6px"><span style="font-size:22px;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,'+s.c1+','+s.c2+');display:flex;align-items:center;justify-content:center">'+base.icon+'</span><div style="flex:1"><b style="font-size:12px">'+s.label+'</b><br><small style="color:#94a3b8">'+s.desc+'</small></div><button onclick="t16ApplyStyle('+idx+')" style="background:#22c55e;border:none;color:#fff;padding:8px 14px;border-radius:20px;font-weight:800;cursor:pointer;font-size:11px">Use This ✅</button></div>'; });
+  t16AiSuggestStyles._styles=styles; t16AiSuggestStyles._base=base;
+  document.getElementById('t16StyleList').innerHTML=html; document.getElementById('t16StyleEmpty').style.display='none';
+  document.getElementById('t16Name').value=name; t16UpdatePreview();
+}
+function t16ApplyStyle(idx){ var s=t16AiSuggestStyles._styles[idx]; var base=t16AiSuggestStyles._base; if(!s) return; document.getElementById('t16Color1').value=s.c1; document.getElementById('t16Color2').value=s.c2; document.getElementById('t16Font').value=s.font; t16SetShape(s.shape, document.querySelector('#t16ShapeModes button[data-shape="'+s.shape+'"]')); t16SetEffect(s.effect, document.querySelector('#t16EffectModes button[data-effect="'+s.effect+'"]')); t16Icon=base.icon; t16RenderIcons(); t16UpdatePreview(); document.getElementById('t16Status').innerText="✅ Premium Style Applied: "+s.label; }
+function t16AiImproveName(){ var tag=document.getElementById('t16Tagline').value||""; if(tag && tag.indexOf('•')===-1) tag=tag.split(' ').join(' • '); document.getElementById('t16Tagline').value=tag||"Quality • Trust • Best Service"; t16UpdatePreview(); }
+function t16AiFont(){ var name=(document.getElementById('t16Name').value||"").toLowerCase(); var font="Arial"; if(name.indexOf('gym')>-1) font="Impact"; else if(name.indexOf('jewellery')>-1||name.indexOf('wedding')>-1||name.indexOf('beauty')>-1) font="Georgia"; else if(name.indexOf('tech')>-1) font="Verdana"; document.getElementById('t16Font').value=font; t16UpdatePreview(); }
+function t16AiColor(){ var name=(document.getElementById('t16Name').value||"").toLowerCase(); if(name.indexOf('jewellery')>-1||name.indexOf('gold')>-1) t16SetColors('#f59e0b','#92400e','#92400e'); else if(name.indexOf('gym')>-1) t16SetColors('#111827','#ef4444','#111827'); else if(name.indexOf('food')>-1) t16SetColors('#ef4444','#f59e0b','#111827'); else t16SetColors('#2563eb','#22d3ee','#111827'); }
+function t16AiScore(){
+  var name=document.getElementById('t16Name').value||""; var tag=document.getElementById('t16Tagline').value||""; var score=60, tips=[];
+  if(name.length>=3 && name.length<=20){ score+=20; } else if(name.length>20){ score-=10; tips.push("⚠️ Name too long - Keep under 20 letters"); } else { tips.push("⚠️ Name too short"); }
+  if(tag.length>5){ score+=10; } else { tips.push("⚠️ Add tagline"); }
+  if(t16Effect!=='none'){ score+=5; } else { tips.push("💡 Add Premium Effect - Gold / 3D / Neon makes logo look premium"); }
+  if(t16Shape!=='none'){ score+=5; } else { tips.push("💡 Add shape"); }
+  if(score>95) score=95;
+  var box=document.getElementById('t16AiScoreBox'); var color=score>=85?"#22c55e":score>=70?"#f59e0b":"#ef4444";
+  box.innerHTML='<b style="font-size:16px;color:'+color+'">⭐ AI Logo Score: '+score+' / 100 • Effect: '+t16Effect+'</b><br><div style="height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:6px"><div style="height:100%;background:'+color+';width:'+score+'%"></div></div><div style="margin-top:8px;font-size:12px;color:#fff;line-height:1.6">'+(tips.length? tips.join('<br>') : '✅ Perfect Premium Logo! Ready to use! 🎉')+'</div><button onclick="t16AiFixScore()" style="margin-top:8px;background:#22c55e;border:none;color:#fff;padding:9px 16px;border-radius:20px;font-weight:800;cursor:pointer">🤖 AI Fix All Issues</button>';
+  box.style.display='block';
+}
+function t16AiFixScore(){ if(t16Effect==='none') t16SetEffect('gold', document.querySelector('#t16EffectModes button[data-effect="gold"]')); if(t16Shape==='none') t16SetShape('circle', document.querySelector('#t16ShapeModes button[data-shape="circle"]')); var tag=document.getElementById('t16Tagline').value||""; if(tag.length<5) document.getElementById('t16Tagline').value="Quality • Trust • Best Service"; t16UpdatePreview(); t16AiScore(); }
+function t16AiRedesign(){ var shapes=['circle','shield','badge','hexagon','diamond']; var next=shapes[Math.floor(Math.random()*shapes.length)]; t16SetShape(next, document.querySelector('#t16ShapeModes button[data-shape="'+next+'"]')); var colors=[['#f59e0b','#92400e'],['#ec4899','#a855f7'],['#2563eb','#22d3ee'],['#22c55e','#0ea5e9']]; var c=colors[Math.floor(Math.random()*colors.length)]; t16SetColors(c[0],c[1],document.getElementById('t16TextColor').value); var effs=['gold','neon','3d','metal']; var eff=effs[Math.floor(Math.random()*effs.length)]; t16SetEffect(eff, document.querySelector('#t16EffectModes button[data-effect="'+eff+'"]')); t16UpdatePreview(); }
+function t16SetTemplate(name){
+  var d={
+    saree:{name:"Orbittroniz", tagline:"Saree • Dress • Fashion", icon:"🛍️", shape:"circle", c1:"#ec4899", c2:"#a855f7", text:"#111827", font:"Georgia", effect:"none"},
+    jewellery:{name:"Sharma Jewellers", tagline:"Gold • Diamond • Trust Since 1990", icon:"💎", shape:"shield", c1:"#f59e0b", c2:"#92400e", text:"#92400e", font:"Georgia", effect:"gold"},
+    gym:{name:"Power Gym", tagline:"No Pain • No Gain", icon:"💪", shape:"shield", c1:"#111827", c2:"#ef4444", text:"#111827", font:"Impact", effect:"3d"},
+    beauty:{name:"Glow Beauty", tagline:"Beauty • Makeup • Salon", icon:"💅", shape:"circle", c1:"#f59e0b", c2:"#ec4899", text:"#92400e", font:"Georgia", effect:"gold"},
+    bakery:{name:"Sweet Bakery", tagline:"Fresh • Sweet • Yummy", icon:"🍰", shape:"circle", c1:"#fbcfe8", c2:"#ec4899", text:"#9d174d", font:"Georgia", effect:"none"},
+    cafe:{name:"Coffee House", tagline:"Coffee • Peace • Love", icon:"☕", shape:"circle", c1:"#92400e", c2:"#78350f", text:"#78350f", font:"Georgia", effect:"vintage"},
+    food:{name:"Tasty Food", tagline:"Fresh • Tasty • Yummy", icon:"🍔", shape:"circle", c1:"#ef4444", c2:"#f59e0b", text:"#111827", font:"Impact", effect:"none"},
+    tech:{name:"Tech Solutions", tagline:"Innovation • Future", icon:"💻", shape:"hexagon", c1:"#2563eb", c2:"#22d3ee", text:"#111827", font:"Verdana", effect:"neon"},
+    school:{name:"Bright School", tagline:"Learn • Grow • Shine", icon:"🎓", shape:"shield", c1:"#2563eb", c2:"#1e40af", text:"#1e40af", font:"Georgia", effect:"none"},
+    hospital:{name:"City Hospital", tagline:"Care • Cure • Compassion", icon:"🏥", shape:"circle", c1:"#22c55e", c2:"#0ea5e9", text:"#14532d", font:"Arial", effect:"none"},
+    baby:{name:"Little Angels", tagline:"Baby Care • Love", icon:"👶", shape:"circle", c1:"#fbcfe8", c2:"#bfdbfe", text:"#111827", font:"Georgia", effect:"none"},
+    travel:{name:"Travel World", tagline:"Explore • Dream • Discover", icon:"✈️", shape:"circle", c1:"#2563eb", c2:"#22d3ee", text:"#111827", font:"Arial", effect:"none"},
+    wedding:{name:"Royal Wedding", tagline:"Love • Forever", icon:"💍", shape:"badge", c1:"#f59e0b", c2:"#92400e", text:"#92400e", font:"Georgia", effect:"gold"},
+    realestate:{name:"Dream Homes", tagline:"Dream • Build • Live", icon:"🏠", shape:"shield", c1:"#f59e0b", c2:"#92400e", text:"#92400e", font:"Georgia", effect:"gold"},
+    fashion:{name:"Fashion Hub", tagline:"Style • Trend • You", icon:"👗", shape:"diamond", c1:"#111827", c2:"#ec4899", text:"#111827", font:"Georgia", effect:"metal"},
+    electronics:{name:"Mobile World", tagline:"Best Price • Best Quality", icon:"📱", shape:"hexagon", c1:"#2563eb", c2:"#22d3ee", text:"#111827", font:"Verdana", effect:"neon"},
+    grocery:{name:"Fresh Grocery", tagline:"Fresh • Daily • Best Price", icon:"🛒", shape:"circle", c1:"#22c55e", c2:"#0ea5e9", text:"#14532d", font:"Arial", effect:"none"},
+    photography:{name:"Lens Studio", tagline:"Capture • Memories", icon:"📸", shape:"circle", c1:"#111827", c2:"#334155", text:"#111827", font:"Arial", effect:"3d"},
+    yoga:{name:"Peace Yoga", tagline:"Calm • Peace • Balance", icon:"🧘", shape:"circle", c1:"#22c55e", c2:"#0ea5e9", text:"#14532d", font:"Georgia", effect:"none"}
+  };
+  var x=d[name]||d['saree'];
+  document.getElementById('t16Name').value=x.name; document.getElementById('t16Tagline').value=x.tagline; document.getElementById('t16Initial').value=x.name.charAt(0);
+  t16Icon=x.icon; t16SetShape(x.shape, document.querySelector('#t16ShapeModes button[data-shape="'+x.shape+'"]')); t16SetLayout('icon-top', document.querySelector('#t16LayoutModes button[data-layout="icon-top"]'));
+  document.getElementById('t16Color1').value=x.c1; document.getElementById('t16Color2').value=x.c2; document.getElementById('t16TextColor').value=x.text; document.getElementById('t16Font').value=x.font;
+  t16SetEffect(x.effect, document.querySelector('#t16EffectModes button[data-effect="'+x.effect+'"]'));
+  t16RenderIcons(); t16UpdatePreview(); document.getElementById('t16Status').innerText="✅ Premium Template: "+name+" • Effect: "+x.effect;
+}
+function t16SetShape(s,btn){ t16Shape=s; document.querySelectorAll('#t16ShapeModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); t16UpdatePreview(); }
+function t16SetLayout(l,btn){ t16Layout=l; document.querySelectorAll('#t16LayoutModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); t16UpdatePreview(); }
+function t16SetColors(c1,c2,tc){ document.getElementById('t16Color1').value=c1; document.getElementById('t16Color2').value=c2; document.getElementById('t16TextColor').value=tc; t16UpdatePreview(); }
+function t16SetSize(s,btn){ t16Size=s; document.querySelectorAll('#t16SizeModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); t16UpdatePreview(); }
+function t16SetFmt(f,btn){ t16Fmt=f; document.querySelectorAll('#t16FmtModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); t16UpdatePreview(); }
+// CORE DRAW
+function t16DrawLogo(ctx, W, H, bgMode){
+  var name=document.getElementById('t16Name').value||"Your Name";
+  var tagline=document.getElementById('t16Tagline').value||"";
+  var initial=document.getElementById('t16Initial').value||name.charAt(0)||"S";
+  var c1=document.getElementById('t16Color1').value||"#f59e0b";
+  var c2=document.getElementById('t16Color2').value||"#92400e";
+  var textColor=document.getElementById('t16TextColor').value||"#92400e";
+  var font=document.getElementById('t16Font').value||"Georgia";
+  var tagFont=document.getElementById('t16TagFont').value||"Arial";
+  var iconSize=parseInt(document.getElementById('t16IconSize').value||120);
+  var nameSize=parseInt(document.getElementById('t16NameSize').value||70);
+  var spacing=parseInt(document.getElementById('t16Spacing').value||2);
+  var gradientOn=document.getElementById('t16GradientOn').checked;
+  var transparent=document.getElementById('t16Transparent').checked;
+  var safeZone=document.getElementById('t16SafeZone').checked;
+  var sparkle=document.getElementById('t16Sparkle').checked;
+  if(bgMode==='white'){ ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,W,H); }
+  else if(bgMode==='black'){ ctx.fillStyle='#000000'; ctx.fillRect(0,0,W,H); }
+  else if(bgMode==='transparent' || bgMode==='export'){ if(transparent) ctx.clearRect(0,0,W,H); else { ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,W,H); } }
+  else { ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,W,H); }
+  var finalTextColor=textColor; if(bgMode==='black') finalTextColor='#ffffff';
+  var scale=W/1024; var cx=W/2;
+  var shapeSize=340*scale; var iconFont=iconSize*scale; var nameFont=nameSize*scale;
+  // Premium Effects - Apply to shape
+  if(t16Effect==='neon'){
+    ctx.save(); ctx.shadowColor=c1; ctx.shadowBlur=30*scale; // Neon glow will apply in shape draw
+  }
+  if(t16Layout==='icon-only'){ t16DrawShape(ctx, cx, H/2, shapeSize, c1, c2, gradientOn, initial, t16Icon, iconFont*1.4); if(t16Effect==='neon') ctx.restore(); if(safeZone) t16DrawSafeZone(ctx,W,H,scale); if(sparkle) t16DrawSparkles(ctx,W,H,scale); return; }
+  if(t16Layout==='text-only'){
+    ctx.textAlign='center'; ctx.textBaseline='middle'; var nf=nameFont; ctx.font="900 "+Math.round(nf)+"px "+font+", Arial"; while(ctx.measureText(name).width>W-100*scale && nf>30){ nf-=5; ctx.font="900 "+Math.round(nf)+"px "+font+", Arial"; }
+    t16DrawPremiumText(ctx, name, cx, H/2-30*scale, finalTextColor, nf, font);
+    if(tagline){ ctx.font=Math.round(32*scale)+"px "+tagFont+", Arial"; ctx.fillStyle=bgMode==='black'?'#cccccc':'#666666'; ctx.fillText(tagline, cx, H/2+40*scale); }
+    if(t16Effect==='neon') ctx.restore(); if(safeZone) t16DrawSafeZone(ctx,W,H,scale); return;
+  }
+  if(t16Layout==='icon-left'){
+    var iconX=W*0.28, textX=W*0.62; t16DrawShape(ctx, iconX, H/2-20*scale, shapeSize*0.9, c1, c2, gradientOn, initial, t16Icon, iconFont);
+    ctx.textAlign='left'; ctx.textBaseline='middle'; var nf2=nameFont; ctx.font="900 "+Math.round(nf2)+"px "+font+", Arial"; while(ctx.measureText(name).width>W*0.55 && nf2>28){ nf2-=4; ctx.font="900 "+Math.round(nf2)+"px "+font+", Arial"; }
+    t16DrawPremiumText(ctx, name, textX, H/2-50*scale, finalTextColor, nf2, font);
+    if(tagline){ ctx.font=Math.round(30*scale)+"px "+tagFont+", Arial"; ctx.fillStyle=bgMode==='black'?'#cccccc':'#666666'; ctx.fillText(tagline, textX, H/2+20*scale); }
+    if(t16Effect==='neon') ctx.restore(); return;
+  }
+  // icon-top
+  var shapeY=H*0.38, nameY=H*0.68, tagY=H*0.78;
+  if(t16Shape==='none'){ ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font=Math.round(iconFont*1.2)+"px Arial"; ctx.fillText(t16Icon, cx, shapeY); }
+  else { t16DrawShape(ctx, cx, shapeY, shapeSize, c1, c2, gradientOn, initial, t16Icon, iconFont); }
+  ctx.textAlign='center'; ctx.textBaseline='middle'; var nf3=nameFont; ctx.font="900 "+Math.round(nf3)+"px "+font+", Arial"; while(ctx.measureText(name).width>W-120*scale && nf3>28){ nf3-=4; ctx.font="900 "+Math.round(nf3)+"px "+font+", Arial"; }
+  if(t16Shape==='monogram') nf3=nf3*1.1;
+  // Letter spacing - Draw with spaces if >5
+  var nameDraw=name; if(spacing>6) nameDraw=name.split('').join(' ');
+  t16DrawPremiumText(ctx, nameDraw, cx, nameY, finalTextColor, nf3, font);
+  if(tagline){ ctx.font=Math.round(32*scale)+"px "+tagFont+", Arial"; ctx.fillStyle=bgMode==='black'?'#cccccc':'#666666'; if(ctx.measureText(tagline).width>W-120*scale){ var words=tagline.split(' '); var l1=words.slice(0,Math.ceil(words.length/2)).join(' '); var l2=words.slice(Math.ceil(words.length/2)).join(' '); ctx.fillText(l1, cx, tagY); ctx.fillText(l2, cx, tagY+38*scale); } else { ctx.fillText(tagline, cx, tagY); } }
+  if(t16Effect==='neon') ctx.restore();
+  if(safeZone) t16DrawSafeZone(ctx,W,H,scale);
+  if(sparkle) t16DrawSparkles(ctx,W,H,scale);
+}
+function t16DrawPremiumText(ctx, text, x, y, color, size, font){
+  ctx.save(); ctx.font="900 "+Math.round(size)+"px "+font+", Arial"; ctx.textAlign='center'; ctx.textBaseline='middle';
+  if(t16Effect==='3d'){
+    ctx.fillStyle='rgba(0,0,0,0.35)'; ctx.fillText(text, x+4, y+5); ctx.fillStyle='rgba(0,0,0,0.2)'; ctx.fillText(text, x+2, y+3); ctx.fillStyle=color; ctx.fillText(text, x, y);
+  } else if(t16Effect==='gold'){
+    var g=ctx.createLinearGradient(x-200,y-20,x+200,y+20); g.addColorStop(0,'#f59e0b'); g.addColorStop(0.5,'#fff7cc'); g.addColorStop(1,'#92400e'); ctx.fillStyle=g; ctx.fillText(text, x, y);
+  } else if(t16Effect==='neon'){
+    ctx.shadowColor=color; ctx.shadowBlur=18; ctx.fillStyle=color; ctx.fillText(text, x, y); ctx.fillText(text, x, y); ctx.shadowBlur=0;
+  } else if(t16Effect==='emboss'){
+    ctx.fillStyle='rgba(255,255,255,0.8)'; ctx.fillText(text, x, y-2); ctx.fillStyle='rgba(0,0,0,0.5)'; ctx.fillText(text, x, y+2); ctx.fillStyle=color; ctx.fillText(text, x, y);
+  } else if(t16Effect==='outline'){
+    ctx.strokeStyle=color; ctx.lineWidth=Math.max(2,size*0.06); ctx.strokeText(text, x, y); ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.fillText(text, x, y);
+  } else if(t16Effect==='metal'){
+    var gm=ctx.createLinearGradient(x,y-30,x,y+30); gm.addColorStop(0,'#e2e8f0'); gm.addColorStop(0.5,'#94a3b8'); gm.addColorStop(1,'#334155'); ctx.fillStyle=gm; ctx.fillText(text, x, y);
+  } else if(t16Effect==='vintage'){
+    ctx.fillStyle=color; ctx.globalAlpha=0.85; ctx.fillText(text, x, y); ctx.globalAlpha=1;
+  } else {
+    ctx.shadowColor='rgba(0,0,0,0.3)'; ctx.shadowBlur=6; ctx.shadowOffsetY=2; ctx.fillStyle=color; ctx.fillText(text, x, y); ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+  }
+  ctx.restore();
+}
+function t16DrawSafeZone(ctx,W,H,scale){
+  ctx.save(); ctx.strokeStyle='rgba(34,211,238,0.4)'; ctx.setLineDash([8,8]); ctx.lineWidth=1; ctx.strokeRect(60*scale,60*scale,W-120*scale,H-120*scale); ctx.setLineDash([]); ctx.fillStyle='rgba(34,211,238,0.8)'; ctx.font="14px Arial"; ctx.textAlign='left'; ctx.fillText("SAFE ZONE", 65*scale, 75*scale); ctx.restore();
+}
+function t16DrawSparkles(ctx,W,H,scale){
+  ctx.save(); ctx.fillStyle='rgba(255,215,0,0.9)'; ctx.font=Math.round(28*scale)+"px Arial"; ctx.textAlign='center';
+  ctx.fillText("✨", W*0.15, H*0.15); ctx.fillText("⭐", W*0.85, H*0.2); ctx.fillText("✨", W*0.88, H*0.75); ctx.fillText("⭐", W*0.12, H*0.8);
+  ctx.restore();
+}
+function t16DrawShape(ctx, cx, cy, size, c1, c2, gradientOn, initial, icon, iconFont){
+  ctx.save();
+  // Premium effect for shape - 3D shadow
+  if(t16Effect==='3d'){ ctx.shadowColor='rgba(0,0,0,0.4)'; ctx.shadowBlur=18; ctx.shadowOffsetY=8; }
+  if(t16Effect==='gold'){ // Gold foil - Add shine
+    var gg=ctx.createLinearGradient(cx-size/2,cy-size/2,cx+size/2,cy+size/2); gg.addColorStop(0,'#fde68a'); gg.addColorStop(0.5,'#f59e0b'); gg.addColorStop(1,'#92400e'); ctx.fillStyle=gg;
+  } else if(t16Effect==='metal'){
+    var gm=ctx.createLinearGradient(cx-size/2,cy-size/2,cx+size/2,cy+size/2); gm.addColorStop(0,'#e2e8f0'); gm.addColorStop(0.5,'#94a3b8'); gm.addColorStop(1,'#334155'); ctx.fillStyle=gm;
+  } else if(t16Effect==='neon'){
+    ctx.shadowColor=c1; ctx.shadowBlur=28;
+    var gn=ctx.createLinearGradient(cx-size/2,cy-size/2,cx+size/2,cy+size/2); gn.addColorStop(0,c1); gn.addColorStop(1,c2); ctx.fillStyle=gn;
+  } else if(t16Effect==='vintage'){
+    ctx.fillStyle=c1; ctx.globalAlpha=0.9;
+  } else if(gradientOn){
+    var g=ctx.createLinearGradient(cx-size/2,cy-size/2,cx+size/2,cy+size/2); g.addColorStop(0,c1); g.addColorStop(1,c2); ctx.fillStyle=g;
+  } else { ctx.fillStyle=c1; }
+  var r=size/2;
+  if(t16Shape==='circle' || t16Shape==='monogram'){
+    ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fill();
+    if(t16Effect!=='neon'){ ctx.shadowBlur=0; ctx.shadowOffsetY=0; }
+    ctx.strokeStyle='rgba(255,255,255,0.6)'; ctx.lineWidth=4; ctx.stroke();
+  } else if(t16Shape==='square'){
+    ctx.fillRect(cx-r,cy-r,size,size); ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+  } else if(t16Shape==='shield'){
+    ctx.beginPath(); ctx.moveTo(cx,cy-r); ctx.lineTo(cx+r,cy-r*0.6); ctx.lineTo(cx+r,cy+r*0.3); ctx.quadraticCurveTo(cx+r,cy+r*0.9,cx,cy+r*1.1); ctx.quadraticCurveTo(cx-r,cy+r*0.9,cx-r,cy+r*0.3); ctx.lineTo(cx-r,cy-r*0.6); ctx.closePath(); ctx.fill(); ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+  } else if(t16Shape==='badge'){
+    ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0; ctx.shadowOffsetY=0; ctx.setLineDash([12,8]); ctx.strokeStyle='rgba(255,255,255,0.8)'; ctx.lineWidth=4; ctx.beginPath(); ctx.arc(cx,cy,r-14,0,Math.PI*2); ctx.stroke(); ctx.setLineDash([]);
+  } else if(t16Shape==='hexagon'){
+    ctx.beginPath(); for(var i=0;i<6;i++){ var a=Math.PI/3*i-Math.PI/2; var x=cx+r*Math.cos(a), y=cy+r*Math.sin(a); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); } ctx.closePath(); ctx.fill(); ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+  } else if(t16Shape==='star'){
+    ctx.beginPath(); for(var j=0;j<10;j++){ var a2=Math.PI/5*j-Math.PI/2; var rad=j%2===0?r:r*0.45; var x2=cx+rad*Math.cos(a2), y2=cy+rad*Math.sin(a2); if(j===0) ctx.moveTo(x2,y2); else ctx.lineTo(x2,y2); } ctx.closePath(); ctx.fill(); ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+  } else if(t16Shape==='diamond'){
+    ctx.beginPath(); ctx.moveTo(cx,cy-r); ctx.lineTo(cx+r*0.7,cy-r*0.2); ctx.lineTo(cx+r*0.7,cy+r*0.5); ctx.lineTo(cx,cy+r); ctx.lineTo(cx-r*0.7,cy+r*0.5); ctx.lineTo(cx-r*0.7,cy-r*0.2); ctx.closePath(); ctx.fill(); ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+  } else if(t16Shape==='double'){
+    ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='rgba(255,255,255,0.9)'; ctx.lineWidth=3; ctx.stroke(); ctx.beginPath(); ctx.arc(cx,cy,r-18,0,Math.PI*2); ctx.stroke(); ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+  } else if(t16Shape==='ribbon'){
+    ctx.fillRect(cx-r,cy-r*0.4,size,r*0.8); ctx.beginPath(); ctx.moveTo(cx-r,cy-r*0.4); ctx.lineTo(cx-r-20,cy); ctx.lineTo(cx-r,cy+r*0.4); ctx.closePath(); ctx.fill(); ctx.beginPath(); ctx.moveTo(cx+r,cy-r*0.4); ctx.lineTo(cx+r+20,cy); ctx.lineTo(cx+r,cy+r*0.4); ctx.closePath(); ctx.fill(); ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+  } else if(t16Shape==='crown'){
+    ctx.beginPath(); ctx.moveTo(cx-r,cy+r*0.5); ctx.lineTo(cx-r,cy-r*0.3); ctx.lineTo(cx-r*0.5,cy); ctx.lineTo(cx,cy-r*0.7); ctx.lineTo(cx+r*0.5,cy); ctx.lineTo(cx+r,cy-r*0.3); ctx.lineTo(cx+r,cy+r*0.5); ctx.closePath(); ctx.fill(); ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+  }
+  ctx.globalAlpha=1; ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  if(t16Shape==='monogram'){ ctx.fillStyle='#ffffff'; ctx.font="900 "+Math.round(size*0.6)+"px Arial"; ctx.fillText(initial, cx, cy); }
+  else { ctx.font=Math.round(iconFont)+"px Arial"; try{ ctx.fillText(icon, cx, cy); }catch(e){ ctx.fillStyle='#fff'; ctx.font="900 "+Math.round(size*0.5)+"px Arial"; ctx.fillText(initial, cx, cy); } }
+  // Gold shine line on shape
+  if(t16Effect==='gold'){ ctx.fillStyle='rgba(255,255,255,0.35)'; ctx.beginPath(); ctx.ellipse(cx-r*0.3,cy-r*0.4,r*0.4,r*0.15,-0.5,0,Math.PI*2); ctx.fill(); }
+  ctx.restore();
+}
+function t16UpdatePreview(){
+  var sz=parseInt(t16Size)||1024;
+  var c1=document.getElementById('t16PreviewWhite'); c1.width=300; c1.height=300; var ctx1=c1.getContext('2d'); t16DrawLogo(ctx1,300,300,'white');
+  var c2=document.getElementById('t16PreviewBlack'); c2.width=300; c2.height=300; var ctx2=c2.getContext('2d'); t16DrawLogo(ctx2,300,300,'black');
+  var c3=document.getElementById('t16PreviewTrans'); c3.width=300; c3.height=300; var ctx3=c3.getContext('2d'); ctx3.clearRect(0,0,300,300); t16DrawLogo(ctx3,300,300,'transparent');
+  // Mockups
+  try{
+    var mc=document.getElementById('t16MockShirt'); if(mc){ var mctx=mc.getContext('2d'); mctx.clearRect(0,0,42,42); mctx.drawImage(c1,0,0,42,42); }
+    var mb=document.getElementById('t16MockBoard'); if(mb){ mb.width=200; mb.height=60; var bctx=mb.getContext('2d'); bctx.fillStyle='#fff'; bctx.fillRect(0,0,200,60); bctx.drawImage(c1,70,0,60,60); }
+    var mcard=document.getElementById('t16MockCard'); if(mcard){ var cctx=mcard.getContext('2d'); cctx.clearRect(0,0,42,42); cctx.drawImage(c1,0,0,42,42); }
+    document.getElementById('t16MockCardName').innerText=document.getElementById('t16Name').value||"Orbittroniz";
+    document.getElementById('t16MockCardTag').innerText=document.getElementById('t16Tagline').value||"";
+  }catch(e){}
+  document.getElementById('t16PreviewInfo').innerText="Logo: "+sz+" x "+sz+" • Shape: "+t16Shape+" • Effect: "+t16Effect+" • Icon: "+t16Icon;
+  document.getElementById('t16Stats').innerText="Logo: "+sz+" x "+sz+" • Shape: "+t16Shape+" • Effect: "+t16Effect+" • Icon: "+t16Icon;
+}
+function t16Download(){
+  var sz=parseInt(t16Size)||1024; var canvas=document.createElement('canvas'); canvas.width=sz; canvas.height=sz; var ctx=canvas.getContext('2d');
+  if(t16Fmt==='jpeg') t16DrawLogo(ctx,sz,sz,'white'); else t16DrawLogo(ctx,sz,sz,'export');
+  var mime=t16Fmt==='png'?'image/png':t16Fmt==='webp'?'image/webp':'image/jpeg'; var ext=t16Fmt==='png'?'png':t16Fmt==='webp'?'webp':'jpg';
+  canvas.toBlob(function(blob){ if(!blob){ alert("Download failed - Try again"); return; } var prefix=(document.getElementById('t16Prefix').value.trim()||"Logo - Orbittroniz").replace(/[\\/:*?"<>|]/g,''); var name=(document.getElementById('t16Name').value||"Logo").replace(/[\\/:*?"<>|]/g,'').slice(0,30); var fname=prefix+" - "+name+" - "+sz+"x"+sz+"."+ext; var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download=fname; document.body.appendChild(a); a.click(); a.remove(); t16Results.push({blob:blob,name:fname,url:url,w:sz,h:sz}); t16RenderResults(); document.getElementById('t16Status').innerText="✅ Premium Logo Downloaded! "+sz+"x"+sz+" • "+(blob.size/1024).toFixed(0)+" KB"; }, mime, t16Fmt==='png'?1:0.92);
+}
+function t16DownloadPack(){
+  // 4 Versions: Main + Icon Only + Black BG + White BG
+  var sz=1024;
+  var oldLayout=t16Layout, oldShape=t16Shape;
+  var jobs=[
+    {label:"Main Logo", layout:oldLayout, bg:'export', suffix:"Main"},
+    {label:"Icon Only", layout:"icon-only", bg:'export', suffix:"Icon Only"},
+    {label:"Black Version", layout:oldLayout, bg:'black', suffix:"Black BG"},
+    {label:"White Version", layout:oldLayout, bg:'white', suffix:"White BG"}
+  ];
+  var i=0;
+  function next(){
+    if(i>=jobs.length){ t16SetLayout(oldLayout, document.querySelector('#t16LayoutModes button[data-layout="'+oldLayout+'"]')); t16UpdatePreview(); document.getElementById('t16Status').innerText="✅ Logo Pack Downloaded! 4 Versions - Check downloads"; return; }
+    var job=jobs[i];
+    t16SetLayout(job.layout, document.querySelector('#t16LayoutModes button[data-layout="'+job.layout+'"]'));
+    t16UpdatePreview();
+    setTimeout(function(){
+      var canvas=document.createElement('canvas'); canvas.width=sz; canvas.height=sz; var ctx=canvas.getContext('2d'); t16DrawLogo(ctx,sz,sz,job.bg);
+      canvas.toBlob(function(blob){ if(blob){ var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download="Logo Pack - "+(document.getElementById('t16Name').value||"Logo")+" - "+job.suffix+".png"; document.body.appendChild(a); a.click(); a.remove(); } i++; setTimeout(next, 700); }, 'image/png');
+    }, 300);
+  }
+  next();
+}
+function t16DownloadVariations(){
+  var oldC1=document.getElementById('t16Color1').value, oldC2=document.getElementById('t16Color2').value, oldShape=t16Shape, oldEffect=t16Effect;
+  var vars=[['#f59e0b','#92400e','badge','gold'], ['#111827','#ef4444','shield','3d'], ['#2563eb','#22d3ee','hexagon','neon']];
+  var i=0;
+  function next(){ if(i>=vars.length){ document.getElementById('t16Color1').value=oldC1; document.getElementById('t16Color2').value=oldC2; t16SetShape(oldShape, document.querySelector('#t16ShapeModes button[data-shape="'+oldShape+'"]')); t16SetEffect(oldEffect, document.querySelector('#t16EffectModes button[data-effect="'+oldEffect+'"]')); t16UpdatePreview(); document.getElementById('t16Status').innerText="✅ 3 Premium Variations Downloaded!"; return; } document.getElementById('t16Color1').value=vars[i][0]; document.getElementById('t16Color2').value=vars[i][1]; t16SetShape(vars[i][2], document.querySelector('#t16ShapeModes button[data-shape="'+vars[i][2]+'"]')); t16SetEffect(vars[i][3], document.querySelector('#t16EffectModes button[data-effect="'+vars[i][3]+'"]')); t16UpdatePreview(); setTimeout(function(){ t16Download(); i++; setTimeout(next, 800); }, 300); }
+  next();
+}
+function t16RenderResults(){ var out=document.getElementById('t16Out'); out.innerHTML=""; if(!t16Results.length){ document.getElementById('t16OutEmpty').style.display='block'; return; } document.getElementById('t16OutEmpty').style.display='none'; t16Results.forEach(function(r,idx){ var card=document.createElement('div'); card.className='t16-imgcard'; card.innerHTML='<img src="'+r.url+'" style="background:repeating-conic-gradient(#ddd 0% 25%, #fff 0% 50%) 0 0/20px 20px"><div style="padding:8px;text-align:center"><b style="font-size:11px">'+r.name+'</b><br><small style="color:#22c55e">'+r.w+'x'+r.h+' • Logo ✅</small><div style="display:flex;gap:4px;margin-top:6px"><button onclick="t16DownloadOne('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">⬇️ Download</button><button onclick="t16ShareOne('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">📤 Share</button></div></div>'; out.appendChild(card); }); }
+function t16DownloadOne(i){ if(!t16Results[i]) return; var r=t16Results[i]; var a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }
+async function t16ShareOne(i){ if(!t16Results[i]) return; try{ var r=t16Results[i]; var file=new File([r.blob],r.name,{type:r.blob.type}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:r.name}); } }catch(e){} }
+async function t16Share(){ if(!t16Results.length){ t16Download(); setTimeout(function(){ if(t16Results.length) t16ShareOne(0); }, 600); return; } await t16ShareOne(t16Results.length-1); }
+function t16OpenPreview(){ var sz=1024; var mc=document.getElementById('t16ModalCanvas'); mc.width=sz; mc.height=sz; var ctx=mc.getContext('2d'); t16DrawLogo(ctx,sz,sz,'white'); document.getElementById('t16ModalTitle').innerText="Premium Logo - "+document.getElementById('t16Name').value; document.getElementById('t16ModalCap').innerText=document.getElementById('t16Tagline').value+" • "+t16Shape+" • Effect: "+t16Effect; document.getElementById('t16Modal').style.display='flex'; }
+function t16ClosePreview(){ document.getElementById('t16Modal').style.display='none'; }
+function t16Reset(){ document.getElementById('t16Name').value="Sharma Jewellers"; document.getElementById('t16Tagline').value="Gold • Diamond • Trust Since 1990"; document.getElementById('t16Initial').value="S"; t16Icon='💎'; t16Results=[]; document.getElementById('t16Out').innerHTML=""; document.getElementById('t16OutEmpty').style.display='block'; document.getElementById('t16Status').innerText=""; t16RenderIcons(); t16SetTemplate('jewellery'); }
+t16RenderIcons(); t16SetTemplate('jewellery'); t16UpdatePreview();
+</script>
+<!-- ================= TOOL 16 PREMIUM V2 - END ================= -->
 
 <!-- TOOL 17 -->
 <div class="tool" id="tool-17"><div class="panel"><h3>💳 Tool 17 - BizCard Maker</h3>
