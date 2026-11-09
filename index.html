@@ -7017,7 +7017,7 @@ setTimeout(function(){ t16AiThink(); }, 600);
 </script>
 <!-- ================= TOOL 16 V4 - END ================= -->
 <!-- TOOL 17 -->
-<!-- ================= TOOL 17 - BIZCARD - ENGLISH ONLY - AI + HUMAN - PREMIUM - START ================= -->
+ <!-- ================= TOOL 17 V2 - BIZCARD - LIKE CANVA - AI GENERATE 8 CARDS - SELECT BEST - START ================= -->
 <style>
 .t17-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
 .t17-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -7053,390 +7053,300 @@ setTimeout(function(){ t16AiThink(); }, 600);
 </style>
 
 <div class="tool active" id="tool-17"><div class="t17-card">
-<div class="t17-title">💳 BizCard Pro - Visiting Card - AI + Human 💎</div>
-<div class="t17-sub">English Only • AI + Human Co-Creator • 8 Premium Styles • Front + Back • QR Box • Gold Foil • Print Ready 1050x600</div>
+<div class="t17-title">💳 BizCard Pro - Like Canva - AI Generate 8 Cards ✨</div>
+<div class="t17-sub">English Only • Write 1 Line, AI Will Generate 8 Premium Cards • Select Best • Edit • Download • Print Ready</div>
 
-<!-- LIVE PREVIEW FRONT + BACK -->
-<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;text-align:center">
-<b style="font-size:13px">👀 LIVE CARD PREVIEW - Front + Back - Edit Karte Hi Dikhega</b>
-<div style="margin-top:10px">
-<div style="font-size:11px;color:#94a3b8;font-weight:700">⬇️ FRONT SIDE - Logo + Name</div>
-<canvas id="t17PreviewFront" style="max-width:100%;border-radius:12px;margin-top:6px;box-shadow:0 10px 30px rgba(0,0,0,.5)"></canvas>
-</div>
-<div style="margin-top:10px">
-<div style="font-size:11px;color:#94a3b8;font-weight:700">⬇️ BACK SIDE - Details + Contact</div>
-<canvas id="t17PreviewBack" style="max-width:100%;border-radius:12px;margin-top:6px;box-shadow:0 10px 30px rgba(0,0,0,.5)"></canvas>
-</div>
-<div style="display:flex;gap:6px;margin-top:10px">
-<button onclick="t17AiRedesign()" style="flex:1;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🤖 AI Re-Design</button>
-<button onclick="t17AiScore()" style="flex:1;background:linear-gradient(135deg,#f59e0b,#ef4444);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">⭐ AI Check Score</button>
-<button onclick="t17FlipPreview()" style="flex:1;background:linear-gradient(135deg,#ec4899,#f59e0b);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🔄 Flip Card</button>
-</div>
-<div id="t17AiScoreBox" style="display:none;margin-top:8px;background:#0a1224;border:1px solid #f59e0b;border-radius:10px;padding:10px;text-align:left"></div>
-</div>
-
-<!-- AI + HUMAN -->
-<label class="t17-label">🧠 1. AI + HUMAN BOTH THINK - Dono Milke Unique Card Banayenge</label>
-<div style="display:flex;gap:10px">
-<div style="flex:1;background:linear-gradient(135deg,rgba(34,211,238,.18),rgba(124,58,237,.18));border:1px solid #22d3ee;border-radius:14px;padding:12px">
-<b style="font-size:13px;color:#22d3ee">👤 HUMAN (YOU)</b><br>
-<small style="color:#94a3b8">Card kaisa chahiye? Royal? Modern? Soft?</small>
-<textarea id="t17Human" class="t17-input" rows="3" style="margin-top:8px">My card should look royal, gold, premium. Customer should feel this shop is trusted and rich.</textarea>
-<div class="t17-chiprow">
-<button onclick="t17HumanFill('My card should look royal, gold, premium. Customer should feel trusted and rich.')">👑 Royal Gold</button>
-<button onclick="t17HumanFill('My card should look modern, clean, tech. Young people should like it.')">⚡ Modern Tech</button>
-<button onclick="t17HumanFill('My card should look soft, lovely, for ladies. Pink and caring feel.')">🌸 Soft Lovely</button>
-</div>
-</div>
-<div style="flex:1;background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(236,72,153,.18));border:1px solid #f59e0b;border-radius:14px;padding:12px">
-<b style="font-size:13px;color:#f59e0b">🤖 AI (ME)</b><br>
-<small style="color:#94a3b8">AI tumhari baat padh ke apna idea likhega</small>
-<div id="t17AiThinkBox" style="background:#060a18;border-radius:10px;padding:10px;margin-top:8px;font-size:12px;color:#fff;line-height:1.6;min-height:88px">Click <b>AI Think</b> - AI will read your words...</div>
-<button onclick="t17AiThink()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#f59e0b,#ec4899);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🤖 AI THINK</button>
-</div>
-</div>
-<div id="t17MergeBox" style="display:none;margin-top:10px;background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;text-align:left"></div>
-
-<!-- AI PROMPT -->
-<label class="t17-label">🤖 2. AI PROMPT TO CARD - Bas Likh Do, AI Pura Card Bana Dega</label>
+<!-- STEP 1 - WRITE SOMETHING - LIKE GOOD APPS -->
+<label class="t17-label">✍️ STEP 1 - WRITE SOMETHING ABOUT YOUR BUSINESS - AI Will Generate 8 Cards</label>
 <div style="background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(34,211,238,.25));border:1px solid #a78bfa;border-radius:14px;padding:12px">
-<textarea id="t17AiPrompt" class="t17-input" placeholder="Example: Visiting card for Sharma Jewellers, gold, royal, phone 98765 43210, Solapur" rows="2">Visiting card for Sharma Jewellers, gold, royal, phone 98765 43210, Solapur</textarea>
-<div class="t17-chiprow">
-<button onclick="t17AiPromptFill('Visiting card for Sharma Jewellers, gold, royal, phone 98765 43210, Solapur')">💎 Jewellers</button>
-<button onclick="t17AiPromptFill('Visiting card for Power Gym, black, strong, phone 98765 43210')">🏋️ Gym</button>
-<button onclick="t17AiPromptFill('Visiting card for Saree House, pink, elegant, Solapur')">🛍️ Saree</button>
+<b style="font-size:13px">✨ Just Write In 1 Line - Like This:</b><br>
+<small style="color:#94a3b8">Example: <b style="color:#22d3ee">Sharma Jewellers, gold shop, Solapur, phone 98765 43210</b> / <b style="color:#f59e0b">Power Gym, Solapur, fitness</b> / <b style="color:#ec4899">Saree House, pink, Solapur</b></small>
+<textarea id="t17Prompt" class="t17-input" rows="2" style="margin-top:8px">Sharma Jewellers, gold shop, Solapur, phone 98765 43210</textarea>
+<div style="display:flex;gap:8px;margin-top:8px">
+<input type="text" id="t17Name" class="t17-input" placeholder="Your Name - Rahul Sharma" value="Rahul Sharma" style="flex:1">
+<input type="text" id="t17Phone" class="t17-input" placeholder="Phone - 98765 43210" value="98765 43210" style="flex:1">
 </div>
-<button onclick="t17AiGenerateFromPrompt()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:14px;border-radius:12px;font-weight:900;cursor:pointer;font-size:14px">🤖 AI GENERATE CARD - Make My Card</button>
-<div id="t17AiThinking" style="display:none;text-align:center;margin-top:8px"><b>🤖 AI is Thinking...</b><br><small style="color:#94a3b8">Reading prompt, choosing premium style...</small><br><div style="font-size:22px;margin-top:4px">🧠✨💳</div></div>
+<div class="t17-chiprow">
+<button onclick="t17FillPrompt('Sharma Jewellers, gold shop, Solapur, phone 98765 43210','Rahul Sharma')">💎 Jewellers</button>
+<button onclick="t17FillPrompt('Power Gym, fitness, Solapur, phone 98765 43210','Amit Patil')">🏋️ Gym</button>
+<button onclick="t17FillPrompt('Saree House, pink saree shop, Solapur, phone 98765 43210','Priya Sharma')">🛍️ Saree</button>
+</div>
+<div class="t17-chiprow">
+<button onclick="t17FillPrompt('Orbittroniz, business tools technology, Solapur','Orbittroniz Team')">🪐 Orbittroniz</button>
+<button onclick="t17FillPrompt('Sweet Bakery, cakes, Solapur, phone 98765 43210','Sweet Bakery')">🍰 Bakery</button>
+<button onclick="t17FillPrompt('City Hospital, care, Solapur, phone 98765 43210','Dr. Patil')">🏥 Hospital</button>
+</div>
+<button onclick="t17AiGenerate8()" style="width:100%;margin-top:10px;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:16px;border-radius:12px;font-weight:900;cursor:pointer;font-size:15px">✨ AI GENERATE 8 CARDS - Create My Cards</button>
+<button onclick="t17AiGenerate8(true)" style="width:100%;margin-top:8px;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px;border-radius:12px;font-weight:800;cursor:pointer">🎲 GENERATE AGAIN - 8 New Different Cards</button>
+<div id="t17AiThinking" style="display:none;text-align:center;margin-top:8px"><b>🤖 AI is Thinking...</b><br><small style="color:#94a3b8">Reading your business, designing 8 premium cards - Gold, Black, Orbit, Minimal, Rose, Blue, Green, Luxury...</small><br><div style="font-size:24px;margin-top:4px">🧠✨💳💳💳</div></div>
 <div id="t17AiResult" style="display:none;margin-top:8px;background:#060a18;border-radius:10px;padding:10px;text-align:left"></div>
 </div>
 
-<!-- MODE -->
-<label class="t17-label">🤖 3. MODE</label>
-<div class="t17-mode" id="t17ModeModes">
-<button class="active" data-mode="auto" onclick="t17SetMode('auto',this)">🤖 AUTO - AI Will Suggest</button>
-<button data-mode="manual" onclick="t17SetMode('manual',this)">✋ MANUAL - I Will Design<br><small>100% Working</small></button>
-</div>
-<div id="t17ModeInfo" style="text-align:center;font-size:11px;color:#22d3ee;margin-top:6px;font-weight:700">Mode: AUTO</div>
-<div id="t17ManualGuide" style="display:none;background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;margin-top:10px">
-<b style="color:#22c55e">✋ MANUAL MODE:</b><br><small style="color:#fff;line-height:1.7"><b>Step 1:</b> Details likho - Name, Business, Phone<br><b>Step 2:</b> Template + Colors chuno<br><b>Step 3:</b> Download dabao<br><i>No AI needed ✅</i></small>
-</div>
+<!-- STEP 2 - 8 CARDS GALLERY - LIKE CANVA TEMPLATES -->
+<label class="t17-label">🖼️ STEP 2 - YOUR 8 PREMIUM CARDS - Select Best One - Click Any Card To Select</label>
+<div id="t17Gallery" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px"></div>
+<div id="t17GalleryEmpty" style="text-align:center;color:#94a3b8;padding:16px;font-size:12px;background:#060a18;border-radius:12px">No cards yet - Write something above and click AI GENERATE 8 CARDS<br><br>AI will make 8 different premium cards like Canva templates</div>
 
-<!-- 8 TEMPLATES -->
-<label class="t17-label">💎 4. PREMIUM TEMPLATES - 8 World-Class Styles - One Click</label>
-<div class="t17-pillrow">
-<button class="t17-pill" onclick="t17SetTemplate('orbit')">🪐<br>Orbit<br>Like Orbittroniz</button>
-<button class="t17-pill" onclick="t17SetTemplate('gold')">👑<br>Royal Gold<br>Gold Foil</button>
-<button class="t17-pill" onclick="t17SetTemplate('black')">🌑<br>Premium Black<br>Luxury</button>
-<button class="t17-pill" onclick="t17Reset()">🔄<br>Clear<br>All</button>
+<!-- STEP 3 - SELECTED CARD EDITOR -->
+<div id="t17Editor" style="display:none;background:#060a18;border:1px solid #22d3ee;border-radius:12px;padding:12px;margin-top:12px">
+<b style="font-size:13px;color:#22d3ee">✏️ STEP 3 - EDIT SELECTED CARD - <span id="t17EditorName">Card 1</span></b><br>
+<small style="color:#94a3b8">Change details - Only this selected card will change</small>
+<div style="text-align:center;margin-top:10px">
+<div style="font-size:11px;color:#94a3b8">FRONT - Logo + Name</div>
+<canvas id="t17EditFront" style="max-width:100%;border-radius:12px;margin-top:6px;box-shadow:0 10px 30px rgba(0,0,0,.5)"></canvas>
+<div style="font-size:11px;color:#94a3b8;margin-top:10px">BACK - Details + Contact</div>
+<canvas id="t17EditBack" style="max-width:100%;border-radius:12px;margin-top:6px;box-shadow:0 10px 30px rgba(0,0,0,.5)"></canvas>
 </div>
-<div class="t17-pillrow" style="margin-top:8px">
-<button class="t17-pill" onclick="t17SetTemplate('samsung')">💙<br>Samsung Blue<br>Oval Trust</button>
-<button class="t17-pill" onclick="t17SetTemplate('mercedes')">⭐<br>Mercedes Star<br>Silver Luxury</button>
-<button class="t17-pill" onclick="t17SetTemplate('apple')">🍎<br>Apple Minimal<br>Clean White</button>
-<button class="t17-pill" onclick="t17SetTemplate('rose')">🌸<br>Rose Gold<br>Beauty Soft</button>
+<!-- EDIT FIELDS - Auto filled from prompt, editable -->
+<div style="margin-top:12px">
+<input type="text" id="t17BizName" class="t17-input" placeholder="Business Name" value="Sharma Jewellers" oninput="t17UpdateSelected()">
+<input type="text" id="t17Role" class="t17-input" placeholder="Role - Owner" value="Owner" oninput="t17UpdateSelected()" style="margin-top:8px">
+<input type="text" id="t17Phone2" class="t17-input" placeholder="2nd Phone - Optional" value="91234 56780" oninput="t17UpdateSelected()" style="margin-top:8px">
+<input type="text" id="t17Email" class="t17-input" placeholder="Email / Website" value="sharma@gmail.com" oninput="t17UpdateSelected()" style="margin-top:8px">
+<input type="text" id="t17Address" class="t17-input" placeholder="Address" value="Main Road, Solapur" oninput="t17UpdateSelected()" style="margin-top:8px">
+<textarea id="t17Services" class="t17-input" placeholder="Services" rows="2" oninput="t17UpdateSelected()" style="margin-top:8px">Gold • Diamond • Silver • Repair</textarea>
+<input type="text" id="t17LogoText" class="t17-input" placeholder="Logo Text - S" value="S" oninput="t17UpdateSelected()" style="margin-top:8px">
 </div>
-
-<label class="t17-label">✏️ 5. YOUR DETAILS - Name, Business, Phone, Address</label>
-<input type="text" id="t17Name" class="t17-input" placeholder="Your Name - Example: Rahul Sharma" value="Rahul Sharma" oninput="t17UpdatePreview()">
-<input type="text" id="t17BizName" class="t17-input" placeholder="Business Name - Example: Sharma Jewellers" value="Sharma Jewellers" oninput="t17UpdatePreview()" style="margin-top:8px">
-<input type="text" id="t17Role" class="t17-input" placeholder="Your Role - Example: Owner / Founder / Manager" value="Owner" oninput="t17UpdatePreview()" style="margin-top:8px">
-<input type="text" id="t17Phone" class="t17-input" placeholder="Phone - Example: 98765 43210" value="98765 43210" oninput="t17UpdatePreview()" style="margin-top:8px">
-<input type="text" id="t17Phone2" class="t17-input" placeholder="2nd Phone / WhatsApp - Optional" value="91234 56780" oninput="t17UpdatePreview()" style="margin-top:8px">
-<input type="text" id="t17Email" class="t17-input" placeholder="Email / Website - Example: sharma@gmail.com / www.sharma.com" value="sharma@gmail.com" oninput="t17UpdatePreview()" style="margin-top:8px">
-<input type="text" id="t17Address" class="t17-input" placeholder="Address - Example: Main Road, Solapur" value="Main Road, Solapur" oninput="t17UpdatePreview()" style="margin-top:8px">
-<textarea id="t17Services" class="t17-input" placeholder="Services - Example: Gold • Diamond • Silver • Repair" rows="2" oninput="t17UpdatePreview()" style="margin-top:8px">Gold • Diamond • Silver • Repair</textarea>
-<div style="display:flex;gap:6px;margin-top:8px">
-<button onclick="t17AiImproveServices()" style="flex:1;background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🤖 AI Improve Services</button>
-<button onclick="t17FillExample()" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:11px;border-radius:10px;font-weight:700;cursor:pointer">📝 Fill Example</button>
+<div style="display:flex;gap:8px;margin-top:10px;align-items:center">
+<input type="color" id="t17Color1" value="#f59e0b" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t17UpdateSelected()">
+<input type="color" id="t17Color2" value="#92400e" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t17UpdateSelected()">
+<input type="color" id="t17BgColor" value="#000000" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t17UpdateSelected()">
+<div style="flex:1"><small style="color:#94a3b8">Change colors of selected card only</small></div>
 </div>
-
-<label class="t17-label">🎨 6. LOGO / ICON FOR CARD - Orbit / Initial / Emoji</label>
-<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px">
-<div style="display:flex;gap:8px;align-items:center">
-<input type="text" id="t17LogoText" class="t17-input" placeholder="Logo Text - Example: S (Initial) or 🪐" value="S" style="flex:1" oninput="t17UpdatePreview()">
-<select id="t17LogoStyle" class="t17-input" style="flex:1" onchange="t17UpdatePreview()"><option value="orbit">🪐 Orbit Logo - Like Orbittroniz</option><option value="circle">⭕ Circle Initial</option><option value="shield">🛡️ Shield Initial</option><option value="crown">👑 Crown + Initial</option><option value="oval">💙 Oval - Samsung Style</option><option value="star">⭐ Star - Mercedes Style</option><option value="minimal">⚪ Minimal Letter</option><option value="emoji">😀 Emoji Icon</option></select>
-</div>
-<div style="display:flex;gap:6px;margin-top:8px">
-<button onclick="t17SetLogo('🪐','orbit')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;cursor:pointer">🪐 Orbit</button>
-<button onclick="t17SetLogo('💎','circle')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;cursor:pointer">💎 Diamond</button>
-<button onclick="t17SetLogo('👑','crown')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;cursor:pointer">👑 Crown</button>
-<button onclick="t17SetLogo('S','shield')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;cursor:pointer">S Shield</button>
-</div>
-</div>
-
-<label class="t17-label">✨ 7. PREMIUM EFFECTS</label>
 <div class="t17-mode" id="t17EffectModes">
-<button data-effect="none" onclick="t17SetEffect('none',this)">📝 Normal<br>Clean</button>
-<button class="active" data-effect="gold" onclick="t17SetEffect('gold',this)">👑 Gold Foil<br>Luxury</button>
-<button data-effect="3d" onclick="t17SetEffect('3d',this)">🧊 3D Shadow<br>Depth</button>
-<button data-effect="neon" onclick="t17SetEffect('neon',this)">💡 Neon Glow<br>Night</button>
+<button data-effect="none" onclick="t17SetEffect('none',this)">📝 Normal</button>
+<button class="active" data-effect="gold" onclick="t17SetEffect('gold',this)">👑 Gold Foil</button>
+<button data-effect="3d" onclick="t17SetEffect('3d',this)">🧊 3D Shadow</button>
+<button data-effect="neon" onclick="t17SetEffect('neon',this)">💡 Neon Glow</button>
 </div>
 <div class="t17-mode">
-<button data-effect="emboss" onclick="t17SetEffect('emboss',this)">🔲 Emboss<br>Stamp</button>
-<button data-effect="metal" onclick="t17SetEffect('metal',this)">⚙️ Metallic<br>Silver</button>
-<button data-effect="vintage" onclick="t17SetEffect('vintage',this)">📜 Vintage<br>Old Style</button>
-<button data-effect="gradient" onclick="t17SetEffect('gradient',this)">🌈 Gradient<br>Colorful</button>
+<button data-effect="emboss" onclick="t17SetEffect('emboss',this)">🔲 Emboss</button>
+<button data-effect="metal" onclick="t17SetEffect('metal',this)">⚙️ Metallic</button>
+<button data-effect="gradient" onclick="t17SetEffect('gradient',this)">🌈 Gradient</button>
+<button data-effect="vintage" onclick="t17SetEffect('vintage',this)">📜 Vintage</button>
+</div>
+<div style="display:flex;gap:6px;margin-top:10px">
+<button onclick="t17DownloadSelected()" style="flex:1;background:linear-gradient(135deg,#22c55e,#16a34a);border:none;color:#fff;padding:13px;border-radius:12px;font-weight:900;cursor:pointer">📥 Download Selected Card (Front + Back)</button>
+<button onclick="t17DownloadSelectedPack()" style="flex:1;background:linear-gradient(135deg,#f59e0b,#92400e);border:none;color:#fff;padding:13px;border-radius:12px;font-weight:900;cursor:pointer">💎 Pack (Front+Back+DP)</button>
+</div>
 </div>
 
-<label class="t17-label">🎨 8. COLORS - Premium Palettes</label>
-<div style="display:flex;gap:8px;align-items:center">
-<input type="color" id="t17Color1" value="#f59e0b" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t17UpdatePreview()">
-<input type="color" id="t17Color2" value="#92400e" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t17UpdatePreview()">
-<input type="color" id="t17BgColor" value="#000000" style="width:60px;height:45px;border:none;border-radius:10px" oninput="t17UpdatePreview()">
-<div style="flex:1"><small style="color:#94a3b8">C1 = Main<br>C2 = Second<br>C3 = Background</small></div>
-</div>
-<div style="display:flex;gap:6px;margin-top:8px">
-<button onclick="t17SetColors('#f59e0b','#92400e','#000000')" style="flex:1;background:linear-gradient(135deg,#f59e0b,#92400e);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">👑 Royal Gold</button>
-<button onclick="t17SetColors('#a78bfa','#22d3ee','#000000')" style="flex:1;background:linear-gradient(135deg,#a78bfa,#22d3ee);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">🪐 Orbit</button>
-<button onclick="t17SetColors('#2563eb','#1e40af','#ffffff')" style="flex:1;background:linear-gradient(135deg,#2563eb,#1e40af);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">💙 Samsung</button>
-<button onclick="t17SetColors('#111827','#334155','#ffffff')" style="flex:1;background:linear-gradient(135deg,#111827,#334155);border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">🌑 Black</button>
-</div>
-<button onclick="t17AiColor()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#ec4899,#f59e0b);border:none;color:#fff;padding:11px;border-radius:10px;font-weight:800;cursor:pointer">🎨 AI Pick Best Colors</button>
-<div class="t17-toggle"><b>📱 Show QR Style Box? (Phone Number QR Look)</b><input type="checkbox" id="t17QrOn" checked onchange="t17UpdatePreview()"></div>
-<div class="t17-toggle"><b>🌟 Show Stars / Decorations?</b><input type="checkbox" id="t17Decor" checked onchange="t17UpdatePreview()"></div>
-<div class="t17-toggle"><b>🔲 Show Border Frame?</b><input type="checkbox" id="t17BorderOn" checked onchange="t17UpdatePreview()"></div>
-<div class="t17-toggle"><b>📐 Show Back Side Also? (Front + Back Both)</b><input type="checkbox" id="t17BackOn" checked onchange="t17UpdatePreview()"></div>
-
-<label class="t17-label">✏️ 9. FONT + SIZE</label>
-<div style="display:flex;gap:8px">
-<select id="t17Font" class="t17-input" style="flex:1" onchange="t17UpdatePreview()"><option value="Arial">Arial - Clean</option><option value="Georgia">Georgia - Royal / Elegant</option><option value="Impact">Impact - Bold</option><option value="Times New Roman">Times - Classic</option><option value="Verdana">Verdana - Modern</option></select>
-<button onclick="t17AiFont()" style="background:linear-gradient(135deg,#7c3aed,#22d3ee);border:none;color:#fff;padding:12px 14px;border-radius:12px;font-weight:800;cursor:pointer;white-space:nowrap">🤖 AI Font</button>
-</div>
-<span style="font-size:11px;color:#fff">🔤 Name Size: <b id="t17NameSizeVal" style="color:#22d3ee">48px</b></span>
-<input type="range" id="t17NameSize" class="t17-range" min="30" max="80" value="48" oninput="document.getElementById('t17NameSizeVal').innerText=this.value+'px';t17UpdatePreview()">
-
-<label class="t17-label">📐 10. CARD SIZE + FORMAT</label>
-<div class="t17-mode" id="t17SizeModes">
-<button class="active" data-size="1050x600" onclick="t17SetSize('1050x600',this)">💳 1050x600 - Print Ready</button>
-<button data-size="1200x700" onclick="t17SetSize('1200x700',this)">🖨️ 1200x700 - HD Print</button>
-<button data-size="1080x1080" onclick="t17SetSize('1080x1080',this)">📱 1080x1080 - WhatsApp DP</button>
-<button data-size="1050x600" onclick="t17SetSize('1050x600',this)">↩️ Back To Print</button>
-</div>
-<div class="t17-mode" id="t17FmtModes">
-<button class="active" data-fmt="png" onclick="t17SetFmt('png',this)">🎨 PNG - Best</button>
-<button data-fmt="jpeg" onclick="t17SetFmt('jpeg',this)">🖼️ JPG - Small</button>
-<button data-fmt="webp" onclick="t17SetFmt('webp',this)">⚡ WEBP</button>
-<button data-fmt="png" onclick="t17SetFmt('png',this)">↩️ PNG Again</button>
-</div>
-<input type="text" id="t17Prefix" class="t17-input" placeholder="BizCard - Orbittroniz" value="BizCard - Orbittroniz" style="margin-top:8px">
 <div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:10px;text-align:center">
-<b id="t17Stats" style="font-size:13px">Card: 1050 x 600 • Style: Royal Gold • Front + Back</b><br>
-<small id="t17AiQuality" style="color:#a78bfa">AI: Ready • Premium Working ✅</small>
+<b id="t17Stats" style="font-size:13px">Cards: 0 • Select Best Card</b><br>
+<small id="t17AiQuality" style="color:#a78bfa">AI: Ready • Write 1 Line To Start ✅</small>
 </div>
 <div id="t17Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
 
-<button class="t17-btn-preview" onclick="t17OpenPreview()">👀 PREVIEW - Full Screen Card</button>
-<button class="t17-btn3d" onclick="t17DownloadBoth()">📥 DOWNLOAD FRONT + BACK - REAL START</button>
-<button class="t17-btn2" onclick="t17DownloadPack()" style="background:linear-gradient(135deg,#f59e0b,#92400e);color:#fff;border:none">💎 DOWNLOAD CARD PACK - Front + Back + WhatsApp DP Version</button>
-<button class="t17-btn2" onclick="t17DownloadFrontOnly()" style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;border:none">📥 Download Front Only</button>
-<button class="t17-btn-share" id="t17ShareBtn" onclick="t17Share()" style="display:block">📤 SHARE CARD</button>
-<button class="t17-btn2" onclick="t17Reset()">🗑️ Clear / New Card</button>
+<button class="t17-btn-preview" onclick="t17OpenPreview()">👀 PREVIEW - Selected Card Full Screen</button>
+<button class="t17-btn3d" onclick="t17DownloadAll()">📥 DOWNLOAD ALL 8 CARDS - Front + Back All</button>
+<button class="t17-btn2" onclick="t17AiRemix()" style="background:linear-gradient(135deg,#ec4899,#f59e0b);color:#fff;border:none">🎲 AI REMIX - Mix 2 Best Cards To Make New Card</button>
+<button class="t17-btn-share" id="t17ShareBtn" onclick="t17ShareSelected()" style="display:block">📤 SHARE SELECTED CARD</button>
+<button class="t17-btn2" onclick="t17Reset()">🗑️ Clear / New Cards</button>
 
-<label class="t17-label">🖼️ YOUR CARDS</label>
+<label class="t17-label">🖼️ DOWNLOADED CARDS</label>
 <div class="t17-grid" id="t17Out"></div>
-<div id="t17OutEmpty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">No cards yet - Download to see here</div>
+<div id="t17OutEmpty" style="text-align:center;color:#94a3b8;padding:12px;font-size:12px">No downloads yet - Download any card to see here</div>
 </div></div>
-<!-- ================= TOOL 17 - END ================= -->
+<!-- ================= TOOL 17 V2 - END ================= -->
 
-<div class="t17-modal" id="t17Modal"><div id="t17ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Card Preview</div><canvas id="t17ModalCanvas"></canvas><div id="t17ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div><div class="t17-modal-nav"><button onclick="t17FlipPreview()" style="background:#f59e0b">🔄 Flip Front / Back</button><button onclick="t17DownloadBoth()" style="background:#22c55e">⬇️ Download Both</button><button onclick="t17Share()" style="background:#2563eb">📤 Share</button><button class="primary" onclick="t17ClosePreview()">✅ Close</button></div></div>
+<div class="t17-modal" id="t17Modal"><div id="t17ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Card Preview</div><canvas id="t17ModalCanvas"></canvas><div id="t17ModalCap" style="color:#94a3b8;font-size:12px;margin-top:8px;text-align:center"></div><div class="t17-modal-nav"><button onclick="t17FlipModal()" style="background:#f59e0b">🔄 Flip Front / Back</button><button onclick="t17DownloadSelected()" style="background:#22c55e">⬇️ Download</button><button onclick="t17ShareSelected()" style="background:#2563eb">📤 Share</button><button class="primary" onclick="t17ClosePreview()">✅ Close</button></div></div>
 
 <script>
-// ===== TOOL 17 JS - BIZCARD - AI + HUMAN - PREMIUM =====
-var t17Effect='gold', t17Size='1050x600', t17Fmt='png', t17Mode='auto', t17Results=[], t17AiIdea=null, t17ShowFront=true, t17Style='gold';
-function t17HumanFill(t){ document.getElementById('t17Human').value=t; }
-function t17AiPromptFill(t){ document.getElementById('t17AiPrompt').value=t; }
-function t17FillExample(){ document.getElementById('t17Name').value="Rahul Sharma"; document.getElementById('t17BizName').value="Sharma Jewellers"; document.getElementById('t17Role').value="Owner"; document.getElementById('t17Phone').value="98765 43210"; document.getElementById('t17Phone2').value="91234 56780"; document.getElementById('t17Email').value="sharma@gmail.com"; document.getElementById('t17Address').value="Main Road, Solapur"; document.getElementById('t17Services').value="Gold • Diamond • Silver • Repair"; t17UpdatePreview(); }
-function t17SetMode(m,btn){ t17Mode=m; document.querySelectorAll('#t17ModeModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active');
-  document.getElementById('t17ModeInfo').innerText = m==='auto' ? "Mode: AUTO • AI will suggest" : "Mode: MANUAL • AI off, you design - 100% Working ✅";
-  document.getElementById('t17ManualGuide').style.display = m==='manual' ? 'block' : 'none';
-}
-function t17AiThink(){
-  var human=(document.getElementById('t17Human').value||"").toLowerCase();
-  var idea={colors:"Gold", shape:"Shield", reason:""};
-  var reasons=[];
-  if(human.indexOf('royal')>-1 || human.indexOf('gold')>-1 || human.indexOf('premium')>-1 || human.indexOf('rich')>-1){
-    reasons.push("You said <b>royal / gold / premium</b> - AI thinks <b>Gold = Rich, Luxury</b>. Customer will feel shop is premium.");
-    reasons.push("AI suggests <b>Black background + Gold text</b> - Black + Gold is most premium combo in world.");
-    reasons.push("AI suggests <b>Gold Foil effect</b> - Shiny gold looks like real gold card.");
-    idea.colors="Royal Gold"; idea.shape="Gold Foil";
-  } else if(human.indexOf('modern')>-1 || human.indexOf('tech')>-1){
-    reasons.push("You said <b>modern / tech</b> - AI thinks <b>Orbit / Gradient</b> - Future feel.");
-    reasons.push("AI suggests <b>Clean white or black + Gradient text</b> - Like Apple, Orbittroniz.");
-    idea.colors="Orbit Gradient"; idea.shape="Orbit";
-  } else if(human.indexOf('soft')>-1 || human.indexOf('lovely')>-1){
-    reasons.push("You said <b>soft / lovely</b> - AI thinks <b>Rose Gold + Pink</b> - Soft and caring.");
-    idea.colors="Rose Gold"; idea.shape="Circle Soft";
-  } else {
-    reasons.push("AI read your words - Best is <b>Royal Gold</b> - It works for any business, looks premium.");
-    idea.colors="Royal Gold";
+// ===== TOOL 17 V2 - AI GENERATE 8 CARDS - LIKE CANVA =====
+var t17Cards=[], t17SelectedIdx=0, t17Results=[], t17Effect='gold', t17ModalFront=true, t17GenCount=0;
+var t17Templates=[
+  {id:"gold", label:"Royal Gold", desc:"Black + Gold Foil - Premium", c1:"#f59e0b", c2:"#92400e", bg:"#000000", effect:"gold", logo:"crown", score:94, badge:"💎 Premium"},
+  {id:"black", label:"Premium Black", desc:"Black + Silver - Luxury", c1:"#e2e8f0", c2:"#94a3b8", bg:"#000000", effect:"metal", logo:"minimal", score:90, badge:"🌑 Luxury"},
+  {id:"orbit", label:"Orbit", desc:"Orbittroniz Style - Purple-Blue", c1:"#a78bfa", c2:"#22d3ee", bg:"#000000", effect:"gradient", logo:"orbit", score:92, badge:"🪐 Future"},
+  {id:"minimal", label:"Apple Minimal", desc:"White + Clean - Simple Premium", c1:"#111827", c2:"#111827", bg:"#ffffff", effect:"none", logo:"minimal", score:91, badge:"🍎 Minimal"},
+  {id:"rose", label:"Rose Gold", desc:"Pink + Gold - Beauty Soft", c1:"#fbcfe8", c2:"#ec4899", bg:"#ffffff", effect:"gradient", logo:"circle", score:88, badge:"🌸 Soft"},
+  {id:"blue", label:"Samsung Blue", desc:"Blue Oval - Trusted", c1:"#2563eb", c2:"#1e40af", bg:"#ffffff", effect:"none", logo:"oval", score:89, badge:"💙 Trusted"},
+  {id:"green", label:"Fresh Green", desc:"Green + Blue - Fresh / Hospital", c1:"#22c55e", c2:"#0ea5e9", bg:"#ffffff", effect:"none", logo:"circle", score:87, badge:"🌿 Fresh"},
+  {id:"luxury", label:"Luxury Shield", desc:"Shield + Gold - Royal Trust", c1:"#f59e0b", c2:"#111827", bg:"#ffffff", effect:"3d", logo:"shield", score:93, badge:"🛡️ Trust"}
+];
+function t17FillPrompt(prompt, name){ document.getElementById('t17Prompt').value=prompt; document.getElementById('t17Name').value=name; var ph=prompt.match(/(\d{10})/); if(ph) document.getElementById('t17Phone').value=ph[1].replace(/(\d{5})(\d{5})/,"$1 $2"); }
+// ===== AI BRAIN - Parse 1 Line, Extract Business, Phone, Place, Type =====
+function t17ParsePrompt(){
+  var prompt=(document.getElementById('t17Prompt').value||"").toLowerCase();
+  var name=document.getElementById('t17Name').value||"Your Name";
+  var phone=document.getElementById('t17Phone').value||"98765 43210";
+  // Phone from prompt if present
+  var phMatch=prompt.match(/(\d{10})/); if(phMatch) phone=phMatch[1].replace(/(\d{5})(\d{5})/,"$1 $2");
+  var place="Solapur"; if(prompt.indexOf('pune')>-1) place="Pune"; else if(prompt.indexOf('mumbai')>-1) place="Mumbai"; else if(prompt.indexOf('nashik')>-1) place="Nashik"; else if(prompt.indexOf('kolhapur')>-1) place="Kolhapur";
+  var biz="My Business", role="Owner", services="Quality • Trust • Best Service", bizType="general";
+  if(prompt.indexOf('jeweller')>-1 || prompt.indexOf('gold')>-1){ biz="Sharma Jewellers"; role="Owner"; services="Gold • Diamond • Silver • Repair"; bizType="jewellery"; }
+  else if(prompt.indexOf('gym')>-1 || prompt.indexOf('fitness')>-1){ biz="Power Gym"; role="Owner / Trainer"; services="Gym • Yoga • Diet Plan • Personal Training"; bizType="gym"; }
+  else if(prompt.indexOf('saree')>-1 || prompt.indexOf('sari')>-1){ biz="Saree House"; role="Owner"; services="Saree • Dress • Kurtis • Blouse"; bizType="saree"; }
+  else if(prompt.indexOf('orbit')>-1 || prompt.indexOf('tech')>-1 || prompt.indexOf('business tools')>-1){ biz="Orbittroniz"; role="Business Tools • Technology"; services="Tools • Websites • Business Growth"; bizType="tech"; }
+  else if(prompt.indexOf('bakery')>-1 || prompt.indexOf('cake')>-1){ biz="Sweet Bakery"; role="Owner"; services="Cakes • Pastries • Fresh Bread"; bizType="bakery"; }
+  else if(prompt.indexOf('hospital')>-1 || prompt.indexOf('clinic')>-1 || prompt.indexOf('doctor')>-1){ biz="City Hospital"; role="Doctor"; services="Care • Cure • 24x7 Emergency"; bizType="hospital"; }
+  else if(prompt.indexOf('beauty')>-1 || prompt.indexOf('salon')>-1){ biz="Glow Beauty"; role="Owner"; services="Hair • Makeup • Facial • Manicure"; bizType="beauty"; }
+  else if(prompt.indexOf('food')>-1 || prompt.indexOf('restaurant')>-1){ biz="Tasty Food"; role="Owner"; services="Fresh • Tasty • Home Delivery"; bizType="food"; }
+  else if(prompt.indexOf('school')>-1){ biz="Bright School"; role="Principal"; services="Learn • Grow • Shine"; bizType="school"; }
+  else {
+    // Use first 2 words of prompt as business name if not matched
+    var words=prompt.split(',')[0].trim().split(' ');
+    if(words.length>=2) biz=words.slice(0,2).map(function(w){ return w.charAt(0).toUpperCase()+w.slice(1); }).join(' ');
+    else if(words.length===1) biz=words[0].charAt(0).toUpperCase()+words[0].slice(1)+" Business";
   }
-  t17AiIdea=idea;
-  document.getElementById('t17AiThinkBox').innerHTML="<b>🤖 AI Thinking:</b><br>"+reasons.join("<br><br>");
-  var merge=document.getElementById('t17MergeBox');
-  merge.innerHTML='<b style="color:#22c55e">✅ MERGED IDEA - Human + AI:</b><br><small style="color:#fff;line-height:1.6">Human: "<i>'+(document.getElementById('t17Human').value||"")+'</i>"<br>AI added: '+idea.colors+' + '+idea.shape+'<br><b>Final Card:</b> Your details + '+idea.colors+' + Premium Effect. Unique card, no copy.</small>';
-  merge.style.display='block';
-  return idea;
+  // If user typed business name in Name field and it looks like business, keep it - Use prompt biz as primary
+  // Email - Auto from biz
+  var email=biz.toLowerCase().replace(/[^a-z0-9]/g,'')+"@gmail.com";
+  var address="Main Road, "+place;
+  return {biz:biz, name:name, role:role, phone:phone, phone2:"91234 56780", email:email, address:address, services:services, bizType:bizType, place:place, prompt:prompt};
 }
-function t17AiGenerateFromPrompt(){
-  var prompt=(document.getElementById('t17AiPrompt').value||"").toLowerCase();
-  if(!prompt.trim()) return alert("First write what card you want!");
+function t17AiGenerate8(isRegen){
+  var prompt=(document.getElementById('t17Prompt').value||"").trim();
+  if(!prompt) return alert("First write something about your business! Example: Sharma Jewellers, gold shop, Solapur");
   document.getElementById('t17AiThinking').style.display='block'; document.getElementById('t17AiResult').style.display='none';
+  t17GenCount++;
   setTimeout(function(){
     document.getElementById('t17AiThinking').style.display='none';
-    var phoneMatch=prompt.match(/(\d{10})/); var phone=phoneMatch?phoneMatch[1].replace(/(\d{5})(\d{5})/,"$1 $2"):"98765 43210";
-    var place="Solapur"; if(prompt.indexOf('pune')>-1) place="Pune"; else if(prompt.indexOf('mumbai')>-1) place="Mumbai";
-    var result=null;
-    if(prompt.indexOf('jeweller')>-1 || prompt.indexOf('gold')>-1){ result={biz:"Sharma Jewellers", name:"Rahul Sharma", role:"Owner", services:"Gold • Diamond • Silver • Repair", style:"gold", c1:"#f59e0b", c2:"#92400e", bg:"#000000", effect:"gold", detected:"Jewellery - Royal Gold"}; }
-    else if(prompt.indexOf('gym')>-1){ result={biz:"Power Gym", name:"Amit Patil", role:"Owner / Trainer", services:"Gym • Yoga • Diet Plan", style:"black", c1:"#111827", c2:"#ef4444", bg:"#000000", effect:"3d", detected:"Gym - Black Strong"}; }
-    else if(prompt.indexOf('saree')>-1){ result={biz:"Saree House", name:"Priya Sharma", role:"Owner", services:"Saree • Dress • Kurtis", style:"rose", c1:"#fbcfe8", c2:"#ec4899", bg:"#ffffff", effect:"gradient", detected:"Saree - Rose Pink"}; }
-    else if(prompt.indexOf('tech')>-1 || prompt.indexOf('orbit')>-1){ result={biz:"Orbittroniz", name:"Orbittroniz Team", role:"Business Tools • Technology", services:"Tools • Websites • Business Growth", style:"orbit", c1:"#a78bfa", c2:"#22d3ee", bg:"#000000", effect:"gradient", detected:"Tech - Orbit Style"}; }
-    else { result={biz:"My Business", name:"Your Name", role:"Owner", services:"Quality • Trust • Best Service", style:"gold", c1:"#f59e0b", c2:"#92400e", bg:"#000000", effect:"gold", detected:"General - Royal Gold"}; }
-    document.getElementById('t17BizName').value=result.biz;
-    document.getElementById('t17Name').value=result.name;
-    document.getElementById('t17Role').value=result.role;
-    document.getElementById('t17Phone').value=phone;
-    document.getElementById('t17Address').value="Main Road, "+place;
-    document.getElementById('t17Services').value=result.services;
-    document.getElementById('t17Color1').value=result.c1; document.getElementById('t17Color2').value=result.c2; document.getElementById('t17BgColor').value=result.bg;
-    t17Style=result.style; t17SetEffect(result.effect, document.querySelector('#t17EffectModes button[data-effect="'+result.effect+'"]'));
-    document.getElementById('t17LogoText').value=result.biz.charAt(0);
-    t17UpdatePreview();
+    var data=t17ParsePrompt();
+    // Order templates by business type - AI Best First - Like good apps, best template on top
+    var ordered=t17Templates.slice();
+    if(data.bizType==='jewellery'){ ordered.sort(function(a,b){ return (a.id==='gold'?-1:0)-(b.id==='gold'?-1:0); }); }
+    else if(data.bizType==='gym'){ ordered.sort(function(a,b){ return (a.id==='black'?-1:0)-(b.id==='black'?-1:0); }); }
+    else if(data.bizType==='saree' || data.bizType==='beauty'){ ordered.sort(function(a,b){ return (a.id==='rose'?-1:0)-(b.id==='rose'?-1:0); }); }
+    else if(data.bizType==='tech'){ ordered.sort(function(a,b){ return (a.id==='orbit'?-1:0)-(b.id==='orbit'?-1:0); }); }
+    else if(data.bizType==='hospital'){ ordered.sort(function(a,b){ return (a.id==='green'?-1:0)-(b.id==='green'?-1:0); }); }
+    else if(data.bizType==='school'){ ordered.sort(function(a,b){ return (a.id==='blue'?-1:0)-(b.id==='blue'?-1:0); }); }
+    // If regen, shuffle colors slightly to make new variations - Good apps style: Generate Again gives new designs
+    if(isRegen){
+      ordered.forEach(function(t){
+        // Slight color variation for new generation - Keep same style but new shade
+        if(t.id==='gold'){ t.c1="#fbbf24"; t.c2="#b45309"; }
+        if(t.id==='orbit'){ t.c1="#c4b5fd"; t.c2="#06b6d4"; }
+      });
+      // Shuffle a bit but keep best first
+      var first=ordered[0]; var rest=ordered.slice(1); rest.sort(function(){ return Math.random()-0.5; }); ordered=[first].concat(rest);
+    }
+    t17Cards=ordered.map(function(t,idx){
+      return {template:JSON.parse(JSON.stringify(t)), data:JSON.parse(JSON.stringify(data)), idx:idx, effect:t.effect};
+    });
+    t17SelectedIdx=0;
+    t17RenderGallery();
+    t17LoadSelected(0);
+    var best=ordered[0];
     var box=document.getElementById('t17AiResult');
-    box.innerHTML='<b>✅ AI Created Your Card!</b><br><small style="color:#94a3b8">AI understood: <b style="color:#22d3ee">'+result.detected+'</b><br>Style: '+result.style+' • Colors: '+result.c1+' + '+result.c2+' • Effect: '+result.effect+'<br>Phone: '+phone+' • Place: '+place+'</small>';
+    box.innerHTML='<b>✅ AI Generated 8 Premium Cards For "'+data.biz+'"!</b><br><small style="color:#94a3b8">AI understood: Business = <b style="color:#22d3ee">'+data.bizType+'</b> • Place = '+data.place+' • Phone = '+data.phone+'<br>⭐ <b>AI Best For You: '+best.label+'</b> - '+best.desc+' - Score: '+best.score+'/100<br>Why? '+(data.bizType==='jewellery'?"Jewellery = Gold = Royal, customers trust gold card":data.bizType==='gym'?"Gym = Black = Strong":"Your business matches this style best")+'<br><b>Select any card below, edit it, download it.</b> Pasand nahi aaya? <b>Generate Again</b> dabao - 8 naye cards milenge.</small>';
     box.style.display='block';
-    document.getElementById('t17Status').innerText="✅ AI Card Ready! Check preview";
-    t17AiThink();
-  }, 800);
+    document.getElementById('t17Stats').innerText="Cards: 8 • Business: "+data.biz+" • Best: "+best.label;
+    document.getElementById('t17Status').innerText="✅ 8 Cards Ready! Select best one below 👇";
+    document.getElementById('t17AiQuality').innerText="AI: 8 Cards Generated • Best: "+best.label+" ⭐";
+  }, 1000);
 }
-function t17AiImproveServices(){
-  var s=document.getElementById('t17Services').value||"";
-  if(!s) return alert("First write services!");
-  var improved=s.trim(); if(improved.indexOf('•')===-1) improved=improved.split(',').join(' • ');
-  document.getElementById('t17Services').value=improved; t17UpdatePreview();
+function t17RenderGallery(){
+  var g=document.getElementById('t17Gallery'); g.innerHTML="";
+  if(!t17Cards.length){ document.getElementById('t17GalleryEmpty').style.display='block'; return; }
+  document.getElementById('t17GalleryEmpty').style.display='none';
+  t17Cards.forEach(function(card, idx){
+    var wrap=document.createElement('div');
+    wrap.style.cssText="background:#060a18;border:"+(idx===t17SelectedIdx?"2px solid #22d3ee":"1px solid #2a3a6a")+";border-radius:14px;overflow:hidden;cursor:pointer;position:relative";
+    wrap.onclick=function(){ t17LoadSelected(idx); };
+    if(idx===0){
+      var badge=document.createElement('div'); badge.style.cssText="position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#f59e0b,#92400e);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;z-index:2"; badge.innerText="⭐ AI BEST FOR YOU"; wrap.appendChild(badge);
+    }
+    if(idx===t17SelectedIdx){
+      var sel=document.createElement('div'); sel.style.cssText="position:absolute;top:8px;right:8px;background:#22c55e;color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;z-index:2"; sel.innerText="✅ SELECTED"; wrap.appendChild(sel);
+    }
+    // Front card preview - Small
+    var canvasF=document.createElement('canvas'); canvasF.width=525; canvasF.height=300; canvasF.style.cssText="width:100%;display:block";
+    var ctxF=canvasF.getContext('2d'); t17DrawCard(ctxF,525,300,card, true);
+    wrap.appendChild(canvasF);
+    // Back preview - Smaller, faded
+    var canvasB=document.createElement('canvas'); canvasB.width=525; canvasB.height=300; canvasB.style.cssText="width:100%;display:block;opacity:0.85;border-top:1px solid #2a3a6a";
+    var ctxB=canvasB.getContext('2d'); t17DrawCard(ctxB,525,300,card, false);
+    wrap.appendChild(canvasB);
+    var foot=document.createElement('div'); foot.style.cssText="padding:8px;text-align:center";
+    foot.innerHTML='<b style="font-size:12px">'+card.template.label+' • Score: '+card.template.score+'/100</b><br><small style="color:#94a3b8">'+card.template.desc+'</small><br><small style="color:#a78bfa">'+card.template.badge+'</small><br><div style="display:flex;gap:4px;margin-top:6px"><button onclick="event.stopPropagation();t17LoadSelected('+idx+');t17DownloadSelected()" style="flex:1;background:#22c55e;border:none;color:#fff;border-radius:8px;padding:8px;font-size:11px;font-weight:800;cursor:pointer">⬇️ Download</button><button onclick="event.stopPropagation();t17LoadSelected('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:8px;font-size:11px;cursor:pointer">✏️ Select & Edit</button></div>';
+    wrap.appendChild(foot); g.appendChild(wrap);
+  });
 }
-function t17SetLogo(txt, style){ document.getElementById('t17LogoText').value=txt; document.getElementById('t17LogoStyle').value=style; t17UpdatePreview(); }
-function t17SetEffect(eff,btn){ t17Effect=eff; document.querySelectorAll('#t17EffectModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); t17UpdatePreview(); }
-function t17SetColors(c1,c2,bg){ document.getElementById('t17Color1').value=c1; document.getElementById('t17Color2').value=c2; document.getElementById('t17BgColor').value=bg; t17UpdatePreview(); }
-function t17SetSize(s,btn){ t17Size=s; document.querySelectorAll('#t17SizeModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); t17UpdatePreview(); }
-function t17SetFmt(f,btn){ t17Fmt=f; document.querySelectorAll('#t17FmtModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); }
-function t17GetSize(){ var p=t17Size.split('x'); return {w:parseInt(p[0])||1050, h:parseInt(p[1])||600}; }
-function t17AiColor(){
-  var biz=(document.getElementById('t17BizName').value||"").toLowerCase();
-  if(biz.indexOf('jeweller')>-1||biz.indexOf('gold')>-1) t17SetColors('#f59e0b','#92400e','#000000');
-  else if(biz.indexOf('gym')>-1) t17SetColors('#111827','#ef4444','#000000');
-  else if(biz.indexOf('saree')>-1||biz.indexOf('beauty')>-1) t17SetColors('#fbcfe8','#ec4899','#ffffff');
-  else t17SetColors('#a78bfa','#22d3ee','#000000');
+function t17LoadSelected(idx){
+  t17SelectedIdx=idx; var card=t17Cards[idx]; if(!card) return;
+  t17RenderGallery();
+  document.getElementById('t17Editor').style.display='block';
+  document.getElementById('t17EditorName').innerText=card.template.label+" - "+card.data.biz+" • Score: "+card.template.score+"/100";
+  // Fill editor fields from card data - So editing only this card
+  document.getElementById('t17BizName').value=card.data.biz;
+  document.getElementById('t17Name').value=card.data.name;
+  document.getElementById('t17Phone').value=card.data.phone;
+  document.getElementById('t17Role').value=card.data.role;
+  document.getElementById('t17Phone2').value=card.data.phone2||"";
+  document.getElementById('t17Email').value=card.data.email||"";
+  document.getElementById('t17Address').value=card.data.address||"";
+  document.getElementById('t17Services').value=card.data.services||"";
+  document.getElementById('t17LogoText').value=card.data.biz.charAt(0)||"S";
+  document.getElementById('t17Color1').value=card.template.c1;
+  document.getElementById('t17Color2').value=card.template.c2;
+  document.getElementById('t17BgColor').value=card.template.bg;
+  t17Effect=card.effect;
+  document.querySelectorAll('#t17EffectModes button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-effect')===t17Effect); });
+  t17UpdateSelected();
+  document.getElementById('t17Status').innerText="✅ Selected: "+card.template.label+" - Edit below, only this card will change";
+  // Scroll to editor
+  setTimeout(function(){ document.getElementById('t17Editor').scrollIntoView({behavior:'smooth', block:'start'}); }, 200);
 }
-function t17AiFont(){
-  var biz=(document.getElementById('t17BizName').value||"").toLowerCase();
-  var f="Arial"; if(biz.indexOf('jeweller')>-1||biz.indexOf('wedding')>-1) f="Georgia"; else if(biz.indexOf('gym')>-1) f="Impact"; else if(biz.indexOf('tech')>-1) f="Verdana";
-  document.getElementById('t17Font').value=f; t17UpdatePreview();
+function t17UpdateSelected(){
+  var card=t17Cards[t17SelectedIdx]; if(!card) return;
+  // Update ONLY selected card data - Not other cards - Like Canva, editing one template does not change others
+  card.data.biz=document.getElementById('t17BizName').value||card.data.biz;
+  card.data.name=document.getElementById('t17Name').value||card.data.name;
+  card.data.phone=document.getElementById('t17Phone').value||card.data.phone;
+  card.data.role=document.getElementById('t17Role').value||card.data.role;
+  card.data.phone2=document.getElementById('t17Phone2').value||"";
+  card.data.email=document.getElementById('t17Email').value||"";
+  card.data.address=document.getElementById('t17Address').value||"";
+  card.data.services=document.getElementById('t17Services').value||"";
+  card.data.logoText=document.getElementById('t17LogoText').value||card.data.biz.charAt(0);
+  card.template.c1=document.getElementById('t17Color1').value;
+  card.template.c2=document.getElementById('t17Color2').value;
+  card.template.bg=document.getElementById('t17BgColor').value;
+  card.effect=t17Effect;
+  // Update editor previews - Full size
+  var front=document.getElementById('t17EditFront'); front.width=1050; front.height=600; front.style.maxHeight='300px'; var ctxF=front.getContext('2d'); ctxF.save(); ctxF.scale(1050/1050,600/600); t17DrawCard(ctxF,1050,600,card,true); ctxF.restore();
+  // For display, scale down via CSS - Canvas is 1050, CSS max-width 100% will shrink
+  var back=document.getElementById('t17EditBack'); back.width=1050; back.height=600; back.style.maxHeight='300px'; var ctxB=back.getContext('2d'); t17DrawCard(ctxB,1050,600,card,false);
+  // Update gallery thumb for this card - Re-render gallery but keep editor open - Use lightweight: Only update selected card thumb? For simplicity, re-render gallery without scrolling
+  // We skip full gallery re-render on every keystroke to avoid flicker - Gallery updates on LoadSelected / Generate
 }
-function t17AiScore(){
-  var name=document.getElementById('t17Name').value||""; var phone=document.getElementById('t17Phone').value||""; var biz=document.getElementById('t17BizName').value||""; var addr=document.getElementById('t17Address').value||""; var services=document.getElementById('t17Services').value||"";
-  var score=55, tips=[];
-  if(name.length>=3){ score+=10; } else { tips.push("⚠️ Add your full name - Customer needs to know who to ask for"); }
-  if(phone.replace(/\D/g,'').length>=10){ score+=15; } else { tips.push("⚠️ Add 10-digit phone number - Without phone, card is useless"); }
-  if(biz.length>=3){ score+=10; } else { tips.push("⚠️ Add business name"); }
-  if(addr.length>5){ score+=5; } else { tips.push("⚠️ Add address - Customer needs to find your shop"); }
-  if(services.length>5){ score+=5; } else { tips.push("💡 Add services - What do you sell? Gold? Saree? Gym?"); }
-  if(document.getElementById('t17QrOn').checked){ score+=5; } else { tips.push("💡 Turn ON QR Box - Looks modern"); }
-  if(score>95) score=95;
-  var box=document.getElementById('t17AiScoreBox'); var color=score>=85?"#22c55e":score>=70?"#f59e0b":"#ef4444";
-  box.innerHTML='<b style="font-size:16px;color:'+color+'">⭐ AI Card Score: '+score+' / 100</b><br><div style="height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:6px"><div style="height:100%;background:'+color+';width:'+score+'%"></div></div><div style="margin-top:8px;font-size:12px;color:#fff;line-height:1.6">'+(tips.length? tips.join('<br>') : '✅ Perfect Card! Name, Phone, Business, Address, Services - All there. Ready to print! 🎉')+'</div><button onclick="t17AiFixScore()" style="margin-top:8px;background:#22c55e;border:none;color:#fff;padding:9px 16px;border-radius:20px;font-weight:800;cursor:pointer">🤖 AI Fix All Issues</button>';
-  box.style.display='block';
+function t17SetEffect(eff,btn){ t17Effect=eff; document.querySelectorAll('#t17EffectModes button').forEach(function(b){b.classList.remove('active')}); if(btn)btn.classList.add('active'); t17UpdateSelected(); }
+function t17AiRemix(){
+  if(t17Cards.length<2) return alert("First generate 8 cards!");
+  var a=t17Cards[0], b=t17Cards[1];
+  var newTemplate={id:"remix", label:"Remix - AI Mixed Card", desc:"Mix of "+a.template.label+" + "+b.template.label, c1:a.template.c1, c2:b.template.c2, bg:a.template.bg, effect:"gold", logo:"crown", score:95, badge:"🎲 AI Remix - Unique"};
+  var newCard={template:newTemplate, data:JSON.parse(JSON.stringify(a.data)), idx:0, effect:"gold"};
+  t17Cards.unshift(newCard); t17SelectedIdx=0; t17RenderGallery(); t17LoadSelected(0);
+  document.getElementById('t17Status').innerText="🎲 AI Remix Done! New unique card from 2 best cards";
 }
-function t17AiFixScore(){
-  if(!document.getElementById('t17QrOn').checked) document.getElementById('t17QrOn').checked=true;
-  var phone=document.getElementById('t17Phone').value||""; if(phone.replace(/\D/g,'').length<10) document.getElementById('t17Phone').value="98765 43210";
-  var addr=document.getElementById('t17Address').value||""; if(addr.length<5) document.getElementById('t17Address').value="Main Road, Solapur";
-  var services=document.getElementById('t17Services').value||""; if(services.length<5) document.getElementById('t17Services').value="Quality • Trust • Best Service";
-  t17UpdatePreview(); t17AiScore();
-}
-function t17AiRedesign(){
-  var styles=['gold','orbit','black','rose','samsung','mercedes','apple'];
-  var next=styles[Math.floor(Math.random()*styles.length)]; t17SetTemplate(next);
-}
-function t17FlipPreview(){
-  t17ShowFront=!t17ShowFront;
-  var front=document.getElementById('t17PreviewFront'); var back=document.getElementById('t17PreviewBack');
-  // Simple flip - Scroll to other side and highlight
-  if(t17ShowFront) front.scrollIntoView({behavior:'smooth', block:'center'});
-  else back.scrollIntoView({behavior:'smooth', block:'center'});
-  document.getElementById('t17Status').innerText=t17ShowFront?"👀 Showing FRONT side":"👀 Showing BACK side";
-}
-function t17SetTemplate(name){
-  var d={
-    orbit:{c1:"#a78bfa", c2:"#22d3ee", bg:"#000000", effect:"gradient", logoStyle:"orbit"},
-    gold:{c1:"#f59e0b", c2:"#92400e", bg:"#000000", effect:"gold", logoStyle:"crown"},
-    black:{c1:"#e2e8f0", c2:"#94a3b8", bg:"#000000", effect:"metal", logoStyle:"minimal"},
-    samsung:{c1:"#2563eb", c2:"#1e40af", bg:"#ffffff", effect:"none", logoStyle:"oval"},
-    mercedes:{c1:"#94a3b8", c2:"#334155", bg:"#000000", effect:"metal", logoStyle:"star"},
-    apple:{c1:"#111827", c2:"#111827", bg:"#ffffff", effect:"none", logoStyle:"minimal"},
-    rose:{c1:"#fbcfe8", c2:"#ec4899", bg:"#ffffff", effect:"gradient", logoStyle:"circle"}
-  };
-  var x=d[name]||d['gold']; t17Style=name;
-  document.getElementById('t17Color1').value=x.c1; document.getElementById('t17Color2').value=x.c2; document.getElementById('t17BgColor').value=x.bg;
-  document.getElementById('t17LogoStyle').value=x.logoStyle;
-  t17SetEffect(x.effect, document.querySelector('#t17EffectModes button[data-effect="'+x.effect+'"]'));
-  t17UpdatePreview(); document.getElementById('t17Status').innerText="✅ Premium Template: "+name+" • Effect: "+x.effect;
-}
-// ===== CORE CARD DRAW - Front + Back - Same For Preview + Download =====
-function t17DrawCard(ctx, W, H, isFront){
-  var name=document.getElementById('t17Name').value||"Your Name";
-  var biz=document.getElementById('t17BizName').value||"Your Business";
-  var role=document.getElementById('t17Role').value||"Owner";
-  var phone=document.getElementById('t17Phone').value||"98765 43210";
-  var phone2=document.getElementById('t17Phone2').value||"";
-  var email=document.getElementById('t17Email').value||"";
-  var address=document.getElementById('t17Address').value||"";
-  var services=document.getElementById('t17Services').value||"";
-  var logoText=document.getElementById('t17LogoText').value||biz.charAt(0)||"S";
-  var logoStyle=document.getElementById('t17LogoStyle').value||"orbit";
-  var font=document.getElementById('t17Font').value||"Arial";
-  var nameSize=parseInt(document.getElementById('t17NameSize').value||48);
-  var c1=document.getElementById('t17Color1').value||"#f59e0b";
-  var c2=document.getElementById('t17Color2').value||"#92400e";
-  var bg=document.getElementById('t17BgColor').value||"#000000";
-  var qrOn=document.getElementById('t17QrOn').checked;
-  var decor=document.getElementById('t17Decor').checked;
-  var borderOn=document.getElementById('t17BorderOn').checked;
+// ===== CORE CARD DRAW - Takes card object, not global fields - So each card is independent =====
+function t17DrawCard(ctx, W, H, card, isFront){
+  var d=card.data, t=card.template, effect=card.effect||"gold";
+  var biz=d.biz||"My Business", name=d.name||"Your Name", role=d.role||"Owner", phone=d.phone||"98765 43210", phone2=d.phone2||"", email=d.email||"", address=d.address||"", services=d.services||"", logoText=d.logoText||biz.charAt(0)||"S";
+  var c1=t.c1, c2=t.c2, bg=t.bg;
   var isDark=bg.toLowerCase()==="#000000" || bg.toLowerCase()==="#111827" || bg.toLowerCase()==="#1e40af";
-  var textMain=isDark?"#ffffff":bg.toLowerCase()==="#ffffff"?"#111827":"#ffffff";
+  var textMain=isDark?"#ffffff":"#111827";
   var textSub=isDark?"rgba(255,255,255,0.75)":"#64748b";
   var scale=W/1050;
-  // Background
   ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
-  // Premium effect background - Gradient wash
-  if(t17Effect==='gradient' || t17Effect==='gold'){
-    var bgGrad=ctx.createLinearGradient(0,0,W,H); bgGrad.addColorStop(0, bg); bgGrad.addColorStop(1, c2+"22"); ctx.fillStyle=bgGrad; ctx.fillRect(0,0,W,H);
-  }
-  // Decor - Corner circles / lines
-  if(decor){
-    ctx.fillStyle=c1; ctx.globalAlpha=0.12; ctx.beginPath(); ctx.arc(W-40*scale, 40*scale, 120*scale, 0, Math.PI*2); ctx.fill(); ctx.beginPath(); ctx.arc(40*scale, H-40*scale, 90*scale, 0, Math.PI*2); ctx.fill(); ctx.globalAlpha=1;
-    ctx.strokeStyle=c1; ctx.globalAlpha=0.3; ctx.lineWidth=2*scale; ctx.beginPath(); ctx.arc(W-40*scale, 40*scale, 140*scale, 0, Math.PI*2); ctx.stroke(); ctx.globalAlpha=1;
-  }
+  if(effect==='gradient' || effect==='gold'){ var bgGrad=ctx.createLinearGradient(0,0,W,H); bgGrad.addColorStop(0,bg); bgGrad.addColorStop(1,c2+"22"); ctx.fillStyle=bgGrad; ctx.fillRect(0,0,W,H); }
+  // Decor
+  ctx.fillStyle=c1; ctx.globalAlpha=0.12; ctx.beginPath(); ctx.arc(W-40*scale,40*scale,120*scale,0,Math.PI*2); ctx.fill(); ctx.beginPath(); ctx.arc(40*scale,H-40*scale,90*scale,0,Math.PI*2); ctx.fill(); ctx.globalAlpha=1;
   // Border
-  if(borderOn){
-    ctx.strokeStyle=c1; ctx.globalAlpha=0.7; ctx.lineWidth=3*scale; ctx.strokeRect(14*scale,14*scale,W-28*scale,H-28*scale);
-    ctx.strokeStyle=c1; ctx.globalAlpha=0.3; ctx.lineWidth=1*scale; ctx.strokeRect(22*scale,22*scale,W-44*scale,H-44*scale); ctx.globalAlpha=1;
-  }
-  // Helper - Premium text
+  ctx.strokeStyle=c1; ctx.globalAlpha=0.7; ctx.lineWidth=3*scale; ctx.strokeRect(14*scale,14*scale,W-28*scale,H-28*scale); ctx.globalAlpha=1;
   function premiumText(text, x, y, color, size, weight, align){
-    ctx.save(); ctx.font=weight+" "+Math.round(size*scale)+"px "+font+", Arial"; ctx.textAlign=align||"left"; ctx.textBaseline='middle';
-    if(t17Effect==='gold'){ var g=ctx.createLinearGradient(x-100*scale,y,x+100*scale,y); g.addColorStop(0,'#fde68a'); g.addColorStop(0.5,'#f59e0b'); g.addColorStop(1,'#92400e'); ctx.fillStyle=g; }
-    else if(t17Effect==='neon'){ ctx.shadowColor=c1; ctx.shadowBlur=12*scale; ctx.fillStyle=color; }
-    else if(t17Effect==='3d'){ ctx.fillStyle='rgba(0,0,0,0.3)'; ctx.fillText(text, x+2*scale, y+2*scale); ctx.fillStyle=color; }
-    else if(t17Effect==='metal'){ var gm=ctx.createLinearGradient(x,y-20*scale,x,y+20*scale); gm.addColorStop(0,'#e2e8f0'); gm.addColorStop(0.5,'#94a3b8'); gm.addColorStop(1,'#334155'); ctx.fillStyle=gm; }
+    ctx.save(); ctx.font=weight+" "+Math.round(size*scale)+"px Arial, sans-serif"; ctx.textAlign=align||"left"; ctx.textBaseline='middle';
+    if(effect==='gold'){ var g=ctx.createLinearGradient(x-100*scale,y,x+100*scale,y); g.addColorStop(0,'#fde68a'); g.addColorStop(0.5,'#f59e0b'); g.addColorStop(1,'#92400e'); ctx.fillStyle=g; }
+    else if(effect==='neon'){ ctx.shadowColor=c1; ctx.shadowBlur=12*scale; ctx.fillStyle=color; }
+    else if(effect==='3d'){ ctx.fillStyle='rgba(0,0,0,0.3)'; ctx.fillText(text, x+2*scale, y+2*scale); ctx.fillStyle=color; }
+    else if(effect==='metal'){ var gm=ctx.createLinearGradient(x,y-20*scale,x,y+20*scale); gm.addColorStop(0,'#e2e8f0'); gm.addColorStop(0.5,'#94a3b8'); gm.addColorStop(1,'#334155'); ctx.fillStyle=gm; }
     else { ctx.fillStyle=color; }
     ctx.fillText(text, x, y); ctx.restore();
   }
-  // Helper - Draw Logo Mark
   function drawLogoMark(cx, cy, size){
-    var r=size/2;
+    var r=size/2; var logoStyle=t.logo||"circle";
     if(logoStyle==='orbit'){
-      // Orbit logo - Mini version of Orbittroniz logo
       var grad=ctx.createLinearGradient(cx-r,cy-r,cx+r,cy+r); grad.addColorStop(0,c1); grad.addColorStop(1,c2);
       ctx.save(); ctx.shadowColor=c1; ctx.shadowBlur=10*scale; ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fillStyle=grad; ctx.fill(); ctx.restore();
       ctx.fillStyle=bg; ctx.beginPath(); ctx.arc(cx,cy,r-16*scale,0,Math.PI*2); ctx.fill();
@@ -7452,51 +7362,34 @@ function t17DrawCard(ctx, W, H, isFront){
     } else if(logoStyle==='oval'){
       var g=ctx.createLinearGradient(cx-r,cy-r,cx+r,cy+r); g.addColorStop(0,c1); g.addColorStop(1,c2); ctx.fillStyle=g; ctx.beginPath(); ctx.ellipse(cx,cy,r,r*0.65,0,0,Math.PI*2); ctx.fill();
       ctx.fillStyle='#ffffff'; ctx.font="700 "+Math.round(r*0.6)+"px Arial"; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(logoText, cx, cy);
-    } else if(logoStyle==='star'){
-      ctx.strokeStyle=c1; ctx.lineWidth=5*scale; ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.stroke();
-      ctx.strokeStyle=c1; ctx.lineWidth=4*scale; for(var i=0;i<3;i++){ var a=-Math.PI/2+i*(Math.PI*2/3); ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a)); ctx.stroke(); }
-      ctx.fillStyle=c1; ctx.beginPath(); ctx.arc(cx,cy,6*scale,0,Math.PI*2); ctx.fill();
     } else if(logoStyle==='minimal'){
       ctx.fillStyle=c1; ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fill();
       ctx.fillStyle=bg==="#ffffff"?"#ffffff":"#000000"; ctx.font="300 "+Math.round(r*1.1)+"px Arial"; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(logoText.charAt(0), cx, cy+4*scale);
-    } else if(logoStyle==='emoji'){
-      ctx.font=Math.round(r*1.2)+"px Arial"; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(logoText, cx, cy);
-    } else { // circle
+    } else {
       var gg=ctx.createLinearGradient(cx-r,cy-r,cx+r,cy+r); gg.addColorStop(0,c1); gg.addColorStop(1,c2); ctx.fillStyle=gg; ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fill();
       ctx.fillStyle='#ffffff'; ctx.font="900 "+Math.round(r*0.8)+"px Arial"; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(logoText.charAt(0), cx, cy);
     }
   }
   if(isFront){
-    // FRONT - Left Logo, Right Name + Biz
     var logoCx=150*scale, logoCy=H/2, logoSize=170*scale;
     drawLogoMark(logoCx, logoCy, logoSize);
     var tx=280*scale;
-    // Small top label
     ctx.font="600 "+Math.round(20*scale)+"px Arial"; ctx.textAlign='left'; ctx.fillStyle=c1; ctx.fillText("✦  PREMIUM  ✦", tx, H*0.28);
-    // Business Name - Big, Premium
-    premiumText(biz, tx, H*0.42, textMain, nameSize, "900", "left");
-    // Name
-    ctx.font="600 "+Math.round(28*scale)+"px "+font+", Arial"; ctx.textAlign='left'; ctx.fillStyle=textSub; ctx.fillText(name, tx, H*0.55);
-    // Role - In pill
-    ctx.fillStyle=c1; var roleW=ctx.measureText(role).width+40*scale; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(tx, H*0.62, roleW, 36*scale, 18*scale) : ctx.rect(tx, H*0.62, roleW, 36*scale); ctx.fill();
+    premiumText(biz, tx, H*0.42, textMain, 48, "900", "left");
+    ctx.font="600 "+Math.round(28*scale)+"px Arial"; ctx.textAlign='left'; ctx.fillStyle=textSub; ctx.fillText(name, tx, H*0.55);
+    ctx.fillStyle=c1; var roleW=ctx.measureText(role).width+40*scale; ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(tx, H*0.62, roleW, 36*scale, 18*scale); else ctx.rect(tx, H*0.62, roleW, 36*scale); ctx.fill();
     ctx.fillStyle=isDark?"#000000":"#ffffff"; ctx.font="700 "+Math.round(20*scale)+"px Arial"; ctx.textAlign='left'; ctx.fillText(role.toUpperCase(), tx+20*scale, H*0.62+18*scale);
-    // Services - Bottom
     ctx.font="600 "+Math.round(20*scale)+"px Arial"; ctx.fillStyle=textSub; ctx.fillText(services, tx, H*0.82);
-    // Gold line
     ctx.fillStyle=c1; ctx.fillRect(tx, H*0.70, 80*scale, 3*scale);
   } else {
-    // BACK - Details
     var bx=70*scale;
-    // Top - Business + Name
     ctx.font="600 "+Math.round(20*scale)+"px Arial"; ctx.textAlign='left'; ctx.fillStyle=c1; ctx.fillText("CONTACT US  •  VISIT US", bx, 70*scale);
-    premiumText(biz, bx, 115*scale, textMain, nameSize*0.9, "900", "left");
+    premiumText(biz, bx, 115*scale, textMain, 43, "900", "left");
     ctx.font="600 "+Math.round(26*scale)+"px Arial"; ctx.fillStyle=textSub; ctx.fillText(name+"  •  "+role, bx, 160*scale);
     ctx.fillStyle=c1; ctx.fillRect(bx, 185*scale, 80*scale, 3*scale);
-    // Details - Left
     var dy=230*scale; var lh=48*scale;
-    ctx.font="700 "+Math.round(24*scale)+"px Arial"; ctx.textAlign='left';
     function detailLine(icon, label, value){
-      ctx.fillStyle=c1; ctx.fillText(icon, bx, dy);
+      ctx.font="700 "+Math.round(24*scale)+"px Arial"; ctx.textAlign='left'; ctx.fillStyle=c1; ctx.fillText(icon, bx, dy);
       ctx.fillStyle=textSub; ctx.font="600 "+Math.round(18*scale)+"px Arial"; ctx.fillText(label, bx+42*scale, dy-12*scale);
       ctx.fillStyle=textMain; ctx.font="700 "+Math.round(26*scale)+"px Arial"; ctx.fillText(value, bx+42*scale, dy+16*scale);
       dy+=lh+18*scale;
@@ -7505,68 +7398,66 @@ function t17DrawCard(ctx, W, H, isFront){
     detailLine("✉️", "EMAIL / WEBSITE", email);
     detailLine("📍", "ADDRESS", address);
     detailLine("✨", "SERVICES", services);
-    // QR Style Box - Right Bottom - Visual QR pattern
-    if(qrOn){
-      var qx=W-180*scale, qy=H-180*scale, qs=130*scale;
-      ctx.fillStyle=isDark?"#ffffff":"#ffffff"; ctx.fillRect(qx, qy, qs, qs);
-      ctx.fillStyle="#000000";
-      // Fake QR pattern - Deterministic from phone
-      var seed=0; for(var s=0;s<phone.length;s++) seed+=phone.charCodeAt(s);
-      for(var r=0;r<8;r++){ for(var col=0;col<8;col++){ var v=(seed + r*7 + col*11)%3; if(v===0) ctx.fillRect(qx+8*scale+col*14*scale, qy+8*scale+r*14*scale, 12*scale, 12*scale); } }
-      // Corners
-      ctx.fillStyle="#000000"; ctx.fillRect(qx+8*scale, qy+8*scale, 28*scale, 28*scale); ctx.fillStyle="#ffffff"; ctx.fillRect(qx+14*scale, qy+14*scale, 16*scale, 16*scale); ctx.fillStyle="#000000"; ctx.fillRect(qx+18*scale, qy+18*scale, 8*scale, 8*scale);
-      ctx.fillRect(qx+qs-36*scale, qy+8*scale, 28*scale, 28*scale); ctx.fillStyle="#ffffff"; ctx.fillRect(qx+qs-30*scale, qy+14*scale, 16*scale, 16*scale); ctx.fillStyle="#000000"; ctx.fillRect(qx+qs-26*scale, qy+18*scale, 8*scale, 8*scale);
-      ctx.fillRect(qx+8*scale, qy+qs-36*scale, 28*scale, 28*scale); ctx.fillStyle="#ffffff"; ctx.fillRect(qx+14*scale, qy+qs-30*scale, 16*scale, 16*scale); ctx.fillStyle="#000000"; ctx.fillRect(qx+18*scale, qy+qs-26*scale, 8*scale, 8*scale);
-      ctx.fillStyle=textSub; ctx.font="600 "+Math.round(14*scale)+"px Arial"; ctx.textAlign='center'; ctx.fillText("SCAN TO CALL", qx+qs/2, qy+qs+22*scale);
-    }
-    // Bottom strip - Services / Tagline
+    // QR Box
+    var qx=W-180*scale, qy=H-180*scale, qs=130*scale;
+    ctx.fillStyle="#ffffff"; ctx.fillRect(qx, qy, qs, qs);
+    ctx.fillStyle="#000000"; var seed=0; for(var s=0;s<phone.length;s++) seed+=phone.charCodeAt(s);
+    for(var r=0;r<8;r++){ for(var col=0;col<8;col++){ var v=(seed + r*7 + col*11)%3; if(v===0) ctx.fillRect(qx+8*scale+col*14*scale, qy+8*scale+r*14*scale, 12*scale, 12*scale); } }
+    ctx.fillStyle="#000000"; ctx.fillRect(qx+8*scale, qy+8*scale, 28*scale, 28*scale); ctx.fillStyle="#ffffff"; ctx.fillRect(qx+14*scale, qy+14*scale, 16*scale, 16*scale); ctx.fillStyle="#000000"; ctx.fillRect(qx+18*scale, qy+18*scale, 8*scale, 8*scale);
+    ctx.fillRect(qx+qs-36*scale, qy+8*scale, 28*scale, 28*scale); ctx.fillStyle="#ffffff"; ctx.fillRect(qx+qs-30*scale, qy+14*scale, 16*scale, 16*scale); ctx.fillStyle="#000000"; ctx.fillRect(qx+qs-26*scale, qy+18*scale, 8*scale, 8*scale);
+    ctx.fillRect(qx+8*scale, qy+qs-36*scale, 28*scale, 28*scale); ctx.fillStyle="#ffffff"; ctx.fillRect(qx+14*scale, qy+qs-30*scale, 16*scale, 16*scale); ctx.fillStyle="#000000"; ctx.fillRect(qx+18*scale, qy+qs-26*scale, 8*scale, 8*scale);
+    ctx.fillStyle=textSub; ctx.font="600 "+Math.round(14*scale)+"px Arial"; ctx.textAlign='center'; ctx.fillText("SCAN TO CALL", qx+qs/2, qy+qs+22*scale);
     ctx.fillStyle=c1; ctx.fillRect(0, H-38*scale, W, 38*scale);
-    ctx.fillStyle=isDark?"#000000":"#ffffff"; ctx.font="700 "+Math.round(18*scale)+"px Arial"; ctx.textAlign='center'; ctx.fillText("✦  "+biz.toUpperCase()+"  •  "+phone+"  •  THANK YOU FOR VISITING  ✦", W/2, H-19*scale);
+    ctx.fillStyle=isDark?"#000000":"#ffffff"; ctx.font="700 "+Math.round(18*scale)+"px Arial"; ctx.textAlign='center'; ctx.fillText("✦  "+biz.toUpperCase()+"  •  "+phone+"  •  THANK YOU  ✦", W/2, H-19*scale);
   }
 }
-function t17UpdatePreview(){
-  var sz=t17GetSize();
-  var front=document.getElementById('t17PreviewFront'); var scale=Math.min(1, 700/sz.w);
-  front.width=sz.w*scale; front.height=sz.h*scale; var ctxF=front.getContext('2d'); ctxF.save(); ctxF.scale(scale,scale); t17DrawCard(ctxF, sz.w, sz.h, true); ctxF.restore();
-  var back=document.getElementById('t17PreviewBack'); back.width=sz.w*scale; back.height=sz.h*scale; var ctxB=back.getContext('2d'); ctxB.save(); ctxB.scale(scale,scale); t17DrawCard(ctxB, sz.w, sz.h, false); ctxB.restore();
-  document.getElementById('t17Stats').innerText="Card: "+sz.w+" x "+sz.h+" • Style: "+t17Style+" • Effect: "+t17Effect+" • Front + Back";
-}
-function t17DownloadCard(isFront, suffix){
-  var sz=t17GetSize(); var canvas=document.createElement('canvas'); canvas.width=sz.w; canvas.height=sz.h; var ctx=canvas.getContext('2d'); t17DrawCard(ctx, sz.w, sz.h, isFront);
-  var mime=t17Fmt==='png'?'image/png':t17Fmt==='webp'?'image/webp':'image/jpeg'; var ext=t17Fmt==='png'?'png':t17Fmt==='webp'?'webp':'jpg';
+function t17DownloadCard(card, isFront, suffix){
+  var canvas=document.createElement('canvas'); canvas.width=1050; canvas.height=600; var ctx=canvas.getContext('2d'); t17DrawCard(ctx,1050,600,card,isFront);
   return new Promise(function(resolve){
-    canvas.toBlob(function(blob){ if(!blob){ alert("Download failed"); resolve(null); return; } var prefix=(document.getElementById('t17Prefix').value.trim()||"BizCard - Orbittroniz").replace(/[\\/:*?"<>|]/g,''); var biz=(document.getElementById('t17BizName').value||"Card").replace(/[\\/:*?"<>|]/g,'').slice(0,30); var fname=prefix+" - "+biz+" - "+suffix+"."+ext; var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download=fname; document.body.appendChild(a); a.click(); a.remove(); t17Results.push({blob:blob,name:fname,url:url,w:sz.w,h:sz.h}); t17RenderResults(); resolve(blob); }, mime, t17Fmt==='png'?1:0.92);
+    canvas.toBlob(function(blob){ if(!blob){ resolve(null); return; } var fname="BizCard - "+card.data.biz+" - "+card.template.label+" - "+suffix+".png"; var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download=fname; document.body.appendChild(a); a.click(); a.remove(); t17Results.push({blob:blob,name:fname,url:url,w:1050,h:600}); t17RenderResults(); resolve(blob); }, 'image/png');
   });
 }
-async function t17DownloadBoth(){
-  await t17DownloadCard(true, "Front");
+async function t17DownloadSelected(){
+  var card=t17Cards[t17SelectedIdx]; if(!card) return alert("First generate cards!");
+  await t17DownloadCard(card, true, "Front");
   await new Promise(function(r){ setTimeout(r, 500); });
-  await t17DownloadCard(false, "Back");
-  document.getElementById('t17Status').innerText="✅ Front + Back Downloaded! Print shop me de do - 1050x600 ready";
+  await t17DownloadCard(card, false, "Back");
+  document.getElementById('t17Status').innerText="✅ Selected Card Downloaded! Front + Back - "+card.template.label;
 }
-async function t17DownloadFrontOnly(){ await t17DownloadCard(true, "Front"); document.getElementById('t17Status').innerText="✅ Front Downloaded!"; }
-async function t17DownloadPack(){
-  await t17DownloadCard(true, "Front");
+async function t17DownloadSelectedPack(){
+  var card=t17Cards[t17SelectedIdx]; if(!card) return alert("First generate cards!");
+  await t17DownloadCard(card, true, "Front");
   await new Promise(function(r){ setTimeout(r, 500); });
-  await t17DownloadCard(false, "Back");
+  await t17DownloadCard(card, false, "Back");
   await new Promise(function(r){ setTimeout(r, 500); });
-  // WhatsApp DP version - Square
-  var oldSize=t17Size; t17Size='1080x1080'; t17UpdatePreview();
-  await t17DownloadCard(true, "WhatsApp DP - Square");
-  t17Size=oldSize; t17UpdatePreview();
-  document.getElementById('t17Status').innerText="✅ Card Pack Downloaded! Front + Back + WhatsApp DP";
+  // WhatsApp DP - Square version - Use front card but square canvas - Simple: Draw front on square with white padding
+  var canvas=document.createElement('canvas'); canvas.width=1080; canvas.height=1080; var ctx=canvas.getContext('2d'); ctx.fillStyle="#000000"; ctx.fillRect(0,0,1080,1080); ctx.save(); ctx.translate(0,240); t17DrawCard(ctx,1080,600,card,true); ctx.restore();
+  canvas.toBlob(function(blob){ if(blob){ var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download="BizCard - "+card.data.biz+" - WhatsApp DP.png"; document.body.appendChild(a); a.click(); a.remove(); } });
+  document.getElementById('t17Status').innerText="✅ Pack Downloaded! Front + Back + WhatsApp DP";
+}
+async function t17DownloadAll(){
+  if(!t17Cards.length) return alert("First generate cards!");
+  for(var i=0;i<t17Cards.length;i++){
+    var card=t17Cards[i];
+    await t17DownloadCard(card, true, "Front");
+    await new Promise(function(r){ setTimeout(r, 400); });
+    await t17DownloadCard(card, false, "Back");
+    await new Promise(function(r){ setTimeout(r, 400); });
+  }
+  document.getElementById('t17Status').innerText="✅ All 8 Cards Downloaded! Front + Back All";
 }
 function t17RenderResults(){ var out=document.getElementById('t17Out'); out.innerHTML=""; if(!t17Results.length){ document.getElementById('t17OutEmpty').style.display='block'; return; } document.getElementById('t17OutEmpty').style.display='none'; t17Results.forEach(function(r,idx){ var card=document.createElement('div'); card.className='t17-imgcard'; card.innerHTML='<img src="'+r.url+'"><div style="padding:8px;text-align:center"><b style="font-size:11px">'+r.name+'</b><br><small style="color:#22c55e">'+r.w+'x'+r.h+' • BizCard ✅</small><div style="display:flex;gap:4px;margin-top:6px"><button onclick="t17DownloadOne('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">⬇️ Download</button><button onclick="t17ShareOne('+idx+')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;border-radius:8px;padding:7px;font-size:11px;cursor:pointer">📤 Share</button></div></div>'; out.appendChild(card); }); }
 function t17DownloadOne(i){ if(!t17Results[i]) return; var r=t17Results[i]; var a=document.createElement('a'); a.href=r.url; a.download=r.name; document.body.appendChild(a); a.click(); a.remove(); }
 async function t17ShareOne(i){ if(!t17Results[i]) return; try{ var r=t17Results[i]; var file=new File([r.blob],r.name,{type:r.blob.type}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:r.name}); } }catch(e){} }
-async function t17Share(){ if(!t17Results.length){ await t17DownloadBoth(); setTimeout(function(){ if(t17Results.length) t17ShareOne(0); }, 600); return; } await t17ShareOne(0); }
-function t17OpenPreview(){ var sz=t17GetSize(); var mc=document.getElementById('t17ModalCanvas'); mc.width=sz.w; mc.height=sz.h; var ctx=mc.getContext('2d'); t17DrawCard(ctx, sz.w, sz.h, t17ShowFront); document.getElementById('t17ModalTitle').innerText="BizCard Preview - "+(t17ShowFront?"FRONT":"BACK")+" - "+document.getElementById('t17BizName').value; document.getElementById('t17ModalCap').innerText=document.getElementById('t17Name').value+" • "+document.getElementById('t17Phone').value+" • "+document.getElementById('t17Address').value; document.getElementById('t17Modal').style.display='flex'; }
+async function t17ShareSelected(){ if(!t17Results.length){ await t17DownloadSelected(); setTimeout(function(){ if(t17Results.length) t17ShareOne(0); }, 600); return; } await t17ShareOne(0); }
+function t17OpenPreview(){ var card=t17Cards[t17SelectedIdx]; if(!card) return alert("First generate cards!"); var mc=document.getElementById('t17ModalCanvas'); mc.width=1050; mc.height=600; var ctx=mc.getContext('2d'); t17DrawCard(ctx,1050,600,card,t17ModalFront); document.getElementById('t17ModalTitle').innerText="BizCard Preview - "+(t17ModalFront?"FRONT":"BACK")+" - "+card.template.label; document.getElementById('t17ModalCap').innerText=card.data.biz+" • "+card.data.name+" • "+card.data.phone+" • Score: "+card.template.score+"/100"; document.getElementById('t17Modal').style.display='flex'; }
+function t17FlipModal(){ t17ModalFront=!t17ModalFront; t17OpenPreview(); }
 function t17ClosePreview(){ document.getElementById('t17Modal').style.display='none'; }
-function t17Reset(){ document.getElementById('t17Name').value="Rahul Sharma"; document.getElementById('t17BizName').value="Sharma Jewellers"; document.getElementById('t17Role').value="Owner"; document.getElementById('t17Phone').value="98765 43210"; document.getElementById('t17Phone2').value="91234 56780"; document.getElementById('t17Email').value="sharma@gmail.com"; document.getElementById('t17Address').value="Main Road, Solapur"; document.getElementById('t17Services').value="Gold • Diamond • Silver • Repair"; t17Results=[]; document.getElementById('t17Out').innerHTML=""; document.getElementById('t17OutEmpty').style.display='block'; document.getElementById('t17Status').innerText=""; t17SetTemplate('gold'); }
-t17SetTemplate('gold'); t17AiThink(); t17UpdatePreview();
+function t17Reset(){ t17Cards=[]; t17SelectedIdx=0; t17Results=[]; t17GenCount=0; document.getElementById('t17Gallery').innerHTML=""; document.getElementById('t17GalleryEmpty').style.display='block'; document.getElementById('t17Editor').style.display='none'; document.getElementById('t17Out').innerHTML=""; document.getElementById('t17OutEmpty').style.display='block'; document.getElementById('t17Status').innerText=""; document.getElementById('t17Prompt').value="Sharma Jewellers, gold shop, Solapur, phone 98765 43210"; document.getElementById('t17Name').value="Rahul Sharma"; document.getElementById('t17Phone').value="98765 43210"; }
+// Auto generate on load - So user sees 8 cards immediately like good apps
+setTimeout(function(){ t17AiGenerate8(false); }, 600);
 </script>
-<!-- ================= TOOL 17 - END ================= -->
-
+<!-- ================= TOOL 17 V2 - END ================= --> 
 <!-- TOOL 18 -->
 <div class="tool" id="tool-18"><div class="panel"><h3>🧾 Tool 18 - Invoice Maker</h3>
 <!-- YAHAN TOOL 18 KA CODE PASTE KARO -->
