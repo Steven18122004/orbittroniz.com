@@ -2747,7 +2747,7 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 </script>
 <!-- ============ TOOL 7 TAP FIXED END ============ -->
 <=================TOOL 8 TAP BACKGROUND REMOVER ============>
-<!-- ============ TOOL 8 - MODIFIED - DETECT + DETAIL + PREVIEW ============ -->
+ <!-- ============ TOOL 8 SIMPLE - AI REMOVE 100% - MY OWN WAY ============ -->
 
 <div id="page-tool8" class="tool-page" style="display:none">
 <div id="tool8">
@@ -2756,107 +2756,63 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 #tool8 *{box-sizing:border-box}
 #tool8 .card{background:#fff;border:1.5px solid #EDE9FE;border-radius:22px;padding:16px}
 #tool8 .btn{width:100%;padding:16px;border:none;border-radius:14px;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;font-weight:900;cursor:pointer;margin-top:12px;font-size:15px}
-#tool8 .btn2{flex:1;padding:12px;border-radius:12px;border:1.5px solid #EDE9FE;background:#fff;font-weight:800;cursor:pointer;font-size:12.5px}
+#tool8 .btn:disabled{opacity:.6}
+#tool8 .btn2{flex:1;padding:13px;border-radius:12px;border:1.5px solid #EDE9FE;background:#fff;font-weight:800;cursor:pointer;font-size:13px}
 #tool8 .btn2.green{background:#16A34A;color:#fff;border:none}
 #tool8 .btn2.blue{background:#2563EB;color:#fff;border:none}
-#tool8 .btn2.red{background:#DC2626;color:#fff;border:none}
 #tool8 .btn2.active{background:#111827;color:#fff;border:none}
 #tool8 .tapbox{border:2px dashed #7C3AED;background:#F8F9FF;border-radius:18px;padding:20px;text-align:center;margin-top:12px}
-#tool8 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:8px 11px;border-radius:20px;font-size:12px;margin:6px 6px 0 0;cursor:pointer;font-weight:700}
-#tool8 .chip.active{background:#111827;color:#fff;border:none}
-#tool8 .detail{background:#F0FDF4;border:2px solid #16A34A;border-radius:14px;padding:12px;margin-top:12px;display:none;font-size:13px;line-height:1.8}
-#tool8 .detail.white{background:#FFFBEB;border-color:#F59E0B}
-#tool8 .detail.trans{background:#F5F3FF;border-color:#7C3AED}
-#tool8 .detail.color{background:#EFF6FF;border-color:#2563EB}
-#tool8 canvas{width:100%;max-height:420px;object-fit:contain;border-radius:14px;border:1.5px solid #EDE9FE;margin-top:12px;touch-action:none;cursor:crosshair;display:none}
+#tool8 .box{border:1.5px solid #EDE9FE;border-radius:14px;padding:12px;margin-top:12px;background:#F8F9FF}
+#tool8 .box b{font-size:13px}
+#tool8 img{width:100%;max-height:380px;object-fit:contain;border-radius:12px;margin-top:10px;display:none;background:#fff}
 #tool8 .checker{background-image:linear-gradient(45deg,#E5E7EB 25%,transparent 25%),linear-gradient(-45deg,#E5E7EB 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#E5E7EB 75%),linear-gradient(-45deg,transparent 75%,#E5E7EB 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}
-#tool8 input[type=range]{width:100%}
-#tool8 .preview-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
-#tool8 .preview-box{border:2px solid #EDE9FE;border-radius:12px;padding:8px;text-align:center;cursor:pointer;font-size:11px;font-weight:800}
-#tool8 .preview-box.active{border-color:#111827;background:#F8F9FF}
-#tool8 .preview-box img{width:100%;height:80px;object-fit:contain;border-radius:8px}
-#tool8 .section{background:#F8F9FF;border:1.5px solid #EDE9FE;border-radius:14px;padding:12px;margin-top:12px}
+#tool8 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:10px 14px;border-radius:20px;font-size:13px;margin:7px 7px 0 0;cursor:pointer;font-weight:800}
+#tool8 .chip.active{background:#111827;color:#fff;border:none}
 </style>
 
 <div id="tool8"><div class="card">
 <button type="button" onclick="goHomePageTool8()" style="background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer">← Back</button>
 <h2 style="text-align:center;margin-top:10px">✂️ Background Remover</h2>
-<p style="font-size:12px;color:#6B7280;text-align:center">Upload → Tells Transparent / White → Preview → Download</p>
+<p style="font-size:12px;color:#6B7280;text-align:center">Upload → AI Removes 100% → Choose Transparent / White / Black → Download</p>
 
 <div class="tapbox">
 <div style="font-size:36px">🖼️</div>
 <b style="font-size:16px">Select Photo</b>
-<p style="font-size:12px;color:#6B7280">Person / Product / Object</p>
-<button type="button" id="t8TapBtn" style="width:100%;padding:14px;border:none;border-radius:12px;background:#111827;color:#fff;font-weight:900;font-size:15px;cursor:pointer;margin-top:8px">📂 TAP TO SELECT PHOTO</button>
-<button type="button" id="t8TapBtn2" style="width:100%;padding:12px;border:1.5px solid #7C3AED;background:#fff;color:#7C3AED;font-weight:900;font-size:14px;cursor:pointer;margin-top:8px;border-radius:12px">📂 Choose From Gallery - 2nd Way</button>
+<p style="font-size:12px;color:#6B7280">Person / Product / Pet - Any Background</p>
+<button type="button" id="t8Tap" style="width:100%;padding:14px;border:none;border-radius:12px;background:#111827;color:#fff;font-weight:900;font-size:15px;cursor:pointer;margin-top:8px">📂 TAP TO SELECT PHOTO</button>
 </div>
-<div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t8CamBtn">📷 Camera</button><button type="button" class="btn2" id="t8SampleBtn">✨ Sample - White BG</button><button type="button" class="btn2" id="t8SampleTransBtn">✨ Sample - Transparent</button></div>
+<div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t8Cam">📷 Camera</button><button type="button" class="btn2" id="t8Sample">✨ Try Sample</button></div>
 
 <p id="t8Status" style="font-size:13px;text-align:center;color:#6B7280;margin-top:12px">Tap Select Photo first</p>
 <p id="t8Error" style="font-size:13px;text-align:center;color:#DC2626;display:none"></p>
 
-<!-- DETAIL - SHOWS AFTER UPLOAD - Transparent / White / Colored -->
-<div class="detail" id="t8DetailBox">
-<b id="t8DetailTitle" style="font-size:16px">📸 Photo Detail</b><br>
-<span id="t8DetailText"></span>
-<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-<span id="t8BgColorDot" style="display:inline-block;width:24px;height:24px;border-radius:50%;border:2px solid #E5E7EB;vertical-align:middle"></span>
-<span id="t8BgColorCode" style="font-weight:900"></span>
-<span id="t8BgAdvice" style="font-size:12px"></span>
-</div>
+<img id="t8Orig" alt="Original">
+<img id="t8Result" class="checker" alt="Result">
+
+<div class="box" id="t8BgBox" style="display:none">
+<b>🎨 Choose Background - Tap Any One - Preview Changes Instantly</b><br>
+<span class="chip active" data-bg="transparent">Transparent</span>
+<span class="chip" data-bg="white">⬜ White</span>
+<span class="chip" data-bg="black">⬛ Black</span>
+<span class="chip" data-bg="blue">🟦 Blue</span>
+<span class="chip" data-bg="pink">🩷 Pink</span>
+<span class="chip" data-bg="green">🟩 Green</span>
+<span class="chip" data-bg="red">🟥 Red</span>
+<span class="chip" data-bg="yellow">🟨 Yellow</span>
+<p style="font-size:11px;color:#6B7280;margin-top:8px">Transparent = PNG with no background. White / Black = JPG with that background.</p>
 </div>
 
-<!-- PREVIEW - BEFORE REMOVE - See How It Looks -->
-<div id="t8PreviewBox" style="display:none;margin-top:12px">
-<b>👀 Preview - Tap To See How It Will Look</b>
-<p style="font-size:11px;color:#6B7280">This is live preview - Tap any box to see your photo on that background</p>
-<div class="preview-grid" id="t8PreviewGrid">
-<div class="preview-box active" data-preview="original"><img id="t8PrevOrig" alt="Original"><br>Original</div>
-<div class="preview-box" data-preview="transparent"><img id="t8PrevTrans" alt="Transparent"><br>Transparent</div>
-<div class="preview-box" data-preview="white"><img id="t8PrevWhite" alt="White"><br>White BG</div>
-<div class="preview-box" data-preview="black"><img id="t8PrevBlack" alt="Black"><br>Black BG</div>
-<div class="preview-box" data-preview="blue"><img id="t8PrevBlue" alt="Blue"><br>Blue BG</div>
-<div class="preview-box" data-preview="checker"><img id="t8PrevChecker" alt="Checker"><br>Checker</div>
+<button type="button" class="btn" id="t8Go">✂️ Remove Background</button>
+
+<div id="t8Out" style="display:none">
+<div style="display:flex;gap:8px;margin-top:12px">
+<button type="button" class="btn2 green" id="t8Down">⬇️ Download</button>
+<button type="button" class="btn2 blue" id="t8Share">📤 Share</button>
 </div>
 <div style="display:flex;gap:8px;margin-top:8px">
-<button type="button" class="btn2" id="t8PreviewFullBtn">🔍 Full Screen Preview</button>
-<button type="button" class="btn2" id="t8PreviewCompareBtn">↔️ Before / After</button>
+<button type="button" class="btn2" id="t8Copy">📋 Copy Image</button>
+<button type="button" class="btn2" id="t8Preview">👀 Full Preview</button>
 </div>
-</div>
-
-<!-- FULL SCREEN PREVIEW MODAL -->
-<div id="t8Modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:999;align-items:center;justify-content:center;flex-direction:column;padding:16px">
-<img id="t8ModalImg" style="max-width:100%;max-height:75vh;border-radius:14px;background:#fff">
-<p id="t8ModalText" style="color:#fff;font-weight:900;margin-top:12px;text-align:center"></p>
-<button type="button" id="t8ModalClose" style="margin-top:12px;padding:12px 24px;border:none;border-radius:20px;background:#fff;font-weight:900;cursor:pointer">✖️ Close Preview</button>
-</div>
-
-<label style="font-size:12px;font-weight:900;display:block;margin-top:12px">Remove Strength</label>
-<div id="t8StrengthRow"><span class="chip" data-s="30">Soft - Hair Safe</span><span class="chip active" data-s="45">Medium - Best</span><span class="chip" data-s="70">Strong - Clean</span></div>
-
-<label style="font-size:12px;font-weight:900;display:block;margin-top:10px">Final Background - For Download</label>
-<div id="t8BgRow"><span class="chip active" data-bg="transparent">Transparent PNG</span><span class="chip" data-bg="white">⬜ White</span><span class="chip" data-bg="black">⬛ Black</span><span class="chip" data-bg="blue">🟦 Blue</span></div>
-
-<button type="button" class="btn" id="t8RemoveBtn">✂️ Remove Background - Auto</button>
-
-<canvas id="t8Canvas" class="checker"></canvas>
-
-<!-- BRUSH -->
-<div id="t8BrushBox" style="display:none" class="section">
-<b>🖌️ Brush - Fix Where Auto Missed</b>
-<p style="font-size:11px;color:#6B7280">Auto left BG? Erase it. Cut too much? Restore it.</p>
-<div style="display:flex;gap:8px;margin-top:8px">
-<button type="button" class="btn2 active" id="t8EraseBtn">🧽 Erase BG</button>
-<button type="button" class="btn2" id="t8RestoreBtn">♻️ Restore</button>
-</div>
-<label style="font-size:11px;font-weight:900;display:block;margin-top:10px">Brush Size - <span id="t8BrushSizeTxt">30</span></label>
-<input type="range" id="t8BrushSize" min="5" max="120" value="30">
-<div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="btn2" id="t8UndoBtn">↩️ Undo</button><button type="button" class="btn2 red" id="t8ResetBtn">🔄 Reset</button></div>
-</div>
-
-<div id="t8Out" style="display:none;margin-top:12px">
-<div style="display:flex;gap:8px"><button type="button" class="btn2 green" id="t8DownloadBtn">⬇️ Download PNG</button><button type="button" class="btn2 blue" id="t8DownloadJPG">⬇️ Download JPG - White</button></div>
-<div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="btn2" id="t8PreviewFinalBtn">👀 Preview Final</button><button type="button" class="btn2" id="t8ShareBtn">📤 Share</button></div>
 </div>
 
 <div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2" onclick="clearTool8()">🗑️ New Photo</button><button type="button" class="btn2" onclick="goHomePageTool8()">← Back</button></div>
@@ -2864,336 +2820,163 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 </div>
 </div>
 
-<script>
-(function(){
-  "use strict";
-  window.goHomePageTool8 = window.goHomePageTool8 || function(){
-    try{ if(typeof window.goHomePage==="function"){ window.goHomePage(); return; } }catch(e){}
-    var p=document.getElementById('page-tool8'); if(p) p.style.display='none';
-    var h=document.getElementById('homeView'); if(h) h.style.display='block';
-    window.scrollTo(0,0);
-  };
-  function el(id){ return document.getElementById(id); }
-  function status(m){ var e=el('t8Status'); if(e) e.textContent=m; }
-  function showErr(m){ var e=el('t8Error'); if(!e) return; if(!m){ e.style.display='none'; return; } e.style.display='block'; e.textContent=m; }
-
-  var file=null, origImg=null, origCanvas=null, workCanvas=null, workCtx=null, undoStack=[], brushMode='erase', brushSize=30, strength=45, bgMode='transparent', detectedBg='unknown', detectedColor='#FFFFFF', currentPreview='original';
-
-  function openPicker(useCamera){
-    try{
-      var inp=document.createElement('input'); inp.type='file'; inp.accept='image/*,.jpg,.jpeg,.png,.webp';
-      if(useCamera) inp.setAttribute('capture','environment');
-      inp.style.position='fixed'; inp.style.left='-9999px'; inp.style.opacity='0';
-      document.body.appendChild(inp);
-      inp.onchange=function(){ if(inp.files && inp.files[0]) setFile(inp.files[0]); setTimeout(function(){ try{ inp.remove(); }catch(e){} },500); };
-      setTimeout(function(){ try{ if(document.body.contains(inp)) inp.remove(); }catch(e){} },10000);
-      inp.click();
-    }catch(e){ showErr("Picker failed - Tap 2nd button"); }
-  }
-
-  // DETECT - Transparent / White / Colored - Full Detail
-  function detectBackground(){
-    if(!origCanvas) return;
-    var w=origCanvas.width, h=origCanvas.height;
-    var ctx=origCanvas.getContext('2d');
-    var data=ctx.getImageData(0,0,w,h).data;
-    var total=w*h;
-    var transCount=0, whiteCount=0;
-    var rSum=0,gSum=0,bSum=0, cornerCount=0;
-    // Corners + Edges - Sample background
-    var corners=[[2,2],[w-3,2],[2,h-3],[w-3,h-3],[Math.floor(w/2),2],[Math.floor(w/2),h-3],[2,Math.floor(h/2)],[w-3,Math.floor(h/2)]];
-    corners.forEach(function(c){
-      var idx=(c[1]*w+c[0])*4;
-      rSum+=data[idx]; gSum+=data[idx+1]; bSum+=data[idx+2]; cornerCount++;
-      if(data[idx+3]<10) transCount++;
-    });
-    // Check all pixels for transparency / white
-    var checkStep=Math.max(1, Math.floor(total/5000));
-    var sampled=0;
-    for(var i=0;i<total;i+=checkStep){
-      var a=data[i*4+3];
-      if(a<10) transCount++;
-      else if(data[i*4]>240 && data[i*4+1]>240 && data[i*4+2]>240) whiteCount++;
-      sampled++;
-    }
-    var transPct=Math.round((transCount/Math.max(1,sampled+cornerCount))*100);
-    var whitePct=Math.round((whiteCount/Math.max(1,sampled))*100);
-    var avgR=Math.round(rSum/cornerCount), avgG=Math.round(gSum/cornerCount), avgB=Math.round(bSum/cornerCount);
-    var hex="#"+((1<<24)+(avgR<<16)+(avgG<<8)+avgB).toString(16).slice(1).toUpperCase();
-    detectedColor=hex;
-
-    var detailBox=el('t8DetailBox'), detailTitle=el('t8DetailTitle'), detailText=el('t8DetailText');
-    var fileSizeKB=file ? Math.round(file.size/1024) : 0;
-    var fileType=file ? (file.type||"image") : "image";
-    var isJPG=fileType.indexOf('jpeg')>-1 || fileType.indexOf('jpg')>-1;
-    var isPNG=fileType.indexOf('png')>-1;
-
-    // Decide type
-    if(transPct>30){
-      detectedBg='transparent';
-      detailBox.className='detail trans'; detailBox.style.display='block';
-      detailTitle.textContent="✅ This Photo Has TRANSPARENT Background";
-      detailText.innerHTML=
-        "<b>Background:</b> Transparent (Already PNG, no background) - "+transPct+"% pixels transparent<br>"+
-        "<b>Size:</b> "+w+" x "+h+" px • <b>File:</b> "+fileSizeKB+" KB • <b>Type:</b> "+fileType+"<br>"+
-        "<b>Color Code:</b> Transparent - No color<br>"+
-        "<b>What To Do:</b> Background already removed! You can directly download PNG or add White / Black background below.<br>"+
-        "<b>Good For:</b> Logo, Sticker, Product, Passport Photo ✅";
-      el('t8BgColorDot').style.background="repeating-conic-gradient(#ccc 0% 25%,#fff 0% 50%) 50% / 8px 8px";
-      el('t8BgColorCode').textContent="Transparent";
-      el('t8BgAdvice').textContent="→ No need to remove, just add new BG if you want";
-    } else if(avgR>240 && avgG>240 && avgB>240){
-      detectedBg='white';
-      detailBox.className='detail white'; detailBox.style.display='block';
-      detailTitle.textContent="⬜ This Photo Has WHITE Background";
-      detailText.innerHTML=
-        "<b>Background:</b> White (Pure White) - "+whitePct+"% pixels are white - Confidence 98%<br>"+
-        "<b>Size:</b> "+w+" x "+h+" px • <b>File:</b> "+fileSizeKB+" KB • <b>Type:</b> "+fileType+"<br>"+
-        "<b>Color Code:</b> "+hex+" - White<br>"+
-        "<b>What To Do:</b> Perfect for Auto Remove! Tap Remove Background - It will remove in 1 sec, 100% clean.<br>"+
-        "<b>Good For:</b> Passport Photo, Product Photo, Profile Photo ✅";
-      el('t8BgColorDot').style.background=hex;
-      el('t8BgColorCode').textContent=hex+" (White)";
-      el('t8BgAdvice').textContent="→ Best for removal - Tap Remove";
-    } else if(avgR>200 && avgG>200 && avgB>200){
-      detectedBg='light';
-      detailBox.className='detail white'; detailBox.style.display='block';
-      detailTitle.textContent="⬜ This Photo Has LIGHT Background - "+hex;
-      detailText.innerHTML=
-        "<b>Background:</b> Light Color - "+hex+" - "+whitePct+"% light pixels<br>"+
-        "<b>Size:</b> "+w+" x "+h+" px • <b>File:</b> "+fileSizeKB+" KB • <b>Type:</b> "+fileType+"<br>"+
-        "<b>Color Code:</b> "+hex+"<br>"+
-        "<b>What To Do:</b> Use Medium Strength - Auto will remove 90%, then Brush for edges.<br>"+
-        "<b>Good For:</b> Product, Person - Will work well ✅";
-      el('t8BgColorDot').style.background=hex;
-      el('t8BgColorCode').textContent=hex;
-      el('t8BgAdvice').textContent="→ Use Medium + Brush if needed";
-    } else {
-      detectedBg='colored';
-      detailBox.className='detail color'; detailBox.style.display='block';
-      detailTitle.textContent="🎨 This Photo Has COLORED Background - "+hex;
-      detailText.innerHTML=
-        "<b>Background:</b> Colored / Dark - "+hex+" - Not white<br>"+
-        "<b>Size:</b> "+w+" x "+h+" px • <b>File:</b> "+fileSizeKB+" KB • <b>Type:</b> "+fileType+"<br>"+
-        "<b>Color Code:</b> "+hex+"<br>"+
-        "<b>What To Do:</b> Auto may leave some BG - Use Strong Strength + Brush Erase for edges. For person photo, use Soft brush for hair.<br>"+
-        "<b>Good For:</b> Outdoor, Colored Wall - Needs Brush Fix ⚠️";
-      el('t8BgColorDot').style.background=hex;
-      el('t8BgColorCode').textContent=hex;
-      el('t8BgAdvice').textContent="→ Use Strong + Brush";
-    }
-    // Extra detail - JPG cannot be transparent
-    if(isJPG && detectedBg==='transparent'){
-      detailText.innerHTML += "<br><b>Note:</b> JPG file cannot have transparent - This file is actually PNG renamed as JPG? Check file.";
-    }
-    if(isPNG && detectedBg!=='transparent'){
-      detailText.innerHTML += "<br><b>Note:</b> This is PNG but background is not transparent yet - Tap Remove to make it transparent.";
-    }
-    detailBox.scrollIntoView({behavior:"smooth", block:"center"});
-  }
-
-  // PREVIEW - Generate 6 preview thumbnails
-  function makePreviews(){
-    if(!origCanvas) return;
-    var box=el('t8PreviewBox'); box.style.display='block';
-    // Original
-    el('t8PrevOrig').src=origCanvas.toDataURL('image/jpeg',0.85);
-    // White
-    var cW=document.createElement('canvas'); cW.width=origCanvas.width; cW.height=origCanvas.height; var ctxW=cW.getContext('2d'); ctxW.fillStyle="#fff"; ctxW.fillRect(0,0,cW.width,cW.height); ctxW.drawImage(origCanvas,0,0);
-    el('t8PrevWhite').src=cW.toDataURL('image/jpeg',0.85);
-    // Black
-    var cB=document.createElement('canvas'); cB.width=origCanvas.width; cB.height=origCanvas.height; var ctxB=cB.getContext('2d'); ctxB.fillStyle="#000"; ctxB.fillRect(0,0,cB.width,cB.height); ctxB.drawImage(origCanvas,0,0);
-    el('t8PrevBlack').src=cB.toDataURL('image/jpeg',0.85);
-    // Blue
-    var cBl=document.createElement('canvas'); cBl.width=origCanvas.width; cBl.height=origCanvas.height; var ctxBl=cBl.getContext('2d'); ctxBl.fillStyle="#2563EB"; ctxBl.fillRect(0,0,cBl.width,cBl.height); ctxBl.drawImage(origCanvas,0,0);
-    el('t8PrevBlue').src=cBl.toDataURL('image/jpeg',0.85);
-    // Transparent - Checker
-    var cT=document.createElement('canvas'); cT.width=origCanvas.width; cT.height=origCanvas.height; var ctxT=cT.getContext('2d'); ctxT.fillStyle="#E5E7EB"; ctxT.fillRect(0,0,cT.width,cT.height); ctxT.drawImage(origCanvas,0,0);
-    el('t8PrevTrans').src=cT.toDataURL('image/jpeg',0.85);
-    // Checker
-    el('t8PrevChecker').src=cT.toDataURL('image/jpeg',0.85);
-    // Click preview to set main canvas bg
-    var grid=el('t8PreviewGrid');
-    grid.querySelectorAll('.preview-box').forEach(function(b){ b.classList.remove('active'); });
-    var activeBox=grid.querySelector('[data-preview="original"]'); if(activeBox) activeBox.classList.add('active');
-  }
-
-  function setFile(f){
-    if(!f) return;
-    if(f.size>10*1024*1024){ showErr("Photo too big - Max 10 MB"); return; }
-    file=f; showErr(""); status("✅ Selected: "+(f.name||"Photo")+" - Checking background...");
-    var url=URL.createObjectURL(f);
-    var img=new Image();
-    img.onload=function(){
-      origImg=img;
-      origCanvas=document.createElement('canvas'); origCanvas.width=img.naturalWidth||img.width; origCanvas.height=img.naturalHeight||img.height;
-      var octx=origCanvas.getContext('2d'); octx.drawImage(img,0,0);
-      workCanvas=el('t8Canvas'); workCtx=workCanvas.getContext('2d');
-      var maxW=1200; var scale=1; if(origCanvas.width>maxW) scale=maxW/origCanvas.width;
-      workCanvas.width=Math.floor(origCanvas.width*scale); workCanvas.height=Math.floor(origCanvas.height*scale);
-      workCtx.drawImage(img,0,0,workCanvas.width,workCanvas.height);
-      workCanvas.style.display='block';
-      el('t8BrushBox').style.display='none'; el('t8Out').style.display='none';
-      undoStack=[];
-      try{ URL.revokeObjectURL(url); }catch(e){}
-      // DETECT + PREVIEW - After upload
-      detectBackground();
-      makePreviews();
-      status("✅ Photo loaded - See Detail above - Tap Remove Background");
-    };
-    img.onerror=function(){ showErr("Image load failed - Try JPG"); };
-    img.src=url;
-  }
-  var tap1=el('t8TapBtn'); if(tap1) tap1.addEventListener('click', function(e){ e.preventDefault(); openPicker(false); });
-  var tap2=el('t8TapBtn2'); if(tap2) tap2.addEventListener('click', function(e){ e.preventDefault(); openPicker(false); });
-  var cam=el('t8CamBtn'); if(cam) cam.addEventListener('click', function(e){ e.preventDefault(); openPicker(true); });
-  function makeSample(isTrans){
-    var c=document.createElement('canvas'); c.width=600; c.height=700; var x=c.getContext('2d');
-    if(isTrans){ x.clearRect(0,0,600,700); } else { x.fillStyle="#fff"; x.fillRect(0,0,600,700); }
-    x.fillStyle="#E8B48A"; x.beginPath(); x.arc(300,180,90,0,Math.PI*2); x.fill();
-    x.fillStyle="#2563EB"; x.fillRect(200,270,200,300);
-    x.fillStyle="#111"; x.fillRect(180,80,240,40);
-    c.toBlob(function(b){ if(b) setFile(new File([b], isTrans?"Sample-Transparent.png":"Sample-White.jpg",{type:isTrans?"image/png":"image/jpeg"})); }, isTrans?"image/png":"image/jpeg", 0.95);
-  }
-  var s1=el('t8SampleBtn'); if(s1) s1.addEventListener('click', function(){ makeSample(false); });
-  var s2=el('t8SampleTransBtn'); if(s2) s2.addEventListener('click', function(){ makeSample(true); });
-
-  // Preview Grid Click - Change main canvas bg preview
-  var grid=el('t8PreviewGrid');
-  if(grid) grid.addEventListener('click', function(e){
-    var b=e.target.closest('.preview-box'); if(!b) return;
-    grid.querySelectorAll('.preview-box').forEach(function(x){ x.classList.remove('active'); }); b.classList.add('active');
-    currentPreview=b.getAttribute('data-preview');
-    var cv=el('t8Canvas');
-    if(currentPreview==='transparent'){ cv.classList.add('checker'); cv.style.background='#fff'; }
-    else if(currentPreview==='white'){ cv.classList.remove('checker'); cv.style.background='#fff'; }
-    else if(currentPreview==='black'){ cv.classList.remove('checker'); cv.style.background='#000'; }
-    else if(currentPreview==='blue'){ cv.classList.remove('checker'); cv.style.background='#2563EB'; }
-    else if(currentPreview==='checker'){ cv.classList.add('checker'); }
-    else { cv.classList.remove('checker'); cv.style.background='#fff'; }
-    status("👀 Preview: "+currentPreview+" - This is how it will look");
-  });
-
-  // Full Screen Preview
-  function showModal(imgSrc, text){
-    var modal=el('t8Modal'); var img=el('t8ModalImg'); img.src=imgSrc; el('t8ModalText').textContent=text;
-    modal.style.display='flex';
-  }
-  var fullBtn=el('t8PreviewFullBtn'); if(fullBtn) fullBtn.addEventListener('click', function(){
-    if(!origCanvas){ showErr("Select photo first"); return; }
-    showModal(origCanvas.toDataURL('image/jpeg',0.9), "Original Photo - "+detectedBg+" Background - "+detectedColor);
-  });
-  var compBtn=el('t8PreviewCompareBtn'); if(compBtn) compBtn.addEventListener('click', function(){
-    if(!workCanvas){ showErr("Remove first to compare"); return; }
-    showModal(workCanvas.toDataURL('image/png'), "After Remove - Preview on "+currentPreview+" background");
-  });
-  var modalClose=el('t8ModalClose'); if(modalClose) modalClose.addEventListener('click', function(){ el('t8Modal').style.display='none'; });
-  var modal=el('t8Modal'); if(modal) modal.addEventListener('click', function(e){ if(e.target===modal) modal.style.display='none'; });
-
-  // Settings
-  var sRow=el('t8StrengthRow'); if(sRow) sRow.addEventListener('click', function(e){ var c=e.target.closest('.chip'); if(!c) return; sRow.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('active'); }); c.classList.add('active'); strength=parseInt(c.getAttribute('data-s'),10)||45; });
-  var bgRow=el('t8BgRow'); if(bgRow) bgRow.addEventListener('click', function(e){ var c=e.target.closest('.chip'); if(!c) return; bgRow.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('active'); }); c.classList.add('active'); bgMode=c.getAttribute('data-bg')||"transparent"; });
-
-  function pushUndo(){ try{ if(!workCtx) return; var d=workCtx.getImageData(0,0,workCanvas.width,workCanvas.height); undoStack.push(d); if(undoStack.length>20) undoStack.shift(); }catch(e){} }
-
-  // AUTO REMOVE
-  var removeBtn=el('t8RemoveBtn');
-  if(removeBtn) removeBtn.addEventListener('click', function(){
-    if(!origImg || !workCanvas){ showErr("Select photo first"); return; }
-    removeBtn.disabled=true; removeBtn.textContent="⏳ Removing...";
-    status("Removing background... Please wait");
-    setTimeout(function(){
-      try{
-        pushUndo();
-        var w=workCanvas.width, h=workCanvas.height;
-        var tmp=document.createElement('canvas'); tmp.width=w; tmp.height=h; var tctx=tmp.getContext('2d'); tctx.drawImage(origImg,0,0,w,h);
-        var origData=tctx.getImageData(0,0,w,h).data;
-        var samples=[]; function sample(x,y){ var idx=(y*w+x)*4; samples.push([origData[idx],origData[idx+1],origData[idx+2]]); }
-        sample(2,2); sample(w-3,2); sample(2,h-3); sample(w-3,h-3); sample(Math.floor(w/2),2);
-        var br=0,bg=0,bb=0; samples.forEach(function(s){ br+=s[0]; bg+=s[1]; bb+=s[2]; }); br/=samples.length; bg/=samples.length; bb/=samples.length;
-        var imgData=workCtx.getImageData(0,0,w,h); var data=imgData.data;
-        var visited=new Uint8Array(w*h); var q=[];
-        for(var xi=0;xi<w;xi++){ q.push(xi); q.push((h-1)*w+xi); }
-        for(var yi=0;yi<h;yi++){ q.push(yi*w); q.push(yi*w+w-1); }
-        var qi=0, tol=strength;
-        function isBg(idx){ var i=idx*4; return Math.abs(data[i]-br)<tol && Math.abs(data[i+1]-bg)<tol && Math.abs(data[i+2]-bb)<tol; }
-        while(qi<q.length){ var idx=q[qi++]; if(visited[idx]) continue; visited[idx]=1; if(!isBg(idx)) continue; data[idx*4+3]=0; var cx=idx%w, cy=Math.floor(idx/w); if(cx>0) q.push(idx-1); if(cx<w-1) q.push(idx+1); if(cy>0) q.push(idx-w); if(cy<h-1) q.push(idx+w); if(q.length>w*h*2) break; }
-        workCtx.putImageData(imgData,0,0);
-        el('t8BrushBox').style.display='block'; el('t8Out').style.display='block';
-        status("✅ Removed! Preview below - If BG left, use Brush. Tap Preview Final to see how it looks.");
-        // Update preview grid with removed version
-        setTimeout(function(){ makePreviews(); },200);
-        el('t8BrushBox').scrollIntoView({behavior:"smooth"});
-      }catch(e){ showErr("Remove failed - Try white background photo or Brush"); }
-      finally{ removeBtn.disabled=false; removeBtn.textContent="✂️ Remove Background - Auto"; }
-    },100);
-  });
-
-  // BRUSH
-  function getPos(e){ var rect=workCanvas.getBoundingClientRect(); var cx=e.touches ? e.touches[0].clientX : e.clientX; var cy=e.touches ? e.touches[0].clientY : e.clientY; return {x:(cx-rect.left)*(workCanvas.width/rect.width), y:(cy-rect.top)*(workCanvas.height/rect.height)}; }
-  var isDrawing=false;
-  function brushAt(x,y){
-    if(!workCtx) return;
-    if(brushMode==='erase'){ workCtx.save(); workCtx.globalCompositeOperation='destination-out'; workCtx.beginPath(); workCtx.arc(x,y,brushSize,0,Math.PI*2); workCtx.fill(); workCtx.restore(); }
-    else { workCtx.save(); workCtx.beginPath(); workCtx.arc(x,y,brushSize,0,Math.PI*2); workCtx.clip(); workCtx.drawImage(origImg,0,0,workCanvas.width,workCanvas.height); workCtx.restore(); }
-  }
-  var cv=el('t8Canvas');
-  function startDraw(e){ if(el('t8BrushBox').style.display==='none') return; e.preventDefault(); isDrawing=true; pushUndo(); var pos=getPos(e); brushAt(pos.x,pos.y); }
-  function moveDraw(e){ if(!isDrawing) return; e.preventDefault(); var pos=getPos(e); brushAt(pos.x,pos.y); }
-  function endDraw(){ isDrawing=false; }
-  if(cv){ cv.addEventListener('mousedown', startDraw); cv.addEventListener('mousemove', moveDraw); cv.addEventListener('mouseup', endDraw); cv.addEventListener('mouseleave', endDraw); cv.addEventListener('touchstart', startDraw, {passive:false}); cv.addEventListener('touchmove', moveDraw, {passive:false}); cv.addEventListener('touchend', endDraw); }
-  var eraseBtn=el('t8EraseBtn'); if(eraseBtn) eraseBtn.addEventListener('click', function(){ brushMode='erase'; eraseBtn.classList.add('active'); el('t8RestoreBtn').classList.remove('active'); });
-  var restoreBtn=el('t8RestoreBtn'); if(restoreBtn) restoreBtn.addEventListener('click', function(){ brushMode='restore'; restoreBtn.classList.add('active'); el('t8EraseBtn').classList.remove('active'); });
-  var bs=el('t8BrushSize'); if(bs) bs.addEventListener('input', function(){ brushSize=parseInt(bs.value,10)||30; el('t8BrushSizeTxt').textContent=brushSize; });
-  var undoBtn=el('t8UndoBtn'); if(undoBtn) undoBtn.addEventListener('click', function(){ if(undoStack.length===0){ showErr("Nothing to undo"); return; } var last=undoStack.pop(); if(last) workCtx.putImageData(last,0,0); });
-  var resetBtn=el('t8ResetBtn'); if(resetBtn) resetBtn.addEventListener('click', function(){ if(!origImg) return; workCtx.clearRect(0,0,workCanvas.width,workCanvas.height); workCtx.drawImage(origImg,0,0,workCanvas.width,workCanvas.height); undoStack=[]; });
-
-  // DOWNLOAD + PREVIEW FINAL
-  function downloadCanvas(isJPG){
-    if(!workCanvas){ showErr("Remove first"); return; }
-    try{
-      var out=document.createElement('canvas'); out.width=workCanvas.width; out.height=workCanvas.height; var octx=out.getContext('2d');
-      if(isJPG){
-        octx.fillStyle="#fff"; octx.fillRect(0,0,out.width,out.height);
-        if(bgMode==='black'){ octx.fillStyle="#000"; octx.fillRect(0,0,out.width,out.height); }
-        if(bgMode==='blue'){ octx.fillStyle="#2563EB"; octx.fillRect(0,0,out.width,out.height); }
-        octx.drawImage(workCanvas,0,0);
-        var urlJ=out.toDataURL('image/jpeg',0.92);
-        var aJ=document.createElement('a'); aJ.href=urlJ; aJ.download="BG-Removed-White.jpg"; document.body.appendChild(aJ); aJ.click(); setTimeout(function(){ aJ.remove(); },500);
-      } else {
-        if(bgMode==='white'){ octx.fillStyle="#fff"; octx.fillRect(0,0,out.width,out.height); }
-        else if(bgMode==='black'){ octx.fillStyle="#000"; octx.fillRect(0,0,out.width,out.height); }
-        else if(bgMode==='blue'){ octx.fillStyle="#2563EB"; octx.fillRect(0,0,out.width,out.height); }
-        octx.drawImage(workCanvas,0,0);
-        var urlP=out.toDataURL('image/png');
-        var aP=document.createElement('a'); aP.href=urlP; aP.download="BG-Removed-Transparent.png"; document.body.appendChild(aP); aP.click(); setTimeout(function(){ aP.remove(); },500);
-      }
-      status("✅ Downloaded!");
-    }catch(e){ showErr("Download failed"); }
-  }
-  var downBtn=el('t8DownloadBtn'); if(downBtn) downBtn.addEventListener('click', function(){ downloadCanvas(false); });
-  var downJPG=el('t8DownloadJPG'); if(downJPG) downJPG.addEventListener('click', function(){ downloadCanvas(true); });
-  var previewFinalBtn=el('t8PreviewFinalBtn'); if(previewFinalBtn) previewFinalBtn.addEventListener('click', function(){
-    if(!workCanvas){ showErr("Remove first"); return; }
-    // Show final on selected bg
-    var out=document.createElement('canvas'); out.width=workCanvas.width; out.height=workCanvas.height; var octx=out.getContext('2d');
-    if(bgMode==='white'){ octx.fillStyle="#fff"; octx.fillRect(0,0,out.width,out.height); }
-    else if(bgMode==='black'){ octx.fillStyle="#000"; octx.fillRect(0,0,out.width,out.height); }
-    else if(bgMode==='blue'){ octx.fillStyle="#2563EB"; octx.fillRect(0,0,out.width,out.height); }
-    octx.drawImage(workCanvas,0,0);
-    showModal(out.toDataURL('image/png'), "Final Preview - Background: "+bgMode+" - This is how your downloaded image will look");
-  });
-  var shareBtn=el('t8ShareBtn'); if(shareBtn) shareBtn.addEventListener('click', async function(){ try{ workCanvas.toBlob(async function(blob){ if(!blob) return; var f=new File([blob],"BG-Removed.png",{type:"image/png"}); if(navigator.share && navigator.canShare && navigator.canShare({files:[f]})) await navigator.share({files:[f]}); else downloadCanvas(false); }, "image/png"); }catch(e){ downloadCanvas(false); } });
-
-  window.clearTool8=function(){
-    file=null; origImg=null; origCanvas=null; undoStack=[]; bgMode='transparent'; detectedBg='unknown';
-    var cv2=el('t8Canvas'); if(cv2) cv2.style.display='none';
-    el('t8DetailBox').style.display='none'; el('t8PreviewBox').style.display='none'; el('t8BrushBox').style.display='none'; el('t8Out').style.display='none';
-    showErr(""); status("Tap Select Photo first");
-  };
-})();
+<script type="importmap">
+{ "imports": { "@imgly/background-removal": "https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.5/dist/index.mjs" } }
 </script>
-<!-- ============ TOOL 8 MODIFIED END ============ -->
+
+<script type="module">
+import { removeBackground } from "@imgly/background-removal";
+
+window.goHomePageTool8 = window.goHomePageTool8 || function(){
+  try{ if(typeof window.goHomePage==="function"){ window.goHomePage(); return; } }catch(e){}
+  var p=document.getElementById('page-tool8'); if(p) p.style.display='none';
+  var h=document.getElementById('homeView'); if(h) h.style.display='block';
+  window.scrollTo(0,0);
+};
+function el(id){ return document.getElementById(id); }
+function status(m){ var e=el('t8Status'); if(e) e.textContent=m; }
+function showErr(m){ var e=el('t8Error'); if(!e) return; if(!m){ e.style.display='none'; return; } e.style.display='block'; e.textContent=m; }
+
+let file=null, resultBlob=null, resultUrl="", bgMode="transparent";
+let config = { publicPath: "https://staticimgly.com/@imgly/background-removal-data/", debug: false };
+
+// TAP - Always works - Fresh input every time
+function openPicker(useCamera){
+  try{
+    var inp=document.createElement('input');
+    inp.type='file'; inp.accept='image/*,.jpg,.jpeg,.png,.webp';
+    if(useCamera) inp.setAttribute('capture','environment');
+    inp.style.position='fixed'; inp.style.left='-9999px'; inp.style.opacity='0';
+    document.body.appendChild(inp);
+    inp.onchange=function(){
+      if(inp.files && inp.files[0]) setFile(inp.files[0]);
+      setTimeout(function(){ try{ inp.remove(); }catch(e){} },500);
+    };
+    setTimeout(function(){ try{ if(document.body.contains(inp)) inp.remove(); }catch(e){} },10000);
+    inp.click();
+  }catch(e){ showErr("Picker failed - Try again"); }
+}
+function setFile(f){
+  if(!f) return;
+  if(f.size>10*1024*1024){ showErr("Photo too big - Max 10 MB"); return; }
+  file=f; resultBlob=null; resultUrl=""; bgMode="transparent";
+  showErr(""); status("✅ Selected: "+(f.name||"Photo")+" - Tap Remove Background");
+  var url=URL.createObjectURL(f);
+  var orig=el('t8Orig'); orig.src=url; orig.style.display='block';
+  var res=el('t8Result'); res.src=""; res.style.display='none';
+  el('t8BgBox').style.display='none'; el('t8Out').style.display='none';
+  // Reset bg chips
+  document.querySelectorAll('#t8BgBox .chip').forEach(function(c){ c.classList.remove('active'); });
+  var first=document.querySelector('#t8BgBox .chip[data-bg="transparent"]'); if(first) first.classList.add('active');
+}
+el('t8Tap').addEventListener('click', function(e){ e.preventDefault(); openPicker(false); });
+el('t8Cam').addEventListener('click', function(e){ e.preventDefault(); openPicker(true); });
+el('t8Sample').addEventListener('click', function(){
+  var c=document.createElement('canvas'); c.width=600; c.height=700; var x=c.getContext('2d');
+  x.fillStyle="#8AB4F8"; x.fillRect(0,0,600,700); // blue bg - hard case
+  x.fillStyle="#E8B48A"; x.beginPath(); x.arc(300,180,90,0,Math.PI*2); x.fill();
+  x.fillStyle="#2563EB"; x.fillRect(200,270,200,300);
+  x.fillStyle="#111"; x.fillRect(180,80,240,40);
+  x.fillStyle="#111"; x.beginPath(); x.arc(270,175,8,0,Math.PI*2); x.fill(); x.beginPath(); x.arc(330,175,8,0,Math.PI*2); x.fill();
+  x.fillStyle="#DC2626"; x.fillRect(270,215,60,10);
+  c.toBlob(function(b){ if(b) setFile(new File([b],"Sample.jpg",{type:"image/jpeg"})); }, "image/jpeg", 0.95);
+});
+
+// BG CHIPS - Change preview instantly
+document.getElementById('t8BgBox').addEventListener('click', function(e){
+  var chip=e.target.closest('.chip'); if(!chip) return;
+  document.querySelectorAll('#t8BgBox .chip').forEach(function(x){ x.classList.remove('active'); });
+  chip.classList.add('active');
+  bgMode=chip.getAttribute('data-bg')||"transparent";
+  updateResultBg();
+});
+function updateResultBg(){
+  var img=el('t8Result');
+  if(!resultUrl) return;
+  if(bgMode==="transparent"){ img.classList.add('checker'); img.style.background='transparent'; }
+  else if(bgMode==="white"){ img.classList.remove('checker'); img.style.background='#fff'; }
+  else if(bgMode==="black"){ img.classList.remove('checker'); img.style.background='#000'; }
+  else if(bgMode==="blue"){ img.classList.remove('checker'); img.style.background='#2563EB'; }
+  else if(bgMode==="pink"){ img.classList.remove('checker'); img.style.background='#F9A8D4'; }
+  else if(bgMode==="green"){ img.classList.remove('checker'); img.style.background='#16A34A'; }
+  else if(bgMode==="red"){ img.classList.remove('checker'); img.style.background='#DC2626'; }
+  else if(bgMode==="yellow"){ img.classList.remove('checker'); img.style.background='#FACC15'; }
+}
+
+// REMOVE - Real AI - 100% Clear
+el('t8Go').addEventListener('click', async function(){
+  if(!file){ showErr("Select photo first - Tap Select Photo"); return; }
+  var btn=el('t8Go'); btn.disabled=true; btn.textContent="⏳ AI Removing... Please Wait 10-20 Sec (First Time Downloads AI Model)";
+  status("AI Removing... First time downloads AI model (15 MB) - Please wait, do not close");
+  showErr("");
+  try{
+    // Real AI - Same as Remove.bg
+    var blob=await removeBackground(file, config);
+    resultBlob=blob;
+    if(resultUrl) URL.revokeObjectURL(resultUrl);
+    resultUrl=URL.createObjectURL(blob);
+    var res=el('t8Result'); res.src=resultUrl; res.style.display='block';
+    el('t8BgBox').style.display='block'; el('t8Out').style.display='block';
+    updateResultBg();
+    status("✅ Done! 100% Clear Background Removed - Choose Transparent / White / Black above, then Download");
+    el('t8Out').scrollIntoView({behavior:"smooth"});
+  }catch(e){
+    showErr("AI failed - Check internet, open in Chrome, try smaller photo. Error: "+(e.message||""));
+    status("Failed - Try again with clear photo, good internet");
+  }finally{ btn.disabled=false; btn.textContent="✂️ Remove Background"; }
+});
+
+// DOWNLOAD - Correct for each BG
+el('t8Down').addEventListener('click', async function(){
+  if(!resultBlob){ showErr("Remove background first"); return; }
+  try{
+    if(bgMode==="transparent"){
+      // Direct PNG - Already transparent
+      var a=document.createElement('a'); a.href=resultUrl; a.download="BG-Removed-Transparent.png"; document.body.appendChild(a); a.click(); setTimeout(function(){ a.remove(); },500);
+      status("✅ Downloaded Transparent PNG");
+    } else {
+      // Draw BG + Cutout -> JPG
+      var img=new Image(); img.src=resultUrl;
+      await new Promise(function(res,rej){ img.onload=res; img.onerror=rej; });
+      var c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; var ctx=c.getContext('2d');
+      var colors={white:"#FFFFFF", black:"#000000", blue:"#2563EB", pink:"#F9A8D4", green:"#16A34A", red:"#DC2626", yellow:"#FACC15"};
+      ctx.fillStyle=colors[bgMode]||"#FFFFFF"; ctx.fillRect(0,0,c.width,c.height);
+      ctx.drawImage(img,0,0);
+      var url=c.toDataURL('image/jpeg',0.95);
+      var a2=document.createElement('a'); a2.href=url; a2.download="BG-Removed-"+bgMode+".jpg"; document.body.appendChild(a2); a2.click(); setTimeout(function(){ a2.remove(); },500);
+      status("✅ Downloaded "+bgMode+" JPG");
+    }
+  }catch(e){ showErr("Download failed - Try again"); }
+});
+el('t8Share').addEventListener('click', async function(){
+  if(!resultBlob){ showErr("Remove first"); return; }
+  try{
+    var f=new File([resultBlob],"BG-Removed.png",{type:"image/png"});
+    if(navigator.share && navigator.canShare && navigator.canShare({files:[f]})){ await navigator.share({files:[f], title:"BG Removed"}); }
+    else { el('t8Down').click(); }
+  }catch(e){ el('t8Down').click(); }
+});
+el('t8Copy').addEventListener('click', async function(){
+  if(!resultBlob){ showErr("Remove first"); return; }
+  try{
+    await navigator.clipboard.write([new ClipboardItem({"image/png":resultBlob})]);
+    status("✅ Copied - Paste in WhatsApp / Notes");
+  }catch(e){ showErr("Copy not supported - Use Download"); }
+});
+el('t8Preview').addEventListener('click', function(){
+  if(!resultUrl){ showErr("Remove first"); return; }
+  var w=window.open(resultUrl,"_blank"); if(!w) status("Preview opened in new tab - If blocked, tap Download");
+});
+
+window.clearTool8=function(){
+  file=null; resultBlob=null; if(resultUrl) URL.revokeObjectURL(resultUrl); resultUrl=""; bgMode="transparent";
+  var o=el('t8Orig'); if(o){ o.src=""; o.style.display='none'; }
+  var r=el('t8Result'); if(r){ r.src=""; r.style.display='none'; }
+  el('t8BgBox').style.display='none'; el('t8Out').style.display='none';
+  showErr(""); status("Tap Select Photo first");
+};
+</script>
+<!-- ============ TOOL 8 SIMPLE END ============ -->
 <!-- ================= TOOL 9 - PDF MERGER ================= -->
 <div id="page-tool9" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>📚 PDF Merger</b><br><span>Most Demanded</span></div></div><h2 style="text-align:center">📚 PDF Merger</h2><p style="font-size:12px;color:#6B7280;text-align:center">Merge Aadhar Front + Back, Marksheet Pages Into 1 PDF</p><div class="drop" onclick="document.getElementById('mergeFile').click()"><b>📄 Select PDFs - Multiple</b><p style="font-size:12px;color:#6B7280">Select 2 or more PDFs in order</p><input type="file" id="mergeFile" accept="application/pdf" multiple onchange="loadMerge(event)"></div><p id="mergeInfo" style="font-size:12px;color:#166534;text-align:center;margin-top:8px">Select PDFs first</p><label>Merged File Name</label><input id="mergeName" value="Merged-Document"><button class="btn" onclick="mergePDFs()">📚 Merge PDFs Into 1</button><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
 
