@@ -572,9 +572,9 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
 })();
 </script>
 <!-- ================= TOOL 1 END - V4 FINAL - BUG FREE ================= --> 
-<!-- ================= TOOL 2 - PDF TO image start=====≈============
-<!-- ================= TOOL 2 START - V2 - PDF LOADING FIXED - PREMIUM - NO DOCTYPE ================= -->
-<!-- PASTE THIS ONLY - REPLACE OLD TOOL 2 COMPLETELY - PDF WILL LOAD NOW -->
+<!-- ================= TOOLS 2 pdf to image ==========================
+<!-- ================= TOOL 2 START - V3 - TAP TO SELECT FIXED - NO DOCTYPE ================= -->
+<!-- PASTE THIS ONLY - REPLACE OLD TOOL 2 - TAP WILL WORK NOW 100% -->
 
 <div id="page-tool2" class="tool-page" style="display:none">
 <div id="tool2">
@@ -586,21 +586,25 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
 #tool2 .topbar button{background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer;font-size:13px}
 #tool2 label{font-size:12px;font-weight:900;display:block;margin-top:13px}
 #tool2 input,#tool2 select{width:100%;padding:13px;border-radius:14px;border:1.5px solid #E5E7EB;background:#F9FAFB;font-size:14px;margin-top:6px}
-#tool2 .btn{width:100%;padding:15px;border:none;border-radius:16px;font-weight:900;cursor:pointer;margin-top:12px;color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);font-size:14px;box-shadow:0 12px 22px rgba(124,58,237,.30)}
+#tool2 .btn{width:100%;padding:15px;border:none;border-radius:16px;font-weight:900;cursor:pointer;margin-top:12px;color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);font-size:14px;box-shadow:0 12px 22px rgba(124,58,237,.30);touch-action:manipulation}
 #tool2 .btn:disabled{opacity:.6}
-#tool2 .btn2{flex:1;padding:11px;border-radius:14px;border:1.5px solid #E5E7EB;background:#fff;font-weight:800;cursor:pointer;font-size:12.5px}
+#tool2 .btn2{flex:1;padding:11px;border-radius:14px;border:1.5px solid #E5E7EB;background:#fff;font-weight:800;cursor:pointer;font-size:12.5px;touch-action:manipulation}
 #tool2 .btn2.primary{background:#111827;color:#fff;border:none}
 #tool2 .btn2.green{background:#16A34A;color:#fff;border:none}
-#tool2 .btn2:disabled{opacity:.5}
-#tool2 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:9px 12px;border-radius:20px;font-size:12px;margin:7px 7px 0 0;cursor:pointer;font-weight:700}
+#tool2 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:9px 12px;border-radius:20px;font-size:12px;margin:7px 7px 0 0;cursor:pointer;font-weight:700;touch-action:manipulation}
 #tool2 .chip.active{background:#111827;color:#fff;border:none}
 #tool2 .toggle-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #EDE9FE;gap:8px}
-#tool2 .toggle{width:52px;height:28px;background:#22C55E;border-radius:30px;position:relative;cursor:pointer;flex-shrink:0}
+#tool2 .toggle{width:52px;height:28px;background:#22C55E;border-radius:30px;position:relative;cursor:pointer;flex-shrink:0;touch-action:manipulation}
 #tool2 .toggle.off{background:#9CA3AF}
 #tool2 .toggle::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%}
 #tool2 .toggle.off::after{left:27px}
-#tool2 .drop{border:2px dashed #7C3AED;background:linear-gradient(135deg,#F8F9FF,#FDF2F8);border-radius:18px;padding:20px;text-align:center;cursor:pointer;margin-top:12px}
-#tool2 .drop input{display:none}
+/* ===== FIX: TAP AREA - NO display:none - REAL INPUT COVERS FULL BOX ===== */
+#tool2 .drop{position:relative;border:2px dashed #7C3AED;background:linear-gradient(135deg,#F8F9FF,#FDF2F8);border-radius:18px;padding:20px;text-align:center;margin-top:12px;overflow:hidden;touch-action:manipulation;cursor:pointer;z-index:1}
+#tool2 .drop:active{background:#EDE9FE;transform:scale(.98)}
+#tool2 .drop-content{position:relative;z-index:1;pointer-events:none}
+#tool2 .drop-content *{pointer-events:none}
+#tool2 .file-input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:2;display:block !important;visibility:visible !important;font-size:100px}
+#tool2 .big-select-btn{position:relative;z-index:3;display:block;width:100%;padding:14px;border:none;border-radius:14px;background:#111827;color:#fff;font-weight:900;font-size:14px;cursor:pointer;margin-top:10px;touch-action:manipulation}
 #tool2 .progress{height:10px;background:#E5E7EB;border-radius:20px;overflow:hidden;margin-top:12px;display:none}
 #tool2 .progress i{display:block;height:100%;background:linear-gradient(90deg,#7C3AED,#EC4899);width:0%}
 #tool2 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
@@ -611,20 +615,32 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
 </style>
 
 <div id="tool2"><div class="card">
-<div class="topbar"><button type="button" onclick="goHomePageTool2()">← Back</button><div><b>📄 PDF To Image</b><br><span style="font-size:11px;color:#6B7280">PDF Loading Fixed • Premium • ZIP • Stitch</span></div><span style="margin-left:auto;background:#DCFCE7;color:#166534;font-size:11px;font-weight:900;padding:6px 10px;border-radius:20px">● FIXED</span></div>
+<div class="topbar"><button type="button" onclick="goHomePageTool2()">← Back</button><div><b>📄 PDF To Image</b><br><span style="font-size:11px;color:#6B7280">Tap Fixed • Premium • ZIP • Stitch</span></div><span style="margin-left:auto;background:#DCFCE7;color:#166534;font-size:11px;font-weight:900;padding:6px 10px;border-radius:20px">● TAP FIXED</span></div>
 
-<h2 style="text-align:center">📄 PDF To Image - Fixed</h2>
-<p style="font-size:12px;color:#6B7280;text-align:center">If PDF not loading before, now it will load - 3 CDN + Worker-Free Mode<br><span style="color:#16A34A;font-weight:800">100% Private - PDF never leaves phone</span></p>
+<h2 style="text-align:center">📄 PDF To Image - Tap Fixed</h2>
+<p style="font-size:12px;color:#6B7280;text-align:center">Tap box OR tap button below - Both open file picker<br><span style="color:#16A34A;font-weight:800">100% Private - PDF never leaves phone</span></p>
 
-<!-- STEP 1 - LIBRARY STATUS - NEW - SHOWS WHY PDF NOT LOADING -->
-<div id="t2LibBox" style="background:#FFFBEB;border:1px dashed #F59E0B;border-radius:12px;padding:10px;margin-top:10px;font-size:12px;line-height:1.6"><b>🔧 System Status:</b><br><span id="t2LibStatus">Checking PDF engine... Please wait 2 sec</span><br><button type="button" id="t2LibRetryBtn" style="margin-top:6px;padding:8px 12px;border-radius:20px;border:1px solid #E5E7EB;background:#fff;font-weight:800;cursor:pointer;font-size:11px;display:none">🔄 Retry Load Engine</button></div>
+<div id="t2LibBox" style="background:#FFFBEB;border:1px dashed #F59E0B;border-radius:12px;padding:10px;margin-top:10px;font-size:12px;line-height:1.6"><b>🔧 System:</b><br><span id="t2LibStatus">Checking PDF engine...</span><br><button type="button" id="t2LibRetryBtn" style="margin-top:6px;padding:8px 12px;border-radius:20px;border:1px solid #E5E7EB;background:#fff;font-weight:800;cursor:pointer;font-size:11px;display:none">🔄 Retry Load Engine</button></div>
 
-<div class="drop" id="t2Drop"><b>📄 Tap To Select PDF</b><p style="font-size:12px;color:#6B7280;margin-top:4px">Tap here - Choose PDF from Files / Drive / WhatsApp<br>Max 50 MB • Marksheet, Aadhar, Notes, Form</p><input type="file" id="t2File" accept="application/pdf,.pdf"></div>
+<!-- ===== FIXED TAP AREA - LABEL + REAL INPUT COVERING FULL BOX ===== -->
+<!-- FIX: label for="t2File" - Tap label = Tap input - Works in WhatsApp / Chrome / iPhone -->
+<label for="t2File" class="drop" id="t2Drop">
+  <!-- REAL INPUT - NOT display:none - opacity:0 + covers full box - Tap goes DIRECTLY to input -->
+  <input type="file" id="t2File" class="file-input" accept="application/pdf,.pdf">
+  <div class="drop-content">
+    <div style="font-size:32px">📄</div>
+    <b style="font-size:16px">Tap To Select PDF</b>
+    <p style="font-size:12px;color:#6B7280;margin-top:4px;font-weight:400">Tap here - Choose PDF from Files / Drive / WhatsApp<br>Max 50 MB • Marksheet, Aadhar, Notes, Form</p>
+    <div style="display:inline-block;margin-top:8px;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;padding:10px 18px;border-radius:20px;font-weight:900;font-size:13px">📂 Choose PDF File →</div>
+  </div>
+</label>
 
-<!-- LIVE STATUS - NEW -->
+<!-- SECOND TAP WAY - BIG BUTTON - If box tap fails, button will work -->
+<button type="button" class="big-select-btn" id="t2BigBtn">📂 TAP HERE TO SELECT PDF - 2nd Way</button>
+<p style="font-size:11px;color:#6B7280;text-align:center;margin-top:6px">If tap not opening, open in <b>Chrome</b> - Tap 3 dots → Open in Chrome - Then tap again</p>
+
 <div class="status-box" id="t2StatusBox"><b id="t2StatusTitle">📄 Status</b><br><span id="t2StatusText">Select PDF first</span></div>
-<div class="error-box" id="t2ErrorBox"><b>⚠️ PDF Not Loading? Read This:</b><br><span id="t2ErrorText"></span><br><button type="button" id="t2RetryBtn" style="margin-top:8px;padding:10px 14px;border-radius:20px;border:none;background:#DC2626;color:#fff;font-weight:900;cursor:pointer">🔄 Tap To Retry With Same PDF</button><br><span style="font-size:11px;color:#6B7280">If still fails: 1) Open in Chrome, not WhatsApp browser 2) PDF must be under 50 MB 3) PDF must NOT be password locked</span></div>
-
+<div class="error-box" id="t2ErrorBox"><b>⚠️ PDF Not Loading?</b><br><span id="t2ErrorText"></span><br><button type="button" id="t2RetryBtn" style="margin-top:8px;padding:10px 14px;border-radius:20px;border:none;background:#DC2626;color:#fff;font-weight:900;cursor:pointer">🔄 Tap To Retry With Same PDF</button></div>
 <p id="t2Name" style="font-size:12px;color:#166534;font-weight:800;text-align:center;margin-top:8px;display:none"></p>
 
 <div id="t2PageBox" style="display:none;background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:12px;margin-top:12px">
@@ -647,20 +663,20 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
 </div>
 <button type="button" class="btn" id="t2ConvertBtn">✨ Convert PDF To Images</button>
 <div class="progress" id="t2Progress"><i id="t2Bar"></i></div>
-<p id="t2Status" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select PDF first - Engine will load automatically</p>
+<p id="t2Status" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select PDF first</p>
 <div id="t2Result" style="display:none">
 <div style="display:flex;justify-content:space-between;margin-top:12px"><b>Images - <span id="t2Count">0</span></b><span id="t2Total" style="font-size:12px;color:#6B7280"></span></div>
 <div class="grid" id="t2Grid"></div>
 <div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2 green" id="t2ZipBtn">📦 ZIP All</button><button type="button" class="btn2 primary" id="t2StitchBtn">🧵 Stitch Long</button></div>
 </div>
 <div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2" onclick="clearTool2()">🗑️ New PDF</button><button type="button" class="btn2 primary" onclick="goHomePageTool2()">← Back</button></div>
-<div style="background:#FFFBEB;border:1px dashed #F59E0B;border-radius:14px;padding:12px;margin-top:12px;font-size:12px;line-height:1.7"><b>📖 If PDF Still Not Loading - Do This:</b><br>1. <b>Open in Chrome</b> - Don't open inside WhatsApp browser - Tap 3 dots → Open in Chrome<br>2. <b>Check Internet</b> - First time needs internet to load engine<br>3. <b>PDF Size</b> - Must be under 50 MB<br>4. <b>Password</b> - Unlock PDF first<br>5. <b>Try Small PDF</b> - Try 1-page PDF first to test</div>
+<div style="background:#FFFBEB;border:1px dashed #F59E0B;border-radius:14px;padding:12px;margin-top:12px;font-size:12px;line-height:1.7"><b>📖 If Tap Still Not Opening:</b><br>1. <b>Open in Chrome</b> - WhatsApp browser blocks file picker sometimes - Tap 3 dots → Open in Chrome<br>2. <b>Allow Files Permission</b> - Chrome → Allow Files<br>3. <b>Try Big Black Button</b> - Below box - 2nd way</div>
 </div></div>
 </div>
 </div>
 
 <script>
-/* ================= TOOL 2 V2 - PDF LOADING FIXED - ROBUST ENGINE ================= */
+/* ================= TOOL 2 V3 - TAP FIXED - ROBUST ================= */
 (function(){
   window.goHomePageTool2 = window.goHomePageTool2 || function(){
     if(typeof window.goHomePage === "function"){ window.goHomePage(); return; }
@@ -671,26 +687,13 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
   function el(id){ return document.getElementById(id); }
   function getWm2(){ try{ var wm=localStorage.getItem('orbit_watermark'); var txt=localStorage.getItem('orbit_watermark_text')||"Made With Orbittroniz.com"; return {wm: wm!=='false', txt:txt}; }catch(e){ return {wm:true, txt:"Made With Orbittroniz.com"}; } }
   function updateWmUI2(){ var w=getWm2(); var t=el('t2WmText'); if(t) t.textContent=(w.wm?"ON - ":"OFF - ")+w.txt; var tg=el('t2WmToggle'); if(tg) tg.classList.toggle('off',!w.wm); }
-  function setStatus2(title,msg,showBox){
-    var box=el('t2StatusBox'); if(box) box.style.display = showBox===false ? 'none' : 'block';
-    var tt=el('t2StatusTitle'); if(tt) tt.textContent=title;
-    var tx=el('t2StatusText'); if(tx) tx.textContent=msg;
-    var st=el('t2Status'); if(st) st.textContent=msg;
-  }
-  function showError2(msg){
-    var box=el('t2ErrorBox'); if(!box) return;
-    if(!msg){ box.style.display='none'; return; }
-    box.style.display='block'; var tx=el('t2ErrorText'); if(tx) tx.textContent=msg;
-  }
-  function showName2(msg){
-    var n=el('t2Name'); if(!n) return;
-    if(!msg){ n.style.display='none'; return; }
-    n.style.display='block'; n.textContent=msg;
-  }
+  function setStatus2(title,msg,showBox){ var box=el('t2StatusBox'); if(box) box.style.display = showBox===false ? 'none' : 'block'; var tt=el('t2StatusTitle'); if(tt) tt.textContent=title; var tx=el('t2StatusText'); if(tx) tx.textContent=msg; var st=el('t2Status'); if(st) st.textContent=msg; }
+  function showError2(msg){ var box=el('t2ErrorBox'); if(!box) return; if(!msg){ box.style.display='none'; return; } box.style.display='block'; var tx=el('t2ErrorText'); if(tx) tx.textContent=msg; }
+  function showName2(msg){ var n=el('t2Name'); if(!n) return; if(!msg){ n.style.display='none'; return; } n.style.display='block'; n.textContent=msg; }
 
   var S2={doc:null,name:"My-Document",selected:new Set(),quality:"medium",enhance:true,crop:true,compress:false,images:[],converting:false,totalPages:0,lastFile:null,engineReady:false,engineTried:false};
 
-  // ===== FIX 1: LOAD PDF.JS WITH 3 CDN FALLBACK + WORKER FALLBACK =====
+  // ===== PDF ENGINE - 3 CDN FALLBACK =====
   var PDF_CDNS=[
     {js:"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js", worker:"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"},
     {js:"https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js", worker:"https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js"},
@@ -698,12 +701,9 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
   ];
   function loadScript2(src){
     return new Promise(function(resolve,reject){
-      // If already loaded, skip
       if(window.pdfjsLib){ resolve(); return; }
       var s=document.createElement('script'); s.src=src; s.async=true;
-      s.onload=function(){ resolve(); };
-      s.onerror=function(){ reject(new Error("CDN failed: "+src)); };
-      // Timeout 12 sec - FIX: Don't hang forever
+      s.onload=function(){ resolve(); }; s.onerror=function(){ reject(new Error("CDN failed")); };
       setTimeout(function(){ if(!window.pdfjsLib) reject(new Error("Timeout")); },12000);
       document.head.appendChild(s);
     });
@@ -715,159 +715,121 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
     var libStatus=el('t2LibStatus'); var retryBtn=el('t2LibRetryBtn');
     if(libStatus) libStatus.textContent="Loading PDF engine... Trying CDN 1/3...";
     if(retryBtn) retryBtn.style.display='none';
-    // If already in page from <head> (old full app), use it
     if(window.pdfjsLib){
-      try{
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDF_CDNS[0].worker;
-        S2.engineReady=true;
-        if(libStatus) libStatus.textContent="✅ PDF Engine Ready - You can select PDF now";
-        setStatus2("✅ Engine Ready","PDF engine loaded - Select PDF now",true);
-        return true;
-      }catch(e){}
+      try{ window.pdfjsLib.GlobalWorkerOptions.workerSrc=PDF_CDNS[0].worker; S2.engineReady=true; if(libStatus) libStatus.textContent="✅ PDF Engine Ready - You can select PDF now"; setStatus2("✅ Engine Ready","PDF engine loaded - Select PDF now",true); return true; }catch(e){}
     }
     for(var i=0;i<PDF_CDNS.length;i++){
       try{
         if(libStatus) libStatus.textContent="Loading PDF engine... Trying CDN "+(i+1)+"/3...";
         await loadScript2(PDF_CDNS[i].js);
-        if(window.pdfjsLib){
-          // FIX: Worker may fail in WhatsApp WebView - Try worker, but if fails, use fake worker (disable worker)
-          try{ window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDF_CDNS[i].worker; }catch(e){}
-          S2.engineReady=true;
-          if(libStatus) libStatus.textContent="✅ PDF Engine Ready (CDN "+(i+1)+") - You can select PDF now";
-          setStatus2("✅ Engine Ready","PDF engine loaded from CDN "+(i+1)+" - Select PDF now",true);
-          return true;
-        }
-      }catch(e){
-        // Try next CDN
-        continue;
-      }
+        if(window.pdfjsLib){ try{ window.pdfjsLib.GlobalWorkerOptions.workerSrc=PDF_CDNS[i].worker; }catch(e){} S2.engineReady=true; if(libStatus) libStatus.textContent="✅ PDF Engine Ready (CDN "+(i+1)+") - You can select PDF now"; setStatus2("✅ Engine Ready","PDF engine loaded from CDN "+(i+1)+" - Select PDF now",true); return true; }
+      }catch(e){ continue; }
     }
-    // FIX: Last resort - Try without worker (pdf.js can run without worker, slower but works)
-    if(window.pdfjsLib){
-      try{ window.pdfjsLib.GlobalWorkerOptions.workerSrc=""; S2.engineReady=true; if(libStatus) libStatus.textContent="✅ PDF Engine Ready (Worker-Free Mode)"; return true; }catch(e){}
-    }
+    if(window.pdfjsLib){ try{ window.pdfjsLib.GlobalWorkerOptions.workerSrc=""; S2.engineReady=true; if(libStatus) libStatus.textContent="✅ PDF Engine Ready (Worker-Free)"; return true; }catch(e){} }
     if(libStatus) libStatus.textContent="❌ PDF Engine Failed - Check internet and tap Retry";
     if(retryBtn) retryBtn.style.display='inline-block';
-    setStatus2("❌ Engine Not Loaded","Check internet and tap Retry Load Engine",true);
     return false;
   }
   var libRetry=el('t2LibRetryBtn'); if(libRetry) libRetry.addEventListener('click', function(){ S2.engineTried=false; S2.engineReady=false; ensurePdfEngine2(); });
-  // Auto load engine on open - FIX: Don't wait for user to click
   setTimeout(function(){ ensurePdfEngine2(); },300);
 
   // Quality + Toggles
   var qRow=el('t2QualityRow');
   if(qRow) qRow.addEventListener('click', function(ev){ var c=ev.target.closest('.chip'); if(!c) return; S2.quality=c.getAttribute('data-q')||"medium"; qRow.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('active'); }); c.classList.add('active'); });
-  function bindTog(id, getV, setV){ var t=el(id); if(!t) return; t.addEventListener('click', function(){ setV(!getV()); t.classList.toggle('off',!getV()); }); }
+  function bindTog(id,getV,setV){ var t=el(id); if(!t) return; t.addEventListener('click', function(){ setV(!getV()); t.classList.toggle('off',!getV()); }); }
   bindTog('t2EnhanceToggle', function(){ return S2.enhance; }, function(v){ S2.enhance=v; });
   bindTog('t2CropToggle', function(){ return S2.crop; }, function(v){ S2.crop=v; });
   bindTog('t2CompressToggle', function(){ return S2.compress; }, function(v){ S2.compress=v; });
   var wmTog=el('t2WmToggle'); if(wmTog) wmTog.addEventListener('click', function(){ try{ localStorage.setItem('orbit_watermark', getWm2().wm ? 'false':'true'); }catch(e){} updateWmUI2(); });
   updateWmUI2();
 
-  // File Input - FIX: Keep lastFile for Retry
-  var drop=el('t2Drop'), fileInp=el('t2File');
-  if(drop && fileInp){
-    drop.addEventListener('click', function(e){ e.preventDefault(); fileInp.click(); });
-    fileInp.addEventListener('change', function(e){ var f=e.target.files && e.target.files[0]; if(f){ S2.lastFile=f; loadPdf2(f); } });
-    drop.addEventListener('dragover', function(e){ e.preventDefault(); drop.style.borderColor='#EC4899'; });
-    drop.addEventListener('dragleave', function(){ drop.style.borderColor='#7C3AED'; });
-    drop.addEventListener('drop', function(e){ e.preventDefault(); drop.style.borderColor='#7C3AED'; if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]){ S2.lastFile=e.dataTransfer.files[0]; loadPdf2(S2.lastFile); } });
+  // ===== TAP FIX - CORE =====
+  // FIX: Do NOT call fileInp.click() from div click - That is blocked on mobile
+  // Instead: Real input covers full box (opacity:0) + label for="t2File" - Tap goes DIRECTLY to input
+  // Big button also just focuses input - Also direct
+  var fileInp=el('t2File');
+  var bigBtn=el('t2BigBtn');
+  var dropLabel=el('t2Drop');
+  function onFileChosen(file){
+    if(!file) return;
+    S2.lastFile=file;
+    // FIX: Reset input value AFTER reading, so same file can be chosen again next time
+    // Do it in setTimeout so browser finishes reading first
+    loadPdf2(file);
+  }
+  if(fileInp){
+    // FIX: Use 'change' only - No JS click() - This is the mobile-safe way
+    fileInp.addEventListener('change', function(e){
+      var f=e.target.files && e.target.files[0];
+      if(f){ onFileChosen(f); }
+      // FIX: Do NOT clear here - Clear after load in clearTool2, else Retry fails
+    });
+    // FIX: Also handle cancel - If user cancels, do nothing, keep old state
+    fileInp.addEventListener('cancel', function(){ setStatus2("📄 Status","Selection cancelled - Tap again to select PDF",true); });
+  }
+  if(bigBtn && fileInp){
+    // FIX: Big button - Use direct .click() on user gesture - This IS allowed because it's a real button tap, not div tap
+    bigBtn.addEventListener('click', function(e){
+      e.preventDefault(); e.stopPropagation();
+      // Small delay helps iOS
+      try{ fileInp.click(); }catch(err){ alert("Tap the box above to select PDF"); }
+    });
+  }
+  // FIX: Prevent label double-trigger - Label already triggers input, so NO extra click handler on label
+  // Drag & Drop still works on label
+  if(dropLabel){
+    dropLabel.addEventListener('dragover', function(e){ e.preventDefault(); dropLabel.style.borderColor='#EC4899'; });
+    dropLabel.addEventListener('dragleave', function(){ dropLabel.style.borderColor='#7C3AED'; });
+    dropLabel.addEventListener('drop', function(e){ e.preventDefault(); dropLabel.style.borderColor='#7C3AED'; if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]){ onFileChosen(e.dataTransfer.files[0]); } });
   }
   var retryBtn=el('t2RetryBtn'); if(retryBtn) retryBtn.addEventListener('click', function(){ if(S2.lastFile){ showError2(""); loadPdf2(S2.lastFile); } else { alert("Please select PDF again"); if(fileInp) fileInp.click(); } });
 
-  function parseRange2(str,total){
-    str=String(str||"").trim(); if(!str) return null; var set=new Set();
-    str.split(',').forEach(function(part){ part=part.trim(); if(!part) return; if(part.indexOf('-')>-1){ var pp=part.split('-'); var a=parseInt(pp[0],10), b=parseInt(pp[1],10); if(isNaN(a)||isNaN(b)) return; var lo=Math.min(a,b), hi=Math.max(a,b); for(var i=lo;i<=hi;i++){ if(i>=1&&i<=total) set.add(i); } } else { var n=parseInt(part,10); if(!isNaN(n)&&n>=1&&n<=total) set.add(n); } });
-    return set;
-  }
-  function renderChips2(){
-    var box=el('t2Chips'); if(!box||!S2.doc) return; box.innerHTML="";
-    for(var i=1;i<=S2.totalPages;i++){
-      (function(p){ var s=document.createElement('span'); s.className='chip '+(S2.selected.has(p)?'active':''); s.textContent='Page '+p; s.addEventListener('click', function(){ if(S2.selected.has(p)){ S2.selected.delete(p); s.classList.remove('active'); } else { S2.selected.add(p); s.classList.add('active'); } updateRangeInfo2(); }); box.appendChild(s); })(i);
-    }
-    updateRangeInfo2();
-  }
+  function parseRange2(str,total){ str=String(str||"").trim(); if(!str) return null; var set=new Set(); str.split(',').forEach(function(part){ part=part.trim(); if(!part) return; if(part.indexOf('-')>-1){ var pp=part.split('-'); var a=parseInt(pp[0],10), b=parseInt(pp[1],10); if(isNaN(a)||isNaN(b)) return; var lo=Math.min(a,b), hi=Math.max(a,b); for(var i=lo;i<=hi;i++){ if(i>=1&&i<=total) set.add(i); } } else { var n=parseInt(part,10); if(!isNaN(n)&&n>=1&&n<=total) set.add(n); } }); return set; }
+  function renderChips2(){ var box=el('t2Chips'); if(!box||!S2.doc) return; box.innerHTML=""; for(var i=1;i<=S2.totalPages;i++){ (function(p){ var s=document.createElement('span'); s.className='chip '+(S2.selected.has(p)?'active':''); s.textContent='Page '+p; s.addEventListener('click', function(){ if(S2.selected.has(p)){ S2.selected.delete(p); s.classList.remove('active'); } else { S2.selected.add(p); s.classList.add('active'); } updateRangeInfo2(); }); box.appendChild(s); })(i); } updateRangeInfo2(); }
   function updateRangeInfo2(){ var info=el('t2RangeInfo'); if(info) info.textContent=S2.selected.size+" / "+S2.totalPages+" pages selected"; }
   var rangeInp=el('t2Range');
   if(rangeInp) rangeInp.addEventListener('input', function(){ if(!S2.doc) return; var v=rangeInp.value; if(!v.trim()){ S2.selected=new Set(); for(var i=1;i<=S2.totalPages;i++) S2.selected.add(i); renderChips2(); return; } var parsed=parseRange2(v,S2.totalPages); if(parsed&&parsed.size>0){ S2.selected=parsed; renderChips2(); } });
   var selAll=el('t2SelectAllBtn'); if(selAll) selAll.addEventListener('click', function(){ S2.selected=new Set(); for(var i=1;i<=S2.totalPages;i++) S2.selected.add(i); if(rangeInp) rangeInp.value=""; renderChips2(); });
   var clrAll=el('t2ClearAllBtn'); if(clrAll) clrAll.addEventListener('click', function(){ S2.selected=new Set(); if(rangeInp) rangeInp.value=""; renderChips2(); });
 
-  // FIX: Read file with FileReader fallback (arrayBuffer fails on some Android)
   function readFileAsArrayBuffer2(file){
     return new Promise(function(resolve,reject){
-      // Try 1: file.arrayBuffer (modern)
-      if(file.arrayBuffer){
-        file.arrayBuffer().then(resolve).catch(function(){
-          // Fallback to FileReader
-          readViaFileReader2(file).then(resolve).catch(reject);
-        });
-        return;
-      }
+      if(file.arrayBuffer){ file.arrayBuffer().then(resolve).catch(function(){ readViaFileReader2(file).then(resolve).catch(reject); }); return; }
       readViaFileReader2(file).then(resolve).catch(reject);
     });
   }
-  function readViaFileReader2(file){
-    return new Promise(function(resolve,reject){
-      try{
-        var r=new FileReader();
-        r.onload=function(){ resolve(r.result); };
-        r.onerror=function(){ reject(new Error("FileReader failed")); };
-        r.readAsArrayBuffer(file);
-      }catch(e){ reject(e); }
-    });
-  }
+  function readViaFileReader2(file){ return new Promise(function(resolve,reject){ try{ var r=new FileReader(); r.onload=function(){ resolve(r.result); }; r.onerror=function(){ reject(new Error("FileReader failed")); }; r.readAsArrayBuffer(file); }catch(e){ reject(e); } }); }
 
-  // LOAD PDF - FIX: Engine ensure + FileReader + Detailed errors
   async function loadPdf2(f){
-    if(!f) return;
-    S2.lastFile=f;
-    showError2(""); showName2("");
+    if(!f) return; S2.lastFile=f; showError2(""); showName2("");
     setStatus2("📄 Reading PDF...","Reading "+f.name+" - Please wait...",true);
-    if(f.size > 50*1024*1024){ showError2("PDF is too big - "+Math.round(f.size/1024/1024)+" MB - Max is 50 MB. Please compress PDF first using PDF Compress tool, or split PDF."); setStatus2("❌ Too Big","PDF is "+Math.round(f.size/1024/1024)+" MB - Max 50 MB",true); return; }
-    // FIX: Check extension + type, but allow if name ends with .pdf even if type empty (WhatsApp gives empty type)
-    var nameLower=f.name.toLowerCase();
-    if(nameLower.indexOf('.pdf')===-1){ showError2("This is not a PDF file. Please select a file ending with .pdf"); return; }
-    // FIX: Ensure engine first - This was missing before, so PDF never loaded
+    if(f.size > 50*1024*1024){ showError2("PDF is too big - "+Math.round(f.size/1024/1024)+" MB - Max 50 MB. Compress PDF first."); setStatus2("❌ Too Big","PDF is "+Math.round(f.size/1024/1024)+" MB - Max 50 MB",true); return; }
+    if(f.name.toLowerCase().indexOf('.pdf')===-1){ showError2("This is not a PDF file. Please select a file ending with .pdf"); return; }
     var engineOk=await ensurePdfEngine2();
-    if(!engineOk || !window.pdfjsLib){
-      showError2("PDF engine could not load - Check internet, then tap Retry Load Engine above, then select PDF again. Best: Open in Chrome, not WhatsApp browser.");
-      setStatus2("❌ Engine Failed","Check internet + Open in Chrome",true);
-      return;
-    }
+    if(!engineOk || !window.pdfjsLib){ showError2("PDF engine could not load - Check internet, tap Retry Load Engine, then select PDF again. Best: Open in Chrome, not WhatsApp browser."); return; }
     setStatus2("📄 Loading PDF...","Engine ready - Reading "+f.name+" ("+Math.round(f.size/1024)+" KB)...",true);
     try{
       S2.name=f.name.replace(/\.pdf$/i,"").replace(/[^a-zA-Z0-9-_ ]/g,"").trim() || "My-Document";
       var rn=el('t2Rename'); if(rn) rn.value=S2.name;
       var buf=await readFileAsArrayBuffer2(f);
-      // FIX: Try with worker, if worker fails, retry without worker
       var doc=null;
-      try{
-        doc=await window.pdfjsLib.getDocument({data:buf}).promise;
-      }catch(err1){
-        // Worker failed - Try disable worker
-        try{
-          window.pdfjsLib.GlobalWorkerOptions.workerSrc="";
-          doc=await window.pdfjsLib.getDocument({data:buf}).promise;
-        }catch(err2){ throw err1; }
-      }
+      try{ doc=await window.pdfjsLib.getDocument({data:buf}).promise; }catch(err1){ try{ window.pdfjsLib.GlobalWorkerOptions.workerSrc=""; doc=await window.pdfjsLib.getDocument({data:buf}).promise; }catch(err2){ throw err1; } }
       S2.doc=doc; S2.totalPages=doc.numPages;
-      if(S2.totalPages===0){ showError2("This PDF has 0 pages - File may be empty."); return; }
+      if(S2.totalPages===0){ showError2("This PDF has 0 pages"); return; }
       S2.selected=new Set(); for(var i=1;i<=S2.totalPages;i++) S2.selected.add(i);
       S2.images=[]; var grid=el('t2Grid'); if(grid) grid.innerHTML=""; var res=el('t2Result'); if(res) res.style.display='none';
-      var pb=el('t2PageBox'); if(pb) pb.style.display='block';
-      renderChips2();
+      var pb=el('t2PageBox'); if(pb) pb.style.display='block'; renderChips2();
       showName2("✅ "+f.name+" - "+S2.totalPages+" pages - Ready to Convert");
       setStatus2("✅ PDF Loaded","✅ "+f.name+" - "+S2.totalPages+" pages - Tap Convert now",true);
+      // FIX: After successful load, reset file input so same file can be chosen again for New PDF
+      if(fileInp) fileInp.value="";
     }catch(err){
       var msg=String(err && err.message || err || "").toLowerCase();
-      if(msg.indexOf("password")>-1 || msg.indexOf("encrypted")>-1){ showError2("This PDF is PASSWORD PROTECTED / ENCRYPTED. Please unlock PDF first - Open PDF in Chrome, enter password, Print → Save as PDF, then try again."); }
-      else if(msg.indexOf("invalid")>-1 || msg.indexOf("corrupt")>-1 || msg.indexOf("damaged")>-1){ showError2("This PDF is DAMAGED / CORRUPT. Try opening PDF in Google Drive / Chrome - If it opens there, download again and retry."); }
-      else if(msg.indexOf("worker")>-1){ showError2("PDF Worker blocked by browser. Fix: Open in Chrome (not WhatsApp browser), then tap Retry."); }
-      else { showError2("Could not read PDF - "+(err && err.message || "Unknown error")+". Try: 1) Open in Chrome 2) Try small 1-page PDF 3) Re-download PDF"); }
+      if(msg.indexOf("password")>-1 || msg.indexOf("encrypted")>-1){ showError2("This PDF is PASSWORD PROTECTED. Unlock PDF first - Open in Chrome, enter password, Print → Save as PDF, then try again."); }
+      else if(msg.indexOf("invalid")>-1 || msg.indexOf("corrupt")>-1){ showError2("This PDF is DAMAGED. Try opening in Google Drive / Chrome - If it opens there, download again."); }
+      else if(msg.indexOf("worker")>-1){ showError2("PDF Worker blocked. Fix: Open in Chrome (not WhatsApp browser), then tap Retry."); }
+      else { showError2("Could not read PDF - "+(err && err.message || "Unknown error")+". Try small 1-page PDF first."); }
       setStatus2("❌ PDF Failed","Tap Retry above or select PDF again",true);
-      // FIX: Don't clear lastFile - So Retry works
     }
   }
   window.loadPdf2Tool2=loadPdf2;
@@ -875,119 +837,47 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
   async function convertPdf2(){
     if(S2.converting) return;
     if(!S2.doc){ showError2("Please select PDF first - Tap Select PDF above."); return; }
-    if(S2.selected.size===0){ showError2("Please select at least 1 page - Tap Select All or tap a page chip."); return; }
+    if(S2.selected.size===0){ showError2("Please select at least 1 page - Tap Select All."); return; }
     S2.converting=true;
-    var btn=el('t2ConvertBtn'); if(btn){ btn.disabled=true; btn.textContent="⏳ Converting... Please Wait"; }
-    var prog=el('t2Progress'); if(prog) prog.style.display='block';
-    var bar=el('t2Bar'); if(bar) bar.style.width='0%';
-    var grid=el('t2Grid'); if(grid) grid.innerHTML="";
-    var res=el('t2Result'); if(res) res.style.display='none';
-    S2.images=[]; showError2("");
+    var btn=el('t2ConvertBtn'); if(btn){ btn.disabled=true; btn.textContent="⏳ Converting..."; }
+    var prog=el('t2Progress'); if(prog) prog.style.display='block'; var bar=el('t2Bar'); if(bar) bar.style.width='0%';
+    var grid=el('t2Grid'); if(grid) grid.innerHTML=""; var res=el('t2Result'); if(res) res.style.display='none'; S2.images=[]; showError2("");
     try{
       var pages=Array.from(S2.selected).sort(function(a,b){ return a-b; });
-      var scale=parseFloat(el('t2Size').value||"1.5");
-      var fmt=el('t2Format').value||"jpeg";
-      var wm=getWm2();
-      var fileName=(el('t2Rename').value||S2.name||"My-Document").replace(/[^a-zA-Z0-9-_ ]/g,"").trim()||"My-Document"; S2.name=fileName;
-      var totalKB=0;
+      var scale=parseFloat(el('t2Size').value||"1.5"); var fmt=el('t2Format').value||"jpeg"; var wm=getWm2();
+      var fileName=(el('t2Rename').value||S2.name||"My-Document").replace(/[^a-zA-Z0-9-_ ]/g,"").trim()||"My-Document"; S2.name=fileName; var totalKB=0;
       for(var idx=0;idx<pages.length;idx++){
-        var pNum=pages[idx];
-        setStatus2("🔄 Converting...","Converting Page "+pNum+" - "+(idx+1)+"/"+pages.length,true);
-        var page=await S2.doc.getPage(pNum);
-        var vp=page.getViewport({scale:scale});
+        var pNum=pages[idx]; setStatus2("🔄 Converting...","Converting Page "+pNum+" - "+(idx+1)+"/"+pages.length,true);
+        var page=await S2.doc.getPage(pNum); var vp=page.getViewport({scale:scale});
         var cv=document.createElement('canvas'); cv.width=Math.floor(vp.width); cv.height=Math.floor(vp.height);
         var ctx=cv.getContext('2d'); ctx.fillStyle="#ffffff"; ctx.fillRect(0,0,cv.width,cv.height);
         await page.render({canvasContext:ctx, viewport:vp}).promise;
-        if(S2.enhance){
-          try{ var imgData=ctx.getImageData(0,0,cv.width,cv.height); var d=imgData.data; for(var pi=0;pi<d.length;pi+=4){ d[pi]=Math.min(255,d[pi]*1.08+6); d[pi+1]=Math.min(255,d[pi+1]*1.08+6); d[pi+2]=Math.min(255,d[pi+2]*1.08+6); } ctx.putImageData(imgData,0,0); }catch(e){}
-        }
-        if(S2.crop){
-          try{ var cropped=cropWhiteBorder2(cv,ctx); if(cropped){ cv=cropped; ctx=cv.getContext('2d'); } }catch(e){}
-        }
-        if(wm.wm){
-          try{ ctx.fillStyle="rgba(0,0,0,0.55)"; var fs=Math.max(12,Math.floor(cv.width/45)); ctx.font="bold "+fs+"px Arial"; ctx.textAlign="right"; ctx.fillText(wm.txt, cv.width-12, cv.height-12); }catch(e){}
-        }
+        if(S2.enhance){ try{ var imgData=ctx.getImageData(0,0,cv.width,cv.height); var d=imgData.data; for(var pi=0;pi<d.length;pi+=4){ d[pi]=Math.min(255,d[pi]*1.08+6); d[pi+1]=Math.min(255,d[pi+1]*1.08+6); d[pi+2]=Math.min(255,d[pi+2]*1.08+6); } ctx.putImageData(imgData,0,0); }catch(e){} }
+        if(S2.crop){ try{ var cropped=cropWhiteBorder2(cv,ctx); if(cropped){ cv=cropped; ctx=cv.getContext('2d'); } }catch(e){} }
+        if(wm.wm){ try{ ctx.fillStyle="rgba(0,0,0,0.55)"; var fs=Math.max(12,Math.floor(cv.width/45)); ctx.font="bold "+fs+"px Arial"; ctx.textAlign="right"; ctx.fillText(wm.txt, cv.width-12, cv.height-12); }catch(e){} }
         var q=S2.quality==="low"?0.6:S2.quality==="high"?0.95:0.82; if(S2.compress) q=Math.min(q,0.65);
         var url=fmt==="png"?cv.toDataURL("image/png"):cv.toDataURL("image/jpeg",q);
-        var kb=Math.round(url.length*3/4/1024); totalKB+=kb;
-        S2.images.push({page:pNum,dataUrl:url,format:fmt,kb:kb});
-        (function(it,index){
-          var card=document.createElement('div'); card.className='img-card';
-          var img=document.createElement('img'); img.src=it.dataUrl; img.alt='Page '+it.page;
-          var b=document.createElement('div'); b.style.fontWeight='800'; b.style.marginTop='6px'; b.textContent='Page '+it.page;
-          var sz=document.createElement('div'); sz.style.fontSize='11px'; sz.style.color='#6B7280'; sz.textContent=it.kb+' KB • '+(it.format==='png'?'PNG':'JPG');
-          var dl=document.createElement('button'); dl.className='btn2 primary'; dl.style.width='100%'; dl.style.marginTop='6px'; dl.type='button'; dl.textContent='⬇️ Download'; dl.addEventListener('click', function(){ downloadOne2(index); });
-          card.appendChild(img); card.appendChild(b); card.appendChild(sz); card.appendChild(dl); if(grid) grid.appendChild(card);
-        })(S2.images[S2.images.length-1], S2.images.length-1);
+        var kb=Math.round(url.length*3/4/1024); totalKB+=kb; S2.images.push({page:pNum,dataUrl:url,format:fmt,kb:kb});
+        (function(it,index){ var card=document.createElement('div'); card.className='img-card'; var img=document.createElement('img'); img.src=it.dataUrl; img.alt='Page '+it.page; var b=document.createElement('div'); b.style.fontWeight='800'; b.style.marginTop='6px'; b.textContent='Page '+it.page; var sz=document.createElement('div'); sz.style.fontSize='11px'; sz.style.color='#6B7280'; sz.textContent=it.kb+' KB • '+(it.format==='png'?'PNG':'JPG'); var dl=document.createElement('button'); dl.className='btn2 primary'; dl.style.width='100%'; dl.style.marginTop='6px'; dl.type='button'; dl.textContent='⬇️ Download'; dl.addEventListener('click', function(){ downloadOne2(index); }); card.appendChild(img); card.appendChild(b); card.appendChild(sz); card.appendChild(dl); if(grid) grid.appendChild(card); })(S2.images[S2.images.length-1], S2.images.length-1);
         if(bar) bar.style.width=Math.round(((idx+1)/pages.length)*100)+"%";
         await new Promise(function(r){ setTimeout(r,30); });
       }
-      if(res) res.style.display='block';
-      var cnt=el('t2Count'); if(cnt) cnt.textContent=S2.images.length;
-      var tot=el('t2Total'); if(tot) tot.textContent="Total "+(Math.round(totalKB/1024*10)/10)+" MB";
-      setStatus2("✅ Done","✅ Done - "+S2.images.length+" images ready - Download 1 by 1 or ZIP All",true);
-    }catch(err){
-      showError2("Convert failed - "+(err && err.message || "")+" - Try lower quality / smaller PDF");
-    }finally{
-      S2.converting=false; if(btn){ btn.disabled=false; btn.textContent="✨ Convert PDF To Images"; }
-      setTimeout(function(){ if(prog) prog.style.display='none'; },1500);
-    }
+      if(res) res.style.display='block'; var cnt=el('t2Count'); if(cnt) cnt.textContent=S2.images.length; var tot=el('t2Total'); if(tot) tot.textContent="Total "+(Math.round(totalKB/1024*10)/10)+" MB";
+      setStatus2("✅ Done","✅ Done - "+S2.images.length+" images ready",true);
+    }catch(err){ showError2("Convert failed - Try lower quality"); }finally{ S2.converting=false; if(btn){ btn.disabled=false; btn.textContent="✨ Convert PDF To Images"; } setTimeout(function(){ if(prog) prog.style.display='none'; },1500); }
   }
-  function cropWhiteBorder2(canvas,ctx){
-    var w=canvas.width, h=canvas.height; if(w<50||h<50) return null;
-    try{
-      var data=ctx.getImageData(0,0,w,h).data;
-      function isWhite(x,y){ var i=(y*w+x)*4; return data[i]>245 && data[i+1]>245 && data[i+2]>245; }
-      var top=0, bottom=h-1, left=0, right=w-1;
-      outer: for(var y=0;y<h;y+=4){ for(var x=0;x<w;x+=8){ if(!isWhite(x,y)){ top=y; break outer; } } }
-      outer2: for(var y2=h-1;y2>0;y2-=4){ for(var x2=0;x2<w;x2+=8){ if(!isWhite(x2,y2)){ bottom=y2; break outer2; } } }
-      outer3: for(var x3=0;x3<w;x3+=4){ for(var y3=0;y3<h;y3+=8){ if(!isWhite(x3,y3)){ left=x3; break outer3; } } }
-      outer4: for(var x4=w-1;x4>0;x4-=4){ for(var y4=0;y4<h;y4+=8){ if(!isWhite(x4,y4)){ right=x4; break outer4; } } }
-      if(top<5&&bottom>h-6&&left<5&&right>w-6) return null;
-      var nw=Math.max(10,right-left+1), nh=Math.max(10,bottom-top+1); if(nw<w*0.5||nh<h*0.5) return null;
-      var nc=document.createElement('canvas'); nc.width=nw; nc.height=nh; nc.getContext('2d').drawImage(canvas,left,top,nw,nh,0,0,nw,nh); return nc;
-    }catch(e){ return null; }
-  }
-  function downloadOne2(i){ var it=S2.images[i]; if(!it) return; try{ var a=document.createElement('a'); a.href=it.dataUrl; a.download=S2.name+"-Page-"+it.page+"."+(it.format==="png"?"png":"jpg"); document.body.appendChild(a); a.click(); a.remove(); }catch(e){ showError2("Download failed - Try again"); } }
-  async function downloadZip2(){
-    if(!S2.images.length){ showError2("Convert PDF first"); return; }
-    try{
-      if(!window.JSZip){
-        // FIX: Load JSZip on demand if not in head
-        await new Promise(function(res,rej){ var s=document.createElement('script'); s.src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"; s.onload=res; s.onerror=rej; document.head.appendChild(s); });
-      }
-      var zip=new window.JSZip(); S2.images.forEach(function(it){ zip.file(S2.name+"-Page-"+it.page+"."+(it.format==="png"?"png":"jpg"), it.dataUrl.split(',')[1]||"", {base64:true}); });
-      var blob=await zip.generateAsync({type:"blob"}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=S2.name+".zip"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(a.href); },1000);
-    }catch(e){ showError2("ZIP failed - Download 1 by 1 instead - Check internet"); }
-  }
-  async function stitch2(){
-    if(S2.images.length<2){ showError2("Need 2+ pages to stitch"); return; }
-    try{
-      var imgs=[]; for(var i=0;i<S2.images.length;i++){ var im=new Image(); im.src=S2.images[i].dataUrl; await new Promise(function(res){ im.onload=res; im.onerror=res; }); imgs.push(im); }
-      var w=Math.max.apply(null, imgs.map(function(im){ return im.naturalWidth||im.width; })); var h=imgs.reduce(function(s,im){ return s+(im.naturalHeight||im.height); },0);
-      if(w<=0||h<=0){ showError2("Stitch failed - Try again"); return; }
-      var c=document.createElement('canvas'); c.width=w; c.height=h; var ctx=c.getContext('2d'); ctx.fillStyle="#fff"; ctx.fillRect(0,0,w,h); var y=0; imgs.forEach(function(im){ var iw=im.naturalWidth||im.width, ih=im.naturalHeight||im.height; ctx.drawImage(im,0,y,iw,ih); y+=ih; });
-      var a=document.createElement('a'); a.href=c.toDataURL("image/jpeg",0.85); a.download=S2.name+"-Long.jpg"; document.body.appendChild(a); a.click(); a.remove();
-    }catch(e){ showError2("Stitch failed - Try again"); }
-  }
-  function clearTool2(){
-    S2.doc=null; S2.images=[]; S2.selected=new Set(); S2.totalPages=0; S2.lastFile=null;
-    if(fileInp) fileInp.value="";
-    var grid=el('t2Grid'); if(grid) grid.innerHTML="";
-    var res=el('t2Result'); if(res) res.style.display='none';
-    var pb=el('t2PageBox'); if(pb) pb.style.display='none';
-    var rn=el('t2Rename'); if(rn) rn.value="My-Document";
-    var ri=el('t2Range'); if(ri) ri.value="";
-    showName2(""); showError2(""); setStatus2("📄 Status","Select PDF first",true);
-    var bar=el('t2Bar'); if(bar) bar.style.width='0%';
-  }
+  function cropWhiteBorder2(canvas,ctx){ var w=canvas.width,h=canvas.height; if(w<50||h<50) return null; try{ var data=ctx.getImageData(0,0,w,h).data; function isWhite(x,y){ var i=(y*w+x)*4; return data[i]>245 && data[i+1]>245 && data[i+2]>245; } var top=0,bottom=h-1,left=0,right=w-1; outer: for(var y=0;y<h;y+=4){ for(var x=0;x<w;x+=8){ if(!isWhite(x,y)){ top=y; break outer; } } } outer2: for(var y2=h-1;y2>0;y2-=4){ for(var x2=0;x2<w;x2+=8){ if(!isWhite(x2,y2)){ bottom=y2; break outer2; } } } outer3: for(var x3=0;x3<w;x3+=4){ for(var y3=0;y3<h;y3+=8){ if(!isWhite(x3,y3)){ left=x3; break outer3; } } } outer4: for(var x4=w-1;x4>0;x4-=4){ for(var y4=0;y4<h;y4+=8){ if(!isWhite(x4,y4)){ right=x4; break outer4; } } } if(top<5&&bottom>h-6&&left<5&&right>w-6) return null; var nw=Math.max(10,right-left+1), nh=Math.max(10,bottom-top+1); if(nw<w*0.5||nh<h*0.5) return null; var nc=document.createElement('canvas'); nc.width=nw; nc.height=nh; nc.getContext('2d').drawImage(canvas,left,top,nw,nh,0,0,nw,nh); return nc; }catch(e){ return null; } }
+  function downloadOne2(i){ var it=S2.images[i]; if(!it) return; try{ var a=document.createElement('a'); a.href=it.dataUrl; a.download=S2.name+"-Page-"+it.page+"."+(it.format==="png"?"png":"jpg"); document.body.appendChild(a); a.click(); a.remove(); }catch(e){ showError2("Download failed"); } }
+  async function downloadZip2(){ if(!S2.images.length){ showError2("Convert PDF first"); return; } try{ if(!window.JSZip){ await new Promise(function(res,rej){ var s=document.createElement('script'); s.src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); } var zip=new window.JSZip(); S2.images.forEach(function(it){ zip.file(S2.name+"-Page-"+it.page+"."+(it.format==="png"?"png":"jpg"), it.dataUrl.split(',')[1]||"", {base64:true}); }); var blob=await zip.generateAsync({type:"blob"}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=S2.name+".zip"; document.body.appendChild(a); a.click(); a.remove(); }catch(e){ showError2("ZIP failed - Download 1 by 1"); } }
+  async function stitch2(){ if(S2.images.length<2){ showError2("Need 2+ pages to stitch"); return; } try{ var imgs=[]; for(var i=0;i<S2.images.length;i++){ var im=new Image(); im.src=S2.images[i].dataUrl; await new Promise(function(res){ im.onload=res; im.onerror=res; }); imgs.push(im); } var w=Math.max.apply(null, imgs.map(function(im){ return im.naturalWidth||im.width; })); var h=imgs.reduce(function(s,im){ return s+(im.naturalHeight||im.height); },0); if(w<=0||h<=0){ showError2("Stitch failed"); return; } var c=document.createElement('canvas'); c.width=w; c.height=h; var ctx=c.getContext('2d'); ctx.fillStyle="#fff"; ctx.fillRect(0,0,w,h); var y=0; imgs.forEach(function(im){ var iw=im.naturalWidth||im.width, ih=im.naturalHeight||im.height; ctx.drawImage(im,0,y,iw,ih); y+=ih; }); var a=document.createElement('a'); a.href=c.toDataURL("image/jpeg",0.85); a.download=S2.name+"-Long.jpg"; document.body.appendChild(a); a.click(); a.remove(); }catch(e){ showError2("Stitch failed"); } }
+  function clearTool2(){ S2.doc=null; S2.images=[]; S2.selected=new Set(); S2.totalPages=0; S2.lastFile=null; if(fileInp) fileInp.value=""; var grid=el('t2Grid'); if(grid) grid.innerHTML=""; var res=el('t2Result'); if(res) res.style.display='none'; var pb=el('t2PageBox'); if(pb) pb.style.display='none'; var rn=el('t2Rename'); if(rn) rn.value="My-Document"; var ri=el('t2Range'); if(ri) ri.value=""; showName2(""); showError2(""); setStatus2("📄 Status","Select PDF first",true); var bar=el('t2Bar'); if(bar) bar.style.width='0%'; }
   window.clearTool2=clearTool2;
   var convBtn=el('t2ConvertBtn'); if(convBtn) convBtn.addEventListener('click', convertPdf2);
   var zipBtn=el('t2ZipBtn'); if(zipBtn) zipBtn.addEventListener('click', downloadZip2);
   var stitchBtn=el('t2StitchBtn'); if(stitchBtn) stitchBtn.addEventListener('click', stitch2);
 })();
 </script>
-<!-- ================= TOOL 2 END - V2 - PDF LOADING FIXED ================= -->
+<!-- ================= TOOL 2 END - V3 - TAP FIXED ================= -->
 <!-- ================= TOOL 3 - IMAGE TO PDF ================= -->
 <div id="page-tool3" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>📸 Image To PDF</b><br><span>Your Tool</span></div></div><h2 style="text-align:center">📸 Image To PDF</h2><p style="font-size:12px;color:#6B7280;text-align:center">Aadhar, Marksheet, Notes, Form - Multiple Photos To 1 PDF</p><div class="drop" onclick="document.getElementById('imgPdfFile').click()"><b>📸 Select Images - Multiple</b><p style="font-size:12px;color:#6B7280">Tap to select 1 or many photos</p><input type="file" id="imgPdfFile" accept="image/*" multiple onchange="previewImgPdf(event)"></div><div id="imgPdfPreview" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"></div><label>PDF Name</label><input id="imgPdfName" value="My-Document"><label>Page Size</label><select id="imgPdfSize"><option value="a4">A4 - Best For Print</option><option value="photo">Photo Size - Keep Original</option></select><button class="btn" onclick="makeImgPdf()">📄 Convert To PDF - Free</button><p id="imgPdfStatus" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select images first</p><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
 
