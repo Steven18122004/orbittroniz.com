@@ -2045,8 +2045,434 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 </script>
 <!-- ================= TOOL 5 END - DOWNLOAD BUG FIXED ================= -->
 <!-- ================= TOOL 6 - IMAGE COMPRESS ================= -->
-<div id="page-tool6" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>🗜️ Image Compress</b><br><span>Your Tool</span></div></div><h2 style="text-align:center">🗜️ Image Compress</h2><p style="font-size:12px;color:#6B7280;text-align:center">Reduce Photo Size - Keep Quality - For WhatsApp, Form</p><div class="drop" onclick="document.getElementById('compFile').click()"><b>📸 Select Image</b><p style="font-size:12px;color:#6B7280">Example: 3 MB → 300 KB</p><input type="file" id="compFile" accept="image/*" onchange="compressImage(event)"></div><label>Target Quality</label><select id="compQ"><option value="0.9">High - 90%</option><option value="0.7" selected>Medium - 70% - Best</option><option value="0.4">Low - 40% - Smallest</option></select><p id="compInfo" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select image first</p><img id="compPreview" style="width:100%;border-radius:12px;margin-top:10px;display:none"><button class="btn2 green" style="width:100%;margin-top:10px" onclick="downloadCompressed()">⬇️ Download Compressed</button><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
+<!-- ================= TOOL 6 START - V2 - ALL BUGS FIXED - IMAGE COMPRESSOR ================= -->
+<!-- PASTE THIS ONLY - REPLACE OLD TOOL 6 COMPLETELY -->
 
+<div id="page-tool6" class="tool-page" style="display:none">
+<div id="tool6">
+<style>
+#tool6{font-family:system-ui,Arial,sans-serif}
+#tool6 *{box-sizing:border-box}
+#tool6 .card{background:#fff;border:1.5px solid #EDE9FE;border-radius:22px;padding:16px;box-shadow:0 12px 24px rgba(0,0,0,.06)}
+#tool6 .topbar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-bottom:1px solid #EDE9FE;margin:-16px -16px 12px -16px;border-radius:22px 22px 0 0;position:sticky;top:0;z-index:20}
+#tool6 .topbar button{background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer;font-size:13px}
+#tool6 label{font-size:12px;font-weight:900;display:block;margin-top:13px}
+#tool6 input,#tool6 select{width:100%;padding:13px;border-radius:14px;border:1.5px solid #E5E7EB;background:#F9FAFB;font-size:14px;margin-top:6px}
+#tool6 .btn{width:100%;padding:15px;border:none;border-radius:16px;font-weight:900;cursor:pointer;margin-top:12px;color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);font-size:14px;touch-action:manipulation}
+#tool6 .btn:disabled{opacity:.6}
+#tool6 .btn2{flex:1;padding:11px;border-radius:14px;border:1.5px solid #EDE9FE;background:#fff;font-weight:800;cursor:pointer;font-size:12.5px;touch-action:manipulation}
+#tool6 .btn2.primary{background:#111827;color:#fff;border:none}
+#tool6 .btn2.green{background:#16A34A;color:#fff;border:none}
+#tool6 .btn2.red{background:#DC2626;color:#fff;border:none}
+#tool6 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:9px 12px;border-radius:20px;font-size:12px;margin:7px 7px 0 0;cursor:pointer;font-weight:700;touch-action:manipulation}
+#tool6 .chip.active{background:#111827;color:#fff;border:none}
+#tool6 .toggle-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #EDE9FE;gap:8px}
+#tool6 .toggle{width:52px;height:28px;background:#22C55E;border-radius:30px;position:relative;cursor:pointer;flex-shrink:0;touch-action:manipulation}
+#tool6 .toggle.off{background:#9CA3AF}
+#tool6 .toggle::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%}
+#tool6 .toggle.off::after{left:27px}
+#tool6 .drop{position:relative;border:2px dashed #7C3AED;background:linear-gradient(135deg,#F8F9FF,#FDF2F8);border-radius:18px;padding:20px;text-align:center;margin-top:12px;overflow:hidden;cursor:pointer}
+#tool6 .drop-content{position:relative;z-index:1;pointer-events:none}
+#tool6 .drop-content *{pointer-events:none}
+#tool6 .file-input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:2}
+#tool6 .big-btn{display:block;width:100%;padding:14px;border:none;border-radius:14px;background:#111827;color:#fff;font-weight:900;font-size:14px;cursor:pointer;margin-top:10px;touch-action:manipulation}
+#tool6 .progress{height:10px;background:#E5E7EB;border-radius:20px;overflow:hidden;margin-top:12px;display:none}
+#tool6 .progress i{display:block;height:100%;background:linear-gradient(90deg,#7C3AED,#EC4899);width:0%}
+#tool6 .status-box{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:10px;margin-top:10px;font-size:12px;line-height:1.6;display:none}
+#tool6 .error-box{background:#FEF2F2;border:1px solid #FECACA;border-radius:12px;padding:12px;margin-top:10px;font-size:12px;line-height:1.7;display:none;color:#991B1B}
+#tool6 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+#tool6 .img-card{background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:10px;text-align:center;position:relative}
+#tool6 .img-card img{width:100%;border-radius:10px;max-height:150px;object-fit:contain;background:#fff}
+#tool6 .img-card .num{position:absolute;top:6px;left:6px;background:#111827;color:#fff;font-size:11px;font-weight:900;padding:4px 8px;border-radius:20px;z-index:2}
+#tool6 .img-card .del{position:absolute;top:6px;right:6px;background:#DC2626;color:#fff;border:none;width:26px;height:26px;border-radius:50%;font-weight:900;cursor:pointer;z-index:2}
+#tool6 .range-row{display:flex;align-items:center;gap:10px;margin-top:6px}
+#tool6 .range-row input[type="range"]{flex:1;padding:0}
+#tool6 .ok-box{background:#F0FDF4;border:2px solid #16A34A;border-radius:16px;padding:14px;margin-top:12px;text-align:center;display:none}
+#tool6 .dl-btn{width:100%;padding:16px;border:none;border-radius:16px;background:#16A34A;color:#fff;font-weight:900;font-size:16px;cursor:pointer;margin-top:10px}
+#tool6 .result-item{display:flex;gap:8px;align-items:center;background:#fff;border:1px solid #EDE9FE;border-radius:12px;padding:10px;margin-top:8px}
+#tool6 .result-item img{width:56px;height:56px;object-fit:cover;border-radius:8px}
+</style>
+
+<div id="tool6"><div class="card">
+<div class="topbar"><button type="button" onclick="goHomePageTool6()">← Back</button><div><b>🗜️ Image Compressor</b><br><span style="font-size:11px;color:#6B7280">Fixed V2 • Bulk 20 • To KB • Resize • Convert</span></div><span style="margin-left:auto;background:#DCFCE7;color:#166534;font-size:11px;font-weight:900;padding:6px 10px;border-radius:20px">● FIXED V2</span></div>
+
+<h2 style="text-align:center">🗜️ Image Compressor - Fixed V2</h2>
+<p style="font-size:12px;color:#6B7280;text-align:center">2 MB → 100 KB • Bulk 20 • JPG ↔ PNG ↔ WebP</p>
+
+<label for="t6File" class="drop">
+<input type="file" id="t6File" class="file-input" accept="image/*,.jpg,.jpeg,.png,.webp" multiple>
+<div class="drop-content"><div style="font-size:32px">🖼️</div><b>Tap To Select Photos</b><p style="font-size:12px;color:#6B7280;margin-top:4px">Up to 20 • JPG, PNG, WebP • Max 20 MB each</p><div style="display:inline-block;margin-top:8px;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;padding:10px 18px;border-radius:20px;font-weight:900">📂 Choose Photos →</div></div>
+</label>
+<button type="button" class="big-btn" id="t6BigBtn">📂 TAP HERE TO SELECT PHOTOS - 2nd Way</button>
+<div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t6CameraBtn">📷 Camera</button><button type="button" class="btn2" id="t6SampleBtn">✨ Try Sample</button></div>
+
+<div class="status-box" id="t6StatusBox"><b id="t6StatusTitle">📄 Status</b><br><span id="t6StatusText">Select photos first</span></div>
+<div class="error-box" id="t6ErrorBox"><b>⚠️ Error:</b><br><span id="t6ErrorText"></span></div>
+
+<div id="t6ListBox" style="display:none;margin-top:12px">
+<div style="display:flex;justify-content:space-between"><b>Your Photos - <span id="t6Count">0</span></b><span style="font-size:11px;color:#6B7280">Tap ✕ to remove</span></div>
+<div class="grid" id="t6Grid"></div>
+<div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t6AddMoreBtn">➕ Add More</button><button type="button" class="btn2 red" id="t6ClearBtn">🗑️ Clear All</button></div>
+</div>
+
+<label>Preset</label>
+<div id="t6PresetRow"><span class="chip active" data-preset="whatsapp">💬 WhatsApp - Under 200 KB</span><span class="chip" data-preset="form">📝 Form - Under 100 KB</span><span class="chip" data-preset="instagram">📷 Instagram - 1080px</span><span class="chip" data-preset="passport">🪪 Passport - 2x2</span><span class="chip" data-preset="custom">⚙️ Custom</span></div>
+
+<label>Target Size</label>
+<div id="t6TargetRow"><span class="chip" data-target="50">50 KB</span><span class="chip" data-target="100">100 KB - Form</span><span class="chip active" data-target="200">200 KB - WhatsApp</span><span class="chip" data-target="500">500 KB</span><span class="chip" data-target="0">No Target</span></div>
+
+<label>Quality - <span id="t6QualityLabel">80%</span></label>
+<div class="range-row"><span style="font-size:12px">30%</span><input type="range" id="t6Quality" min="30" max="95" value="80"><span style="font-size:12px">95%</span></div>
+
+<label>Resize</label>
+<div style="display:flex;gap:8px"><div style="flex:1"><label style="margin-top:0">Width (px)</label><input type="number" id="t6Width" placeholder="Example: 1080"></div><div style="flex:1"><label style="margin-top:0">Height (px)</label><input type="number" id="t6Height" placeholder="Empty = Auto"></div></div>
+<div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="chip" data-resize="1080">1080px</button><button type="button" class="chip" data-resize="800">800px</button><button type="button" class="chip" data-resize="512">512px</button><button type="button" class="chip" data-resize="0">Original</button></div>
+
+<div style="background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:4px 12px;margin-top:12px">
+<div class="toggle-row"><div><b>🔒 Keep Ratio</b></div><div class="toggle" id="t6RatioToggle"></div></div>
+<div class="toggle-row"><div><b>💧 Watermark</b><br><span id="t6WmText" style="font-size:11px;color:#6B7280">ON</span></div><div class="toggle" id="t6WmToggle"></div></div>
+<div class="toggle-row" style="border:none"><div><b>✂️ Crop To Square</b></div><div class="toggle off" id="t6SquareToggle"></div></div>
+</div>
+
+<label>Convert Format</label>
+<div id="t6FormatRow"><span class="chip active" data-format="keep">Keep Original</span><span class="chip" data-format="jpeg">→ JPG - Smallest</span><span class="chip" data-format="png">→ PNG - Transparent / HD</span><span class="chip" data-format="webp">→ WebP - Smallest + HD</span></div>
+
+<label>File Name Prefix</label>
+<input type="text" id="t6Rename" value="Compressed">
+
+<button type="button" class="btn" id="t6CompressBtn">✨ Compress All Photos</button>
+<div class="progress" id="t6Progress"><i id="t6Bar"></i></div>
+<p id="t6Status" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select photos first</p>
+
+<div class="ok-box" id="t6DownloadBox">
+<b style="color:#166534;font-size:16px">✅ Photos Compressed & Ready!</b><br>
+<span id="t6ResultInfo" style="font-size:12px;color:#166534"></span><br>
+<button type="button" class="dl-btn" id="t6DownloadAllBtn">⬇️ DOWNLOAD ALL PHOTOS</button>
+<p style="font-size:11px;color:#6B7280;margin-top:8px">If Chrome asks "Allow multiple downloads?" → Tap <b>Allow</b><br>Or download one by one below - Each has a link too</p>
+<div id="t6ResultList"></div>
+</div>
+
+<div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2" onclick="clearTool6()">🗑️ New Compress</button><button type="button" class="btn2 primary" onclick="goHomePageTool6()">← Back</button></div>
+</div></div>
+</div>
+</div>
+
+<script>
+(function(){
+  window.goHomePageTool6 = window.goHomePageTool6 || function(){
+    if(typeof window.goHomePage === "function"){ window.goHomePage(); return; }
+    var p=document.getElementById('page-tool6'); if(p) p.style.display='none';
+    var h=document.getElementById('homeView'); if(h) h.style.display='block';
+    window.scrollTo(0,0);
+  };
+  function el(id){ return document.getElementById(id); }
+  function getWm(){ try{ return {on: localStorage.getItem('orbit_watermark')!=='false', txt: localStorage.getItem('orbit_watermark_text')||"Made With Orbittroniz.com"}; }catch(e){ return {on:true, txt:"Made With Orbittroniz.com"}; } }
+  function updateWm(){ var w=getWm(); var t=el('t6WmText'); if(t) t.textContent=(w.on?"ON - ":"OFF - ")+w.txt; var tg=el('t6WmToggle'); if(tg) tg.classList.toggle('off',!w.on); }
+  function setStatus(title,msg){ var b=el('t6StatusBox'); if(b) b.style.display='block'; var tt=el('t6StatusTitle'); if(tt) tt.textContent=title; var tx=el('t6StatusText'); if(tx) tx.textContent=msg; var st=el('t6Status'); if(st) st.textContent=msg; }
+  function showError(msg){ var b=el('t6ErrorBox'); if(!b) return; if(!msg){ b.style.display='none'; return; } b.style.display='block'; var tx=el('t6ErrorText'); if(tx) tx.textContent=msg; }
+  function showErrorAuto(msg){ showError(msg); setTimeout(function(){ showError(""); },6000); }
+  function fmt(bytes){ if(bytes<1024) return Math.round(bytes)+" B"; if(bytes<1024*1024) return Math.round(bytes/1024)+" KB"; return (bytes/1024/1024).toFixed(2)+" MB"; }
+  function revoke(u){ if(u){ try{ URL.revokeObjectURL(u); }catch(e){} } }
+  // FIX 6: Check WebP support once
+  function supportsWebP(){
+    try{ var c=document.createElement('canvas'); c.width=1; c.height=1; return c.toDataURL("image/webp").indexOf("data:image/webp")===0; }catch(e){ return false; }
+  }
+  var WEBP_OK=supportsWebP();
+
+  var S={files:[], targetKB:200, format:"keep", ratio:true, square:false, busy:false, results:[]};
+
+  function setTargetUI(v){ document.querySelectorAll('#t6TargetRow .chip').forEach(function(x){ x.classList.toggle('active', parseInt(x.getAttribute('data-target'),10)===v); }); }
+  function setQualityUI(v){ el('t6Quality').value=v; el('t6QualityLabel').textContent=v+"%"; }
+  function setFormatUI(f){ S.format=f; document.querySelectorAll('#t6FormatRow .chip').forEach(function(x){ x.classList.toggle('active', x.getAttribute('data-format')===f); }); }
+  function syncToggles(){ el('t6RatioToggle').classList.toggle('off',!S.ratio); el('t6SquareToggle').classList.toggle('off',!S.square); }
+
+  document.getElementById('t6PresetRow').addEventListener('click', function(e){
+    var c=e.target.closest('.chip'); if(!c) return;
+    document.querySelectorAll('#t6PresetRow .chip').forEach(function(x){ x.classList.remove('active'); }); c.classList.add('active');
+    var p=c.getAttribute('data-preset');
+    if(p==="whatsapp"){ S.targetKB=200; setTargetUI(200); setQualityUI(80); setFormatUI("jpeg"); el('t6Width').value=""; el('t6Height').value=""; S.square=false; syncToggles(); }
+    if(p==="form"){ S.targetKB=100; setTargetUI(100); setQualityUI(75); setFormatUI("jpeg"); el('t6Width').value=800; el('t6Height').value=""; S.square=false; syncToggles(); }
+    if(p==="instagram"){ S.targetKB=0; setTargetUI(0); setQualityUI(85); setFormatUI("jpeg"); el('t6Width').value=1080; el('t6Height').value=1080; S.square=true; syncToggles(); }
+    if(p==="passport"){ S.targetKB=100; setTargetUI(100); setQualityUI(85); setFormatUI("jpeg"); el('t6Width').value=600; el('t6Height').value=600; S.square=true; syncToggles(); }
+    if(p==="custom"){ setStatus("⚙️ Custom","Change settings below"); return; }
+    setStatus("✅ Preset Applied","Preset '"+p+"' - Tap Compress All");
+  });
+  document.getElementById('t6TargetRow').addEventListener('click', function(e){
+    var c=e.target.closest('.chip'); if(!c) return;
+    S.targetKB=parseInt(c.getAttribute('data-target'),10)||0;
+    document.querySelectorAll('#t6TargetRow .chip').forEach(function(x){ x.classList.remove('active'); }); c.classList.add('active');
+    // FIX 5: Warn if PNG + small target
+    if(S.format==="png" && S.targetKB>0 && S.targetKB<=200) showErrorAuto("⚠️ PNG cannot go to "+S.targetKB+" KB - PNG is lossless. Use JPG for small size.");
+  });
+  document.getElementById('t6FormatRow').addEventListener('click', function(e){
+    var c=e.target.closest('.chip'); if(!c) return;
+    var f=c.getAttribute('data-format');
+    if(f==="webp" && !WEBP_OK){ showErrorAuto("WebP not supported on this phone - Using JPG instead"); setFormatUI("jpeg"); return; }
+    setFormatUI(f);
+    if(f==="png" && S.targetKB>0 && S.targetKB<=200) showErrorAuto("⚠️ PNG cannot go to "+S.targetKB+" KB - Use JPG for small size.");
+  });
+  el('t6Quality').addEventListener('input', function(){ el('t6QualityLabel').textContent=el('t6Quality').value+"%"; });
+  document.querySelectorAll('#tool6 [data-resize]').forEach(function(ch){
+    ch.addEventListener('click', function(){
+      var v=parseInt(ch.getAttribute('data-resize'),10)||0;
+      if(v===0){ el('t6Width').value=""; el('t6Height').value=""; } else { el('t6Width').value=v; el('t6Height').value=""; }
+    });
+  });
+  el('t6RatioToggle').addEventListener('click', function(){ S.ratio=!S.ratio; syncToggles(); });
+  el('t6SquareToggle').addEventListener('click', function(){ S.square=!S.square; syncToggles(); });
+  el('t6WmToggle').addEventListener('click', function(){ try{ localStorage.setItem('orbit_watermark', getWm().on ? 'false':'true'); }catch(e){} updateWm(); });
+  updateWm(); syncToggles();
+
+  var fileInp=el('t6File');
+  function openPicker(){ var f=document.createElement('input'); f.type='file'; f.accept='image/*,.jpg,.jpeg,.png,.webp'; f.multiple=true; f.onchange=function(){ if(f.files && f.files.length>0) handleFiles(f.files); }; f.click(); }
+  el('t6BigBtn').addEventListener('click', function(e){ e.preventDefault(); openPicker(); });
+  el('t6AddMoreBtn').addEventListener('click', function(e){ e.preventDefault(); openPicker(); });
+  el('t6CameraBtn').addEventListener('click', function(){ var ci=document.createElement('input'); ci.type='file'; ci.accept='image/*'; ci.setAttribute('capture','environment'); ci.onchange=function(){ if(ci.files && ci.files[0]) handleFiles(ci.files); }; ci.click(); });
+  el('t6SampleBtn').addEventListener('click', function(){
+    var c=document.createElement('canvas'); c.width=1200; c.height=800; var ctx=c.getContext('2d');
+    var g=ctx.createLinearGradient(0,0,1200,800); g.addColorStop(0,"#7C3AED"); g.addColorStop(1,"#EC4899"); ctx.fillStyle=g; ctx.fillRect(0,0,1200,800);
+    ctx.fillStyle="#fff"; ctx.font="bold 64px Arial"; ctx.textAlign="center"; ctx.fillText("SAMPLE",600,400);
+    c.toBlob(function(blob){ if(!blob) return; var f=new File([blob], "Sample.jpg", {type:"image/jpeg"}); handleFiles([f]); }, "image/jpeg", 0.95);
+  });
+  if(fileInp) fileInp.addEventListener('change', function(e){ var fs=e.target.files; if(fs && fs.length>0) handleFiles(fs); fileInp.value=""; });
+
+  function handleFiles(files){
+    showError("");
+    var arr=Array.from(files);
+    if(S.files.length + arr.length > 20){ showErrorAuto("Max 20 photos - Adding first "+(20-S.files.length)+" only"); arr=arr.slice(0, 20-S.files.length); if(arr.length===0) return; }
+    var added=0, heic=0, dup=0;
+    arr.forEach(function(f){
+      var ln=f.name.toLowerCase();
+      if(ln.indexOf('.heic')>-1 || ln.indexOf('.heif')>-1){ heic++; return; }
+      if(f.size>20*1024*1024){ showErrorAuto(f.name+" too big - Max 20 MB - Skipped"); return; }
+      if(!f.type || f.type.indexOf('image')===-1){ if(ln.indexOf('.jpg')===-1 && ln.indexOf('.jpeg')===-1 && ln.indexOf('.png')===-1 && ln.indexOf('.webp')===-1) return; }
+      // FIX 8: Duplicate check - Same name + same size = duplicate
+      var isDup=S.files.some(function(o){ return o.name===f.name && o.size===f.size; });
+      if(isDup){ dup++; return; }
+      var previewUrl=URL.createObjectURL(f);
+      S.files.push({file:f, name:f.name, size:f.size, previewUrl:previewUrl});
+      added++;
+    });
+    if(heic>0) showErrorAuto(heic+" HEIC skipped - Save as JPG in Gallery, then select.");
+    if(dup>0) showErrorAuto(dup+" duplicate photo(s) skipped - Already added.");
+    if(added===0 && S.files.length===0){ showErrorAuto("No valid photos - Select JPG / PNG"); return; }
+    renderGrid();
+    var total=S.files.reduce(function(a,b){ return a+b.size; },0);
+    setStatus("✅ Photos Loaded","✅ "+S.files.length+" photos - Total "+fmt(total)+" - Tap Compress All");
+  }
+
+  function renderGrid(){
+    var box=el('t6ListBox'); if(box) box.style.display = S.files.length>0 ? 'block' : 'none';
+    el('t6Count').textContent=S.files.length;
+    var grid=el('t6Grid'); grid.innerHTML="";
+    S.files.forEach(function(obj, idx){
+      var card=document.createElement('div'); card.className='img-card';
+      var num=document.createElement('div'); num.className='num'; num.textContent=idx+1;
+      var del=document.createElement('button'); del.className='del'; del.type='button'; del.textContent='×';
+      // FIX 10: Revoke preview URL on remove
+      del.addEventListener('click', function(){ revoke(obj.previewUrl); S.files.splice(idx,1); renderGrid(); });
+      var img=document.createElement('img'); img.src=obj.previewUrl; img.alt='Photo '+(idx+1);
+      var nm=document.createElement('div'); nm.style.cssText="font-size:11px;color:#6B7280;margin-top:6px"; nm.textContent=obj.name.length>22 ? obj.name.slice(0,22)+'...' : obj.name;
+      var meta=document.createElement('div'); meta.style.cssText="font-size:11px;font-weight:800;margin-top:2px"; meta.textContent=fmt(obj.size);
+      card.appendChild(num); card.appendChild(del); card.appendChild(img); card.appendChild(nm); card.appendChild(meta);
+      grid.appendChild(card);
+    });
+  }
+  el('t6ClearBtn').addEventListener('click', function(){ clearAll6(); });
+
+  function clearResults6(){
+    // FIX 4: Revoke old result blob URLs
+    S.results.forEach(function(r){ revoke(r.blobUrl); });
+    S.results=[];
+  }
+
+  // FIX 3: Load with EXIF orientation - iPhone photos stay upright
+  async function loadBitmap(file){
+    try{
+      if(window.createImageBitmap){
+        var bmp=await createImageBitmap(file, {imageOrientation:"from-image"});
+        return {source:bmp, w:bmp.width, h:bmp.height, isBitmap:true};
+      }
+    }catch(e){}
+    // Fallback - Old browser - Use Image
+    return new Promise(function(resolve, reject){
+      var url=URL.createObjectURL(file);
+      var im=new Image();
+      im.onload=function(){ resolve({source:im, w:im.naturalWidth||im.width, h:im.naturalHeight||im.height, isBitmap:false, url:url}); };
+      im.onerror=function(){ revoke(url); reject(new Error("Image load failed")); };
+      im.src=url;
+    });
+  }
+
+  function canvasToBlob(canvas, mime, quality){
+    return new Promise(function(resolve){
+      // FIX 2: Use toBlob, not fetch(dataURL) - Works for large photos
+      if(canvas.toBlob){ canvas.toBlob(function(b){ resolve(b); }, mime, quality); }
+      else { var url=canvas.toDataURL(mime, quality); fetch(url).then(function(r){ return r.blob(); }).then(resolve).catch(function(){ resolve(null); }); }
+    });
+  }
+  function drawToCanvas(source, origW, origH, newW, newH, isPng){
+    var c=document.createElement('canvas'); c.width=newW; c.height=newH; var ctx=c.getContext('2d');
+    // FIX 1: PNG = No white fill, keep transparency. JPG/WebP = White fill.
+    if(!isPng){ ctx.fillStyle="#ffffff"; ctx.fillRect(0,0,newW,newH); }
+    else { ctx.clearRect(0,0,newW,newH); }
+    if(S.square){ var s=Math.min(origW, origH); ctx.drawImage(source, Math.floor((origW-s)/2), Math.floor((origH-s)/2), s, s, 0, 0, newW, newH); }
+    else { ctx.drawImage(source, 0, 0, newW, newH); }
+    return {canvas:c, ctx:ctx};
+  }
+
+  async function compressOne(obj){
+    var loaded=await loadBitmap(obj.file);
+    var source=loaded.source, origW=loaded.w, origH=loaded.h;
+    try{
+      var outFormat=S.format;
+      if(outFormat==="keep"){ if(obj.file.type && obj.file.type.indexOf('png')>-1) outFormat="png"; else if(obj.file.type && obj.file.type.indexOf('webp')>-1) outFormat="webp"; else outFormat="jpeg"; }
+      // FIX 6: WebP fallback
+      if(outFormat==="webp" && !WEBP_OK) outFormat="jpeg";
+      var isPng=(outFormat==="png");
+      var mime=isPng ? "image/png" : outFormat==="webp" ? "image/webp" : "image/jpeg";
+      var ext=isPng ? "png" : outFormat==="webp" ? "webp" : "jpg";
+      var targetW=parseInt(el('t6Width').value||"",10)||0;
+      var targetH=parseInt(el('t6Height').value||"",10)||0;
+      var newW=origW, newH=origH;
+      if(S.square){
+        var side=Math.min(origW, origH);
+        newW=targetW||side; newH=targetH||targetW||side;
+        if(targetH && !targetW) newW=targetH;
+      } else {
+        if(targetW && !targetH && S.ratio){ newW=targetW; newH=Math.max(1, Math.round(origH*(targetW/origW))); }
+        else if(targetH && !targetW && S.ratio){ newH=targetH; newW=Math.max(1, Math.round(origW*(targetH/origH))); }
+        else if(targetW && targetH){ newW=targetW; newH=targetH; }
+        if(newW>origW || newH>origH){ var sc=Math.min(origW/newW, origH/newH, 1); newW=Math.max(1, Math.round(newW*sc)); newH=Math.max(1, Math.round(newH*sc)); }
+      }
+      newW=Math.max(1, Math.floor(newW)); newH=Math.max(1, Math.floor(newH));
+      // FIX 9: Cap before draw
+      var maxDim=Math.max(newW, newH);
+      if(maxDim>2500){ var sc2=2500/maxDim; newW=Math.floor(newW*sc2); newH=Math.floor(newH*sc2); }
+      if(newW<1 || newH<1 || newW>5000 || newH>5000) throw new Error("Invalid size");
+
+      var quality=parseFloat(el('t6Quality').value||"80")/100;
+      async function makeBlob(q, w, h){
+        var d=drawToCanvas(source, origW, origH, w, h, isPng);
+        var wm=getWm();
+        if(wm.on && !isPng){ d.ctx.fillStyle="rgba(120,120,120,0.7)"; d.ctx.font=Math.max(10, Math.floor(w*0.02))+"px Arial"; d.ctx.textAlign="right"; d.ctx.textBaseline="bottom"; d.ctx.fillText(wm.txt, w-8, h-6); }
+        var blob=await canvasToBlob(d.canvas, mime, q);
+        d.canvas.width=0; d.canvas.height=0;
+        return blob;
+      }
+      var blob=await makeBlob(quality, newW, newH);
+      if(!blob) throw new Error("Canvas failed");
+      var size=blob.size;
+      if(S.targetKB>0 && !isPng && size>S.targetKB*1024){
+        var targetBytes=S.targetKB*1024;
+        var low=0.30, high=quality, bestBlob=blob, bestSize=size;
+        for(var i=0;i<6;i++){
+          var mid=(low+high)/2;
+          var tryBlob=await makeBlob(mid, newW, newH);
+          if(!tryBlob) break;
+          var trySize=tryBlob.size;
+          if(trySize<=targetBytes){ bestBlob=tryBlob; bestSize=trySize; low=mid; }
+          else { high=mid; }
+          if(Math.abs(trySize-targetBytes) < targetBytes*0.08){ bestBlob=tryBlob; bestSize=trySize; break; }
+        }
+        var shrink=0, curW=newW, curH=newH;
+        while(bestSize>targetBytes && shrink<3){
+          shrink++; curW=Math.max(1, Math.floor(curW*0.8)); curH=Math.max(1, Math.floor(curH*0.8));
+          var shrinkBlob=await makeBlob(0.6, curW, curH);
+          if(!shrinkBlob) break;
+          bestBlob=shrinkBlob; bestSize=shrinkBlob.size; newW=curW; newH=curH;
+        }
+        blob=bestBlob; size=bestSize;
+      }
+      var blobUrl=URL.createObjectURL(blob);
+      var baseName=obj.name.replace(/\.[^.]+$/, "");
+      var prefix=(el('t6Rename').value||"Compressed").replace(/[^a-zA-Z0-9-_ ]/g,"").trim() || "Compressed";
+      var fileName=prefix+"-"+baseName+"."+ext;
+      return {name:fileName, blob:blob, blobUrl:blobUrl, size:size, origSize:obj.size, w:newW, h:newH};
+    } finally {
+      try{ if(loaded.isBitmap && loaded.source.close) loaded.source.close(); }catch(e){}
+      if(loaded.url) revoke(loaded.url);
+    }
+  }
+
+  async function compressAll(){
+    if(S.busy) return;
+    if(S.files.length===0){ showErrorAuto("Select photos first - Tap Choose Photos"); return; }
+    S.busy=true;
+    var btn=el('t6CompressBtn'); btn.disabled=true; btn.textContent="⏳ Compressing... Please Wait";
+    var prog=el('t6Progress'); prog.style.display='block'; el('t6Bar').style.width='0%';
+    showError("");
+    // FIX 4: Clear old results + revoke old blobs
+    clearResults6();
+    el('t6DownloadBox').style.display='none';
+    el('t6ResultList').innerHTML="";
+    try{
+      var totalOrig=0, totalNew=0;
+      for(var i=0;i<S.files.length;i++){
+        setStatus("🔄 Compressing...","Compressing Photo "+(i+1)+"/"+S.files.length);
+        try{
+          var res=await compressOne(S.files[i]);
+          if(res){ S.results.push(res); totalOrig+=res.origSize; totalNew+=res.size; }
+        }catch(e){ continue; }
+        el('t6Bar').style.width=Math.round(((i+1)/S.files.length)*100)+"%";
+        await new Promise(function(r){ setTimeout(r,10); });
+      }
+      if(S.results.length===0){ showErrorAuto("Compression failed - Try other photos"); }
+      else {
+        var saved=totalOrig-totalNew; var pct=totalOrig>0 ? Math.round((saved/totalOrig)*100) : 0;
+        el('t6DownloadBox').style.display='block';
+        el('t6ResultInfo').textContent=S.results.length+" photos - "+fmt(totalOrig)+" → "+fmt(totalNew)+" - Saved "+fmt(saved)+" ("+pct+"%) - Tap DOWNLOAD ALL below";
+        setStatus("✅ Compressed","✅ "+S.results.length+" photos done - Saved "+pct+"% - Tap DOWNLOAD ALL");
+        var listEl=el('t6ResultList');
+        S.results.forEach(function(r){
+          var div=document.createElement('div'); div.className='result-item';
+          var img=document.createElement('img'); img.src=r.blobUrl;
+          var info=document.createElement('div'); info.style.cssText="flex:1;font-size:12px;line-height:1.5"; info.innerHTML="<b>"+r.name+"</b><br>"+r.w+" x "+r.h+" • "+fmt(r.origSize)+" → <b style='color:#16A34A'>"+fmt(r.size)+"</b>";
+          // FIX 7: Real link as fallback - If button blocked, tap link
+          var link=document.createElement('a'); link.href=r.blobUrl; link.download=r.name; link.style.cssText="font-size:11px;color:#2563EB;display:block;margin-top:2px"; link.textContent="Tap link if button fails";
+          link.addEventListener('click', function(){ setStatus("✅ Download Started","Downloading "+r.name); });
+          info.appendChild(link);
+          var dl=document.createElement('button'); dl.type='button'; dl.className='btn2 green'; dl.style.cssText="flex:none;padding:8px 12px"; dl.textContent="⬇️ Download";
+          dl.addEventListener('click', function(){ var a=document.createElement('a'); a.href=r.blobUrl; a.download=r.name; document.body.appendChild(a); a.click(); setTimeout(function(){ a.remove(); },500); });
+          div.appendChild(img); div.appendChild(info); div.appendChild(dl);
+          listEl.appendChild(div);
+        });
+        el('t6DownloadBox').scrollIntoView({behavior:"smooth", block:"center"});
+      }
+    }catch(e){ showErrorAuto("Compression failed - "+(e && e.message || "")); }
+    finally{
+      S.busy=false; btn.disabled=false; btn.textContent="✨ Compress All Photos";
+      setTimeout(function(){ prog.style.display='none'; },1000);
+    }
+  }
+  el('t6CompressBtn').addEventListener('click', compressAll);
+
+  el('t6DownloadAllBtn').addEventListener('click', function(){
+    if(S.results.length===0){ showErrorAuto("Compress first"); return; }
+    // FIX 7: 800ms gap, one by one - Chrome allows if user allows multiple downloads
+    S.results.forEach(function(r, idx){
+      setTimeout(function(){
+        var a=document.createElement('a'); a.href=r.blobUrl; a.download=r.name; document.body.appendChild(a); a.click(); setTimeout(function(){ a.remove(); },500);
+      }, idx*800);
+    });
+    setStatus("✅ Download Started","✅ Download started - If Chrome asks 'Allow multiple downloads?' → Tap Allow - "+S.results.length+" photos");
+  });
+
+  function clearAll6(){
+    S.files.forEach(function(o){ revoke(o.previewUrl); });
+    clearResults6();
+    S.files=[];
+    if(fileInp) fileInp.value="";
+    renderGrid();
+    el('t6DownloadBox').style.display='none';
+    el('t6ResultList').innerHTML="";
+    showError(""); setStatus("📄 Status","Select photos first");
+    el('t6Bar').style.width='0%';
+  }
+  window.clearTool6=clearAll6;
+})();
+</script>
+<!-- ================= TOOL 6 END - V2 - ALL BUGS FIXED ================= -->
 <!-- ================= TOOL 7 - IMAGE TO TEXT ================= -->
 <div id="page-tool7" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>🖼️ Image To Text</b><br><span>Your Tool • OCR</span></div></div><h2 style="text-align:center">🖼️ Image To Text - OCR</h2><p style="font-size:12px;color:#6B7280;text-align:center">Photo of Notes, Book, Bill → Text - Copy & Share</p><div class="drop" onclick="document.getElementById('ocrFile').click()"><b>📸 Tap To Select Image</b><p style="font-size:12px;color:#6B7280">Notes, Book Page, Handwritten, Bill</p><input type="file" id="ocrFile" accept="image/*" onchange="runOCR(event)"></div><img id="ocrPreview" style="width:100%;border-radius:14px;margin-top:10px;display:none"><button class="btn" onclick="document.getElementById('ocrFile').click()">📸 Choose Image</button><p id="ocrStatus" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select image first</p><div class="out" id="ocrOut">Text will appear here...</div><div style="display:flex;gap:8px;margin-top:10px"><button class="btn2 primary" onclick="copyOCR()">📋 Copy Text</button><button class="btn2" onclick="shareOCR()">📤 Share</button></div><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
 
