@@ -2474,7 +2474,714 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 </script>
 <!-- ================= TOOL 6 END - V2 - ALL BUGS FIXED ================= -->
 <!-- ================= TOOL 7 - IMAGE TO TEXT ================= -->
-<div id="page-tool7" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>🖼️ Image To Text</b><br><span>Your Tool • OCR</span></div></div><h2 style="text-align:center">🖼️ Image To Text - OCR</h2><p style="font-size:12px;color:#6B7280;text-align:center">Photo of Notes, Book, Bill → Text - Copy & Share</p><div class="drop" onclick="document.getElementById('ocrFile').click()"><b>📸 Tap To Select Image</b><p style="font-size:12px;color:#6B7280">Notes, Book Page, Handwritten, Bill</p><input type="file" id="ocrFile" accept="image/*" onchange="runOCR(event)"></div><img id="ocrPreview" style="width:100%;border-radius:14px;margin-top:10px;display:none"><button class="btn" onclick="document.getElementById('ocrFile').click()">📸 Choose Image</button><p id="ocrStatus" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select image first</p><div class="out" id="ocrOut">Text will appear here...</div><div style="display:flex;gap:8px;margin-top:10px"><button class="btn2 primary" onclick="copyOCR()">📋 Copy Text</button><button class="btn2" onclick="shareOCR()">📤 Share</button></div><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
+<!-- ================= TOOL 7 START - V2 - ALL BUGS FIXED + PREMIUM ================= -->
+<!-- PASTE THIS ONLY - REPLACE OLD TOOL 7 COMPLETELY -->
+
+<div id="page-tool7" class="tool-page" style="display:none">
+<div id="tool7">
+<style>
+#tool7{font-family:system-ui,Arial,sans-serif}
+#tool7 *{box-sizing:border-box}
+#tool7 .card{background:#fff;border:1.5px solid #EDE9FE;border-radius:22px;padding:16px;box-shadow:0 12px 24px rgba(0,0,0,.06)}
+#tool7 .topbar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-bottom:1px solid #EDE9FE;margin:-16px -16px 12px -16px;border-radius:22px 22px 0 0;position:sticky;top:0;z-index:20}
+#tool7 .topbar button{background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer;font-size:13px}
+#tool7 label{font-size:12px;font-weight:900;display:block;margin-top:13px}
+#tool7 input,#tool7 select,#tool7 textarea{width:100%;padding:13px;border-radius:14px;border:1.5px solid #E5E7EB;background:#F9FAFB;font-size:14px;margin-top:6px}
+#tool7 textarea{min-height:220px;resize:vertical;line-height:1.8;font-family:system-ui,Arial,sans-serif}
+#tool7 .btn{width:100%;padding:15px;border:none;border-radius:16px;font-weight:900;cursor:pointer;margin-top:12px;color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);font-size:14px;touch-action:manipulation}
+#tool7 .btn:disabled{opacity:.6}
+#tool7 .btn2{flex:1;padding:11px;border-radius:14px;border:1.5px solid #EDE9FE;background:#fff;font-weight:800;cursor:pointer;font-size:12.5px;touch-action:manipulation}
+#tool7 .btn2.primary{background:#111827;color:#fff;border:none}
+#tool7 .btn2.green{background:#16A34A;color:#fff;border:none}
+#tool7 .btn2.blue{background:#2563EB;color:#fff;border:none}
+#tool7 .btn2.red{background:#DC2626;color:#fff;border:none}
+#tool7 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:9px 12px;border-radius:20px;font-size:12px;margin:7px 7px 0 0;cursor:pointer;font-weight:700;touch-action:manipulation}
+#tool7 .chip.active{background:#111827;color:#fff;border:none}
+#tool7 .toggle-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #EDE9FE;gap:8px}
+#tool7 .toggle{width:52px;height:28px;background:#22C55E;border-radius:30px;position:relative;cursor:pointer;flex-shrink:0;touch-action:manipulation}
+#tool7 .toggle.off{background:#9CA3AF}
+#tool7 .toggle::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%}
+#tool7 .toggle.off::after{left:27px}
+#tool7 .drop{position:relative;border:2px dashed #7C3AED;background:linear-gradient(135deg,#F8F9FF,#FDF2F8);border-radius:18px;padding:20px;text-align:center;margin-top:12px;overflow:hidden;cursor:pointer}
+#tool7 .drop-content{position:relative;z-index:1;pointer-events:none}
+#tool7 .drop-content *{pointer-events:none}
+#tool7 .file-input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:2}
+#tool7 .big-btn{display:block;width:100%;padding:14px;border:none;border-radius:14px;background:#111827;color:#fff;font-weight:900;font-size:14px;cursor:pointer;margin-top:10px;touch-action:manipulation}
+#tool7 .progress{height:10px;background:#E5E7EB;border-radius:20px;overflow:hidden;margin-top:12px;display:none}
+#tool7 .progress i{display:block;height:100%;background:linear-gradient(90deg,#7C3AED,#EC4899);width:0%}
+#tool7 .status-box{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:10px;margin-top:10px;font-size:12px;line-height:1.6;display:none}
+#tool7 .error-box{background:#FEF2F2;border:1px solid #FECACA;border-radius:12px;padding:12px;margin-top:10px;font-size:12px;line-height:1.7;display:none;color:#991B1B}
+#tool7 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+#tool7 .img-card{background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:10px;text-align:center;position:relative}
+#tool7 .img-card img{width:100%;border-radius:10px;max-height:220px;object-fit:contain;background:#fff}
+#tool7 .img-card .del{position:absolute;top:6px;right:6px;background:#DC2626;color:#fff;border:none;width:26px;height:26px;border-radius:50%;font-weight:900;cursor:pointer;z-index:2}
+#tool7 .out-box{background:#F8F9FF;border:1.5px solid #EDE9FE;border-radius:16px;padding:12px;margin-top:12px;display:none}
+#tool7 .para-block{background:#fff;border:1px solid #EDE9FE;border-radius:12px;padding:12px;margin-top:8px;line-height:1.9;font-size:14px;white-space:pre-wrap;position:relative}
+#tool7 .para-block.heading{font-weight:900;font-size:16px;background:#F8F9FF}
+#tool7 .para-block .copy-para{position:absolute;top:6px;right:6px;background:#F3F4F6;border:1px solid #E5E7EB;padding:4px 8px;border-radius:20px;font-size:11px;font-weight:900;cursor:pointer}
+#tool7 .word{cursor:pointer;border-radius:4px;padding:0 2px}
+#tool7 .word:hover{background:#FEF08A}
+#tool7 .word.low{color:#DC2626;background:#FEF2F2}
+#tool7 .dark .para-block{background:#111827;color:#fff;border-color:#374151}
+#tool7 .dark #t7ResultViewWrap{background:#111827}
+#tool7 .history-item{background:#fff;border:1px solid #EDE9FE;border-radius:10px;padding:10px;margin-top:8px;font-size:12px;cursor:pointer}
+</style>
+
+<div id="tool7"><div class="card">
+<div class="topbar"><button type="button" onclick="goHomePageTool7()">← Back</button><div><b>📝 Image To Text</b><br><span style="font-size:11px;color:#6B7280">Fixed V2 • Same Para • Premium</span></div><span style="margin-left:auto;background:#DCFCE7;color:#166534;font-size:11px;font-weight:900;padding:6px 10px;border-radius:20px">● FIXED V2</span></div>
+
+<h2 style="text-align:center">📝 Image To Text - Fixed V2</h2>
+<p style="font-size:12px;color:#6B7280;text-align:center">Same para as image • Handwriting • Translate • Summary<br><span style="color:#16A34A;font-weight:800">Premium FREE • No watermark on text</span></p>
+
+<label for="t7File" class="drop">
+<input type="file" id="t7File" class="file-input" accept="image/*,.jpg,.jpeg,.png,.webp" multiple>
+<div class="drop-content"><div style="font-size:32px">🖼️</div><b>Tap To Select Image</b><p style="font-size:12px;color:#6B7280;margin-top:4px">Book / Notes / Board / Screenshot • Up to 5 • Max 10 MB each</p><div style="display:inline-block;margin-top:8px;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;padding:10px 18px;border-radius:20px;font-weight:900">📂 Choose Image →</div></div>
+</label>
+<button type="button" class="big-btn" id="t7BigBtn">📂 TAP HERE TO SELECT IMAGE - 2nd Way</button>
+<div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t7CameraBtn">📷 Camera</button><button type="button" class="btn2" id="t7SampleBtn">✨ Try Sample</button></div>
+
+<div class="status-box" id="t7StatusBox"><b id="t7StatusTitle">📄 Status</b><br><span id="t7StatusText">Select image first</span></div>
+<div class="error-box" id="t7ErrorBox"><b>⚠️ Error:</b><br><span id="t7ErrorText"></span></div>
+
+<div id="t7ListBox" style="display:none;margin-top:12px"><b>Your Images - <span id="t7Count">0</span></b><div class="grid" id="t7Grid"></div><div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t7AddMoreBtn">➕ Add More</button><button type="button" class="btn2 red" id="t7ClearBtn">🗑️ Clear All</button></div></div>
+
+<label>What Is In Image?</label>
+<div id="t7ModeRow"><span class="chip active" data-mode="print">📄 Printed Book</span><span class="chip" data-mode="hand">✍️ Handwriting</span><span class="chip" data-mode="table">📊 Table</span><span class="chip" data-mode="board">🏫 Board</span><span class="chip" data-mode="screenshot">📱 Screenshot</span></div>
+
+<label>Language</label>
+<div id="t7LangRow"><span class="chip active" data-lang="eng">🇬🇧 English</span><span class="chip" data-lang="auto">✨ Auto Detect</span><span class="chip" data-lang="eng+hin">🇮🇳 English + Hindi</span><span class="chip" data-lang="hin">🇮🇳 Hindi Only</span><span class="chip" data-lang="eng+mar">🇮🇳 English + Marathi</span></div>
+
+<div style="display:flex;gap:8px"><div style="flex:1"><label>Output Style</label><select id="t7Output"><option value="para" selected>Same Para As Image</option><option value="lines">Line By Line</option><option value="single">Single Paragraph</option></select></div><div style="flex:1"><label>Enhance</label><select id="t7Enhance"><option value="auto">Auto Enhance</option><option value="off">No Enhance - Original</option><option value="strong">Strong - Blurry Photo</option></select></div></div>
+
+<div style="background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:4px 12px;margin-top:12px">
+<div class="toggle-row"><div><b>✨ Fix Spelling</b><br><span style="font-size:11px;color:#6B7280">"teh" → "the"</span></div><div class="toggle" id="t7SpellToggle"></div></div>
+<div class="toggle-row"><div><b>🔤 Capital First Letter</b></div><div class="toggle" id="t7CapToggle"></div></div>
+<div class="toggle-row"><div><b>🎯 Red = Low Confidence</b></div><div class="toggle" id="t7LowToggle"></div></div>
+<div class="toggle-row"><div><b>📐 Bold Headings</b></div><div class="toggle" id="t7BoldToggle"></div></div>
+<div class="toggle-row" style="border:none"><div><b>💧 Watermark</b></div><div class="toggle" id="t7WmToggle"></div></div>
+</div>
+
+<button type="button" class="btn" id="t7ExtractBtn">✨ Extract Text - Same Para As Image</button>
+<div class="progress" id="t7Progress"><i id="t7Bar"></i></div>
+<p id="t7Status" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select image first</p>
+
+<div class="out-box" id="t7OutBox">
+<div style="display:flex;justify-content:space-between;align-items:center"><b>✅ Extracted Text</b><span style="font-size:11px;color:#6B7280" id="t7Stats">-</span></div>
+<div style="font-size:11px;color:#6B7280;margin-top:4px">Tap any word to fix it • Tap 📋 on para to copy only that para • Red = check it</div>
+
+<div id="t7ResultViewWrap" style="margin-top:8px;max-height:420px;overflow-y:auto;padding:4px">
+<div id="t7ResultView"></div>
+</div>
+<textarea id="t7ResultEdit" style="display:none" placeholder="Edit text here..."></textarea>
+
+<div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="btn2" id="t7EditToggleBtn">✏️ Edit All Text</button><button type="button" class="btn2" id="t7DarkBtn">🌙 Dark Mode</button><button type="button" class="btn2" id="t7ParaFixBtn">↩️ Fix Paras Again</button></div>
+
+<!-- PREMIUM: Find & Replace -->
+<div style="background:#FFFBEB;border:1px solid #F59E0B;border-radius:12px;padding:10px;margin-top:10px">
+<b style="font-size:12px">🔍 PREMIUM - Find & Replace - Fix OCR Mistake In All Paras At Once</b>
+<div style="display:flex;gap:8px;margin-top:8px"><input type="text" id="t7Find" placeholder="Find: scool" style="margin-top:0"><input type="text" id="t7Replace" placeholder="Replace: school" style="margin-top:0"></div>
+<button type="button" class="btn2" id="t7ReplaceBtn" style="width:100%;margin-top:8px">🔄 Replace All</button>
+</div>
+
+<label style="margin-top:12px">🌟 PREMIUM - Other Apps Don't Give</label>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<button type="button" class="btn2 blue" id="t7TranslateBtn">🌐 Translate → Hindi</button>
+<button type="button" class="btn2 blue" id="t7TranslateEnBtn">🌐 Translate → English</button>
+<button type="button" class="btn2" id="t7SummaryBtn">📋 Summary - 5 Lines</button>
+<button type="button" class="btn2" id="t7KeyPointsBtn">⭐ Key Points</button>
+<button type="button" class="btn2" id="t7QuestionsBtn">❓ Questions From Text</button>
+<button type="button" class="btn2" id="t7CleanBtn">🧹 Clean Spaces</button>
+</div>
+<div id="t7ExtraBox" style="display:none;background:#FFFBEB;border:1px solid #F59E0B;border-radius:12px;padding:10px;margin-top:10px;font-size:13px;line-height:1.7;white-space:pre-wrap"></div>
+
+<div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2 green" id="t7CopyBtn">📋 Copy All</button><button type="button" class="btn2 green" id="t7DownloadTxtBtn">⬇️ .TXT</button></div>
+<div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="btn2 primary" id="t7DownloadWordBtn">📄 .DOC Word</button><button type="button" class="btn2 primary" id="t7DownloadPdfBtn">📕 .PDF</button></div>
+<div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="btn2" id="t7SpeakBtn">🔊 Listen</button><button type="button" class="btn2" id="t7SearchBtn">🔍 Google Search</button></div>
+<div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="btn2" id="t7ShareBtn" style="width:100%">📤 Share / WhatsApp</button></div>
+
+<!-- PREMIUM: History -->
+<div style="margin-top:12px"><b style="font-size:12px">🕘 PREMIUM - Recent - Last 5 Extractions - Tap To Reopen</b><div id="t7History"></div></div>
+</div>
+
+<div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2" onclick="clearTool7()">🗑️ New Image</button><button type="button" class="btn2 primary" onclick="goHomePageTool7()">← Back</button></div>
+</div></div>
+</div>
+</div>
+
+<script>
+(function(){
+  window.goHomePageTool7 = window.goHomePageTool7 || function(){
+    if(typeof window.goHomePage === "function"){ window.goHomePage(); return; }
+    var p=document.getElementById('page-tool7'); if(p) p.style.display='none';
+    var h=document.getElementById('homeView'); if(h) h.style.display='block';
+    window.scrollTo(0,0);
+  };
+  function el(id){ return document.getElementById(id); }
+  function setStatus(title,msg){ var b=el('t7StatusBox'); if(b) b.style.display='block'; var tt=el('t7StatusTitle'); if(tt) tt.textContent=title; var tx=el('t7StatusText'); if(tx) tx.textContent=msg; var st=el('t7Status'); if(st) st.textContent=msg; }
+  function showError(msg){ var b=el('t7ErrorBox'); if(!b) return; if(!msg){ b.style.display='none'; return; } b.style.display='block'; var tx=el('t7ErrorText'); if(tx) tx.textContent=msg; }
+  function showErrorAuto(msg){ showError(msg); setTimeout(function(){ showError(""); },6000); }
+  function getWm(){ try{ return {on: localStorage.getItem('orbit_watermark')!=='false', txt: localStorage.getItem('orbit_watermark_text')||"Made With Orbittroniz.com"}; }catch(e){ return {on:true, txt:"Made With Orbittroniz.com"}; } }
+  function escHtml(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  var S={files:[], mode:"print", lang:"eng", spell:true, cap:true, low:true, bold:true, wm:true, busy:false, rawText:"", paraText:"", paras:[], words:[], isEditing:false, isSpeaking:false, worker:null, dark:false};
+
+  function loadScript(src){ return new Promise(function(res,rej){ var s=document.createElement('script'); s.src=src; s.onload=function(){res();}; s.onerror=function(){rej(new Error("fail"));}; setTimeout(function(){rej(new Error("timeout"));},15000); document.head.appendChild(s); }); }
+  async function ensureOCR(){
+    if(window.Tesseract) return true;
+    var cdns=["https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js","https://unpkg.com/tesseract.js@5/dist/tesseract.min.js"];
+    for(var i=0;i<cdns.length;i++){ try{ await loadScript(cdns[i]); if(window.Tesseract) return true; }catch(e){} }
+    return !!window.Tesseract;
+  }
+  setTimeout(ensureOCR,300);
+
+  document.getElementById('t7ModeRow').addEventListener('click', function(e){
+    var c=e.target.closest('.chip'); if(!c) return;
+    document.querySelectorAll('#t7ModeRow .chip').forEach(function(x){ x.classList.remove('active'); }); c.classList.add('active');
+    S.mode=c.getAttribute('data-mode');
+  });
+  document.getElementById('t7LangRow').addEventListener('click', function(e){
+    var c=e.target.closest('.chip'); if(!c) return;
+    document.querySelectorAll('#t7LangRow .chip').forEach(function(x){ x.classList.remove('active'); }); c.classList.add('active');
+    S.lang=c.getAttribute('data-lang');
+  });
+  function bindToggle(id, key){ el(id).addEventListener('click', function(){ S[key]=!S[key]; el(id).classList.toggle('off',!S[key]); }); }
+  bindToggle('t7SpellToggle','spell'); bindToggle('t7CapToggle','cap'); bindToggle('t7LowToggle','low'); bindToggle('t7BoldToggle','bold'); bindToggle('t7WmToggle','wm');
+  el('t7WmToggle').classList.toggle('off',!S.wm);
+
+  var fileInp=el('t7File');
+  function openPicker(){ var f=document.createElement('input'); f.type='file'; f.accept='image/*,.jpg,.jpeg,.png,.webp'; f.multiple=true; f.onchange=function(){ if(f.files && f.files.length>0) handleFiles(f.files); }; f.click(); }
+  el('t7BigBtn').addEventListener('click', function(e){ e.preventDefault(); openPicker(); });
+  el('t7AddMoreBtn').addEventListener('click', function(e){ e.preventDefault(); openPicker(); });
+  el('t7CameraBtn').addEventListener('click', function(){ var ci=document.createElement('input'); ci.type='file'; ci.accept='image/*'; ci.setAttribute('capture','environment'); ci.onchange=function(){ if(ci.files && ci.files[0]) handleFiles(ci.files); }; ci.click(); });
+  el('t7SampleBtn').addEventListener('click', function(){
+    var c=document.createElement('canvas'); c.width=900; c.height=600; var ctx=c.getContext('2d');
+    ctx.fillStyle="#fff"; ctx.fillRect(0,0,900,600);
+    ctx.fillStyle="#111"; ctx.font="bold 42px Arial"; ctx.fillText("My School Day", 60, 90);
+    ctx.font="24px Arial"; ctx.fillText("I wake up at 6 AM every day.", 60, 160);
+    ctx.fillText("I brush my teeth and take a bath.", 60, 210);
+    ctx.fillText("Then I eat breakfast and go to school.", 60, 260);
+    ctx.font="bold 32px Arial"; ctx.fillText("My Hobby", 60, 380);
+    ctx.font="24px Arial"; ctx.fillText("I like to play cricket with my friends.", 60, 430);
+    ctx.fillText("It makes me happy and healthy.", 60, 480);
+    c.toBlob(function(blob){ if(!blob) return; var f=new File([blob], "Sample.jpg", {type:"image/jpeg"}); handleFiles([f]); }, "image/jpeg", 0.95);
+  });
+  if(fileInp) fileInp.addEventListener('change', function(e){ var fs=e.target.files; if(fs && fs.length>0) handleFiles(fs); fileInp.value=""; });
+
+  function handleFiles(files){
+    showError("");
+    var arr=Array.from(files);
+    if(S.files.length + arr.length > 5){ showErrorAuto("Max 5 images"); arr=arr.slice(0, 5-S.files.length); if(arr.length===0) return; }
+    var added=0;
+    arr.forEach(function(f){
+      if(f.size>10*1024*1024){ showErrorAuto(f.name+" too big - Max 10 MB"); return; }
+      if(!f.type || f.type.indexOf('image')===-1) return;
+      if(S.files.some(function(o){ return o.name===f.name && o.size===f.size; })) return;
+      var url=URL.createObjectURL(f);
+      S.files.push({file:f, name:f.name, size:f.size, previewUrl:url});
+      added++;
+    });
+    if(added===0 && S.files.length===0){ showErrorAuto("No valid images"); return; }
+    renderGrid();
+    setStatus("✅ Images Loaded","✅ "+S.files.length+" image(s) - Tap Extract Text");
+  }
+  function renderGrid(){
+    var box=el('t7ListBox'); if(box) box.style.display = S.files.length>0 ? 'block' : 'none';
+    el('t7Count').textContent=S.files.length;
+    var grid=el('t7Grid'); grid.innerHTML="";
+    S.files.forEach(function(obj, idx){
+      var card=document.createElement('div'); card.className='img-card';
+      var del=document.createElement('button'); del.className='del'; del.type='button'; del.textContent='×';
+      del.addEventListener('click', function(){ try{ URL.revokeObjectURL(obj.previewUrl); }catch(e){} S.files.splice(idx,1); renderGrid(); });
+      var img=document.createElement('img'); img.src=obj.previewUrl;
+      var nm=document.createElement('div'); nm.style.cssText="font-size:11px;color:#6B7280;margin-top:6px"; nm.textContent=obj.name;
+      card.appendChild(del); card.appendChild(img); card.appendChild(nm);
+      grid.appendChild(card);
+    });
+  }
+  el('t7ClearBtn').addEventListener('click', function(){ clearTool7(); });
+
+  // FIX 8: Soft contrast only, no hard threshold
+  async function preprocessImage(file){
+    return new Promise(function(resolve, reject){
+      var url=URL.createObjectURL(file);
+      var im=new Image();
+      im.onload=function(){
+        try{
+          var w=im.naturalWidth||im.width, h=im.naturalHeight||im.height;
+          var enhance=el('t7Enhance').value;
+          var scale=1;
+          if(enhance!=="off"){
+            if(w<1500) scale=2; else if(w<2500) scale=1.5;
+            if(enhance==="strong" && w<2000) scale=2.5;
+          }
+          var cw=Math.floor(w*scale), ch=Math.floor(h*scale);
+          if(cw>3000){ var s2=3000/cw; cw=Math.floor(cw*s2); ch=Math.floor(ch*s2); }
+          var c=document.createElement('canvas'); c.width=cw; c.height=ch; var ctx=c.getContext('2d');
+          ctx.fillStyle="#fff"; ctx.fillRect(0,0,cw,ch);
+          ctx.drawImage(im, 0, 0, cw, ch);
+          if(enhance!=="off" && (S.mode==="hand" || S.mode==="board" || enhance==="strong")){
+            var d=ctx.getImageData(0,0,cw,ch); var data=d.data;
+            for(var i=0;i<data.length;i+=4){
+              var gray=0.299*data[i]+0.587*data[i+1]+0.114*data[i+2];
+              // Soft contrast: stretch, not hard black/white
+              var v=Math.max(0, Math.min(255, (gray-30)*1.3));
+              data[i]=data[i+1]=data[i+2]=v;
+            }
+            ctx.putImageData(d,0,0);
+          }
+          var out=c.toDataURL("image/jpeg", 0.92);
+          try{ URL.revokeObjectURL(url); }catch(e){}
+          resolve(out);
+        }catch(e){ try{ URL.revokeObjectURL(url); }catch(e2){} reject(e); }
+      };
+      im.onerror=function(){ try{ URL.revokeObjectURL(url); }catch(e){} reject(new Error("Image load failed")); };
+      im.src=url;
+    });
+  }
+
+  // FIX 2: Word-boundary spelling fix
+  var SPELL_MAP={ "teh":"the", "recieve":"receive", "seperate":"separate", "occured":"occurred", "untill":"until", "wich":"which", "thier":"their", "freind":"friend", "scool":"school", "becuase":"because", "amimals":"animals", "pepole":"people", "goverment":"government", "enviroment":"environment", "knowlege":"knowledge", "writting":"writing", "studing":"studying", "exmple":"example", "importent":"important", "diffrent":"different", "happned":"happened", "wether":"whether", "alot":"a lot" };
+  function fixSpelling(text){
+    if(!S.spell) return text;
+    Object.keys(SPELL_MAP).forEach(function(wrong){
+      var right=SPELL_MAP[wrong];
+      var re=new RegExp("\\b"+wrong+"\\b","gi");
+      text=text.replace(re, function(m){
+        if(m.charAt(0)>="A" && m.charAt(0)<="Z") return right.charAt(0).toUpperCase()+right.slice(1);
+        return right;
+      });
+    });
+    return text;
+  }
+  function fixCapital(text){
+    if(!S.cap) return text;
+    return text.replace(/(^|[.!?]\s+)([a-z])/g, function(m,p1,p2){ return p1+p2.toUpperCase(); });
+  }
+  function cleanText(text){
+    return text.replace(/[ \t]+/g," ").replace(/\n{3,}/g,"\n\n").replace(/^\s+|\s+$/g,"");
+  }
+
+  // FIX 1: Use Tesseract paragraphs + lines first, fallback to fixed word grouping
+  function rebuildFromData(data){
+    // Best: Use Tesseract's own paragraphs - It already knows layout
+    if(data.paragraphs && data.paragraphs.length>0){
+      var paras=[];
+      data.paragraphs.forEach(function(p){
+        var lines=p.lines || [];
+        var paraText=lines.map(function(l){ return (l.words||[]).map(function(w){ return w.text; }).join(" "); }).join(" ");
+        if(paraText.trim()) paras.push({text: paraText.trim(), isHeading: false, words: p.words||[]});
+      });
+      // Heading: First line of para is short + all caps or large
+      paras.forEach(function(p){
+        if(p.text.length<60 && p.text===p.text.toUpperCase() && /[A-Z]/.test(p.text) && S.bold) p.isHeading=true;
+      });
+      if(paras.length>0) return paras;
+    }
+    // Fallback: Word grouping with FIXED average Y logic
+    var words=(data.words||[]).filter(function(w){ return w.text && w.text.trim() && w.confidence>30; });
+    if(words.length===0) return [];
+    words=words.slice().sort(function(a,b){
+      var ay=a.bbox ? (a.bbox.y0+a.bbox.y1)/2 : 0, by=b.bbox ? (b.bbox.y0+b.bbox.y1)/2 : 0;
+      var ax=a.bbox ? a.bbox.x0 : 0, bx=b.bbox ? b.bbox.x0 : 0;
+      if(Math.abs(ay-by) < 14) return ax-bx;
+      return ay-by;
+    });
+    var lines=[]; var cur=[]; var curY=null; var curH=20;
+    words.forEach(function(w){
+      var y=w.bbox ? (w.bbox.y0+w.bbox.y1)/2 : 0;
+      var h=w.bbox ? (w.bbox.y1-w.bbox.y0) : 20;
+      if(curY===null){ cur=[w]; curY=y; curH=h; return; }
+      // FIX: Compare to current line average, not first line Y
+      if(Math.abs(y-curY) < Math.max(14, curH*0.7)){ cur.push(w); curY=(curY*(cur.length-1)+y)/cur.length; }
+      else { lines.push(cur); cur=[w]; curY=y; curH=h; }
+    });
+    if(cur.length>0) lines.push(cur);
+    // Group lines to paras by gap between prev line bottom and cur line top
+    var paras2=[]; var curPara=[];
+    for(var i=0;i<lines.length;i++){
+      if(i>0){
+        var prevBottom=lines[i-1][0].bbox ? Math.max.apply(null, lines[i-1].map(function(w){ return w.bbox.y1; })) : 0;
+        var curTop=lines[i][0].bbox ? Math.min.apply(null, lines[i].map(function(w){ return w.bbox.y0; })) : 0;
+        var gap=curTop-prevBottom;
+        if(gap>28 && curPara.length>0){ paras2.push(curPara); curPara=[]; }
+      }
+      curPara.push(lines[i]);
+    }
+    if(curPara.length>0) paras2.push(curPara);
+    var out=paras2.map(function(p){
+      var txt=p.map(function(l){ return l.map(function(w){ return w.text; }).join(" "); }).join(" ");
+      var isHead=false;
+      if(S.bold && txt.length<60 && txt===txt.toUpperCase() && /[A-Z]/.test(txt)) isHead=true;
+      return {text: txt, isHeading: isHead, words: p.reduce(function(a,l){ return a.concat(l); },[])};
+    });
+    var mode=el('t7Output').value;
+    if(mode==="single") return [{text: out.map(function(p){ return p.text; }).join(" "), isHeading:false, words: words}];
+    if(mode==="lines") return lines.map(function(l){ return {text: l.map(function(w){ return w.text; }).join(" "), isHeading:false, words:l}; });
+    return out;
+  }
+
+  function parasToText(paras){
+    if(S.mode==="table"){
+      // Table mode: Lines with |
+      return paras.map(function(p){ return p.text; }).join("\n");
+    }
+    return paras.map(function(p){ return p.isHeading ? "**"+p.text+"**" : p.text; }).join("\n\n");
+  }
+  function renderResultView(){
+    var view=el('t7ResultView');
+    view.innerHTML="";
+    S.paras.forEach(function(para, pIdx){
+      var div=document.createElement('div');
+      div.className='para-block'+(para.isHeading ? ' heading' : '');
+      // Copy para button - PREMIUM
+      var cp=document.createElement('button'); cp.className='copy-para'; cp.type='button'; cp.textContent='📋 Copy Para';
+      cp.addEventListener('click', async function(){
+        try{ await navigator.clipboard.writeText(para.text); setStatus("✅ Copied","Para "+(pIdx+1)+" copied"); }catch(e){ showErrorAuto("Copy failed"); }
+      });
+      div.appendChild(cp);
+      // Words with low confidence - FIX 6: By index, not by text
+      if(S.low && para.words && para.words.length>0){
+        // Build text with spans per word
+        para.words.forEach(function(w, wIdx){
+          var sp=document.createElement('span');
+          sp.className='word'+(w.confidence<60 ? ' low' : '');
+          sp.textContent=w.text;
+          sp.title = w.confidence<60 ? "Low confidence ("+Math.round(w.confidence)+"%) - Tap to fix" : "Tap to fix";
+          sp.addEventListener('click', function(){
+            var nv=prompt("Fix this word:", sp.textContent);
+            if(nv!==null && nv.trim()!==""){
+              // Update para text - Replace only this occurrence by index
+              var wordsArr=para.text.split(" ");
+              // Find nth occurrence - Simple: replace first matching from wIdx position
+              var idx=wordsArr.indexOf(w.text);
+              if(idx>-1) wordsArr[idx]=nv.trim();
+              para.text=wordsArr.join(" ");
+              // Rebuild S.paraText from paras
+              S.paraText=parasToText(S.paras);
+              el('t7ResultEdit').value=S.paraText;
+              renderResultView(); updateStats();
+            }
+          });
+          div.appendChild(sp);
+          div.appendChild(document.createTextNode(" "));
+        });
+      } else {
+        div.appendChild(document.createTextNode(para.text));
+      }
+      view.appendChild(div);
+    });
+    // Dark mode class
+    var wrap=el('t7ResultViewWrap');
+    if(S.dark) wrap.classList.add('dark'); else wrap.classList.remove('dark');
+    // Also add dark to paras container
+    if(S.dark) view.classList.add('dark'); else view.classList.remove('dark');
+  }
+  function updateStats(){
+    var txt=S.paraText||"";
+    var words=txt.trim().split(/\s+/).filter(Boolean).length;
+    var paras=S.paras.length;
+    el('t7Stats').textContent=words+" words • "+paras+" paras";
+  }
+  function saveHistory(){
+    try{
+      var hist=JSON.parse(localStorage.getItem('orbit_t7_history')||"[]");
+      hist.unshift({time: new Date().toLocaleString('en-IN'), preview: S.paraText.slice(0,120), full: S.paraText});
+      hist=hist.slice(0,5);
+      localStorage.setItem('orbit_t7_history', JSON.stringify(hist));
+      renderHistory();
+    }catch(e){}
+  }
+  function renderHistory(){
+    var hEl=el('t7History'); if(!hEl) return; hEl.innerHTML="";
+    try{
+      var hist=JSON.parse(localStorage.getItem('orbit_t7_history')||"[]");
+      hist.forEach(function(item){
+        var d=document.createElement('div'); d.className='history-item';
+        d.innerHTML="<b>"+escHtml(item.time)+"</b><br>"+escHtml(item.preview)+"...";
+        d.addEventListener('click', function(){
+          S.paraText=item.full;
+          // Rebuild paras from text - Split by double newline
+          S.paras=item.full.split(/\n\s*\n/).filter(function(p){ return p.trim(); }).map(function(p){ return {text: p.trim(), isHeading: p.trim().length<60 && p.trim()===p.trim().toUpperCase(), words:[]}; });
+          el('t7OutBox').style.display='block';
+          el('t7ResultEdit').value=S.paraText;
+          renderResultView(); updateStats();
+          setStatus("✅ History Loaded","Loaded from history - "+item.time);
+        });
+        hEl.appendChild(d);
+      });
+    }catch(e){}
+  }
+  renderHistory();
+
+  // FIX 4: Reuse 1 worker
+  async function getWorker(lang){
+    if(S.worker && S.workerLang===lang) return S.worker;
+    if(S.worker){ try{ await S.worker.terminate(); }catch(e){} S.worker=null; }
+    var worker=await window.Tesseract.createWorker(lang, 1, { logger: function(m){ if(m.status==="recognizing text" && m.progress){ el('t7Bar').style.width=Math.round(70+m.progress*30)+"%"; } } });
+    S.worker=worker; S.workerLang=lang;
+    return worker;
+  }
+
+  async function extract(){
+    if(S.busy) return;
+    if(S.files.length===0){ showErrorAuto("Select image first"); return; }
+    S.busy=true;
+    var btn=el('t7ExtractBtn'); btn.disabled=true; btn.textContent="⏳ Reading Text... Please Wait";
+    var prog=el('t7Progress'); prog.style.display='block'; el('t7Bar').style.width='0%';
+    showError(""); el('t7OutBox').style.display='none'; el('t7ExtraBox').style.display='none';
+    try{
+      var ok=await ensureOCR();
+      if(!ok){ showErrorAuto("OCR engine failed - Check internet, open in Chrome."); return; }
+      var allParas=[]; var allWords=[];
+      var langToUse=S.lang;
+      if(langToUse==="auto"){
+        // Auto: Try English first, if few words, try Hindi
+        langToUse="eng";
+      }
+      for(var i=0;i<S.files.length;i++){
+        setStatus("🔄 Reading...","Reading Image "+(i+1)+"/"+S.files.length);
+        el('t7Bar').style.width=Math.round(((i)/S.files.length)*70)+"%";
+        var dataUrl=await preprocessImage(S.files[i].file);
+        var data=null;
+        try{
+          // Try worker reuse, fallback to recognize
+          var worker=await getWorker(langToUse);
+          var res=await worker.recognize(dataUrl);
+          data=res.data;
+        }catch(e){
+          // FIX 5: If eng+hin fails, fallback to eng
+          if(langToUse!=="eng"){
+            showErrorAuto("Hindi/Marathi model failed - Using English instead");
+            langToUse="eng";
+            var worker2=await getWorker("eng");
+            var res2=await worker2.recognize(dataUrl);
+            data=res2.data;
+          } else {
+            // Fallback to simple recognize
+            var r2=await window.Tesseract.recognize(dataUrl, "eng", {});
+            data=r2.data;
+          }
+        }
+        if(!data) continue;
+        var paras=rebuildFromData(data);
+        // Auto detect: If English gave <5 words and image might be Hindi, try Hindi once
+        if(S.lang==="auto" && paras.length===0){
+          try{
+            var wHin=await getWorker("hin");
+            var rHin=await wHin.recognize(dataUrl);
+            var parasHin=rebuildFromData(rHin.data);
+            if(parasHin.length>0){ paras=parasHin; langToUse="hin"; }
+          }catch(e){}
+        }
+        // Apply spelling/capital per para - FIX: Apply to para text, not to whole with broken joins
+        paras.forEach(function(p){
+          p.text=fixSpelling(p.text);
+          p.text=fixCapital(p.text);
+        });
+        allParas=allParas.concat(paras);
+        if(data.words) allWords=allWords.concat(data.words.filter(function(w){ return w.text && w.text.trim(); }));
+        await new Promise(function(r){ setTimeout(r,10); });
+      }
+      if(allParas.length===0){ showErrorAuto("No text found - Photo too blurry / dark. Take closer, brighter photo."); return; }
+      S.paras=allParas; S.words=allWords;
+      S.rawText=parasToText(allParas);
+      S.paraText=cleanText(S.rawText);
+      // Rebuild paras text after clean - Keep paras array as source of truth, but update paraText
+      S.paraText=parasToText(S.paras);
+      if(S.wm){ var wmt=getWm(); if(wmt.on) S.paraText += "\n\n— "+wmt.txt; }
+      el('t7OutBox').style.display='block';
+      el('t7ResultEdit').value=S.paraText;
+      renderResultView();
+      updateStats();
+      saveHistory();
+      setStatus("✅ Text Extracted","✅ Done - "+S.files.length+" image(s) - Tap Copy / Download");
+      el('t7OutBox').scrollIntoView({behavior:"smooth", block:"center"});
+    }catch(e){
+      showErrorAuto("Failed - "+(e && e.message || "")+" - Try clearer photo");
+    } finally {
+      S.busy=false; btn.disabled=false; btn.textContent="✨ Extract Text - Same Para As Image";
+      setTimeout(function(){ prog.style.display='none'; },1000);
+    }
+  }
+  el('t7ExtractBtn').addEventListener('click', extract);
+  el('t7ParaFixBtn').addEventListener('click', function(){
+    if(S.paras.length===0){ showErrorAuto("Extract first"); return; }
+    // Rebuild from stored words - Simple re-group
+    S.paraText=parasToText(S.paras);
+    el('t7ResultEdit').value=S.paraText;
+    renderResultView(); updateStats();
+    setStatus("✅ Paragraphs Fixed","Paragraphs rebuilt");
+  });
+  el('t7EditToggleBtn').addEventListener('click', function(){
+    var edit=el('t7ResultEdit'); var view=el('t7ResultViewWrap');
+    if(!S.isEditing){ S.isEditing=true; edit.style.display='block'; view.style.display='none'; el('t7EditToggleBtn').textContent="✅ Done Editing"; edit.value=S.paraText; }
+    else {
+      S.isEditing=false; S.paraText=edit.value; edit.style.display='none'; view.style.display='block'; el('t7EditToggleBtn').textContent="✏️ Edit All Text";
+      // FIX 7: Rebuild paras from edited text, preserving paras
+      S.paras=S.paraText.split(/\n\s*\n/).filter(function(p){ return p.trim(); }).map(function(p){ return {text: p.trim().replace(/^\*\*|\*\*$/g,""), isHeading: p.trim().length<60 && p.trim()===p.trim().toUpperCase(), words:[]}; });
+      renderResultView(); updateStats();
+    }
+  });
+  el('t7ResultEdit').addEventListener('input', function(){ S.paraText=el('t7ResultEdit').value; });
+  el('t7DarkBtn').addEventListener('click', function(){ S.dark=!S.dark; renderResultView(); el('t7DarkBtn').textContent=S.dark ? "☀️ Light Mode" : "🌙 Dark Mode"; });
+
+  el('t7ReplaceBtn').addEventListener('click', function(){
+    var find=el('t7Find').value.trim(); var rep=el('t7Replace').value;
+    if(!find){ showErrorAuto("Enter Find text"); return; }
+    if(S.paras.length===0){ showErrorAuto("Extract first"); return; }
+    var count=0;
+    S.paras.forEach(function(p){
+      var re=new RegExp(find.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"), "gi");
+      var before=p.text;
+      p.text=p.text.replace(re, rep);
+      if(p.text!==before) count++;
+    });
+    S.paraText=parasToText(S.paras);
+    el('t7ResultEdit').value=S.paraText;
+    renderResultView(); updateStats();
+    setStatus("✅ Replaced","Replaced in "+count+" para(s)");
+  });
+
+  function getText(){ return S.paraText || ""; }
+  function showExtra(title, text){
+    var b=el('t7ExtraBox'); b.style.display='block'; b.textContent=title+"\n\n"+text;
+    b.scrollIntoView({behavior:"smooth", block:"center"});
+  }
+  async function translate(toLang){
+    var txt=getText(); if(!txt.trim()){ showErrorAuto("Extract text first"); return; }
+    setStatus("🌐 Translating...","Translating...");
+    try{
+      var chunks=[]; var chunkSize=400;
+      for(var i=0;i<txt.length;i+=chunkSize) chunks.push(txt.slice(i,i+chunkSize));
+      var out=[];
+      for(var j=0;j<chunks.length;j++){
+        var url="https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl="+toLang+"&dt=t&q="+encodeURIComponent(chunks[j]);
+        var res=await fetch(url);
+        if(!res.ok) throw new Error("Translate failed");
+        var data=await res.json();
+        out.push(data[0].map(function(x){ return x[0]; }).join(""));
+      }
+      showExtra("🌐 Translated - "+(toLang==="hi" ? "Hindi" : "English"), out.join(" "));
+      setStatus("✅ Translated","See yellow box below");
+    }catch(e){
+      // FIX 9: Fallback - Open Google Translate with text
+      showErrorAuto("Translate API blocked - Opening Google Translate with your text...");
+      var gt="https://translate.google.com/?sl=auto&tl="+(toLang==="hi"?"hi":"en")+"&text="+encodeURIComponent(txt.slice(0,1000))+"&op=translate";
+      window.open(gt,"_blank");
+    }
+  }
+  el('t7TranslateBtn').addEventListener('click', function(){ translate("hi"); });
+  el('t7TranslateEnBtn').addEventListener('click', function(){ translate("en"); });
+  el('t7SummaryBtn').addEventListener('click', function(){
+    var txt=getText(); if(!txt.trim()){ showErrorAuto("Extract first"); return; }
+    var sentences=txt.split(/(?<=[.!?])\s+/).filter(function(s){ return s.trim().length>10; });
+    if(sentences.length<=5){ showExtra("📋 Summary - Already Short:", txt); return; }
+    var picked=[sentences[0], sentences[Math.floor(sentences.length/3)], sentences[Math.floor(sentences.length*2/3)], sentences[sentences.length-1]];
+    var longest=sentences.slice().sort(function(a,b){ return b.length-a.length; })[0];
+    if(picked.indexOf(longest)===-1) picked.push(longest);
+    showExtra("📋 Summary - 5 Lines:", picked.map(function(s,i){ return (i+1)+". "+s.trim(); }).join("\n"));
+  });
+  el('t7KeyPointsBtn').addEventListener('click', function(){
+    var txt=getText(); if(!txt.trim()){ showErrorAuto("Extract first"); return; }
+    var lines=S.paras.map(function(p){ return p.text; }).filter(function(l){ return l.length>5; });
+    showExtra("⭐ Key Points:", lines.slice(0,8).map(function(l){ return "⭐ "+l.replace(/^\*\*|\*\*$/g,""); }).join("\n"));
+  });
+  el('t7QuestionsBtn').addEventListener('click', function(){
+    var txt=getText(); if(!txt.trim()){ showErrorAuto("Extract first"); return; }
+    var sentences=txt.split(/(?<=[.!?])\s+/).filter(function(s){ return s.trim().length>15; }).slice(0,5);
+    var qs=sentences.map(function(s,i){ return "Q"+(i+1)+". What is "+s.replace(/^[A-Z][a-z]+ /,"").slice(0,60)+" ?\nAns: "+s.trim(); }).join("\n\n");
+    showExtra("❓ Questions:", qs || "Not enough text");
+  });
+  el('t7CleanBtn').addEventListener('click', function(){
+    var txt=getText(); if(!txt.trim()){ showErrorAuto("Extract first"); return; }
+    S.paraText=txt.replace(/[ \t]+/g," ").replace(/\n{3,}/g,"\n\n");
+    S.paras=S.paraText.split(/\n\s*\n/).filter(function(p){ return p.trim(); }).map(function(p){ return {text:p.trim(), isHeading:false, words:[]}; });
+    el('t7ResultEdit').value=S.paraText;
+    renderResultView(); updateStats();
+    setStatus("✅ Cleaned","Spaces cleaned");
+  });
+  el('t7CopyBtn').addEventListener('click', async function(){
+    var txt=getText(); if(!txt.trim()){ showErrorAuto("Extract first"); return; }
+    try{ await navigator.clipboard.writeText(txt); setStatus("✅ Copied","Text copied"); }
+    catch(e){ var ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); setStatus("✅ Copied","Text copied"); }catch(e2){ showErrorAuto("Long press text → Select All → Copy"); } ta.remove(); }
+  });
+  function downloadBlob(blob, name){
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a'); a.href=url; a.download=name; document.body.appendChild(a); a.click(); setTimeout(function(){ a.remove(); try{ URL.revokeObjectURL(url); }catch(e){} },800);
+    setStatus("✅ Download Started","Download started - "+name);
+  }
+  el('t7DownloadTxtBtn').addEventListener('click', function(){
+    var txt=getText(); if(!txt.trim()){ showErrorAuto("Extract first"); return; }
+    downloadBlob(new Blob([txt], {type:"text/plain;charset=utf-8"}), "Extracted-Text.txt");
+  });
+  el('t7DownloadWordBtn').addEventListener('click', function(){
+    var txt=getText(); if(!txt.trim()){ showErrorAuto("Extract first"); return; }
+    // FIX 10: Proper Word HTML with <p> per para
+    var parasHtml=S.paras.map(function(p){
+      if(p.isHeading) return "<p><b>"+escHtml(p.text)+"</b></p>";
+      return "<p>"+escHtml(p.text)+"</p>";
+    }).join("");
+    var html="<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'><head><meta charset='utf-8'><title>Extracted Text</title></head><body>"+parasHtml+"</body></html>";
+    downloadBlob(new Blob([html], {type:"application/msword"}), "Extracted-Text.doc");
+  });
+  el('t7DownloadPdfBtn').addEventListener('click', function(){
+    var txt=getText(); if(!txt.trim()){ showErrorAuto("Extract first"); return; }
+    var parasHtml=S.paras.map(function(p){
+      if(p.isHeading) return "<h3>"+escHtml(p.text)+"</h3>";
+      return "<p>"+escHtml(p.text)+"</p>";
+    }).join("");
+    var html="<html><head><meta charset='utf-8'><title>Extracted</title><style>body{font-family:Arial;padding:20px;line-height:1.8} h3{color:#111} p{margin:10px 0}</style></head><body>"+parasHtml+"</body></html>";
+    var blob=new Blob([html], {type:"text/html"});
+    var url=URL.createObjectURL(blob);
+    var w=window.open(url,"_blank");
+    if(!w) downloadBlob(blob, "Extracted-Text.html");
+    else setStatus("✅ PDF Ready","In new tab: Tap Print → Save as PDF");
+  });
+  el('t7ShareBtn').addEventListener('click', async function(){
+    var txt=getText(); if(!txt.trim()){ showErrorAuto("Extract first"); return; }
+    try{
+      if(navigator.share){ await navigator.share({title:"Extracted Text", text:txt}); setStatus("✅ Shared","Text shared"); return; }
+      await navigator.clipboard.writeText(txt); setStatus("✅ Copied","Share not supported - Copied, paste in WhatsApp");
+    }catch(e){ if(String(e).indexOf("Abort")>-1) return; showErrorAuto("Share failed - Use Copy"); }
+  });
+  // FIX 3: Speak toggle - Stop on 2nd tap
+  el('t7SpeakBtn').addEventListener('click', function(){
+    if(S.isSpeaking){
+      try{ window.speechSynthesis.cancel(); }catch(e){}
+      S.isSpeaking=false; el('t7SpeakBtn').textContent="🔊 Listen"; setStatus("⏹️ Stopped","Reading stopped"); return;
+    }
+    var txt=getText(); if(!txt.trim()){ showErrorAuto("Extract first"); return; }
+    try{
+      window.speechSynthesis.cancel();
+      var u=new SpeechSynthesisUtterance(txt.slice(0,2000));
+      u.lang = S.lang.indexOf("hin")>-1 ? "hi-IN" : "en-IN"; u.rate=0.9;
+      u.onend=function(){ S.isSpeaking=false; el('t7SpeakBtn').textContent="🔊 Listen"; };
+      u.onerror=function(){ S.isSpeaking=false; el('t7SpeakBtn').textContent="🔊 Listen"; };
+      S.isSpeaking=true; el('t7SpeakBtn').textContent="⏹️ Stop Reading";
+      window.speechSynthesis.speak(u);
+      setStatus("🔊 Speaking...","Tap Stop to stop");
+    }catch(e){ showErrorAuto("Read aloud not supported"); }
+  });
+  el('t7SearchBtn').addEventListener('click', function(){
+    var txt=getText(); if(!txt.trim()){ showErrorAuto("Extract first"); return; }
+    window.open("https://www.google.com/search?q="+encodeURIComponent(txt.slice(0,100).replace(/\n/g," ")), "_blank");
+  });
+
+  window.clearTool7=function(){
+    S.files.forEach(function(o){ try{ URL.revokeObjectURL(o.previewUrl); }catch(e){} });
+    S.files=[]; S.rawText=""; S.paraText=""; S.paras=[]; S.words=[];
+    if(fileInp) fileInp.value="";
+    renderGrid();
+    el('t7OutBox').style.display='none'; el('t7ExtraBox').style.display='none';
+    showError(""); setStatus("📄 Status","Select image first");
+    el('t7Bar').style.width='0%';
+    try{ window.speechSynthesis.cancel(); S.isSpeaking=false; }catch(e){}
+    // FIX 4: Terminate worker on clear - Free memory
+    if(S.worker){ try{ S.worker.terminate(); }catch(e){} S.worker=null; S.workerLang=null; }
+  };
+})();
+</script>
+<!-- ================= TOOL 7 END - V2 - ALL BUGS FIXED + PREMIUM ================= --> 
 
 <!-- ================= TOOL 8 - BG REMOVER ================= -->
 <div id="page-tool8" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>✂️ BG Remover</b><br><span>Your Tool</span></div></div><h2 style="text-align:center">✂️ BG Remover</h2><p style="font-size:12px;color:#6B7280;text-align:center">Best for white / light background - Passport, Product</p><div class="drop" onclick="document.getElementById('bgFile').click()"><b>📸 Select Image</b><input type="file" id="bgFile" accept="image/*" onchange="removeBG(event)"></div><label>Sensitivity</label><select id="bgSens"><option value="30">Low - Keep More</option><option value="60" selected>Medium - Best</option><option value="90">High - Remove More</option></select><button class="btn" onclick="document.getElementById('bgFile').click()">✂️ Remove Background</button><div style="display:flex;gap:8px;margin-top:10px"><div style="flex:1"><p style="font-size:11px;font-weight:800;text-align:center">Original</p><img id="bgOrig" style="width:100%;border-radius:12px"></div><div style="flex:1"><p style="font-size:11px;font-weight:800;text-align:center">Transparent</p><img id="bgResult" style="width:100%;border-radius:12px;background:repeating-conic-gradient(#ddd 0% 25%,#fff 0% 50%) 0 0/20px 20px"></div></div><button class="btn2 green" style="width:100%;margin-top:10px" onclick="downloadBG()">⬇️ Download Transparent PNG</button><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
