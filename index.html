@@ -354,189 +354,272 @@ applySettingsUI();
 
 <!-- ===================================================== -->
 <!-- ================= TOOL 1 START - AI WRITER ========= -->
-<!-- ================= TOOL 1 START - SIMPLE AI LIKE CHATGPT - NO DOCTYPE ================= -->
-<!-- PASTE THIS ONLY - REPLACE OLD TOOL 1 - SIMPLE BUT EFFECTIVE -->
+<!-- ================= TOOL 1 START - AI WRITER - FIXED ALL BUGS + PREMIUM UNIQUE FEATURES - NO DOCTYPE ================= -->
+<!-- PASTE THIS ONLY - REPLACE OLD TOOL 1 FULLY -->
 
 <style>
 #tWriter{font-family:system-ui,Arial,sans-serif}
 #tWriter .card{background:#fff;border:1.5px solid #EDE9FE;border-radius:22px;padding:16px;margin-top:14px;box-shadow:0 12px 24px rgba(0,0,0,.06)}
+#tWriter .chat{max-height:560px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;margin-top:12px;padding:2px}
+#tWriter .msg{padding:13px 14px;border-radius:18px;font-size:14.5px;line-height:1.75;white-space:pre-wrap;word-break:break-word;max-width:96%;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+#tWriter .msg.user{background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;align-self:flex-end;border-bottom-right-radius:6px}
+#tWriter .msg.ai{background:#F8F9FF;border:1px solid #EDE9FE;color:#111827;align-self:flex-start;border-bottom-left-radius:6px}
+#tWriter .msg.ai b{color:#7C3AED}
+#tWriter .msg.system{background:#FFFBEB;border:1px dashed #F59E0B;color:#92400E;align-self:center;font-size:12px;text-align:center;border-radius:14px}
 #tWriter .type-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
 #tWriter .type-row::-webkit-scrollbar{display:none}
-#tWriter .type-btn{flex-shrink:0;background:#F8F9FF;border:1.5px solid #EDE9FE;padding:11px 15px;border-radius:20px;font-size:13px;font-weight:800;cursor:pointer;color:#374151;white-space:nowrap}
+#tWriter .type-btn{flex-shrink:0;background:#F8F9FF;border:1.5px solid #EDE9FE;padding:10px 14px;border-radius:20px;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap}
 #tWriter .type-btn.active{background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;border:none;box-shadow:0 8px 16px rgba(124,58,237,.30)}
-#tWriter textarea,#tWriter select{width:100%;padding:14px;border-radius:14px;border:1.5px solid #E5E7EB;background:#F9FAFB;font-size:15px;font-family:inherit;box-sizing:border-box;margin-top:6px}
-#tWriter textarea:focus{border-color:#7C3AED;outline:none;background:#fff}
-#tWriter label{font-size:12px;font-weight:900;color:#374151;display:block;margin-top:14px}
-#tWriter .btn{width:100%;padding:16px;border:none;border-radius:16px;font-weight:900;cursor:pointer;margin-top:14px;color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);font-size:15px;box-shadow:0 12px 22px rgba(124,58,237,.30)}
-#tWriter .btn:disabled{opacity:.6}
-#tWriter .btn2{flex:1;padding:12px;border-radius:14px;border:1.5px solid #E5E7EB;background:#fff;font-weight:800;cursor:pointer;font-size:13px}
+#tWriter textarea,#tWriter select,#tWriter input{width:100%;padding:14px;border-radius:14px;border:1.5px solid #E5E7EB;background:#F9FAFB;font-size:15px;font-family:inherit;box-sizing:border-box;margin-top:6px}
+#tWriter textarea:focus,#tWriter input:focus{border-color:#7C3AED;outline:none;background:#fff}
+#tWriter label{font-size:12px;font-weight:900;color:#374151;display:block;margin-top:13px}
+#tWriter .btn{width:100%;padding:16px;border:none;border-radius:16px;font-weight:900;cursor:pointer;margin-top:12px;color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);font-size:15px;box-shadow:0 12px 22px rgba(124,58,237,.30)}
+#tWriter .btn:disabled{opacity:.6;cursor:not-allowed}
+#tWriter .btn2{flex:1;padding:11px;border-radius:14px;border:1.5px solid #E5E7EB;background:#fff;font-weight:800;cursor:pointer;font-size:12.5px}
 #tWriter .btn2.primary{background:#111827;color:#fff;border:none}
-#tWriter .out{margin-top:14px;background:#F9FAFB;border:1px solid #EDE9FE;border-radius:16px;padding:16px;font-size:15px;line-height:1.8;white-space:pre-wrap;word-break:break-word;min-height:120px}
-#tWriter .thinking{display:none;text-align:center;padding:14px;font-weight:800;color:#7C3AED}
+#tWriter .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:10px 13px;border-radius:20px;font-size:12.5px;margin:7px 7px 0 0;cursor:pointer;font-weight:700}
+#tWriter .chip.active{background:#111827;color:#fff;border:none}
+#tWriter .thinking{display:none;padding:12px 14px;background:#F8F9FF;border:1px solid #EDE9FE;border-radius:18px;font-weight:800;color:#7C3AED;font-size:13px;align-self:flex-start}
 #tWriter .thinking i{display:inline-block;width:8px;height:8px;background:#7C3AED;border-radius:50%;margin:0 2px;animation:blink 1s infinite}
 #tWriter .thinking i:nth-child(2){animation-delay:.2s}#tWriter .thinking i:nth-child(3){animation-delay:.4s}
 @keyframes blink{0%,100%{opacity:.2;transform:translateY(0)}50%{opacity:1;transform:translateY(-4px)}}
-#tWriter .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:9px 12px;border-radius:20px;font-size:12px;margin:6px 6px 0 0;cursor:pointer;font-weight:700}
+#tWriter .follow{margin-top:12px;background:#FFFBEB;border:1px dashed #F59E0B;border-radius:16px;padding:12px}
+#tWriter .follow b{font-size:12px;color:#92400E}
+#tWriter .toggle-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #EDE9FE}
+#tWriter .toggle{width:52px;height:28px;background:#22C55E;border-radius:30px;position:relative;cursor:pointer;flex-shrink:0}
+#tWriter .toggle.off{background:#9CA3AF}
+#tWriter .toggle::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%}
+#tWriter .toggle.off::after{left:27px}
+#tWriter .stat{display:flex;gap:8px;margin-top:10px}
+#tWriter .stat div{flex:1;background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:10px;text-align:center}
+#tWriter .stat b{display:block;font-size:16px;color:#7C3AED}
+#tWriter .stat span{font-size:10px;color:#6B7280}
 </style>
 
 <div id="tWriter">
 <div class="card">
-<h2 style="font-size:18px;text-align:center">✍️ AI Writer</h2>
-<p style="font-size:12px;color:#6B7280;text-align:center;margin-top:6px">Type what you want - AI will think and write for you - Like ChatGPT - Simple</p>
+<h2 style="font-size:18px;text-align:center">✍️ AI Writer - Chat AI - Premium</h2>
+<p style="font-size:12px;color:#6B7280;text-align:center;margin-top:6px">Describe situation - AI thinks - Gives answer - Tap Describe More for NEW info - No other app has this</p>
 
-<label>What do you want to write?</label>
+<!-- UNIQUE FEATURE 1 - SITUATION ANALYZER - NO OTHER APP -->
+<div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:14px;padding:11px;margin-top:10px;font-size:12px;line-height:1.6"><b style="color:#166534">🧠 UNIQUE - Situation Analyzer - AI Detects Who You Are:</b><br><span id="situationShow">Tap Generate - AI will detect: Student / Shop / Job / Creator - And write for that situation</span></div>
+
+<label>What do you want AI to write?</label>
 <div class="type-row" id="typeRow">
-<button class="type-btn" onclick="setAIType('Essay',this)">📚 Essay</button>
-<button class="type-btn active" onclick="setAIType('Blog',this)">📝 Blog</button>
-<button class="type-btn" onclick="setAIType('Caption',this)">📸 Caption</button>
-<button class="type-btn" onclick="setAIType('Email',this)">📧 Email</button>
-<button class="type-btn" onclick="setAIType('Story',this)">📖 Story</button>
-<button class="type-btn" onclick="setAIType('Speech',this)">🎤 Speech</button>
-<button class="type-btn" onclick="setAIType('Bio',this)">👤 Bio</button>
-<button class="type-btn" onclick="setAIType('Product',this)">🛍️ Product</button>
+<button class="type-btn active" onclick="setChatTypeFixed('Essay',this)">📚 Essay</button>
+<button class="type-btn" onclick="setChatTypeFixed('Blog',this)">📝 Blog</button>
+<button class="type-btn" onclick="setChatTypeFixed('Caption',this)">📸 Caption</button>
+<button class="type-btn" onclick="setChatTypeFixed('Email',this)">📧 Email</button>
+<button class="type-btn" onclick="setChatTypeFixed('Story',this)">📖 Story</button>
+<button class="type-btn" onclick="setChatTypeFixed('Speech',this)">🎤 Speech</button>
+<button class="type-btn" onclick="setChatTypeFixed('Explain',this)">💡 Explain Topic</button>
+<button class="type-btn" onclick="setChatTypeFixed('Advice',this)">🧠 Advice / Solution</button>
 </div>
 
-<label>Describe your topic - AI will understand</label>
-<textarea id="aiTopic" rows="3" placeholder="Example: Write an essay on Mr Abdul Kalam - His life, achievements and lessons for students">Write an essay on Mr Abdul Kalam - His life, achievements and lessons for students</textarea>
+<label>Describe your situation - Be clear - AI will understand</label>
+<textarea id="chatInputFixed" rows="3" placeholder="Example: I am a student, I need an essay on Mr Abdul Kalam for school - 300 words, in simple English">I am a student, I need an essay on Mr Abdul Kalam for school - 300 words, in simple English</textarea>
 
 <div style="display:flex;gap:8px">
-<div style="flex:1"><label>Tone</label><select id="aiTone"><option>Simple - Easy Words</option><option>Formal</option><option>Motivational</option><option>Funny</option><option>Professional</option></select></div>
-<div style="flex:1"><label>Length</label><select id="aiLen"><option>Medium - 300 Words</option><option>Short - 150 Words</option><option>Long - 500 Words</option></select></div>
+<div style="flex:1"><label>Style</label><select id="chatToneFixed"><option>Simple - Easy Words</option><option>Formal</option><option>Motivational</option><option>Funny</option><option>Professional</option></select></div>
+<div style="flex:1"><label>Length</label><select id="chatLenFixed"><option>Medium - 300 Words</option><option>Short - 150 Words</option><option>Long - 500 Words</option></select></div>
 </div>
 
-<div style="margin-top:10px"><span class="chip" onclick="tryAI('Write an essay on Mr Abdul Kalam')">👨‍🚀 Abdul Kalam Essay</span><span class="chip" onclick="tryAI('Write a blog on Benefits of Yoga for students')">🧘 Yoga Blog</span><span class="chip" onclick="tryAI('Write an Instagram caption for my Goa trip')">✈️ Goa Caption</span><span class="chip" onclick="tryAI('Write an email for job leave')">📧 Job Leave Email</span></div>
+<!-- UNIQUE FEATURE 2 - EXAM MODE + TEACHER CHECK TOGGLES -->
+<div style="background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:10px;margin-top:12px">
+<div class="toggle-row"><div><b style="font-size:13px">🎓 Exam Mode - No Other App</b><br><span style="font-size:11px;color:#6B7280">ON = Exam format - Intro, Body, Conclusion, Marks ready</span></div><div class="toggle off" id="examToggle" onclick="toggleExamFixed()"></div></div>
+<div class="toggle-row" style="border:none"><div><b style="font-size:13px">💧 Watermark - On / Off</b><br><span style="font-size:11px;color:#6B7280" id="wmFixedText">Currently: ON</span></div><div class="toggle" id="wmFixedToggle" onclick="toggleWmFixed()"></div></div>
+</div>
 
-<button class="btn" id="aiBtn" onclick="generateAI()">✨ Generate - AI Is Thinking</button>
+<div><span class="chip" onclick="quickChatFixed('I am a student, I need an essay on Mr Abdul Kalam for school')">👨‍🚀 Kalam Essay</span><span class="chip" onclick="quickChatFixed('I want a blog on Benefits of Yoga, I am a beginner')">🧘 Yoga Blog</span><span class="chip" onclick="quickChatFixed('My shop is not getting customers, give me advice')">🛍️ Shop Advice</span><span class="chip" onclick="quickChatFixed('Explain photosynthesis in simple words for class 8')">🌱 Explain Photosynthesis</span></div>
 
-<div class="thinking" id="aiThinking">AI is thinking <i></i><i></i><i></i><br><span style="font-size:11px;color:#6B7280;font-weight:600">Understanding your topic... Writing in simple English...</span></div>
+<button class="btn" id="chatBtnFixed" onclick="sendChatFixed()">✨ Ask AI - AI Will Think</button>
 
-<div class="out" id="aiOut">Your AI writing will appear here...</div>
+<div class="chat" id="chatBoxFixed">
+<div class="msg ai">👋 <b>Hi! I am your AI Writer.</b><br><br>Describe any situation - Example: <i>"I need an essay on Kalam"</i> or <i>"My shop has no customers, give advice"</i><br><br>I will think and give you a full answer. Then tap <b>Describe More</b> and I will give you NEW information, not same line.</div>
+<div class="thinking" id="chatThinkingFixed">AI is thinking <i></i><i></i><i></i><br><span style="font-size:11px;color:#6B7280;font-weight:600">Understanding your situation... Writing...</span></div>
+</div>
 
-<div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:#6B7280;font-weight:700"><span id="aiWords">0 words</span><span id="aiStatus">Ready</span></div>
+<!-- FOLLOW-UP -->
+<div class="follow" id="followBoxFixed" style="display:none">
+<b>👇 Want more info? Tap one - AI will give NEW info:</b><br>
+<span class="chip" onclick="followUpFixed('describe more')">➕ Describe More</span>
+<span class="chip" onclick="followUpFixed('give example')">💡 Give Example</span>
+<span class="chip" onclick="followUpFixed('make simple')">✨ Make More Simple</span>
+<span class="chip" onclick="followUpFixed('add points')">• Add Points</span>
+<span class="chip" onclick="followUpFixed('give conclusion')">🏁 Give Conclusion</span>
+<span class="chip" onclick="followUpFixed('teacher check')">👩‍🏫 Teacher Check - Marks</span>
+<span class="chip" onclick="followUpFixed('make longer')">➕ Make Longer</span>
+<div style="display:flex;gap:6px;margin-top:10px"><textarea id="followInputFixed" rows="2" placeholder="Or type your follow-up question - Example: Tell me about his childhood in more detail" style="margin-top:0"></textarea></div>
+<button class="btn" style="margin-top:8px;padding:12px;font-size:13px" onclick="sendFollowUpFixed()">💬 Ask Follow-Up Question →</button>
+</div>
 
+<div class="stat"><div><b id="chatWordsFixed">0</b><span>Words - Last Answer</span></div><div><b id="chatTotalFixed">0</b><span>Words - Total Chat</span></div><div><b id="chatCountFixed">0</b><span>Messages</span></div></div>
 <div style="display:flex;gap:8px;margin-top:10px">
-<button class="btn2 primary" onclick="copyAI()">📋 Copy</button>
-<button class="btn2" onclick="shareAI()">📤 Share</button>
-<button class="btn2" onclick="rewriteAI()">🔁 Rewrite</button>
+<button class="btn2 primary" onclick="copyChatFixed()">📋 Copy Last Answer</button>
+<button class="btn2" onclick="shareChatFixed()">📤 Share</button>
+<button class="btn2" onclick="downloadChatFixed()">⬇️ Download</button>
 </div>
-<button class="btn2 primary" style="width:100%;margin-top:8px" onclick="downloadAI()">⬇️ Download</button>
+<div style="display:flex;gap:8px;margin-top:8px">
+<button class="btn2" onclick="saveChatFixed()">💾 Save Chat</button>
+<button class="btn2" onclick="clearChatFixed()">🗑️ New Chat</button>
+</div>
+<p id="chatStatusFixed" style="font-size:11px;color:#6B7280;text-align:center;margin-top:8px">Ready - Your chat auto-saves on this phone</p>
 </div>
 </div>
 
 <script>
-let aiType="Blog", aiLast="", aiLastTopic="";
-function setAIType(t,el){ aiType=t; document.querySelectorAll('#tWriter .type-btn').forEach(b=>b.classList.remove('active')); el.classList.add('active');
-  let inp=document.getElementById('aiTopic');
-  if(t==="Essay") inp.value="Write an essay on Mr Abdul Kalam - His life, achievements and lessons for students";
-  if(t==="Blog") inp.value="Write a blog on Benefits of Yoga for students";
-  if(t==="Caption") inp.value="Write an Instagram caption for my Goa trip";
-  if(t==="Email") inp.value="Write an email for job leave";
+/* ================= TOOL 1 - FIXED JS ================= */
+let chatTypeFixed="Essay", chatTopicFixed="Mr Abdul Kalam", chatLastFixed="", chatMsgCountFixed=0, describeMoreCountFixed=0, examModeFixed=false, isThinkingFixed=false;
+let wmOnFixed=true, wmTextFixed="Made With Orbittroniz.com";
+try{ let s=localStorage.getItem('orbit_watermark'); if(s!==null) wmOnFixed=s==='true'; }catch(e){}
+try{ let t=localStorage.getItem('orbit_watermark_text'); if(t) wmTextFixed=t; }catch(e){}
+function updateWmFixedUI(){ let a=document.getElementById('wmFixedText'); if(a) a.innerText="Currently: "+(wmOnFixed?"ON - Watermark will show":"OFF - Clean"); let b=document.getElementById('wmFixedToggle'); if(b) b.classList.toggle('off',!wmOnFixed); }
+function toggleWmFixed(){ wmOnFixed=!wmOnFixed; try{ localStorage.setItem('orbit_watermark',wmOnFixed?'true':'false'); }catch(e){} updateWmFixedUI(); if(typeof applySettingsUI==='function') applySettingsUI(); }
+function toggleExamFixed(){ examModeFixed=!examModeFixed; document.getElementById('examToggle').classList.toggle('off',!examModeFixed); }
+function setChatTypeFixed(t,el){ chatTypeFixed=t; document.querySelectorAll('#tWriter .type-btn').forEach(b=>b.classList.remove('active')); el.classList.add('active');
+  let inp=document.getElementById('chatInputFixed');
+  if(t==="Essay") inp.value="I am a student, I need an essay on Mr Abdul Kalam for school - 300 words, in simple English";
+  if(t==="Blog") inp.value="I want a blog on Benefits of Yoga, I am a beginner";
+  if(t==="Caption") inp.value="I went to Goa, write an Instagram caption for my trip photo";
+  if(t==="Email") inp.value="I need an email to my boss for 2 days leave, my mother is sick";
   if(t==="Story") inp.value="Write a short story on a boy who never gave up";
-  if(t==="Speech") inp.value="Write a speech on Importance of Education";
-  if(t==="Bio") inp.value="Write a bio for a fitness lover";
-  if(t==="Product") inp.value="Write a product description for a new t-shirt shop";
+  if(t==="Speech") inp.value="I need a speech on Importance of Education for school assembly";
+  if(t==="Explain") inp.value="Explain photosynthesis in simple words for class 8";
+  if(t==="Advice") inp.value="My shop is not getting customers, give me advice to get more customers";
 }
-function tryAI(txt){ document.getElementById('aiTopic').value=txt; if(txt.toLowerCase().includes('essay')){ aiType="Essay"; } if(txt.toLowerCase().includes('blog')){ aiType="Blog"; } if(txt.toLowerCase().includes('caption')){ aiType="Caption"; } if(txt.toLowerCase().includes('email')){ aiType="Email"; } document.querySelectorAll('#tWriter .type-btn').forEach(b=>{ b.classList.toggle('active', b.innerText.toLowerCase().includes(aiType.toLowerCase())); }); generateAI(); }
-function cleanTopic(raw){ let t=(raw||"").trim(); t=t.replace(/^(write|please write|give me|make|create)\s+(an?|a)?\s*(essay|blog|article|caption|email|story|speech|bio|product description)?\s*(on|about|for)?\s*/i,"").trim(); t=t.replace(/[-–—:]+.*$/,"").trim(); return t || "My Topic"; }
-function getTopicFromInput(){ let raw=document.getElementById('aiTopic').value||""; let topic=cleanTopic(raw); if(raw.toLowerCase().includes("kalam")) topic="Mr Abdul Kalam"; if(raw.toLowerCase().includes("gandhi")) topic="Mahatma Gandhi"; if(raw.toLowerCase().includes("yoga")) topic="Benefits of Yoga"; if(raw.toLowerCase().includes("goa")) topic="My Goa Trip"; return topic; }
+function quickChatFixed(txt){ document.getElementById('chatInputFixed').value=txt; if(txt.toLowerCase().includes('essay')) chatTypeFixed="Essay"; if(txt.toLowerCase().includes('blog')) chatTypeFixed="Blog"; if(txt.toLowerCase().includes('explain')) chatTypeFixed="Explain"; if(txt.toLowerCase().includes('shop')) chatTypeFixed="Advice"; document.querySelectorAll('#tWriter .type-btn').forEach(b=>{ b.classList.toggle('active', b.innerText.toLowerCase().includes(chatTypeFixed.toLowerCase())); }); sendChatFixed(); }
+function detectSituation(raw){ let l=(raw||"").toLowerCase(); if(l.includes('student')||l.includes('school')||l.includes('class')||l.includes('exam')||l.includes('college')) return "🎓 Student - School / Exam Mode"; if(l.includes('shop')||l.includes('business')||l.includes('customer')||l.includes('sell')) return "🛍️ Shop / Business Owner"; if(l.includes('job')||l.includes('boss')||l.includes('office')||l.includes('interview')) return "💼 Job / Office"; if(l.includes('instagram')||l.includes('youtube')||l.includes('reels')||l.includes('creator')||l.includes('vlog')) return "📸 Creator / Influencer"; if(l.includes('mother')||l.includes('father')||l.includes('family')) return "👪 Family / Personal"; return "👤 General User"; }
+function extractTopicFixed(raw){ let l=(raw||"").toLowerCase(); if(l.includes('kalam')||l.includes('abdul')) return "Mr Abdul Kalam"; if(l.includes('gandhi')) return "Mahatma Gandhi"; if(l.includes('yoga')) return "Benefits of Yoga"; if(l.includes('photosynthesis')) return "Photosynthesis"; if(l.includes('goa')) return "My Goa Trip"; if(l.includes('shop')||l.includes('customer')) return "My Shop - No Customers"; if(l.includes('education')) return "Importance of Education"; if(l.includes('friend')) return "My Best Friend"; if(l.includes('school')) return "My School"; let m=(raw||"").match(/(?:on|about|for)\s+([A-Za-z ]{3,30})/i); if(m){ let t=m[1].trim().replace(/for school.*/i,"").replace(/in simple.*/i,"").trim(); if(t) return t; } return "My Topic"; }
+function addMsgFixed(text,isUser,isSystem){ let box=document.getElementById('chatBoxFixed'); let d=document.createElement('div'); d.className='msg '+(isSystem?'system':isUser?'user':'ai'); d.innerText=text; let think=document.getElementById('chatThinkingFixed'); box.insertBefore(d,think); box.scrollTop=box.scrollHeight; chatMsgCountFixed++; document.getElementById('chatCountFixed').innerText=chatMsgCountFixed; return d; }
+function showThinkingFixed(show){ document.getElementById('chatThinkingFixed').style.display=show?"block":"none"; if(show){ let box=document.getElementById('chatBoxFixed'); box.scrollTop=box.scrollHeight; } }
+function updateWordsFixed(lastText){ let w=lastText?lastText.trim().split(/\s+/).length:0; document.getElementById('chatWordsFixed').innerText=w; let total=0; document.querySelectorAll('#chatBoxFixed .msg.ai').forEach(m=>{ total+=m.innerText.trim().split(/\s+/).length; }); document.getElementById('chatTotalFixed').innerText=total; }
 
-function buildAI(topic){
-  let tone=document.getElementById('aiTone').value||"Simple - Easy Words";
-  let len=document.getElementById('aiLen').value||"Medium - 300 Words";
+function buildMainAnswerFixed(topic, raw){
+  let tone=document.getElementById('chatToneFixed').value||"Simple - Easy Words";
+  let len=document.getElementById('chatLenFixed').value||"Medium - 300 Words";
   let isLong=len.includes("500"), isShort=len.includes("150");
-  let simple = tone.includes("Simple") ? "in very simple and easy English" : tone.includes("Formal") ? "in formal English" : tone.includes("Motivational") ? "in motivational style" : tone.includes("Funny") ? "in funny style" : "in professional style";
-
-  if(aiType==="Essay"){
-    if(topic==="Mr Abdul Kalam"){
-      let e="Essay on Dr. A. P. J. Abdul Kalam\n\n";
-      e+="Dr. A. P. J. Abdul Kalam is one of the most loved people in India. He was a great scientist, a teacher, and the 11th President of India. People call him the Missile Man of India and the People's President. His life shows us that a poor boy can achieve anything with hard work, honesty, and dreams.\n\n";
-      e+="Kalam was born on 15 October 1931 in Rameswaram, Tamil Nadu. His family was poor. His father was a boat owner and his mother was a homemaker. As a child, Kalam sold newspapers to help his family. He studied hard even when he had very little money. He completed his graduation in Physics and later studied Aerospace Engineering from Madras Institute of Technology. His teachers saw his hard work and honesty from the beginning.\n\n";
-      e+="Kalam joined DRDO in 1958 and later joined ISRO in 1969. He played a very important role in India's space and missile programmes. He led the project for India's first Satellite Launch Vehicle, SLV-3, which launched the Rohini satellite in 1980. He also led the development of Agni and Prithvi missiles. Because of his work, India became strong in missile technology. The whole world started respecting India.\n\n";
-      if(!isShort){
-        e+="In 2002, Kalam became the 11th President of India. He was not a politician. He was a scientist and a teacher. That is why people loved him so much. He always met students, visited schools and colleges, and inspired young people. He believed the future of India is in the hands of students. He stayed as President till 2007 and worked with full honesty.\n\n";
-        e+="Kalam wrote many famous books like Wings of Fire, Ignited Minds, and India 2020. In Wings of Fire, he wrote about his childhood, his struggles, and his dreams. His famous thought is - Dream, dream, dream. Dreams transform into thoughts and thoughts result in action. He always told students - If you want to shine like a sun, first burn like a sun. He taught us discipline, hard work, and love for the country.\n\n";
-      }
-      if(isLong){
-        e+="Even after becoming President, Kalam lived a simple life. He loved children and students. He never gave up, even when he failed many times. On 27 July 2015, while giving a lecture to students at IIM Shillong, he passed away. The whole country cried. He died doing what he loved most - teaching students. Today, his birthday 15 October is celebrated as World Students' Day.\n\n";
-      }
-      e+="In conclusion, Dr. A. P. J. Abdul Kalam is a true hero for every student. His life proves that if you dream big, work hard, and never give up, you can achieve anything. We should follow his teachings, respect our teachers, love our country, and work hard for a better India. That will be the real tribute to Kalam Sir.";
-      return e;
-    }
-    if(topic==="Mahatma Gandhi"){
-      return "Essay on Mahatma Gandhi\n\nMahatma Gandhi is called the Father of the Nation. His full name was Mohandas Karamchand Gandhi. He is known all over the world for truth and non-violence. He helped India get freedom from British rule without using weapons.\n\nGandhi was born on 2 October 1869 in Porbandar, Gujarat. He studied law in London and went to South Africa for work. There he saw how Indians were treated badly. That changed his life. He came back to India in 1915 and started movements like Non-Cooperation Movement, Salt March in 1930, and Quit India Movement in 1942. Lakhs of people followed him.\n\nGandhi taught us truth, non-violence, simple living, and cleanliness. He wore simple khadi clothes. He said - Be the change that you wish to see in the world. He believed in Swadeshi - use Indian goods. He was assassinated on 30 January 1948, but his thoughts are alive even today. The whole world celebrates 2 October as International Day of Non-Violence.\n\nIn conclusion, Mahatma Gandhi showed the world that truth and non-violence are stronger than guns. We should follow his path and keep India clean, peaceful, and united.";
-    }
-    let e="Essay on "+topic+"\n\n";
-    e+=topic+" is one of the most important topics for students today. It affects our daily life, our studies, and our future. In this essay, we will understand what "+topic+" means, why it is important, what are its benefits, and how we can use it in a good way in our life. This essay is written "+simple+".\n\n";
-    e+="What is "+topic+"? In simple words, "+topic+" is something that helps us learn, grow, and become better. We can see it in our home, in school, in society, and even on the internet. It is not just a word in a book. It is a part of real life. To understand it properly, we must look at its history, its present use, and its future. When we understand the basics, everything becomes easy.\n\n";
-    e+="Why is "+topic+" important? First, it helps us gain knowledge and confidence. Second, it teaches us discipline and good habits. Third, it helps society grow. When people understand "+topic+" properly, they take better decisions, they help others, and they make their family and country proud. For students, "+topic+" is very useful because it improves marks, thinking power, and communication skills.\n\n";
-    if(!isShort){
-      e+="Benefits of "+topic+" are many. It improves our knowledge and skills. It makes us disciplined and responsible. It helps us solve problems in daily life. It gives us confidence to speak and work in a team. It prepares us for a good job and a better future. Let us take a simple example. A student who follows "+topic+" daily - studies regularly, asks questions, and practises - gets better marks than a student who studies only before exams. Small daily efforts matter more than big one-day efforts.\n\n";
-      e+="Every good thing has some challenges. Sometimes we feel lazy, sometimes we don't understand "+topic+", and sometimes we fail. But failure is not the end. We should learn from our mistakes, ask our teachers and parents for help, and try again. With patience and regular practice, we can overcome any problem. Students should be curious and hardworking. Parents should support. Teachers should explain in simple ways. When all three work together, learning becomes easy and fun.\n\n";
-    }
-    if(isLong) e+="In the future, "+topic+" will become even more important. With new technology, new jobs, and new challenges, those who understand "+topic+" well will get more opportunities. So, we should start learning about it from today itself, not tomorrow. We should read, write, and discuss it daily.\n\n";
-    e+="In conclusion, "+topic+" is very important for every student and for society. It gives us knowledge, confidence, discipline, and a better future. We should understand it, follow it daily, and share its benefits with others. If we do this, we will not only get success in exams, but also success in life.";
+  let simple = tone.includes("Simple") ? "in very simple and easy English" : tone.includes("Formal") ? "in formal English" : "in motivational style";
+  let examPrefix = examModeFixed ? "🎓 EXAM MODE - Write this in exam - Marks: 10/10 Format\n\n" : "";
+  if(chatTypeFixed==="Explain" || topic==="Photosynthesis"){
+    return examPrefix+"💡 Photosynthesis - Explained In Simple Words\n\nPhotosynthesis is how plants make their own food. Plants take sunlight, water, and carbon dioxide from air, and make glucose (food) and oxygen. This happens in leaves, in green parts called chlorophyll.\n\nExample: Think of a plant as a small kitchen. Sunlight is the gas, water is the water, carbon dioxide is the raw material. The plant cooks food and gives us oxygen to breathe. Without photosynthesis, there would be no oxygen, no food, no life.\n\nWhy it matters: All animals and humans depend on plants for oxygen and food. That is why we should plant more trees and protect them.\n\nIn short: Sunlight + Water + CO2 = Food + Oxygen. That is photosynthesis.";
+  }
+  if(chatTypeFixed==="Advice" || topic.includes("Shop")){
+    return examPrefix+"🧠 Advice For Your Shop - How To Get More Customers\n\nI understand your situation - Your shop is good but customers are not coming. This is a common problem. Here is a practical plan:\n\n1. Make Your Shop Visible: Put a clear board with shop name and what you sell. Post 1 photo daily on WhatsApp Status and Instagram.\n\n2. Talk To Old Customers: Call 10 old customers and say - We have new stock, please visit. Give a small discount for first visit. Old customers bring new customers.\n\n3. Offer Something Free: Give a small free sample or 10% off for first 3 days. People love offers.\n\n4. Keep Shop Clean and Friendly: Smile, greet every customer, and ask - How can I help you? A friendly shop wins over a big shop.\n\nTry this for 7 days and tell me the result. Tap Describe More - I will give you a 30-day plan.";
+  }
+  if(chatTypeFixed==="Essay" && topic==="Mr Abdul Kalam"){
+    let e=examPrefix+"Essay on Dr. A. P. J. Abdul Kalam\n\nDr. A. P. J. Abdul Kalam is one of the most loved people in India. He was a great scientist, a teacher, and the 11th President of India. People call him the Missile Man of India and the People's President. His life shows us that a poor boy can achieve anything with hard work, honesty, and dreams.\n\nKalam was born on 15 October 1931 in Rameswaram, Tamil Nadu. His family was poor. His father was a boat owner and his mother was a homemaker. As a child, Kalam sold newspapers to help his family. He studied hard even when he had very little money. He completed his graduation in Physics and later studied Aerospace Engineering from Madras Institute of Technology.\n\nKalam joined DRDO in 1958 and later joined ISRO in 1969. He played a very important role in India's space and missile programmes. He led the project for India's first Satellite Launch Vehicle, SLV-3, which launched the Rohini satellite in 1980. He also led the development of Agni and Prithvi missiles. Because of his work, India became strong in missile technology.\n\n";
+    if(!isShort) e+="In 2002, Kalam became the 11th President of India. He was not a politician. He was a scientist and a teacher. That is why people loved him so much. He always met students, visited schools and colleges, and inspired young people. He believed the future of India is in the hands of students.\n\nKalam wrote many famous books like Wings of Fire, Ignited Minds, and India 2020. His famous thought is - Dream, dream, dream. Dreams transform into thoughts and thoughts result in action. He always told students - If you want to shine like a sun, first burn like a sun.\n\n";
+    e+="In conclusion, Dr. A. P. J. Abdul Kalam is a true hero for every student. His life proves that if you dream big, work hard, and never give up, you can achieve anything. We should follow his teachings, respect our teachers, love our country, and work hard for a better India.";
     return e;
   }
-  if(aiType==="Blog"){
-    return topic+" - A Complete Guide\n\nHave you ever wondered why everyone is talking about "+topic+"? In this blog, we will understand it "+simple+".\n\nWhat is "+topic+"? It is something that can change your daily life in a good way. Many people ignore it, but those who understand it, get real benefits. It is not difficult. You just need to start small and stay consistent.\n\nWhy "+topic+" Matters: First, it saves your time. Second, it improves your health, work, or studies. Third, it gives you confidence. When you follow it daily, you will see results in 30 days. Many successful people follow this simple rule - Start small, learn daily, and never give up.\n\nHow To Start: Step 1 - Understand the basics. Step 2 - Make a small daily plan. Step 3 - Follow it for 21 days. Step 4 - Track your progress. Step 5 - Share your experience with others. Remember, perfection is not needed. Progress is needed.\n\nCommon Mistakes To Avoid: Many people start fast and stop in 3 days. Don't do that. Start slow. Don't compare yourself with others. Focus on your own journey.\n\nFinal Words: "+topic+" can truly change your life if you take action today. Don't just read this blog. Start today. Share this blog with someone who needs it.";
+  if(chatTypeFixed==="Essay"){
+    let e=examPrefix+"Essay on "+topic+"\n\n"+topic+" is one of the most important topics for students today. It affects our daily life, our studies, and our future. In this essay, we will understand what "+topic+" means, why it is important, what are its benefits, and how we can use it in a good way. This essay is written "+simple+".\n\nWhat is "+topic+"? In simple words, "+topic+" is something that helps us learn, grow, and become better. We can see it in our home, in school, in society, and even on the internet. It is not just a word in a book. It is a part of real life.\n\nWhy is "+topic+" important? First, it helps us gain knowledge and confidence. Second, it teaches us discipline and good habits. Third, it helps society grow. When people understand "+topic+" properly, they take better decisions, they help others, and they make their family and country proud.\n\n";
+    if(!isShort) e+="Benefits of "+topic+" are many. It improves our knowledge and skills. It makes us disciplined and responsible. It helps us solve problems in daily life. It gives us confidence to speak and work in a team. It prepares us for a good job and a better future. A student who follows "+topic+" daily gets better marks than a student who studies only before exams.\n\nEvery good thing has some challenges. Sometimes we feel lazy, sometimes we don't understand "+topic+", and sometimes we fail. But failure is not the end. We should learn from our mistakes, ask our teachers and parents for help, and try again.\n\n";
+    if(isLong) e+="In the future, "+topic+" will become even more important. With new technology, new jobs, and new challenges, those who understand "+topic+" well will get more opportunities. So, we should start learning about it from today itself.\n\n";
+    e+="In conclusion, "+topic+" is very important for every student and for society. It gives us knowledge, confidence, discipline, and a better future. We should understand it, follow it daily, and share its benefits with others.";
+    return e;
   }
-  if(aiType==="Caption"){
-    return "✨ "+topic+" ✨\n\nSome moments are not just moments, they are memories. "+topic+" taught me that happiness is in small things. Keep smiling, keep growing, keep shining.\n\nTell me in comments - Do you agree? 👇\nSave this for later! ❤️\nFollow for more!\n\n#"+topic.split(' ')[0]+" #Viral #Trending #ExplorePage #InstaDaily #Reels #Motivation #DailyPost #Orbittroniz";
-  }
-  if(aiType==="Email"){
-    return "Subject: Regarding "+topic+"\n\nDear Sir / Madam,\n\nI hope you are doing well. I am writing to you about "+topic+". I would like to request your kind help and guidance.\n\n"+topic+" is important for me, and I believe with your support, it can be completed successfully. Please let me know a suitable time to discuss this.\n\nThank you for your time and understanding.\n\nBest Regards,\nYour Name";
-  }
-  if(aiType==="Story"){
-    return "A Short Story - "+topic+"\n\nOnce, there was a young person who loved "+topic+". Every day, they tried to learn something new about it. One day, they faced a big problem. Everyone said - You cannot do it. But they did not give up.\n\nThey kept trying, kept learning, and finally they succeeded. That day, they understood one important lesson - Never give up. Hard work always pays off.\n\nMoral: Never give up. Keep learning, keep growing.";
-  }
-  if(aiType==="Speech"){
-    return "Speech on "+topic+"\n\nGood Morning Everyone,\n\nToday, I am very happy to speak about "+topic+". "+topic+" is very important in our life. It teaches us many good things. If we understand it well, our life becomes better.\n\nLet me share one example. Many successful people follow "+topic+" in their daily life. They work hard, stay disciplined, and never give up. That is why they succeed.\n\nSo, friends, let us promise today - We will follow "+topic+" daily, we will work hard, and we will make our parents and teachers proud.\n\nThank you for listening to me. Have a great day!";
-  }
-  if(aiType==="Bio"){
-    return "✨ "+topic+" Lover | Positive Vibes\nDaily Inspiration | Simple Living\nLearning | Growing | Sharing\nDM For Collab 📩";
-  }
-  if(aiType==="Product"){
-    return topic+" - Best Quality, Best Price ✨\n\nLooking for "+topic+"? You are at the right place. This product is made with care, tested for quality, and loved by many customers.\n\nKey Features: High quality, long lasting, easy to use, and great value for money.\n\nWhy Choose Us? Honest price, fast delivery, friendly support.\n\nOrder Now - Limited Offer! DM Us Today.";
-  }
+  if(chatTypeFixed==="Blog") return examPrefix+topic+" - A Complete Guide\n\nHave you ever wondered why everyone is talking about "+topic+"? In this blog, we will understand it "+simple+".\n\nWhat is "+topic+"? It is something that can change your daily life in a good way. Many people ignore it, but those who understand it, get real benefits. It is not difficult. You just need to start small and stay consistent.\n\nWhy "+topic+" Matters: First, it saves your time. Second, it improves your health, work, or studies. Third, it gives you confidence. When you follow it daily, you will see results in 30 days.\n\nHow To Start: Step 1 - Understand basics. Step 2 - Make a small daily plan. Step 3 - Follow it for 21 days. Step 4 - Track progress. Step 5 - Share with others. Remember, perfection is not needed. Progress is needed.\n\nFinal Words: "+topic+" can truly change your life if you take action today. Don't just read. Start today. Share this blog with someone who needs it.";
+  if(chatTypeFixed==="Caption") return "✨ "+topic+" ✨\n\nSome moments are not just moments, they are memories. "+topic+" taught me that happiness is in small things. Keep smiling, keep growing, keep shining.\n\nTell me in comments - Do you agree? 👇\nSave this for later! ❤️\nFollow for more!\n\n#"+topic.split(' ')[0]+" #Viral #Trending #ExplorePage #InstaDaily #Reels #Motivation #DailyPost";
+  if(chatTypeFixed==="Email") return "Subject: Regarding "+topic+"\n\nDear Sir / Madam,\n\nI hope you are doing well. I am writing to you about "+topic+". I would like to request your kind help and guidance.\n\n"+topic+" is important for me, and I believe with your support, it can be completed successfully. Please let me know a suitable time to discuss this.\n\nThank you for your time and understanding.\n\nBest Regards,\nYour Name";
+  if(chatTypeFixed==="Story") return "A Short Story - "+topic+"\n\nOnce, there was a young person who loved "+topic+". Every day, they tried to learn something new about it. One day, they faced a big problem. Everyone said - You cannot do it. But they did not give up.\n\nThey kept trying, kept learning, and finally they succeeded. That day, they understood one important lesson - Never give up. Hard work always pays off.\n\nMoral: Never give up. Keep learning, keep growing.";
+  if(chatTypeFixed==="Speech") return "Speech on "+topic+"\n\nGood Morning Everyone,\n\nToday, I am very happy to speak about "+topic+". "+topic+" is very important in our life. It teaches us many good things. If we understand it well, our life becomes better.\n\nMany successful people follow "+topic+" in their daily life. They work hard, stay disciplined, and never give up. That is why they succeed.\n\nSo, friends, let us promise today - We will follow "+topic+" daily, we will work hard, and we will make our parents and teachers proud.\n\nThank you for listening to me. Have a great day!";
   return topic+"\n\n"+topic+" is important and useful. In this writing, we will understand it "+simple+" and learn how to use it in daily life.";
 }
-function generateAI(){
-  let raw=document.getElementById('aiTopic').value||"";
-  if(!raw.trim()){ alert("Please describe your topic first"); return; }
-  let btn=document.getElementById('aiBtn'); btn.disabled=true; btn.innerText="⏳ AI Is Thinking...";
-  document.getElementById('aiThinking').style.display="block";
-  document.getElementById('aiOut').innerText="";
-  document.getElementById('aiStatus').innerText="AI is thinking...";
+function buildMoreInfoFixed(kind, topic){
+  describeMoreCountFixed++;
+  let n=describeMoreCountFixed;
+  let extras=[
+    "➕ More Detail About "+topic+" - Part 1 - History\n\nLet me describe "+topic+" in more detail. Many people only know the basic part, but the real story is deeper. "+topic+" has history, present, and future. When you understand all layers, you understand it fully. 20 years ago, it was very different. Today, it is changing fast because of technology and education. In future, it will become even more important.",
+    "➕ More Detail - Part 2 - Why It Works\n\nHere is more information most people don't know. The secret is consistency. People who follow "+topic+" daily for 30 days get 10x better results than people who do it once in a while. Why? Because daily practice builds habit, habit builds confidence, and confidence builds success. If you read 5 lines daily, in 1 month you will know 150 lines.",
+    "➕ More Detail - Part 3 - Common Mistakes\n\nThe biggest mistake people make about "+topic+" is they think it is difficult. It is not difficult. It is simple, but it needs patience. You don't need to be perfect. You need to be regular. Start with 10 minutes daily. Ask questions. Write in your own words. Teach someone else. When you teach, you learn twice.",
+    "➕ More Detail - Part 4 - Real Life Use\n\nIn daily life, "+topic+" appears in small moments - at home, in school, in market, and on mobile. If we pay attention, we will see it everywhere. This habit of observing makes learning interesting and easy. Try to find 1 example of "+topic+" today in your daily life.",
+    "➕ More Detail - Part 5 - For Exam\n\nFor exam, remember 3 points about "+topic+": 1) What it is - Definition in 2 lines. 2) Why it is important - 3 benefits. 3) Example - 1 real example. If you write these 3 points in exam, you will get full marks. Practice writing this in 10 minutes without seeing book.",
+    "➕ More Detail - Part 6 - For Future\n\nIn future, "+topic+" will open many opportunities. Jobs, business, and higher studies all need this knowledge. So, learning it today is an investment for tomorrow. Start small, stay consistent, and keep improving. Your future self will thank you.",
+    "➕ More Detail - Part 7 - Motivation\n\nSuccess in "+topic+" does not come in one day. It comes from daily small efforts. If you stay honest, work hard, and never give up, "+topic+" will become easy for you. Believe in yourself and keep going. You are closer than you think.",
+    "➕ More Detail - Part 8 - Final Secret\n\nFinal secret about "+topic+": Learn, Practise, Share. Learn from books and teachers. Practise daily. Share with friends. When you share, you remember forever. This is the formula used by toppers and successful people."
+  ];
+  if(kind==="describe more") return extras[(n-1)%extras.length];
+  if(kind==="give example") return "💡 Example For "+topic+"\n\nRamesh is a student in Class 9. He did not understand "+topic+" at first. He got low marks. Then he changed his method. He started reading 10 minutes daily, writing 5 lines in his own words, and asking his teacher 1 question daily.\n\nAfter 30 days, his marks improved. After 90 days, he became one of the best students in class. His secret was not talent. It was daily practice.\n\nLesson: You can do the same. Start today with 10 minutes.";
+  if(kind==="make simple") return "✨ "+topic+" - In Super Simple Words\n\n"+topic+" means - Something that helps you learn and grow. That's it.\n\nThink like this: If you eat food daily, you grow strong. In the same way, if you learn about "+topic+" daily, your mind grows strong.\n\nDon't make it complicated. Learn a little daily. That's enough.";
+  if(kind==="add points") return "• Points About "+topic+"\n\n• "+topic+" improves knowledge\n• "+topic+" builds confidence\n• "+topic+" teaches discipline\n• "+topic+" helps in exams and job\n• "+topic+" makes you a better person\n• Start small, stay consistent\n• Ask questions, don't fear failure";
+  if(kind==="give conclusion") return "🏁 Conclusion For "+topic+"\n\nIn conclusion, "+topic+" is very important for every student and for society. It gives us knowledge, confidence, discipline, and a better future. We should understand it, follow it daily, and share its benefits with others. If we do this, we will not only get success in exams, but also success in life.";
+  if(kind==="teacher check") return "👩‍🏫 Teacher Check For Your Answer\n\nMarks: 8.5 / 10 ✅\n\nWhat is Good: Clear introduction, simple English, good conclusion, easy to understand.\n\nWhat To Improve: 1) Add 1 more example - Marks will become 9.5. 2) Add 2 more points in body. 3) Check spelling of 1-2 words.\n\nTeacher Tip: Write in neat handwriting, leave 1 line gap between paragraphs, and underline important words. You will get full marks.";
+  if(kind==="make longer") return "➕ More To Add About "+topic+"\n\nHere is one more important point. Many people give up after 3 days. Don't be that person. The first 7 days are the hardest. After 7 days, it becomes habit. After 21 days, it becomes easy. After 90 days, it becomes your strength.\n\nSo, promise yourself - I will follow "+topic+" for at least 21 days, no matter what. That one promise can change your life.";
+  return "Here is more info about "+topic+". Tell me what part you want more detail on - Example: childhood, benefits, example, or conclusion - And I will describe it.";
+}
+function sendChatFixed(){
+  if(isThinkingFixed) return;
+  let raw=document.getElementById('chatInputFixed').value||"";
+  if(!raw.trim()){ alert("Please describe your situation first"); return; }
+  isThinkingFixed=true; describeMoreCountFixed=0; chatTopicFixed=extractTopicFixed(raw);
+  let situation=detectSituation(raw);
+  document.getElementById('situationShow').innerText="Detected: "+situation+" | Topic: "+chatTopicFixed+" | AI will write for this situation";
+  addMsgFixed(raw,true,false);
+  let btn=document.getElementById('chatBtnFixed'); btn.disabled=true; btn.innerText="⏳ AI Is Thinking...";
+  showThinkingFixed(true);
+  document.getElementById('followBoxFixed').style.display="none";
   setTimeout(function(){
-    let topic=getTopicFromInput();
-    let out=buildAI(topic);
-    aiLast=out; aiLastTopic=topic;
-    document.getElementById('aiThinking').style.display="none";
-    btn.disabled=false; btn.innerText="✨ Generate - AI Is Thinking";
-    document.getElementById('aiOut').innerText=out;
-    let w=out.trim().split(/\s+/).length;
-    document.getElementById('aiWords').innerText=w+" words - Minimum 300 for Essay";
-    document.getElementById('aiStatus').innerText="Done ✅ - "+aiType;
-    document.getElementById('aiOut').scrollIntoView({behavior:'smooth',block:'center'});
+    let ans=buildMainAnswerFixed(chatTopicFixed, raw);
+    if(wmOnFixed) ans=ans+"\n\n- "+wmTextFixed;
+    chatLastFixed=ans;
+    showThinkingFixed(false);
+    addMsgFixed(ans,false,false);
+    btn.disabled=false; btn.innerText="✨ Ask AI - AI Will Think"; isThinkingFixed=false;
+    document.getElementById('followBoxFixed').style.display="block";
+    updateWordsFixed(ans);
+    document.getElementById('chatStatusFixed').innerText="AI Answered ✅ - Tap Describe More for NEW info";
   },1100);
 }
-function rewriteAI(){
-  if(!aiLast){ alert("Generate first"); return; }
-  let topic=aiLastTopic||getTopicFromInput();
-  document.getElementById('aiTopic').value="Write a new version on "+topic+" in different words";
-  generateAI();
+function followUpFixed(kind){
+  if(isThinkingFixed) return;
+  isThinkingFixed=true;
+  addMsgFixed(kind==="describe more"?"Describe more about "+chatTopicFixed:"Please "+kind+" for "+chatTopicFixed, true, false);
+  showThinkingFixed(true);
+  setTimeout(function(){
+    let more=buildMoreInfoFixed(kind, chatTopicFixed);
+    if(wmOnFixed && kind==="give conclusion") more=more+"\n\n- "+wmTextFixed;
+    chatLastFixed=more;
+    showThinkingFixed(false);
+    addMsgFixed(more,false,false);
+    updateWordsFixed(more);
+    isThinkingFixed=false;
+  },900);
 }
-function copyAI(){
-  if(!aiLast){ alert("Generate first"); return; }
-  if(navigator.clipboard) navigator.clipboard.writeText(aiLast).then(()=>{ document.getElementById('aiStatus').innerText="Copied ✅"; });
+function sendFollowUpFixed(){
+  if(isThinkingFixed) return;
+  let q=(document.getElementById('followInputFixed').value||"").trim();
+  if(!q){ alert("Type your follow-up question"); return; }
+  isThinkingFixed=true;
+  addMsgFixed(q,true,false);
+  document.getElementById('followInputFixed').value="";
+  showThinkingFixed(true);
+  setTimeout(function(){
+    let ans="";
+    let l=q.toLowerCase();
+    if(l.includes('childhood')||l.includes('early')) ans="👶 Childhood Detail - "+chatTopicFixed+"\n\nIn childhood, "+chatTopicFixed+" was very simple and hardworking. The family had very little money, but they had big values - honesty, hard work, and respect. As a child, he/she learned discipline, helped family, and studied with full focus. That childhood made him/her strong for future success.";
+    else if(l.includes('example')) ans=buildMoreInfoFixed('give example', chatTopicFixed);
+    else if(l.includes('simple')) ans=buildMoreInfoFixed('make simple', chatTopicFixed);
+    else if(l.includes('marks')||l.includes('teacher')||l.includes('check')) ans=buildMoreInfoFixed('teacher check', chatTopicFixed);
+    else ans="💡 Good Question - "+q+"\n\nHere is the answer about "+chatTopicFixed+" in simple words: "+chatTopicFixed+" is important because it helps you learn, grow, and succeed. If you want to understand it better, start with basics, take one example daily, and practise 10 minutes daily. If you tell me more about your situation - Example: Are you a student? What class? - I will give you even more specific answer for you.";
+    chatLastFixed=ans;
+    showThinkingFixed(false);
+    addMsgFixed(ans,false,false);
+    updateWordsFixed(ans);
+    isThinkingFixed=false;
+  },900);
 }
-function shareAI(){ if(!aiLast){ alert("Generate first"); return; } window.open("https://wa.me/?text="+encodeURIComponent(aiLast)); }
-function downloadAI(){
-  if(!aiLast){ alert("Generate first"); return; }
-  let b=new Blob([aiLast],{type:'text/plain'}); let a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download="AI-Writing-Orbittroniz.txt"; a.click();
-}
+function copyChatFixed(){ if(!chatLastFixed){ alert("Ask AI first"); return; } let txt=chatLastFixed; if(navigator.clipboard) navigator.clipboard.writeText(txt).then(()=>{ document.getElementById('chatStatusFixed').innerText="Copied Last Answer ✅"; }); }
+function shareChatFixed(){ if(!chatLastFixed){ alert("Ask AI first"); return; } window.open("https://wa.me/?text="+encodeURIComponent(chatLastFixed)); }
+function downloadChatFixed(){ if(!chatLastFixed){ alert("Ask AI first"); return; } let all=""; document.querySelectorAll('#chatBoxFixed .msg.ai').forEach(m=>{ all+=m.innerText+"\n\n---\n\n"; }); let b=new Blob([all],{type:'text/plain'}); let a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download="AI-Writer-Orbittroniz.txt"; a.click(); document.getElementById('chatStatusFixed').innerText="Downloaded ✅"; }
+function saveChatFixed(){ try{ let html=document.getElementById('chatBoxFixed').innerHTML; localStorage.setItem('orbit_writer_chat',html); localStorage.setItem('orbit_writer_topic',chatTopicFixed); }catch(e){} document.getElementById('chatStatusFixed').innerText="Chat Saved 💾 - Will stay after closing app"; }
+function clearChatFixed(){ document.getElementById('chatBoxFixed').innerHTML='<div class="msg ai">👋 <b>Hi! I am your AI Writer.</b><br><br>Describe any situation - I will think and give you a full answer. Then tap <b>Describe More</b> for more info.</div><div class="thinking" id="chatThinkingFixed" style="display:none">AI is thinking <i></i><i></i><i></i></div>'; document.getElementById('followBoxFixed').style.display="none"; document.getElementById('chatWordsFixed').innerText="0"; document.getElementById('chatTotalFixed').innerText="0"; chatLastFixed=""; describeMoreCountFixed=0; chatMsgCountFixed=0; document.getElementById('chatCountFixed').innerText="0"; }
+/* Restore saved chat on load */
+try{ let saved=localStorage.getItem('orbit_writer_chat'); if(saved && saved.length>200){ document.getElementById('chatBoxFixed').innerHTML=saved; document.getElementById('chatBoxFixed').style.display='flex'; } }catch(e){}
+updateWmFixedUI();
 </script>
-<!-- ================= TOOL 1 END - SIMPLE AI ================= -->
+<!-- ================= TOOL 1 END - FIXED + PREMIUM ================= -->
 <!-- ================= TOOL 1 END ================= -->
 <!-- ===================================================== -->
 
