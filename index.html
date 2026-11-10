@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbittroniz.com - AI Tools - Free</title>
+<!-- LIBRARY START -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<!-- LIBRARY END -->
+
+<!-- ===================================================== -->
+<!-- ================= THEME START ======================= -->
+<!-- ===== LIGHT PREMIUM - WHITE HEADER + WHITE FOOTER === -->
+<!-- ===== CHANGE COLOUR HERE ONLY - FULL APP CHANGES ==== -->
+<!-- ===================================================== -->
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:linear-gradient(180deg,#EEF0FF 0%,#F8F9FF 40%,#FFF5F8 100%);color:#111827;font-family:system-ui,-apple-system,Arial,sans-serif;padding-bottom:112px;overflow-x:hidden}
+.blob{position:fixed;border-radius:50%;filter:blur(70px);opacity:.45;z-index:-1;pointer-events:none}
+.blob1{width:260px;height:260px;background:#C7D2FE;top:-80px;left:-80px;animation:bf 9s ease-in-out infinite}
+.blob2{width:220px;height:220px;background:#A5F3FC;top:300px;right:-90px;animation:bf 10s ease-in-out infinite;animation-delay:1s}
+.blob3{width:200px;height:200px;background:#FBCFE8;bottom:100px;left:30%;animation:bf 11s ease-in-out infinite;animation-delay:2s}
+@keyframes bf{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-22px) scale(1.1)}}
+@keyframes flow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes shineMove{0%{left:-70%}60%,100%{left:130%}}
+/* ================= THEME - HEADER START ================= */
+.header{background:rgba(255,255,255,.94);backdrop-filter:blur(20px);padding:13px 13px 13px;border-radius:0 0 28px 28px;position:sticky;top:0;z-index:100;box-shadow:0 10px 30px rgba(124,58,237,.14);border:1px solid #EDE9FE;border-top:none}
+.top{display:flex;align-items:center;justify-content:space-between;gap:7px}
+.doodle-wrap{flex:1;min-width:0}
+.doodle-logo{display:flex;font-weight:900;letter-spacing:-1.2px;line-height:1;font-size:25px;white-space:nowrap;cursor:pointer;animation:floatY 4s ease-in-out infinite}
+.doodle-logo span{display:inline-block;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:lb 3.2s ease-in-out infinite}
+@keyframes lb{0%,100%{transform:translateY(0)}20%{transform:translateY(-5px) scale(1.06)}}
+.doodle-logo span:nth-child(1){background-image:linear-gradient(180deg,#8B5CF6,#6D28D9);animation-delay:0s;position:relative}
+.doodle-logo span:nth-child(1)::after{content:"";position:absolute;width:138%;height:36%;left:-19%;top:34%;border:2.2px solid #06B6D4;border-radius:50%;transform:rotate(-18deg)}
+.doodle-logo span:nth-child(2){background-image:linear-gradient(180deg,#F472B6,#DB2777);animation-delay:.12s}
+.doodle-logo span:nth-child(3){background-image:linear-gradient(180deg,#22D3EE,#0891B2);animation-delay:.24s}
+.doodle-logo span:nth-child(4){background-image:linear-gradient(180deg,#FBBF24,#D97706);animation-delay:.36s}
+.doodle-logo span:nth-child(5){background-image:linear-gradient(180deg,#4ADE80,#16A34A);animation-delay:.48s}
+.doodle-logo span:nth-child(6){background-image:linear-gradient(180deg,#A78BFA,#7C3AED);animation-delay:.6s}
+.doodle-logo span:nth-child(7){background-image:linear-gradient(180deg,#F472B6,#BE185D);animation-delay:.72s}
+.doodle-logo span:nth-child(8){background-image:linear-gradient(180deg,#60A5FA,#2563EB);animation-delay:.84s}
+.doodle-logo span:nth-child(9){background-image:linear-gradient(180deg,#22D3EE,#0E7490);animation-delay:.96s}
+.doodle-logo span:nth-child(10){background-image:linear-gradient(180deg,#FB923C,#EA580C);animation-delay:1.08s}
+.doodle-logo span:nth-child(11){background-image:linear-gradient(180deg,#4ADE80,#15803D);animation-delay:1.2s}
+.doodle-sub{font-size:10.5px;color:#6B7280;margin-top:3px;font-weight:600}.doodle-sub b{color:#7C3AED}
+.ai-badge{background:linear-gradient(135deg,#FEF3C7,#FDE68A);color:#92400E;border:1px solid #FDE68A;font-size:9px;font-weight:900;padding:5px 8px;border-radius:20px}
+/* ================= THEME - HEADER END ================= */
+/* ================= THEME - SEARCH START ================= */
+.search{margin-top:12px;background:#fff;border:1.5px solid #E5E7EB;border-radius:18px;display:flex;padding:4px 4px 4px 14px;box-shadow:0 8px 20px rgba(0,0,0,.06)}
+.search input{flex:1;border:none;outline:none;padding:11px 4px;font-size:14px;color:#111;background:transparent;font-weight:600}
+.search button{background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;border:none;padding:11px 20px;border-radius:14px;font-weight:900;cursor:pointer;box-shadow:0 8px 16px rgba(124,58,237,.35)}
+/* ================= THEME - SEARCH END ================= */
+/* ================= THEME - GREETING / HERO START ================= */
+.greet{margin:14px 14px 0;background:#fff;border:1px solid #EDE9FE;border-radius:22px;padding:14px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 10px 24px rgba(124,58,237,.10);position:relative;overflow:hidden}
+.greet::after{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#7C3AED,#EC4899,#22D3EE,#F59E0B)}
+.greet h2{font-size:17px}.greet p{font-size:11px;color:#6B7280;margin-top:3px}
+.greet-right{text-align:right}.greet-right b{font-size:18px;color:#7C3AED}.greet-right span{display:block;font-size:10px;color:#6B7280}
+.shop-mode{margin:10px 14px 0;background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border:1px solid #A7F3D0;border-radius:18px;padding:11px 13px;display:flex;justify-content:space-between;align-items:center}
+.shop-mode.off{background:linear-gradient(135deg,#FEF2F2,#FEE2E2);border-color:#FECACA}
+.shop-mode b{font-size:13px}.shop-mode p{font-size:10.5px;color:#6B7280}
+.toggle{width:52px;height:28px;background:#22C55E;border-radius:30px;position:relative;cursor:pointer;flex-shrink:0;transition:.2s}.toggle.off{background:#9CA3AF}
+.toggle::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:.2s}.toggle.off::after{left:27px}
+.hero{margin:12px 14px;padding:18px;background:linear-gradient(135deg,#7C3AED,#EC4899 45%,#F59E0B);background-size:200% 200%;animation:flow 5s ease infinite;border-radius:24px;text-align:center;position:relative;overflow:hidden;box-shadow:0 18px 32px rgba(124,58,237,.28);color:#fff}
+.hero::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:shineMove 3s ease infinite}
+.hero h2{font-size:19px;line-height:1.3;position:relative;z-index:1}.hero p{font-size:12px;opacity:.9;margin-top:6px;position:relative;z-index:1}
+.hero-btns{display:flex;gap:9px;margin-top:13px;position:relative;z-index:1}
+.hero-btns button{flex:1;padding:13px;border:none;border-radius:16px;font-weight:900;cursor:pointer}
+.hb1{background:#fff;color:#7C3AED}.hb2{background:rgba(255,255,255,.22);color:#fff;border:1.5px solid rgba(255,255,255,.5) !important}
+/* ================= THEME - GREETING / HERO END ================= */
+/* ================= THEME - DASHBOARD START ================= */
+.wrap{padding:0 14px}
+.sec{display:flex;justify-content:space-between;align-items:center;margin:16px 2px 10px}.sec b{font-size:16px}.sec a{font-size:11px;color:#7C3AED;font-weight:800}
+.cat-row{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}
+.cat-item{flex-shrink:0;text-align:center;width:62px;cursor:pointer}
+.cat-item .cat-ic{width:52px;height:52px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:24px;background:#fff;border:1px solid #EDE9FE;box-shadow:0 8px 16px rgba(0,0,0,.06)}
+.cat-item.active .cat-ic{background:linear-gradient(135deg,#7C3AED,#EC4899);border:none}
+.cat-item span{font-size:10.5px;font-weight:700;color:#374151;display:block;margin-top:5px}.cat-item.active span{color:#7C3AED}
+.dash-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.dash-stat{background:#fff;border:1px solid #EDE9FE;border-radius:18px;padding:13px 6px;text-align:center;box-shadow:0 8px 18px rgba(0,0,0,.05);position:relative;overflow:hidden}
+.dash-stat::after{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7C3AED,#EC4899,#22D3EE)}
+.dash-stat b{display:block;font-size:18px}.dash-stat span{font-size:10px;color:#6B7280}
+.chip-row{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:none;margin-top:12px}
+.chip{white-space:nowrap;background:#fff;border:1.5px solid #E5E7EB;padding:10px 15px;border-radius:22px;font-size:12.5px;cursor:pointer;color:#374151;font-weight:800}
+.chip.active{background:linear-gradient(135deg,#7C3AED,#EC4899);border:none;color:#fff;box-shadow:0 10px 20px rgba(124,58,237,.35)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:12px}
+.card{background:#fff;border:1px solid #EDE9FE;border-radius:24px;padding:16px;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 12px 24px rgba(0,0,0,.06);transition:.2s}
+.card:active{transform:scale(.96)}.card:hover{transform:translateY(-3px);box-shadow:0 18px 32px rgba(124,58,237,.16);border-color:#C7D2FE}
+.card::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);animation:shineMove 4s ease infinite;pointer-events:none}
+.card .ic{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;animation:floatY 3s ease-in-out infinite;position:relative;z-index:2}
+.ic-purple{background:linear-gradient(135deg,#EDE9FE,#DDD6FE)}.ic-pink{background:linear-gradient(135deg,#FCE7F3,#FBCFE8)}.ic-cyan{background:linear-gradient(135deg,#CFFAFE,#A5F3FC)}.ic-orange{background:linear-gradient(135deg,#FEF3C7,#FDE68A)}.ic-green{background:linear-gradient(135deg,#DCFCE7,#BBF7D0)}.ic-blue{background:linear-gradient(135deg,#DBEAFE,#BFDBFE)}
+.card b{display:block;font-size:14px;margin-top:11px;position:relative;z-index:2}.card p{font-size:11.5px;color:#6B7280;margin-top:4px;position:relative;z-index:2}
+.card .feat{font-size:10px;color:#7C3AED;margin-top:8px;font-weight:800;background:#F5F3FF;border:1px solid #EDE9FE;padding:6px 8px;border-radius:10px;display:inline-block;position:relative;z-index:2}
+.card .open-btn{margin-top:12px;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;border:none;padding:11px;width:100%;border-radius:13px;font-weight:900;cursor:pointer;font-size:12.5px;position:relative;z-index:2}
+.card .fav{position:absolute;top:10px;right:10px;background:#F3F4F6;border:1px solid #E5E7EB;color:#9CA3AF;padding:6px 9px;border-radius:20px;cursor:pointer;z-index:3}
+.card .fav.on{color:#F59E0B;background:#FEF3C7}
+.badge{position:absolute;top:10px;left:10px;color:#fff;font-size:9px;font-weight:900;padding:5px 10px;border-radius:20px;z-index:3}
+.badge.hot{background:linear-gradient(135deg,#F59E0B,#F97316)}.badge.new{background:linear-gradient(135deg,#2563EB,#3B82F6)}.badge.ai{background:linear-gradient(135deg,#EC4899,#8B5CF6)}.badge.free{background:linear-gradient(135deg,#16A34A,#22C55E)}.badge.unique{background:linear-gradient(135deg,#7C3AED,#F59E0B)}
+.wide{grid-column:span 2;background:linear-gradient(135deg,#7C3AED,#EC4899,#F59E0B);background-size:200% 200%;animation:flow 5s ease infinite;border:none}
+.wide b,.wide p{color:#fff}.wide .feat{color:#fff;background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.4)}
+.wide .open-btn{background:#fff !important;color:#7C3AED !important}
+/* ================= THEME - DASHBOARD END ================= */
+/* ================= THEME - UPCOMING + UNIQUE START ================= */
+.upcoming{margin-top:18px;background:#fff;border:1.5px dashed #C7D2FE;border-radius:22px;padding:15px;box-shadow:0 10px 22px rgba(124,58,237,.08)}
+.upcoming h3{font-size:15px}.upcoming p{font-size:11px;color:#6B7280;margin-top:3px}
+.up-card{display:flex;gap:11px;align-items:center;background:#F8F9FF;border:1px solid #EDE9FE;border-radius:16px;padding:11px;margin-top:10px}
+.up-card .up-ic{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.up-card b{font-size:13px;display:block}.up-card span{font-size:10.5px;color:#6B7280}
+.up-card .notify{margin-left:auto;flex-shrink:0;background:#111827;color:#fff;border:none;padding:8px 12px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer}
+.up-card .notify.done{background:#22C55E}
+.up-lock{font-size:10px;background:#FEF3C7;color:#92400E;padding:4px 8px;border-radius:20px;font-weight:800;display:inline-block;margin-top:5px}
+.unique-card{background:#fff;border:1px solid #EDE9FE;border-radius:20px;padding:14px;margin-top:10px;display:flex;gap:11px;box-shadow:0 8px 18px rgba(0,0,0,.05)}
+.unique-card .u-ic{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;background:#F5F3FF;border:1px solid #EDE9FE}
+.unique-card b{font-size:13px}.unique-card p{font-size:11px;color:#6B7280;margin-top:2px;line-height:1.5}
+/* ================= THEME - UPCOMING + UNIQUE END ================= */
+/* ================= THEME - TOOL BOX START ================= */
+.tool{display:none;background:#fff;border:1.5px solid #EDE9FE;border-radius:26px;padding:18px;margin-top:16px;box-shadow:0 18px 32px rgba(0,0,0,.08);position:relative;overflow:hidden}
+.tool::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#7C3AED,#EC4899,#22D3EE,#F59E0B)}
+.tool h3{text-align:center;font-size:18px}.tool .tool-hint{font-size:11px;color:#6B7280;text-align:center;margin-top:6px;background:#F8F9FF;border:1px solid #EDE9FE;padding:9px;border-radius:12px}
+.tool label{font-size:11px;font-weight:900;display:block;margin-top:13px;color:#374151}
+.tool input,.tool select,.tool textarea{width:100%;background:#F9FAFB;color:#111827;padding:13px;border-radius:14px;border:1.5px solid #E5E7EB;margin-top:5px;font-size:14px}
+.tool input:focus{border-color:#7C3AED;box-shadow:0 0 0 4px rgba(124,58,237,.12);outline:none;background:#fff}
+.tool-section{background:#F8F9FF;border:1px solid #EDE9FE;border-radius:18px;padding:13px;margin-top:12px}
+.tool-section b{font-size:12.5px}.tool-section p{font-size:11px;color:#6B7280;margin-top:3px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.row3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:7px;margin-top:7px}
+.out{margin-top:12px;text-align:center;font-size:12px;color:#7C3AED;word-break:break-word;background:#F5F3FF;border:1px solid #EDE9FE;padding:12px;border-radius:16px}
+.out img{max-width:100%;border-radius:12px;margin-top:8px;background:#fff}
+/* ================= THEME - TOOL BOX END ================= */
+/* ================= THEME - BUTTON START ================= */
+/* USE: .btn / .btn green / blue / pink / orange / dark */
+.btn{position:relative;overflow:hidden;width:100%;padding:15px;border:none;border-radius:16px;font-weight:900;cursor:pointer;margin-top:11px;color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);background-size:200% 200%;animation:flow 3s ease infinite;box-shadow:0 12px 22px rgba(124,58,237,.30),0 3px 0 #5B21B6;transition:.15s;font-size:14px}
+.btn::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);animation:shineMove 2.6s ease infinite}
+.btn:active{transform:translateY(3px)}
+.btn.green{background:linear-gradient(135deg,#16A34A,#22C55E);box-shadow:0 12px 22px rgba(34,197,94,.30),0 3px 0 #166534}
+.btn.blue{background:linear-gradient(135deg,#2563EB,#3B82F6);box-shadow:0 12px 22px rgba(59,130,246,.30),0 3px 0 #1E40AF}
+.btn.pink{background:linear-gradient(135deg,#DB2777,#EC4899);box-shadow:0 12px 22px rgba(236,72,153,.30),0 3px 0 #9D174D}
+.btn.orange{background:linear-gradient(135deg,#D97706,#F59E0B);box-shadow:0 12px 22px rgba(245,158,11,.30),0 3px 0 #92400E}
+.btn.dark{background:#F3F4F6 !important;color:#111827 !important;border:1.5px solid #E5E7EB !important;box-shadow:none !important;animation:none !important}
+.btn.dark::after{display:none}
+.close{float:right;background:#F3F4F6;color:#111827;border:1px solid #E5E7EB;width:34px;height:34px;border-radius:50%;font-weight:900;cursor:pointer}
+.chip2{display:inline-block;background:#fff;border:1.5px solid #E5E7EB;padding:9px 13px;border-radius:20px;font-size:11.5px;margin:5px 5px 0 0;cursor:pointer;font-weight:700;color:#374151}
+.chip2.active{background:linear-gradient(135deg,#7C3AED,#EC4899);border:none;color:#fff}
+.feature-box{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:12px;text-align:center}
+.feature-box div{background:#F8F9FF;border:1px solid #EDE9FE;padding:12px 4px;border-radius:16px;font-size:11px}
+.feature-box b{display:block;font-size:18px}
+/* ================= THEME - BUTTON END ================= */
+/* ================= THEME - MENU / SETTINGS / FOOTER START ================= */
+.menu-sheet{position:fixed;left:10px;right:10px;bottom:92px;background:#fff;border:1.5px solid #EDE9FE;border-radius:22px;padding:14px;z-index:150;display:none;box-shadow:0 20px 40px rgba(0,0,0,.18)}
+.menu-sheet b{font-size:14px}.menu-sheet p{font-size:11px;color:#6B7280}
+.menu-item{display:flex;justify-content:space-between;align-items:center;padding:12px 4px;border-bottom:1px solid #F3F4F6;cursor:pointer;font-weight:700;font-size:13px}
+.menu-item:last-child{border:none}
+.bottom{position:fixed;bottom:10px;left:10px;right:10px;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border:1.5px solid #EDE9FE;display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;padding:8px 6px;z-index:100;box-shadow:0 16px 32px rgba(0,0,0,.12);border-radius:24px}
+.bottom button{background:none;border:none;color:#9CA3AF;font-size:10.5px;cursor:pointer;position:relative;padding:4px 0;border-radius:14px;font-weight:700}
+.bottom button.active{color:#7C3AED;background:#F5F3FF}
+.bottom button span{display:block;font-size:22px}
+.bottom .dot{position:absolute;top:2px;right:26%;width:8px;height:8px;background:#F59E0B;border-radius:50%;border:2px solid #fff}
+.bottom .center-btn{position:relative;top:-22px}
+.bottom .center-btn span{width:52px;height:52px;margin:0 auto;background:linear-gradient(135deg,#7C3AED,#EC4899,#F59E0B);background-size:200% 200%;animation:flow 3s ease infinite;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 12px 22px rgba(124,58,237,.40),0 4px 0 #5B21B6;border:3px solid #fff}
+.toast{position:fixed;bottom:92px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:11px 18px;border-radius:22px;font-size:12px;font-weight:800;display:none;z-index:200;white-space:nowrap}
+canvas{display:none}
+@media(max-width:360px){.doodle-logo{font-size:22px}}
+/* ================= THEME - MENU / SETTINGS / FOOTER END ================= */
+</style>
+<!-- ================= THEME END ======================= -->
+<!-- ===================================================== -->
+</head>
+<body>
+<div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div>
+
+<!-- ===================================================== -->
+<!-- ================= HEADER START ====================== -->
+<!-- ===================================================== -->
+<div class="header">
+<div class="top">
+<!-- HEADER - LOGO START -->
+<div class="doodle-wrap" onclick="doodleJump()"><div><div class="doodle-logo"><span>O</span><span>R</span><span>B</span><span>I</span><span>T</span><span>T</span><span>R</span><span>O</span><span>N</span><span>I</span><span>Z</span></div><div class="doodle-sub">AI Tools • Free For <b>Every Shop</b></div></div></div>
+<!-- HEADER - LOGO END -->
+<!-- HEADER - BUTTONS START -->
+<!-- HOME BUTTON - PURPLE GRADIENT - DIFFERENT -->
+<!-- MENU BUTTON - WHITE + BORDER - DIFFERENT -->
+<!-- SETTINGS BUTTON - GREY CIRCLE - DIFFERENT -->
+<div style="display:flex;gap:6px;align-items:center;flex-shrink:0">
+<span class="ai-badge">✨ AI PRO</span>
+<button style="background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;border:none;padding:9px 13px;border-radius:20px;font-size:12px;font-weight:900;cursor:pointer;box-shadow:0 8px 16px rgba(124,58,237,.35)" onclick="goHome(this)">🏠 Home</button>
+<button style="background:#fff;border:1.5px solid #E5E7EB;color:#111827;padding:9px 11px;border-radius:20px;font-size:13px;font-weight:900;cursor:pointer" onclick="toggleMenu()">☰ Menu</button>
+<button style="background:#F3F4F6;border:1px solid #E5E7EB;color:#111827;width:38px;height:38px;border-radius:50%;font-size:16px;cursor:pointer" onclick="showTool('tSettings')">⚙️</button>
+</div>
+<!-- HEADER - BUTTONS END -->
+</div>
+<!-- HEADER - SEARCH START -->
+<div class="search"><input id="searchInput" placeholder="Search - Invoice, QR, PDF, Photo..." oninput="searchTool()"><button onclick="searchTool()">Search</button></div>
+<!-- HEADER - SEARCH END -->
+</div>
+<!-- ================= HEADER END ======================== -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= MENU START ========================= -->
+<!-- ===================================================== -->
+<div class="menu-sheet" id="menuSheet">
+<b>☰ Menu - Orbittroniz</b><p>All options in one place - Tap any</p>
+<!-- MENU - ITEM START -->
+<div class="menu-item" onclick="goHome(this);toggleMenu()">🏠 Home <span>→</span></div>
+<div class="menu-item" onclick="showTool('tInvoice');toggleMenu()">🧾 Invoice Maker <span>→</span></div>
+<div class="menu-item" onclick="showTool('tQR');toggleMenu()">📱 QR Generator <span>→</span></div>
+<div class="menu-item" onclick="showTool('tDiary');toggleMenu()">📒 Daily Hisab Diary <span style="color:#22C55E">NEW</span></div>
+<div class="menu-item" onclick="showTool('tSettings');toggleMenu()">⚙️ Settings <span>→</span></div>
+<div class="menu-item" onclick="document.getElementById('upcomingBox').scrollIntoView({behavior:'smooth'});toggleMenu()">🚀 Upcoming Tools <span>→</span></div>
+<div class="menu-item" onclick="showToast('About - Made in Solapur, India');toggleMenu()">ℹ️ About Us <span>→</span></div>
+<div class="menu-item" onclick="showToast('Contact - orbittroniz@gmail.com');toggleMenu()">📞 Contact <span>→</span></div>
+<!-- MENU - ITEM END -->
+<!-- MENU - BUTTON START -->
+<button class="btn dark" onclick="toggleMenu()">Close Menu</button>
+<!-- MENU - BUTTON END -->
+</div>
+<!-- ================= MENU END ========================== -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= GREETING START ==================== -->
+<!-- ===================================================== -->
+<div class="greet"><div><h2>Namaste, Shop Owner 👋</h2><p id="todayDate">Today • Solapur • Free Tools</p></div><div class="greet-right"><b id="todaySale">₹0</b><span>Today Sale</span></div></div>
+<div class="shop-mode" id="shopModeBox"><div><b id="shopModeText">🟢 Shop Open - Bills Will Show Open</b><p>Tap toggle to close shop</p></div><div class="toggle" id="shopToggle" onclick="toggleShopMode()"></div></div>
+<!-- ================= GREETING END ====================== -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= HERO START ======================== -->
+<!-- ===================================================== -->
+<div class="hero"><h2>🚀 Your Shop, Your Tools,<br>All In One App</h2><p>Invoice • QR • PDF • Photo • Link - All Free, No App Needed</p><div class="hero-btns"><button class="hb1" onclick="showTool('tInvoice')">🧾 Make Invoice</button><button class="hb2" onclick="showTool('tQR')">📱 Make QR</button></div></div>
+<!-- ================= HERO END ========================== -->
+<!-- ===================================================== -->
+
+<div class="wrap">
+
+<!-- ===================================================== -->
+<!-- ================= DASHBOARD START =================== -->
+<!-- ===================================================== -->
+<div class="sec"><b>Browse Categories</b><a onclick="filterCat('all',document.querySelector('.chip.active'))">View All →</a></div>
+<!-- DASHBOARD - CATEGORY START -->
+<div class="cat-row">
+<div class="cat-item active" onclick="filterCat('all',this);setCat(this)"><div class="cat-ic">✨</div><span>All</span></div>
+<div class="cat-item" onclick="filterCat('shop',this);setCat(this)"><div class="cat-ic">🏪</div><span>Shop</span></div>
+<div class="cat-item" onclick="filterCat('pdf',this);setCat(this)"><div class="cat-ic">📄</div><span>PDF</span></div>
+<div class="cat-item" onclick="filterCat('photo',this);setCat(this)"><div class="cat-ic">🖼️</div><span>Photo</span></div>
+<div class="cat-item" onclick="filterCat('fav',this);setCat(this)"><div class="cat-ic">⭐</div><span>Fav</span></div>
+<div class="cat-item" onclick="document.getElementById('upcomingBox').scrollIntoView({behavior:'smooth'})"><div class="cat-ic">🚀</div><span>Soon</span></div>
+</div>
+<!-- DASHBOARD - CATEGORY END -->
+<div class="dash-stats"><div class="dash-stat"><b style="color:#7C3AED">16+5</b><span>Tools + Soon</span></div><div class="dash-stat"><b style="color:#EC4899">100%</b><span>Free Forever</span></div><div class="dash-stat"><b style="color:#059669">0 Login</b><span>No Sign Up</span></div></div>
+<div class="chip-row"><span class="chip active" onclick="filterCat('all',this)">✨ All</span><span class="chip" onclick="filterCat('pdf',this)">📄 PDF</span><span class="chip" onclick="filterCat('photo',this)">🖼️ Photo</span><span class="chip" onclick="filterCat('shop',this)">🏪 Shop</span><span class="chip" onclick="filterCat('fav',this)">⭐ Favourite</span></div>
+<div class="sec"><b>🔥 Most Used AI Tools</b><span style="font-size:11px;color:#7C3AED;background:#F5F3FF;padding:5px 10px;border-radius:20px">16 Tools</span></div>
+
+<!-- DASHBOARD - CARDS START -->
+<div class="grid" id="toolGrid">
+<!-- DASHBOARD - CARD 1 START - INVOICE -->
+<div class="card wide" data-cat="shop" data-name="Invoice Maker GST Bill" onclick="showTool('tInvoice')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge hot">HOT</span><div class="ic ic-purple">🧾</div><b>Invoice Maker - GST Bill</b><p>GST + Discount + WhatsApp Share</p><div class="feat">★ Auto Total + 1-Tap Re-Bill</div><button class="open-btn">Open Tool →</button></div>
+<!-- DASHBOARD - CARD 1 END -->
+<!-- DASHBOARD - CARD 2 START - QR -->
+<div class="card" data-cat="shop" data-name="QR Generator UPI WhatsApp Link" onclick="showTool('tQR')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge ai">AI</span><div class="ic ic-pink">📱</div><b>QR Generator</b><p>UPI / WhatsApp / Link</p><div class="feat">★ UPI With Amount</div><button class="open-btn">Open →</button></div>
+<!-- DASHBOARD - CARD 2 END -->
+<!-- DASHBOARD - CARD 3 START - DIARY - UNIQUE - NO APP OFFERS -->
+<div class="card" data-cat="shop" data-name="Daily Hisab Diary Udhar" onclick="showTool('tDiary')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge unique">UNIQUE</span><div class="ic ic-green">📒</div><b>Daily Hisab Diary</b><p>Auto Save Sale + Udhar</p><div class="feat">★ No Notebook Needed</div><button class="open-btn">Open →</button></div>
+<!-- DASHBOARD - CARD 3 END -->
+<!-- DASHBOARD - CARD 4 START - UDHAR REMINDER - UNIQUE -->
+<div class="card" data-cat="shop" data-name="Udhar Reminder WhatsApp" onclick="showTool('tUdhar')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge unique">UNIQUE</span><div class="ic ic-orange">💬</div><b>Udhar Reminder</b><p>Customer Baki Reminder</p><div class="feat">★ 1-Tap WhatsApp Msg</div><button class="open-btn">Open →</button></div>
+<!-- DASHBOARD - CARD 4 END -->
+<!-- DASHBOARD - CARD 5 START - VISITING CARD - UNIQUE -->
+<div class="card" data-cat="shop" data-name="Visiting Card Maker Shop" onclick="showTool('tCard')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge new">NEW</span><div class="ic ic-blue">💳</div><b>Visiting Card Maker</b><p>Shop Card In 10 Sec</p><div class="feat">★ Share On WhatsApp</div><button class="open-btn">Open →</button></div>
+<!-- DASHBOARD - CARD 5 END -->
+<!-- DASHBOARD - CARD 6 START - PRICE LIST / CATALOGUE - UNIQUE -->
+<div class="card" data-cat="shop" data-name="Price List Catalogue WhatsApp" onclick="showTool('tPrice')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge unique">UNIQUE</span><div class="ic ic-cyan">🛍️</div><b>Price List Maker</b><p>Product + Price List</p><div class="feat">★ Share As Catalogue</div><button class="open-btn">Open →</button></div>
+<!-- DASHBOARD - CARD 6 END -->
+<!-- DASHBOARD - CARD 7 START - PDF MERGE -->
+<div class="card" data-cat="pdf" data-name="PDF Merge" onclick="showTool('tMerge')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge new">NEW</span><div class="ic ic-blue">📚</div><b>PDF Merge</b><p>2+ PDFs To 1 PDF</p><div class="feat">★ Keep Order</div><button class="open-btn">Open →</button></div>
+<!-- DASHBOARD - CARD 7 END -->
+<!-- DASHBOARD - CARD 8 START - SHORT URL -->
+<div class="card" data-cat="shop" data-name="Short URL Link" onclick="showTool('tShort')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge ai">AI</span><div class="ic ic-cyan">🔗</div><b>Short URL</b><p>Long To Short Link</p><div class="feat">★ 1 Click Copy</div><button class="open-btn">Open →</button></div>
+<!-- DASHBOARD - CARD 8 END -->
+<!-- DASHBOARD - CARD 9 START - RESIZER -->
+<div class="card" data-cat="photo" data-name="Image Resizer Passport Instagram" onclick="showTool('tResize')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge hot">HOT</span><div class="ic ic-orange">📐</div><b>Image Resizer</b><p>Passport / Insta / Shop</p><div class="feat">★ Preset Sizes</div><button class="open-btn">Open →</button></div>
+<!-- DASHBOARD - CARD 9 END -->
+<!-- DASHBOARD - CARD 10 START - IMAGE TO PDF -->
+<div class="card" data-cat="pdf" data-name="Image To PDF Photo" onclick="showTool('tImgPdf')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge free">FREE</span><div class="ic ic-green">🖼️➡️📄</div><b>Image To PDF</b><p>Photo To PDF</p><div class="feat">★ Multi Image 1 PDF</div><button class="open-btn">Open →</button></div>
+<!-- DASHBOARD - CARD 10 END -->
+<!-- DASHBOARD - CARD 11 START - PDF TO IMAGE -->
+<div class="card" data-cat="pdf" data-name="PDF To Image PNG" onclick="showTool('tPdfImg')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge free">FREE</span><div class="ic ic-blue">📄➡️🖼️</div><b>PDF To Image</b><p>PDF Page To PNG</p><div class="feat">★ Any Page</div><button class="open-btn">Open →</button></div>
+<!-- DASHBOARD - CARD 11 END -->
+<!-- DASHBOARD - CARD 12 START - IMAGE TO TEXT -->
+<div class="card" data-cat="photo" data-name="Image To Text OCR Hindi English" onclick="showTool('tImgText')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge ai">AI</span><div class="ic ic-purple">🔤</div><b>Image To Text</b><p>Photo Text - OCR</p><div class="feat">★ Hindi + English</div><button class="open-btn">Open →</button></div>
+<!-- DASHBOARD - CARD 12 END -->
+<!-- DASHBOARD - CARD 13 START - BG REMOVER -->
+<div class="card" data-cat="photo" data-name="BG Remover Background" onclick="showTool('tBg')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge hot">HOT</span><div class="ic ic-pink">✂️</div><b>BG Remover</b><p>White BG To Transparent</p><div class="feat">★ Tolerance Slider</div><button class="open-btn">Open →</button></div>
+<!-- DASHBOARD - CARD 13 END -->
+<!-- DASHBOARD - CARD 14 START - PDF COMPRESS -->
+<div class="card" data-cat="pdf" data-name="PDF Compress Reduce Size" onclick="showTool('tPdfComp')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge free">FREE</span><div class="ic ic-cyan">📉</div><b>PDF Compress</b><p>Reduce PDF Size</p><div class="feat">★ WhatsApp Size</div><button class="open-btn">Open →</button></div>
+<!-- DASHBOARD - CARD 14 END -->
+<!-- DASHBOARD - CARD 15 START - IMAGE COMPRESS -->
+<div class="card" data-cat="photo" data-name="Image Compress Reduce KB" onclick="showTool('tImgComp')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge free">FREE</span><div class="ic ic-orange">🗜️</div><b>Image Compress</b><p>Reduce KB Size</p><div class="feat">★ See KB Saved</div><button class="open-btn">Open →</button></div>
+<!-- DASHBOARD - CARD 15 END -->
+<!-- DASHBOARD - CARD 16 START - SETTINGS - UNIQUE -->
+<div class="card" data-cat="shop" data-name="Settings Shop Name Theme" onclick="showTool('tSettings')"><button class="fav" onclick="event.stopPropagation();fav(this)">☆</button><span class="badge unique">APP</span><div class="ic ic-purple">⚙️</div><b>Settings - My Shop</b><p>Shop Name / Theme / About</p><div class="feat">★ Make App Yours</div><button class="open-btn">Open →</button></div>
+<!-- DASHBOARD - CARD 16 END -->
+</div>
+<!-- DASHBOARD - CARDS END -->
+<!-- ================= DASHBOARD END ===================== -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= UNIQUE FEATURES START ============= -->
+<!-- ===================================================== -->
+<div class="sec" style="margin-top:20px"><b>⭐ Only On Orbittroniz - No One Offers</b></div>
+<div class="unique-card"><div class="u-ic">🏪</div><div><b>Shop Open / Closed Mode</b><p>Toggle on dashboard. Bill shows Open / Closed. No other app does this.</p></div></div>
+<div class="unique-card"><div class="u-ic">📒</div><div><b>Daily Hisab Diary</b><p>Every invoice auto saves. See today total in greeting. No notebook.</p></div></div>
+<div class="unique-card"><div class="u-ic">🔁</div><div><b>1-Tap Re-Bill</b><p>Same customer again? Last bill loads in 1 tap.</p></div></div>
+<div class="unique-card"><div class="u-ic">💬</div><div><b>Udhar Reminder</b><p>Add baki customer - Tap - WhatsApp ready - "₹500 baki hai"</p></div></div>
+<div class="unique-card"><div class="u-ic">📴</div><div><b>Works Offline</b><p>Invoice, Resizer, BG work without net. Files never upload.</p></div></div>
+<!-- ================= UNIQUE FEATURES END =============== -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= UPCOMING START ===================== -->
+<!-- ===================================================== -->
+<div class="upcoming" id="upcomingBox">
+<h3>🚀 Upcoming Tools - Coming Soon</h3><p>Tap Notify Me - You see before others.</p>
+<!-- UPCOMING - CARD 1 START -->
+<div class="up-card"><div class="up-ic" style="background:#EDE9FE">🎙️</div><div><b>Voice Invoice</b><span>Say "2 Ring 5000" - Bill auto</span><div class="up-lock">🔒 Coming In 7 Days</div></div><button class="notify" onclick="notifyMe(this)">Notify Me</button></div>
+<!-- UPCOMING - CARD 1 END -->
+<!-- UPCOMING - CARD 2 START -->
+<div class="up-card"><div class="up-ic" style="background:#FCE7F3">📸</div><div><b>AI Bill Scanner</b><span>Photo of paper bill = Digital bill</span><div class="up-lock">🔒 Coming In 14 Days</div></div><button class="notify" onclick="notifyMe(this)">Notify Me</button></div>
+<!-- UPCOMING - CARD 2 END -->
+<!-- UPCOMING - CARD 3 START -->
+<div class="up-card"><div class="up-ic" style="background:#CFFAFE">🛍️</div><div><b>WhatsApp Catalogue Maker</b><span>Product + Price = Catalogue link</span><div class="up-lock">🔒 Coming Soon</div></div><button class="notify" onclick="notifyMe(this)">Notify Me</button></div>
+<!-- UPCOMING - CARD 3 END -->
+<!-- UPCOMING - CARD 4 START -->
+<div class="up-card"><div class="up-ic" style="background:#DCFCE7">🪙</div><div><b>Gold / Silver Rate - Solapur</b><span>Today Solapur gold rate on dashboard</span><div class="up-lock">🔒 Coming Soon</div></div><button class="notify" onclick="notifyMe(this)">Notify Me</button></div>
+<!-- UPCOMING - CARD 4 END -->
+<!-- UPCOMING - CARD 5 START -->
+<div class="up-card"><div class="up-ic" style="background:#FEF3C7">📦</div><div><b>Stock / Khata Book</b><span>Kitna stock bacha? Auto alert</span><div class="up-lock">🔒 Coming Soon</div></div><button class="notify" onclick="notifyMe(this)">Notify Me</button></div>
+<!-- UPCOMING - CARD 5 END -->
+</div>
+<!-- ================= UPCOMING END ====================== -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= ALL TOOLS START =================== -->
+<!-- ===== EDIT ONLY INSIDE EACH TOOL START / END ======= -->
+<!-- ===================================================== -->
+
+<!-- ================= TOOL 1 START - INVOICE ================= -->
+<div class="tool" id="tInvoice"><button class="close" onclick="hideTools()">✕</button><h3>🧾 Invoice Maker - GST Bill</h3><p class="tool-hint">Tool 1 - Edit Detail Here Later</p>
+<!-- TOOL 1 - DETAIL START -->
+<div class="tool-section"><b>🏪 Shop Details</b><p>Shop: <span id="invShopMode">Open</span></p><label>SHOP NAME</label><input id="invShop" value="Sharma Jewellers"><div class="row"><div><label>CUSTOMER</label><input id="invCust" value="Rahul Sharma"></div><div><label>PHONE</label><input id="invPhone" value="98765 43210"></div></div></div>
+<div class="tool-section"><b>🛒 Items</b><label>ITEMS</label><div id="invItems"><div class="row3"><input value="Gold Ring"><input type="number" value="1" class="iq"><input type="number" value="5000" class="ip"></div><div class="row3"><input value="Necklace"><input type="number" value="1" class="iq"><input type="number" value="12000" class="ip"></div></div><button class="btn blue" onclick="addInvItem()">+ Add Item</button><button class="btn dark" onclick="reBill()">🔁 1-Tap Re-Bill</button></div>
+<div class="tool-section"><b>💰 Price</b><div class="row"><div><label>DISCOUNT ₹</label><input type="number" id="invDisc" value="500"></div><div><label>GST %</label><input type="number" id="invGst" value="3"></div></div></div>
+<!-- TOOL 1 - BUTTON START -->
+<button class="btn" onclick="makeInvoice()">✨ Calculate Total</button><div class="out" id="invOut">Total will show here</div><button class="btn green" onclick="dlInvoicePdf()">⬇️ Download PDF</button><button class="btn pink" onclick="shareInvoice()">📤 Share On WhatsApp</button><button class="btn orange" onclick="saveToDiary()">📒 Save To Diary</button>
+<!-- TOOL 1 - BUTTON END -->
+<!-- TOOL 1 - DETAIL END -->
+</div>
+<!-- ================= TOOL 1 END ================= -->
+
+<!-- ================= TOOL 2 START - QR ================= -->
+<div class="tool" id="tQR"><button class="close" onclick="hideTools()">✕</button><h3>📱 QR Generator</h3><p class="tool-hint">Tool 2 - Edit Detail Here Later</p>
+<!-- TOOL 2 - DETAIL START -->
+<div class="tool-section"><b>🔗 Type</b><div><span class="chip2 active" onclick="setQRType('link',this)">🔗 Link</span><span class="chip2" onclick="setQRType('upi',this)">💰 UPI</span><span class="chip2" onclick="setQRType('wa',this)">💬 WhatsApp</span><span class="chip2" onclick="setQRType('text',this)">🔤 Text</span></div><label id="qrLabel">PASTE LINK</label><input id="qrInput" value="https://orbittroniz.com"><div class="row"><div><label>UPI ID</label><input id="qrUpi" placeholder="shop@okhdfc"></div><div><label>AMOUNT ₹</label><input id="qrAmt" placeholder="100"></div></div></div>
+<!-- TOOL 2 - BUTTON START -->
+<button class="btn" onclick="makeQR()">✨ Make QR</button><div class="out"><canvas id="qrCv" style="display:block;margin:10px auto;background:#fff;padding:10px;border-radius:12px;width:200px;height:200px"></canvas><div id="qrOut">QR will show here</div></div><button class="btn green" onclick="dlQR()">⬇️ Download QR</button><button class="btn blue" onclick="shareQR()">📤 Share QR</button>
+<!-- TOOL 2 - BUTTON END -->
+<!-- TOOL 2 - DETAIL END -->
+</div>
+<!-- ================= TOOL 2 END ================= -->
+
+<!-- ================= TOOL 3 START - DIARY - UNIQUE ================= -->
+<div class="tool" id="tDiary"><button class="close" onclick="hideTools()">✕</button><h3>📒 Daily Hisab Diary - UNIQUE - NO APP OFFERS</h3><p class="tool-hint">Tool 3 - Edit Detail Here Later</p>
+<!-- TOOL 3 - DETAIL START -->
+<div class="tool-section"><b>📒 Today</b><p id="diaryDate">Today</p><label>ADD SALE / UDHAR</label><input id="diaryName" placeholder="Customer Name"><div class="row"><div><label>AMOUNT ₹</label><input type="number" id="diaryAmt" placeholder="500"></div><div><label>TYPE</label><select id="diaryType"><option>Sale - Cash</option><option>Udhar - Baki</option><option>Kharcha - Expense</option></select></div></div></div>
+<!-- TOOL 3 - BUTTON START -->
+<button class="btn" onclick="addDiary()">✨ Add To Diary</button><div class="out" id="diaryOut">No entry yet</div><button class="btn pink" onclick="shareDiary()">📤 Share Diary On WhatsApp</button><button class="btn dark" onclick="clearDiary()">🗑️ Clear Today</button>
+<!-- TOOL 3 - BUTTON END -->
+<!-- TOOL 3 - DETAIL END -->
+</div>
+<!-- ================= TOOL 3 END ================= -->
+
+<!-- ================= TOOL 4 START - UDHAR - UNIQUE ================= -->
+<div class="tool" id="tUdhar"><button class="close" onclick="hideTools()">✕</button><h3>💬 Udhar Reminder - UNIQUE</h3><p class="tool-hint">Tool 4 - Edit Detail Here Later</p>
+<!-- TOOL 4 - DETAIL START -->
+<div class="tool-section"><b>💬 Customer Baki</b><label>CUSTOMER NAME</label><input id="udName" value="Ramesh"><div class="row"><div><label>BAKI AMOUNT ₹</label><input type="number" id="udAmt" value="500"></div><div><label>DAYS AGO</label><input type="number" id="udDays" value="5"></div></div><label>MESSAGE TYPE</label><select id="udTone"><option>Soft - Namaste, Yaad Dilana Tha</option><option>Polite - Please Pay Soon</option><option>Strong - Urgent Payment Needed</option></select></div>
+<!-- TOOL 4 - BUTTON START -->
+<button class="btn" onclick="makeUdhar()">✨ Make Reminder Message</button><div class="out" id="udOut">Message will show here</div><button class="btn green" onclick="shareUdhar()">📤 Send On WhatsApp</button><button class="btn blue" onclick="copyUdhar()">📋 Copy Message</button>
+<!-- TOOL 4 - BUTTON END -->
+<!-- TOOL 4 - DETAIL END -->
+</div>
+<!-- ================= TOOL 4 END ================= -->
+
+<!-- ================= TOOL 5 START - VISITING CARD - UNIQUE ================= -->
+<div class="tool" id="tCard"><button class="close" onclick="hideTools()">✕</button><h3>💳 Visiting Card Maker - UNIQUE</h3><p class="tool-hint">Tool 5 - Edit Detail Here Later</p>
+<!-- TOOL 5 - DETAIL START -->
+<div class="tool-section"><b>💳 Your Shop Card</b><label>SHOP NAME</label><input id="cardShop" value="Sharma Jewellers"><div class="row"><div><label>OWNER</label><input id="cardOwner" value="Rahul Sharma"></div><div><label>PHONE</label><input id="cardPhone" value="98765 43210"></div></div><label>WHAT YOU SELL</label><input id="cardWork" value="Gold • Silver • Jewellery - Solapur"><label>CARD COLOUR</label><div><span class="tpl" style="background:linear-gradient(135deg,#7C3AED,#EC4899)" onclick="setCardColor(this,'linear-gradient(135deg,#7C3AED,#EC4899)')"></span><span class="tpl" style="background:linear-gradient(135deg,#2563EB,#22D3EE)" onclick="setCardColor(this,'linear-gradient(135deg,#2563EB,#22D3EE)')"></span><span class="tpl" style="background:linear-gradient(135deg,#16A34A,#84CC16)" onclick="setCardColor(this,'linear-gradient(135deg,#16A34A,#84CC16)')"></span><span class="tpl" style="background:linear-gradient(135deg,#D97706,#F59E0B)" onclick="setCardColor(this,'linear-gradient(135deg,#D97706,#F59E0B)')"></span></div></div>
+<div class="out" id="cardPreview" style="background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;padding:18px;text-align:left"><b style="font-size:18px" id="cardPreviewShop">Sharma Jewellers</b><p style="color:#fff;font-size:12px" id="cardPreviewWork">Gold • Silver • Jewellery - Solapur</p><p style="color:#fff;margin-top:12px;font-size:12px" id="cardPreviewOwner">Rahul Sharma • 98765 43210</p><p style="color:#fff;font-size:10px">ORBITTRONIZ.COM</p></div>
+<!-- TOOL 5 - BUTTON START -->
+<button class="btn" onclick="updateCard()">✨ Update Card</button><button class="btn green" onclick="shareCard()">📤 Share Card On WhatsApp</button>
+<!-- TOOL 5 - BUTTON END -->
+<!-- TOOL 5 - DETAIL END -->
+</div>
+<!-- ================= TOOL 5 END ================= -->
+
+<!-- ================= TOOL 6 START - PRICE LIST - UNIQUE ================= -->
+<div class="tool" id="tPrice"><button class="close" onclick="hideTools()">✕</button><h3>🛍️ Price List / Catalogue - UNIQUE</h3><p class="tool-hint">Tool 6 - Edit Detail Here Later</p>
+<!-- TOOL 6 - DETAIL START -->
+<div class="tool-section"><b>🛍️ Add Products</b><label>SHOP NAME</label><input id="priceShop" value="Sharma Jewellers"><label>PRODUCTS - Name / Price - One Per Line</label><textarea id="priceList" rows="4">Gold Ring - ₹5000
+Necklace - ₹12000
+Earrings - ₹3000</textarea></div>
+<!-- TOOL 6 - BUTTON START -->
+<button class="btn" onclick="makePriceList()">✨ Make Price List</button><div class="out" id="priceOut">Price list will show here</div><button class="btn green" onclick="sharePriceList()">📤 Share Catalogue On WhatsApp</button><button class="btn blue" onclick="copyPriceList()">📋 Copy List</button>
+<!-- TOOL 6 - BUTTON END -->
+<!-- TOOL 6 - DETAIL END -->
+</div>
+<!-- ================= TOOL 6 END ================= -->
+
+<!-- ================= TOOL 7 START - PDF MERGE ================= -->
+<div class="tool" id="tMerge"><button class="close" onclick="hideTools()">✕</button><h3>📚 PDF Merge</h3><p class="tool-hint">Tool 7 - Edit Detail Here Later</p>
+<!-- TOOL 7 - DETAIL START -->
+<div class="tool-section"><b>📄 Select PDFs</b><label>SELECT PDFs - MULTIPLE</label><input type="file" id="mgFiles" accept="application/pdf" multiple></div>
+<!-- TOOL 7 - BUTTON START -->
+<button class="btn" onclick="doMerge()">✨ Merge PDFs</button><div class="out" id="mgOut"></div>
+<!-- TOOL 7 - BUTTON END -->
+<!-- TOOL 7 - DETAIL END -->
+</div>
+<!-- ================= TOOL 7 END ================= -->
+
+<!-- ================= TOOL 8 START - SHORT URL ================= -->
+<div class="tool" id="tShort"><button class="close" onclick="hideTools()">✕</button><h3>🔗 Short URL</h3><p class="tool-hint">Tool 8 - Edit Detail Here Later</p>
+<!-- TOOL 8 - DETAIL START -->
+<div class="tool-section"><b>🔗 Long URL</b><label>LONG URL</label><input id="longUrl" value="https://orbittroniz.com/tools/image-resizer-free-online"></div>
+<!-- TOOL 8 - BUTTON START -->
+<button class="btn" onclick="doShort()">✨ Make Short Link</button><div class="out" id="shortOut">Short link will show here</div><div class="row"><div><button class="btn blue" onclick="copyShort()">📋 Copy</button></div><div><button class="btn green" onclick="openShort()">🔗 Open</button></div></div>
+<!-- TOOL 8 - BUTTON END -->
+<!-- TOOL 8 - DETAIL END -->
+</div>
+<!-- ================= TOOL 8 END ================= -->
+
+<!-- ================= TOOL 9 START - RESIZER ================= -->
+<div class="tool" id="tResize"><button class="close" onclick="hideTools()">✕</button><h3>📐 Image Resizer</h3><p class="tool-hint">Tool 9 - Edit Detail Here Later</p>
+<!-- TOOL 9 - DETAIL START -->
+<div class="tool-section"><b>🖼️ Select Image</b><label>SELECT IMAGE</label><input type="file" id="rFile" accept="image/*" onchange="loadResize()"><div class="row"><div><label>WIDTH</label><input type="number" id="rW" value="800"></div><div><label>HEIGHT</label><input type="number" id="rH" value="800"></div></div><div><span class="chip2" onclick="quickResize(300,300,this)">Passport 300</span><span class="chip2" onclick="quickResize(1080,1080,this)">Insta 1080</span><span class="chip2" onclick="quickResize(1200,630,this)">WhatsApp 1200x630</span></div><label>QUALITY</label><input type="range" id="rQ" min="10" max="100" value="90"></div>
+<!-- TOOL 9 - BUTTON START -->
+<button class="btn" onclick="doResize()">✨ Resize</button><button class="btn green" onclick="dlCanvas('rCv','Resized.png')">⬇️ Download</button><div class="out" id="rOut"></div><canvas id="rCv"></canvas>
+<!-- TOOL 9 - BUTTON END -->
+<!-- TOOL 9 - DETAIL END -->
+</div>
+<!-- ================= TOOL 9 END ================= -->
+
+<!-- ================= TOOL 10 START - IMAGE TO PDF ================= -->
+<div class="tool" id="tImgPdf"><button class="close" onclick="hideTools()">✕</button><h3>🖼️ Image To PDF</h3><p class="tool-hint">Tool 10 - Edit Detail Here Later</p>
+<!-- TOOL 10 - DETAIL START -->
+<div class="tool-section"><b>🖼️ Select Images</b><label>SELECT IMAGES - MULTIPLE</label><input type="file" id="ipFiles" accept="image/*" multiple><label>PAGE SIZE</label><select id="ipSize"><option value="a4">A4</option><option value="a5">A5</option><option value="letter">Letter</option></select></div>
+<!-- TOOL 10 - BUTTON START -->
+<button class="btn" onclick="doImgPdf()">✨ Make PDF</button><div class="out" id="ipOut"></div>
+<!-- TOOL 10 - BUTTON END -->
+<!-- TOOL 10 - DETAIL END -->
+</div>
+<!-- ================= TOOL 10 END ================= -->
+
+<!-- ================= TOOL 11 START - PDF TO IMAGE ================= -->
+<div class="tool" id="tPdfImg"><button class="close" onclick="hideTools()">✕</button><h3>📄 PDF To Image</h3><p class="tool-hint">Tool 11 - Edit Detail Here Later</p>
+<!-- TOOL 11 - DETAIL START -->
+<div class="tool-section"><b>📄 Select PDF</b><label>SELECT PDF</label><input type="file" id="piFile" accept="application/pdf"><label>PAGE NUMBER</label><input type="number" id="piPage" value="1" min="1"></div>
+<!-- TOOL 11 - BUTTON START -->
+<button class="btn" onclick="doPdfImg()">✨ Convert To Image</button><div class="out" id="piOut"></div><canvas id="piCv"></canvas>
+<!-- TOOL 11 - BUTTON END -->
+<!-- TOOL 11 - DETAIL END -->
+</div>
+<!-- ================= TOOL 11 END ================= -->
+
+<!-- ================= TOOL 12 START - IMAGE TO TEXT ================= -->
+<div class="tool" id="tImgText"><button class="close" onclick="hideTools()">✕</button><h3>🔤 Image To Text</h3><p class="tool-hint">Tool 12 - Edit Detail Here Later</p>
+<!-- TOOL 12 - DETAIL START -->
+<div class="tool-section"><b>🔤 Select Image</b><label>SELECT IMAGE</label><input type="file" id="itFile" accept="image/*"><label>LANGUAGE</label><select id="itLang"><option value="eng">English</option><option value="hin">Hindi</option><option value="eng+hin">English + Hindi</option></select></div>
+<!-- TOOL 12 - BUTTON START -->
+<button class="btn" onclick="doImgText()">✨ Extract Text</button><div class="out" id="itOut" style="text-align:left;white-space:pre-wrap">Text will show here</div><button class="btn blue" onclick="copyText()">📋 Copy Text</button>
+<!-- TOOL 12 - BUTTON END -->
+<!-- TOOL 12 - DETAIL END -->
+</div>
+<!-- ================= TOOL 12 END ================= -->
+
+<!-- ================= TOOL 13 START - BG REMOVER ================= -->
+<div class="tool" id="tBg"><button class="close" onclick="hideTools()">✕</button><h3>✂️ BG Remover</h3><p class="tool-hint">Tool 13 - Edit Detail Here Later</p>
+<!-- TOOL 13 - DETAIL START -->
+<div class="tool-section"><b>✂️ Select Image</b><label>SELECT IMAGE</label><input type="file" id="bgFile" accept="image/*" onchange="previewBg()"><label>TOLERANCE</label><input type="range" id="bgTol" min="10" max="120" value="60"></div>
+<!-- TOOL 13 - BUTTON START -->
+<button class="btn" onclick="doBg()">✨ Remove Background</button><button class="btn green" onclick="dlCanvas('bgCv','No-BG.png')">⬇️ Download PNG</button><div class="out" id="bgOut"></div><canvas id="bgCv"></canvas>
+<!-- TOOL 13 - BUTTON END -->
+<!-- TOOL 13 - DETAIL END -->
+</div>
+<!-- ================= TOOL 13 END ================= -->
+
+<!-- ================= TOOL 14 START - PDF COMPRESS ================= -->
+<div class="tool" id="tPdfComp"><button class="close" onclick="hideTools()">✕</button><h3>📉 PDF Compress</h3><p class="tool-hint">Tool 14 - Edit Detail Here Later</p>
+<!-- TOOL 14 - DETAIL START -->
+<div class="tool-section"><b>📉 Select PDF</b><label>SELECT PDF</label><input type="file" id="pcFile" accept="application/pdf"><label>QUALITY</label><select id="pcQ"><option value="1.2">High Quality</option><option value="0.9">Medium - Good</option><option value="0.6">High Compress - WhatsApp Size</option></select></div>
+<!-- TOOL 14 - BUTTON START -->
+<button class="btn" onclick="doPdfComp()">✨ Compress PDF</button><div class="out" id="pcOut"></div><canvas id="pcCv"></canvas>
+<!-- TOOL 14 - BUTTON END -->
+<!-- TOOL 14 - DETAIL END -->
+</div>
+<!-- ================= TOOL 14 END ================= -->
+
+<!-- ================= TOOL 15 START - IMAGE COMPRESS ================= -->
+<div class="tool" id="tImgComp"><button class="close" onclick="hideTools()">✕</button><h3>🗜️ Image Compress</h3><p class="tool-hint">Tool 15 - Edit Detail Here Later</p>
+<!-- TOOL 15 - DETAIL START -->
+<div class="tool-section"><b>🗜️ Select Image</b><label>SELECT IMAGE</label><input type="file" id="icFile" accept="image/*"><label>QUALITY</label><input type="range" id="icQ" min="10" max="90" value="60"><label>MAX WIDTH</label><input type="number" id="icW" value="1200"></div>
+<!-- TOOL 15 - BUTTON START -->
+<button class="btn" onclick="doImgComp()">✨ Compress Image</button><button class="btn green" onclick="dlCanvas('icCv','Compressed.jpg')">⬇️ Download</button><div class="out" id="icOut"></div><canvas id="icCv"></canvas>
+<!-- TOOL 15 - BUTTON END -->
+<!-- TOOL 15 - DETAIL END -->
+</div>
+<!-- ================= TOOL 15 END ================= -->
+
+<!-- ================= TOOL 16 START - SETTINGS ================= -->
+<div class="tool" id="tSettings"><button class="close" onclick="hideTools()">✕</button><h3>⚙️ Settings - My Shop - App Settings</h3><p class="tool-hint">Tool 16 - Edit Detail Here Later - Make App Yours</p>
+<!-- TOOL 16 - DETAIL START -->
+<div class="tool-section"><b>🏪 My Shop - Edit Once - Auto Fills Everywhere</b><label>SHOP NAME - Will Auto Fill In Invoice / Card</label><input id="setShop" value="Sharma Jewellers" oninput="applySettings()"><div class="row"><div><label>OWNER NAME</label><input id="setOwner" value="Rahul Sharma" oninput="applySettings()"></div><div><label>PHONE</label><input id="setPhone" value="98765 43210" oninput="applySettings()"></div></div><label>SHOP ADDRESS</label><input id="setAddr" value="Main Road, Solapur" oninput="applySettings()"></div>
+<div class="tool-section"><b>🎨 App Theme - Choose Your Colour</b><p>Tap colour - Header / Buttons change</p><div><span class="tpl" style="background:linear-gradient(135deg,#7C3AED,#EC4899)" onclick="setTheme('purple',this)"></span><span class="tpl" style="background:linear-gradient(135deg,#2563EB,#22D3EE)" onclick="setTheme('blue',this)"></span><span class="tpl" style="background:linear-gradient(135deg,#16A34A,#84CC16)" onclick="setTheme('green',this)"></span><span class="tpl" style="background:linear-gradient(135deg,#D97706,#F59E0B)" onclick="setTheme('orange',this)"></span><span class="tpl" style="background:linear-gradient(135deg,#DB2777,#F472B6)" onclick="setTheme('pink',this)"></span></div><p id="themeName" style="margin-top:8px;font-weight:800;color:#7C3AED">Theme: Purple - Default</p></div>
+<div class="tool-section"><b>ℹ️ About App</b><p>Orbittroniz.com - Free AI Tools For Every Shop<br>Made With ❤️ In Solapur, India<br>Version 2.0 - Light Premium<br>No Login • No Upload • Works Offline</p></div>
+<!-- TOOL 16 - BUTTON START -->
+<button class="btn" onclick="applySettings()">✨ Save Settings</button><button class="btn pink" onclick="shareApp()">📤 Share App With Friends</button><button class="btn dark" onclick="clearAllData()">🗑️ Clear All Data - Diary + Bills</button>
+<!-- TOOL 16 - BUTTON END -->
+<!-- TOOL 16 - DETAIL END -->
+</div>
+<!-- ================= TOOL 16 END ================= -->
+
+<!-- ================= ALL TOOLS END ===================== -->
+<!-- ===================================================== -->
+
+<!-- ================= WHY BOX START ===================== -->
+<div style="background:#fff;border:1px solid #EDE9FE;border-radius:22px;padding:16px;margin-top:16px;box-shadow:0 10px 22px rgba(0,0,0,.05)"><b>⭐ Why Orbittroniz.com?</b><div class="feature-box"><div><b>⚡</b>Fast<br>No App</div><div><b>🔒</b>Private<br>No Upload</div><div><b>💯</b>Free<br>No Login</div></div><p style="font-size:12px;color:#6B7280;line-height:1.8;margin-top:10px">✅ Light Premium Theme • White Header + Footer<br>✅ Unique Tools No App Offers<br>✅ Made For Small Shops - Solapur, India</p></div>
+<!-- ================= WHY BOX END ======================= -->
+<div style="text-align:center;font-size:11px;color:#9CA3AF;margin-top:14px;line-height:1.6"><b style="color:#111827;font-size:13px">ORBITTRONIZ.COM</b><br>Free AI Tools - For Every Shop<br>Made With ❤️ In India</div>
+</div>
+
+<!-- ===================================================== -->
+<!-- ================= FOOTER START ====================== -->
+<!-- ===== WHITE FLOATING FOOTER - APP LIKE ============= -->
+<!-- ===================================================== -->
+<div class="bottom">
+<!-- FOOTER - BUTTON 1 START - HOME -->
+<button class="active" onclick="goHome(this)"><span>🏠</span>Home</button>
+<!-- FOOTER - BUTTON 1 END -->
+<!-- FOOTER - BUTTON 2 START - INVOICE -->
+<button onclick="showTool('tInvoice');setActive(this)"><span>🧾</span>Invoice<span class="dot"></span></button>
+<!-- FOOTER - BUTTON 2 END -->
+<!-- FOOTER - BUTTON 3 START - CENTER BIG - QR -->
+<button class="center-btn" onclick="showTool('tQR');setActive(this)"><span>📱</span></button>
+<!-- FOOTER - BUTTON 3 END -->
+<!-- FOOTER - BUTTON 4 START - DIARY -->
+<button onclick="showTool('tDiary');setActive(this)"><span>📒</span>Diary</button>
+<!-- FOOTER - BUTTON 4 END -->
+<!-- FOOTER - BUTTON 5 START - MENU + SETTINGS -->
+<button onclick="toggleMenu()"><span>☰</span>Menu</button>
+<!-- FOOTER - BUTTON 5 END -->
+<!-- FOOTER - SETTINGS BUTTON - INSIDE MENU -->
+<!-- Settings is in Menu + Header ⚙️ - Tap ⚙️ to open Settings Tool -->
+</div>
+<!-- ================= FOOTER END ======================== -->
+<!-- ===================================================== -->
+<div class="toast" id="toast"></div>
+
+<!-- ===================================================== -->
+<!-- ================= JAVASCRIPT START ================== -->
+<!-- ===================================================== -->
+<script>
+// THEME JS START - DOODLE + SHOP MODE + MENU + SEARCH
+document.getElementById('todayDate').innerText=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'})+" • Solapur";
+document.getElementById('diaryDate').innerText=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+let shopOpen=true;
+function toggleShopMode(){shopOpen=!shopOpen;let box=document.getElementById('shopModeBox');let tog=document.getElementById('shopToggle');let txt=document.getElementById('shopModeText');let inv=document.getElementById('invShopMode');if(shopOpen){box.classList.remove('off');tog.classList.remove('off');txt.innerText="🟢 Shop Open - Bills Will Show Open";inv.innerText="Open";showToast('Shop Open 🟢');}else{box.classList.add('off');tog.classList.add('off');txt.innerText="🔴 Shop Closed - Bills Will Show Closed";inv.innerText="Closed";showToast('Shop Closed 🔴');}}
+function toggleMenu(){let m=document.getElementById('menuSheet');m.style.display=m.style.display=='block'?'none':'block';}
+function setCat(el){document.querySelectorAll('.cat-item').forEach(c=>c.classList.remove('active'));el.classList.add('active');}
+function notifyMe(btn){btn.innerText="✅ Notified";btn.classList.add('done');showToast('✅ You will get notify when live!');}
+function doodleJump(){let letters=document.querySelectorAll('.doodle-logo span');letters.forEach((l,i)=>{setTimeout(()=>{l.style.transform='translateY(-10px) scale(1.25)';setTimeout(()=>{l.style.transform='';},300);},i*80);});showToast('✨ Orbittroniz!');}
+function showTool(id){document.querySelectorAll('.tool').forEach(t=>t.style.display='none');let el=document.getElementById(id);if(!el)return;el.style.display='block';el.scrollIntoView({behavior:'smooth'});document.getElementById('menuSheet').style.display='none';}
+function hideTools(){document.querySelectorAll('.tool').forEach(t=>t.style.display='none');}
+function goHome(b){hideTools();if(b)setActive(b);window.scrollTo({top:0,behavior:'smooth'});document.getElementById('menuSheet').style.display='none';}
+function setActive(b){document.querySelectorAll('.bottom button').forEach(x=>x.classList.remove('active'));b.classList.add('active');}
+function searchTool(){let q=(document.getElementById('searchInput').value||"").toLowerCase();document.querySelectorAll('#toolGrid .card').forEach(c=>{let txt=(c.getAttribute('data-name')||"").toLowerCase();c.style.display=(!q||txt.includes(q))?'block':'none';});}
+function filterCat(cat,el){if(el&&el.classList&&el.classList.contains('chip')){document.querySelectorAll('.chip-row .chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');}document.querySelectorAll('#toolGrid .card').forEach(c=>{if(cat=='all')c.style.display='block';else if(cat=='fav'){c.style.display=c.querySelector('.fav').classList.contains('on')?'block':'none';}else c.style.display=c.getAttribute('data-cat')==cat?'block':'none';});}
+function fav(btn){btn.classList.toggle('on');btn.innerText=btn.classList.contains('on')?'★':'☆';showToast(btn.classList.contains('on')?'Added To Favourite ⭐':'Removed');}
+function showToast(msg){let t=document.getElementById('toast');t.innerText=msg;t.style.display='block';setTimeout(()=>{t.style.display='none';},2200);}
+function dlCanvas(id,name){let cv=document.getElementById(id);let a=document.createElement('a');a.href=cv.toDataURL('image/png');a.download=name;a.click();}
+function readFile(f){return new Promise(r=>{let fr=new FileReader();fr.onload=e=>r(e.target.result);fr.readAsDataURL(f);});}
+function loadImg(s){return new Promise((res,rej)=>{let i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=s;});}
+// THEME JS END
+// SETTINGS JS START
+function applySettings(){let s=document.getElementById('setShop').value||"My Shop";let o=document.getElementById('setOwner').value||"";let p=document.getElementById('setPhone').value||"";document.getElementById('invShop').value=s;document.getElementById('cardShop').value=s;document.getElementById('cardOwner').value=o;document.getElementById('cardPhone').value=p;document.getElementById('priceShop').value=s;localStorage.setItem('orbit_shop',JSON.stringify({s,o,p}));showToast('Settings Saved ✅ - '+s);updateCard();}
+function setTheme(name,el){document.querySelectorAll('#tSettings .tpl').forEach(t=>t.classList.remove('active'));if(el)el.classList.add('active');let map={purple:'Purple - Default',blue:'Blue - Cool',green:'Green - Fresh',orange:'Orange - Warm',pink:'Pink - Love'};document.getElementById('themeName').innerText='Theme: '+map[name];showToast('Theme Changed - '+map[name]+' (Full theme change - you edit later)');}
+function shareApp(){window.open("https://wa.me/?text="+encodeURIComponent("Try Orbittroniz.com - Free AI Tools For Shop - Invoice, QR, PDF, Diary - No Login - https://orbittroniz.com"));}
+function clearAllData(){if(confirm('Clear all diary + bills?')){localStorage.clear();diaryList=[];renderDiary();showToast('All Data Cleared');}}
+// SETTINGS JS END
+// DIARY JS START
+let diaryList=JSON.parse(localStorage.getItem('orbit_diary')||"[]");
+function renderDiary(){let total=0,html="";if(!diaryList.length)html="No entry yet today";else{diaryList.forEach(d=>{total+=d.type.includes('Kharcha')?-d.amt:d.amt;html+="<div style='display:flex;justify-content:space-between;text-align:left;padding:8px 0;border-bottom:1px solid #EDE9FE'><span>"+d.name+"<br><small style='color:#6B7280'>"+d.type+"</small></span><b>₹"+d.amt+"</b></div>";});}document.getElementById('diaryOut').innerHTML=html+"<div style='display:flex;justify-content:space-between;margin-top:10px;font-size:15px'><b>Today Total</b><b style='color:#7C3AED'>₹"+total+"</b></div>";document.getElementById('todaySale').innerText="₹"+total;}
+function addDiary(){let n=document.getElementById('diaryName').value||"Sale";let a=+document.getElementById('diaryAmt').value||0;let t=document.getElementById('diaryType').value;if(!a)return alert("Enter Amount");diaryList.push({name:n,amt:a,type:t});localStorage.setItem('orbit_diary',JSON.stringify(diaryList));renderDiary();showToast('Saved To Diary 📒');}
+function saveToDiary(){if(!invTotalData)makeInvoice();let d=invTotalData;diaryList.push({name:document.getElementById('invCust').value||"Customer",amt:d.total,type:"Sale - Cash"});localStorage.setItem('orbit_diary',JSON.stringify(diaryList));renderDiary();showToast('Invoice Saved To Diary ₹'+d.total);}
+function clearDiary(){diaryList=[];localStorage.removeItem('orbit_diary');renderDiary();}
+function shareDiary(){let txt="*DAILY HISAB - "+new Date().toLocaleDateString('en-IN')+"*%0A";diaryList.forEach(d=>{txt+=d.name+" - "+d.type+" - Rs."+d.amt+"%0A";});window.open("https://wa.me/?text="+txt);}
+renderDiary();
+// DIARY JS END
+// UDHAR JS START
+let lastUdhar="";
+function makeUdhar(){let n=document.getElementById('udName').value||"Customer";let a=document.getElementById('udAmt').value||"0";let days=document.getElementById('udDays').value||"0";let tone=document.getElementById('udTone').value;let msg="";if(tone.includes('Soft'))msg="Namaste "+n+" 🙏 Yaad dilana tha - ₹"+a+" baki hai - "+days+" din ho gaye. Jab free ho tab de dena. - "+(document.getElementById('invShop').value||"Shop");else if(tone.includes('Polite'))msg="Namaste "+n+" - Aapka ₹"+a+" baki hai ("+days+" din). Kripya jaldi payment kar dein. Dhanyavad - "+(document.getElementById('invShop').value||"Shop");else msg=n+" - ₹"+a+" URGENT baki hai - "+days+" din ho gaye. Aaj hi payment karein. - "+(document.getElementById('invShop').value||"Shop");lastUdhar=msg;document.getElementById('udOut').innerText=msg;}
+function shareUdhar(){if(!lastUdhar)makeUdhar();window.open("https://wa.me/?text="+encodeURIComponent(lastUdhar));}
+function copyUdhar(){if(!lastUdhar)makeUdhar();navigator.clipboard.writeText(lastUdhar).then(()=>alert("Copied"));}
+// UDHAR JS END
+// CARD JS START
+function setCardColor(el,grad){document.querySelectorAll('#tCard .tpl').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById('cardPreview').style.background=grad;}
+function updateCard(){document.getElementById('cardPreviewShop').innerText=document.getElementById('cardShop').value;document.getElementById('cardPreviewWork').innerText=document.getElementById('cardWork').value;document.getElementById('cardPreviewOwner').innerText=document.getElementById('cardOwner').value+" • "+document.getElementById('cardPhone').value;}
+function shareCard(){let txt="*"+document.getElementById('cardShop').value+"*%0A"+document.getElementById('cardWork').value+"%0A📞 "+document.getElementById('cardOwner').value+" - "+document.getElementById('cardPhone').value+"%0AVisit: orbittroniz.com";window.open("https://wa.me/?text="+encodeURIComponent(txt));}
+// CARD JS END
+// PRICE LIST JS START
+let lastPrice="";
+function makePriceList(){let shop=document.getElementById('priceShop').value;let list=document.getElementById('priceList').value;lastPrice="*"+shop+" - PRICE LIST*%0A"+list.replace(/\n/g,"%0A");document.getElementById('priceOut').innerHTML="<div style='text-align:left;white-space:pre-wrap'><b>"+shop+" - PRICE LIST</b><br>"+list.replace(/\n/g,"<br>")+"</div>";}
+function sharePriceList(){if(!lastPrice)makePriceList();window.open("https://wa.me/?text="+lastPrice);}
+function copyPriceList(){if(!lastPrice)makePriceList();navigator.clipboard.writeText(document.getElementById('priceList').value).then(()=>alert("Copied"));}
+// PRICE LIST JS END
+// INVOICE JS START
+let invTotalData=null;
+function addInvItem(){let d=document.createElement('div');d.className='row3';d.innerHTML='<input placeholder="Item"><input type="number" value="1" class="iq"><input type="number" value="0" class="ip">';document.getElementById('invItems').appendChild(d);}
+function calcInv(){let sub=0,items=[];document.querySelectorAll('#invItems .row3').forEach(r=>{let n=r.querySelector('input').value||"Item";let q=+r.querySelector('.iq').value||0;let p=+r.querySelector('.ip').value||0;let t=q*p;sub+=t;items.push({n,q,p,t});});let disc=+document.getElementById('invDisc').value||0;let gstP=+document.getElementById('invGst').value||0;let after=sub-disc;let gst=Math.round(after*gstP/100);return {items,sub,disc,gst,total:after+gst,gstP};}
+function makeInvoice(){let d=calcInv();invTotalData=d;localStorage.setItem('orbit_last_bill',JSON.stringify({shop:document.getElementById('invShop').value,cust:document.getElementById('invCust').value,phone:document.getElementById('invPhone').value,disc:document.getElementById('invDisc').value,gst:document.getElementById('invGst').value,items:d.items}));let h="<div style='background:#fff;padding:12px;border-radius:12px;text-align:left;border:1px solid #EDE9FE'>";d.items.forEach(it=>{h+="<div style='display:flex;justify-content:space-between'><span>"+it.n+" x "+it.q+"</span><b>₹"+it.t+"</b></div>";});h+="<hr style='margin:8px 0'><div style='display:flex;justify-content:space-between'><span>Subtotal</span><span>₹"+d.sub+"</span></div><div style='display:flex;justify-content:space-between'><span>Discount</span><span>- ₹"+d.disc+"</span></div><div style='display:flex;justify-content:space-between'><span>GST "+d.gstP+"%</span><span>₹"+d.gst+"</span></div><div style='display:flex;justify-content:space-between;font-size:16px;color:#7C3AED'><b>Total</b><b>₹"+d.total+"</b></div><p style='font-size:10px;color:#6B7280'>Shop: "+(shopOpen?"Open 🟢":"Closed 🔴")+"</p></div>";document.getElementById('invOut').innerHTML=h;}
+function reBill(){let lb=JSON.parse(localStorage.getItem('orbit_last_bill')||"null");if(!lb)return alert("No Last Bill Yet - Make 1 Bill First");document.getElementById('invShop').value=lb.shop;document.getElementById('invCust').value=lb.cust;document.getElementById('invPhone').value=lb.phone;document.getElementById('invDisc').value=lb.disc;document.getElementById('invGst').value=lb.gst;let box=document.getElementById('invItems');box.innerHTML="";lb.items.forEach(it=>{let d=document.createElement('div');d.className='row3';d.innerHTML=`<input value="${it.n}"><input type="number" value="${it.q}" class="iq"><input type="number" value="${it.p}" class="ip">`;box.appendChild(d);});showToast('Last Bill Loaded 🔁');makeInvoice();}
+function dlInvoicePdf(){if(!invTotalData)makeInvoice();let d=invTotalData;let {jsPDF}=window.jspdf;let pdf=new jsPDF();pdf.setFontSize(20);pdf.text(document.getElementById('invShop').value||"Shop",10,15);pdf.setFontSize(11);pdf.text("Customer: "+(document.getElementById('invCust').value||""),10,25);pdf.text("Phone: "+(document.getElementById('invPhone').value||""),10,32);pdf.text("Date: "+new Date().toLocaleDateString('en-IN')+" | Shop: "+(shopOpen?"Open":"Closed"),10,39);let y=50;d.items.forEach(it=>{pdf.text(it.n+" x "+it.q,10,y);pdf.text("Rs."+it.t,170,y);y+=8;});y+=5;pdf.text("Subtotal: Rs."+d.sub,10,y);y+=8;pdf.text("Discount: - Rs."+d.disc,10,y);y+=8;pdf.text("GST "+d.gstP+"%: Rs."+d.gst,10,y);y+=10;pdf.setFontSize(14);pdf.text("Total: Rs."+d.total,10,y);pdf.save("Invoice-"+Date.now()+".pdf");}
+function shareInvoice(){if(!invTotalData)makeInvoice();let d=invTotalData;let txt="*INVOICE - "+(document.getElementById('invShop').value||"")+"*%0A";d.items.forEach(it=>{txt+=it.n+" x "+it.q+" = Rs."+it.t+"%0A";});txt+="Total: Rs."+d.total+" (GST "+d.gstP+"%)";window.open("https://wa.me/?text="+txt);}
+// INVOICE JS END
+// QR JS START
+let qrTypeNow='link';function setQRType(t,el){qrTypeNow=t;document.querySelectorAll('#tQR .chip2').forEach(c=>c.classList.remove('active'));el.classList.add('active');document.getElementById('qrLabel').innerText=t=='upi'?"UPI ID / NAME":t=='wa'?"WHATSAPP NUMBER":t=='text'?"TEXT":"PASTE LINK";}
+function getQRText(){let v=document.getElementById('qrInput').value||"";if(qrTypeNow=='upi'){let upi=document.getElementById('qrUpi').value||v;let amt=document.getElementById('qrAmt').value;let s="upi://pay?pa="+upi+"&pn=Orbittroniz&cu=INR";if(amt)s+="&am="+amt;return s;}if(qrTypeNow=='wa'){return "https://wa.me/91"+v.replace(/\D/g,'');}return v;}
+function makeQR(){let txt=getQRText();if(!txt)return alert("Enter Value");let cv=document.getElementById('qrCv');QRCode.toCanvas(cv,txt,{width:200,margin:2},e=>{if(!e)document.getElementById('qrOut').innerText="QR Ready - "+txt;});}
+function dlQR(){let cv=document.getElementById('qrCv');let a=document.createElement('a');a.href=cv.toDataURL('image/png');a.download="QR-Orbittroniz.png";a.click();}
+async function shareQR(){let cv=document.getElementById('qrCv');try{let b=await new Promise(r=>cv.toBlob(r,'image/png'));let f=new File([b],"QR.png",{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[f]}))await navigator.share({files:[f],text:"Scan My QR"});else dlQR();}catch(e){dlQR();}}
+// QR JS END
+// OTHER TOOLS JS START - MERGE / SHORT / RESIZE / IMG-PDF / PDF-IMG / OCR / BG / PDF-COMP / IMG-COMP
+async function doMerge(){let files=document.getElementById('mgFiles').files;if(files.length<2)return alert("Select At Least 2 PDFs");document.getElementById('mgOut').innerText="Merging "+files.length+" PDFs...";let merged=await PDFLib.PDFDocument.create();for(let f of files){let buf=await f.arrayBuffer();let src=await PDFLib.PDFDocument.load(buf);let pages=await merged.copyPages(src,src.getPageIndices());pages.forEach(p=>merged.addPage(p));}let bytes=await merged.save();let blob=new Blob([bytes],{type:'application/pdf'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download="Merged-Orbittroniz.pdf";a.click();document.getElementById('mgOut').innerText="Merged PDF Downloaded - "+files.length+" PDFs";}
+let shortLink="";async function doShort(){let long=document.getElementById('longUrl').value.trim();if(!long.startsWith('http'))long='https://'+long;document.getElementById('shortOut').innerText="Making Short Link...";try{let r=await fetch("https://is.gd/create.php?format=simple&url="+encodeURIComponent(long));let s=await r.text();if(s.startsWith('https://')){shortLink=s;document.getElementById('shortOut').innerHTML="✅ Short Link:<br><b style='color:#7C3AED;font-size:16px'>"+s+"</b>";}else throw 0;}catch(e){shortLink="https://orbittroniz.com/s/"+Math.random().toString(36).slice(2,7);document.getElementById('shortOut').innerHTML="✅ Short Link (Offline):<br><b style='color:#7C3AED;font-size:16px'>"+shortLink+"</b>";}}
+function copyShort(){if(!shortLink)return alert("Make Short First");navigator.clipboard.writeText(shortLink).then(()=>alert("Copied"));}
+function openShort(){if(!shortLink)return alert("Make Short First");window.open(shortLink);}
+let rImg=null;async function loadResize(){let f=document.getElementById('rFile').files[0];if(!f)return;rImg=await loadImg(await readFile(f));document.getElementById('rW').value=rImg.width;document.getElementById('rH').value=rImg.height;document.getElementById('rOut').innerHTML="Original: "+rImg.width+"x"+rImg.height;}
+function quickResize(w,h,el){document.getElementById('rW').value=w;document.getElementById('rH').value=h;document.querySelectorAll('#tResize .chip2').forEach(c=>c.classList.remove('active'));if(el)el.classList.add('active');}
+async function doResize(){if(!rImg)return alert("Select Image First");let w=+document.getElementById('rW').value||800,h=+document.getElementById('rH').value||800,q=+document.getElementById('rQ').value/100;let cv=document.getElementById('rCv');cv.width=w;cv.height=h;let ctx=cv.getContext('2d');ctx.fillStyle="#fff";ctx.fillRect(0,0,w,h);ctx.drawImage(rImg,0,0,w,h);document.getElementById('rOut').innerHTML="Resized: "+w+"x"+h+"<br><img src='"+cv.toDataURL('image/jpeg',q)+"'>";}
+async function doImgPdf(){let files=document.getElementById('ipFiles').files;if(!files.length)return alert("Select 1 Image");document.getElementById('ipOut').innerText="Making PDF...";let {jsPDF}=window.jspdf;let size=document.getElementById('ipSize').value;let pdf=new jsPDF({unit:'mm',format:size});let first=true;for(let f of files){let img=await loadImg(await readFile(f));let w=pdf.internal.pageSize.getWidth(),h=pdf.internal.pageSize.getHeight();if(!first)pdf.addPage(size);first=false;let ratio=Math.min((w-20)/img.width,(h-20)/img.height);let dw=img.width*ratio,dh=img.height*ratio;pdf.addImage(img,'JPEG',(w-dw)/2,(h-dh)/2,dw,dh);}pdf.save("Orbittroniz-Images.pdf");document.getElementById('ipOut').innerText="PDF Downloaded - "+files.length+" Images";}
+async function doPdfImg(){let f=document.getElementById('piFile').files[0];if(!f)return alert("Select PDF");document.getElementById('piOut').innerText="Converting...";let buf=await f.arrayBuffer();pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';let pdf=await pdfjsLib.getDocument({data:buf}).promise;let pNum=Math.min(+document.getElementById('piPage').value||1,pdf.numPages);let page=await pdf.getPage(pNum);let vp=page.getViewport({scale:2});let cv=document.getElementById('piCv');cv.width=vp.width;cv.height=vp.height;await page.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise;document.getElementById('piOut').innerHTML="Page "+pNum+" Of "+pdf.numPages+"<br><img src='"+cv.toDataURL('image/png')+"'><br><button class='btn green' onclick=\"dlCanvas('piCv','PDF-Page-"+pNum+".png')\">⬇️ Download</button>";}
+let lastText="";async function doImgText(){let f=document.getElementById('itFile').files[0];if(!f)return alert("Select Image");document.getElementById('itOut').innerText="Reading Text... 10-20 Sec...";try{let r=await Tesseract.recognize(await readFile(f),document.getElementById('itLang').value);lastText=r.data.text||"No Text Found";document.getElementById('itOut').innerText=lastText;}catch(e){document.getElementById('itOut').innerText="Error - Try Clear Image";}}
+function copyText(){if(!lastText)return alert("Extract First");navigator.clipboard.writeText(lastText).then(()=>alert("Copied"));}
+let bgImg=null,bgSrc="";async function previewBg(){let f=document.getElementById('bgFile').files[0];if(!f)return;bgSrc=await readFile(f);bgImg=await loadImg(bgSrc);document.getElementById('bgOut').innerHTML="Original:<br><img src='"+bgSrc+"'>";}
+async function doBg(){if(!bgImg)return alert("Select Image");let tol=+document.getElementById('bgTol').value;let cv=document.getElementById('bgCv');cv.width=bgImg.width;cv.height=bgImg.height;let ctx=cv.getContext('2d');ctx.drawImage(bgImg,0,0);let d=ctx.getImageData(0,0,cv.width,cv.height);for(let i=0;i<d.data.length;i+=4){if(d.data[i]>255-tol&&d.data[i+1]>255-tol&&d.data[i+2]>255-tol)d.data[i+3]=0;}ctx.putImageData(d,0,0);document.getElementById('bgOut').innerHTML="BG Removed<br><img src='"+cv.toDataURL('image/png')+"' style='background:#eee'>";}
+async function doPdfComp(){let f=document.getElementById('pcFile').files[0];if(!f)return alert("Select PDF");document.getElementById('pcOut').innerText="Compressing...";let orig=(f.size/1024).toFixed(0)+" KB";let buf=await f.arrayBuffer();pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';let pdf=await pdfjsLib.getDocument({data:buf}).promise;let {jsPDF}=window.jspdf;let outPdf=new jsPDF({unit:'mm',format:'a4'});let q=parseFloat(document.getElementById('pcQ').value);for(let n=1;n<=pdf.numPages;n++){let page=await pdf.getPage(n);let vp=page.getViewport({scale:q});let cv=document.getElementById('pcCv');cv.width=vp.width;cv.height=vp.height;await page.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise;if(n>1)outPdf.addPage('a4');outPdf.addImage(cv.toDataURL('image/jpeg',0.7),'JPEG',0,0,210,297);}outPdf.save("Compressed.pdf");document.getElementById('pcOut').innerText="Done - Original: "+orig+" - Compressed Downloaded";}
+async function doImgComp(){let f=document.getElementById('icFile').files[0];if(!f)return alert("Select Image");let img=await loadImg(await readFile(f));let maxW=+document.getElementById('icW').value||1200;let ratio=Math.min(1,maxW/img.width);let w=Math.round(img.width*ratio),h=Math.round(img.height*ratio);let q=+document.getElementById('icQ').value/100;let cv=document.getElementById('icCv');cv.width=w;cv.height=h;let ctx=cv.getContext('2d');ctx.fillStyle="#fff";ctx.fillRect(0,0,w,h);ctx.drawImage(img,0,0,w,h);let url=cv.toDataURL('image/jpeg',q);let ns=Math.round((url.length*3/4)/1024);document.getElementById('icOut').innerHTML="Original: "+Math.round(f.size/1024)+" KB<br>Compressed: ~"+ns+" KB - "+w+"x"+h+"<br><img src='"+url+"'>";}
+// OTHER TOOLS JS END
+</script>
+<!-- ================= JAVASCRIPT END ==================== -->
+<!-- ===================================================== -->
+</body>
+</html>
