@@ -879,8 +879,432 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
 </script>
 <!-- ================= TOOL 2 END - V3 - TAP FIXED ================= -->
 <!-- ================= TOOL 3 - IMAGE TO PDF ================= -->
-<div id="page-tool3" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>📸 Image To PDF</b><br><span>Your Tool</span></div></div><h2 style="text-align:center">📸 Image To PDF</h2><p style="font-size:12px;color:#6B7280;text-align:center">Aadhar, Marksheet, Notes, Form - Multiple Photos To 1 PDF</p><div class="drop" onclick="document.getElementById('imgPdfFile').click()"><b>📸 Select Images - Multiple</b><p style="font-size:12px;color:#6B7280">Tap to select 1 or many photos</p><input type="file" id="imgPdfFile" accept="image/*" multiple onchange="previewImgPdf(event)"></div><div id="imgPdfPreview" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"></div><label>PDF Name</label><input id="imgPdfName" value="My-Document"><label>Page Size</label><select id="imgPdfSize"><option value="a4">A4 - Best For Print</option><option value="photo">Photo Size - Keep Original</option></select><button class="btn" onclick="makeImgPdf()">📄 Convert To PDF - Free</button><p id="imgPdfStatus" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select images first</p><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
+<!-- ================= TOOL 3 START - V2 - ALL BUGS FIXED - IMAGE TO PDF - NO DOCTYPE ================= -->
+<!-- PASTE THIS ONLY - REPLACE OLD TOOL 3 COMPLETELY -->
 
+<div id="page-tool3" class="tool-page" style="display:none">
+<div id="tool3">
+<style>
+#tool3{font-family:system-ui,Arial,sans-serif}
+#tool3 *{box-sizing:border-box}
+#tool3 .card{background:#fff;border:1.5px solid #EDE9FE;border-radius:22px;padding:16px;box-shadow:0 12px 24px rgba(0,0,0,.06)}
+#tool3 .topbar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-bottom:1px solid #EDE9FE;margin:-16px -16px 12px -16px;border-radius:22px 22px 0 0;position:sticky;top:0;z-index:20}
+#tool3 .topbar button{background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer;font-size:13px}
+#tool3 label{font-size:12px;font-weight:900;display:block;margin-top:13px}
+#tool3 input,#tool3 select{width:100%;padding:13px;border-radius:14px;border:1.5px solid #E5E7EB;background:#F9FAFB;font-size:14px;margin-top:6px}
+#tool3 .btn{width:100%;padding:15px;border:none;border-radius:16px;font-weight:900;cursor:pointer;margin-top:12px;color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);font-size:14px;box-shadow:0 12px 22px rgba(124,58,237,.30);touch-action:manipulation}
+#tool3 .btn:disabled{opacity:.6}
+#tool3 .btn2{flex:1;padding:11px;border-radius:14px;border:1.5px solid #E5E7EB;background:#fff;font-weight:800;cursor:pointer;font-size:12.5px;touch-action:manipulation}
+#tool3 .btn2.primary{background:#111827;color:#fff;border:none}
+#tool3 .btn2.green{background:#16A34A;color:#fff;border:none}
+#tool3 .btn2.red{background:#DC2626;color:#fff;border:none}
+#tool3 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:9px 12px;border-radius:20px;font-size:12px;margin:7px 7px 0 0;cursor:pointer;font-weight:700;touch-action:manipulation}
+#tool3 .chip.active{background:#111827;color:#fff;border:none}
+#tool3 .toggle-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #EDE9FE;gap:8px}
+#tool3 .toggle{width:52px;height:28px;background:#22C55E;border-radius:30px;position:relative;cursor:pointer;flex-shrink:0;touch-action:manipulation}
+#tool3 .toggle.off{background:#9CA3AF}
+#tool3 .toggle::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%}
+#tool3 .toggle.off::after{left:27px}
+#tool3 .drop{position:relative;border:2px dashed #7C3AED;background:linear-gradient(135deg,#F8F9FF,#FDF2F8);border-radius:18px;padding:20px;text-align:center;margin-top:12px;overflow:hidden;touch-action:manipulation;cursor:pointer;z-index:1}
+#tool3 .drop:active{background:#EDE9FE;transform:scale(.98)}
+#tool3 .drop-content{position:relative;z-index:1;pointer-events:none}
+#tool3 .drop-content *{pointer-events:none}
+#tool3 .file-input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:2;display:block !important;visibility:visible !important}
+#tool3 .big-select-btn{position:relative;z-index:3;display:block;width:100%;padding:14px;border:none;border-radius:14px;background:#111827;color:#fff;font-weight:900;font-size:14px;cursor:pointer;margin-top:10px;touch-action:manipulation}
+#tool3 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+#tool3 .img-card{background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:10px;text-align:center;position:relative}
+#tool3 .img-card img{width:100%;border-radius:10px;max-height:180px;object-fit:contain;background:#fff}
+#tool3 .img-card .num{position:absolute;top:6px;left:6px;background:#111827;color:#fff;font-size:11px;font-weight:900;padding:4px 8px;border-radius:20px;z-index:2}
+#tool3 .img-card .del{position:absolute;top:6px;right:6px;background:#DC2626;color:#fff;border:none;width:26px;height:26px;border-radius:50%;font-weight:900;cursor:pointer;z-index:2}
+#tool3 .progress{height:10px;background:#E5E7EB;border-radius:20px;overflow:hidden;margin-top:12px;display:none}
+#tool3 .progress i{display:block;height:100%;background:linear-gradient(90deg,#7C3AED,#EC4899);width:0%}
+#tool3 .status-box{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:10px;margin-top:10px;font-size:12px;line-height:1.6;display:none}
+#tool3 .error-box{background:#FEF2F2;border:1px solid #FECACA;border-radius:12px;padding:12px;margin-top:10px;font-size:12px;line-height:1.7;display:none;color:#991B1B}
+#tool3 .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+#tool3 .filter-btn{padding:8px 12px;border-radius:20px;border:1.5px solid #E5E7EB;background:#fff;font-size:11px;font-weight:800;cursor:pointer}
+#tool3 .filter-btn.active{background:#111827;color:#fff;border:none}
+</style>
+
+<div id="tool3"><div class="card">
+<div class="topbar"><button type="button" onclick="goHomePageTool3()">← Back</button><div><b>🖼️ Image To PDF</b><br><span style="font-size:11px;color:#6B7280">All Bugs Fixed • Premium Free</span></div><span style="margin-left:auto;background:#DCFCE7;color:#166534;font-size:11px;font-weight:900;padding:6px 10px;border-radius:20px">● FIXED V2</span></div>
+
+<h2 style="text-align:center">🖼️ Image To PDF - Fixed V2</h2>
+<p style="font-size:12px;color:#6B7280;text-align:center">Unlimited • Reorder • Crop • Rotate • Filter • A4 • Page Number<br><span style="color:#16A34A;font-weight:800">Private - Never Leaves Phone • No False Password Claim</span></p>
+
+<label for="t3File" class="drop" id="t3Drop">
+<input type="file" id="t3File" class="file-input" accept="image/*,.jpg,.jpeg,.png,.webp" multiple>
+<div class="drop-content">
+<div style="font-size:32px">🖼️</div>
+<b style="font-size:16px">Tap To Select Images</b>
+<p style="font-size:12px;color:#6B7280;margin-top:4px;font-weight:400">Tap here - Select MANY images at once<br>Gallery / Camera / Files • JPG, PNG, WebP • Max 50</p>
+<div style="display:inline-block;margin-top:8px;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;padding:10px 18px;border-radius:20px;font-weight:900;font-size:13px">📂 Choose Images →</div>
+</div>
+</label>
+<button type="button" class="big-select-btn" id="t3BigBtn">📂 TAP HERE TO SELECT IMAGES - 2nd Way</button>
+<div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t3CameraBtn">📷 Camera</button><button type="button" class="btn2" id="t3SampleBtn">✨ Try Sample</button></div>
+
+<div class="status-box" id="t3StatusBox"><b id="t3StatusTitle">📄 Status</b><br><span id="t3StatusText">Select images first</span></div>
+<div class="error-box" id="t3ErrorBox"><b>⚠️ Error:</b><br><span id="t3ErrorText"></span></div>
+
+<div id="t3ListBox" style="display:none;margin-top:12px">
+<div style="display:flex;justify-content:space-between;align-items:center"><b>Your Images - <span id="t3Count">0</span></b><span style="font-size:11px;color:#6B7280">↑ ↓ Reorder • ✂️ Crop • 🔄 Rotate</span></div>
+<div class="grid" id="t3Grid"></div>
+<div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t3AddMoreBtn">➕ Add More</button><button type="button" class="btn2 red" id="t3ClearBtn">🗑️ Clear All</button></div>
+</div>
+
+<label>PDF File Name</label>
+<input type="text" id="t3Rename" value="My-Images" placeholder="Example: My-Aadhar-Cards">
+
+<label>Page Size</label>
+<div id="t3SizeRow"><span class="chip active" data-size="a4">📄 A4 - Print / School / Office</span><span class="chip" data-size="letter">📄 Letter - USA</span><span class="chip" data-size="photo">🖼️ Photo Size - Same As Image</span><span class="chip" data-size="a5">📄 A5 - Small</span></div>
+
+<div style="display:flex;gap:8px"><div style="flex:1"><label>Orientation</label><select id="t3Orientation"><option value="portrait">Portrait - Vertical ↕️</option><option value="landscape">Landscape - Horizontal ↔️</option><option value="auto">Auto - As Per Image</option></select></div><div style="flex:1"><label>Margin</label><select id="t3Margin"><option value="10">Small - 10</option><option value="20" selected>Normal - 20</option><option value="0">No Margin - Full Page</option><option value="40">Big Margin - 40</option></select></div></div>
+
+<div style="display:flex;gap:8px"><div style="flex:1"><label>Quality / Size</label><select id="t3Quality"><option value="0.7">Small - WhatsApp - 0.7</option><option value="0.85" selected>Medium - Best - 0.85</option><option value="1">High - HD - 1.0</option></select></div><div style="flex:1"><label>Fit Image</label><select id="t3Fit"><option value="fit">Fit - Full Image - No Cut</option><option value="fill">Fill - Full Page - May Cut</option></select></div></div>
+
+<label>Filter For All Images</label>
+<div class="filter-row" id="t3FilterRow"><button type="button" class="filter-btn active" data-filter="none">Original</button><button type="button" class="filter-btn" data-filter="bw">⚫ B&W</button><button type="button" class="filter-btn" data-filter="scan">📄 Scan - Bright</button><button type="button" class="filter-btn" data-filter="gray">⚪ Gray</button><button type="button" class="filter-btn" data-filter="vivid">🌈 Vivid</button></div>
+
+<div style="background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:4px 12px;margin-top:12px">
+<div class="toggle-row"><div><b>🔢 Page Number</b><br><span style="font-size:11px;color:#6B7280">Center bottom - 1 / 5</span></div><div class="toggle" id="t3PageNumToggle"></div></div>
+<div class="toggle-row"><div><b>📱 Compress - Small PDF</b><br><span style="font-size:11px;color:#6B7280">For WhatsApp send</span></div><div class="toggle off" id="t3CompressToggle"></div></div>
+<div class="toggle-row"><div><b>💧 Watermark</b><br><span id="t3WmText" style="font-size:11px;color:#6B7280">ON</span></div><div class="toggle" id="t3WmToggle"></div></div>
+<div class="toggle-row" style="border:none"><div><b>🏷️ Password Hint In File Name</b><br><span style="font-size:11px;color:#6B7280">FIXED: This is NOT encryption - It only adds password to file name for reminder</span></div><div class="toggle off" id="t3PassToggle"></div></div>
+</div>
+<div id="t3PassBox" style="display:none"><label>Password Hint - For Your Reminder Only</label><input type="text" id="t3Password" placeholder="Example: 1234 - Will appear in file name"><p style="font-size:11px;color:#DC2626;margin-top:4px">⚠️ Honest Note: Browser PDF cannot be truly locked without server. This only adds password to file name - Example: My-Images-Pass-1234.pdf - For real lock, use PDF Protect tool.</p></div>
+
+<label>Header / Title On Each Page (Optional)</label>
+<input type="text" id="t3Header" placeholder="Example: My Documents - Leave empty if not needed">
+
+<button type="button" class="btn" id="t3ConvertBtn">✨ Create PDF - Download Now</button>
+<div class="progress" id="t3Progress"><i id="t3Bar"></i></div>
+<p id="t3Status" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select images first</p>
+
+<div id="t3Result" style="display:none;background:#F0FDF4;border:1px solid #BBF7D0;border-radius:14px;padding:12px;margin-top:12px;text-align:center"><b style="color:#166534">✅ PDF Created!</b><br><span id="t3ResultInfo" style="font-size:12px;color:#166534"></span><br><button type="button" class="btn2 green" id="t3DownloadBtn" style="width:100%;margin-top:8px">⬇️ Download PDF Again</button></div>
+
+<div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2" onclick="clearTool3()">🗑️ New PDF</button><button type="button" class="btn2 primary" onclick="goHomePageTool3()">← Back</button></div>
+</div></div>
+</div>
+</div>
+
+<script>
+/* ================= TOOL 3 V2 - ALL BUGS FIXED ================= */
+(function(){
+  window.goHomePageTool3 = window.goHomePageTool3 || function(){
+    if(typeof window.goHomePage === "function"){ window.goHomePage(); return; }
+    var p=document.getElementById('page-tool3'); if(p) p.style.display='none';
+    var h=document.getElementById('homeView'); if(h) h.style.display='block';
+    window.scrollTo(0,0);
+  };
+  function el(id){ return document.getElementById(id); }
+  function getWm3(){ try{ var wm=localStorage.getItem('orbit_watermark'); var txt=localStorage.getItem('orbit_watermark_text')||"Made With Orbittroniz.com"; return {wm: wm!=='false', txt:txt}; }catch(e){ return {wm:true, txt:"Made With Orbittroniz.com"}; } }
+  function updateWmUI3(){ var w=getWm3(); var t=el('t3WmText'); if(t) t.textContent=(w.wm?"ON - ":"OFF - ")+w.txt; var tg=el('t3WmToggle'); if(tg) tg.classList.toggle('off',!w.wm); }
+  function setStatus3(title,msg,showBox){ var box=el('t3StatusBox'); if(box) box.style.display = showBox===false ? 'none' : 'block'; var tt=el('t3StatusTitle'); if(tt) tt.textContent=title; var tx=el('t3StatusText'); if(tx) tx.textContent=msg; var st=el('t3Status'); if(st) st.textContent=msg; }
+  function showError3(msg){ var box=el('t3ErrorBox'); if(!box) return; if(!msg){ box.style.display='none'; return; } box.style.display='block'; var tx=el('t3ErrorText'); if(tx) tx.textContent=msg; }
+  function showErrorAuto3(msg){ showError3(msg); setTimeout(function(){ showError3(""); },6000); }
+  function revokeLastPdf3(){
+    if(S3.lastPdfUrl){ try{ URL.revokeObjectURL(S3.lastPdfUrl); }catch(e){} S3.lastPdfUrl=null; }
+  }
+
+  var S3={images:[], pageSize:"a4", filter:"none", pageNum:true, compress:false, pass:false, creating:false, lastPdfUrl:null, lastPdfName:"My-Images.pdf", libTried:false};
+
+  // jsPDF - 3 CDN
+  var JSPDF_CDNS=["https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js","https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js","https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"];
+  function loadScript3(src){
+    return new Promise(function(resolve,reject){
+      if(window.jspdf && window.jspdf.jsPDF){ resolve(); return; }
+      var s=document.createElement('script'); s.src=src; s.async=true;
+      s.onload=function(){ resolve(); }; s.onerror=function(){ reject(new Error("CDN failed")); };
+      setTimeout(function(){ if(!(window.jspdf && window.jspdf.jsPDF)) reject(new Error("Timeout")); },12000);
+      document.head.appendChild(s);
+    });
+  }
+  async function ensureJsPdf3(){
+    if(window.jspdf && window.jspdf.jsPDF) return true;
+    S3.libTried=true;
+    for(var i=0;i<JSPDF_CDNS.length;i++){ try{ await loadScript3(JSPDF_CDNS[i]); if(window.jspdf && window.jspdf.jsPDF) return true; }catch(e){ continue; } }
+    return !!(window.jspdf && window.jspdf.jsPDF);
+  }
+  setTimeout(function(){ ensureJsPdf3(); },300);
+
+  // Settings
+  var sizeRow=el('t3SizeRow');
+  if(sizeRow) sizeRow.addEventListener('click', function(ev){ var c=ev.target.closest('.chip'); if(!c) return; S3.pageSize=c.getAttribute('data-size')||"a4"; sizeRow.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('active'); }); c.classList.add('active'); });
+  var filterRow=el('t3FilterRow');
+  if(filterRow) filterRow.addEventListener('click', function(ev){ var b=ev.target.closest('.filter-btn'); if(!b) return; S3.filter=b.getAttribute('data-filter')||"none"; filterRow.querySelectorAll('.filter-btn').forEach(function(x){ x.classList.remove('active'); }); b.classList.add('active'); setStatus3("🎨 Filter Changed","Filter '"+S3.filter+"' will apply when PDF is created",true); });
+  function bindTog3(id,getV,setV){ var t=el(id); if(!t) return; t.addEventListener('click', function(){ setV(!getV()); t.classList.toggle('off',!getV()); }); }
+  bindTog3('t3PageNumToggle', function(){ return S3.pageNum; }, function(v){ S3.pageNum=v; });
+  bindTog3('t3CompressToggle', function(){ return S3.compress; }, function(v){ S3.compress=v; });
+  var wmTog=el('t3WmToggle'); if(wmTog) wmTog.addEventListener('click', function(){ try{ localStorage.setItem('orbit_watermark', getWm3().wm ? 'false':'true'); }catch(e){} updateWmUI3(); });
+  updateWmUI3();
+  var passTog=el('t3PassToggle');
+  if(passTog) passTog.addEventListener('click', function(){ S3.pass=!S3.pass; passTog.classList.toggle('off',!S3.pass); var pb=el('t3PassBox'); if(pb) pb.style.display=S3.pass?'block':'none'; });
+
+  // Tap Fix
+  var fileInp=el('t3File');
+  var bigBtn=el('t3BigBtn');
+  var addMoreBtn=el('t3AddMoreBtn');
+  if(bigBtn && fileInp) bigBtn.addEventListener('click', function(e){ e.preventDefault(); try{ fileInp.click(); }catch(err){} });
+  if(addMoreBtn && fileInp) addMoreBtn.addEventListener('click', function(e){ e.preventDefault(); try{ fileInp.click(); }catch(err){} });
+  var camBtn=el('t3CameraBtn');
+  if(camBtn) camBtn.addEventListener('click', function(){ var ci=document.createElement('input'); ci.type='file'; ci.accept='image/*'; ci.setAttribute('capture','environment'); ci.onchange=function(){ if(ci.files && ci.files[0]) handleFiles3(ci.files); }; ci.click(); });
+  var sampleBtn=el('t3SampleBtn');
+  if(sampleBtn) sampleBtn.addEventListener('click', function(){ createSampleImages3(); });
+  if(fileInp) fileInp.addEventListener('change', function(e){ var files=e.target.files; if(files && files.length>0) handleFiles3(files); fileInp.value=""; });
+
+  async function handleFiles3(files){
+    showError3("");
+    var arr=Array.from(files);
+    if(arr.length===0) return;
+    if(S3.images.length + arr.length > 50){ showErrorAuto3("Max 50 images - You selected "+(S3.images.length+arr.length)+". Selecting first "+(50-S3.images.length)+" only."); arr=arr.slice(0, 50 - S3.images.length); if(arr.length===0) return; }
+    setStatus3("📷 Loading Images...","Loading "+arr.length+" images...",true);
+    var added=0, heicCount=0;
+    for(var i=0;i<arr.length;i++){
+      var f=arr[i];
+      var ln=f.name.toLowerCase();
+      // FIX 5: HEIC detect
+      if(ln.indexOf('.heic')>-1 || ln.indexOf('.heif')>-1){ heicCount++; continue; }
+      if(!f.type || f.type.indexOf('image')===-1){
+        if(ln.indexOf('.jpg')===-1 && ln.indexOf('.jpeg')===-1 && ln.indexOf('.png')===-1 && ln.indexOf('.webp')===-1) continue;
+      }
+      if(f.size > 20*1024*1024){ showErrorAuto3("Image "+f.name+" too big - Max 20 MB - Skipped"); continue; }
+      try{
+        var url=await readImageAsDataUrl3(f);
+        var valid=await isValidImage3(url);
+        if(!valid) continue;
+        S3.images.push({name:f.name, dataUrl:url, rotation:0, cropped:null});
+        added++;
+      }catch(e){ continue; }
+    }
+    if(heicCount>0) showErrorAuto3(heicCount+" iPhone HEIC photo(s) skipped - iPhone HEIC not supported in browser. Fix: Open in Gallery → Share → Save as JPG, then select again.");
+    if(added===0){ showErrorAuto3("No valid images found - Please select JPG / PNG images"); return; }
+    renderGrid3();
+    setStatus3("✅ Images Loaded","✅ "+S3.images.length+" images ready - Reorder, Crop, Rotate, then Create PDF",true);
+  }
+  function readImageAsDataUrl3(file){ return new Promise(function(resolve,reject){ var r=new FileReader(); r.onload=function(){ resolve(r.result); }; r.onerror=function(){ reject(new Error("Read failed")); }; r.readAsDataURL(file); }); }
+  function isValidImage3(url){ return new Promise(function(resolve){ var im=new Image(); im.onload=function(){ resolve(true); }; im.onerror=function(){ resolve(false); }; im.src=url; setTimeout(function(){ resolve(false); },8000); }); }
+  function createSampleImages3(){
+    function makeSample(text,color){
+      var c=document.createElement('canvas'); c.width=800; c.height=1000; var ctx=c.getContext('2d'); ctx.fillStyle=color; ctx.fillRect(0,0,800,1000); ctx.fillStyle="#fff"; ctx.font="bold 48px Arial"; ctx.textAlign="center"; ctx.fillText(text,400,500); ctx.font="24px Arial"; ctx.fillText("Sample - Replace with your photo",400,560); return c.toDataURL("image/jpeg",0.9);
+    }
+    S3.images.push({name:"Sample-1.jpg", dataUrl:makeSample("SAMPLE PAGE 1","#7C3AED"), rotation:0, cropped:null});
+    S3.images.push({name:"Sample-2.jpg", dataUrl:makeSample("SAMPLE PAGE 2","#EC4899"), rotation:0, cropped:null});
+    renderGrid3();
+    setStatus3("✅ Sample Loaded","✅ 2 sample images loaded - Tap Create PDF to test",true);
+  }
+
+  function renderGrid3(){
+    var box=el('t3ListBox'); if(box) box.style.display = S3.images.length>0 ? 'block' : 'none';
+    var cnt=el('t3Count'); if(cnt) cnt.textContent=S3.images.length;
+    var grid=el('t3Grid'); if(!grid) return; grid.innerHTML="";
+    S3.images.forEach(function(imgObj, idx){
+      var card=document.createElement('div'); card.className='img-card';
+      var num=document.createElement('div'); num.className='num'; num.textContent=(idx+1);
+      var del=document.createElement('button'); del.className='del'; del.type='button'; del.textContent='×';
+      del.addEventListener('click', function(){ S3.images.splice(idx,1); renderGrid3(); });
+      var img=document.createElement('img'); img.src=imgObj.cropped || imgObj.dataUrl; img.alt='Image '+(idx+1); img.style.transform='rotate('+imgObj.rotation+'deg)';
+      var name=document.createElement('div'); name.style.fontSize='11px'; name.style.color='#6B7280'; name.style.marginTop='6px'; name.textContent=imgObj.name.length>22 ? imgObj.name.slice(0,22)+'...' : imgObj.name;
+      var ctrl=document.createElement('div'); ctrl.style.display='flex'; ctrl.style.gap='4px'; ctrl.style.marginTop='6px';
+      function makeBtn(txt, fn){ var b=document.createElement('button'); b.type='button'; b.className='btn2'; b.style.padding='7px 4px'; b.style.fontSize='11px'; b.textContent=txt; b.addEventListener('click', fn); return b; }
+      var upBtn=makeBtn('↑ Up', function(){ if(idx>0){ var tmp=S3.images[idx]; S3.images[idx]=S3.images[idx-1]; S3.images[idx-1]=tmp; renderGrid3(); } });
+      var downBtn=makeBtn('↓ Down', function(){ if(idx<S3.images.length-1){ var tmp2=S3.images[idx]; S3.images[idx]=S3.images[idx+1]; S3.images[idx+1]=tmp2; renderGrid3(); } });
+      var rotBtn=makeBtn('🔄 Rotate', function(){ imgObj.rotation=(imgObj.rotation+90)%360; renderGrid3(); });
+      // FIX 3: Crop resets rotation - Prevents crop+rotate clash
+      var cropBtn=makeBtn('✂️ Crop', function(){ cropImage3(idx); });
+      ctrl.appendChild(upBtn); ctrl.appendChild(downBtn);
+      var ctrl2=document.createElement('div'); ctrl2.style.display='flex'; ctrl2.style.gap='4px'; ctrl2.style.marginTop='4px'; ctrl2.appendChild(rotBtn); ctrl2.appendChild(cropBtn);
+      card.appendChild(num); card.appendChild(del); card.appendChild(img); card.appendChild(name); card.appendChild(ctrl); card.appendChild(ctrl2);
+      grid.appendChild(card);
+    });
+  }
+  function cropImage3(idx){
+    var obj=S3.images[idx]; if(!obj) return;
+    var im=new Image(); im.src=obj.cropped || obj.dataUrl;
+    im.onload=function(){
+      try{
+        var c=document.createElement('canvas'); var w=im.naturalWidth||im.width, h=im.naturalHeight||im.height;
+        var cw=Math.floor(w*0.9), ch=Math.floor(h*0.9); var sx=Math.floor((w-cw)/2), sy=Math.floor((h-ch)/2);
+        c.width=cw; c.height=ch; c.getContext('2d').drawImage(im, sx, sy, cw, ch, 0,0,cw,ch);
+        obj.cropped=c.toDataURL("image/jpeg",0.92);
+        // FIX 3: Reset rotation after crop - Crop is done on unrotated image
+        obj.rotation=0;
+        renderGrid3();
+        setStatus3("✂️ Cropped","Image "+(idx+1)+" cropped - Center 90% - Rotation reset",true);
+      }catch(e){ showErrorAuto3("Crop failed - Try another image"); }
+    };
+    im.onerror=function(){ showErrorAuto3("Crop failed - Image not loaded"); };
+  }
+  var clearBtn=el('t3ClearBtn'); if(clearBtn) clearBtn.addEventListener('click', function(){ S3.images=[]; renderGrid3(); setStatus3("📄 Status","All cleared - Select images again",true); });
+
+  // FIX 4 + 9: Downscale + Filter with safe try/catch - Returns dataUrl, never crashes
+  function applyFilterAndRotate3(dataUrl, filter, rotation){
+    return new Promise(function(resolve){
+      var im=new Image(); im.src=dataUrl;
+      im.onload=function(){
+        try{
+          var origW=im.naturalWidth||im.width, origH=im.naturalHeight||im.height;
+          // FIX 4: Downscale max 2000px - Prevents memory crash
+          var scaleDown=1;
+          if(origW>2000 || origH>2000){ scaleDown=Math.min(2000/origW, 2000/origH); }
+          var w=Math.max(1, Math.floor(origW*scaleDown)), h=Math.max(1, Math.floor(origH*scaleDown));
+          var swap=(rotation===90||rotation===270);
+          var cw=swap?h:w, ch=swap?w:h;
+          var c=document.createElement('canvas'); c.width=cw; c.height=ch; var ctx=c.getContext('2d');
+          // White background - FIX: Prevent black background on PNG transparent
+          ctx.fillStyle="#ffffff"; ctx.fillRect(0,0,cw,ch);
+          ctx.translate(cw/2, ch/2); ctx.rotate(rotation*Math.PI/180); ctx.drawImage(im, -w/2, -h/2, w, h);
+          if(filter!=="none"){
+            try{
+              var imgData=ctx.getImageData(0,0,cw,ch); var d=imgData.data;
+              for(var i=0;i<d.length;i+=4){
+                var r=d[i], g=d[i+1], b=d[i+2];
+                if(filter==="bw"){ var avg=(r+g+b)/3; var v=avg>128?255:0; d[i]=v; d[i+1]=v; d[i+2]=v; }
+                else if(filter==="gray"){ var gv=(r*0.299+g*0.587+b*0.114); d[i]=gv; d[i+1]=gv; d[i+2]=gv; }
+                else if(filter==="scan"){ d[i]=Math.min(255, r*1.2+20); d[i+1]=Math.min(255, g*1.2+20); d[i+2]=Math.min(255, b*1.2+20); }
+                else if(filter==="vivid"){ d[i]=Math.min(255, r*1.15); d[i+1]=Math.min(255, g*1.1); d[i+2]=Math.min(255, b*1.05); }
+              }
+              ctx.putImageData(imgData,0,0);
+            }catch(e){
+              // FIX 9: If getImageData fails (tainted), ignore filter, keep original rotated image
+            }
+          }
+          var q=S3.compress?0.65:parseFloat(el('t3Quality').value||"0.85");
+          resolve(c.toDataURL("image/jpeg", q));
+        }catch(e){ resolve(dataUrl); }
+      };
+      im.onerror=function(){ resolve(dataUrl); };
+    });
+  }
+
+  async function createPdf3(){
+    if(S3.creating) return;
+    if(S3.images.length===0){ showErrorAuto3("Please select images first - Tap Select Images"); return; }
+    S3.creating=true;
+    var btn=el('t3ConvertBtn'); if(btn){ btn.disabled=true; btn.textContent="⏳ Creating PDF... Please Wait"; }
+    var prog=el('t3Progress'); if(prog) prog.style.display='block'; var bar=el('t3Bar'); if(bar) bar.style.width='0%';
+    showError3("");
+    // FIX 8: Revoke old URL before new one
+    revokeLastPdf3();
+    try{
+      var ok=await ensureJsPdf3();
+      if(!ok || !(window.jspdf && window.jspdf.jsPDF)){ showErrorAuto3("PDF engine failed - Check internet and try again. Best: Open in Chrome."); S3.creating=false; if(btn){ btn.disabled=false; btn.textContent="✨ Create PDF - Download Now"; } return; }
+      var jsPDF=window.jspdf.jsPDF;
+      var orientation=el('t3Orientation').value || "portrait";
+      var margin=parseFloat(el('t3Margin').value || "20");
+      var fitMode=el('t3Fit').value || "fit";
+      var header=el('t3Header').value.trim();
+      var password=el('t3Password').value.trim();
+      var fileName=(el('t3Rename').value||"My-Images").replace(/[^a-zA-Z0-9-_ ]/g,"").trim() || "My-Images";
+      // FIX 1: Honest password hint - NOT encryption
+      if(S3.pass && password) fileName=fileName+"-Pass-"+password;
+      var pageW=210, pageH=297;
+      if(S3.pageSize==="letter"){ pageW=216; pageH=279; }
+      if(S3.pageSize==="a5"){ pageW=148; pageH=210; }
+      var doc=null;
+      var wm=getWm3();
+      var totalKB=0;
+      for(var idx=0;idx<S3.images.length;idx++){
+        var obj=S3.images[idx];
+        setStatus3("🔄 Creating PDF...","Processing Image "+(idx+1)+"/"+S3.images.length,true);
+        // FIX 2: Rotation applied ONLY here, not in preview CSS + canvas double
+        var filteredUrl=await applyFilterAndRotate3(obj.cropped || obj.dataUrl, S3.filter, obj.rotation);
+        var dims=await getImageDims3(filteredUrl);
+        var pw=pageW, ph=pageH, orient=orientation;
+        if(S3.pageSize==="photo"){
+          var ratio=dims.h/dims.w;
+          pw=210; ph=Math.min(297, Math.max(100, 210*ratio));
+          orient = ratio>1 ? "portrait" : "landscape";
+        } else {
+          if(orientation==="auto"){ orient = dims.w>dims.h ? "landscape" : "portrait"; }
+          // FIX: Do NOT swap pw/ph manually - jsPDF handles orientation - We pass format as [pw,ph] with orientation
+          // Keep pw/ph as base, jsPDF will rotate
+        }
+        // FIX 6: Correct jsPDF API - Use object format
+        if(idx===0){
+          doc=new jsPDF({orientation:orient, unit:"mm", format:[pw, ph], compress:S3.compress});
+        } else {
+          doc.addPage({format:[pw, ph], orientation:orient});
+        }
+        // After addPage, get actual page size from doc - FIX: Use doc.internal.pageSize
+        var actualW=doc.internal.pageSize.getWidth(), actualH=doc.internal.pageSize.getHeight();
+        pw=actualW; ph=actualH;
+        var availW=pw - margin*2;
+        var topOffset=margin;
+        if(header) topOffset+=10;
+        // FIX 7: Reserve separate space - Page number at bottom, watermark at bottom-left, no overlap
+        var bottomReserve=12;
+        var availH=ph - topOffset - margin - bottomReserve;
+        var imgRatio=dims.w/dims.h;
+        var drawW=availW, drawH=availW/imgRatio;
+        if(fitMode==="fit"){
+          if(drawH>availH){ drawH=availH; drawW=availH*imgRatio; }
+        } else {
+          drawW=availW; drawH=availH;
+        }
+        // FIX: Clamp draw size to page - Never overflow
+        drawW=Math.min(drawW, availW); drawH=Math.min(drawH, availH);
+        var x=(pw-drawW)/2, y=topOffset + (availH-drawH)/2;
+        doc.setFillColor(255,255,255); doc.rect(0,0,pw,ph,'F');
+        if(header){
+          doc.setFontSize(12); doc.setTextColor(0,0,0); doc.setFont("helvetica","bold");
+          doc.text(header, pw/2, margin+2, {align:"center"});
+          doc.setDrawColor(200,200,200); doc.line(margin, margin+5, pw-margin, margin+5);
+        }
+        try{ doc.addImage(filteredUrl, "JPEG", x, y, drawW, drawH, undefined, "FAST"); }catch(e){
+          try{ doc.addImage(filteredUrl, "PNG", x, y, drawW, drawH, undefined, "FAST"); }catch(e2){ continue; }
+        }
+        // FIX 7: Watermark LEFT, Page Number CENTER - No overlap
+        if(wm.wm){
+          doc.setFontSize(8); doc.setTextColor(150,150,150); doc.setFont("helvetica","normal");
+          doc.text(wm.txt, margin, ph-4, {align:"left"});
+        }
+        if(S3.pageNum){
+          doc.setFontSize(10); doc.setTextColor(100,100,100); doc.setFont("helvetica","normal");
+          doc.text("Page "+(idx+1)+" / "+S3.images.length, pw/2, ph-4, {align:"center"});
+        }
+        totalKB+=Math.round(filteredUrl.length*3/4/1024);
+        if(bar) bar.style.width=Math.round(((idx+1)/S3.images.length)*100)+"%";
+        await new Promise(function(r){ setTimeout(r,20); });
+      }
+      var pdfBlob=doc.output("blob");
+      var pdfUrl=URL.createObjectURL(pdfBlob);
+      S3.lastPdfUrl=pdfUrl; S3.lastPdfName=fileName+".pdf";
+      var a=document.createElement('a'); a.href=pdfUrl; a.download=S3.lastPdfName; document.body.appendChild(a); a.click(); a.remove();
+      var resBox=el('t3Result'); if(resBox) resBox.style.display='block';
+      var resInfo=el('t3ResultInfo'); if(resInfo) resInfo.textContent=fileName+".pdf - "+S3.images.length+" pages - ~"+Math.round(totalKB/1024*10)/10+" MB - Downloaded";
+      setStatus3("✅ PDF Created","✅ PDF Created - "+S3.images.length+" pages - Downloaded as "+fileName+".pdf",true);
+    }catch(err){
+      showErrorAuto3("PDF creation failed - "+(err && err.message || "")+" - Try fewer images / lower quality");
+    }finally{
+      S3.creating=false;
+      if(btn){ btn.disabled=false; btn.textContent="✨ Create PDF - Download Now"; }
+      setTimeout(function(){ if(prog) prog.style.display='none'; },1500);
+    }
+  }
+  function getImageDims3(url){
+    return new Promise(function(resolve){
+      var im=new Image(); im.onload=function(){ resolve({w:im.naturalWidth||im.width, h:im.naturalHeight||im.height}); }; im.onerror=function(){ resolve({w:800,h:1000}); }; im.src=url;
+    });
+  }
+  var convertBtn=el('t3ConvertBtn'); if(convertBtn) convertBtn.addEventListener('click', createPdf3);
+  var dlBtn=el('t3DownloadBtn'); if(dlBtn) dlBtn.addEventListener('click', function(){ if(!S3.lastPdfUrl){ showErrorAuto3("Create PDF first"); return; } var a=document.createElement('a'); a.href=S3.lastPdfUrl; a.download=S3.lastPdfName; document.body.appendChild(a); a.click(); a.remove(); });
+
+  function clearTool3(){
+    revokeLastPdf3();
+    S3.images=[]; S3.lastPdfName="My-Images.pdf";
+    if(fileInp) fileInp.value="";
+    renderGrid3();
+    var res=el('t3Result'); if(res) res.style.display='none';
+    var rn=el('t3Rename'); if(rn) rn.value="My-Images";
+    var hd=el('t3Header'); if(hd) hd.value="";
+    var pwEl=el('t3Password'); if(pwEl) pwEl.value="";
+    showError3(""); setStatus3("📄 Status","Select images first",true);
+    var bar=el('t3Bar'); if(bar) bar.style.width='0%';
+  }
+  window.clearTool3=clearTool3;
+})();
+</script>
+<!-- ================= TOOL 3 END - V2 - ALL BUGS FIXED ================= -->
 <!-- ================= TOOL 4 - QR MAKER ================= -->
 <div id="page-tool4" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>🔲 QR Maker</b><br><span>Your Tool</span></div></div><h2 style="text-align:center">🔲 QR Code Maker</h2><p style="font-size:12px;color:#6B7280;text-align:center">Link / UPI / WhatsApp - 1 Tap QR</p><label>Type</label><select id="qrType" onchange="qrHint()"><option value="link">🔗 Link / Website</option><option value="text">📝 Text</option><option value="upi">💰 UPI Payment - Pay Me</option><option value="whatsapp">💬 WhatsApp Number</option></select><label>Enter Details</label><input id="qrInput" value="https://orbittroniz.com" placeholder="https://... or UPI ID"><p id="qrHintText" style="font-size:11px;color:#6B7280;margin-top:6px">For Link: Paste full link with https://</p><button class="btn" onclick="makeQR()">✨ Generate QR Code</button><div id="qrBox" style="display:flex;justify-content:center;margin-top:14px;background:#fff;padding:14px;border-radius:14px;border:1px solid #EDE9FE"></div><p id="qrShowText" style="font-size:12px;text-align:center;margin-top:8px;color:#6B7280"></p><div style="display:flex;gap:8px;margin-top:10px"><button class="btn2 primary" onclick="downloadQR()">⬇️ Download QR</button><button class="btn2" onclick="shareQR()">📤 Share QR</button></div><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
 
