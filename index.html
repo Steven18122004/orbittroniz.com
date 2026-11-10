@@ -1306,8 +1306,450 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
 </script>
 <!-- ================= TOOL 3 END - V2 - ALL BUGS FIXED ================= -->
 <!-- ================= TOOL 4 - QR MAKER ================= -->
-<div id="page-tool4" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>🔲 QR Maker</b><br><span>Your Tool</span></div></div><h2 style="text-align:center">🔲 QR Code Maker</h2><p style="font-size:12px;color:#6B7280;text-align:center">Link / UPI / WhatsApp - 1 Tap QR</p><label>Type</label><select id="qrType" onchange="qrHint()"><option value="link">🔗 Link / Website</option><option value="text">📝 Text</option><option value="upi">💰 UPI Payment - Pay Me</option><option value="whatsapp">💬 WhatsApp Number</option></select><label>Enter Details</label><input id="qrInput" value="https://orbittroniz.com" placeholder="https://... or UPI ID"><p id="qrHintText" style="font-size:11px;color:#6B7280;margin-top:6px">For Link: Paste full link with https://</p><button class="btn" onclick="makeQR()">✨ Generate QR Code</button><div id="qrBox" style="display:flex;justify-content:center;margin-top:14px;background:#fff;padding:14px;border-radius:14px;border:1px solid #EDE9FE"></div><p id="qrShowText" style="font-size:12px;text-align:center;margin-top:8px;color:#6B7280"></p><div style="display:flex;gap:8px;margin-top:10px"><button class="btn2 primary" onclick="downloadQR()">⬇️ Download QR</button><button class="btn2" onclick="shareQR()">📤 Share QR</button></div><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
+<!-- ================= TOOL 4 START - V2 - ALL BUGS FIXED - QR CODE + LOGO - NO DOCTYPE ================= -->
+<!-- PASTE THIS ONLY - REPLACE OLD TOOL 4 COMPLETELY -->
 
+<div id="page-tool4" class="tool-page" style="display:none">
+<div id="tool4">
+<style>
+#tool4{font-family:system-ui,Arial,sans-serif}
+#tool4 *{box-sizing:border-box}
+#tool4 .card{background:#fff;border:1.5px solid #EDE9FE;border-radius:22px;padding:16px;box-shadow:0 12px 24px rgba(0,0,0,.06)}
+#tool4 .topbar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-bottom:1px solid #EDE9FE;margin:-16px -16px 12px -16px;border-radius:22px 22px 0 0;position:sticky;top:0;z-index:20}
+#tool4 .topbar button{background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer;font-size:13px}
+#tool4 label{font-size:12px;font-weight:900;display:block;margin-top:13px}
+#tool4 input,#tool4 select,#tool4 textarea{width:100%;padding:13px;border-radius:14px;border:1.5px solid #E5E7EB;background:#F9FAFB;font-size:14px;margin-top:6px;font-family:inherit}
+#tool4 .btn{width:100%;padding:15px;border:none;border-radius:16px;font-weight:900;cursor:pointer;margin-top:12px;color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);font-size:14px;box-shadow:0 12px 22px rgba(124,58,237,.30);touch-action:manipulation}
+#tool4 .btn:disabled{opacity:.6}
+#tool4 .btn2{flex:1;padding:11px;border-radius:14px;border:1.5px solid #E5E7EB;background:#fff;font-weight:800;cursor:pointer;font-size:12.5px;touch-action:manipulation}
+#tool4 .btn2.primary{background:#111827;color:#fff;border:none}
+#tool4 .btn2.green{background:#16A34A;color:#fff;border:none}
+#tool4 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:9px 12px;border-radius:20px;font-size:12px;margin:7px 7px 0 0;cursor:pointer;font-weight:700;touch-action:manipulation}
+#tool4 .chip.active{background:#111827;color:#fff;border:none}
+#tool4 .type-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+#tool4 .type-row::-webkit-scrollbar{display:none}
+#tool4 .type-btn{flex-shrink:0;background:#F8F9FF;border:1.5px solid #EDE9FE;padding:10px 14px;border-radius:20px;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap;touch-action:manipulation}
+#tool4 .type-btn.active{background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;border:none}
+#tool4 .toggle-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #EDE9FE;gap:8px}
+#tool4 .toggle{width:52px;height:28px;background:#22C55E;border-radius:30px;position:relative;cursor:pointer;flex-shrink:0;touch-action:manipulation}
+#tool4 .toggle.off{background:#9CA3AF}
+#tool4 .toggle::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%}
+#tool4 .toggle.off::after{left:27px}
+#tool4 .color-row{display:flex;gap:8px;align-items:center;margin-top:6px}
+#tool4 .color-row input[type="color"]{width:56px;height:44px;padding:2px;border-radius:12px;border:1.5px solid #E5E7EB;cursor:pointer;flex-shrink:0}
+#tool4 .color-preset{width:36px;height:36px;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.2);cursor:pointer;flex-shrink:0}
+#tool4 .color-preset.active{outline:2px solid #7C3AED;outline-offset:2px}
+#tool4 .qr-preview{background:#fff;border:2px solid #EDE9FE;border-radius:18px;padding:16px;text-align:center;margin-top:12px;min-height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#tool4 .qr-preview canvas{max-width:100%;border-radius:12px}
+#tool4 .drop{position:relative;border:2px dashed #7C3AED;background:linear-gradient(135deg,#F8F9FF,#FDF2F8);border-radius:14px;padding:14px;text-align:center;margin-top:8px;overflow:hidden;cursor:pointer;touch-action:manipulation}
+#tool4 .drop-content{position:relative;z-index:1;pointer-events:none}
+#tool4 .drop-content *{pointer-events:none}
+#tool4 .file-input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:2;display:block !important;visibility:visible !important}
+#tool4 .status-box{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:10px;margin-top:10px;font-size:12px;line-height:1.6;display:none}
+#tool4 .error-box{background:#FEF2F2;border:1px solid #FECACA;border-radius:12px;padding:12px;margin-top:10px;font-size:12px;line-height:1.7;display:none;color:#991B1B}
+#tool4 .logo-preview{width:64px;height:64px;border-radius:12px;object-fit:cover;border:2px solid #EDE9FE;display:none;margin:8px auto 0}
+#tool4 .char-count{font-size:11px;color:#6B7280;text-align:right;margin-top:2px}
+</style>
+
+<div id="tool4"><div class="card">
+<div class="topbar"><button type="button" onclick="goHomePageTool4()">← Back</button><div><b>📷 QR Code</b><br><span style="font-size:11px;color:#6B7280">All Bugs Fixed • Logo • Colors • WiFi • UPI</span></div><span style="margin-left:auto;background:#DCFCE7;color:#166534;font-size:11px;font-weight:900;padding:6px 10px;border-radius:20px">● FIXED V2</span></div>
+
+<h2 style="text-align:center">📷 QR Code Generator - Fixed V2</h2>
+<p style="font-size:12px;color:#6B7280;text-align:center">Logo + Colors + Frames + WiFi + UPI + WhatsApp + vCard<br><span style="color:#16A34A;font-weight:800">Real Vector SVG • Real Share Image • No Watermark</span></p>
+
+<label>QR Type</label>
+<div class="type-row" id="t4TypeRow"><button type="button" class="type-btn active" data-type="text">📝 Text / Link</button><button type="button" class="type-btn" data-type="whatsapp">💬 WhatsApp</button><button type="button" class="type-btn" data-type="upi">💰 UPI Payment</button><button type="button" class="type-btn" data-type="wifi">📶 WiFi</button><button type="button" class="type-btn" data-type="vcard">👤 Contact / vCard</button><button type="button" class="type-btn" data-type="phone">📞 Phone Call</button><button type="button" class="type-btn" data-type="email">📧 Email</button><button type="button" class="type-btn" data-type="sms">💬 SMS</button></div>
+
+<div id="t4Inputs">
+<div id="t4TextBox"><label>Text / Website Link</label><textarea id="t4Text" rows="2" placeholder="Example: https://instagram.com/yourshop">https://orbittroniz.com</textarea><div class="char-count" id="t4CharCount">0 / 2000 chars</div></div>
+<div id="t4WhatsappBox" style="display:none"><label>WhatsApp Number (With Country Code)</label><input type="text" id="t4WaNumber" placeholder="Example: 919876543210" value="919876543210"><label>Message (Optional)</label><input type="text" id="t4WaMsg" placeholder="Example: Hi, I want to order" value="Hi, I want to order"></div>
+<div id="t4UpiBox" style="display:none"><label>UPI ID</label><input type="text" id="t4UpiId" placeholder="Example: 9876543210@paytm" value="9876543210@paytm"><label>Your Name</label><input type="text" id="t4UpiName" placeholder="Example: Ramesh Shop" value="Ramesh Shop"><label>Amount (Optional - 0 = Any Amount)</label><input type="text" id="t4UpiAmount" placeholder="Example: 100 OR 0" value="0"><p style="font-size:11px;color:#166534">✅ Works in GPay, PhonePe, Paytm</p></div>
+<div id="t4WifiBox" style="display:none"><label>WiFi Name (SSID)</label><input type="text" id="t4WifiName" placeholder="Example: MyHomeWiFi"><label>WiFi Password</label><input type="text" id="t4WifiPass" placeholder="Example: 12345678"><label>Security</label><select id="t4WifiSec"><option value="WPA">WPA / WPA2 - Most Common</option><option value="WEP">WEP - Old</option><option value="nopass">No Password - Open</option></select></div>
+<div id="t4VcardBox" style="display:none"><label>Full Name</label><input type="text" id="t4VcName" placeholder="Example: Ramesh Kumar" value="Ramesh Kumar"><label>Phone</label><input type="text" id="t4VcPhone" placeholder="Example: +919876543210" value="+919876543210"><label>Business / Shop Name</label><input type="text" id="t4VcOrg" placeholder="Example: Ramesh Kirana Store" value="Ramesh Kirana Store"><label>City</label><input type="text" id="t4VcCity" placeholder="Example: Solapur" value="Solapur"><label>State (Optional)</label><input type="text" id="t4VcState" placeholder="Example: Maharashtra" value="Maharashtra"></div>
+<div id="t4PhoneBox" style="display:none"><label>Phone Number To Call</label><input type="text" id="t4PhoneNum" placeholder="Example: +919876543210" value="+919876543210"></div>
+<div id="t4EmailBox" style="display:none"><label>Email Address</label><input type="text" id="t4EmailAddr" placeholder="Example: shop@gmail.com" value="shop@gmail.com"><label>Subject</label><input type="text" id="t4EmailSub" placeholder="Example: Order Enquiry" value="Order Enquiry"></div>
+<div id="t4SmsBox" style="display:none"><label>Phone Number</label><input type="text" id="t4SmsNum" placeholder="Example: 919876543210" value="919876543210"><label>Message</label><input type="text" id="t4SmsMsg" placeholder="Example: Hi, I want to order" value="Hi, I want to order"></div>
+</div>
+
+<label>Frame Text - Shown Below QR</label>
+<input type="text" id="t4FrameText" placeholder="Example: Scan To Pay - Ramesh Shop" value="Scan Me - Orbittroniz">
+
+<label>QR Colors</label>
+<div class="color-row"><input type="color" id="t4FgColor" value="#000000"><div><b>QR Color</b><br><span style="font-size:11px;color:#6B7280">Tap to change</span></div><span class="color-preset active" data-fg="#000000" style="background:#000000"></span><span class="color-preset" data-fg="#7C3AED" style="background:#7C3AED"></span><span class="color-preset" data-fg="#DC2626" style="background:#DC2626"></span><span class="color-preset" data-fg="#16A34A" style="background:#16A34A"></span><span class="color-preset" data-fg="#0F172A" style="background:#0F172A"></span></div>
+<div class="color-row"><input type="color" id="t4BgColor" value="#ffffff"><div><b>Background</b><br><span style="font-size:11px;color:#6B7280">White scans best</span></div><button type="button" class="chip" id="t4TransparentBtn">✨ Transparent</button><button type="button" class="chip" id="t4WhiteBgBtn">⬜ White</button></div>
+<p style="font-size:11px;color:#DC2626;margin-top:4px">⚠️ Keep contrast high - Dark QR on Light BG scans best.</p>
+
+<div style="display:flex;gap:8px"><div style="flex:1"><label>QR Size</label><select id="t4Size"><option value="512">Medium - 512px</option><option value="1024" selected>High - 1024px - Print</option><option value="2048">Ultra HD - 2048px</option><option value="256">Small - 256px</option></select></div><div style="flex:1"><label>Error Correction</label><select id="t4Level"><option value="H">High - Best With Logo - H</option><option value="Q">Medium-High - Q</option><option value="M" selected>Medium - M</option><option value="L">Low - L</option></select></div></div>
+
+<label>🏢 Add Your Logo In Center</label>
+<label for="t4LogoFile" class="drop" id="t4LogoDrop">
+<input type="file" id="t4LogoFile" class="file-input" accept="image/*,.png,.jpg,.jpeg,.webp">
+<div class="drop-content"><div style="font-size:24px">🖼️</div><b>Tap To Upload Logo</b><p style="font-size:11px;color:#6B7280;margin-top:2px;font-weight:400">Shop logo / Photo / DP - Max 5 MB</p></div>
+</label>
+<img id="t4LogoPreview" class="logo-preview" alt="Logo preview">
+<div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="btn2" id="t4RemoveLogoBtn">❌ Remove Logo</button><button type="button" class="btn2 primary" id="t4UseEmojiBtn">😀 Use Emoji As Logo</button></div>
+<div id="t4EmojiRow" style="display:none;margin-top:8px"><span class="chip" data-emoji="🛍️">🛍️ Shop</span><span class="chip" data-emoji="🍔">🍔 Food</span><span class="chip" data-emoji="💰">💰 Pay</span><span class="chip" data-emoji="📷">📷 Photo</span><span class="chip" data-emoji="❤️">❤️ Love</span><span class="chip" data-emoji="⭐">⭐ Star</span></div>
+<label>Logo Size</label>
+<select id="t4LogoSize"><option value="0.18">Small Logo - Safest Scan</option><option value="0.22" selected>Medium Logo - Best - 22%</option><option value="0.28">Big Logo - May Fail Scan</option></select>
+
+<div style="background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:4px 12px;margin-top:12px">
+<div class="toggle-row"><div><b>🖼️ Frame Around QR</b><br><span style="font-size:11px;color:#6B7280">White border + Text below</span></div><div class="toggle" id="t4FrameToggle"></div></div>
+<div class="toggle-row"><div><b>💧 Watermark</b><br><span id="t4WmText" style="font-size:11px;color:#6B7280">ON</span></div><div class="toggle" id="t4WmToggle"></div></div>
+<div class="toggle-row" style="border:none"><div><b>🔄 Auto Update</b><br><span style="font-size:11px;color:#6B7280">QR updates as you type</span></div><div class="toggle" id="t4AutoToggle"></div></div>
+</div>
+
+<button type="button" class="btn" id="t4GenerateBtn">✨ Generate QR Code</button>
+
+<div class="qr-preview" id="t4PreviewBox">
+<div id="t4PreviewEmpty"><div style="font-size:48px">📷</div><b>Your QR Will Appear Here</b><p style="font-size:12px;color:#6B7280">Tap Generate QR Code above</p></div>
+<canvas id="t4Canvas" width="512" height="512" style="display:none"></canvas>
+<div id="t4QrInfo" style="font-size:12px;color:#6B7280;margin-top:8px;display:none"></div>
+</div>
+
+<div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2 green" id="t4DownloadPngBtn">⬇️ Download PNG</button><button type="button" class="btn2 primary" id="t4DownloadSvgBtn">⬇️ Download SVG - Vector</button></div>
+<div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="btn2" id="t4CopyBtn">📋 Copy QR Image</button><button type="button" class="btn2" id="t4ShareBtn">📤 Share QR Image</button><button type="button" class="btn2" id="t4PrintBtn">🖨️ Print</button></div>
+
+<div class="status-box" id="t4StatusBox"><b id="t4StatusTitle">📄 Status</b><br><span id="t4StatusText">Ready</span></div>
+<div class="error-box" id="t4ErrorBox"><b>⚠️ Error:</b><br><span id="t4ErrorText"></span></div>
+
+<div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2" onclick="clearTool4()">🗑️ New QR</button><button type="button" class="btn2 primary" onclick="goHomePageTool4()">← Back</button></div>
+</div></div>
+</div>
+</div>
+
+<script>
+/* ================= TOOL 4 V2 - ALL BUGS FIXED ================= */
+(function(){
+  window.goHomePageTool4 = window.goHomePageTool4 || function(){
+    if(typeof window.goHomePage === "function"){ window.goHomePage(); return; }
+    var p=document.getElementById('page-tool4'); if(p) p.style.display='none';
+    var h=document.getElementById('homeView'); if(h) h.style.display='block';
+    window.scrollTo(0,0);
+  };
+  function el(id){ return document.getElementById(id); }
+  function getWm4(){ try{ var wm=localStorage.getItem('orbit_watermark'); var txt=localStorage.getItem('orbit_watermark_text')||"Made With Orbittroniz.com"; return {wm: wm!=='false', txt:txt}; }catch(e){ return {wm:true, txt:"Made With Orbittroniz.com"}; } }
+  function updateWmUI4(){ var w=getWm4(); var t=el('t4WmText'); if(t) t.textContent=(w.wm?"ON - ":"OFF - ")+w.txt; var tg=el('t4WmToggle'); if(tg) tg.classList.toggle('off',!w.wm); }
+  function setStatus4(title,msg,showBox){ var box=el('t4StatusBox'); if(box) box.style.display = showBox===false ? 'none' : 'block'; var tt=el('t4StatusTitle'); if(tt) tt.textContent=title; var tx=el('t4StatusText'); if(tx) tx.textContent=msg; }
+  function showError4(msg){ var box=el('t4ErrorBox'); if(!box) return; if(!msg){ box.style.display='none'; return; } box.style.display='block'; var tx=el('t4ErrorText'); if(tx) tx.textContent=msg; }
+  function showErrorAuto4(msg){ showError4(msg); setTimeout(function(){ showError4(""); },6000); }
+  function escapeXml(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&apos;"); }
+
+  var S4={type:"text", logoDataUrl:null, logoEmoji:null, frame:true, auto:true, transparent:false, lastDataUrl:null, lastCanvas:null, lastText:"", lastQr:null, lastModuleCount:0, lastFg:"#000000", lastBg:"#ffffff", generating:false, libReady:false};
+
+  var QRGEN_CDNS=["https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js","https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js","https://unpkg.com/qrcode-generator@1.4.4/qrcode.min.js"];
+  function loadScript4(src){
+    return new Promise(function(resolve,reject){
+      if(window.qrcode){ resolve(); return; }
+      var s=document.createElement('script'); s.src=src; s.async=true;
+      s.onload=function(){ resolve(); }; s.onerror=function(){ reject(new Error("CDN failed")); };
+      setTimeout(function(){ if(!window.qrcode) reject(new Error("Timeout")); },12000);
+      document.head.appendChild(s);
+    });
+  }
+  async function ensureQrLib4(){
+    if(window.qrcode){ S4.libReady=true; return true; }
+    for(var i=0;i<QRGEN_CDNS.length;i++){ try{ await loadScript4(QRGEN_CDNS[i]); if(window.qrcode){ S4.libReady=true; return true; } }catch(e){ continue; } }
+    return !!window.qrcode;
+  }
+  setTimeout(function(){ ensureQrLib4(); },300);
+
+  // TYPE SWITCH
+  var typeRow=el('t4TypeRow');
+  if(typeRow) typeRow.addEventListener('click', function(ev){
+    var b=ev.target.closest('.type-btn'); if(!b) return;
+    S4.type=b.getAttribute('data-type')||"text";
+    typeRow.querySelectorAll('.type-btn').forEach(function(x){ x.classList.remove('active'); }); b.classList.add('active');
+    var boxes={text:'t4TextBox', whatsapp:'t4WhatsappBox', upi:'t4UpiBox', wifi:'t4WifiBox', vcard:'t4VcardBox', phone:'t4PhoneBox', email:'t4EmailBox', sms:'t4SmsBox'};
+    for(var k in boxes){ var bx=el(boxes[k]); if(bx) bx.style.display = (k===S4.type) ? 'block' : 'none'; }
+    if(S4.auto) generateQr4();
+  });
+
+  // COLORS
+  var fgInput=el('t4FgColor'), bgInput=el('t4BgColor');
+  document.querySelectorAll('#tool4 .color-preset').forEach(function(p){
+    p.addEventListener('click', function(){
+      var c=p.getAttribute('data-fg'); if(fgInput) fgInput.value=c;
+      document.querySelectorAll('#tool4 .color-preset').forEach(function(x){ x.classList.remove('active'); }); p.classList.add('active');
+      if(S4.auto) generateQr4();
+    });
+  });
+  if(fgInput) fgInput.addEventListener('input', function(){ if(S4.auto) generateQr4(); });
+  if(bgInput) bgInput.addEventListener('input', function(){ S4.transparent=false; if(S4.auto) generateQr4(); });
+  var transBtn=el('t4TransparentBtn'); if(transBtn) transBtn.addEventListener('click', function(){ S4.transparent=true; if(S4.auto) generateQr4(); setStatus4("✨ Transparent BG","Transparent - Good for poster overlay",true); });
+  var whiteBtn=el('t4WhiteBgBtn'); if(whiteBtn) whiteBtn.addEventListener('click', function(){ S4.transparent=false; if(bgInput) bgInput.value="#ffffff"; if(S4.auto) generateQr4(); });
+
+  // TOGGLES
+  function bindTog4(id,getV,setV){ var t=el(id); if(!t) return; t.addEventListener('click', function(){ setV(!getV()); t.classList.toggle('off',!getV()); if(S4.auto && id!=='t4AutoToggle') generateQr4(); }); }
+  bindTog4('t4FrameToggle', function(){ return S4.frame; }, function(v){ S4.frame=v; });
+  var wmTog=el('t4WmToggle'); if(wmTog) wmTog.addEventListener('click', function(){ try{ localStorage.setItem('orbit_watermark', getWm4().wm ? 'false':'true'); }catch(e){} updateWmUI4(); if(S4.auto) generateQr4(); });
+  updateWmUI4();
+  bindTog4('t4AutoToggle', function(){ return S4.auto; }, function(v){ S4.auto=v; });
+
+  // LOGO
+  var logoFile=el('t4LogoFile');
+  var logoPrev=el('t4LogoPreview');
+  if(logoFile) logoFile.addEventListener('change', function(e){
+    var f=e.target.files && e.target.files[0]; if(!f) return;
+    if(f.size>5*1024*1024){ showErrorAuto4("Logo too big - Max 5 MB"); logoFile.value=""; return; }
+    var ln=f.name.toLowerCase(); if(ln.indexOf('.heic')>-1){ showErrorAuto4("HEIC not supported - Save logo as JPG / PNG"); logoFile.value=""; return; }
+    var r=new FileReader(); r.onload=function(){
+      S4.logoDataUrl=r.result; S4.logoEmoji=null; if(logoPrev){ logoPrev.src=S4.logoDataUrl; logoPrev.style.display='block'; }
+      // FIX 6: Auto switch level dropdown to H when logo added
+      var lvl=el('t4Level'); if(lvl) lvl.value="H";
+      setStatus4("✅ Logo Added","Logo added - Error Correction auto set to H for safe scan",true);
+      if(S4.auto) generateQr4();
+    }; r.onerror=function(){ showErrorAuto4("Logo load failed"); }; r.readAsDataURL(f);
+    logoFile.value="";
+  });
+  var removeLogo=el('t4RemoveLogoBtn'); if(removeLogo) removeLogo.addEventListener('click', function(){ S4.logoDataUrl=null; S4.logoEmoji=null; if(logoPrev) logoPrev.style.display='none'; setStatus4("Logo Removed","Logo removed",true); if(S4.auto) generateQr4(); });
+  var emojiBtn=el('t4UseEmojiBtn'); if(emojiBtn) emojiBtn.addEventListener('click', function(){ var row=el('t4EmojiRow'); if(row) row.style.display = row.style.display==='none' ? 'block' : 'none'; });
+  var emojiRow=el('t4EmojiRow');
+  if(emojiRow) emojiRow.addEventListener('click', function(ev){ var c=ev.target.closest('.chip'); if(!c) return; S4.logoEmoji=c.getAttribute('data-emoji'); S4.logoDataUrl=null; if(logoPrev) logoPrev.style.display='none'; var lvl2=el('t4Level'); if(lvl2) lvl2.value="H"; setStatus4("✅ Emoji Logo","Emoji '"+S4.logoEmoji+"' added - Level set to H",true); if(S4.auto) generateQr4(); });
+
+  // BUILD QR TEXT - FIXED: WiFi nopass, vCard, SMS, Phone
+  function buildQrText4(){
+    if(S4.type==="text"){
+      var t=el('t4Text').value.trim(); if(!t) return null;
+      return {text:t, label:"Text / Link"};
+    }
+    if(S4.type==="whatsapp"){
+      var num=(el('t4WaNumber').value||"").replace(/\D/g,""); if(!num || num.length<10) return null;
+      var msg=el('t4WaMsg').value.trim();
+      return {text:"https://wa.me/"+num+(msg ? "?text="+encodeURIComponent(msg) : ""), label:"WhatsApp - "+num};
+    }
+    if(S4.type==="upi"){
+      var upi=(el('t4UpiId').value||"").trim(); if(!upi || upi.indexOf('@')===-1) return null;
+      var name=(el('t4UpiName').value||"").trim() || "Pay";
+      var amt=(el('t4UpiAmount').value||"0").trim();
+      var url="upi://pay?pa="+encodeURIComponent(upi)+"&pn="+encodeURIComponent(name)+"&cu=INR";
+      if(amt && amt!=="0" && !isNaN(parseFloat(amt))) url+="&am="+encodeURIComponent(amt);
+      return {text:url, label:"UPI Payment - "+upi};
+    }
+    if(S4.type==="wifi"){
+      var ssid=(el('t4WifiName').value||"").trim(); if(!ssid) return null;
+      var pass=el('t4WifiPass').value||""; var sec=el('t4WifiSec').value||"WPA";
+      function esc(s){ return String(s).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/:/g,"\\:").replace(/"/g,'\\"'); }
+      // FIX 2: nopass has NO P field
+      if(sec==="nopass") return {text:"WIFI:T:nopass;S:"+esc(ssid)+";;", label:"WiFi Open - "+ssid};
+      return {text:"WIFI:T:"+sec+";S:"+esc(ssid)+";P:"+esc(pass)+";;", label:"WiFi - "+ssid};
+    }
+    if(S4.type==="vcard"){
+      var n=(el('t4VcName').value||"").trim(); if(!n) return null;
+      var ph=(el('t4VcPhone').value||"").trim(); var org=(el('t4VcOrg').value||"").trim(); var city=(el('t4VcCity').value||"").trim(); var state=(el('t4VcState') ? el('t4VcState').value.trim() : "") || "";
+      // FIX 3: Correct vCard ADR: PO Box;Ext;Street;City;State;ZIP;Country
+      var v="BEGIN:VCARD\nVERSION:3.0\nFN:"+n+"\nORG:"+org+"\nTEL;TYPE=CELL:"+ph+"\nADR:;;"+city+";"+state+";;;\nEND:VCARD";
+      return {text:v, label:"Contact - "+n};
+    }
+    if(S4.type==="phone"){
+      var pn=(el('t4PhoneNum').value||"").replace(/\s/g,""); if(!pn) return null;
+      return {text:"tel:"+pn, label:"Call - "+pn};
+    }
+    if(S4.type==="email"){
+      var em=(el('t4EmailAddr').value||"").trim(); if(!em || em.indexOf('@')===-1) return null;
+      var sub=el('t4EmailSub').value.trim();
+      return {text:"mailto:"+em+(sub ? "?subject="+encodeURIComponent(sub) : ""), label:"Email - "+em};
+    }
+    if(S4.type==="sms"){
+      var sn=(el('t4SmsNum').value||"").replace(/\D/g,""); if(!sn) return null;
+      var sm=el('t4SmsMsg').value.trim();
+      // FIX 4: Use &body - Works on iPhone + Android
+      return {text:"sms:"+sn+(sm ? "&body="+encodeURIComponent(sm) : ""), label:"SMS - "+sn};
+    }
+    return null;
+  }
+  function contrastCheck4(fg, bg){
+    function lum(hex){ var c=String(hex||"").replace('#',''); if(c.length===3) c=c.split('').map(function(ch){ return ch+ch; }).join(''); var r=parseInt(c.substr(0,2),16), g=parseInt(c.substr(2,2),16), b=parseInt(c.substr(4,2),16); return (0.299*r+0.587*g+0.114*b)/255; }
+    try{ var l1=lum(fg), l2=lum(bg); if(Math.abs(l1-l2)<0.35) return false; }catch(e){}
+    return true;
+  }
+
+  async function generateQr4(){
+    if(S4.generating) return;
+    var built=buildQrText4();
+    if(!built){ showErrorAuto4("Please fill required field - UPI must have @, WhatsApp number 10+ digits, WiFi name required"); return; }
+    // FIX 9: Length check before lib throws
+    if(built.text.length>2000){ showErrorAuto4("Text too long - "+built.text.length+" chars - Max 2000 chars for QR. Please shorten text."); return; }
+    S4.generating=true;
+    var btn=el('t4GenerateBtn'); if(btn){ btn.disabled=true; btn.textContent="⏳ Generating..."; }
+    showError4("");
+    // FIX 10: Clear canvas before new generation - No old QR stays on fail
+    var canvasPre=el('t4Canvas'); if(canvasPre){ var ctxPre=canvasPre.getContext('2d'); ctxPre.clearRect(0,0,canvasPre.width,canvasPre.height); }
+    try{
+      var ok=await ensureQrLib4();
+      if(!ok || !window.qrcode){ showErrorAuto4("QR engine failed - Check internet and try again. Best: Open in Chrome."); S4.generating=false; if(btn){ btn.disabled=false; btn.textContent="✨ Generate QR Code"; } return; }
+      var fg=el('t4FgColor').value || "#000000";
+      var bg=S4.transparent ? "#ffffff" : (el('t4BgColor').value || "#ffffff");
+      if(!contrastCheck4(fg, bg) && !S4.transparent){ showErrorAuto4("⚠️ Low contrast - QR may not scan - Use Dark QR on Light BG"); }
+      var size=parseInt(el('t4Size').value||"1024",10);
+      var level=el('t4Level').value||"H";
+      if((S4.logoDataUrl || S4.logoEmoji) && level!=="H"){ level="H"; var lvlEl=el('t4Level'); if(lvlEl) lvlEl.value="H"; }
+      var qr=window.qrcode(0, level);
+      qr.addData(built.text); qr.make();
+      var moduleCount=qr.getModuleCount();
+      S4.lastQr=qr; S4.lastModuleCount=moduleCount; S4.lastFg=fg; S4.lastBg=bg;
+      var frameText=(el('t4FrameText').value||"").trim();
+      var wm=getWm4();
+      var pad=Math.floor(size*0.08);
+      var frameH=(S4.frame && frameText) ? Math.floor(size*0.12) : 0;
+      var wmH=wm.wm ? Math.floor(size*0.05) : 0;
+      var totalH=size + pad*2 + frameH + wmH;
+      var totalW=size + pad*2;
+      var canvas=el('t4Canvas');
+      canvas.width=totalW; canvas.height=totalH;
+      var ctx=canvas.getContext('2d');
+      if(S4.transparent){ ctx.clearRect(0,0,totalW,totalH); } else { ctx.fillStyle=bg; ctx.fillRect(0,0,totalW,totalH); }
+      var cell=Math.floor(size/moduleCount);
+      var qrPixel=cell*moduleCount;
+      var offsetX=pad + Math.floor((size-qrPixel)/2);
+      var offsetY=pad;
+      ctx.fillStyle=fg;
+      for(var r=0;r<moduleCount;r++){ for(var c=0;c<moduleCount;c++){ if(qr.isDark(r,c)){ ctx.fillRect(offsetX + c*cell, offsetY + r*cell, cell, cell); } } }
+      var logoSizeRatio=parseFloat(el('t4LogoSize').value||"0.22");
+      if(S4.logoDataUrl || S4.logoEmoji){
+        var logoSize=Math.floor(qrPixel*logoSizeRatio);
+        var lx=offsetX + Math.floor((qrPixel-logoSize)/2);
+        var ly=offsetY + Math.floor((qrPixel-logoSize)/2);
+        var bgPad=Math.floor(logoSize*0.18);
+        ctx.fillStyle="#ffffff";
+        var bx=lx-bgPad, by=ly-bgPad, bw=logoSize+bgPad*2, bh=logoSize+bgPad*2, rad=12;
+        ctx.beginPath(); ctx.moveTo(bx+rad,by); ctx.arcTo(bx+bw,by,bx+bw,by+bh,rad); ctx.arcTo(bx+bw,by+bh,bx,by+bh,rad); ctx.arcTo(bx,by+bh,bx,by,rad); ctx.arcTo(bx,by,bx+bw,by,rad); ctx.closePath(); ctx.fill();
+        ctx.strokeStyle="#E5E7EB"; ctx.lineWidth=2; ctx.stroke();
+        if(S4.logoDataUrl){
+          var logoImg=new Image(); logoImg.src=S4.logoDataUrl;
+          await new Promise(function(res){ logoImg.onload=res; logoImg.onerror=res; });
+          try{ ctx.drawImage(logoImg, lx, ly, logoSize, logoSize); }catch(e){}
+        } else if(S4.logoEmoji){
+          ctx.font=Math.floor(logoSize*0.7)+"px Arial"; ctx.textAlign="center"; ctx.textBaseline="middle";
+          ctx.fillText(S4.logoEmoji, lx+logoSize/2, ly+logoSize/2+2);
+        }
+      }
+      // Frame Text - FIX 8: White pill behind text when transparent, so text visible
+      if(S4.frame && frameText){
+        var frameY=pad+size+frameH/2;
+        if(S4.transparent){
+          ctx.fillStyle="rgba(255,255,255,0.95)";
+          var pillW=Math.min(totalW-16, ctx.measureText(frameText).width + 24);
+          // Need font before measure
+          ctx.font="bold "+Math.floor(size*0.045)+"px Arial";
+          pillW=Math.min(totalW-16, ctx.measureText(frameText).width + 24);
+          ctx.beginPath(); ctx.roundRect((totalW-pillW)/2, frameY- Math.floor(size*0.035), pillW, Math.floor(size*0.07), 12); ctx.fill();
+        }
+        ctx.fillStyle=fg; ctx.font="bold "+Math.floor(size*0.045)+"px Arial"; ctx.textAlign="center"; ctx.textBaseline="middle";
+        var ft=frameText; while(ctx.measureText(ft).width > totalW-20 && ft.length>3){ ft=ft.slice(0,-1); }
+        if(ft!==frameText) ft=ft.slice(0,-2)+"..";
+        ctx.fillText(ft, totalW/2, frameY);
+      }
+      // Watermark - FIX 7: Centered in wm area, not clipped
+      if(wm.wm){
+        ctx.fillStyle="rgba(120,120,120,0.9)"; ctx.font=Math.floor(size*0.022)+"px Arial"; ctx.textAlign="right"; ctx.textBaseline="middle";
+        ctx.fillText(wm.txt, totalW-8, totalH - wmH/2);
+      }
+      var empty=el('t4PreviewEmpty'); if(empty) empty.style.display='none';
+      canvas.style.display='block'; canvas.style.width='min(100%, 320px)'; canvas.style.height='auto';
+      var info=el('t4QrInfo'); if(info){ info.style.display='block'; info.textContent="✅ QR Ready - "+built.label+" - Size: "+totalW+"x"+totalH+" - Scan with any camera"; }
+      S4.lastText=built.text; S4.lastCanvas=canvas;
+      try{ S4.lastDataUrl=canvas.toDataURL("image/png"); }catch(e){ S4.lastDataUrl=null; }
+      setStatus4("✅ QR Generated","✅ QR Generated - "+built.label+" - Download PNG / SVG below",true);
+    }catch(err){
+      showErrorAuto4("QR generation failed - Try shorter text. Error: "+(err && err.message || ""));
+    }finally{
+      S4.generating=false;
+      if(btn){ btn.disabled=false; btn.textContent="✨ Generate QR Code"; }
+    }
+  }
+
+  function downloadPng4(){
+    if(!S4.lastDataUrl){ showErrorAuto4("Generate QR first"); return; }
+    try{ var a=document.createElement('a'); a.href=S4.lastDataUrl; a.download="QR-"+(S4.type||"code")+".png"; document.body.appendChild(a); a.click(); a.remove(); setStatus4("✅ Downloaded","PNG downloaded",true); }catch(e){ showErrorAuto4("Download failed - Try again"); }
+  }
+  // FIX 1: Real Vector SVG - Each module as <rect>
+  function downloadSvg4(){
+    if(!S4.lastQr || !S4.lastText){ showErrorAuto4("Generate QR first"); return; }
+    try{
+      var qr=S4.lastQr, mc=S4.lastModuleCount, fg=S4.lastFg, bg=S4.lastBg;
+      var cell=10; var padCells=4; var totalCells=mc + padCells*2;
+      var svgSize=totalCells*cell;
+      var parts=[];
+      parts.push('<svg xmlns="http://www.w3.org/2000/svg" width="'+svgSize+'" height="'+svgSize+'" viewBox="0 0 '+svgSize+' '+svgSize+'">');
+      if(!S4.transparent) parts.push('<rect width="'+svgSize+'" height="'+svgSize+'" fill="'+escapeXml(bg)+'"/>');
+      parts.push('<g fill="'+escapeXml(fg)+'">');
+      for(var r=0;r<mc;r++){ for(var c=0;c<mc;c++){ if(qr.isDark(r,c)){ parts.push('<rect x="'+((c+padCells)*cell)+'" y="'+((r+padCells)*cell)+'" width="'+cell+'" height="'+cell+'"/>'); } } }
+      parts.push('</g>');
+      // Frame text as SVG text if present
+      var frameText=(el('t4FrameText').value||"").trim();
+      if(S4.frame && frameText){ parts.push('<text x="'+(svgSize/2)+'" y="'+(svgSize-8)+'" font-family="Arial" font-size="28" font-weight="bold" text-anchor="middle" fill="'+escapeXml(fg)+'">'+escapeXml(frameText)+'</text>'); }
+      parts.push('</svg>');
+      var svgStr=parts.join('');
+      var blob=new Blob([svgStr],{type:'image/svg+xml'}); var url=URL.createObjectURL(blob);
+      var a=document.createElement('a'); a.href=url; a.download="QR-"+(S4.type||"code")+"-Vector.svg"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(url); },1000);
+      setStatus4("✅ SVG Downloaded","Real Vector SVG downloaded - Sharp at any size",true);
+    }catch(e){ showErrorAuto4("SVG download failed - Use PNG"); }
+  }
+  async function copyQr4(){
+    if(!S4.lastCanvas){ showErrorAuto4("Generate QR first"); return; }
+    try{
+      if(navigator.clipboard && window.ClipboardItem){
+        var blob=await new Promise(function(res){ S4.lastCanvas.toBlob(res,'image/png'); });
+        await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
+        setStatus4("✅ Copied","QR image copied - Paste in WhatsApp",true);
+      } else { showErrorAuto4("Copy not supported - Use Download PNG"); }
+    }catch(e){ showErrorAuto4("Copy failed - Use Download PNG"); }
+  }
+  // FIX 5: Real Share Image - navigator.share with files
+  async function shareQr4(){
+    if(!S4.lastCanvas){ showErrorAuto4("Generate QR first"); return; }
+    try{
+      var blob=await new Promise(function(res){ S4.lastCanvas.toBlob(res,'image/png'); });
+      var file=new File([blob], "QR-"+(S4.type||"code")+".png", {type:"image/png"});
+      if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
+        await navigator.share({title:"My QR Code", text:"Scan this QR - "+S4.lastText, files:[file]});
+        setStatus4("✅ Shared","QR image shared",true);
+        return;
+      }
+      // Fallback: WhatsApp text
+      window.open("https://wa.me/?text="+encodeURIComponent("Scan this QR - "+S4.lastText));
+    }catch(e){
+      if(String(e).indexOf("Abort")==-1) window.open("https://wa.me/?text="+encodeURIComponent("Scan this QR - "+S4.lastText));
+    }
+  }
+  function printQr4(){
+    if(!S4.lastDataUrl){ showErrorAuto4("Generate QR first"); return; }
+    var w=window.open("","_blank");
+    if(!w){ showErrorAuto4("Popup blocked - Allow popup, then try Print again"); return; }
+    w.document.write('<html><head><title>Print QR</title></head><body style="text-align:center;font-family:Arial"><h2>'+escapeXml(el('t4FrameText').value||"Scan Me")+'</h2><img src="'+S4.lastDataUrl+'" style="width:300px"><p>Scan with camera</p><script>window.onload=function(){window.print();}<\/script></body></html>');
+    w.document.close();
+  }
+
+  var genBtn=el('t4GenerateBtn'); if(genBtn) genBtn.addEventListener('click', generateQr4);
+  var pngBtn=el('t4DownloadPngBtn'); if(pngBtn) pngBtn.addEventListener('click', downloadPng4);
+  var svgBtn=el('t4DownloadSvgBtn'); if(svgBtn) svgBtn.addEventListener('click', downloadSvg4);
+  var copyBtn=el('t4CopyBtn'); if(copyBtn) copyBtn.addEventListener('click', copyQr4);
+  var shareBtn=el('t4ShareBtn'); if(shareBtn) shareBtn.addEventListener('click', shareQr4);
+  var printBtn=el('t4PrintBtn'); if(printBtn) printBtn.addEventListener('click', printQr4);
+
+  var debounceTimer=null;
+  function debouncedGenerate4(){ if(!S4.auto) return; clearTimeout(debounceTimer); debounceTimer=setTimeout(function(){ generateQr4(); },600); }
+  function updateCharCount4(){ var txt=el('t4Text'); var cc=el('t4CharCount'); if(txt && cc) cc.textContent=txt.value.length+" / 2000 chars"; }
+  var textArea=el('t4Text'); if(textArea) textArea.addEventListener('input', updateCharCount4);
+  updateCharCount4();
+  ['t4Text','t4WaNumber','t4WaMsg','t4UpiId','t4UpiName','t4UpiAmount','t4WifiName','t4WifiPass','t4VcName','t4VcPhone','t4VcOrg','t4VcCity','t4VcState','t4PhoneNum','t4EmailAddr','t4EmailSub','t4SmsNum','t4SmsMsg','t4FrameText','t4LogoSize','t4Size','t4Level'].forEach(function(id){ var inp=el(id); if(inp) inp.addEventListener('input', debouncedGenerate4); if(inp && inp.tagName==='SELECT') inp.addEventListener('change', debouncedGenerate4); });
+  var wifiSec=el('t4WifiSec'); if(wifiSec) wifiSec.addEventListener('change', debouncedGenerate4);
+
+  function clearTool4(){
+    S4.logoDataUrl=null; S4.logoEmoji=null; S4.lastDataUrl=null; S4.lastText=""; S4.lastQr=null;
+    var lp=el('t4LogoPreview'); if(lp) lp.style.display='none';
+    var canvas=el('t4Canvas'); if(canvas){ canvas.style.display='none'; var ctx=canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height); }
+    var empty=el('t4PreviewEmpty'); if(empty) empty.style.display='block';
+    var info=el('t4QrInfo'); if(info) info.style.display='none';
+    var txt=el('t4Text'); if(txt) txt.value="https://orbittroniz.com";
+    var ft=el('t4FrameText'); if(ft) ft.value="Scan Me - Orbittroniz";
+    updateCharCount4();
+    showError4(""); setStatus4("📄 Status","Ready - Generate new QR",true);
+  }
+  window.clearTool4=clearTool4;
+})();
+</script>
+<!-- ================= TOOL 4 END - V2 - ALL BUGS FIXED ================= -->
 <!-- ================= TOOL 5 - PDF COMPRESS ================= -->
 <div id="page-tool5" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>📉 PDF Compress</b><br><span>Your Tool</span></div></div><h2 style="text-align:center">📉 PDF Compress</h2><p style="font-size:12px;color:#6B7280;text-align:center">Reduce PDF Size - For WhatsApp, Email, Form</p><div class="drop" onclick="document.getElementById('pdfCompFile').click()"><b>📄 Select PDF To Compress</b><p style="font-size:12px;color:#6B7280">Example: 5 MB → 800 KB</p><input type="file" id="pdfCompFile" accept="application/pdf" onchange="compressPdf(event)"></div><label>Compression Level</label><select id="pdfCompLevel"><option value="1.2">Light - Keep Quality</option><option value="0.8" selected>Medium - Best - For WhatsApp</option><option value="0.5">High - Smallest</option></select><p id="pdfCompInfo" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select PDF - We will re-render pages at lower quality</p><button class="btn2 green" style="width:100%;margin-top:10px" onclick="downloadCompressedPdf()">⬇️ Download Compressed PDF</button><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
 
