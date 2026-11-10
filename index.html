@@ -1812,7 +1812,9 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
 })();
 </script>
 <!-- ================= TOOL 4 END - V3 - LOGO SETTINGS FULL ================= -->
-<!-- ================= TOOL 5 START - PDF COMPRESSOR - BUGS FREE - PROPER CODE ================= -->
+<!-- ================= TOOL 5 START - PDF COMPRESSOR - BUGS FREE ==============
+<!-- ================= TOOL 5 START - DOWNLOAD FIXED - LIKE OTHER APPS - BUGS FREE ================= -->
+<!-- PASTE THIS ONLY - REPLACE OLD TOOL 5 - DOWNLOAD BUTTON METHOD LIKE iLovePDF / Smallpdf -->
 
 <div id="page-tool5" class="tool-page" style="display:none">
 <div id="tool5">
@@ -1829,6 +1831,7 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
 #tool5 .btn2{flex:1;padding:11px;border-radius:14px;border:1.5px solid #EDE9FE;background:#fff;font-weight:800;cursor:pointer;font-size:12.5px;touch-action:manipulation}
 #tool5 .btn2.primary{background:#111827;color:#fff;border:none}
 #tool5 .btn2.green{background:#16A34A;color:#fff;border:none}
+#tool5 .btn2.blue{background:#2563EB;color:#fff;border:none}
 #tool5 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:9px 12px;border-radius:20px;font-size:12px;margin:7px 7px 0 0;cursor:pointer;font-weight:700;touch-action:manipulation}
 #tool5 .chip.active{background:#111827;color:#fff;border:none}
 #tool5 .toggle-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #EDE9FE;gap:8px}
@@ -1851,10 +1854,12 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
 #tool5 .range-row input[type="range"]{flex:1;padding:0}
 #tool5 .preview{display:flex;gap:8px;overflow-x:auto;margin-top:10px}
 #tool5 .preview canvas{border:1px solid #EDE9FE;border-radius:8px;max-height:120px}
+#tool5 .download-box{background:#F0FDF4;border:2px solid #16A34A;border-radius:16px;padding:14px;margin-top:12px;text-align:center;display:none}
+#tool5 .download-big{width:100%;padding:16px;border:none;border-radius:16px;background:#16A34A;color:#fff;font-weight:900;font-size:16px;cursor:pointer;margin-top:10px;touch-action:manipulation;box-shadow:0 10px 20px rgba(22,163,74,.3)}
 </style>
 
 <div id="tool5"><div class="card">
-<div class="topbar"><button type="button" onclick="goHomePageTool5()">← Back</button><div><b>🗜️ PDF Compressor</b><br><span style="font-size:11px;color:#6B7280">Premium • To KB • Clear Text</span></div></div>
+<div class="topbar"><button type="button" onclick="goHomePageTool5()">← Back</button><div><b>🗜️ PDF Compressor</b><br><span style="font-size:11px;color:#6B7280">Download Fixed • Like iLovePDF</span></div></div>
 
 <h2 style="text-align:center">🗜️ PDF Compressor</h2>
 <p style="font-size:12px;color:#6B7280;text-align:center">5 MB → 200 KB • 10 MB → 500 KB • For Form / WhatsApp / Email</p>
@@ -1875,7 +1880,7 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
 
 <div id="t5InfoBox" style="display:none;margin-top:12px;background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:12px">
 <b>📄 Your PDF</b><br>
-<div style="font-size:12px;line-height:1.8;margin-top:4px">File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b id="t5OrigPages">-</b><br><span id="t5OrigNote" style="color:#6B7280"></span></div>
+<div style="font-size:12px;line-height:1.8;margin-top:4px">File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b id="t5OrigPages">-</b></div>
 <div class="preview" id="t5PagePreview"></div>
 </div>
 
@@ -1891,7 +1896,7 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
 <div style="display:flex;gap:8px"><div style="flex:1"><label>Page Size</label><select id="t5PageSize"><option value="keep">Keep Original</option><option value="a4">A4</option><option value="letter">Letter</option></select></div><div style="flex:1"><label>DPI</label><select id="t5Dpi"><option value="100">100 DPI - Small</option><option value="130" selected>130 DPI - Best</option><option value="170">170 DPI - Sharp</option></select></div></div>
 
 <div style="background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:4px 12px;margin-top:12px">
-<div class="toggle-row"><div><b>🖼️ Grayscale</b><br><span style="font-size:11px;color:#6B7280">30% smaller - For documents</span></div><div class="toggle off" id="t5GrayToggle"></div></div>
+<div class="toggle-row"><div><b>🖼️ Grayscale</b></div><div class="toggle off" id="t5GrayToggle"></div></div>
 <div class="toggle-row"><div><b>💧 Watermark</b><br><span id="t5WmText" style="font-size:11px;color:#6B7280">ON</span></div><div class="toggle" id="t5WmToggle"></div></div>
 <div class="toggle-row" style="border:none"><div><b>🔢 Page Numbers</b></div><div class="toggle off" id="t5PageNumToggle"></div></div>
 </div>
@@ -1899,7 +1904,7 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
 <label>New File Name</label>
 <input type="text" id="t5Rename" value="Compressed">
 
-<button type="button" class="btn" id="t5CompressBtn">✨ Compress PDF - Download Now</button>
+<button type="button" class="btn" id="t5CompressBtn">✨ Compress PDF</button>
 <div class="progress" id="t5Progress"><i id="t5Bar"></i></div>
 <p id="t5Status" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select PDF first</p>
 
@@ -1907,9 +1912,24 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
 <div class="compare"><div>📄 Before<br><b id="t5BeforeSize">-</b><br><span style="font-size:11px;color:#6B7280" id="t5BeforePages">-</span></div><div>→</div><div style="background:#F0FDF4">✅ After<br><b id="t5AfterSize" style="color:#16A34A">-</b><br><span style="font-size:11px;color:#6B7280" id="t5AfterSaved">-</span></div></div>
 </div>
 
-<div id="t5Result" style="display:none;background:#F0FDF4;border:1px solid #BBF7D0;border-radius:14px;padding:12px;margin-top:12px;text-align:center"><b style="color:#166534">✅ PDF Compressed!</b><br><span id="t5ResultInfo" style="font-size:12px;color:#166534"></span><br><button type="button" class="btn2 green" id="t5DownloadAgainBtn" style="width:100%;margin-top:8px">⬇️ Download Again</button></div>
+<!-- DOWNLOAD BOX - LIKE OTHER APPS - SHOWS AFTER COMPRESS - USER TAPS TO DOWNLOAD -->
+<div class="download-box" id="t5DownloadBox">
+<b style="color:#166534;font-size:16px">✅ PDF Compressed & Ready!</b><br>
+<span id="t5ResultInfo" style="font-size:12px;color:#166534"></span><br>
+<button type="button" class="download-big" id="t5DownloadBtn">⬇️ DOWNLOAD COMPRESSED PDF</button>
+<p style="font-size:11px;color:#6B7280;margin-top:8px">Tap Download → PDF saves to Downloads folder<br>If download does not start, use Open / Share below</p>
+<div style="display:flex;gap:8px;margin-top:8px">
+<button type="button" class="btn2 blue" id="t5OpenBtn">👁️ Open PDF</button>
+<button type="button" class="btn2 primary" id="t5ShareBtn">📤 Share / WhatsApp</button>
+</div>
+<div style="display:flex;gap:8px;margin-top:8px">
+<button type="button" class="btn2 green" id="t5DownloadAgainBtn">⬇️ Download Again</button>
+<button type="button" class="btn2" id="t5TryAutoBtn">🔁 Try Auto Download</button>
+</div>
+</div>
 
 <div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2" onclick="clearTool5()">🗑️ New PDF</button><button type="button" class="btn2 primary" onclick="goHomePageTool5()">← Back</button></div>
+<div style="background:#FFFBEB;border:1px dashed #F59E0B;border-radius:14px;padding:12px;margin-top:12px;font-size:12px;line-height:1.7"><b>📖 If Download Not Starting:</b><br>1. Use Chrome browser (not WhatsApp browser) - Open link in Chrome<br>2. Tap Download button - Allow "Download file?" → Allow<br>3. Check Downloads folder in Files app<br>4. Still not? Tap <b>Share</b> → Send to WhatsApp / Gmail - It will save</div>
 </div></div>
 </div>
 </div>
@@ -1930,7 +1950,7 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
   function showErrorAuto(msg){ showError(msg); setTimeout(function(){ showError(""); },7000); }
   function fmt(bytes){ if(bytes<1024) return Math.round(bytes)+" B"; if(bytes<1024*1024) return Math.round(bytes/1024)+" KB"; return (bytes/1024/1024).toFixed(2)+" MB"; }
 
-  var S={file:null,fileSize:0,buf:null,pages:0,targetKB:500,gray:false,pageNum:false,busy:false,lastUrl:null,lastName:"Compressed.pdf"};
+  var S={file:null,fileSize:0,buf:null,pages:0,targetKB:500,gray:false,pageNum:false,busy:false,lastBlob:null,lastUrl:null,lastName:"Compressed.pdf"};
 
   var PDFJS_CDNS=["https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js","https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"];
   var PDFJS_WORKER=["https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js","https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js"];
@@ -1941,7 +1961,7 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
   setTimeout(function(){ ensurePdfJs(); ensureJsPdf(); },300);
 
   function setTargetUI(v){ document.querySelectorAll('#t5TargetRow .chip').forEach(function(x){ x.classList.toggle('active', parseInt(x.getAttribute('data-target'),10)===v); }); }
-  function setQualityUI(v){ var q=el('t5Quality'); if(q) q.value=v; var l=el('t5QualityLabel'); if(l) l.textContent=v+"%"; }
+  function setQualityUI(v){ el('t5Quality').value=v; el('t5QualityLabel').textContent=v+"%"; }
   document.getElementById('t5PresetRow').addEventListener('click', function(ev){
     var c=ev.target.closest('.chip'); if(!c) return;
     document.querySelectorAll('#t5PresetRow .chip').forEach(function(x){ x.classList.remove('active'); }); c.classList.add('active');
@@ -1961,7 +1981,7 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
   el('t5Quality').addEventListener('input', function(){ el('t5QualityLabel').textContent=el('t5Quality').value+"%"; });
   el('t5GrayToggle').addEventListener('click', function(){ S.gray=!S.gray; el('t5GrayToggle').classList.toggle('off',!S.gray); });
   el('t5PageNumToggle').addEventListener('click', function(){ S.pageNum=!S.pageNum; el('t5PageNumToggle').classList.toggle('off',!S.pageNum); });
-  var wmTog=el('t5WmToggle'); wmTog.addEventListener('click', function(){ try{ localStorage.setItem('orbit_watermark', getWm().on ? 'false':'true'); }catch(e){} updateWm(); });
+  el('t5WmToggle').addEventListener('click', function(){ try{ localStorage.setItem('orbit_watermark', getWm().on ? 'false':'true'); }catch(e){} updateWm(); });
   updateWm();
 
   var fileInp=el('t5File');
@@ -1991,7 +2011,6 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
       el('t5FileName').textContent=f.name;
       el('t5OrigSize').textContent=fmt(f.size);
       el('t5OrigPages').textContent=pages+" pages";
-      el('t5OrigNote').textContent = f.size<500*1024 ? "Already small - Will save only a little." : "Good - Can be compressed 70-85%.";
       el('t5Rename').value=f.name.replace(/\.pdf$/i,"")+"-Compressed";
       var prev=el('t5PagePreview'); prev.innerHTML="";
       var showN=Math.min(3, pages);
@@ -2066,6 +2085,73 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
     return doc.output("blob");
   }
 
+  // ===== DOWNLOAD - LIKE OTHER APPS - 3 WAYS - ALL IN USER TAP =====
+  function ensureBlobUrl(){
+    if(S.lastUrl) return S.lastUrl;
+    if(!S.lastBlob) return null;
+    S.lastUrl=URL.createObjectURL(S.lastBlob);
+    return S.lastUrl;
+  }
+  function downloadPdf(){
+    if(!S.lastBlob){ showErrorAuto("Compress PDF first - Then tap Download"); return; }
+    // WAY 1 - Normal download - Works in Chrome - Must be in user tap
+    try{
+      var url=ensureBlobUrl();
+      var a=document.createElement('a');
+      a.href=url; a.download=S.lastName; a.target="_blank"; a.rel="noopener";
+      a.style.display='none';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function(){ try{ a.remove(); }catch(e){} }, 500);
+      setStatus("✅ Download Started","✅ Download started - Check Downloads / Notification bar - File: "+S.lastName);
+      return;
+    }catch(e){
+      // WAY 2 - Fallback - Open in new tab - User can Save from viewer
+      try{
+        var url2=ensureBlobUrl();
+        var w=window.open(url2, "_blank");
+        if(w) { setStatus("✅ PDF Opened","PDF opened in new tab - Tap 3 dots → Download to save"); return; }
+      }catch(e2){}
+      showErrorAuto("Download blocked - Tap Open PDF or Share button");
+    }
+  }
+  function openPdf(){
+    if(!S.lastBlob){ showErrorAuto("Compress first"); return; }
+    var url=ensureBlobUrl();
+    var w=window.open(url, "_blank");
+    if(!w){
+      // In-app browser blocks popup - Show hint + try location
+      showErrorAuto("Popup blocked - Long press Download button → Open link, or use Share button. Or open this site in Chrome.");
+      // Try same-tab open as last resort
+      setTimeout(function(){ window.location.href=url; }, 500);
+    } else {
+      setStatus("✅ PDF Opened","PDF opened - Tap Download icon in viewer to save");
+    }
+  }
+  async function sharePdf(){
+    if(!S.lastBlob){ showErrorAuto("Compress first"); return; }
+    try{
+      var file=new File([S.lastBlob], S.lastName, {type:"application/pdf"});
+      if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
+        await navigator.share({title:"Compressed PDF", text:"Here is compressed PDF - "+S.lastName, files:[file]});
+        setStatus("✅ Shared","PDF shared - Sent to WhatsApp / Gmail");
+        return;
+      }
+      // Fallback - Download + hint
+      downloadPdf();
+      setStatus("✅ Share Not Supported","Share not supported in this browser - Download started instead - Send downloaded file to WhatsApp");
+    }catch(err){
+      if(String(err).indexOf("Abort")>-1) return;
+      downloadPdf();
+    }
+  }
+  // Bind download buttons - All are direct user taps - Browser allows
+  el('t5DownloadBtn').addEventListener('click', downloadPdf);
+  el('t5DownloadAgainBtn').addEventListener('click', downloadPdf);
+  el('t5TryAutoBtn').addEventListener('click', downloadPdf);
+  el('t5OpenBtn').addEventListener('click', openPdf);
+  el('t5ShareBtn').addEventListener('click', sharePdf);
+
   async function compress(){
     if(S.busy) return;
     if(!S.file || !S.buf){ showErrorAuto("Please select PDF first"); return; }
@@ -2074,7 +2160,10 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
     var prog=el('t5Progress'); prog.style.display='block'; el('t5Bar').style.width='0%';
     showError("");
     if(S.lastUrl){ try{ URL.revokeObjectURL(S.lastUrl); }catch(e){} S.lastUrl=null; }
+    S.lastBlob=null;
     el('t5PagePreview').innerHTML="";
+    el('t5DownloadBox').style.display='none';
+    el('t5CompareBox').style.display='none';
     var pdfDoc=null;
     try{
       var ok1=await ensurePdfJs(); var ok2=await ensureJsPdf();
@@ -2092,19 +2181,21 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
         finalSize=blob.size;
       }
       try{ pdfDoc.destroy(); }catch(e){} pdfDoc=null;
-      var url=URL.createObjectURL(blob); S.lastUrl=url;
+      // FIX: Do NOT auto-download here - Browser blocks it - Save blob, show Download button
+      S.lastBlob=blob; S.lastUrl=null;
       var base=(el('t5Rename').value||"Compressed").replace(/[^a-zA-Z0-9-_ ]/g,"").trim() || "Compressed";
       S.lastName=base+".pdf";
-      var a=document.createElement('a'); a.href=url; a.download=S.lastName; document.body.appendChild(a); a.click(); a.remove();
       el('t5CompareBox').style.display='block';
       el('t5BeforeSize').textContent=fmt(S.fileSize);
       el('t5BeforePages').textContent=S.pages+" pages";
       el('t5AfterSize').textContent=fmt(finalSize);
       var saved=S.fileSize-finalSize; var pct=S.fileSize>0 ? Math.round((saved/S.fileSize)*100) : 0;
       el('t5AfterSaved').textContent = (S.targetKB>0 && finalSize>S.targetKB*1024) ? "Saved "+fmt(Math.max(0,saved))+" ("+pct+"%) - Smallest possible is "+fmt(finalSize) : "Saved "+fmt(Math.max(0,saved))+" ("+pct+"%) - Target met ✅";
-      el('t5Result').style.display='block';
-      el('t5ResultInfo').textContent=base+".pdf - "+fmt(S.fileSize)+" → "+fmt(finalSize)+" - Saved "+pct+"% - Downloaded";
-      setStatus("✅ PDF Compressed","✅ "+fmt(S.fileSize)+" → "+fmt(finalSize)+" - Saved "+pct+"% - Downloaded");
+      el('t5DownloadBox').style.display='block';
+      el('t5ResultInfo').textContent=base+".pdf - "+fmt(S.fileSize)+" → "+fmt(finalSize)+" - Saved "+pct+"% - Tap DOWNLOAD below";
+      setStatus("✅ Ready To Download","✅ Compressed! Tap GREEN DOWNLOAD button below to save - "+fmt(finalSize));
+      // Scroll to download button - Like other apps
+      setTimeout(function(){ var box=el('t5DownloadBox'); if(box) box.scrollIntoView({behavior:"smooth", block:"center"}); }, 300);
     }catch(err){
       var m=String(err && err.message || err || "");
       if(m.toLowerCase().indexOf("password")>-1) showErrorAuto("Password protected - Unlock first.");
@@ -2112,20 +2203,20 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
     }finally{
       try{ if(pdfDoc) pdfDoc.destroy(); }catch(e){}
       S.busy=false;
-      btn.disabled=false; btn.textContent="✨ Compress PDF - Download Now";
+      btn.disabled=false; btn.textContent="✨ Compress PDF";
       setTimeout(function(){ prog.style.display='none'; },1500);
     }
   }
   el('t5CompressBtn').addEventListener('click', compress);
-  el('t5DownloadAgainBtn').addEventListener('click', function(){ if(!S.lastUrl){ showErrorAuto("Compress first"); return; } var a=document.createElement('a'); a.href=S.lastUrl; a.download=S.lastName; document.body.appendChild(a); a.click(); a.remove(); });
 
   window.clearTool5=function(){
     if(S.lastUrl){ try{ URL.revokeObjectURL(S.lastUrl); }catch(e){} S.lastUrl=null; }
+    S.lastBlob=null;
     S.file=null; S.fileSize=0; S.buf=null; S.pages=0; S.lastName="Compressed.pdf";
     if(fileInp) fileInp.value="";
     el('t5InfoBox').style.display='none';
     el('t5CompareBox').style.display='none';
-    el('t5Result').style.display='none';
+    el('t5DownloadBox').style.display='none';
     el('t5Rename').value="Compressed";
     el('t5PagePreview').innerHTML="";
     showError(""); setStatus("📄 Status","Select PDF first");
@@ -2133,7 +2224,7 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
   };
 })();
 </script>
-<!-- ================= TOOL 5 END - PDF COMPRESSOR - BUGS FREE - PROPER CODE ================= -->
+<!-- ================= TOOL 5 END - DOWNLOAD FIXED - LIKE OTHER APPS ================= -->
 <!-- ================= TOOL 6 - IMAGE COMPRESS ================= -->
 <div id="page-tool6" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>🗜️ Image Compress</b><br><span>Your Tool</span></div></div><h2 style="text-align:center">🗜️ Image Compress</h2><p style="font-size:12px;color:#6B7280;text-align:center">Reduce Photo Size - Keep Quality - For WhatsApp, Form</p><div class="drop" onclick="document.getElementById('compFile').click()"><b>📸 Select Image</b><p style="font-size:12px;color:#6B7280">Example: 3 MB → 300 KB</p><input type="file" id="compFile" accept="image/*" onchange="compressImage(event)"></div><label>Target Quality</label><select id="compQ"><option value="0.9">High - 90%</option><option value="0.7" selected>Medium - 70% - Best</option><option value="0.4">Low - 40% - Smallest</option></select><p id="compInfo" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select image first</p><img id="compPreview" style="width:100%;border-radius:12px;margin-top:10px;display:none"><button class="btn2 green" style="width:100%;margin-top:10px" onclick="downloadCompressed()">⬇️ Download Compressed</button><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
 
