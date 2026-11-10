@@ -2747,7 +2747,7 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 </script>
 <!-- ============ TOOL 7 TAP FIXED END ============ -->
 <=================TOOL 8 TAP BACKGROUND REMOVER ============>
-<!-- ============ FINAL - NO AI CDN - NO ERROR - 100% WORKING - TRY TOMORROW ============ -->
+<!-- ============ DESCRIBE + COLOUR - REMOVE ONLY THAT OBJECT - BEST FOR BOTH ============ -->
 
 <div id="page-tool8" class="tool-page" style="display:none">
 <div id="tool8">
@@ -2756,47 +2756,106 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 #tool8 *{box-sizing:border-box}
 #tool8 .card{background:#fff;border:1.5px solid #EDE9FE;border-radius:22px;padding:16px}
 #tool8 .btn{width:100%;padding:16px;border:none;border-radius:14px;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;font-weight:900;cursor:pointer;margin-top:12px;font-size:15px}
+#tool8 .btn.green{background:linear-gradient(135deg,#16A34A,#22C55E)}
 #tool8 .btn2{flex:1;padding:12px;border-radius:12px;border:1.5px solid #EDE9FE;background:#fff;font-weight:800;cursor:pointer;font-size:13px}
 #tool8 .btn2.green{background:#16A34A;color:#fff;border:none}
 #tool8 .btn2.blue{background:#2563EB;color:#fff;border:none}
 #tool8 .btn2.active{background:#111827;color:#fff;border:none}
 #tool8 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:10px 14px;border-radius:20px;font-size:13px;margin:7px 7px 0 0;cursor:pointer;font-weight:800}
 #tool8 .chip.active{background:#111827;color:#fff;border:none}
-#tool8 canvas{width:100%;max-height:420px;object-fit:contain;border-radius:14px;border:1.5px solid #EDE9FE;margin-top:12px;display:none;touch-action:none}
+#tool8 .color-dot{width:44px;height:44px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.2);cursor:pointer;display:inline-block;margin:6px 6px 0 0}
+#tool8 .color-dot.active{border:3px solid #111827;transform:scale(1.15)}
+#tool8 canvas{width:100%;max-height:460px;object-fit:contain;border-radius:14px;border:1.5px solid #EDE9FE;margin-top:12px;display:none;touch-action:none}
 #tool8 .checker{background-image:linear-gradient(45deg,#E5E7EB 25%,transparent 25%),linear-gradient(-45deg,#E5E7EB 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#E5E7EB 75%),linear-gradient(-45deg,transparent 75%,#E5E7EB 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}
 #tool8 .box{background:#F8F9FF;border:1.5px solid #EDE9FE;border-radius:14px;padding:12px;margin-top:12px}
+#tool8 input[type=text]{width:100%;padding:14px;border:1.5px solid #EDE9FE;border-radius:12px;font-size:14px;outline:none}
 #tool8 input[type=range]{width:100%}
+#tool8 .preset{flex:1;padding:10px;border-radius:10px;border:1.5px solid #EDE9FE;background:#fff;font-size:11px;font-weight:800;cursor:pointer;text-align:center}
 </style>
 
 <div id="tool8"><div class="card">
 <button type="button" onclick="goHomePageTool8()" style="background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer">← Back</button>
-<h2 style="text-align:center;margin-top:10px">✂️ Background Remover - No Error</h2>
-<p style="font-size:12px;color:#6B7280;text-align:center">Works Offline - No AI Download - No Internet Needed</p>
+<h2 style="text-align:center;margin-top:10px">🎯 Describe → Remove Only That</h2>
+<p style="font-size:12px;color:#6B7280;text-align:center">Type what to remove + Pick colour → Only that object gone, rest safe</p>
 
 <button type="button" id="t8Tap" style="width:100%;padding:14px;border:none;border-radius:12px;background:#111827;color:#fff;font-weight:900;font-size:15px;cursor:pointer;margin-top:12px">📂 TAP TO SELECT PHOTO</button>
-<button type="button" id="t8Sample" style="width:100%;padding:12px;border:1.5px solid #7C3AED;background:#fff;color:#7C3AED;font-weight:900;font-size:14px;cursor:pointer;margin-top:8px;border-radius:12px">✨ Try Sample - Must Work</button>
+<div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="btn2" id="t8Cam">📷 Camera</button><button type="button" class="btn2" id="t8Sample">✨ Sample Photo</button></div>
 
-<p id="t8Status" style="font-size:13px;text-align:center;color:#6B7280;margin-top:12px">Tap Select Photo first</p>
+<p id="t8Status" style="font-size:13px;text-align:center;color:#6B7280;margin-top:12px">Select photo first, then describe</p>
 <p id="t8Error" style="font-size:13px;text-align:center;color:#DC2626;display:none"></p>
 
 <canvas id="t8Canvas" class="checker"></canvas>
 
+<!-- STEP 1 - DESCRIBE -->
+<div class="box" id="t8DescribeBox" style="display:none">
+<b>✍️ Step 1 - Describe What To Remove</b>
+<input type="text" id="t8Desc" placeholder="Example: remove red chair / remove blue background / remove black bag / remove white background">
+<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+<button type="button" class="preset" data-desc="remove blue background">🟦 Blue BG</button>
+<button type="button" class="preset" data-desc="remove white background">⬜ White BG</button>
+<button type="button" class="preset" data-desc="remove black background">⬛ Black BG</button>
+<button type="button" class="preset" data-desc="remove red object">🟥 Red Object</button>
+<button type="button" class="preset" data-desc="remove green object">🟩 Green Object</button>
+</div>
+<p style="font-size:11px;color:#6B7280;margin-top:6px">You can type anything - Example: <b>remove red car, remove yellow wall, remove green curtain</b></p>
+
+<b style="margin-top:10px;display:block">🎨 Step 2 - Pick Colour To Remove</b>
+<div id="t8Colors" style="margin-top:6px">
+<span class="color-dot active" data-color="#2563EB" data-name="blue" style="background:#2563EB"></span>
+<span class="color-dot" data-color="#FFFFFF" data-name="white" style="background:#FFFFFF;border:3px solid #E5E7EB"></span>
+<span class="color-dot" data-color="#000000" data-name="black" style="background:#000000"></span>
+<span class="color-dot" data-color="#DC2626" data-name="red" style="background:#DC2626"></span>
+<span class="color-dot" data-color="#16A34A" data-name="green" style="background:#16A34A"></span>
+<span class="color-dot" data-color="#FACC15" data-name="yellow" style="background:#FACC15"></span>
+<span class="color-dot" data-color="#F97316" data-name="orange" style="background:#F97316"></span>
+<span class="color-dot" data-color="#EC4899" data-name="pink" style="background:#EC4899"></span>
+<span class="color-dot" data-color="#7C3AED" data-name="purple" style="background:#7C3AED"></span>
+<span class="color-dot" data-color="#8B5E3C" data-name="brown" style="background:#8B5E3C"></span>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+<span style="font-size:12px;font-weight:800">Or Pick Custom:</span>
+<input type="color" id="t8ColorPicker" value="#2563EB" style="width:50px;height:38px;border:none;cursor:pointer">
+<span id="t8PickedColorTxt" style="font-size:12px;font-weight:800">Blue (#2563EB)</span>
+</div>
+<p style="font-size:11px;color:#6B7280;margin-top:6px">💡 OR Tap on photo on that object - App will pick its exact colour automatically - Most accurate!</p>
+<p id="t8TapHint" style="font-size:12px;text-align:center;color:#7C3AED;font-weight:800;display:none">👆 Tap on object in photo to pick its colour</p>
+
+<b style="margin-top:10px;display:block">🎚️ Step 3 - How Much To Remove</b>
+<label style="font-size:11px;font-weight:900">Colour Match - <span id="t8TolTxt">Medium - 60</span></label>
+<input type="range" id="t8Tol" min="20" max="120" value="60">
+<div style="display:flex;gap:8px;margin-top:6px">
+<button type="button" class="btn2" data-tol="30">Low - Only Exact Colour</button>
+<button type="button" class="btn2 active" data-tol="60">Medium - Best</button>
+<button type="button" class="btn2" data-tol="100">High - All Shades</button>
+</div>
+
+<div style="display:flex;gap:8px;margin-top:10px">
+<button type="button" class="btn2 active" id="t8ModeObject" style="background:#111827;color:#fff">🎯 Remove Only That Object</button>
+<button type="button" class="btn2" id="t8ModeAll">🌍 Remove All That Colour</button>
+</div>
+<p style="font-size:11px;color:#6B7280;margin-top:6px"><b>Only That Object</b> = Tap object, remove only that connected object. <b>All That Colour</b> = Remove that colour from everywhere in photo.</p>
+
+<button type="button" class="btn green" id="t8RemoveBtn">✨ Remove This - AI Understands</button>
+<button type="button" class="btn2" id="t8Undo" style="width:100%;margin-top:8px">↩️ Undo - Bring Back</button>
+</div>
+
 <div class="box" id="t8BgBox" style="display:none">
-<b>🎨 Choose Background</b><br>
+<b>🎨 After Remove - Choose Background</b><br>
 <span class="chip active" data-bg="transparent">Transparent</span>
 <span class="chip" data-bg="white">⬜ White</span>
 <span class="chip" data-bg="black">⬛ Black</span>
 <span class="chip" data-bg="blue">🟦 Blue</span>
 <span class="chip" data-bg="pink">🩷 Pink</span>
+<span class="chip" data-bg="green">🟩 Green</span>
 </div>
 
 <div class="box" id="t8BrushBox" style="display:none">
-<b>🖌️ If Some BG Left - Erase In 5 Sec</b>
+<b>🖌️ Fix - Erase / Restore</b>
 <div style="display:flex;gap:8px;margin-top:8px">
-<button type="button" class="btn2 active" id="t8Erase">🧽 Erase BG</button>
+<button type="button" class="btn2" id="t8Erase" style="background:#111827;color:#fff">🧽 Erase</button>
 <button type="button" class="btn2" id="t8Restore">♻️ Restore</button>
 </div>
-<label style="font-size:11px;font-weight:900;display:block;margin-top:10px">Brush Size - <span id="t8BrushTxt">30</span></label>
+<label style="font-size:11px;font-weight:900;display:block;margin-top:10px">Brush - <span id="t8BrushTxt">30</span></label>
 <input type="range" id="t8BrushSize" min="5" max="100" value="30">
 </div>
 
@@ -2825,88 +2884,206 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
   function el(id){ return document.getElementById(id); }
   function status(m){ var s=el('t8Status'); if(s) s.textContent=m; }
   function showErr(m){ var e=el('t8Error'); if(!e) return; if(!m){ e.style.display='none'; return; } e.style.display='block'; e.textContent=m; }
+  function hexToRgb(hex){
+    hex=hex.replace('#',''); if(hex.length===3) hex=hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+    return [parseInt(hex.substr(0,2),16), parseInt(hex.substr(2,2),16), parseInt(hex.substr(4,2),16)];
+  }
 
-  var origImg=null, workCanvas=null, workCtx=null, bgMode='transparent', done=false, brushMode='erase', brushSize=30;
+  var origImg=null, workCanvas=null, workCtx=null, bgMode='transparent', done=false;
+  var selectedColor=[37,99,235], selectedColorName='blue', selectedHex='#2563EB', tolerance=60, removeMode='object', tapPoint=null, history=[];
+  var brushMode='erase', brushSize=30;
 
-  function openPicker(){
-    var inp=document.createElement('input');
-    inp.type='file'; inp.accept='image/*';
-    inp.onchange=function(){ if(inp.files && inp.files[0]) handleFile(inp.files[0]); setTimeout(function(){ try{ inp.remove(); }catch(e){} },300); };
+  // COLOR MAP - AI understands words -> colour
+  var COLOR_WORDS={
+    'red':[220,38,38], 'blue':[37,99,235], 'green':[22,163,74], 'black':[0,0,0], 'white':[255,255,255],
+    'yellow':[250,204,21], 'orange':[249,115,22], 'pink':[236,72,153], 'purple':[124,58,237], 'brown':[139,94,60],
+    'grey':[128,128,128], 'gray':[128,128,128], 'sky':[56,189,248], 'navy':[30,58,138], 'maroon':[128,0,0]
+  };
+
+  function openPicker(useCamera){
+    var inp=document.createElement('input'); inp.type='file'; inp.accept='image/*,.jpg,.jpeg,.png,.webp';
+    if(useCamera) inp.setAttribute('capture','environment');
+    inp.onchange=function(){ if(inp.files && inp.files[0]) handleFile(inp.files[0]); setTimeout(function(){ try{ inp.remove(); }catch(e){} },200); };
     inp.click();
   }
-  el('t8Tap').addEventListener('click', function(e){ e.preventDefault(); openPicker(); });
+  el('t8Tap').addEventListener('click', function(e){ e.preventDefault(); openPicker(false); });
+  el('t8Cam').addEventListener('click', function(e){ e.preventDefault(); openPicker(true); });
   el('t8Sample').addEventListener('click', function(){
+    // Sample: Person + Red Chair + Blue BG - User can remove red chair OR blue BG - Both work
     var c=document.createElement('canvas'); c.width=600; c.height=700; var x=c.getContext('2d');
-    x.fillStyle="#FFFFFF"; x.fillRect(0,0,600,700);
-    x.fillStyle="#E8B48A"; x.beginPath(); x.arc(300,180,90,0,Math.PI*2); x.fill();
-    x.fillStyle="#2563EB"; x.fillRect(200,270,200,300);
-    x.fillStyle="#111111"; x.fillRect(180,80,240,40);
-    x.fillStyle="#111111"; x.beginPath(); x.arc(270,175,8,0,Math.PI*2); x.fill(); x.beginPath(); x.arc(330,175,8,0,Math.PI*2); x.fill();
+    x.fillStyle="#2563EB"; x.fillRect(0,0,600,700); // Blue BG
+    x.fillStyle="#DC2626"; x.fillRect(50,400,150,250); // Red Chair - Object to remove
+    x.fillStyle="#111"; x.fillRect(50,380,150,20);
+    x.fillStyle="#E8B48A"; x.beginPath(); x.arc(350,180,90,0,Math.PI*2); x.fill(); // Person
+    x.fillStyle="#FFFFFF"; x.fillRect(250,270,200,300); // White shirt
+    x.fillStyle="#111111"; x.fillRect(230,80,240,40);
     c.toBlob(function(b){ if(b) handleFile(new File([b],"Sample.jpg",{type:"image/jpeg"})); }, "image/jpeg", 0.95);
   });
 
   function handleFile(f){
-    if(!f) return;
-    if(f.size>12*1024*1024){ showErr("Photo too big - Max 12 MB"); return; }
-    showErr(""); done=false; bgMode='transparent';
+    if(!f) return; if(f.size>12*1024*1024){ showErr("Photo too big - Max 12 MB"); return; }
+    showErr(""); done=false; bgMode='transparent'; history=[]; tapPoint=null;
     status("⏳ Loading...");
-    var url=URL.createObjectURL(f);
-    var img=new Image();
+    var url=URL.createObjectURL(f); var img=new Image();
     img.onload=function(){
-      origImg=img;
-      workCanvas=el('t8Canvas'); workCtx=workCanvas.getContext('2d');
+      origImg=img; workCanvas=el('t8Canvas'); workCtx=workCanvas.getContext('2d');
       var nw=img.naturalWidth||img.width, nh=img.naturalHeight||img.height;
       var scale=1; if(nw>1000) scale=1000/nw;
-      workCanvas.width=Math.max(1, Math.floor(nw*scale));
-      workCanvas.height=Math.max(1, Math.floor(nh*scale));
-      workCtx.clearRect(0,0,workCanvas.width,workCanvas.height);
-      workCtx.drawImage(img,0,0,workCanvas.width,workCanvas.height);
+      workCanvas.width=Math.max(1, Math.floor(nw*scale)); workCanvas.height=Math.max(1, Math.floor(nh*scale));
+      workCtx.clearRect(0,0,workCanvas.width,workCanvas.height); workCtx.drawImage(img,0,0,workCanvas.width,workCanvas.height);
       workCanvas.style.display='block';
       try{ URL.revokeObjectURL(url); }catch(e){}
-      setTimeout(autoRemove, 50);
+      el('t8DescribeBox').style.display='block'; el('t8TapHint').style.display='block';
+      status("✅ Photo loaded - Now: 1) Type what to remove 2) Pick colour / Tap on object 3) Tap Remove This");
     };
     img.onerror=function(){ showErr("Image load failed - Try JPG"); };
     img.src=url;
   }
 
-  function autoRemove(){
-    try{
-      var w=workCanvas.width, h=workCanvas.height;
-      var imgData=workCtx.getImageData(0,0,w,h);
-      var data=imgData.data;
-      function getPx(x,y){ var i=(y*w+x)*4; return [data[i],data[i+1],data[i+2]]; }
-      var pts=[getPx(2,2),getPx(w-3,2),getPx(2,h-3),getPx(w-3,h-3)];
-      var br=0,bg=0,bb=0; pts.forEach(function(p){ br+=p[0]; bg+=p[1]; bb+=p[2]; });
-      br/=pts.length; bg/=pts.length; bb/=pts.length;
-      var tol=55;
-      var visited=new Uint8Array(w*h);
-      var queue=[];
-      for(var x=0;x<w;x++){ queue.push(x); queue.push((h-1)*w+x); }
-      for(var y=0;y<h;y++){ queue.push(y*w); queue.push(y*w+w-1); }
-      var qi=0;
-      while(qi<queue.length){
-        var idx=queue[qi++];
-        if(visited[idx]) continue;
-        visited[idx]=1;
-        var i=idx*4;
-        if(Math.abs(data[i]-br)>=tol || Math.abs(data[i+1]-bg)>=tol || Math.abs(data[i+2]-bb)>=tol) continue;
-        data[i+3]=0;
-        var cx=idx%w, cy=Math.floor(idx/w);
-        if(cx>0) queue.push(idx-1);
-        if(cx<w-1) queue.push(idx+1);
-        if(cy>0) queue.push(idx-w);
-        if(cy<h-1) queue.push(idx+w);
+  // DESCRIBE - AI understands words
+  el('t8Desc').addEventListener('input', function(){
+    var txt=(el('t8Desc').value||"").toLowerCase();
+    for(var word in COLOR_WORDS){
+      if(txt.indexOf(word)>=0){
+        selectedColor=COLOR_WORDS[word]; selectedColorName=word;
+        selectedHex='#'+selectedColor.map(function(v){ var h=v.toString(16); return h.length===1?'0'+h:h; }).join('');
+        updateColorUI(); status("🤖 AI Understood: You want to remove '"+word+"' colour - Picked "+word+" - Now tap Remove This");
+        break;
       }
-      workCtx.putImageData(imgData,0,0);
-      done=true;
-      el('t8BgBox').style.display='block';
-      el('t8BrushBox').style.display='block';
-      el('t8Down').style.display='block';
-      el('t8Out').style.display='block';
-      updateBg();
-      status("✅ Done - Background Removed - Choose Transparent / White / Black, Tap Download");
-    }catch(e){ showErr("Remove failed - Try again"); }
+    }
+  });
+  // Presets
+  var presets=document.querySelectorAll('.preset');
+  presets.forEach(function(b){ b.addEventListener('click', function(){ el('t8Desc').value=b.getAttribute('data-desc')||""; el('t8Desc').dispatchEvent(new Event('input')); }); });
+
+  // COLOUR PICK - Dots
+  var dots=document.querySelectorAll('.color-dot');
+  dots.forEach(function(d){
+    d.addEventListener('click', function(){
+      dots.forEach(function(x){ x.classList.remove('active'); }); d.classList.add('active');
+      selectedHex=d.getAttribute('data-color')||"#2563EB"; selectedColorName=d.getAttribute('data-name')||"blue";
+      selectedColor=hexToRgb(selectedHex); el('t8ColorPicker').value=selectedHex;
+      el('t8PickedColorTxt').textContent=selectedColorName+" ("+selectedHex+")";
+      status("🎨 Picked colour: "+selectedColorName+" - Now tap Remove This or tap on object in photo");
+    });
+  });
+  el('t8ColorPicker').addEventListener('input', function(){
+    selectedHex=el('t8ColorPicker').value||"#2563EB"; selectedColor=hexToRgb(selectedHex); selectedColorName="custom";
+    el('t8PickedColorTxt').textContent="Custom ("+selectedHex+")";
+    dots.forEach(function(x){ x.classList.remove('active'); });
+  });
+  function updateColorUI(){
+    el('t8PickedColorTxt').textContent=selectedColorName+" ("+selectedHex+")";
+    el('t8ColorPicker').value=selectedHex;
+    dots.forEach(function(x){ x.classList.toggle('active', (x.getAttribute('data-name')||"")===selectedColorName); });
   }
+  // Tolerance
+  el('t8Tol').addEventListener('input', function(){ tolerance=parseInt(el('t8Tol').value,10)||60; el('t8TolTxt').textContent=(tolerance<40?"Low - "+tolerance:(tolerance<80?"Medium - "+tolerance:"High - "+tolerance)); });
+  document.querySelectorAll('[data-tol]').forEach(function(b){ b.addEventListener('click', function(){ tolerance=parseInt(b.getAttribute('data-tol'),10)||60; el('t8Tol').value=tolerance; el('t8TolTxt').textContent="Medium - "+tolerance; document.querySelectorAll('[data-tol]').forEach(function(x){ x.classList.remove('active'); }); b.classList.add('active'); }); });
+
+  // Mode
+  el('t8ModeObject').addEventListener('click', function(){ removeMode='object'; el('t8ModeObject').classList.add('active'); el('t8ModeAll').classList.remove('active'); el('t8ModeObject').style.background='#111827'; el('t8ModeObject').style.color='#fff'; el('t8ModeAll').style.background='#fff'; el('t8ModeAll').style.color='#111'; status("🎯 Mode: Remove Only That Object - Tap on object first for best result"); });
+  el('t8ModeAll').addEventListener('click', function(){ removeMode='all'; el('t8ModeAll').classList.add('active'); el('t8ModeObject').classList.remove('active'); el('t8ModeAll').style.background='#111827'; el('t8ModeAll').style.color='#fff'; el('t8ModeObject').style.background='#fff'; el('t8ModeObject').style.color='#111'; status("🌍 Mode: Remove All That Colour Everywhere"); });
+
+  // TAP ON PHOTO - Pick exact colour of object - Most accurate - AI way
+  var isTapPick=false;
+  function getPos(e){
+    var rect=workCanvas.getBoundingClientRect();
+    var cx=e.touches ? e.touches[0].clientX : e.clientX;
+    var cy=e.touches ? e.touches[0].clientY : e.clientY;
+    return { x:(cx-rect.left)*(workCanvas.width/rect.width), y:(cy-rect.top)*(workCanvas.height/rect.height) };
+  }
+  function handleTap(e){
+    if(!origImg || !workCtx) return;
+    // If brush box is visible and user is in brush mode, tap is for brush - Handled separately
+    // Here tap = Pick colour + Set object point
+    var p=getPos(e);
+    // Don't interfere with brush drawing - If done and brush box visible, tap is brush, not pick - We check: If user tapped and description box is open, it's pick
+    // For simplicity: Tap always picks colour + sets tapPoint for object mode
+    try{
+      var d=workCtx.getImageData(Math.floor(p.x), Math.floor(p.y), 1, 1).data;
+      selectedColor=[d[0],d[1],d[2]];
+      selectedHex='#'+selectedColor.map(function(v){ var h=v.toString(16); return h.length===1?'0'+h:h; }).join('');
+      selectedColorName="tapped";
+      tapPoint={x:Math.floor(p.x), y:Math.floor(p.y)};
+      updateColorUI(); el('t8PickedColorTxt').textContent="Tapped Colour ("+selectedHex+") - Object at tap";
+      status("👆 Tapped! Picked colour "+selectedHex+" from that object - Now tap 'Remove This' - Only that object will go");
+      // Visual feedback - Small circle
+      workCtx.save(); workCtx.strokeStyle='#fff'; workCtx.lineWidth=3; workCtx.beginPath(); workCtx.arc(p.x,p.y,20,0,Math.PI*2); workCtx.stroke(); workCtx.restore();
+      setTimeout(function(){ if(origImg && !done){ workCtx.clearRect(0,0,workCanvas.width,workCanvas.height); workCtx.drawImage(origImg,0,0,workCanvas.width,workCanvas.height); } }, 600);
+    }catch(err){}
+  }
+  // Tap listener - Only when describe box is visible and not yet done, or when user wants to re-pick
+  // We use click, not drag, to avoid conflict with brush - Brush uses mousedown+move, Tap uses click
+  var cvClick=el('t8Canvas');
+  if(cvClick) cvClick.addEventListener('click', handleTap);
+
+  // REMOVE THIS - Main AI Logic
+  el('t8RemoveBtn').addEventListener('click', function(){
+    if(!origImg || !workCtx){ showErr("Select photo first"); return; }
+    // Parse description again for colour
+    var txt=(el('t8Desc').value||"").toLowerCase();
+    if(txt){
+      for(var w in COLOR_WORDS){ if(txt.indexOf(w)>=0){ selectedColor=COLOR_WORDS[w]; selectedColorName=w; updateColorUI(); break; } }
+      // If description says "background" - Use background mode - Remove from edges
+      if(txt.indexOf('background')>=0 && removeMode==='object'){ removeMode='all'; status("🤖 AI: 'Background' detected - Removing all that colour as background"); }
+    }
+    // Save for Undo
+    try{ history.push(workCtx.getImageData(0,0,workCanvas.width,workCanvas.height)); if(history.length>5) history.shift(); }catch(e){}
+    status("✨ Removing '"+(selectedColorName||"")+"' ... Please wait");
+    setTimeout(function(){
+      try{
+        var w=workCanvas.width, h=workCanvas.height;
+        var imgData=workCtx.getImageData(0,0,w,h); var data=imgData.data;
+        var tr=selectedColor[0], tg=selectedColor[1], tb=selectedColor[2];
+        var tol=tolerance;
+        var removed=0;
+        if(removeMode==='all'){
+          // Remove ALL pixels matching colour everywhere - Best for background
+          for(var i=0;i<w*h;i++){
+            var idx=i*4;
+            if(Math.abs(data[idx]-tr)<tol && Math.abs(data[idx+1]-tg)<tol && Math.abs(data[idx+2]-tb)<tol){
+              data[idx+3]=0; removed++;
+            }
+          }
+        } else {
+          // Remove ONLY THAT OBJECT - Flood fill from tap point OR from best matching point
+          // If user tapped, start from tap. If not, find first matching pixel near edge/center
+          var startIdx=-1;
+          if(tapPoint && tapPoint.x>=0 && tapPoint.x<w && tapPoint.y>=0 && tapPoint.y<h) startIdx=tapPoint.y*w+tapPoint.x;
+          else {
+            // Auto find: Scan for matching colour - Start from largest blob
+            for(var si=0; si<w*h; si++){ var sI=si*4; if(Math.abs(data[sI]-tr)<tol && Math.abs(data[sI+1]-tg)<tol && Math.abs(data[sI+2]-tb)<tol){ startIdx=si; break; } }
+          }
+          if(startIdx<0){ showErr("That colour not found in photo - Tap on object in photo to pick its exact colour, then try again"); status("Colour not found - Tap on object"); return; }
+          var visited=new Uint8Array(w*h); var queue=[startIdx]; visited[startIdx]=1; var qi=0;
+          while(qi<queue.length){
+            var cur=queue[qi++]; var cI=cur*4;
+            if(Math.abs(data[cI]-tr)>=tol || Math.abs(data[cI+1]-tg)>=tol || Math.abs(data[cI+2]-tb)>=tol) continue;
+            data[cI+3]=0; removed++;
+            var cx=cur%w, cy=Math.floor(cur/w);
+            if(cx>0 && !visited[cur-1]){ visited[cur-1]=1; queue.push(cur-1); }
+            if(cx<w-1 && !visited[cur+1]){ visited[cur+1]=1; queue.push(cur+1); }
+            if(cy>0 && !visited[cur-w]){ visited[cur-w]=1; queue.push(cur-w); }
+            if(cy<h-1 && !visited[cur+w]){ visited[cur+w]=1; queue.push(cur+w); }
+            if(queue.length>w*h*2) break;
+          }
+        }
+        if(removed<100){ showErr("Only "+removed+" pixels removed - Increase 'How Much' to High, or Tap on object to pick exact colour"); status("Try High tolerance or tap on object"); return; }
+        workCtx.putImageData(imgData,0,0);
+        done=true;
+        el('t8BgBox').style.display='block'; el('t8BrushBox').style.display='block'; el('t8Down').style.display='block'; el('t8Out').style.display='block';
+        updateBg();
+        status("✅ Removed "+removed+" pixels of '"+selectedColorName+"' - Only that object gone, rest safe - Tap Download or Remove another object");
+      }catch(e){ showErr("Remove failed - Try again"); }
+    }, 50);
+  });
+
+  el('t8Undo').addEventListener('click', function(){
+    if(history.length===0){ showErr("Nothing to undo"); return; }
+    var last=history.pop(); if(last) workCtx.putImageData(last,0,0);
+    status("↩️ Undone - Back to before");
+  });
 
   function updateBg(){
     var cv=el('t8Canvas'); if(!cv) return;
@@ -2915,6 +3092,7 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
     else if(bgMode==='black'){ cv.classList.remove('checker'); cv.style.background='#000000'; }
     else if(bgMode==='blue'){ cv.classList.remove('checker'); cv.style.background='#2563EB'; }
     else if(bgMode==='pink'){ cv.classList.remove('checker'); cv.style.background='#F9A8D4'; }
+    else if(bgMode==='green'){ cv.classList.remove('checker'); cv.style.background='#16A34A'; }
   }
   var bgBox=el('t8BgBox');
   if(bgBox) bgBox.addEventListener('click', function(e){
@@ -2923,69 +3101,50 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
     chip.classList.add('active'); bgMode=chip.getAttribute('data-bg')||"transparent"; updateBg();
   });
 
-  // Brush - Simple, no error
-  function getPos(e){
-    var rect=workCanvas.getBoundingClientRect();
-    var cx=e.touches ? e.touches[0].clientX : e.clientX;
-    var cy=e.touches ? e.touches[0].clientY : e.clientY;
-    return { x:(cx-rect.left)*(workCanvas.width/rect.width), y:(cy-rect.top)*(workCanvas.height/rect.height) };
-  }
-  var isDrawing=false;
+  // Brush - Erase / Restore after remove
   function brushAt(x,y){
     if(!workCtx) return;
-    if(brushMode==='erase'){
-      workCtx.save(); workCtx.globalCompositeOperation='destination-out';
-      workCtx.beginPath(); workCtx.arc(x,y,brushSize,0,Math.PI*2); workCtx.fill(); workCtx.restore();
-    } else {
-      workCtx.save(); workCtx.beginPath(); workCtx.arc(x,y,brushSize,0,Math.PI*2); workCtx.clip();
-      workCtx.drawImage(origImg,0,0,workCanvas.width,workCanvas.height); workCtx.restore();
-    }
+    if(brushMode==='erase'){ workCtx.save(); workCtx.globalCompositeOperation='destination-out'; workCtx.beginPath(); workCtx.arc(x,y,brushSize,0,Math.PI*2); workCtx.fill(); workCtx.restore(); }
+    else { workCtx.save(); workCtx.beginPath(); workCtx.arc(x,y,brushSize,0,Math.PI*2); workCtx.clip(); workCtx.drawImage(origImg,0,0,workCanvas.width,workCanvas.height); workCtx.restore(); }
   }
-  var cv=el('t8Canvas');
+  var isDrawing=false;
+  var cv2=el('t8Canvas');
   function startDraw(e){ if(!done) return; e.preventDefault(); isDrawing=true; var p=getPos(e); brushAt(p.x,p.y); }
   function moveDraw(e){ if(!isDrawing) return; e.preventDefault(); var p=getPos(e); brushAt(p.x,p.y); }
   function endDraw(){ isDrawing=false; }
-  if(cv){
-    cv.addEventListener('mousedown', startDraw);
-    cv.addEventListener('mousemove', moveDraw);
-    cv.addEventListener('mouseup', endDraw);
-    cv.addEventListener('touchstart', startDraw, {passive:false});
-    cv.addEventListener('touchmove', moveDraw, {passive:false});
-    cv.addEventListener('touchend', endDraw);
+  if(cv2){
+    cv2.addEventListener('mousedown', startDraw);
+    cv2.addEventListener('mousemove', moveDraw);
+    cv2.addEventListener('mouseup', endDraw);
+    cv2.addEventListener('touchstart', startDraw, {passive:false});
+    cv2.addEventListener('touchmove', moveDraw, {passive:false});
+    cv2.addEventListener('touchend', endDraw);
   }
-  el('t8Erase').addEventListener('click', function(){ brushMode='erase'; el('t8Erase').classList.add('active'); el('t8Restore').classList.remove('active'); });
-  el('t8Restore').addEventListener('click', function(){ brushMode='restore'; el('t8Restore').classList.add('active'); el('t8Erase').classList.remove('active'); });
+  el('t8Erase').addEventListener('click', function(){ brushMode='erase'; el('t8Erase').style.background='#111827'; el('t8Erase').style.color='#fff'; el('t8Restore').style.background='#fff'; el('t8Restore').style.color='#111'; });
+  el('t8Restore').addEventListener('click', function(){ brushMode='restore'; el('t8Restore').style.background='#111827'; el('t8Restore').style.color='#fff'; el('t8Erase').style.background='#fff'; el('t8Erase').style.color='#111'; });
   el('t8BrushSize').addEventListener('input', function(){ brushSize=parseInt(el('t8BrushSize').value,10)||30; el('t8BrushTxt').textContent=brushSize; });
 
   function doDownload(){
-    if(!done){ showErr("Wait - Removing..."); return; }
+    if(!done){ showErr("First tap Remove This"); return; }
     try{
       var out=document.createElement('canvas'); out.width=workCanvas.width; out.height=workCanvas.height; var octx=out.getContext('2d');
-      if(bgMode==='transparent'){
-        octx.drawImage(workCanvas,0,0);
-        var a=document.createElement('a'); a.href=out.toDataURL('image/png'); a.download="BG-Removed-Transparent.png"; document.body.appendChild(a); a.click(); setTimeout(function(){ a.remove(); },500);
-        status("✅ Downloaded Transparent PNG");
-      } else {
-        var colors={white:"#FFFFFF", black:"#000000", blue:"#2563EB", pink:"#F9A8D4"};
-        octx.fillStyle=colors[bgMode]||"#FFFFFF"; octx.fillRect(0,0,out.width,out.height); octx.drawImage(workCanvas,0,0);
-        var a2=document.createElement('a'); a2.href=out.toDataURL('image/jpeg',0.92); a2.download="BG-Removed-"+bgMode+".jpg"; document.body.appendChild(a2); a2.click(); setTimeout(function(){ a2.remove(); },500);
-        status("✅ Downloaded "+bgMode+" JPG");
-      }
-    }catch(e){ showErr("Download failed - Try in Chrome"); }
+      if(bgMode==='transparent'){ octx.drawImage(workCanvas,0,0); var a=document.createElement('a'); a.href=out.toDataURL('image/png'); a.download="Removed-Object-Transparent.png"; document.body.appendChild(a); a.click(); setTimeout(function(){ a.remove(); },500); status("✅ Downloaded Transparent PNG"); }
+      else { var colors={white:"#FFFFFF", black:"#000000", blue:"#2563EB", pink:"#F9A8D4", green:"#16A34A"}; octx.fillStyle=colors[bgMode]||"#FFFFFF"; octx.fillRect(0,0,out.width,out.height); octx.drawImage(workCanvas,0,0); var a2=document.createElement('a'); a2.href=out.toDataURL('image/jpeg',0.92); a2.download="Removed-Object-"+bgMode+".jpg"; document.body.appendChild(a2); a2.click(); setTimeout(function(){ a2.remove(); },500); status("✅ Downloaded "+bgMode+" JPG"); }
+    }catch(e){ showErr("Download failed"); }
   }
   el('t8Down').addEventListener('click', doDownload);
   el('t8Down2').addEventListener('click', doDownload);
-  el('t8Share').addEventListener('click', function(){ if(!done) return; try{ workCanvas.toBlob(function(blob){ if(!blob) return; var f=new File([blob],"BG-Removed.png",{type:"image/png"}); if(navigator.share && navigator.canShare({files:[f]})) navigator.share({files:[f]}); else doDownload(); }, "image/png"); }catch(e){ doDownload(); } });
+  el('t8Share').addEventListener('click', function(){ if(!done) return; try{ workCanvas.toBlob(function(blob){ if(!blob) return; var f=new File([blob],"Removed.png",{type:"image/png"}); if(navigator.share && navigator.canShare({files:[f]})) navigator.share({files:[f]}); else doDownload(); }, "image/png"); }catch(e){ doDownload(); } });
 
   window.clearTool8=function(){
-    done=false; bgMode='transparent'; origImg=null;
+    done=false; bgMode='transparent'; origImg=null; history=[]; tapPoint=null;
     var c=el('t8Canvas'); if(c){ c.style.display='none'; try{ var ctx=c.getContext('2d'); if(ctx) ctx.clearRect(0,0,c.width,c.height); }catch(e){} }
-    el('t8BgBox').style.display='none'; el('t8BrushBox').style.display='none'; el('t8Down').style.display='none'; el('t8Out').style.display='none';
-    showErr(""); status("Tap Select Photo first");
+    el('t8DescribeBox').style.display='none'; el('t8BgBox').style.display='none'; el('t8BrushBox').style.display='none'; el('t8Down').style.display='none'; el('t8Out').style.display='none';
+    showErr(""); status("Select photo first");
   };
 })();
 </script>
-<!-- ============ FINAL END ============ -->
+<!-- ============ DESCRIBE + COLOUR END ============ -->
 <!-- ================= TOOL 9 - PDF MERGER ================= -->
 <div id="page-tool9" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>📚 PDF Merger</b><br><span>Most Demanded</span></div></div><h2 style="text-align:center">📚 PDF Merger</h2><p style="font-size:12px;color:#6B7280;text-align:center">Merge Aadhar Front + Back, Marksheet Pages Into 1 PDF</p><div class="drop" onclick="document.getElementById('mergeFile').click()"><b>📄 Select PDFs - Multiple</b><p style="font-size:12px;color:#6B7280">Select 2 or more PDFs in order</p><input type="file" id="mergeFile" accept="application/pdf" multiple onchange="loadMerge(event)"></div><p id="mergeInfo" style="font-size:12px;color:#166534;text-align:center;margin-top:8px">Select PDFs first</p><label>Merged File Name</label><input id="mergeName" value="Merged-Document"><button class="btn" onclick="mergePDFs()">📚 Merge PDFs Into 1</button><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
 
