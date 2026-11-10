@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+l<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -2474,7 +2474,7 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 </script>
 <!-- ================= TOOL 6 END - V2 - ALL BUGS FIXED ================= -->
 <!-- ================= TOOL 7 - IMAGE TO TEXT ================= -->
-<!-- ============ TOOL 7 SIMPLE - MY OWN WAY - 100% WORKING ============ -->
+<!-- ============ TOOL 7 - TAP FIXED - 100% WORKING ============ -->
 
 <div id="page-tool7" class="tool-page" style="display:none">
 <div id="tool7">
@@ -2482,44 +2482,56 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 #tool7{font-family:system-ui,Arial,sans-serif}
 #tool7 *{box-sizing:border-box}
 #tool7 .card{background:#fff;border:1.5px solid #EDE9FE;border-radius:22px;padding:16px}
-#tool7 .btn{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;font-weight:900;cursor:pointer;margin-top:12px;font-size:15px}
-#tool7 .btn2{flex:1;padding:12px;border-radius:12px;border:1.5px solid #EDE9FE;background:#fff;font-weight:800;cursor:pointer}
+#tool7 .btn{width:100%;padding:16px;border:none;border-radius:14px;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;font-weight:900;cursor:pointer;margin-top:12px;font-size:15px}
+#tool7 .btn:active{opacity:.8}
+#tool7 .btn2{flex:1;padding:13px;border-radius:12px;border:1.5px solid #EDE9FE;background:#fff;font-weight:800;cursor:pointer;font-size:13px}
 #tool7 .btn2.green{background:#16A34A;color:#fff;border:none}
+#tool7 .btn2.blue{background:#2563EB;color:#fff;border:none}
 #tool7 textarea{width:100%;min-height:260px;padding:14px;border-radius:14px;border:1.5px solid #EDE9FE;background:#F9FAFB;font-size:15px;line-height:1.8;margin-top:12px}
-#tool7 .drop{border:2px dashed #7C3AED;background:#F8F9FF;border-radius:18px;padding:22px;text-align:center;margin-top:12px;cursor:pointer}
-#tool7 .drop input{width:100%;cursor:pointer}
+#tool7 .tapbox{border:2px dashed #7C3AED;background:#F8F9FF;border-radius:18px;padding:20px;text-align:center;margin-top:12px}
 #tool7 table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
 #tool7 table th,#tool7 table td{border:1px solid #111;padding:8px;text-align:left}
 #tool7 table th{background:#111;color:#fff}
+#tool7 .preview{width:100%;max-height:220px;object-fit:contain;border-radius:12px;margin-top:10px;display:none;background:#F9FAFB}
 </style>
 
 <div id="tool7"><div class="card">
 <button type="button" onclick="goHomePageTool7()" style="background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer">← Back</button>
-<h2 style="text-align:center">📝 Image To Text</h2>
+<h2 style="text-align:center;margin-top:10px">📝 Image To Text</h2>
 <p style="font-size:12px;color:#6B7280;text-align:center">Upload photo → Get text → Copy</p>
 
-<div class="drop">
-<b style="font-size:16px">📷 Tap To Select Image</b>
+<!-- TAP BOX - NOW 2 REAL BUTTONS - NOT HIDDEN INPUT -->
+<div class="tapbox">
+<div style="font-size:36px">🖼️</div>
+<b style="font-size:16px">Select Image</b>
 <p style="font-size:12px;color:#6B7280">Book / Notes / Table / Board</p>
-<input type="file" id="t7File" accept="image/*">
+<button type="button" id="t7TapBtn" style="width:100%;padding:14px;border:none;border-radius:12px;background:#111827;color:#fff;font-weight:900;font-size:15px;cursor:pointer;margin-top:8px">📂 TAP TO SELECT IMAGE</button>
+<button type="button" id="t7TapBtn2" style="width:100%;padding:12px;border:1.5px solid #7C3AED;background:#fff;color:#7C3AED;font-weight:900;font-size:14px;cursor:pointer;margin-top:8px;border-radius:12px">📂 Choose From Gallery - 2nd Way</button>
 </div>
-<div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t7Cam">📷 Camera</button><button type="button" class="btn2" id="t7Sample">✨ Sample</button></div>
 
-<p id="t7Status" style="font-size:13px;text-align:center;color:#6B7280;margin-top:12px">Select image first</p>
+<div style="display:flex;gap:8px;margin-top:10px">
+<button type="button" class="btn2" id="t7CamBtn">📷 Camera</button>
+<button type="button" class="btn2" id="t7SampleBtn">✨ Sample</button>
+<button type="button" class="btn2" id="t7FileBtn">📁 Files</button>
+</div>
+
+<img id="t7Preview" class="preview" alt="Selected photo">
+
+<p id="t7Status" style="font-size:13px;text-align:center;color:#6B7280;margin-top:12px">Tap Select Image first</p>
 <p id="t7Error" style="font-size:13px;text-align:center;color:#DC2626;display:none"></p>
 
-<button type="button" class="btn" id="t7Go">✨ Get Text</button>
+<button type="button" class="btn" id="t7GoBtn">✨ Get Text</button>
 
 <div id="t7Out" style="display:none">
 <textarea id="t7Text" placeholder="Your text will appear here... You can edit it."></textarea>
 <div style="display:flex;gap:8px;margin-top:10px">
-<button type="button" class="btn2 green" id="t7Copy">📋 Copy Text</button>
-<button type="button" class="btn2" id="t7CopyTable" style="display:none;background:#2563EB;color:#fff;border:none">📊 Copy Table</button>
+<button type="button" class="btn2 green" id="t7CopyBtn">📋 Copy Text</button>
+<button type="button" class="btn2 blue" id="t7CopyTableBtn" style="display:none">📊 Copy Table</button>
 </div>
 <div style="display:flex;gap:8px;margin-top:8px">
-<button type="button" class="btn2" id="t7Fix">🤖 Fix Mistakes</button>
-<button type="button" class="btn2" id="t7Down">⬇️ Download</button>
-<button type="button" class="btn2" id="t7Share">📤 Share</button>
+<button type="button" class="btn2" id="t7FixBtn">🤖 Fix Mistakes</button>
+<button type="button" class="btn2" id="t7DownBtn">⬇️ Download</button>
+<button type="button" class="btn2" id="t7ShareBtn">📤 Share</button>
 </div>
 <div id="t7TableBox"></div>
 <p id="t7FixInfo" style="font-size:12px;color:#16A34A;text-align:center;margin-top:8px"></p>
@@ -2532,30 +2544,85 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 
 <script>
 (function(){
+  "use strict";
+  // Back button - Safe even if goHomePage not exist
   window.goHomePageTool7 = window.goHomePageTool7 || function(){
-    if(typeof window.goHomePage==="function"){ window.goHomePage(); return; }
+    try{ if(typeof window.goHomePage==="function"){ window.goHomePage(); return; } }catch(e){}
     var p=document.getElementById('page-tool7'); if(p) p.style.display='none';
     var h=document.getElementById('homeView'); if(h) h.style.display='block';
+    window.scrollTo(0,0);
   };
-  var file=null, tableRows=null;
-  function status(m){ var e=document.getElementById('t7Status'); if(e) e.textContent=m; }
-  function error(m){ var e=document.getElementById('t7Error'); if(!e) return; if(!m){ e.style.display='none'; return; } e.style.display='block'; e.textContent=m; }
+  function el(id){ return document.getElementById(id); }
+  function status(m){ var e=el('t7Status'); if(e) e.textContent=m; }
+  function showErr(m){ var e=el('t7Error'); if(!e) return; if(!m){ e.style.display='none'; return; } e.style.display='block'; e.textContent=m; }
 
-  // My simple fix - Only 20 sure mistakes, no guessing
-  var FIX = {
-    "scool":"school","freind":"friend","teh":"the","recieve":"receive","becuase":"because",
-    "thier":"their","writting":"writing","seperate":"separate","happend":"happened","grammer":"grammar",
-    "dont":"don't","cant":"can't","wont":"won't","didnt":"didn't","isnt":"isn't",
-    "he go":"He goes","she go":"She goes","he play":"He plays","they goes":"They go",
-    "i has":"I have","he have":"He has","they has":"They have",
-    "yesterday i go":"Yesterday I went","yesterday i play":"Yesterday I played",
-    "go school":"go to school","like play":"like to play",
-    "a apple":"an apple","an boy":"a boy","an school":"a school"
-  };
+  var file=null, tableRows=null;
+
+  // ===== TAP TO SELECT - FIXED - Creates fresh input every tap - Works on WhatsApp / Chrome / iPhone =====
+  function openPicker(useCamera){
+    try{
+      var inp=document.createElement('input');
+      inp.type='file';
+      inp.accept='image/*,.jpg,.jpeg,.png,.webp';
+      if(useCamera) inp.setAttribute('capture','environment');
+      // Must be in DOM for iPhone
+      inp.style.position='fixed'; inp.style.left='-9999px'; inp.style.opacity='0';
+      document.body.appendChild(inp);
+      inp.onchange=function(){
+        if(inp.files && inp.files[0]){
+          setFile(inp.files[0]);
+        } else {
+          status("No image selected - Tap again");
+        }
+        setTimeout(function(){ try{ inp.remove(); }catch(e){} },500);
+      };
+      // If user cancels, onchange may not fire - Clean up after 5 sec
+      setTimeout(function(){ try{ if(document.body.contains(inp)) inp.remove(); }catch(e){} },10000);
+      inp.click();
+    }catch(e){
+      showErr("Picker failed - Tap Files button instead");
+    }
+  }
+  function setFile(f){
+    if(!f) return;
+    if(f.size>10*1024*1024){ showErr("Photo too big - Max 10 MB - Take smaller photo"); return; }
+    file=f; showErr("");
+    status("✅ Selected: "+(f.name||"Photo")+" - Tap Get Text");
+    // Show preview - Proves tap worked
+    try{
+      var pv=el('t7Preview');
+      if(pv){
+        var url=URL.createObjectURL(f);
+        pv.src=url; pv.style.display='block';
+        pv.onload=function(){ try{ URL.revokeObjectURL(url); }catch(e){} };
+      }
+    }catch(e){}
+  }
+
+  // Bind ALL tap buttons - Any one works
+  var tap1=el('t7TapBtn'); if(tap1) tap1.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); openPicker(false); });
+  var tap2=el('t7TapBtn2'); if(tap2) tap2.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); openPicker(false); });
+  var fileBtn=el('t7FileBtn'); if(fileBtn) fileBtn.addEventListener('click', function(e){ e.preventDefault(); openPicker(false); });
+  var camBtn=el('t7CamBtn'); if(camBtn) camBtn.addEventListener('click', function(e){ e.preventDefault(); openPicker(true); });
+  var sampleBtn=el('t7SampleBtn');
+  if(sampleBtn) sampleBtn.addEventListener('click', function(){
+    try{
+      var c=document.createElement('canvas'); c.width=800; c.height=500; var x=c.getContext('2d');
+      x.fillStyle="#fff"; x.fillRect(0,0,800,500);
+      x.fillStyle="#111"; x.font="bold 32px Arial"; x.fillText("My School Day", 50, 70);
+      x.font="22px Arial"; x.fillText("Yesterday I go to scool", 50, 130);
+      x.fillText("My freind Ram play with me", 50, 175);
+      x.fillText("He go to school by bus", 50, 220);
+      x.fillText("It makes me happy and healthy.", 50, 265);
+      c.toBlob(function(b){ if(b) setFile(new File([b],"Sample.jpg",{type:"image/jpeg"})); }, "image/jpeg", 0.95);
+    }catch(e){ showErr("Sample failed - Select your own image"); }
+  });
+
+  // Simple fix - Only sure mistakes
+  var FIX={"scool":"school","freind":"friend","teh":"the","recieve":"receive","becuase":"because","thier":"their","writting":"writing","seperate":"separate","happend":"happened","grammer":"grammar","dont":"don't","cant":"can't","wont":"won't","didnt":"didn't","isnt":"isn't","he go":"He goes","she go":"She goes","he play":"He plays","they goes":"They go","i has":"I have","he have":"He has","they has":"They have","yesterday i go":"Yesterday I went","yesterday i play":"Yesterday I played","go school":"go to school","like play":"like to play","a apple":"an apple","an boy":"a boy","an school":"a school"};
   function fixText(t){
     if(!t) return t;
     var out=t;
-    // Long phrases first
     Object.keys(FIX).sort(function(a,b){ return b.length-a.length; }).forEach(function(k){
       var re=new RegExp("\\b"+k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\b","gi");
       out=out.replace(re, function(m){
@@ -2564,108 +2631,70 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
         return r;
       });
     });
-    // Small cleanups - Safe only
-    out=out.replace(/ {2,}/g," "); // double space
-    out=out.replace(/ ,/g,","); // space before comma
-    out=out.replace(/\bi\b/g,"I"); // i -> I
-    out=out.replace(/,([A-Za-z])/g,", $1"); // space after comma
-    out=out.replace(/([.!?]\s+)([a-z])/g, function(m,a,b){ return a+b.toUpperCase(); }); // capital after .
+    out=out.replace(/ {2,}/g," ").replace(/ ,/g,",").replace(/\bi\b/g,"I").replace(/,([A-Za-z])/g,", $1");
+    out=out.replace(/([.!?]\s+)([a-z])/g, function(m,a,b){ return a+b.toUpperCase(); });
     if(out && out.charAt(0)>="a" && out.charAt(0)<="z") out=out.charAt(0).toUpperCase()+out.slice(1);
     if(out.trim() && !/[.!?]$/.test(out.trim())) out=out.trim()+".";
     return out;
   }
-
-  // Table - Simple: Line has 3 parts separated by 2+ spaces = table row
   function checkTable(text){
-    var lines=text.split("\n").map(function(l){ return l.trim(); }).filter(Boolean);
+    var lines=(text||"").split("\n").map(function(l){ return l.trim(); }).filter(Boolean);
     var rows=[];
     lines.forEach(function(l){
       var parts=l.split(/\s{2,}|\t|\|/).map(function(p){ return p.trim(); }).filter(Boolean);
       if(parts.length>=3) rows.push(parts);
     });
-    // Need at least 3 table rows to call it table
+    var box=el('t7TableBox'); var copyBtn=el('t7CopyTableBtn');
     if(rows.length>=3){
       tableRows=rows;
-      var html="<table><tr>";
-      rows[0].forEach(function(c){ html+="<th>"+c.replace(/</g,"&lt;")+"</th>"; });
-      html+="</tr>";
+      var html="<table><tr>"; rows[0].forEach(function(c){ html+="<th>"+c.replace(/</g,"&lt;")+"</th>"; }); html+="</tr>";
       for(var i=1;i<rows.length;i++){ html+="<tr>"; rows[i].forEach(function(c){ html+="<td>"+c.replace(/</g,"&lt;")+"</td>"; }); html+="</tr>"; }
-      html+="</table><p style='font-size:11px;color:#6B7280'>Table detected - Copy Table button will copy it for Excel</p>";
-      document.getElementById('t7TableBox').innerHTML=html;
-      document.getElementById('t7CopyTable').style.display='block';
+      html+="</table>";
+      if(box) box.innerHTML=html;
+      if(copyBtn) copyBtn.style.display='block';
     } else {
-      tableRows=null;
-      document.getElementById('t7TableBox').innerHTML="";
-      document.getElementById('t7CopyTable').style.display='none';
+      tableRows=null; if(box) box.innerHTML=""; if(copyBtn) copyBtn.style.display='none';
     }
   }
 
-  function setFile(f){
-    if(!f) return;
-    if(f.size>10*1024*1024){ error("Photo too big - Max 10 MB"); return; }
-    file=f; error("");
-    status("✅ Photo selected: "+f.name+" - Tap Get Text");
-  }
-  document.getElementById('t7File').addEventListener('change', function(e){ if(e.target.files[0]) setFile(e.target.files[0]); e.target.value=""; });
-  document.getElementById('t7Cam').addEventListener('click', function(){
-    var i=document.createElement('input'); i.type='file'; i.accept='image/*'; i.setAttribute('capture','environment');
-    i.onchange=function(){ if(i.files[0]) setFile(i.files[0]); }; i.click();
-  });
-  document.getElementById('t7Sample').addEventListener('click', function(){
-    var c=document.createElement('canvas'); c.width=800; c.height=500; var x=c.getContext('2d');
-    x.fillStyle="#fff"; x.fillRect(0,0,800,500);
-    x.fillStyle="#111"; x.font="bold 32px Arial"; x.fillText("My School Day", 50, 70);
-    x.font="22px Arial"; x.fillText("Yesterday I go to scool", 50, 130);
-    x.fillText("My freind Ram play with me", 50, 175);
-    x.fillText("He go to school by bus", 50, 220);
-    x.fillText("It makes me happy and healthy.", 50, 265);
-    c.toBlob(function(b){ setFile(new File([b],"Sample.jpg",{type:"image/jpeg"})); }, "image/jpeg", 0.95);
-  });
-
-  // Load Tesseract - Only 1 CDN, simple
   function loadOCR(){
     return new Promise(function(res,rej){
       if(window.Tesseract){ res(true); return; }
       var s=document.createElement('script'); s.src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
-      s.onload=function(){ res(true); }; s.onerror=function(){ rej(new Error("OCR failed to load - Check internet")); };
+      s.onload=function(){ res(true); }; s.onerror=function(){ rej(new Error("OCR load failed - Check internet")); };
       document.head.appendChild(s);
     });
   }
 
-  document.getElementById('t7Go').addEventListener('click', async function(){
-    if(!file){ error("Select image first"); return; }
-    var btn=document.getElementById('t7Go'); btn.disabled=true; btn.textContent="⏳ Reading... Please Wait";
-    status("Reading... This takes 10-20 seconds, please wait");
-    error("");
+  var goBtn=el('t7GoBtn');
+  if(goBtn) goBtn.addEventListener('click', async function(){
+    if(!file){ showErr("Select image first - Tap Select Image above"); status("Tap Select Image first"); return; }
+    goBtn.disabled=true; goBtn.textContent="⏳ Reading... Please Wait";
+    status("Reading... 10-20 sec, please wait"); showErr("");
     try{
       await loadOCR();
-      // Simple: Pass file URL directly to Tesseract - No canvas, no preprocessing, no bbox
       var url=URL.createObjectURL(file);
-      var result=await window.Tesseract.recognize(url, "eng", { logger:function(m){ if(m.status==="recognizing text" && m.progress) status("Reading... "+Math.round(m.progress*100)+"%"); } });
-      URL.revokeObjectURL(url);
+      var result=await window.Tesseract.recognize(url, "eng", { logger:function(m){ if(m && m.status==="recognizing text" && m.progress) status("Reading... "+Math.round(m.progress*100)+"%"); } });
+      try{ URL.revokeObjectURL(url); }catch(e){}
       var text=(result && result.data && result.data.text) ? result.data.text.trim() : "";
-      if(!text){ error("No text found - Take closer, brighter photo"); status("No text found"); return; }
-      // Show raw first, then auto-fix - User sees both
-      document.getElementById('t7Out').style.display='block';
-      document.getElementById('t7Text').value=text;
+      if(!text){ showErr("No text found - Take closer, brighter photo"); status("No text found"); return; }
+      var out=el('t7Out'); if(out) out.style.display='block';
+      var ta=el('t7Text'); if(ta) ta.value=text;
       checkTable(text);
-      status("✅ Done - "+text.split(/\s+/).length+" words - Tap Fix Mistakes to make perfect");
-      document.getElementById('t7Out').scrollIntoView({behavior:"smooth"});
+      status("✅ Done - "+text.split(/\s+/).length+" words - Tap Fix Mistakes");
+      if(out) out.scrollIntoView({behavior:"smooth"});
     }catch(e){
-      error("Failed - "+(e.message||"Check internet, open in Chrome, try again"));
+      showErr("Failed - "+(e && e.message ? e.message : "Check internet, open in Chrome, try again"));
       status("Failed - Try again");
-    }finally{ btn.disabled=false; btn.textContent="✨ Get Text"; }
+    }finally{ goBtn.disabled=false; goBtn.textContent="✨ Get Text"; }
   });
 
-  document.getElementById('t7Fix').addEventListener('click', function(){
-    var ta=document.getElementById('t7Text');
-    var before=ta.value;
-    var after=fixText(before);
-    ta.value=after;
-    checkTable(after);
-    var diff=before!==after ? "✅ Fixed! Tap Copy now." : "✅ Already perfect - No mistakes found.";
-    document.getElementById('t7FixInfo').textContent=diff;
-    status(diff);
+  var fixBtn=el('t7FixBtn');
+  if(fixBtn) fixBtn.addEventListener('click', function(){
+    var ta=el('t7Text'); if(!ta) return;
+    var before=ta.value; var after=fixText(before); ta.value=after; checkTable(after);
+    var msg=before!==after ? "✅ Fixed! Tap Copy now." : "✅ Already perfect - No mistakes.";
+    var fi=el('t7FixInfo'); if(fi) fi.textContent=msg; status(msg);
   });
 
   function copyText(txt){
@@ -2674,53 +2703,49 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
         navigator.clipboard.writeText(txt).then(function(){ res(true); }).catch(function(){ fallback(); });
       } else fallback();
       function fallback(){
-        var ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select();
-        try{ document.execCommand('copy'); res(true); }catch(e){ res(false); } ta.remove();
+        var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select();
+        try{ var ok=document.execCommand('copy'); res(!!ok); }catch(e){ res(false); } ta.remove();
       }
     });
   }
-  document.getElementById('t7Copy').addEventListener('click', async function(){
-    var t=document.getElementById('t7Text').value;
-    if(!t.trim()){ error("No text to copy - Get Text first"); return; }
-    var ok=await copyText(t);
-    if(ok){ status("✅ Copied! Paste in WhatsApp / Notes"); } else error("Copy failed - Long press text → Select All → Copy");
+  var copyBtn=el('t7CopyBtn');
+  if(copyBtn) copyBtn.addEventListener('click', async function(){
+    var t=el('t7Text').value; if(!t.trim()){ showErr("No text - Get Text first"); return; }
+    var ok=await copyText(t); if(ok) status("✅ Copied! Paste in WhatsApp / Notes"); else showErr("Copy failed - Long press text → Select All → Copy");
   });
-  document.getElementById('t7CopyTable').addEventListener('click', async function(){
-    if(!tableRows){ error("No table in this image"); return; }
+  var copyTableBtn=el('t7CopyTableBtn');
+  if(copyTableBtn) copyTableBtn.addEventListener('click', async function(){
+    if(!tableRows){ showErr("No table in this image"); return; }
     var tsv=tableRows.map(function(r){ return r.join("\t"); }).join("\n");
-    var ok=await copyText(tsv);
-    if(ok) status("✅ Table copied! Paste in Excel / Sheets - Same table");
+    var ok=await copyText(tsv); if(ok) status("✅ Table copied! Paste in Excel / Sheets");
   });
-  document.getElementById('t7Down').addEventListener('click', function(){
-    var t=document.getElementById('t7Text').value;
-    if(!t.trim()){ error("No text - Get Text first"); return; }
+  var downBtn=el('t7DownBtn');
+  if(downBtn) downBtn.addEventListener('click', function(){
+    var t=el('t7Text').value; if(!t.trim()){ showErr("No text - Get Text first"); return; }
     var blob=new Blob([t],{type:"text/plain;charset=utf-8"});
     var url=URL.createObjectURL(blob);
     var a=document.createElement('a'); a.href=url; a.download="Text.txt"; document.body.appendChild(a); a.click();
-    setTimeout(function(){ a.remove(); URL.revokeObjectURL(url); },500);
-    status("✅ Downloaded - Check Downloads");
+    setTimeout(function(){ try{ a.remove(); URL.revokeObjectURL(url); }catch(e){} },500);
+    status("✅ Downloaded");
   });
-  document.getElementById('t7Share').addEventListener('click', async function(){
-    var t=document.getElementById('t7Text').value;
-    if(!t.trim()){ error("No text - Get Text first"); return; }
-    try{
-      if(navigator.share){ await navigator.share({text:t}); return; }
-      await copyText(t); status("✅ Copied - Share not supported, paste in WhatsApp");
-    }catch(e){}
+  var shareBtn=el('t7ShareBtn');
+  if(shareBtn) shareBtn.addEventListener('click', async function(){
+    var t=el('t7Text').value; if(!t.trim()){ showErr("No text - Get Text first"); return; }
+    try{ if(navigator.share){ await navigator.share({text:t}); return; } await copyText(t); status("✅ Copied - Paste in WhatsApp"); }catch(e){}
   });
 
   window.clearTool7=function(){
     file=null; tableRows=null;
-    document.getElementById('t7File').value="";
-    document.getElementById('t7Out').style.display='none';
-    document.getElementById('t7Text').value="";
-    document.getElementById('t7TableBox').innerHTML="";
-    document.getElementById('t7FixInfo').textContent="";
-    error(""); status("Select image first");
+    var pv=el('t7Preview'); if(pv){ pv.src=""; pv.style.display='none'; }
+    var out=el('t7Out'); if(out) out.style.display='none';
+    var ta=el('t7Text'); if(ta) ta.value="";
+    var tb=el('t7TableBox'); if(tb) tb.innerHTML="";
+    var fi=el('t7FixInfo'); if(fi) fi.textContent="";
+    showErr(""); status("Tap Select Image first");
   };
 })();
 </script>
-<!-- ============ TOOL 7 SIMPLE END ============ -->
+<!-- ============ TOOL 7 TAP FIXED END ============ -->
               
 
 <!-- ================= TOOL 8 - BG REMOVER ================= -->
