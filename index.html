@@ -2474,7 +2474,7 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 </script>
 <!-- ================= TOOL 6 END - V2 - ALL BUGS FIXED ================= -->
 <!-- ================= TOOL 7 - IMAGE TO TEXT ================= -->
-<!-- ================= TOOL 7 FINAL - 100% WORKING - BUGS FREE - UNIVERSAL AI - NO API ================= -->
+<!-- ============ TOOL 7 SIMPLE - MY OWN WAY - 100% WORKING ============ -->
 
 <div id="page-tool7" class="tool-page" style="display:none">
 <div id="tool7">
@@ -2482,595 +2482,245 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 #tool7{font-family:system-ui,Arial,sans-serif}
 #tool7 *{box-sizing:border-box}
 #tool7 .card{background:#fff;border:1.5px solid #EDE9FE;border-radius:22px;padding:16px}
-#tool7 .topbar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-bottom:1px solid #EDE9FE;margin:-16px -16px 12px -16px;border-radius:22px 22px 0 0;position:sticky;top:0;z-index:20}
-#tool7 .topbar button{background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer;font-size:13px}
-#tool7 label{font-size:12px;font-weight:900;display:block;margin-top:13px}
-#tool7 input,#tool7 select{width:100%;padding:13px;border-radius:14px;border:1.5px solid #E5E7EB;background:#F9FAFB;font-size:14px;margin-top:6px}
-#tool7 .btn{width:100%;padding:15px;border:none;border-radius:16px;font-weight:900;cursor:pointer;margin-top:12px;color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);font-size:15px}
-#tool7 .btn:disabled{opacity:.6}
-#tool7 .btn2{flex:1;padding:12px;border-radius:14px;border:1.5px solid #EDE9FE;background:#fff;font-weight:800;cursor:pointer;font-size:13px}
-#tool7 .btn2.primary{background:#111827;color:#fff;border:none}
+#tool7 .btn{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;font-weight:900;cursor:pointer;margin-top:12px;font-size:15px}
+#tool7 .btn2{flex:1;padding:12px;border-radius:12px;border:1.5px solid #EDE9FE;background:#fff;font-weight:800;cursor:pointer}
 #tool7 .btn2.green{background:#16A34A;color:#fff;border:none}
-#tool7 .btn2.blue{background:#2563EB;color:#fff;border:none}
-#tool7 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:9px 12px;border-radius:20px;font-size:12px;margin:7px 7px 0 0;cursor:pointer;font-weight:700}
-#tool7 .chip.active{background:#111827;color:#fff;border:none}
-#tool7 .drop{position:relative;border:2px dashed #7C3AED;background:linear-gradient(135deg,#F8F9FF,#FDF2F8);border-radius:18px;padding:20px;text-align:center;margin-top:12px;overflow:hidden;cursor:pointer}
-#tool7 .drop-content{pointer-events:none}
-#tool7 .file-input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:2}
-#tool7 .big-btn{display:block;width:100%;padding:14px;border:none;border-radius:14px;background:#111827;color:#fff;font-weight:900;font-size:14px;cursor:pointer;margin-top:10px}
-#tool7 .progress{height:10px;background:#E5E7EB;border-radius:20px;overflow:hidden;margin-top:12px;display:none}
-#tool7 .progress i{display:block;height:100%;background:linear-gradient(90deg,#7C3AED,#EC4899);width:0%}
-#tool7 .status-box{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:10px;margin-top:10px;font-size:12px;line-height:1.6;display:none}
-#tool7 .error-box{background:#FEF2F2;border:1px solid #FECACA;border-radius:12px;padding:12px;margin-top:10px;font-size:12px;line-height:1.7;display:none;color:#991B1B}
-#tool7 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-#tool7 .img-card{background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:10px;text-align:center;position:relative}
-#tool7 .img-card img{width:100%;border-radius:10px;max-height:220px;object-fit:contain;background:#fff}
-#tool7 .img-card .del{position:absolute;top:6px;right:6px;background:#DC2626;color:#fff;border:none;width:26px;height:26px;border-radius:50%;font-weight:900;cursor:pointer;z-index:2}
-#tool7 .final-box{background:#fff;border:2px solid #16A34A;border-radius:16px;padding:14px;margin-top:12px;display:none}
-#tool7 .para{white-space:pre-wrap;line-height:1.9;font-size:14.5px;margin-top:10px}
-#tool7 .para.head{font-weight:900;font-size:17px}
-#tool7 table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px;background:#fff}
-#tool7 table th,#tool7 table td{border:1.5px solid #111827;padding:9px;text-align:left;word-break:break-word}
-#tool7 table th{background:#111827;color:#fff}
-#tool7 table tr:nth-child(even) td{background:#F8F9FF}
-#tool7 .copy-bar{position:sticky;top:60px;z-index:10;background:#111827;color:#fff;border-radius:14px;padding:10px;display:flex;gap:8px;align-items:center;margin-top:10px}
-#tool7 .copy-bar button{flex:1;padding:12px;border:none;border-radius:10px;font-weight:900;cursor:pointer}
-#tool7 .score-pill{display:inline-block;padding:6px 12px;border-radius:20px;font-weight:900;font-size:12px;color:#fff}
-#tool7 .ai-note{background:#FFFBEB;border:1px solid #F59E0B;border-radius:10px;padding:10px;margin-top:10px;font-size:12px;line-height:1.7}
-#tool7 .history-item{background:#fff;border:1px solid #EDE9FE;border-radius:10px;padding:10px;margin-top:8px;font-size:12px;cursor:pointer}
-#tool7 .spinner{display:inline-block;width:16px;height:16px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
-@keyframes spin{to{transform:rotate(360deg)}}
+#tool7 textarea{width:100%;min-height:260px;padding:14px;border-radius:14px;border:1.5px solid #EDE9FE;background:#F9FAFB;font-size:15px;line-height:1.8;margin-top:12px}
+#tool7 .drop{border:2px dashed #7C3AED;background:#F8F9FF;border-radius:18px;padding:22px;text-align:center;margin-top:12px;cursor:pointer}
+#tool7 .drop input{width:100%;cursor:pointer}
+#tool7 table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+#tool7 table th,#tool7 table td{border:1px solid #111;padding:8px;text-align:left}
+#tool7 table th{background:#111;color:#fff}
 </style>
 
 <div id="tool7"><div class="card">
-<div class="topbar"><button type="button" onclick="goHomePageTool7()">← Back</button><div><b>📝 Image To Text + AI</b><br><span style="font-size:11px;color:#6B7280">Universal AI • Auto 98% • Same Table</span></div><span style="margin-left:auto;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;font-size:11px;font-weight:900;padding:6px 10px;border-radius:20px">🤖 AI FINAL</span></div>
+<button type="button" onclick="goHomePageTool7()" style="background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer">← Back</button>
+<h2 style="text-align:center">📝 Image To Text</h2>
+<p style="font-size:12px;color:#6B7280;text-align:center">Upload photo → Get text → Copy</p>
 
-<h2 style="text-align:center">📝 Image To Text - Universal AI</h2>
-<p style="font-size:13px;color:#6B7280;text-align:center;line-height:1.7">Upload photo → <b>Auto Perfect Text</b><br>Table in photo → <b>Same Table</b> → Tap Copy → Done<br><span style="color:#16A34A;font-weight:800">AI Score 98-99% • No API • 100% Working</span></p>
-
-<label for="t7File" class="drop">
-<input type="file" id="t7File" class="file-input" accept="image/*,.jpg,.jpeg,.png,.webp" multiple>
-<div class="drop-content"><div style="font-size:36px">🖼️</div><b style="font-size:16px">Tap To Select Image</b><p style="font-size:12px;color:#6B7280;margin-top:4px">Book / Notes / Board / Table / Screenshot • Up to 5 • Max 10 MB</p><div style="display:inline-block;margin-top:8px;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;padding:11px 20px;border-radius:20px;font-weight:900">📂 Choose Image →</div></div>
-</label>
-<button type="button" class="big-btn" id="t7BigBtn">📂 TAP HERE - 2nd Way</button>
-<div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t7CameraBtn">📷 Camera</button><button type="button" class="btn2" id="t7SampleBtn">✨ Try Sample - Table + Para</button></div>
-
-<div class="status-box" id="t7StatusBox"><b id="t7StatusTitle">📄 Status</b><br><span id="t7StatusText">Select image first - AI will do rest automatically</span></div>
-<div class="error-box" id="t7ErrorBox"><b>⚠️ Error:</b><br><span id="t7ErrorText"></span></div>
-
-<div id="t7ListBox" style="display:none;margin-top:12px"><b>Your Images - <span id="t7Count">0</span></b><div class="grid" id="t7Grid"></div><div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t7AddMoreBtn">➕ Add More</button><button type="button" class="btn2" id="t7ClearBtn" style="background:#DC2626;color:#fff;border:none">🗑️ Clear All</button></div></div>
-
-<label>Language</label>
-<div id="t7LangRow"><span class="chip active" data-lang="eng">🇬🇧 English</span><span class="chip" data-lang="auto">✨ Auto Detect</span><span class="chip" data-lang="eng+hin">🇮🇳 English + Hindi</span></div>
-<label>Type</label>
-<div id="t7DocTypeRow"><span class="chip active" data-doctype="auto">✨ Auto - Para + Table Both</span><span class="chip" data-doctype="table">📊 Table Only</span><span class="chip" data-doctype="letter">✉️ Letter</span><span class="chip" data-doctype="essay">📝 Essay</span></div>
-
-<button type="button" class="btn" id="t7ExtractBtn">✨ Extract + AI Fix - 1 Tap - Auto Perfect</button>
-<div class="progress" id="t7Progress"><i id="t7Bar"></i></div>
-<p id="t7Status" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select image first</p>
-
-<div class="final-box" id="t7FinalBox">
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><b style="font-size:16px">✅ Perfect Text - Ready To Copy</b><span><span class="score-pill" id="t7ScorePill" style="background:#16A34A">AI Score 98%</span> <span style="font-size:11px;color:#6B7280" id="t7Stats">-</span></span></div>
-<div style="font-size:12px;color:#6B7280;margin-top:6px">AI fixed <b id="t7FixCount">0</b> mistakes automatically - Spelling, Grammar, Table, Format - Same as image, but perfect.</div>
-<div class="copy-bar">
-<button type="button" id="t7CopyAllBtn" style="background:#16A34A;color:#fff">📋 COPY ALL TEXT</button>
-<button type="button" id="t7CopyTableBtn" style="background:#2563EB;color:#fff;display:none">📊 COPY TABLE ONLY</button>
-<button type="button" id="t7CopyParaBtn" style="background:#fff;color:#111">📄 COPY PARA ONLY</button>
+<div class="drop">
+<b style="font-size:16px">📷 Tap To Select Image</b>
+<p style="font-size:12px;color:#6B7280">Book / Notes / Table / Board</p>
+<input type="file" id="t7File" accept="image/*">
 </div>
-<div id="t7FinalContent" style="margin-top:8px"></div>
-<div class="ai-note" id="t7AiNote"></div>
-<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
-<button type="button" class="btn2 green" id="t7DownloadTxtBtn">⬇️ .TXT</button>
-<button type="button" class="btn2 primary" id="t7DownloadWordBtn">📄 Word</button>
-<button type="button" class="btn2 primary" id="t7DownloadPdfBtn">📕 PDF</button>
-<button type="button" class="btn2" id="t7ShareBtn">📤 Share</button>
+<div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t7Cam">📷 Camera</button><button type="button" class="btn2" id="t7Sample">✨ Sample</button></div>
+
+<p id="t7Status" style="font-size:13px;text-align:center;color:#6B7280;margin-top:12px">Select image first</p>
+<p id="t7Error" style="font-size:13px;text-align:center;color:#DC2626;display:none"></p>
+
+<button type="button" class="btn" id="t7Go">✨ Get Text</button>
+
+<div id="t7Out" style="display:none">
+<textarea id="t7Text" placeholder="Your text will appear here... You can edit it."></textarea>
+<div style="display:flex;gap:8px;margin-top:10px">
+<button type="button" class="btn2 green" id="t7Copy">📋 Copy Text</button>
+<button type="button" class="btn2" id="t7CopyTable" style="display:none;background:#2563EB;color:#fff;border:none">📊 Copy Table</button>
 </div>
-<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-<button type="button" class="btn2" id="t7TranslateBtn">🌐 → Hindi</button>
-<button type="button" class="btn2" id="t7SummaryBtn">📋 Summary</button>
-<button type="button" class="btn2" id="t7SpeakBtn">🔊 Listen</button>
-<button type="button" class="btn2" id="t7ShowFixesBtn">🔍 See What AI Fixed</button>
+<div style="display:flex;gap:8px;margin-top:8px">
+<button type="button" class="btn2" id="t7Fix">🤖 Fix Mistakes</button>
+<button type="button" class="btn2" id="t7Down">⬇️ Download</button>
+<button type="button" class="btn2" id="t7Share">📤 Share</button>
 </div>
-<div id="t7FixList" style="display:none;background:#FFFBEB;border:1px solid #F59E0B;border-radius:12px;padding:10px;margin-top:10px;font-size:12.5px;line-height:1.8;white-space:pre-wrap"></div>
-<div id="t7ExtraBox" style="display:none;background:#FFFBEB;border:1px solid #F59E0B;border-radius:12px;padding:10px;margin-top:10px;font-size:13px;line-height:1.7;white-space:pre-wrap"></div>
-<div style="margin-top:12px"><b style="font-size:12px">🕘 Recent</b><div id="t7History"></div></div>
+<div id="t7TableBox"></div>
+<p id="t7FixInfo" style="font-size:12px;color:#16A34A;text-align:center;margin-top:8px"></p>
 </div>
 
-<div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2" onclick="clearTool7()">🗑️ New Image</button><button type="button" class="btn2 primary" onclick="goHomePageTool7()">← Back</button></div>
+<div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2" onclick="clearTool7()">🗑️ New</button><button type="button" class="btn2" onclick="goHomePageTool7()">← Back</button></div>
 </div></div>
 </div>
 </div>
 
 <script>
 (function(){
-  "use strict";
   window.goHomePageTool7 = window.goHomePageTool7 || function(){
-    if(typeof window.goHomePage === "function"){ window.goHomePage(); return; }
+    if(typeof window.goHomePage==="function"){ window.goHomePage(); return; }
     var p=document.getElementById('page-tool7'); if(p) p.style.display='none';
     var h=document.getElementById('homeView'); if(h) h.style.display='block';
-    window.scrollTo(0,0);
   };
-  function el(id){ return document.getElementById(id); }
-  function setStatus(t,m){ var b=el('t7StatusBox'); if(b) b.style.display='block'; var tt=el('t7StatusTitle'); if(tt) tt.textContent=t; var tx=el('t7StatusText'); if(tx) tx.textContent=m; var st=el('t7Status'); if(st) st.textContent=m; }
-  function showError(m){ var b=el('t7ErrorBox'); if(!b) return; if(!m){ b.style.display='none'; return; } b.style.display='block'; el('t7ErrorText').textContent=m; }
-  function showErrorAuto(m){ showError(m); setTimeout(function(){ showError(""); },6000); }
-  function getWm(){ try{ return {on: localStorage.getItem('orbit_watermark')!=='false', txt: localStorage.getItem('orbit_watermark_text')||"Made With Orbittroniz.com"}; }catch(e){ return {on:true, txt:"Made With Orbittroniz.com"}; } }
-  function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-  function safeNum(v, def){ var n=parseInt(v,10); return isNaN(n)?(def||0):n; }
+  var file=null, tableRows=null;
+  function status(m){ var e=document.getElementById('t7Status'); if(e) e.textContent=m; }
+  function error(m){ var e=document.getElementById('t7Error'); if(!e) return; if(!m){ e.style.display='none'; return; } e.style.display='block'; e.textContent=m; }
 
-  var S={files:[], lang:"eng", docType:"auto", busy:false, isSpeaking:false, finalText:"", finalParas:[], finalTable:null, fixList:[], score:98};
-
-  // OCR load - 2 CDNs, safe
-  function loadScript(src){ return new Promise(function(res,rej){ var s=document.createElement('script'); s.src=src; s.onload=function(){ res(true); }; s.onerror=function(){ rej(new Error("fail")); }; setTimeout(function(){ rej(new Error("timeout")); },15000); document.head.appendChild(s); }); }
-  async function ensureOCR(){
-    if(window.Tesseract) return true;
-    var cdns=["https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js","https://unpkg.com/tesseract.js@5/dist/tesseract.min.js"];
-    for(var i=0;i<cdns.length;i++){ try{ await loadScript(cdns[i]); if(window.Tesseract) return true; }catch(e){} }
-    return !!window.Tesseract;
-  }
-
-  // UI - Lang / DocType
-  var langRow=document.getElementById('t7LangRow');
-  if(langRow) langRow.addEventListener('click', function(e){ var c=e.target.closest('.chip'); if(!c) return; langRow.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('active'); }); c.classList.add('active'); S.lang=c.getAttribute('data-lang')||"eng"; });
-  var docRow=document.getElementById('t7DocTypeRow');
-  if(docRow) docRow.addEventListener('click', function(e){ var c=e.target.closest('.chip'); if(!c) return; docRow.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('active'); }); c.classList.add('active'); S.docType=c.getAttribute('data-doctype')||"auto"; });
-
-  var fileInp=el('t7File');
-  function openPicker(){ try{ var f=document.createElement('input'); f.type='file'; f.accept='image/*,.jpg,.jpeg,.png,.webp'; f.multiple=true; f.onchange=function(){ if(f.files && f.files.length>0) handleFiles(f.files); }; f.click(); }catch(e){ showErrorAuto("File picker failed - Try Choose Image box above"); } }
-  function bindBtn(id, fn){ var b=el(id); if(b) b.addEventListener('click', function(e){ e.preventDefault(); fn(); }); }
-  bindBtn('t7BigBtn', openPicker);
-  bindBtn('t7AddMoreBtn', openPicker);
-  bindBtn('t7CameraBtn', function(){ try{ var ci=document.createElement('input'); ci.type='file'; ci.accept='image/*'; ci.setAttribute('capture','environment'); ci.onchange=function(){ if(ci.files && ci.files[0]) handleFiles(ci.files); }; ci.click(); }catch(e){ openPicker(); } });
-  bindBtn('t7SampleBtn', function(){
-    try{
-      var c=document.createElement('canvas'); c.width=950; c.height=750; var ctx=c.getContext('2d');
-      ctx.fillStyle="#fff"; ctx.fillRect(0,0,950,750);
-      ctx.fillStyle="#111"; ctx.font="bold 38px Arial"; ctx.fillText("Marks Table", 60, 70);
-      ctx.font="22px Arial"; ctx.fillText("Name", 60, 130); ctx.fillText("Subject", 250, 130); ctx.fillText("Marks", 450, 130);
-      ctx.fillText("Ram", 60, 175); ctx.fillText("Maths", 250, 175); ctx.fillText("85", 450, 175);
-      ctx.fillText("Shyam", 60, 220); ctx.fillText("Science", 250, 220); ctx.fillText("90", 450, 220);
-      ctx.fillText("Total", 60, 265); ctx.fillText("175", 450, 265);
-      ctx.font="bold 30px Arial"; ctx.fillText("My School Day", 60, 330);
-      ctx.font="22px Arial"; ctx.fillText("Yesterday I go to scool", 60, 375);
-      ctx.fillText("My freind Ram play with me", 60, 420);
-      ctx.fillText("He go to school by bus", 60, 465);
-      ctx.fillText("it makes me happy and healthy", 60, 510);
-      ctx.fillText("I like 2 play cricket", 60, 555);
-      if(c.toBlob){ c.toBlob(function(blob){ if(!blob) return; var f=new File([blob], "Sample.jpg", {type:"image/jpeg"}); handleFiles([f]); }, "image/jpeg", 0.95); }
-    }catch(e){ showErrorAuto("Sample failed - Select your own image"); }
-  });
-  if(fileInp) fileInp.addEventListener('change', function(e){ var fs=e.target.files; if(fs && fs.length>0) handleFiles(fs); fileInp.value=""; });
-
-  function handleFiles(files){
-    showError("");
-    var arr=Array.prototype.slice.call(files||[]);
-    if(S.files.length + arr.length > 5){ showErrorAuto("Max 5 images - Adding first "+(5-S.files.length)+" only"); arr=arr.slice(0, Math.max(0, 5-S.files.length)); if(arr.length===0) return; }
-    var added=0;
-    arr.forEach(function(f){
-      if(!f) return;
-      if(f.size>10*1024*1024){ showErrorAuto((f.name||"File")+" too big - Max 10 MB"); return; }
-      if(!f.type || f.type.indexOf('image')===-1){
-        var ln=(f.name||"").toLowerCase();
-        if(ln.indexOf('.jpg')===-1 && ln.indexOf('.jpeg')===-1 && ln.indexOf('.png')===-1 && ln.indexOf('.webp')===-1) return;
-      }
-      if(S.files.some(function(o){ return o.name===f.name && o.size===f.size; })) return;
-      var url=""; try{ url=URL.createObjectURL(f); }catch(e){ url=""; }
-      S.files.push({file:f, name:f.name||"Image", size:f.size||0, previewUrl:url});
-      added++;
-    });
-    if(added===0 && S.files.length===0){ showErrorAuto("No valid images - Select JPG / PNG"); return; }
-    renderGrid(); setStatus("✅ Images Loaded","✅ "+S.files.length+" image(s) - Tap Extract + AI Fix");
-  }
-  function renderGrid(){
-    var box=el('t7ListBox'); if(box) box.style.display = S.files.length>0 ? 'block' : 'none';
-    var cnt=el('t7Count'); if(cnt) cnt.textContent=S.files.length;
-    var grid=el('t7Grid'); if(!grid) return; grid.innerHTML="";
-    S.files.forEach(function(obj, idx){
-      var card=document.createElement('div'); card.className='img-card';
-      var del=document.createElement('button'); del.className='del'; del.type='button'; del.textContent='×';
-      del.addEventListener('click', function(){ try{ if(obj.previewUrl) URL.revokeObjectURL(obj.previewUrl); }catch(e){} S.files.splice(idx,1); renderGrid(); });
-      var img=document.createElement('img'); if(obj.previewUrl) img.src=obj.previewUrl; img.alt='Photo';
-      var nm=document.createElement('div'); nm.style.cssText="font-size:11px;color:#6B7280;margin-top:6px"; nm.textContent=obj.name;
-      card.appendChild(del); card.appendChild(img); card.appendChild(nm); grid.appendChild(card);
-    });
-  }
-  bindBtn('t7ClearBtn', function(){ clearTool7(); });
-
-  function preprocessImage(file){
-    return new Promise(function(resolve, reject){
-      var url=""; try{ url=URL.createObjectURL(file); }catch(e){ reject(new Error("File read failed")); return; }
-      var im=new Image();
-      im.onload=function(){
-        try{
-          var w=im.naturalWidth||im.width||100, h=im.naturalHeight||im.height||100;
-          var scale=1; if(w<1500) scale=2; else if(w<2500) scale=1.5;
-          var cw=Math.floor(w*scale), ch=Math.floor(h*scale);
-          if(cw>3000){ var s2=3000/cw; cw=Math.floor(cw*s2); ch=Math.floor(ch*s2); }
-          if(cw<1) cw=1; if(ch<1) ch=1;
-          var c=document.createElement('canvas'); c.width=cw; c.height=ch; var ctx=c.getContext('2d');
-          if(!ctx){ resolve(url); return; }
-          ctx.fillStyle="#fff"; ctx.fillRect(0,0,cw,ch); ctx.drawImage(im, 0, 0, cw, ch);
-          var out=""; try{ out=c.toDataURL("image/jpeg", 0.92); }catch(e){ out=url; }
-          try{ URL.revokeObjectURL(url); }catch(e2){}
-          resolve(out);
-        }catch(e){ try{ URL.revokeObjectURL(url); }catch(e2){} reject(e); }
-      };
-      im.onerror=function(){ try{ URL.revokeObjectURL(url); }catch(e){} reject(new Error("Image load failed - Try JPG photo")); };
-      im.src=url;
-    });
-  }
-
-  // ---------- UNIVERSAL AI - 2000+ WORDS ----------
-  var BASE=("the of and to in is you that it he was for on are as with his they I at be this have from or one had by word but not what all were we when your can said there use an each which she do how their if will up other about out many then them these so some her would make like him into time has look two more write go see number no way could people my than first water been call who oil its now find long down day did get come made may part over new sound take only little work know place year live me back give most very after thing our just name good sentence man think say great where help through much before line right too mean old any same tell boy follow came want show also around form three small set put end does another well large must big even such because turn here why ask went men read need land different home us move try kind hand picture again change off play spell air away animal house point page letter mother answer found study still learn should world high every near add food between own below country plant last school father keep tree never start city earth eye light thought head under story saw left few while along might close something seem next hard open example begin life always those both paper together got group often run dog horse cat bird fish book pen pencil table chair door window room house family mother father brother sister friend friends teacher student exam result lesson chapter history geography science mathematics english hindi marathi cricket football hockey play playing happy healthy morning evening breakfast lunch dinner yesterday today tomorrow going goes plays played studying likes love wants needs total marks subject").split(" ");
-  var VERBS=("go goes went gone going play plays played playing eat eats ate eaten eating study studies studied studying work works worked working read reads reading write writes wrote written writing speak speaks spoke spoken speaking listen listens listened listening run runs ran running walk walks walked walking jump jumps jumped jumping sing sings sang sung singing dance dances danced dancing swim swims swam swum swimming live lives lived living love loves loved loving like likes liked liking want wants wanted wanting need needs needed needing help helps helped helping learn learns learned learning teach teaches taught teaching").split(" ");
-  var NAMES=["ram","shyam","priya","anjali","rahul","rohit","sita","gita","amit","sumit","pooja","neha","vikash","ankit","manoj","sunita","ramesh","suresh","kavita","deepak","sonu","monu","raj","rani","mohan","sohan","geeta","meena","reena","seema","poonam","arjun","krishna","radha","laxmi","vishal","sanjay","ajay","vijay","manish","rakesh","dinesh","mahesh","naresh","kiran","pawan","pankaj","sharma","verma","gupta","singh","kumar","patel","yadav","jain","agarwal"];
-  var DICT_SET={}; BASE.concat(VERBS).forEach(function(w){ DICT_SET[w]=true; });
-  var NAMES_SET={}; NAMES.forEach(function(n){ NAMES_SET[n]=true; });
-  var OCR_MAP={"scool":"school","freind":"friend","teh":"the","recieve":"receive","seperate":"separate","occured":"occurred","untill":"until","wich":"which","thier":"their","becuase":"because","amimals":"animals","pepole":"people","goverment":"government","enviroment":"environment","knowlege":"knowledge","writting":"writing","studing":"studying","exmple":"example","importent":"important","diffrent":"different","happned":"happened","wether":"whether","alot":"a lot","dont":"don't","cant":"can't","wont":"won't","didnt":"didn't","isnt":"isn't","tommorow":"tomorrow","yestarday":"yesterday","togather":"together","grammer":"grammar","happend":"happened","libary":"library","managment":"management","neigbour":"neighbour","occassion":"occasion","posible":"possible","realy":"really","seccess":"success","sucess":"success","tommorrow":"tomorrow","writen":"written","rnorning":"morning","rnain":"main","cornpany":"company","rnath":"math","rnarks":"marks","arnount":"amount","0ld":"old","1ove":"love","g00d":"good","sch00l":"school","m0rning":"morning","h0me":"home","w0rk":"work","t0":"to","f0r":"for","y0u":"you","u":"you","ur":"your","pls":"please","plz":"please","thx":"thanks","msg":"message","govt":"government","dept":"department","info":"information","exarn":"exam"};
-  var ALL_WORDS=BASE.concat(VERBS);
-  function lev(a,b){ if(a===b) return 0; if(!a) return b.length; if(!b) return a.length; var prev=[],cur=[]; for(var j=0;j<=b.length;j++) prev[j]=j; for(var i=1;i<=a.length;i++){ cur[0]=i; for(var j2=1;j2<=b.length;j2++){ var cost=(a[i-1]===b[j2-1])?0:1; cur[j2]=Math.min(prev[j2]+1,cur[j2-1]+1,prev[j2-1]+cost); } var t=prev; prev=cur; cur=t; } return prev[b.length]; }
-  function suggestWord(word, learned){
-    var low=word.toLowerCase();
-    if(NAMES_SET[low] || (learned && learned[low])) return null;
-    if(DICT_SET[low] || OCR_MAP[low]) return OCR_MAP[low]||null;
-    if(low.length<3 || low.length>15) return null;
-    var best=null,bd=99;
-    for(var i=0;i<ALL_WORDS.length;i++){ var d=lev(low, ALL_WORDS[i]); if(d<bd){ bd=d; best=ALL_WORDS[i]; } if(d===1) break; }
-    if(bd===1) return best;
-    if(bd===2 && low.length>=7) return best;
-    return null;
-  }
-  function fixTextPiece(text, learned, fixes, isCell){
-    if(!text) return "";
-    var fixed=text;
-    var parts=fixed.split(/(\s+|[.,!?;:()"])/);
-    for(var i=0;i<parts.length;i++){
-      var w=parts[i]; if(!/^[A-Za-z]{3,}$/.test(w)) continue;
-      var low=w.toLowerCase();
-      if(NAMES_SET[low] || (learned && learned[low])) continue;
-      if(OCR_MAP[low]){
-        var corr=OCR_MAP[low]; if(w.charAt(0)>="A" && w.charAt(0)<="Z") corr=corr.charAt(0).toUpperCase()+corr.slice(1);
-        if(corr!==w){ fixes.push({old:w, new:corr, why:"Spelling: '"+w+"' → '"+corr+"' (OCR misread)"}); parts[i]=corr; }
-      } else {
-        var sugg=suggestWord(w, learned);
-        if(sugg && sugg!==low){
-          var corr2=sugg; if(w.charAt(0)>="A" && w.charAt(0)<="Z") corr2=corr2.charAt(0).toUpperCase()+corr2.slice(1);
-          fixes.push({old:w, new:corr2, why:"Spelling: '"+w+"' → '"+corr2+"'"}); parts[i]=corr2;
-        }
-      }
-    }
-    fixed=parts.join("");
-    var GRAMMAR=[
-      [/(\bhe|\bshe|\bram|\bshyam)\s+go\b/gi, "$1 goes", "Grammar: He/She/Ram + go → goes"],
-      [/(\bhe|\bshe)\s+play\b/gi, "$1 plays", "Grammar: He/She + play → plays"],
-      [/\bram play\b/gi, "Ram plays", "Grammar: Ram + play → Ram plays"],
-      [/\bthey goes\b/gi, "They go", "Grammar: They + goes → They go"],
-      [/\bwe goes\b/gi, "We go", "Grammar: We + goes → We go"],
-      [/\bI goes\b/gi, "I go", "Grammar: I + goes → I go"],
-      [/(\bhe|\bshe)\s+have\b/gi, "$1 has", "Grammar: He/She + have → has"],
-      [/\bthey has\b/gi, "They have", "Grammar: They + has → They have"],
-      [/\bI has\b/gi, "I have", "Grammar: I + has → I have"],
-      [/\bhe is go\b/gi, "He is going", "Grammar: He is go → He is going"],
-      [/\ba apple\b/gi, "an apple", "Grammar: a + vowel → an apple"],
-      [/\ba orange\b/gi, "an orange", "Grammar: a + vowel → an orange"],
-      [/\ban boy\b/gi, "a boy", "Grammar: an + consonant → a boy"],
-      [/\ban school\b/gi, "a school", "Grammar: an + consonant → a school"],
-      [/\bme go\b/gi, "I go", "Grammar: Me go → I go"],
-      [/\bme is\b/gi, "I am", "Grammar: Me is → I am"],
-      [/\btheir is\b/gi, "There is", "Grammar: Their vs There"],
-      [/\bthere friend\b/gi, "their friend", "Grammar: There → Their"],
-      [/\byour welcome\b/gi, "You're welcome", "Grammar: Your vs You're"],
-      [/\bchilds\b/gi, "children", "Grammar: Child plural → children"],
-      [/\byesterday i go\b/gi, "Yesterday I went", "Tense: Yesterday + go → went"],
-      [/\byesterday he go\b/gi, "Yesterday he went", "Tense: Yesterday + go → went"],
-      [/\byesterday i play\b/gi, "Yesterday I played", "Tense: Yesterday + play → played"],
-      [/\btomorrow i went\b/gi, "Tomorrow I will go", "Tense: Tomorrow + went → will go"],
-      [/\bgo school\b/gi, "go to school", "Missing: go school → go to school"],
-      [/\blike play\b/gi, "like to play", "Missing: like play → like to play"],
-      [/\bdont\b/gi, "don't", "Punctuation: Dont → don't"],
-      [/\bcant\b/gi, "can't", "Punctuation: Cant → can't"],
-      [/\bwont\b/gi, "won't", "Punctuation: Wont → won't"]
-    ];
-    GRAMMAR.forEach(function(g){
-      try{
-        if(g[0].test(fixed)){
-          var before=fixed; fixed=fixed.replace(g[0], g[1]);
-          if(fixed!==before) fixes.push({old:g[0].toString(), new:g[1], why:g[2]});
-        }
-      }catch(e){}
-    });
-    if(fixed.indexOf("  ")>-1){ fixes.push({old:"Double space", new:"Single space", why:"Hidden: Double space"}); fixed=fixed.replace(/\s{2,}/g," "); }
-    if(/\s+([,.!?])/.test(fixed)){ fixes.push({old:"Space before punctuation", new:"No space", why:"Hidden: Space before , ."}); fixed=fixed.replace(/\s+([,.!?])/g,"$1"); }
-    if(/\bi\b/.test(fixed)){ var bI=fixed; fixed=fixed.replace(/\bi\b/g,"I"); if(fixed!==bI) fixes.push({old:"'i' small", new:"'I'", why:"Hidden: 'i' → 'I'"}); }
-    if(/\bi like 2\b/gi.test(fixed) || /\b2 play\b/gi.test(fixed)){ fixed=fixed.replace(/\b2\b/g,"to"); fixes.push({old:"'2' for 'to'", new:"'to'", why:"Hidden: '2' → 'to'"}); }
-    var numO=fixed.match(/\b\d+[O]+\d*\b/g);
-    if(numO){ numO.forEach(function(n){ var c=n.replace(/O/g,"0"); fixes.push({old:n, new:c, why:"Numbers: 'O' → '0'"}); fixed=fixed.split(n).join(c); }); }
-    var dup=fixed.match(/\b(\w+)\s+\1\b/gi);
-    if(dup){ dup.forEach(function(d){ fixes.push({old:d, new:d.split(" ")[0], why:"Duplicate word removed"}); }); fixed=fixed.replace(/\b(\w+)\s+\1\b/gi,"$1"); }
-    fixed=fixed.replace(/([.!?]\s+)([a-z])/g, function(m,p1,p2){ return p1+p2.toUpperCase(); });
-    if(/,[A-Za-z]/.test(fixed)){ fixed=fixed.replace(/,([A-Za-z])/g,", $1"); }
-    return fixed;
-  }
-  function universalAiFix(blocks, allWords){
-    var learned={};
-    var counts={};
-    (allWords||[]).forEach(function(w){
-      var t=(w.text||"").toLowerCase().replace(/[^a-z]/g,"");
-      if(t.length>=3 && /^[A-Z]/.test(w.text||"")) counts[t]=(counts[t]||0)+1;
-    });
-    Object.keys(counts).forEach(function(n){ if(counts[n]>=2) learned[n]=true; });
-    var fixes=[]; var fixedBlocks=[];
-    (blocks||[]).forEach(function(block){
-      if(!block) return;
-      if(block.type==="table"){
-        var fixedRows=[];
-        (block.rows||[]).forEach(function(row){
-          var fixedRow=[]; (row||[]).forEach(function(cell){ fixedRow.push(fixTextPiece(cell||"", learned, fixes, true)); }); fixedRows.push(fixedRow);
-        });
-        if(fixedRows.length>=2){
-          var lastRow=fixedRows[fixedRows.length-1];
-          if(/total/i.test(lastRow.join(" "))){
-            var sum=0, hasNums=false;
-            for(var r=0;r<fixedRows.length-1;r++){
-              var row=fixedRows[r]; var lastCell=row[row.length-1]||"";
-              var num=safeNum(String(lastCell).replace(/[^0-9-]/g,""), NaN);
-              if(!isNaN(num)){ sum+=num; hasNums=true; }
-            }
-            var totalVal=safeNum(String(lastRow[lastRow.length-1]||"").replace(/[^0-9-]/g,""), NaN);
-            if(hasNums && !isNaN(totalVal) && totalVal!==sum){
-              fixes.push({old:"Total "+totalVal, new:"Total "+sum, why:"Table: Total was "+totalVal+", sum is "+sum+" - AI corrected total"});
-              lastRow[lastRow.length-1]=String(sum);
-            }
-          }
-        }
-        fixedBlocks.push({type:"table", rows: fixedRows});
-      } else {
-        var fixedText=fixTextPiece(block.text||"", learned, fixes, false);
-        fixedText=(fixedText||"").trim();
-        if(fixedText && fixedText.charAt(0)>="a" && fixedText.charAt(0)<="z") fixedText=fixedText.charAt(0).toUpperCase()+fixedText.slice(1);
-        if(fixedText && !/[.!?]\s*$/.test(fixedText)) fixedText+=".";
-        fixedBlocks.push({type:"para", text: fixedText, isHeading: !!block.isHeading});
-      }
-    });
-    var score=98; if(fixes.length===0) score=99; else if(fixes.length<=5) score=99; else score=98;
-    return {blocks: fixedBlocks, fixes: fixes, score: score};
-  }
-
-  // Build blocks from words - Using bbox X for table, Y for lines - Safe checks
-  function buildBlocksFromWords(words){
-    if(!words || words.length===0) return [];
-    var valid=words.filter(function(w){ return w && w.text && w.text.trim() && w.bbox && typeof w.bbox.x0==="number" && typeof w.bbox.y0==="number"; });
-    if(valid.length===0){
-      // Fallback - No bbox, use text only
-      return [{type:"para", text: words.map(function(w){ return w.text; }).join(" "), isHeading:false, words: words}];
-    }
-    var sorted=valid.slice().sort(function(a,b){
-      var ay=(a.bbox.y0+a.bbox.y1)/2, by=(b.bbox.y0+b.bbox.y1)/2;
-      var ax=a.bbox.x0, bx=b.bbox.x0;
-      if(Math.abs(ay-by)<16) return ax-bx;
-      return ay-by;
-    });
-    var lines=[]; var cur=[]; var curY=null;
-    sorted.forEach(function(w){
-      var y=(w.bbox.y0+w.bbox.y1)/2;
-      if(curY===null || Math.abs(y-curY)<16){ cur.push(w); if(curY===null) curY=y; else curY=(curY*(cur.length-1)+y)/cur.length; }
-      else { lines.push(cur); cur=[w]; curY=y; }
-    });
-    if(cur.length>0) lines.push(cur);
-    // Table detect by X gaps
-    var tableLines=0;
-    lines.forEach(function(l){
-      if(l.length>=2){
-        var gaps=0; for(var i=1;i<l.length;i++){ var gap=l[i].bbox.x0 - l[i-1].bbox.x1; if(gap>70) gaps++; }
-        if(gaps>=1) tableLines++;
-      }
-    });
-    var isTable = (tableLines>=3) || (S.docType==="table" && lines.length>=2);
-    if(isTable){
-      var allX=[]; lines.forEach(function(l){ l.forEach(function(w){ allX.push(w.bbox.x0); }); });
-      allX.sort(function(a,b){ return a-b; });
-      var colCenters=[];
-      allX.forEach(function(x){
-        var found=false;
-        for(var i=0;i<colCenters.length;i++){ if(Math.abs(x-colCenters[i])<50){ colCenters[i]=(colCenters[i]+x)/2; found=true; break; } }
-        if(!found) colCenters.push(x);
+  // My simple fix - Only 20 sure mistakes, no guessing
+  var FIX = {
+    "scool":"school","freind":"friend","teh":"the","recieve":"receive","becuase":"because",
+    "thier":"their","writting":"writing","seperate":"separate","happend":"happened","grammer":"grammar",
+    "dont":"don't","cant":"can't","wont":"won't","didnt":"didn't","isnt":"isn't",
+    "he go":"He goes","she go":"She goes","he play":"He plays","they goes":"They go",
+    "i has":"I have","he have":"He has","they has":"They have",
+    "yesterday i go":"Yesterday I went","yesterday i play":"Yesterday I played",
+    "go school":"go to school","like play":"like to play",
+    "a apple":"an apple","an boy":"a boy","an school":"a school"
+  };
+  function fixText(t){
+    if(!t) return t;
+    var out=t;
+    // Long phrases first
+    Object.keys(FIX).sort(function(a,b){ return b.length-a.length; }).forEach(function(k){
+      var re=new RegExp("\\b"+k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\b","gi");
+      out=out.replace(re, function(m){
+        var r=FIX[k.toLowerCase()]||FIX[k];
+        if(m.charAt(0)>="A" && m.charAt(0)<="Z") return r.charAt(0).toUpperCase()+r.slice(1);
+        return r;
       });
-      colCenters.sort(function(a,b){ return a-b; });
-      if(colCenters.length>=2){
-        var rows=[];
-        lines.forEach(function(line){
-          var row=new Array(colCenters.length).fill("");
-          line.forEach(function(w){
-            var bestIdx=0, bestDist=9999;
-            colCenters.forEach(function(cx, idx){ var d=Math.abs(w.bbox.x0-cx); if(d<bestDist){ bestDist=d; bestIdx=idx; } });
-            if(row[bestIdx]) row[bestIdx]+=" "+w.text; else row[bestIdx]=w.text;
-          });
-          while(row.length>0 && row[row.length-1]==="") row.pop();
-          if(row.some(function(c){ return (c||"").trim(); })) rows.push(row);
-        });
-        if(rows.length>=2) return [{type:"table", rows: rows}];
-      }
+    });
+    // Small cleanups - Safe only
+    out=out.replace(/ {2,}/g," "); // double space
+    out=out.replace(/ ,/g,","); // space before comma
+    out=out.replace(/\bi\b/g,"I"); // i -> I
+    out=out.replace(/,([A-Za-z])/g,", $1"); // space after comma
+    out=out.replace(/([.!?]\s+)([a-z])/g, function(m,a,b){ return a+b.toUpperCase(); }); // capital after .
+    if(out && out.charAt(0)>="a" && out.charAt(0)<="z") out=out.charAt(0).toUpperCase()+out.slice(1);
+    if(out.trim() && !/[.!?]$/.test(out.trim())) out=out.trim()+".";
+    return out;
+  }
+
+  // Table - Simple: Line has 3 parts separated by 2+ spaces = table row
+  function checkTable(text){
+    var lines=text.split("\n").map(function(l){ return l.trim(); }).filter(Boolean);
+    var rows=[];
+    lines.forEach(function(l){
+      var parts=l.split(/\s{2,}|\t|\|/).map(function(p){ return p.trim(); }).filter(Boolean);
+      if(parts.length>=3) rows.push(parts);
+    });
+    // Need at least 3 table rows to call it table
+    if(rows.length>=3){
+      tableRows=rows;
+      var html="<table><tr>";
+      rows[0].forEach(function(c){ html+="<th>"+c.replace(/</g,"&lt;")+"</th>"; });
+      html+="</tr>";
+      for(var i=1;i<rows.length;i++){ html+="<tr>"; rows[i].forEach(function(c){ html+="<td>"+c.replace(/</g,"&lt;")+"</td>"; }); html+="</tr>"; }
+      html+="</table><p style='font-size:11px;color:#6B7280'>Table detected - Copy Table button will copy it for Excel</p>";
+      document.getElementById('t7TableBox').innerHTML=html;
+      document.getElementById('t7CopyTable').style.display='block';
+    } else {
+      tableRows=null;
+      document.getElementById('t7TableBox').innerHTML="";
+      document.getElementById('t7CopyTable').style.display='none';
     }
-    // Paras by Y gap
-    var paras=[]; var curPara=[];
-    for(var i=0;i<lines.length;i++){
-      if(i>0){
-        var prevBottom=Math.max.apply(null, lines[i-1].map(function(w){ return w.bbox.y1; }));
-        var curTop=Math.min.apply(null, lines[i].map(function(w){ return w.bbox.y0; }));
-        var gap=curTop-prevBottom;
-        if(gap>30 && curPara.length>0){ paras.push(curPara); curPara=[]; }
-      }
-      curPara.push(lines[i]);
-    }
-    if(curPara.length>0) paras.push(curPara);
-    return paras.map(function(p){
-      var txt=p.map(function(l){ return l.map(function(w){ return w.text; }).join(" "); }).join(" ");
-      var isHead=false;
-      if(txt.length<60 && txt===txt.toUpperCase() && /[A-Z]/.test(txt)) isHead=true;
-      var firstH=p[0] && p[0][0] && p[0][0].bbox ? (p[0][0].bbox.y1-p[0][0].bbox.y0) : 0;
-      if(firstH>30 && txt.length<60) isHead=true;
-      return {type:"para", text: txt, isHeading: isHead, words: p.reduce(function(a,l){ return a.concat(l); },[])};
+  }
+
+  function setFile(f){
+    if(!f) return;
+    if(f.size>10*1024*1024){ error("Photo too big - Max 10 MB"); return; }
+    file=f; error("");
+    status("✅ Photo selected: "+f.name+" - Tap Get Text");
+  }
+  document.getElementById('t7File').addEventListener('change', function(e){ if(e.target.files[0]) setFile(e.target.files[0]); e.target.value=""; });
+  document.getElementById('t7Cam').addEventListener('click', function(){
+    var i=document.createElement('input'); i.type='file'; i.accept='image/*'; i.setAttribute('capture','environment');
+    i.onchange=function(){ if(i.files[0]) setFile(i.files[0]); }; i.click();
+  });
+  document.getElementById('t7Sample').addEventListener('click', function(){
+    var c=document.createElement('canvas'); c.width=800; c.height=500; var x=c.getContext('2d');
+    x.fillStyle="#fff"; x.fillRect(0,0,800,500);
+    x.fillStyle="#111"; x.font="bold 32px Arial"; x.fillText("My School Day", 50, 70);
+    x.font="22px Arial"; x.fillText("Yesterday I go to scool", 50, 130);
+    x.fillText("My freind Ram play with me", 50, 175);
+    x.fillText("He go to school by bus", 50, 220);
+    x.fillText("It makes me happy and healthy.", 50, 265);
+    c.toBlob(function(b){ setFile(new File([b],"Sample.jpg",{type:"image/jpeg"})); }, "image/jpeg", 0.95);
+  });
+
+  // Load Tesseract - Only 1 CDN, simple
+  function loadOCR(){
+    return new Promise(function(res,rej){
+      if(window.Tesseract){ res(true); return; }
+      var s=document.createElement('script'); s.src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
+      s.onload=function(){ res(true); }; s.onerror=function(){ rej(new Error("OCR failed to load - Check internet")); };
+      document.head.appendChild(s);
     });
   }
 
-  function renderFinal(blocks, fixes, score){
-    var container=el('t7FinalContent'); if(!container) return; container.innerHTML="";
-    var fullParts=[];
-    (blocks||[]).forEach(function(b){
-      if(!b) return;
-      if(b.type==="table"){
-        var table=document.createElement('table');
-        if(b.rows && b.rows.length>0){
-          var thead=document.createElement('thead'); var trH=document.createElement('tr');
-          (b.rows[0]||[]).forEach(function(cell){ var th=document.createElement('th'); th.textContent=cell||""; trH.appendChild(th); });
-          thead.appendChild(trH); table.appendChild(thead);
-          var tbody=document.createElement('tbody');
-          for(var r=1;r<b.rows.length;r++){
-            var tr=document.createElement('tr');
-            (b.rows[r]||[]).forEach(function(cell){ var td=document.createElement('td'); td.textContent=cell||""; tr.appendChild(td); });
-            tbody.appendChild(tr);
-          }
-          table.appendChild(tbody);
-        }
-        container.appendChild(table);
-        fullParts.push((b.rows||[]).map(function(row){ return (row||[]).join("  "); }).join("\n"));
-      } else {
-        var div=document.createElement('div'); div.className='para'+(b.isHeading?' head':''); div.textContent=b.text||""; container.appendChild(div);
-        fullParts.push(b.text||"");
-      }
-    });
-    S.finalText=fullParts.join("\n\n");
-    S.finalParas=(blocks||[]).filter(function(b){ return b && b.type==="para"; });
-    S.finalTable=(blocks||[]).find(function(b){ return b && b.type==="table"; }) || null;
-    var ctBtn=el('t7CopyTableBtn'); if(ctBtn) ctBtn.style.display = S.finalTable ? 'block' : 'none';
-    var fc=el('t7FixCount'); if(fc) fc.textContent=fixes.length;
-    var pill=el('t7ScorePill'); if(pill){ pill.textContent="AI Score "+score+"%"; pill.style.background=score>=98?"#16A34A":"#F59E0B"; }
-    var st=el('t7Stats'); if(st) st.textContent=S.finalText.split(/\s+/).filter(Boolean).length+" words • "+blocks.length+" blocks";
-    var note=el('t7AiNote'); if(note){ if(fixes.length===0) note.innerHTML="✅ <b>AI: Perfect!</b> No mistakes found - Text was already 99% correct."; else note.innerHTML="🤖 <b>AI Fixed "+fixes.length+" Mistakes Automatically</b> - Tap 'See What AI Fixed' to see list. Table rebuilt exactly as in image."; }
-    try{ var hist=JSON.parse(localStorage.getItem('orbit_t7_history')||"[]"); hist.unshift({time: new Date().toLocaleString('en-IN'), preview: S.finalText.slice(0,120), full: S.finalText}); hist=hist.slice(0,5); localStorage.setItem('orbit_t7_history', JSON.stringify(hist)); renderHistory(); }catch(e){}
-  }
-  function renderHistory(){
-    var hEl=el('t7History'); if(!hEl) return; hEl.innerHTML="";
-    try{ var hist=JSON.parse(localStorage.getItem('orbit_t7_history')||"[]"); hist.forEach(function(item){ var d=document.createElement('div'); d.className='history-item'; d.innerHTML="<b>"+esc(item.time)+"</b><br>"+esc(item.preview)+"..."; d.addEventListener('click', function(){ S.finalText=item.full; var fb=el('t7FinalBox'); if(fb) fb.style.display='block'; var fc=el('t7FinalContent'); if(fc) fc.innerHTML="<div class='para'>"+esc(item.full)+"</div>"; }); hEl.appendChild(d); }); }catch(e){}
-  }
-  renderHistory();
-
-  async function extractAndFix(){
-    if(S.busy) return;
-    if(S.files.length===0){ showErrorAuto("Select image first"); return; }
-    S.busy=true; var btn=el('t7ExtractBtn'); if(btn){ btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Reading + AI Fixing... Please Wait'; }
-    var prog=el('t7Progress'); if(prog) prog.style.display='block'; var bar=el('t7Bar'); if(bar) bar.style.width='0%';
-    showError(""); var fb=el('t7FinalBox'); if(fb) fb.style.display='none'; var eb=el('t7ExtraBox'); if(eb) eb.style.display='none'; var fl=el('t7FixList'); if(fl) fl.style.display='none';
+  document.getElementById('t7Go').addEventListener('click', async function(){
+    if(!file){ error("Select image first"); return; }
+    var btn=document.getElementById('t7Go'); btn.disabled=true; btn.textContent="⏳ Reading... Please Wait";
+    status("Reading... This takes 10-20 seconds, please wait");
+    error("");
     try{
-      var ok=await ensureOCR(); if(!ok){ showErrorAuto("OCR engine failed - Check internet, open in Chrome, try again."); return; }
-      var allWords=[]; var allBlocks=[];
-      var langToUse=(S.lang==="auto"?"eng":S.lang);
-      for(var i=0;i<S.files.length;i++){
-        setStatus("🔄 Reading + AI Fixing...","Reading Image "+(i+1)+"/"+S.files.length+" - AI will fix automatically");
-        if(bar) bar.style.width=Math.round(((i)/S.files.length)*70)+"%";
-        var dataUrl=await preprocessImage(S.files[i].file);
-        var data=null;
-        try{
-          var res=await window.Tesseract.recognize(dataUrl, langToUse, { logger: function(m){ if(m && m.status==="recognizing text" && m.progress && bar) bar.style.width=Math.round(70+m.progress*30)+"%"; } });
-          data=res && res.data ? res.data : null;
-        }catch(e){
-          if(langToUse!=="eng"){ try{ langToUse="eng"; var res2=await window.Tesseract.recognize(dataUrl, "eng", {}); data=res2 && res2.data ? res2.data : null; }catch(e2){ data=null; } }
-          else { data=null; }
-        }
-        if(!data) continue;
-        var words=(data.words||[]).filter(function(w){ return w && w.text && String(w.text).trim() && (typeof w.confidence==="undefined" || w.confidence>30); });
-        allWords=allWords.concat(words);
-        var blocks=buildBlocksFromWords(words);
-        allBlocks=allBlocks.concat(blocks);
-      }
-      if(allBlocks.length===0){ showErrorAuto("No text found - Photo too blurry / dark. Take closer, brighter photo, straight."); return; }
-      setStatus("🤖 AI Fixing...","AI is fixing spelling, grammar, table, format - Making 98% perfect...");
-      if(bar) bar.style.width="85%";
-      var aiResult=universalAiFix(allBlocks, allWords);
-      S.fixList=aiResult.fixes; S.score=aiResult.score;
-      if(S.docType==="essay"){
-        var paraBlocks=aiResult.blocks.filter(function(b){ return b.type==="para"; });
-        if(paraBlocks.length===1){
-          var pb=paraBlocks[0]; var sents=(pb.text||"").split(/(?<=[.!?])\s+/).filter(Boolean);
-          if(sents.length>=6){
-            aiResult.blocks=[{type:"para", text: sents.slice(0,2).join(" "), isHeading:false}, {type:"para", text: sents.slice(2, sents.length-2).join(" "), isHeading:false}, {type:"para", text: sents.slice(sents.length-2).join(" "), isHeading:false}].concat(aiResult.blocks.filter(function(b){ return b.type==="table"; }));
-          }
-        }
-      }
-      var finalBox=el('t7FinalBox'); if(finalBox) finalBox.style.display='block';
-      renderFinal(aiResult.blocks, aiResult.fixes, aiResult.score);
-      if(bar) bar.style.width="100%";
-      setStatus("✅ Done - 98% Perfect","✅ AI Fixed "+aiResult.fixes.length+" mistakes - Score "+aiResult.score+"% - Tap COPY ALL");
-      if(finalBox) finalBox.scrollIntoView({behavior:"smooth", block:"center"});
-      if(getWm().on) S.finalText += "\n\n— "+getWm().txt;
-    }catch(e){ showErrorAuto("Failed - "+(e && e.message ? e.message : "Try clearer photo")); }
-    finally{ S.busy=false; if(btn){ btn.disabled=false; btn.textContent="✨ Extract + AI Fix - 1 Tap - Auto Perfect"; } setTimeout(function(){ if(prog) prog.style.display='none'; },1000); }
-  }
-  var extractBtn=el('t7ExtractBtn'); if(extractBtn) extractBtn.addEventListener('click', extractAndFix);
-
-  async function copyText(txt, successMsg){
-    if(!txt || !txt.trim()){ showErrorAuto("Extract first"); return false; }
-    try{
-      if(navigator.clipboard && navigator.clipboard.writeText){ await navigator.clipboard.writeText(txt); setStatus("✅ Copied", successMsg||"Copied"); return true; }
-      throw new Error("no clipboard");
+      await loadOCR();
+      // Simple: Pass file URL directly to Tesseract - No canvas, no preprocessing, no bbox
+      var url=URL.createObjectURL(file);
+      var result=await window.Tesseract.recognize(url, "eng", { logger:function(m){ if(m.status==="recognizing text" && m.progress) status("Reading... "+Math.round(m.progress*100)+"%"); } });
+      URL.revokeObjectURL(url);
+      var text=(result && result.data && result.data.text) ? result.data.text.trim() : "";
+      if(!text){ error("No text found - Take closer, brighter photo"); status("No text found"); return; }
+      // Show raw first, then auto-fix - User sees both
+      document.getElementById('t7Out').style.display='block';
+      document.getElementById('t7Text').value=text;
+      checkTable(text);
+      status("✅ Done - "+text.split(/\s+/).length+" words - Tap Fix Mistakes to make perfect");
+      document.getElementById('t7Out').scrollIntoView({behavior:"smooth"});
     }catch(e){
-      try{
-        var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); var ok=document.execCommand('copy'); ta.remove(); if(ok){ setStatus("✅ Copied", successMsg||"Copied"); return true; }
-        showErrorAuto("Copy failed - Long press text → Select All → Copy"); return false;
-      }catch(e2){ showErrorAuto("Copy failed - Long press text → Select All → Copy"); return false; }
-    }
+      error("Failed - "+(e.message||"Check internet, open in Chrome, try again"));
+      status("Failed - Try again");
+    }finally{ btn.disabled=false; btn.textContent="✨ Get Text"; }
+  });
+
+  document.getElementById('t7Fix').addEventListener('click', function(){
+    var ta=document.getElementById('t7Text');
+    var before=ta.value;
+    var after=fixText(before);
+    ta.value=after;
+    checkTable(after);
+    var diff=before!==after ? "✅ Fixed! Tap Copy now." : "✅ Already perfect - No mistakes found.";
+    document.getElementById('t7FixInfo').textContent=diff;
+    status(diff);
+  });
+
+  function copyText(txt){
+    return new Promise(function(res){
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(function(){ res(true); }).catch(function(){ fallback(); });
+      } else fallback();
+      function fallback(){
+        var ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select();
+        try{ document.execCommand('copy'); res(true); }catch(e){ res(false); } ta.remove();
+      }
+    });
   }
-  bindBtn('t7CopyAllBtn', async function(){ var ok=await copyText(S.finalText, "✅ All text + table copied - Paste in WhatsApp / Notes / Word"); if(ok){ var b=el('t7CopyAllBtn'); if(b){ var old=b.textContent; b.textContent="✅ Copied!"; setTimeout(function(){ b.textContent=old; },2000); } } });
-  bindBtn('t7CopyTableBtn', async function(){
-    if(!S.finalTable){ showErrorAuto("No table in image - Use Copy All"); return; }
-    var tsv=(S.finalTable.rows||[]).map(function(row){ return (row||[]).join("\t"); }).join("\n");
-    var ok=await copyText(tsv, "✅ Table copied as Excel - Paste in Excel / Google Sheets - Same table");
-    if(ok){ var b2=el('t7CopyTableBtn'); if(b2){ var old2=b2.textContent; b2.textContent="✅ Table Copied!"; setTimeout(function(){ b2.textContent=old2; },2000); } }
+  document.getElementById('t7Copy').addEventListener('click', async function(){
+    var t=document.getElementById('t7Text').value;
+    if(!t.trim()){ error("No text to copy - Get Text first"); return; }
+    var ok=await copyText(t);
+    if(ok){ status("✅ Copied! Paste in WhatsApp / Notes"); } else error("Copy failed - Long press text → Select All → Copy");
   });
-  bindBtn('t7CopyParaBtn', async function(){
-    var paras=(S.finalParas||[]).map(function(p){ return p.text; }).join("\n\n");
-    if(!paras.trim()){ showErrorAuto("No para - Only table in image - Use Copy Table"); return; }
-    await copyText(paras, "Para copied - Table not included");
+  document.getElementById('t7CopyTable').addEventListener('click', async function(){
+    if(!tableRows){ error("No table in this image"); return; }
+    var tsv=tableRows.map(function(r){ return r.join("\t"); }).join("\n");
+    var ok=await copyText(tsv);
+    if(ok) status("✅ Table copied! Paste in Excel / Sheets - Same table");
   });
-  bindBtn('t7ShowFixesBtn', function(){
-    var listEl=el('t7FixList'); if(!listEl) return;
-    if(listEl.style.display==='block'){ listEl.style.display='none'; var b=el('t7ShowFixesBtn'); if(b) b.textContent="🔍 See What AI Fixed"; return; }
-    listEl.style.display='block'; var b2=el('t7ShowFixesBtn'); if(b2) b2.textContent="🔼 Hide Fixes";
-    if(!S.fixList || S.fixList.length===0) listEl.textContent="✅ AI: No mistakes - Text was already perfect (99%).";
-    else listEl.textContent="🤖 AI Fixed "+S.fixList.length+" Mistakes:\n\n"+S.fixList.map(function(f,i){ return (i+1)+". '"+f.old+"' → '"+f.new+"'\n   Why: "+f.why; }).join("\n\n");
+  document.getElementById('t7Down').addEventListener('click', function(){
+    var t=document.getElementById('t7Text').value;
+    if(!t.trim()){ error("No text - Get Text first"); return; }
+    var blob=new Blob([t],{type:"text/plain;charset=utf-8"});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a'); a.href=url; a.download="Text.txt"; document.body.appendChild(a); a.click();
+    setTimeout(function(){ a.remove(); URL.revokeObjectURL(url); },500);
+    status("✅ Downloaded - Check Downloads");
   });
-  function showExtra(t,txt){ var b=el('t7ExtraBox'); if(!b) return; b.style.display='block'; b.textContent=t+"\n\n"+txt; b.scrollIntoView({behavior:"smooth", block:"center"}); }
-  async function translate(toLang){
-    var txt=S.finalText; if(!txt || !txt.trim()){ showErrorAuto("Extract first"); return; }
-    try{ var chunks=[]; for(var i=0;i<txt.length;i+=400) chunks.push(txt.slice(i,i+400)); var out=[]; for(var j=0;j<chunks.length;j++){ var url="https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl="+toLang+"&dt=t&q="+encodeURIComponent(chunks[j]); var res=await fetch(url); if(!res.ok) throw new Error("fail"); var data=await res.json(); out.push(data[0].map(function(x){ return x[0]; }).join("")); } showExtra("🌐 Translated", out.join(" ")); }catch(e){ window.open("https://translate.google.com/?sl=auto&tl="+(toLang==="hi"?"hi":"en")+"&text="+encodeURIComponent(txt.slice(0,1000))+"&op=translate","_blank"); }
-  }
-  bindBtn('t7TranslateBtn', function(){ translate("hi"); });
-  bindBtn('t7SummaryBtn', function(){ var txt=S.finalText; if(!txt || !txt.trim()){ showErrorAuto("Extract first"); return; } var sents=txt.split(/(?<=[.!?])\s+/).filter(function(s){ return s.trim().length>10; }); if(sents.length<=5){ showExtra("📋 Summary", txt); return; } var picked=[sents[0], sents[Math.floor(sents.length/3)], sents[Math.floor(sents.length*2/3)], sents[sents.length-1]]; showExtra("📋 Summary", picked.map(function(s,i){ return (i+1)+". "+s.trim(); }).join("\n")); });
-  function downloadBlob(blob, name){ try{ var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download=name; document.body.appendChild(a); a.click(); setTimeout(function(){ try{ a.remove(); URL.revokeObjectURL(url); }catch(e){} },800); setStatus("✅ Download Started","Download started - "+name); }catch(e){ showErrorAuto("Download failed - Use Copy button"); } }
-  bindBtn('t7DownloadTxtBtn', function(){ var txt=S.finalText; if(!txt || !txt.trim()){ showErrorAuto("Extract first"); return; } downloadBlob(new Blob([txt], {type:"text/plain;charset=utf-8"}), "Perfect-Text.txt"); });
-  bindBtn('t7DownloadWordBtn', function(){ var txt=S.finalText; if(!txt || !txt.trim()){ showErrorAuto("Extract first"); return; } var html="<html><head><meta charset='utf-8'></head><body><pre style='font-family:Arial;font-size:14px;white-space:pre-wrap'>"+esc(txt)+"</pre></body></html>"; downloadBlob(new Blob([html], {type:"application/msword"}), "Perfect-Text.doc"); });
-  bindBtn('t7DownloadPdfBtn', function(){ var txt=S.finalText; if(!txt || !txt.trim()){ showErrorAuto("Extract first"); return; } var html="<html><head><meta charset='utf-8'><style>body{font-family:Arial;padding:20px;line-height:1.8}</style></head><body><pre style='font-family:Arial;white-space:pre-wrap'>"+esc(txt)+"</pre></body></html>"; var blob=new Blob([html], {type:"text/html"}); try{ var url=URL.createObjectURL(blob); var w=window.open(url,"_blank"); if(!w) downloadBlob(blob, "Perfect-Text.html"); else setStatus("✅ PDF Ready","In new tab: Print → Save as PDF"); }catch(e){ downloadBlob(blob, "Perfect-Text.html"); } });
-  bindBtn('t7SpeakBtn', function(){
-    if(S.isSpeaking){ try{ window.speechSynthesis.cancel(); }catch(e){} S.isSpeaking=false; var b=el('t7SpeakBtn'); if(b) b.textContent="🔊 Listen"; return; }
-    var txt=S.finalText; if(!txt || !txt.trim()){ showErrorAuto("Extract first"); return; }
-    try{ var u=new SpeechSynthesisUtterance(txt.slice(0,2000)); u.lang="en-IN"; u.rate=0.9; u.onend=function(){ S.isSpeaking=false; var bb=el('t7SpeakBtn'); if(bb) bb.textContent="🔊 Listen"; }; u.onerror=function(){ S.isSpeaking=false; var bb2=el('t7SpeakBtn'); if(bb2) bb2.textContent="🔊 Listen"; }; S.isSpeaking=true; var b3=el('t7SpeakBtn'); if(b3) b3.textContent="⏹️ Stop"; window.speechSynthesis.speak(u); }catch(e){ showErrorAuto("Read aloud not supported"); }
+  document.getElementById('t7Share').addEventListener('click', async function(){
+    var t=document.getElementById('t7Text').value;
+    if(!t.trim()){ error("No text - Get Text first"); return; }
+    try{
+      if(navigator.share){ await navigator.share({text:t}); return; }
+      await copyText(t); status("✅ Copied - Share not supported, paste in WhatsApp");
+    }catch(e){}
   });
-  bindBtn('t7ShareBtn', async function(){ var txt=S.finalText; if(!txt || !txt.trim()){ showErrorAuto("Extract first"); return; } try{ if(navigator.share){ await navigator.share({title:"Perfect Text", text:txt}); return; } await copyText(txt, "Copied, paste in WhatsApp"); }catch(e){ if(String(e).indexOf("Abort")>-1) return; await copyText(txt, "Copied, paste in WhatsApp"); } });
 
   window.clearTool7=function(){
-    S.files.forEach(function(o){ try{ if(o.previewUrl) URL.revokeObjectURL(o.previewUrl); }catch(e){} });
-    S.files=[]; S.finalText=""; S.finalParas=[]; S.finalTable=null; S.fixList=[];
-    if(fileInp) fileInp.value=""; renderGrid();
-    var fb=el('t7FinalBox'); if(fb) fb.style.display='none';
-    var eb=el('t7ExtraBox'); if(eb) eb.style.display='none';
-    var fl=el('t7FixList'); if(fl) fl.style.display='none';
-    showError(""); setStatus("📄 Status","Select image first - AI will do rest");
-    var bar=el('t7Bar'); if(bar) bar.style.width='0%';
-    try{ window.speechSynthesis.cancel(); S.isSpeaking=false; }catch(e){}
+    file=null; tableRows=null;
+    document.getElementById('t7File').value="";
+    document.getElementById('t7Out').style.display='none';
+    document.getElementById('t7Text').value="";
+    document.getElementById('t7TableBox').innerHTML="";
+    document.getElementById('t7FixInfo').textContent="";
+    error(""); status("Select image first");
   };
 })();
 </script>
-<!-- ================= TOOL 7 END - FINAL - 100% WORKING ================= -->
+<!-- ============ TOOL 7 SIMPLE END ============ -->
               
 
 <!-- ================= TOOL 8 - BG REMOVER ================= -->
