@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbittroniz.com - Free AI Tools - AI Writer, PDF To Image, BG Remover, QR, Invoice</title>
+<meta name="description" content="Orbittroniz - Free AI Tools - AI Writer, PDF To Image, Image To Text, BG Remover, QR Code, Invoice - English Only - No Login">
+<!-- EDIT LATER - ADD YOUR SCRIPTS HERE - PASTE DETAIL CODE NEEDS THESE - DO NOT REMOVE -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+/* ================= DOCTYPE START - THEME START - EDIT LATER ================= */
+/* EDIT LATER - YOU CAN EDIT COLORS HERE - THEME */
+:root{ --m1:#7C3AED; --m2:#EC4899; --m3:#22D3EE; --bg:#EEF0FF; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(180deg,#0F0A2E,#1E1B4B 30%,#F8F9FF 60%,#FFF5F8);background-attachment:fixed;color:#111827;font-family:system-ui,-apple-system,Arial,sans-serif;padding:14px;padding-bottom:30px}
+@keyframes flow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes shine{0%{left:-70%}60%,100%{left:130%}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes pop{0%{transform:scale(.95);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes orbitRun{0%{transform:translateX(-10px) rotateY(0deg)}50%{transform:translateX(10px) rotateY(180deg)}100%{transform:translateX(-10px) rotateY(360deg)}}
+@keyframes orbitSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes aiPulse{0%,100%{box-shadow:0 0 0 0 rgba(124,58,237,.35)}50%{box-shadow:0 0 0 12px rgba(124,58,237,0)}}
+/* ================= HEADER + 3D LOGO START ================= */
+.header{background:rgba(255,255,255,.96);border:1px solid #EDE9FE;border-radius:22px;padding:13px 15px;box-shadow:0 10px 24px rgba(124,58,237,.15);position:sticky;top:12px;z-index:50}
+.header-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+/* EDIT LATER - 3D RUNNING LOGO - YOU CAN EDIT SPEED / SIZE HERE - animation: orbitRun 3s */
+.logo-3d-wrap{display:flex;align-items:center;gap:10px}
+.logo-orbit{width:44px;height:44px;border-radius:50%;background:conic-gradient(from 0deg,#7C3AED,#EC4899,#22D3EE,#F59E0B,#7C3AED);display:flex;align-items:center;justify-content:center;position:relative;animation:orbitSpin 6s linear infinite;box-shadow:0 8px 20px rgba(124,58,237,.35)}
+.logo-orbit::before{content:"";position:absolute;inset:3px;background:#fff;border-radius:50%}
+.logo-orbit::after{content:"O";position:relative;z-index:1;font-size:22px;font-weight:900;background:linear-gradient(135deg,#7C3AED,#EC4899);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.logo-3d{perspective:600px;display:flex;font-weight:900;font-size:24px;letter-spacing:-1px}
+.logo-3d span{display:inline-block;transform-style:preserve-3d;animation:orbitRun 3s ease-in-out infinite;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 6px 14px rgba(124,58,237,.20)}
+.logo-3d span:nth-child(1){background-image:linear-gradient(180deg,#8B5CF6,#6D28D9);animation-delay:0s}
+.logo-3d span:nth-child(2){background-image:linear-gradient(180deg,#F472B6,#DB2777);animation-delay:.1s}
+.logo-3d span:nth-child(3){background-image:linear-gradient(180deg,#22D3EE,#0891B2);animation-delay:.2s}
+.logo-3d span:nth-child(4){background-image:linear-gradient(180deg,#FBBF24,#D97706);animation-delay:.3s}
+.logo-3d span:nth-child(5){background-image:linear-gradient(180deg,#4ADE80,#16A34A);animation-delay:.4s}
+.logo-3d span:nth-child(6){background-image:linear-gradient(180deg,#A78BFA,#7C3AED);animation-delay:.5s}
+.logo-3d span:nth-child(7){background-image:linear-gradient(180deg,#F472B6,#BE185D);animation-delay:.6s}
+.logo-3d span:nth-child(8){background-image:linear-gradient(180deg,#60A5FA,#2563EB);animation-delay:.7s}
+.logo-3d span:nth-child(9){background-image:linear-gradient(180deg,#22D3EE,#0E7490);animation-delay:.8s}
+.logo-3d span:nth-child(10){background-image:linear-gradient(180deg,#FB923C,#EA580C);animation-delay:.9s}
+.logo-3d span:nth-child(11){background-image:linear-gradient(180deg,#4ADE80,#15803D);animation-delay:1s}
+.header small{display:block;font-size:10.5px;color:#6B7280;margin-top:3px;font-weight:600}
+.header-btn{background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;border:none;padding:10px 14px;border-radius:20px;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap;box-shadow:0 8px 16px rgba(124,58,237,.30);animation:aiPulse 2s infinite}
+/* ================= HEADER + 3D LOGO END ================= */
+/* DASHBOARD NAV */
+.dash-nav{display:flex;gap:7px;margin-top:11px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.dash-nav::-webkit-scrollbar{display:none}
+.dash-nav button{flex-shrink:0;border:1.5px solid #EDE9FE;background:#F8F9FF;color:#374151;padding:10px 15px;border-radius:20px;font-weight:800;font-size:12px;cursor:pointer}
+.dash-nav button.active{background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;border:none;box-shadow:0 8px 16px rgba(124,58,237,.30)}
+/* HERO - AI LOOK */
+.hero{margin-top:13px;background:linear-gradient(135deg,#4F46E5,#7C3AED 25%,#EC4899 60%,#F59E0B);background-size:220% 220%;animation:flow 5s ease infinite;color:#fff;border-radius:24px;padding:20px 16px;text-align:center;box-shadow:0 18px 32px rgba(124,58,237,.28);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:shine 3s ease infinite}
+.hero h1{font-size:22px;line-height:1.25;position:relative;z-index:1}
+.hero p{font-size:12.5px;opacity:.92;margin-top:7px;line-height:1.6;position:relative;z-index:1}
+.hero-tags{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:12px;position:relative;z-index:1}
+.hero-tags span{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);padding:6px 11px;border-radius:20px;font-size:11px;font-weight:700}
+.hero-search{margin-top:13px;background:#fff;border-radius:16px;padding:5px 5px 5px 14px;display:flex;gap:6px;position:relative;z-index:1;box-shadow:0 10px 20px rgba(0,0,0,.15)}
+.hero-search input{flex:1;border:none;outline:none;font-size:13.5px;background:transparent;color:#111827}
+.hero-search button{background:#111827;color:#fff;border:none;padding:11px 16px;border-radius:12px;font-weight:800;cursor:pointer}
+.cat{display:flex;gap:8px;overflow-x:auto;margin-top:13px;padding-bottom:4px;scrollbar-width:none}
+.cat::-webkit-scrollbar{display:none}
+.cat span{flex-shrink:0;background:#fff;border:1.5px solid #EDE9FE;padding:9px 14px;border-radius:20px;font-size:12px;font-weight:800;cursor:pointer;color:#374151}
+.cat span.active{background:linear-gradient(135deg,#7C3AED,#EC4899);border:none;color:#fff;box-shadow:0 8px 16px rgba(124,58,237,.30)}
+/* TOOLS GRID - HOME - ONLY CARDS - NO FEATURES INSIDE - CLICK TO OPEN TOOL */
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:13px}
+.tool-card{background:#fff;border:1.5px solid #EDE9FE;border-radius:20px;padding:14px;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.04)}
+.tool-card:active{transform:scale(.98)}
+.tool-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#7C3AED,#EC4899,#22D3EE,#F59E0B)}
+.tool-card .icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;animation:floatY 3s ease infinite}
+.tool-card b{display:block;font-size:13.5px;margin-top:9px;line-height:1.3}
+.tool-card p{font-size:11px;color:#6B7280;margin-top:4px;line-height:1.5}
+.tool-card .go{margin-top:9px;font-size:11px;font-weight:900;color:#7C3AED}
+.tool-card .badge{position:absolute;top:10px;right:10px;background:#FEF3C7;color:#92400E;font-size:9px;font-weight:900;padding:4px 7px;border-radius:20px}
+/* TOOL BOX - ONLY STRUCTURE - PASTE CODE INSIDE */
+.tool{background:#fff;border:1.5px solid #EDE9FE;border-radius:24px;padding:16px;margin-top:16px;box-shadow:0 14px 28px rgba(0,0,0,.06);position:relative;overflow:hidden;animation:pop .3s ease}
+.tool::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#7C3AED,#EC4899,#22D3EE,#F59E0B)}
+.tool h2{font-size:17px;text-align:center}
+.tool .hint{font-size:11px;color:#6B7280;text-align:center;margin-top:6px;background:#F8F9FF;border:1px solid #EDE9FE;padding:9px;border-radius:12px;line-height:1.5}
+/* PASTE PLACEHOLDER - SHOWS UNTIL YOU PASTE DETAIL CODE */
+.paste-box{background:#FFFBEB;border:2px dashed #F59E0B;border-radius:16px;padding:16px;margin-top:12px;text-align:center}
+.paste-box b{font-size:13px;color:#92400E}
+.paste-box p{font-size:11.5px;color:#92400E;margin-top:6px;line-height:1.6}
+.paste-box code{background:#fff;border:1px solid #FDE68A;padding:2px 6px;border-radius:6px;font-size:11px}
+/* COMMON - FOR PASTED DETAIL CODE - DO NOT REMOVE - DETAIL CODE USES THESE */
+.tool-section{background:#F8F9FF;border:1px solid #EDE9FE;border-radius:18px;padding:14px;margin-top:12px}
+.tool-section b{font-size:13px}
+.tool-section p{font-size:11px;color:#6B7280;margin-top:4px;line-height:1.5}
+.tool label{font-size:11px;font-weight:900;display:block;margin-top:13px;color:#374151}
+.tool input,.tool select,.tool textarea{width:100%;background:#F9FAFB;color:#111827;padding:13px;border-radius:14px;border:1.5px solid #E5E7EB;margin-top:5px;font-size:14px;font-family:inherit;box-sizing:border-box}
+.tool input:focus,.tool select:focus{border-color:#7C3AED;outline:none;background:#fff}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.out{margin-top:13px;background:#F5F3FF;border:1px solid #EDE9FE;border-radius:16px;padding:15px;font-size:14px;line-height:1.75;white-space:pre-wrap;word-break:break-word;min-height:80px}
+.btn{width:100%;padding:15px;border:none;border-radius:16px;font-weight:900;cursor:pointer;margin-top:11px;color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);box-shadow:0 12px 22px rgba(124,58,237,.30),0 3px 0 #5B21B6;font-size:14px}
+.btn.green{background:linear-gradient(135deg,#16A34A,#22C55E);box-shadow:0 12px 22px rgba(34,197,94,.30),0 3px 0 #166534}
+.btn.blue{background:linear-gradient(135deg,#2563EB,#3B82F6);box-shadow:0 12px 22px rgba(59,130,246,.30),0 3px 0 #1E40AF}
+.btn.pink{background:linear-gradient(135deg,#DB2777,#EC4899);box-shadow:0 12px 22px rgba(236,72,153,.30),0 3px 0 #9D174D}
+.btn.dark{background:#F3F4F6 !important;color:#111827 !important;border:1.5px solid #E5E7EB !important;box-shadow:none !important}
+.btn-small{padding:11px;font-size:12.5px}
+.page{background:#fff;border:1px solid #EDE9FE;border-radius:22px;padding:17px;margin-top:14px}
+.page h3{font-size:16px}
+.page p,.page li{font-size:12.5px;color:#4B5563;line-height:1.75;margin-top:7px}
+.page li{margin-left:16px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:11px 18px;border-radius:22px;font-size:12px;font-weight:800;display:none;z-index:999;white-space:nowrap}
+.preview-img{max-width:100%;border-radius:14px;border:1px solid #EDE9FE;margin-top:10px}
+/* ================= THEME END ================= */
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER START - 3D RUNNING LOGO ================= -->
+<div class="header">
+<div class="header-top">
+<div class="logo-3d-wrap">
+<div class="logo-orbit"></div>
+<div><div class="logo-3d"><span>O</span><span>R</span><span>B</span><span>I</span><span>T</span><span>T</span><span>R</span><span>O</span><span>N</span><span>I</span><span>Z</span></div><small>Free AI Tools • No Login • No Watermark • English Only • 3D Live Logo</small></div>
+</div>
+<button class="header-btn" onclick="showDashboard('home')">🏠 Dashboard</button>
+</div>
+<!-- DASHBOARD NAV - HOME / TOOLS / SETTINGS / MUCH MORE -->
+<div class="dash-nav" id="dashNav">
+<button class="active" onclick="showDashboard('home',this)">🏠 Home</button>
+<button onclick="showDashboard('tools',this)">🧰 All Tools</button>
+<button onclick="showDashboard('writer',this)">✍️ AI Writer</button>
+<button onclick="showDashboard('image',this)">🖼️ Image Tools</button>
+<button onclick="showDashboard('pdf',this)">📄 PDF Tools</button>
+<button onclick="showDashboard('business',this)">💼 Business</button>
+<button onclick="showDashboard('settings',this)">⚙️ Settings</button>
+<button onclick="showDashboard('about',this)">ℹ️ About</button>
+<button onclick="showDashboard('privacy',this)">🔒 Privacy</button>
+</div>
+</div>
+<!-- ================= HEADER END ================= -->
+
+<!-- ================= HERO START - AI LOOK ================= -->
+<div id="dashHome">
+<div class="hero"><h1>🚀 Free AI + Image + PDF Tools - All In 1 Dashboard</h1><p>Highest Demanded - AI Writer, PDF To Image, Image To Text, BG Remover, QR Code, Invoice, Caption, Hashtag, Bio - 100% Free - Works On Phone - Live 3D Logo</p><div class="hero-tags"><span>✍️ AI Writer</span><span>📄 PDF To Image</span><span>🖼️ Image To Text</span><span>✂️ BG Remover</span><span>🔳 QR Code</span><span>🧾 Invoice</span><span>💃 3D Logo</span></div><div class="hero-search"><input id="searchInput" placeholder="Search tool - Writer, PDF, QR, Invoice, BG Remover..." oninput="searchTools()"><button onclick="searchTools()">Search</button></div></div>
+<div class="cat" id="catBar"><span class="active" onclick="filterCat('All',this)">🌟 All Tools</span><span onclick="filterCat('Write',this)">✍️ Write</span><span onclick="filterCat('Image',this)">🖼️ Image</span><span onclick="filterCat('PDF',this)">📄 PDF</span><span onclick="filterCat('Business',this)">💼 Business</span><span onclick="filterCat('Social',this)">📸 Social</span></div>
+</div>
+<!-- ================= HERO END ================= -->
+
+<!-- ================= DASHBOARD - SETTINGS - ONLY STRUCTURE - EDIT LATER ================= -->
+<div class="page" id="dashSettings" style="display:none">
+<h3>⚙️ Settings - Dashboard - Edit Later</h3>
+<p>Settings detail code will be pasted here later. For now - Watermark, Detail, Dancing Logo, History controls will come here.</p>
+<!-- ================= SETTINGS START - PASTE CODE HERE - START ================= -->
+<!-- PASTE SETTINGS DETAIL CODE HERE - AFTER PASTING, SETTINGS WILL START WORKING -->
+<div class="paste-box"><b>⚙️ SETTINGS - PASTE CODE HERE</b><p>Paste Settings detail code here later.<br>Example: Watermark On/Off, Detail On/Off, Dancing Logo On/Off, Clear Data.<br>Code: <code>&lt;!-- SETTINGS START --&gt; ... PASTE ... &lt;!-- SETTINGS END --&gt;</code></p></div>
+<!-- ================= SETTINGS END - PASTE CODE HERE - END ================= -->
+</div>
+<!-- ================= DASHBOARD - SETTINGS END ================= -->
+
+<!-- ================= HOME - ALL TOOLS GRID - ONLY CARDS - CLICK TO OPEN TOOL ================= -->
+<div class="tools-grid" id="toolsGrid">
+<div class="tool-card" data-cat="Write" onclick="openTool('tWriter')"><span class="badge">🔥 NO.1</span><div class="icon" style="background:#F5F3FF">✍️</div><b>AI Writer - Premium</b><p>Blog, Caption, Essay, Email, Bio - 12 Types In 1</p><div class="go">Open Tool →</div></div>
+<div class="tool-card" data-cat="PDF" onclick="openTool('tPdfToImage')"><span class="badge">🔥 NEW</span><div class="icon" style="background:#FEF3C7">📄</div><b>PDF To Image</b><p>PDF Pages To JPG Images</p><div class="go">Open Tool →</div></div>
+<div class="tool-card" data-cat="Image" onclick="openTool('tImageToText')"><span class="badge">🔥 NEW</span><div class="icon" style="background:#ECFEFF">🖼️</div><b>Image To Text - OCR</b><p>Photo To Text - Copy Text</p><div class="go">Open Tool →</div></div>
+<div class="tool-card" data-cat="Image" onclick="openTool('tBgRemover')"><span class="badge">⭐ PREMIUM</span><div class="icon" style="background:#FDF2F8">✂️</div><b>BG Remover</b><p>Remove Background - Transparent PNG</p><div class="go">Open Tool →</div></div>
+<div class="tool-card" data-cat="Business" onclick="openTool('tQr')"><div class="icon" style="background:#EFF6FF">🔳</div><b>QR Code Maker</b><p>Link / Text / UPI To QR</p><div class="go">Open Tool →</div></div>
+<div class="tool-card" data-cat="Business" onclick="openTool('tInvoice')"><div class="icon" style="background:#ECFDF5">🧾</div><b>Invoice Maker</b><p>Professional Bill - PDF Download</p><div class="go">Open Tool →</div></div>
+<div class="tool-card" data-cat="Social" onclick="openTool('tCaption')"><div class="icon" style="background:#FDF2F8">📸</div><b>Caption Generator</b><p>Viral Caption + Hashtags</p><div class="go">Open Tool →</div></div>
+<div class="tool-card" data-cat="Social" onclick="openTool('tHashtag')"><div class="icon" style="background:#ECFEFF">#️⃣</div><b>Hashtag Generator</b><p>30 Viral Hashtags</p><div class="go">Open Tool →</div></div>
+<div class="tool-card" data-cat="Social" onclick="openTool('tBio')"><div class="icon" style="background:#FEF3C7">👤</div><b>Bio Maker</b><p>Stylish Insta / YouTube Bio</p><div class="go">Open Tool →</div></div>
+<div class="tool-card" data-cat="Image" onclick="openTool('tCompress')"><div class="icon" style="background:#FFF7ED">🗜️</div><b>Image Compressor</b><p>Reduce Photo Size</p><div class="go">Open Tool →</div></div>
+<div class="tool-card" data-cat="Write" onclick="openTool('tEmail')"><div class="icon" style="background:#EFF6FF">📧</div><b>Email Writer</b><p>Professional Email For Job</p><div class="go">Open Tool →</div></div>
+<div class="tool-card" data-cat="Business" onclick="openTool('tResume')"><div class="icon" style="background:#ECFDF5">💼</div><b>Resume Summary</b><p>Job CV Summary</p><div class="go">Open Tool →</div></div>
+<div class="tool-card" data-cat="Write" onclick="openTool('tEssay')"><div class="icon" style="background:#FFF7ED">📚</div><b>Essay Writer</b><p>School Essay - Easy Words</p><div class="go">Open Tool →</div></div>
+<div class="tool-card" data-cat="Write" onclick="openTool('tStory')"><div class="icon" style="background:#F5F3FF">📖</div><b>Story Maker</b><p>Short Story + Moral</p><div class="go">Open Tool →</div></div>
+</div>
+<!-- ================= HOME - TOOLS GRID END ================= -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 1 START - AI WRITER ========= -->
+<!-- ===== PASTE CODE HERE - TOOL 1 - START ============= -->
+<!-- ===================================================== -->
+<div class="tool" id="tWriter">
+<h2>✍️ Tool 1 - AI Writer - Premium</h2>
+<p class="hint">12 Types In 1 - Rewrite + Humanize + SEO + History + Favourite - Paste Detail Code Below To Start Working</p>
+<!-- PASTE CODE HERE - TOOL 1 - DETAIL - START -->
+<div class="paste-box"><b>✍️ TOOL 1 - AI WRITER - PASTE CODE HERE</b><p>Paste Tool 1 detail code here - Features, Buttons, All Stuff.<br>After pasting, Tool 1 will start working.<br>Keep this line: <code>&lt;!-- TOOL 1 START --&gt; PASTE HERE &lt;!-- TOOL 1 END --&gt;</code></p></div>
+<!-- PASTE CODE HERE - TOOL 1 - DETAIL - END -->
+</div>
+<!-- ================= TOOL 1 END - AI WRITER ================= -->
+<!-- ===== PASTE CODE HERE - TOOL 1 - END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 2 START - PDF TO IMAGE ====== -->
+<!-- ===== PASTE CODE HERE - TOOL 2 - START ============= -->
+<!-- ===================================================== -->
+<div class="tool" id="tPdfToImage">
+<h2>📄 Tool 2 - PDF To Image</h2>
+<p class="hint">PDF Pages To JPG Images - Paste Detail Code Below To Start Working</p>
+<!-- PASTE CODE HERE - TOOL 2 - DETAIL - START -->
+<div class="paste-box"><b>📄 TOOL 2 - PDF TO IMAGE - PASTE CODE HERE</b><p>Paste Tool 2 detail code here.<br>After pasting, Tool 2 will start working.</p></div>
+<!-- PASTE CODE HERE - TOOL 2 - DETAIL - END -->
+</div>
+<!-- ================= TOOL 2 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 3 START - IMAGE TO TEXT ====== -->
+<!-- ===================================================== -->
+<div class="tool" id="tImageToText">
+<h2>🖼️ Tool 3 - Image To Text - OCR</h2>
+<p class="hint">Photo To Text - Paste Detail Code Below To Start Working</p>
+<!-- PASTE CODE HERE - TOOL 3 - DETAIL - START -->
+<div class="paste-box"><b>🖼️ TOOL 3 - IMAGE TO TEXT - PASTE CODE HERE</b><p>Paste Tool 3 detail code here.<br>After pasting, Tool 3 will start working.</p></div>
+<!-- PASTE CODE HERE - TOOL 3 - DETAIL - END -->
+</div>
+<!-- ================= TOOL 3 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 4 START - BG REMOVER ========= -->
+<!-- ===================================================== -->
+<div class="tool" id="tBgRemover">
+<h2>✂️ Tool 4 - BG Remover</h2>
+<p class="hint">Remove Background - Transparent PNG - Paste Detail Code Below</p>
+<!-- PASTE CODE HERE - TOOL 4 - DETAIL - START -->
+<div class="paste-box"><b>✂️ TOOL 4 - BG REMOVER - PASTE CODE HERE</b><p>Paste Tool 4 detail code here.<br>After pasting, Tool 4 will start working.</p></div>
+<!-- PASTE CODE HERE - TOOL 4 - DETAIL - END -->
+</div>
+<!-- ================= TOOL 4 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 5 START - QR CODE ============ -->
+<!-- ===================================================== -->
+<div class="tool" id="tQr">
+<h2>🔳 Tool 5 - QR Code Maker</h2>
+<p class="hint">Link / Text / UPI To QR - Paste Detail Code Below</p>
+<!-- PASTE CODE HERE - TOOL 5 - DETAIL - START -->
+<div class="paste-box"><b>🔳 TOOL 5 - QR CODE - PASTE CODE HERE</b><p>Paste Tool 5 detail code here.<br>After pasting, Tool 5 will start working.</p></div>
+<!-- PASTE CODE HERE - TOOL 5 - DETAIL - END -->
+</div>
+<!-- ================= TOOL 5 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 6 START - INVOICE ============ -->
+<!-- ===================================================== -->
+<div class="tool" id="tInvoice">
+<h2>🧾 Tool 6 - Invoice Maker</h2>
+<p class="hint">Professional Bill - PDF Download - Paste Detail Code Below</p>
+<!-- PASTE CODE HERE - TOOL 6 - DETAIL - START -->
+<div class="paste-box"><b>🧾 TOOL 6 - INVOICE - PASTE CODE HERE</b><p>Paste Tool 6 detail code here.<br>After pasting, Tool 6 will start working.</p></div>
+<!-- PASTE CODE HERE - TOOL 6 - DETAIL - END -->
+</div>
+<!-- ================= TOOL 6 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 7 START - CAPTION ============ -->
+<!-- ===================================================== -->
+<div class="tool" id="tCaption">
+<h2>📸 Tool 7 - Caption Generator</h2>
+<p class="hint">Viral Caption + Hashtags - Paste Detail Code Below</p>
+<!-- PASTE CODE HERE - TOOL 7 - DETAIL - START -->
+<div class="paste-box"><b>📸 TOOL 7 - CAPTION - PASTE CODE HERE</b><p>Paste Tool 7 detail code here.</p></div>
+<!-- PASTE CODE HERE - TOOL 7 - DETAIL - END -->
+</div>
+<!-- ================= TOOL 7 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 8 START - HASHTAG ============ -->
+<!-- ===================================================== -->
+<div class="tool" id="tHashtag">
+<h2>#️⃣ Tool 8 - Hashtag Generator</h2>
+<p class="hint">30 Viral Hashtags - Paste Detail Code Below</p>
+<!-- PASTE CODE HERE - TOOL 8 - DETAIL - START -->
+<div class="paste-box"><b>#️⃣ TOOL 8 - HASHTAG - PASTE CODE HERE</b><p>Paste Tool 8 detail code here.</p></div>
+<!-- PASTE CODE HERE - TOOL 8 - DETAIL - END -->
+</div>
+<!-- ================= TOOL 8 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 9 START - BIO ================ -->
+<!-- ===================================================== -->
+<div class="tool" id="tBio">
+<h2>👤 Tool 9 - Bio Maker</h2>
+<p class="hint">Stylish Bio - Paste Detail Code Below</p>
+<!-- PASTE CODE HERE - TOOL 9 - DETAIL - START -->
+<div class="paste-box"><b>👤 TOOL 9 - BIO - PASTE CODE HERE</b><p>Paste Tool 9 detail code here.</p></div>
+<!-- PASTE CODE HERE - TOOL 9 - DETAIL - END -->
+</div>
+<!-- ================= TOOL 9 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 10 START - COMPRESS ========== -->
+<!-- ===================================================== -->
+<div class="tool" id="tCompress">
+<h2>🗜️ Tool 10 - Image Compressor</h2>
+<p class="hint">Reduce Photo Size - Paste Detail Code Below</p>
+<!-- PASTE CODE HERE - TOOL 10 - DETAIL - START -->
+<div class="paste-box"><b>🗜️ TOOL 10 - COMPRESS - PASTE CODE HERE</b><p>Paste Tool 10 detail code here.</p></div>
+<!-- PASTE CODE HERE - TOOL 10 - DETAIL - END -->
+</div>
+<!-- ================= TOOL 10 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 11 START - EMAIL ============= -->
+<!-- ===================================================== -->
+<div class="tool" id="tEmail">
+<h2>📧 Tool 11 - Email Writer</h2>
+<p class="hint">Professional Email - Paste Detail Code Below</p>
+<!-- PASTE CODE HERE - TOOL 11 - DETAIL - START -->
+<div class="paste-box"><b>📧 TOOL 11 - EMAIL - PASTE CODE HERE</b><p>Paste Tool 11 detail code here.</p></div>
+<!-- PASTE CODE HERE - TOOL 11 - DETAIL - END -->
+</div>
+<!-- ================= TOOL 11 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 12 START - RESUME ============ -->
+<!-- ===================================================== -->
+<div class="tool" id="tResume">
+<h2>💼 Tool 12 - Resume Summary</h2>
+<p class="hint">Job CV Summary - Paste Detail Code Below</p>
+<!-- PASTE CODE HERE - TOOL 12 - DETAIL - START -->
+<div class="paste-box"><b>💼 TOOL 12 - RESUME - PASTE CODE HERE</b><p>Paste Tool 12 detail code here.</p></div>
+<!-- PASTE CODE HERE - TOOL 12 - DETAIL - END -->
+</div>
+<!-- ================= TOOL 12 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 13 START - ESSAY ============= -->
+<!-- ===================================================== -->
+<div class="tool" id="tEssay">
+<h2>📚 Tool 13 - Essay Writer</h2>
+<p class="hint">School Essay - Paste Detail Code Below</p>
+<!-- PASTE CODE HERE - TOOL 13 - DETAIL - START -->
+<div class="paste-box"><b>📚 TOOL 13 - ESSAY - PASTE CODE HERE</b><p>Paste Tool 13 detail code here.</p></div>
+<!-- PASTE CODE HERE - TOOL 13 - DETAIL - END -->
+</div>
+<!-- ================= TOOL 13 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 14 START - STORY ============= -->
+<!-- ===================================================== -->
+<div class="tool" id="tStory">
+<h2>📖 Tool 14 - Story Maker</h2>
+<p class="hint">Short Story + Moral - Paste Detail Code Below</p>
+<!-- PASTE CODE HERE - TOOL 14 - DETAIL - START -->
+<div class="paste-box"><b>📖 TOOL 14 - STORY - PASTE CODE HERE</b><p>Paste Tool 14 detail code here.</p></div>
+<!-- PASTE CODE HERE - TOOL 14 - DETAIL - END -->
+</div>
+<!-- ================= TOOL 14 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ================= WHY US START - EDIT LATER ================= -->
+<div class="page" style="text-align:center"><h3>⭐ Why Orbittroniz Is Best?</h3><p>✅ 14 Highest Demanded Tools In 1 Dashboard<br>✅ Live 3D Running Logo + AI Look - No Other App<br>✅ Paste Code System - You Can Edit Any Tool Anytime<br>✅ English Only - No Bugs - Free Forever</p></div>
+<!-- ================= WHY US END ================= -->
+<!-- ================= ABOUT START - EDIT LATER ================= -->
+<div class="page" id="about"><h3>ℹ️ About Orbittroniz.com</h3><p>Orbittroniz.com is a free tools dashboard made for students, creators, shop owners, job seekers, and everyone. Edit this About text later with your own words.</p><p><b>Contact:</b> Use WhatsApp Share button in any tool to share feedback.</p></div>
+<!-- ================= ABOUT END ================= -->
+<!-- ================= HOW TO USE START ================= -->
+<div class="page" id="howto"><h3>📖 How To Use - 3 Easy Steps - For Owner</h3><p><b>Step 1 - For Owner:</b> Find Tool - Example: <code>TOOL 1 START ..... PASTE CODE HERE ..... TOOL 1 END</code></p><p><b>Step 2:</b> Delete the yellow PASTE BOX inside that tool and paste your detail code there.</p><p><b>Step 3:</b> Save. Click that tool card. That tool will start working. Same for all tools. Working will be done later by pasting detail code.</p><p><b>For User:</b> Click tool card - Tool opens - Type / Upload - Tap Generate - Copy / Download.</p></div>
+<!-- ================= HOW TO USE END ================= -->
+<!-- ================= PRIVACY POLICY START - EDIT LATER ================= -->
+<div class="page" id="privacy"><h3>🔒 Privacy Policy - Orbittroniz.com</h3><p><b>Last Updated:</b> 2026 - English Only</p><p><b>1. What We Collect:</b> We do NOT collect your name, phone, email, password. We do NOT ask login. Your writings and files are processed in your own phone browser.</p><p><b>2. PDF / Image:</b> Your PDF and photos are converted locally in your browser. No file is uploaded to our server.</p><p><b>3. History:</b> History is saved only on your device using Local Storage.</p><p><b>4. Cookies:</b> We may use simple cookies to remember settings. No personal data is sold.</p><p><b>5. Third Party:</b> Share button opens WhatsApp. WhatsApp has its own privacy policy.</p><p><b>6. Children Safety:</b> Tools are safe for all ages. All content is in simple English.</p><p><b>7. Changes:</b> If we change this policy, we will update this page.</p></div>
+<!-- ================= PRIVACY POLICY END ================= -->
+<!-- ================= TERMS START ================= -->
+<div class="page" id="terms"><h3>📜 Terms & Conditions</h3><p><b>1.</b> All tools are free for personal use.</p><p><b>2.</b> You can use generated text for Instagram, YouTube, school, job, or business. Check facts before publishing.</p><p><b>3.</b> Do not use tools for illegal, harmful, or hateful content.</p><p><b>4.</b> We try to keep all tools working without bugs, but we do not guarantee 100% accuracy.</p><p><b>5.</b> We may update tools or design anytime without notice.</p></div>
+<!-- ================= TERMS END ================= -->
+<!-- ================= FOOTER START ================= -->
+<div class="page" style="text-align:center"><b>Orbittroniz.com - Free AI + Image + PDF Tools</b><p><a href="#tWriter" style="color:#7C3AED;font-weight:800">AI Writer</a> • <a href="#tPdfToImage" style="color:#7C3AED;font-weight:800">PDF To Image</a> • <a href="#tImageToText" style="color:#7C3AED;font-weight:800">Image To Text</a> • <a href="#tBgRemover" style="color:#7C3AED;font-weight:800">BG Remover</a> • <a href="#tQr" style="color:#7C3AED;font-weight:800">QR Code</a> • <a href="#tInvoice" style="color:#7C3AED;font-weight:800">Invoice</a> • <a href="#about" style="color:#7C3AED;font-weight:800">About</a> • <a href="#privacy" style="color:#7C3AED;font-weight:800">Privacy Policy</a> • <a href="#terms" style="color:#7C3AED;font-weight:800">Terms</a></p><p style="font-size:11px;color:#9CA3AF">© 2026 Orbittroniz.com - Made With Love For India - English Only - Free Forever - Live 3D Logo 💃</p></div>
+<!-- ================= FOOTER END ================= -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= DOCTYPE - JAVASCRIPT START - ONLY STRUCTURE - NO TOOL FEATURES ================= */
+/* EDIT LATER - DO NOT REMOVE - THIS JS IS ONLY FOR DASHBOARD / SEARCH / OPEN TOOL - TOOL WORKING WILL COME FROM PASTED DETAIL CODE */
+function showToast(m){ let t=document.getElementById('toast'); t.innerText=m; t.style.display='block'; setTimeout(function(){ t.style.display='none'; },2200); }
+function showDashboard(section,el){
+  document.querySelectorAll('#dashNav button').forEach(function(b){ b.classList.remove('active'); });
+  if(el) el.classList.add('active');
+  let settingsBox=document.getElementById('dashSettings');
+  let homeBox=document.getElementById('dashHome');
+  let grid=document.getElementById('toolsGrid');
+  if(section==='settings'){ settingsBox.style.display='block'; settingsBox.scrollIntoView({behavior:'smooth'}); return; }
+  if(section==='home'){ homeBox.style.display='block'; grid.style.display='grid'; settingsBox.style.display='none'; window.scrollTo({top:0,behavior:'smooth'}); return; }
+  if(section==='tools'){ homeBox.style.display='block'; grid.style.display='grid'; settingsBox.style.display='none'; grid.scrollIntoView({behavior:'smooth'}); return; }
+  if(section==='writer'){ settingsBox.style.display='none'; openTool('tWriter'); return; }
+  if(section==='image'){ settingsBox.style.display='none'; openTool('tBgRemover'); return; }
+  if(section==='pdf'){ settingsBox.style.display='none'; openTool('tPdfToImage'); return; }
+  if(section==='business'){ settingsBox.style.display='none'; openTool('tInvoice'); return; }
+  if(section==='about'){ settingsBox.style.display='none'; document.getElementById('about').scrollIntoView({behavior:'smooth'}); return; }
+  if(section==='privacy'){ settingsBox.style.display='none'; document.getElementById('privacy').scrollIntoView({behavior:'smooth'}); return; }
+}
+function searchTools(){ let q=(document.getElementById('searchInput').value||"").toLowerCase(); document.querySelectorAll('.tool-card').forEach(function(c){ c.style.display=c.innerText.toLowerCase().indexOf(q)!==-1?"":"none"; }); if(q){ let map={writer:'tWriter',pdf:'tPdfToImage',image:'tImageToText',bg:'tBgRemover',qr:'tQr',invoice:'tInvoice',caption:'tCaption',hashtag:'tHashtag',bio:'tBio',compress:'tCompress',email:'tEmail',resume:'tResume',essay:'tEssay',story:'tStory'}; for(let k in map){ if(q.indexOf(k)!==-1){ document.getElementById(map[k]).scrollIntoView({behavior:'smooth'}); break; } } } }
+function filterCat(cat,el){ document.querySelectorAll('#catBar span').forEach(function(s){ s.classList.remove('active'); }); el.classList.add('active'); document.querySelectorAll('.tool-card').forEach(function(c){ c.style.display=(cat==='All'||c.dataset.cat===cat)?"":"none"; }); }
+function openTool(id){ let el=document.getElementById(id); if(!el) return; el.scrollIntoView({behavior:'smooth',block:'start'}); showToast('Tool Opened - Paste Detail Code To Start Working'); }
+/* ================= DOCTYPE - JAVASCRIPT END ================= */
+/* ================= PASTE DETAIL CODE JS WILL COME HERE LATER - AFTER PASTING, TOOL WILL WORK ================= */
+</script>
+</body>
+</html>
+<!-- ================= DOCTYPE END ================= -->
