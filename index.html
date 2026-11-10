@@ -572,9 +572,406 @@ footer p{font-size:11px;color:#A1A1AA;text-align:center;margin-top:6px;line-heig
 })();
 </script>
 <!-- ================= TOOL 1 END - V4 FINAL - BUG FREE ================= --> 
-<!-- ================= TOOL 2 - PDF TO IMAGE ================= -->
-<div id="page-tool2" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>📄 PDF To Image</b><br><span>Your Tool • Advanced</span></div></div><h2 style="text-align:center">📄 PDF To Image</h2><p style="font-size:12px;color:#6B7280;text-align:center">ZIP • Stitch • WhatsApp Compress • Auto Crop</p><div class="drop" onclick="document.getElementById('pdf2File').click()"><b>📄 Tap To Select PDF</b><p style="font-size:12px;color:#6B7280">Max 50 MB • Private</p><input type="file" id="pdf2File" accept="application/pdf" onchange="loadPdf2(event)"></div><p id="pdf2Name" style="font-size:12px;color:#166534;font-weight:800;text-align:center;margin-top:8px;display:none"></p><div id="pdf2PageBox" style="display:none;background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:12px;margin-top:12px"><b>📑 Page Range - Example: 1-3, 5</b><input type="text" id="pdf2Range" placeholder="1-3, 5 OR empty = All" oninput="applyRangePdf2()"><div id="pdf2Chips" style="margin-top:8px"></div><p id="pdf2RangeInfo" style="font-size:11px;color:#166534"></p></div><label>File Name</label><input type="text" id="pdf2Rename" value="My-Document"><label>Quality</label><div id="pdf2QualityRow"><span class="chip" onclick="setPdf2Quality('low',this)">📱 Low</span><span class="chip active" onclick="setPdf2Quality('medium',this)">✨ Medium</span><span class="chip" onclick="setPdf2Quality('high',this)">🖨️ High</span></div><div style="display:flex;gap:8px"><div style="flex:1"><label>Format</label><select id="pdf2Format"><option value="jpeg">JPG</option><option value="png">PNG</option></select></div><div style="flex:1"><label>Size</label><select id="pdf2Size"><option value="1.5">Normal</option><option value="2">HD</option><option value="1">Small</option></select></div></div><div style="background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:10px;margin-top:12px"><div class="toggle-row"><div><b>✨ Auto Enhance</b></div><div class="toggle" id="pdf2EnhanceToggle" onclick="togglePdf2Enhance()"></div></div><div class="toggle-row"><div><b>✂️ Auto Crop</b></div><div class="toggle" id="pdf2CropToggle" onclick="togglePdf2Crop()"></div></div><div class="toggle-row"><div><b>📱 WhatsApp Compress</b></div><div class="toggle off" id="pdf2CompressToggle" onclick="togglePdf2Compress()"></div></div><div class="toggle-row" style="border:none"><div><b>💧 Watermark</b><br><span id="pdf2WmText" style="font-size:11px;color:#6B7280">ON</span></div><div class="toggle" id="pdf2WmToggle" onclick="togglePdf2Wm()"></div></div></div><button class="btn" id="pdf2Btn" onclick="convertPdf2()">✨ Convert PDF To Images</button><div style="height:10px;background:#E5E7EB;border-radius:20px;overflow:hidden;margin-top:12px;display:none" id="pdf2Progress"><i id="pdf2Bar" style="display:block;height:100%;background:linear-gradient(90deg,#7C3AED,#EC4899);width:0%"></i></div><p id="pdf2Status" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select PDF first</p><div id="pdf2Result" style="display:none"><div style="display:flex;justify-content:space-between;margin-top:12px"><b>Images - <span id="pdf2Count">0</span></b><span id="pdf2Total"></span></div><div id="pdf2Grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"></div><div style="display:flex;gap:8px;margin-top:12px"><button class="btn2 green" onclick="downloadZipPdf2()">📦 ZIP All</button><button class="btn2 primary" onclick="stitchPdf2()">🧵 Stitch Long</button></div></div><button class="btn2" style="width:100%;margin-top:12px" onclick="goHomePage()">← Back</button></div></div>
+<!-- ================= TOOL 2 - PDF TO IMAGE ==========
+<!-- ================= TOOL 2 START - PDF TO IMAGE - PREMIUM - BUG FREE - NO DOCTYPE ================= -->
+<!-- PASTE THIS ONLY - REPLACE OLD TOOL 2 - WORKS ALONE + WITH FULL APP -->
 
+<div id="page-tool2" class="tool-page" style="display:none">
+<div id="tool2">
+<style>
+#tool2{font-family:system-ui,Arial,sans-serif}
+#tool2 *{box-sizing:border-box}
+#tool2 .card{background:#fff;border:1.5px solid #EDE9FE;border-radius:22px;padding:16px;box-shadow:0 12px 24px rgba(0,0,0,.06)}
+#tool2 .topbar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-bottom:1px solid #EDE9FE;margin:-16px -16px 12px -16px;border-radius:22px 22px 0 0;position:sticky;top:0;z-index:20}
+#tool2 .topbar button{background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer;font-size:13px}
+#tool2 label{font-size:12px;font-weight:900;display:block;margin-top:13px}
+#tool2 input,#tool2 select{width:100%;padding:13px;border-radius:14px;border:1.5px solid #E5E7EB;background:#F9FAFB;font-size:14px;margin-top:6px}
+#tool2 .btn{width:100%;padding:15px;border:none;border-radius:16px;font-weight:900;cursor:pointer;margin-top:12px;color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);font-size:14px;box-shadow:0 12px 22px rgba(124,58,237,.30)}
+#tool2 .btn:disabled{opacity:.6}
+#tool2 .btn2{flex:1;padding:11px;border-radius:14px;border:1.5px solid #E5E7EB;background:#fff;font-weight:800;cursor:pointer;font-size:12.5px}
+#tool2 .btn2.primary{background:#111827;color:#fff;border:none}
+#tool2 .btn2.green{background:#16A34A;color:#fff;border:none}
+#tool2 .btn2:disabled{opacity:.5}
+#tool2 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:9px 12px;border-radius:20px;font-size:12px;margin:7px 7px 0 0;cursor:pointer;font-weight:700}
+#tool2 .chip.active{background:#111827;color:#fff;border:none}
+#tool2 .chip.all{background:#DCFCE7;border-color:#86EFAC;color:#166534}
+#tool2 .toggle-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #EDE9FE;gap:8px}
+#tool2 .toggle{width:52px;height:28px;background:#22C55E;border-radius:30px;position:relative;cursor:pointer;flex-shrink:0}
+#tool2 .toggle.off{background:#9CA3AF}
+#tool2 .toggle::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;transition:.2s}
+#tool2 .toggle.off::after{left:27px}
+#tool2 .drop{border:2px dashed #7C3AED;background:linear-gradient(135deg,#F8F9FF,#FDF2F8);border-radius:18px;padding:20px;text-align:center;cursor:pointer;margin-top:12px}
+#tool2 .drop input{display:none}
+#tool2 .progress{height:10px;background:#E5E7EB;border-radius:20px;overflow:hidden;margin-top:12px;display:none}
+#tool2 .progress i{display:block;height:100%;background:linear-gradient(90deg,#7C3AED,#EC4899);width:0%;transition:width .2s}
+#tool2 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+#tool2 .img-card{background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:10px;text-align:center}
+#tool2 .img-card img{width:100%;border-radius:10px;max-height:200px;object-fit:contain;background:#fff}
+#tool2 .badge{font-size:11px;background:#FEF3C7;color:#92400E;padding:4px 8px;border-radius:20px;font-weight:900}
+</style>
+
+<div id="tool2"><div class="card">
+<div class="topbar"><button type="button" onclick="goHomePageTool2()">← Back</button><div><b>📄 PDF To Image</b><br><span style="font-size:11px;color:#6B7280">Premium • ZIP • Stitch • Compress • No Login</span></div><span style="margin-left:auto;background:#DCFCE7;color:#166534;font-size:11px;font-weight:900;padding:6px 10px;border-radius:20px">● LIVE</span></div>
+
+<h2 style="text-align:center">📄 PDF To Image - Premium</h2>
+<p style="font-size:12px;color:#6B7280;text-align:center">ZIP • Stitch Long Image • WhatsApp Compress • Auto Enhance • Auto Crop<br><span style="color:#16A34A;font-weight:800">100% Private - PDF never leaves your phone</span></p>
+
+<!-- SELECT PDF -->
+<div class="drop" id="t2Drop"><b>📄 Tap To Select PDF</b><p style="font-size:12px;color:#6B7280;margin-top:4px">Max 50 MB • Any PDF - Marksheet, Aadhar, Notes, Form</p><input type="file" id="t2File" accept="application/pdf,.pdf"></div>
+<p id="t2Name" style="font-size:12px;color:#166534;font-weight:800;text-align:center;margin-top:8px;display:none"></p>
+<p id="t2Error" style="font-size:12px;color:#DC2626;font-weight:800;text-align:center;margin-top:8px;display:none"></p>
+
+<!-- PAGE RANGE - PREMIUM -->
+<div id="t2PageBox" style="display:none;background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:12px;margin-top:12px">
+<b>📑 Page Range - Example: 1-3, 5</b><br><span style="font-size:11px;color:#6B7280">Leave empty = All Pages • Or tap chips below</span>
+<input type="text" id="t2Range" placeholder="Example: 1-3, 5  OR  empty = All Pages">
+<div style="margin-top:8px"><button type="button" class="chip all" id="t2SelectAllBtn">✅ Select All</button><button type="button" class="chip" id="t2ClearAllBtn">❌ Clear All</button><span id="t2RangeInfo" style="font-size:11px;color:#166534;font-weight:800;margin-left:6px"></span></div>
+<div id="t2Chips" style="margin-top:8px"></div>
+</div>
+
+<label>File Name - For Downloaded Images</label>
+<input type="text" id="t2Rename" value="My-Document" placeholder="Example: My-Aadhar">
+
+<label>Quality - Premium</label>
+<div id="t2QualityRow"><span class="chip" data-q="low">📱 Low - Small Size - For WhatsApp</span><span class="chip active" data-q="medium">✨ Medium - Best - Clear + Small</span><span class="chip" data-q="high">🖨️ High - HD - For Print</span></div>
+
+<div style="display:flex;gap:8px"><div style="flex:1"><label>Format</label><select id="t2Format"><option value="jpeg">JPG - Small Size - Best</option><option value="png">PNG - High Quality - Big Size</option></select></div><div style="flex:1"><label>Size / Resolution</label><select id="t2Size"><option value="1">Small - Fast - 1x</option><option value="1.5" selected>Normal - Clear - 1.5x</option><option value="2">HD - Very Clear - 2x</option><option value="2.5">Ultra HD - 2.5x - Slow</option></select></div></div>
+
+<!-- PREMIUM TOGGLES -->
+<div style="background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:4px 12px;margin-top:12px">
+<div class="toggle-row"><div><b>✨ Auto Enhance</b><br><span style="font-size:11px;color:#6B7280">Bright + Sharp - Like Scanner</span></div><div class="toggle" id="t2EnhanceToggle"></div></div>
+<div class="toggle-row"><div><b>✂️ Auto Crop White Border</b><br><span style="font-size:11px;color:#6B7280">Removes extra white space</span></div><div class="toggle" id="t2CropToggle"></div></div>
+<div class="toggle-row"><div><b>📱 WhatsApp Compress</b><br><span style="font-size:11px;color:#6B7280">Extra small - For WhatsApp Status / Send</span></div><div class="toggle off" id="t2CompressToggle"></div></div>
+<div class="toggle-row" style="border:none"><div><b>💧 Watermark</b><br><span id="t2WmText" style="font-size:11px;color:#6B7280">ON - From Settings</span></div><div class="toggle" id="t2WmToggle"></div></div>
+</div>
+
+<button type="button" class="btn" id="t2ConvertBtn">✨ Convert PDF To Images</button>
+<div class="progress" id="t2Progress"><i id="t2Bar"></i></div>
+<p id="t2Status" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select PDF first</p>
+
+<!-- RESULT -->
+<div id="t2Result" style="display:none">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><b>Images - <span id="t2Count">0</span></b><span id="t2Total" style="font-size:12px;color:#6B7280"></span></div>
+<div class="grid" id="t2Grid"></div>
+<div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2 green" id="t2ZipBtn">📦 ZIP All - 1 Tap</button><button type="button" class="btn2 primary" id="t2StitchBtn">🧵 Stitch Long Image</button></div>
+<p style="font-size:11px;color:#6B7280;text-align:center;margin-top:8px">ZIP = All images in 1 ZIP file • Stitch = All pages joined into 1 long image - Like scanner</p>
+</div>
+
+<div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2" onclick="clearTool2()">🗑️ New PDF</button><button type="button" class="btn2 primary" onclick="goHomePageTool2()">← Back To Home</button></div>
+
+<!-- HOW TO USE - PREMIUM APPS HAVE THIS -->
+<div style="background:#FFFBEB;border:1px dashed #F59E0B;border-radius:14px;padding:12px;margin-top:12px;font-size:12px;line-height:1.7"><b>📖 How To Use - 3 Steps:</b><br>1. Tap Select PDF - Choose your PDF<br>2. Choose Pages - Tap chips or type 1-3, 5 - Choose Quality<br>3. Tap Convert - Download 1 by 1 OR ZIP All OR Stitch Long</div>
+</div></div>
+</div>
+</div>
+
+<script>
+/* ================= TOOL 2 - PDF TO IMAGE - BUG FREE - IIFE - NO GLOBAL COLLISION ================= */
+(function(){
+  // FIX: Fallback navigation if full app goHomePage not exists
+  window.goHomePageTool2 = window.goHomePageTool2 || function(){
+    if(typeof window.goHomePage === "function"){ window.goHomePage(); return; }
+    var p=document.getElementById('page-tool2'); if(p) p.style.display='none';
+    var h=document.getElementById('homeView'); if(h) h.style.display='block';
+    window.scrollTo(0,0);
+  };
+  function el(id){ return document.getElementById(id); }
+  function getWm2(){
+    try{
+      var wm=localStorage.getItem('orbit_watermark');
+      var txt=localStorage.getItem('orbit_watermark_text') || "Made With Orbittroniz.com";
+      return {wm: wm !== 'false', txt: txt};
+    }catch(e){ return {wm:true, txt:"Made With Orbittroniz.com"}; }
+  }
+  function setWm2(on){
+    try{ localStorage.setItem('orbit_watermark', on ? 'true' : 'false'); }catch(e){}
+    updateWmUI2();
+  }
+  function updateWmUI2(){
+    var w=getWm2();
+    var t=el('t2WmText'); if(t) t.textContent = (w.wm ? "ON - " : "OFF - ") + w.txt;
+    var tg=el('t2WmToggle'); if(tg) tg.classList.toggle('off', !w.wm);
+  }
+  function showError2(msg){
+    var e=el('t2Error'); if(!e) return;
+    if(!msg){ e.style.display='none'; e.textContent=''; return; }
+    e.style.display='block'; e.textContent='⚠️ '+msg;
+  }
+  function showName2(msg, isOk){
+    var n=el('t2Name'); if(!n) return;
+    if(!msg){ n.style.display='none'; return; }
+    n.style.display='block'; n.textContent=msg; n.style.color = isOk ? '#166534' : '#DC2626';
+  }
+
+  // STATE - Inside IIFE, no global collision
+  var S2 = {doc:null, name:"My-Document", selected:new Set(), quality:"medium", enhance:true, crop:true, compress:false, images:[], converting:false, totalPages:0};
+
+  // QUALITY CHIPS
+  var qRow=el('t2QualityRow');
+  if(qRow){
+    qRow.addEventListener('click', function(ev){
+      var chip=ev.target.closest('.chip'); if(!chip) return;
+      S2.quality = chip.getAttribute('data-q') || "medium";
+      qRow.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+    });
+  }
+  // TOGGLES
+  function bindToggle2(id, getVal, setVal){
+    var t=el(id); if(!t) return;
+    t.addEventListener('click', function(){ setVal(!getVal()); t.classList.toggle('off', !getVal()); });
+  }
+  bindToggle2('t2EnhanceToggle', function(){ return S2.enhance; }, function(v){ S2.enhance=v; });
+  bindToggle2('t2CropToggle', function(){ return S2.crop; }, function(v){ S2.crop=v; });
+  bindToggle2('t2CompressToggle', function(){ return S2.compress; }, function(v){ S2.compress=v; });
+  var wmTog=el('t2WmToggle'); if(wmTog) wmTog.addEventListener('click', function(){ setWm2(!getWm2().wm); });
+  updateWmUI2();
+
+  // DROP / FILE - FIX: Reset input so same PDF can be selected again
+  var drop=el('t2Drop'), fileInp=el('t2File');
+  if(drop && fileInp){
+    drop.addEventListener('click', function(e){ e.preventDefault(); fileInp.click(); });
+    fileInp.addEventListener('change', function(e){ loadPdf2(e); });
+    // Drag & Drop - Premium
+    drop.addEventListener('dragover', function(e){ e.preventDefault(); drop.style.borderColor='#EC4899'; });
+    drop.addEventListener('dragleave', function(){ drop.style.borderColor='#7C3AED'; });
+    drop.addEventListener('drop', function(e){ e.preventDefault(); drop.style.borderColor='#7C3AED'; if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]){ fileInp.files=e.dataTransfer.files; loadPdf2({target:fileInp}); } });
+  }
+
+  function parseRange2(str,total){
+    str=String(str||"").trim(); if(!str) return null;
+    var set=new Set();
+    str.split(',').forEach(function(part){
+      part=part.trim(); if(!part) return;
+      if(part.indexOf('-')>-1){
+        var pp=part.split('-'); var a=parseInt(pp[0],10), b=parseInt(pp[1],10);
+        if(isNaN(a)||isNaN(b)) return;
+        var lo=Math.min(a,b), hi=Math.max(a,b);
+        for(var i=lo;i<=hi;i++){ if(i>=1 && i<=total) set.add(i); }
+      } else {
+        var n=parseInt(part,10); if(!isNaN(n) && n>=1 && n<=total) set.add(n);
+      }
+    });
+    return set;
+  }
+  function renderChips2(){
+    var box=el('t2Chips'); if(!box || !S2.doc) return;
+    box.innerHTML="";
+    for(var i=1;i<=S2.totalPages;i++){
+      (function(p){
+        var s=document.createElement('span'); s.className='chip '+(S2.selected.has(p)?'active':''); s.textContent='Page '+p; s.type='button';
+        s.addEventListener('click', function(){
+          if(S2.selected.has(p)){ S2.selected.delete(p); s.classList.remove('active'); } else { S2.selected.add(p); s.classList.add('active'); }
+          updateRangeInfo2();
+        });
+        box.appendChild(s);
+      })(i);
+    }
+    updateRangeInfo2();
+  }
+  function updateRangeInfo2(){
+    var info=el('t2RangeInfo'); if(info) info.textContent = S2.selected.size + " / " + S2.totalPages + " pages selected";
+  }
+  var rangeInp=el('t2Range');
+  if(rangeInp) rangeInp.addEventListener('input', function(){
+    if(!S2.doc) return;
+    var v=rangeInp.value;
+    if(!v.trim()){ S2.selected=new Set(); for(var i=1;i<=S2.totalPages;i++) S2.selected.add(i); renderChips2(); return; }
+    var parsed=parseRange2(v,S2.totalPages);
+    if(parsed && parsed.size>0){ S2.selected=parsed; renderChips2(); }
+  });
+  var selAll=el('t2SelectAllBtn'); if(selAll) selAll.addEventListener('click', function(){ S2.selected=new Set(); for(var i=1;i<=S2.totalPages;i++) S2.selected.add(i); if(rangeInp) rangeInp.value=""; renderChips2(); });
+  var clrAll=el('t2ClearAllBtn'); if(clrAll) clrAll.addEventListener('click', function(){ S2.selected=new Set(); if(rangeInp) rangeInp.value=""; renderChips2(); });
+
+  // LOAD PDF - FIX: Size check, password check, worker check
+  async function loadPdf2(e){
+    var f = e && e.target && e.target.files ? e.target.files[0] : null;
+    if(!f) return;
+    showError2(""); showName2("Loading "+f.name+"...", true);
+    // FIX: Check file size 50 MB
+    if(f.size > 50*1024*1024){ showError2("PDF is too big - Max 50 MB. Please compress PDF first using PDF Compress tool."); showName2(""); if(fileInp) fileInp.value=""; return; }
+    if(!f.name.toLowerCase().endsWith('.pdf') && f.type !== 'application/pdf'){ showError2("Please select a valid PDF file."); if(fileInp) fileInp.value=""; return; }
+    try{
+      if(!window.pdfjsLib){ showError2("PDF library not loaded - Check internet and reload page."); return; }
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+      S2.name = f.name.replace(/\.pdf$/i,"").replace(/[^a-zA-Z0-9-_ ]/g,"").trim() || "My-Document";
+      var rn=el('t2Rename'); if(rn) rn.value=S2.name;
+      var buf=await f.arrayBuffer();
+      S2.doc=await window.pdfjsLib.getDocument({data:buf}).promise;
+      S2.totalPages=S2.doc.numPages;
+      S2.selected=new Set(); for(var i=1;i<=S2.totalPages;i++) S2.selected.add(i);
+      S2.images=[]; var grid=el('t2Grid'); if(grid) grid.innerHTML=""; var res=el('t2Result'); if(res) res.style.display='none';
+      var pb=el('t2PageBox'); if(pb) pb.style.display='block';
+      renderChips2();
+      showName2("✅ "+f.name+" - "+S2.totalPages+" pages - Ready to Convert", true);
+      var st=el('t2Status'); if(st) st.textContent="Ready - "+S2.totalPages+" pages selected - Tap Convert";
+    }catch(err){
+      // FIX: Password protected PDF error
+      if(String(err && err.message || err).toLowerCase().indexOf("password")>-1){ showError2("This PDF is password protected. Please unlock PDF first, then try again."); }
+      else { showError2("Could not read PDF - File may be damaged. Try another PDF."); }
+      showName2(""); if(fileInp) fileInp.value="";
+    }
+  }
+  window.loadPdf2Tool2 = loadPdf2;
+
+  // CONVERT - FIX: Prevent double click, handle 0 pages, handle cancel
+  async function convertPdf2(){
+    if(S2.converting){ return; }
+    if(!S2.doc){ showError2("Please select PDF first."); return; }
+    if(S2.selected.size===0){ showError2("Please select at least 1 page - Tap Select All or tap a page chip."); return; }
+    S2.converting=true;
+    var btn=el('t2ConvertBtn'); if(btn){ btn.disabled=true; btn.textContent="⏳ Converting... Please Wait"; }
+    var prog=el('t2Progress'); if(prog) prog.style.display='block';
+    var bar=el('t2Bar'); if(bar) bar.style.width='0%';
+    var grid=el('t2Grid'); if(grid) grid.innerHTML="";
+    var res=el('t2Result'); if(res) res.style.display='none';
+    S2.images=[];
+    showError2("");
+    try{
+      var pages=Array.from(S2.selected).sort(function(a,b){ return a-b; });
+      var scale=parseFloat(el('t2Size').value || "1.5");
+      var fmt=el('t2Format').value || "jpeg";
+      var wm=getWm2();
+      var fileName=(el('t2Rename').value || S2.name || "My-Document").replace(/[^a-zA-Z0-9-_ ]/g,"").trim() || "My-Document";
+      S2.name=fileName;
+      var totalKB=0;
+      for(var idx=0;idx<pages.length;idx++){
+        var pNum=pages[idx];
+        var page=await S2.doc.getPage(pNum);
+        var vp=page.getViewport({scale:scale});
+        var cv=document.createElement('canvas'); cv.width=Math.floor(vp.width); cv.height=Math.floor(vp.height);
+        var ctx=cv.getContext('2d'); ctx.fillStyle="#ffffff"; ctx.fillRect(0,0,cv.width,cv.height);
+        await page.render({canvasContext:ctx, viewport:vp}).promise;
+        // FIX: Auto Enhance - Real brightness + contrast
+        if(S2.enhance){
+          try{
+            var imgData=ctx.getImageData(0,0,cv.width,cv.height); var d=imgData.data;
+            for(var pi=0;pi<d.length;pi+=4){ d[pi]=Math.min(255, d[pi]*1.08+6); d[pi+1]=Math.min(255, d[pi+1]*1.08+6); d[pi+2]=Math.min(255, d[pi+2]*1.08+6); }
+            ctx.putImageData(imgData,0,0);
+          }catch(e){}
+        }
+        // FIX: Auto Crop - Trim white border (fast sampling)
+        if(S2.crop){
+          try{
+            var cropped=cropWhiteBorder2(cv, ctx);
+            if(cropped){ cv=cropped; ctx=cv.getContext('2d'); }
+          }catch(e){}
+        }
+        // Watermark - FIX: Position safe, font size based on width
+        if(wm.wm){
+          try{
+            ctx.fillStyle="rgba(0,0,0,0.55)"; var fs=Math.max(12, Math.floor(cv.width/45)); ctx.font="bold "+fs+"px Arial"; ctx.textAlign="right"; ctx.fillText(wm.txt, cv.width-12, cv.height-12);
+          }catch(e){}
+        }
+        var q = S2.quality==="low" ? 0.6 : S2.quality==="high" ? 0.95 : 0.82;
+        if(S2.compress) q=Math.min(q,0.65);
+        var url = fmt==="png" ? cv.toDataURL("image/png") : cv.toDataURL("image/jpeg", q);
+        var kb=Math.round(url.length*3/4/1024);
+        totalKB+=kb;
+        S2.images.push({page:pNum, dataUrl:url, format:fmt, kb:kb});
+        // Card
+        (function(it, index){
+          var card=document.createElement('div'); card.className='img-card';
+          var img=document.createElement('img'); img.src=it.dataUrl; img.alt='Page '+it.page;
+          var b=document.createElement('div'); b.style.fontWeight='800'; b.style.marginTop='6px'; b.textContent='Page '+it.page;
+          var sz=document.createElement('div'); sz.style.fontSize='11px'; sz.style.color='#6B7280'; sz.textContent=it.kb+' KB • '+(it.format==='png'?'PNG':'JPG');
+          var dl=document.createElement('button'); dl.className='btn2 primary'; dl.style.width='100%'; dl.style.marginTop='6px'; dl.type='button'; dl.textContent='⬇️ Download';
+          dl.addEventListener('click', function(){ downloadOne2(index); });
+          card.appendChild(img); card.appendChild(b); card.appendChild(sz); card.appendChild(dl); if(grid) grid.appendChild(card);
+        })(S2.images[S2.images.length-1], S2.images.length-1);
+        if(bar) bar.style.width=Math.round(((idx+1)/pages.length)*100)+"%";
+        var st=el('t2Status'); if(st) st.textContent="Converting "+(idx+1)+"/"+pages.length+" pages...";
+        await new Promise(function(r){ setTimeout(r,30); });
+      }
+      if(res) res.style.display='block';
+      var cnt=el('t2Count'); if(cnt) cnt.textContent=S2.images.length;
+      var tot=el('t2Total'); if(tot) tot.textContent="Total "+(Math.round(totalKB/1024*10)/10)+" MB";
+      var st2=el('t2Status'); if(st2) st2.textContent="✅ Done - "+S2.images.length+" images ready - Download 1 by 1 or ZIP All";
+    }catch(err){
+      showError2("Convert failed - Try again with smaller PDF or lower quality.");
+    }finally{
+      S2.converting=false;
+      if(btn){ btn.disabled=false; btn.textContent="✨ Convert PDF To Images"; }
+      setTimeout(function(){ if(prog) prog.style.display='none'; },1500);
+    }
+  }
+  function cropWhiteBorder2(canvas, ctx){
+    var w=canvas.width, h=canvas.height;
+    if(w<50 || h<50) return null;
+    try{
+      var data=ctx.getImageData(0,0,w,h).data;
+      function isWhite(x,y){ var i=(y*w+x)*4; return data[i]>245 && data[i+1]>245 && data[i+2]>245; }
+      var top=0, bottom=h-1, left=0, right=w-1;
+      // Sample every 4px for speed
+      outer: for(var y=0;y<h;y+=4){ for(var x=0;x<w;x+=8){ if(!isWhite(x,y)){ top=y; break outer; } } }
+      outer2: for(var y2=h-1;y2>0;y2-=4){ for(var x2=0;x2<w;x2+=8){ if(!isWhite(x2,y2)){ bottom=y2; break outer2; } } }
+      outer3: for(var x3=0;x3<w;x3+=4){ for(var y3=0;y3<h;y3+=8){ if(!isWhite(x3,y3)){ left=x3; break outer3; } } }
+      outer4: for(var x4=w-1;x4>0;x4-=4){ for(var y4=0;y4<h;y4+=8){ if(!isWhite(x4,y4)){ right=x4; break outer4; } } }
+      if(top<5 && bottom>h-6 && left<5 && right>w-6) return null;
+      var nw=Math.max(10, right-left+1), nh=Math.max(10, bottom-top+1);
+      if(nw<w*0.5 || nh<h*0.5) return null;
+      var nc=document.createElement('canvas'); nc.width=nw; nc.height=nh; nc.getContext('2d').drawImage(canvas, left, top, nw, nh, 0,0,nw,nh);
+      return nc;
+    }catch(e){ return null; }
+  }
+  function downloadOne2(i){
+    var it=S2.images[i]; if(!it) return;
+    try{
+      var a=document.createElement('a'); a.href=it.dataUrl; a.download=S2.name+"-Page-"+it.page+"."+(it.format==="png"?"png":"jpg"); document.body.appendChild(a); a.click(); a.remove();
+    }catch(e){ showError2("Download failed - Try again"); }
+  }
+  async function downloadZip2(){
+    if(!S2.images.length){ showError2("Convert PDF first"); return; }
+    try{
+      if(!window.JSZip){ showError2("ZIP library not loaded - Check internet"); return; }
+      var zip=new window.JSZip();
+      S2.images.forEach(function(it){
+        var base64=it.dataUrl.split(',')[1] || "";
+        zip.file(S2.name+"-Page-"+it.page+"."+(it.format==="png"?"png":"jpg"), base64, {base64:true});
+      });
+      var blob=await zip.generateAsync({type:"blob"});
+      var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=S2.name+".zip"; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); },1000);
+    }catch(e){ showError2("ZIP failed - Download 1 by 1 instead"); }
+  }
+  async function stitch2(){
+    if(S2.images.length<2){ showError2("Need 2+ pages to stitch"); return; }
+    try{
+      var imgs=[];
+      for(var i=0;i<S2.images.length;i++){
+        var im=new Image(); im.src=S2.images[i].dataUrl;
+        await new Promise(function(res,rej){ im.onload=res; im.onerror=res; });
+        imgs.push(im);
+      }
+      var w=Math.max.apply(null, imgs.map(function(im){ return im.naturalWidth || im.width; }));
+      var h=imgs.reduce(function(s,im){ return s+(im.naturalHeight || im.height); },0);
+      if(w<=0 || h<=0){ showError2("Stitch failed - Try again"); return; }
+      var c=document.createElement('canvas'); c.width=w; c.height=h; var ctx=c.getContext('2d'); ctx.fillStyle="#fff"; ctx.fillRect(0,0,w,h);
+      var y=0; imgs.forEach(function(im){ var iw=im.naturalWidth||im.width, ih=im.naturalHeight||im.height; ctx.drawImage(im,0,y,iw,ih); y+=ih; });
+      var a=document.createElement('a'); a.href=c.toDataURL("image/jpeg",0.85); a.download=S2.name+"-Long.jpg"; document.body.appendChild(a); a.click(); a.remove();
+    }catch(e){ showError2("Stitch failed - Try again"); }
+  }
+  function clearTool2(){
+    S2.doc=null; S2.images=[]; S2.selected=new Set(); S2.totalPages=0;
+    if(fileInp) fileInp.value="";
+    var grid=el('t2Grid'); if(grid) grid.innerHTML="";
+    var res=el('t2Result'); if(res) res.style.display='none';
+    var pb=el('t2PageBox'); if(pb) pb.style.display='none';
+    var rn=el('t2Rename'); if(rn) rn.value="My-Document";
+    var ri=el('t2Range'); if(ri) ri.value="";
+    showName2(""); showError2("");
+    var st=el('t2Status'); if(st) st.textContent="Select PDF first";
+    var bar=el('t2Bar'); if(bar) bar.style.width='0%';
+  }
+  window.clearTool2 = clearTool2;
+
+  // Bind buttons - FIX: Use addEventListener, not inline onclick for convert (double call bug)
+  var convBtn=el('t2ConvertBtn'); if(convBtn) convBtn.addEventListener('click', convertPdf2);
+  var zipBtn=el('t2ZipBtn'); if(zipBtn) zipBtn.addEventListener('click', downloadZip2);
+  var stitchBtn=el('t2StitchBtn'); if(stitchBtn) stitchBtn.addEventListener('click', stitch2);
+})();
+</script>
+<!-- ================= TOOL 2 END - PDF TO IMAGE - PREMIUM - BUG FREE ================= --> 
 <!-- ================= TOOL 3 - IMAGE TO PDF ================= -->
 <div id="page-tool3" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>📸 Image To PDF</b><br><span>Your Tool</span></div></div><h2 style="text-align:center">📸 Image To PDF</h2><p style="font-size:12px;color:#6B7280;text-align:center">Aadhar, Marksheet, Notes, Form - Multiple Photos To 1 PDF</p><div class="drop" onclick="document.getElementById('imgPdfFile').click()"><b>📸 Select Images - Multiple</b><p style="font-size:12px;color:#6B7280">Tap to select 1 or many photos</p><input type="file" id="imgPdfFile" accept="image/*" multiple onchange="previewImgPdf(event)"></div><div id="imgPdfPreview" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"></div><label>PDF Name</label><input id="imgPdfName" value="My-Document"><label>Page Size</label><select id="imgPdfSize"><option value="a4">A4 - Best For Print</option><option value="photo">Photo Size - Keep Original</option></select><button class="btn" onclick="makeImgPdf()">📄 Convert To PDF - Free</button><p id="imgPdfStatus" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select images first</p><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
 
