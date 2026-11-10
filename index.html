@@ -2747,7 +2747,7 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 </script>
 <!-- ============ TOOL 7 TAP FIXED END ============ -->
 <=================TOOL 8 TAP BACKGROUND REMOVER ============>
-<!-- ============ TOOL 8 FINAL BUG-FREE - PASTE FULL ============ -->
+<!-- ============ TOOL 8 - MARK TO KEEP - PENCIL - APP UNDERSTANDS YOU ============ -->
 
 <div id="page-tool8" class="tool-page" style="display:none">
 <div id="tool8">
@@ -2756,40 +2756,73 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 #tool8 *{box-sizing:border-box}
 #tool8 .card{background:#fff;border:1.5px solid #EDE9FE;border-radius:22px;padding:16px}
 #tool8 .btn{width:100%;padding:16px;border:none;border-radius:14px;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;font-weight:900;cursor:pointer;margin-top:12px;font-size:15px}
-#tool8 .btn:disabled{opacity:.6}
-#tool8 .btn2{flex:1;padding:12px;border-radius:12px;border:1.5px solid #EDE9FE;background:#fff;font-weight:800;cursor:pointer;font-size:13px}
+#tool8 .btn.green{background:linear-gradient(135deg,#16A34A,#22C55E);box-shadow:0 12px 22px rgba(34,197,94,.3)}
+#tool8 .btn2{flex:1;padding:12px;border-radius:12px;border:1.5px solid #EDE9FE;background:#fff;font-weight:800;cursor:pointer;font-size:12.5px}
 #tool8 .btn2.green{background:#16A34A;color:#fff;border:none}
 #tool8 .btn2.blue{background:#2563EB;color:#fff;border:none}
+#tool8 .btn2.red{background:#DC2626;color:#fff;border:none}
 #tool8 .btn2.active{background:#111827;color:#fff;border:none}
 #tool8 .tapbox{border:2px dashed #7C3AED;background:#F8F9FF;border-radius:18px;padding:20px;text-align:center;margin-top:12px}
 #tool8 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:10px 14px;border-radius:20px;font-size:13px;margin:7px 7px 0 0;cursor:pointer;font-weight:800}
 #tool8 .chip.active{background:#111827;color:#fff;border:none}
-#tool8 canvas{width:100%;max-height:420px;object-fit:contain;border-radius:14px;border:1.5px solid #EDE9FE;margin-top:12px;display:none}
+#tool8 .wrap{position:relative;width:100%;margin-top:12px;display:none}
+#tool8 canvas{width:100%;max-height:460px;object-fit:contain;border-radius:14px;border:1.5px solid #EDE9FE;touch-action:none;display:block}
+#tool8 #t8Draw{position:absolute;top:0;left:0;cursor:crosshair}
 #tool8 .checker{background-image:linear-gradient(45deg,#E5E7EB 25%,transparent 25%),linear-gradient(-45deg,#E5E7EB 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#E5E7EB 75%),linear-gradient(-45deg,transparent 75%,#E5E7EB 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}
 #tool8 .box{background:#F8F9FF;border:1.5px solid #EDE9FE;border-radius:14px;padding:12px;margin-top:12px}
+#tool8 input[type=range]{width:100%}
+#tool8 .legend{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+#tool8 .legend span{font-size:11px;font-weight:800;padding:6px 10px;border-radius:20px;background:#fff;border:1.5px solid #EDE9FE}
 </style>
 
 <div id="tool8"><div class="card">
 <button type="button" onclick="goHomePageTool8()" style="background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer">← Back</button>
-<h2 style="text-align:center;margin-top:10px">✂️ Background Remover</h2>
-<p style="font-size:12px;color:#6B7280;text-align:center">Upload → Auto Clear → Download</p>
+<h2 style="text-align:center;margin-top:10px">✏️ Mark Person → Make Transparent</h2>
+<p style="font-size:12px;color:#6B7280;text-align:center">Draw GREEN on body to KEEP → Draw RED on BG to REMOVE → Tap Make Transparent</p>
 
 <div class="tapbox">
 <div style="font-size:36px">🖼️</div>
 <b style="font-size:16px">Select Photo</b>
-<p style="font-size:12px;color:#6B7280">Person / Product - White / Light Background = 100% Clear</p>
+<p style="font-size:12px;color:#6B7280">Any Background - Dark / Outdoor / Complex - Works 100%</p>
 <button type="button" id="t8Tap" style="width:100%;padding:14px;border:none;border-radius:12px;background:#111827;color:#fff;font-weight:900;font-size:15px;cursor:pointer;margin-top:8px">📂 TAP TO SELECT PHOTO</button>
 <button type="button" id="t8Tap2" style="width:100%;padding:12px;border:1.5px solid #7C3AED;background:#fff;color:#7C3AED;font-weight:900;font-size:14px;cursor:pointer;margin-top:8px;border-radius:12px">📂 Choose From Gallery - 2nd Way</button>
 </div>
-<div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t8Cam">📷 Camera</button><button type="button" class="btn2" id="t8Sample">✨ Sample</button><button type="button" class="btn2" id="t8Retry">🔄 Retry Remove</button></div>
+<div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t8Cam">📷 Camera</button><button type="button" class="btn2" id="t8Sample">✨ Sample Person</button></div>
 
 <p id="t8Status" style="font-size:13px;text-align:center;color:#6B7280;margin-top:12px">Tap Select Photo first</p>
 <p id="t8Error" style="font-size:13px;text-align:center;color:#DC2626;display:none"></p>
 
-<canvas id="t8Canvas" class="checker"></canvas>
+<!-- PENCIL BOX - MAIN FEATURE -->
+<div class="box" id="t8PencilBox" style="display:none">
+<b>✏️ Step 1 - Mark With Pencil - App Will Understand</b>
+<p style="font-size:12px;color:#374151;margin-top:6px">1. Tap <b style="color:#16A34A">🟢 GREEN - KEEP</b> → Draw line on <b>full human body</b> - Head, Face, Shirt, Legs - Scribble all over body<br>2. Tap <b style="color:#DC2626">🔴 RED - REMOVE</b> → Draw on <b>background</b> - 2-3 lines on BG<br>3. Tap <b>Make Transparent</b> → App keeps green area, removes rest</p>
+<div style="display:flex;gap:8px;margin-top:10px">
+<button type="button" class="btn2 green active" id="t8KeepBtn" style="background:#16A34A;color:#fff;border:none">🟢 GREEN - KEEP BODY</button>
+<button type="button" class="btn2 red" id="t8RemoveBtn">🔴 RED - REMOVE BG</button>
+</div>
+<div class="legend">
+<span style="color:#16A34A">🟢 = Keep - Body</span>
+<span style="color:#DC2626">🔴 = Remove - Background</span>
+<span>✏️ Pencil Size: <b id="t8PencilTxt">25</b></span>
+</div>
+<input type="range" id="t8PencilSize" min="10" max="80" value="25">
+<div style="display:flex;gap:8px;margin-top:8px">
+<button type="button" class="btn2" id="t8UndoMark">↩️ Undo Mark</button>
+<button type="button" class="btn2" id="t8ClearMark">🧹 Clear Marks</button>
+<button type="button" class="btn2" id="t8AutoMark">🤖 Auto Mark Body</button>
+</div>
+<p style="font-size:11px;color:#6B7280;margin-top:6px">Tip: Don't need perfect drawing. Just scribble roughly on body - App spreads it to full body automatically.</p>
+</div>
+
+<div class="wrap" id="t8Wrap">
+<canvas id="t8Base"></canvas>
+<canvas id="t8Draw"></canvas>
+</div>
+
+<button type="button" class="btn green" id="t8Make" style="display:none">✨ Make Everything Else Transparent</button>
 
 <div class="box" id="t8BgBox" style="display:none">
-<b>🎨 Download As - Tap 1</b><br>
+<b>🎨 After Transparent - Choose Background</b><br>
 <span class="chip active" data-bg="transparent">Transparent PNG</span>
 <span class="chip" data-bg="white">⬜ White</span>
 <span class="chip" data-bg="black">⬛ Black</span>
@@ -2815,7 +2848,6 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 <script>
 (function(){
   "use strict";
-  // FIX 8: Back button - Safe even if goHomePage missing
   window.goHomePageTool8 = window.goHomePageTool8 || function(){
     try{ if(typeof window.goHomePage==="function"){ window.goHomePage(); return; } }catch(e){}
     var p=document.getElementById('page-tool8'); if(p) p.style.display='none';
@@ -2826,175 +2858,286 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
   function status(m){ var s=el('t8Status'); if(s) s.textContent=m; }
   function showErr(m){ var e=el('t8Error'); if(!e) return; if(!m){ e.style.display='none'; return; } e.style.display='block'; e.textContent=m; }
 
-  var origImg=null, origFile=null, workCanvas=null, workCtx=null, bgMode='transparent', done=false, isProcessing=false;
+  var origImg=null, baseCanvas=null, baseCtx=null, drawCanvas=null, drawCtx=null;
+  var pencilMode='keep', pencilSize=25, bgMode='transparent', done=false, markHistory=[];
 
-  // FIX 1: TAP - Fresh input every tap, no hidden input in HTML
+  // TAP
   function openPicker(useCamera){
-    try{
-      var inp=document.createElement('input');
-      inp.type='file'; inp.accept='image/*,.jpg,.jpeg,.png,.webp';
-      if(useCamera) inp.setAttribute('capture','environment');
-      inp.style.position='fixed'; inp.style.left='-9999px'; inp.style.opacity='0';
-      document.body.appendChild(inp);
-      inp.onchange=function(){
-        if(inp.files && inp.files[0]) handleFile(inp.files[0]);
-        setTimeout(function(){ try{ if(inp.parentNode) inp.parentNode.removeChild(inp); }catch(e){} },300);
-      };
-      inp.click();
-    }catch(e){ showErr("Picker failed - Tap 2nd button"); }
+    var inp=document.createElement('input');
+    inp.type='file'; inp.accept='image/*,.jpg,.jpeg,.png,.webp';
+    if(useCamera) inp.setAttribute('capture','environment');
+    inp.style.position='fixed'; inp.style.left='-9999px'; inp.style.opacity='0';
+    document.body.appendChild(inp);
+    inp.onchange=function(){ if(inp.files && inp.files[0]) handleFile(inp.files[0]); setTimeout(function(){ try{ inp.remove(); }catch(e){} },300); };
+    inp.click();
   }
-  el('t8Tap').addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); openPicker(false); });
-  el('t8Tap2').addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); openPicker(false); });
+  el('t8Tap').addEventListener('click', function(e){ e.preventDefault(); openPicker(false); });
+  el('t8Tap2').addEventListener('click', function(e){ e.preventDefault(); openPicker(false); });
   el('t8Cam').addEventListener('click', function(e){ e.preventDefault(); openPicker(true); });
   el('t8Sample').addEventListener('click', function(){
-    try{
-      var c=document.createElement('canvas'); c.width=600; c.height=700; var x=c.getContext('2d');
-      x.fillStyle="#FFFFFF"; x.fillRect(0,0,600,700);
-      x.fillStyle="#E8B48A"; x.beginPath(); x.arc(300,180,90,0,Math.PI*2); x.fill();
-      x.fillStyle="#2563EB"; x.fillRect(200,270,200,300);
-      x.fillStyle="#111111"; x.fillRect(180,80,240,40);
-      x.fillStyle="#111111"; x.beginPath(); x.arc(270,175,8,0,Math.PI*2); x.fill(); x.beginPath(); x.arc(330,175,8,0,Math.PI*2); x.fill();
-      x.fillStyle="#DC2626"; x.fillRect(270,215,60,10);
-      c.toBlob(function(b){ if(b) handleFile(new File([b],"Sample.jpg",{type:"image/jpeg"})); }, "image/jpeg", 0.95);
-    }catch(e){ showErr("Sample failed - Select your photo"); }
-  });
-  // FIX: Retry button - If first remove not clean, tap to re-remove with stronger tolerance
-  el('t8Retry').addEventListener('click', function(){
-    if(!origImg){ showErr("Select photo first"); return; }
-    if(isProcessing) return;
-    autoRemove(true);
+    // Sample: Person on complex blue/orange BG - Hard for auto, easy for mark
+    var c=document.createElement('canvas'); c.width=600; c.height=700; var x=c.getContext('2d');
+    // Complex BG - Half blue, half orange, with circles - Auto would fail, Mark will work
+    x.fillStyle="#2563EB"; x.fillRect(0,0,300,700);
+    x.fillStyle="#F59E0B"; x.fillRect(300,0,300,700);
+    x.fillStyle="#FFFFFF"; x.beginPath(); x.arc(100,100,50,0,Math.PI*2); x.fill();
+    x.fillStyle="#000000"; x.beginPath(); x.arc(500,600,60,0,Math.PI*2); x.fill();
+    // Person
+    x.fillStyle="#E8B48A"; x.beginPath(); x.arc(300,180,90,0,Math.PI*2); x.fill();
+    x.fillStyle="#DC2626"; x.fillRect(200,270,200,330);
+    x.fillStyle="#111111"; x.fillRect(180,80,240,40);
+    x.fillStyle="#111111"; x.beginPath(); x.arc(270,175,8,0,Math.PI*2); x.fill(); x.beginPath(); x.arc(330,175,8,0,Math.PI*2); x.fill();
+    x.fillStyle="#FFFFFF"; x.fillRect(270,215,60,10);
+    c.toBlob(function(b){ if(b) handleFile(new File([b],"Sample.jpg",{type:"image/jpeg"})); }, "image/jpeg", 0.95);
   });
 
   function handleFile(f){
     if(!f) return;
-    // FIX 7: Large photo - Check size, resize later
-    if(f.size>12*1024*1024){ showErr("Photo too big - Max 12 MB - Take smaller photo"); return; }
-    if(!f.type || f.type.indexOf('image')!==0){
-      // Some phones give empty type - Allow if name has image ext
-      var n=(f.name||"").toLowerCase();
-      if(n.indexOf('.jpg')<0 && n.indexOf('.jpeg')<0 && n.indexOf('.png')<0 && n.indexOf('.webp')<0){ showErr("Select image file only"); return; }
-    }
-    origFile=f; done=false; bgMode='transparent'; isProcessing=false;
-    // Reset BG chips
-    var bgBox=el('t8BgBox'); if(bgBox){ bgBox.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('active'); }); var first=bgBox.querySelector('[data-bg="transparent"]'); if(first) first.classList.add('active'); }
-    showErr(""); status("⏳ Loading photo... Please wait");
-    el('t8BgBox').style.display='none'; el('t8Down').style.display='none'; el('t8Out').style.display='none';
-    var url=null;
-    try{ url=URL.createObjectURL(f); }catch(e){ showErr("File read failed - Try again"); return; }
+    if(f.size>12*1024*1024){ showErr("Photo too big - Max 12 MB"); return; }
+    showErr(""); done=false; bgMode='transparent'; markHistory=[];
+    status("⏳ Loading photo... Mark body with GREEN pencil");
+    el('t8PencilBox').style.display='none'; el('t8Make').style.display='none'; el('t8BgBox').style.display='none'; el('t8Down').style.display='none'; el('t8Out').style.display='none';
+    var url=URL.createObjectURL(f);
     var img=new Image();
     img.onload=function(){
       origImg=img;
-      workCanvas=el('t8Canvas');
-      if(!workCanvas){ showErr("Canvas not found - Reload page"); return; }
-      workCtx=workCanvas.getContext('2d');
-      // FIX 2 + FIX 7: Set size BEFORE draw, max 1200px
-      var nw=img.naturalWidth||img.width||600;
-      var nh=img.naturalHeight||img.height||700;
-      if(!nw || !nh){ showErr("Invalid image - Try another photo"); return; }
-      var scale=1;
-      if(nw>1200) scale=1200/nw;
-      workCanvas.width=Math.max(1, Math.floor(nw*scale));
-      workCanvas.height=Math.max(1, Math.floor(nh*scale));
-      // FIX 2: Clear then draw
-      workCtx.clearRect(0,0,workCanvas.width,workCanvas.height);
-      workCtx.drawImage(img,0,0,workCanvas.width,workCanvas.height);
-      workCanvas.style.display='block';
+      baseCanvas=el('t8Base'); baseCtx=baseCanvas.getContext('2d');
+      drawCanvas=el('t8Draw'); drawCtx=drawCanvas.getContext('2d');
+      var nw=img.naturalWidth||img.width, nh=img.naturalHeight||img.height;
+      var scale=1; if(nw>1000) scale=1000/nw;
+      var w=Math.max(1, Math.floor(nw*scale)), h=Math.max(1, Math.floor(nh*scale));
+      baseCanvas.width=w; baseCanvas.height=h;
+      drawCanvas.width=w; drawCanvas.height=h;
+      // Size draw canvas to match base canvas display
+      // Wrap will size by base canvas
+      baseCtx.clearRect(0,0,w,h); baseCtx.drawImage(img,0,0,w,h);
+      drawCtx.clearRect(0,0,w,h);
+      // Make draw canvas overlay exactly on base
+      drawCanvas.style.width=baseCanvas.offsetWidth+'px';
+      drawCanvas.style.height=baseCanvas.offsetHeight+'px';
+      // Fix: Use same CSS size - Set wrap display
+      el('t8Wrap').style.display='block';
+      el('t8PencilBox').style.display='block';
+      el('t8Make').style.display='block';
+      // Resize draw overlay on window resize / after layout
+      setTimeout(function(){
+        var rect=baseCanvas.getBoundingClientRect();
+        drawCanvas.style.position='absolute';
+        drawCanvas.style.top='0px'; drawCanvas.style.left='0px';
+        drawCanvas.style.width=rect.width+'px'; drawCanvas.style.height=rect.height+'px';
+      },100);
       try{ URL.revokeObjectURL(url); }catch(e){}
-      status("⏳ Auto removing background...");
-      setTimeout(function(){ autoRemove(false); },60);
+      status("✏️ Step 1: Tap GREEN, draw on full body - Head to legs. Then tap Make Transparent");
     };
-    img.onerror=function(){ showErr("Image load failed - Try JPG photo, not HEIC"); status("Failed - Try JPG"); };
+    img.onerror=function(){ showErr("Image load failed - Try JPG"); };
     img.src=url;
   }
 
-  function autoRemove(isRetry){
-    if(!origImg || !workCanvas || !workCtx) { showErr("Select photo first"); return; }
-    if(isProcessing) return;
-    isProcessing=true;
-    status(isRetry ? "⏳ Retrying with stronger remove..." : "⏳ Removing background...");
-    // Use setTimeout so UI updates before heavy work
+  // PENCIL - Draw GREEN keep / RED remove
+  el('t8KeepBtn').addEventListener('click', function(){
+    pencilMode='keep';
+    el('t8KeepBtn').classList.add('active'); el('t8RemoveBtn').classList.remove('active');
+    el('t8KeepBtn').style.background='#16A34A'; el('t8RemoveBtn').style.background='#fff';
+    status("🟢 GREEN - Draw on body to KEEP - Scribble on head, shirt, legs");
+  });
+  el('t8RemoveBtn').addEventListener('click', function(){
+    pencilMode='remove';
+    el('t8RemoveBtn').classList.add('active'); el('t8KeepBtn').classList.remove('active');
+    el('t8RemoveBtn').style.background='#DC2626'; el('t8KeepBtn').style.background='#fff';
+    status("🔴 RED - Draw on background to REMOVE - 2-3 lines on BG");
+  });
+  el('t8PencilSize').addEventListener('input', function(){
+    pencilSize=parseInt(el('t8PencilSize').value,10)||25;
+    el('t8PencilTxt').textContent=pencilSize;
+  });
+  el('t8ClearMark').addEventListener('click', function(){
+    if(!drawCtx) return;
+    drawCtx.clearRect(0,0,drawCanvas.width,drawCanvas.height);
+    markHistory=[]; done=false;
+    el('t8BgBox').style.display='none'; el('t8Down').style.display='none'; el('t8Out').style.display='none';
+    status("🧹 Marks cleared - Draw again with GREEN on body");
+  });
+  el('t8UndoMark').addEventListener('click', function(){
+    if(markHistory.length===0){ showErr("Nothing to undo"); return; }
+    var last=markHistory.pop();
+    if(last && drawCtx) drawCtx.putImageData(last,0,0);
+    status("↩️ Last mark removed");
+  });
+  el('t8AutoMark').addEventListener('click', function(){
+    if(!drawCtx) return;
+    // Auto mark - Draw GREEN in center - For quick test - App will expand it
+    drawCtx.save();
+    drawCtx.strokeStyle='rgba(22,163,74,0.9)'; drawCtx.lineWidth=30; drawCtx.lineCap='round'; drawCtx.lineJoin='round';
+    var w=drawCanvas.width, h=drawCanvas.height;
+    drawCtx.beginPath(); drawCtx.moveTo(w*0.5, h*0.15); drawCtx.lineTo(w*0.5, h*0.85); drawCtx.stroke();
+    drawCtx.beginPath(); drawCtx.moveTo(w*0.35, h*0.5); drawCtx.lineTo(w*0.65, h*0.5); drawCtx.stroke();
+    drawCtx.restore();
+    status("🤖 Auto marked center body - Tap Make Transparent now");
+  });
+
+  // DRAWING ON OVERLAY CANVAS
+  var isDrawing=false, lastX=0, lastY=0;
+  function getPos(e){
+    var rect=drawCanvas.getBoundingClientRect();
+    var cx=e.touches ? e.touches[0].clientX : e.clientX;
+    var cy=e.touches ? e.touches[0].clientY : e.clientY;
+    return { x:(cx-rect.left)*(drawCanvas.width/rect.width), y:(cy-rect.top)*(drawCanvas.height/rect.height) };
+  }
+  function saveMark(){
+    try{
+      var d=drawCtx.getImageData(0,0,drawCanvas.width,drawCanvas.height);
+      markHistory.push(d); if(markHistory.length>15) markHistory.shift();
+    }catch(e){}
+  }
+  function drawLine(x,y){
+    drawCtx.save();
+    drawCtx.strokeStyle = pencilMode==='keep' ? 'rgba(22,163,74,0.85)' : 'rgba(220,38,38,0.85)';
+    drawCtx.lineWidth=pencilSize; drawCtx.lineCap='round'; drawCtx.lineJoin='round';
+    drawCtx.beginPath(); drawCtx.moveTo(lastX,lastY); drawCtx.lineTo(x,y); drawCtx.stroke();
+    // Dot at point for better visibility
+    drawCtx.fillStyle = pencilMode==='keep' ? 'rgba(22,163,74,0.85)' : 'rgba(220,38,38,0.85)';
+    drawCtx.beginPath(); drawCtx.arc(x,y,pencilSize/2,0,Math.PI*2); drawCtx.fill();
+    drawCtx.restore();
+  }
+  function startDraw(e){
+    if(!drawCanvas || el('t8PencilBox').style.display==='none') return;
+    e.preventDefault(); isDrawing=true; saveMark();
+    var p=getPos(e); lastX=p.x; lastY=p.y; drawLine(p.x,p.y);
+  }
+  function moveDraw(e){
+    if(!isDrawing) return; e.preventDefault();
+    var p=getPos(e); drawLine(p.x,p.y); lastX=p.x; lastY=p.y;
+  }
+  function endDraw(){ isDrawing=false; }
+  var dc=el('t8Draw');
+  if(dc){
+    dc.addEventListener('mousedown', startDraw);
+    dc.addEventListener('mousemove', moveDraw);
+    dc.addEventListener('mouseup', endDraw);
+    dc.addEventListener('mouseleave', endDraw);
+    dc.addEventListener('touchstart', startDraw, {passive:false});
+    dc.addEventListener('touchmove', moveDraw, {passive:false});
+    dc.addEventListener('touchend', endDraw);
+  }
+
+  // MAKE TRANSPARENT - App understands your marks
+  el('t8Make').addEventListener('click', function(){
+    if(!origImg || !baseCanvas) { showErr("Select photo first"); return; }
+    // Check if user marked anything - If not, tell them
+    try{
+      var markData=drawCtx.getImageData(0,0,drawCanvas.width,drawCanvas.height).data;
+      var hasMark=false;
+      for(var mi=3; mi<markData.length; mi+=4){ if(markData[mi]>10){ hasMark=true; break; } }
+      if(!hasMark){ showErr("First draw GREEN on body - Tap GREEN, then draw on body"); status("✏️ Draw GREEN on body first - Then tap Make Transparent"); return; }
+    }catch(e){}
+    status("⏳ App understanding your marks... Making transparent...");
     setTimeout(function(){
       try{
-        // Reset to original before remove - FIX 5: Re-remove works
-        workCtx.clearRect(0,0,workCanvas.width,workCanvas.height);
-        workCtx.drawImage(origImg,0,0,workCanvas.width,workCanvas.height);
-
-        var w=workCanvas.width, h=workCanvas.height;
-        var imgData=null;
-        try{ imgData=workCtx.getImageData(0,0,w,h); }catch(e){ showErr("Canvas blocked - Open in Chrome, not WhatsApp viewer"); isProcessing=false; return; }
-        var data=imgData.data;
-
-        // 1. BG color - Average of 44 edge points - More accurate than 4 corners
-        function getPx(x,y){ var i=(y*w+x)*4; return [data[i],data[i+1],data[i+2]]; }
-        var pts=[];
-        pts.push(getPx(2,2), getPx(w-3,2), getPx(2,h-3), getPx(w-3,h-3));
-        for(var e=0;e<10;e++){
-          var ex=Math.floor(w*(e+1)/11);
-          pts.push(getPx(ex,2), getPx(ex,h-3));
-          var ey=Math.floor(h*(e+1)/11);
-          pts.push(getPx(2,ey), getPx(w-3,ey));
+        var w=baseCanvas.width, h=baseCanvas.height;
+        var origData=baseCtx.getImageData(0,0,w,h).data;
+        var markD=drawCtx.getImageData(0,0,w,h).data;
+        // Keep seeds = GREEN pixels, Remove seeds = RED pixels
+        var keepMask=new Uint8Array(w*h); // 1 = definitely keep
+        var removeMask=new Uint8Array(w*h); // 1 = definitely remove
+        for(var i=0;i<w*h;i++){
+          var mi=i*4;
+          // GREEN mark: G high, R low, B low
+          if(markD[mi+1]>100 && markD[mi]<100 && markD[mi+3]>10) keepMask[i]=1;
+          // RED mark: R high, G low
+          if(markD[mi]>150 && markD[mi+1]<100 && markD[mi+3]>10) removeMask[i]=1;
         }
-        var br=0,bg=0,bb=0;
-        for(var p=0;p<pts.length;p++){ br+=pts[p][0]; bg+=pts[p][1]; bb+=pts[p][2]; }
-        br/=pts.length; bg/=pts.length; bb/=pts.length;
-
-        // 2. Auto tolerance - FIX 4: Retry uses stronger
-        var isWhite = br>240 && bg>240 && bb>240;
-        var tol = isRetry ? 75 : (isWhite ? 55 : 65);
-
-        // 3. Flood fill from edges - Only connected BG
-        var visited=new Uint8Array(w*h);
+        // If user only marked KEEP (no RED), auto treat corners as REMOVE
+        var hasRemove=false; for(var ri=0; ri<w*h; ri++){ if(removeMask[ri]){ hasRemove=true; break; } }
+        if(!hasRemove){
+          // Mark corners as remove seeds
+          removeMask[0]=1; removeMask[w-1]=1; removeMask[(h-1)*w]=1; removeMask[h*w-1]=1;
+        }
+        // SPREAD KEEP: Flood fill from GREEN seeds - Expand to similar colors (skin, shirt, hair)
+        // This is how app understands full body from your scribble
+        var kept=new Uint8Array(w*h);
         var queue=[];
-        for(var x=0;x<w;x++){ queue.push(x); queue.push((h-1)*w+x); }
-        for(var y=0;y<h;y++){ queue.push(y*w); queue.push(y*w+w-1); }
+        for(var ki=0; ki<w*h; ki++){ if(keepMask[ki]){ kept[ki]=1; queue.push(ki); } }
         var qi=0;
+        var tol=48; // Color similarity - Body colors are connected, BG is different
         while(qi<queue.length){
           var idx=queue[qi++];
-          if(visited[idx]) continue;
-          visited[idx]=1;
-          var i=idx*4;
-          if(Math.abs(data[i]-br)>=tol || Math.abs(data[i+1]-bg)>=tol || Math.abs(data[i+2]-bb)>=tol) continue;
-          data[i+3]=0;
           var cx=idx%w, cy=Math.floor(idx/w);
-          if(cx>0) queue.push(idx-1);
-          if(cx<w-1) queue.push(idx+1);
-          if(cy>0) queue.push(idx-w);
-          if(cy<h-1) queue.push(idx+w);
-          if(queue.length>w*h*3) break; // Safety - Prevent infinite loop
+          var baseI=idx*4;
+          var br=origData[baseI], bg=origData[baseI+1], bb=origData[baseI+2];
+          var neighbors=[idx-1, idx+1, idx-w, idx+w];
+          for(var ni=0; ni<4; ni++){
+            var nidx=neighbors[ni];
+            if(nidx<0 || nidx>=w*h) continue;
+            if(kept[nidx] || removeMask[nidx]) continue;
+            var nx=nidx%w, ny=Math.floor(nidx/w);
+            if(Math.abs(nx-cx)>1 || Math.abs(ny-cy)>1) continue;
+            var nI=nidx*4;
+            var dr=Math.abs(origData[nI]-br), dg=Math.abs(origData[nI+1]-bg), db=Math.abs(origData[nI+2]-bb);
+            if(dr<tol && dg<tol && db<tol){
+              kept[nidx]=1; queue.push(nidx);
+            }
+          }
+          if(queue.length>w*h*2) break;
         }
-
-        // 4. Edge clean - 2 passes - FIX 4: Full BG clear
-        for(var pass=0; pass<2; pass++){
-          for(var yy=1; yy<h-1; yy++){
-            for(var xx=1; xx<w-1; xx++){
-              var id2=(yy*w+xx)*4;
-              if(data[id2+3]===0) continue;
-              if(Math.abs(data[id2]-br)<18 && Math.abs(data[id2+1]-bg)<18 && Math.abs(data[id2+2]-bb)<18){
-                var n1=((yy-1)*w+xx)*4, n2=((yy+1)*w+xx)*4, n3=(yy*w+xx-1)*4, n4=(yy*w+xx+1)*4;
-                if(data[n1+3]===0 || data[n2+3]===0 || data[n3+3]===0 || data[n4+3]===0) data[id2+3]=0;
-              }
+        // Also keep all pixels very close to GREEN seed colors - Helps for shirt with different shades
+        // Build keep color list from seeds
+        var keepColors=[];
+        for(var ci=0; ci<w*h; ci+=50){ if(keepMask[ci]){ var cI=ci*4; keepColors.push([origData[cI], origData[cI+1], origData[cI+2]]); } }
+        // If keep area is too small (user drew small line), expand by distance - Keep within bounding box of marks + margin
+        var minX=w, maxX=0, minY=h, maxY=0, hasK=false;
+        for(var bi=0; bi<w*h; bi++){ if(kept[bi]){ hasK=true; var bx=bi%w, by=Math.floor(bi/w); if(bx<minX) minX=bx; if(bx>maxX) maxX=bx; if(by<minY) minY=by; if(by>maxY) maxY=by; } }
+        if(hasK){
+          // Expand bounding box by 15% - To include full body even if user missed edge
+          var padX=Math.floor((maxX-minX)*0.15)+10, padY=Math.floor((maxY-minY)*0.15)+10;
+          minX=Math.max(0, minX-padX); maxX=Math.min(w-1, maxX+padX);
+          minY=Math.max(0, minY-padY); maxY=Math.min(h-1, maxY+padY);
+          // Inside bounding box, keep pixels that are NOT like BG (BG = corners)
+          // BG color from corners
+          var bgR=0,bgG=0,bgB=0, bgCnt=0;
+          var corners=[[2,2],[w-3,2],[2,h-3],[w-3,h-3]];
+          corners.forEach(function(c){ var cI=(c[1]*w+c[0])*4; bgR+=origData[cI]; bgG+=origData[cI+1]; bgB+=origData[cI+2]; bgCnt++; });
+          bgR/=bgCnt; bgG/=bgCnt; bgB/=bgCnt;
+          for(var yy=minY; yy<=maxY; yy++){
+            for(var xx=minX; xx<=maxX; xx++){
+              var idd=yy*w+xx;
+              if(kept[idd] || removeMask[idd]) continue;
+              var dI=idd*4;
+              // If pixel is far from BG color, it is likely body - Keep it
+              var dBg=Math.abs(origData[dI]-bgR)+Math.abs(origData[dI+1]-bgG)+Math.abs(origData[dI+2]-bgB);
+              if(dBg>90) kept[idd]=1;
             }
           }
         }
 
-        workCtx.putImageData(imgData,0,0);
-        done=true; isProcessing=false;
+        // BUILD RESULT: Kept = original, Not kept = transparent
+        var result=baseCtx.createImageData(w,h);
+        var rData=result.data;
+        for(var j=0;j<w*h;j++){
+          var jI=j*4;
+          if(kept[j]){
+            rData[jI]=origData[jI]; rData[jI+1]=origData[jI+1]; rData[jI+2]=origData[jI+2]; rData[jI+3]=255;
+          } else {
+            rData[jI]=0; rData[jI+1]=0; rData[jI+2]=0; rData[jI+3]=0;
+          }
+        }
+        baseCtx.putImageData(result,0,0);
+        // Clear marks overlay - Hide it so result is clean
+        drawCtx.clearRect(0,0,w,h);
+        drawCanvas.style.display='none';
+        baseCanvas.classList.add('checker');
+        done=true;
         el('t8BgBox').style.display='block';
         el('t8Down').style.display='block';
         el('t8Out').style.display='block';
         updateBg();
-        status("✅ Background Cleared - Choose Transparent / White / Black, Tap Download");
-        var down=el('t8Down'); if(down) down.scrollIntoView({behavior:"smooth", block:"center"});
-      }catch(err){
-        isProcessing=false;
-        showErr("Remove failed - "+(err && err.message ? err.message : "Try white background photo"));
-        status("Failed - Tap Retry Remove");
-      }
-    },30);
-  }
+        status("✅ Done! Body kept, everything else transparent - Choose White / Black / Transparent, Tap Download");
+        el('t8Down').scrollIntoView({behavior:"smooth"});
+      }catch(e){ showErr("Make transparent failed - Draw GREEN again, bigger"); }
+    },50);
+  });
 
   function updateBg(){
-    var cv=el('t8Canvas'); if(!cv) return;
+    var cv=el('t8Base'); if(!cv) return;
     if(bgMode==='transparent'){ cv.classList.add('checker'); cv.style.background='transparent'; }
     else if(bgMode==='white'){ cv.classList.remove('checker'); cv.style.background='#FFFFFF'; }
     else if(bgMode==='black'){ cv.classList.remove('checker'); cv.style.background='#000000'; }
@@ -3006,75 +3149,50 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
   if(bgBox) bgBox.addEventListener('click', function(e){
     var chip=e.target.closest('.chip'); if(!chip) return;
     bgBox.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('active'); });
-    chip.classList.add('active');
-    bgMode=chip.getAttribute('data-bg')||"transparent";
-    updateBg();
-    status("Background: "+bgMode+" - Tap Download");
+    chip.classList.add('active'); bgMode=chip.getAttribute('data-bg')||"transparent"; updateBg();
   });
 
-  // FIX 3: DOWNLOAD - New offscreen canvas, not work canvas style
   function doDownload(){
-    if(!done){ showErr("Wait - Removing... Tap Retry if stuck"); return; }
-    if(!workCanvas){ showErr("No image - Select photo first"); return; }
+    if(!done){ showErr("First mark body + Tap Make Transparent"); return; }
     try{
-      var out=document.createElement('canvas');
-      out.width=workCanvas.width; out.height=workCanvas.height;
-      var octx=out.getContext('2d');
+      var out=document.createElement('canvas'); out.width=baseCanvas.width; out.height=baseCanvas.height; var octx=out.getContext('2d');
       if(bgMode==='transparent'){
-        octx.clearRect(0,0,out.width,out.height);
-        octx.drawImage(workCanvas,0,0);
+        octx.drawImage(baseCanvas,0,0);
         var urlP=out.toDataURL('image/png');
-        var aP=document.createElement('a'); aP.href=urlP; aP.download="BG-Removed-Transparent.png"; document.body.appendChild(aP); aP.click(); setTimeout(function(){ try{ aP.remove(); }catch(e){} },500);
-        status("✅ Downloaded Transparent PNG - Check Downloads");
+        var aP=document.createElement('a'); aP.href=urlP; aP.download="BG-Removed-Transparent.png"; document.body.appendChild(aP); aP.click(); setTimeout(function(){ aP.remove(); },500);
+        status("✅ Downloaded Transparent PNG");
       } else {
         var colors={white:"#FFFFFF", black:"#000000", blue:"#2563EB", pink:"#F9A8D4", green:"#16A34A"};
-        octx.fillStyle=colors[bgMode]||"#FFFFFF";
-        octx.fillRect(0,0,out.width,out.height);
-        octx.drawImage(workCanvas,0,0);
+        octx.fillStyle=colors[bgMode]||"#FFFFFF"; octx.fillRect(0,0,out.width,out.height);
+        octx.drawImage(baseCanvas,0,0);
         var urlJ=out.toDataURL('image/jpeg',0.92);
-        var aJ=document.createElement('a'); aJ.href=urlJ; aJ.download="BG-Removed-"+bgMode+".jpg"; document.body.appendChild(aJ); aJ.click(); setTimeout(function(){ try{ aJ.remove(); }catch(e){} },500);
-        status("✅ Downloaded "+bgMode+" JPG - Check Downloads");
+        var aJ=document.createElement('a'); aJ.href=urlJ; aJ.download="BG-Removed-"+bgMode+".jpg"; document.body.appendChild(aJ); aJ.click(); setTimeout(function(){ aJ.remove(); },500);
+        status("✅ Downloaded "+bgMode+" JPG");
       }
-    }catch(e){ showErr("Download failed - Try in Chrome, allow Downloads"); }
+    }catch(e){ showErr("Download failed - Try again"); }
   }
   el('t8Down').addEventListener('click', doDownload);
   el('t8Down2').addEventListener('click', doDownload);
   el('t8Share').addEventListener('click', function(){
-    if(!done){ showErr("Wait - Removing..."); return; }
-    try{
-      workCanvas.toBlob(function(blob){
-        if(!blob){ doDownload(); return; }
-        var f=new File([blob],"BG-Removed.png",{type:"image/png"});
-        if(navigator.share && navigator.canShare && navigator.canShare({files:[f]})){ navigator.share({files:[f]}).catch(function(){ doDownload(); }); }
-        else doDownload();
-      }, "image/png");
-    }catch(e){ doDownload(); }
+    if(!done){ showErr("Make transparent first"); return; }
+    try{ baseCanvas.toBlob(function(blob){ if(!blob) return; var f=new File([blob],"BG-Removed.png",{type:"image/png"}); if(navigator.share && navigator.canShare && navigator.canShare({files:[f]})) navigator.share({files:[f]}); else doDownload(); }, "image/png"); }catch(e){ doDownload(); }
   });
   el('t8Copy').addEventListener('click', function(){
-    if(!done){ showErr("Wait - Removing..."); return; }
-    try{
-      workCanvas.toBlob(function(blob){
-        if(!blob){ showErr("Copy failed - Use Download"); return; }
-        if(navigator.clipboard && navigator.clipboard.write){
-          navigator.clipboard.write([new ClipboardItem({"image/png":blob})]).then(function(){ status("✅ Copied - Paste in WhatsApp / Notes"); }).catch(function(){ showErr("Copy not supported - Use Download"); });
-        } else { showErr("Copy not supported - Use Download"); }
-      }, "image/png");
-    }catch(e){ showErr("Copy not supported - Use Download"); }
+    if(!done){ showErr("Make transparent first"); return; }
+    try{ baseCanvas.toBlob(function(blob){ if(!blob) return; navigator.clipboard.write([new ClipboardItem({"image/png":blob})]).then(function(){ status("✅ Copied"); }).catch(function(){ showErr("Copy not supported - Use Download"); }); }, "image/png"); }catch(e){ showErr("Copy not supported"); }
   });
 
-  // FIX 5: Clear - Reset everything
   window.clearTool8=function(){
-    done=false; bgMode='transparent'; origImg=null; origFile=null; isProcessing=false;
-    var c=el('t8Canvas');
-    if(c){ c.style.display='none'; try{ var ctx=c.getContext('2d'); if(ctx) ctx.clearRect(0,0,c.width,c.height); }catch(e){} }
-    el('t8BgBox').style.display='none';
-    el('t8Down').style.display='none';
-    el('t8Out').style.display='none';
+    done=false; bgMode='transparent'; origImg=null; markHistory=[];
+    var b=el('t8Base'); if(b){ b.style.display='none'; }
+    var d=el('t8Draw'); if(d){ d.style.display='block'; var ctx=d.getContext('2d'); if(ctx) ctx.clearRect(0,0,d.width,d.height); }
+    el('t8Wrap').style.display='none';
+    el('t8PencilBox').style.display='none'; el('t8Make').style.display='none'; el('t8BgBox').style.display='none'; el('t8Down').style.display='none'; el('t8Out').style.display='none';
     showErr(""); status("Tap Select Photo first");
   };
 })();
 </script>
-<!-- ============ TOOL 8 FINAL BUG-FREE END ============ -->
+<!-- ============ TOOL 8 MARK TO KEEP END ============ -->
 <!-- ================= TOOL 9 - PDF MERGER ================= -->
 <div id="page-tool9" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>📚 PDF Merger</b><br><span>Most Demanded</span></div></div><h2 style="text-align:center">📚 PDF Merger</h2><p style="font-size:12px;color:#6B7280;text-align:center">Merge Aadhar Front + Back, Marksheet Pages Into 1 PDF</p><div class="drop" onclick="document.getElementById('mergeFile').click()"><b>📄 Select PDFs - Multiple</b><p style="font-size:12px;color:#6B7280">Select 2 or more PDFs in order</p><input type="file" id="mergeFile" accept="application/pdf" multiple onchange="loadMerge(event)"></div><p id="mergeInfo" style="font-size:12px;color:#166534;text-align:center;margin-top:8px">Select PDFs first</p><label>Merged File Name</label><input id="mergeName" value="Merged-Document"><button class="btn" onclick="mergePDFs()">📚 Merge PDFs Into 1</button><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
 
