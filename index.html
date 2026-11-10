@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbittroniz.com - Free AI Tools - AI Writer, Caption, Hashtag, Bio, Resume, Story</title>
+<meta name="description" content="Orbittroniz.com - Free AI Tools in English Only. AI Writer, Caption Generator, Hashtag Generator, Bio Maker, Email Writer, Story Maker. No Login. No Watermark.">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+/* ================= DOCTYPE START - THEME START - GOOD LOOK - PREMIUM ================= */
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(180deg,#EEF0FF,#F8F9FF 45%,#FFF5F8 80%,#ECFEFF);color:#111827;font-family:system-ui,-apple-system,Arial,sans-serif;padding:14px;padding-bottom:30px}
+@keyframes flow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes shine{0%{left:-70%}60%,100%{left:130%}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes pop{0%{transform:scale(.95);opacity:0}100%{transform:scale(1);opacity:1}}
+/* HEADER */
+.header{background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border:1px solid #EDE9FE;border-radius:22px;padding:13px 15px;box-shadow:0 10px 24px rgba(124,58,237,.10);position:sticky;top:12px;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.logo{display:flex;font-weight:900;font-size:23px;letter-spacing:-1px;line-height:1}
+.logo span{background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo span:nth-child(1){background-image:linear-gradient(180deg,#8B5CF6,#6D28D9)}
+.logo span:nth-child(2){background-image:linear-gradient(180deg,#F472B6,#DB2777)}
+.logo span:nth-child(3){background-image:linear-gradient(180deg,#22D3EE,#0891B2)}
+.logo span:nth-child(4){background-image:linear-gradient(180deg,#FBBF24,#D97706)}
+.logo span:nth-child(5){background-image:linear-gradient(180deg,#4ADE80,#16A34A)}
+.logo span:nth-child(6){background-image:linear-gradient(180deg,#A78BFA,#7C3AED)}
+.logo span:nth-child(7){background-image:linear-gradient(180deg,#F472B6,#BE185D)}
+.logo span:nth-child(8){background-image:linear-gradient(180deg,#60A5FA,#2563EB)}
+.logo span:nth-child(9){background-image:linear-gradient(180deg,#22D3EE,#0E7490)}
+.logo span:nth-child(10){background-image:linear-gradient(180deg,#FB923C,#EA580C)}
+.logo span:nth-child(11){background-image:linear-gradient(180deg,#4ADE80,#15803D)}
+.header small{display:block;font-size:10.5px;color:#6B7280;margin-top:3px;font-weight:600}
+.header-btn{background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;border:none;padding:10px 14px;border-radius:20px;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap;box-shadow:0 8px 16px rgba(124,58,237,.30)}
+/* HERO */
+.hero{margin-top:13px;background:linear-gradient(135deg,#4F46E5,#7C3AED 25%,#EC4899 60%,#F59E0B);background-size:220% 220%;animation:flow 5s ease infinite;color:#fff;border-radius:24px;padding:20px 16px;text-align:center;box-shadow:0 18px 32px rgba(124,58,237,.28);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:shine 3s ease infinite}
+.hero h1{font-size:22px;line-height:1.25;position:relative;z-index:1;animation:pop .4s ease}
+.hero p{font-size:12.5px;opacity:.92;margin-top:7px;line-height:1.6;position:relative;z-index:1}
+.hero-tags{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:12px;position:relative;z-index:1}
+.hero-tags span{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);padding:6px 11px;border-radius:20px;font-size:11px;font-weight:700}
+.hero-search{margin-top:13px;background:#fff;border-radius:16px;padding:5px 5px 5px 14px;display:flex;gap:6px;position:relative;z-index:1;box-shadow:0 10px 20px rgba(0,0,0,.15)}
+.hero-search input{flex:1;border:none;outline:none;font-size:13.5px;color:#111827;background:transparent}
+.hero-search button{background:linear-gradient(135deg,#111827,#374151);color:#fff;border:none;padding:11px 16px;border-radius:12px;font-weight:800;cursor:pointer}
+/* CATEGORY */
+.cat{display:flex;gap:8px;overflow-x:auto;margin-top:13px;padding-bottom:4px;scrollbar-width:none}
+.cat::-webkit-scrollbar{display:none}
+.cat span{flex-shrink:0;background:#fff;border:1.5px solid #EDE9FE;padding:9px 14px;border-radius:20px;font-size:12px;font-weight:800;cursor:pointer;color:#374151}
+.cat span.active{background:linear-gradient(135deg,#7C3AED,#EC4899);border:none;color:#fff;box-shadow:0 8px 16px rgba(124,58,237,.30)}
+/* TOOLS GRID - HOME */
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:13px}
+.tool-card{background:#fff;border:1.5px solid #EDE9FE;border-radius:20px;padding:14px;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.04)}
+.tool-card:active{transform:scale(.98)}
+.tool-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#7C3AED,#EC4899,#22D3EE,#F59E0B)}
+.tool-card .icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;animation:floatY 3s ease infinite}
+.tool-card b{display:block;font-size:13.5px;margin-top:9px;line-height:1.3}
+.tool-card p{font-size:11px;color:#6B7280;margin-top:4px;line-height:1.5}
+.tool-card .go{margin-top:9px;font-size:11px;font-weight:900;color:#7C3AED}
+.tool-card .badge{position:absolute;top:10px;right:10px;background:#FEF3C7;color:#92400E;font-size:9px;font-weight:900;padding:4px 7px;border-radius:20px}
+/* TOOL BOX */
+.tool{background:#fff;border:1.5px solid #EDE9FE;border-radius:24px;padding:16px;margin-top:16px;box-shadow:0 14px 28px rgba(0,0,0,.06);position:relative;overflow:hidden;animation:pop .3s ease}
+.tool::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#7C3AED,#EC4899,#22D3EE,#F59E0B)}
+.tool h2{font-size:17px;text-align:center}
+.tool .hint{font-size:11px;color:#6B7280;text-align:center;margin-top:6px;background:#F8F9FF;border:1px solid #EDE9FE;padding:9px;border-radius:12px;line-height:1.5}
+.tool-section{background:#F8F9FF;border:1px solid #EDE9FE;border-radius:18px;padding:14px;margin-top:12px}
+.tool-section b{font-size:13px}
+.tool-section p{font-size:11px;color:#6B7280;margin-top:4px;line-height:1.5}
+.tool label{font-size:11px;font-weight:900;display:block;margin-top:13px;color:#374151;letter-spacing:.3px}
+.tool input,.tool select,.tool textarea{width:100%;background:#F9FAFB;color:#111827;padding:13px;border-radius:14px;border:1.5px solid #E5E7EB;margin-top:5px;font-size:14px;font-family:inherit}
+.tool input:focus,.tool select:focus,.tool textarea:focus{border-color:#7C3AED;box-shadow:0 0 0 4px rgba(124,58,237,.12);outline:none;background:#fff}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.type-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.type-btn{background:#fff;border:1.5px solid #E5E7EB;border-radius:16px;padding:12px 8px;cursor:pointer;font-size:12.5px;font-weight:800;color:#374151;line-height:1.3}
+.type-btn small{display:block;font-size:10px;color:#6B7280;font-weight:600;margin-top:3px}
+.type-btn.active{background:linear-gradient(135deg,#7C3AED,#EC4899);border:none;color:#fff;box-shadow:0 10px 20px rgba(124,58,237,.30);transform:scale(1.02)}
+.type-btn.active small{color:#fff}
+.chip2{display:inline-block;background:#fff;border:1.5px solid #E5E7EB;padding:10px 14px;border-radius:22px;font-size:12px;margin:7px 7px 0 0;cursor:pointer;font-weight:700;color:#374151}
+.chip2.active{background:linear-gradient(135deg,#7C3AED,#EC4899);border:none;color:#fff;box-shadow:0 8px 16px rgba(124,58,237,.30)}
+.toggle-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #EDE9FE;gap:10px}
+.toggle-row:last-child{border:none}
+.toggle-row b{font-size:13px}
+.toggle-row span{font-size:11px;color:#6B7280}
+.toggle{width:52px;height:28px;background:#22C55E;border-radius:30px;position:relative;cursor:pointer;flex-shrink:0}
+.toggle.off{background:#9CA3AF}
+.toggle::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.toggle.off::after{left:27px}
+.out{margin-top:13px;background:#F5F3FF;border:1px solid #EDE9FE;border-radius:16px;padding:15px;font-size:14px;line-height:1.75;white-space:pre-wrap;word-break:break-word;min-height:130px}
+.out:empty::before{content:"Your AI writing will appear here...";color:#9CA3AF}
+.stat-box{flex:1;background:#fff;border:1px solid #EDE9FE;border-radius:14px;padding:11px;text-align:center}
+.stat-box b{display:block;font-size:17px;color:#7C3AED}
+.stat-box span{font-size:10px;color:#6B7280}
+.seo-bar{height:8px;background:#E5E7EB;border-radius:20px;overflow:hidden;margin-top:7px}
+.seo-bar i{display:block;height:100%;background:linear-gradient(90deg,#22C55E,#16A34A);width:0%;transition:.4s}
+.history-item{background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:11px;margin-top:9px;display:flex;gap:8px;justify-content:space-between;align-items:flex-start}
+.history-item b{font-size:12.5px}
+.history-item p{font-size:11.5px;color:#4B5563;margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.history-item button{flex-shrink:0;background:#fff;border:1px solid #E5E7EB;padding:7px 11px;border-radius:20px;cursor:pointer;font-weight:800;font-size:11px}
+/* BUTTONS */
+.btn{position:relative;overflow:hidden;width:100%;padding:15px;border:none;border-radius:16px;font-weight:900;cursor:pointer;margin-top:11px;color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);background-size:200% 200%;animation:flow 3s ease infinite;box-shadow:0 12px 22px rgba(124,58,237,.30),0 3px 0 #5B21B6;font-size:14px}
+.btn::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);animation:shine 2.6s ease infinite}
+.btn:active{transform:translateY(3px)}
+.btn.green{background:linear-gradient(135deg,#16A34A,#22C55E);box-shadow:0 12px 22px rgba(34,197,94,.30),0 3px 0 #166534}
+.btn.blue{background:linear-gradient(135deg,#2563EB,#3B82F6);box-shadow:0 12px 22px rgba(59,130,246,.30),0 3px 0 #1E40AF}
+.btn.pink{background:linear-gradient(135deg,#DB2777,#EC4899);box-shadow:0 12px 22px rgba(236,72,153,.30),0 3px 0 #9D174D}
+.btn.orange{background:linear-gradient(135deg,#D97706,#F59E0B);box-shadow:0 12px 22px rgba(245,158,11,.30),0 3px 0 #92400E}
+.btn.dark{background:#F3F4F6 !important;color:#111827 !important;border:1.5px solid #E5E7EB !important;box-shadow:none !important;animation:none !important}
+.btn.dark::after{display:none}
+.btn-small{padding:11px;font-size:12.5px}
+.btn:disabled{opacity:.6}
+/* FOOTER / PAGES */
+.page{background:#fff;border:1px solid #EDE9FE;border-radius:22px;padding:17px;margin-top:14px}
+.page h3{font-size:16px}
+.page p,.page li{font-size:12.5px;color:#4B5563;line-height:1.75;margin-top:7px}
+.page li{margin-left:16px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:11px 18px;border-radius:22px;font-size:12px;font-weight:800;display:none;z-index:999;white-space:nowrap;box-shadow:0 12px 28px rgba(0,0,0,.30)}
+/* ================= DOCTYPE - THEME END ================= */
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER START ================= -->
+<div class="header">
+  <div><div class="logo"><span>O</span><span>R</span><span>B</span><span>I</span><span>T</span><span>T</span><span>R</span><span>O</span><span>N</span><span>I</span><span>Z</span></div><small>Free AI Tools • No Login • No Watermark • English Only</small></div>
+  <button class="header-btn" onclick="document.getElementById('tWriter').scrollIntoView({behavior:'smooth'})">✍️ Try AI Writer</button>
+</div>
+<!-- ================= HEADER END ================= -->
+
+<!-- ================= HERO START ================= -->
+<div class="hero">
+  <h1>🚀 Free AI Tools - Write, Create & Grow Faster</h1>
+  <p>Highest Demanded Tools In 1 App - AI Writer, Caption, Hashtag, Bio, Email, Story, Resume - 100% Free - Works Offline - No Login</p>
+  <div class="hero-tags"><span>✍️ AI Writer</span><span>📸 Caption</span><span>#️⃣ Hashtag</span><span>⭐ Favourite</span><span>📜 History</span><span>🇬🇧 English Only</span></div>
+  <div class="hero-search"><input id="searchInput" placeholder="Search tool - Example: Writer, Caption, Bio..." oninput="searchTools()"><button onclick="searchTools()">Search</button></div>
+</div>
+<!-- ================= HERO END ================= -->
+
+<!-- ================= CATEGORY START ================= -->
+<div class="cat" id="catBar">
+  <span class="active" onclick="filterCat('All',this)">🌟 All Tools</span>
+  <span onclick="filterCat('Write',this)">✍️ Write</span>
+  <span onclick="filterCat('Social',this)">📸 Social</span>
+  <span onclick="filterCat('Job',this)">💼 Job</span>
+  <span onclick="filterCat('Study',this)">📚 Study</span>
+</div>
+<!-- ================= CATEGORY END ================= -->
+
+<!-- ================= HOME - HIGHEST DEMANDED TOOLS GRID START ================= -->
+<div class="tools-grid" id="toolsGrid">
+  <div class="tool-card" data-cat="Write" onclick="openTool('tWriter')"><span class="badge">🔥 NO.1</span><div class="icon" style="background:#F5F3FF">✍️</div><b>AI Writer - Premium</b><p>Blog, Caption, Essay, Email, Bio, Product - 12 Types In 1</p><div class="go">Open Tool →</div></div>
+  <div class="tool-card" data-cat="Social" onclick="openTool('tCaption')"><div class="icon" style="background:#FDF2F8">📸</div><b>Caption Generator</b><p>Viral Instagram Caption + Hashtags In 1 Tap</p><div class="go">Open Tool →</div></div>
+  <div class="tool-card" data-cat="Social" onclick="openTool('tHashtag')"><div class="icon" style="background:#ECFEFF"> #️⃣</div><b>Hashtag Generator</b><p>30 Viral Hashtags For Reels & Posts</p><div class="go">Open Tool →</div></div>
+  <div class="tool-card" data-cat="Social" onclick="openTool('tBio')"><div class="icon" style="background:#FEF3C7">👤</div><b>Bio Maker</b><p>Stylish Insta / YouTube Bio In Seconds</p><div class="go">Open Tool →</div></div>
+  <div class="tool-card" data-cat="Job" onclick="openTool('tEmail')"><div class="icon" style="background:#EFF6FF">📧</div><b>Email Writer</b><p>Professional Email For Job & Business</p><div class="go">Open Tool →</div></div>
+  <div class="tool-card" data-cat="Job" onclick="openTool('tResume')"><div class="icon" style="background:#ECFDF5">💼</div><b>Resume Summary</b><p>Job CV Summary - Impress HR</p><div class="go">Open Tool →</div></div>
+  <div class="tool-card" data-cat="Study" onclick="openTool('tEssay')"><div class="icon" style="background:#FFF7ED">📚</div><b>Essay Writer</b><p>School / College Essay - Easy Words</p><div class="go">Open Tool →</div></div>
+  <div class="tool-card" data-cat="Write" onclick="openTool('tStory')"><div class="icon" style="background:#F5F3FF">📖</div><b>Story Maker</b><p>Short Story + Moral - For Kids & All</p><div class="go">Open Tool →</div></div>
+</div>
+<!-- ================= HOME - TOOLS GRID END ================= -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 1 START - AI WRITER ========= -->
+<!-- ===== PASTE CODE INSIDE - TOOL 1 - START =========== -->
+<!-- ===================================================== -->
+<div class="tool" id="tWriter">
+<h2>✍️ Tool 1 - AI Writer - Premium - Most Demanded</h2>
+<p class="hint">12 Writing Types In 1 Tool - Rewrite + Humanize + Shorter + Longer + SEO Score + History + Favourite - English Only - No Bugs - Works Offline</p>
+
+<!-- ---------- TOOL 1 - FEATURE 1 - TYPE - PASTE INSIDE START ---------- -->
+<div class="tool-section">
+<b>Step 1 - What Do You Want To Write? - Tap 1 Type</b>
+<p>Most Demanded - Choose 1 - AI writes in that style.</p>
+<div class="type-grid">
+<button class="type-btn active" onclick="setType('Instagram Caption',this)">📸 Instagram Caption<small>Reels / Post / Story</small></button>
+<button class="type-btn" onclick="setType('Blog Intro',this)">📝 Blog Intro<small>Blog / Article Start</small></button>
+<button class="type-btn" onclick="setType('YouTube Title',this)">▶️ YouTube Title<small>Viral Title + Desc</small></button>
+<button class="type-btn" onclick="setType('Essay',this)">📚 Essay<small>School / College</small></button>
+<button class="type-btn" onclick="setType('Email',this)">📧 Email<small>Formal / Job / Business</small></button>
+<button class="type-btn" onclick="setType('Bio',this)">👤 Bio<small>Insta / YouTube Bio</small></button>
+<button class="type-btn" onclick="setType('Product Description',this)">🛍️ Product Description<small>Sell More</small></button>
+<button class="type-btn" onclick="setType('Story',this)">📖 Story<small>Short Story</small></button>
+<button class="type-btn" onclick="setType('Cover Letter',this)">💼 Cover Letter<small>Job Application</small></button>
+<button class="type-btn" onclick="setType('WhatsApp Message',this)">💬 WhatsApp Message<small>Invite / Wish / Thanks</small></button>
+<button class="type-btn" onclick="setType('Speech',this)">🎤 Speech<small>School / Stage</small></button>
+<button class="type-btn" onclick="setType('Resume Summary',this)">📄 Resume Summary<small>For Job / CV</small></button>
+</div>
+</div>
+<!-- ---------- TOOL 1 - FEATURE 1 - TYPE - PASTE INSIDE END ---------- -->
+
+<!-- ---------- TOOL 1 - FEATURE 2 - TOPIC - PASTE INSIDE START ---------- -->
+<div class="tool-section">
+<b>Step 2 - Your Topic + Keyword + Audience</b>
+<p>Example: Benefits of Yoga, My New Shop Opening, Travel to Goa</p>
+<label>TOPIC * - What Is Your Writing About?</label>
+<input id="wTopic" value="Benefits of Yoga" placeholder="Type topic - Example: Benefits of Yoga" maxlength="120">
+<div class="row"><div><label>KEYWORD - For SEO</label><input id="wKeyword" value="Yoga" placeholder="Example: Yoga"></div><div><label>AUDIENCE</label><select id="wAudience"><option>For Everyone</option><option>For Students</option><option>For Business</option><option>For Creators</option><option>For Kids</option></select></div></div>
+<div class="row"><div><label>PURPOSE</label><select id="wPurpose"><option>To Inform</option><option>To Inspire</option><option>To Sell</option><option>To Entertain</option><option>For School Work</option></select></div><div><label>YOUR NAME - Optional</label><input id="wName" placeholder="Example: Rahul" maxlength="40"></div></div>
+</div>
+<!-- ---------- TOOL 1 - FEATURE 2 - TOPIC - PASTE INSIDE END ---------- -->
+
+<!-- ---------- TOOL 1 - FEATURE 3 - TONE + LENGTH + STYLE - PASTE INSIDE START ---------- -->
+<div class="tool-section">
+<b>Step 3 - Tone + Length + Style</b>
+<p>Tone = Feeling. Length = How long.</p>
+<label>TONE - Tap 1</label>
+<div id="toneRow"><span class="chip2 active" onclick="setTone('Funny',this)">😂 Funny</span><span class="chip2" onclick="setTone('Professional',this)">💼 Professional</span><span class="chip2" onclick="setTone('Motivational',this)">🔥 Motivational</span><span class="chip2" onclick="setTone('Emotional',this)">❤️ Emotional</span><span class="chip2" onclick="setTone('Simple',this)">✨ Simple</span><span class="chip2" onclick="setTone('Formal',this)">🎩 Formal</span></div>
+<label>LENGTH - Tap 1</label>
+<div id="lenRow"><span class="chip2" onclick="setLength('Short',this)">Short</span><span class="chip2 active" onclick="setLength('Medium',this)">Medium</span><span class="chip2" onclick="setLength('Long',this)">Long</span><span class="chip2" onclick="setLength('Very Long',this)">Very Long</span></div>
+<label>STYLE - Tap 1 - Premium</label>
+<div id="styleRow"><span class="chip2 active" onclick="setStyle('Paragraph',this)">📄 Paragraph</span><span class="chip2" onclick="setStyle('Points',this)">• Points / List</span><span class="chip2" onclick="setStyle('Story Style',this)">📖 Story Style</span></div>
+</div>
+<!-- ---------- TOOL 1 - FEATURE 3 - PASTE INSIDE END ---------- -->
+
+<!-- ---------- TOOL 1 - FEATURE 4 - PREMIUM SETTINGS - PASTE INSIDE START ---------- -->
+<div class="tool-section">
+<b>Step 4 - Premium Settings - No Other App</b>
+<p>Turn On / Off - Writing changes instantly.</p>
+<div class="toggle-row"><div><b>😊 Emoji In Writing</b><br><span>On = Fun, Off = Professional</span></div><div class="toggle" id="emojiToggle" onclick="toggleEmoji()"></div></div>
+<div class="toggle-row"><div><b>#️⃣ Auto Hashtags</b><br><span>For Caption / YouTube / Product</span></div><div class="toggle" id="hashToggle" onclick="toggleHash()"></div></div>
+<div class="toggle-row"><div><b>🤖 Humanize - No Robot Words</b><br><span>Makes AI text sound human</span></div><div class="toggle off" id="humanToggle" onclick="toggleHuman()"></div></div>
+<div class="toggle-row"><div><b>✅ Grammar Fix - Auto</b><br><span>Fixes small grammar mistakes</span></div><div class="toggle" id="grammarToggle" onclick="toggleGrammar()"></div></div>
+<div class="toggle-row"><div><b>📢 Call To Action At End</b><br><span>Adds Like, Share, Comment, Order Now</span></div><div class="toggle" id="ctaToggle" onclick="toggleCta()"></div></div>
+</div>
+<!-- ---------- TOOL 1 - FEATURE 4 - PASTE INSIDE END ---------- -->
+
+<!-- ---------- TOOL 1 - FEATURE 5 - SAMPLE IDEAS - PASTE INSIDE START ---------- -->
+<div class="tool-section">
+<b>💡 Try 1 Tap Sample Ideas</b>
+<p>Confused? Tap 1 idea - Topic fills automatically.</p>
+<div style="margin-top:8px"><span class="chip2" onclick="useSample('Benefits of Yoga','Yoga')">🧘 Benefits of Yoga</span><span class="chip2" onclick="useSample('My New Shop Opening','Shop')">🛍️ Shop Opening</span><span class="chip2" onclick="useSample('Travel to Goa','Goa')">✈️ Travel to Goa</span><span class="chip2" onclick="useSample('Happy Birthday My Best Friend','Birthday')">🎂 Birthday Friend</span><span class="chip2" onclick="useSample('How To Study Smart','Study')">📚 Study Smart</span><span class="chip2" onclick="useSample('My First Vlog','Vlog')">🎥 My First Vlog</span></div>
+</div>
+<!-- ---------- TOOL 1 - FEATURE 5 - PASTE INSIDE END ---------- -->
+
+<!-- ---------- TOOL 1 - BUTTON 1 - GENERATE - PASTE INSIDE START ---------- -->
+<button class="btn" id="genBtn" onclick="generateWriter()">✨ Generate With AI - Free</button>
+<!-- ---------- TOOL 1 - BUTTON 1 - PASTE INSIDE END ---------- -->
+
+<!-- ---------- TOOL 1 - FEATURE 6 - OUTPUT + STATS - PASTE INSIDE START ---------- -->
+<div class="out" id="wOut"></div>
+<div style="display:flex;gap:8px;margin-top:10px"><div class="stat-box"><b id="wordCount">0</b><span>Words</span></div><div class="stat-box"><b id="charCount">0</b><span>Characters</span></div><div class="stat-box"><b id="readTime">0 min</b><span>Reading Time</span></div><div class="stat-box"><b id="toneShow">Funny</b><span>Tone</span></div></div>
+<div class="tool-section"><b>📈 SEO Score - Premium - Live</b><p>Higher score = Better for Google / Instagram.</p><div style="display:flex;justify-content:space-between"><b id="seoScoreText" style="color:#16A34A;font-size:16px">0 / 100</b><span id="seoLabel" style="font-size:11px;color:#6B7280">Generate to see score</span></div><div class="seo-bar"><i id="seoBar"></i></div><p id="seoTip">Tip: Add Keyword + Long Length + Hashtags for high score.</p></div>
+<!-- ---------- TOOL 1 - FEATURE 6 - PASTE INSIDE END ---------- -->
+
+<!-- ---------- TOOL 1 - FEATURE 7 - PREMIUM BUTTONS - PASTE INSIDE START ---------- -->
+<div class="row"><div><button class="btn blue btn-small" onclick="rewriteWriter()">🔁 Rewrite</button></div><div><button class="btn orange btn-small" onclick="humanizeWriter()">🤖 Humanize</button></div></div>
+<div class="row"><div><button class="btn dark btn-small" onclick="makeShorter()">✂️ Make Shorter</button></div><div><button class="btn dark btn-small" onclick="makeLonger()">➕ Make Longer</button></div></div>
+<div class="row"><div><button class="btn dark btn-small" onclick="fixGrammarNow()">✅ Fix Grammar</button></div><div><button class="btn dark btn-small" onclick="makeMoreFunny()">😂 More Funny</button></div></div>
+<div class="row"><div><button class="btn green btn-small" onclick="copyWriter()">📋 Copy</button></div><div><button class="btn pink btn-small" onclick="shareWriter()">📤 Share WhatsApp</button></div></div>
+<div class="row"><div><button class="btn dark btn-small" onclick="favWriter()">⭐ Favourite</button></div><div><button class="btn dark btn-small" onclick="clearWriter()">🗑️ Clear</button></div></div>
+<button class="btn blue" onclick="downloadWriterTxt()">⬇️ Download TXT</button>
+<button class="btn green" onclick="downloadWriterPdf()">⬇️ Download PDF</button>
+<button class="btn pink" onclick="copyHashtagsOnly()">#️⃣ Copy Hashtags Only</button>
+<!-- ---------- TOOL 1 - FEATURE 7 - PASTE INSIDE END ---------- -->
+
+<!-- ---------- TOOL 1 - FEATURE 8 - HISTORY + FAVOURITE - PASTE INSIDE START ---------- -->
+<div class="tool-section" style="margin-top:14px"><b>📜 History - Last 8 - Auto Saved</b><p>Even if you close app, last writings stay here.</p><div id="historyBox"><p style="color:#9CA3AF;margin-top:8px">No history yet.</p></div><button class="btn dark btn-small" onclick="clearHistory()">🗑️ Clear History</button></div>
+<div class="tool-section"><b>⭐ Favourite Writings</b><p>Tap ⭐ Favourite This - Best writing saves here.</p><div id="favBox"><p style="color:#9CA3AF;margin-top:8px">No favourite yet.</p></div></div>
+<!-- ---------- TOOL 1 - FEATURE 8 - PASTE INSIDE END ---------- -->
+
+</div>
+<!-- ================= TOOL 1 END - AI WRITER ================= -->
+<!-- ===== PASTE CODE INSIDE - TOOL 1 - END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 2 START - CAPTION ============ -->
+<!-- ===== PASTE CODE INSIDE - TOOL 2 - START =========== -->
+<!-- ===================================================== -->
+<div class="tool" id="tCaption">
+<h2>📸 Tool 2 - Caption Generator</h2>
+<p class="hint">Viral Caption + Hashtags - Highest Demanded For Instagram Reels</p>
+<div class="tool-section"><label>YOUR TOPIC</label><input id="capTopic" value="Morning Coffee" placeholder="Example: Morning Coffee"><label>TONE</label><select id="capTone"><option>Funny</option><option>Motivational</option><option>Emotional</option><option>Professional</option></select></div>
+<button class="btn" onclick="generateCaption()">✨ Generate Caption</button>
+<div class="out" id="capOut"></div>
+<div class="row"><div><button class="btn green btn-small" onclick="copyText('capOut')">📋 Copy</button></div><div><button class="btn pink btn-small" onclick="shareText('capOut')">📤 Share WhatsApp</button></div></div>
+</div>
+<!-- ================= TOOL 2 END ================= -->
+<!-- ===== PASTE CODE INSIDE - TOOL 2 - END ============== -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 3 START - HASHTAG =========== -->
+<!-- ===== PASTE CODE INSIDE - TOOL 3 - START =========== -->
+<!-- ===================================================== -->
+<div class="tool" id="tHashtag">
+<h2>#️⃣ Tool 3 - Hashtag Generator</h2>
+<p class="hint">30 Viral Hashtags - Copy All In 1 Tap</p>
+<div class="tool-section"><label>YOUR TOPIC</label><input id="hashTopic" value="Travel" placeholder="Example: Travel, Food, Fitness"><label>PLATFORM</label><select id="hashPlat"><option>Instagram</option><option>YouTube</option><option>Facebook</option></select></div>
+<button class="btn" onclick="generateHashtag()">✨ Generate 30 Hashtags</button>
+<div class="out" id="hashOut"></div>
+<button class="btn green" onclick="copyText('hashOut')">📋 Copy All Hashtags</button>
+</div>
+<!-- ================= TOOL 3 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 4 START - BIO ================ -->
+<!-- ===== PASTE CODE INSIDE - TOOL 4 - START =========== -->
+<!-- ===================================================== -->
+<div class="tool" id="tBio">
+<h2>👤 Tool 4 - Bio Maker</h2>
+<p class="hint">Stylish Bio For Instagram / YouTube / WhatsApp</p>
+<div class="tool-section"><label>YOUR NAME / TOPIC</label><input id="bioTopic" value="Rahul - Fitness Lover" placeholder="Example: Rahul - Fitness Lover"><label>STYLE</label><select id="bioStyle"><option>Cool</option><option>Professional</option><option>Funny</option><option>Motivational</option></select></div>
+<button class="btn" onclick="generateBio()">✨ Generate 3 Bios</button>
+<div class="out" id="bioOut"></div>
+<button class="btn green" onclick="copyText('bioOut')">📋 Copy Bio</button>
+</div>
+<!-- ================= TOOL 4 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 5 START - EMAIL ============== -->
+<!-- ===== PASTE CODE INSIDE - TOOL 5 - START =========== -->
+<!-- ===================================================== -->
+<div class="tool" id="tEmail">
+<h2>📧 Tool 5 - Email Writer</h2>
+<p class="hint">Professional Email For Job, Leave, Business - English Only</p>
+<div class="tool-section"><label>EMAIL ABOUT</label><input id="emailTopic" value="Leave Application" placeholder="Example: Leave Application, Job Apply"><label>YOUR NAME</label><input id="emailName" value="Rahul" placeholder="Your Name"></div>
+<button class="btn" onclick="generateEmail()">✨ Generate Email</button>
+<div class="out" id="emailOut"></div>
+<div class="row"><div><button class="btn green btn-small" onclick="copyText('emailOut')">📋 Copy</button></div><div><button class="btn pink btn-small" onclick="shareText('emailOut')">📤 Share</button></div></div>
+</div>
+<!-- ================= TOOL 5 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 6 START - RESUME ============= -->
+<!-- ===== PASTE CODE INSIDE - TOOL 6 - START =========== -->
+<!-- ===================================================== -->
+<div class="tool" id="tResume">
+<h2>💼 Tool 6 - Resume Summary</h2>
+<p class="hint">Impress HR - Resume Summary In 10 Seconds</p>
+<div class="tool-section"><label>YOUR SKILL / JOB</label><input id="resTopic" value="Computer Operator" placeholder="Example: Computer Operator"><label>YOUR NAME</label><input id="resName" value="Rahul" placeholder="Your Name"></div>
+<button class="btn" onclick="generateResume()">✨ Generate Summary</button>
+<div class="out" id="resOut"></div>
+<button class="btn green" onclick="copyText('resOut')">📋 Copy Summary</button>
+</div>
+<!-- ================= TOOL 6 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 7 START - ESSAY ============== -->
+<!-- ===== PASTE CODE INSIDE - TOOL 7 - START =========== -->
+<!-- ===================================================== -->
+<div class="tool" id="tEssay">
+<h2>📚 Tool 7 - Essay Writer</h2>
+<p class="hint">School / College Essay - Simple English - Easy Words</p>
+<div class="tool-section"><label>ESSAY TOPIC</label><input id="essTopic" value="My Favourite Teacher" placeholder="Example: My Favourite Teacher"><label>LENGTH</label><select id="essLen"><option>Medium</option><option>Short</option><option>Long</option></select></div>
+<button class="btn" onclick="generateEssay()">✨ Generate Essay</button>
+<div class="out" id="essOut"></div>
+<button class="btn green" onclick="copyText('essOut')">📋 Copy Essay</button>
+</div>
+<!-- ================= TOOL 7 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- ================= TOOL 8 START - STORY ============== -->
+<!-- ===== PASTE CODE INSIDE - TOOL 8 - START =========== -->
+<!-- ===================================================== -->
+<div class="tool" id="tStory">
+<h2>📖 Tool 8 - Story Maker</h2>
+<p class="hint">Short Story + Moral - For Kids & Everyone</p>
+<div class="tool-section"><label>STORY ABOUT</label><input id="storyTopic" value="Honest Boy" placeholder="Example: Honest Boy, Brave Girl"><label>MORAL</label><select id="storyMoral"><option>Honesty</option><option>Hard Work</option><option>Kindness</option><option>Never Give Up</option></select></div>
+<button class="btn" onclick="generateStory()">✨ Generate Story</button>
+<div class="out" id="storyOut"></div>
+<button class="btn green" onclick="copyText('storyOut')">📋 Copy Story</button>
+</div>
+<!-- ================= TOOL 8 END ================= -->
+<!-- ===================================================== -->
+
+<!-- ================= WHY US START ================= -->
+<div class="page" style="text-align:center">
+<h3>⭐ Why Orbittroniz Is Best?</h3>
+<p>✅ 8 Highest Demanded Tools In 1 App<br>✅ Tool 1 AI Writer - 12 Types + Rewrite + Humanize + SEO Score - No Other App<br>✅ History + Favourite - Auto Save - No Login<br>✅ English Only - No Bugs - Works Offline<br>✅ Free Forever - No Watermark - No Hidden Charge</p>
+</div>
+<!-- ================= WHY US END ================= -->
+
+<!-- ================= ABOUT START ================= -->
+<div class="page" id="about">
+<h3>ℹ️ About Orbittroniz.com</h3>
+<p>Orbittroniz.com is a free AI tools website made for students, creators, job seekers, shop owners, and everyone who wants to write better in English.</p>
+<p>Our most popular tool is <b>AI Writer</b>. It helps you write Instagram captions, blogs, emails, essays, bios, product descriptions, stories, and more in seconds. You do not need any login. You do not need to pay. Just type your topic and tap Generate.</p>
+<p>We believe good tools should be simple, fast, and free for everyone.</p>
+<p><b>Contact:</b> Use WhatsApp Share button in any tool to share your feedback. We read every message.</p>
+</div>
+<!-- ================= ABOUT END ================= -->
+
+<!-- ================= HOW TO USE START ================= -->
+<div class="page" id="howto">
+<h3>📖 How To Use - 3 Easy Steps</h3>
+<p><b>Step 1:</b> Choose any tool from top - Example: Tool 1 AI Writer.</p>
+<p><b>Step 2:</b> Type your topic - Example: Benefits of Yoga - Choose Tone + Length - Tap Generate.</p>
+<p><b>Step 3:</b> Copy, Share on WhatsApp, or Download as TXT / PDF. Your writing auto saves in History.</p>
+</div>
+<!-- ================= HOW TO USE END ================= -->
+
+<!-- ================= PRIVACY POLICY START ================= -->
+<div class="page" id="privacy">
+<h3>🔒 Privacy Policy - Orbittroniz.com</h3>
+<p><b>Last Updated:</b> 2026 - English Only</p>
+<p><b>1. What We Collect:</b> We do NOT collect your name, phone number, email, or password. We do NOT ask you to login. Your writings are saved only in your own phone browser using Local Storage. We cannot see your writings.</p>
+<p><b>2. History & Favourite:</b> History and Favourite are saved only on your device. If you clear your browser data, history will be deleted. We do not store it on our server.</p>
+<p><b>3. Cookies:</b> We may use simple cookies to remember your settings like Tone or Length. No personal data is sold.</p>
+<p><b>4. Third Party Links:</b> Our Share button opens WhatsApp. WhatsApp has its own privacy policy. We are not responsible for WhatsApp.</p>
+<p><b>5. Ads:</b> If we show ads in future, ads may use cookies to show relevant ads. You can block ads in your browser settings.</p>
+<p><b>6. Children Safety:</b> Our tools are safe for all ages. All content is in simple English. We do not show adult content.</p>
+<p><b>7. Changes:</b> If we change this policy, we will update this page. Continued use of this site means you accept this policy.</p>
+<p><b>8. Contact:</b> If you have any question about privacy, please contact us through the Share button in any tool.</p>
+</div>
+<!-- ================= PRIVACY POLICY END ================= -->
+
+<!-- ================= TERMS START ================= -->
+<div class="page" id="terms">
+<h3>📜 Terms & Conditions</h3>
+<p><b>1.</b> All tools on Orbittroniz.com are free for personal use.</p>
+<p><b>2.</b> You can use generated text for Instagram, YouTube, school, job, or business. You are responsible for checking facts before publishing.</p>
+<p><b>3.</b> Do not use our tools for illegal, harmful, or hateful content.</p>
+<p><b>4.</b> We try to keep all tools working without bugs, but we do not guarantee 100% accuracy of AI text. Please read before you post.</p>
+<p><b>5.</b> We may update tools or design anytime without notice.</p>
+</div>
+<!-- ================= TERMS END ================= -->
+
+<!-- ================= FOOTER START ================= -->
+<div class="page" style="text-align:center">
+<b>Orbittroniz.com - Free AI Tools</b>
+<p><a href="#tWriter" style="color:#7C3AED;font-weight:800">AI Writer</a> • <a href="#tCaption" style="color:#7C3AED;font-weight:800">Caption</a> • <a href="#tHashtag" style="color:#7C3AED;font-weight:800">Hashtag</a> • <a href="#tBio" style="color:#7C3AED;font-weight:800">Bio</a> • <a href="#about" style="color:#7C3AED;font-weight:800">About</a> • <a href="#privacy" style="color:#7C3AED;font-weight:800">Privacy Policy</a> • <a href="#terms" style="color:#7C3AED;font-weight:800">Terms</a></p>
+<p style="font-size:11px;color:#9CA3AF">© 2026 Orbittroniz.com - Made With Love For India - English Only - Free Forever</p>
+</div>
+<!-- ================= FOOTER END ================= -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= DOCTYPE - JAVASCRIPT START ================= */
+/* ---------- HOME - SEARCH + FILTER + OPEN TOOL ---------- */
+function searchTools(){
+  let q = (document.getElementById('searchInput').value || "").toLowerCase();
+  document.querySelectorAll('.tool-card').forEach(function(card){
+    let txt = card.innerText.toLowerCase();
+    card.style.display = txt.indexOf(q) !== -1 ? "" : "none";
+  });
+  if(q){
+    let map = {writer:'tWriter',caption:'tCaption',hashtag:'tHashtag',bio:'tBio',email:'tEmail',resume:'tResume',essay:'tEssay',story:'tStory'};
+    for(let k in map){ if(q.indexOf(k) !== -1){ document.getElementById(map[k]).scrollIntoView({behavior:'smooth'}); break; } }
+  }
+}
+function filterCat(cat, el){
+  document.querySelectorAll('#catBar span').forEach(function(s){ s.classList.remove('active'); });
+  el.classList.add('active');
+  document.querySelectorAll('.tool-card').forEach(function(card){
+    card.style.display = (cat === 'All' || card.dataset.cat === cat) ? "" : "none";
+  });
+}
+function openTool(id){ document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'}); }
+function showToast(m){ let t=document.getElementById('toast'); t.innerText=m; t.style.display='block'; setTimeout(function(){ t.style.display='none'; },2200); }
+function copyText(id){ let el=document.getElementById(id); let txt=el.innerText||""; if(!txt.trim()){ alert("Generate first."); return; } if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(function(){ showToast('Copied ✅'); }); } else { let ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); showToast('Copied ✅'); } }
+function shareText(id){ let el=document.getElementById(id); let txt=el.innerText||""; if(!txt.trim()){ alert("Generate first."); return; } window.open("https://wa.me/?text="+encodeURIComponent(txt+"\n\n- Made With Orbittroniz.com")); }
+
+/* ---------- TOOL 1 - AI WRITER - JS - FULL DETAIL ---------- */
+let wType="Instagram Caption",wTone="Funny",wLength="Medium",wStyle="Paragraph",emojiOn=true,hashOn=true,humanOn=false,grammarOn=true,ctaOn=true,lastWriter="",lastTopic="",lastHashtags="",rewriteCount=0;
+let historyList=[]; let favList=[];
+try{ historyList=JSON.parse(localStorage.getItem('orbit_writer_history')||"[]"); }catch(e){ historyList=[]; }
+try{ favList=JSON.parse(localStorage.getItem('orbit_writer_fav')||"[]"); }catch(e){ favList=[]; }
+function useSample(topic,kw){ document.getElementById('wTopic').value=topic; document.getElementById('wKeyword').value=kw; showToast('Sample Loaded - Tap Generate ✅'); }
+function setType(v,el){ wType=v; document.querySelectorAll('.type-btn').forEach(function(b){ b.classList.remove('active'); }); el.classList.add('active'); }
+function setTone(v,el){ wTone=v; document.querySelectorAll('#toneRow .chip2').forEach(function(c){ c.classList.remove('active'); }); el.classList.add('active'); document.getElementById('toneShow').innerText=v; }
+function setLength(v,el){ wLength=v; document.querySelectorAll('#lenRow .chip2').forEach(function(c){ c.classList.remove('active'); }); el.classList.add('active'); }
+function setStyle(v,el){ wStyle=v; document.querySelectorAll('#styleRow .chip2').forEach(function(c){ c.classList.remove('active'); }); el.classList.add('active'); }
+function toggleEmoji(){ emojiOn=!emojiOn; document.getElementById('emojiToggle').classList.toggle('off',!emojiOn); }
+function toggleHash(){ hashOn=!hashOn; document.getElementById('hashToggle').classList.toggle('off',!hashOn); }
+function toggleHuman(){ humanOn=!humanOn; document.getElementById('humanToggle').classList.toggle('off',!humanOn); }
+function toggleGrammar(){ grammarOn=!grammarOn; document.getElementById('grammarToggle').classList.toggle('off',!grammarOn); }
+function toggleCta(){ ctaOn=!ctaOn; document.getElementById('ctaToggle').classList.toggle('off',!ctaOn); }
+function updateStats(t){ t=(t||"").trim(); let w=t?t.split(/\s+/).length:0; document.getElementById('wordCount').innerText=w; document.getElementById('charCount').innerText=t.length; document.getElementById('readTime').innerText=w===0?"0 min":Math.max(1,Math.ceil(w/200))+" min"; updateSeo(t,w); }
+function updateSeo(t,w){ let s=0; let kw=(document.getElementById('wKeyword').value||"").trim(); if(t&&t.length>20)s+=25; if(w>=50)s+=20; if(w>=100)s+=15; if(kw&&t.toLowerCase().indexOf(kw.toLowerCase())!==-1)s+=20; if(hashOn&&t.indexOf('#')!==-1)s+=10; if(emojiOn&&t.length>30)s+=10; if(s>100)s=100; document.getElementById('seoScoreText').innerText=s+" / 100"; document.getElementById('seoBar').style.width=s+"%"; document.getElementById('seoLabel').innerText=s>=80?"Excellent 🔥":s>=50?"Good 👍":s>0?"Need Improvement":"Generate to see score"; document.getElementById('seoTip').innerText=s>=80?"Great! Your writing is ready to post.":"Tip: Add Keyword + Long Length + Hashtags for high score."; }
+function cleanText(t){ return (t||"").trim().replace(/\s+/g,' ').slice(0,120); }
+function getEmoji(){ if(!emojiOn)return""; if(wTone==="Funny")return" 😂✨"; if(wTone==="Motivational")return" 🔥💪"; if(wTone==="Emotional")return" ❤️🥺"; if(wTone==="Professional")return" 💼"; if(wTone==="Formal")return" 🎩"; return" ✨"; }
+function getHashtags(topic,kw){ if(!hashOn)return""; let b=(kw||topic||"Life").split(' ')[0].replace(/[^A-Za-z]/g,'')||"Life"; let tags="\n\n#"+b+" #Viral #Trending #ExplorePage #InstaDaily #Reels #Orbittroniz #Motivation #DailyPost"; lastHashtags=tags.trim(); return tags; }
+function humanizeText(t){ return t.replace(/In conclusion,/gi,"So, in short,").replace(/Furthermore,/gi,"Also,").replace(/Moreover,/gi,"Plus,").replace(/It is important to note that/gi,"One thing to remember is").replace(/Delve/gi,"Look").replace(/Unlock/gi,"Open").replace(/In today's fast-paced world,/gi,"These days,").replace(/As an AI/gi,"Honestly,"); }
+function fixGrammarText(t){ return t.replace(/\bi\b/g,"I").replace(/\s+\./g,".").replace(/\s+,/g,",").replace(/ +/g," ").replace(/\. ([a-z])/g,function(m,p){ return ". "+p.toUpperCase(); }); }
+function getCta(){ if(!ctaOn)return""; if(wType==="Instagram Caption")return"\n\nTell me in comments - Do you agree? 👇 Save this for later! Follow for more!"; if(wType==="YouTube Title")return"\n\nLike, Share and Subscribe for more videos!"; if(wType==="Product Description")return"\n\nOrder Now - Limited Offer! DM Us Today."; if(wType==="Blog Intro")return"\n\nRead full blog till end - You will love it."; return"\n\nShare this with someone who needs it today."; }
+function buildWriting(topic,kw,aud,purpose,name){
+  let em=getEmoji();
+  let tl=wTone==="Funny"?"Let's keep it fun and light.":wTone==="Professional"?"Let's keep it clear and professional.":wTone==="Motivational"?"Let's make it powerful and motivating.":wTone==="Emotional"?"Let's make it heartfelt and real.":wTone==="Formal"?"Let's keep it formal and respectful.":"Let's keep it simple and easy to understand.";
+  let ln=wLength==="Short"?"Short and to the point.":wLength==="Long"?"Detailed and complete.":wLength==="Very Long"?"Very detailed with examples and tips.":"Clear and complete.";
+  let ending=getCta();
+  if(wType==="Instagram Caption"){ let intro=em+" "+topic+" "+em+"\n\n"; let body=tl+" "+topic+" is one of those things that truly makes life better. Whether you are just starting or you already love it, this moment is for you. "+ln+" Take a second, enjoy it, and share it with someone who needs this today."; if(wLength==="Long"||wLength==="Very Long") body+=" The best part about "+topic+" is that it connects people. It gives you energy, happiness, and a reason to smile. Keep going, keep growing, and never stop believing in yourself."; if(wLength==="Very Long") body+=" Remember, every small step counts. You do not need to be perfect. You just need to start."; let out=intro+body+ending+getHashtags(topic,kw); if(wStyle==="Points") out=intro+"• "+body.split('. ').join('\n• ')+ending+getHashtags(topic,kw); return out; }
+  if(wType==="Blog Intro"){ return topic+" - A Complete Guide For "+aud+"\n\nHave you ever wondered why everyone is talking about "+topic+"? "+tl+" In this blog, we will understand "+topic+" in simple English. "+ln+" By the end, you will know what it is, why it matters, and how you can use it in your daily life."+(wLength==="Long"||wLength==="Very Long"?" We will cover basics, benefits, common mistakes, and practical tips that actually work.":"")+ending; }
+  if(wType==="YouTube Title"){ return "5 Viral YouTube Titles For: "+topic+"\n\n1. I Tried "+topic+" For 30 Days - Shocking Result!"+em+"\n2. "+topic+" - What Nobody Tells You!\n3. "+topic+" In 5 Minutes - Easy Guide For Beginners\n4. Why Everyone Is Talking About "+topic+" In 2026?\n5. "+topic+" - My Honest Experience!\n\nDescription: In this video, we talk about "+topic+" in simple English. "+tl+" Watch till end - You will learn something new."+ending+getHashtags(topic,kw); }
+  if(wType==="Essay"){ return "Essay - "+topic+"\n\nIntroduction:\n"+topic+" is an important topic in our life. "+tl+" "+ln+"\n\nBody:\n"+topic+" helps us learn, grow, and understand the world better. It teaches us discipline, patience, and confidence. Many people have benefited from it. If we follow it daily, our life becomes better."+(wLength==="Long"||wLength==="Very Long"?"\n\nAlso, "+topic+" has a positive effect on our health, mind, and relationships. It gives us a clear goal and keeps us motivated.":"")+"\n\nConclusion:\nIn short, "+topic+" makes our life better and happier. We should understand it and follow it in our daily life."; }
+  if(wType==="Email"){ let n=name||"Your Name"; return "Subject: Regarding "+topic+"\n\nDear Sir / Madam,\n\nI hope you are doing well. I am writing to you about "+topic+". "+tl+" I would like to discuss this in detail and know your thoughts.\n\n"+topic+" is important for us, and I believe we can work together to make it successful. Please let me know a suitable time to discuss."+(wLength==="Long"||wLength==="Very Long"?"\n\nI have prepared some points about "+topic+" and I am happy to share them.":"")+"\n\nThank you for your time.\n\nBest Regards,\n"+n; }
+  if(wType==="Bio"){ return em+" "+topic+" Lover | "+wTone+" Vibes\nDaily Inspiration | Simple Living | Positive Mind\n"+topic+" | Learning | Growing\nDM For Collab 📩"; }
+  if(wType==="Product Description"){ return topic+" - Best Quality, Best Price"+em+"\n\nLooking for "+topic+"? You are at the right place. "+tl+" This product is made with care, tested for quality, and loved by many customers. "+ln+" Key features: High quality, long lasting, easy to use, and great value for money."+(wLength==="Long"||wLength==="Very Long"?" Why choose us? Honest price, fast delivery, friendly support. Thousands of happy customers trust us.":"")+ending+getHashtags(topic,kw); }
+  if(wType==="Story"){ return "A Short Story - "+topic+"\n\nOnce, there was a young person who loved "+topic+". "+tl+" Every day, they tried to learn something new about it. One day, they faced a big problem. But they did not give up. They kept trying, kept learning, and finally they succeeded."+(wLength==="Long"||wLength==="Very Long"?"\n\nThat day, they understood one important lesson - Never give up. Hard work always pays off.":"")+"\n\nMoral: Never give up. Keep learning, keep growing."; }
+  if(wType==="Cover Letter"){ let n=name||"Your Name"; return "Dear Hiring Manager,\n\nI am writing to apply for the position related to "+topic+". "+tl+" I have skills and experience that match this role. I am hardworking, honest, and a fast learner.\n\nI have worked on "+kw+" and I understand what this job needs. I can work in a team, handle pressure, and deliver good results on time.\n\nI would love to discuss this further. Thank you for your time.\n\nSincerely,\n"+n; }
+  if(wType==="WhatsApp Message"){ return "Hi!"+em+"\n\nHope you are doing well. I wanted to share something about "+topic+". "+tl+" "+ln+" Let me know what you think. Would love to hear from you.\n\nTake care! ❤️"; }
+  if(wType==="Speech"){ return "Speech On "+topic+"\n\nGood Morning Everyone,\n\nToday, I am very happy to speak about "+topic+". "+tl+" "+topic+" is very important in our life. It teaches us many good things. If we understand it well, our life becomes better."+(wLength==="Long"||wLength==="Very Long"?" Let me share one example. Many successful people follow "+topic+" in their daily life.":"")+"\n\nThank you for listening to me. Have a great day!"; }
+  if(wType==="Resume Summary"){ let n=name||"Your Name"; return n+" - Resume Summary\n\nDedicated and hardworking person with interest in "+topic+". "+tl+" Good communication skills, fast learner, and team player. Looking for a chance to grow and contribute with honesty and hard work."; }
+  return topic+"\n\n"+tl+" "+topic+" is important and useful. "+ln;
+}
+function saveHistory(topic,out){ if(!out)return; historyList.unshift({type:wType,topic:topic,output:out,time:new Date().toLocaleString('en-IN')}); historyList=historyList.slice(0,8); try{ localStorage.setItem('orbit_writer_history',JSON.stringify(historyList)); }catch(e){} renderHistory(); }
+function renderHistory(){ let b=document.getElementById('historyBox'); if(!b)return; if(!historyList.length){ b.innerHTML='<p style="color:#9CA3AF;margin-top:8px">No history yet.</p>'; return; } b.innerHTML=historyList.map(function(h,i){ return '<div class="history-item"><div><b>'+h.type+' - '+h.topic+'</b><p>'+h.output.replace(/\n/g,' ').slice(0,120)+'</p><small style="color:#9CA3AF">'+(h.time||"")+'</small></div><button onclick="loadHistory('+i+')">Load</button></div>'; }).join(''); }
+function loadHistory(i){ let h=historyList[i]; if(!h)return; lastWriter=h.output; document.getElementById('wOut').innerText=h.output; updateStats(h.output); document.getElementById('wTopic').value=h.topic; showToast('History Loaded ✅'); }
+function renderFav(){ let b=document.getElementById('favBox'); if(!b)return; if(!favList.length){ b.innerHTML='<p style="color:#9CA3AF;margin-top:8px">No favourite yet.</p>'; return; } b.innerHTML=favList.map(function(f,i){ return '<div class="history-item"><div><b>'+f.type+' - '+f.topic+'</b><p>'+f.output.replace(/\n/g,' ').slice(0,120)+'</p></div><button onclick="loadFav('+i+')">Load</button></div>'; }).join(''); }
+function loadFav(i){ let f=favList[i]; if(!f)return; lastWriter=f.output; document.getElementById('wOut').innerText=f.output; updateStats(f.output); showToast('Favourite Loaded ⭐'); }
+function clearHistory(){ historyList=[]; try{ localStorage.removeItem('orbit_writer_history'); }catch(e){} renderHistory(); showToast('History Cleared'); }
+function generateWriter(){ let topic=cleanText(document.getElementById('wTopic').value); if(!topic){ alert("Please type a Topic first - Example: Benefits of Yoga"); document.getElementById('wTopic').focus(); return; } let kw=cleanText(document.getElementById('wKeyword').value)||topic); let aud=document.getElementById('wAudience').value||"For Everyone"; let pur=document.getElementById('wPurpose').value||"To Inform"; let nm=cleanText(document.getElementById('wName').value); let btn=document.getElementById('genBtn'); btn.disabled=true; btn.innerText="⏳ Generating..."; setTimeout(function(){ let out=buildWriting(topic,kw,aud,pur,nm); if(humanOn)out=humanizeText(out); if(grammarOn)out=fixGrammarText(out); lastWriter=out; lastTopic=topic; rewriteCount=0; document.getElementById('wOut').innerText=out; updateStats(out); saveHistory(topic,out); btn.disabled=false; btn.innerText="✨ Generate With AI - Free"; showToast('AI Writing Ready ✅'); document.getElementById('wOut').scrollIntoView({behavior:'smooth',block:'center'}); },400); }
+function rewriteWriter(){ if(!lastWriter){ alert("Generate 1 writing first."); return; } rewriteCount++; let topic=lastTopic||cleanText(document.getElementById('wTopic').value)||"My Topic"; let kw=cleanText(document.getElementById('wKeyword').value)||topic; let aud=document.getElementById('wAudience').value||"For Everyone"; let pur=document.getElementById('wPurpose').value||"To Inform"; let nm=cleanText(document.getElementById('wName').value); let pre=rewriteCount%3===1?"Here is a fresh way to look at it. ":rewriteCount%3===2?"Let me explain this differently. ":"Here is another version for you. "; let out=pre+buildWriting(topic,kw,aud,pur,nm); if(humanOn)out=humanizeText(out); if(grammarOn)out=fixGrammarText(out); lastWriter=out; document.getElementById('wOut').innerText=out; updateStats(out); saveHistory(topic,out); showToast('Rewritten ✅'); }
+function humanizeWriter(){ if(!lastWriter){ alert("Generate 1 writing first."); return; } lastWriter=humanizeText(lastWriter); document.getElementById('wOut').innerText=lastWriter; updateStats(lastWriter); showToast('Humanized 🤖➡️🧑'); }
+function fixGrammarNow(){ if(!lastWriter){ alert("Generate 1 writing first."); return; } lastWriter=fixGrammarText(lastWriter); document.getElementById('wOut').innerText=lastWriter; updateStats(lastWriter); showToast('Grammar Fixed ✅'); }
+function makeMoreFunny(){ if(!lastWriter){ alert("Generate 1 writing first."); return; } lastWriter="😂 Ha Ha! Fun Time! "+lastWriter+"\n\n😂 Funny, right? Share with your funny friend!"; document.getElementById('wOut').innerText=lastWriter; updateStats(lastWriter); showToast('Made More Funny 😂'); }
+function makeShorter(){ if(!lastWriter){ alert("Generate 1 writing first."); return; } let s=lastWriter.split('.').filter(function(x){ return x.trim().length>5; }); let sh=s.slice(0,2).join('. ')+'.'; lastWriter=sh; document.getElementById('wOut').innerText=sh; updateStats(sh); showToast('Made Shorter ✂️'); }
+function makeLonger(){ if(!lastWriter){ alert("Generate 1 writing first."); return; } let ex="\n\nAlso, remember - Consistency is key. Small steps every day create big results. Keep learning, keep improving, and never stop. Your efforts today will shape your tomorrow."; lastWriter=lastWriter+ex; document.getElementById('wOut').innerText=lastWriter; updateStats(lastWriter); showToast('Made Longer ➕'); }
+function copyWriter(){ if(!lastWriter){ alert("Generate 1 writing first."); return; } copyText('wOut'); }
+function shareWriter(){ if(!lastWriter){ alert("Generate 1 writing first."); return; } shareText('wOut'); }
+function favWriter(){ if(!lastWriter){ alert("Generate 1 writing first."); return; } favList.unshift({type:wType,topic:lastTopic,output:lastWriter}); favList=favList.slice(0,10); try{ localStorage.setItem('orbit_writer_fav',JSON.stringify(favList)); }catch(e){} renderFav(); showToast('Saved To Favourite ⭐'); }
+function clearWriter(){ lastWriter=""; document.getElementById('wOut').innerText=""; updateStats(""); document.getElementById('wTopic').value=""; document.getElementById('wKeyword').value=""; showToast('Cleared 🗑️'); }
+function downloadWriterTxt(){ if(!lastWriter){ alert("Generate 1 writing first."); return; } let b=new Blob([lastWriter],{type:'text/plain'}); let a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download="AI-Writing-Orbittroniz.txt"; a.click(); showToast('TXT Downloaded ⬇️'); }
+function downloadWriterPdf(){ if(!lastWriter){ alert("Generate 1 writing first."); return; } if(!window.jspdf){ alert("PDF loading - Try TXT."); return; } let jsPDF=window.jspdf.jsPDF; let pdf=new jsPDF(); pdf.setFontSize(16); pdf.text(wType+" - "+lastTopic,10,15); pdf.setFontSize(11); let lines=pdf.splitTextToSize(lastWriter,180); pdf.text(lines,10,25); pdf.save("AI-Writing-Orbittroniz.pdf"); showToast('PDF Downloaded ⬇️'); }
+function copyHashtagsOnly(){ let tags=lastHashtags||getHashtags(lastTopic||"Life","Life"); if(!tags){ alert("Generate 1 Caption first."); return; } if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(tags).then(function(){ showToast('Hashtags Copied #️⃣'); }); } else { alert(tags); } }
+
+/* ---------- TOOL 2 - CAPTION ---------- */
+function generateCaption(){ let topic=(document.getElementById('capTopic').value||"").trim()||"My Day"; let tone=document.getElementById('capTone').value||"Funny"; document.getElementById('capOut').innerText="✨ "+topic+" ✨\n\n"+tone+" vibes only! "+topic+" makes life better. Enjoy every moment, smile more, worry less. This is your sign to enjoy today!\n\nTell me in comments - Do you agree? Save for later!\n\n#"+topic.split(' ')[0]+" #Viral #Trending #Reels #Orbittroniz"; showToast('Caption Ready ✅'); }
+/* ---------- TOOL 3 - HASHTAG ---------- */
+function generateHashtag(){ let topic=(document.getElementById('hashTopic').value||"").trim()||"Travel"; let plat=document.getElementById('hashPlat').value||"Instagram"; let base=topic.split(' ')[0].replace(/[^A-Za-z]/g,'')||"Life"; let tags=[]; for(let i=1;i<=30;i++){ tags.push("#"+base+(i>1?i:"")); } tags.push("#Viral","#Trending","#ExplorePage","#Reels","#Orbittroniz"); document.getElementById('hashOut').innerText="Hashtags For "+topic+" - "+plat+"\n\n"+tags.slice(0,30).join(" "); showToast('30 Hashtags Ready ✅'); }
+/* ---------- TOOL 4 - BIO ---------- */
+function generateBio(){ let topic=(document.getElementById('bioTopic').value||"").trim()||"Rahul"; let style=document.getElementById('bioStyle').value||"Cool"; document.getElementById('bioOut').innerText="BIO 1 - "+style+":\n✨ "+topic+" | Dreamer | Doer\nDaily Inspiration | Positive Vibes\nDM For Collab 📩\n\nBIO 2:\n🔥 "+topic+" - Living My Best Life\nLearning • Growing • Inspiring\nFollow For Daily Motivation\n\nBIO 3:\n❤️ "+topic+"\nSimple Living | High Thinking\nSmile More • Worry Less"; showToast('Bio Ready ✅'); }
+/* ---------- TOOL 5 - EMAIL ---------- */
+function generateEmail(){ let topic=(document.getElementById('emailTopic').value||"").trim()||"Leave Application"; let name=(document.getElementById('emailName').value||"").trim()||"Your Name"; document.getElementById('emailOut').innerText="Subject: Regarding "+topic+"\n\nDear Sir / Madam,\n\nI hope you are doing well. I am writing to you about "+topic+". I would like to discuss this in detail.\n\nPlease let me know a suitable time to discuss. Thank you for your time.\n\nBest Regards,\n"+name; showToast('Email Ready ✅'); }
+/* ---------- TOOL 6 - RESUME ---------- */
+function generateResume(){ let topic=(document.getElementById('resTopic').value||"").trim()||"Computer Operator"; let name=(document.getElementById('resName').value||"").trim()||"Your Name"; document.getElementById('resOut').innerText=name+" - Resume Summary\n\nDedicated and hardworking person with skills in "+topic+". Good communication, fast learner, team player. Looking for a chance to grow and contribute with honesty and hard work."; showToast('Resume Ready ✅'); }
+/* ---------- TOOL 7 - ESSAY ---------- */
+function generateEssay(){ let topic=(document.getElementById('essTopic').value||"").trim()||"My Favourite Teacher"; let len=document.getElementById('essLen').value||"Medium"; document.getElementById('essOut').innerText="Essay - "+topic+" ("+len+")\n\nIntroduction:\n"+topic+" is an important topic in our life.\n\nBody:\n"+topic+" helps us learn, grow, and understand the world better. It teaches us discipline, patience, and confidence.\n\nConclusion:\nIn short, "+topic+" makes our life better and happier."; showToast('Essay Ready ✅'); }
+/* ---------- TOOL 8 - STORY ---------- */
+function generateStory(){ let topic=(document.getElementById('storyTopic').value||"").trim()||"Honest Boy"; let moral=document.getElementById('storyMoral').value||"Honesty"; document.getElementById('storyOut').innerText="A Short Story - "+topic+"\n\nOnce, there was a young person who loved to learn. One day, they faced a big problem. But they did not give up. They kept trying and finally they succeeded.\n\nMoral: "+moral+" always wins. Never give up."; showToast('Story Ready ✅'); }
+
+renderHistory(); renderFav(); updateStats("");
+/* ================= DOCTYPE - JAVASCRIPT END ================= */
+</script>
+</body>
+</html>
+<!-- ================= DOCTYPE END ================= -->
