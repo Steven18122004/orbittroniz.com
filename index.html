@@ -131,15 +131,200 @@ body{background:linear-gradient(180deg,#0F0A2E,#1E1B4B 30%,#F8F9FF 60%,#FFF5F8);
 </div>
 <!-- ================= HERO END ================= -->
 
-<!-- ================= DASHBOARD - SETTINGS ================= -->
-<div class="page" id="dashSettings" style="display:none">
-<h3>⚙️ Settings - Dashboard - Edit Later</h3>
-<p>Settings detail code will be pasted here later. Watermark, Detail, Dancing Logo, History controls will come here.</p>
-<!-- ================= SETTINGS START - PASTE CODE HERE - START ================= -->
-<div class="paste-box"><b>⚙️ SETTINGS - PASTE CODE HERE</b><p>Paste Settings detail code here later.<br>Example: Watermark On/Off, Detail On/Off, Dancing Logo On/Off, Clear Data.</p></div>
-<!-- ================= SETTINGS END - PASTE CODE HERE - END ================= -->
+<!-- ================= SETTINGS START - PASTE DIRECTLY - NO DOCTYPE ================= -->
+<!-- PASTE THIS WHOLE BLOCK INSIDE YOUR PAGE - WHERE YOU WANT SETTINGS - WORKING - ENGLISH ONLY -->
+
+<style>
+/* ---------- SETTINGS - CSS - PASTE WITH SETTINGS ---------- */
+#dashSettings{--m1:#7C3AED;--m2:#EC4899}
+#dashSettings .tool-section{background:#F8F9FF;border:1px solid #EDE9FE;border-radius:18px;padding:14px;margin-top:12px}
+#dashSettings .tool-section b{font-size:13px;color:#111827}
+#dashSettings .tool-section p{font-size:11px;color:#6B7280;margin-top:4px;line-height:1.5}
+#dashSettings label{font-size:11px;font-weight:900;display:block;margin-top:13px;color:#374151}
+#dashSettings input,#dashSettings select{width:100%;background:#F9FAFB;color:#111827;padding:13px;border-radius:14px;border:1.5px solid #E5E7EB;margin-top:5px;font-size:14px;box-sizing:border-box}
+#dashSettings input:focus{border-color:#7C3AED;outline:none;background:#fff}
+#dashSettings .toggle-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #EDE9FE;gap:10px}
+#dashSettings .toggle-row:last-child{border:none}
+#dashSettings .toggle-row b{font-size:13px}
+#dashSettings .toggle-row span{font-size:11px;color:#6B7280}
+#dashSettings .toggle{width:52px;height:28px;background:#22C55E;border-radius:30px;position:relative;cursor:pointer;flex-shrink:0}
+#dashSettings .toggle.off{background:#9CA3AF}
+#dashSettings .toggle::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%}
+#dashSettings .toggle.off::after{left:27px}
+#dashSettings .btn{width:100%;padding:15px;border:none;border-radius:16px;font-weight:900;cursor:pointer;margin-top:11px;color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);box-shadow:0 12px 22px rgba(124,58,237,.30),0 3px 0 #5B21B6;font-size:14px}
+#dashSettings .btn.dark{background:#F3F4F6 !important;color:#111827 !important;border:1.5px solid #E5E7EB !important;box-shadow:none !important}
+#dashSettings .btn-small{padding:11px;font-size:12.5px}
+#dashSettings .btn.green{background:linear-gradient(135deg,#16A34A,#22C55E);box-shadow:0 12px 22px rgba(34,197,94,.30),0 3px 0 #166534}
+#dashSettings .btn.blue{background:linear-gradient(135deg,#2563EB,#3B82F6);box-shadow:0 12px 22px rgba(59,130,246,.30),0 3px 0 #1E40AF}
+#dashSettings .btn.pink{background:linear-gradient(135deg,#DB2777,#EC4899);box-shadow:0 12px 22px rgba(236,72,153,.30),0 3px 0 #9D174D}
+#dashSettings .wm-badge{display:inline-block;background:#FEF3C7;color:#92400E;font-size:10px;font-weight:800;padding:5px 9px;border-radius:20px;margin-top:8px}
+#dashSettings .detail-box{background:#FFFBEB;border:1px dashed #F59E0B;border-radius:14px;padding:11px;margin-top:10px;font-size:11.5px;line-height:1.6;color:#92400E;display:none}
+#dashSettings .detail-box.show{display:block}
+#dashSettings .detail-btn{background:#FFFBEB;border:1px solid #FDE68A;color:#92400E;padding:8px 12px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer;margin-top:9px}
+/* ---------- SETTINGS - CSS END ---------- */
+</style>
+
+<div id="dashSettings" style="background:#fff;border:1px solid #EDE9FE;border-radius:22px;padding:17px;margin-top:14px">
+<h3 style="font-size:16px">⚙️ Settings - Dashboard - Full Control</h3>
+<p style="font-size:12.5px;color:#4B5563;line-height:1.75;margin-top:7px">Change these anytime - Saved automatically on your phone. No login needed. Settings work for all tools - AI Writer, PDF, Image, Scanner, QR, Invoice.</p>
+<button class="detail-btn" onclick="toggleDetailSettings()">📖 Detail - What Does Each Setting Do? Tap</button>
+<div class="detail-box" id="detailSettingsBox"><b>Detail - Settings:</b><br><b>1. Watermark:</b> ON = Every output shows "- Made With Orbittroniz.com". OFF = Clean output, no watermark. Best for professional use.<br><b>2. Detail Boxes:</b> ON = Every tool shows How To Use detail. OFF = Hide detail, clean look.<br><b>3. Dancing Logo:</b> ON = Orbittroniz letters jump one by one. OFF = Simple static logo.<br><b>4. Site Name:</b> Change watermark text to your shop / name.<br><b>5. Clear Data:</b> Deletes History, Favourite, Settings from this phone only.</div>
+
+<!-- ===== SETTING 1 - WATERMARK ON / OFF - MOST DEMANDED ===== -->
+<div class="tool-section">
+<b>💧 Setting 1 - Watermark - On / Off - Most Demanded</b>
+<p>ON = Every output shows watermark. OFF = Clean output - No watermark - For professional use. Works for AI Writer, Caption, Email, Invoice, Image To Text, QR Share.</p>
+<div class="toggle-row"><div><b>💧 Watermark On / Off</b><br><span id="wmSettingText">Currently: ON - Watermark will show</span></div><div class="toggle" id="wmToggle" onclick="toggleWatermark()"></div></div>
+<div><label>YOUR WATERMARK TEXT - EDIT ANYTIME - CHANGE TO YOUR SHOP NAME</label><input id="wmTextInput" value="Made With Orbittroniz.com" placeholder="Made With Orbittroniz.com" oninput="changeWatermarkText(this.value)"><p>Example: Made With Rahul Shop, Made With My School, Made With Orbittroniz.com</p></div>
+<div><span class="wm-badge" id="wmPreview">Preview: - Made With Orbittroniz.com</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px"><button class="btn green btn-small" onclick="setWatermarkOn()">💧 Watermark ON</button><button class="btn dark btn-small" onclick="setWatermarkOff()">🚫 Watermark OFF</button></div>
 </div>
-<!-- ================= DASHBOARD - SETTINGS END ================= -->
+
+<!-- ===== SETTING 2 - DETAIL OPTION - SHOW / HIDE ===== -->
+<div class="tool-section">
+<b>📖 Setting 2 - Detail Option - Show / Hide Detail For Every Tool</b>
+<p>ON = Every tool shows Detail box - How to use, tips. OFF = Hide detail - Clean look for old users.</p>
+<div class="toggle-row"><div><b>📖 Show Detail Boxes</b><br><span id="detailSettingText">Currently: ON - Detail will show</span></div><div class="toggle" id="detailToggle" onclick="toggleDetailSetting()"></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px"><button class="btn blue btn-small" onclick="showAllDetails()">📖 Show All Details</button><button class="btn dark btn-small" onclick="hideAllDetails()">🙈 Hide All Details</button></div>
+</div>
+
+<!-- ===== SETTING 3 - DANCING LOGO - 3D RUNNING LOGO ===== -->
+<div class="tool-section">
+<b>💃 Setting 3 - Dancing Logo - 3D Running Orbittroniz Logo</b>
+<p>Dancing logo looks fun and premium. Letters jump one by one. Turn off if you want simple logo.</p>
+<div class="toggle-row"><div><b>💃 Dancing Logo On / Off</b><br><span id="danceSettingText">Currently: ON - Logo is dancing</span></div><div class="toggle" id="danceToggle" onclick="toggleDance()"></div></div>
+<div><label>LOGO SPEED - EDIT - 2 = Fast, 3 = Normal, 5 = Slow</label><select id="danceSpeed" onchange="changeDanceSpeed(this.value)"><option value="1.5">Fast - 1.5s - Very Fun</option><option value="3" selected>Normal - 3s - Best</option><option value="5">Slow - 5s - Simple</option></select></div>
+</div>
+
+<!-- ===== SETTING 4 - SITE NAME + LANGUAGE ===== -->
+<div class="tool-section">
+<b>🏷️ Setting 4 - Site Name + Language - Edit Later</b>
+<p>Change site name in watermark and footer. Language is English Only for now.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px"><div><label>SITE NAME</label><input id="siteNameInput" value="Orbittroniz" placeholder="Orbittroniz" oninput="changeSiteName(this.value)"></div><div><label>LANGUAGE</label><select id="siteLang" onchange="changeLang(this.value)"><option>English Only</option><option>English + Hindi (Coming Soon)</option></select></div></div>
+<p id="siteNamePreview" style="margin-top:8px">Preview Site Name: <b>Orbittroniz</b></p>
+</div>
+
+<!-- ===== SETTING 5 - THEME COLOR - GOOD LOOK ===== -->
+<div class="tool-section">
+<b>🎨 Setting 5 - Theme Color - Good Look - Edit Later</b>
+<p>Choose your website main color. Changes buttons and header glow instantly.</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+<button onclick="changeTheme('purple')" style="background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;border:none;padding:11px 14px;border-radius:20px;font-weight:800;cursor:pointer">💜 Purple - Best</button>
+<button onclick="changeTheme('blue')" style="background:linear-gradient(135deg,#2563EB,#3B82F6);color:#fff;border:none;padding:11px 14px;border-radius:20px;font-weight:800;cursor:pointer">💙 Blue</button>
+<button onclick="changeTheme('green')" style="background:linear-gradient(135deg,#16A34A,#22C55E);color:#fff;border:none;padding:11px 14px;border-radius:20px;font-weight:800;cursor:pointer">💚 Green</button>
+<button onclick="changeTheme('orange')" style="background:linear-gradient(135deg,#D97706,#F59E0B);color:#fff;border:none;padding:11px 14px;border-radius:20px;font-weight:800;cursor:pointer">🧡 Orange</button>
+</div>
+<p id="themePreview">Current Theme: <b>Purple - Best</b></p>
+</div>
+
+<!-- ===== SETTING 6 - HISTORY + DATA + STORAGE ===== -->
+<div class="tool-section">
+<b>📜 Setting 6 - History & Data - Storage</b>
+<p>History and Favourite are saved only on your phone. Clear if phone is slow or you want fresh start.</p>
+<div style="display:flex;gap:8px;margin-top:10px"><div style="flex:1;background:#fff;border:1px solid #EDE9FE;border-radius:14px;padding:11px;text-align:center"><b id="historyCount">0</b><span style="font-size:10px;color:#6B7280;display:block">History Items</span></div><div style="flex:1;background:#fff;border:1px solid #EDE9FE;border-radius:14px;padding:11px;text-align:center"><b id="favCount">0</b><span style="font-size:10px;color:#6B7280;display:block">Favourite Items</span></div><div style="flex:1;background:#fff;border:1px solid #EDE9FE;border-radius:14px;padding:11px;text-align:center"><b id="watermarkStatus">ON</b><span style="font-size:10px;color:#6B7280;display:block">Watermark</span></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px"><button class="btn dark btn-small" onclick="clearHistoryOnly()">🗑️ Clear History Only</button><button class="btn dark btn-small" onclick="clearFavOnly()">⭐ Clear Favourite Only</button></div>
+<button class="btn dark btn-small" onclick="clearAllData()">🗑️ Clear All Data - History + Favourite + Settings - Fresh Start</button>
+</div>
+
+<!-- ===== SETTING 7 - EDITABLE FEATURES - FOR OWNER ===== -->
+<div class="tool-section">
+<b>✏️ Setting 7 - Editable Features - For Owner Only - Edit Later</b>
+<p>Search <b>EDIT LATER</b> in code - You can edit tool names, watermark, colors, features anytime without breaking code.</p>
+<ul style="font-size:12px;color:#4B5563;line-height:1.8;margin-left:16px;margin-top:6px">
+<li><b>SITE NAME:</b> Change in Setting 4 above - Updates watermark + footer</li>
+<li><b>WATERMARK:</b> Change in Setting 1 above - Updates all tools</li>
+<li><b>TOOLS ON/OFF:</b> In main doctype, find <code>showTools</code> - true = Show, false = Hide</li>
+<li><b>FEATURES ON/OFF:</b> In Tool 1 code, find <code>features</code> - Rewrite / Humanize / SEO / History</li>
+<li><b>COLORS:</b> In main doctype CSS, find <code>:root</code> - Change --m1, --m2</li>
+</ul>
+</div>
+
+<!-- ===== SETTING 8 - ABOUT SETTINGS ===== -->
+<div class="tool-section">
+<b>ℹ️ About Settings</b>
+<p>Settings are saved in your phone browser using Local Storage. If you clear browser data, settings will reset to default - Watermark ON, Detail ON, Dancing Logo ON. No data goes to server. 100% Private.</p>
+<button class="btn" onclick="saveSettingsNow()">💾 Save Settings Now</button>
+<button class="btn green" onclick="resetSettings()">🔄 Reset To Default Settings</button>
+</div>
+</div>
+
+<script>
+/* ================= SETTINGS - JS - FULL - PASTE WITH SETTINGS - NO DOCTYPE ================= */
+/* EDIT LATER - You can edit default values here only */
+let watermarkOn = true;
+let watermarkText = "Made With Orbittroniz.com";
+let showDetailOn = true;
+let danceOn = true;
+let danceSpeedVal = "3";
+let siteNameVal = "Orbittroniz";
+let themeVal = "purple";
+try{ let s=localStorage.getItem('orbit_watermark'); if(s!==null) watermarkOn=s==='true'; }catch(e){}
+try{ let t=localStorage.getItem('orbit_watermark_text'); if(t) watermarkText=t; }catch(e){}
+try{ let d=localStorage.getItem('orbit_detail'); if(d!==null) showDetailOn=d==='true'; }catch(e){}
+try{ let da=localStorage.getItem('orbit_dance'); if(da!==null) danceOn=da==='true'; }catch(e){}
+try{ let sp=localStorage.getItem('orbit_dance_speed'); if(sp) danceSpeedVal=sp; }catch(e){}
+try{ let sn=localStorage.getItem('orbit_site_name'); if(sn) siteNameVal=sn; }catch(e){}
+try{ let th=localStorage.getItem('orbit_theme'); if(th) themeVal=th; }catch(e){}
+function showToastSettings(m){ let t=document.getElementById('toast'); if(!t){ t=document.createElement('div'); t.id='toast'; t.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:11px 18px;border-radius:22px;font-size:12px;font-weight:800;z-index:999;white-space:nowrap'; document.body.appendChild(t);} t.innerText=m; t.style.display='block'; setTimeout(function(){ t.style.display='none'; },2200); }
+function getWatermarkSuffix(){ return watermarkOn ? "\n\n- "+watermarkText : ""; }
+function toggleDetailSettings(){ document.getElementById('detailSettingsBox').classList.toggle('show'); }
+function applySettingsUI(){
+  let wmT=document.getElementById('wmSettingText'); if(wmT) wmT.innerText="Currently: "+(watermarkOn?"ON - Watermark will show":"OFF - Clean output, no watermark");
+  let wmToggle=document.getElementById('wmToggle'); if(wmToggle) wmToggle.classList.toggle('off',!watermarkOn);
+  let wmInput=document.getElementById('wmTextInput'); if(wmInput) wmInput.value=watermarkText;
+  let wmPrev=document.getElementById('wmPreview'); if(wmPrev) wmPrev.innerText="Preview: - "+watermarkText;
+  let detT=document.getElementById('detailSettingText'); if(detT) detT.innerText="Currently: "+(showDetailOn?"ON - Detail will show":"OFF - Detail hidden");
+  let detToggle=document.getElementById('detailToggle'); if(detToggle) detToggle.classList.toggle('off',!showDetailOn);
+  let danT=document.getElementById('danceSettingText'); if(danT) danT.innerText="Currently: "+(danceOn?"ON - Logo is dancing":"OFF - Logo is simple");
+  let danToggle=document.getElementById('danceToggle'); if(danToggle) danToggle.classList.toggle('off',!danceOn);
+  let danSpeed=document.getElementById('danceSpeed'); if(danSpeed) danSpeed.value=danceSpeedVal;
+  let siteIn=document.getElementById('siteNameInput'); if(siteIn) siteIn.value=siteNameVal;
+  let sitePrev=document.getElementById('siteNamePreview'); if(sitePrev) sitePrev.innerHTML="Preview Site Name: <b>"+siteNameVal+"</b>";
+  let themePrev=document.getElementById('themePreview'); if(themePrev) themePrev.innerHTML="Current Theme: <b>"+themeVal+"</b>";
+  let wmStatus=document.getElementById('watermarkStatus'); if(wmStatus) wmStatus.innerText=watermarkOn?"ON":"OFF";
+  // Dancing logo - apply to any .logo-3d span or .logo span in page
+  document.querySelectorAll('.logo-3d span, .logo span').forEach(function(s){ s.style.animationPlayState=danceOn?'running':'paused'; if(!danceOn) s.style.transform='none'; else s.style.transform=''; s.style.animationDuration=danceSpeedVal+'s'; });
+  // Detail boxes - show/hide all .detail-box in page if setting is OFF
+  if(!showDetailOn){ document.querySelectorAll('.detail-box').forEach(function(b){ b.classList.remove('show'); }); }
+  updateCounts();
+}
+function updateCounts(){
+  let h=0,f=0;
+  try{ h=JSON.parse(localStorage.getItem('orbit_writer_history')||"[]").length; }catch(e){ h=0; }
+  try{ f=JSON.parse(localStorage.getItem('orbit_writer_fav')||"[]").length; }catch(e){ f=0; }
+  let hc=document.getElementById('historyCount'); if(hc) hc.innerText=h;
+  let fc=document.getElementById('favCount'); if(fc) fc.innerText=f;
+}
+function toggleWatermark(){ watermarkOn=!watermarkOn; try{ localStorage.setItem('orbit_watermark',watermarkOn?'true':'false'); }catch(e){} applySettingsUI(); showToastSettings(watermarkOn?'Watermark ON 💧':'Watermark OFF - Clean Output ✅'); }
+function setWatermarkOn(){ watermarkOn=true; try{ localStorage.setItem('orbit_watermark','true'); }catch(e){} applySettingsUI(); showToastSettings('Watermark ON 💧'); }
+function setWatermarkOff(){ watermarkOn=false; try{ localStorage.setItem('orbit_watermark','false'); }catch(e){} applySettingsUI(); showToastSettings('Watermark OFF - Clean ✅'); }
+function changeWatermarkText(v){ watermarkText=v||"Made With Orbittroniz.com"; try{ localStorage.setItem('orbit_watermark_text',watermarkText); }catch(e){} applySettingsUI(); }
+function toggleDetailSetting(){ showDetailOn=!showDetailOn; try{ localStorage.setItem('orbit_detail',showDetailOn?'true':'false'); }catch(e){} applySettingsUI(); showToastSettings(showDetailOn?'Detail ON 📖':'Detail OFF'); }
+function showAllDetails(){ showDetailOn=true; try{ localStorage.setItem('orbit_detail','true'); }catch(e){} document.querySelectorAll('.detail-box').forEach(function(b){ b.classList.add('show'); }); applySettingsUI(); showToastSettings('All Details Shown 📖'); }
+function hideAllDetails(){ showDetailOn=false; try{ localStorage.setItem('orbit_detail','false'); }catch(e){} document.querySelectorAll('.detail-box').forEach(function(b){ b.classList.remove('show'); }); applySettingsUI(); showToastSettings('All Details Hidden 🙈'); }
+function toggleDance(){ danceOn=!danceOn; try{ localStorage.setItem('orbit_dance',danceOn?'true':'false'); }catch(e){} applySettingsUI(); showToastSettings(danceOn?'Dancing Logo ON 💃':'Dancing Logo OFF'); }
+function changeDanceSpeed(v){ danceSpeedVal=v||"3"; try{ localStorage.setItem('orbit_dance_speed',danceSpeedVal); }catch(e){} applySettingsUI(); showToastSettings('Logo Speed Changed - '+danceSpeedVal+'s'); }
+function changeSiteName(v){ siteNameVal=v||"Orbittroniz"; try{ localStorage.setItem('orbit_site_name',siteNameVal); }catch(e){} applySettingsUI(); }
+function changeLang(v){ showToastSettings('Language: '+v+' - English Only For Now'); }
+function changeTheme(color){
+  themeVal=color;
+  try{ localStorage.setItem('orbit_theme',color); }catch(e){}
+  let root=document.documentElement;
+  if(color==='purple'){ root.style.setProperty('--m1','#7C3AED'); root.style.setProperty('--m2','#EC4899'); }
+  if(color==='blue'){ root.style.setProperty('--m1','#2563EB'); root.style.setProperty('--m2','#3B82F6'); }
+  if(color==='green'){ root.style.setProperty('--m1','#16A34A'); root.style.setProperty('--m2','#22C55E'); }
+  if(color==='orange'){ root.style.setProperty('--m1','#D97706'); root.style.setProperty('--m2','#F59E0B'); }
+  applySettingsUI(); showToastSettings('Theme Changed - '+color+' 🎨');
+}
+function clearHistoryOnly(){ try{ localStorage.removeItem('orbit_writer_history'); }catch(e){} if(typeof historyList!=='undefined') historyList=[]; if(typeof renderHistory==='function') renderHistory(); updateCounts(); showToastSettings('History Cleared 🗑️'); }
+function clearFavOnly(){ try{ localStorage.removeItem('orbit_writer_fav'); }catch(e){} if(typeof favList!=='undefined') favList=[]; if(typeof renderFav==='function') renderFav(); updateCounts(); showToastSettings('Favourite Cleared ⭐'); }
+function clearAllData(){ if(!confirm("Clear all History + Favourite + Settings?")) return; try{ localStorage.removeItem('orbit_writer_history'); localStorage.removeItem('orbit_writer_fav'); localStorage.removeItem('orbit_watermark'); localStorage.removeItem('orbit_watermark_text'); localStorage.removeItem('orbit_detail'); localStorage.removeItem('orbit_dance'); localStorage.removeItem('orbit_dance_speed'); localStorage.removeItem('orbit_site_name'); localStorage.removeItem('orbit_theme'); }catch(e){} watermarkOn=true; watermarkText="Made With Orbittroniz.com"; showDetailOn=true; danceOn=true; siteNameVal="Orbittroniz"; themeVal="purple"; applySettingsUI(); showToastSettings('All Data Cleared - Fresh Start 🗑️'); }
+function saveSettingsNow(){ try{ localStorage.setItem('orbit_watermark',watermarkOn?'true':'false'); localStorage.setItem('orbit_watermark_text',watermarkText); localStorage.setItem('orbit_detail',showDetailOn?'true':'false'); localStorage.setItem('orbit_dance',danceOn?'true':'false'); localStorage.setItem('orbit_dance_speed',danceSpeedVal); localStorage.setItem('orbit_site_name',siteNameVal); localStorage.setItem('orbit_theme',themeVal); }catch(e){} showToastSettings('Settings Saved 💾'); }
+function resetSettings(){ watermarkOn=true; watermarkText="Made With Orbittroniz.com"; showDetailOn=true; danceOn=true; danceSpeedVal="3"; siteNameVal="Orbittroniz"; themeVal="purple"; saveSettingsNow(); applySettingsUI(); showToastSettings('Reset To Default ✅'); }
+applySettingsUI();
+/* ================= SETTINGS - JS END ================= */
+</script>
+<!-- ================= SETTINGS END - PASTE DIRECTLY ================= -->
 
 <!-- ================= HOME - ALL TOOLS GRID - ONLY CARDS - CLICK TO OPEN TOOL ================= -->
 <div class="tools-grid" id="toolsGrid">
