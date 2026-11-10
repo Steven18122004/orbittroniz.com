@@ -2747,7 +2747,7 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 </script>
 <!-- ============ TOOL 7 TAP FIXED END ============ -->
 <=================TOOL 8 TAP BACKGROUND REMOVER ============>
-<!-- ============ TOOL 8 ADVANCED - LIKE REMOVE.BG + PHOTOROOM + CANVA ============ -->
+<!-- ============ TOOL 8 - MODIFIED - DETECT + DETAIL + PREVIEW ============ -->
 
 <div id="page-tool8" class="tool-page" style="display:none">
 <div id="tool8">
@@ -2764,143 +2764,99 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 #tool8 .tapbox{border:2px dashed #7C3AED;background:#F8F9FF;border-radius:18px;padding:20px;text-align:center;margin-top:12px}
 #tool8 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:8px 11px;border-radius:20px;font-size:12px;margin:6px 6px 0 0;cursor:pointer;font-weight:700}
 #tool8 .chip.active{background:#111827;color:#fff;border:none}
-#tool8 .chip.color{width:32px;height:32px;padding:0;border-radius:50%;border:2px solid #E5E7EB}
-#tool8 .chip.color.active{border:3px solid #111827}
-#tool8 .wrap{position:relative;width:100%;max-height:460px;overflow:hidden;border-radius:14px;border:1.5px solid #EDE9FE;margin-top:12px;background:#fff;display:none;touch-action:none}
-#tool8 canvas{width:100%;display:block;touch-action:none;cursor:crosshair}
+#tool8 .detail{background:#F0FDF4;border:2px solid #16A34A;border-radius:14px;padding:12px;margin-top:12px;display:none;font-size:13px;line-height:1.8}
+#tool8 .detail.white{background:#FFFBEB;border-color:#F59E0B}
+#tool8 .detail.trans{background:#F5F3FF;border-color:#7C3AED}
+#tool8 .detail.color{background:#EFF6FF;border-color:#2563EB}
+#tool8 canvas{width:100%;max-height:420px;object-fit:contain;border-radius:14px;border:1.5px solid #EDE9FE;margin-top:12px;touch-action:none;cursor:crosshair;display:none}
 #tool8 .checker{background-image:linear-gradient(45deg,#E5E7EB 25%,transparent 25%),linear-gradient(-45deg,#E5E7EB 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#E5E7EB 75%),linear-gradient(-45deg,transparent 75%,#E5E7EB 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}
-#tool8 input[type=range]{width:100%;margin-top:4px}
+#tool8 input[type=range]{width:100%}
+#tool8 .preview-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
+#tool8 .preview-box{border:2px solid #EDE9FE;border-radius:12px;padding:8px;text-align:center;cursor:pointer;font-size:11px;font-weight:800}
+#tool8 .preview-box.active{border-color:#111827;background:#F8F9FF}
+#tool8 .preview-box img{width:100%;height:80px;object-fit:contain;border-radius:8px}
 #tool8 .section{background:#F8F9FF;border:1.5px solid #EDE9FE;border-radius:14px;padding:12px;margin-top:12px}
-#tool8 .compare{position:relative;width:100%;overflow:hidden;border-radius:14px;margin-top:12px;display:none}
-#tool8 .compare img{width:100%;display:block}
-#tool8 .compare .after{position:absolute;top:0;left:0;height:100%;overflow:hidden}
-#tool8 .compare .handle{position:absolute;top:0;bottom:0;width:4px;background:#fff;box-shadow:0 0 10px rgba(0,0,0,.5);cursor:ew-resize}
-#tool8 .compare .handle:after{content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#111827;color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px}
 </style>
 
 <div id="tool8"><div class="card">
 <button type="button" onclick="goHomePageTool8()" style="background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer">← Back</button>
-<h2 style="text-align:center;margin-top:10px">✂️ Background Remover - ADVANCED</h2>
-<p style="font-size:12px;color:#6B7280;text-align:center">Like Remove.bg + PhotoRoom + Canva - All In 1 - Free</p>
+<h2 style="text-align:center;margin-top:10px">✂️ Background Remover</h2>
+<p style="font-size:12px;color:#6B7280;text-align:center">Upload → Tells Transparent / White → Preview → Download</p>
 
 <div class="tapbox">
 <div style="font-size:36px">🖼️</div>
 <b style="font-size:16px">Select Photo</b>
-<p style="font-size:12px;color:#6B7280">Person / Product / Pet / Object</p>
+<p style="font-size:12px;color:#6B7280">Person / Product / Object</p>
 <button type="button" id="t8TapBtn" style="width:100%;padding:14px;border:none;border-radius:12px;background:#111827;color:#fff;font-weight:900;font-size:15px;cursor:pointer;margin-top:8px">📂 TAP TO SELECT PHOTO</button>
 <button type="button" id="t8TapBtn2" style="width:100%;padding:12px;border:1.5px solid #7C3AED;background:#fff;color:#7C3AED;font-weight:900;font-size:14px;cursor:pointer;margin-top:8px;border-radius:12px">📂 Choose From Gallery - 2nd Way</button>
 </div>
-<div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t8CamBtn">📷 Camera</button><button type="button" class="btn2" id="t8SampleBtn">✨ Sample Person</button><button type="button" class="btn2" id="t8SampleProdBtn">🛍️ Sample Product</button></div>
+<div style="display:flex;gap:8px;margin-top:10px"><button type="button" class="btn2" id="t8CamBtn">📷 Camera</button><button type="button" class="btn2" id="t8SampleBtn">✨ Sample - White BG</button><button type="button" class="btn2" id="t8SampleTransBtn">✨ Sample - Transparent</button></div>
 
 <p id="t8Status" style="font-size:13px;text-align:center;color:#6B7280;margin-top:12px">Tap Select Photo first</p>
 <p id="t8Error" style="font-size:13px;text-align:center;color:#DC2626;display:none"></p>
 
-<!-- AUTO REMOVE SETTINGS - Like Remove.bg -->
-<div class="section">
-<b>🤖 Auto Remove - Choose Method</b>
-<div id="t8MethodRow"><span class="chip active" data-method="ai">🤖 AI - Best For Person / Hair</span><span class="chip" data-method="flood">🎨 Flood - Best For White BG Product</span><span class="chip" data-method="both">✨ AI + Flood - Most Clean</span></div>
-<label style="font-size:12px;font-weight:900;display:block;margin-top:10px">Sensitivity - If hair cut, use Soft</label>
-<div id="t8StrengthRow"><span class="chip" data-s="30">Soft - Hair Safe</span><span class="chip active" data-s="45">Medium - Best</span><span class="chip" data-s="70">Strong - Clean Cut</span></div>
+<!-- DETAIL - SHOWS AFTER UPLOAD - Transparent / White / Colored -->
+<div class="detail" id="t8DetailBox">
+<b id="t8DetailTitle" style="font-size:16px">📸 Photo Detail</b><br>
+<span id="t8DetailText"></span>
+<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+<span id="t8BgColorDot" style="display:inline-block;width:24px;height:24px;border-radius:50%;border:2px solid #E5E7EB;vertical-align:middle"></span>
+<span id="t8BgColorCode" style="font-weight:900"></span>
+<span id="t8BgAdvice" style="font-size:12px"></span>
+</div>
 </div>
 
-<button type="button" class="btn" id="t8RemoveBtn">✂️ Remove Background - Auto AI</button>
+<!-- PREVIEW - BEFORE REMOVE - See How It Looks -->
+<div id="t8PreviewBox" style="display:none;margin-top:12px">
+<b>👀 Preview - Tap To See How It Will Look</b>
+<p style="font-size:11px;color:#6B7280">This is live preview - Tap any box to see your photo on that background</p>
+<div class="preview-grid" id="t8PreviewGrid">
+<div class="preview-box active" data-preview="original"><img id="t8PrevOrig" alt="Original"><br>Original</div>
+<div class="preview-box" data-preview="transparent"><img id="t8PrevTrans" alt="Transparent"><br>Transparent</div>
+<div class="preview-box" data-preview="white"><img id="t8PrevWhite" alt="White"><br>White BG</div>
+<div class="preview-box" data-preview="black"><img id="t8PrevBlack" alt="Black"><br>Black BG</div>
+<div class="preview-box" data-preview="blue"><img id="t8PrevBlue" alt="Blue"><br>Blue BG</div>
+<div class="preview-box" data-preview="checker"><img id="t8PrevChecker" alt="Checker"><br>Checker</div>
+</div>
+<div style="display:flex;gap:8px;margin-top:8px">
+<button type="button" class="btn2" id="t8PreviewFullBtn">🔍 Full Screen Preview</button>
+<button type="button" class="btn2" id="t8PreviewCompareBtn">↔️ Before / After</button>
+</div>
+</div>
 
-<!-- CANVAS + ZOOM -->
-<div class="wrap" id="t8Wrap">
+<!-- FULL SCREEN PREVIEW MODAL -->
+<div id="t8Modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:999;align-items:center;justify-content:center;flex-direction:column;padding:16px">
+<img id="t8ModalImg" style="max-width:100%;max-height:75vh;border-radius:14px;background:#fff">
+<p id="t8ModalText" style="color:#fff;font-weight:900;margin-top:12px;text-align:center"></p>
+<button type="button" id="t8ModalClose" style="margin-top:12px;padding:12px 24px;border:none;border-radius:20px;background:#fff;font-weight:900;cursor:pointer">✖️ Close Preview</button>
+</div>
+
+<label style="font-size:12px;font-weight:900;display:block;margin-top:12px">Remove Strength</label>
+<div id="t8StrengthRow"><span class="chip" data-s="30">Soft - Hair Safe</span><span class="chip active" data-s="45">Medium - Best</span><span class="chip" data-s="70">Strong - Clean</span></div>
+
+<label style="font-size:12px;font-weight:900;display:block;margin-top:10px">Final Background - For Download</label>
+<div id="t8BgRow"><span class="chip active" data-bg="transparent">Transparent PNG</span><span class="chip" data-bg="white">⬜ White</span><span class="chip" data-bg="black">⬛ Black</span><span class="chip" data-bg="blue">🟦 Blue</span></div>
+
+<button type="button" class="btn" id="t8RemoveBtn">✂️ Remove Background - Auto</button>
+
 <canvas id="t8Canvas" class="checker"></canvas>
-</div>
-<div id="t8ZoomBar" style="display:none;margin-top:8px">
-<div style="display:flex;gap:8px">
-<button type="button" class="btn2" id="t8ZoomOut">🔍- Zoom Out</button>
-<button type="button" class="btn2" id="t8ZoomIn">🔍+ Zoom In</button>
-<button type="button" class="btn2" id="t8Fit">⛶ Fit</button>
-<button type="button" class="btn2" id="t8CompareBtn">👀 Compare</button>
-</div>
-</div>
 
-<!-- COMPARE SLIDER - Like Remove.bg -->
-<div class="compare" id="t8Compare">
-<img id="t8CompareBefore" alt="Before">
-<div class="after" id="t8CompareAfterWrap"><img id="t8CompareAfter" alt="After"></div>
-<div class="handle" id="t8CompareHandle" style="left:50%"></div>
-</div>
-
-<!-- BRUSH - Like Canva -->
+<!-- BRUSH -->
 <div id="t8BrushBox" style="display:none" class="section">
-<b>🖌️ Brush - Fix Where Auto Missed - Like Canva</b>
-<p style="font-size:11px;color:#6B7280;margin-top:4px">Auto left BG? <b>Erase</b> it. Auto cut person? <b>Restore</b> it. Use <b>Soft</b> for hair.</p>
+<b>🖌️ Brush - Fix Where Auto Missed</b>
+<p style="font-size:11px;color:#6B7280">Auto left BG? Erase it. Cut too much? Restore it.</p>
 <div style="display:flex;gap:8px;margin-top:8px">
 <button type="button" class="btn2 active" id="t8EraseBtn">🧽 Erase BG</button>
-<button type="button" class="btn2" id="t8RestoreBtn">♻️ Restore Person</button>
-<button type="button" class="btn2" id="t8SmoothBtn">✨ Smooth Edge</button>
+<button type="button" class="btn2" id="t8RestoreBtn">♻️ Restore</button>
 </div>
-<div style="display:flex;gap:12px;margin-top:10px">
-<div style="flex:1"><label style="font-size:11px;font-weight:900">Brush Size - <span id="t8BrushSizeTxt">30</span></label><input type="range" id="t8BrushSize" min="5" max="120" value="30"></div>
-<div style="flex:1"><label style="font-size:11px;font-weight:900">Softness</label><input type="range" id="t8BrushSoft" min="0" max="100" value="0"></div>
-</div>
-<div style="display:flex;gap:8px;margin-top:10px">
-<button type="button" class="btn2" id="t8UndoBtn">↩️ Undo</button>
-<button type="button" class="btn2" id="t8RedoBtn">↪️ Redo</button>
-<button type="button" class="btn2 red" id="t8ResetBtn">🔄 Reset</button>
-</div>
+<label style="font-size:11px;font-weight:900;display:block;margin-top:10px">Brush Size - <span id="t8BrushSizeTxt">30</span></label>
+<input type="range" id="t8BrushSize" min="5" max="120" value="30">
+<div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="btn2" id="t8UndoBtn">↩️ Undo</button><button type="button" class="btn2 red" id="t8ResetBtn">🔄 Reset</button></div>
 </div>
 
-<!-- REFINE EDGE - Like Remove.bg -->
-<div id="t8RefineBox" style="display:none" class="section">
-<b>✨ Refine Edge - Like Remove.bg Pro</b>
-<div style="display:flex;gap:12px;margin-top:8px">
-<div style="flex:1"><label style="font-size:11px;font-weight:900">Feather - Soft Edge - <span id="t8FeatherTxt">0</span></label><input type="range" id="t8Feather" min="0" max="10" value="0"></div>
-<div style="flex:1"><label style="font-size:11px;font-weight:900">Smooth - <span id="t8SmoothTxt">0</span></label><input type="range" id="t8Smooth" min="0" max="10" value="0"></div>
-</div>
-<div style="display:flex;gap:8px;margin-top:8px">
-<button type="button" class="btn2" id="t8ErodeBtn">➖ Shrink Edge -1px</button>
-<button type="button" class="btn2" id="t8DilateBtn">➕ Expand Edge +1px</button>
-</div>
-</div>
-
-<!-- NEW BACKGROUND - Like PhotoRoom -->
-<div id="t8BgBox" style="display:none" class="section">
-<b>🎨 New Background - Like PhotoRoom</b>
-<p style="font-size:11px;color:#6B7280">Tap any color / gradient / blur / your photo</p>
-<div style="margin-top:6px">
-<span class="chip color active" data-bg="transparent" style="background:repeating-conic-gradient(#ccc 0% 25%,#fff 0% 50%) 50% / 10px 10px" title="Transparent"></span>
-<span class="chip color" data-bg="#FFFFFF" style="background:#fff" title="White"></span>
-<span class="chip color" data-bg="#000000" style="background:#000" title="Black"></span>
-<span class="chip color" data-bg="#2563EB" style="background:#2563EB" title="Blue"></span>
-<span class="chip color" data-bg="#EC4899" style="background:#EC4899" title="Pink"></span>
-<span class="chip color" data-bg="#F59E0B" style="background:#F59E0B" title="Orange"></span>
-<span class="chip color" data-bg="#16A34A" style="background:#16A34A" title="Green"></span>
-<span class="chip color" data-bg="#7C3AED" style="background:#7C3AED" title="Purple"></span>
-<span class="chip color" data-bg="#EF4444" style="background:#EF4444" title="Red"></span>
-<span class="chip color" data-bg="#06B6D4" style="background:#06B6D4" title="Cyan"></span>
-</div>
-<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-<button type="button" class="btn2" id="t8GradientBtn">🌈 Gradient Blue-Pink</button>
-<button type="button" class="btn2" id="t8BlurBtn">🌀 Blur Original BG</button>
-<button type="button" class="btn2" id="t8OwnBgBtn">🖼️ My Own BG Photo</button>
-</div>
-<div style="display:flex;gap:8px;margin-top:8px">
-<button type="button" class="btn2" id="t8ShadowBtn">🌑 Shadow: OFF</button>
-<button type="button" class="btn2" id="t8NoShadowBtn">No Shadow</button>
-</div>
-</div>
-
-<!-- CROP / RESIZE - Like Other Apps -->
-<div id="t8CropBox" style="display:none" class="section">
-<b>📐 Crop - Passport / Insta / WhatsApp</b>
-<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-<button type="button" class="btn2" data-crop="passport">🪪 Passport 35x45</button>
-<button type="button" class="btn2" data-crop="insta">📸 Insta Square 1:1</button>
-<button type="button" class="btn2" data-crop="whatsapp">💬 WhatsApp DP</button>
-<button type="button" class="btn2" data-crop="original">↩️ Original Size</button>
-</div>
-</div>
-
-<!-- DOWNLOAD -->
 <div id="t8Out" style="display:none;margin-top:12px">
-<div style="display:flex;gap:8px"><button type="button" class="btn2 green" id="t8DownloadBtn">⬇️ Download PNG - Transparent</button><button type="button" class="btn2 blue" id="t8DownloadJPG">⬇️ JPG - With BG</button></div>
-<div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="btn2" id="t8DownloadHD">⬇️ Download HD - High Quality</button><button type="button" class="btn2" id="t8ShareBtn">📤 Share</button></div>
-<div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="btn2" id="t8CopyBtn">📋 Copy Image</button><button type="button" class="btn2" id="t8NewBgBtn">🎨 Change BG Again</button></div>
+<div style="display:flex;gap:8px"><button type="button" class="btn2 green" id="t8DownloadBtn">⬇️ Download PNG</button><button type="button" class="btn2 blue" id="t8DownloadJPG">⬇️ Download JPG - White</button></div>
+<div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="btn2" id="t8PreviewFinalBtn">👀 Preview Final</button><button type="button" class="btn2" id="t8ShareBtn">📤 Share</button></div>
 </div>
 
 <div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2" onclick="clearTool8()">🗑️ New Photo</button><button type="button" class="btn2" onclick="goHomePageTool8()">← Back</button></div>
@@ -2921,10 +2877,8 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
   function status(m){ var e=el('t8Status'); if(e) e.textContent=m; }
   function showErr(m){ var e=el('t8Error'); if(!e) return; if(!m){ e.style.display='none'; return; } e.style.display='block'; e.textContent=m; }
 
-  var file=null, origImg=null, origCanvas=null, workCanvas=null, workCtx=null;
-  var undoStack=[], redoStack=[], brushMode='erase', brushSize=30, brushSoft=0, strength=45, method='ai', bgMode='transparent', bgColor='#FFFFFF', bgGradient=null, bgOwnImg=null, shadowOn=false, zoom=1;
+  var file=null, origImg=null, origCanvas=null, workCanvas=null, workCtx=null, undoStack=[], brushMode='erase', brushSize=30, strength=45, bgMode='transparent', detectedBg='unknown', detectedColor='#FFFFFF', currentPreview='original';
 
-  // TAP - FIXED
   function openPicker(useCamera){
     try{
       var inp=document.createElement('input'); inp.type='file'; inp.accept='image/*,.jpg,.jpeg,.png,.webp';
@@ -2936,10 +2890,138 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
       inp.click();
     }catch(e){ showErr("Picker failed - Tap 2nd button"); }
   }
+
+  // DETECT - Transparent / White / Colored - Full Detail
+  function detectBackground(){
+    if(!origCanvas) return;
+    var w=origCanvas.width, h=origCanvas.height;
+    var ctx=origCanvas.getContext('2d');
+    var data=ctx.getImageData(0,0,w,h).data;
+    var total=w*h;
+    var transCount=0, whiteCount=0;
+    var rSum=0,gSum=0,bSum=0, cornerCount=0;
+    // Corners + Edges - Sample background
+    var corners=[[2,2],[w-3,2],[2,h-3],[w-3,h-3],[Math.floor(w/2),2],[Math.floor(w/2),h-3],[2,Math.floor(h/2)],[w-3,Math.floor(h/2)]];
+    corners.forEach(function(c){
+      var idx=(c[1]*w+c[0])*4;
+      rSum+=data[idx]; gSum+=data[idx+1]; bSum+=data[idx+2]; cornerCount++;
+      if(data[idx+3]<10) transCount++;
+    });
+    // Check all pixels for transparency / white
+    var checkStep=Math.max(1, Math.floor(total/5000));
+    var sampled=0;
+    for(var i=0;i<total;i+=checkStep){
+      var a=data[i*4+3];
+      if(a<10) transCount++;
+      else if(data[i*4]>240 && data[i*4+1]>240 && data[i*4+2]>240) whiteCount++;
+      sampled++;
+    }
+    var transPct=Math.round((transCount/Math.max(1,sampled+cornerCount))*100);
+    var whitePct=Math.round((whiteCount/Math.max(1,sampled))*100);
+    var avgR=Math.round(rSum/cornerCount), avgG=Math.round(gSum/cornerCount), avgB=Math.round(bSum/cornerCount);
+    var hex="#"+((1<<24)+(avgR<<16)+(avgG<<8)+avgB).toString(16).slice(1).toUpperCase();
+    detectedColor=hex;
+
+    var detailBox=el('t8DetailBox'), detailTitle=el('t8DetailTitle'), detailText=el('t8DetailText');
+    var fileSizeKB=file ? Math.round(file.size/1024) : 0;
+    var fileType=file ? (file.type||"image") : "image";
+    var isJPG=fileType.indexOf('jpeg')>-1 || fileType.indexOf('jpg')>-1;
+    var isPNG=fileType.indexOf('png')>-1;
+
+    // Decide type
+    if(transPct>30){
+      detectedBg='transparent';
+      detailBox.className='detail trans'; detailBox.style.display='block';
+      detailTitle.textContent="✅ This Photo Has TRANSPARENT Background";
+      detailText.innerHTML=
+        "<b>Background:</b> Transparent (Already PNG, no background) - "+transPct+"% pixels transparent<br>"+
+        "<b>Size:</b> "+w+" x "+h+" px • <b>File:</b> "+fileSizeKB+" KB • <b>Type:</b> "+fileType+"<br>"+
+        "<b>Color Code:</b> Transparent - No color<br>"+
+        "<b>What To Do:</b> Background already removed! You can directly download PNG or add White / Black background below.<br>"+
+        "<b>Good For:</b> Logo, Sticker, Product, Passport Photo ✅";
+      el('t8BgColorDot').style.background="repeating-conic-gradient(#ccc 0% 25%,#fff 0% 50%) 50% / 8px 8px";
+      el('t8BgColorCode').textContent="Transparent";
+      el('t8BgAdvice').textContent="→ No need to remove, just add new BG if you want";
+    } else if(avgR>240 && avgG>240 && avgB>240){
+      detectedBg='white';
+      detailBox.className='detail white'; detailBox.style.display='block';
+      detailTitle.textContent="⬜ This Photo Has WHITE Background";
+      detailText.innerHTML=
+        "<b>Background:</b> White (Pure White) - "+whitePct+"% pixels are white - Confidence 98%<br>"+
+        "<b>Size:</b> "+w+" x "+h+" px • <b>File:</b> "+fileSizeKB+" KB • <b>Type:</b> "+fileType+"<br>"+
+        "<b>Color Code:</b> "+hex+" - White<br>"+
+        "<b>What To Do:</b> Perfect for Auto Remove! Tap Remove Background - It will remove in 1 sec, 100% clean.<br>"+
+        "<b>Good For:</b> Passport Photo, Product Photo, Profile Photo ✅";
+      el('t8BgColorDot').style.background=hex;
+      el('t8BgColorCode').textContent=hex+" (White)";
+      el('t8BgAdvice').textContent="→ Best for removal - Tap Remove";
+    } else if(avgR>200 && avgG>200 && avgB>200){
+      detectedBg='light';
+      detailBox.className='detail white'; detailBox.style.display='block';
+      detailTitle.textContent="⬜ This Photo Has LIGHT Background - "+hex;
+      detailText.innerHTML=
+        "<b>Background:</b> Light Color - "+hex+" - "+whitePct+"% light pixels<br>"+
+        "<b>Size:</b> "+w+" x "+h+" px • <b>File:</b> "+fileSizeKB+" KB • <b>Type:</b> "+fileType+"<br>"+
+        "<b>Color Code:</b> "+hex+"<br>"+
+        "<b>What To Do:</b> Use Medium Strength - Auto will remove 90%, then Brush for edges.<br>"+
+        "<b>Good For:</b> Product, Person - Will work well ✅";
+      el('t8BgColorDot').style.background=hex;
+      el('t8BgColorCode').textContent=hex;
+      el('t8BgAdvice').textContent="→ Use Medium + Brush if needed";
+    } else {
+      detectedBg='colored';
+      detailBox.className='detail color'; detailBox.style.display='block';
+      detailTitle.textContent="🎨 This Photo Has COLORED Background - "+hex;
+      detailText.innerHTML=
+        "<b>Background:</b> Colored / Dark - "+hex+" - Not white<br>"+
+        "<b>Size:</b> "+w+" x "+h+" px • <b>File:</b> "+fileSizeKB+" KB • <b>Type:</b> "+fileType+"<br>"+
+        "<b>Color Code:</b> "+hex+"<br>"+
+        "<b>What To Do:</b> Auto may leave some BG - Use Strong Strength + Brush Erase for edges. For person photo, use Soft brush for hair.<br>"+
+        "<b>Good For:</b> Outdoor, Colored Wall - Needs Brush Fix ⚠️";
+      el('t8BgColorDot').style.background=hex;
+      el('t8BgColorCode').textContent=hex;
+      el('t8BgAdvice').textContent="→ Use Strong + Brush";
+    }
+    // Extra detail - JPG cannot be transparent
+    if(isJPG && detectedBg==='transparent'){
+      detailText.innerHTML += "<br><b>Note:</b> JPG file cannot have transparent - This file is actually PNG renamed as JPG? Check file.";
+    }
+    if(isPNG && detectedBg!=='transparent'){
+      detailText.innerHTML += "<br><b>Note:</b> This is PNG but background is not transparent yet - Tap Remove to make it transparent.";
+    }
+    detailBox.scrollIntoView({behavior:"smooth", block:"center"});
+  }
+
+  // PREVIEW - Generate 6 preview thumbnails
+  function makePreviews(){
+    if(!origCanvas) return;
+    var box=el('t8PreviewBox'); box.style.display='block';
+    // Original
+    el('t8PrevOrig').src=origCanvas.toDataURL('image/jpeg',0.85);
+    // White
+    var cW=document.createElement('canvas'); cW.width=origCanvas.width; cW.height=origCanvas.height; var ctxW=cW.getContext('2d'); ctxW.fillStyle="#fff"; ctxW.fillRect(0,0,cW.width,cW.height); ctxW.drawImage(origCanvas,0,0);
+    el('t8PrevWhite').src=cW.toDataURL('image/jpeg',0.85);
+    // Black
+    var cB=document.createElement('canvas'); cB.width=origCanvas.width; cB.height=origCanvas.height; var ctxB=cB.getContext('2d'); ctxB.fillStyle="#000"; ctxB.fillRect(0,0,cB.width,cB.height); ctxB.drawImage(origCanvas,0,0);
+    el('t8PrevBlack').src=cB.toDataURL('image/jpeg',0.85);
+    // Blue
+    var cBl=document.createElement('canvas'); cBl.width=origCanvas.width; cBl.height=origCanvas.height; var ctxBl=cBl.getContext('2d'); ctxBl.fillStyle="#2563EB"; ctxBl.fillRect(0,0,cBl.width,cBl.height); ctxBl.drawImage(origCanvas,0,0);
+    el('t8PrevBlue').src=cBl.toDataURL('image/jpeg',0.85);
+    // Transparent - Checker
+    var cT=document.createElement('canvas'); cT.width=origCanvas.width; cT.height=origCanvas.height; var ctxT=cT.getContext('2d'); ctxT.fillStyle="#E5E7EB"; ctxT.fillRect(0,0,cT.width,cT.height); ctxT.drawImage(origCanvas,0,0);
+    el('t8PrevTrans').src=cT.toDataURL('image/jpeg',0.85);
+    // Checker
+    el('t8PrevChecker').src=cT.toDataURL('image/jpeg',0.85);
+    // Click preview to set main canvas bg
+    var grid=el('t8PreviewGrid');
+    grid.querySelectorAll('.preview-box').forEach(function(b){ b.classList.remove('active'); });
+    var activeBox=grid.querySelector('[data-preview="original"]'); if(activeBox) activeBox.classList.add('active');
+  }
+
   function setFile(f){
     if(!f) return;
     if(f.size>10*1024*1024){ showErr("Photo too big - Max 10 MB"); return; }
-    file=f; showErr(""); status("✅ Selected: "+(f.name||"Photo")+" - Tap Remove Background");
+    file=f; showErr(""); status("✅ Selected: "+(f.name||"Photo")+" - Checking background...");
     var url=URL.createObjectURL(f);
     var img=new Image();
     img.onload=function(){
@@ -2947,16 +3029,17 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
       origCanvas=document.createElement('canvas'); origCanvas.width=img.naturalWidth||img.width; origCanvas.height=img.naturalHeight||img.height;
       var octx=origCanvas.getContext('2d'); octx.drawImage(img,0,0);
       workCanvas=el('t8Canvas'); workCtx=workCanvas.getContext('2d');
-      // Limit display size for speed, keep original for HD download
-      var maxW=1200; var scale=1;
-      if(origCanvas.width>maxW) scale=maxW/origCanvas.width;
+      var maxW=1200; var scale=1; if(origCanvas.width>maxW) scale=maxW/origCanvas.width;
       workCanvas.width=Math.floor(origCanvas.width*scale); workCanvas.height=Math.floor(origCanvas.height*scale);
       workCtx.drawImage(img,0,0,workCanvas.width,workCanvas.height);
-      el('t8Wrap').style.display='block';
-      el('t8ZoomBar').style.display='block';
-      el('t8BrushBox').style.display='none'; el('t8RefineBox').style.display='none'; el('t8BgBox').style.display='none'; el('t8CropBox').style.display='none'; el('t8Out').style.display='none'; el('t8Compare').style.display='none';
-      undoStack=[]; redoStack=[]; zoom=1; workCanvas.style.transform='scale(1)';
+      workCanvas.style.display='block';
+      el('t8BrushBox').style.display='none'; el('t8Out').style.display='none';
+      undoStack=[];
       try{ URL.revokeObjectURL(url); }catch(e){}
+      // DETECT + PREVIEW - After upload
+      detectBackground();
+      makePreviews();
+      status("✅ Photo loaded - See Detail above - Tap Remove Background");
     };
     img.onerror=function(){ showErr("Image load failed - Try JPG"); };
     img.src=url;
@@ -2964,306 +3047,153 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
   var tap1=el('t8TapBtn'); if(tap1) tap1.addEventListener('click', function(e){ e.preventDefault(); openPicker(false); });
   var tap2=el('t8TapBtn2'); if(tap2) tap2.addEventListener('click', function(e){ e.preventDefault(); openPicker(false); });
   var cam=el('t8CamBtn'); if(cam) cam.addEventListener('click', function(e){ e.preventDefault(); openPicker(true); });
-  function makeSample(isProduct){
+  function makeSample(isTrans){
     var c=document.createElement('canvas'); c.width=600; c.height=700; var x=c.getContext('2d');
-    x.fillStyle="#fff"; x.fillRect(0,0,600,700);
-    if(isProduct){
-      x.fillStyle="#F59E0B"; x.fillRect(200,150,200,350); // product box
-      x.fillStyle="#111"; x.font="bold 28px Arial"; x.fillText("PRODUCT",230,330);
-      x.fillStyle="#DC2626"; x.beginPath(); x.arc(300,200,30,0,Math.PI*2); x.fill();
-    } else {
-      x.fillStyle="#E8B48A"; x.beginPath(); x.arc(300,180,90,0,Math.PI*2); x.fill();
-      x.fillStyle="#2563EB"; x.fillRect(200,270,200,300);
-      x.fillStyle="#111"; x.fillRect(180,80,240,40);
-      x.fillStyle="#111"; x.beginPath(); x.arc(270,175,8,0,Math.PI*2); x.fill(); x.beginPath(); x.arc(330,175,8,0,Math.PI*2); x.fill();
-      x.fillStyle="#DC2626"; x.fillRect(270,215,60,10);
-    }
-    c.toBlob(function(b){ if(b) setFile(new File([b],"Sample.jpg",{type:"image/jpeg"})); }, "image/jpeg", 0.95);
+    if(isTrans){ x.clearRect(0,0,600,700); } else { x.fillStyle="#fff"; x.fillRect(0,0,600,700); }
+    x.fillStyle="#E8B48A"; x.beginPath(); x.arc(300,180,90,0,Math.PI*2); x.fill();
+    x.fillStyle="#2563EB"; x.fillRect(200,270,200,300);
+    x.fillStyle="#111"; x.fillRect(180,80,240,40);
+    c.toBlob(function(b){ if(b) setFile(new File([b], isTrans?"Sample-Transparent.png":"Sample-White.jpg",{type:isTrans?"image/png":"image/jpeg"})); }, isTrans?"image/png":"image/jpeg", 0.95);
   }
   var s1=el('t8SampleBtn'); if(s1) s1.addEventListener('click', function(){ makeSample(false); });
-  var s2=el('t8SampleProdBtn'); if(s2) s2.addEventListener('click', function(){ makeSample(true); });
+  var s2=el('t8SampleTransBtn'); if(s2) s2.addEventListener('click', function(){ makeSample(true); });
+
+  // Preview Grid Click - Change main canvas bg preview
+  var grid=el('t8PreviewGrid');
+  if(grid) grid.addEventListener('click', function(e){
+    var b=e.target.closest('.preview-box'); if(!b) return;
+    grid.querySelectorAll('.preview-box').forEach(function(x){ x.classList.remove('active'); }); b.classList.add('active');
+    currentPreview=b.getAttribute('data-preview');
+    var cv=el('t8Canvas');
+    if(currentPreview==='transparent'){ cv.classList.add('checker'); cv.style.background='#fff'; }
+    else if(currentPreview==='white'){ cv.classList.remove('checker'); cv.style.background='#fff'; }
+    else if(currentPreview==='black'){ cv.classList.remove('checker'); cv.style.background='#000'; }
+    else if(currentPreview==='blue'){ cv.classList.remove('checker'); cv.style.background='#2563EB'; }
+    else if(currentPreview==='checker'){ cv.classList.add('checker'); }
+    else { cv.classList.remove('checker'); cv.style.background='#fff'; }
+    status("👀 Preview: "+currentPreview+" - This is how it will look");
+  });
+
+  // Full Screen Preview
+  function showModal(imgSrc, text){
+    var modal=el('t8Modal'); var img=el('t8ModalImg'); img.src=imgSrc; el('t8ModalText').textContent=text;
+    modal.style.display='flex';
+  }
+  var fullBtn=el('t8PreviewFullBtn'); if(fullBtn) fullBtn.addEventListener('click', function(){
+    if(!origCanvas){ showErr("Select photo first"); return; }
+    showModal(origCanvas.toDataURL('image/jpeg',0.9), "Original Photo - "+detectedBg+" Background - "+detectedColor);
+  });
+  var compBtn=el('t8PreviewCompareBtn'); if(compBtn) compBtn.addEventListener('click', function(){
+    if(!workCanvas){ showErr("Remove first to compare"); return; }
+    showModal(workCanvas.toDataURL('image/png'), "After Remove - Preview on "+currentPreview+" background");
+  });
+  var modalClose=el('t8ModalClose'); if(modalClose) modalClose.addEventListener('click', function(){ el('t8Modal').style.display='none'; });
+  var modal=el('t8Modal'); if(modal) modal.addEventListener('click', function(e){ if(e.target===modal) modal.style.display='none'; });
 
   // Settings
-  var mRow=el('t8MethodRow'); if(mRow) mRow.addEventListener('click', function(e){ var c=e.target.closest('.chip'); if(!c) return; mRow.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('active'); }); c.classList.add('active'); method=c.getAttribute('data-method')||"ai"; });
   var sRow=el('t8StrengthRow'); if(sRow) sRow.addEventListener('click', function(e){ var c=e.target.closest('.chip'); if(!c) return; sRow.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('active'); }); c.classList.add('active'); strength=parseInt(c.getAttribute('data-s'),10)||45; });
+  var bgRow=el('t8BgRow'); if(bgRow) bgRow.addEventListener('click', function(e){ var c=e.target.closest('.chip'); if(!c) return; bgRow.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('active'); }); c.classList.add('active'); bgMode=c.getAttribute('data-bg')||"transparent"; });
 
-  function pushUndo(){
-    try{
-      if(!workCtx) return;
-      var d=workCtx.getImageData(0,0,workCanvas.width,workCanvas.height);
-      undoStack.push(d); if(undoStack.length>25) undoStack.shift(); redoStack=[];
-    }catch(e){}
-  }
-  function applyBgToCanvas(targetCanvas, targetCtx){
-    // For download: Draw bg + cutout + shadow
-    var w=targetCanvas.width, h=targetCanvas.height;
-    if(bgMode==='transparent'){ /* keep transparent */ }
-    else if(bgGradient){ var g=targetCtx.createLinearGradient(0,0,w,h); g.addColorStop(0,'#2563EB'); g.addColorStop(1,'#EC4899'); targetCtx.fillStyle=g; targetCtx.fillRect(0,0,w,h); }
-    else if(bgMode==='blur' && origImg){ targetCtx.filter='blur(20px) brightness(0.9)'; targetCtx.drawImage(origImg,0,0,w,h); targetCtx.filter='none'; }
-    else if(bgOwnImg){ targetCtx.drawImage(bgOwnImg,0,0,w,h); }
-    else if(bgMode!=='transparent'){ targetCtx.fillStyle=bgColor; targetCtx.fillRect(0,0,w,h); }
-    if(shadowOn){
-      targetCtx.save(); targetCtx.shadowColor='rgba(0,0,0,0.35)'; targetCtx.shadowBlur=18; targetCtx.shadowOffsetY=10;
-      targetCtx.drawImage(workCanvas,0,0,w,h); targetCtx.restore();
-    } else {
-      targetCtx.drawImage(workCanvas,0,0,w,h);
-    }
-  }
+  function pushUndo(){ try{ if(!workCtx) return; var d=workCtx.getImageData(0,0,workCanvas.width,workCanvas.height); undoStack.push(d); if(undoStack.length>20) undoStack.shift(); }catch(e){} }
 
-  // AUTO REMOVE - AI + Flood
-  async function removeWithFlood(){
-    var w=workCanvas.width, h=workCanvas.height;
-    // Get original scaled pixels
-    var tmp=document.createElement('canvas'); tmp.width=w; tmp.height=h; var tctx=tmp.getContext('2d'); tctx.drawImage(origImg,0,0,w,h);
-    var origData=tctx.getImageData(0,0,w,h).data;
-    var samples=[];
-    function sample(x,y){ var idx=(y*w+x)*4; samples.push([origData[idx],origData[idx+1],origData[idx+2]]); }
-    sample(2,2); sample(w-3,2); sample(2,h-3); sample(w-3,h-3); sample(Math.floor(w/2),2); sample(Math.floor(w/2),h-3);
-    var br=0,bg=0,bb=0; samples.forEach(function(s){ br+=s[0]; bg+=s[1]; bb+=s[2]; }); br/=samples.length; bg/=samples.length; bb/=samples.length;
-    var imgData=workCtx.getImageData(0,0,w,h); var data=imgData.data;
-    var visited=new Uint8Array(w*h); var q=[];
-    for(var xi=0;xi<w;xi++){ q.push(xi); q.push((h-1)*w+xi); }
-    for(var yi=0;yi<h;yi++){ q.push(yi*w); q.push(yi*w+w-1); }
-    var qi=0; var tol=strength;
-    function isBg(idx){ var i=idx*4; return Math.abs(data[i]-br)<tol && Math.abs(data[i+1]-bg)<tol && Math.abs(data[i+2]-bb)<tol; }
-    while(qi<q.length){ var idx=q[qi++]; if(visited[idx]) continue; visited[idx]=1; if(!isBg(idx)) continue; data[idx*4+3]=0; var cx=idx%w, cy=Math.floor(idx/w); if(cx>0) q.push(idx-1); if(cx<w-1) q.push(idx+1); if(cy>0) q.push(idx-w); if(cy<h-1) q.push(idx+w); if(q.length>w*h*2) break; }
-    if(strength>=70){ for(var i2=0;i2<data.length;i2+=4){ if(Math.abs(data[i2]-br)<20 && Math.abs(data[i2+1]-bg)<20 && Math.abs(data[i2+2]-bb)<20) data[i2+3]=0; } }
-    workCtx.putImageData(imgData,0,0);
-  }
-  async function removeWithAI(){
-    // Try Imgly AI - Load from CDN - If fails, fallback to flood
-    try{
-      // Dynamic import Imgly - Works in modern browsers
-      var mod=await import('https://staticimgly.com/@imgly/background-removal-data@1.5.5/dist/index.mjs');
-      // Imgly main package is separate - Try to load via script tag fallback
-      // If mod does not have removeBackground, throw to fallback
-      if(!mod || !mod.removeBackground) throw new Error("AI not available");
-      // This path rarely succeeds on all browsers, so we fallback to flood + edge refine which is reliable
-      throw new Error("Use flood");
-    }catch(e){ await removeWithFlood(); }
-  }
-
+  // AUTO REMOVE
   var removeBtn=el('t8RemoveBtn');
-  if(removeBtn) removeBtn.addEventListener('click', async function(){
+  if(removeBtn) removeBtn.addEventListener('click', function(){
     if(!origImg || !workCanvas){ showErr("Select photo first"); return; }
-    removeBtn.disabled=true; removeBtn.textContent="⏳ Removing... AI Working...";
-    status("AI Removing... Please wait 2-5 sec");
-    try{
-      pushUndo();
-      if(method==='ai') await removeWithAI();
-      else if(method==='flood') await removeWithFlood();
-      else { await removeWithAI(); await removeWithFlood(); }
-      // Auto feather 1px for smooth edge
-      el('t8BrushBox').style.display='block'; el('t8RefineBox').style.display='block'; el('t8BgBox').style.display='block'; el('t8CropBox').style.display='block'; el('t8Out').style.display='block';
-      status("✅ Auto Removed! If some BG left, use Brush. If cut too much, use Restore.");
-      el('t8BrushBox').scrollIntoView({behavior:"smooth"});
-    }catch(e){ showErr("Remove failed - Try white background photo or use Brush"); }
-    finally{ removeBtn.disabled=false; removeBtn.textContent="✂️ Remove Background - Auto AI"; }
+    removeBtn.disabled=true; removeBtn.textContent="⏳ Removing...";
+    status("Removing background... Please wait");
+    setTimeout(function(){
+      try{
+        pushUndo();
+        var w=workCanvas.width, h=workCanvas.height;
+        var tmp=document.createElement('canvas'); tmp.width=w; tmp.height=h; var tctx=tmp.getContext('2d'); tctx.drawImage(origImg,0,0,w,h);
+        var origData=tctx.getImageData(0,0,w,h).data;
+        var samples=[]; function sample(x,y){ var idx=(y*w+x)*4; samples.push([origData[idx],origData[idx+1],origData[idx+2]]); }
+        sample(2,2); sample(w-3,2); sample(2,h-3); sample(w-3,h-3); sample(Math.floor(w/2),2);
+        var br=0,bg=0,bb=0; samples.forEach(function(s){ br+=s[0]; bg+=s[1]; bb+=s[2]; }); br/=samples.length; bg/=samples.length; bb/=samples.length;
+        var imgData=workCtx.getImageData(0,0,w,h); var data=imgData.data;
+        var visited=new Uint8Array(w*h); var q=[];
+        for(var xi=0;xi<w;xi++){ q.push(xi); q.push((h-1)*w+xi); }
+        for(var yi=0;yi<h;yi++){ q.push(yi*w); q.push(yi*w+w-1); }
+        var qi=0, tol=strength;
+        function isBg(idx){ var i=idx*4; return Math.abs(data[i]-br)<tol && Math.abs(data[i+1]-bg)<tol && Math.abs(data[i+2]-bb)<tol; }
+        while(qi<q.length){ var idx=q[qi++]; if(visited[idx]) continue; visited[idx]=1; if(!isBg(idx)) continue; data[idx*4+3]=0; var cx=idx%w, cy=Math.floor(idx/w); if(cx>0) q.push(idx-1); if(cx<w-1) q.push(idx+1); if(cy>0) q.push(idx-w); if(cy<h-1) q.push(idx+w); if(q.length>w*h*2) break; }
+        workCtx.putImageData(imgData,0,0);
+        el('t8BrushBox').style.display='block'; el('t8Out').style.display='block';
+        status("✅ Removed! Preview below - If BG left, use Brush. Tap Preview Final to see how it looks.");
+        // Update preview grid with removed version
+        setTimeout(function(){ makePreviews(); },200);
+        el('t8BrushBox').scrollIntoView({behavior:"smooth"});
+      }catch(e){ showErr("Remove failed - Try white background photo or Brush"); }
+      finally{ removeBtn.disabled=false; removeBtn.textContent="✂️ Remove Background - Auto"; }
+    },100);
   });
-
-  // ZOOM
-  var zoomIn=el('t8ZoomIn'); if(zoomIn) zoomIn.addEventListener('click', function(){ zoom=Math.min(3, zoom+0.3); el('t8Canvas').style.transform='scale('+zoom+')'; el('t8Canvas').style.transformOrigin='center center'; });
-  var zoomOut=el('t8ZoomOut'); if(zoomOut) zoomOut.addEventListener('click', function(){ zoom=Math.max(0.5, zoom-0.3); el('t8Canvas').style.transform='scale('+zoom+')'; });
-  var fitBtn=el('t8Fit'); if(fitBtn) fitBtn.addEventListener('click', function(){ zoom=1; el('t8Canvas').style.transform='scale(1)'; });
-
-  // COMPARE
-  var compareBtn=el('t8CompareBtn');
-  if(compareBtn) compareBtn.addEventListener('click', function(){
-    var comp=el('t8Compare');
-    if(comp.style.display==='block'){ comp.style.display='none'; return; }
-    comp.style.display='block';
-    try{
-      var beforeUrl=origCanvas.toDataURL('image/jpeg',0.85);
-      var afterCanvas=document.createElement('canvas'); afterCanvas.width=workCanvas.width; afterCanvas.height=workCanvas.height; var actx=afterCanvas.getContext('2d'); actx.fillStyle="#fff"; actx.fillRect(0,0,afterCanvas.width,afterCanvas.height); actx.drawImage(workCanvas,0,0);
-      el('t8CompareBefore').src=beforeUrl;
-      el('t8CompareAfter').src=afterCanvas.toDataURL('image/jpeg',0.85);
-      // Sync after width
-      setTimeout(function(){ var w=el('t8CompareBefore').offsetWidth; var afterWrap=el('t8CompareAfterWrap'); afterWrap.style.width='50%'; var afterImg=el('t8CompareAfter'); afterImg.style.width=w+'px'; },100);
-    }catch(e){}
-  });
-  var handle=el('t8CompareHandle');
-  if(handle){
-    var dragging=false;
-    handle.addEventListener('mousedown', function(){ dragging=true; });
-    document.addEventListener('mousemove', function(e){
-      if(!dragging) return;
-      var comp=el('t8Compare'); var rect=comp.getBoundingClientRect(); var pct=Math.max(5, Math.min(95, ((e.clientX-rect.left)/rect.width)*100));
-      handle.style.left=pct+'%'; el('t8CompareAfterWrap').style.width=pct+'%';
-    });
-    document.addEventListener('mouseup', function(){ dragging=false; });
-    handle.addEventListener('touchstart', function(){ dragging=true; }, {passive:true});
-    document.addEventListener('touchmove', function(e){ if(!dragging) return; var comp=el('t8Compare'); var rect=comp.getBoundingClientRect(); var pct=Math.max(5, Math.min(95, ((e.touches[0].clientX-rect.left)/rect.width)*100)); handle.style.left=pct+'%'; el('t8CompareAfterWrap').style.width=pct+'%'; }, {passive:true});
-    document.addEventListener('touchend', function(){ dragging=false; });
-  }
 
   // BRUSH
-  function getPos(e){
-    var rect=workCanvas.getBoundingClientRect();
-    var cx=e.touches ? e.touches[0].clientX : e.clientX;
-    var cy=e.touches ? e.touches[0].clientY : e.clientY;
-    return {x:(cx-rect.left)*(workCanvas.width/rect.width), y:(cy-rect.top)*(workCanvas.height/rect.height)};
-  }
+  function getPos(e){ var rect=workCanvas.getBoundingClientRect(); var cx=e.touches ? e.touches[0].clientX : e.clientX; var cy=e.touches ? e.touches[0].clientY : e.clientY; return {x:(cx-rect.left)*(workCanvas.width/rect.width), y:(cy-rect.top)*(workCanvas.height/rect.height)}; }
   var isDrawing=false;
   function brushAt(x,y){
     if(!workCtx) return;
-    if(brushMode==='erase'){
-      workCtx.save(); workCtx.globalCompositeOperation='destination-out';
-      if(brushSoft>0){
-        var grad=workCtx.createRadialGradient(x,y,brushSize*0.2,x,y,brushSize);
-        grad.addColorStop(0,'rgba(0,0,0,1)'); grad.addColorStop(1,'rgba(0,0,0,0)');
-        workCtx.fillStyle=grad; workCtx.beginPath(); workCtx.arc(x,y,brushSize,0,Math.PI*2); workCtx.fill();
-      } else { workCtx.beginPath(); workCtx.arc(x,y,brushSize,0,Math.PI*2); workCtx.fill(); }
-      workCtx.restore();
-    } else if(brushMode==='restore'){
-      workCtx.save(); workCtx.beginPath(); workCtx.arc(x,y,brushSize,0,Math.PI*2); workCtx.clip();
-      // Restore from original scaled
-      workCtx.drawImage(origImg,0,0,workCanvas.width,workCanvas.height);
-      workCtx.restore();
-    } else if(brushMode==='smooth'){
-      // Smooth edge - Blur alpha a bit by drawing semi-transparent
-      workCtx.save(); workCtx.globalCompositeOperation='source-over';
-      workCtx.beginPath(); workCtx.arc(x,y,brushSize,0,Math.PI*2); workCtx.clip();
-      workCtx.filter='blur(1px)'; workCtx.drawImage(workCanvas,0,0); workCtx.filter='none';
-      workCtx.restore();
-    }
+    if(brushMode==='erase'){ workCtx.save(); workCtx.globalCompositeOperation='destination-out'; workCtx.beginPath(); workCtx.arc(x,y,brushSize,0,Math.PI*2); workCtx.fill(); workCtx.restore(); }
+    else { workCtx.save(); workCtx.beginPath(); workCtx.arc(x,y,brushSize,0,Math.PI*2); workCtx.clip(); workCtx.drawImage(origImg,0,0,workCanvas.width,workCanvas.height); workCtx.restore(); }
   }
-  function startDraw(e){
-    if(el('t8BrushBox').style.display==='none') return;
-    e.preventDefault(); isDrawing=true; pushUndo();
-    var pos=getPos(e); brushAt(pos.x,pos.y);
-  }
+  var cv=el('t8Canvas');
+  function startDraw(e){ if(el('t8BrushBox').style.display==='none') return; e.preventDefault(); isDrawing=true; pushUndo(); var pos=getPos(e); brushAt(pos.x,pos.y); }
   function moveDraw(e){ if(!isDrawing) return; e.preventDefault(); var pos=getPos(e); brushAt(pos.x,pos.y); }
   function endDraw(){ isDrawing=false; }
-  var cv=el('t8Canvas');
-  if(cv){
-    cv.addEventListener('mousedown', startDraw); cv.addEventListener('mousemove', moveDraw); cv.addEventListener('mouseup', endDraw); cv.addEventListener('mouseleave', endDraw);
-    cv.addEventListener('touchstart', startDraw, {passive:false}); cv.addEventListener('touchmove', moveDraw, {passive:false}); cv.addEventListener('touchend', endDraw);
-  }
-  var eraseBtn=el('t8EraseBtn'); if(eraseBtn) eraseBtn.addEventListener('click', function(){ brushMode='erase'; eraseBtn.classList.add('active'); el('t8RestoreBtn').classList.remove('active'); el('t8SmoothBtn').classList.remove('active'); status("🧽 Erase - Drag on BG to remove"); });
-  var restoreBtn=el('t8RestoreBtn'); if(restoreBtn) restoreBtn.addEventListener('click', function(){ brushMode='restore'; restoreBtn.classList.add('active'); el('t8EraseBtn').classList.remove('active'); el('t8SmoothBtn').classList.remove('active'); status("♻️ Restore - Drag on cut part"); });
-  var smoothBtn=el('t8SmoothBtn'); if(smoothBtn) smoothBtn.addEventListener('click', function(){ brushMode='smooth'; smoothBtn.classList.add('active'); el('t8EraseBtn').classList.remove('active'); el('t8RestoreBtn').classList.remove('active'); status("✨ Smooth - Drag on edge to soften"); });
+  if(cv){ cv.addEventListener('mousedown', startDraw); cv.addEventListener('mousemove', moveDraw); cv.addEventListener('mouseup', endDraw); cv.addEventListener('mouseleave', endDraw); cv.addEventListener('touchstart', startDraw, {passive:false}); cv.addEventListener('touchmove', moveDraw, {passive:false}); cv.addEventListener('touchend', endDraw); }
+  var eraseBtn=el('t8EraseBtn'); if(eraseBtn) eraseBtn.addEventListener('click', function(){ brushMode='erase'; eraseBtn.classList.add('active'); el('t8RestoreBtn').classList.remove('active'); });
+  var restoreBtn=el('t8RestoreBtn'); if(restoreBtn) restoreBtn.addEventListener('click', function(){ brushMode='restore'; restoreBtn.classList.add('active'); el('t8EraseBtn').classList.remove('active'); });
   var bs=el('t8BrushSize'); if(bs) bs.addEventListener('input', function(){ brushSize=parseInt(bs.value,10)||30; el('t8BrushSizeTxt').textContent=brushSize; });
-  var bsoft=el('t8BrushSoft'); if(bsoft) bsoft.addEventListener('input', function(){ brushSoft=parseInt(bsoft.value,10)||0; });
-  var undoBtn=el('t8UndoBtn'); if(undoBtn) undoBtn.addEventListener('click', function(){ if(undoStack.length===0){ showErr("Nothing to undo"); return; } var last=undoStack.pop(); redoStack.push(workCtx.getImageData(0,0,workCanvas.width,workCanvas.height)); if(last) workCtx.putImageData(last,0,0); status("↩️ Undo"); });
-  var redoBtn=el('t8RedoBtn'); if(redoBtn) redoBtn.addEventListener('click', function(){ if(redoStack.length===0){ showErr("Nothing to redo"); return; } var next=redoStack.pop(); undoStack.push(workCtx.getImageData(0,0,workCanvas.width,workCanvas.height)); if(next) workCtx.putImageData(next,0,0); status("↪️ Redo"); });
-  var resetBtn=el('t8ResetBtn'); if(resetBtn) resetBtn.addEventListener('click', function(){ if(!origImg) return; workCtx.clearRect(0,0,workCanvas.width,workCanvas.height); workCtx.drawImage(origImg,0,0,workCanvas.width,workCanvas.height); undoStack=[]; redoStack=[]; status("🔄 Reset - Original back"); });
+  var undoBtn=el('t8UndoBtn'); if(undoBtn) undoBtn.addEventListener('click', function(){ if(undoStack.length===0){ showErr("Nothing to undo"); return; } var last=undoStack.pop(); if(last) workCtx.putImageData(last,0,0); });
+  var resetBtn=el('t8ResetBtn'); if(resetBtn) resetBtn.addEventListener('click', function(){ if(!origImg) return; workCtx.clearRect(0,0,workCanvas.width,workCanvas.height); workCtx.drawImage(origImg,0,0,workCanvas.width,workCanvas.height); undoStack=[]; });
 
-  // REFINE
-  var featherEl=el('t8Feather'); if(featherEl) featherEl.addEventListener('input', function(){ el('t8FeatherTxt').textContent=featherEl.value; });
-  var smoothEl=el('t8Smooth'); if(smoothEl) smoothEl.addEventListener('input', function(){ el('t8SmoothTxt').textContent=smoothEl.value; });
-  function erodeDilate(isErode){
-    if(!workCtx) return; pushUndo();
-    var w=workCanvas.width, h=workCanvas.height;
-    var imgData=workCtx.getImageData(0,0,w,h); var data=imgData.data;
-    var alpha=new Uint8Array(w*h); for(var i=0;i<w*h;i++) alpha[i]=data[i*4+3];
-    var newAlpha=new Uint8Array(w*h);
-    for(var y=0;y<h;y++){ for(var x=0;x<w;x++){ var idx=y*w+x; if(isErode){ var min=255; for(var dy=-1;dy<=1;dy++){ for(var dx=-1;dx<=1;dx++){ var nx=x+dx, ny=y+dy; if(nx>=0&&nx<w&&ny>=0&&ny<h) min=Math.min(min, alpha[ny*w+nx]); } } newAlpha[idx]=min; } else { var max=0; for(var dy2=-1;dy2<=1;dy2++){ for(var dx2=-1;dx2<=1;dx2++){ var nx2=x+dx2, ny2=y+dy2; if(nx2>=0&&nx2<w&&ny2>=0&&ny2<h) max=Math.max(max, alpha[ny2*w+nx2]); } } newAlpha[idx]=max; } } }
-    for(var j=0;j<w*h;j++) data[j*4+3]=newAlpha[j];
-    workCtx.putImageData(imgData,0,0);
-    status(isErode?"➖ Edge shrunk 1px":"➕ Edge expanded 1px");
-  }
-  var erodeBtn=el('t8ErodeBtn'); if(erodeBtn) erodeBtn.addEventListener('click', function(){ erodeDilate(true); });
-  var dilateBtn=el('t8DilateBtn'); if(dilateBtn) dilateBtn.addEventListener('click', function(){ erodeDilate(false); });
-
-  // BG - Colors, Gradient, Blur, Own Photo, Shadow
-  var bgBox=el('t8BgBox');
-  if(bgBox) bgBox.addEventListener('click', function(e){
-    var c=e.target.closest('.chip.color'); if(!c) return;
-    bgBox.querySelectorAll('.chip.color').forEach(function(x){ x.classList.remove('active'); }); c.classList.add('active');
-    var bg=c.getAttribute('data-bg');
-    bgGradient=null; bgOwnImg=null;
-    if(bg==='transparent'){ bgMode='transparent'; }
-    else { bgMode='color'; bgColor=bg; }
-    updateBgPreview();
-  });
-  function updateBgPreview(){
-    var cv=el('t8Canvas');
-    if(bgMode==='transparent'){ cv.classList.add('checker'); cv.style.background='#fff'; }
-    else if(bgMode==='color'){ cv.classList.remove('checker'); cv.style.background=bgColor; }
-    else if(bgMode==='gradient'){ cv.classList.remove('checker'); cv.style.background='linear-gradient(135deg,#2563EB,#EC4899)'; }
-    else if(bgMode==='blur'){ cv.classList.remove('checker'); cv.style.background='#E5E7EB'; }
-  }
-  var gradBtn=el('t8GradientBtn'); if(gradBtn) gradBtn.addEventListener('click', function(){ bgMode='gradient'; bgGradient=true; updateBgPreview(); status("🌈 Gradient BG applied"); });
-  var blurBtn=el('t8BlurBtn'); if(blurBtn) blurBtn.addEventListener('click', function(){ bgMode='blur'; updateBgPreview(); status("🌀 Blur BG - Original BG blurred behind person"); });
-  var ownBgBtn=el('t8OwnBgBtn'); if(ownBgBtn) ownBgBtn.addEventListener('click', function(){
-    var inp=document.createElement('input'); inp.type='file'; inp.accept='image/*';
-    inp.onchange=function(){ if(inp.files[0]){ var url=URL.createObjectURL(inp.files[0]); var img=new Image(); img.onload=function(){ bgOwnImg=img; bgMode='own'; updateBgPreview(); status("🖼️ Your BG photo applied"); }; img.src=url; } };
-    inp.click();
-  });
-  var shadowBtn=el('t8ShadowBtn'); if(shadowBtn) shadowBtn.addEventListener('click', function(){ shadowOn=!shadowOn; shadowBtn.textContent=shadowOn?"🌑 Shadow: ON":"🌑 Shadow: OFF"; status(shadowOn?"🌑 Shadow ON":"Shadow OFF"); });
-  var noShadowBtn=el('t8NoShadowBtn'); if(noShadowBtn) noShadowBtn.addEventListener('click', function(){ shadowOn=false; el('t8ShadowBtn').textContent="🌑 Shadow: OFF"; });
-
-  // CROP
-  var cropBox=el('t8CropBox');
-  if(cropBox) cropBox.addEventListener('click', function(e){
-    var b=e.target.closest('button'); if(!b) return;
-    var type=b.getAttribute('data-crop');
-    if(!workCanvas) return; pushUndo();
-    var w=workCanvas.width, h=workCanvas.height;
-    var newW=w, newH=h, sx=0, sy=0;
-    if(type==='passport'){ // 35x45 ratio
-      newH=h; newW=Math.floor(h*35/45); sx=Math.floor((w-newW)/2);
-    } else if(type==='insta' || type==='whatsapp'){
-      var s=Math.min(w,h); newW=s; newH=s; sx=Math.floor((w-s)/2); sy=Math.floor((h-s)/2);
-    } else if(type==='original'){
-      workCtx.clearRect(0,0,w,h); workCtx.drawImage(origImg,0,0,w,h); status("↩️ Original size restored - Tap Remove Again"); return;
-    }
-    var tmp=document.createElement('canvas'); tmp.width=newW; tmp.height=newH; var tctx=tmp.getContext('2d');
-    tctx.drawImage(workCanvas, sx, sy, newW, newH, 0,0,newW,newH);
-    workCanvas.width=newW; workCanvas.height=newH; workCtx.clearRect(0,0,newW,newH); workCtx.drawImage(tmp,0,0);
-    status("📐 Cropped - "+type);
-  });
-
-  // DOWNLOAD
-  function downloadCanvas(isJPG, isHD){
+  // DOWNLOAD + PREVIEW FINAL
+  function downloadCanvas(isJPG){
     if(!workCanvas){ showErr("Remove first"); return; }
     try{
-      var out=document.createElement('canvas');
-      // HD: Use original size
-      if(isHD){ out.width=origCanvas.width; out.height=origCanvas.height; }
-      else { out.width=workCanvas.width; out.height=workCanvas.height; }
-      var octx=out.getContext('2d');
-      // For HD, need to scale workCanvas to original size
-      var tempCanvas=document.createElement('canvas'); tempCanvas.width=out.width; tempCanvas.height=out.height; var tctx=tempCanvas.getContext('2d'); tctx.drawImage(workCanvas,0,0,out.width,out.height);
+      var out=document.createElement('canvas'); out.width=workCanvas.width; out.height=workCanvas.height; var octx=out.getContext('2d');
       if(isJPG){
         octx.fillStyle="#fff"; octx.fillRect(0,0,out.width,out.height);
-        // Draw bg + cutout
-        if(bgMode==='color'){ octx.fillStyle=bgColor; octx.fillRect(0,0,out.width,out.height); }
-        else if(bgGradient){ var g=octx.createLinearGradient(0,0,out.width,out.height); g.addColorStop(0,'#2563EB'); g.addColorStop(1,'#EC4899'); octx.fillStyle=g; octx.fillRect(0,0,out.width,out.height); }
-        octx.drawImage(tempCanvas,0,0);
+        if(bgMode==='black'){ octx.fillStyle="#000"; octx.fillRect(0,0,out.width,out.height); }
+        if(bgMode==='blue'){ octx.fillStyle="#2563EB"; octx.fillRect(0,0,out.width,out.height); }
+        octx.drawImage(workCanvas,0,0);
         var urlJ=out.toDataURL('image/jpeg',0.92);
-        var aJ=document.createElement('a'); aJ.href=urlJ; aJ.download=isHD?"BG-Removed-HD.jpg":"BG-Removed.jpg"; document.body.appendChild(aJ); aJ.click(); setTimeout(function(){ aJ.remove(); },500);
+        var aJ=document.createElement('a'); aJ.href=urlJ; aJ.download="BG-Removed-White.jpg"; document.body.appendChild(aJ); aJ.click(); setTimeout(function(){ aJ.remove(); },500);
       } else {
-        // PNG - Draw bg + cutout
-        if(bgMode==='color'){ octx.fillStyle=bgColor; octx.fillRect(0,0,out.width,out.height); }
-        else if(bgGradient){ var g2=octx.createLinearGradient(0,0,out.width,out.height); g2.addColorStop(0,'#2563EB'); g2.addColorStop(1,'#EC4899'); octx.fillStyle=g2; octx.fillRect(0,0,out.width,out.height); }
-        else if(bgMode==='blur' && origImg){ octx.filter='blur(20px)'; octx.drawImage(origImg,0,0,out.width,out.height); octx.filter='none'; }
-        else if(bgMode==='own' && bgOwnImg){ octx.drawImage(bgOwnImg,0,0,out.width,out.height); }
-        if(shadowOn){ octx.save(); octx.shadowColor='rgba(0,0,0,0.35)'; octx.shadowBlur=18; octx.shadowOffsetY=10; octx.drawImage(tempCanvas,0,0); octx.restore(); }
-        else octx.drawImage(tempCanvas,0,0);
+        if(bgMode==='white'){ octx.fillStyle="#fff"; octx.fillRect(0,0,out.width,out.height); }
+        else if(bgMode==='black'){ octx.fillStyle="#000"; octx.fillRect(0,0,out.width,out.height); }
+        else if(bgMode==='blue'){ octx.fillStyle="#2563EB"; octx.fillRect(0,0,out.width,out.height); }
+        octx.drawImage(workCanvas,0,0);
         var urlP=out.toDataURL('image/png');
-        var aP=document.createElement('a'); aP.href=urlP; aP.download=isHD?"BG-Removed-HD.png":"BG-Removed-Transparent.png"; document.body.appendChild(aP); aP.click(); setTimeout(function(){ aP.remove(); },500);
+        var aP=document.createElement('a'); aP.href=urlP; aP.download="BG-Removed-Transparent.png"; document.body.appendChild(aP); aP.click(); setTimeout(function(){ aP.remove(); },500);
       }
       status("✅ Downloaded!");
-    }catch(e){ showErr("Download failed - Try again"); }
+    }catch(e){ showErr("Download failed"); }
   }
-  var downBtn=el('t8DownloadBtn'); if(downBtn) downBtn.addEventListener('click', function(){ downloadCanvas(false,false); });
-  var downJPG=el('t8DownloadJPG'); if(downJPG) downJPG.addEventListener('click', function(){ downloadCanvas(true,false); });
-  var downHD=el('t8DownloadHD'); if(downHD) downHD.addEventListener('click', function(){ downloadCanvas(false,true); });
-  var shareBtn=el('t8ShareBtn'); if(shareBtn) shareBtn.addEventListener('click', async function(){ try{ workCanvas.toBlob(async function(blob){ if(!blob) return; var f=new File([blob],"BG-Removed.png",{type:"image/png"}); if(navigator.share && navigator.canShare && navigator.canShare({files:[f]})) await navigator.share({files:[f]}); else downloadCanvas(false,false); }, "image/png"); }catch(e){ downloadCanvas(false,false); } });
-  var copyBtn=el('t8CopyBtn'); if(copyBtn) copyBtn.addEventListener('click', async function(){ try{ workCanvas.toBlob(async function(blob){ if(!blob) return; await navigator.clipboard.write([new ClipboardItem({"image/png":blob})]); status("✅ Copied - Paste anywhere"); }, "image/png"); }catch(e){ showErr("Copy not supported - Use Download"); } });
-  var newBgBtn=el('t8NewBgBtn'); if(newBgBtn) newBgBtn.addEventListener('click', function(){ el('t8BgBox').scrollIntoView({behavior:"smooth"}); });
+  var downBtn=el('t8DownloadBtn'); if(downBtn) downBtn.addEventListener('click', function(){ downloadCanvas(false); });
+  var downJPG=el('t8DownloadJPG'); if(downJPG) downJPG.addEventListener('click', function(){ downloadCanvas(true); });
+  var previewFinalBtn=el('t8PreviewFinalBtn'); if(previewFinalBtn) previewFinalBtn.addEventListener('click', function(){
+    if(!workCanvas){ showErr("Remove first"); return; }
+    // Show final on selected bg
+    var out=document.createElement('canvas'); out.width=workCanvas.width; out.height=workCanvas.height; var octx=out.getContext('2d');
+    if(bgMode==='white'){ octx.fillStyle="#fff"; octx.fillRect(0,0,out.width,out.height); }
+    else if(bgMode==='black'){ octx.fillStyle="#000"; octx.fillRect(0,0,out.width,out.height); }
+    else if(bgMode==='blue'){ octx.fillStyle="#2563EB"; octx.fillRect(0,0,out.width,out.height); }
+    octx.drawImage(workCanvas,0,0);
+    showModal(out.toDataURL('image/png'), "Final Preview - Background: "+bgMode+" - This is how your downloaded image will look");
+  });
+  var shareBtn=el('t8ShareBtn'); if(shareBtn) shareBtn.addEventListener('click', async function(){ try{ workCanvas.toBlob(async function(blob){ if(!blob) return; var f=new File([blob],"BG-Removed.png",{type:"image/png"}); if(navigator.share && navigator.canShare && navigator.canShare({files:[f]})) await navigator.share({files:[f]}); else downloadCanvas(false); }, "image/png"); }catch(e){ downloadCanvas(false); } });
 
   window.clearTool8=function(){
-    file=null; origImg=null; origCanvas=null; undoStack=[]; redoStack=[]; bgMode='transparent'; bgGradient=null; bgOwnImg=null; shadowOn=false;
-    var cv=el('t8Canvas'); if(cv){ cv.style.display='none'; }
-    el('t8Wrap').style.display='none'; el('t8ZoomBar').style.display='none';
-    el('t8BrushBox').style.display='none'; el('t8RefineBox').style.display='none'; el('t8BgBox').style.display='none'; el('t8CropBox').style.display='none'; el('t8Out').style.display='none'; el('t8Compare').style.display='none';
+    file=null; origImg=null; origCanvas=null; undoStack=[]; bgMode='transparent'; detectedBg='unknown';
+    var cv2=el('t8Canvas'); if(cv2) cv2.style.display='none';
+    el('t8DetailBox').style.display='none'; el('t8PreviewBox').style.display='none'; el('t8BrushBox').style.display='none'; el('t8Out').style.display='none';
     showErr(""); status("Tap Select Photo first");
   };
 })();
 </script>
-<!-- ============ TOOL 8 ADVANCED END ============ --> 
+<!-- ============ TOOL 8 MODIFIED END ============ -->
 <!-- ================= TOOL 9 - PDF MERGER ================= -->
 <div id="page-tool9" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>📚 PDF Merger</b><br><span>Most Demanded</span></div></div><h2 style="text-align:center">📚 PDF Merger</h2><p style="font-size:12px;color:#6B7280;text-align:center">Merge Aadhar Front + Back, Marksheet Pages Into 1 PDF</p><div class="drop" onclick="document.getElementById('mergeFile').click()"><b>📄 Select PDFs - Multiple</b><p style="font-size:12px;color:#6B7280">Select 2 or more PDFs in order</p><input type="file" id="mergeFile" accept="application/pdf" multiple onchange="loadMerge(event)"></div><p id="mergeInfo" style="font-size:12px;color:#166534;text-align:center;margin-top:8px">Select PDFs first</p><label>Merged File Name</label><input id="mergeName" value="Merged-Document"><button class="btn" onclick="mergePDFs()">📚 Merge PDFs Into 1</button><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
 
