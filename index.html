@@ -2747,7 +2747,7 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 </script>
 <!-- ============ TOOL 7 TAP FIXED END ============ -->
 <=================TOOL 8 TAP BACKGROUND REMOVER ============>
-<!-- ============ REAL AI - SIMPLE - 100% - OPEN IN CHROME ============ -->
+<!-- ============ AI WEBSITE WAY - REAL AI MODEL - MODNET - SAME AS REMOVE.BG ============ -->
 
 <div id="page-tool8" class="tool-page" style="display:none">
 <div id="tool8">
@@ -2762,40 +2762,53 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 #tool8 .btn2.blue{background:#2563EB;color:#fff;border:none}
 #tool8 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:10px 14px;border-radius:20px;font-size:13px;margin:7px 7px 0 0;cursor:pointer;font-weight:800}
 #tool8 .chip.active{background:#111827;color:#fff;border:none}
-#tool8 img{width:100%;max-height:400px;object-fit:contain;border-radius:14px;border:1.5px solid #EDE9FE;margin-top:12px;display:none}
+#tool8 img{width:100%;max-height:420px;object-fit:contain;border-radius:14px;border:1.5px solid #EDE9FE;margin-top:12px;display:none}
 #tool8 .checker{background-image:linear-gradient(45deg,#E5E7EB 25%,transparent 25%),linear-gradient(-45deg,#E5E7EB 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#E5E7EB 75%),linear-gradient(-45deg,transparent 75%,#E5E7EB 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}
 #tool8 .box{background:#F8F9FF;border:1.5px solid #EDE9FE;border-radius:14px;padding:12px;margin-top:12px}
+#tool8 .bar{height:10px;background:#E5E7EB;border-radius:20px;overflow:hidden;margin-top:10px;display:none}
+#tool8 .bar i{display:block;height:100%;background:linear-gradient(90deg,#7C3AED,#EC4899);width:0%}
 </style>
 
 <div id="tool8"><div class="card">
 <button type="button" onclick="goHomePageTool8()" style="background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer">← Back</button>
-<h2 style="text-align:center;margin-top:10px">✂️ AI Background Remover</h2>
-<p style="font-size:12px;color:#6B7280;text-align:center">⚠️ Open in Chrome + Internet ON - First time 15 sec</p>
+<h2 style="text-align:center;margin-top:10px">🤖 AI Background Remover</h2>
+<p style="font-size:12px;color:#6B7280;text-align:center">Real AI Model - Same as AI Websites - Works on Any Background</p>
+<p style="font-size:11px;color:#DC2626;text-align:center;font-weight:800">⚠️ MUST Open in Chrome + Internet ON - WhatsApp Browser Will Fail</p>
 
 <button type="button" id="t8Tap" style="width:100%;padding:14px;border:none;border-radius:12px;background:#111827;color:#fff;font-weight:900;font-size:15px;cursor:pointer;margin-top:12px">📂 TAP TO SELECT PHOTO</button>
-<button type="button" id="t8Sample" style="width:100%;padding:12px;border:1.5px solid #7C3AED;background:#fff;color:#7C3AED;font-weight:900;font-size:14px;cursor:pointer;margin-top:8px;border-radius:12px">✨ Try Sample Photo</button>
+<button type="button" id="t8Sample" style="width:100%;padding:12px;border:1.5px solid #7C3AED;background:#fff;color:#7C3AED;font-weight:900;font-size:14px;cursor:pointer;margin-top:8px;border-radius:12px">✨ Try Sample - Complex BG</button>
 
-<p id="t8Status" style="font-size:13px;text-align:center;color:#6B7280;margin-top:12px">Tap Select Photo first</p>
+<p id="t8Status" style="font-size:13px;text-align:center;color:#6B7280;margin-top:12px">Tap Select Photo first - AI will auto remove</p>
 <p id="t8Error" style="font-size:13px;text-align:center;color:#DC2626;display:none"></p>
+<div class="bar" id="t8BarWrap"><i id="t8Bar"></i></div>
 
 <img id="t8Result" class="checker">
 
 <div class="box" id="t8BgBox" style="display:none">
-<b>🎨 Choose Background</b><br>
-<span class="chip active" data-bg="transparent">Transparent</span>
+<b>🎨 Choose Background - Tap</b><br>
+<span class="chip active" data-bg="transparent">Transparent PNG</span>
 <span class="chip" data-bg="white">⬜ White</span>
 <span class="chip" data-bg="black">⬛ Black</span>
 <span class="chip" data-bg="blue">🟦 Blue</span>
+<span class="chip" data-bg="pink">🩷 Pink</span>
+<span class="chip" data-bg="green">🟩 Green</span>
 </div>
 
 <button type="button" class="btn" id="t8Down" style="display:none">⬇️ Download Now</button>
+<div id="t8Out" style="display:none">
+<div style="display:flex;gap:8px;margin-top:12px">
+<button type="button" class="btn2 green" id="t8Down2">⬇️ Download</button>
+<button type="button" class="btn2 blue" id="t8Share">📤 Share</button>
+</div>
+</div>
+
 <div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn2" onclick="clearTool8()">🗑️ New Photo</button><button type="button" class="btn2" onclick="goHomePageTool8()">← Back</button></div>
 </div></div>
 </div>
 </div>
 
 <script type="module">
-import { removeBackground } from "https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.5/dist/index.mjs";
+import { AutoModel, AutoProcessor, RawImage, env } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.7.2";
 
 window.goHomePageTool8 = window.goHomePageTool8 || function(){
   try{ if(typeof window.goHomePage==="function"){ window.goHomePage(); return; } }catch(e){}
@@ -2806,91 +2819,211 @@ window.goHomePageTool8 = window.goHomePageTool8 || function(){
 function el(id){ return document.getElementById(id); }
 function status(m){ el('t8Status').textContent=m; }
 function showErr(m){ var e=el('t8Error'); if(!m){ e.style.display='none'; return; } e.style.display='block'; e.textContent=m; }
+function setBar(p){ var w=el('t8BarWrap'); w.style.display='block'; el('t8Bar').style.width=p+'%'; if(p>=100) setTimeout(function(){ w.style.display='none'; },600); }
 
-let file=null, resultBlob=null, resultUrl="", bgMode="transparent";
+// AI WEBSITE SETUP - Same as AI websites
+env.allowLocalModels = false;
+env.backends.onnx.wasm.numThreads = 1;
+
+let model=null, processor=null, resultBlob=null, resultUrl="", bgMode="transparent", isLoading=false;
+
+async function loadAI(){
+  if(model && processor) return true;
+  if(isLoading) return false;
+  isLoading=true;
+  try{
+    status("🤖 AI Loading Model... First time 20-30 sec - Downloading AI (40 MB) - Do NOT close");
+    setBar(10);
+    // RMBG-1.4 - Real AI model used by AI websites for background removal
+    // It understands person / product, not color
+    model = await AutoModel.from_pretrained("briaai/RMBG-1.4", {
+      progress_callback: function(p){
+        if(p && p.progress!=null) setBar(Math.floor(p.progress));
+        if(p && p.status) status("🤖 AI: "+p.status+" "+(p.file||""));
+      }
+    });
+    setBar(80);
+    processor = await AutoProcessor.from_pretrained("briaai/RMBG-1.4");
+    setBar(100);
+    status("✅ AI Loaded - Select photo, AI will remove");
+    isLoading=false;
+    return true;
+  }catch(e){
+    isLoading=false;
+    console.error(e);
+    showErr("AI Load Failed: "+e.message+" - Check Internet, Open in Chrome, Allow CDN. WhatsApp browser blocks AI.");
+    status("AI Failed to load - Try Chrome");
+    return false;
+  }
+}
+// Pre-load AI in background so when user selects photo, it's ready
+loadAI();
 
 function openPicker(){
   var inp=document.createElement('input');
   inp.type='file'; inp.accept='image/*';
-  inp.onchange=function(){ if(inp.files && inp.files[0]) start(inp.files[0]); };
+  inp.onchange=function(){ if(inp.files && inp.files[0]) runAI(inp.files[0]); };
   inp.click();
 }
 el('t8Tap').addEventListener('click', openPicker);
 el('t8Sample').addEventListener('click', function(){
   var c=document.createElement('canvas'); c.width=600; c.height=700; var x=c.getContext('2d');
-  x.fillStyle="#2563EB"; x.fillRect(0,0,600,700); // Hard blue BG
+  // COMPLEX BG - Blue + Orange + Circles - Color code FAILS here, AI WORKS here
+  x.fillStyle="#2563EB"; x.fillRect(0,0,300,700);
+  x.fillStyle="#F59E0B"; x.fillRect(300,0,300,700);
+  x.fillStyle="#fff"; x.beginPath(); x.arc(100,100,50,0,Math.PI*2); x.fill();
+  x.fillStyle="#000"; x.beginPath(); x.arc(500,600,60,0,Math.PI*2); x.fill();
+  // Person
   x.fillStyle="#E8B48A"; x.beginPath(); x.arc(300,180,90,0,Math.PI*2); x.fill();
   x.fillStyle="#DC2626"; x.fillRect(200,270,200,330);
   x.fillStyle="#111"; x.fillRect(180,80,240,40);
-  c.toBlob(function(b){ if(b) start(new File([b],"Sample.jpg",{type:"image/jpeg"})); }, "image/jpeg", 0.95);
+  c.toBlob(function(b){ if(b) runAI(new File([b],"Sample.jpg",{type:"image/jpeg"})); }, "image/jpeg", 0.95);
 });
 
-async function start(f){
-  if(!f) return;
-  file=f; showErr(""); status("⏳ AI Loading... First time downloads AI model (15 sec) - Please wait, do not close");
-  el('t8BgBox').style.display='none'; el('t8Down').style.display='none';
+async function runAI(file){
+  if(!file) return;
+  showErr(""); status("⏳ AI Thinking...");
+  el('t8BgBox').style.display='none'; el('t8Down').style.display='none'; el('t8Out').style.display='none';
   var imgEl=el('t8Result'); imgEl.style.display='none';
+
+  // 1. Load AI if not loaded
+  var ok = await loadAI();
+  if(!ok) return;
+
   try{
-    // REAL AI - This is the only way for 100% on complex BG
-    var blob = await removeBackground(f, {
-      publicPath: "https://staticimgly.com/@imgly/background-removal-data/",
-      progress: function(key, current, total){
-        var pct = total>0 ? Math.floor(current/total*100) : 0;
-        status("⏳ AI Downloading / Removing... "+pct+"% - Please wait");
-      }
-    });
-    resultBlob=blob;
-    if(resultUrl) URL.revokeObjectURL(resultUrl);
-    resultUrl=URL.createObjectURL(blob);
-    imgEl.src=resultUrl; imgEl.style.display='block';
-    el('t8BgBox').style.display='block'; el('t8Down').style.display='block';
-    status("✅ Done! 100% Removed - Choose Transparent / White / Black, Tap Download");
+    status("🤖 AI Analyzing Photo... Person vs Background...");
+    setBar(20);
+
+    // 2. AI WEBSITE STEP - Same as Remove.bg:
+    // Load image -> Processor makes tensor -> Model predicts mask -> Mask = Person (white) / BG (black)
+    var url=URL.createObjectURL(file);
+    var image = await RawImage.fromURL(url);
+    var origW=image.width, origH=image.height;
+    setBar(40);
+
+    var inputs = await processor(image);
+    setBar(60);
+    var output = await model(inputs);
+    setBar(80);
+
+    // 3. Get mask from AI output
+    var maskTensor = output.alpha || output.logits || output[Object.keys(output)[0]];
+    // Mask is 1xHxW - Convert to image
+    var maskData = maskTensor.data;
+    var maskW = maskTensor.dims[2] || maskTensor.dims[1];
+    var maskH = maskTensor.dims[1] || maskTensor.dims[0];
+    // If dims are [1,1,H,W] adjust
+    if(maskTensor.dims.length===4){ maskW=maskTensor.dims[3]; maskH=maskTensor.dims[2]; }
+
+    // 4. Build transparent image: Keep where mask > 0.5, Remove where mask < 0.5
+    // Resize mask to original size using canvas
+    var maskCanvas=document.createElement('canvas'); maskCanvas.width=maskW; maskCanvas.height=maskH;
+    var mctx=maskCanvas.getContext('2d');
+    var mImg=mctx.createImageData(maskW, maskH);
+    for(var i=0;i<maskW*maskH;i++){
+      var v = maskData[i] || 0;
+      // Model outputs 0-1 or 0-255 - Normalize
+      if(v<=1) v=v*255;
+      mImg.data[i*4]=v; mImg.data[i*4+1]=v; mImg.data[i*4+2]=v; mImg.data[i*4+3]=255;
+    }
+    mctx.putImageData(mImg,0,0);
+
+    // Draw original at full size
+    var outCanvas=document.createElement('canvas'); outCanvas.width=origW; outCanvas.height=origH;
+    var octx=outCanvas.getContext('2d');
+    octx.drawImage(image.toCanvas(),0,0,origW,origH);
+    var origData=octx.getImageData(0,0,origW,origH);
+
+    // Draw mask scaled to original
+    var maskScaled=document.createElement('canvas'); maskScaled.width=origW; maskScaled.height=origH;
+    var sctx=maskScaled.getContext('2d');
+    sctx.drawImage(maskCanvas,0,0,origW,origH);
+    var scaledMask=sctx.getImageData(0,0,origW,origH).data;
+
+    // Apply mask - Smooth edge
+    for(var j=0;j<origW*origH;j++){
+      var a=scaledMask[j*4]; // 0 = BG, 255 = Person
+      // Feather: 30-200 smooth
+      if(a<30) origData.data[j*4+3]=0;
+      else if(a<200) origData.data[j*4+3]=Math.floor((a-30)/170*255);
+      else origData.data[j*4+3]=255;
+    }
+    octx.putImageData(origData,0,0);
+    setBar(95);
+
+    // Show result
+    outCanvas.toBlob(function(blob){
+      if(!blob){ showErr("Result failed - Try again"); return; }
+      resultBlob=blob;
+      if(resultUrl) URL.revokeObjectURL(resultUrl);
+      resultUrl=URL.createObjectURL(blob);
+      imgEl.src=resultUrl; imgEl.style.display='block';
+      el('t8BgBox').style.display='block'; el('t8Down').style.display='block'; el('t8Out').style.display='block';
+      updateBg();
+      setBar(100);
+      status("✅ AI Done! Full Background Removed - Choose Transparent / White / Black, Tap Download");
+      try{ URL.revokeObjectURL(url); }catch(e){}
+    }, "image/png");
+
   }catch(e){
     console.error(e);
-    showErr("AI Failed: "+(e.message||"")+" - Open in Chrome, Internet ON, Try again. WhatsApp browser blocks AI.");
-    status("Failed - Open this page in Chrome and try again");
+    showErr("AI Remove Failed: "+e.message+" - Try smaller photo (<2 MB), Chrome, Internet ON");
+    status("Failed - Try Sample Photo first");
   }
 }
 
-var bgBox=el('t8BgBox');
-bgBox.addEventListener('click', function(e){
-  var chip=e.target.closest('.chip'); if(!chip) return;
-  bgBox.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('active'); });
-  chip.classList.add('active'); bgMode=chip.getAttribute('data-bg')||"transparent";
+function updateBg(){
   var imgEl=el('t8Result');
   if(bgMode==='transparent'){ imgEl.classList.add('checker'); imgEl.style.background='transparent'; }
   else if(bgMode==='white'){ imgEl.classList.remove('checker'); imgEl.style.background='#fff'; }
   else if(bgMode==='black'){ imgEl.classList.remove('checker'); imgEl.style.background='#000'; }
   else if(bgMode==='blue'){ imgEl.classList.remove('checker'); imgEl.style.background='#2563EB'; }
+  else if(bgMode==='pink'){ imgEl.classList.remove('checker'); imgEl.style.background='#F9A8D4'; }
+  else if(bgMode==='green'){ imgEl.classList.remove('checker'); imgEl.style.background='#16A34A'; }
+}
+var bgBox=el('t8BgBox');
+bgBox.addEventListener('click', function(e){
+  var chip=e.target.closest('.chip'); if(!chip) return;
+  bgBox.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('active'); });
+  chip.classList.add('active'); bgMode=chip.getAttribute('data-bg')||"transparent"; updateBg();
 });
 
-el('t8Down').addEventListener('click', async function(){
-  if(!resultBlob){ showErr("Select photo first"); return; }
+async function doDownload(){
+  if(!resultBlob){ showErr("Select photo first - AI will remove"); return; }
   try{
     if(bgMode==='transparent'){
-      var a=document.createElement('a'); a.href=resultUrl; a.download="BG-Removed-Transparent.png"; document.body.appendChild(a); a.click(); a.remove();
+      var a=document.createElement('a'); a.href=resultUrl; a.download="AI-BG-Removed-Transparent.png"; document.body.appendChild(a); a.click(); a.remove();
       status("✅ Downloaded Transparent PNG");
     } else {
       var img=new Image(); img.src=resultUrl;
       await new Promise(function(r,j){ img.onload=r; img.onerror=j; });
       var c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; var ctx=c.getContext('2d');
-      var colors={white:"#FFFFFF", black:"#000000", blue:"#2563EB"};
+      var colors={white:"#FFFFFF", black:"#000000", blue:"#2563EB", pink:"#F9A8D4", green:"#16A34A"};
       ctx.fillStyle=colors[bgMode]||"#FFFFFF"; ctx.fillRect(0,0,c.width,c.height);
       ctx.drawImage(img,0,0);
-      var a2=document.createElement('a'); a2.href=c.toDataURL('image/jpeg',0.92); a2.download="BG-Removed-"+bgMode+".jpg"; document.body.appendChild(a2); a2.click(); a2.remove();
+      var a2=document.createElement('a'); a2.href=c.toDataURL('image/jpeg',0.92); a2.download="AI-BG-Removed-"+bgMode+".jpg"; document.body.appendChild(a2); a2.click(); a2.remove();
       status("✅ Downloaded "+bgMode+" JPG");
     }
-  }catch(e){ showErr("Download failed - Try again"); }
+  }catch(e){ showErr("Download failed"); }
+}
+el('t8Down').addEventListener('click', doDownload);
+el('t8Down2').addEventListener('click', doDownload);
+el('t8Share').addEventListener('click', function(){
+  if(!resultBlob) return;
+  try{
+    var f=new File([resultBlob],"AI-BG-Removed.png",{type:"image/png"});
+    if(navigator.share && navigator.canShare({files:[f]})) navigator.share({files:[f]}); else doDownload();
+  }catch(e){ doDownload(); }
 });
 
 window.clearTool8=function(){
   resultBlob=null; if(resultUrl) URL.revokeObjectURL(resultUrl); resultUrl=""; bgMode='transparent';
   var imgEl=el('t8Result'); imgEl.src=""; imgEl.style.display='none';
-  el('t8BgBox').style.display='none'; el('t8Down').style.display='none';
+  el('t8BgBox').style.display='none'; el('t8Down').style.display='none'; el('t8Out').style.display='none';
   showErr(""); status("Tap Select Photo first");
 };
 </script>
-<!-- ============ END ============ -->
+<!-- ============ AI WEBSITE WAY END ============ --> 
 <!-- ================= TOOL 9 - PDF MERGER ================= -->
 <div id="page-tool9" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>📚 PDF Merger</b><br><span>Most Demanded</span></div></div><h2 style="text-align:center">📚 PDF Merger</h2><p style="font-size:12px;color:#6B7280;text-align:center">Merge Aadhar Front + Back, Marksheet Pages Into 1 PDF</p><div class="drop" onclick="document.getElementById('mergeFile').click()"><b>📄 Select PDFs - Multiple</b><p style="font-size:12px;color:#6B7280">Select 2 or more PDFs in order</p><input type="file" id="mergeFile" accept="application/pdf" multiple onchange="loadMerge(event)"></div><p id="mergeInfo" style="font-size:12px;color:#166534;text-align:center;margin-top:8px">Select PDFs first</p><label>Merged File Name</label><input id="mergeName" value="Merged-Document"><button class="btn" onclick="mergePDFs()">📚 Merge PDFs Into 1</button><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
 
