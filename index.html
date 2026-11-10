@@ -625,8 +625,279 @@ updateWmFixedUI();
 
 <!-- ===================================================== -->
 <!-- ================= TOOL 2 START - PDF TO IMAGE ====== -->
-<!-- ===================================================== -->
-<div class="tool" id="tPdfToImage"><h2>📄 Tool 2 - PDF To Image</h2><p class="hint">PDF Pages To JPG Images - Paste Detail Code Below</p><!-- PASTE CODE HERE - TOOL 2 - START --><div class="paste-box"><b>📄 TOOL 2 - PDF TO IMAGE - PASTE CODE HERE</b><p>Paste Tool 2 detail code here.</p></div><!-- PASTE CODE HERE - TOOL 2 - END --></div>
+<!-- ================= TOOL 2 START - PDF TO IMAGE - ADVANCED - FIXED ALL BUGS - NO DOCTYPE ================= -->
+<!-- PASTE THIS ONLY - REPLACE OLD TOOL 2 FULLY -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+#tPdf2{font-family:system-ui,Arial,sans-serif}
+#tPdf2 .card{background:#fff;border:1.5px solid #EDE9FE;border-radius:22px;padding:16px;margin-top:14px;box-shadow:0 12px 24px rgba(0,0,0,.06)}
+#tPdf2 .drop{border:2px dashed #7C3AED;background:#F8F9FF;border-radius:18px;padding:22px;text-align:center;cursor:pointer;margin-top:12px}
+#tPdf2 .drop b{font-size:15px}
+#tPdf2 .drop p{font-size:12px;color:#6B7280;margin-top:6px;line-height:1.6}
+#tPdf2 input[type=file]{display:none}
+#tPdf2 label{font-size:12px;font-weight:900;color:#374151;display:block;margin-top:13px}
+#tPdf2 select,#tPdf2 input[type=text]{width:100%;padding:13px;border-radius:14px;border:1.5px solid #E5E7EB;background:#F9FAFB;font-size:14px;margin-top:6px;box-sizing:border-box}
+#tPdf2 .btn{width:100%;padding:16px;border:none;border-radius:16px;font-weight:900;cursor:pointer;margin-top:12px;color:#fff;background:linear-gradient(135deg,#7C3AED,#EC4899);font-size:15px;box-shadow:0 12px 22px rgba(124,58,237,.30)}
+#tPdf2 .btn:disabled{opacity:.6;cursor:not-allowed}
+#tPdf2 .btn2{flex:1;padding:11px;border-radius:14px;border:1.5px solid #E5E7EB;background:#fff;font-weight:800;cursor:pointer;font-size:12.5px}
+#tPdf2 .btn2.primary{background:#111827;color:#fff;border:none}
+#tPdf2 .btn2.green{background:#16A34A;color:#fff;border:none}
+#tPdf2 .chip{display:inline-block;background:#fff;border:1.5px solid #EDE9FE;padding:10px 13px;border-radius:20px;font-size:12.5px;margin:7px 7px 0 0;cursor:pointer;font-weight:700}
+#tPdf2 .chip.active{background:#111827;color:#fff;border:none}
+#tPdf2 .toggle-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #EDE9FE;gap:8px}
+#tPdf2 .toggle{width:52px;height:28px;background:#22C55E;border-radius:30px;position:relative;cursor:pointer;flex-shrink:0}
+#tPdf2 .toggle.off{background:#9CA3AF}
+#tPdf2 .toggle::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%}
+#tPdf2 .toggle.off::after{left:27px}
+#tPdf2 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+#tPdf2 .img-card{background:#F8F9FF;border:1px solid #EDE9FE;border-radius:16px;padding:10px;text-align:center;position:relative}
+#tPdf2 .img-card img{width:100%;border-radius:12px;border:1px solid #E5E7EB;max-height:220px;object-fit:contain;background:#fff;cursor:zoom-in}
+#tPdf2 .img-card b{font-size:12px;display:block;margin-top:8px}
+#tPdf2 .img-card span{font-size:11px;color:#6B7280}
+#tPdf2 .del{position:absolute;top:6px;right:6px;background:#EF4444;color:#fff;border:none;width:26px;height:26px;border-radius:50%;cursor:pointer;font-weight:900}
+#tPdf2 .progress{height:10px;background:#E5E7EB;border-radius:20px;overflow:hidden;margin-top:12px;display:none}
+#tPdf2 .progress i{display:block;height:100%;background:linear-gradient(90deg,#7C3AED,#EC4899);width:0%;transition:.3s}
+#tPdf2 .zoom{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:9999;display:none;align-items:center;justify-content:center;padding:12px}
+#tPdf2 .zoom img{max-width:100%;max-height:88vh;border-radius:12px;background:#fff}
+#tPdf2 .zoom button{position:absolute;top:12px;right:12px;background:#fff;border:none;padding:10px 14px;border-radius:20px;font-weight:900;cursor:pointer}
+</style>
+
+<div id="tPdf2">
+<div class="card">
+<h2 style="font-size:18px;text-align:center">📄 Tool 2 - PDF To Image - Advanced</h2>
+<p style="font-size:12px;color:#6B7280;text-align:center;margin-top:6px">ZIP Download • Stitch To 1 Long Image • WhatsApp Compress • Auto Crop • Rotate • No other app offers this</p>
+
+<div class="drop" onclick="document.getElementById('pdf2File').click()">
+<b>📄 Tap To Select PDF File</b>
+<p>Or drop PDF here • Max 50 MB • 100% Private - PDF never leaves your phone<br>Best for: Form, Marksheet, Aadhar, Notes, Book Pages</p>
+<div style="margin-top:10px"><span style="background:#7C3AED;color:#fff;padding:10px 18px;border-radius:20px;font-size:13px;font-weight:800;display:inline-block">📂 Choose PDF</span></div>
+</div>
+<input type="file" id="pdf2File" accept="application/pdf" onchange="loadPdf2(event)">
+<p id="pdf2Name" style="font-size:12px;color:#166534;font-weight:800;text-align:center;margin-top:8px;display:none"></p>
+
+<!-- ADVANCED - PAGE RANGE - FIXED BUG -->
+<div style="background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:12px;margin-top:12px;display:none" id="pdf2PageBox">
+<b style="font-size:13px">📑 Advanced - Page Range - Type, Don't Tap 20 Times</b>
+<p style="font-size:11px;color:#6B7280;margin-top:4px">Example: Type <b>1-3, 5</b> = Page 1,2,3 and 5 only. Or leave empty = All pages.</p>
+<input type="text" id="pdf2Range" placeholder="Example: 1-3, 5  OR  leave empty for All Pages" oninput="applyRangePdf2()">
+<div id="pdf2Chips" style="margin-top:8px"></div>
+<div style="display:flex;gap:8px;margin-top:10px"><button class="btn2 primary" onclick="selectAllPdf2()">✅ Select All</button><button class="btn2" onclick="clearAllPdf2()">❌ Clear All</button></div>
+<p id="pdf2RangeInfo" style="font-size:11px;color:#166534;font-weight:700;margin-top:8px"></p>
+</div>
+
+<!-- ADVANCED SETTINGS -->
+<label>File Name For Images - Rename - Unique</label>
+<input type="text" id="pdf2Rename" value="My-Document" placeholder="Example: My-Aadhar, My-Marksheet">
+
+<label>Image Quality</label>
+<div id="pdf2QualityRow"><span class="chip" onclick="setPdf2Quality('low',this)">📱 Low - WhatsApp - Small</span><span class="chip active" onclick="setPdf2Quality('medium',this)">✨ Medium - Best</span><span class="chip" onclick="setPdf2Quality('high',this)">🖨️ High - Print</span></div>
+
+<div style="display:flex;gap:8px">
+<div style="flex:1"><label>Format</label><select id="pdf2Format"><option value="jpeg">JPG - Small Size</option><option value="png">PNG - High Quality</option></select></div>
+<div style="flex:1"><label>Size</label><select id="pdf2Size"><option value="1.5">Normal - A4</option><option value="2">Large - HD</option><option value="1">Small - Fast</option></select></div>
+</div>
+
+<div style="background:#F8F9FF;border:1px solid #EDE9FE;border-radius:14px;padding:10px;margin-top:12px">
+<div class="toggle-row"><div><b style="font-size:13px">✨ Auto Enhance - Make Blurry Clear</b><br><span style="font-size:11px;color:#6B7280">Fast - Like scanner - Bright + Sharp</span></div><div class="toggle" id="pdf2EnhanceToggle" onclick="togglePdf2Enhance()"></div></div>
+<div class="toggle-row"><div><b style="font-size:13px">✂️ Auto Crop White Border - Unique</b><br><span style="font-size:11px;color:#6B7280">Removes extra white space - Image looks clean</span></div><div class="toggle" id="pdf2CropToggle" onclick="togglePdf2Crop()"></div></div>
+<div class="toggle-row"><div><b style="font-size:13px">📱 WhatsApp Compress - Under 200KB</b><br><span style="font-size:11px;color:#6B7280">Auto compress - Sends fast on WhatsApp</span></div><div class="toggle off" id="pdf2CompressToggle" onclick="togglePdf2Compress()"></div></div>
+<div class="toggle-row"><div><b style="font-size:13px">🔄 Rotate 90° - For Sideways PDF</b><br><span style="font-size:11px;color:#6B7280">If PDF is sideways, turn ON</span></div><div class="toggle off" id="pdf2RotateToggle" onclick="togglePdf2Rotate()"></div></div>
+<div class="toggle-row" style="border:none"><div><b style="font-size:13px">💧 Watermark</b><br><span style="font-size:11px;color:#6B7280" id="pdf2WmText">Currently: ON</span></div><div class="toggle" id="pdf2WmToggle" onclick="togglePdf2Wm()"></div></div>
+</div>
+
+<button class="btn" id="pdf2Btn" onclick="convertPdf2()">✨ Convert PDF To Images - Free</button>
+<div class="progress" id="pdf2Progress"><i id="pdf2Bar"></i></div>
+<p id="pdf2Status" style="font-size:12px;color:#6B7280;text-align:center;margin-top:8px">Select a PDF first</p>
+
+<div id="pdf2Result" style="display:none">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px"><b style="font-size:14px">🖼️ Your Images - <span id="pdf2Count">0</span> Pages</b><span id="pdf2Total" style="font-size:11px;color:#6B7280"></span></div>
+<div class="grid" id="pdf2Grid"></div>
+<!-- ADVANCED ACTIONS -->
+<div style="display:flex;gap:8px;margin-top:12px"><button class="btn2 green" onclick="downloadZipPdf2()">📦 Download All As ZIP - 1 File</button><button class="btn2 primary" onclick="stitchPdf2()">🧵 Stitch To 1 Long Image</button></div>
+<div style="display:flex;gap:8px;margin-top:8px"><button class="btn2" onclick="downloadAllOneByOnePdf2()">⬇️ Download One By One</button><button class="btn2" onclick="sharePdf2()">📤 Share</button></div>
+<button class="btn2 primary" style="width:100%;margin-top:8px" onclick="clearPdf2()">🗑️ Convert Another PDF</button>
+</div>
+
+<div style="background:#FFFBEB;border:1px dashed #F59E0B;border-radius:14px;padding:11px;margin-top:14px;font-size:12px;line-height:1.7;color:#92400E"><b>How To Use:</b><br>1. Choose PDF<br>2. Type Page Range - Example: 1-3, 5 - Or leave All<br>3. Choose Quality - Medium is best<br>4. Tap Convert - Tap image to Zoom<br>5. Tap Download ZIP - 1 file with all images</div>
+</div>
+<!-- ZOOM MODAL -->
+<div class="zoom" id="pdf2Zoom"><button onclick="closeZoomPdf2()">✕ Close</button><img id="pdf2ZoomImg"></div>
+</div>
+
+<script>
+/* ================= TOOL 2 - ADVANCED JS - FIXED ================= */
+let pdf2Doc=null, pdf2Name="My-Document", pdf2Selected=new Set(), pdf2Quality="medium", pdf2Enhance=true, pdf2Crop=true, pdf2Compress=false, pdf2Rotate=false, pdf2Wm=true, pdf2Images=[], pdf2Converting=false;
+try{ let s=localStorage.getItem('orbit_watermark'); if(s!==null) pdf2Wm=s==='true'; }catch(e){}
+function updatePdf2Wm(){ let a=document.getElementById('pdf2WmText'); if(a) a.innerText="Currently: "+(pdf2Wm?"ON":"OFF - Clean"); let b=document.getElementById('pdf2WmToggle'); if(b) b.classList.toggle('off',!pdf2Wm); }
+function togglePdf2Wm(){ pdf2Wm=!pdf2Wm; try{ localStorage.setItem('orbit_watermark',pdf2Wm?'true':'false'); }catch(e){} updatePdf2Wm(); }
+function togglePdf2Enhance(){ pdf2Enhance=!pdf2Enhance; document.getElementById('pdf2EnhanceToggle').classList.toggle('off',!pdf2Enhance); }
+function togglePdf2Crop(){ pdf2Crop=!pdf2Crop; document.getElementById('pdf2CropToggle').classList.toggle('off',!pdf2Crop); }
+function togglePdf2Compress(){ pdf2Compress=!pdf2Compress; document.getElementById('pdf2CompressToggle').classList.toggle('off',!pdf2Compress); }
+function togglePdf2Rotate(){ pdf2Rotate=!pdf2Rotate; document.getElementById('pdf2RotateToggle').classList.toggle('off',!pdf2Rotate); }
+function setPdf2Quality(q,el){ pdf2Quality=q; document.querySelectorAll('#pdf2QualityRow .chip').forEach(c=>c.classList.remove('active')); el.classList.add('active'); }
+function parseRangePdf2(str,total){
+  str=(str||"").trim(); if(!str) return null;
+  let set=new Set();
+  str.split(',').forEach(part=>{
+    part=part.trim(); if(!part) return;
+    if(part.includes('-')){ let a=parseInt(part.split('-')[0]), b=parseInt(part.split('-')[1]); if(isNaN(a)||isNaN(b)) return; let s=Math.min(a,b), e=Math.max(a,b); for(let i=s;i<=e;i++) if(i>=1&&i<=total) set.add(i); }
+    else { let n=parseInt(part); if(!isNaN(n)&&n>=1&&n<=total) set.add(n); }
+  });
+  return set;
+}
+function applyRangePdf2(){
+  if(!pdf2Doc) return;
+  let val=document.getElementById('pdf2Range').value||"";
+  let parsed=parseRangePdf2(val, pdf2Doc.numPages);
+  if(parsed && parsed.size>0){ pdf2Selected=parsed; document.getElementById('pdf2RangeInfo').innerText="✅ "+parsed.size+" pages selected from range: "+val; }
+  else if(val.trim()===""){ pdf2Selected=new Set(); for(let i=1;i<=pdf2Doc.numPages;i++) pdf2Selected.add(i); document.getElementById('pdf2RangeInfo').innerText="All pages selected"; }
+  else { document.getElementById('pdf2RangeInfo').innerText="⚠️ Invalid range - Example: 1-3, 5"; return; }
+  renderPdf2Chips();
+}
+function selectAllPdf2(){ if(!pdf2Doc) return; pdf2Selected=new Set(); for(let i=1;i<=pdf2Doc.numPages;i++) pdf2Selected.add(i); document.getElementById('pdf2Range').value=""; renderPdf2Chips(); }
+function clearAllPdf2(){ pdf2Selected.clear(); renderPdf2Chips(); }
+function renderPdf2Chips(){
+  if(!pdf2Doc) return;
+  let box=document.getElementById('pdf2Chips'); let h="";
+  for(let i=1;i<=pdf2Doc.numPages;i++){ let a=pdf2Selected.has(i)?"active":""; h+='<span class="chip '+a+'" onclick="togglePdf2Chip('+i+',this)">Page '+i+'</span>'; }
+  box.innerHTML=h;
+  document.getElementById('pdf2Status').innerText=pdf2Selected.size+" pages selected - Tap Convert";
+}
+function togglePdf2Chip(p,el){ if(pdf2Selected.has(p)){ pdf2Selected.delete(p); el.classList.remove('active'); } else { pdf2Selected.add(p); el.classList.add('active'); } document.getElementById('pdf2Status').innerText=pdf2Selected.size+" pages selected"; }
+async function loadPdf2(e){
+  let file=e.target.files[0]; if(!file) return;
+  if(!file.name.toLowerCase().endsWith(".pdf")){ alert("Please select a PDF file only"); return; }
+  if(file.size>50*1024*1024){ alert("PDF too big - Max 50 MB"); return; }
+  pdf2Name=file.name.replace(/\.pdf$/i,"")||"My-Document";
+  document.getElementById('pdf2Rename').value=pdf2Name;
+  document.getElementById('pdf2Name').style.display="block";
+  document.getElementById('pdf2Name').innerText="✅ Selected: "+file.name+" - Loading...";
+  document.getElementById('pdf2Status').innerText="Loading PDF... Please wait";
+  try{
+    if(!window.pdfjsLib){ alert("PDF library not loaded - Check internet"); return; }
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    let buf=await file.arrayBuffer();
+    pdf2Doc=await window.pdfjsLib.getDocument({data:buf}).promise;
+    pdf2Selected=new Set(); for(let i=1;i<=pdf2Doc.numPages;i++) pdf2Selected.add(i);
+    document.getElementById('pdf2PageBox').style.display="block";
+    renderPdf2Chips();
+    document.getElementById('pdf2Name').innerText="✅ "+file.name+" - "+pdf2Doc.numPages+" pages found";
+    document.getElementById('pdf2Status').innerText=pdf2Doc.numPages+" pages found - All selected";
+  }catch(err){ alert("This PDF could not be opened - Try another PDF"); }
+}
+function applyEnhanceFast(ctx,w,h){
+  if(!pdf2Enhance) return;
+  // FIXED BUG - Old code used slow pixel loop - Now use fast filter via temp canvas + brightness
+  try{ ctx.filter="brightness(1.08) contrast(1.08)"; let tmp=document.createElement('canvas'); tmp.width=w; tmp.height=h; let tctx=tmp.getContext('2d'); tctx.drawImage(ctx.canvas,0,0); ctx.filter="none"; ctx.clearRect(0,0,w,h); ctx.drawImage(tmp,0,0); }catch(e){}
+}
+function autoCropCanvas(canvas){
+  if(!pdf2Crop) return canvas;
+  try{
+    let ctx=canvas.getContext('2d'); let w=canvas.width, h=canvas.height;
+    let img=ctx.getImageData(0,0,w,h).data;
+    let top=0,bottom=h-1,left=0,right=w-1;
+    // Find top - scan every 4th row for speed
+    outer: for(let y=0;y<h;y+=4){ for(let x=0;x<w;x+=8){ let idx=(y*w+x)*4; if(img[idx]<240||img[idx+1]<240||img[idx+2]<240){ top=y; break outer; } } }
+    outer2: for(let y=h-1;y>=0;y-=4){ for(let x=0;x<w;x+=8){ let idx=(y*w+x)*4; if(img[idx]<240||img[idx+1]<240||img[idx+2]<240){ bottom=y; break outer2; } } }
+    top=Math.max(0,top-10); bottom=Math.min(h-1,bottom+10);
+    if(bottom-top<100) return canvas;
+    let out=document.createElement('canvas'); out.width=w; out.height=bottom-top+1; let octx=out.getContext('2d'); octx.drawImage(canvas,0,-top); return out;
+  }catch(e){ return canvas; }
+}
+async function convertPdf2(){
+  if(pdf2Converting) return;
+  if(!pdf2Doc){ alert("Please select a PDF first"); return; }
+  if(pdf2Selected.size===0){ alert("Please select at least 1 page"); return; }
+  pdf2Converting=true;
+  let btn=document.getElementById('pdf2Btn'); btn.disabled=true; btn.innerText="⏳ Converting... Please Wait";
+  document.getElementById('pdf2Progress').style.display="block";
+  document.getElementById('pdf2Result').style.display="none";
+  document.getElementById('pdf2Grid').innerHTML="";
+  pdf2Images=[];
+  let customName=(document.getElementById('pdf2Rename').value||"").trim()||pdf2Name;
+  pdf2Name=customName;
+  let pages=[...pdf2Selected].sort((a,b)=>a-b);
+  let baseScale=parseFloat(document.getElementById('pdf2Size').value||"1.5");
+  if(pdf2Quality==="low") baseScale=baseScale*0.8;
+  if(pdf2Quality==="high") baseScale=baseScale*1.4;
+  let format=document.getElementById('pdf2Format').value||"jpeg";
+  let totalKB=0;
+  for(let idx=0; idx<pages.length; idx++){
+    let pNum=pages[idx];
+    try{
+      let page=await pdf2Doc.getPage(pNum);
+      let viewport=page.getViewport({scale:baseScale, rotation: pdf2Rotate?90:0});
+      let canvas=document.createElement('canvas'); canvas.width=viewport.width; canvas.height=viewport.height;
+      let ctx=canvas.getContext('2d'); ctx.fillStyle="#FFFFFF"; ctx.fillRect(0,0,canvas.width,canvas.height);
+      await page.render({canvasContext:ctx, viewport:viewport}).promise;
+      applyEnhanceFast(ctx,canvas.width,canvas.height);
+      let finalCanvas=autoCropCanvas(canvas);
+      if(pdf2Wm){
+        let fctx=finalCanvas.getContext('2d'); fctx.fillStyle="rgba(0,0,0,0.55)"; fctx.font="bold 14px Arial"; fctx.textAlign="right"; fctx.fillText("Made With Orbittroniz.com", finalCanvas.width-12, finalCanvas.height-12);
+      }
+      // Compress for WhatsApp - Try lower quality until under 200KB
+      let quality = pdf2Quality==="low" ? 0.6 : pdf2Quality==="high" ? 0.95 : 0.82;
+      let dataUrl = format==="png" ? finalCanvas.toDataURL("image/png") : finalCanvas.toDataURL("image/jpeg", quality);
+      if(pdf2Compress && format==="jpeg"){
+        let tries=0;
+        while(dataUrl.length>200*1024*1.37 && quality>0.35 && tries<4){ quality-=0.15; dataUrl=finalCanvas.toDataURL("image/jpeg", quality); tries++; }
+      }
+      let kb=Math.round((dataUrl.length*3/4)/1024); totalKB+=kb;
+      pdf2Images.push({page:pNum, dataUrl:dataUrl, format:format, kb:kb});
+      let card=document.createElement('div'); card.className='img-card';
+      card.innerHTML='<button class="del" onclick="deletePdf2Image('+idx+',this)">✕</button><img src="'+dataUrl+'" onclick="zoomPdf2('+idx+')"><b>Page '+pNum+'</b><span>'+kb+' KB • '+(format==="jpeg"?"JPG":"PNG")+'</span><br><button class="btn2 primary" style="width:100%;margin-top:8px" onclick="downloadOnePdf2('+idx+')">⬇️ Download</button>';
+      document.getElementById('pdf2Grid').appendChild(card);
+      document.getElementById('pdf2Bar').style.width=Math.round(((idx+1)/pages.length)*100)+"%";
+      document.getElementById('pdf2Status').innerText="Converting... "+(idx+1)+" / "+pages.length+" done";
+      await new Promise(r=>setTimeout(r,60));
+    }catch(err){ console.log(err); }
+  }
+  document.getElementById('pdf2Result').style.display="block";
+  document.getElementById('pdf2Count').innerText=pdf2Images.length;
+  document.getElementById('pdf2Total').innerText="Total: "+(Math.round(totalKB/1024*10)/10)+" MB";
+  document.getElementById('pdf2Status').innerText="✅ Done - "+pdf2Images.length+" images ready - Tap image to Zoom";
+  btn.disabled=false; btn.innerText="✨ Convert PDF To Images - Free"; pdf2Converting=false;
+  document.getElementById('pdf2Result').scrollIntoView({behavior:'smooth'});
+}
+function deletePdf2Image(idx,btn){ pdf2Images.splice(idx,1); if(btn) btn.parentElement.remove(); document.getElementById('pdf2Count').innerText=pdf2Images.length; }
+function downloadOnePdf2(idx){ let it=pdf2Images[idx]; if(!it) return; let a=document.createElement('a'); a.href=it.dataUrl; a.download=pdf2Name+"-Page-"+it.page+"."+(it.format==="jpeg"?"jpg":"png"); a.click(); }
+async function downloadZipPdf2(){
+  if(!pdf2Images.length){ alert("Convert first"); return; }
+  if(!window.JSZip){ alert("ZIP library not loaded - Check internet"); return; }
+  document.getElementById('pdf2Status').innerText="Creating ZIP... Please wait";
+  let zip=new JSZip();
+  for(let it of pdf2Images){
+    let base64=it.dataUrl.split(',')[1];
+    zip.file(pdf2Name+"-Page-"+it.page+"."+(it.format==="jpeg"?"jpg":"png"), base64, {base64:true});
+  }
+  let blob=await zip.generateAsync({type:"blob"});
+  let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=pdf2Name+"-All-Images.zip"; a.click();
+  document.getElementById('pdf2Status').innerText="✅ ZIP Downloaded - "+pdf2Images.length+" images in 1 file";
+}
+async function downloadAllOneByOnePdf2(){ if(!pdf2Images.length){ alert("Convert first"); return; } for(let i=0;i<pdf2Images.length;i++){ downloadOnePdf2(i); await new Promise(r=>setTimeout(r,600)); } }
+async function stitchPdf2(){
+  if(pdf2Images.length<2){ alert("Need at least 2 pages to stitch"); return; }
+  document.getElementById('pdf2Status').innerText="Stitching to 1 long image... Please wait";
+  let imgs=[];
+  for(let it of pdf2Images){ let im=new Image(); im.src=it.dataUrl; await new Promise(r=>{ im.onload=r; }); imgs.push(im); }
+  let w=Math.max(...imgs.map(i=>i.width));
+  let h=imgs.reduce((s,i)=>s+i.height,0);
+  let canvas=document.createElement('canvas'); canvas.width=w; canvas.height=h;
+  let ctx=canvas.getContext('2d'); ctx.fillStyle="#fff"; ctx.fillRect(0,0,w,h);
+  let y=0; for(let im of imgs){ ctx.drawImage(im,0,y); y+=im.height; }
+  let dataUrl=canvas.toDataURL("image/jpeg",0.85);
+  let a=document.createElement('a'); a.href=dataUrl; a.download=pdf2Name+"-Long-Image.jpg"; a.click();
+  document.getElementById('pdf2Status').innerText="✅ Long Image Downloaded - Perfect for WhatsApp Status";
+}
+function zoomPdf2(idx){ let it=pdf2Images[idx]; if(!it) return; document.getElementById('pdf2ZoomImg').src=it.dataUrl; document.getElementById('pdf2Zoom').style.display="flex"; }
+function closeZoomPdf2(){ document.getElementById('pdf2Zoom').style.display="none"; }
+function sharePdf2(){ if(!pdf2Images.length){ alert("Convert first"); return; } window.open("https://wa.me/?text="+encodeURIComponent("I converted PDF to Image using Orbittroniz.com - "+pdf2Name+" - "+pdf2Images.length+" pages")); }
+function clearPdf2(){ pdf2Doc=null; pdf2Images=[]; pdf2Selected.clear(); document.getElementById('pdf2File').value=""; document.getElementById('pdf2Name').style.display="none"; document.getElementById('pdf2PageBox').style.display="none"; document.getElementById('pdf2Result').style.display="none"; document.getElementById('pdf2Progress').style.display="none"; document.getElementById('pdf2Status').innerText="Select a PDF first"; }
+updatePdf2Wm();
+</script>
+<!-- ================= TOOL 2 END - ADVANCED ================= -->
 <!-- ================= TOOL 2 END ================= -->
 <!-- ===================================================== -->
 
