@@ -3650,8 +3650,483 @@ window.t9Reset=function(){
 <div id="page-tool10" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>📐 Image Resizer</b><br><span>Most Demanded</span></div></div><h2 style="text-align:center">📐 Image Resizer</h2><div class="drop" onclick="document.getElementById('resizeFile').click()"><b>📸 Select Image</b><input type="file" id="resizeFile" accept="image/*" onchange="loadResize(event)"></div><label>Preset - 1 Tap</label><div><span class="chip" onclick="setResizePreset(300,300)">Passport 300x300</span><span class="chip" onclick="setResizePreset(1080,1080)">Insta Square 1080</span><span class="chip" onclick="setResizePreset(1080,1350)">Insta Post 1080x1350</span><span class="chip" onclick="setResizePreset(1920,1080)">YouTube 1920x1080</span></div><div style="display:flex;gap:8px"><div style="flex:1"><label>Width</label><input id="resizeW" type="number" value="800"></div><div style="flex:1"><label>Height</label><input id="resizeH" type="number" value="800"></div></div><button class="btn" onclick="doResize()">📐 Resize Image</button><img id="resizePreview" style="width:100%;border-radius:12px;margin-top:10px;display:none"><button class="btn2 green" style="width:100%;margin-top:10px" onclick="downloadResized()">⬇️ Download Resized</button><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
 
 <!-- ================= TOOL 11 - INVOICE MAKER ================= -->
-<div id="page-tool11" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>🧾 Invoice Maker</b><br><span>Most Demanded</span></div></div><h2 style="text-align:center">🧾 Invoice Maker</h2><p style="font-size:12px;color:#6B7280;text-align:center">Professional Bill For Shop - In 30 Seconds</p><label>Your Shop / Name</label><input id="invShop" value="Orbittroniz Shop"><label>Customer Name</label><input id="invCust" value="Rahul Sharma"><label>Item Name</label><input id="invItem" value="T-Shirt"><div style="display:flex;gap:8px"><div style="flex:1"><label>Price (₹)</label><input id="invPrice" type="number" value="499"></div><div style="flex:1"><label>Qty</label><input id="invQty" type="number" value="2"></div></div><label>Invoice No.</label><input id="invNo" value="INV-001"><button class="btn" onclick="makeInvoice()">🧾 Generate Invoice</button><div class="out" id="invOut">Invoice preview will appear here...</div><button class="btn2 green" style="width:100%;margin-top:10px" onclick="downloadInvoice()">⬇️ Download Invoice PDF</button><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
+<!-- ============ TOOL 11 - AI INVOICE - ALL BUGS FIXED - FINAL - START ============ -->
+<style>
+.t11-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.t11-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t11-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.t11-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
+.t11-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:12px;border-radius:12px;font-size:14px;outline:none;margin-top:6px}
+.t11-input.small{padding:10px;font-size:13px}
+.t11-row{display:flex;gap:8px}.t11-row>*{flex:1}
+.t11-mode{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px}
+.t11-mode button{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 6px;border-radius:12px;font-size:12px;font-weight:700;cursor:pointer}
+.t11-mode button.active{background:linear-gradient(135deg,#7c3aed,#22d3ee);border-color:transparent}
+.t11-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.t11-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.t11-btn-preview{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t11-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t11-item{background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px;margin-top:8px}
+.t11-item .t11-row{margin-top:6px}
+.t11-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
+.t11-toggle b{font-size:13px}
+.t11-toggle input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.t11-toggle input:checked{background:#22c55e}
+.t11-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.t11-toggle input:checked::after{left:23px}
+.t11-ai-box{background:linear-gradient(145deg,#fef3c7,#fde68a);border:1px solid #f59e0b;border-radius:14px;padding:12px;margin-top:12px;color:#111}
+.t11-invoice{background:#fff;color:#111;border-radius:12px;padding:18px;margin-top:12px;font-family:system-ui,Arial,sans-serif}
+.t11-invoice.blue .t11-inv-head{background:#1e3a8a;color:#fff}
+.t11-invoice.black .t11-inv-head{background:#111827;color:#fff}
+.t11-invoice.green .t11-inv-head{background:#065f46;color:#fff}
+.t11-inv-head{border-radius:10px;padding:14px;display:flex;justify-content:space-between;gap:10px}
+.t11-inv-head h2{margin:0;font-size:20px}.t11-inv-head p{margin:2px 0;font-size:11px;opacity:.9}
+.t11-inv-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}
+.t11-inv-table th{background:#f3f4f6;text-align:left;padding:8px;border:1px solid #e5e7eb}
+.t11-inv-table td{padding:8px;border:1px solid #e5e7eb;vertical-align:top}
+.t11-inv-total{text-align:right;font-size:13px;line-height:1.9;margin-top:10px}.t11-inv-total b{font-size:16px}
+.t11-inv-footer{display:flex;justify-content:space-between;gap:10px;margin-top:14px;align-items:flex-end}
+</style>
 
+<div id="page-tool11" class="tool-page" style="display:none">
+<div class="tool active" id="tool-11"><div class="t11-card">
+<button type="button" onclick="goHomePageTool11()" style="background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer;color:#111">← Back</button>
+<div class="t11-title">🤖 AI Invoice Maker Pro</div>
+<div class="t11-sub">AI Auto Fill • UPI QR • WhatsApp • GST • Amount In Words • No Bugs</div>
+
+<div class="t11-ai-box">
+<b>🤖 AI AUTO INVOICE - Type In Normal Words</b>
+<textarea id="t11AiText" rows="3" style="width:100%;border:1px solid #f59e0b;border-radius:10px;padding:12px;font-size:14px;margin-top:8px;outline:none" placeholder="Example: Rahul Sharma ko 2 shirt 500 me, 1 pant 800 me, delivery 50, phone 9876543210"></textarea>
+<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+<button type="button" onclick="t11AiFill()" style="flex:1;background:#111827;color:#fff;border:none;padding:12px;border-radius:10px;font-weight:900;cursor:pointer">🤖 AI AUTO FILL INVOICE</button>
+<button type="button" onclick="t11AiExample(1)" style="background:#fff;border:1px solid #f59e0b;padding:12px;border-radius:10px;cursor:pointer;font-size:11px;font-weight:800">Example 1</button>
+<button type="button" onclick="t11AiExample(2)" style="background:#fff;border:1px solid #f59e0b;padding:12px;border-radius:10px;cursor:pointer;font-size:11px;font-weight:800">Example 2</button>
+</div>
+<p style="font-size:11px;margin:6px 0 0">AI understands: Name, Phone, Item, Qty, Price, Delivery, GST, Discount - Hindi + English</p>
+<p id="t11AiResult" style="font-size:12px;font-weight:800;color:#065f46;display:none;margin:6px 0 0"></p>
+</div>
+
+<label class="t11-label">🏢 1. YOUR BUSINESS - Auto Saved</label>
+<div class="t11-row"><input type="text" id="t11BizName" class="t11-input" placeholder="Business Name"><input type="text" id="t11BizPhone" class="t11-input" placeholder="Phone"></div>
+<input type="text" id="t11BizAddr" class="t11-input" placeholder="Address - Shop, Street, City, Pin">
+<div class="t11-row"><input type="text" id="t11BizGst" class="t11-input" placeholder="GSTIN - Optional"><input type="text" id="t11BizUpi" class="t11-input" placeholder="UPI ID - Example: 98765@okhdfc"></div>
+<div class="t11-row"><div><label style="font-size:11px;color:#94a3b8">Logo</label><input type="file" id="t11LogoFile" accept="image/*" class="t11-input"></div><div><label style="font-size:11px;color:#94a3b8">Signature</label><input type="file" id="t11SignFile" accept="image/*" class="t11-input"></div></div>
+
+<label class="t11-label">👤 2. CUSTOMER</label>
+<input type="text" id="t11CustName" class="t11-input" placeholder="Customer Name">
+<div class="t11-row"><input type="text" id="t11CustPhone" class="t11-input" placeholder="Customer Phone - 10 Digit"><input type="text" id="t11CustGst" class="t11-input" placeholder="Customer GSTIN - Optional"></div>
+<input type="text" id="t11CustAddr" class="t11-input" placeholder="Customer Address - Optional">
+
+<label class="t11-label">📄 3. INVOICE DETAILS - Auto Number</label>
+<div class="t11-row"><input type="text" id="t11InvNo" class="t11-input" placeholder="Invoice No"><input type="date" id="t11InvDate" class="t11-input"><input type="date" id="t11DueDate" class="t11-input"></div>
+<div class="t11-row"><select id="t11Currency" class="t11-input"><option value="₹">₹ INR</option><option value="$">$ USD</option><option value="€">€ EUR</option><option value="£">£ GBP</option></select><select id="t11PayStatus" class="t11-input"><option value="UNPAID">🔴 UNPAID</option><option value="PAID">🟢 PAID</option><option value="PARTIAL">🟡 PARTIAL</option></select><select id="t11Lang" class="t11-input"><option value="en">English Msg</option><option value="hi">Hindi Msg</option><option value="hinglish">Hinglish Msg</option></select></div>
+
+<label class="t11-label">🛒 4. ITEMS</label>
+<div id="t11Items"></div>
+<button type="button" class="t11-btn2" onclick="t11AddItem()" style="margin-top:8px">➕ Add Item</button>
+<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+<button type="button" onclick="t11QuickItem('Product - 1 Qty - 499')" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px 12px;border-radius:20px;cursor:pointer;font-size:11px">Product ₹499</button>
+<button type="button" onclick="t11QuickItem('Service - 1 Qty - 999')" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px 12px;border-radius:20px;cursor:pointer;font-size:11px">Service ₹999</button>
+<button type="button" onclick="t11QuickItem('Delivery Charge - 1 Qty - 50')" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:8px 12px;border-radius:20px;cursor:pointer;font-size:11px">Delivery ₹50</button>
+<button type="button" onclick="t11AiSuggestPrice()" style="background:#f59e0b;border:none;color:#fff;padding:8px 12px;border-radius:20px;cursor:pointer;font-size:11px;font-weight:800">🤖 AI Suggest Price</button>
+</div>
+<p id="t11SuggestBox" style="font-size:11px;color:#94a3b8;display:none;margin-top:6px"></p>
+
+<label class="t11-label">💰 5. DISCOUNT / TAX / CHARGES</label>
+<div class="t11-row"><div><label style="font-size:11px;color:#94a3b8">Discount %</label><input type="number" id="t11Discount" class="t11-input" placeholder="0" value="0" min="0" max="100" oninput="t11Calc()"></div><div><label style="font-size:11px;color:#94a3b8">GST / Tax %</label><input type="number" id="t11Tax" class="t11-input" placeholder="18" value="18" min="0" max="100" oninput="t11Calc()"></div><div><label style="font-size:11px;color:#94a3b8">Extra Charge</label><input type="number" id="t11Extra" class="t11-input" placeholder="0" value="0" min="0" oninput="t11Calc()"></div></div>
+<button type="button" onclick="t11AiSmartTax()" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:9px 12px;border-radius:10px;cursor:pointer;font-size:11px;font-weight:800;margin-top:6px">🤖 AI Smart Tax - Auto Suggest</button>
+<div class="t11-toggle"><b>🧾 Show GST As CGST + SGST?</b><input type="checkbox" id="t11SplitGst" checked onchange="t11Calc()"></div>
+<div class="t11-toggle"><b>💳 Show UPI QR For Payment?</b><input type="checkbox" id="t11ShowQR" checked onchange="t11Calc()"></div>
+
+<label class="t11-label">🎨 6. TEMPLATE</label>
+<div class="t11-mode" id="t11TplModes"><button class="active" data-tpl="blue" onclick="t11SetTpl('blue',this)">🔵 Blue</button><button data-tpl="black" onclick="t11SetTpl('black',this)">⚫ Black</button><button data-tpl="green" onclick="t11SetTpl('green',this)">🟢 Green</button></div>
+
+<label class="t11-label">📝 7. NOTES</label>
+<input type="text" id="t11Notes" class="t11-input" placeholder="Thank you for your business!" value="Thank you for your business!">
+<button type="button" onclick="t11AiMessage()" style="background:#162143;border:1px solid #2a3a6a;color:#fff;padding:9px 12px;border-radius:10px;cursor:pointer;font-size:11px;font-weight:800;margin-top:6px">🤖 AI Write Payment Reminder</button>
+<p id="t11AiMsgBox" style="font-size:12px;color:#94a3b8;background:#060a18;border:1px solid #2a3a6a;border-radius:10px;padding:10px;display:none;margin-top:8px"></p>
+
+<div style="background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;margin-top:12px;text-align:center"><b style="font-size:14px;color:#fff">Total: <span id="t11TotalShow" style="color:#22c55e">₹ 0.00</span></b><br><small id="t11WordsShow" style="color:#94a3b8">Zero Rupees Only</small><br><small id="t11CountShow" style="color:#94a3b8">0 Items</small></div>
+<div id="t11Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
+<button class="t11-btn-preview" onclick="t11Calc()">👀 PREVIEW INVOICE - Live</button>
+<button class="t11-btn3d" onclick="t11SaveAndPreview()">✅ SAVE + GENERATE INVOICE</button>
+<div id="t11PreviewWrap"></div>
+<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button type="button" class="t11-btn2" style="flex:1" onclick="t11Print()">🖨️ Print / Save PDF</button><button type="button" class="t11-btn2" style="flex:1" onclick="t11DownloadImage()">🖼️ Download Image</button></div>
+<button class="t11-btn-share" onclick="t11ShareWhatsApp()">💬 SEND ON WHATSAPP</button>
+<button class="t11-btn2" onclick="t11CopyText()">📋 Copy Invoice Text</button>
+<button class="t11-btn2" onclick="t11NewInvoice()">🆕 New Invoice - Next Number</button>
+<button class="t11-btn2" onclick="t11Reset()">🗑️ Clear All</button>
+<div id="t11Out"></div>
+<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">AI Powered • 100% Private • Saved In Phone • GST Ready • UPI QR</p>
+</div></div>
+</div>
+<!-- ============ TOOL 11 - FIXED - END ============ -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+(function(){
+"use strict";
+window.goHomePageTool11 = window.goHomePageTool11 || function(){
+  try{ if(typeof window.goHomePage==="function"){ window.goHomePage(); return; } }catch(e){}
+  var p=document.getElementById('page-tool11'); if(p) p.style.display='none';
+  var h=document.getElementById('homeView'); if(h) h.style.display='block';
+  window.scrollTo(0,0);
+};
+window.clearTool11 = function(){ t11Reset(); };
+
+function el(id){ return document.getElementById(id); }
+function val(id){ return (el(id).value||"").trim(); }
+function num(v){ var n=parseFloat(v); return isNaN(n)?0:n; }
+function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function fmt(n, cur){ cur=cur||val('t11Currency')||"₹"; return cur+" "+Number(n||0).toLocaleString('en-IN',{minimumFractionDigits:2, maximumFractionDigits:2}); }
+function status(m){ var s=el('t11Status'); if(s) s.textContent=m; }
+function round2(x){ return Math.round((num(x)||0)*100)/100; }
+
+var t11Tpl='blue', t11LogoUrl="", t11SignUrl="", t11ItemsData=[];
+var t11InvCounter=1; try{ t11InvCounter=parseInt(localStorage.getItem('t11_inv_no')||"1",10)||1; }catch(e){}
+var t11PriceHistory={}; try{ t11PriceHistory=JSON.parse(localStorage.getItem('t11_price_hist')||"{}"); }catch(e){}
+// FIX 1 - Rendering lock - Prevents Calc <-> Render infinite loop
+var t11Rendering=false;
+
+// ============ AI 1 - AUTO FILL - FIXED PARSER ============
+window.t11AiExample=function(n){
+  if(n===1) el('t11AiText').value="Rahul Sharma ko 2 shirt 500 me, 1 pant 800 me, delivery 50, phone 9876543210";
+  else el('t11AiText').value="Priya ko repair service 999 me, GST 18%, discount 10%, phone 9123456789";
+};
+function cleanName(s){
+  return (s||"").replace(/^(ko|to|for|me)\s+/i,"").replace(/\s+(ko|to|for|me)$/i,"").replace(/\s+/g," ").trim();
+}
+function cap(s){ return s.split(' ').map(function(w){ return w? w.charAt(0).toUpperCase()+w.slice(1).toLowerCase() : ""; }).join(' '); }
+window.t11AiFill=function(){
+  var text=(el('t11AiText').value||"").trim();
+  if(!text){ alert("Type something first! Example: Rahul ko 2 shirt 500 me"); return; }
+  var low=text.toLowerCase();
+  // Phone
+  var phoneMatch=text.match(/(\+?91[\s-]?)?[6-9]\d{9}/);
+  if(phoneMatch){ var ph=phoneMatch[0].replace(/[^0-9]/g,""); if(ph.length>10) ph=ph.slice(-10); el('t11CustPhone').value=ph; }
+  // Name - Before "ko" - FIX: Do not include item words
+  var nameMatch=text.match(/^([A-Za-z ]+?)\s+(ko|to|for)\b/i);
+  if(nameMatch){ el('t11CustName').value=cap(cleanName(nameMatch[1]).split(' ').slice(0,3).join(' ')); }
+  // Discount
+  var discMatch=low.match(/discount\s*(\d+)\s*%?|(\d+)\s*%\s*(discount|off)/);
+  if(discMatch){ var d=num(discMatch[1]||discMatch[2]); if(d>0 && d<=100) el('t11Discount').value=d; }
+  // GST
+  var gstMatch=low.match(/gst\s*(\d+)\s*%?|(\d+)\s*%\s*gst/);
+  if(gstMatch){ var g=num(gstMatch[1]||gstMatch[2]); if(g>=0 && g<=100) el('t11Tax').value=g; }
+  // Items - Split
+  var items=[];
+  var parts=text.split(/,| and | aur |\+|;/i);
+  parts.forEach(function(part){
+    var p=part.trim(); if(!p) return;
+    var pl=p.toLowerCase();
+    // FIX: Delivery handled first, then return - No duplicate
+    if(/delivery/.test(pl)){
+      var dm=p.match(/(\d+)/);
+      if(dm) items.push({name:"Delivery Charge", qty:1, price:num(dm[1])});
+      return;
+    }
+    // Skip if part is only name/phone/gst/discount - No numbers for item
+    if(/phone|discount|gst/.test(pl) && !/^\d+\s+[a-z]+\s+\d+/.test(pl)) return;
+    // Remove customer name prefix: "Rahul Sharma ko 2 shirt 500" -> "2 shirt 500"
+    p=p.replace(/^[A-Za-z ]+?\s+(ko|to|for)\s+/i, "");
+    // Pattern: "2 shirt 500"
+    var m1=p.match(/(\d+)\s+([a-zA-Z ]+?)\s+(\d+)(?:\s*(?:me|rs|rupees|inr))?$/i);
+    if(m1){
+      var qty=num(m1[1]), name=cleanName(m1[2]), price=num(m1[3]);
+      if(name && price>0 && qty>0 && qty<=1000 && name.length>1 && name.length<40 && !/phone|discount|gst/.test(name.toLowerCase())) items.push({name:cap(name), qty:qty, price:price});
+      return;
+    }
+    // Pattern: "repair service 999" / "shirt 500"
+    var m2=p.match(/([a-zA-Z ]+?)\s+(\d+)(?:\s*(?:me|rs|rupees))?$/i);
+    if(m2){
+      var name2=cleanName(m2[1]), price2=num(m2[2]);
+      if(name2 && price2>0 && !/phone|discount|gst|delivery/.test(name2.toLowerCase()) && name2.length>1 && name2.length<40){
+        items.push({name:cap(name2), qty:1, price:price2});
+      }
+    }
+  });
+  if(items.length>0){
+    t11ItemsData=items.slice(0,10);
+    t11RenderItems(); t11Calc();
+    var resEl=el('t11AiResult'); resEl.style.display='block';
+    resEl.textContent="✅ AI: Customer: "+(val('t11CustName')||"-")+" | Items: "+items.length+" | Total: "+fmt(t11CalcSilent().total);
+    status("🤖 AI Filled - Check & Edit If Needed, Then Save");
+    items.forEach(function(it){ t11PriceHistory[it.name.toLowerCase()]=it.price; });
+    try{ localStorage.setItem('t11_price_hist', JSON.stringify(t11PriceHistory)); }catch(e){}
+  } else {
+    alert("AI could not understand items. Try: Rahul ko 2 shirt 500 me, 1 pant 800 me");
+  }
+};
+window.t11AiSuggestPrice=function(){
+  var names=t11ItemsData.map(function(x){ return x.name; }).filter(function(n){ return n && n.trim(); });
+  if(!names.length){ alert("First type item name - Example: Shirt"); return; }
+  var suggestions=[];
+  var common={ "shirt":499, "tshirt":399, "pant":799, "jeans":999, "kurti":699, "saree":1499, "shoes":1299, "repair":499, "service":999, "delivery":50, "printing":100, "design":500, "photo":200, "cake":599, "pizza":299, "burger":99 };
+  t11ItemsData.forEach(function(it){
+    var k=(it.name||"").toLowerCase().trim(); if(!k) return;
+    var price=null;
+    if(t11PriceHistory[k]) price=t11PriceHistory[k];
+    else { for(var key in common){ if(k.indexOf(key)>=0){ price=common[key]; break; } } }
+    if(price && num(it.price)===0){ it.price=price; suggestions.push(it.name+" → ₹"+price); }
+    else if(price && num(it.price)!==price){ suggestions.push(it.name+" - Last: ₹"+price); }
+  });
+  t11RenderItems(); t11Calc();
+  var box=el('t11SuggestBox'); box.style.display='block';
+  box.textContent = suggestions.length ? "🤖 AI Suggest: "+suggestions.join(" | ") : "🤖 AI: No suggestion - Type price, AI will learn it";
+};
+window.t11AiSmartTax=function(){
+  var sub=t11CalcSilent().sub; var msg="";
+  if(sub>=5000){ el('t11Discount').value=5; msg="Subtotal high - AI suggests 5% Discount. "; }
+  else { el('t11Discount').value=0; msg="No discount needed. "; }
+  if(val('t11BizGst')){ el('t11Tax').value=18; msg+="GSTIN found - GST 18% applied."; }
+  else { msg+="No GSTIN - Add GSTIN if registered, else keep Tax 0%."; }
+  t11Calc(); status("🤖 AI Smart: "+msg);
+};
+window.t11AiMessage=function(){
+  var c=t11CalcSilent(); var lang=val('t11Lang')||"en";
+  var cust=val('t11CustName')||"Customer"; var biz=val('t11BizName')||"Our Shop";
+  var msg="";
+  if(lang==='hi') msg="Namaste "+cust+" ji, Aapka Invoice "+val('t11InvNo')+" ka total "+fmt(c.total)+" hai. Kripya 7 din me payment karein. UPI: "+(val('t11BizUpi')||"-")+" - Dhanyavaad, "+biz;
+  else if(lang==='hinglish') msg="Hi "+cust+", Aapka Invoice "+val('t11InvNo')+" ready hai - Total "+fmt(c.total)+". Please 7 din me payment kar dein. UPI: "+(val('t11BizUpi')||"-")+" - Thank you! 🙏 "+biz;
+  else msg="Hi "+cust+", Your Invoice "+val('t11InvNo')+" is ready - Total "+fmt(c.total)+". Please pay within 7 days. UPI: "+(val('t11BizUpi')||"-")+" - Thank you! "+biz;
+  var box=el('t11AiMsgBox'); box.style.display='block'; box.textContent="🤖 AI Message: "+msg;
+  el('t11Notes').value=msg; t11Calc();
+};
+
+function t11Init(){
+  try{
+    var saved=JSON.parse(localStorage.getItem('t11_business')||"{}");
+    if(saved.bizName) el('t11BizName').value=saved.bizName;
+    if(saved.bizPhone) el('t11BizPhone').value=saved.bizPhone;
+    if(saved.bizAddr) el('t11BizAddr').value=saved.bizAddr;
+    if(saved.bizGst) el('t11BizGst').value=saved.bizGst;
+    if(saved.bizUpi) el('t11BizUpi').value=saved.bizUpi;
+  }catch(e){}
+  var today=new Date(); var iso=today.toISOString().slice(0,10);
+  if(!el('t11InvDate').value) el('t11InvDate').value=iso;
+  var due=new Date(); due.setDate(due.getDate()+7); if(!el('t11DueDate').value) el('t11DueDate').value=due.toISOString().slice(0,10);
+  if(!el('t11InvNo').value) el('t11InvNo').value="INV-"+String(t11InvCounter).padStart(4,'0');
+  if(!t11ItemsData.length) t11ItemsData=[{name:"", qty:1, price:0},{name:"", qty:1, price:0}];
+  t11RenderItems(); t11Calc();
+}
+el('t11LogoFile').addEventListener('change', function(e){
+  var f=e.target.files && e.target.files[0]; if(!f) return;
+  if(f.size>2*1024*1024){ alert("Logo too big - Max 2 MB"); e.target.value=""; return; }
+  var r=new FileReader(); r.onload=function(){ t11LogoUrl=r.result; t11Calc(); status("✅ Logo Added"); }; r.readAsDataURL(f);
+});
+el('t11SignFile').addEventListener('change', function(e){
+  var f=e.target.files && e.target.files[0]; if(!f) return;
+  if(f.size>2*1024*1024){ alert("Signature too big - Max 2 MB"); e.target.value=""; return; }
+  var r=new FileReader(); r.onload=function(){ t11SignUrl=r.result; t11Calc(); status("✅ Signature Added"); }; r.readAsDataURL(f);
+});
+['t11BizName','t11BizPhone','t11BizAddr','t11BizGst','t11BizUpi'].forEach(function(id){
+  el(id).addEventListener('input', function(){
+    try{ localStorage.setItem('t11_business', JSON.stringify({bizName:val('t11BizName'), bizPhone:val('t11BizPhone'), bizAddr:val('t11BizAddr'), bizGst:val('t11BizGst'), bizUpi:val('t11BizUpi')})); }catch(e){}
+    t11Calc();
+  });
+});
+['t11CustName','t11CustPhone','t11CustAddr','t11CustGst','t11InvNo','t11InvDate','t11DueDate','t11Currency','t11PayStatus','t11Notes','t11Lang'].forEach(function(id){
+  if(el(id)) el(id).addEventListener('input', function(){ t11Calc(); });
+});
+
+window.t11AddItem=function(){
+  if(t11ItemsData.length>=20){ status("❌ Max 20 Items"); return; }
+  t11ItemsData.push({name:"", qty:1, price:0}); t11RenderItems(); t11Calc();
+};
+window.t11QuickItem=function(str){
+  var parts=str.split(' - '); var name=parts[0]||"Product"; var price=num((parts[2]||"0").replace(/[^0-9.]/g,""));
+  t11ItemsData.push({name:name, qty:1, price:price}); t11RenderItems(); t11Calc();
+};
+window.t11RemoveItem=function(idx){
+  if(t11ItemsData.length<=1){ status("❌ At least 1 item needed"); return; }
+  t11ItemsData.splice(idx,1); t11RenderItems(); t11Calc();
+};
+function t11RenderItems(){
+  var wrap=el('t11Items'); if(!wrap) return;
+  var html="";
+  t11ItemsData.forEach(function(it, idx){
+    html+='<div class="t11-item"><div style="display:flex;justify-content:space-between"><b style="font-size:12px;color:#fff">Item '+(idx+1)+'</b><button type="button" onclick="t11RemoveItem('+idx+')" style="background:#ef4444;border:none;color:#fff;padding:5px 10px;border-radius:10px;cursor:pointer;font-size:11px">✕ Remove</button></div>'
+    +'<input type="text" class="t11-input small" placeholder="Item Name" value="'+esc(it.name)+'" oninput="t11ItemsData['+idx+'].name=this.value; t11Calc();">'
+    +'<div class="t11-row"><input type="number" class="t11-input small" placeholder="Qty" value="'+it.qty+'" min="0" step="0.01" oninput="t11ItemsData['+idx+'].qty=num(this.value); t11Calc();">'
+    +'<input type="number" class="t11-input small" placeholder="Price" value="'+it.price+'" min="0" step="0.01" oninput="t11ItemsData['+idx+'].price=num(this.value); t11Calc();">'
+    +'<input type="text" class="t11-input small" value="'+fmt(round2(num(it.qty)*num(it.price))).replace(/^[^\d]*/,"")+'" readonly style="background:#162143"></div></div>';
+  });
+  wrap.innerHTML=html;
+}
+function t11Words(n){
+  n=Math.round(num(n)); if(n===0) return "Zero Rupees Only";
+  var ones=["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
+  var tens=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
+  function two(x){ if(x<20) return ones[x]; return tens[Math.floor(x/10)] + (x%10? " "+ones[x%10]:""); }
+  function three(x){ var h=Math.floor(x/100), r=x%100; return (h? ones[h]+" Hundred":"") + (r? (h?" ":"")+two(r):""); }
+  var out=""; var crore=Math.floor(n/10000000); n%=10000000; var lakh=Math.floor(n/100000); n%=100000; var thousand=Math.floor(n/1000); n%=1000; var hundred=n;
+  if(crore) out+=three(crore)+" Crore "; if(lakh) out+=two(lakh)+" Lakh "; if(thousand) out+=three(thousand)+" Thousand "; if(hundred) out+=three(hundred);
+  return out.trim()+" Rupees Only";
+}
+function t11CalcSilent(){
+  var sub=0; t11ItemsData.forEach(function(it){ sub+=round2(num(it.qty)*num(it.price)); });
+  sub=round2(sub);
+  var discPct=num(el('t11Discount').value); if(discPct<0) discPct=0; if(discPct>100) discPct=100;
+  var discAmt=round2(sub*discPct/100); var afterDisc=round2(sub-discAmt);
+  var extra=round2(num(el('t11Extra').value)); if(extra<0) extra=0;
+  var taxPct=num(el('t11Tax').value); if(taxPct<0) taxPct=0; if(taxPct>100) taxPct=100;
+  var taxAmt=round2((afterDisc+extra)*taxPct/100);
+  var total=round2(afterDisc+extra+taxAmt);
+  return {sub:sub, disc:discAmt, extra:extra, tax:taxAmt, total:total, discPct:discPct, taxPct:taxPct};
+}
+// FIX 1 - Single entry point - Calc updates UI + calls Render once, Render never calls Calc
+window.t11Calc=function(){
+  if(t11Rendering) return t11CalcSilent();
+  t11Rendering=true;
+  try{
+    var c=t11CalcSilent();
+    el('t11TotalShow').textContent=fmt(c.total);
+    el('t11WordsShow').textContent=t11Words(c.total);
+    el('t11CountShow').textContent=t11ItemsData.filter(function(x){ return (x.name||"").trim() || num(x.price)>0; }).length+" Items • Subtotal "+fmt(c.sub);
+    t11Render(c);
+  } finally { t11Rendering=false; }
+  return t11CalcSilent();
+};
+window.t11SetTpl=function(t,btn){
+  t11Tpl=t;
+  document.querySelectorAll('#t11TplModes button').forEach(function(b){ b.classList.remove('active'); });
+  if(btn) btn.classList.add('active');
+  t11Calc();
+};
+window.t11Render=function(calc){
+  calc=calc||t11CalcSilent();
+  var bizName=val('t11BizName')||"Your Business Name";
+  var bizPhone=val('t11BizPhone')||""; var bizAddr=val('t11BizAddr')||""; var bizGst=val('t11BizGst')||""; var bizUpi=val('t11BizUpi')||"";
+  var custName=val('t11CustName')||"Customer Name"; var custPhone=val('t11CustPhone')||""; var custAddr=val('t11CustAddr')||""; var custGst=val('t11CustGst')||"";
+  var invNo=val('t11InvNo')||"INV-0001"; var invDate=val('t11InvDate')||""; var dueDate=val('t11DueDate')||"";
+  var payStatus=val('t11PayStatus')||"UNPAID"; var notes=val('t11Notes')||"Thank you for your business!";
+  var showQR=el('t11ShowQR').checked && !!bizUpi;
+  var statusColor = payStatus==='PAID' ? '#22c55e' : payStatus==='PARTIAL' ? '#f59e0b' : '#ef4444';
+  var rows="";
+  t11ItemsData.forEach(function(it, idx){
+    if(!(it.name||"").trim() && num(it.price)===0 && num(it.qty)===0) return;
+    var amt=round2(num(it.qty)*num(it.price));
+    rows+='<tr><td>'+(idx+1)+'</td><td>'+esc(it.name||"Item")+'</td><td style="text-align:center">'+it.qty+'</td><td style="text-align:right">'+fmt(it.price)+'</td><td style="text-align:right">'+fmt(amt)+'</td></tr>';
+  });
+  if(!rows) rows='<tr><td>1</td><td>Add Item Above</td><td style="text-align:center">1</td><td style="text-align:right">'+fmt(0)+'</td><td style="text-align:right">'+fmt(0)+'</td></tr>';
+  var taxHtml="";
+  if(el('t11SplitGst').checked && calc.taxPct>0){ var half=round2(calc.tax/2); taxHtml+='<div>CGST ('+(calc.taxPct/2)+'%) : '+fmt(half)+'</div><div>SGST ('+(calc.taxPct/2)+'%) : '+fmt(half)+'</div>'; }
+  else if(calc.taxPct>0){ taxHtml+='<div>GST / Tax ('+calc.taxPct+'%) : '+fmt(calc.tax)+'</div>'; }
+  // FIX QR - Always show UPI text, QR image onerror hide - Never blank
+  var qrHtml="";
+  if(showQR){
+    var upiLink="upi://pay?pa="+encodeURIComponent(bizUpi)+"&pn="+encodeURIComponent(bizName)+"&am="+calc.total.toFixed(2)+"&cu=INR&tn="+encodeURIComponent(invNo);
+    var qrImg="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data="+encodeURIComponent(upiLink);
+    qrHtml='<div style="text-align:center"><img src="'+qrImg+'" alt="UPI QR" style="width:120px;height:120px;border:1px solid #e5e7eb;border-radius:8px" onerror="this.style.display=\'none\'"><br><small style="font-size:10px">Scan To Pay - UPI: '+esc(bizUpi)+'<br>Amount: '+fmt(calc.total)+'</small></div>';
+  } else if(bizUpi){
+    qrHtml='<div style="text-align:center;font-size:11px">Pay UPI: '+esc(bizUpi)+'</div>';
+  }
+  var logoHtml = t11LogoUrl ? '<img src="'+t11LogoUrl+'" style="max-width:70px;max-height:70px;object-fit:contain;border-radius:8px;background:#fff">' : '<div style="width:56px;height:56px;border-radius:10px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:24px">🧾</div>';
+  var signHtml = t11SignUrl ? '<img src="'+t11SignUrl+'" style="max-width:120px;max-height:50px;object-fit:contain">' : '<div style="height:30px;border-bottom:1px solid #111;width:120px"></div><small>Authorised Signature</small>';
+  var html='<div class="t11-invoice '+t11Tpl+'" id="t11InvoiceDoc">'
+  +'<div class="t11-inv-head"><div style="display:flex;gap:10px;align-items:center">'+logoHtml+'<div><h2>'+esc(bizName)+'</h2><p>'+esc(bizAddr)+'</p><p>📞 '+esc(bizPhone)+(bizGst?' • GSTIN: '+esc(bizGst):'')+'</p></div></div>'
+  +'<div style="text-align:right"><div style="font-size:22px;font-weight:900;letter-spacing:1px">INVOICE</div><div style="font-size:12px"># '+esc(invNo)+'</div><div style="display:inline-block;background:'+statusColor+';color:#fff;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:800;margin-top:4px">'+esc(payStatus)+'</div></div></div>'
+  +'<div style="display:flex;justify-content:space-between;gap:10px;margin-top:12px;font-size:12px"><div><b style="font-size:11px;color:#6b7280">BILL TO</b><br><b>'+esc(custName)+'</b><br>'+esc(custAddr)+'<br>📞 '+esc(custPhone)+(custGst?'<br>GSTIN: '+esc(custGst):'')+'</div>'
+  +'<div style="text-align:right"><b style="font-size:11px;color:#6b7280">INVOICE DATE</b><br>'+esc(invDate)+'<br><b style="font-size:11px;color:#6b7280">DUE DATE</b><br>'+esc(dueDate)+'</div></div>'
+  +'<table class="t11-inv-table"><tr><th style="width:30px">#</th><th>Item</th><th style="width:50px;text-align:center">Qty</th><th style="width:90px;text-align:right">Price</th><th style="width:100px;text-align:right">Amount</th></tr>'+rows+'</table>'
+  +'<div style="display:flex;justify-content:space-between;gap:10px"><div style="font-size:11px;color:#555;max-width:55%"><b>Amount In Words:</b><br>'+esc(t11Words(calc.total))+'<br><br><b>Notes:</b><br>'+esc(notes)+'</div>'
+  +'<div class="t11-inv-total"><div>Subtotal: '+fmt(calc.sub)+'</div>'
+  +(calc.disc>0?'<div>Discount ('+calc.discPct+'%) : - '+fmt(calc.disc)+'</div>':'')
+  +(calc.extra>0?'<div>Extra Charge: '+fmt(calc.extra)+'</div>':'')
+  +taxHtml
+  +'<div style="border-top:2px solid #111;margin-top:6px;padding-top:6px"><b>Total: '+fmt(calc.total)+'</b></div></div></div>'
+  +'<div class="t11-inv-footer"><div>'+qrHtml+'</div><div style="text-align:center">'+signHtml+'<br><small style="font-size:10px;color:#888">For '+esc(bizName)+'</small></div></div>'
+  +'<p style="text-align:center;font-size:10px;color:#999;margin-top:12px">Computer Generated Invoice • Made with Orbittroniz • Thank you!</p></div>';
+  el('t11PreviewWrap').innerHTML=html;
+};
+window.t11SaveAndPreview=function(){
+  if(!val('t11BizName')){ alert("Enter Business Name First!"); el('t11BizName').focus(); return; }
+  if(!val('t11CustName')){ alert("Enter Customer Name First!"); el('t11CustName').focus(); return; }
+  var hasItem=t11ItemsData.some(function(x){ return (x.name||"").trim() && num(x.price)>0; });
+  if(!hasItem){ alert("Add At Least 1 Item With Name + Price!"); return; }
+  try{
+    localStorage.setItem('t11_business', JSON.stringify({bizName:val('t11BizName'), bizPhone:val('t11BizPhone'), bizAddr:val('t11BizAddr'), bizGst:val('t11BizGst'), bizUpi:val('t11BizUpi')}));
+    localStorage.setItem('t11_inv_no', String(t11InvCounter+1));
+    var inv={no:val('t11InvNo'), cust:val('t11CustName'), total:t11CalcSilent().total, date:val('t11InvDate')};
+    var hist=JSON.parse(localStorage.getItem('t11_history')||"[]"); hist.unshift(inv); if(hist.length>20) hist=hist.slice(0,20); localStorage.setItem('t11_history', JSON.stringify(hist));
+    t11ItemsData.forEach(function(it){ if(it.name) t11PriceHistory[it.name.toLowerCase()]=num(it.price); });
+    localStorage.setItem('t11_price_hist', JSON.stringify(t11PriceHistory));
+  }catch(e){}
+  t11Calc();
+  status("✅ Invoice Saved - "+val('t11InvNo')+" - Now Print / WhatsApp / Download");
+  el('t11Out').innerHTML='<div style="background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;text-align:center;margin-top:8px">✅ Invoice Generated - '+esc(val('t11InvNo'))+'<br><small>Total: '+fmt(t11CalcSilent().total)+' • Customer: '+esc(val('t11CustName'))+'</small></div>';
+  document.getElementById('t11PreviewWrap').scrollIntoView({behavior:"smooth", block:"center"});
+};
+window.t11Print=function(){
+  var doc=document.getElementById('t11InvoiceDoc');
+  if(!doc){ alert("Generate Invoice First! - Press Preview"); return; }
+  var w=window.open('', '_blank');
+  if(!w){ alert("Popup blocked - Allow popup, or use Download Image"); return; }
+  // FIX Print - Full CSS copied, not just outerHTML
+  var css='.t11-invoice{background:#fff;color:#111;border-radius:12px;padding:18px;font-family:Arial,sans-serif;max-width:800px;margin:0 auto}.t11-invoice.blue .t11-inv-head{background:#1e3a8a;color:#fff}.t11-invoice.black .t11-inv-head{background:#111827;color:#fff}.t11-invoice.green .t11-inv-head{background:#065f46;color:#fff}.t11-inv-head{border-radius:10px;padding:14px;display:flex;justify-content:space-between;gap:10px}.t11-inv-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}.t11-inv-table th{background:#f3f4f6;text-align:left;padding:8px;border:1px solid #e5e7eb}.t11-inv-table td{padding:8px;border:1px solid #e5e7eb}.t11-inv-total{text-align:right;font-size:13px;line-height:1.9;margin-top:10px}.t11-inv-footer{display:flex;justify-content:space-between;gap:10px;margin-top:14px;align-items:flex-end}@media print{body{padding:0}}';
+  w.document.write('<html><head><title>Invoice '+esc(val('t11InvNo'))+'</title><style>'+css+'</style></head><body>'+doc.outerHTML+'</body></html>');
+  w.document.close();
+  setTimeout(function(){ try{ w.focus(); w.print(); }catch(e){} }, 600);
+  status("🖨️ Print Window Open - Select Save As PDF");
+};
+window.t11DownloadImage=async function(){
+  var doc=document.getElementById('t11InvoiceDoc');
+  if(!doc){ alert("Generate Invoice First!"); return; }
+  if(typeof html2canvas==="undefined"){ alert("Image Library Loading - Try Print"); return; }
+  try{
+    status("⏳ Creating Image...");
+    var canvas=await html2canvas(doc, {scale:2, backgroundColor:"#ffffff", useCORS:true});
+    var a=document.createElement('a'); a.href=canvas.toDataURL('image/png'); a.download=(val('t11InvNo')||"Invoice").replace(/[\\/:*?"<>|]/g,'')+".png"; document.body.appendChild(a); a.click(); setTimeout(function(){ a.remove(); },500);
+    status("✅ Invoice Image Downloaded");
+  }catch(e){ status("❌ Image Failed - Use Print / Save PDF"); }
+};
+window.t11ShareWhatsApp=function(){
+  if(!val('t11CustPhone')){ alert("Enter Customer Phone First!"); el('t11CustPhone').focus(); return; }
+  var c=t11CalcSilent(); var lang=val('t11Lang')||"en";
+  var header = lang==='hi' ? "🧾 *INVOICE - "+val('t11BizName')+"*\nNamaste "+val('t11CustName')+" ji,\n" : lang==='hinglish' ? "🧾 *INVOICE - "+val('t11BizName')+"*\nHi "+val('t11CustName')+",\n" : "🧾 *INVOICE - "+val('t11BizName')+"*\nHi "+val('t11CustName')+",\n";
+  var msg=header+"Invoice No: "+val('t11InvNo')+"\nDate: "+val('t11InvDate')+"\nDue: "+val('t11DueDate')+"\n----------------\n"
+  +t11ItemsData.filter(function(x){ return (x.name||"").trim(); }).map(function(x){ return "• "+x.name+" - "+x.qty+" x "+fmt(x.price)+" = "+fmt(round2(num(x.qty)*num(x.price))); }).join("\n")
+  +"\n----------------\nSubtotal: "+fmt(c.sub)+(c.disc>0?"\nDiscount: - "+fmt(c.disc):"")+(c.tax>0?"\nGST: "+fmt(c.tax):"")
+  +"\n*Total: "+fmt(c.total)+"*\nAmount In Words: "+t11Words(c.total)+"\n"+(val('t11BizUpi')?"Pay UPI: "+val('t11BizUpi')+"\n":"")+"Status: "+val('t11PayStatus')+"\nThank you! 🙏";
+  // FIX Phone - Clean + auto 91
+  var phone=val('t11CustPhone').replace(/[^0-9]/g,"");
+  if(phone.length===10) phone="91"+phone;
+  if(phone.length<12){ alert("Enter Valid 10 Digit Phone!"); return; }
+  window.open("https://wa.me/"+phone+"?text="+encodeURIComponent(msg), "_blank");
+  status("💬 WhatsApp Open - Message Ready");
+};
+window.t11CopyText=function(){
+  var c=t11CalcSilent();
+  var txt="INVOICE "+val('t11InvNo')+" | "+val('t11BizName')+" | Customer: "+val('t11CustName')+" | Total: "+fmt(c.total)+" | "+t11Words(c.total);
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(function(){ status("✅ Copied!"); }).catch(function(){ status("Copy failed"); }); }
+  else { alert(txt); }
+};
+window.t11NewInvoice=function(){
+  t11InvCounter++;
+  try{ localStorage.setItem('t11_inv_no', String(t11InvCounter)); }catch(e){}
+  el('t11InvNo').value="INV-"+String(t11InvCounter).padStart(4,'0');
+  el('t11CustName').value=""; el('t11CustPhone').value=""; el('t11CustAddr').value=""; el('t11CustGst').value=""; el('t11AiText').value="";
+  t11ItemsData=[{name:"", qty:1, price:0},{name:"", qty:1, price:0}];
+  el('t11Discount').value=0; el('t11Extra').value=0;
+  var today=new Date(); el('t11InvDate').value=today.toISOString().slice(0,10);
+  var due=new Date(); due.setDate(due.getDate()+7); el('t11DueDate').value=due.toISOString().slice(0,10);
+  t11RenderItems(); t11Calc();
+  status("🆕 New Invoice - No: "+el('t11InvNo').value);
+};
+window.t11Reset=function(){
+  if(!confirm("Clear All? Business details also will be cleared.")) return;
+  try{ localStorage.removeItem('t11_business'); localStorage.removeItem('t11_inv_no'); localStorage.removeItem('t11_price_hist'); }catch(e){}
+  ['t11BizName','t11BizPhone','t11BizAddr','t11BizGst','t11BizUpi','t11CustName','t11CustPhone','t11CustAddr','t11CustGst','t11Notes','t11AiText'].forEach(function(id){ if(el(id)) el(id).value=""; });
+  el('t11Notes').value="Thank you for your business!";
+  t11LogoUrl=""; t11SignUrl=""; t11InvCounter=1; el('t11InvNo').value="INV-0001";
+  t11ItemsData=[{name:"", qty:1, price:0},{name:"", qty:1, price:0}];
+  t11RenderItems(); t11Calc();
+  status("🗑️ Cleared");
+};
+t11Init();
+})();
+</script>
+<!-- ============ TOOL 11 - ALL BUGS FIXED - FINAL END ============ -->
 <!-- ================= TOOL 12 - PHOTO ENHANCER ================= -->
 <div id="page-tool12" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>✨ Photo Enhancer</b><br><span>Most Demanded</span></div></div><h2 style="text-align:center">✨ Photo Enhancer</h2><p style="font-size:12px;color:#6B7280;text-align:center">Blurry / Dark Photo → Clear, Bright, Sharp</p><div class="drop" onclick="document.getElementById('enhFile').click()"><b>📸 Select Blurry / Dark Photo</b><input type="file" id="enhFile" accept="image/*" onchange="loadEnhance(event)"></div><label>Enhance Level</label><select id="enhLevel"><option value="1">Light - Natural</option><option value="2" selected>Medium - Best - Clear + Bright</option><option value="3">Strong - Very Sharp</option></select><button class="btn" onclick="doEnhance()">✨ Enhance Photo Now</button><div style="display:flex;gap:8px;margin-top:10px"><div style="flex:1"><p style="font-size:11px;font-weight:800;text-align:center">Before</p><img id="enhBefore" style="width:100%;border-radius:12px"></div><div style="flex:1"><p style="font-size:11px;font-weight:800;text-align:center">After</p><img id="enhAfter" style="width:100%;border-radius:12px"></div></div><button class="btn2 green" style="width:100%;margin-top:10px" onclick="downloadEnhanced()">⬇️ Download Enhanced Photo</button><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
 
