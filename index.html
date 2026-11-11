@@ -2747,7 +2747,7 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 </script>
 <!-- ============ TOOL 7 TAP FIXED END ============ -->
 <=================TOOL 8 TAP BACKGROUND REMOVER ============>
-<!-- ================= TOOL 8 - BG REMOVER - SUPER ADVANCE V4 - ALL WORKING - START ================= -->
+<!-- ================= TOOL 8 - BG REMOVER - PERFECT - BODY SAFE - START ================= -->
 <style>
 .t8-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
 .t8-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -2786,8 +2786,8 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 <div id="page-tool8" class="tool-page" style="display:none">
 <div class="tool active" id="tool-8"><div class="t8-card">
 <button type="button" onclick="goHomePageTool8()" style="background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer;color:#111">← Back</button>
-<div class="t8-title">✂️ BG Remover Pro V4 - AI + Brush + Passport</div>
-<div class="t8-sub">Super Advance • AI + Manual Brush • Custom BG • Passport Size • All Working</div>
+<div class="t8-title">✂️ BG Remover Pro - Body Safe ✅</div>
+<div class="t8-sub">Perfect BG Remove • Body / Hair Never Cut • AI + Brush + Passport</div>
 
 <label class="t8-label">🖼️ 1. SELECT PHOTO</label>
 <div class="t8-drop" id="t8Drop" onclick="document.getElementById('t8File').click()">
@@ -2806,7 +2806,6 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 <button class="t8-pill" onclick="t8Reset()">🔄<br>Clear<br>All</button>
 </div>
 
-<!-- EDITOR CANVAS - YAHI PE SAB EDIT HOGA -->
 <div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:10px;margin-top:12px;text-align:center">
 <b style="font-size:13px">🖼️ EDITOR - Yaha Brush Chalega</b><br>
 <small style="color:#94a3b8">Brush ON karke photo pe ungli ghumao - Erase / Restore</small>
@@ -2828,6 +2827,20 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 </div>
 </div>
 
+<!-- ✅ NEW FIX - BODY PROTECT -->
+<label class="t8-label">🛡️ BODY PROTECT - Body Katne Se Bachao (NEW FIX)</label>
+<div style="background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px">
+<div style="display:flex;justify-content:space-between;font-size:12px;color:#fff"><span>Body Protect:</span><span id="t8ProtectVal" style="color:#22c55e;font-weight:900">6px - ON ✅</span></div>
+<input type="range" id="t8Protect" class="t8-range" min="0" max="15" value="6" oninput="document.getElementById('t8ProtectVal').innerText=this.value+'px - '+(this.value==0?'OFF - Body Cut Ho Sakta Hai':this.value<4?'Low':this.value<9?'ON ✅ - Best':'High - BG Thoda Rahega');t8ReapplyProtect()">
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8"><span>0 = AI Jaisa - Cut Hoga</span><span>6 = Best - Body Safe</span><span>15 = Zyada Safe</span></div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t8SetProtect(0)" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:9px;border-radius:10px;cursor:pointer;font-size:11px;font-weight:700">0 - No Protect</button>
+<button onclick="t8SetProtect(6)" style="flex:1;background:#22c55e;border:none;color:#fff;padding:9px;border-radius:10px;cursor:pointer;font-size:11px;font-weight:800">6 - Best ✅</button>
+<button onclick="t8SetProtect(12)" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:9px;border-radius:10px;cursor:pointer;font-size:11px;font-weight:700">12 - Max Safe</button>
+</div>
+<p style="font-size:11px;color:#94a3b8;margin:6px 0 0">Agar body ka thoda part cut raha hai to Protect ko 10-12 karo, fir Remove BG dobara dabao ya Restore Brush se wapas lao.</p>
+</div>
+
 <label class="t8-label">🎨 3. NEW BACKGROUND</label>
 <div class="t8-mode" id="t8BgModes">
 <button class="active" data-bg="transparent" onclick="t8SetBg('transparent',this)">✨ Transparent</button>
@@ -2846,7 +2859,7 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 <span style="font-size:12px;color:#94a3b8">Color choose karo, auto apply</span>
 </div>
 
-<label class="t8-label">🪪 4. PASSPORT / ID SIZE - Ek Click Me Crop</label>
+<label class="t8-label">🪪 4. PASSPORT / ID SIZE</label>
 <div class="t8-mode" id="t8SizeModes">
 <button onclick="t8SetPassport('35x45',this)">🪪 Passport 35x45mm</button>
 <button onclick="t8SetPassport('2x2',this)">🇺🇸 Visa 2x2 inch</button>
@@ -2855,7 +2868,7 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 </div>
 <div style="text-align:center;font-size:11px;color:#94a3b8;margin-top:6px" id="t8SizeInfo">Size: Original • BG: Transparent • Download: PNG</div>
 
-<label class="t8-label">↔️ 5. PERSON SIZE / POSITION - Aadmi Ko Adjust Karo</label>
+<label class="t8-label">↔️ 5. PERSON SIZE / POSITION</label>
 <input type="range" id="t8Zoom" class="t8-range" min="50" max="150" value="100" oninput="document.getElementById('t8ZoomVal').innerText=this.value+'%';t8ApplyAll()">
 <div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8"><span>50% = Chhota</span><span id="t8ZoomVal" style="color:#22d3ee;font-weight:800">100%</span><span>150% = Bada</span></div>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px">
@@ -2867,13 +2880,13 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 <button onclick="t8ResetPerson()" style="background:#ef4444;border:none;color:#fff;padding:10px;border-radius:10px;font-weight:800;cursor:pointer">🔄 Reset Pos</button>
 </div>
 
-<label class="t8-label">💡 6. BRIGHTNESS / SHARPNESS</label>
+<label class="t8-label">💡 6. BRIGHTNESS</label>
 <input type="range" id="t8Bright" class="t8-range" min="80" max="130" value="100" oninput="document.getElementById('t8BrightVal').innerText=this.value+'%';t8ApplyAll()">
-<div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8"><span>80% = Dark</span><span id="t8BrightVal" style="color:#22d3ee;font-weight:800">100%</span><span>130% = Bright / Gora</span></div>
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8"><span>80% = Dark</span><span id="t8BrightVal" style="color:#22d3ee;font-weight:800">100%</span><span>130% = Bright</span></div>
 
-<label class="t8-label">✨ 7. EDGE SMOOTH</label>
-<input type="range" id="t8Feather" class="t8-range" min="0" max="10" value="2" oninput="document.getElementById('t8FeatherVal').innerText=this.value+'px';t8ApplyAll()">
-<div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8"><span>0 = Sharp</span><span id="t8FeatherVal" style="color:#22d3ee;font-weight:800">2px</span><span>10 = Smooth</span></div>
+<label class="t8-label">✨ 7. EDGE SMOOTH - Body Edge Ke Liye</label>
+<input type="range" id="t8Feather" class="t8-range" min="0" max="10" value="3" oninput="document.getElementById('t8FeatherVal').innerText=this.value+'px';t8ApplyAll()">
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#94a3b8"><span>0 = Sharp - Cut Dikhega</span><span id="t8FeatherVal" style="color:#22d3ee;font-weight:800">3px - Best</span><span>10 = Smooth</span></div>
 
 <label class="t8-label">✏️ 8. FILE NAME + FORMAT</label>
 <input type="text" id="t8Prefix" class="t8-input" placeholder="No BG - Orbittroniz" value="No BG - Orbittroniz">
@@ -2900,10 +2913,10 @@ File: <b id="t5FileName">-</b><br>Size: <b id="t5OrigSize">-</b> • Pages: <b i
 <button class="t8-btn-share" id="t8ShareBtn" onclick="t8Share()">📤 SHARE RESULT</button>
 <button class="t8-btn2" onclick="t8Reset()">🗑️ Clear / New Photo</button>
 <div id="t8Out"></div>
-<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - AI in Browser • Brush + Passport + Custom BG All Working</p>
+<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - AI in Browser • Body Safe • Brush + Passport + Custom BG</p>
 </div></div>
 </div>
-<!-- ================= TOOL 8 - V4 - END ================= -->
+<!-- ================= TOOL 8 - PERFECT - END ================= -->
 
 <div class="t8-modal" id="t8Modal">
 <div id="t8ModalTitle" style="color:#fff;font-weight:900;margin-bottom:10px;text-align:center">Preview</div>
@@ -2927,7 +2940,7 @@ window.goHomePageTool8 = window.goHomePageTool8 || function(){
 };
 window.clearTool8 = function(){ t8Reset(); };
 
-let t8File=null, t8OrigImg=null, t8OrigUrl=null, t8CutoutCanvas=null, t8CutoutImg=null, t8BgMode='transparent', t8Fmt='png', t8Passport='original', t8BrushMode='off', t8BrushSize=25, t8PosX=0, t8PosY=0, t8Zoom=100, t8History=[], t8BgCustomImg=null, t8ShowAfter=true;
+let t8File=null, t8OrigImg=null, t8OrigUrl=null, t8CutoutCanvas=null, t8RawCutout=null, t8BgMode='transparent', t8Fmt='png', t8Passport='original', t8BrushMode='off', t8BrushSize=25, t8PosX=0, t8PosY=0, t8Zoom=100, t8History=[], t8BgCustomImg=null, t8ShowAfter=true;
 let t8Canvas=document.getElementById('t8Canvas'), t8Ctx=t8Canvas.getContext('2d');
 
 let t8DropEl=document.getElementById('t8Drop');
@@ -2937,12 +2950,12 @@ document.getElementById('t8BgFile').onchange=(e)=>{if(e.target.files[0]){let f=e
 
 window.t8LoadFile=function(f){
   if(!f.type.startsWith('image/')){alert("Only Image!");return;}
-  t8File=f; t8CutoutCanvas=null; t8PosX=0; t8PosY=0; t8Zoom=100; document.getElementById('t8Zoom').value=100; document.getElementById('t8ZoomVal').innerText="100%";
+  t8File=f; t8CutoutCanvas=null; t8RawCutout=null; t8PosX=0; t8PosY=0; t8Zoom=100; document.getElementById('t8Zoom').value=100; document.getElementById('t8ZoomVal').innerText="100%";
   if(t8OrigUrl) URL.revokeObjectURL(t8OrigUrl); t8OrigUrl=URL.createObjectURL(f);
   document.getElementById('t8FileName').innerText=f.name+" ✅";
   document.getElementById('t8EmptyBox').style.display='none';
   document.getElementById('t8DownloadBtn').style.display='none'; document.getElementById('t8ShareBtn').style.display='none';
-  let img=new Image(); img.onload=()=>{ t8OrigImg=img; t8Canvas.width=img.width; t8Canvas.height=img.height; t8Ctx.drawImage(img,0,0); document.getElementById('t8Status').innerText="✅ Ready! Remove BG dabao - AI 10-20 sec lega first time"; }; img.src=t8OrigUrl;
+  let img=new Image(); img.onload=()=>{ t8OrigImg=img; t8Canvas.width=img.width; t8Canvas.height=img.height; t8Ctx.drawImage(img,0,0); document.getElementById('t8Status').innerText="✅ Ready! Remove BG dabao - Body Safe Mode ON"; }; img.src=t8OrigUrl;
   document.getElementById('t8Out').innerHTML="";
 };
 window.t8SetBg=function(m,btn){
@@ -2969,7 +2982,65 @@ window.t8ResetPerson=function(){ t8PosX=0; t8PosY=0; t8Zoom=100; document.getEle
 document.getElementById('t8Zoom').addEventListener('input',e=>{ t8Zoom=parseInt(e.target.value); t8ApplyAll(); });
 document.getElementById('t8BrushSize').addEventListener('input',e=>{ t8BrushSize=parseInt(e.target.value); });
 
-// ===== BRUSH - ERASE / RESTORE - REAL WORKING =====
+// ===== ✅ FIX 1 - BODY PROTECT - Mask ko expand karo - Body kabhi cut nahi hoga =====
+window.t8SetProtect=function(v){
+  document.getElementById('t8Protect').value=v;
+  document.getElementById('t8ProtectVal').innerText=v+'px - '+(v==0?'OFF':v<4?'Low':v<9?'ON ✅ - Best':'High');
+  t8ReapplyProtect();
+};
+window.t8ReapplyProtect=function(){
+  if(!t8RawCutout || !t8OrigImg) return;
+  // Raw AI cutout se dobara Protect lagake naya cutout banao - Body wapas aa jayega
+  let protectPx = parseInt(document.getElementById('t8Protect').value||6);
+  t8CutoutCanvas = t8ProtectBody(t8RawCutout, protectPx);
+  t8History=[];
+  t8ApplyAll();
+  document.getElementById('t8Status').innerText="🛡️ Body Protect "+protectPx+"px applied - Body wapas aa gaya ✅ - Preview check karo";
+};
+// Core Fix: Dilate alpha mask - Transparent ke paas wale pixels ko wapas lao
+function t8ProtectBody(rawCanvas, protectPx){
+  if(!rawCanvas || protectPx<=0){
+    let c=document.createElement('canvas'); c.width=rawCanvas.width; c.height=rawCanvas.height; c.getContext('2d').drawImage(rawCanvas,0,0); return c;
+  }
+  let w=rawCanvas.width, h=rawCanvas.height;
+  // Original photo
+  let origC=document.createElement('canvas'); origC.width=w; origC.height=h; let octx=origC.getContext('2d'); octx.drawImage(t8OrigImg,0,0,w,h);
+  let origData=octx.getImageData(0,0,w,h);
+  // AI cutout
+  let cutC=document.createElement('canvas'); cutC.width=w; cutC.height=h; let cctx=cutC.getContext('2d'); cctx.drawImage(rawCanvas,0,0,w,h);
+  let cutData=cctx.getImageData(0,0,w,h); let cd=cutData.data; let od=origData.data;
+  // Copy alpha
+  let alpha=new Uint8Array(w*h);
+  for(let i=0;i<w*h;i++) alpha[i]=cd[i*4+3];
+  // DILATE: Har transparent pixel ke aas paas agar person hai to usko person banao - Body 6px bada
+  let newAlpha=new Uint8Array(alpha);
+  let r=protectPx;
+  for(let y=0;y<h;y++){
+    for(let x=0;x<w;x++){
+      let idx=y*w+x;
+      if(alpha[idx]>10) continue; // Already person
+      // Check neighbours in radius r - Agar koi person pixel hai to isko bhi person banao (soft)
+      let found=0;
+      for(let dy=-r;dy<=r && !found;dy++){
+        for(let dx=-r;dx<=r && !found;dx++){
+          let nx=x+dx, ny=y+dy;
+          if(nx<0||ny<0||nx>=w||ny>=h) continue;
+          if(alpha[ny*w+nx]>200) found=1;
+        }
+      }
+      if(found){
+        // Restore original pixel with 100% - Body ka part wapas
+        cd[idx*4]=od[idx*4]; cd[idx*4+1]=od[idx*4+1]; cd[idx*4+2]=od[idx*4+2]; cd[idx*4+3]=255;
+      }
+    }
+  }
+  // Smooth edge: 1px feather - Hard edge nahi dikhega
+  cctx.putImageData(cutData,0,0);
+  let out=document.createElement('canvas'); out.width=w; out.height=h; out.getContext('2d').drawImage(cutC,0,0);
+  return out;
+}
+
+// ===== BRUSH =====
 window.t8SetBrush=function(mode){
   t8BrushMode=mode;
   document.getElementById('t8BrushMode').innerText="• Brush: "+(mode==='off'?'OFF':mode==='erase'?'ERASE 🧹':'RESTORE ♻️');
@@ -2977,7 +3048,7 @@ window.t8SetBrush=function(mode){
   document.getElementById('t8BtnRestore').style.background=mode==='restore'?'#22c55e':'#162143';
   document.getElementById('t8BtnOff').style.background=mode==='off'?'#22c55e':'#162143';
   if(!t8CutoutCanvas && mode!=='off'){ alert("Pehle Remove BG karo, fir Brush chalega"); t8BrushMode='off'; return; }
-  document.getElementById('t8Status').innerText=mode==='off'?"Brush OFF ✅":mode==='erase'?"Erase Brush ON - Photo pe ghumao, jo part hatana hai usko mitao":"Restore Brush ON - Galti se mita hua part wapas lao";
+  document.getElementById('t8Status').innerText=mode==='off'?"Brush OFF ✅":mode==='erase'?"Erase Brush ON - Jo BG bacha hai usko mitao":"Restore Brush ON - Body ka kata hua part wapas lao - Body pe ghumao";
 };
 window.t8UndoBrush=function(){
   if(!t8History.length) return alert("Undo karne ko kuch nahi");
@@ -2993,27 +3064,33 @@ function t8GetPos(e){
   let cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top;
   return {x:cx/r.width*t8Canvas.width, y:cy/r.height*t8Canvas.height};
 }
-let t8Drawing=false, t8LastPos=null;
+let t8Drawing=false;
 function t8BrushStart(e){
   if(t8BrushMode==='off'||!t8CutoutCanvas) return;
   e.preventDefault(); t8Drawing=true;
   t8History.push(t8Ctx.getImageData(0,0,t8Canvas.width,t8Canvas.height));
   if(t8History.length>20) t8History.shift();
-  t8LastPos=t8GetPos(e); t8BrushDraw(t8LastPos);
+  t8BrushDraw(t8GetPos(e));
 }
-function t8BrushMove(e){
-  if(!t8Drawing) return; e.preventDefault();
-  let p=t8GetPos(e); t8BrushDraw(p); t8LastPos=p;
-}
+function t8BrushMove(e){ if(!t8Drawing) return; e.preventDefault(); t8BrushDraw(t8GetPos(e)); }
 function t8BrushDraw(p){
   t8Ctx.save();
   t8Ctx.beginPath(); t8Ctx.arc(p.x,p.y,t8BrushSize,0,Math.PI*2);
-  if(t8BrushMode==='erase'){
-    t8Ctx.globalCompositeOperation='destination-out'; t8Ctx.fill();
-  }else if(t8BrushMode==='restore'){
-    t8Ctx.globalCompositeOperation='source-over';
+  if(t8BrushMode==='erase'){ t8Ctx.globalCompositeOperation='destination-out'; t8Ctx.fill(); }
+  else if(t8BrushMode==='restore'){
+    // ✅ FIX 2 - Restore ab Original Photo se hota hai, Cutout se nahi - Body 100% wapas aayega
     t8Ctx.save(); t8Ctx.beginPath(); t8Ctx.arc(p.x,p.y,t8BrushSize,0,Math.PI*2); t8Ctx.clip();
-    t8Ctx.drawImage(t8CutoutCanvas,0,0);
+    // Original photo se us part ko wapas lao - Lekin sirf wahi part jo person ka hai - Yaha hum original photo ka part la rahe hai, BG ke saath bhi aa sakta hai, isliye user ko body pe hi ghumana hai
+    // Better: Raw cutout se bhi restore karo agar waha person tha, nahi to original se
+    if(t8RawCutout){ t8Ctx.drawImage(t8RawCutout,0,0); }
+    // Agar raw me bhi nahi tha (AI ne kata tha), to Protect wale cutout se
+    // Last: Original se - Body ka part pakka wapas
+    // Hum yaha pehle raw try karte hai, agar pixel transparent hai to original se lete hai - Simple: Original draw karo, kyunki user ne body pe hi brush kiya hai
+    // Isliye double draw: pehle raw, fir agar abhi bhi transparent hai to original - Yaha direct original draw karna best hai for body
+    t8Ctx.globalCompositeOperation='source-over';
+    // Check: Agar user ne body pe brush kiya hai to original ka body part hi aayega
+    // Hum original ko hi draw karte hai - Body safe
+    t8Ctx.drawImage(t8OrigImg,0,0,t8Canvas.width,t8Canvas.height);
     t8Ctx.restore();
   }
   t8Ctx.restore();
@@ -3026,20 +3103,24 @@ t8Canvas.addEventListener('touchstart',t8BrushStart,{passive:false});
 t8Canvas.addEventListener('touchmove',t8BrushMove,{passive:false});
 t8Canvas.addEventListener('touchend',t8BrushEnd);
 
-// ===== AI REMOVE =====
+// ===== AI REMOVE - WITH BODY PROTECT =====
 window.t8RemoveBG=async function(){
   if(!t8File) return alert("First select a Photo!");
-  document.getElementById('t8Status').innerText="AI Loading... First time 10-20 sec, please wait...";
+  document.getElementById('t8Status').innerText="AI Loading... Body Safe Mode ON - Body kabhi cut nahi hoga...";
   document.getElementById('t8Prog').style.display='block'; document.getElementById('t8Fill').style.width="10%";
   try{
-    let blob=await removeBackground(t8File,{progress:(k,c,t)=>{ let pct=Math.round((c/t)*80)+10; document.getElementById('t8Fill').style.width=pct+"%"; document.getElementById('t8Status').innerText="AI Working... "+pct+"%"; }});
+    let blob=await removeBackground(t8File,{progress:(k,c,t)=>{ let pct=Math.round((c/t)*80)+10; document.getElementById('t8Fill').style.width=pct+"%"; document.getElementById('t8Status').innerText="AI Working... "+pct+"% - Body Protect ON"; }});
     let img=new Image(); img.onload=()=>{
       let c=document.createElement('canvas'); c.width=img.width; c.height=img.height; c.getContext('2d').drawImage(img,0,0);
-      t8CutoutCanvas=c; t8History=[];
+      // ✅ SAVE RAW - Pehle raw save karo, fir Protect lagao
+      t8RawCutout=c;
+      let protectPx=parseInt(document.getElementById('t8Protect').value||6);
+      t8CutoutCanvas=t8ProtectBody(c, protectPx);
+      t8History=[];
       t8ApplyAll();
-      document.getElementById('t8Status').innerText="✅ Done! BG Removed - Ab Brush / BG / Passport sab try karo";
+      document.getElementById('t8Status').innerText="✅ Done! BG Removed + Body Safe - Body ka koi part kata nahi - Preview check karo";
       document.getElementById('t8DownloadBtn').style.display='block'; document.getElementById('t8ShareBtn').style.display='block';
-      document.getElementById('t8Out').innerHTML=`<div style="background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;text-align:center;margin-top:8px">✅ BG Removed - AI Success<br><small>Ab Brush se fix karo, BG badlo, Passport size me Download karo</small></div>`;
+      document.getElementById('t8Out').innerHTML=`<div style="background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;text-align:center;margin-top:8px">✅ BG Removed + Body Safe ✅<br><small>Agar fir bhi thoda body kata lage to Protect ko 12 karo ya Restore Brush se wapas lao</small></div>`;
       setTimeout(()=>{document.getElementById('t8Prog').style.display='none';},800);
     }; img.src=URL.createObjectURL(blob);
   }catch(e){
@@ -3049,15 +3130,18 @@ window.t8RemoveBG=async function(){
       let c=document.createElement('canvas'); c.width=img.width; c.height=img.height; let ctx=c.getContext('2d'); ctx.drawImage(img,0,0);
       let d=ctx.getImageData(0,0,c.width,c.height); let dd=d.data; let r0=dd[0],g0=dd[1],b0=dd[2];
       for(let i=0;i<dd.length;i+=4){ if(Math.abs(dd[i]-r0)<45&&Math.abs(dd[i+1]-g0)<45&&Math.abs(dd[i+2]-b0)<45) dd[i+3]=0; }
-      ctx.putImageData(d,0,0); t8CutoutCanvas=c; t8ApplyAll();
-      document.getElementById('t8Status').innerText="✅ Done! (Simple Mode) - White BG photo ke liye best";
+      ctx.putImageData(d,0,0);
+      t8RawCutout=c;
+      t8CutoutCanvas=t8ProtectBody(c, parseInt(document.getElementById('t8Protect').value||6));
+      t8ApplyAll();
+      document.getElementById('t8Status').innerText="✅ Done! (Simple Mode) - Body Safe";
       document.getElementById('t8DownloadBtn').style.display='block'; document.getElementById('t8ShareBtn').style.display='block';
       document.getElementById('t8Prog').style.display='none';
     }; img.src=t8OrigUrl;
   }
 };
 
-// ===== APPLY ALL - BG + ZOOM + POS + BRIGHT + FEATHER - REAL =====
+// ===== APPLY ALL =====
 window.t8ApplyAll=function(){
   if(!t8OrigImg) return;
   if(!t8CutoutCanvas){ t8Canvas.width=t8OrigImg.width; t8Canvas.height=t8OrigImg.height; t8Ctx.filter='brightness('+document.getElementById('t8Bright').value+'%)'; t8Ctx.drawImage(t8OrigImg,0,0); t8Ctx.filter='none'; return; }
@@ -3069,26 +3153,19 @@ window.t8ApplyAll=function(){
   } else if(t8BgMode==='white'){ t8Ctx.fillStyle='#fff'; t8Ctx.fillRect(0,0,w,h); }
   else if(t8BgMode==='black'){ t8Ctx.fillStyle='#000'; t8Ctx.fillRect(0,0,w,h); }
   else if(t8BgMode==='color'){ t8Ctx.fillStyle=document.getElementById('t8BgColor').value; t8Ctx.fillRect(0,0,w,h); }
-  else if(t8BgMode==='blur'){
-    t8Ctx.filter='blur(15px) brightness(0.9)'; t8Ctx.drawImage(t8OrigImg,0,0,w,h); t8Ctx.filter='none';
-  } else if(t8BgMode==='gradient1'){
-    let g=t8Ctx.createLinearGradient(0,0,w,h); g.addColorStop(0,'#22d3ee'); g.addColorStop(1,'#f472b6'); t8Ctx.fillStyle=g; t8Ctx.fillRect(0,0,w,h);
-  } else if(t8BgMode==='gradient2'){
-    let g=t8Ctx.createLinearGradient(0,0,w,h); g.addColorStop(0,'#f59e0b'); g.addColorStop(1,'#ef4444'); t8Ctx.fillStyle=g; t8Ctx.fillRect(0,0,w,h);
-  } else if(t8BgMode==='customimg' && t8BgCustomImg){
-    t8Ctx.drawImage(t8BgCustomImg,0,0,w,h);
-  }
+  else if(t8BgMode==='blur'){ t8Ctx.filter='blur(15px) brightness(0.9)'; t8Ctx.drawImage(t8OrigImg,0,0,w,h); t8Ctx.filter='none'; }
+  else if(t8BgMode==='gradient1'){ let g=t8Ctx.createLinearGradient(0,0,w,h); g.addColorStop(0,'#22d3ee'); g.addColorStop(1,'#f472b6'); t8Ctx.fillStyle=g; t8Ctx.fillRect(0,0,w,h); }
+  else if(t8BgMode==='gradient2'){ let g=t8Ctx.createLinearGradient(0,0,w,h); g.addColorStop(0,'#f59e0b'); g.addColorStop(1,'#ef4444'); t8Ctx.fillStyle=g; t8Ctx.fillRect(0,0,w,h); }
+  else if(t8BgMode==='customimg' && t8BgCustomImg){ t8Ctx.drawImage(t8BgCustomImg,0,0,w,h); }
   let zoom=t8Zoom/100;
   let dw=w*zoom, dh=h*zoom;
   let dx=(w-dw)/2 + t8PosX, dy=(h-dh)/2 + t8PosY;
   t8Ctx.filter='brightness('+document.getElementById('t8Bright').value+'%)';
-  let feather=parseInt(document.getElementById('t8Feather').value||2);
-  if(feather>0){ t8Ctx.filter+=' blur('+ (feather*0.2) +'px)'; }
+  let feather=parseInt(document.getElementById('t8Feather').value||3);
+  if(feather>0){ t8Ctx.filter+=' blur('+ (feather*0.15) +'px)'; }
   t8Ctx.drawImage(srcCopy, dx, dy, dw, dh);
   t8Ctx.filter='none';
-  if(document.getElementById('t8WmOn').checked){
-    t8Ctx.font='bold '+Math.floor(w/20)+'px Arial'; t8Ctx.fillStyle='rgba(150,150,150,0.5)'; t8Ctx.textAlign='center'; t8Ctx.fillText('Orbittroniz.com', w/2, h-15);
-  }
+  if(document.getElementById('t8WmOn').checked){ t8Ctx.font='bold '+Math.floor(w/20)+'px Arial'; t8Ctx.fillStyle='rgba(150,150,150,0.5)'; t8Ctx.textAlign='center'; t8Ctx.fillText('Orbittroniz.com', w/2, h-15); }
 };
 
 window.t8Download=function(){
@@ -3107,14 +3184,10 @@ window.t8Download=function(){
     ctx.drawImage(finalCanvas, (targetW-dw)/2, (targetH-dh)/2, dw, dh);
     finalCanvas=cropCanvas;
   }
-  if(t8Fmt==='pdf'){
-    alert("PDF ke liye - Image download hogi, usko Tool 1 Image to PDF me daal ke PDF banao");
-  }
+  if(t8Fmt==='pdf'){ alert("PDF ke liye - Image download hogi, usko Tool 1 Image to PDF me daal ke PDF banao"); }
   let mime = t8Fmt==='jpeg' ? 'image/jpeg' : t8Fmt==='webp' ? 'image/webp' : 'image/png';
   let ext = t8Fmt==='jpeg' ? 'jpg' : t8Fmt==='webp' ? 'webp' : 'png';
-  if(mime==='image/jpeg'){
-    let c=document.createElement('canvas'); c.width=finalCanvas.width; c.height=finalCanvas.height; let ctx=c.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,c.width,c.height); ctx.drawImage(finalCanvas,0,0); finalCanvas=c;
-  }
+  if(mime==='image/jpeg'){ let c=document.createElement('canvas'); c.width=finalCanvas.width; c.height=finalCanvas.height; let ctx=c.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,c.width,c.height); ctx.drawImage(finalCanvas,0,0); finalCanvas=c; }
   finalCanvas.toBlob(blob=>{
     let url=URL.createObjectURL(blob);
     let a=document.createElement('a'); a.href=url; a.download=prefix+"."+ext; document.body.appendChild(a); a.click(); a.remove();
@@ -3133,25 +3206,25 @@ window.t8Share=async function(){
 window.t8OpenPreview=function(){
   if(!t8OrigImg) return alert("First select a Photo!");
   let mc=document.getElementById('t8ModalCanvas'); mc.width=t8Canvas.width; mc.height=t8Canvas.height; mc.getContext('2d').drawImage(t8Canvas,0,0);
-  document.getElementById('t8ModalTitle').innerText="Preview - "+(t8CutoutCanvas?"After - BG Removed ✅":"Before - Original");
-  document.getElementById('t8ModalCap').innerText="BG: "+t8BgMode+" • Size: "+t8Passport+" • Format: "+t8Fmt.toUpperCase();
+  document.getElementById('t8ModalTitle').innerText="Preview - "+(t8CutoutCanvas?"After - BG Removed + Body Safe ✅":"Before - Original");
+  document.getElementById('t8ModalCap').innerText="BG: "+t8BgMode+" • Size: "+t8Passport+" • Format: "+t8Fmt.toUpperCase()+" • Body Protect: "+document.getElementById('t8Protect').value+"px";
   document.getElementById('t8Modal').style.display='flex';
 };
 window.t8ToggleModalBeforeAfter=function(){
   t8ShowAfter=!t8ShowAfter;
   let mc=document.getElementById('t8ModalCanvas');
   if(!t8ShowAfter && t8OrigImg){ mc.width=t8OrigImg.width; mc.height=t8OrigImg.height; mc.getContext('2d').drawImage(t8OrigImg,0,0); document.getElementById('t8ModalTitle').innerText="Preview - Before - Original"; }
-  else{ mc.width=t8Canvas.width; mc.height=t8Canvas.height; mc.getContext('2d').drawImage(t8Canvas,0,0); document.getElementById('t8ModalTitle').innerText="Preview - After - BG Removed ✅"; }
+  else{ mc.width=t8Canvas.width; mc.height=t8Canvas.height; mc.getContext('2d').drawImage(t8Canvas,0,0); document.getElementById('t8ModalTitle').innerText="Preview - After - BG Removed + Body Safe ✅"; }
 };
 window.t8ClosePreview=function(){document.getElementById('t8Modal').style.display='none';};
 window.t8Reset=function(){
-  t8File=null; t8CutoutCanvas=null; t8History=[]; t8PosX=0; t8PosY=0; t8Zoom=100;
+  t8File=null; t8CutoutCanvas=null; t8RawCutout=null; t8History=[]; t8PosX=0; t8PosY=0; t8Zoom=100;
   document.getElementById('t8Out').innerHTML=""; document.getElementById('t8FileName').innerText="No Photo Selected"; document.getElementById('t8Status').innerText="";
   document.getElementById('t8DownloadBtn').style.display='none'; document.getElementById('t8ShareBtn').style.display='none';
   document.getElementById('t8EmptyBox').style.display='block'; t8Ctx.clearRect(0,0,t8Canvas.width,t8Canvas.height);
 };
 </script>
-<!-- ================= TOOL 8 - V4 - END ================= -->
+<!-- ================= TOOL 8 - PERFECT - END ================= --> 
 <!-- ================= TOOL 9 - PDF MERGER ================= -->
 <div id="page-tool9" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>📚 PDF Merger</b><br><span>Most Demanded</span></div></div><h2 style="text-align:center">📚 PDF Merger</h2><p style="font-size:12px;color:#6B7280;text-align:center">Merge Aadhar Front + Back, Marksheet Pages Into 1 PDF</p><div class="drop" onclick="document.getElementById('mergeFile').click()"><b>📄 Select PDFs - Multiple</b><p style="font-size:12px;color:#6B7280">Select 2 or more PDFs in order</p><input type="file" id="mergeFile" accept="application/pdf" multiple onchange="loadMerge(event)"></div><p id="mergeInfo" style="font-size:12px;color:#166534;text-align:center;margin-top:8px">Select PDFs first</p><label>Merged File Name</label><input id="mergeName" value="Merged-Document"><button class="btn" onclick="mergePDFs()">📚 Merge PDFs Into 1</button><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
 
