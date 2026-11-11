@@ -4128,8 +4128,406 @@ t11Init();
 </script>
 <!-- ============ TOOL 11 - ALL BUGS FIXED - FINAL END ============ -->
 <!-- ================= TOOL 12 - PHOTO ENHANCER ================= -->
-<div id="page-tool12" class="tool-page"><div class="card"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>✨ Photo Enhancer</b><br><span>Most Demanded</span></div></div><h2 style="text-align:center">✨ Photo Enhancer</h2><p style="font-size:12px;color:#6B7280;text-align:center">Blurry / Dark Photo → Clear, Bright, Sharp</p><div class="drop" onclick="document.getElementById('enhFile').click()"><b>📸 Select Blurry / Dark Photo</b><input type="file" id="enhFile" accept="image/*" onchange="loadEnhance(event)"></div><label>Enhance Level</label><select id="enhLevel"><option value="1">Light - Natural</option><option value="2" selected>Medium - Best - Clear + Bright</option><option value="3">Strong - Very Sharp</option></select><button class="btn" onclick="doEnhance()">✨ Enhance Photo Now</button><div style="display:flex;gap:8px;margin-top:10px"><div style="flex:1"><p style="font-size:11px;font-weight:800;text-align:center">Before</p><img id="enhBefore" style="width:100%;border-radius:12px"></div><div style="flex:1"><p style="font-size:11px;font-weight:800;text-align:center">After</p><img id="enhAfter" style="width:100%;border-radius:12px"></div></div><button class="btn2 green" style="width:100%;margin-top:10px" onclick="downloadEnhanced()">⬇️ Download Enhanced Photo</button><button class="btn2" style="width:100%;margin-top:8px" onclick="goHomePage()">← Back</button></div></div>
+<!-- ============ TOOL 12 - AI PHOTO ENHANCER - ALL BUGS FIXED - FINAL - START ============ -->
+<style>
+.t12-card{background:linear-gradient(145deg,#1a2a55,#0a1224);border:1px solid rgba(34,211,238,.35);border-radius:20px;padding:16px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 30px rgba(124,58,237,.25)}
+.t12-title{font-size:20px;font-weight:900;text-align:center;background:linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.t12-sub{text-align:center;font-size:11px;color:#94a3b8;margin:4px 0 12px}
+.t12-label{font-size:11px;color:#fff;font-weight:800;margin:14px 0 6px;display:block}
+.t12-input{width:100%;background:#060a18;border:1px solid #2a3a6a;color:#fff;padding:12px;border-radius:12px;font-size:14px;outline:none;margin-top:6px}
+.t12-drop{border:2px dashed #22d3ee;border-radius:16px;padding:20px;text-align:center;background:linear-gradient(145deg,rgba(34,211,238,.12),rgba(124,58,237,.12));cursor:pointer}
+.t12-pillrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.t12-pill{background:#162143;border:1px solid #2a3a6a;color:#fff;padding:12px 4px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;text-align:center;line-height:1.3}
+.t12-btn3d{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,.45),0 4px 0 #4c1d95;margin-top:12px}
+.t12-btn3d:disabled{opacity:.6}
+.t12-btn2{width:100%;padding:13px;border:1px solid #2a3a6a;border-radius:12px;background:#162143;color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:8px}
+.t12-btn-ai{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px}
+.t12-btn-share{width:100%;padding:13px;border:none;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:14px;font-weight:900;cursor:pointer;margin-top:8px;display:none}
+.t12-prog{height:8px;background:#0a1224;border-radius:20px;overflow:hidden;margin-top:10px;display:none;border:1px solid #2a3a6a}
+.t12-prog div{height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee);width:0%}
+.t12-range{width:100%;accent-color:#22d3ee}
+.t12-toggle{display:flex;align-items:center;justify-content:space-between;background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px;margin-top:8px}
+.t12-toggle b{font-size:13px}
+.t12-toggle input{width:46px;height:26px;appearance:none;background:#334155;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.t12-toggle input:checked{background:#22c55e}
+.t12-toggle input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}
+.t12-toggle input:checked::after{left:23px}
+.t12-compare{position:relative;width:100%;border-radius:14px;overflow:hidden;border:1px solid #2a3a6a;background:#000;display:none;margin-top:12px;touch-action:none}
+.t12-compare img{width:100%;display:block;max-height:520px;object-fit:contain;background:#000}
+.t12-compare .t12-after{position:absolute;top:0;left:0;width:50%;height:100%;overflow:hidden;background:#000}
+.t12-compare .t12-after img{width:100%;height:100%;object-fit:contain;max-height:520px}
+.t12-handle{position:absolute;top:0;bottom:0;width:3px;background:#fff;box-shadow:0 0 10px rgba(0,0,0,.8);z-index:2}
+.t12-handle span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;color:#111;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900}
+.t12-badge{position:absolute;top:8px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:900;z-index:3}
+</style>
 
+<div id="page-tool12" class="tool-page" style="display:none">
+<div class="tool active" id="tool-12"><div class="t12-card">
+<button type="button" onclick="goHomePageTool12()" style="background:#F3F4F6;border:1px solid #E5E7EB;padding:9px 14px;border-radius:20px;font-weight:900;cursor:pointer;color:#111">← Back</button>
+<div class="t12-title">✨ AI Photo Enhancer Pro</div>
+<div class="t12-sub">AI Auto Fix • HD Sharp • Face Glow • Old Photo Restore • No Bugs</div>
+
+<label class="t12-label">📸 1. ADD PHOTO</label>
+<div class="t12-drop" id="t12Drop" onclick="document.getElementById('t12File').click()">
+<b style="font-size:15px;color:#22d3ee">+ Click or Drag Photo Here</b><br>
+<small style="color:#94a3b8">JPG / PNG / WEBP - Max 12 MB</small><br>
+<small style="color:#22d3ee" id="t12FileName">No Photo Selected</small>
+</div>
+<input type="file" id="t12File" accept="image/*" hidden>
+
+<div style="background:linear-gradient(145deg,#fef3c7,#fde68a);border:1px solid #f59e0b;border-radius:14px;padding:12px;margin-top:12px;color:#111">
+<b>🤖 AI AUTO ENHANCE - AI Reads Photo & Fixes Only What's Needed</b>
+<p style="font-size:11px;margin:6px 0 0">AI checks: Brightness, Contrast, Color, Blur, Yellow Tint - Then applies perfect fix.</p>
+<p id="t12AiResult" style="font-size:12px;font-weight:800;color:#065f46;display:none;margin:6px 0 0"></p>
+<button type="button" onclick="t12AiAuto()" style="width:100%;background:#111827;color:#fff;border:none;padding:13px;border-radius:10px;font-weight:900;cursor:pointer;margin-top:8px">🤖 AI AUTO ENHANCE - 1 CLICK HD</button>
+</div>
+
+<label class="t12-label">⚡ 2. QUICK PRESETS</label>
+<div class="t12-pillrow">
+<button class="t12-pill" onclick="t12Preset('passport')">🪪<br>Passport<br>HD Clear</button>
+<button class="t12-pill" onclick="t12Preset('instagram')">📸<br>Instagram<br>Glow</button>
+<button class="t12-pill" onclick="t12Preset('old')">🕰️<br>Old Photo<br>Restore</button>
+<button class="t12-pill" onclick="t12Preset('night')">🌙<br>Night<br>Bright</button>
+</div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<button onclick="t12Preset('face')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;cursor:pointer;font-size:11px;font-weight:700">😊 Face Glow</button>
+<button onclick="t12Preset('product')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;cursor:pointer;font-size:11px;font-weight:700">🛍️ Product Sharp</button>
+<button onclick="t12Preset('original')" style="flex:1;background:#162143;border:1px solid #2a3a6a;color:#fff;padding:10px;border-radius:10px;cursor:pointer;font-size:11px;font-weight:700">↩️ Original</button>
+</div>
+
+<label class="t12-label">🎚️ 3. MANUAL - Fine Tune After AI</label>
+<div style="background:#060a18;border:1px solid #2a3a6a;border-radius:12px;padding:12px">
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#fff"><b>Brightness</b><span id="t12BrightVal" style="color:#22d3ee">0</span></div><input type="range" id="t12Brightness" class="t12-range" min="-50" max="50" value="0" oninput="t12UpdateLabel(); t12ApplyLive()">
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#fff;margin-top:8px"><b>Contrast</b><span id="t12ContrastVal" style="color:#22d3ee">0</span></div><input type="range" id="t12Contrast" class="t12-range" min="-50" max="50" value="0" oninput="t12UpdateLabel(); t12ApplyLive()">
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#fff;margin-top:8px"><b>Warmth / Color</b><span id="t12WarmVal" style="color:#22d3ee">0</span></div><input type="range" id="t12Warmth" class="t12-range" min="-50" max="50" value="0" oninput="t12UpdateLabel(); t12ApplyLive()">
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#fff;margin-top:8px"><b>Sharpness / HD</b><span id="t12SharpVal" style="color:#22d3ee">0</span></div><input type="range" id="t12Sharpness" class="t12-range" min="0" max="100" value="0" oninput="t12UpdateLabel(); t12ApplyLive()">
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#fff;margin-top:8px"><b>Saturation</b><span id="t12SatVal" style="color:#22d3ee">0</span></div><input type="range" id="t12Saturation" class="t12-range" min="-50" max="100" value="0" oninput="t12UpdateLabel(); t12ApplyLive()">
+</div>
+<div class="t12-toggle"><b>✨ Face Glow? (Center Bright)</b><input type="checkbox" id="t12FaceGlow" onchange="t12ApplyLive()"></div>
+<div class="t12-toggle"><b>🧹 Denoise? (Remove Grain)</b><input type="checkbox" id="t12Denoise" onchange="t12ApplyLive()"></div>
+
+<label class="t12-label">👀 4. BEFORE / AFTER - Drag Slider</label>
+<div class="t12-compare" id="t12Compare">
+<span class="t12-badge" style="left:8px;background:#111;color:#fff">BEFORE</span>
+<span class="t12-badge" style="right:8px;background:#22c55e;color:#fff">AFTER - AI ✨</span>
+<img id="t12BeforeImg" alt="">
+<div class="t12-after" id="t12AfterWrap"><img id="t12AfterImg" alt=""></div>
+<div class="t12-handle" id="t12Handle" style="left:50%"><span>↔</span></div>
+</div>
+<p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:6px">Drag white line left / right to compare</p>
+<input type="range" id="t12CompareSlider" class="t12-range" min="0" max="100" value="50" oninput="t12SetCompare(this.value)" style="display:none">
+
+<div class="t12-prog" id="t12Prog"><div id="t12Fill"></div></div>
+<div id="t12Status" style="text-align:center;font-size:12px;color:#22d3ee;margin-top:8px;font-weight:700"></div>
+<div id="t12ResultInfo" style="text-align:center;font-size:11px;color:#94a3b8;margin-top:6px"></div>
+
+<button class="t12-btn-ai" onclick="t12AiAuto()">🤖 AI AUTO ENHANCE AGAIN</button>
+<button class="t12-btn3d" onclick="t12EnhanceFinal()">✨ ENHANCE & SAVE HD</button>
+<button class="t12-btn2" onclick="t12Download()" id="t12DownloadBtn" style="display:none">⬇️ Download Enhanced HD Photo</button>
+<button class="t12-btn-share" id="t12ShareBtn" onclick="t12Share()">📤 Share Enhanced Photo</button>
+<button class="t12-btn2" onclick="t12Reset()">🗑️ Clear / New Photo</button>
+<div id="t12Out"></div>
+<p style="text-align:center;font-size:10px;color:#64748b;margin-top:8px">100% Private - Photo Never Uploaded • AI Runs In Your Phone • No Bugs</p>
+</div></div>
+</div>
+<!-- ============ TOOL 12 - FIXED - END ============ -->
+
+<script>
+(function(){
+"use strict";
+window.goHomePageTool12 = window.goHomePageTool12 || function(){
+  try{ if(typeof window.goHomePage==="function"){ window.goHomePage(); return; } }catch(e){}
+  var p=document.getElementById('page-tool12'); if(p) p.style.display='none';
+  var h=document.getElementById('homeView'); if(h) h.style.display='block';
+  window.scrollTo(0,0);
+};
+window.clearTool12 = function(){ t12Reset(); };
+
+function el(id){ return document.getElementById(id); }
+function status(m){ var s=el('t12Status'); if(s) s.textContent=m; }
+function setBar(p){ var w=el('t12Prog'); if(!w) return; w.style.display='block'; el('t12Fill').style.width=p+'%'; if(p>=100) setTimeout(function(){ w.style.display='none'; },600); }
+function fmtSize(b){ if(!b) return "0 B"; if(b<1024) return b+' B'; if(b<1024*1024) return (b/1024).toFixed(1)+' KB'; return (b/1024/1024).toFixed(2)+' MB'; }
+function num(v){ var n=parseFloat(v); return isNaN(n)?0:n; }
+
+var origImg=null, origFile=null, origUrl="", outUrl="", outBlob=null, isWorking=false;
+var t12Vals={ brightness:0, contrast:0, warmth:0, sharpness:0, saturation:0 };
+var t12ApplyTimer=null, t12LastCanvas=null, t12LastW=0, t12LastH=0;
+
+function handleFile(f){
+  if(!f || isWorking) return;
+  if((f.type||"").indexOf('image/')!==0){ status("❌ Only Images"); return; }
+  if(f.size>12*1024*1024){ alert("Photo too big - Max 12 MB"); return; }
+  origFile=f;
+  if(origUrl){ try{ URL.revokeObjectURL(origUrl); }catch(e){} }
+  if(outUrl){ try{ URL.revokeObjectURL(outUrl); }catch(e){} outUrl=""; outBlob=null; }
+  origUrl=URL.createObjectURL(f);
+  var img=new Image();
+  img.onload=function(){
+    origImg=img;
+    t12Vals={ brightness:0, contrast:0, warmth:0, sharpness:0, saturation:0 };
+    syncSliders(); t12UpdateLabel();
+    el('t12FaceGlow').checked=false; el('t12Denoise').checked=false;
+    el('t12FileName').textContent="✅ "+f.name+" - "+fmtSize(f.size);
+    el('t12BeforeImg').src=origUrl;
+    el('t12AfterImg').src=origUrl;
+    el('t12Compare').style.display='block'; el('t12CompareSlider').style.display='block';
+    t12SetCompare(50);
+    el('t12DownloadBtn').style.display='none'; el('t12ShareBtn').style.display='none';
+    el('t12Out').innerHTML="";
+    status("✅ Photo Loaded - Press AI Auto Enhance");
+    el('t12ResultInfo').textContent="Original: "+(img.naturalWidth||0)+"x"+(img.naturalHeight||0)+" • "+fmtSize(f.size);
+    var thisImg=img;
+    setTimeout(function(){ if(origImg===thisImg) t12AiAuto(true); }, 300);
+  };
+  img.onerror=function(){ status("❌ Image load failed - Try JPG"); };
+  img.src=origUrl;
+}
+el('t12File').addEventListener('change', function(e){ if(e.target.files && e.target.files[0]) handleFile(e.target.files[0]); e.target.value=""; });
+var dropEl=el('t12Drop');
+if(dropEl){
+  dropEl.addEventListener('dragover', function(e){ e.preventDefault(); dropEl.style.borderColor="#22c55e"; });
+  dropEl.addEventListener('dragleave', function(){ dropEl.style.borderColor="#22d3ee"; });
+  dropEl.addEventListener('drop', function(e){ e.preventDefault(); dropEl.style.borderColor="#22d3ee"; if(e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+}
+function syncSliders(){
+  el('t12Brightness').value=t12Vals.brightness;
+  el('t12Contrast').value=t12Vals.contrast;
+  el('t12Warmth').value=t12Vals.warmth;
+  el('t12Sharpness').value=t12Vals.sharpness;
+  el('t12Saturation').value=t12Vals.saturation;
+}
+window.t12UpdateLabel=function(){
+  el('t12BrightVal').textContent=el('t12Brightness').value;
+  el('t12ContrastVal').textContent=el('t12Contrast').value;
+  el('t12WarmVal').textContent=el('t12Warmth').value;
+  el('t12SharpVal').textContent=el('t12Sharpness').value;
+  el('t12SatVal').textContent=el('t12Saturation').value;
+};
+function analyzePhoto(){
+  var c=document.createElement('canvas'); var w=200, h=Math.max(1, Math.round(200 * (origImg.naturalHeight||600)/(origImg.naturalWidth||600)));
+  c.width=w; c.height=h; var ctx=c.getContext('2d'); ctx.drawImage(origImg,0,0,w,h);
+  var data=ctx.getImageData(0,0,w,h).data;
+  var sumR=0,sumG=0,sumB=0,sumL=0, count=0, dark=0;
+  for(var i=0;i<data.length;i+=4){
+    var r=data[i], g=data[i+1], b=data[i+2];
+    var l=0.299*r+0.587*g+0.114*b;
+    sumR+=r; sumG+=g; sumB+=b; sumL+=l; count++;
+    if(l<60) dark++;
+  }
+  var avgL=sumL/count, avgR=sumR/count, avgB=sumB/count;
+  var varSum=0; for(var j=0;j<data.length;j+=4){ var ll=0.299*data[j]+0.587*data[j+1]+0.114*data[j+2]; varSum+=(ll-avgL)*(ll-avgL); }
+  var std=Math.sqrt(varSum/count);
+  var edge=0; for(var y=0;y<h-1;y++){ for(var x=0;x<w-1;x++){ var idx=(y*w+x)*4; var l1=0.299*data[idx]+0.587*data[idx+1]+0.114*data[idx+2]; var idx2=(y*w+x+1)*4; var l2=0.299*data[idx2]+0.587*data[idx2+1]+0.114*data[idx2+2]; edge+=Math.abs(l1-l2); } }
+  var edgeAvg=edge/(w*h);
+  return { avgL:avgL, avgR:avgR, avgB:avgB, std:std, edge:edgeAvg, isDark:avgL<90, isDull:std<35, isYellow:(avgR-avgB)>18, isBlue:(avgB-avgR)>18, isBlurry:edgeAvg<6, isWashed:avgL>180 && std<40 };
+}
+window.t12AiAuto=function(silent){
+  if(!origImg){ if(!silent) alert("Add Photo First!"); return; }
+  if(isWorking) return; // FIX: Lock - No double run
+  isWorking=true; setBar(20); status("🤖 AI Analyzing Photo...");
+  setTimeout(function(){
+    try{
+      var a=analyzePhoto();
+      var fixes=[];
+      t12Vals={ brightness:0, contrast:0, warmth:0, sharpness:0, saturation:0 };
+      if(a.isDark){ t12Vals.brightness=Math.min(35, Math.round((90-a.avgL)*0.35)); fixes.push("Dark → Bright +"+t12Vals.brightness); }
+      else if(a.isWashed){ t12Vals.brightness=-12; fixes.push("Too Bright → -12"); }
+      else if(a.avgL<110){ t12Vals.brightness=12; fixes.push("Bright +12"); }
+      if(a.isDull){ t12Vals.contrast=28; fixes.push("Dull → Contrast +28"); }
+      else if(a.std<50){ t12Vals.contrast=15; fixes.push("Contrast +15"); }
+      if(a.isYellow){ t12Vals.warmth=-22; fixes.push("Yellow → Cool -22"); }
+      else if(a.isBlue){ t12Vals.warmth=18; fixes.push("Blue → Warm +18"); }
+      else if(a.avgL<120){ t12Vals.warmth=8; fixes.push("Warm +8"); }
+      if(a.isBlurry){ t12Vals.sharpness=70; fixes.push("Blurry → Sharp +70"); }
+      else { t12Vals.sharpness=35; fixes.push("Sharp +35"); }
+      if(a.isDull){ t12Vals.saturation=25; fixes.push("Color +25"); } else { t12Vals.saturation=12; }
+      el('t12FaceGlow').checked = !a.isWashed;
+      if(!a.isWashed) fixes.push("Face Glow ON");
+      el('t12Denoise').checked=false;
+      syncSliders(); t12UpdateLabel();
+      setBar(60); status("🤖 AI Fixing...");
+      applyEnhance(function(out){
+        if(out){
+          if(outUrl){ try{ URL.revokeObjectURL(outUrl); }catch(e){} }
+          outUrl=out.url; outBlob=out.blob;
+          el('t12AfterImg').src=outUrl;
+          setBar(100);
+          var resEl=el('t12AiResult'); resEl.style.display='block';
+          resEl.textContent="✅ AI Detected: "+(a.isDark?"Dark ":"")+(a.isDull?"Dull ":"")+(a.isYellow?"Yellow ":"")+(a.isBlurry?"Blurry ":"")+" - Fixed: "+fixes.join(", ");
+          status("✅ AI Done! Drag slider to compare - Download HD");
+          el('t12DownloadBtn').style.display='block'; el('t12ShareBtn').style.display='block';
+          el('t12ResultInfo').textContent="AI Enhanced: "+out.w+"x"+out.h+" • Size: "+fmtSize(out.blob.size);
+          el('t12Out').innerHTML='<div style="background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;text-align:center;margin-top:8px">✅ AI Enhanced Done<br><small>Drag slider to compare, then Download</small></div>';
+        }
+      });
+    }catch(e){ console.error(e); status("❌ AI Failed - Try Manual Sliders"); isWorking=false; }
+  }, 80);
+};
+window.t12Preset=function(name){
+  if(!origImg){ alert("Add Photo First!"); return; }
+  if(name==='passport'){ t12Vals={brightness:15, contrast:22, warmth:5, sharpness:55, saturation:10}; el('t12FaceGlow').checked=true; el('t12Denoise').checked=false; }
+  else if(name==='instagram'){ t12Vals={brightness:10, contrast:18, warmth:12, sharpness:40, saturation:35}; el('t12FaceGlow').checked=true; }
+  else if(name==='old'){ t12Vals={brightness:20, contrast:30, warmth:-10, sharpness:65, saturation:20}; el('t12FaceGlow').checked=false; el('t12Denoise').checked=true; }
+  else if(name==='night'){ t12Vals={brightness:32, contrast:20, warmth:10, sharpness:45, saturation:18}; el('t12FaceGlow').checked=true; }
+  else if(name==='face'){ t12Vals={brightness:14, contrast:12, warmth:10, sharpness:40, saturation:18}; el('t12FaceGlow').checked=true; }
+  else if(name==='product'){ t12Vals={brightness:8, contrast:28, warmth:0, sharpness:70, saturation:22}; el('t12FaceGlow').checked=false; }
+  else if(name==='original'){ t12Vals={brightness:0, contrast:0, warmth:0, sharpness:0, saturation:0}; el('t12FaceGlow').checked=false; el('t12Denoise').checked=false; }
+  syncSliders(); t12UpdateLabel(); t12ApplyLive();
+  status("✅ Preset Applied: "+name.toUpperCase());
+};
+// FIX: Core - Async toBlob, no atob blocking, edge-safe sharp, max 1600px
+function applyEnhance(callback){
+  if(!origImg){ if(callback) callback(null); return; }
+  try{
+    var ow=origImg.naturalWidth||600, oh=origImg.naturalHeight||600;
+    var maxDim=1600; var scale=1; if(ow>maxDim || oh>maxDim) scale=Math.min(maxDim/ow, maxDim/oh);
+    var w=Math.max(1, Math.round(ow*scale)), h=Math.max(1, Math.round(oh*scale));
+    var c=document.createElement('canvas'); c.width=w; c.height=h;
+    var ctx=c.getContext('2d'); ctx.drawImage(origImg,0,0,w,h);
+    var imgData=ctx.getImageData(0,0,w,h); var data=imgData.data;
+    var b=t12Vals.brightness, con=t12Vals.contrast, warm=t12Vals.warmth, sat=t12Vals.saturation;
+    var conFactor=(259*(con+255))/(255*(259-con));
+    var faceGlow=el('t12FaceGlow').checked;
+    var denoise=el('t12Denoise').checked;
+    // FIX Denoise: Light only, skip if image large (avoid hang)
+    if(denoise && w*h < 800*800){
+      var copy=new Uint8ClampedArray(data);
+      for(var y=1;y<h-1;y++){ for(var x=1;x<w-1;x++){ var idx=(y*w+x)*4; for(var ch=0;ch<3;ch++){ data[idx+ch]=(copy[idx+ch]+copy[idx-4+ch]+copy[idx+4+ch]+copy[idx-w*4+ch]+copy[idx+w*4+ch])/5; } } }
+    }
+    for(var i=0;i<data.length;i+=4){
+      var px=i/4; var x=px%w, y=Math.floor(px/w);
+      var r=data[i], g=data[i+1], bl=data[i+2];
+      r=conFactor*(r-128)+128+b;
+      g=conFactor*(g-128)+128+b;
+      bl=conFactor*(bl-128)+128+b;
+      r+=warm*0.6; bl-=warm*0.6; g+=warm*0.15;
+      var gray=0.299*r+0.587*g+0.114*bl;
+      var sFactor=1+sat/100;
+      r=gray+(r-gray)*sFactor; g=gray+(g-gray)*sFactor; bl=gray+(bl-gray)*sFactor;
+      // FIX Face Glow: Center only, max +14, no white wash
+      if(faceGlow){
+        var cx=w/2, cy=h*0.42, rx=w*0.32, ry=h*0.32;
+        var dx=(x-cx)/rx, dy=(y-cy)/ry; var dist=dx*dx+dy*dy;
+        if(dist<1){ var glow=(1-dist)*14; r+=glow; g+=glow; bl+=glow; }
+      }
+      data[i]=Math.max(0,Math.min(255,r));
+      data[i+1]=Math.max(0,Math.min(255,g));
+      data[i+2]=Math.max(0,Math.min(255,bl));
+    }
+    ctx.putImageData(imgData,0,0);
+    // FIX Sharpness: Copy original to output first, then only inner pixels - Edges never black
+    if(t12Vals.sharpness>0){
+      var amount=t12Vals.sharpness/100;
+      var src=ctx.getImageData(0,0,w,h); var sdata=src.data;
+      var out=ctx.createImageData(w,h); var odata=out.data;
+      // FIX: Copy all pixels first - Edges safe
+      for(var e2=0;e2<sdata.length;e2++) odata[e2]=sdata[e2];
+      for(var yy=1;yy<h-1;yy++){ for(var xx=1;xx<w-1;xx++){ var idx2=(yy*w+xx)*4; for(var ch2=0;ch2<3;ch2++){ var center=sdata[idx2+ch2]; var up=sdata[idx2-w*4+ch2], down=sdata[idx2+w*4+ch2], left=sdata[idx2-4+ch2], right=sdata[idx2+4+ch2]; var val2=center*(1+4*amount) - (up+down+left+right)*amount; odata[idx2+ch2]=Math.max(0,Math.min(255,val2)); } odata[idx2+3]=255; } }
+      ctx.putImageData(out,0,0);
+    }
+    t12LastCanvas=c; t12LastW=w; t12LastH=h;
+    // FIX: Async toBlob - No atob blocking, no blank
+    c.toBlob(function(blob){
+      if(!blob){ isWorking=false; if(callback) callback(null); return; }
+      var url=URL.createObjectURL(blob);
+      isWorking=false;
+      if(callback) callback({blob:blob, w:w, h:h, canvas:c, url:url});
+    }, 'image/jpeg', 0.92);
+  }catch(e){ console.error(e); isWorking=false; if(callback) callback(null); }
+}
+window.t12ApplyLive=function(){
+  if(!origImg) return;
+  t12Vals.brightness=num(el('t12Brightness').value);
+  t12Vals.contrast=num(el('t12Contrast').value);
+  t12Vals.warmth=num(el('t12Warmth').value);
+  t12Vals.sharpness=num(el('t12Sharpness').value);
+  t12Vals.saturation=num(el('t12Saturation').value);
+  if(t12ApplyTimer) clearTimeout(t12ApplyTimer);
+  // FIX: Debounce 200ms - No hang on slider drag
+  t12ApplyTimer=setTimeout(function(){
+    if(isWorking) return;
+    isWorking=true;
+    applyEnhance(function(out){
+      if(out){
+        if(outUrl){ try{ URL.revokeObjectURL(outUrl); }catch(e){} }
+        outUrl=out.url; outBlob=out.blob;
+        el('t12AfterImg').src=outUrl;
+        el('t12DownloadBtn').style.display='block'; el('t12ShareBtn').style.display='block';
+        status("✅ Live Preview Updated");
+      }
+    });
+  }, 200);
+};
+window.t12EnhanceFinal=function(){
+  if(!origImg){ alert("Add Photo First!"); return; }
+  if(isWorking) return;
+  isWorking=true; setBar(30); status("✨ Enhancing HD - Please wait...");
+  setTimeout(function(){
+    applyEnhance(function(out){
+      if(out){
+        if(outUrl){ try{ URL.revokeObjectURL(outUrl); }catch(e){} }
+        outUrl=out.url; outBlob=out.blob;
+        el('t12AfterImg').src=outUrl;
+        setBar(100); status("✅ HD Enhanced Done!");
+        el('t12DownloadBtn').style.display='block'; el('t12ShareBtn').style.display='block';
+        el('t12ResultInfo').textContent="Enhanced: "+out.w+"x"+out.h+" • Size: "+fmtSize(out.blob.size);
+        el('t12Out').innerHTML='<div style="background:#060a18;border:1px solid #22c55e;border-radius:12px;padding:12px;text-align:center;margin-top:8px">✅ HD Enhanced Done<br><small>Download Now - Quality 92% JPG</small></div>';
+      } else { status("❌ Enhance Failed - Try Smaller Photo"); isWorking=false; }
+    });
+  }, 80);
+};
+window.t12SetCompare=function(v){
+  var pct=Math.max(0, Math.min(100, num(v)));
+  var wrap=el('t12AfterWrap'); if(wrap) wrap.style.width=pct+'%';
+  var handle=el('t12Handle'); if(handle) handle.style.left=pct+'%';
+  // FIX: After image must stay full width inside clipped wrap - Prevent stretch
+  var afterImg=el('t12AfterImg'); if(afterImg && el('t12Compare').offsetWidth>0){ afterImg.style.width=el('t12Compare').offsetWidth+'px'; }
+};
+(function(){
+  var comp=el('t12Compare'); if(!comp) return;
+  var dragging=false;
+  function getPct(e){
+    var rect=comp.getBoundingClientRect();
+    var cx=e.touches ? e.touches[0].clientX : e.clientX;
+    return ((cx-rect.left)/rect.width*100);
+  }
+  comp.addEventListener('mousedown', function(e){ dragging=true; var p=getPct(e); t12SetCompare(p); el('t12CompareSlider').value=p; });
+  comp.addEventListener('mousemove', function(e){ if(dragging){ var p2=getPct(e); t12SetCompare(p2); el('t12CompareSlider').value=p2; } });
+  comp.addEventListener('mouseup', function(){ dragging=false; });
+  comp.addEventListener('mouseleave', function(){ dragging=false; });
+  comp.addEventListener('touchstart', function(e){ dragging=true; t12SetCompare(getPct(e)); }, {passive:true});
+  comp.addEventListener('touchmove', function(e){ if(dragging) t12SetCompare(getPct(e)); }, {passive:true});
+  comp.addEventListener('touchend', function(){ dragging=false; });
+})();
+window.t12Download=function(){
+  if(!outBlob){ alert("Enhance First! Press AI Auto Enhance"); return; }
+  // FIX: Use outUrl directly - Never blank, no re-encode
+  var a=document.createElement('a'); a.href=outUrl; a.download="AI-Enhanced-HD-"+Date.now()+".jpg"; document.body.appendChild(a); a.click(); setTimeout(function(){ try{ a.remove(); }catch(e){} },500);
+  status("✅ Downloaded Enhanced HD Photo");
+};
+window.t12Share=async function(){
+  if(!outBlob){ alert("Enhance First!"); return; }
+  try{
+    var file=new File([outBlob], "AI-Enhanced.jpg", {type:"image/jpeg"});
+    if(navigator.canShare && navigator.canShare({files:[file]})){ await navigator.share({files:[file]}); }
+    else { t12Download(); }
+  }catch(e){ status("Share cancelled"); }
+};
+window.t12Reset=function(){
+  if(origUrl){ try{ URL.revokeObjectURL(origUrl); }catch(e){} }
+  if(outUrl){ try{ URL.revokeObjectURL(outUrl); }catch(e){} }
+  origImg=null; origFile=null; origUrl=""; outUrl=""; outBlob=null; isWorking=false;
+  t12Vals={brightness:0, contrast:0, warmth:0, sharpness:0, saturation:0}; syncSliders(); t12UpdateLabel();
+  el('t12FileName').textContent="No Photo Selected";
+  el('t12Compare').style.display='none'; el('t12CompareSlider').style.display='none';
+  el('t12DownloadBtn').style.display='none'; el('t12ShareBtn').style.display='none';
+  el('t12Status').textContent=""; el('t12ResultInfo').textContent=""; el('t12Out').innerHTML="";
+  var ai=el('t12AiResult'); if(ai) ai.style.display='none';
+  el('t12FaceGlow').checked=false; el('t12Denoise').checked=false;
+};
+})();
+</script>
+<!-- ============ TOOL 12 - ALL BUGS FIXED - FINAL END ============ -->
 <!-- ================= PRIVACY POLICY PAGE ================= -->
 <div id="page-privacy" class="tool-page"><div class="card policy-box"><div class="tool-topbar"><button onclick="goHomePage()">← Back</button><div><b>🔒 Privacy Policy</b><br><span>Orbittroniz</span></div></div><h2 style="text-align:center">🔒 Privacy Policy</h2><p style="text-align:center;font-size:12px;color:#6B7280">Last Updated: 10 November 2026 • Effective Immediately</p><h3>1. We Respect Your Privacy</h3><p>Orbittroniz is built with privacy first. We do <b>NOT</b> collect, store, or share your personal files. All tools work <b>100% in your browser / on your phone</b>. Your PDF, Image, Text never leaves your device.</p><h3>2. What We Do NOT Collect</h3><ul><li>We do NOT upload your PDF, Image, or Document to any server</li><li>We do NOT ask for Name, Mobile, Email, OTP, or Login</li><li>We do NOT track your files or read your documents</li><li>We do NOT sell your data to anyone</li></ul><h3>3. What We May Collect</h3><p>We may use basic anonymous analytics like which tool is used most, to improve the website. This does not include your files or personal details.</p><h3>4. Cookies</h3><p>We use only local storage on your phone to save your settings like Watermark ON/OFF and your watermark text. You can clear it anytime from your browser.</p><h3>5. Third-Party Libraries</h3><p>We use trusted libraries like PDF.js, jsPDF, Tesseract OCR - All run locally in your browser. They do not send your files to their servers.</p><h3>6. Children Privacy</h3><p>Our tools are safe for students. We do not ask children for any personal information.</p><h3>7. Contact Us</h3><p>If you have any privacy question, contact us from Contact page. We will reply within 48 hours.</p><button class="btn" style="background:#111827" onclick="goHomePage()">← Back To Home</button></div></div>
 
