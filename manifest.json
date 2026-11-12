@@ -17,13 +17,10 @@
   "related_applications": [],
   "scope_extensions": [
     {
-      "origin": "https://orbittroniz.com"
-    },
-    {
-      "origin": "https://www.orbittroniz.com"
+      "origin": "https://*.orbittroniz.com"
     }
   ],
-  "display_override": ["window-controls-overlay", "standalone"],
+  "display_override": ["tabbed", "window-controls-overlay", "standalone"],
   "handle_links": "preferred",
   "launch_handler": {
     "client_mode": "auto"
@@ -136,28 +133,24 @@
   "screenshots": [
     {
       "src": "/screenshot-desktop.png",
-      "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Orbittroniz - Free Business Tools on Desktop"
     },
     {
       "src": "/screenshot-desktop.png",
-      "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
       "label": "No Login, Free Forever Tools"
     },
     {
       "src": "/screenshot-mobile.png",
-      "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Orbittroniz - Free Business Tools on Mobile"
     },
     {
       "src": "/screenshot-mobile.png",
-      "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "AI Writer, PDF Tools and QR Maker - Free"
