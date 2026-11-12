@@ -7,6 +7,9 @@
   "background_color": "#0a1224",
   "theme_color": "#7c3aed",
   "orientation": "portrait",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "handle_links": "preferred",
+  "launch_handler": { "client_mode": "auto" },
   "icons": [
     {
       "src": "icon-192.png",
