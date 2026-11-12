@@ -1,3 +1,4 @@
+
 {
   "id": "/",
   "name": "Orbittroniz",
@@ -14,8 +15,9 @@
   "categories": ["business", "productivity", "tools", "utilities"],
   "display_override": ["window-controls-overlay", "standalone"],
   "handle_links": "preferred",
-  "launch_handler": { "client_mode": "auto" },
-  "edge_side_panel": {},
+  "launch_handler": {
+    "client_mode": "auto"
+  },
   "icons": [
     {
       "src": "/icon-192.png",
@@ -48,16 +50,42 @@
       "short_name": "AI Writer",
       "description": "Free AI Writer Tool",
       "url": "/",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
-      ,
+    {
+      "name": "PDF Tools",
+      "short_name": "PDF Tools",
+      "description": "Free PDF Tools",
+      "url": "/",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
   "protocol_handlers": [
-    { "protocol": "web+orbittroniz", "url": "/?q=%s" }
+    {
+      "protocol": "web+orbittroniz",
+      "url": "/?q=%s"
+    }
   ],
   "share_target": {
     "action": "/",
     "method": "GET",
-    "params": { "title": "title", "text": "text", "url": "url" }
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
   },
   "screenshots": [
     {
@@ -73,14 +101,6 @@
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Orbittroniz Home"
-    }
-  ]
-    {
-      "name": "PDF Tools",
-      "short_name": "PDF Tools",
-      "description": "Free PDF Tools",
-      "url": "/",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     }
   ]
 }
