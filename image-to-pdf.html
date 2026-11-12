@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Image to PDF Converter Online - JPG to PDF | Orbittroniz</title>
+<meta name="description" content="Convert Image to PDF online free. JPG to PDF, PNG to PDF, Multiple Images to One PDF in 10 seconds. No watermark, no login. Best free JPG to PDF converter for students.">
+<link rel="canonical" href="https://www.orbittroniz.com/image-to-pdf.html" />
+<meta property="og:title" content="Free Image to PDF Converter | Orbittroniz">
+<meta property="og:description" content="Photo to PDF - Multiple Images - 100% Free, No Login.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Image to PDF - Orbittroniz","applicationCategory":"UtilitiesApplication","offers":{"@type":"Offer","price":"0"}}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#0a0620;color:white}
+.top{background:linear-gradient(180deg,#7c3aed,#4c1d95);padding:15px;text-align:center}
+.top h1{font-size:28px;background:linear-gradient(90deg,#facc15,#f472b6,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav{background:#7c3aed;display:flex;gap:8px;overflow:auto;padding:8px;white-space:nowrap}
+.nav a{background:rgba(255,255,255,.15);color:white;text-decoration:none;padding:7px 12px;border-radius:20px;font-size:13px;font-weight:700}
+.nav a.active{background:white;color:#7c3aed}
+.wrap{max-width:850px;margin:15px auto;padding:0 12px}
+.card{background:white;color:#111;border-radius:18px;padding:15px}
+.card2{background:#f8f5ff;border-radius:14px;padding:12px;margin-top:12px}
+.badge{display:inline-block;background:#22c55e;color:white;font-size:11px;padding:4px 8px;border-radius:20px;font-weight:800}
+.chip{display:inline-block;background:white;border:1px solid #ddd;border-radius:20px;padding:6px 10px;margin:4px 2px;font-size:12px;cursor:pointer}
+input,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;outline:none;font-size:14px}
+.btn{width:100%;background:linear-gradient(90deg,#ec4899,#7c3aed);color:white;border:none;padding:14px;border-radius:12px;font-size:16px;font-weight:800;cursor:pointer;margin-top:10px}
+.smallbtn{background:#111;color:white;border:none;padding:10px 14px;border-radius:20px;font-size:13px;cursor:pointer}
+.seo{background:white;color:#111;border-radius:18px;padding:18px;margin-top:15px;line-height:1.7}
+.seo h2{margin:15px 0 8px}
+.seo p{font-size:14px;color:#333}
+.footer{text-align:center;padding:20px;font-size:12px;opacity:.7}
+.footer a{color:white;margin:0 5px}
+.drop{border:2px dashed #a78bfa;background:#f5f3ff;border-radius:14px;padding:20px;text-align:center;cursor:pointer}
+.preview{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}
+.preview div{position:relative;border:1px solid #ddd;border-radius:10px;overflow:hidden;background:white}
+.preview img{width:100%;height:110px;object-fit:cover;display:block}
+.preview button{position:absolute;top:5px;right:5px;background:#ef4444;color:white;border:none;border-radius:50%;width:24px;height:24px;cursor:pointer;font-weight:800}
+.preview span{display:block;text-align:center;font-size:11px;padding:4px;color:#666}
+</style>
+</head>
+<body>
+
+<div class="top">
+<h1>Orbittroniz</h1>
+<p style="font-size:12px">✨ LIVE AI • Free Forever • No Login • Made in India ✨</p>
+</div>
+
+<div class="nav">
+<a href="index.html">🏠 Home</a>
+<a href="index.html">🧰 All Tools</a>
+<a href="ai-writer.html">✍️ AI Writer</a>
+<a href="pdf-to-image.html">📄 PDF To Image</a>
+<a href="image-to-pdf.html" class="active">🖼️ Image To PDF</a>
+<a href="qr-code-maker.html">🔳 QR Maker</a>
+</div>
+
+<div class="wrap">
+<a href="index.html" style="color:#a78bfa;text-decoration:none;font-size:13px">← Back To All Tools</a>
+
+<!-- TOOL START - SAME TO SAME DESIGN -->
+<div class="card" style="margin-top:10px">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<h3>🖼️ Image To PDF - Photo To PDF</h3>
+<span class="badge">● LIVE • FREE</span>
+</div>
+<p style="font-size:12px;color:#666;margin:5px 0">Photo To PDF - Multiple Images • One PDF • No Login • Files Never Leave Your Phone</p>
+
+<div class="card2">
+<div style="background:#dcfce7;color:#111;padding:8px;border-radius:8px;font-size:12px">✅ <b>Private:</b> Your photos are converted inside your phone/browser. No upload to server.</div>
+
+<div class="drop" onclick="document.getElementById('imgFiles').click()" style="margin-top:10px">
+<div style="font-size:32px">🖼️</div>
+<b>Tap To Select Images</b>
+<p style="font-size:12px;color:#666">Select Multiple Photos - JPG, PNG, WebP • From Gallery / Camera</p>
+<input type="file" id="imgFiles" accept="image/*" multiple hidden onchange="loadImages(this)">
+</div>
+
+<div style="display:flex;gap:8px;margin-top:10px">
+<select id="pageSize"><option value="a4">A4 Size - For School / Job</option><option value="fit">Fit To Image - Full Photo</option><option value="letter">Letter Size</option></select>
+<select id="orientation"><option value="p">Portrait - Vertical</option><option value="l">Landscape - Horizontal</option></select>
+</div>
+
+<div style="display:flex;gap:8px;margin-top:8px">
+<select id="margin"><option value="10">Small Margin - Clean</option><option value="0">No Margin - Full Page</option><option value="20">Big Margin</option></select>
+<input id="pdfName" placeholder="PDF File Name - Example: My Notes" value="Orbittroniz-Image-To-PDF">
+</div>
+
+<div id="preview" class="preview"></div>
+<p id="status" style="text-align:center;font-size:12px;color:#666;margin-top:10px">No images selected yet. Select photos to start.</p>
+
+<button class="btn" onclick="makePDF()">✨ Convert Images To PDF</button>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:10px">
+<button class="smallbtn" onclick="document.getElementById('imgFiles').click()">➕ Add More Images</button>
+<button class="smallbtn" style="background:#eee;color:#111" onclick="clearAll()">🗑 Clear All</button>
+</div>
+
+<p style="text-align:center;font-size:11px;color:#999;margin-top:8px">Tip: Images ko upar-neeche karne ke liye pehle wali delete karke dobara select karo - Order wahi rahega jisme select kiya.</p>
+</div>
+</div>
+<!-- TOOL END -->
+
+<!-- SEO CONTENT - YEHI RANKING LAYEGA -->
+<div class="seo">
+<h1>Free Image to PDF Converter Online - JPG to PDF, PNG to PDF</h1>
+<p>Orbittroniz Image to PDF Converter is a <b>100% free online tool to convert your photos into one PDF file in just 10 seconds.</b> No watermark, no login, no app needed. Best for students, job seekers, and shop owners in India who want to make PDF from photos for school, job, or WhatsApp.</p>
+
+<h2>What is Image to PDF Converter?</h2>
+<p>Image to PDF Converter converts your JPG, PNG, or WebP photos into a professional PDF file. You can select 1 photo or 50 photos together - all will become 1 single PDF. It is perfect for Notes, Homework, ID Cards, Certificates, Bills, and Visiting Cards.</p>
+
+<h2>How to Convert Image to PDF? - 3 Easy Steps</h2>
+<p><b>Step 1:</b> Tap on Select Images and choose your photos from Gallery or Camera.<br>
+<b>Step 2:</b> Select Page Size - A4 for School/Job, and Orientation - Portrait or Landscape.<br>
+<b>Step 3:</b> Click on <b>Convert Images To PDF</b>. Download your PDF. Done!</p>
+
+<h2>Why Use Orbittroniz Image to PDF Tool?</h2>
+<p>1. <b>100% Free Forever</b> - No hidden charges.<br>
+2. <b>Multiple Images</b> - 50 photos = 1 PDF.<br>
+3. <b>No Watermark</b> - Clean professional PDF.<br>
+4. <b>100% Private</b> - Photos never leave your phone.<br>
+5. <b>Works on Mobile</b> - Best JPG to PDF converter for Android and iPhone.</p>
+
+<h2>Best For</h2>
+<p>Students who want to convert handwritten notes photo to PDF for teacher, Job seekers who want to make resume PDF from photo, Shop owners who want to make bill PDF, Everyone who wants to send photos as one PDF on WhatsApp.</p>
+
+<h2>Frequently Asked Questions</h2>
+<p><b>Q: How to convert JPG to PDF for free?</b><br>Just upload your JPG images above, click Convert, and download your PDF. 100% free.</p>
+<p><b>Q: Can I convert multiple images to one PDF?</b><br>Yes, select all images together, they will become one PDF in same order.</p>
+<p><b>Q: Is my photo safe?</b><br>Yes, your photo is converted inside your browser only. We never upload it to any server.</p>
+<p><b>Q: Can I use it on mobile?</b><br>Yes, it works perfectly on Android, iPhone, and Computer.</p>
+
+<p style="margin-top:15px"><b>Related Free Tools:</b><br>
+<a href="pdf-to-image.html">PDF To Image Converter - PDF to JPG →</a><br>
+<a href="qr-code-maker.html">QR Code Maker Free →</a><br>
+<a href="ai-writer.html">AI Writer - Free Essay, Blog, Caption →</a><br>
+<a href="index.html">All 12 Tools - Back to Home →</a>
+</p>
+</div>
+
+</div>
+
+<div class="footer">
+<b>Orbittroniz</b><br>12 Free AI Tools • No Login • 100% Private • Made in India 🇮🇳<br><br>
+<a href="index.html">About Us</a> <a href="index.html">Contact Us</a> <a href="index.html">Privacy Policy</a> <a href="index.html">Terms</a>
+</div>
+
+<script>
+let images=[];
+function loadImages(input){
+  let files=[...input.files];
+  files.forEach(f=>{
+    let reader=new FileReader();
+    reader.onload=e=>{
+      images.push(e.target.result);
+      render();
+    };
+    reader.readAsDataURL(f);
+  });
+}
+function render(){
+  let p=document.getElementById('preview'); p.innerHTML='';
+  images.forEach((src,i)=>{
+    let d=document.createElement('div');
+    d.innerHTML='<img src="'+src+'"><span>Page '+(i+1)+'</span><button onclick="removeImg('+i+')">×</button>';
+    p.appendChild(d);
+  });
+  document.getElementById('status').innerText='✅ '+images.length+' Images Selected - Ready To Convert';
+}
+function removeImg(i){images.splice(i,1);render(); if(images.length==0) document.getElementById('status').innerText='No images selected yet.'}
+function clearAll(){images=[];render();document.getElementById('status').innerText='Cleared. Select images again.'}
+async function makePDF(){
+  if(images.length==0){alert('Pehle images select karo!');return}
+  document.getElementById('status').innerText='Creating PDF... Please wait...';
+  const {jsPDF}=window.jspdf;
+  let size=document.getElementById('pageSize').value;
+  let orient=document.getElementById('orientation').value;
+  let margin=parseInt(document.getElementById('margin').value);
+  let name=document.getElementById('pdfName').value||'Orbittroniz-Image-To-PDF';
+  let doc=new jsPDF({orientation:orient,unit:'mm',format:size==='a4'?'a4':size==='letter'?'letter':[210,297]});
+  for(let i=0;i<images.length;i++){
+    if(i>0) doc.addPage(doc.internal.pageSize.getWidth(),doc.internal.pageSize.getHeight(),orient);
+    let w=doc.internal.pageSize.getWidth(), h=doc.internal.pageSize.getHeight();
+    let img=new Image(); img.src=images[i];
+    await new Promise(r=>img.onload=r);
+    if(size==='fit'){
+      // full page fit
+      doc.addImage(images[i],'JPEG',0,0,w,h,undefined,'FAST');
+    } else {
+      // keep aspect ratio inside margin
+      let ratio=Math.min((w-margin*2)/img.width,(h-margin*2)/img.height);
+      let nw=img.width*ratio, nh=img.height*ratio;
+      let x=(w-nw)/2, y=(h-nh)/2;
+      doc.addImage(images[i],'JPEG',x,y,nw,nh,undefined,'FAST');
+    }
+  }
+  doc.save(name+'.pdf');
+  document.getElementById('status').innerText='✅ Done! PDF Downloaded - '+images.length+' Pages';
+}
+</script>
+</body>
+</html>
