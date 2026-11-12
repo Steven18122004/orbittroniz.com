@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free PDF to Image Converter Online - PDF to JPG, PNG | Orbittroniz</title>
+<meta name="description" content="Convert PDF to Image online free. PDF to JPG, PDF to PNG in 10 seconds. No watermark, no login, no signup. Best free PDF to JPG converter for students in India.">
+<link rel="canonical" href="https://www.orbittroniz.com/pdf-to-image.html" />
+<meta property="og:title" content="Free PDF to Image Converter | Orbittroniz">
+<meta property="og:description" content="PDF Pages to JPG - ZIP - Stitch - Compress. 100% Free, No Login.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"PDF to Image - Orbittroniz","applicationCategory":"UtilitiesApplication","offers":{"@type":"Offer","price":"0"}}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#0a0620;color:white}
+.top{background:linear-gradient(180deg,#7c3aed,#4c1d95);padding:15px;text-align:center}
+.top h1{font-size:28px;background:linear-gradient(90deg,#facc15,#f472b6,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav{background:#7c3aed;display:flex;gap:8px;overflow:auto;padding:8px;white-space:nowrap}
+.nav a{background:rgba(255,255,255,.15);color:white;text-decoration:none;padding:7px 12px;border-radius:20px;font-size:13px;font-weight:700}
+.nav a.active{background:white;color:#7c3aed}
+.wrap{max-width:850px;margin:15px auto;padding:0 12px}
+.card{background:white;color:#111;border-radius:18px;padding:15px}
+.card2{background:#f8f5ff;border-radius:14px;padding:12px;margin-top:12px}
+.badge{display:inline-block;background:#22c55e;color:white;font-size:11px;padding:4px 8px;border-radius:20px;font-weight:800}
+.chip{display:inline-block;background:white;border:1px solid #ddd;border-radius:20px;padding:6px 10px;margin:4px 2px;font-size:12px;cursor:pointer}
+input,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;outline:none;font-size:14px}
+.btn{width:100%;background:linear-gradient(90deg,#ec4899,#7c3aed);color:white;border:none;padding:14px;border-radius:12px;font-size:16px;font-weight:800;cursor:pointer;margin-top:10px}
+.smallbtn{background:#111;color:white;border:none;padding:10px 14px;border-radius:20px;font-size:13px;cursor:pointer}
+.seo{background:white;color:#111;border-radius:18px;padding:18px;margin-top:15px;line-height:1.7}
+.seo h2{margin:15px 0 8px}
+.seo p{font-size:14px;color:#333}
+.footer{text-align:center;padding:20px;font-size:12px;opacity:.7}
+.footer a{color:white;margin:0 5px}
+.drop{border:2px dashed #a78bfa;background:#f5f3ff;border-radius:14px;padding:20px;text-align:center;cursor:pointer}
+.preview{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.preview img{width:100%;border-radius:10px;border:1px solid #ddd}
+.preview a{display:block;text-align:center;background:#111;color:white;text-decoration:none;padding:8px;border-radius:20px;font-size:12px;margin-top:5px}
+</style>
+</head>
+<body>
+
+<div class="top">
+<h1>Orbittroniz</h1>
+<p style="font-size:12px">✨ LIVE AI • Free Forever • No Login • Made in India ✨</p>
+</div>
+
+<div class="nav">
+<a href="index.html">🏠 Home</a>
+<a href="index.html">🧰 All Tools</a>
+<a href="ai-writer.html">✍️ AI Writer</a>
+<a href="pdf-to-image.html" class="active">📄 PDF To Image</a>
+<a href="qr-code-maker.html">🔳 QR Maker</a>
+<a href="index.html">⚙️ Settings</a>
+</div>
+
+<div class="wrap">
+<a href="index.html" style="color:#a78bfa;text-decoration:none;font-size:13px">← Back To All Tools</a>
+
+<!-- TOOL START - SAME TO SAME DESIGN -->
+<div class="card" style="margin-top:10px">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<h3>📄 PDF To Image - Convert PDF Pages</h3>
+<span class="badge">● LIVE • FREE</span>
+</div>
+<p style="font-size:12px;color:#666;margin:5px 0">PDF Pages To JPG - ZIP - Stitch - Compress • No Login • Files Never Leave Your Phone</p>
+
+<div class="card2">
+<div style="background:#dcfce7;color:#111;padding:8px;border-radius:8px;font-size:12px">✅ <b>Private:</b> Your PDF is converted inside your phone/browser. No upload to server.</div>
+
+<div class="drop" onclick="document.getElementById('pdfFile').click()" style="margin-top:10px">
+<div style="font-size:32px">📄</div>
+<b>Tap To Upload PDF File</b>
+<p style="font-size:12px;color:#666">Or Drag & Drop PDF Here • Max 50 MB</p>
+<input type="file" id="pdfFile" accept=".pdf" hidden onchange="loadPDF(this)">
+</div>
+
+<div style="display:flex;gap:8px;margin-top:10px">
+<select id="format"><option value="image/jpeg">JPG - For WhatsApp / Share</option><option value="image/png">PNG - High Quality</option></select>
+<select id="quality"><option value="1.5">Medium Quality - Fast</option><option value="2">High Quality - Clear</option><option value="1">Low Quality - Small Size</option></select>
+</div>
+
+<button class="btn" onclick="convertPDF()">✨ Convert PDF To Images</button>
+<p id="status" style="text-align:center;font-size:12px;color:#666;margin-top:8px">No file selected yet. Upload PDF to start.</p>
+
+<div id="preview" class="preview"></div>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:10px">
+<button class="smallbtn" onclick="downloadAll()">⬇ Download All Images</button>
+<button class="smallbtn" style="background:#eee;color:#111" onclick="location.reload()">🔄 New PDF</button>
+</div>
+</div>
+</div>
+<!-- TOOL END -->
+
+<!-- SEO CONTENT - YEHI RANKING LAYEGA -->
+<div class="seo">
+<h1>Free PDF to Image Converter Online - PDF to JPG & PNG</h1>
+<p>Orbittroniz PDF to Image Converter is a <b>100% free online tool to convert your PDF pages into JPG or PNG images in just 10 seconds.</b> No watermark, no login, no app needed. Best for students, teachers, and business owners in India who want to share PDF notes on WhatsApp or upload on a website.</p>
+
+<h2>What is PDF to Image Converter?</h2>
+<p>PDF to Image Converter converts every page of your PDF file into a separate image. For example, if your PDF has 5 pages, you will get 5 JPG images. You can download one by one or download all together. It works for Notes, Assignments, Forms, Invoices, and Visiting Cards.</p>
+
+<h2>How to Convert PDF to Image? - 3 Easy Steps</h2>
+<p><b>Step 1:</b> Tap on Upload and select your PDF file.<br>
+<b>Step 2:</b> Select Format - JPG for WhatsApp, PNG for High Quality. Select Quality - Medium or High.<br>
+<b>Step 3:</b> Click on <b>Convert PDF To Images</b>. Download your images. Done!</p>
+
+<h2>Why Use Orbittroniz PDF to Image Tool?</h2>
+<p>1. <b>100% Free Forever</b> - No hidden charges.<br>
+2. <b>No Watermark</b> - Your image will be clean.<br>
+3. <b>100% Private</b> - File is converted inside your phone, not uploaded to server.<br>
+4. <b>High Quality</b> - Clear images for printing and sharing.<br>
+5. <b>Works on Mobile</b> - No need to install any app.</p>
+
+<h2>Best For</h2>
+<p>Students who want to convert notes PDF to JPG for WhatsApp, Teachers who want to share question paper as image, Shop owners who want to convert invoice PDF to image, Job seekers who want to convert resume PDF to image.</p>
+
+<h2>Frequently Asked Questions</h2>
+<p><b>Q: Is PDF to JPG converter free?</b><br>Yes, it is 100% free for lifetime. No login needed.</p>
+<p><b>Q: Will there be watermark on my image?</b><br>No, there is no watermark at all.</p>
+<p><b>Q: Is my PDF safe?</b><br>Yes, your PDF never leaves your phone. Conversion happens in your browser only.</p>
+<p><b>Q: Can I convert PDF to JPG on mobile?</b><br>Yes, it works perfectly on Android, iPhone, and Computer.</p>
+
+<p style="margin-top:15px"><b>Related Free Tools:</b><br>
+<a href="ai-writer.html">AI Writer - Free Essay, Blog, Caption →</a><br>
+<a href="qr-code-maker.html">QR Code Maker Free →</a><br>
+<a href="index.html">All 12 Tools - Back to Home →</a>
+</p>
+</div>
+
+</div>
+
+<div class="footer">
+<b>Orbittroniz</b><br>12 Free AI Tools • No Login • 100% Private • Made in India 🇮🇳<br><br>
+<a href="index.html">About Us</a> <a href="index.html">Contact Us</a> <a href="index.html">Privacy Policy</a> <a href="index.html">Terms</a>
+</div>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+let pdfDoc=null, fileName='pdf';
+async function loadPDF(input){
+  let file=input.files[0];
+  if(!file) return;
+  fileName=file.name.replace('.pdf','');
+  document.getElementById('status').innerText='PDF Loaded: '+file.name+' - Now click Convert button';
+  let buf=await file.arrayBuffer();
+  pdfDoc=await pdfjsLib.getDocument({data:buf}).promise;
+  document.getElementById('status').innerText='✅ '+pdfDoc.numPages+' Pages Found in '+file.name+' - Click Convert';
+}
+async function convertPDF(){
+  if(!pdfDoc){alert('Pehle PDF upload karo!');return}
+  document.getElementById('status').innerText='Converting... Please wait...';
+  let preview=document.getElementById('preview'); preview.innerHTML='';
+  let format=document.getElementById('format').value;
+  let scale=parseFloat(document.getElementById('quality').value);
+  for(let i=1;i<=pdfDoc.numPages;i++){
+    let page=await pdfDoc.getPage(i);
+    let viewport=page.getViewport({scale:scale});
+    let canvas=document.createElement('canvas');
+    canvas.width=viewport.width; canvas.height=viewport.height;
+    await page.render({canvasContext:canvas.getContext('2d'),viewport:viewport}).promise;
+    let url=canvas.toDataURL(format,0.9);
+    let ext=format.includes('png')?'png':'jpg';
+    let div=document.createElement('div');
+    div.innerHTML='<img src="'+url+'"><a href="'+url+'" download="'+fileName+'-page-'+i+'.'+ext+'">⬇ Download Page '+i+'</a>';
+    preview.appendChild(div);
+  }
+  document.getElementById('status').innerText='✅ Done! '+pdfDoc.numPages+' Images Ready - Download Below';
+}
+function downloadAll(){
+  let links=document.querySelectorAll('#preview a');
+  if(links.length==0){alert('Pehle Convert karo!');return}
+  links.forEach((a,i)=>{setTimeout(()=>a.click(),i*300)});
+  alert('All images downloading...');
+}
+</script>
+</body>
+</html>
