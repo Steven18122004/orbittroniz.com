@@ -13,10 +13,25 @@
   "background_color": "#0a1224",
   "theme_color": "#7c3aed",
   "categories": ["business", "productivity", "tools", "utilities"],
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce8e53b7",
+  "scope_extensions": [
+    {
+      "origin": "https://orbittroniz.com"
+    },
+    {
+      "origin": "https://www.orbittroniz.com"
+    }
+  ],
   "display_override": ["window-controls-overlay", "standalone"],
   "handle_links": "preferred",
   "launch_handler": {
     "client_mode": "auto"
+  },
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "note_taking": {
+    "new_note_url": "/?note=new"
   },
   "icons": [
     {
@@ -50,42 +65,38 @@
       "short_name": "AI Writer",
       "description": "Free AI Writer Tool",
       "url": "/",
-      "icons": [
-        {
-          "src": "/icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
       "name": "PDF Tools",
       "short_name": "PDF Tools",
       "description": "Free PDF Tools",
       "url": "/",
-      "icons": [
-        {
-          "src": "/icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "QR Maker",
+      "short_name": "QR Maker",
+      "description": "Free QR Maker",
+      "url": "/",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     }
   ],
   "protocol_handlers": [
+    { "protocol": "web+orbittroniz", "url": "/?q=%s" }
+  ],
+  "file_handlers": [
     {
-      "protocol": "web+orbittroniz",
-      "url": "/?q=%s"
+      "action": "/",
+      "accept": { "text/plain": [".txt"], "application/pdf": [".pdf"] },
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }],
+      "launch_type": "single-client"
     }
   ],
   "share_target": {
     "action": "/",
     "method": "GET",
-    "params": {
-      "title": "title",
-      "text": "text",
-      "url": "url"
-    }
+    "params": { "title": "title", "text": "text", "url": "url" }
   },
   "screenshots": [
     {
@@ -93,14 +104,30 @@
       "sizes": "512x512",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "Orbittroniz Home"
+      "label": "Orbittroniz - Free Business Tools"
     },
     {
       "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Orbittroniz Home"
+      "label": "Orbittroniz - Free Business Tools"
+    }
+  ],
+  "widgets": [
+    {
+      "name": "Orbittroniz Tools",
+      "short_name": "Tools",
+      "description": "Quick access to Orbittroniz Tools",
+      "tag": "orbittroniz-tools",
+      "template": "orbittroniz-template",
+      "ms_ac_template": "widgets/orbittroniz-template.json",
+      "data": "widgets/orbittroniz-data.json",
+      "type": "application/json",
+      "screenshots": [{ "src": "/icon-512.png", "sizes": "512x512", "label": "Tools Widget" }],
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }],
+      "auth": false,
+      "update": 86400
     }
   ]
 }
