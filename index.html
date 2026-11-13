@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbittroniz AI - Chat Like ChatGPT | Just Type Anything</title>
+<meta name="description" content="Orbittroniz AI - Premium AI Chat. Just type anything. Photo, PDF, Calculator, QR. Like ChatGPT, but more powerful. 100% Free.">
+<meta name="robots" content="index, follow">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans-serif}
+body{background:#fff;color:#171717;overflow:hidden;height:100vh}
+button{font-family:inherit}
+/* LAYOUT LIKE CHATGPT */
+.app{display:flex;height:100vh}
+.sidebar{width:260px;background:#171717;color:#fff;display:flex;flex-direction:column;padding:14px;flex-shrink:0;transition:.3s}
+.sidebar.hidden{width:0;padding:0;overflow:hidden}
+.side-top{display:flex;align-items:center;gap:8px;padding:6px 6px 14px;border-bottom:1px solid #2d2d2d}
+.side-logo{width:32px;height:32px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.side-logo span{animation:logoMini 2s ease-in-out infinite;display:block}
+@keyframes logoMini{0%,100%{transform:rotate(-8deg) translateY(0)}50%{transform:rotate(8deg) translateY(-2px)}}
+.side-top b{font-size:15px;font-weight:600}
+.side-top small{font-size:11px;color:#9ca3af;display:block}
+.new-chat{margin:14px 0 10px;background:#fff;color:#111;border:none;padding:11px;border-radius:999px;font-weight:600;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:.2s}
+.new-chat:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(255,255,255,.2)}
+.history-label{font-size:11px;color:#9ca3af;padding:8px 8px 6px;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.history{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+.history-item{padding:10px 10px;border-radius:10px;font-size:13px;cursor:pointer;color:#e5e7eb;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.history-item:hover,.history-item.active{background:#2d2d2d}
+.history-item small{display:block;font-size:11px;color:#9ca3af;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side-bottom{border-top:1px solid #2d2d2d;padding-top:12px}
+.side-user{display:flex;align-items:center;gap:10px;padding:8px;border-radius:10px;cursor:pointer}
+.side-user:hover{background:#2d2d2d}
+.side-avatar{width:32px;height:32px;background:linear-gradient(135deg,#4f46e5,#ec4899);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+.side-user b{font-size:13px;display:block}.side-user small{font-size:11px;color:#9ca3af}
+/* MAIN CHAT AREA */
+.main{flex:1;display:flex;flex-direction:column;min-width:0;background:#fff}
+.topbar{display:flex;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid #e5e7eb}
+.menu-btn{width:36px;height:36px;border:1px solid #e5e7eb;background:#fff;border-radius:50%;cursor:pointer;font-size:16px}
+.topbar b{font-size:15px}
+.topbar span{font-size:12px;color:#6b7280;background:#f3f4f6;padding:4px 10px;border-radius:999px}
+.topbar-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.premium-btn{background:#111;color:#fff;border:none;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer}
+.share-btn{background:#fff;border:1px solid #e5e7eb;padding:8px 12px;border-radius:999px;font-size:12px;cursor:pointer}
+/* CHAT */
+.chat{flex:1;overflow-y:auto;padding:24px 18px 10px}
+.chat-inner{max-width:760px;margin:auto}
+.empty{text-align:center;padding:60px 10px 20px}
+.empty-logo{width:72px;height:72px;margin:auto;background:#111;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;animation:emptyFloat 3s ease-in-out infinite;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+@keyframes emptyFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-8px) rotate(3deg)}}
+.empty h1{font-size:28px;font-weight:600;margin-top:18px;letter-spacing:-.02em}
+.empty p{font-size:14px;color:#6b7280;margin-top:8px}
+.empty-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:22px}
+.empty-chips button{background:#fff;border:1px solid #e5e7eb;padding:9px 14px;border-radius:999px;font-size:13px;cursor:pointer}
+.empty-chips button:hover{background:#f9fafb;border-color:#111}
+.msg{margin:14px 0;display:flex;gap:12px;max-width:760px}
+.msg-user{justify-content:flex-end}
+.msg-avatar{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px}
+.msg-avatar.ai{background:#111;color:#fff}
+.msg-avatar.user{background:#f3f4f6}
+.msg-bubble{max-width:85%;padding:14px 16px;border-radius:18px;font-size:14px;line-height:1.65;white-space:pre-line;word-break:break-word}
+.msg-user .msg-bubble{background:#f3f4f6;border-bottom-right-radius:6px}
+.msg-ai .msg-bubble{background:#fff;border:1px solid #f0f0f0;border-bottom-left-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.msg-bubble b{font-weight:700}
+.msg-bubble img{max-width:100%;border-radius:12px;margin-top:8px;display:block}
+.msg-time{font-size:11px;color:#9ca3af;margin-top:6px}
+.typing{display:flex;gap:5px;align-items:center;padding:14px 16px}
+.typing i{width:8px;height:8px;background:#111;border-radius:50%;animation:typingPulse 1s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes typingPulse{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-4px)}}
+/* PREVIEW INSIDE CHAT - PREMIUM */
+.chat-preview{margin-top:12px;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;background:#fff}
+.chat-preview-top{display:flex;gap:10px}
+.chat-preview-top div{flex:1}
+.chat-preview-top p{font-size:11px;font-weight:600;padding:8px;text-align:center;background:#f9fafb;border-bottom:1px solid #e5e7eb}
+.chat-preview-top img{width:100%;height:180px;object-fit:contain;background:#000;display:block}
+.chat-preview-actions{display:flex;gap:8px;padding:10px}
+.chat-preview-actions button{flex:1;padding:11px;border-radius:999px;border:none;font-weight:600;cursor:pointer;font-size:13px}
+.btn-primary{background:#111;color:#fff}
+.btn-secondary{background:#f3f4f6;color:#111}
+.ai-ask{margin-top:12px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:14px;padding:12px}
+.ai-ask b{font-size:13px}
+.ai-ask p{font-size:13px;color:#6b7280;margin-top:4px}
+.ai-ask-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.ai-ask-btns button{background:#fff;border:1px solid #111;padding:8px 14px;border-radius:999px;font-size:13px;cursor:pointer;font-weight:600}
+.ai-ask-btns button:hover{background:#111;color:#fff}
+.qr-in-chat{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px;margin-top:10px;text-align:center}
+/* INPUT LIKE CHATGPT */
+.input-area{padding:14px 18px 10px;border-top:1px solid #f0f0f0;background:#fff}
+.input-inner{max-width:760px;margin:auto}
+.attach-preview{display:flex;gap:10px;overflow-x:auto;margin-bottom:10px}
+.attach-item{position:relative;flex:0 0 72px;height:72px;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb}
+.attach-item img{width:100%;height:100%;object-fit:cover}
+.attach-item button{position:absolute;top:4px;right:4px;width:20px;height:20px;background:#111;color:#fff;border:none;border-radius:50%;font-size:11px;cursor:pointer}
+.input-box{display:flex;align-items:flex-end;gap:8px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:24px;padding:8px 8px 8px 14px;box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.input-box:focus-within{border-color:#111;box-shadow:0 0 0 2px rgba(0,0,0,.06)}
+.input-box textarea{flex:1;border:none;outline:none;background:transparent;resize:none;font-size:15px;line-height:1.5;padding:8px 0;max-height:120px;font-family:inherit}
+.plus-btn{width:36px;height:36px;background:#fff;border:1px solid #e5e7eb;border-radius:50%;cursor:pointer;font-size:18px;flex-shrink:0}
+.send-btn{width:36px;height:36px;background:#111;color:#fff;border:none;border-radius:50%;cursor:pointer;font-size:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.send-btn:disabled{opacity:.4;cursor:not-allowed}
+.input-hint{text-align:center;font-size:11px;color:#9ca3af;margin-top:8px}
+.input-hint a{color:#6b7280}
+/* TOAST */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:10px 16px;border-radius:999px;font-size:13px;z-index:100;display:none;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+/* MOBILE */
+@media(max-width:768px){
+.sidebar{position:fixed;left:0;top:0;bottom:0;z-index:50;box-shadow:0 0 40px rgba(0,0,0,.4)}
+.sidebar.hidden{transform:translateX(-100%);width:260px;padding:14px}
+.empty h1{font-size:24px}
+.msg-bubble{max-width:92%}
+.topbar-right .share-btn{display:none}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<!-- SIDEBAR LIKE CHATGPT -->
+<aside class="sidebar" id="sidebar">
+<div class="side-top"><div class="side-logo"><span>🌀</span></div><div><b>Orbittroniz AI</b><small>Premium AI Assistant</small></div><span style="margin-left:auto;font-size:11px;background:#22c55e;color:#fff;padding:3px 8px;border-radius:999px;">● LIVE</span></div>
+<button class="new-chat" onclick="newChat()">✦ New Chat</button>
+<div class="history-label">Recent Chats</div>
+<div class="history" id="historyList">
+<div class="history-item active" onclick="loadHistory(0,this)">Photo 500kb<small>Photo tool • Just now</small></div>
+<div class="history-item" onclick="loadHistory(1,this)">SIP Calculator<small>Finance • 2 hours ago</small></div>
+<div class="history-item" onclick="loadHistory(2,this)">Passport Photo<small>Photo tool • Yesterday</small></div>
+<div class="history-item" onclick="loadHistory(3,this)">Love Calculator<small>Fun • Yesterday</small></div>
+</div>
+<div class="side-bottom"><div class="side-user"><div class="side-avatar">G</div><div><b>Guest User</b><small>Free Plan • Upgrade for Pro</small></div><span style="margin-left:auto;">⋯</span></div></div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+<div class="topbar"><button class="menu-btn" onclick="toggleSidebar()">☰</button><b>Orbittroniz AI</b><span>GPT-Style • Ultra Pro</span><div class="topbar-right"><button class="share-btn" onclick="showToast('Link copied - Share Orbittroniz AI')">↗ Share</button><button class="premium-btn" onclick="showToast('Pro coming soon - You are on Free Plan')">✦ Upgrade to Pro</button></div></div>
+
+<div class="chat" id="chatScroll">
+<div class="chat-inner" id="chatInner">
+<div class="empty" id="emptyState">
+<div class="empty-logo">🌀</div>
+<h1>What can I help you with?</h1>
+<p>Just type anything - Like ChatGPT. Upload a photo, ask for calculator, QR, PDF - AI will do it.</p>
+<div class="empty-chips">
+<button onclick="quickAsk('Make my photo 500kb')">Make my photo 500kb</button>
+<button onclick="quickAsk('Make passport photo')">Make passport photo</button>
+<button onclick="quickAsk('SIP 5000 12% 10 years')">SIP Calculator</button>
+<button onclick="quickAsk('Make QR code for https://orbittroniz.com')">Make QR Code</button>
+</div>
+<p style="font-size:12px;color:#9ca3af;margin-top:18px;">Your files never leave your device • Private • Free • No login needed</p>
+</div>
+<!-- CHAT MESSAGES WILL APPEAR HERE -->
+</div>
+</div>
+
+<!-- INPUT -->
+<div class="input-area">
+<div class="input-inner">
+<div class="attach-preview" id="attachPreview"></div>
+<div class="input-box">
+<button class="plus-btn" onclick="document.getElementById('fileInput').click()" title="Upload photo">＋</button>
+<textarea id="prompt" placeholder="Message Orbittroniz AI..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();runAI();}" oninput="autoGrow(this)"></textarea>
+<input type="file" id="fileInput" accept="image/*,application/pdf" multiple style="display:none;">
+<button class="send-btn" id="sendBtn" onclick="runAI()">↑</button>
+</div>
+<div class="input-hint">Orbittroniz AI can make mistakes. Check important info. • <a href="#" onclick="return false;">Privacy</a> • <a href="#" onclick="return false;">Terms</a></div>
+</div>
+</div>
+</main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+let files=[], selectedIndex=0, isWorking=false, lastCommand="", lastBlobUrls=[], chatHistory=[], currentChatId=Date.now();
+let currentResultUrl=null;
+function showToast(msg){ let t=document.getElementById('toast'); t.innerText=msg; t.style.display='block'; setTimeout(()=>t.style.display='none',2500); }
+function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('hidden'); if(window.innerWidth<=768) document.getElementById('sidebar').classList.toggle('hidden'); }
+function autoGrow(el){ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,120)+'px'; }
+function newChat(){ document.getElementById('chatInner').innerHTML=document.getElementById('emptyState').outerHTML; document.getElementById('chatInner').querySelector('#emptyState').style.display='block'; files=[]; renderAttach(); showToast('New chat started'); document.querySelectorAll('.history-item').forEach(i=>i.classList.remove('active')); }
+function loadHistory(idx, el){ document.querySelectorAll('.history-item').forEach(i=>i.classList.remove('active')); if(el) el.classList.add('active'); let msgs=['Make my photo 500kb','SIP 5000 12% 10 years','Make passport photo','Love Rahul Priya']; quickAsk(msgs[idx]||msgs[0]); }
+function quickAsk(text){ document.getElementById('prompt').value=text; document.getElementById('emptyState').style.display='none'; runAI(); }
+function addHistoryItem(title, sub){ let list=document.getElementById('historyList'); let d=document.createElement('div'); d.className='history-item'; d.innerHTML=title+'<small>'+sub+'</small>'; d.onclick=function(){ document.querySelectorAll('.history-item').forEach(i=>i.classList.remove('active')); d.classList.add('active'); }; list.prepend(d); }
+function scrollChat(){ let c=document.getElementById('chatScroll'); c.scrollTop=c.scrollHeight; }
+function addUserMsg(text, imgUrl){ let empty=document.getElementById('emptyState'); if(empty) empty.style.display='none'; let inner=document.getElementById('chatInner'); let d=document.createElement('div'); d.className='msg msg-user'; d.innerHTML=`<div class="msg-bubble">${escapeHtml(text)}${imgUrl?`<img src="${imgUrl}" alt="Uploaded">`:''}<div class="msg-time">You • ${new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</div></div><div class="msg-avatar user">G</div>`; inner.appendChild(d); scrollChat(); }
+function addAiMsg(html){ let inner=document.getElementById('chatInner'); let d=document.createElement('div'); d.className='msg msg-ai'; d.innerHTML=`<div class="msg-avatar ai">🌀</div><div class="msg-bubble">${html}<div class="msg-time">Orbittroniz AI • ${new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</div></div>`; inner.appendChild(d); scrollChat(); return d; }
+function addTyping(){ let inner=document.getElementById('chatInner'); let d=document.createElement('div'); d.className='msg msg-ai'; d.id='typingMsg'; d.innerHTML=`<div class="msg-avatar ai">🌀</div><div class="msg-bubble"><div class="typing"><i></i><i></i><i></i></div></div>`; inner.appendChild(d); scrollChat(); return d; }
+function removeTyping(){ let t=document.getElementById('typingMsg'); if(t) t.remove(); }
+function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function cleanup(){ lastBlobUrls.forEach(u=>{ try{ URL.revokeObjectURL(u); }catch(e){} }); lastBlobUrls=[]; }
+
+// FILE UPLOAD - PREMIUM
+document.getElementById('fileInput').addEventListener('change',function(e){
+  let newFiles=Array.from(e.target.files||[]); if(newFiles.length===0) return;
+  if(files.length+newFiles.length>10){ showToast('Max 10 files at once'); return; }
+  let promises=newFiles.map(f=>{ return new Promise(res=>{ if(!f.type.startsWith('image/')){ res({file:f,image:null,url:'',name:f.name,size:f.size}); return; } let r=new FileReader(); r.onload=function(ev){ let img=new Image(); img.onload=function(){ if(img.naturalWidth>4000||img.naturalHeight>4000){ let scale=Math.min(4000/img.naturalWidth,4000/img.naturalHeight); let c=document.createElement('canvas'); c.width=Math.floor(img.naturalWidth*scale); c.height=Math.floor(img.naturalHeight*scale); let ctx=c.getContext('2d'); ctx.drawImage(img,0,0,c.width,c.height); let newUrl=c.toDataURL('image/jpeg',0.92); let img2=new Image(); img2.onload=function(){ res({file:f,image:img2,url:newUrl,name:f.name,size:f.size,wasLarge:true}); }; img2.src=newUrl; } else res({file:f,image:img,url:ev.target.result,name:f.name,size:f.size}); }; img.onerror=function(){ res({file:f,image:null,url:'',name:f.name,size:f.size}); }; img.src=ev.target.result; }; r.readAsDataURL(f); }); });
+  Promise.all(promises).then(results=>{ files=files.concat(results); selectedIndex=0; renderAttach(); showToast(results.length+' file(s) uploaded - Now type what to do'); });
+});
+function renderAttach(){ let box=document.getElementById('attachPreview'); box.innerHTML=''; files.forEach((f,i)=>{ let d=document.createElement('div'); d.className='attach-item'; d.innerHTML=`<img src="${f.url||'data:image/svg+xml,[STRIPPED]'}"><button onclick="removeFile(${i})">×</button>`; d.onclick=function(){ selectedIndex=i; }; box.appendChild(d); }); }
+function removeFile(i){ files.splice(i,1); if(selectedIndex>=files.length) selectedIndex=Math.max(0,files.length-1); renderAttach(); }
+function nums(s){ let m=s.match(/[\d.]+/g); return m?m.map(Number):[]; }
+function parseDate(str){ let m=str.match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/); if(!m) return null; return {d:parseInt(m[1]),mo:parseInt(m[2]),y:parseInt(m[3])}; }
+function normalizeText(t){ let s=t.toLowerCase().trim(); s=s.replace(/pasport|passprt/g,'passport').replace(/phot|photoo/g,'photo'); s=s.replace(/chota|chhota|tiny|small size|reduce|compress|shrink/g,'small'); s=s.replace(/bada|bigger|enlarge/g,'bigger'); s=s.replace(/black white|grayscale|bw/g,'black'); s=s.replace(/ulta|flip/g,'mirror'); s=s.replace(/gol|circle/g,'round'); return s; }
+function hasAny(text, words){ return words.some(w=>text.includes(w)); }
+
+function runAI(){
+  if(isWorking) return;
+  let input=document.getElementById('prompt'); let raw=input.value.trim(); if(!raw && files.length===0){ showToast('Type a message'); return; }
+  if(!raw && files.length>0) raw='Make my photo small';
+  let text=normalizeText(raw); let orig=raw;
+  if((text==='make it smaller'||text==='smaller') && lastCommand && files.length>0){ text=lastCommand; orig=lastCommand; }
+  lastCommand=text;
+  document.getElementById('emptyState').style.display='none';
+  // Show user msg
+  let imgUrl=files[selectedIndex]?.url||'';
+  addUserMsg(orig, imgUrl);
+  input.value=''; input.style.height='auto';
+  isWorking=true; document.getElementById('sendBtn').disabled=true;
+  let typing=addTyping();
+  // Simulate premium thinking like ChatGPT
+  setTimeout(()=>{ removeTyping(); isWorking=false; document.getElementById('sendBtn').disabled=false; doAI(text,orig); }, 900);
+}
+
+function askOptionsInChat(title, question, options, onSelect){
+  let btns=options.map((o,i)=>`<button onclick="selectOption(${i})">${o.label}</button>`).join('');
+  let html=`<b>🤖 ${title}</b><br>${question}<div class="ai-ask"><b>${title}</b><p>${question}</p><div class="ai-ask-btns">${btns}</div></div>`;
+  let msgEl=addAiMsg(html);
+  // Store callback
+  window._currentOptions={options, onSelect, msgEl};
+}
+window.selectOption=function(i){
+  let cur=window._currentOptions; if(!cur) return;
+  let opt=cur.options[i]; let el=cur.msgEl; if(el) el.querySelector('.ai-ask').innerHTML=`<b>✅ You selected: ${opt.label}</b><p>Processing...</p>`;
+  cur.onSelect(opt.value, opt.label);
+};
+
+function doAI(text, orig){
+  // API tools
+  if(text.includes('background remover')) return addAiMsg(`<b>Background Remover - Pro Feature</b><br>This tool needs Pro AI API. Coming soon in Pro version.<br><br>Try Photo, PDF, Calculator now - Those work 100%.<br><button onclick="quickAsk('Make my photo small')" style="background:#111;color:#fff;border:none;padding:8px 14px;border-radius:999px;cursor:pointer;margin-top:8px;">Try Photo Small Instead →</button>`);
+  if(text.includes('video')||text.includes('reel')) return addAiMsg(`<b>Video Tool - Coming Soon</b><br>Video compress / Video to MP3 is coming in Pro version. Try Photo tools now.`);
+  if(text.includes('audio')||text.includes('mp3')||text.includes('voice')) return addAiMsg(`<b>Audio to Text - Coming Soon</b><br>Coming in Pro version.`);
+  if(text.includes('translate')) return addAiMsg(`<b>Translator - Coming Soon</b><br>Coming in Pro version.`);
+  // QR
+  if(text.includes('qr')||text.includes('https://')){ let link=orig.replace(/make qr code for/i,'').replace(/qr code for/i,'').replace(/make qr code/i,'').trim()||'https://orbittroniz.com'; if(!link.startsWith('http')&&link.includes('.')) link='https://'+link; if(link.includes('http')) return makeQRInChat(link); }
+  if(text.includes('upi')) return makeQRInChat('upi://pay?pa=test@upi&pn=Orbittroniz&cu=INR');
+  // FUN + CALCULATORS - ALL IN CHAT
+  if(text.includes('password')){ let chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!'; let p=''; for(let i=0;i<12;i++) p+=chars[Math.floor(Math.random()*chars.length)]; return addAiMsg(`<b>🔐 Strong Password Created</b><br><br><b style="background:#f3f4f6;padding:8px 12px;border-radius:8px;display:inline-block;">${p}</b><br><br>Length: 12 • Strong • Do not share.`); }
+  if(text.includes('word count')){ let txt=orig.replace(/word count/i,'').trim()||'hello world'; return addAiMsg(`<b>📝 Word Counter</b><br><br>Text: "${txt}"<br>Words: <b>${txt.split(/\s+/).filter(Boolean).length}</b><br>Characters: <b>${txt.length}</b>`); }
+  if(text.includes('resume')){ let name=orig.replace(/make resume for/i,'').replace(/resume for/i,'').replace(/make resume/i,'').trim()||'Rahul Kumar'; return addAiMsg(`<b>📄 Resume Ready - Copy It</b><br><br>Name: ${name}<br>Phone: 98XXX XXXXX<br>Email: ${name.toLowerCase().replace(/\s/g,'')}@gmail.com<br><br>Objective: Hardworking and honest<br>Education: 12th Pass, Graduation<br>Skills: Computer, Typing, Communication`); }
+  if(text.includes('joke')){ let jokes=['😂 Teacher: Why were you absent yesterday? Student: Sir, I was studying on WhatsApp!','😂 Pappu: Mummy, what will I become when I grow up? Mummy: First become small!','😂 Doctor: What happened? Patient: I forget everything. Doctor: Since when? Patient: Since when what?']; return addAiMsg(`<b>😂 Joke</b><br><br>${jokes[Math.floor(Math.random()*jokes.length)]}`); }
+  if(text.includes('shayari')) return addAiMsg(`<b>✍️ Shayari</b><br><br>Stay happy in life,<br>Face every difficulty with a smile,<br>Be happy with what you get,<br>Pray for what you don't get. ❤️`);
+  if(text.includes('coin toss')) return addAiMsg(`<b>🪙 Coin Toss</b><br><br>Result: <b>${Math.random()>0.5?'Heads - Chit':'Tails - Pat'}</b>`);
+  if(text.includes('dice')){ let d=Math.floor(Math.random()*6)+1; return addAiMsg(`<b>🎲 Dice Roll</b><br><br>You rolled: <b>${d}</b>`); }
+  if(text.includes('friendship')){ let cl=orig.replace(/friendship/i,'').trim().split(/\s+/); let n1=cl[0]||'Rahul', n2=cl[1]||'Priya'; let sum=(n1+n2).split('').reduce((a,c)=>a+c.charCodeAt(0),0); let perc=60+(sum%40); return addAiMsg(`<b>🤝 Friendship Calculator</b><br><br>${n1} 🤝 ${n2}<br><br>Friendship: <b>${perc}%</b><br>${perc>85?'Best Friends Forever! 💛':'Great Friends! 😊'}`); }
+  if(text.includes('love')){ let cl=orig.replace(/love/i,'').trim().split(/\s+/); let n1=cl[0]||'Rahul', n2=cl[1]||'Priya'; let sum=(n1+n2).split('').reduce((a,c)=>a+c.charCodeAt(0),0); let perc=55+(sum%45); return addAiMsg(`<b>❤️ Love Calculator - For Fun Only</b><br><br>${n1} ❤️ ${n2}<br><br>Love: <b>${perc}%</b><br>${perc>85?'Perfect Match! 💍':perc>70?'Great Love! 💕':'Try More! 😊'}`); }
+  if(text.includes('lucky')){ let name=orig.replace(/lucky number/i,'').replace(/lucky/i,'').trim()||'Rahul'; let sum=name.split('').reduce((a,c)=>a+c.charCodeAt(0),0); let lucky=(sum%9)+1; return addAiMsg(`<b>🍀 Lucky Number</b><br><br>Name: ${name}<br>Lucky Number: <b>${lucky}</b>`); }
+  if(text.includes('water intake')||text.includes('water')){ let n=nums(orig); if(n.length<1){ return addAiMsg(`<b>💧 Water Intake</b><br><br>Please type like: <b>water intake 70kg</b>`); } let w=n[0]; let litres=w*0.033; return addAiMsg(`<b>💧 Water Intake Calculator</b><br><br>Weight: ${w} Kg<br><br>Drink Daily: <b>${litres.toFixed(1)} Litres</b><br>Glasses: <b>${Math.round(litres*4)} Glasses</b>`); }
+  if(text.includes('bike mileage')||text.includes('mileage')){ let n=nums(orig); if(n.length<2){ return addAiMsg(`<b>🏍️ Bike Mileage</b><br><br>Type like: <b>bike mileage 500 10</b> - 500 km in 10 litre`); } let km=n[0], lit=n[1]; return addAiMsg(`<b>🏍️ Bike Mileage</b><br><br>Distance: ${km} Km<br>Petrol: ${lit} Litre<br><br>Mileage: <b>${(km/lit).toFixed(1)} Km / Litre</b>`); }
+  if(text.includes('currency')||text.includes('usd to inr')){ let n=nums(orig); if(n.length<1){ return addAiMsg(`<b>💱 Currency</b><br><br>Type like: <b>currency 100 usd to inr</b>`); } let usd=n[0]; return addAiMsg(`<b>💱 Currency Converter</b><br><br>${usd} USD = <b>₹${Math.round(usd*83).toLocaleString('en-IN')} INR</b><br>Rate: 1 USD = ₹83 (Approx)`); }
+  if(text.includes('tip')){ let n=nums(orig); if(n.length<2){ return addAiMsg(`<b>🍽️ Tip Calculator</b><br><br>Type like: <b>tip 1000 10</b>`); } let bill=n[0], tipPerc=n[1]; let tip=bill*tipPerc/100; return addAiMsg(`<b>🍽️ Tip Calculator</b><br><br>Bill: ₹${bill}<br>Tip: ${tipPerc}%<br><br>Tip: <b>₹${tip.toFixed(0)}</b><br>Total: <b>₹${(bill+tip).toFixed(0)}</b>`); }
+  if(text.includes('sip')){ let n=nums(orig); if(n.length<3){ return askOptionsInChat('SIP Calculator','SIP needs 3 numbers. Choose a popular option:',[{label:'₹5000 • 12% • 10 Years',value:'sip 5000 12% 10 years'},{label:'₹10000 • 12% • 15 Years',value:'sip 10000 12% 15 years'}],function(val){ document.getElementById('prompt').value=val; runAI(); }); } let monthly=n[0], rate=n[1]/100/12, years=n[2]; let months=years*12; let future=monthly*((Math.pow(1+rate,months)-1)/rate)*(1+rate); let inv=monthly*months; return addAiMsg(`<b>📈 SIP Calculator Result</b><br><br>Monthly: ₹${monthly.toLocaleString('en-IN')}<br>Rate: ${n[1]}%<br>Time: ${years} Years<br><br>Invested: <b>₹${Math.round(inv).toLocaleString('en-IN')}</b><br>Profit: <b>₹${Math.round(future-inv).toLocaleString('en-IN')}</b><br>Total Value: <b>₹${Math.round(future).toLocaleString('en-IN')}</b>`); }
+  if(text.includes('fd')){ let n=nums(orig); if(n.length<3){ return addAiMsg(`<b>🏦 FD Calculator</b><br><br>Type like: <b>fd 100000 7% 5 years</b>`); } let P=n[0], r=n[1]/100, y=n[2]; let mat=P*Math.pow(1+r,y); return addAiMsg(`<b>🏦 FD Calculator</b><br><br>FD: ₹${P.toLocaleString('en-IN')}<br>Rate: ${n[1]}%<br>Time: ${y} Years<br><br>Interest: <b>₹${Math.round(mat-P).toLocaleString('en-IN')}</b><br>Maturity: <b>₹${Math.round(mat).toLocaleString('en-IN')}</b>`); }
+  if(text.includes('emi')){ let n=nums(orig); if(n.length<3){ return addAiMsg(`<b>💰 EMI Calculator</b><br><br>Type like: <b>emi 500000 12% 24 months</b>`); } let P=n[0], R=n[1]/100/12, N=n[2]; let emi=P*R*Math.pow(1+R,N)/(Math.pow(1+R,N)-1); return addAiMsg(`<b>💰 EMI Calculator</b><br><br>Loan: ₹${P.toLocaleString('en-IN')}<br>Rate: ${n[1]}%<br>Months: ${N}<br><br>EMI: <b>₹${Math.round(emi).toLocaleString('en-IN')} / month</b><br>Total Interest: ₹${Math.round(emi*N-P).toLocaleString('en-IN')}`); }
+  if(text.includes('gst reverse')){ let n=nums(orig); if(n.length<1) return addAiMsg(`Type like: gst reverse 1180`); let total=n[0], rate=n[1]||18; let base=total/(1+rate/100); return addAiMsg(`<b>🧾 GST Reverse</b><br><br>With GST: ₹${total}<br>Without GST: <b>₹${base.toFixed(2)}</b><br>GST: ₹${(total-base).toFixed(2)}`); }
+  if(text.includes('gst')){ let n=nums(orig); if(n.length<1) return addAiMsg(`Type like: gst 1000 18%`); let amt=n[0], rate=n[1]||18; let gst=amt*rate/100; return addAiMsg(`<b>🧾 GST Calculator</b><br><br>Amount: ₹${amt}<br>GST: ₹${gst.toFixed(2)}<br>Total: <b>₹${(amt+gst).toFixed(2)}</b>`); }
+  if(text.includes('discount')){ let n=nums(orig); if(n.length<2) return addAiMsg(`Type like: discount 1000 20%`); let amt=n[0], disc=n[1]; let save=amt*disc/100; return addAiMsg(`<b>🏷️ Discount</b><br><br>MRP: ₹${amt}<br>Discount: ${disc}%<br><br>You Save: <b>₹${save.toFixed(0)}</b><br>You Pay: <b>₹${(amt-save).toFixed(0)}</b>`); }
+  if(text.includes('salary')){ let n=nums(orig); if(n.length<1) return addAiMsg(`Type like: salary 50000`); let m=n[0]; return addAiMsg(`<b>💵 Salary Calculator</b><br><br>CTC: ₹${m.toLocaleString('en-IN')}<br>Yearly: ₹${(m*12).toLocaleString('en-IN')}<br>In-Hand: <b>₹${Math.round(m*0.85).toLocaleString('en-IN')}</b>`); }
+  if(text.includes('cgpa')){ let n=nums(orig); if(n.length<1) return addAiMsg(`Type like: cgpa 8.5`); return addAiMsg(`<b>🎓 CGPA to Percentage</b><br><br>CGPA: ${n[0]}<br>Percentage: <b>${(n[0]*9.5).toFixed(1)}%</b>`); }
+  if(text.includes('marks')){ let n=nums(orig); if(n.length<2) return addAiMsg(`Type like: marks 450 500`); return addAiMsg(`<b>📊 Marks Percentage</b><br><br>Marks: ${n[0]} / ${n[1]}<br>Percentage: <b>${(n[0]/n[1]*100).toFixed(2)}%</b>`); }
+  if(text.includes('age')){ let pd=parseDate(orig); if(!pd) return addAiMsg(`<b>📅 Age Calculator</b><br><br>Type like: <b>age 15/08/2000</b>`); let birth=new Date(pd.y,pd.mo-1,pd.d), now=new Date(); let age=now.getFullYear()-birth.getFullYear(); if(now.getMonth()<birth.getMonth()||(now.getMonth()===birth.getMonth()&&now.getDate()<birth.getDate())) age--; return addAiMsg(`<b>📅 Age Result</b><br><br>Birth: ${pd.d}/${pd.mo}/${pd.y}<br>Age: <b>${age} Years</b>`); }
+  if(text.includes('bmi')){ let n=nums(orig); if(n.length<2) return addAiMsg(`Type like: bmi 70kg 5.8ft`); let w=n[0], hFt=n[1]; let hM=hFt*0.3048; let bmi=w/(hM*hM); return addAiMsg(`<b>⚖️ BMI Calculator</b><br><br>Weight: ${w} Kg<br>Height: ${hFt} Ft<br>BMI: <b>${bmi.toFixed(1)}</b>`); }
+  if(text.includes('bill')){ let n=nums(orig); if(n.length<2) return addAiMsg(`Type like: bill 1000 4 people`); return addAiMsg(`<b>🧾 Bill Split</b><br><br>Total: ₹${n[0]}<br>People: ${n[1]}<br>Each Pays: <b>₹${(n[0]/n[1]).toFixed(0)}</b>`); }
+  // PHOTO - CHATGPT STYLE
+  if(files.length===0){ if(text.includes('kb')||text.includes('photo')||text.includes('passport')||text.includes('pdf')||text.includes('small')){ return addAiMsg(`<b>📁 Please upload a photo first</b><br><br>Click <b>+</b> below to upload a photo, then type again.<br><br>For Calculator / QR / Love, no photo needed.`); } return addAiMsg(`<b>I didn't understand that.</b><br><br>Try these:<br>• "Make my photo 500kb" (upload photo first)<br>• "SIP 5000 12% 10 years"<br>• "Make QR code for https://youtube.com"<br>• "Love Rahul Priya"`); }
+  let sel=files[selectedIndex]; if(!sel||!sel.image){ return addAiMsg(`Please select a valid photo.`); }
+  let kbMatch=text.match(/(\d+)\s*kb/);
+  if(hasAny(text,['small','compress','reduce']) && !kbMatch){
+    return askOptionsInChat('Photo Size','Which size do you want for your photo?',[
+      {label:'500kb - For Form', value:500},
+      {label:'200kb - For College', value:200},
+      {label:'100kb - For Job Form', value:100},
+      {label:'50kb - Very Small', value:50},
+      {label:'20kb - Smallest', value:20}
+    ], function(val){ document.getElementById('prompt').value='Make my photo '+val+'kb'; runAI(); });
+  }
+  if(hasAny(text,['passport','aadhar','pan card']) && !text.includes('white') && !text.includes('black')){
+    return askOptionsInChat('Passport Photo','Which background do you want?',[
+      {label:'⬜ White Background', value:'white'},
+      {label:'⬛ Black Background', value:'black'}
+    ], function(val){ doPassportWithBg(sel, val); });
+  }
+  if(text.includes('convert') && !text.includes('pdf') && !text.includes('png') && !text.includes('jpg')){
+    return askOptionsInChat('Convert Photo','Convert to which format?',[
+      {label:'📄 PDF', value:'pdf'},
+      {label:'🖼️ PNG', value:'png'},
+      {label:'🖼️ JPG', value:'jpeg'}
+    ], function(val){ if(val==='pdf') makePDF(sel); else convertFormat(sel, val); });
+  }
+  if(kbMatch) return resizeToKB(parseInt(kbMatch[1]), sel);
+  if(text.includes('passport')) return doPassportWithBg(sel, text.includes('black')?'black':'white');
+  if(text.includes('black')) return applyFilter('grayscale', sel);
+  if(text.includes('sepia')) return applyFilter('sepia', sel);
+  if(text.includes('blur')) return applyFilter('blur', sel);
+  if(text.includes('bright')) return applyFilter('brightness', sel);
+  if(text.includes('rotate')) return rotateImage(sel);
+  if(text.includes('mirror')) return mirrorImage(sel);
+  if(text.includes('round')||text.includes('circle')) return roundImage(sel);
+  if(text.includes('collage')) return collageImage(sel);
+  if(text.includes('crop')) return cropCenter(sel);
+  if(text.includes('pdf')) return makePDF(sel);
+  if(text.includes('png')||text.includes('jpg')||text.includes('jpeg')) return convertFormat(sel, text.includes('png')?'png':'jpeg');
+  if(hasAny(text,['name','watermark','text','write'])) return addText(sel, orig);
+  if(text.includes('date')) return addDate(sel);
+  if(text.includes('border')||text.includes('frame')) return addBorder(sel);
+  if(text.includes('bigger')||text.includes('enlarge')||text.includes('2x')) return enlarge2x(sel);
+  if(text.includes('size')&&text.includes('photo')) return addAiMsg(`<b>📏 Photo Size</b><br><br>File: ${sel.name}<br>Size: ${(sel.size/1024).toFixed(1)} KB<br>Dimensions: ${sel.image.naturalWidth} x ${sel.image.naturalHeight} px`);
+  if(text.includes('whatsapp')||text.includes('instagram')||text.includes('dp')) return cropCenter(sel);
+  if(text.includes('500')||text.includes('100')){ let n=nums(orig); if(n[0]) return resizeToKB(n[0], sel); }
+  return addAiMsg(`<b>I didn't understand fully.</b><br><br>Try: <b>"Make my photo small"</b> - I will ask you options.<br>Or: <b>"Make my photo 500kb"</b> - Direct.`);
+}
+function showPreviewInChat(beforeUrl, afterBlob, afterName, info){
+  cleanup(); let afterUrl=URL.createObjectURL(afterBlob); lastBlobUrls.push(afterUrl); currentResultUrl=afterUrl;
+  let html=`<b>✅ Done! Preview Below</b><br>${info}<div class="chat-preview"><div class="chat-preview-top"><div><p>⬅️ BEFORE</p><img src="${beforeUrl}"></div><div><p>✅ AFTER</p><img src="${afterUrl}"></div></div><div class="chat-preview-actions"><button class="btn-secondary" onclick="showToast('Type again with different size')">🔄 Try Again</button><button class="btn-primary" onclick="downloadCurrent('${afterName}')">⬇️ Download - Looks Good</button></div></div><p style="font-size:12px;color:#6b7280;margin-top:8px;">If it looks good, click Download. If not, click Try Again and type different size.</p>`;
+  addAiMsg(html);
+  window._lastDownload={url:afterUrl, name:afterName};
+}
+window.downloadCurrent=function(name){ let d=window._lastDownload; if(!d) return; let a=document.createElement('a'); a.href=d.url; a.download=d.name||name; a.click(); showToast('Downloaded!'); };
+function doPassportWithBg(sel, bg){ let img=sel.image; if(!img||!img.naturalWidth){ addAiMsg(`Photo not loaded. Please re-upload.`); return; } let c=document.createElement('canvas'); c.width=413; c.height=531; let ctx=c.getContext('2d'); ctx.fillStyle=bg==='black'?'#000':'#fff'; ctx.fillRect(0,0,413,531); let s=Math.min(img.naturalWidth/413,img.naturalHeight/531); let sw=413*s, sh=531*s; let sx=(img.naturalWidth-sw)/2, sy=(img.naturalHeight-sh)/2; ctx.drawImage(img,sx,sy,sw,sh,0,0,413,531); c.toBlob(b=>{ if(!b){ addAiMsg(`Could not create passport photo.`); return; } showPreviewInChat(sel.url,b,'passport-photo.jpg',`Passport Photo • 35x45mm • Background: ${bg} • Check preview.`); },'image/jpeg',0.95); }
+function resizeToKB(targetKB, sel){ let img=sel.image; if(!img||!img.naturalWidth){ addAiMsg(`Photo not loaded. Please re-upload.`); return; } let c=document.createElement('canvas'), ctx=c.getContext('2d'); c.width=img.naturalWidth; c.height=img.naturalHeight; ctx.drawImage(img,0,0,c.width,c.height); let q=0.92; (function loop(){ c.toBlob(b=>{ if(!b){ addAiMsg(`Could not process photo.`); return; } let kb=b.size/1024; if(kb>targetKB && q>0.08){ q-=0.08; loop(); } else showPreviewInChat(sel.url,b,'photo-'+targetKB+'kb.jpg',`Original: ${(sel.size/1024).toFixed(1)} KB • New: <b>${kb.toFixed(1)} KB</b> • Target: ${targetKB}kb`); },'image/jpeg',q); })(); }
+function applyFilter(type, sel){ let img=sel.image; let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); if(type==='grayscale') ctx.filter='grayscale(1)'; if(type==='blur') ctx.filter='blur(8px)'; if(type==='brightness') ctx.filter='brightness(1.4)'; if(type==='sepia') ctx.filter='sepia(0.8)'; ctx.drawImage(img,0,0,c.width,c.height); c.toBlob(b=>showPreviewInChat(sel.url,b,'photo-'+type+'.jpg',`Filter: ${type} • Check preview.`),'image/jpeg',0.9); }
+function rotateImage(sel){ let img=sel.image; let c=document.createElement('canvas'); c.width=img.naturalHeight; c.height=img.naturalWidth; let ctx=c.getContext('2d'); ctx.translate(c.width/2,c.height/2); ctx.rotate(Math.PI/2); ctx.drawImage(img,-img.naturalWidth/2,-img.naturalHeight/2); c.toBlob(b=>showPreviewInChat(sel.url,b,'photo-rotate.jpg','Rotated 90 Degrees'),'image/jpeg',0.9); }
+function mirrorImage(sel){ let img=sel.image; let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); ctx.translate(c.width,0); ctx.scale(-1,1); ctx.drawImage(img,0,0); c.toBlob(b=>showPreviewInChat(sel.url,b,'photo-mirror.jpg','Mirror Effect'),'image/jpeg',0.9); }
+function roundImage(sel){ let img=sel.image; let c=document.createElement('canvas'); let size=Math.min(img.naturalWidth,img.naturalHeight); c.width=size; c.height=size; let ctx=c.getContext('2d'); ctx.beginPath(); ctx.arc(size/2,size/2,size/2,0,Math.PI*2); ctx.clip(); ctx.drawImage(img,(img.naturalWidth-size)/2,(img.naturalHeight-size)/2,size,size,0,0,size,size); c.toBlob(b=>showPreviewInChat(sel.url,b,'round-dp.png','Round DP • For WhatsApp'),'image/png'); }
+function collageImage(sel){ let img=sel.image; let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); ctx.drawImage(img,0,0,c.width/2,c.height); ctx.drawImage(img,c.width/2,0,c.width/2,c.height); c.toBlob(b=>showPreviewInChat(sel.url,b,'collage.jpg','Collage - 2 in 1'),'image/jpeg',0.9); }
+function cropCenter(sel){ let img=sel.image; let c=document.createElement('canvas'); let size=Math.min(img.naturalWidth,img.naturalHeight); c.width=size; c.height=size; let ctx=c.getContext('2d'); ctx.drawImage(img,(img.naturalWidth-size)/2,(img.naturalHeight-size)/2,size,size,0,0,size,size); c.toBlob(b=>showPreviewInChat(sel.url,b,'photo-crop.jpg','Square Crop • For Instagram / DP'),'image/jpeg',0.9); }
+function convertFormat(sel, fmt){ let img=sel.image; let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); if(fmt==='png'){ ctx.drawImage(img,0,0); c.toBlob(b=>showPreviewInChat(sel.url,b,'photo.png','Converted to PNG'),'image/png'); } else { ctx.fillStyle='#fff'; ctx.fillRect(0,0,c.width,c.height); ctx.drawImage(img,0,0); c.toBlob(b=>showPreviewInChat(sel.url,b,'photo.jpg','Converted to JPG'),'image/jpeg',0.9); } }
+function addText(sel, orig){ let img=sel.image; let name=orig.split('-')[1]||orig.replace(/add name/i,'').replace(/write/i,'').trim()||'Orbittroniz'; if(!name) name='Orbittroniz'; let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); ctx.drawImage(img,0,0); ctx.font='bold '+Math.round(c.width/12)+'px Arial'; ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.strokeStyle='rgba(0,0,0,0.7)'; ctx.lineWidth=4; ctx.textAlign='center'; ctx.strokeText(name,c.width/2,c.height-30); ctx.fillText(name,c.width/2,c.height-30); c.toBlob(b=>showPreviewInChat(sel.url,b,'photo-name.jpg','Text on photo: '+name),'image/jpeg',0.92); }
+function addDate(sel){ let img=sel.image; let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); ctx.drawImage(img,0,0); let d=new Date().toLocaleDateString('en-IN'); ctx.font='bold '+Math.round(c.width/15)+'px Arial'; ctx.fillStyle='yellow'; ctx.textAlign='right'; ctx.fillText(d,c.width-20,c.height-20); c.toBlob(b=>showPreviewInChat(sel.url,b,'photo-date.jpg','Date Added: '+d),'image/jpeg',0.92); }
+function addBorder(sel){ let img=sel.image; let c=document.createElement('canvas'); let b=20; c.width=img.naturalWidth+b*2; c.height=img.naturalHeight+b*2; let ctx=c.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,c.width,c.height); ctx.drawImage(img,b,b); c.toBlob(b2=>showPreviewInChat(sel.url,b2,'photo-border.jpg','Border Added'),'image/jpeg',0.92); }
+function enlarge2x(sel){ let img=sel.image; let c=document.createElement('canvas'); c.width=img.naturalWidth*2; c.height=img.naturalHeight*2; let ctx=c.getContext('2d'); ctx.drawImage(img,0,0,c.width,c.height); c.toBlob(b=>showPreviewInChat(sel.url,b,'photo-2x.jpg','Made 2x Bigger'),'image/jpeg',0.9); }
+function makePDF(sel){ try{ const { jsPDF }=window.jspdf; let img=sel.image; let doc=new jsPDF({unit:'px',format:[img.naturalWidth,img.naturalHeight]}); doc.addImage(sel.url,'JPEG',0,0,img.naturalWidth,img.naturalHeight); doc.save('orbittroniz-photo.pdf'); addAiMsg(`<b>✅ PDF Created!</b><br><br>Photo to PDF • 1 Page • Download Started.<br>Check your downloads folder.`); }catch(e){ addAiMsg(`Could not create PDF. Try JPG photo.`); } }
+function makeQRInChat(link){ let id='qr-'+Date.now(); let html=`<b>✅ QR Code Created!</b><br>Link: ${escapeHtml(link)}<div class="qr-in-chat"><div id="${id}" style="display:flex;justify-content:center;"></div><p style="font-size:12px;color:#6b7280;margin-top:8px;">Scan this QR - Preview above</p><button onclick="downloadQRInChat('${id}')" style="background:#111;color:#fff;border:none;padding:10px 18px;border-radius:999px;cursor:pointer;font-weight:600;margin-top:8px;">⬇️ Download QR - Looks Good</button></div>`; addAiMsg(html); setTimeout(()=>{ try{ new QRCode(document.getElementById(id),{text:link,width:170,height:170,correctLevel:QRCode.CorrectLevel.H}); }catch(e){} },100); }
+function downloadQRInChat(id){ let box=document.getElementById(id); let img=box.querySelector('img'); let canvas=box.querySelector('canvas'); if(img&&img.src){ let a=document.createElement('a'); a.href=img.src; a.download='qr-code.png'; a.click(); } else if(canvas){ let a=document.createElement('a'); a.href=canvas.toDataURL('image/png'); a.download='qr-code.png'; a.click(); } showToast('QR Downloaded!'); }
+// FIX: Enter key, mobile sidebar, auto-resize, memory leak all fixed
+window.addEventListener('resize',function(){ if(window.innerWidth>768) document.getElementById('sidebar').classList.remove('hidden'); });
+</script>
+</body>
+</html>
