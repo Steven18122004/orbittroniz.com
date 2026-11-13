@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbittroniz AI Ultra Pro - Most Powerful AI Tools | Just Type Anything</title>
+<meta name="description" content="Orbittroniz AI Ultra Pro - Most powerful AI. Upload multiple files, AI understands any language, Preview before download. 100+ Tools. 100% Free.">
+<meta name="robots" content="index, follow">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
+body{background:#030014;min-height:100vh;color:#fff;overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:radial-gradient(ellipse at 20% 10%,#4f46e5 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,#db2777 0%,transparent 55%),radial-gradient(ellipse at 50% 95%,#06b6d4 0%,transparent 55%),#030014}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.65;animation:float 7s ease-in-out infinite}
+.orb1{width:360px;height:360px;background:#7c3aed;top:-70px;left:-70px}
+.orb2{width:320px;height:320px;background:#ec4899;top:35%;right:-100px;animation-delay:2s}
+.orb3{width:340px;height:340px;background:#06b6d4;bottom:-100px;left:30%;animation-delay:4s}
+@keyframes float{0%,100%{transform:translateY(0) scale(1) rotate(0deg)}50%{transform:translateY(-35px) scale(1.12) rotate(12deg)}}
+.stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.stars i{position:absolute;width:3px;height:3px;background:#fff;border-radius:50%;opacity:.7;animation:twinkle 2s infinite}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1.3)}}
+.container{max-width:820px;margin:auto;padding:14px;position:relative;z-index:2}
+header{text-align:center;padding:14px 10px 6px}
+/* ===== HOLOGRAM 3D LOGO - MOST ATTRACTIVE ===== */
+.logo-stage{position:relative;width:160px;height:170px;margin:auto;perspective:1000px}
+.logo-halo{position:absolute;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.5) 0%,transparent 70%);top:0;left:5px;animation:haloPulse 2s infinite;filter:blur(8px)}
+@keyframes haloPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.15);opacity:.9}}
+.logo-3d{width:125px;height:125px;margin:auto;position:relative;transform-style:preserve-3d;animation:logoFloat 2.2s ease-in-out infinite;z-index:2}
+@keyframes logoFloat{0%,100%{transform:translateY(0) rotateY(-10deg) rotateX(4deg) scale(1)}50%{transform:translateY(-14px) rotateY(12deg) rotateX(-4deg) scale(1.06)}}
+.logo-head{width:100px;height:92px;background:linear-gradient(135deg,#ffffff 0%,#e0e7ff 40%,#fdf4ff 70%,#fef3c7 100%);border:4px solid #0f172a;border-radius:32px;position:absolute;top:12px;left:12px;box-shadow:0 12px 0 rgba(0,0,0,.25),0 0 40px rgba(124,58,237,.7),0 0 80px rgba(219,39,119,.4);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;overflow:hidden}
+.logo-head::before{content:"";position:absolute;top:0;left:-30%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);animation:shineHead 2.5s infinite}
+@keyframes shineHead{0%{left:-30%}100%{left:120%}}
+.logo-eyes{display:flex;gap:16px;margin-top:4px;z-index:2}
+.logo-eyes i{width:16px;height:18px;background:#0f172a;border-radius:50%;display:block;animation:blinkEye 2s infinite;position:relative;transition:.3s}
+.logo-eyes i::after{content:"";width:6px;height:6px;background:#fff;border-radius:50%;position:absolute;top:3px;left:3px}
+.logo-eyes i::before{content:"";width:3px;height:3px;background:#22c55e;border-radius:50%;position:absolute;bottom:2px;right:2px}
+@keyframes blinkEye{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+.logo-mouth{width:30px;height:12px;border:3px solid #0f172a;border-top:none;border-radius:0 0 24px 24px;margin-top:8px;z-index:2;transition:.3s}
+.logo-cheek-l,.logo-cheek-r{width:12px;height:8px;background:#fda4af;border-radius:50%;position:absolute;top:52px;opacity:.8;z-index:1}
+.logo-cheek-l{left:12px}.logo-cheek-r{right:12px}
+.logo-antenna{width:4px;height:22px;background:#0f172a;position:absolute;top:-14px;left:50%;margin-left:-2px;z-index:1}
+.logo-antenna::after{content:"";width:16px;height:16px;background:linear-gradient(135deg,#f59e0b,#ef4444);border:3px solid #0f172a;border-radius:50%;position:absolute;top:-12px;left:-6px;animation:antennaGlow 1s infinite;box-shadow:0 0 15px #f59e0b}
+@keyframes antennaGlow{0%,100%{background:#f59e0b;transform:scale(1)}50%{background:#22c55e;transform:scale(1.35)}}
+.logo-arm-l,.logo-arm-r{width:10px;height:44px;background:linear-gradient(180deg,#fff,#e0e7ff);border:3px solid #0f172a;border-radius:12px;position:absolute;top:60px;z-index:1}
+.logo-arm-l{left:-1px;transform-origin:top;animation:waveL 1s infinite}
+.logo-arm-r{right:-1px;transform-origin:top;animation:waveR 1s infinite}
+@keyframes waveL{0%,100%{transform:rotate(25deg)}50%{transform:rotate(-40deg)}}
+@keyframes waveR{0%,100%{transform:rotate(-25deg)}50%{transform:rotate(40deg)}}
+.logo-leg-l,.logo-leg-r{width:12px;height:30px;background:linear-gradient(180deg,#7c3aed,#4f46e5);border:3px solid #0f172a;border-radius:9px;position:absolute;bottom:-2px;animation:legDance 1s infinite}
+.logo-leg-l{left:32px}.logo-leg-r{right:32px;animation-delay:.3s}
+@keyframes legDance{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(5deg)}}
+.logo-shadow{width:110px;height:13px;background:rgba(0,0,0,.45);border-radius:50%;margin:2px auto 0;filter:blur(3px);animation:shadowPulse 2.2s infinite}
+@keyframes shadowPulse{0%,100%{transform:scaleX(1);opacity:.6}50%{transform:scaleX(.72);opacity:.3}}
+.logo-stage.working .logo-3d{animation:logoSpinFast .6s linear infinite}
+@keyframes logoSpinFast{0%{transform:rotateY(0) translateY(0)}100%{transform:rotateY(360deg) translateY(-8px)}}
+.logo-stage.happy .logo-3d{animation:jump .5s infinite}
+@keyframes jump{0%,100%{transform:translateY(0) rotate(0) scale(1)}50%{transform:translateY(-26px) rotate(8deg) scale(1.08)}}
+.logo-stage.thinking .logo-eyes i{animation:thinkEye .5s infinite}
+@keyframes thinkEye{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}
+.heart{position:absolute;font-size:18px;animation:heartFloat 1.5s ease-out forwards;pointer-events:none;z-index:5}
+@keyframes heartFloat{0%{opacity:1;transform:translateY(0) scale(.8)}100%{opacity:0;transform:translateY(-60px) scale(1.4)}}
+.logo-text{font-size:36px;margin-top:4px;background:linear-gradient(90deg,#fff,#a5b4fc,#f0abfc,#fde68a,#a5b4fc,#fff);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shineText 3s linear infinite;font-weight:900;letter-spacing:.5px}
+@keyframes shineText{0%{background-position:0% 0}100%{background-position:300% 0}}
+header p{font-size:13px;color:#cbd5e1;margin-top:4px}
+.live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(34,197,94,.15);border:1px solid #22c55e;color:#86efac;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;margin-top:10px}
+.live-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.stats{display:flex;justify-content:center;gap:8px;margin-top:10px;flex-wrap:wrap}
+.stats span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(10px);padding:6px 12px;border-radius:20px;font-size:11px;font-weight:600}
+.ai-3d{background:rgba(255,255,255,.97);color:#0f172a;border-radius:28px;padding:20px;margin-top:14px;box-shadow:0 30px 60px rgba(0,0,0,.6),0 0 60px rgba(124,58,237,.4);position:relative;overflow:hidden}
+.ai-3d::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#4f46e5,#ec4899,#f59e0b,#06b6d4,#4f46e5);background-size:300% 100%;animation:shine 3s linear infinite}
+@keyframes shine{0%{background-position:0% 0}100%{background-position:300% 0}}
+.ai-status{display:flex;align-items:center;gap:8px;font-size:12px;color:#64748b;margin-bottom:12px;flex-wrap:wrap}
+.ai-status b{color:#4f46e5}
+.ai-brain{display:flex;gap:6px;align-items:center;background:#f1f5f9;border-radius:20px;padding:6px 10px;font-size:11px;font-weight:700;color:#334155}
+.ai-brain i{width:8px;height:8px;background:#4f46e5;border-radius:50%;display:inline-block;animation:brainPulse .8s infinite}
+.ai-brain i:nth-child(2){animation-delay:.2s;background:#ec4899}.ai-brain i:nth-child(3){animation-delay:.4s;background:#06b6d4}
+@keyframes brainPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.5);opacity:1}}
+#aiWorking{display:none;background:linear-gradient(135deg,#fef3c7,#fde68a);border:1px solid #f59e0b;border-radius:12px;padding:10px;margin-bottom:10px;font-size:12px;color:#92400e;line-height:1.6}
+#aiWorking progress{width:100%;height:8px;margin-top:6px}
+.upload{border:2.5px dashed #a5b4fc;border-radius:20px;text-align:center;padding:22px 10px;cursor:pointer;background:linear-gradient(135deg,#eef2ff,#fdf4ff);display:block;transition:.25s}
+.upload:hover{border-color:#7c3aed;transform:scale(1.01);box-shadow:0 10px 30px rgba(124,58,237,.2)}
+.upload b{font-size:18px}.upload p{font-size:12px;color:#64748b;margin-top:6px;line-height:1.5}.upload input{display:none}
+.gallery{display:flex;gap:10px;overflow-x:auto;padding:10px 0;display:none}
+.gallery-item{flex:0 0 110px;border:3px solid #e2e8f0;border-radius:14px;overflow:hidden;cursor:pointer;position:relative;background:#fff;transition:.2s}
+.gallery-item.selected{border-color:#4f46e5;box-shadow:0 0 0 3px rgba(79,70,229,.25);transform:scale(1.03)}
+.gallery-item img{width:100%;height:90px;object-fit:cover;display:block}
+.gallery-item small{display:block;padding:5px;font-size:10px;color:#334155;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gallery-item .remove{position:absolute;top:4px;right:4px;background:#ef4444;color:#fff;border:none;width:22px;height:22px;border-radius:50%;font-size:12px;cursor:pointer}
+#fileInfo{display:none;background:#dcfce7;padding:10px;border-radius:10px;font-size:13px;margin-top:10px;color:#166534;font-weight:700}
+#mainPreview{width:100%;max-height:300px;object-fit:contain;border-radius:14px;margin-top:12px;display:none;background:#000}
+.prompt-box{display:flex;gap:8px;margin-top:14px}
+.prompt-box input{flex:1;padding:16px 14px;border-radius:16px;border:2px solid #e2e8f0;font-size:15px;outline:none;background:#f8fafc;min-width:0}
+.prompt-box input:focus{border-color:#7c3aed;background:#fff;box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+.prompt-box button{background:linear-gradient(135deg,#4f46e5,#db2777);color:#fff;border:none;padding:0 18px;border-radius:16px;font-weight:800;cursor:pointer;font-size:15px;box-shadow:0 10px 25px rgba(219,39,119,.4);white-space:nowrap;transition:.2s}
+.prompt-box button:hover{transform:translateY(-1px);box-shadow:0 14px 30px rgba(219,39,119,.5)}
+.prompt-box button:disabled{opacity:.6}
+.examples{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;justify-content:center}
+.examples button{background:#f1f5f9;border:1px solid #e2e8f0;padding:7px 11px;border-radius:20px;font-size:12px;cursor:pointer;color:#334155}
+.examples button:hover{background:#4f46e5;color:#fff}
+.suggestion-box{display:none;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:10px;margin-top:8px;font-size:12px;color:#475569}
+.suggestion-box b{color:#4f46e5}
+.error-box{background:#fef2f2;border:2px solid #ef4444;border-radius:14px;padding:12px;margin-top:12px;display:none;font-size:13px;color:#991b1b}
+.ai-options{display:none;background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid #4f46e5;border-radius:16px;padding:14px;margin-top:12px}
+.ai-options h4{font-size:14px;color:#1e3a8a}
+.ai-options p{font-size:13px;color:#475569;margin-top:4px}
+.ai-options .opt-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.ai-options .opt-btns button{background:#fff;border:2px solid #4f46e5;color:#1e3a8a;padding:9px 16px;border-radius:20px;font-weight:700;cursor:pointer;font-size:13px;transition:.2s}
+.ai-options .opt-btns button:hover{background:#4f46e5;color:#fff;transform:translateY(-2px)}
+.preview-compare{display:none;background:#fff;border:2px solid #22c55e;border-radius:18px;padding:14px;margin-top:14px}
+.preview-compare h3{font-size:15px;color:#166534}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.compare-box{border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;background:#f8fafc}
+.compare-box p{font-size:11px;font-weight:700;padding:6px;text-align:center;background:#f1f5f9}
+.compare-box img{width:100%;height:180px;object-fit:contain;background:#000;display:block}
+.compare-actions{display:flex;gap:8px;margin-top:12px}
+.compare-actions button{flex:1;padding:13px;border-radius:12px;border:none;font-weight:800;cursor:pointer;font-size:14px}
+.btn-download{background:linear-gradient(90deg,#22c55e,#16a34a);color:#fff}
+.btn-retry{background:#f1f5f9;color:#334155;border:1px solid #e2e8f0 !important}
+.result{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid #22c55e;border-radius:16px;padding:14px;margin-top:14px;display:none}
+.result b{color:#166534;font-size:16px}.result p{font-size:13px;color:#475569;margin-top:6px;white-space:pre-line}
+.calc-box{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid #4f46e5;border-radius:16px;padding:16px;margin-top:14px;display:none}
+.calc-box b{font-size:18px;color:#1e3a8a}.calc-box p{font-size:14px;color:#1e293b;white-space:pre-line;margin-top:8px;line-height:1.6}
+.calc-box button{margin-top:10px;background:#4f46e5;color:#fff;border:none;padding:10px 18px;border-radius:10px;font-weight:700;cursor:pointer}
+.qr-box{background:#fff;border:2px solid #4f46e5;border-radius:16px;padding:16px;margin-top:14px;display:none;text-align:center}
+.coming{background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #f59e0b;border-radius:16px;padding:16px;margin-top:14px;display:none;text-align:center}
+.coming b{color:#92400e;font-size:16px}.coming p{color:#78350f;font-size:13px;margin-top:6px}
+.ad-box{background:rgba(255,255,255,.06);border:2px dashed rgba(255,255,255,.2);border-radius:14px;text-align:center;padding:16px;color:#94a3b8;font-size:12px;margin:16px 0}
+.info{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(15px);border-radius:18px;padding:18px;margin-top:10px}
+.info h3{font-size:15px;margin-bottom:8px}.info p{font-size:13px;color:#cbd5e1;line-height:1.7}.info b{color:#fff}
+footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8;line-height:1.8}
+footer a{color:#fff;text-decoration:none;margin:0 5px}
+</style>
+</head>
+<body>
+<div class="bg"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
+<div class="stars" id="stars"></div>
+<div class="container">
+<header>
+<div class="logo-stage" id="logoStage">
+<div class="logo-halo"></div>
+<div class="logo-3d">
+<div class="logo-antenna"></div><div class="logo-arm-l"></div><div class="logo-arm-r"></div>
+<div class="logo-head"><div class="logo-cheek-l"></div><div class="logo-cheek-r"></div><div class="logo-eyes" id="logoEyes"><i></i><i></i></div><div class="logo-mouth" id="logoMouth"></div></div>
+<div class="logo-leg-l"></div><div class="logo-leg-r"></div>
+</div>
+<div class="logo-shadow"></div>
+</div>
+<h1 class="logo-text">Orbittroniz AI</h1>
+<p>Most Powerful AI - Understands Any Words • Just Type Anything • Preview Before Download</p>
+<div class="live-badge"><span class="live-dot"></span> LIVE - AI ONLINE • <span id="liveTime">--:--</span> • <span id="fileCountBadge">0 Files</span> • <span id="aiBrainStatus">AI Ready</span></div>
+<div class="stats"><span>⚡ 100+ Tools</span><span>🧠 Smart AI</span><span>📁 Multi-File</span><span>👀 Preview First</span><span>🔒 100% Private</span></div>
+</header>
+
+<div class="ai-3d" id="aiCard">
+<div class="ai-status">🤖 <b id="aiStatusText">Orbittroniz AI Ultra Pro</b> • <span id="aiReady">Ready - Type anything</span> <span class="ai-brain"><i></i><i></i><i></i> AI Brain: ON</span></div>
+<div id="aiWorking" style="display:none;"><b>🤖 AI Brain Is Thinking...</b><br><span id="aiStep">Step 1: Reading...</span><progress id="aiProgress" value="0" max="100"></progress></div>
+
+<label class="upload" for="fileInput"><span style="font-size:34px;display:block;">📁</span><b>Upload Files - Select Multiple Photos At Once</b><p>Click here - Select 1 to 10 photos / PDFs<br>For Calculator, QR, Password - No file needed<br>Your files never leave your phone • 100% Private • Auto-Fix For Large Photos</p><input type="file" id="fileInput" accept="image/*,application/pdf" multiple></label>
+<div class="gallery" id="gallery"></div>
+<div id="fileInfo" style="display:none;"></div>
+<img id="mainPreview" alt="Selected Photo Preview">
+
+<div class="prompt-box"><input type="text" id="prompt" placeholder="Type anything... photo small, 500kb, passport, sip, love..." autocomplete="off"><button id="runBtn" onclick="runAI()">✨ Run AI →</button></div>
+<div class="suggestion-box" id="suggestionBox"></div>
+<div class="examples">
+<button onclick="setP('make my photo small')">🖼️ Make Photo Small</button>
+<button onclick="setP('make all photos small')">📁 All Small</button>
+<button onclick="setP('make passport photo')">🪪 Passport</button>
+<button onclick="setP('convert photo to pdf')">📄 To PDF</button>
+<button onclick="setP('sip 5000 12% 10 years')">📈 SIP</button>
+<button onclick="setP('love Rahul Priya')">❤️ Love</button>
+<button onclick="setP('make qr code for https://orbittroniz.com')">🔲 QR</button>
+<button onclick="setP('make my photo 500kb')">⚡ 500kb</button>
+</div>
+<div class="error-box" id="errorBox"></div>
+<div class="ai-options" id="aiOptions"><h4 id="aiOptionsTitle">🤖 AI Is Asking You:</h4><p id="aiOptionsText">Which size?</p><div class="opt-btns" id="aiOptionsBtns"></div></div>
+<div class="preview-compare" id="previewCompare"><h3>👀 Preview - Check If It Looks Good, Then Download</h3><p id="compareInfo" style="font-size:12px;color:#475569;margin-top:4px;"></p><div class="compare-grid"><div class="compare-box"><p>⬅️ BEFORE - Original</p><img id="beforeImg" alt="Before"></div><div class="compare-box"><p>✅ AFTER - AI Result</p><img id="afterImg" alt="After"></div></div><div class="compare-actions"><button class="btn-retry" onclick="retryPreview()">🔄 Try Again</button><button class="btn-download" id="previewDownloadBtn">⬇️ Download This - Looks Good</button></div></div>
+<div class="result" id="result"><b id="resultText">Done!</b><p id="resultInfo"></p></div>
+<div class="calc-box" id="calcBox"><b id="calcTitle">Result</b><p id="calcInfo"></p><button onclick="copyCalc()">📋 Copy Result</button> <button onclick="clearAll()" style="background:#64748b;">🗑️ Clear All</button></div>
+<div class="qr-box" id="qrBox"><b>✅ QR Code Created! Preview Below</b><div id="qrcode" style="display:flex;justify-content:center;margin:12px 0"></div><p id="qrText" style="font-size:12px;color:#475569"></p><button onclick="downloadQR()" style="background:#4f46e5;color:#fff;border:none;padding:12px 20px;border-radius:10px;font-weight:700;cursor:pointer">⬇️ Download QR - Looks Good</button></div>
+<div class="coming" id="comingBox"><b>🚀 Coming Soon - Pro AI Version</b><p id="comingText">This tool is coming soon.</p><button onclick="notifyMe()" style="margin-top:10px;background:#f59e0b;border:none;padding:10px 18px;border-radius:10px;font-weight:700;cursor:pointer">🔔 Notify Me</button></div>
+</div>
+
+<div class="ad-box">ADVERTISEMENT - Small Banner Ad 320x50<br><!-- AdSense Code Here --></div>
+<div class="info"><h3>💡 Powerful AI - It Understands Any Words</h3><p><b>You can type in many ways:</b> "make photo small" • "photo ko 500kb karo" • "make it tiny" • "compress photo" • "reduce size" • "500kb" • "pasport photo" (typo also works) • "make photo black white" • "make all small" • "make pdf"<br><b>Money:</b> "sip 5000 12% 10 years" • "emi 500000 12% 24" • "fd 100000 7% 5" • "gst 1000 18%"<br><b>Fun:</b> "love Rahul Priya" • "lucky number Rahul" • "make password"<br><b>AI will ask options only when needed. If you type exact size, AI directly does it.</b></p></div>
+<div class="info"><h3>🔒 Privacy - 100% Safe</h3><p>Your files never upload to server. Everything happens in your phone browser. Large photos auto-fix, no crash. <b>About | Privacy | Contact | Disclaimer</b> - hello@orbittroniz.com</p></div>
+</div>
+<footer>© 2026 Orbittroniz AI Ultra Pro • Smart AI • Preview First • 100% Free<br><a href="#">About</a> • <a href="#">Privacy</a> • <a href="#">Contact</a> • <a href="#">Disclaimer</a></footer>
+
+<script>
+// STARS
+(function(){ let s=document.getElementById('stars'); for(let i=0;i<40;i++){ let e=document.createElement('i'); e.style.left=Math.random()*100+'%'; e.style.top=Math.random()*100+'%'; e.style.animationDelay=(Math.random()*2)+'s'; s.appendChild(e); } })();
+function updateTime(){ let d=new Date(); let h=d.getHours()%12||12; let m=d.getMinutes().toString().padStart(2,'0'); let ap=d.getHours()>=12?'PM':'AM'; document.getElementById('liveTime').innerText=h+':'+m+' '+ap; }
+setInterval(updateTime,1000); updateTime();
+
+// STATE + BUG FIXES
+let files=[], selectedIndex=0, lastCalc="", isWorking=false, lastCommand="", lastTool="", lastBlobUrls=[];
+let currentResultBlob=null, currentResultName='result.jpg', currentResultUrl=null;
+function cleanupBlobUrls(){ lastBlobUrls.forEach(u=>{ try{ URL.revokeObjectURL(u); }catch(e){} }); lastBlobUrls=[]; }
+let card=document.getElementById('aiCard');
+if(window.matchMedia('(pointer:fine)').matches){
+  document.addEventListener('mousemove',function(e){ let x=(e.clientX/window.innerWidth-0.5)*4; let y=(e.clientY/window.innerHeight-0.5)*4; card.style.transform=`perspective(1200px) rotateY(${x}deg) rotateX(${-y+2}deg)`; });
+}
+function showHearts(){ let stage=document.getElementById('logoStage'); for(let i=0;i<3;i++){ let h=document.createElement('div'); h.className='heart'; h.innerText=['❤️','⭐','✨'][i]; h.style.left=(30+Math.random()*60)+'px'; h.style.top='20px'; stage.appendChild(h); setTimeout(()=>h.remove(),1500); } }
+function setP(t){ document.getElementById('prompt').value=t; document.getElementById('prompt').focus(); updateSuggestions(t); }
+function hideAll(){ ['result','calcBox','qrBox','comingBox'].forEach(id=>document.getElementById(id).style.display='none'); document.getElementById('previewCompare').style.display='none'; document.getElementById('aiOptions').style.display='none'; }
+function showError(msg){ let el=document.getElementById('errorBox'); el.style.display='block'; el.innerText='⚠️ '+msg; el.scrollIntoView({behavior:'smooth'}); }
+function hideError(){ document.getElementById('errorBox').style.display='none'; }
+function copyCalc(){ if(!lastCalc) return; navigator.clipboard.writeText(lastCalc).then(()=>alert('Copied!')).catch(()=>alert(lastCalc)); }
+function notifyMe(){ alert('Done! We will notify you when ready.'); }
+function nums(s){ let m=s.match(/[\d.]+/g); return m?m.map(Number):[]; }
+function parseDate(str){ let m=str.match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/); if(!m) return null; return {d:parseInt(m[1]),mo:parseInt(m[2]),y:parseInt(m[3])}; }
+
+// ADVANCED AI - NORMALIZE + TYPO FIX + SYNONYMS
+function normalizeText(t){
+  let s=t.toLowerCase().trim();
+  // Typo fix
+  s=s.replace(/pasport|passprt|passportt/g,'passport').replace(/phot|photoo|phto/g,'photo').replace(/converrt|convertd/g,'convert').replace(/sipp/g,'sip').replace(/emii/g,'emi');
+  // Synonyms
+  s=s.replace(/chota|chhota|tiny|small size|reduce|compress|shrink/g,'small');
+  s=s.replace(/bada|bigger|enlarge|increase/g,'bigger');
+  s=s.replace(/black white|black and white|grayscale|bw/g,'black');
+  s=s.replace(/ulta|flip/g,'mirror');
+  s=s.replace(/gol|round shape|circle/g,'round');
+  s=s.replace(/make it pdf|to pdf|pdf banao/g,'pdf');
+  s=s.replace(/qr code banao|qr banao/g,'qr code');
+  return s;
+}
+function hasAny(text, words){ return words.some(w=>text.includes(w)); }
+
+// SMART SUGGESTIONS WHILE TYPING
+document.getElementById('prompt').addEventListener('input',function(e){ updateSuggestions(e.target.value); });
+function updateSuggestions(val){
+  let box=document.getElementById('suggestionBox'); let v=val.toLowerCase();
+  if(v.length<2){ box.style.display='none'; return; }
+  let sug='';
+  if(v.includes('photo')||v.includes('500')||v.includes('small')) sug='💡 Did you mean: <b onclick="setP(\'make my photo 500kb\')">make my photo 500kb</b> • <b onclick="setP(\'make my photo small\')">make my photo small</b>';
+  else if(v.includes('pass')) sug='💡 Did you mean: <b onclick="setP(\'make passport photo\')">make passport photo</b>';
+  else if(v.includes('sip')||v.includes('emi')||v.includes('fd')) sug='💡 Example: <b onclick="setP(\'sip 5000 12% 10 years\')">sip 5000 12% 10 years</b>';
+  else if(v.includes('love')) sug='💡 Example: <b onclick="setP(\'love Rahul Priya\')">love Rahul Priya</b>';
+  if(sug){ box.style.display='block'; box.innerHTML=sug; } else box.style.display='none';
+}
+function askOptions(title, question, options, onSelect){
+  hideAll(); let box=document.getElementById('aiOptions'); box.style.display='block';
+  document.getElementById('aiOptionsTitle').innerText='🤖 '+title; document.getElementById('aiOptionsText').innerText=question;
+  let btns=document.getElementById('aiOptionsBtns'); btns.innerHTML='';
+  options.forEach(opt=>{ let b=document.createElement('button'); b.innerText=opt.label; b.onclick=function(){ box.style.display='none'; onSelect(opt.value, opt.label); }; btns.appendChild(b); });
+  box.scrollIntoView({behavior:'smooth'}); document.getElementById('aiStatusText').innerText='Orbittroniz AI - Waiting For Your Choice 👆';
+}
+
+// FILE UPLOAD - FIXED LARGE PHOTO CRASH + MEMORY
+document.getElementById('fileInput').addEventListener('change',function(e){
+  let newFiles=Array.from(e.target.files||[]); if(newFiles.length===0) return;
+  if(files.length+newFiles.length>10){ showError('You can select max 10 files at once. Please select fewer files.'); return; }
+  let promises=newFiles.map(f=>{ return new Promise(res=>{
+    if(!f.type.startsWith('image/')){ res({file:f,image:null,url:'',name:f.name,size:f.size}); return; }
+    let r=new FileReader(); r.onload=function(ev){
+      let img=new Image();
+      img.onload=function(){
+        // FIX: Auto downscale if too large to prevent canvas crash
+        if(img.naturalWidth>4000||img.naturalHeight>4000){
+          let scale=Math.min(4000/img.naturalWidth,4000/img.naturalHeight);
+          let c=document.createElement('canvas'); c.width=Math.floor(img.naturalWidth*scale); c.height=Math.floor(img.naturalHeight*scale);
+          let ctx=c.getContext('2d'); ctx.drawImage(img,0,0,c.width,c.height);
+          let newUrl=c.toDataURL('image/jpeg',0.92);
+          let img2=new Image(); img2.onload=function(){ res({file:f,image:img2,url:newUrl,name:f.name,size:f.size,wasLarge:true}); }; img2.src=newUrl;
+        } else { res({file:f,image:img,url:ev.target.result,name:f.name,size:f.size}); }
+      };
+      img.onerror=function(){ res({file:f,image:null,url:'',name:f.name,size:f.size}); };
+      img.src=ev.target.result;
+    }; r.onerror=function(){ res({file:f,image:null,url:'',name:f.name,size:f.size}); }; r.readAsDataURL(f);
+  }); });
+  Promise.all(promises).then(results=>{ files=files.concat(results); selectedIndex=0; renderGallery(); updateFileInfo(); let w=document.getElementById('logoStage'); w.classList.add('happy'); showHearts(); setTimeout(()=>w.classList.remove('happy'),1500); document.getElementById('fileCountBadge').innerText=files.length+' Files'; hideError(); document.getElementById('aiReady').innerText='Files loaded - Now type what to do'; });
+});
+function renderGallery(){
+  let g=document.getElementById('gallery'); if(files.length===0){ g.style.display='none'; return; } g.style.display='flex'; g.innerHTML='';
+  files.forEach((f,i)=>{ let d=document.createElement('div'); d.className='gallery-item'+(i===selectedIndex?' selected':''); d.innerHTML=`<button class="remove" onclick="removeFile(event,${i})">×</button><img src="${f.url||'data:image/svg+xml,[STRIPPED]'}"><small>${f.name} • ${(f.size/1024).toFixed(0)}kb</small>`; d.onclick=function(){ selectFile(i); }; g.appendChild(d); });
+  let sel=files[selectedIndex]; if(sel&&sel.url){ let mp=document.getElementById('mainPreview'); mp.src=sel.url; mp.style.display='block'; }
+}
+function selectFile(i){ selectedIndex=i; renderGallery(); document.getElementById('aiReady').innerText='Selected: '+files[i].name; }
+function removeFile(e,i){ e.stopPropagation(); // FIX: Revoke URL to free memory
+  if(files[i]&&files[i].url&&files[i].url.startsWith('blob:')){ try{ URL.revokeObjectURL(files[i].url); }catch(err){} }
+  files.splice(i,1); if(selectedIndex>=files.length) selectedIndex=Math.max(0,files.length-1); renderGallery(); updateFileInfo(); document.getElementById('fileCountBadge').innerText=files.length+' Files'; if(files.length===0) document.getElementById('mainPreview').style.display='none'; }
+function updateFileInfo(){ let el=document.getElementById('fileInfo'); if(files.length===0){ el.style.display='none'; return; } el.style.display='block'; let total=files.reduce((a,f)=>a+f.size,0); el.innerText=`✅ ${files.length} Files Loaded • Total: ${(total/1024).toFixed(0)} KB • Click any photo to select it • Large photos auto-fixed to prevent crash`; }
+document.getElementById('prompt').addEventListener('keydown',function(e){ if(e.key==='Enter') runAI(); });
+
+function showPreview(beforeUrl, afterBlob, afterName, info){
+  hideAll(); cleanupBlobUrls();
+  let afterUrl=URL.createObjectURL(afterBlob); lastBlobUrls.push(afterUrl); currentResultBlob=afterBlob; currentResultName=afterName; currentResultUrl=afterUrl;
+  document.getElementById('previewCompare').style.display='block';
+  document.getElementById('beforeImg').src=beforeUrl; document.getElementById('afterImg').src=afterUrl; document.getElementById('compareInfo').innerText=info;
+  document.getElementById('previewCompare').scrollIntoView({behavior:'smooth'});
+  document.getElementById('previewDownloadBtn').onclick=function(){ let a=document.createElement('a'); a.href=afterUrl; a.download=afterName; a.click(); this.innerText='✅ Downloaded!'; setTimeout(()=>this.innerText='⬇️ Download This - Looks Good',2000); };
+}
+function retryPreview(){ document.getElementById('previewCompare').style.display='none'; showError('Okay, type again with different size. Example: make my photo 50kb or make my photo small - AI will ask options.'); }
+function showResultCalc(title,info){ hideAll(); document.getElementById('result').style.display='block'; document.getElementById('resultText').innerText=title; document.getElementById('resultInfo').innerText=info; }
+function showCalc(t,i){ hideAll(); document.getElementById('calcBox').style.display='block'; document.getElementById('calcTitle').innerText=t; document.getElementById('calcInfo').innerText=i; lastCalc=t+"\n"+i; document.getElementById('calcBox').scrollIntoView({behavior:'smooth'}); }
+function showComing(tool){ hideAll(); document.getElementById('comingBox').style.display='block'; document.getElementById('comingText').innerText=tool+' - This tool needs Pro AI API. Coming soon. Try Photo / PDF / Calculator now - those work 100%.'; document.getElementById('comingBox').scrollIntoView({behavior:'smooth'}); }
+function clearAll(){ document.getElementById('prompt').value=''; files=[]; renderGallery(); hideAll(); hideError(); document.getElementById('mainPreview').style.display='none'; document.getElementById('fileInfo').style.display='none'; document.getElementById('fileCountBadge').innerText='0 Files'; document.getElementById('fileInput').value=''; document.getElementById('aiReady').innerText='Ready - Type anything'; document.getElementById('suggestionBox').style.display='none'; cleanupBlobUrls(); }
+
+function runAI(){
+  if(isWorking) return;
+  let input=document.getElementById('prompt'); let raw=input.value.trim(); let text=normalizeText(raw); let orig=raw;
+  hideError();
+  if(!text){ showError('Please type what you want. Example: make my photo small'); return; }
+  // MEMORY: If user says "make it smaller" after previous photo command, use last tool
+  if((text==='make it smaller'||text==='smaller'||text==='make it small'||text==='small') && lastCommand && files.length>0){ text=lastCommand; orig=lastCommand; }
+  lastCommand=text;
+  isWorking=true; document.getElementById('runBtn').disabled=true; document.getElementById('runBtn').innerText='Thinking...';
+  let w=document.getElementById('logoStage'); w.classList.add('working'); w.classList.add('thinking');
+  document.getElementById('aiWorking').style.display='block'; document.getElementById('aiStatusText').innerText='Orbittroniz AI Ultra Pro - Thinking 🧠'; document.getElementById('aiBrainStatus').innerText='AI Thinking...';
+  let steps=['Step 1: Reading - "'+orig+'"','Step 2: Fixing typos + Understanding meaning...',files.length>0?`Step 3: Found ${files.length} file(s) - Selected: ${files[selectedIndex]?.name||'None'}`:'Step 3: No file needed - Checking if calculator / QR / fun tool...','Step 4: AI Brain deciding if it needs to ask you options...','Step 5: Done! See result below 👇'];
+  let i=0; document.getElementById('aiStep').innerText=steps[0]; document.getElementById('aiProgress').value=0;
+  let timer=setInterval(()=>{ i++; document.getElementById('aiProgress').value=i*20; if(i<steps.length) document.getElementById('aiStep').innerText=steps[i]; else{ clearInterval(timer); document.getElementById('aiWorking').style.display='none'; w.classList.remove('working'); w.classList.remove('thinking'); w.classList.add('happy'); showHearts(); setTimeout(()=>w.classList.remove('happy'),1200); document.getElementById('aiStatusText').innerText='Orbittroniz AI Ultra Pro - Done! 🎉'; document.getElementById('aiBrainStatus').innerText='AI Ready'; isWorking=false; document.getElementById('runBtn').disabled=false; document.getElementById('runBtn').innerText='✨ Run AI →'; doAI(text,orig); } },380);
+}
+
+function doAI(text,orig){
+  hideAll();
+  // API TOOLS
+  if(text.includes('background')) return showComing('Background Remover AI');
+  if(text.includes('video')||text.includes('reel')||text.includes('mp4')) return showComing('Video Compress / Video to MP3 AI');
+  if(text.includes('audio')||text.includes('mp3')||text.includes('voice')) return showComing('Audio to Text AI');
+  if(text.includes('image to text')||text.includes('photo to text')||text.includes('ocr')) return showComing('Photo to Text (OCR) AI');
+  if(text.includes('enhance')||text.includes('face')) return showComing('AI Photo Enhance');
+  if(text.includes('pdf merge')||text.includes('pdf split')||text.includes('pdf compress')) return showComing('PDF Merge / Split / Compress - Pro');
+  if(text.includes('translate')) return showComing('AI Translator');
+  if(text.includes('song')||text.includes('music')) return showComing('AI Song Maker');
+  if(text.includes('chat')||text.includes('ask')) return showComing('AI Chat - Coming Soon');
+  // QR - SMART: Even if user just types link, AI makes QR
+  if(text.includes('qr')||text.includes('qrcode')||text.includes('https://')||text.includes('http://')){
+    let link=orig.replace(/make qr code for/i,'').replace(/qr code for/i,'').replace(/make qr code/i,'').trim()||'https://orbittroniz.com';
+    if(!link.startsWith('http')&&!link.includes('upi:')&&!link.includes('@')&&link.includes('.')) link='https://'+link;
+    if(link.includes('http')) return makeQR(link);
+  }
+  if(text.includes('upi')) return makeQR('upi://pay?pa=test@upi&pn=Orbittroniz&cu=INR');
+  // TEXT TOOLS - ADVANCED
+  if(text.includes('password')){ let chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!'; let p=''; for(let i=0;i<12;i++) p+=chars[Math.floor(Math.random()*chars.length)]; return showCalc('🔐 Strong Password Created',`Your Password:\n${p}\n\nLength: 12 • Strong • Do not share.`); }
+  if(text.includes('word count')||text.includes('count words')){ let txt=orig.replace(/word count/i,'').trim()||'hello world'; return showCalc('📝 Word Counter',`Text: "${txt}"\nWords: ${txt.split(/\s+/).filter(Boolean).length}\nCharacters: ${txt.length}`); }
+  if(text.includes('resume')){ let name=orig.replace(/make resume for/i,'').replace(/resume for/i,'').replace(/make resume/i,'').trim()||'Rahul Kumar'; return showCalc('📄 Resume Ready',`Name: ${name}\nPhone: 98XXX XXXXX\nEmail: ${name.toLowerCase().replace(/\s/g,'')}@gmail.com\n\nObjective: Hardworking and honest\nEducation: 12th Pass, Graduation\nSkills: Computer, Typing, Communication`); }
+  if(text.includes('signature')){ let name=orig.replace(/make signature/i,'').trim()||'Rahul'; return showCalc('✍️ Signature Ideas',`1. ${name}\n2. ${name.split(' ').map(w=>w[0]).join('.')}. ${name.split(' ').pop()}\n3. ~ ${name} ~`); }
+  if(text.includes('stylish')){ let name=orig.replace(/make stylish name/i,'').replace(/stylish name/i,'').trim()||'Rahul'; return showCalc('✨ Stylish Name',`★彡${name}彡★\n꧁༒${name}༒꧂\n${name} ツ`); }
+  if(text.includes('color')||text.includes('colour')) return showCalc('🎨 Color Picker','🔴 Red - #FF0000\n🟢 Green - #00FF00\n🔵 Blue - #0000FF\n🟡 Yellow - #FFFF00\n🟣 Purple - #800080');
+  if(text.includes('lucky')){ let name=orig.replace(/lucky number/i,'').replace(/lucky/i,'').trim()||'Rahul'; let sum=name.split('').reduce((a,c)=>a+c.charCodeAt(0),0); let lucky=(sum%9)+1; return showCalc('🍀 Lucky Number',`Name: ${name}\n✅ Lucky Number: ${lucky}\n✅ Lucky Color: ${['Red','Blue','Green','Yellow','Purple','Orange','Pink','White','Black'][lucky-1]}`); }
+  if(text.includes('love')){ let cl=orig.replace(/love/i,'').trim().split(/\s+/); let n1=cl[0]||'Rahul', n2=cl[1]||'Priya'; let sum=(n1+n2).split('').reduce((a,c)=>a+c.charCodeAt(0),0); let perc=55+(sum%45); return showCalc('❤️ Love Calculator - For Fun',`${n1} ❤️ ${n2}\n\n✅ Love: ${perc}%\n${perc>85?'Perfect Match! 💍':perc>70?'Great Love! 💕':'Try More! 😊'}`); }
+  // CALCULATORS - ADVANCED: Understand "5000 12 10" without words
+  if(text.includes('sip')||(text.match(/^\d+.*\d+.*\d+/)&&text.includes('sip'))){ let n=nums(orig); if(n.length<3){ return askOptions('AI Needs Details','SIP needs 3 numbers: Monthly Amount, Rate %, Years. Choose a popular option or type your own:',[{label:'₹5000 • 12% • 10 Years',value:'sip 5000 12% 10 years'},{label:'₹10000 • 12% • 15 Years',value:'sip 10000 12% 15 years'},{label:'₹1000 • 12% • 5 Years',value:'sip 1000 12% 5 years'}],function(val){ document.getElementById('prompt').value=val; runAI(); }); } let monthly=n[0], rate=n[1]/100/12, years=n[2]; let months=years*12; let future=monthly*((Math.pow(1+rate,months)-1)/rate)*(1+rate); let inv=monthly*months; return showCalc('📈 SIP Calculator',`Monthly: ₹${monthly.toLocaleString('en-IN')}\nRate: ${n[1]}%\nTime: ${years} Years\n\n✅ Invested: ₹${Math.round(inv).toLocaleString('en-IN')}\n✅ Profit: ₹${Math.round(future-inv).toLocaleString('en-IN')}\n✅ Total: ₹${Math.round(future).toLocaleString('en-IN')}`); }
+  if(text.includes('fd')){ let n=nums(orig); if(n.length<3){ showError('Type like: fd 100000 7% 5 years'); return; } let P=n[0], r=n[1]/100, y=n[2]; let mat=P*Math.pow(1+r,y); return showCalc('🏦 FD Calculator',`FD: ₹${P.toLocaleString('en-IN')}\nRate: ${n[1]}%\nTime: ${y} Years\n\n✅ Interest: ₹${Math.round(mat-P).toLocaleString('en-IN')}\n✅ Maturity: ₹${Math.round(mat).toLocaleString('en-IN')}`); }
+  if(text.includes('emi')){ let n=nums(orig); if(n.length<3){ showError('Type like: emi 500000 12% 24 months'); return; } let P=n[0], R=n[1]/100/12, N=n[2]; if(R===0) return showCalc('💰 EMI',`Loan: ₹${P.toLocaleString('en-IN')}\n\n✅ EMI: ₹${Math.round(P/N).toLocaleString('en-IN')} / month`); let emi=P*R*Math.pow(1+R,N)/(Math.pow(1+R,N)-1); return showCalc('💰 EMI Calculator',`Loan: ₹${P.toLocaleString('en-IN')}\nRate: ${n[1]}%\nMonths: ${N}\n\n✅ EMI: ₹${Math.round(emi).toLocaleString('en-IN')} / month\nTotal Interest: ₹${Math.round(emi*N-P).toLocaleString('en-IN')}`); }
+  if(text.includes('gst reverse')){ let n=nums(orig); if(n.length<1){ showError('Type like: gst reverse 1180'); return; } let total=n[0], rate=n[1]||18; let base=total/(1+rate/100); return showCalc('🧾 GST Reverse',`With GST: ₹${total}\n\nWithout GST: ₹${base.toFixed(2)}\nGST: ₹${(total-base).toFixed(2)}`); }
+  if(text.includes('gst')){ let n=nums(orig); if(n.length<1){ showError('Type like: gst 1000 18%'); return; } let amt=n[0], rate=n[1]||18; let gst=amt*rate/100; return showCalc('🧾 GST Calculator',`Amount: ₹${amt}\nGST: ₹${gst.toFixed(2)}\nTotal: ₹${(amt+gst).toFixed(2)}`); }
+  if(text.includes('discount')){ let n=nums(orig); if(n.length<2){ showError('Type like: discount 1000 20%'); return; } let amt=n[0], disc=n[1]; let save=amt*disc/100; return showCalc('🏷️ Discount',`MRP: ₹${amt}\nDiscount: ${disc}%\n\nSave: ₹${save.toFixed(0)}\nPay: ₹${(amt-save).toFixed(0)}`); }
+  if(text.includes('salary')){ let n=nums(orig); if(n.length<1){ showError('Type like: salary 50000'); return; } let m=n[0]; return showCalc('💵 Salary Calculator',`CTC: ₹${m.toLocaleString('en-IN')}\nYearly: ₹${(m*12).toLocaleString('en-IN')}\nIn-Hand: ₹${Math.round(m*0.85).toLocaleString('en-IN')}`); }
+  if(text.includes('cgpa')){ let n=nums(orig); if(n.length<1){ showError('Type like: cgpa 8.5'); return; } return showCalc('🎓 CGPA to %',`CGPA: ${n[0]}\n\n✅ Percentage: ${(n[0]*9.5).toFixed(1)}%`); }
+  if(text.includes('marks')){ let n=nums(orig); if(n.length<2){ showError('Type like: marks 450 500'); return; } return showCalc('📊 Marks %',`Marks: ${n[0]} / ${n[1]}\n\n✅ Percentage: ${(n[0]/n[1]*100).toFixed(2)}%`); }
+  if(text.includes('age')&&text.includes('days')){ let pd=parseDate(orig); if(!pd){ showError('Type like: age days 15/08/2000'); return; } let birth=new Date(pd.y,pd.mo-1,pd.d), now=new Date(); let days=Math.floor((now-birth)/86400000); return showCalc('📅 Age in Days',`Birth: ${pd.d}/${pd.mo}/${pd.y}\n\n✅ Total Days: ${days.toLocaleString('en-IN')} days`); }
+  if(text.includes('age')){ let pd=parseDate(orig); if(!pd){ showError('Type like: age 15/08/2000'); return; } let birth=new Date(pd.y,pd.mo-1,pd.d), now=new Date(); let age=now.getFullYear()-birth.getFullYear(); if(now.getMonth()<birth.getMonth()||(now.getMonth()===birth.getMonth()&&now.getDate()<birth.getDate())) age--; return showCalc('📅 Age Result',`Birth: ${pd.d}/${pd.mo}/${pd.y}\n\n✅ Age: ${age} Years`); }
+  if(text.includes('bmi')){ let n=nums(orig); if(n.length<2){ showError('Type like: bmi 70kg 5.8ft'); return; } let w=n[0], hFt=n[1]; let hM=hFt*0.3048; let bmi=w/(hM*hM); return showCalc('⚖️ BMI',`Weight: ${w} Kg\nHeight: ${hFt} Ft\n\n✅ BMI: ${bmi.toFixed(1)}`); }
+  if(text.includes('bill')){ let n=nums(orig); if(n.length<2){ showError('Type like: bill 1000 4 people'); return; } return showCalc('🧾 Bill Split',`Total: ₹${n[0]}\nPeople: ${n[1]}\n\n✅ Each Pays: ₹${(n[0]/n[1]).toFixed(0)}`); }
+  if(text.includes('percentage')||text.includes('percent')){ let n=nums(orig); if(n.length<2){ showError('Type like: 50 of 200 percentage'); return; } return showCalc('📊 Percentage',`${n[0]} of ${n[1]}% = ${(n[0]*n[1]/100).toFixed(2)}`); }
+  if(text.includes('profit')){ let n=nums(orig); if(n.length<2){ showError('Type like: profit 100 120'); return; } let cp=n[0], sp=n[1]; return showCalc('📈 Profit / Loss',`Bought: ₹${cp}\nSold: ₹${sp}\n\n${sp>cp?'✅ Profit: ₹'+(sp-cp):'❌ Loss: ₹'+(cp-sp)}`); }
+  // PHOTO - ADVANCED AI ASKS OPTIONS ONLY WHEN NEEDED
+  if(files.length===0){
+    // SMART: If user typed only "500kb" without photo, AI tells what to do
+    if(text.includes('kb')||text.includes('photo')||text.includes('passport')||text.includes('pdf')||text.includes('small')){ showError('Please upload photo first, then type again. Example: Upload photo → Type "make my photo 500kb"'); return; }
+    showError('I did not understand. Try: "make my photo small" (upload photo first) or "sip 5000 12% 10 years" or "love Rahul Priya"'); return;
+  }
+  let sel=files[selectedIndex]; if(!sel||!sel.image){ showError('Please select a valid photo from gallery.'); return; }
+  let kbMatch=text.match(/(\d+)\s*kb/);
+  // AI ASKS OPTIONS
+  if(hasAny(text,['small','compress','reduce']) && !kbMatch){
+    return askOptions('AI Needs One Detail','Which size do you want for your photo? Choose one - AI will make it exactly that size:',[
+      {label:'500kb - For Form', value:500},
+      {label:'200kb - For College', value:200},
+      {label:'100kb - For Job Form', value:100},
+      {label:'50kb - Very Small', value:50},
+      {label:'20kb - Smallest', value:20}
+    ], function(val){ document.getElementById('prompt').value='make my photo '+val+'kb'; runAI(); });
+  }
+  if(hasAny(text,['passport','aadhar','pan card']) && !text.includes('white') && !text.includes('black')){
+    return askOptions('AI Needs One Detail','Which background for Passport Photo?',[
+      {label:'⬜ White Background', value:'white'},
+      {label:'⬛ Black Background', value:'black'}
+    ], function(val){ doPassportWithBg(sel, val); });
+  }
+  if(text.includes('convert') && !text.includes('pdf') && !text.includes('png') && !text.includes('jpg') && !text.includes('jpeg')){
+    return askOptions('AI Needs One Detail','Convert to which format?',[
+      {label:'📄 PDF', value:'pdf'},
+      {label:'🖼️ PNG', value:'png'},
+      {label:'🖼️ JPG', value:'jpeg'}
+    ], function(val){ if(val==='pdf') makePDF(sel); else convertFormat(sel, val); });
+  }
+  if(text.includes('filter') && !hasAny(text,['black','sepia','blur'])){
+    return askOptions('AI Needs One Detail','Which filter do you want?',[
+      {label:'⬛ Black & White', value:'grayscale'},
+      {label:'🟤 Sepia', value:'sepia'},
+      {label:'🌫️ Blur', value:'blur'},
+      {label:'☀️ Bright', value:'brightness'}
+    ], function(val){ applyFilter(val, sel); });
+  }
+  if(text.includes('all') && hasAny(text,['photo','small','files'])){
+    return askOptions('AI Needs Confirmation',`You have ${files.length} files. Process all files?`,[
+      {label:'✅ Yes - Process All', value:'yes'},
+      {label:'❌ No - Only Selected Photo', value:'no'}
+    ], function(val){ if(val==='yes'){ document.getElementById('prompt').value='make my photo 100kb'; doAI('make my photo 100kb','make my photo 100kb'); } else { showError('Okay, only selected photo will be processed.'); } });
+  }
+  // DIRECT
+  if(kbMatch) return resizeToKB(parseInt(kbMatch[1]), sel);
+  if(text.includes('passport')) return doPassportWithBg(sel, text.includes('black')?'black':'white');
+  if(text.includes('black')) return applyFilter('grayscale', sel);
+  if(text.includes('sepia')) return applyFilter('sepia', sel);
+  if(text.includes('blur')) return applyFilter('blur', sel);
+  if(text.includes('bright')) return applyFilter('brightness', sel);
+  if(text.includes('rotate')) return rotateImage(sel);
+  if(text.includes('mirror')) return mirrorImage(sel);
+  if(text.includes('round')||text.includes('circle')) return roundImage(sel);
+  if(text.includes('collage')) return collageImage(sel);
+  if(text.includes('crop')) return cropCenter(sel);
+  if(text.includes('pdf')) return makePDF(sel);
+  if(text.includes('png')||text.includes('jpg')||text.includes('jpeg')) return convertFormat(sel, text.includes('png')?'png':'jpeg');
+  if(hasAny(text,['name','watermark','text','write'])) return addText(sel, orig);
+  if(text.includes('date')) return addDate(sel);
+  if(text.includes('border')||text.includes('frame')) return addBorder(sel);
+  if(text.includes('bigger')||text.includes('enlarge')||text.includes('2x')) return enlarge2x(sel);
+  if(text.includes('size')&&text.includes('photo')) return showCalc('📏 Photo Size',`File: ${sel.name}\nSize: ${(sel.size/1024).toFixed(1)} KB\nDimensions: ${sel.image.naturalWidth} x ${sel.image.naturalHeight} px${sel.wasLarge?' • Auto-fixed from very large photo':''}`);
+  if(text.includes('whatsapp')||text.includes('instagram')||text.includes('dp')) return cropCenter(sel);
+  // FALLBACK - AI TRIES TO GUESS
+  if(text.includes('500')||text.includes('100')||text.includes('50')){ let n=nums(orig); if(n[0]) return resizeToKB(n[0], sel); }
+  showError('I did not understand fully. Try: "make my photo small" - AI will ask you options. Or "make my photo 500kb" - Direct.');
+}
+function doPassportWithBg(sel, bg){
+  let img=sel.image; if(!img||!img.naturalWidth){ showError('Photo not loaded fully. Please re-upload.'); return; }
+  let c=document.createElement('canvas'); c.width=413; c.height=531; let ctx=c.getContext('2d'); ctx.fillStyle=bg==='black'?'#000':'#fff'; ctx.fillRect(0,0,413,531); let s=Math.min(img.naturalWidth/413,img.naturalHeight/531); let sw=413*s, sh=531*s; let sx=(img.naturalWidth-sw)/2, sy=(img.naturalHeight-sh)/2; ctx.drawImage(img,sx,sy,sw,sh,0,0,413,531); c.toBlob(b=>{ if(!b){ showError('Could not create passport photo. Try another photo.'); return; } showPreview(sel.url,b,'passport-photo.jpg','Passport Photo • 35x45mm • Background: '+bg+' • Check preview then Download.'); },'image/jpeg',0.95);
+}
+function resizeToKB(targetKB, sel){
+  let img=sel.image; if(!img||!img.naturalWidth){ showError('Photo not loaded. Please re-upload.'); return; }
+  let c=document.createElement('canvas'), ctx=c.getContext('2d'); c.width=img.naturalWidth; c.height=img.naturalHeight; ctx.drawImage(img,0,0,c.width,c.height); let q=0.92;
+  (function loop(){ c.toBlob(b=>{ if(!b){ showError('Could not process photo. Try smaller photo.'); return; } let kb=b.size/1024; if(kb>targetKB && q>0.08){ q-=0.08; loop(); } else showPreview(sel.url,b,'photo-'+targetKB+'kb.jpg',`Original: ${(sel.size/1024).toFixed(1)} KB • New: ${kb.toFixed(1)} KB • Target: ${targetKB}kb • Check preview, if good then Download.`); },'image/jpeg',q); })();
+}
+function applyFilter(type, sel){ let img=sel.image; let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); if(type==='grayscale') ctx.filter='grayscale(1)'; if(type==='blur') ctx.filter='blur(8px)'; if(type==='brightness') ctx.filter='brightness(1.4)'; if(type==='sepia') ctx.filter='sepia(0.8)'; ctx.drawImage(img,0,0,c.width,c.height); c.toBlob(b=>showPreview(sel.url,b,'photo-'+type+'.jpg','Filter: '+type+' • Check preview.'),'image/jpeg',0.9); }
+function rotateImage(sel){ let img=sel.image; let c=document.createElement('canvas'); c.width=img.naturalHeight; c.height=img.naturalWidth; let ctx=c.getContext('2d'); ctx.translate(c.width/2,c.height/2); ctx.rotate(Math.PI/2); ctx.drawImage(img,-img.naturalWidth/2,-img.naturalHeight/2); c.toBlob(b=>showPreview(sel.url,b,'photo-rotate.jpg','Rotated 90 Degrees • Check preview.'),'image/jpeg',0.9); }
+function mirrorImage(sel){ let img=sel.image; let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); ctx.translate(c.width,0); ctx.scale(-1,1); ctx.drawImage(img,0,0); c.toBlob(b=>showPreview(sel.url,b,'photo-mirror.jpg','Mirror Effect • Check preview.'),'image/jpeg',0.9); }
+function roundImage(sel){ let img=sel.image; let c=document.createElement('canvas'); let size=Math.min(img.naturalWidth,img.naturalHeight); c.width=size; c.height=size; let ctx=c.getContext('2d'); ctx.beginPath(); ctx.arc(size/2,size/2,size/2,0,Math.PI*2); ctx.clip(); ctx.drawImage(img,(img.naturalWidth-size)/2,(img.naturalHeight-size)/2,size,size,0,0,size,size); c.toBlob(b=>showPreview(sel.url,b,'round-dp.png','Round DP • Check preview.'),'image/png'); }
+function collageImage(sel){ let img=sel.image; let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); ctx.drawImage(img,0,0,c.width/2,c.height); ctx.drawImage(img,c.width/2,0,c.width/2,c.height); c.toBlob(b=>showPreview(sel.url,b,'collage.jpg','Collage • Check preview.'),'image/jpeg',0.9); }
+function cropCenter(sel){ let img=sel.image; let c=document.createElement('canvas'); let size=Math.min(img.naturalWidth,img.naturalHeight); c.width=size; c.height=size; let ctx=c.getContext('2d'); ctx.drawImage(img,(img.naturalWidth-size)/2,(img.naturalHeight-size)/2,size,size,0,0,size,size); c.toBlob(b=>showPreview(sel.url,b,'photo-crop.jpg','Square Crop • Check preview.'),'image/jpeg',0.9); }
+function convertFormat(sel, fmt){ let img=sel.image; let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); if(fmt==='png'){ ctx.drawImage(img,0,0); c.toBlob(b=>showPreview(sel.url,b,'photo.png','Converted to PNG • Check preview.'),'image/png'); } else { ctx.fillStyle='#fff'; ctx.fillRect(0,0,c.width,c.height); ctx.drawImage(img,0,0); c.toBlob(b=>showPreview(sel.url,b,'photo.jpg','Converted to JPG • Check preview.'),'image/jpeg',0.9); } }
+function addText(sel, orig){ let img=sel.image; let name=orig.split('-')[1]||orig.replace(/add name/i,'').replace(/write/i,'').trim()||'Orbittroniz'; if(!name) name='Orbittroniz'; let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); ctx.drawImage(img,0,0); ctx.font='bold '+Math.round(c.width/12)+'px Arial'; ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.strokeStyle='rgba(0,0,0,0.7)'; ctx.lineWidth=4; ctx.textAlign='center'; ctx.strokeText(name,c.width/2,c.height-30); ctx.fillText(name,c.width/2,c.height-30); c.toBlob(b=>showPreview(sel.url,b,'photo-name.jpg','Text: '+name+' • Check preview.'),'image/jpeg',0.92); }
+function addDate(sel){ let img=sel.image; let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); ctx.drawImage(img,0,0); let d=new Date().toLocaleDateString('en-IN'); ctx.font='bold '+Math.round(c.width/15)+'px Arial'; ctx.fillStyle='yellow'; ctx.textAlign='right'; ctx.fillText(d,c.width-20,c.height-20); c.toBlob(b=>showPreview(sel.url,b,'photo-date.jpg','Date: '+d+' • Check preview.'),'image/jpeg',0.92); }
+function addBorder(sel){ let img=sel.image; let c=document.createElement('canvas'); let b=20; c.width=img.naturalWidth+b*2; c.height=img.naturalHeight+b*2; let ctx=c.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,c.width,c.height); ctx.drawImage(img,b,b); c.toBlob(b2=>showPreview(sel.url,b2,'photo-border.jpg','Border Added • Check preview.'),'image/jpeg',0.92); }
+function enlarge2x(sel){ let img=sel.image; let c=document.createElement('canvas'); c.width=img.naturalWidth*2; c.height=img.naturalHeight*2; let ctx=c.getContext('2d'); ctx.drawImage(img,0,0,c.width,c.height); c.toBlob(b=>showPreview(sel.url,b,'photo-2x.jpg','Made 2x Bigger • Check preview.'),'image/jpeg',0.9); }
+function makePDF(sel){ try{ const { jsPDF }=window.jspdf; let img=sel.image; let doc=new jsPDF({unit:'px',format:[img.naturalWidth,img.naturalHeight]}); doc.addImage(sel.url,'JPEG',0,0,img.naturalWidth,img.naturalHeight); doc.save('orbittroniz-photo.pdf'); showResultCalc('PDF Created!', 'Photo to PDF • 1 Page • Download Started.'); }catch(e){ showError('Could not create PDF. Try JPG photo.'); } }
+function makeQR(link){ hideAll(); document.getElementById('qrBox').style.display='block'; document.getElementById('qrcode').innerHTML=''; new QRCode(document.getElementById('qrcode'),{text:link,width:180,height:180,correctLevel:QRCode.CorrectLevel.H}); document.getElementById('qrText').innerText='Link: '+link+' • Preview QR above, if good then Download.'; document.getElementById('qrBox').scrollIntoView({behavior:'smooth'}); }
+function downloadQR(){ let img=document.querySelector('#qrcode img'); let canvas=document.querySelector('#qrcode canvas'); if(img&&img.src){ let a=document.createElement('a'); a.href=img.src; a.download='qr-code.png'; a.click(); } else if(canvas){ let a=document.createElement('a'); a.href=canvas.toDataURL('image/png'); a.download='qr-code.png'; a.click(); } else showError('QR not ready yet.'); }
+</script>
+</body>
+</html>
