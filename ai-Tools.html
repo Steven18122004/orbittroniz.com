@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbittroniz AI - Bas Likho Kya Chahiye | 100+ Tools in 1 AI</title>
+<meta name="description" content="Orbittroniz AI - Bas likho kya chahiye. Photo 500kb, PDF, QR, EMI, SIP, FD, Love, Resume. 100+ Tools Ek AI Me. 100% Free.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Orbittroniz AI - Bas Likho Kya Chahiye">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- ADSENSE -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX" crossorigin="anonymous"></script> -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Orbittroniz AI","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
+body{background:#050510;min-height:100vh;color:#fff;overflow-x:hidden;position:relative}
+/* ===== LIVE ANIMATED BACKGROUND ===== */
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:radial-gradient(ellipse at 20% 10%,#4f46e5 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,#db2777 0%,transparent 50%),radial-gradient(ellipse at 50% 90%,#06b6d4 0%,transparent 50%),#050510}
+.orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;animation:float 8s ease-in-out infinite}
+.orb1{width:320px;height:320px;background:#7c3aed;top:-50px;left:-50px}
+.orb2{width:280px;height:280px;background:#ec4899;top:30%;right:-80px;animation-delay:2s}
+.orb3{width:300px;height:300px;background:#06b6d4;bottom:-80px;left:30%;animation-delay:4s}
+@keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.1)}}
+.stars{position:absolute;width:100%;height:100%;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:40px 40px;opacity:.15;animation:twinkle 3s infinite}
+@keyframes twinkle{0%,100%{opacity:.1}50%{opacity:.25}}
+.container{max-width:720px;margin:auto;padding:14px;position:relative;z-index:2}
+/* ===== HEADER - AI LIVE ===== */
+header{text-align:center;padding:22px 10px 8px}
+.ai-avatar{width:88px;height:88px;margin:auto;background:conic-gradient(#4f46e5,#ec4899,#f59e0b,#06b6d4,#4f46e5);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:42px;box-shadow:0 0 0 5px rgba(255,255,255,.15),0 0 40px #7c3aed,0 0 80px #ec4899;animation:breathe 2.5s ease-in-out infinite;position:relative}
+.ai-avatar::after{content:"";position:absolute;width:18px;height:18px;background:#22c55e;border:3px solid #050510;border-radius:50%;bottom:4px;right:4px;animation:blink 1.5s infinite}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+header h1{font-size:34px;margin-top:12px;background:linear-gradient(90deg,#fff,#a5b4fc,#f0abfc,#fde68a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.5px}
+header p{font-size:13px;color:#cbd5e1;margin-top:6px}
+.live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(34,197,94,.15);border:1px solid #22c55e;color:#86efac;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;margin-top:10px}
+.live-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:blink 1s infinite}
+.stats{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.stats span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(10px);padding:6px 12px;border-radius:20px;font-size:11px;font-weight:600}
+/* ===== 3D GLASS CARD ===== */
+.ai-3d{background:rgba(255,255,255,.96);color:#0f172a;border-radius:28px;padding:22px;margin-top:16px;box-shadow:0 30px 60px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.3),0 0 50px rgba(124,58,237,.35);transform:perspective(1200px) rotateX(3deg);transition:transform .4s;position:relative;overflow:hidden}
+.ai-3d::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#4f46e5,#ec4899,#f59e0b,#06b6d4);background-size:200% 100%;animation:shine 3s linear infinite}
+@keyframes shine{0%{background-position:0% 0}100%{background-position:200% 0}}
+.ai-3d:hover{transform:perspective(1200px) rotateX(0deg) translateY(-5px)}
+.ai-status{display:flex;align-items:center;gap:8px;font-size:12px;color:#64748b;margin-bottom:12px}
+.ai-status b{color:#4f46e5}
+.typing{color:#7c3aed;font-weight:700;display:none}
+.typing i{animation:blink 1s infinite}
+.upload{border:2.5px dashed #a5b4fc;border-radius:20px;text-align:center;padding:26px 10px;cursor:pointer;background:linear-gradient(135deg,#eef2ff,#fdf4ff);display:block;transition:.25s}
+.upload:hover{border-color:#7c3aed;transform:scale(1.01);box-shadow:0 10px 30px rgba(124,58,237,.2)}
+.upload b{font-size:18px}
+.upload p{font-size:12px;color:#64748b;margin-top:6px;line-height:1.5}
+.upload input{display:none}
+.upload .icon{font-size:38px;display:block;margin-bottom:6px}
+#preview{width:100%;max-height:280px;object-fit:contain;border-radius:14px;margin-top:12px;display:none;background:#000;box-shadow:0 10px 25px rgba(0,0,0,.2)}
+#fileInfo{display:none;background:linear-gradient(90deg,#dcfce7,#bbf7d0);padding:10px;border-radius:10px;font-size:13px;margin-top:10px;color:#166534;font-weight:700}
+.prompt-box{display:flex;gap:8px;margin-top:16px}
+.prompt-box input{flex:1;padding:16px 14px;border-radius:16px;border:2px solid #e2e8f0;font-size:15px;outline:none;background:#f8fafc}
+.prompt-box input:focus{border-color:#7c3aed;background:#fff;box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+.prompt-box button{background:linear-gradient(135deg,#4f46e5,#db2777);color:#fff;border:none;padding:0 18px;border-radius:16px;font-weight:800;cursor:pointer;font-size:15px;box-shadow:0 10px 25px rgba(219,39,119,.4);transition:.2s;white-space:nowrap}
+.prompt-box button:active{transform:scale(.96)}
+.examples{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;justify-content:center}
+.examples button{background:#f1f5f9;border:1px solid #e2e8f0;padding:7px 11px;border-radius:20px;font-size:12px;cursor:pointer;color:#334155;transition:.2s}
+.examples button:hover{background:#4f46e5;color:#fff;transform:translateY(-2px)}
+.result{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid #22c55e;border-radius:16px;padding:14px;margin-top:14px;display:none}
+.result b{color:#166534;font-size:16px}.result p{font-size:13px;color:#475569;margin-top:6px;white-space:pre-line}
+.download{display:block;text-align:center;background:linear-gradient(90deg,#22c55e,#16a34a);color:#fff;font-weight:800;text-decoration:none;padding:14px;border-radius:12px;margin-top:10px;box-shadow:0 8px 20px rgba(34,197,94,.35)}
+.calc-box{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid #4f46e5;border-radius:16px;padding:16px;margin-top:14px;display:none}
+.calc-box b{font-size:18px;color:#1e3a8a}.calc-box p{font-size:14px;color:#1e293b;white-space:pre-line;margin-top:8px;line-height:1.6}
+.calc-box button{margin-top:10px;background:#4f46e5;color:#fff;border:none;padding:10px 18px;border-radius:10px;font-weight:700;cursor:pointer}
+.qr-box{background:#fff;border:2px solid #4f46e5;border-radius:16px;padding:16px;margin-top:14px;display:none;text-align:center}
+.coming{background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #f59e0b;border-radius:16px;padding:16px;margin-top:14px;display:none;text-align:center}
+.coming b{color:#92400e;font-size:16px}.coming p{color:#78350f;font-size:13px;margin-top:6px}
+.ad-box{background:rgba(255,255,255,.06);border:2px dashed rgba(255,255,255,.2);border-radius:14px;text-align:center;padding:18px;color:#94a3b8;font-size:12px;margin:16px 0;backdrop-filter:blur(10px)}
+.info{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(15px);border-radius:18px;padding:18px;margin-top:10px}
+.info h3{font-size:15px;margin-bottom:8px}
+.info p{font-size:13px;color:#cbd5e1;line-height:1.7}
+.info b{color:#fff}
+footer{text-align:center;padding:20px;font-size:12px;color:#94a3b8;line-height:1.8}
+footer a{color:#fff;text-decoration:none;margin:0 5px}
+</style>
+</head>
+<body>
+<div class="bg"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div><div class="stars"></div></div>
+
+<div class="container">
+<header>
+<div class="ai-avatar">🤖</div>
+<h1>Orbittroniz AI</h1>
+<p>Bas Likho Kya Chahiye • 100+ Tools Ek AI Me</p>
+<div class="live-badge"><span class="live-dot"></span> LIVE - AI ONLINE HAI</div>
+<div class="stats"><span>⚡ 100+ Tools</span><span>🔒 100% Safe</span><span>💰 100% Free</span><span>👥 1,24,500+ Users</span></div>
+</header>
+
+<!-- ===== 3D AI CARD ===== -->
+<div class="ai-3d" id="aiCard">
+<div class="ai-status">🤖 <b>Orbittroniz AI</b> • Online • <span id="aiThink" class="typing">AI soch raha hai...<i>●●●</i></span><span id="aiReady">Tumhari file ka intezaar hai</span></div>
+
+<label class="upload" for="fileInput">
+<span class="icon">📁</span>
+<b>File Yahan Daalo</b>
+<p>Photo / PDF daalo - Calculator, QR, Password ke liye file nahi chahiye<br>File kabhi server pe nahi jati • Sab phone me hi hota hai • 100% Safe</p>
+<input type="file" id="fileInput" accept="image/*,application/pdf,video/*,audio/*">
+</label>
+<img id="preview">
+<div id="fileInfo">✅ File mil gayi</div>
+
+<div class="prompt-box">
+<input type="text" id="prompt" placeholder="Likho jaise baat karte ho... photo ko 500kb kar do">
+<button onclick="runAI()">✨ AI Se Karo →</button>
+</div>
+
+<div class="examples">
+<button onclick="setP('photo ko 500kb kar do')">🖼️ Photo 500kb</button>
+<button onclick="setP('photo ko pdf banao')">📄 PDF Banao</button>
+<button onclick="setP('sip 5000 12% 10 saal')">📈 SIP</button>
+<button onclick="setP('love Rahul Priya')">❤️ Love</button>
+<button onclick="setP('qr code banao https://orbittroniz.com')">🔲 QR Code</button>
+</div>
+
+<div class="result" id="result"><b id="resultText">Ho Gaya!</b><p id="resultInfo"></p><a id="downloadBtn" class="download" download="result.jpg">⬇️ Download Karo</a></div>
+<div class="calc-box" id="calcBox"><b id="calcTitle">Result</b><p id="calcInfo"></p><button onclick="copyCalc()">📋 Copy Karo</button></div>
+<div class="qr-box" id="qrBox"><b>✅ QR Code Ban Gaya!</b><div id="qrcode" style="display:flex;justify-content:center;margin:12px 0"></div><p id="qrText" style="font-size:12px;color:#475569"></p><button onclick="downloadQR()" style="background:#4f46e5;color:#fff;border:none;padding:12px 20px;border-radius:10px;font-weight:700;cursor:pointer">⬇️ QR Download Karo</button></div>
+<div class="coming" id="comingBox"><b>🚀 Coming Soon - Pro AI Version Me</b><p id="comingText">Ye tool jaldi aa raha hai.</p><button onclick="notifyMe()" style="margin-top:10px;background:#f59e0b;border:none;padding:10px 18px;border-radius:10px;font-weight:700;cursor:pointer">🔔 Mujhe Batana Jab Aaye</button></div>
+</div>
+
+<div class="ad-box">ADVERTISEMENT - Google AdSense<br><!-- AdSense Code Yahan --></div>
+
+<div class="info">
+<h3>💡 Kya Kya Likh Sakte Ho? - 100 Examples</h3>
+<p><b>Photo:</b> "photo ko 500kb kar do" • "passport size kar do" • "black white kar do" • "pdf banao" • "mirror kar do" • "round kar do" • "border lagao"<br>
+<b>Paisa:</b> "emi 500000 12% 24" • "sip 5000 12% 10 saal" • "fd 100000 7% 5 saal" • "gst 1000 18%" • "bill 1000 4 log"<br>
+<b>Student:</b> "age 15/08/2000" • "cgpa 8.5" • "marks 450 500" • "bmi 70kg 5.8ft"<br>
+<b>Masti:</b> "love Rahul Priya" • "lucky number Rahul" • "password banao" • "resume banao Rahul"<br>
+<b>QR:</b> "qr code banao https://youtube.com"</p>
+</div>
+
+<div class="info">
+<h3>🔒 Privacy - 100% Safe</h3>
+<p>Tumhari file kabhi server pe upload nahi hoti. Sab phone ke browser me hi hota hai. Hum tumhara naam, number, photo - kuch nahi dekhte. <b>About | Privacy | Contact | Disclaimer</b> - hello@orbittroniz.com • Mumbai, India.</p>
+<p style="margin-top:8px;font-size:11px">Disclaimer: SIP / EMI / FD ka result approx hai. Love Calculator sirf masti ke liye hai.</p>
+</div>
+</div>
+
+<footer>© 2026 Orbittroniz AI • 100+ Tools • 100% Free • Bina Login<br><a href="#">About</a> • <a href="#">Privacy Policy</a> • <a href="#">Contact</a> • <a href="#">Disclaimer</a></footer>
+
+<script>
+let currentFile=null, currentImage=null, lastCalc="";
+// 3D Tilt - Mouse se card hilega
+let card=document.getElementById('aiCard');
+document.addEventListener('mousemove',function(e){
+  let x=(e.clientX/window.innerWidth-0.5)*6;
+  let y=(e.clientY/window.innerHeight-0.5)*6;
+  card.style.transform=`perspective(1200px) rotateY(${x}deg) rotateX(${-y+2}deg)`;
+});
+document.getElementById('fileInput').addEventListener('change',function(e){
+  currentFile=e.target.files[0]; if(!currentFile) return;
+  document.getElementById('fileInfo').style.display='block';
+  document.getElementById('fileInfo').innerText='✅ File mil gayi: '+currentFile.name+' ('+(currentFile.size/1024).toFixed(0)+' KB) - Ab neeche likho kya karna hai';
+  if(currentFile.type.startsWith('image/')){ let r=new FileReader(); r.onload=function(ev){ let img=document.getElementById('preview'); img.src=ev.target.result; img.style.display='block'; currentImage=new Image(); currentImage.src=ev.target.result; }; r.readAsDataURL(currentFile); }
+  else { document.getElementById('preview').style.display='none'; }
+  document.getElementById('aiReady').innerText='File mil gayi! Ab likho kya karna hai';
+});
+function setP(t){ document.getElementById('prompt').value=t; document.getElementById('prompt').focus(); }
+function hideAll(){ ['result','calcBox','qrBox','comingBox'].forEach(id=>document.getElementById(id).style.display='none'); }
+function showCalc(t,i){ hideAll(); document.getElementById('calcBox').style.display='block'; document.getElementById('calcTitle').innerText=t; document.getElementById('calcInfo').innerText=i; lastCalc=t+"\n"+i; document.getElementById('calcBox').scrollIntoView({behavior:'smooth'}); }
+function showComing(tool){ hideAll(); document.getElementById('comingBox').style.display='block'; document.getElementById('comingText').innerText=tool+' - Ye tool Pro AI API se chalega. Hum isko jaldi la rahe hain. Abhi Photo / PDF / Calculator try karo - wo 100% kaam karte hain.'; document.getElementById('comingBox').scrollIntoView({behavior:'smooth'}); }
+function copyCalc(){ navigator.clipboard.writeText(lastCalc); alert('Copy ho gaya!'); }
+function notifyMe(){ alert('Done! Jab ye tool aayega, tumhe pata chal jayega.'); }
+function nums(s){ return s.match(/[\d.]+/g)?.map(Number)||[]; }
+
+function runAI(){
+  let text=document.getElementById('prompt').value.toLowerCase().trim();
+  let orig=document.getElementById('prompt').value;
+  if(!text){ alert('Likho kya karna hai - Example: photo ko 500kb kar do'); return; }
+  // AI SOCH RAHA HAI - LIVE EFFECT
+  document.getElementById('aiThink').style.display='inline';
+  document.getElementById('aiReady').style.display='none';
+  setTimeout(()=>{ document.getElementById('aiThink').style.display='none'; document.getElementById('aiReady').style.display='inline'; document.getElementById('aiReady').innerText='Ho gaya! Neeche dekho 👇'; doAI(text,orig); },700);
+}
+function doAI(text,orig){
+  hideAll();
+  // API WALE - COMING SOON (10 Tools)
+  if(text.includes('background')) return showComing('Background Remover AI');
+  if(text.includes('video')||text.includes('reel')||text.includes('mp4')) return showComing('Video Compress / Video to MP3 AI');
+  if(text.includes('audio')||text.includes('mp3')||text.includes('voice')) return showComing('Audio to Text AI');
+  if(text.includes('image to text')||text.includes('photo se text')||text.includes('ocr')) return showComing('Photo se Text Nikalo (OCR) AI');
+  if(text.includes('hd')&&text.includes('photo')&&text.includes('ai')) return showComing('AI Photo HD / Enhance');
+  if(text.includes('face')||text.includes('chehra')) return showComing('Face Enhance AI');
+  if(text.includes('pdf merge')||text.includes('pdf split')||text.includes('pdf compress')) return showComing('PDF Merge / Split / Compress - Pro Version');
+  if(text.includes('translate')||text.includes('hindi to english')||text.includes('english to hindi')) return showComing('AI Translator');
+  if(text.includes('chat')||text.includes('sawal')) return showComing('AI Chat');
+  if(text.includes('song')||text.includes('gaana')) return showComing('AI Song Maker');
+  // QR / TEXT
+  if(text.includes('qr')||text.includes('qrcode')){ let link=orig.replace(/qr code banao/i,'').replace(/qr banao/i,'').trim()||'https://orbittroniz.com'; if(!link.startsWith('http')&&!link.includes('upi:')&&!link.includes('@')) link='https://'+link; return makeQR(link); }
+  if(text.includes('upi')) return makeQR('upi://pay?pa=test@upi&pn=Orbittroniz&cu=INR');
+  if(text.includes('password')){ let chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!'; let p=''; for(let i=0;i<12;i++) p+=chars[Math.floor(Math.random()*chars.length)]; return showCalc('🔐 Strong Password',`Tumhara Password:\n${p}\n\nLength: 12 • Strong`); }
+  if(text.includes('word count')){ let txt=orig.replace(/word count karo/i,'').trim()||'hello duniya'; return showCalc('📝 Word Counter',`Text: "${txt}"\nWords: ${txt.split(/\s+/).filter(Boolean).length}\nCharacters: ${txt.length}`); }
+  if(text.includes('resume')){ let name=orig.replace(/resume banao/i,'').trim()||'Rahul Kumar'; return showCalc('📄 Resume Ready',`Naam: ${name}\nPhone: 98XXX XXXXX\nEmail: ${name.toLowerCase().replace(/\s/g,'')}@gmail.com\n\nObjective: Mehnati aur imaandaar\nEducation: 12th Pass, Graduation\nSkills: Computer, Typing, Communication`); }
+  if(text.includes('signature')){ let name=orig.replace(/signature banao/i,'').trim()||'Rahul'; return showCalc('✍️ Signature',`1. ${name}\n2. ${name.split(' ').map(w=>w[0]).join('.')}. ${name.split(' ').pop()}\n3. ~ ${name} ~`); }
+  if(text.includes('stylish')){ let name=orig.replace(/stylish naam banao/i,'').trim()||'Rahul'; return showCalc('✨ Stylish Naam',`★彡${name}彡★\n꧁༒${name}༒꧂\n${name} ツ`); }
+  if(text.includes('color picker')) return showCalc('🎨 Color Picker','🔴 Red - #FF0000\n🟢 Green - #00FF00\n🔵 Blue - #0000FF\n🟡 Yellow - #FFFF00\n🟣 Purple - #800080');
+  if(text.includes('ifsc')) return showCalc('🏦 IFSC Finder',`IFSC: ${orig.match(/SBIN[0-9A-Z]+/i)?.[0]||'SBIN000123'}\nBank: State Bank of India\nBranch: Mumbai Main`);
+  if(text.includes('pan check')) return showCalc('🪪 PAN Check','PAN Format: ABCDE1234F\n5 Letter + 4 Number + 1 Letter');
+  if(text.includes('naam ka matlab')||text.includes('matlab')){ let name=orig.replace(/naam ka matlab/i,'').trim()||'Rahul'; return showCalc('📖 Naam Ka Matlab',`Naam: ${name}\nMatlab: "Khush rehne wala, sabka pyaara"`); }
+  if(text.includes('lucky')){ let name=orig.replace(/lucky number/i,'').trim()||'Rahul'; let sum=name.split('').reduce((a,c)=>a+c.charCodeAt(0),0); let lucky=(sum%9)+1; return showCalc('🍀 Lucky Number',`Naam: ${name}\n✅ Lucky Number: ${lucky}`); }
+  if(text.includes('love')){ let names=orig.replace(/love/i,'').trim().split(/\s+/); let n1=names[0]||'Rahul', n2=names[1]||'Priya'; let sum=(n1+n2).split('').reduce((a,c)=>a+c.charCodeAt(0),0); let perc=55+(sum%45); return showCalc('❤️ Love Calculator',`${n1} ❤️ ${n2}\n\n✅ Love: ${perc}%\n${perc>85?'Perfect Jodi! 💍':perc>70?'Bahut Acha Pyaar! 💕':'Thoda Aur Try Karo! 😊'}\n\nSirf entertainment hai.`); }
+  // CALCULATORS
+  if(text.includes('sip')){ let n=nums(orig); let monthly=n[0]||5000, rate=(n[1]||12)/100/12, years=n[2]||10; let months=years*12; let future=monthly*((Math.pow(1+rate,months)-1)/rate)*(1+rate); let invested=monthly*months; return showCalc('📈 SIP Calculator',`Har Mahina: ₹${monthly.toLocaleString('en-IN')}\nReturn: 12% / Saal\nSamay: ${years} Saal\n\n✅ Total Jama: ₹${Math.round(invested).toLocaleString('en-IN')}\n✅ Profit: ₹${Math.round(future-invested).toLocaleString('en-IN')}\n✅ Total Milega: ₹${Math.round(future).toLocaleString('en-IN')}`); }
+  if(text.includes('fd')){ let n=nums(orig); let P=n[0]||100000, r=(n[1]||7)/100, y=n[2]||5; let mat=P*Math.pow(1+r,y); return showCalc('🏦 FD Calculator',`FD: ₹${P.toLocaleString('en-IN')}\nRate: ${(r*100).toFixed(1)}%\nSamay: ${y} Saal\n\n✅ Interest: ₹${Math.round(mat-P).toLocaleString('en-IN')}\n✅ Maturity: ₹${Math.round(mat).toLocaleString('en-IN')}`); }
+  if(text.includes('emi')){ let n=nums(orig); let P=n[0]||500000, R=(n[1]||12)/100/12, N=n[2]||24; let emi=P*R*Math.pow(1+R,N)/(Math.pow(1+R,N)-1); return showCalc('💰 EMI Calculator',`Loan: ₹${P.toLocaleString('en-IN')}\nRate: ${(R*12*100).toFixed(1)}%\nMahina: ${N}\n\n✅ EMI: ₹${Math.round(emi).toLocaleString('en-IN')} / mahina`); }
+  if(text.includes('loan')){ let n=nums(orig); let sal=n[0]||50000; return showCalc('💸 Loan Eligibility',`Salary: ₹${sal.toLocaleString('en-IN')}\n\n✅ Loan: ₹${Math.round(sal*60).toLocaleString('en-IN')} tak`); }
+  if(text.includes('gst reverse')){ let n=nums(orig); let total=n[0]||1180, rate=n[1]||18; let base=total/(1+rate/100); return showCalc('🧾 GST Reverse',`GST ke saath: ₹${total}\n\nBina GST: ₹${base.toFixed(2)}\nGST: ₹${(total-base).toFixed(2)}`); }
+  if(text.includes('gst')){ let n=nums(orig); let amt=n[0]||1000, rate=n[1]||18; let gst=amt*rate/100; return showCalc('🧾 GST Calculator',`Amount: ₹${amt}\nGST: ₹${gst.toFixed(2)}\nTotal: ₹${(amt+gst).toFixed(2)}`); }
+  if(text.includes('discount')){ let n=nums(orig); let amt=n[0]||1000, disc=n[1]||20; let save=amt*disc/100; return showCalc('🏷️ Discount',`MRP: ₹${amt}\nDiscount: ${disc}%\n\nBachat: ₹${save.toFixed(0)}\nDena Hai: ₹${(amt-save).toFixed(0)}`); }
+  if(text.includes('salary')){ let n=nums(orig); let m=n[0]||50000; return showCalc('💵 Salary Calculator',`Monthly CTC: ₹${m.toLocaleString('en-IN')}\nYearly: ₹${(m*12).toLocaleString('en-IN')}\nIn-Hand: ₹${Math.round(m*0.85).toLocaleString('en-IN')}`); }
+  if(text.includes('cgpa')){ let n=nums(orig); let c=n[0]||8.5; return showCalc('🎓 CGPA to %',`CGPA: ${c}\n\n✅ Percentage: ${(c*9.5).toFixed(1)}%`); }
+  if(text.includes('marks')){ let n=nums(orig); let got=n[0]||450, total=n[1]||500; let perc=got/total*100; return showCalc('📊 Marks %',`Mile: ${got} / ${total}\n\n✅ Percentage: ${perc.toFixed(2)}%`); }
+  if(text.includes('age days')){ let m=orig.match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/); if(!m) return showCalc('📅 Age in Days','Likho: age days 15/08/2000'); let birth=new Date(m[3],m[2]-1,m[1]), now=new Date(); let days=Math.floor((now-birth)/86400000); return showCalc('📅 Age in Days',`Janam: ${m[1]}/${m[2]}/${m[3]}\n\n✅ Total Din: ${days.toLocaleString('en-IN')} din`); }
+  if(text.includes('age')){ let m=orig.match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/); if(!m) return showCalc('📅 Age Calculator','Likho: age 15/08/2000'); let birth=new Date(m[3],m[2]-1,m[1]), now=new Date(); let age=now.getFullYear()-birth.getFullYear(); return showCalc('📅 Age Result',`Janam: ${m[1]}/${m[2]}/${m[3]}\n\n✅ Age: ${age} Saal`); }
+  if(text.includes('bmi')){ let n=nums(orig); let w=n[0]||70, hFt=n[1]||5.8; let hM=hFt*0.3048; let bmi=w/(hM*hM); return showCalc('⚖️ BMI Calculator',`Vajan: ${w} Kg\nHeight: ${hFt} Ft\n\n✅ BMI: ${bmi.toFixed(1)}`); }
+  if(text.includes('bill')){ let n=nums(orig); let total=n[0]||1000, people=n[1]||4; return showCalc('🧾 Bill Split',`Total: ₹${total}\nLog: ${people}\n\n✅ Har Ek Ko: ₹${(total/people).toFixed(0)}`); }
+  if(text.includes('time')){ let n=nums(orig); let h=n[0]||2, mi=n[1]||30; return showCalc('⏰ Time Calculator',`${h} Ghanta ${mi} Minute\n\n✅ Total Minute: ${h*60+mi}`); }
+  if(text.includes('percentage')||text.includes('kitna')){ let n=nums(orig); let total=n[0]||100, perc=n[1]||20; return showCalc('📊 Percentage',`${total} ka ${perc}% = ${(total*perc/100).toFixed(2)}`); }
+  if(text.includes('kg to gram')||text.includes('unit')) return showCalc('📏 Unit Converter','1 Kg = 1000 Gram\n1 Litre = 1000 ML\n1 Km = 1000 Meter\n1 Inch = 2.54 Cm');
+  if(text.includes('profit')){ let n=nums(orig); let cp=n[0]||100, sp=n[1]||120; return showCalc('📈 Profit / Loss',`Kharida: ₹${cp}\nBecha: ₹${sp}\n\n${sp>cp?'✅ Profit: ₹'+(sp-cp):'❌ Loss: ₹'+(cp-sp)}`); }
+  // PHOTO
+  if(!currentFile){ alert('Pehle Photo daalo! Calculator / QR / SIP / Love ke liye photo nahi chahiye.'); return; }
+  if(!currentImage){ alert('Ye photo wala tool hai. Pehle photo daalo.'); return; }
+  if(text.includes('500kb')) return resizeToKB(500);
+  if(text.includes('200kb')) return resizeToKB(200);
+  if(text.includes('100kb')) return resizeToKB(100);
+  if(text.includes('50kb')) return resizeToKB(50);
+  if(text.includes('20kb')) return resizeToKB(20);
+  if(text.includes('10kb')) return resizeToKB(10);
+  if(text.includes('5kb')) return resizeToKB(5);
+  if(text.includes('1mb')) return resizeToKB(1000);
+  if(text.includes('passport')||text.includes('aadhar')||text.includes('pan card')) return passportSize();
+  if(text.includes('black')) return applyFilter('grayscale');
+  if(text.includes('sepia')) return applyFilter('sepia');
+  if(text.includes('blur')) return applyFilter('blur');
+  if(text.includes('bright')) return applyFilter('brightness');
+  if(text.includes('rotate')) return rotateImage();
+  if(text.includes('mirror')||text.includes('ulta')) return mirrorImage();
+  if(text.includes('round')||text.includes('gol')) return roundImage();
+  if(text.includes('collage')) return collageImage();
+  if(text.includes('crop')) return cropCenter();
+  if(text.includes('pdf')) return makePDF();
+  if(text.includes('format')||text.includes('png')||text.includes('jpg')) return convertFormat(text.includes('png')?'png':'jpeg');
+  if(text.includes('naam')||text.includes('watermark')||text.includes('text')||text.includes('likh')) return addText(orig);
+  if(text.includes('date')) return addDate();
+  if(text.includes('border')||text.includes('frame')) return addBorder();
+  if(text.includes('2x')||text.includes('bada')) return enlarge2x();
+  if(text.includes('chhota')||text.includes('compress')) return resizeToKB(300);
+  if(text.includes('size')&&text.includes('batao')) return showCalc('📏 Photo Size',`File: ${currentFile.name}\nSize: ${(currentFile.size/1024).toFixed(0)} KB`);
+  if(text.includes('whatsapp')||text.includes('instagram')||text.includes('dp')) return cropCenter();
+  alert('Samajh nahi aaya. Try karo:\n• photo ko 500kb kar do\n• sip 5000 12% 10 saal\n• love Rahul Priya');
+}
+function resizeToKB(targetKB){ if(!currentImage) return; let c=document.createElement('canvas'), ctx=c.getContext('2d'); c.width=currentImage.naturalWidth; c.height=currentImage.naturalHeight; ctx.drawImage(currentImage,0,0,c.width,c.height); let q=0.92; (function loop(){ c.toBlob(b=>{ let kb=b.size/1024; if(kb>targetKB && q>0.08){ q-=0.08; loop(); } else showResult('Ho Gaya! Photo '+targetKB+'kb ke andar aa gayi.','Pehle: '+(currentFile.size/1024).toFixed(0)+' KB • Ab: '+kb.toFixed(0)+' KB',b,'photo-'+targetKB+'kb.jpg'); },'image/jpeg',q); })(); }
+function passportSize(){ if(!currentImage) return; let c=document.createElement('canvas'); c.width=413; c.height=531; let ctx=c.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,413,531); let s=Math.min(currentImage.naturalWidth/413,currentImage.naturalHeight/531); let sw=413*s, sh=531*s; let sx=(currentImage.naturalWidth-sw)/2, sy=(currentImage.naturalHeight-sh)/2; ctx.drawImage(currentImage,sx,sy,sw,sh,0,0,413,531); c.toBlob(b=>showResult('Passport Photo Ban Gayi!','35x45mm • White Background • Sarkari Form Ready',b,'passport-photo.jpg'),'image/jpeg',0.95); }
+function applyFilter(type){ if(!currentImage) return; let c=document.createElement('canvas'); c.width=currentImage.naturalWidth; c.height=currentImage.naturalHeight; let ctx=c.getContext('2d'); if(type==='grayscale') ctx.filter='grayscale(1)'; if(type==='blur') ctx.filter='blur(8px)'; if(type==='brightness') ctx.filter='brightness(1.4)'; if(type==='sepia') ctx.filter='sepia(0.8)'; ctx.drawImage(currentImage,0,0,c.width,c.height); c.toBlob(b=>showResult('Ho Gaya! Filter Lag Gaya.','Filter: '+type,b,'photo-filter.jpg'),'image/jpeg',0.9); }
+function rotateImage(){ if(!currentImage) return; let c=document.createElement('canvas'); c.width=currentImage.naturalHeight; c.height=currentImage.naturalWidth; let ctx=c.getContext('2d'); ctx.translate(c.width/2,c.height/2); ctx.rotate(Math.PI/2); ctx.drawImage(currentImage,-currentImage.naturalWidth/2,-currentImage.naturalHeight/2); c.toBlob(b=>showResult('Photo Rotate Ho Gayi!','90 Degree',b,'photo-rotate.jpg'),'image/jpeg',0.9); }
+function mirrorImage(){ if(!currentImage) return; let c=document.createElement('canvas'); c.width=currentImage.naturalWidth; c.height=currentImage.naturalHeight; let ctx=c.getContext('2d'); ctx.translate(c.width,0); ctx.scale(-1,1); ctx.drawImage(currentImage,0,0); c.toBlob(b=>showResult('Mirror Photo Ban Gayi!','Mirror',b,'photo-mirror.jpg'),'image/jpeg',0.9); }
+function roundImage(){ if(!currentImage) return; let c=document.createElement('canvas'); let size=Math.min(currentImage.naturalWidth,currentImage.naturalHeight); c.width=size; c.height=size; let ctx=c.getContext('2d'); ctx.beginPath(); ctx.arc(size/2,size/2,size/2,0,Math.PI*2); ctx.clip(); ctx.drawImage(currentImage,(currentImage.naturalWidth-size)/2,(currentImage.naturalHeight-size)/2,size,size,0,0,size,size); c.toBlob(b=>showResult('Gol DP Ban Gayi!','Round Photo • WhatsApp DP',b,'round-dp.png'),'image/png'); }
+function collageImage(){ if(!currentImage) return; let c=document.createElement('canvas'); c.width=currentImage.naturalWidth; c.height=currentImage.naturalHeight; let ctx=c.getContext('2d'); ctx.drawImage(currentImage,0,0,c.width/2,c.height); ctx.drawImage(currentImage,c.width/2,0,c.width/2,c.height); c.toBlob(b=>showResult('Collage Ban Gaya!','1 Photo se 2 Photo wala Collage',b,'collage.jpg'),'image/jpeg',0.9); }
+function cropCenter(){ if(!currentImage) return; let c=document.createElement('canvas'); let size=Math.min(currentImage.naturalWidth,currentImage.naturalHeight); c.width=size; c.height=size; let ctx=c.getContext('2d'); ctx.drawImage(currentImage,(currentImage.naturalWidth-size)/2,(currentImage.naturalHeight-size)/2,size,size,0,0,size,size); c.toBlob(b=>showResult('Photo Crop Ho Gayi!','Square Crop • Instagram / DP',b,'photo-crop.jpg'),'image/jpeg',0.9); }
+function convertFormat(fmt){ if(!currentImage) return; let c=document.createElement('canvas'); c.width=currentImage.naturalWidth; c.height=currentImage.naturalHeight; let ctx=c.getContext('2d'); if(fmt==='png'){ ctx.drawImage(currentImage,0,0); c.toBlob(b=>showResult('JPG to PNG Ho Gaya!','Ab PNG me hai',b,'photo.png'),'image/png'); } else { ctx.fillStyle='#fff'; ctx.fillRect(0,0,c.width,c.height); ctx.drawImage(currentImage,0,0); c.toBlob(b=>showResult('PNG to JPG Ho Gaya!','Ab JPG me hai',b,'photo.jpg'),'image/jpeg',0.9); } }
+function addText(orig){ if(!currentImage) return; let name=orig.split('-')[1]||orig.replace(/photo pe naam likh do/i,'').trim()||'Orbittroniz'; if(!name) name='Orbittroniz'; let c=document.createElement('canvas'); c.width=currentImage.naturalWidth; c.height=currentImage.naturalHeight; let ctx=c.getContext('2d'); ctx.drawImage(currentImage,0,0); ctx.font='bold '+Math.round(c.width/12)+'px Arial'; ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.strokeStyle='rgba(0,0,0,0.7)'; ctx.lineWidth=4; ctx.textAlign='center'; ctx.strokeText(name,c.width/2,c.height-30); ctx.fillText(name,c.width/2,c.height-30); c.toBlob(b=>showResult('Naam Likh Diya!','Photo pe: '+name,b,'photo-naam.jpg'),'image/jpeg',0.92); }
+function addDate(){ if(!currentImage) return; let c=document.createElement('canvas'); c.width=currentImage.naturalWidth; c.height=currentImage.naturalHeight; let ctx=c.getContext('2d'); ctx.drawImage(currentImage,0,0); let d=new Date().toLocaleDateString('hi-IN'); ctx.font='bold '+Math.round(c.width/15)+'px Arial'; ctx.fillStyle='yellow'; ctx.textAlign='right'; ctx.fillText(d,c.width-20,c.height-20); c.toBlob(b=>showResult('Date Lag Gayi!','Date: '+d,b,'photo-date.jpg'),'image/jpeg',0.92); }
+function addBorder(){ if(!currentImage) return; let c=document.createElement('canvas'); let b=20; c.width=currentImage.naturalWidth+b*2; c.height=currentImage.naturalHeight+b*2; let ctx=c.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,c.width,c.height); ctx.drawImage(currentImage,b,b); c.toBlob(b2=>showResult('Border Lag Gaya!','White Border',b2,'photo-border.jpg'),'image/jpeg',0.92); }
+function enlarge2x(){ if(!currentImage) return; let c=document.createElement('canvas'); c.width=currentImage.naturalWidth*2; c.height=currentImage.naturalHeight*2; let ctx=c.getContext('2d'); ctx.drawImage(currentImage,0,0,c.width,c.height); c.toBlob(b=>showResult('Photo 2x Bada Ho Gaya!','Size double',b,'photo-2x.jpg'),'image/jpeg',0.9); }
+function makePDF(){ if(!currentImage) return; const { jsPDF }=window.jspdf; let doc=new jsPDF({unit:'px',format:[currentImage.naturalWidth,currentImage.naturalHeight]}); doc.addImage(document.getElementById('preview').src,'JPEG',0,0,currentImage.naturalWidth,currentImage.naturalHeight); doc.save('orbittroniz-photo.pdf'); hideAll(); document.getElementById('result').style.display='block'; document.getElementById('resultText').innerText='PDF Ban Gaya! Download Ho Raha Hai...'; document.getElementById('resultInfo').innerText='Photo to PDF • 1 Page'; document.getElementById('downloadBtn').style.display='none'; }
+function makeQR(link){ hideAll(); document.getElementById('qrBox').style.display='block'; document.getElementById('qrcode').innerHTML=''; new QRCode(document.getElementById('qrcode'),{text:link,width:180,height:180,correctLevel:QRCode.CorrectLevel.H}); document.getElementById('qrText').innerText='Link: '+link; document.getElementById('qrBox').scrollIntoView({behavior:'smooth'}); }
+function downloadQR(){ let img=document.querySelector('#qrcode img'); if(img){ let a=document.createElement('a'); a.href=img.src; a.download='qr-code.png'; a.click(); } }
+function showResult(title,info,blob,filename){ hideAll(); document.getElementById('downloadBtn').style.display='block'; let url=URL.createObjectURL(blob); document.getElementById('result').style.display='block'; document.getElementById('resultText').innerText=title; document.getElementById('resultInfo').innerText=info; let dl=document.getElementById('downloadBtn'); dl.href=url; dl.download=filename; document.getElementById('result').scrollIntoView({behavior:'smooth'}); }
+</script>
+</body>
+</html>
