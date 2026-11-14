@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbittroniz AI - No API - Free Unlimited Meme</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,Arial,sans-serif}
+body{background:#0f0f12;color:#fff;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+button{cursor:pointer;font-family:inherit;border:none}
+.top{position:sticky;top:0;background:#111;border-bottom:1px solid #222;display:flex;align-items:center;gap:11px;padding:11px 14px}
+.logo{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:900;font-size:18px;background:linear-gradient(135deg,#7c3aed,#db2777,#f59e0b)}
+.top b{font-size:16px}.top small{color:#aaa;font-size:11px;display:block}
+.top .r{margin-left:auto;display:flex;gap:6px}.top .r button{background:#222;color:#fff;padding:8px 12px;border-radius:999px;font-size:12px}
+.badge{background:#22c55e;color:#000;font-weight:800;font-size:11px;padding:4px 8px;border-radius:999px;text-align:center;margin:8px 14px}
+.chat{flex:1;overflow:auto;padding:16px;background:#0f0f12}.inner{max-width:680px;margin:auto}
+.welcome{text-align:center;padding:20px 10px}.welcome h1{font-size:26px;line-height:1.2}.welcome p{color:#aaa;font-size:13.5px;line-height:1.6;margin-top:8px}
+.msg{margin:14px 0;display:flex;gap:10px}.msg.user{justify-content:flex-end}
+.bubble{max-width:88%;padding:12px 14px;border-radius:16px;font-size:14px;line-height:1.65;white-space:pre-line;word-break:break-word;color:#111}
+.ai .bubble{background:#fff;border:1px solid #eee;border-bottom-left-radius:4px}.user .bubble{background:#fff;color:#111;border-bottom-right-radius:4px}
+.avatar{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-size:13px}.ai .avatar{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff}.user .avatar{background:#333;color:#fff}
+.bubble img{max-width:100%;border-radius:12px;margin-top:8px;display:block}.bubble .genImg{width:100%;border-radius:12px;margin-top:10px;display:block}
+.bubble .actions{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}.bubble .actions button{background:#f5f3ff;border:1px solid #e9e4ff;padding:7px 11px;border-radius:999px;font-size:12px}.bubble .actions button.primary{background:#111;color:#fff}
+.try{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;justify-content:center}.try button{background:#222;color:#fff;border:1px solid #333;padding:9px 12px;border-radius:999px;font-size:12px}
+.try button.hot{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none}
+.inputArea{padding:10px 14px 12px;background:#111;border-top:1px solid #222}.inputWrap{max-width:680px;margin:auto}
+.attachPrev{display:flex;gap:8px;margin-bottom:8px}.attachItem{position:relative;width:62px;height:62px;border-radius:12px;overflow:hidden;border:2px solid #7c3aed}.attachItem img{width:100%;height:100%;object-fit:cover}.attachItem button{position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:50%;background:#000;color:#fff;font-size:11px}
+.box{display:flex;align-items:flex-end;gap:8px;background:#222;border:2px solid #333;border-radius:26px;padding:6px}.box:focus-within{border-color:#7c3aed;background:#222}
+.box textarea{flex:1;border:none;outline:none;background:transparent;resize:none;font-size:15px;padding:8px 0;max-height:110px;color:#fff}
+.box textarea::placeholder{color:#888}
+.iconBtn{width:38px;height:38px;border-radius:50%;background:#333;border:1px solid #444;font-size:18px;flex-shrink:0;display:grid;place-items:center;cursor:pointer;color:#fff}
+.send{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#db2777,#f59e0b);color:#fff;font-size:18px;flex-shrink:0}.send:disabled{opacity:.6}
+.hint{text-align:center;color:#888;font-size:11px;margin-top:6px}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#fff;color:#111;padding:10px 16px;border-radius:999px;z-index:99;display:none;font-size:13px;font-weight:700}
+canvas{display:none}
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">O</div><div><b>Orbittroniz AI - NO API</b><small>Funny • Dark Meme • Horror • Realistic - Free Unlimited</small></div><div class="r"><button onclick="newChat()">+ New</button><button onclick="downloadLast()">⬇ Download</button></div></div>
+<div class="badge">✅ NO API KEY NEEDED • NO QUOTA • NO LIMIT • UNLIMITED FREE • WORKS OFFLINE FOR PHOTO MEME</div>
+
+<div class="chat" id="chatScroll"><div class="inner" id="chatInner">
+<div class="welcome" id="welcome">
+<div class="logo" style="width:64px;height:64px;font-size:30px;margin:auto">O</div>
+<h1>NO API.<br>Attach Photo → Tap Meme.<br>Or Only Tell → New Photo.</h1>
+<p><b>2 Powerful Ways - No Key:</b><br><br><b>Way 1 - YOUR Photo Meme (Instant):</b> Attach YOUR photo → Tap Funny / Dark Meme → Your SAME face, meme text, dark filter - Instant, Unlimited<br><br><b>Way 2 - Only Tell (New Photo):</b> No photo → Type <i>"funny dark meme girl in red saree, realistic"</i> → New realistic photo from FREE AI - Unlimited</p>
+<div class="try">
+<button class="hot" onclick="quick('funny')">😂 Funny - Your Photo</button>
+<button class="hot" onclick="quick('meme')">🤣 Meme - Your Photo</button>
+<button class="hot" onclick="quick('dark meme')">💀 Dark Meme - Your Photo</button>
+<button class="hot" onclick="quick('horror')">👻 Horror - Your Photo</button>
+<button onclick="quick('old')">👴 Old Age - Your Photo</button>
+<button onclick="quick('baby')">👶 Baby Face - Your Photo</button>
+<button onclick="quick('movie')">🎬 Movie Poster - Your Photo</button>
+<button onclick="quick('superhero')">🦸 Superhero - Your Photo</button>
+<button onclick="quick('gym')">💪 Funny Gym - Your Photo</button>
+<button onclick="quick('glamour')">✨ Glamour - Your Photo</button>
+<button onclick="quick('saree')">🥻 Saree Filter - Your Photo</button>
+<button class="hot" onclick="quick('Make a realistic photo of a funny dark meme Indian girl in red saree, dark background, funny scary expression, photorealistic, DSLR photo')">✨ Only Tell - Dark Meme Girl (No Photo)</button>
+<button onclick="quick('Make a realistic photo of a 22 year old Indian girl, long black hair, wearing red silk saree with gold border, standing in village, smiling, golden hour light, DSLR photo')">✨ Only Tell - Saree Girl (No Photo)</button>
+<button onclick="quick('Make a realistic photo of a funny Indian man with big moustache, dark humor meme style, photorealistic')">😂 Only Tell - Funny Man Meme</button>
+</div>
+</div>
+</div></div>
+
+<div class="inputArea"><div class="inputWrap">
+<div class="attachPrev" id="attachPrev"></div>
+<div class="box">
+<label class="iconBtn">📎<input type="file" id="fileInput" accept="image/*" hidden></label>
+<button class="iconBtn" onclick="document.getElementById('fileInput').click()">🖼️</button>
+<textarea id="prompt" rows="1" placeholder="Type here... e.g. funny / meme / dark meme / horror / or full description..."></textarea>
+<button class="send" id="sendBtn" onclick="sendMsg()">↑</button>
+</div>
+<div class="hint">📎 Attach YOUR Photo → Tap Button = YOUR Face Meme Instant • No Photo + Type = New AI Photo • NO API, NO QUOTA</div>
+</div></div>
+<div class="toast" id="toast"></div>
+<canvas id="myCanvas"></canvas>
+
+<script>
+// ============================================================
+// ✅ POWERFUL AI - NO API - NO KEY - NO QUOTA - FREE UNLIMITED
+// ENGINE 1: YOUR PHOTO -> CANVAS MEME (Keeps YOUR face 100% - Instant)
+// ENGINE 2: ONLY TELL -> POLLINATIONS FREE AI (New realistic photo)
+// ============================================================
+let files=[], busy=false, origImg=null, origUrl="", lastGenUrl="";
+const $=id=>document.getElementById(id);
+function toast(m){let t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(t._t);t._t=setTimeout(()=>t.style.display='none',2800)}
+function esc(s){return (s||'').replace(/&/g,'&lt;').replace(/>/g,'&gt;')}
+function scroll(){let c=$('chatScroll');requestAnimationFrame(()=>c.scrollTop=c.scrollHeight)}
+function newChat(){$('chatInner').innerHTML=document.querySelector('#welcome').outerHTML;files=[];origImg=null;lastGenUrl="";renderAttach();toast('New chat - No API needed')}
+function quick(t){$('prompt').value=t;sendMsg()}
+function addUser(text,file){let w=$('welcome');if(w)w.style.display='none';let d=document.createElement('div');d.className='msg user';let extra=file&&file.url?'<img src="'+file.url+'">':'';d.innerHTML='<div class="bubble">'+esc(text)+extra+'</div><div class="avatar">You</div>';$('chatInner').appendChild(d);scroll()}
+function addAI(html){let d=document.createElement('div');d.className='msg ai';d.innerHTML='<div class="avatar">O</div><div class="bubble">'+html+'</div>';$('chatInner').appendChild(d);scroll();return d}
+$('prompt').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg()}});
+$('prompt').addEventListener('input',e=>{e.target.style.height='auto';e.target.style.height=Math.min(e.target.scrollHeight,110)+'px'});
+$('fileInput').addEventListener('change',e=>{
+  let f=e.target.files&&e.target.files[0];if(!f)return;
+  if(!f.type.startsWith('image/')){toast('Select a photo');return}
+  let r=new FileReader();r.onload=ev=>{
+    let url=ev.target.result;origUrl=url;
+    let img=new Image();img.onload=()=>{origImg=img;};
+    img.src=url;
+    files=[{name:f.name,url:url}];renderAttach();
+    let w=$('welcome');if(w)w.style.display='none';
+    addAI('✅ <b>YOUR Photo Attached - YOUR Face Will Stay Same!</b><br><br>Now Tap 1 Button OR Type 1 word:<br>• <b>funny</b> • <b>meme</b> • <b>dark meme</b> • <b>horror</b> • <b>old</b> • <b>movie</b><br><br>This is NO API - Instant - Unlimited - Works on YOUR photo in YOUR phone.');
+    toast('Photo attached - YOUR face will stay!');
+  };r.readAsDataURL(f);setTimeout(()=>e.target.value='',100);
+});
+function renderAttach(){
+  let box=$('attachPrev');box.innerHTML='';
+  files.forEach(f=>{let d=document.createElement('div');d.className='attachItem';d.innerHTML='<img src="'+f.url+'"><button>×</button>';d.querySelector('button').onclick=()=>{files=[];origImg=null;renderAttach()};box.appendChild(d)});
+}
+
+// ===== ENGINE 1: YOUR PHOTO MEME MAKER - CANVAS - NO API - KEEPS YOUR FACE =====
+function makePhotoMeme(type, rawText){
+  if(!origImg) return null;
+  let canvas=$('myCanvas');
+  let ctx=canvas.getContext('2d');
+  let W=origImg.width, H=origImg.height;
+  // Limit size for speed
+  let maxW=900; let scale=Math.min(1, maxW/W); W=Math.floor(W*scale); H=Math.floor(H*scale);
+  canvas.width=W; canvas.height=H;
+  // Draw original
+  ctx.filter='none'; ctx.drawImage(origImg,0,0,W,H);
+  let topText="", bottomText="", filterDesc="";
+
+  if(type==='funny'){
+    // Funny: Bright + Saturate + Warp effect by stretching centre
+    ctx.filter='saturate(1.6) contrast(1.2) brightness(1.1)';
+    ctx.drawImage(origImg,0,0,W,H);
+    ctx.filter='none';
+    topText="WHEN YOU SAY"; bottomText="FUNNY HO GAYA 😂";
+    filterDesc="Funny Filter - Bright + Meme Text";
+  } else if(type==='meme'){
+    ctx.filter='saturate(1.3) contrast(1.1)';
+    ctx.drawImage(origImg,0,0,W,H); ctx.filter='none';
+    topText="ME AFTER"; bottomText="SENDING MEME 🤣";
+    filterDesc="Meme - Classic Top/Bottom Text";
+  } else if(type==='dark meme' || type==='dark humor' || type==='dark humour'){
+    // Dark Meme: Darken, vignette, red tint
+    ctx.filter='brightness(0.55) contrast(1.4) saturate(0.7)';
+    ctx.drawImage(origImg,0,0,W,H); ctx.filter='none';
+    // Vignette
+    let grad=ctx.createRadialGradient(W/2,H/2,W*0.2,W/2,H/2,W*0.7);
+    grad.addColorStop(0,'rgba(0,0,0,0)'); grad.addColorStop(1,'rgba(0,0,0,0.85)');
+    ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
+    topText="DARK HUMOR"; bottomText="SAMAJH AAYA? 💀";
+    filterDesc="Dark Meme - Dark + Vignette";
+  } else if(type==='horror'){
+    ctx.filter='brightness(0.45) contrast(1.6) saturate(0.3) hue-rotate(10deg)';
+    ctx.drawImage(origImg,0,0,W,H); ctx.filter='none';
+    let grad=ctx.createRadialGradient(W/2,H/2,10,W/2,H/2,W*0.6);
+    grad.addColorStop(0,'rgba(0,0,0,0)'); grad.addColorStop(1,'rgba(0,0,0,0.9)');
+    ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
+    topText="BHOOT AAYA"; bottomText="👻 DAR LAG RAHA HAI?";
+    filterDesc="Horror - Dark + Fog";
+  } else if(type==='old'){
+    ctx.filter='grayscale(0.6) sepia(0.4) contrast(1.1) brightness(0.95)';
+    ctx.drawImage(origImg,0,0,W,H); ctx.filter='none';
+    topText="70 SAAL BAAD"; bottomText="ABHI BHI YOUNG 👴";
+    filterDesc="Old Age Filter - Sepia";
+  } else if(type==='baby'){
+    ctx.filter='saturate(1.4) brightness(1.2) contrast(0.9)';
+    ctx.drawImage(origImg,0,0,W,H); ctx.filter='none';
+    topText="CUTE BABY"; bottomText="AWW SO CUTE 👶";
+    filterDesc="Baby Face - Bright Cute";
+  } else if(type==='movie'){
+    ctx.filter='saturate(1.5) contrast(1.3) brightness(0.9)';
+    ctx.drawImage(origImg,0,0,W,H); ctx.filter='none';
+    // Cinema bars
+    ctx.fillStyle='#000'; ctx.fillRect(0,0,W,H*0.08); ctx.fillRect(0,H-H*0.08,W,H*0.08);
+    topText="ORBITTRONIZ"; bottomText="COMING SOON 🎬";
+    filterDesc="Movie Poster - Cinema Bars";
+  } else if(type==='superhero'){
+    ctx.filter='saturate(1.7) contrast(1.4) brightness(1.05)';
+    ctx.drawImage(origImg,0,0,W,H); ctx.filter='none';
+    topText="SUPERHERO"; bottomText="POWER MODE ON 🦸";
+    filterDesc="Superhero - High Contrast";
+  } else if(type==='gym'){
+    ctx.filter='saturate(1.4) contrast(1.5) brightness(1.0)';
+    ctx.drawImage(origImg,0,0,W,H); ctx.filter='none';
+    topText="GYM DAY 1"; bottomText="AB TOH BODY BANEGI 💪";
+    filterDesc="Gym - Strong Contrast";
+  } else if(type==='glamour'){
+    ctx.filter='saturate(1.3) brightness(1.15) contrast(1.05)';
+    ctx.drawImage(origImg,0,0,W,H); ctx.filter='none';
+    topText="GLAMOUR"; bottomText="FASHION STAR ✨";
+    filterDesc="Glamour - Soft Bright";
+  } else if(type==='saree'){
+    ctx.filter='saturate(1.5) contrast(1.1) brightness(1.0) sepia(0.15)';
+    ctx.drawImage(origImg,0,0,W,H); ctx.filter='none';
+    topText="SAREE LOOK"; bottomText="DESI SWAG 🥻";
+    filterDesc="Saree Filter - Warm Desi Tone (Note: True saree change needs Gemini API - This filter gives saree vibe on YOUR photo)";
+  } else {
+    ctx.filter='saturate(1.3) contrast(1.1)';
+    ctx.drawImage(origImg,0,0,W,H); ctx.filter='none';
+    topText="ORBITTRONIZ"; bottomText=rawText.toUpperCase().slice(0,25);
+    filterDesc="Custom Meme";
+  }
+
+  // Draw Meme Text - Bold White with Black Outline
+  function drawMemeText(text, y, isTop){
+    if(!text) return;
+    ctx.font='900 ' + Math.floor(W*0.07) + 'px Impact, Arial Black, sans-serif';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.lineWidth=Math.floor(W*0.012); ctx.strokeStyle='#000'; ctx.lineJoin='round';
+    // Word wrap if long
+    let words=text.split(' '); let lines=[]; let cur='';
+    for(let w of words){ let test=cur?cur+' '+w:w; if(ctx.measureText(test).width > W*0.9 && cur){lines.push(cur); cur=w;} else cur=test; }
+    if(cur) lines.push(cur);
+    let lineH=Math.floor(W*0.09);
+    let startY = isTop ? (y + lineH/2) : (y - (lines.length-1)*lineH - lineH/2);
+    lines.forEach((line,i)=>{
+      let yy=startY + i*lineH;
+      ctx.strokeText(line, W/2, yy); ctx.fillStyle='#fff'; ctx.fillText(line, W/2, yy);
+    });
+  }
+  drawMemeText(topText, H*0.06, true);
+  drawMemeText(bottomText, H*0.94, false);
+  return {url: canvas.toDataURL('image/jpeg',0.92), desc: filterDesc};
+}
+
+async function sendMsg(){
+  if(busy){toast('Please wait...');return}
+  let inp=$('prompt');let raw=(inp.value||'').trim();let file=files[0];
+  if(!raw&&!file){toast('Attach photo or type - e.g. funny / dark meme / saree');return}
+  if(!raw&&file)raw='funny';
+
+  // Map short words
+  let lowRaw=raw.toLowerCase().trim();
+  let shortMap={
+    'funny':'funny','meme':'meme','dark meme':'dark meme','dark humor':'dark meme','dark humour':'dark meme',
+    'horror':'horror','old':'old','baby':'baby','movie':'movie','superhero':'superhero','gym':'gym','glamour':'glamour','saree':'saree'
+  };
+  let typeKey='';
+  if(shortMap[lowRaw]) typeKey=shortMap[lowRaw];
+  for(let k in shortMap){ if(lowRaw==='make '+k || lowRaw==='make it '+k || lowRaw==='make me '+k){ typeKey=shortMap[k]; break; } }
+  // If raw contains keyword, detect it
+  if(!typeKey){
+    for(let k in shortMap){ if(lowRaw.includes(k)){ typeKey=shortMap[k]; break; } }
+  }
+
+  let isTextOnly = !file || !origImg;
+  let w=$('welcome');if(w)w.style.display='none';
+  addUser(raw,file);inp.value='';busy=true;$('sendBtn').disabled=true;$('sendBtn').textContent='...';
+
+  // ===== ENGINE 1: YOUR PHOTO MEME - INSTANT - NO API =====
+  if(!isTextOnly && typeKey){
+    let t=addAI('Making YOUR Photo Meme - Instant - No API... ● ● ●<br><small>Keeping YOUR face 100% same, adding meme text + filter in your phone - No quota, no waiting.</small>');
+    setTimeout(()=>{
+      try{
+        let res=makePhotoMeme(typeKey, raw);
+        if(!res) throw new Error('No photo');
+        lastGenUrl=res.url; t.remove();
+        let gid='gen'+Date.now();
+        addAI("<b>✅ Done! YOUR Photo Meme - YOUR Face Same - NO API - Unlimited!</b><br><br>Your prompt: <b>" + esc(raw) + "</b><br>Filter: " + esc(res.desc) + "<br><br>This is YOUR photo, not imaginary - Because it edited YOUR photo in your phone.<img class='genImg' id='" + gid + "' src='" + res.url + "'><div class='actions'><button class='primary' onclick=\"downloadById('" + gid + "')\">⬇ Download Meme</button><button onclick=\"quick('meme')\">🤣 Meme Again</button><button onclick=\"quick('dark meme')\">💀 Dark Meme</button><button onclick=\"quick('horror')\">👻 Horror</button></div><div style='margin-top:8px;font-size:12px;color:#888'>Tip: Try <b>dark meme</b>, <b>horror</b>, <b>movie</b> - All instant, unlimited.</div>");
+      }catch(e){ t.remove(); addAI("⚠️ Error: " + esc(e.message)); }
+      busy=false;$('sendBtn').disabled=false;$('sendBtn').textContent='↑';scroll();
+    },400);
+    return;
+  }
+
+  // ===== ENGINE 1b: YOUR PHOTO + FULL DESCRIPTION - Try to explain filter =====
+  if(!isTextOnly && !typeKey){
+    // User attached photo but typed full new description like "Make girl in saree" - We cannot do true AI edit without API, so do best meme + tell truth
+    let t=addAI('Making YOUR Photo Style - Instant... ● ● ●');
+    setTimeout(()=>{
+      let res=makePhotoMeme('meme', raw);
+      lastGenUrl=res.url; t.remove();
+      let gid='gen'+Date.now();
+      addAI("<b>✅ Done! YOUR Photo With Meme Style - YOUR Face Same</b><br><br>Your prompt: <b>" + esc(raw) + "</b><br><br><b>Note:</b> Without API, true AI cannot change your clothes to saree and keep face. This version keeps YOUR face 100% and adds meme style + filter. For TRUE saree change (clothes change, face same), you need Gemini API with AIza... key - That is the only powerful AI for clothes change.<br><br>For now, this meme version is unlimited free.<img class='genImg' id='" + gid + "' src='" + res.url + "'><div class='actions'><button class='primary' onclick=\"downloadById('" + gid + "')\">⬇ Download</button><button onclick=\"quick('dark meme')\">💀 Dark Meme</button></div>");
+      busy=false;$('sendBtn').disabled=false;$('sendBtn').textContent='↑';scroll();
+    },400);
+    return;
+  }
+
+  // ===== ENGINE 2: ONLY TELL - NEW REALISTIC PHOTO - FREE POLLINATIONS - NO API =====
+  let t=addAI('Making NEW Realistic Photo from your words - FREE AI - No API... ● ● ●<br><small>Generating realistic photo - Please wait 10-20 sec - Unlimited, No Quota.</small>');
+  try{
+    // Make prompt more realistic automatically
+    let fullPrompt = raw + ", photorealistic, realistic photo, natural skin texture, natural lighting, DSLR camera photo, 85mm lens, high detail, not cartoon, not painting, professional photography";
+    // If user typed short word like funny / dark meme without photo, expand it
+    if(lowRaw==='funny' || lowRaw==='meme' || lowRaw==='dark meme'){
+      fullPrompt = "Funny dark meme Indian person, funny expression, dark background, humorous meme style, photorealistic, realistic photo, DSLR, high detail";
+    }
+    let pollPrompt = encodeURIComponent(fullPrompt);
+    let pollUrl = "https://image.pollinations.ai/prompt/" + pollPrompt + "?width=1024&height=1280&seed=" + Date.now() + "&nologo=true&enhance=true";
+    // Preload to check it loads
+    let imgTest=new Image();
+    imgTest.onload=()=>{
+      lastGenUrl=pollUrl; t.remove();
+      let gid='gen'+Date.now();
+      addAI("<b>✅ Done! NEW Realistic Photo - NO API - Unlimited!</b><br><br>Your prompt: <b>" + esc(raw) + "</b><br><br>This is a NEW photo from your words (not your attached photo, because no photo was given). For YOUR face meme, attach photo + tap Funny / Dark Meme.<img class='genImg' id='" + gid + "' src='" + pollUrl + "'><div class='actions'><button class='primary' onclick=\"downloadById('" + gid + "')\">⬇ Download Image</button><button onclick=\"quick('Make a realistic photo of a funny dark meme Indian girl in red saree, dark background, funny scary expression, photorealistic')\">💀 More Dark Meme</button></div>");
+      busy=false;$('sendBtn').disabled=false;$('sendBtn').textContent='↑';scroll();
+    };
+    imgTest.onerror=()=>{
+      t.remove();
+      addAI("⚠️ <b>Free AI Busy - Try Again</b><br><br>Pollinations free server is busy. Tap Send again in 10 sec - It is unlimited, just retry.");
+      busy=false;$('sendBtn').disabled=false;$('sendBtn').textContent='↑';
+    };
+    imgTest.src=pollUrl;
+  }catch(err){
+    t.remove(); addAI("⚠️ Error: " + esc(err.message));
+    busy=false;$('sendBtn').disabled=false;$('sendBtn').textContent='↑';
+  }
+}
+function downloadById(id){let img=document.getElementById(id);let url=img?img.src:lastGenUrl;if(!url){toast('No image');return}let a=document.createElement('a');a.href=url;a.download='orbittroniz-meme.jpg';a.click();toast('Downloaded!')}
+function downloadLast(){downloadById('')}
+</script>
+</body>
+</html>
