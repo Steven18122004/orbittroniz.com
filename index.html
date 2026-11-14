@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbittroniz AI Style Studio - Photo Editor + Style Recommend</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,Arial,sans-serif}
+body{background:#f7f5ff;color:#17171a;min-height:100vh}
+button{cursor:pointer;font-family:inherit;border:none}
+input,select{font-family:inherit}
+/* LOGO - PREMIUM ORB */
+.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:#fff;font-weight:900;font-size:19px;position:relative;flex-shrink:0;background:radial-gradient(circle at 30% 25%,#fff 0%,#c084fc 12%,#7c3aed 38%,#db2777 68%,#f59e0b 100%);box-shadow:0 8px 22px rgba(124,58,237,.45),inset 0 1px 0 rgba(255,255,255,.7);animation:float 3s ease-in-out infinite}
+.logo:before{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.5px dashed #a78bfa;animation:spin 7s linear infinite}
+.logo:after{content:"";position:absolute;width:9px;height:9px;background:#fde047;border:2px solid #fff;border-radius:50%;top:-4px;left:50%;box-shadow:0 0 12px #fde047;animation:orbit 2.8s linear infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes orbit{0%{transform:rotate(0) translateX(24px) rotate(0)}100%{transform:rotate(360deg) translateX(24px) rotate(-360deg)}}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}} .pop{animation:pop .5s ease}
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid #eee;display:flex;align-items:center;gap:12px;padding:12px 16px}
+.top b{font-size:17px;background:linear-gradient(90deg,#7c3aed,#db2777,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.top span{color:#888;font-size:12px}.top .r{margin-left:auto;display:flex;gap:8px}
+.top .r button{background:#fff;border:1px solid #eee;padding:8px 12px;border-radius:999px;font-size:12px}
+.wrap{max-width:1180px;margin:auto;padding:16px}
+.hero{text-align:center;padding:18px 10px 8px}
+.hero h1{font-size:30px;line-height:1.2;background:linear-gradient(90deg,#7c3aed,#db2777,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:#777;margin-top:8px;font-size:14px;line-height:1.6}
+.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:16px;align-items:start}
+.card{background:#fff;border:1px solid #eee;border-radius:18px;padding:16px;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+.card h2{font-size:16px;margin-bottom:4px}.card p.sub{color:#888;font-size:12px;line-height:1.5}
+.upload{border:2px dashed #d8b4fe;background:#fdfaff;border-radius:14px;padding:18px;text-align:center;margin-top:12px;cursor:pointer}
+.upload:hover{border-color:#7c3aed;background:#f5f3ff}
+.upload .big{font-size:34px}
+.upload b{display:block;margin-top:6px}
+.upload small{color:#888}
+.upload input{display:none}
+.previewBox{margin-top:12px;border:1px solid #eee;border-radius:14px;overflow:hidden;background:#000}
+.previewTop{display:flex}.previewTop div{flex:1}.previewTop p{text-align:center;background:#fafafa;padding:7px;font-size:11px;font-weight:700;border-bottom:1px solid #eee}
+.previewTop img{width:100%;height:280px;object-fit:contain;background:#000;display:block}
+.previewTop .ph{height:280px;display:grid;place-items:center;color:#888;background:#111;font-size:13px;padding:20px;text-align:center}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.row button{padding:9px 13px;border-radius:999px;background:#f5f3ff;border:1px solid #e9e4ff;font-size:12px;font-weight:600}
+.row button.active{background:#17171a;color:#fff;border-color:#17171a}
+.row button.primary{background:linear-gradient(90deg,#7c3aed,#db2777);color:#fff;border:none;box-shadow:0 6px 14px rgba(124,58,237,.3)}
+.row button.green{background:#0a7a42;color:#fff;border:none}
+label{font-size:12px;font-weight:700;color:#444;display:block;margin-top:14px}
+select,input[type="range"],input[type="text"]{width:100%;padding:11px;border:1px solid #e5e5e5;border-radius:12px;margin-top:6px;background:#fafafa;font-size:14px;outline:none}
+select:focus,input:focus{border-color:#7c3aed;background:#fff}
+.seg{display:flex;gap:8px;margin-top:6px}.seg button{flex:1;padding:11px;border-radius:12px;background:#f5f3ff;border:1px solid #e9e4ff;font-weight:700}.seg button.active{background:#17171a;color:#fff}
+.rangeVal{font-size:11px;color:#888;float:right}
+.styleGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.styleCard{border:1px solid #eee;border-radius:12px;padding:12px;cursor:pointer;background:#fafafa}
+.styleCard:hover{border-color:#7c3aed;background:#f5f3ff}
+.styleCard.active{border:2px solid #7c3aed;background:#ede9fe}
+.styleCard .emoji{font-size:22px}.styleCard b{font-size:13px;display:block;margin-top:4px}.styleCard small{color:#777;font-size:11px;line-height:1.4;display:block;margin-top:2px}
+.styleCard .tag{display:inline-block;background:#fff;border:1px solid #eee;padding:2px 7px;border-radius:999px;font-size:10px;margin-top:6px}
+.recBox{background:linear-gradient(135deg,#fdfaff,#fff7ed);border:1px solid #f0d9ff;border-radius:14px;padding:14px;margin-top:12px}
+.recBox h3{font-size:14px}.recBox ul{margin:10px 0 0 18px;font-size:13px;line-height:1.7;color:#333}
+.recBox ul b{color:#7c3aed}
+.palette{display:flex;gap:6px;margin-top:8px}.palette div{width:32px;height:32px;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.2);cursor:pointer}
+.palette div.active{outline:2px solid #17171a;outline-offset:2px}
+.badge{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;background:#17171a;color:#fff}
+.badge.purple{background:#7c3aed}.badge.pink{background:#db2777}.badge.green{background:#0a7a42}.badge.orange{background:#f59e0b}
+.tip{background:#fffbeb;border:1px dashed #eab308;border-radius:10px;padding:10px;font-size:12px;color:#555;line-height:1.6;margin-top:12px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#17171a;color:#fff;padding:11px 18px;border-radius:999px;z-index:99;display:none;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.tabs button{padding:9px 13px;border-radius:999px;background:#f5f3ff;border:1px solid #e9e4ff;font-size:12px;font-weight:700}.tabs button.active{background:#17171a;color:#fff}
+.hidden{display:none}
+.looks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.looks button{border-radius:12px;padding:10px;border:1px solid #eee;background:#fafafa;font-size:11px;font-weight:700}.looks button.active{border-color:#7c3aed;background:#ede9fe}
+.looks span{font-size:20px;display:block}
+.footer{max-width:1180px;margin:16px auto;padding:0 16px 30px;color:#999;font-size:12px;text-align:center;line-height:1.6}
+@media(max-width:860px){.grid{grid-template-columns:1fr}.hero h1{font-size:24px}.previewTop img,.previewTop .ph{height:220px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">O</div><div><b>Orbittroniz AI Style Studio</b><br><span>Photo Editor + AI Style Recommend • Girls & Boys</span></div><div class="r"><button onclick="newAll()">+ New Photo</button><button onclick="downloadEdited()">⬇ Download</button></div></div>
+
+<div class="wrap">
+<div class="hero"><h1>Upload Photo. AI Will Tell You<br>What Style Will Suit You.</h1><p>Hair • Clothes • Colors • Body Fit • Makeup • Accessories • Background<br>For <b>Girls & Boys</b> - Wedding, College, Party, Job, Daily Wear - All in one place.</p></div>
+
+<div class="grid">
+<!-- LEFT : PHOTO + EDITOR -->
+<div class="card">
+<h2>📸 1. Add Your Photo</h2><p class="sub">Tap to upload from gallery. Photo stays in your phone only - never uploaded to server.</p>
+<label class="upload" for="fileInput"><div class="big">📸 +</div><b>Tap to Add Photo / Take Photo</b><small>JPG, PNG, WEBP • Also PDF allowed • Max 10 MB</small><input type="file" id="fileInput" accept="image/*,application/pdf"></label>
+
+<div class="previewBox"><div class="previewTop"><div><p>BEFORE - Original</p><div id="beforeBox" class="ph">No photo yet<br><small>Upload photo to start editing</small></div></div><div><p>AFTER - Edited + Style</p><div id="afterBox" class="ph">Edited photo will show here<br><small>Apply filter / style below</small></div></div></div></div>
+
+<div class="row">
+<button class="primary" onclick="downloadEdited()">⬇ Download Edited Photo</button>
+<button onclick="resetPhoto()">↩ Reset</button>
+<button onclick="makePDFNow()">📄 Make PDF</button>
+<button class="green" onclick="askAI()">✨ AI Recommend Me</button>
+</div>
+
+<h2 style="margin-top:16px">🎨 2. Edit Photo - Filters & Looks</h2><p class="sub">Tap a look - it applies instantly on AFTER photo.</p>
+<div class="tabs" id="filterTabs">
+<button class="active" data-f="original" onclick="setFilter('original',this)">Original</button>
+<button data-f="glow" onclick="setFilter('glow',this)">✨ Glow</button>
+<button data-f="fair" onclick="setFilter('fair',this)">🤍 Fair Glow</button>
+<button data-f="tan" onclick="setFilter('tan',this)">🤎 Warm Tan</button>
+<button data-f="cinematic" onclick="setFilter('cinematic',this)">🎬 Cinematic</button>
+<button data-f="hd" onclick="setFilter('hd',this)">💎 HD Clear</button>
+<button data-f="vintage" onclick="setFilter('vintage',this)">📷 Vintage</button>
+<button data-f="bw" onclick="setFilter('bw',this)">⬛ Black-White</button>
+<button data-f="sepia" onclick="setFilter('sepia',this)">🟫 Sepia</button>
+<button data-f="cool" onclick="setFilter('cool',this)">🧊 Cool Blue</button>
+<button data-f="warm" onclick="setFilter('warm',this)">🔥 Warm</button>
+<button data-f="blurbg" onclick="setFilter('blurbg',this)">🌫️ Soft Blur</button>
+</div>
+
+<label>Brightness <span class="rangeVal" id="bVal">100%</span></label><input type="range" id="bright" min="70" max="140" value="100" oninput="updateSliders()">
+<label>Contrast <span class="rangeVal" id="cVal">100%</span></label><input type="range" id="contrast" min="70" max="140" value="100" oninput="updateSliders()">
+<label>Smooth Skin <span class="rangeVal" id="sVal">0</span></label><input type="range" id="smooth" min="0" max="10" value="0" oninput="updateSliders()">
+
+<label>🖼️ Background Style</label>
+<div class="row" id="bgRow">
+<button class="active" onclick="setBg('original',this)">Original</button>
+<button onclick="setBg('white',this)">⬜ White</button>
+<button onclick="setBg('black',this)">⬛ Black</button>
+<button onclick="setBg('pink',this)">🩷 Pink Studio</button>
+<button onclick="setBg('blue',this)">💙 Blue Studio</button>
+<button onclick="setBg('blur',this)">🌫️ Blur</button>
+</div>
+
+<label>💇 Hair Color - Try On</label>
+<div class="palette" id="hairPalette">
+<div style="background:#111" title="Natural Black" onclick="setHairColor('#111',this)"></div>
+<div style="background:#5b3a1a" title="Brown" onclick="setHairColor('#5b3a1a',this)"></div>
+<div style="background:#a67c3a" title="Golden Brown" onclick="setHairColor('#a67c3a',this)"></div>
+<div style="background:#e8c07a" title="Blonde" onclick="setHairColor('#e8c07a',this)"></div>
+<div style="background:#8b1e1e" title="Red / Maroon" onclick="setHairColor('#8b1e1e',this)"></div>
+<div style="background:#1e3a8a" title="Blue Highlight" onclick="setHairColor('#1e3a8a',this)"></div>
+<div style="background:#7c3aed" title="Purple Highlight" onclick="setHairColor('#7c3aed',this)"></div>
+<div style="background:#eee" title="No Change" onclick="setHairColor('',this)"></div>
+</div>
+<div class="tip" id="hairTip">Hair color is a <b>preview tint</b> on photo. For best result, use Bright photo with clear face. Tap a color above to see how it looks on you.</div>
+
+<label>📐 Photo Size - For Form</label>
+<div class="row">
+<button onclick="resizeToKB(500)">500kb - Form</button>
+<button onclick="resizeToKB(200)">200kb - College</button>
+<button onclick="resizeToKB(100)">100kb - Job</button>
+<button onclick="makePassport('white')">Passport - White</button>
+<button onclick="makePassport('black')">Passport - Black</button>
+</div>
+</div>
+
+<!-- RIGHT : AI RECOMMEND -->
+<div class="card">
+<h2>🤖 3. AI Style Recommend</h2><p class="sub">Fill 3 things - AI will recommend perfect style for YOU. Works for Girls & Boys.</p>
+
+<label>Who is this photo for?</label>
+<div class="seg" id="genderSeg"><button class="active" data-g="girl" onclick="setGender('girl',this)">👧 Girl / Woman</button><button data-g="boy" onclick="setGender('boy',this)">👦 Boy / Man</button></div>
+
+<label>Your Name (Optional)</label><input type="text" id="userName" placeholder="e.g. Priya, Rahul">
+
+<label>Skin Tone</label>
+<select id="skin"><option value="fair">Fair - Light Skin</option><option value="wheatish" selected>Wheatish - Medium Skin (Most Indian)</option><option value="dusky">Dusky - Warm Brown Skin</option><option value="dark">Deep - Dark Skin</option></select>
+
+<label>Occasion - Where will you wear this style?</label>
+<select id="occasion" onchange="renderStyles()">
+<option value="college">🎓 College / School</option>
+<option value="wedding">💍 Wedding / Function</option>
+<option value="party">🎉 Party / Birthday</option>
+<option value="job">💼 Job / Interview / Office</option>
+<option value="daily">👕 Daily / Casual / Market</option>
+<option value="festival">🪔 Festival - Diwali / Eid</option>
+<option value="date">❤️ Date / Meeting Someone</option>
+</select>
+
+<label>Your Body Type</label>
+<select id="body"><option value="slim">Slim</option><option value="fit" selected>Fit / Medium</option><option value="healthy">Healthy / Plus Size</option><option value="tall">Tall</option><option value="short">Short / Petite</option></select>
+
+<div class="row"><button class="primary" onclick="askAI()">✨ AI Recommend My Style</button><button onclick="shuffleStyle()">🔀 Surprise Me</button></div>
+
+<div id="aiResult"></div>
+
+<h2 style="margin-top:18px">💇 Hair Styles - <span id="hairTitle">For Girls</span></h2><p class="sub">Tap a hair style - AI will tell if it suits you + color.</p>
+<div class="styleGrid" id="hairGrid"></div>
+
+<h2 style="margin-top:18px">👗 Clothes Styles - <span id="clothTitle">For Girls</span></h2><p class="sub">Tap a cloth - See full outfit, colors, footwear.</p>
+<div class="styleGrid" id="clothGrid"></div>
+
+<div class="recBox" id="outfitBox"><h3>👑 Your Complete Look - Tap Any Style Above</h3><ul><li>Select <b>Gender</b> + <b>Occasion</b> above</li><li>Tap a <b>Hair Style</b> and a <b>Cloth Style</b></li><li>AI will make your <b>full outfit</b> here with colors, accessories, footwear</li></ul></div>
+
+<h2 style="margin-top:18px">💪 Body & Confidence Tips</h2>
+<div class="styleGrid">
+<div class="styleCard" onclick="showBodyTip('pose',this)"><div class="emoji">🧍</div><b>Best Pose</b><small>Stand straight, chin up, slight smile - Looks tall & confident.</small><span class="tag">For Photo</span></div>
+<div class="styleCard" onclick="showBodyTip('fit',this)"><div class="emoji">💪</div><b>Fit Look</b><small>Well-fitted clothes, not too loose. Shows body shape better.</small><span class="tag">For Body</span></div>
+<div class="styleCard" onclick="showBodyTip('skin',this)"><div class="emoji">✨</div><b>Glowing Skin</b><small>Drink 3L water, sleep 7 hrs, use sunscreen daily.</small><span class="tag">Daily</span></div>
+<div class="styleCard" onclick="showBodyTip('conf',this)"><div class="emoji">😎</div><b>Confidence</b><small>Eye contact, slow walk, smile. Confidence = 50% of style.</small><span class="tag">Attitude</span></div>
+</div>
+<div class="tip" id="bodyTip">Tap any card above to see full detail. Style is not only clothes - <b>Pose + Smile + Confidence</b> makes photo 10x better.</div>
+</div>
+</div>
+</div>
+
+<div class="footer">Orbittroniz AI Style Studio • Photo stays in your phone • No server upload • Made for Girls & Boys • Share with friends</div>
+<div class="toast" id="toast"></div>
+
+<script>
+let originalImg=null, originalUrl="", currentFilter='original', currentBg='original', hairColor="", selectedHair=null, selectedCloth=null, gender='girl';
+let brightVal=100, contrastVal=100, smoothVal=0;
+const $=id=>document.getElementById(id);
+function toast(m){let t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(t._t);t._t=setTimeout(()=>t.style.display='none',2600)}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function newAll(){originalImg=null;originalUrl="";$('fileInput').value="";$('beforeBox').innerHTML='No photo yet<br><small>Upload photo to start</small>';$('afterBox').innerHTML='Edited photo will show here';selectedHair=null;selectedCloth=null;$('aiResult').innerHTML="";$('outfitBox').innerHTML='<h3>👑 Your Complete Look</h3><ul><li>Upload photo + Select style above</li></ul>';toast('New photo cleared');document.querySelectorAll('.logo').forEach(l=>{l.classList.remove('pop');void l.offsetWidth;l.classList.add('pop')})}
+
+// DATA - HAIR + CLOTHES
+const HAIR={
+ girl:[
+  {id:'long',e:'💇‍♀️',t:'Long Straight',d:'Long, straight, middle parting. Suits all faces.',best:'All faces, Long face best',color:'Black / Brown'},
+  {id:'layers',e:'✂️',t:'Layer Cut',d:'Layers give volume. Best for thin hair.',best:'Round + Oval face',color:'Brown Highlight'},
+  {id:'curly',e:'🌀',t:'Soft Curls',d:'Loose curls for party / wedding. Looks premium.',best:'Oval, Heart face',color:'Black / Golden Brown'},
+  {id:'pony',e:'🎀',t:'High Ponytail',d:'Neat, confident, college + job look.',best:'All faces',color:'Black'},
+  {id:'braid',e:'🌸',t:'Side Braid',d:'Traditional + cute. Best for festival / wedding.',best:'Round face',color:'Black + Flower'},
+  {id:'bob',e:'💁‍♀️',t:'Bob Cut',d:'Short bob - Modern, bold, easy to manage.',best:'Oval, Small face',color:'Black / Brown'},
+  {id:'bun',e:'🪔',t:'Low Bun',d:'Elegant bun for wedding / function.',best:'All faces',color:'Black + Gajra'},
+  {id:'bangs',e:'👧',t:'Front Bangs',d:'Fringe + long hair. Cute college look.',best:'Long, Oval face',color:'Brown'}
+ ],
+ boy:[
+  {id:'fade',e:'💈',t:'Fade Cut',d:'Side fade + top volume. Most trending boys cut.',best:'All faces',color:'Black'},
+  {id:'undercut',e:'😎',t:'Undercut',d:'Short sides, long top. Party + college.',best:'Oval, Square face',color:'Black / Brown'},
+  {id:'messy',e:'🌪️',t:'Messy Top',d:'Casual messy hair. Daily + college.',best:'Round face',color:'Black'},
+  {id:'sidepart',e:'👔',t:'Side Part - Formal',d:'Neat side parting. Best for job / interview.',best:'All faces',color:'Black'},
+  {id:'curlyb',e:'🌀',t:'Curly Top',d:'Natural curls. Keep medium length.',best:'Oval face',color:'Black'},
+  {id:'buzz',e:'✂️',t:'Buzz Cut',d:'Very short, clean, bold. Summer best.',best:'Square, Oval face',color:'Black'},
+  {id:'spiky',e:'⚡',t:'Spiky',d:'Spikes with gel. Party look.',best:'Round, Heart face',color:'Brown Highlight'},
+  {id:'longb',e:'🎸',t:'Medium Long',d:'Shoulder length. Artistic / stylish look.',best:'Oval, Long face',color:'Black / Brown'}
+ ]
+};
+const CLOTHES={
+ girl:[
+  {id:'kurti',e:'👗',t:'Kurti + Jeans',d:'Daily + College. Comfort + style.',colors:['#f59e0b','#db2777','#7c3aed','#fff'],wear:'Juttis / Sneakers',best:'College, Daily'},
+  {id:'saree',e:'🥻',t:'Saree',d:'Wedding + Festival. Most elegant Indian look.',colors:['#dc2626','#f59e0b','#059669'],wear:'Heels + Jhumka',best:'Wedding, Festival'},
+  {id:'lehenga',e:'👑',t:'Lehenga',d:'Bridal / Wedding function. Heavy look.',colors:['#db2777','#f59e0b','#7c3aed'],wear:'Heels + Maang Tikka',best:'Wedding'},
+  {id:'jeans',e:'👖',t:'Denim + Top',d:'Casual, college, outing. Easy + cool.',colors:['#2563eb','#fff','#111'],wear:'Sneakers',best:'College, Daily'},
+  {id:'formal',e:'👩‍💼',t:'Formal Shirt + Pant',d:'Job / Interview. Looks professional.',colors:['#fff','#111','#7c3aed'],wear:'Loafers / Heels',best:'Job, Interview'},
+  {id:'party',e:'✨',t:'Party Dress',d:'Shimmery dress for party / birthday.',colors:['#111','#db2777','#f59e0b'],wear:'Heels + Clutch',best:'Party'},
+  {id:'anarkali',e:'🌸',t:'Anarkali Suit',d:'Festival + Function. Flowy + beautiful.',colors:['#ec4899','#f59e0b','#059669'],wear:'Juttis + Earrings',best:'Festival'},
+  {id:'co-ord',e:'💅',t:'Co-ord Set',d:'Matching top + bottom. Trendy Instagram look.',colors:['#fda4af','#a78bfa','#fff'],wear:'Sneakers',best:'College, Date'},
+  {id:'denimj',e:'🧥',t:'Denim Jacket',d:'Jacket over top. Winter + outing.',colors:['#2563eb','#fff'],wear:'Boots',best:'Winter, Outing'},
+  {id:'maxi',e:'🌺',t:'Maxi Dress',d:'Long flowy dress. Summer + date.',colors:['#fb7185','#f59e0b','#fff'],wear:'Sandals',best:'Date, Outing'}
+ ],
+ boy:[
+  {id:'kurta',e:'🕌',t:'Kurta Pajama',d:'Festival + Wedding. Classic Indian.',colors:['#fff','#f59e0b','#059669'],wear:'Mojari / Loafer',best:'Festival, Wedding'},
+  {id:'sherwani',e:'👑',t:'Sherwani',d:'Wedding - Groom look. Premium.',colors:['#7c3aed','#f59e0b','#111'],wear:'Mojari',best:'Wedding'},
+  {id:'formalb',e:'👔',t:'Formal Shirt + Pant',d:'Job / Interview. Clean + professional.',colors:['#fff','#111','#2563eb'],wear:'Formal Shoes',best:'Job'},
+  {id:'jeansb',e:'👖',t:'Jeans + T-Shirt',d:'Daily + College. Simple + cool.',colors:['#111','#fff','#2563eb'],wear:'Sneakers',best:'College, Daily'},
+  {id:'denimb',e:'🧥',t:'Denim Jacket + Tee',d:'Winter + outing. Stylish layer.',colors:['#2563eb','#fff','#111'],wear:'Sneakers / Boots',best:'Outing'},
+  {id:'blazer',e:'🎩',t:'Blazer + Shirt',d:'Party + Function. Smart look.',colors:['#111','#fff','#7c3aed'],wear:'Loafers',best:'Party, Function'},
+  {id:'check',e:'📸',t:'Checked Shirt',d:'Casual + photo look. Instagram style.',colors:['#dc2626','#fff','#111'],wear:'Sneakers',best:'College, Outing'},
+  {id:'pathani',e:'🕌',t:'Pathani Suit',d:'Festival + Eid. Comfort + royal.',colors:['#fff','#059669','#111'],wear:'Peshawari',best:'Festival, Eid'},
+  {id:'hoodie',e:'🧣',t:'Hoodie + Jeans',d:'Winter casual. Youth look.',colors:['#111','#7c3aed','#f59e0b'],wear:'Sneakers',best:'Winter, Daily'},
+  {id:'polo',e:'⛳',t:'Polo + Chinos',d:'Date + Smart casual. Clean look.',colors:['#059669','#fff','#f59e0b'],wear:'Loafers',best:'Date, Office'}
+ ]
+};
+function setGender(g,btn){gender=g;document.querySelectorAll('#genderSeg button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');$('hairTitle').textContent=g==='girl'?'For Girls':'For Boys';$('clothTitle').textContent=g==='girl'?'For Girls':'For Boys';renderStyles();toast(g==='girl'?'Girls styles loaded':'Boys styles loaded')}
+function renderStyles(){
+  let hg=$('hairGrid');hg.innerHTML='';HAIR[gender].forEach(h=>{
+    let d=document.createElement('div');d.className='styleCard'+(selectedHair===h.id?' active':'');d.innerHTML='<div class="emoji">'+h.e+'</div><b>'+h.t+'</b><small>'+h.d+'</small><span class="tag">Suits: '+h.best+'</span><span class="tag">Color: '+h.color+'</span>';d.onclick=()=>{selectedHair=h.id;document.querySelectorAll('#hairGrid .styleCard').forEach(c=>c.classList.remove('active'));d.classList.add('active');showOutfit(h,null);toast('Hair: '+h.t)};hg.appendChild(d);
+  });
+  let cg=$('clothGrid');cg.innerHTML='';CLOTHES[gender].forEach(c=>{
+    let d=document.createElement('div');d.className='styleCard'+(selectedCloth===c.id?' active':'');let cols=c.colors.map(col=>'<span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:'+col+';border:1px solid #ddd;margin-right:3px"></span>').join('');d.innerHTML='<div class="emoji">'+c.e+'</div><b>'+c.t+'</b><small>'+c.d+'</small><div style="margin-top:6px">'+cols+'</div><span class="tag">Wear: '+c.wear+'</span><span class="tag">Best: '+c.best+'</span>';d.onclick=()=>{selectedCloth=c.id;document.querySelectorAll('#clothGrid .styleCard').forEach(x=>x.classList.remove('active'));d.classList.add('active');showOutfit(null,c);toast('Cloth: '+c.t)};cg.appendChild(d);
+  });
+}
+function showOutfit(hair,cloth){
+  let occ=$('occasion').value, skin=$('skin').value, body=$('body').value, name=$('userName').value.trim()||'You';
+  let h=hair||HAIR[gender].find(x=>x.id===selectedHair);let c=cloth||CLOTHES[gender].find(x=>x.id===selectedCloth);
+  if(!h&&!c)return;
+  let hairTxt=h?'<b>Hair:</b> '+h.t+' - '+h.d+' Best color: '+h.color+'<br>':'';
+  let clothTxt=c?'<b>Outfit:</b> '+c.t+' - '+c.d+'<br><b>Wear with:</b> '+c.wear+'<br>':'';
+  let skinTip=skin==='fair'?'Fair skin - Light pastel + white + baby pink will glow on you.':skin==='wheatish'?'Wheatish skin - Maroon, Olive, Mustard, Navy will look premium on you.':skin==='dusky'?'Dusky skin - Bright colors - Red, Yellow, Royal Blue, Emerald will pop on you.':'Deep skin - White, Gold, Bright Red, Turquoise will shine on you.';
+  let occTip=occ==='wedding'?'Wedding tip: Keep makeup / grooming clean, add one statement accessory.':occ==='college'?'College tip: Keep it simple, comfortable, neat. Less is more.':occ==='job'?'Job tip: Neat, ironed, clean shoes, light perfume. Confidence matters.':occ==='party'?'Party tip: One shiny item only - either dress OR accessories, not both heavy.':occ==='festival'?'Festival tip: Traditional + one jhumka / mojari. Don\'t overdo.':occ==='date'?'Date tip: Smell good, smile, clean nails, simple outfit.':'Daily tip: Comfort + clean + neat is best style.';
+  $('outfitBox').innerHTML='<h3>👑 Complete Look for '+esc(name)+' - '+(gender==='girl'?'Girl':'Boy')+' • '+occ+'</h3><ul><li>'+hairTxt+'</li><li>'+clothTxt+'</li><li><b>Skin Tone Tip:</b> '+skinTip+'</li><li><b>Body ('+body+'):</b> Choose well-fitted, not too loose. Vertical lines make you look taller.</li><li><b>Occasion Tip:</b> '+occTip+'</li><li><b>Accessories:</b> '+(gender==='girl'?'Small earrings + watch + light lipstick + clean nails':'Watch + clean shoes + belt + light perfume')+'</li><li><b>Footwear:</b> '+(c?c.wear:'Clean sneakers / formal shoes')+'</li></ul><div class="tip">💡 <b>Photo Tip:</b> Apply <b>Glow / HD</b> filter on left, stand in daylight, smile slightly. Your photo will look 10x better.</div>';
+}
+function askAI(){
+  let occ=$('occasion').value, skin=$('skin').value, body=$('body').value, name=$('userName').value.trim()||'You';
+  let list=CLOTHES[gender].filter(c=>c.best.toLowerCase().includes(occ)||occ==='daily'||c.best.toLowerCase().includes('college')&&occ==='college');
+  if(list.length===0)list=CLOTHES[gender].slice(0,3);
+  let pick=list.slice(0,3);let hairPick=HAIR[gender].slice(0,3);
+  let skinMsg=skin==='fair'?'Fair skin: Try Pastel Pink, White, Baby Blue, Lavender. Avoid very dark colors.':skin==='wheatish'?'Wheatish skin: Try Maroon, Olive Green, Mustard, Navy Blue, Black. You look best in warm colors.':skin==='dusky'?'Dusky skin: Try Bright Red, Yellow, Royal Blue, Emerald Green. Bright colors will pop.':'Deep skin: Try White, Gold, Bright Red, Turquoise, Neon. You will shine.';
+  let bodyMsg=body==='slim'?'Slim body: Layered clothes, check shirts, slightly loose fit will give fuller look. Avoid very tight.':body==='fit'?'Fit body: Fitted clothes are best. Show shape, avoid baggy.':body==='healthy'?'Healthy body: Dark colors, vertical stripes, V-neck / open collar, well-fitted - you will look slim & smart.':body==='tall'?'Tall body: Horizontal stripes, contrast top-bottom, avoid full one color.':'Short body: Same color top-bottom, high waist, vertical lines - you will look taller.';
+  $('aiResult').innerHTML='<div class="recBox"><h3>✨ AI Recommends for '+esc(name)+' - '+(gender==='girl'?'Girl':'Boy')+' • '+occ+'</h3><ul><li><b>Best Outfits for you:</b><br>'+pick.map(p=>'• '+p.t+' - '+p.d+' (Wear: '+p.wear+')').join('<br>')+'</li><li><b>Best Hair:</b><br>'+hairPick.map(h=>'• '+h.t+' - '+h.d).join('<br>')+'</li><li><b>Skin Tone:</b> '+skinMsg+'</li><li><b>Body Type:</b> '+bodyMsg+'</li><li><b>Top Color for You:</b> '+(gender==='girl'?'Maroon + Gold + Pastel Pink':'Navy + White + Olive + Black')+'</li><li><b>Accessories:</b> '+(gender==='girl'?'Jhumka + Watch + Small clutch + Heels':'Watch + Belt + Clean Sneakers + Perfume')+'</li></ul><div class="tip">Tap any <b>Hair</b> or <b>Cloth</b> card below to see full complete look.</div></div>';
+  toast('AI recommendation ready!');
+  // Auto-select first picks
+  if(pick[0]){selectedCloth=pick[0].id} if(hairPick[0]){selectedHair=hairPick[0].id} renderStyles(); showOutfit(hairPick[0],pick[0]);
+  $('aiResult').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function shuffleStyle(){
+  let h=HAIR[gender][Math.floor(Math.random()*HAIR[gender].length)];let c=CLOTHES[gender][Math.floor(Math.random()*CLOTHES[gender].length)];
+  selectedHair=h.id;selectedCloth=c.id;renderStyles();showOutfit(h,c);toast('Surprise Look: '+h.t+' + '+c.t);
+}
+function showBodyTip(type,el){
+  document.querySelectorAll('.styleCard').forEach(c=>c.classList.remove('active'));el.classList.add('active');
+  let m={pose:'<b>Best Pose:</b> Stand straight, shoulders back, chin slightly up, one foot forward, slight smile. For girls: One hand on waist. For boys: Hands in pocket one side. This makes you look tall & confident in photo.',fit:'<b>Fit Look:</b> Always wear well-fitted clothes. Too loose = looks dull, too tight = uncomfortable. Check in mirror: Shoulder seam should be on shoulder, not hanging.',skin:'<b>Glowing Skin:</b> Drink 3L water, sleep 7-8 hrs, wash face 2x daily, use sunscreen. For photo: Apply Glow / HD filter + Brightness 110% for instant glow.',conf:'<b>Confidence:</b> Eye contact, slow walk, smile with teeth slightly. Practice 2 min in mirror daily. Confidence is 50% of style - clothes are only 50%.'};
+  $('bodyTip').innerHTML=m[type]||m.pose;
+}
+// PHOTO HANDLING
+$('fileInput').addEventListener('change',e=>{
+  let f=e.target.files[0];if(!f){toast('No file selected');return}
+  if(f.type==='application/pdf'){toast('PDF attached - Use Make PDF / Explain, not Style Editor');return}
+  if(!f.type.startsWith('image/')){toast('Please select a photo');return}
+  let r=new FileReader();r.onload=ev=>{
+    originalUrl=ev.target.result;
+    let img=new Image();img.onload=()=>{
+      originalImg=img;currentFilter='original';hairColor="";brightVal=100;contrastVal=100;smoothVal=0;$('bright').value=100;$('contrast').value=100;$('smooth').value=0;updateLabels();
+      $('beforeBox').innerHTML='<img src="'+originalUrl+'">';
+      renderAfter();
+      toast('Photo added! Now tap AI Recommend + Filters');
+    };img.src=originalUrl;
+  };r.readAsDataURL(f);e.target.value='';
+});
+function getFilterCSS(){
+  let base='brightness('+brightVal+'%) contrast('+contrastVal+'%)';
+  if(currentFilter==='glow')base+=' saturate(1.25) brightness(1.08)';
+  if(currentFilter==='fair')base+=' brightness(1.18) saturate(1.1) sepia(0.08)';
+  if(currentFilter==='tan')base+=' sepia(0.25) saturate(1.25) contrast(1.05)';
+  if(currentFilter==='cinematic')base+=' contrast(1.2) saturate(1.15) sepia(0.12)';
+  if(currentFilter==='hd')base+=' contrast(1.15) saturate(1.3) brightness(1.05)';
+  if(currentFilter==='vintage')base+=' sepia(0.45) contrast(0.95)';
+  if(currentFilter==='bw')base+=' grayscale(1)';
+  if(currentFilter==='sepia')base+=' sepia(0.85)';
+  if(currentFilter==='cool')base+=' hue-rotate(180deg) saturate(1.1)';
+  if(currentFilter==='warm')base+=' sepia(0.3) saturate(1.25)';
+  if(currentFilter==='blurbg')base+=' blur(0px) brightness(1.05)';
+  return base;
+}
+function renderAfter(){
+  if(!originalImg){$('afterBox').innerHTML='Upload photo first';return}
+  let c=document.createElement('canvas');c.width=originalImg.naturalWidth;c.height=originalImg.naturalHeight;
+  let ctx=c.getContext('2d');
+  // Background
+  if(currentBg==='white'){ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height)}
+  else if(currentBg==='black'){ctx.fillStyle='#000';ctx.fillRect(0,0,c.width,c.height)}
+  else if(currentBg==='pink'){ctx.fillStyle='#fbcfe8';ctx.fillRect(0,0,c.width,c.height)}
+  else if(currentBg==='blue'){ctx.fillStyle='#bfdbfe';ctx.fillRect(0,0,c.width,c.height)}
+  // Draw with filter
+  ctx.filter=getFilterCSS();ctx.drawImage(originalImg,0,0,c.width,c.height);ctx.filter='none';
+  if(currentBg==='blur'){ctx.filter='blur(2px)';ctx.drawImage(originalImg,0,0,c.width,c.height);ctx.filter='none';ctx.globalAlpha=.85;ctx.drawImage(originalImg,0,0,c.width,c.height);ctx.globalAlpha=1}
+  // Hair tint preview - subtle top tint
+  if(hairColor){ctx.fillStyle=hairColor;ctx.globalAlpha=.18;ctx.fillRect(0,0,c.width,c.height*0.28);ctx.globalAlpha=1}
+  // Smooth skin - soft overlay
+  if(smoothVal>0){ctx.fillStyle='rgba(255,235,220,0.08)';ctx.fillRect(0,0,c.width,c.height)}
+  let url=c.toDataURL('image/jpeg',.92);
+  $('afterBox').innerHTML='<img src="'+url+'" id="afterImg">';
+  return url;
+}
+function setFilter(f,btn){currentFilter=f;document.querySelectorAll('#filterTabs button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');if(!originalImg){toast('Upload photo first');return}renderAfter();toast('Filter: '+f)}
+function updateSliders(){brightVal=parseInt($('bright').value);contrastVal=parseInt($('contrast').value);smoothVal=parseInt($('smooth').value);updateLabels();if(originalImg)renderAfter()}
+function updateLabels(){$('bVal').textContent=brightVal+'%';$('cVal').textContent=contrastVal+'%';$('sVal').textContent=smoothVal}
+function setBg(b,btn){currentBg=b;document.querySelectorAll('#bgRow button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');if(!originalImg){toast('Upload photo first');return}renderAfter();toast('Background: '+b)}
+function setHairColor(col,el){hairColor=col;document.querySelectorAll('#hairPalette div').forEach(d=>d.classList.remove('active'));if(el)el.classList.add('active');if(!originalImg){toast('Upload photo first, then try hair color');return}renderAfter();$('hairTip').innerHTML=col?'<b>Hair Color Preview:</b> '+col+' applied as tint on top of photo. This is a preview - real hair color will look like this. Tap white box to remove.':'Hair color removed.';toast('Hair color preview applied')}
+function resetPhoto(){currentFilter='original';currentBg='original';hairColor="";brightVal=100;contrastVal=100;smoothVal=0;$('bright').value=100;$('contrast').value=100;$('smooth').value=0;updateLabels();document.querySelectorAll('#filterTabs button').forEach(b=>b.classList.toggle('active',b.dataset.f==='original'));document.querySelectorAll('#bgRow button').forEach(b=>b.classList.toggle('active',b.textContent.includes('Original')));if(originalImg)renderAfter();toast('Reset done')}
+function downloadEdited(){
+  if(!originalImg){toast('Upload photo first');return}
+  let url=renderAfter();let a=document.createElement('a');a.href=url;a.download='orbittroniz-style-photo.jpg';a.click();toast('Edited photo downloaded!');
+}
+function makePDFNow(){
+  if(!originalImg){toast('Upload photo first');return}
+  let url=renderAfter();
+  // Simple PDF via canvas image
+  let img=new Image();img.onload=()=>{
+    let c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;let ctx=c.getContext('2d');ctx.drawImage(img,0,0);
+    let data=c.toDataURL('image/jpeg',.85);let b64=data.split(',')[1];let bin=atob(b64);let w=img.naturalWidth,h=img.naturalHeight;
+    let objs=[];objs[1]='<< /Type /Catalog /Pages 2 0 R >>';objs[2]='<< /Type /Pages /Kids [3 0 R] /Count 1 >>';objs[3]='<< /Type /Page /Parent 2 0 R /MediaBox [0 0 '+w+' '+h+'] /Contents 4 0 R /Resources << /XObject << /Im1 5 0 R >> /ProcSet [/PDF /ImageC] >> >>';objs[4]='<< /Length '+('q\n'+w+' 0 0 '+h+' 0 0 cm\n/Im1 Do\nQ').length+' >>\nstream\nq\n'+w+' 0 0 '+h+' 0 0 cm\n/Im1 Do\nQ\nendstream';objs[5]='<< /Type /XObject /Subtype /Image /Width '+w+' /Height '+h+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+bin.length+' >>\nstream\n'+bin+'\nendstream';
+    let pdf='%PDF-1.4\n';let off={};for(let i=1;i<=5;i++){off[i]=pdf.length;pdf+=i+' 0 obj\n'+objs[i]+'\nendobj\n'}let xref=pdf.length;pdf+='xref\n0 6\n0000000000 65535 f \n';for(let j=1;j<=5;j++)pdf+=String(off[j]).padStart(10,'0')+' 00000 n \n';pdf+='trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF';let bytes=new Uint8Array(pdf.length);for(let k=0;k<pdf.length;k++)bytes[k]=pdf.charCodeAt(k)&0xff;let blob=new Blob([bytes],{type:'application/pdf'});let u=URL.createObjectURL(blob);let a=document.createElement('a');a.href=u;a.download='orbittroniz-style.pdf';a.click();toast('PDF downloaded!');
+  };img.src=url;
+}
+function resizeToKB(target){
+  if(!originalImg){toast('Upload photo first');return}
+  let url=renderAfter();let img=new Image();img.onload=()=>{
+    let c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;c.getContext('2d').drawImage(img,0,0);
+    let q=.92;(function loop(){c.toBlob(b=>{let kb=b.size/1024;if(kb>target&&q>.08){q-=.08;loop()}else{let u=URL.createObjectURL(b);let a=document.createElement('a');a.href=u;a.download='photo-'+target+'kb.jpg';a.click();toast('Photo made '+kb.toFixed(0)+' KB - Downloaded')}},'image/jpeg',q)})()
+  };img.src=url;
+}
+function makePassport(bg){
+  if(!originalImg){toast('Upload photo first');return}
+  let img=originalImg;let c=document.createElement('canvas');c.width=413;c.height=531;let ctx=c.getContext('2d');ctx.fillStyle=bg==='black'?'#000':'#fff';ctx.fillRect(0,0,413,531);let s=Math.min(img.naturalWidth/413,img.naturalHeight/531);let sw=413*s,sh=531*s;ctx.drawImage(img,(img.naturalWidth-sw)/2,(img.naturalHeight-sh)/2,sw,sh,0,0,413,531);c.toBlob(b=>{let u=URL.createObjectURL(b);let a=document.createElement('a');a.href=u;a.download='passport-'+bg+'.jpg';a.click();toast('Passport photo downloaded - '+bg+' background')},'image/jpeg',.95);
+}
+// Init
+renderStyles();updateLabels();
+</script>
+</body>
+</html>
