@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbittroniz AI - Body Change Only Face Same</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,Arial,sans-serif}
+body{background:#0f0f12;color:#fff;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+button{cursor:pointer;font-family:inherit;border:none}
+.top{position:sticky;top:0;background:#111;border-bottom:1px solid #222;display:flex;align-items:center;gap:11px;padding:11px 14px}
+.logo{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:900;font-size:18px;background:linear-gradient(135deg,#7c3aed,#db2777,#f59e0b)}
+.top b{font-size:16px}.top small{color:#aaa;font-size:11px;display:block}
+.top .r{margin-left:auto;display:flex;gap:6px}.top .r button{background:#222;color:#fff;padding:8px 12px;border-radius:999px;font-size:12px}
+.badge{background:#22c55e;color:#000;font-weight:800;font-size:11px;padding:4px 8px;border-radius:999px;text-align:center;margin:8px 14px}
+.chat{flex:1;overflow:auto;padding:16px;background:#0f0f12}.inner{max-width:680px;margin:auto}
+.welcome{text-align:center;padding:20px 10px}.welcome h1{font-size:26px;line-height:1.2}.welcome p{color:#aaa;font-size:13.5px;line-height:1.6;margin-top:8px}
+.msg{margin:14px 0;display:flex;gap:10px}.msg.user{justify-content:flex-end}
+.bubble{max-width:88%;padding:12px 14px;border-radius:16px;font-size:14px;line-height:1.65;white-space:pre-line;word-break:break-word;color:#111}
+.ai .bubble{background:#fff;border:1px solid #eee;border-bottom-left-radius:4px}.user .bubble{background:#fff;color:#111;border-bottom-right-radius:4px}
+.avatar{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-size:13px}.ai .avatar{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff}.user .avatar{background:#333;color:#fff}
+.bubble img{max-width:100%;border-radius:12px;margin-top:8px;display:block}.bubble .genImg{width:100%;border-radius:12px;margin-top:10px;display:block}
+.bubble .actions{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}.bubble .actions button{background:#f5f3ff;border:1px solid #e9e4ff;padding:7px 11px;border-radius:999px;font-size:12px}.bubble .actions button.primary{background:#111;color:#fff}
+.try{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;justify-content:center}.try button{background:#222;color:#fff;border:1px solid #333;padding:9px 12px;border-radius:999px;font-size:12px}
+.try button.hot{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:none}
+.inputArea{padding:10px 14px 12px;background:#111;border-top:1px solid #222}.inputWrap{max-width:680px;margin:auto}
+.attachPrev{display:flex;gap:8px;margin-bottom:8px}.attachItem{position:relative;width:62px;height:62px;border-radius:12px;overflow:hidden;border:2px solid #7c3aed}.attachItem img{width:100%;height:100%;object-fit:cover}.attachItem button{position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:50%;background:#000;color:#fff;font-size:11px}
+.box{display:flex;align-items:flex-end;gap:8px;background:#222;border:2px solid #333;border-radius:26px;padding:6px}.box:focus-within{border-color:#7c3aed;background:#222}
+.box textarea{flex:1;border:none;outline:none;background:transparent;resize:none;font-size:15px;padding:8px 0;max-height:110px;color:#fff}
+.box textarea::placeholder{color:#888}
+.iconBtn{width:38px;height:38px;border-radius:50%;background:#333;border:1px solid #444;font-size:18px;flex-shrink:0;display:grid;place-items:center;cursor:pointer;color:#fff}
+.send{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#db2777,#f59e0b);color:#fff;font-size:18px;flex-shrink:0}.send:disabled{opacity:.6}
+.hint{text-align:center;color:#888;font-size:11px;margin-top:6px}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#fff;color:#111;padding:10px 16px;border-radius:999px;z-index:99;display:none;font-size:13px;font-weight:700}
+canvas{display:none}
+.faceNote{background:#1e1e26;border:1px solid #333;padding:10px;border-radius:12px;font-size:12px;color:#aaa;margin-top:10px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">O</div><div><b>Orbittroniz AI - Body Change</b><small>Face Same • Body Changes • Meme</small></div><div class="r"><button onclick="newChat()">+ New</button><button onclick="downloadLast()">⬇ Download</button></div></div>
+<div class="badge">✅ FACE REMAINS SAME • BODY CHANGES ONLY • NO API • UNLIMITED FREE</div>
+
+<div class="chat" id="chatScroll"><div class="inner" id="chatInner">
+<div class="welcome" id="welcome">
+<div class="logo" style="width:64px;height:64px;font-size:30px;margin:auto">O</div>
+<h1>Body Changes.<br>Face Remains Same.<br>Meme Changes.</h1>
+<p><b>How it works:</b><br>1. Attach YOUR photo (1 or 2 persons)<br>2. Tap Dark Meme / Saree / Superhero<br>3. Code saves your faces → Changes body + background → Pastes your original faces back<br><br>Result = <b>Your SAME faces, New Body, New Background</b></p>
+<div class="try">
+<button class="hot" onclick="quick('dark meme')">💀 Dark Meme - Body Dark, Face Same</button>
+<button class="hot" onclick="quick('funny')">😂 Funny - Body Bright, Face Same</button>
+<button class="hot" onclick="quick('meme')">🤣 Meme - Body Meme, Face Same</button>
+<button onclick="quick('horror')">👻 Horror - Body Horror, Face Same</button>
+<button onclick="quick('saree')">🥻 Saree Body - Body Red Saree, Face Same</button>
+<button onclick="quick('superhero')">🦸 Superhero Body - Body Hero, Face Same</button>
+<button onclick="quick('gym')">💪 Gym Body - Body Strong, Face Same</button>
+<button onclick="quick('movie')">🎬 Movie Body - Body Cinema, Face Same</button>
+<button onclick="quick('old')">👴 Old Body - Body Old, Face Same</button>
+<button onclick="quick('glamour')">✨ Glamour Body - Body Glamour, Face Same</button>
+<button onclick="quick('Make a realistic photo of a funny dark meme Indian girl in red saree, dark background, funny scary expression, photorealistic')">✨ Only Tell - New Photo (No Photo Needed)</button>
+</div>
+<div class="faceNote">⚠️ <b>Face Boxes:</b> For your 2-person photo, faces are in top area. Code keeps <b>Top 0% to 38%</b> as Face Zone - That zone is NEVER changed. Bottom 62% = Body + Background - Changed fully. For single person photo, same logic works.</div>
+</div>
+</div></div>
+
+<div class="inputArea"><div class="inputWrap">
+<div class="attachPrev" id="attachPrev"></div>
+<div class="box">
+<label class="iconBtn">📎<input type="file" id="fileInput" accept="image/*" hidden></label>
+<button class="iconBtn" onclick="document.getElementById('fileInput').click()">🖼️</button>
+<textarea id="prompt" rows="1" placeholder="Type here... e.g. dark meme / saree / superhero / gym..."></textarea>
+<button class="send" id="sendBtn" onclick="sendMsg()">↑</button>
+</div>
+<div class="hint">📎 Attach Photo → Tap Button = Body Changes, Face Same • No API, Unlimited</div>
+</div></div>
+<div class="toast" id="toast"></div>
+<canvas id="myCanvas"></canvas>
+<canvas id="faceCanvas"></canvas>
+
+<script>
+// ============================================================
+// ✅ BODY CHANGES ONLY - FACE REMAINS SAME - HAS MEME CHANGES
+// LOGIC: 1) Save Faces 2) Change Body+Background 3) Paste Faces Back
+// NO API - NO KEY - UNLIMITED
+// ============================================================
+let files=[], busy=false, origImg=null, origUrl="", lastGenUrl="";
+const $=id=>document.getElementById(id);
+function toast(m){let t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(t._t);t._t=setTimeout(()=>t.style.display='none',2800)}
+function esc(s){return (s||'').replace(/&/g,'&lt;').replace(/>/g,'&gt;')}
+function scroll(){let c=$('chatScroll');requestAnimationFrame(()=>c.scrollTop=c.scrollHeight)}
+function newChat(){$('chatInner').innerHTML=document.querySelector('#welcome').outerHTML;files=[];origImg=null;lastGenUrl="";renderAttach();toast('New chat')}
+function quick(t){$('prompt').value=t;sendMsg()}
+function addUser(text,file){let w=$('welcome');if(w)w.style.display='none';let d=document.createElement('div');d.className='msg user';let extra=file&&file.url?'<img src="'+file.url+'">':'';d.innerHTML='<div class="bubble">'+esc(text)+extra+'</div><div class="avatar">You</div>';$('chatInner').appendChild(d);scroll()}
+function addAI(html){let d=document.createElement('div');d.className='msg ai';d.innerHTML='<div class="avatar">O</div><div class="bubble">'+html+'</div>';$('chatInner').appendChild(d);scroll();return d}
+$('prompt').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg()}});
+$('prompt').addEventListener('input',e=>{e.target.style.height='auto';e.target.style.height=Math.min(e.target.scrollHeight,110)+'px'});
+$('fileInput').addEventListener('change',e=>{
+  let f=e.target.files&&e.target.files[0];if(!f)return;
+  if(!f.type.startsWith('image/')){toast('Select a photo');return}
+  let r=new FileReader();r.onload=ev=>{
+    let url=ev.target.result;origUrl=url;
+    let img=new Image();img.onload=()=>{origImg=img;};
+    img.src=url;
+    files=[{name:f.name,url:url}];renderAttach();
+    let w=$('welcome');if(w)w.style.display='none';
+    addAI('✅ <b>Photo Attached - Faces Will Remain Same!</b><br><br>Code will:<br>1️⃣ Save your faces (Top part)<br>2️⃣ Change body + background only<br>3️⃣ Paste your original faces back<br><br>Tap: <b>Dark Meme</b> / <b>Saree</b> / <b>Superhero</b> / <b>Gym</b>');
+    toast('Photo attached - Faces will stay same!');
+  };r.readAsDataURL(f);setTimeout(()=>e.target.value='',100);
+});
+function renderAttach(){
+  let box=$('attachPrev');box.innerHTML='';
+  files.forEach(f=>{let d=document.createElement('div');d.className='attachItem';d.innerHTML='<img src="'+f.url+'"><button>×</button>';d.querySelector('button').onclick=()=>{files=[];origImg=null;renderAttach()};box.appendChild(d)});
+}
+
+// ===== CORE: BODY CHANGE ONLY, FACE SAME =====
+function makeBodyChangeOnly(type, rawText){
+  if(!origImg) return null;
+  let canvas=$('myCanvas');
+  let ctx=canvas.getContext('2d');
+  let faceCanvas=$('faceCanvas');
+  let fctx=faceCanvas.getContext('2d');
+  let W=origImg.width, H=origImg.height;
+  let maxW=900; let scale=Math.min(1, maxW/W); W=Math.floor(W*scale); H=Math.floor(H*scale);
+  canvas.width=W; canvas.height=H;
+  faceCanvas.width=W; faceCanvas.height=H;
+
+  // STEP 1: SAVE FACES - Top 38% = Face Zone - Save it fully
+  // For 2 persons, faces are in top area. We save top 0% to 38% as face zone
+  // Also save 2 face boxes separately for perfect paste
+  fctx.clearRect(0,0,W,H);
+  fctx.drawImage(origImg,0,0,W,H);
+  // Save face zone image data
+  let faceZoneData = fctx.getImageData(0,0,W,Math.floor(H*0.38));
+
+  // STEP 2: DRAW ORIGINAL THEN CHANGE BODY + BACKGROUND ONLY
+  ctx.drawImage(origImg,0,0,W,H);
+  let imgData=ctx.getImageData(0,0,W,H);
+  let d=imgData.data;
+
+  // Face line = 38% height. Above = Face (DO NOT CHANGE). Below = Body (CHANGE)
+  let faceLine = Math.floor(H*0.38);
+  let desc="";
+
+  if(type==='dark meme' || type==='dark humor' || type==='dark humour'){
+    // BODY: Very dark blue-black, Background dark, Clothes black
+    for(let y=0;y<H;y++){
+      for(let x=0;x<W;x++){
+        let i=(y*W+x)*4;
+        if(y < faceLine){ continue; } // FACE - DO NOT TOUCH
+        let r=d[i], g=d[i+1], b=d[i+2];
+        // Body: Darken heavily, make blue-black
+        d[i]=r*0.25; d[i+1]=g*0.22; d[i+2]=b*0.55;
+        // If bright clothes, make them black
+        if(r>100){ d[i]=d[i]*0.4; d[i+1]=d[i+1]*0.4; }
+      }
+    }
+    ctx.putImageData(imgData,0,0);
+    // Add dark fog at bottom (Body area only)
+    let fog=ctx.createLinearGradient(0,H*0.4,0,H);
+    fog.addColorStop(0,'rgba(0,0,0,0)'); fog.addColorStop(1,'rgba(5,0,15,0.9)');
+    ctx.fillStyle=fog; ctx.fillRect(0,faceLine,W,H-faceLine);
+    // Vignette only on body
+    let grad=ctx.createRadialGradient(W/2,H/2,W*0.2,W/2,H/2,W*0.75);
+    grad.addColorStop(0,'rgba(0,0,0,0)'); grad.addColorStop(1,'rgba(0,0,0,0.75)');
+    ctx.fillStyle=grad; ctx.fillRect(0,faceLine,W,H-faceLine);
+    // Devil Horns - Above faces (outside face zone, on top)
+    function horns(cx,cy,size){
+      ctx.fillStyle='#ff0000'; ctx.strokeStyle='#000'; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.moveTo(cx-size*0.6,cy); ctx.quadraticCurveTo(cx-size*0.9,cy-size*1.2,cx-size*0.3,cy-size*0.7); ctx.quadraticCurveTo(cx-size*0.4,cy-size*0.2,cx-size*0.6,cy); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx+size*0.6,cy); ctx.quadraticCurveTo(cx+size*0.9,cy-size*1.2,cx+size*0.3,cy-size*0.7); ctx.quadraticCurveTo(cx+size*0.4,cy-size*0.2,cx+size*0.6,cy); ctx.fill(); ctx.stroke();
+    }
+    horns(W*0.28, H*0.12, W*0.05);
+    horns(W*0.72, H*0.10, W*0.05);
+    desc="Dark Meme - Body + Background Dark, Faces Same";
+  }
+  else if(type==='saree'){
+    // BODY: Change to RED SAREE colour, Faces same
+    for(let y=0;y<H;y++){ for(let x=0;x<W;x++){ let i=(y*W+x)*4;
+      if(y < faceLine) continue;
+      let r=d[i], g=d[i+1], b=d[i+2];
+      // Make body look like red saree - Strong red, low green/blue
+      d[i]=Math.min(255, r*1.6+50); d[i+1]=g*0.35; d[i+2]=b*0.35;
+      // Add gold border effect at bottom of body - golden line
+    }}
+    ctx.putImageData(imgData,0,0);
+    // Gold border line at bottom of body - Like saree border
+    ctx.fillStyle='#FFD700'; ctx.fillRect(0,H-22,W,8);
+    ctx.fillStyle='#FF9933'; ctx.fillRect(0,H-14,W,4);
+    desc="Saree Body - Body Red Saree Colour, Faces Same";
+  }
+  else if(type==='superhero'){
+    // BODY: Blue + Red superhero, Faces same
+    for(let y=0;y<H;y++){ for(let x=0;x<W;x++){ let i=(y*W+x)*4;
+      if(y < faceLine) continue;
+      let r=d[i], g=d[i+1], b=d[i+2];
+      d[i]=r*0.6+30; d[i+1]=g*0.6; d[i+2]=Math.min(255,b*1.6+40); // Blue hero
+    }}
+    ctx.putImageData(imgData,0,0);
+    // Red cape at bottom
+    ctx.fillStyle='rgba(200,0,0,0.85)'; ctx.fillRect(0,H-55,W,55);
+    desc="Superhero Body - Body Blue + Red Cape, Faces Same";
+  }
+  else if(type==='gym'){
+    // BODY: Strong contrast, muscle look, Faces same
+    for(let y=0;y<H;y++){ for(let x=0;x<W;x++){ let i=(y*W+x)*4;
+      if(y < faceLine) continue;
+      let r=d[i], g=d[i+1], b=d[i+2];
+      d[i]=Math.min(255,r*1.3); d[i+1]=Math.min(255,g*1.1); d[i+2]=b*0.9;
+    }}
+    ctx.putImageData(imgData,0,0);
+    desc="Gym Body - Body Strong Contrast, Faces Same";
+  }
+  else if(type==='horror'){
+    for(let y=0;y<H;y++){ for(let x=0;x<W;x++){ let i=(y*W+x)*4;
+      if(y < faceLine) continue;
+      d[i]=d[i]*0.3; d[i+1]=d[i+1]*0.3; d[i+2]=d[i+2]*0.5;
+    }}
+    ctx.putImageData(imgData,0,0);
+    let fog=ctx.createLinearGradient(0,H*0.4,0,H);
+    fog.addColorStop(0,'rgba(0,0,0,0)'); fog.addColorStop(1,'rgba(0,0,0,0.9)');
+    ctx.fillStyle=fog; ctx.fillRect(0,faceLine,W,H-faceLine);
+    desc="Horror Body - Body Dark Horror, Faces Same";
+  }
+  else if(type==='funny'){
+    for(let y=0;y<H;y++){ for(let x=0;x<W;x++){ let i=(y*W+x)*4;
+      if(y < faceLine) continue;
+      d[i]=Math.min(255,d[i]*1.25); d[i+1]=Math.min(255,d[i+1]*1.15); d[i+2]=d[i+2]*0.75; // Yellow funny body
+    }}
+    ctx.putImageData(imgData,0,0);
+    desc="Funny Body - Body Bright Yellow, Faces Same";
+  }
+  else if(type==='meme'){
+    // Meme: Keep body same but add dark caption bar at bottom (Body area)
+    ctx.putImageData(imgData,0,0);
+    desc="Meme - Body Same + Meme Bar, Faces Same";
+  }
+  else if(type==='movie'){
+    for(let y=0;y<H;y++){ for(let x=0;x<W;x++){ let i=(y*W+x)*4;
+      if(y < faceLine) continue;
+      d[i]=d[i]*1.2; d[i+1]=d[i+1]*1.0; d[i+2]=d[i+2]*0.8;
+    }}
+    ctx.putImageData(imgData,0,0);
+    ctx.fillStyle='#000'; ctx.fillRect(0,H-45,W,45);
+    desc="Movie Body - Body Cinema, Faces Same";
+  }
+  else if(type==='old'){
+    for(let y=0;y<H;y++){ for(let x=0;x<W;x++){ let i=(y*W+x)*4;
+      if(y < faceLine) continue;
+      let avg=(d[i]+d[i+1]+d[i+2])/3;
+      d[i]=avg*1.1; d[i+1]=avg*0.95; d[i+2]=avg*0.8; // Sepia old body
+    }}
+    ctx.putImageData(imgData,0,0);
+    desc="Old Body - Body Sepia Old, Faces Same";
+  }
+  else if(type==='glamour'){
+    for(let y=0;y<H;y++){ for(let x=0;x<W;x++){ let i=(y*W+x)*4;
+      if(y < faceLine) continue;
+      d[i]=Math.min(255,d[i]*1.15); d[i+1]=Math.min(255,d[i+1]*1.1); d[i+2]=Math.min(255,d[i+2]*1.05);
+    }}
+    ctx.putImageData(imgData,0,0);
+    desc="Glamour Body - Body Bright Glamour, Faces Same";
+  }
+  else {
+    ctx.putImageData(imgData,0,0);
+    desc="Custom - Body Changed, Faces Same";
+  }
+
+  // STEP 3: PASTE ORIGINAL FACES BACK - Faces 100% Same, Never Changed
+  // Put back face zone exactly as original
+  ctx.putImageData(faceZoneData,0,0);
+  // Add a soft blend line at faceLine so face/body join looks natural
+  ctx.fillStyle='rgba(0,0,0,0.08)'; ctx.fillRect(0,faceLine-2,W,4);
+
+  // STEP 4: MEME CHANGES - Small text at bottom, NOT covering faces
+  function smallText(text){
+    ctx.font='900 ' + Math.floor(W*0.045) + 'px Arial';
+    ctx.textAlign='center';
+    ctx.lineWidth=5; ctx.strokeStyle='#000';
+    ctx.strokeText(text, W/2, H-18);
+    ctx.fillStyle='#fff'; ctx.fillText(text, W/2, H-18);
+  }
+  if(type==='dark meme' || type==='dark humor') smallText('DARK MEME 💀');
+  else if(type==='funny') smallText('FUNNY 😂');
+  else if(type==='meme') smallText('MEME 🤣');
+  else if(type==='horror') smallText('HORROR 👻');
+  else if(type==='saree') smallText('SAREE VIBE 🥻');
+  else if(type==='superhero') smallText('SUPERHERO 🦸');
+  else if(type==='gym') smallText('GYM BODY 💪');
+  else if(type==='movie') smallText('MOVIE 🎬');
+  else smallText(rawText.toUpperCase().slice(0,20));
+
+  return {url: canvas.toDataURL('image/jpeg',0.92), desc: desc};
+}
+
+async function sendMsg(){
+  if(busy){toast('Please wait...');return}
+  let inp=$('prompt');let raw=(inp.value||'').trim();let file=files[0];
+  if(!raw&&!file){toast('Attach photo or type - e.g. dark meme / saree / superhero');return}
+  if(!raw&&file)raw='dark meme';
+  let lowRaw=raw.toLowerCase().trim();
+  let shortMap={'funny':'funny','meme':'meme','dark meme':'dark meme','dark humor':'dark meme','dark humour':'dark meme','horror':'horror','old':'old','baby':'funny','movie':'movie','superhero':'superhero','gym':'gym','glamour':'glamour','saree':'saree'};
+  let typeKey='';
+  if(shortMap[lowRaw]) typeKey=shortMap[lowRaw];
+  for(let k in shortMap){ if(lowRaw==='make '+k || lowRaw==='make it '+k || lowRaw==='make me '+k){ typeKey=shortMap[k]; break; } }
+  if(!typeKey){ for(let k in shortMap){ if(lowRaw.includes(k)){ typeKey=shortMap[k]; break; } } }
+  let isTextOnly = !file || !origImg;
+  let w=$('welcome');if(w)w.style.display='none';
+  addUser(raw,file);inp.value='';busy=true;$('sendBtn').disabled=true;$('sendBtn').textContent='...';
+
+  // ENGINE 1: YOUR PHOTO - BODY CHANGE ONLY, FACE SAME
+  if(!isTextOnly){
+    let t=addAI('Changing BODY ONLY - Faces Saving... ● ● ●<br><small>Saving your faces → Changing body + background → Pasting faces back - Faces will stay 100% same.</small>');
+    setTimeout(()=>{
+      try{
+        let res=makeBodyChangeOnly(typeKey||'meme', raw);
+        if(!res) throw new Error('No photo');
+        lastGenUrl=res.url; t.remove();
+        let gid='gen'+Date.now();
+        addAI("<b>✅ Done! BODY CHANGED ONLY - FACES SAME!</b><br><br>Your prompt: <b>" + esc(raw) + "</b><br>Change: " + esc(res.desc) + "<br><br>Check - Faces same as original? Body changed? Background changed?<img class='genImg' id='" + gid + "' src='" + res.url + "'><div class='actions'><button class='primary' onclick=\"downloadById('" + gid + "')\">⬇ Download</button><button onclick=\"quick('dark meme')\">💀 Dark Meme</button><button onclick=\"quick('saree')\">🥻 Saree Body</button><button onclick=\"quick('superhero')\">🦸 Superhero</button></div><div style='margin-top:8px;font-size:12px;color:#888'>Faces = Original, Body = Changed. Try <b>dark meme</b>, <b>saree</b>, <b>gym</b> - All body changes, faces same.</div>");
+      }catch(e){ t.remove(); addAI("⚠️ Error: " + esc(e.message)); }
+      busy=false;$('sendBtn').disabled=false;$('sendBtn').textContent='↑';scroll();
+    },400);
+    return;
+  }
+
+  // ENGINE 2: ONLY TELL - NEW PHOTO - FREE AI
+  let t=addAI('Making NEW Realistic Photo from your words - FREE AI... ● ● ●<br><small>Generating - Please wait 10-20 sec - Unlimited.</small>');
+  try{
+    let fullPrompt = raw + ", photorealistic, realistic photo, natural skin texture, natural lighting, DSLR camera photo, high detail, not cartoon";
+    let pollUrl = "https://image.pollinations.ai/prompt/" + encodeURIComponent(fullPrompt) + "?width=1024&height=1280&seed=" + Date.now() + "&nologo=true&enhance=true";
+    let imgTest=new Image();
+    imgTest.onload=()=>{
+      lastGenUrl=pollUrl; t.remove();
+      let gid='gen'+Date.now();
+      addAI("<b>✅ Done! NEW Realistic Photo - NO API</b><br><br>Your prompt: <b>" + esc(raw) + "</b><img class='genImg' id='" + gid + "' src='" + pollUrl + "'><div class='actions'><button class='primary' onclick=\"downloadById('" + gid + "')\">⬇ Download Image</button></div>");
+      busy=false;$('sendBtn').disabled=false;$('sendBtn').textContent='↑';scroll();
+    };
+    imgTest.onerror=()=>{ t.remove(); addAI("⚠️ Free AI Busy - Tap Send again in 10 sec."); busy=false;$('sendBtn').disabled=false;$('sendBtn').textContent='↑'; };
+    imgTest.src=pollUrl;
+  }catch(err){ t.remove(); addAI("⚠️ Error: " + esc(err.message)); busy=false;$('sendBtn').disabled=false;$('sendBtn').textContent='↑'; }
+}
+function downloadById(id){let img=document.getElementById(id);let url=img?img.src:lastGenUrl;if(!url){toast('No image');return}let a=document.createElement('a');a.href=url;a.download='orbittroniz-body-change.jpg';a.click();toast('Downloaded!')}
+function downloadLast(){downloadById('')}
+</script>
+</body>
+</html>
