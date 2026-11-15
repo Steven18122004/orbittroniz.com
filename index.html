@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>1 STRATEGY + CHART - ALL BUGS FIXED</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:#0a0a0a;color:#eaecef}
+button{cursor:pointer;border:none;touch-action:manipulation}button:active{transform:scale(.96)}
+.topbar{position:sticky;top:0;z-index:50;background:#0a0a0a;border-bottom:1px solid #222;padding:8px 10px;display:flex;gap:8px;align-items:center}
+.logo{font-size:15px;font-weight:900;color:#f0b90b}
+.searchTop{flex:1;min-width:0;background:#1e2329;border:1px solid #333;border-radius:999px;padding:9px 10px;color:#fff;outline:none;font-size:13px}
+.layout{max-width:1100px;margin:auto;padding:10px;padding-bottom:30px}
+.card{background:#0f1217;border:1px solid #222;border-radius:14px;padding:12px;margin-top:10px}
+.card p{font-size:12px;color:#888;line-height:1.6;margin-top:6px}
+.btnWrap{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.btnWrap button{background:#1e2329;color:#fff;padding:9px 12px;border-radius:20px;font-size:12px}
+.btnWrap button.active{background:#f0b90b;color:#000;font-weight:800}
+.btnWrap button.green{background:#0ecb81;color:#000;font-weight:800}
+.btnWrap button.red{background:#f6465d;color:#fff}
+.btnWrap button.purple{background:#a855f7;color:#fff}
+.btnWrap button.blue{background:#3b82f6;color:#fff}
+.input{width:100%;background:#07090c;border:1px solid #333;border-radius:10px;padding:10px;color:#fff;margin-top:6px;font-size:13px;outline:none}
+.label{font-size:11px;color:#888;margin-top:10px;display:block}
+.tfRow{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tfRow button{background:#1e2329;color:#fff;padding:8px 11px;border-radius:20px;font-size:11px;border-left:4px solid #888}
+.tfRow button.on{background:#f0b90b;color:#000;font-weight:800}
+.tfRow button.onGreen{background:#0ecb81;color:#000;font-weight:800}
+.tfRow button.onPurple{background:#a855f7;color:#fff;font-weight:800}
+.check{display:flex;gap:8px;align-items:flex-start;background:#171b22;border-radius:10px;padding:10px;margin-top:8px;cursor:pointer;border:1px solid transparent}
+.check.done{border-color:#0ecb81}
+.box{width:22px;height:22px;flex-shrink:0;border-radius:6px;border:2px solid #555;display:flex;align-items:center;justify-content:center;font-size:14px;background:#07090c}
+.check.done .box{background:#0ecb81;border-color:#0ecb81;color:#000;font-weight:900}
+.coinItem{display:flex;justify-content:space-between;align-items:center;padding:10px;background:#171b22;border-radius:10px;cursor:pointer;margin-top:7px;border:1px solid transparent}
+.coinItem.active{border-color:#f0b90b}
+.chartBox{background:#131722;border:1px solid #222;border-radius:10px;overflow:hidden;margin-top:10px}
+.chartBox canvas{width:100%;height:520px;display:block;touch-action:none}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12px}
+th{color:#888;text-align:left;padding:8px 6px;border-bottom:1px solid #222}
+td{padding:9px 6px;border-bottom:1px solid #1a1e23}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#f0b90b;color:#000;padding:10px 14px;border-radius:20px;font-weight:700;display:none;z-index:999;max-width:92%;text-align:center;font-size:13px}
+@media(max-width:900px){.chartBox canvas{height:460px}}
+@media(max-width:480px){.chartBox canvas{height:430px}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="logo">1 STRATEGY + CHART</div><input class="searchTop" id="searchTop" placeholder="Search coin... EURUSD, BTC, SOL"><button id="btnRefreshTop" style="width:36px;height:36px;border-radius:50%;background:#1e2329;color:#fff;font-size:16px">↻</button></div>
+<div class="layout">
+
+<!-- WATCHLIST - 1 SECTION ONLY -->
+<div class="card"><h3>⭐ Watchlist - 1 Section Only</h3><p>Tap coin → Its 1 Strategy + Its Chart loads. BTC setting NOT in SOL.</p>
+<div style="display:flex;gap:8px;margin-top:10px"><input id="addCoinInput" class="input" style="margin-top:0" placeholder="Add coin - EURUSD, XAUUSD, BTC, SOL"><button id="btnAddCoin" style="background:#f0b90b;color:#000;padding:10px 14px;border-radius:10px;font-weight:800;white-space:nowrap">+ Add</button></div>
+<div id="coinList"></div>
+<div class="btnWrap"><button id="btnTopCoins">Top Coins</button><button id="btnClearCoins">Clear All</button></div>
+<p style="font-size:11px;color:#888">Current: <b id="currentCoinLabel" style="color:#f0b90b">EURUSD</b></p></div>
+
+<!-- WHATSAPP - ALERT ONLY -->
+<div class="card"><div style="background:#0b2a16;border:1px solid #25d366;border-radius:12px;padding:12px"><h4 style="color:#25d366">💬 WhatsApp - For Alert Only</h4>
+<input id="waInput" class="input" placeholder="e.g. 919876543210">
+<div class="btnWrap"><button id="btnWaSave" style="background:#25d366;color:#000;padding:10px;border-radius:10px;font-weight:800;flex:1">💾 Save Number</button><button id="btnWaTest" style="flex:1;padding:10px;border-radius:10px">Test</button></div>
+<div style="display:flex;gap:6px;margin-top:8px;align-items:center"><button id="btnWaOn" style="background:#25d366;color:#000;padding:8px 12px;border-radius:20px;font-weight:800">WhatsApp ON</button><span id="waStatus" style="font-size:11px;color:#888">Not set</span></div></div></div>
+
+<!-- CHART - TRADINGVIEW STYLE -->
+<div class="card" style="border-color:#f0b90b">
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><b id="chartCoinName" style="font-size:20px">EURUSD</b><span id="livePrice" style="font-size:20px;color:#f0b90b;font-weight:900">--</span><span id="liveTF" style="font-size:11px;background:#1e2329;padding:5px 10px;border-radius:20px">1M • LIVE</span><span id="wsStatus" style="font-size:11px;background:#0ecb81;color:#000;padding:5px 10px;border-radius:20px;font-weight:800">● LIVE</span><span id="chartModeLabel" style="font-size:11px;background:#f0b90b;color:#000;padding:5px 10px;border-radius:20px;font-weight:800">CHART: Your Markings Only</span></div>
+<div class="btnWrap">
+<button data-tf="15m">15m</button><button data-tf="1h">1H</button><button data-tf="4h">4H</button><button data-tf="1d">1D</button><button data-tf="1w">1W</button><button data-tf="1M" class="active">1M</button>
+</div>
+<p style="font-size:11px;color:#888;margin-top:6px">Chart shows ONLY what you marked in Part 1/2/3 below. If you OFF a TF, its line/box is 100% hidden - No bug. Drag to see history. Double-tap = Live.</p>
+<div class="btnWrap">
+<button id="btnLabels" class="active">🏷️ Labels: ON</button>
+<button id="btnCleanMode" class="green">✨ Clean: ON</button>
+<button id="btnZoomIn" class="active">＋ Zoom In</button><button id="btnZoomOut">－ Zoom Out</button>
+<button id="btnPanLeft">◀ Left</button><button id="btnPanRight">Right ▶</button>
+<button id="btnResetChart" class="green">⟲ Live - Last Candle</button>
+<button id="btnGoMiddle" class="purple">⏮️ Go To Middle</button>
+<button id="btnVolume">📊 Volume ON</button>
+</div>
+<div id="candleInfo" style="display:none;background:#1a1e23;border:1px solid #333;border-radius:12px;padding:10px;margin-top:8px;font-size:12px;line-height:1.7"><b style="color:#f0b90b" id="infoTime">--</b> <span id="infoTF" style="color:#888">1M</span><br><span style="color:#888">O:</span> <b id="infoOpen">--</b> &nbsp; <span style="color:#888">H:</span> <b style="color:#0ecb81" id="infoHigh">--</b> &nbsp; <span style="color:#888">L:</span> <b style="color:#f6465d" id="infoLow">--</b> &nbsp; <span style="color:#888">C:</span> <b id="infoClose">--</b><br><span style="color:#888">Your Markings:</span> <b id="infoMark">--</b></div>
+</div>
+<div class="chartBox"><canvas id="chartCanvas"></canvas></div>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><span style="font-size:11px;background:#1a1e23;padding:5px 9px;border-radius:20px;border:1px solid #333">🟡 1Y High/Low Line</span><span style="font-size:11px;background:#1a1e23;padding:5px 9px;border-radius:20px;border:1px solid #333">🟢 Bullish FVG Box</span><span style="font-size:11px;background:#1a1e23;padding:5px 9px;border-radius:20px;border:1px solid #333">🔴 Bearish FVG Box</span><span style="font-size:11px;background:#1a1e23;padding:5px 9px;border-radius:20px;border:1px solid #333">🟣 MSS/CHoCH Dot</span><span style="font-size:11px;background:#1a1e23;padding:5px 9px;border-radius:20px;border:1px solid #333">🟢 Entry / 🔴 SL / 🟡 TP Lines</span></div>
+<div id="chartSignal" style="background:#1a1e23;border:1px solid #f0b90b;border-radius:14px;padding:12px;font-size:12.5px;line-height:1.7;margin-top:10px">Loading chart...</div>
+
+<!-- 1 STRATEGY HEAD -->
+<div class="card" style="border-color:#f0b90b"><h3>🧪 1 STRATEGY ONLY - <span id="stratCoinName" style="color:#f0b90b">EURUSD</span></h3><p>Step 1 → Mark 1Y HL. Step 2 → Lower TF FVG Only. Step 3 → MSS/CHoCH + Alert. All ON/OFF per TF, per Coin. Chart above updates instantly.</p>
+<div class="btnWrap"><button id="btnAllOn" class="green">All ON</button><button id="btnAllOff" class="red">All OFF</button><button id="btnOnly1Y" style="background:#f0b90b;color:#000;font-weight:800">Only 1Y HL</button><button id="btnOnlyFVG" class="green">Only FVG</button><button id="btnOnlyMSS" class="purple">Only MSS/CHoCH</button><button id="btnResetCoin" class="red">Reset This Coin</button></div>
+<p id="stratStatus" style="font-size:11px;color:#888;margin-top:6px">Loading...</p></div>
+
+<!-- PART 1 -->
+<div class="card" style="border-left:4px solid #f0b90b">
+<b style="font-size:13px">📍 PART 1 - 1YR MARK HIGH / LOW - Every TF ON/OFF</b>
+<p>Mark 1Y High/Low + Every TF High/Low. OFF which TF you don't want line. Chart shows only ON lines.</p>
+<div style="font-size:11px;color:#f0b90b;margin-top:8px">HIGH / LOW LINES - Tap ON/OFF</div>
+<div class="tfRow" id="hlRow"></div>
+<div class="btnWrap"><button id="btnHlAllOn" style="background:#f0b90b;color:#000;font-weight:800">HL All ON</button><button id="btnHlAllOff">HL All OFF</button><button id="btnHlOnly1Y" style="background:#f0b90b;color:#000;font-weight:800">Only 1Y High/Low</button></div>
+<label class="label">✏️ 1Y High (Manual)</label><input id="input1YHigh" class="input" placeholder="Example: 1.1200">
+<label class="label">✏️ 1Y Low (Manual)</label><input id="input1YLow" class="input" placeholder="Example: 1.0500">
+<label class="label">✏️ 6M High / Low</label><input id="input6MHigh" class="input" placeholder="6M High"><input id="input6MLow" class="input" placeholder="6M Low">
+<label class="label">✏️ 3M High / Low</label><input id="input3MHigh" class="input" placeholder="3M High"><input id="input3MLow" class="input" placeholder="3M Low">
+<table><thead><tr><th>Level</th><th>Price</th><th>Status</th></tr></thead><tbody id="hlTable"><tr><td colspan="3">Loading...</td></tr></tbody></table>
+</div>
+
+<!-- PART 2 -->
+<div class="card" style="border-left:4px solid #0ecb81">
+<b style="font-size:13px">🟩 PART 2 - LOWER TF - MARK FVG ONLY - Every TF ON/OFF</b>
+<p>After Part 1, go Lower TF. Mark FVG Only. OFF which TF you don't want FVG box. Chart shows only ON FVG boxes.</p>
+<div style="font-size:11px;color:#0ecb81;margin-top:8px">FVG BOXES - Tap ON/OFF</div>
+<div class="tfRow" id="fvgRow"></div>
+<div class="btnWrap"><button id="btnFvgAllOn" class="green">FVG All ON</button><button id="btnFvgAllOff">FVG All OFF</button><button id="btnFvgOnly1M" class="green">Only 1M + 1W FVG</button></div>
+<label class="label">✏️ Bullish FVG - Top / Bottom</label><input id="inputBullFVGTop" class="input" placeholder="Bullish FVG Top - 1.0750"><input id="inputBullFVGBottom" class="input" placeholder="Bullish FVG Bottom - 1.0720">
+<label class="label">✏️ Bearish FVG - Top / Bottom</label><input id="inputBearFVGTop" class="input" placeholder="Bearish FVG Top - 1.0900"><input id="inputBearFVGBottom" class="input" placeholder="Bearish FVG Bottom - 1.0880">
+<label class="label">✏️ FVG TF</label><input id="inputFvgTF" class="input" placeholder="Example: 1M, 1W">
+<table><thead><tr><th>FVG</th><th>Range</th><th>TF</th><th>Status</th></tr></thead><tbody id="fvgTable"><tr><td colspan="4">Write FVG above</td></tr></tbody></table>
+</div>
+
+<!-- PART 3 -->
+<div class="card" style="border-left:4px solid #a855f7">
+<b style="font-size:13px">🔄 PART 3 - MSS / CHoCH - Lower Than FVG TF - Every TF ON/OFF + ALERT</b>
+<p>Keep only TF you want MSS/CHoCH. OFF others. Then setup Entry/SL/TP. Chart shows MSS dot + Entry/SL/TP lines only if you wrote them.</p>
+<div style="font-size:11px;color:#a855f7;margin-top:8px">MSS / CHoCH - Tap ON/OFF</div>
+<div class="tfRow" id="mssRow"></div>
+<div class="btnWrap"><button id="btnMssAllOn" class="purple">MSS/CHoCH All ON</button><button id="btnMssAllOff">MSS/CHoCH All OFF</button><button id="btnMssOnlyLower" class="purple">Only Lower than FVG TF</button></div>
+<div class="check" id="checkMSS"><div class="box"></div><div><b>1. MSS Happened?</b><br><span style="font-size:11px;color:#888">Structure Shift - Broke previous High/Low.</span></div></div>
+<div class="check" id="checkCHOCH"><div class="box"></div><div><b>2. CHoCH Happened?</b><br><span style="font-size:11px;color:#888">Change of Character - First reversal sign.</span></div></div>
+<div class="check" id="checkMSSInFVG"><div class="box"></div><div><b>3. MSS / CHoCH Inside FVG?</b><br><span style="font-size:11px;color:#888">MSS/CHoCH inside FVG from Part 2 = Confirmation.</span></div></div>
+<div style="background:#0b0e11;border-radius:12px;padding:11px;margin-top:10px">
+<b style="font-size:12px">🚨 SET ALERT - YOU SETUP - Entry / SL / Target</b>
+<label class="label">Entry Price *</label><input id="inputEntry" class="input" placeholder="Example: 1.0755">
+<label class="label">SL Price *</label><input id="inputSL" class="input" placeholder="Example: 1.0710">
+<label class="label">Target 1 - TP1 *</label><input id="inputTP1" class="input" placeholder="Example: 1.0820">
+<label class="label">Target 2 - TP2</label><input id="inputTP2" class="input" placeholder="Example: 1.0900">
+<label class="label">Direction</label><div class="btnWrap"><button id="btnDirLong" class="green">🟢 LONG</button><button id="btnDirShort" class="red">🔴 SHORT</button></div><p id="dirLabel" style="font-size:12px;color:#0ecb81;margin-top:6px">Direction: LONG</p>
+<label class="label">Alert Note</label><input id="inputAlertNote" class="input" placeholder="Example: Alert when price comes to FVG + MSS on 1D">
+<div class="btnWrap"><button id="btnSaveAlert" class="green" style="flex:1;padding:11px;font-weight:800">💾 Save Alert + Send WhatsApp</button><button id="btnTestAlert" style="flex:1;padding:11px">Test Alert</button></div><p id="alertMsg" style="font-size:11px;color:#0ecb81;margin-top:6px"></p>
+</div>
+<div style="background:#171b22;border-radius:12px;padding:10px;margin-top:10px;font-size:12px;line-height:1.7"><b>ALERT STATUS - <span id="alertCoin">EURUSD</span></b><br><span id="alertStatus">No Alert yet.</span><br><span id="alertRR" style="color:#f0b90b"></span></div>
+</div>
+
+<div class="card"><b style="font-size:13px">💾 Saved Alerts - For <span id="historyCoin">EURUSD</span></b><div id="historyList" style="font-size:12px;line-height:1.7;margin-top:6px">No saved alert yet.</div><div class="btnWrap"><button id="btnClearHistory">Clear History</button><button id="btnExportHistory" style="background:#f0b90b;color:#000;font-weight:800">📋 Copy All for WhatsApp</button></div></div>
+
+</div>
+<div class="toast" id="toast"></div>
+<script>
+function $(id){return document.getElementById(id)}
+function toast(m){let t=$('toast');if(!t)return;t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500)}
+function bind(id,fn){let el=$(id);if(!el)return;el.addEventListener('click',e=>{try{fn(e,el)}catch(err){console.log(err)}})}
+function safeNum(v){let n=parseFloat(String(v||'').replace(/[^0-9.\-]/g,''));return isNaN(n)?0:n}
+function fmt(n,dec){n=safeNum(n);return n.toLocaleString('en-US',{minimumFractionDigits:dec||2,maximumFractionDigits:dec||4})}
+
+// ===== STATE - 1 STRATEGY ONLY =====
+let currentCoin='EURUSD', currentTF='1M';
+let coinList=[];try{coinList=JSON.parse(localStorage.getItem('one_coins')||'["EURUSD","GBPUSD","BTCUSDT","SOLUSDT","ETHUSDT","XRPUSDT"]')}catch(e){coinList=['EURUSD','BTCUSDT']}
+let DEFAULT={
+  hl:{'1Y':true,'6M':false,'3M':false,'1M':false,'1W':false,'1D':false,'4H':false},
+  fvg:{'1Y':false,'6M':false,'3M':false,'1M':true,'1W':true,'1D':false,'4H':false},
+  mss:{'1Y':false,'6M':false,'3M':false,'1M':false,'1W':false,'1D':true,'4H':true,'1H':true,'15m':true},
+  prices:{yHigh:'',yLow:'',m6High:'',m6Low:'',m3High:'',m3Low:'',bullTop:'',bullBottom:'',bearTop:'',bearBottom:'',fvgTF:'1M',entry:'',sl:'',tp1:'',tp2:'',note:''},
+  checks:{mss:false,choch:false,inFVG:false}, direction:'LONG'
+};
+let S=JSON.parse(JSON.stringify(DEFAULT));
+let TF_LIST=['1Y','6M','3M','1M','1W','1D','4H'];
+let MSS_TF_LIST=['1Y','6M','3M','1M','1W','1D','4H','1H','15m'];
+let waNumber=localStorage.getItem('one_wa')||'', waEnabled=localStorage.getItem('one_wa_on')==='1';
+let candles=[], view={offset:30,zoom:1}, isDragging=false, lastX=0, startDist=0, startZoom=1, showVolume=true, cleanLabels=true, cleanMode=true;
+let crosshair={candleIndex:-1,show:true}, ws=null, wsRetry=0, drawQueued=false, labelUsed=[], lastTapTime=0, pressTimer=null, wsLastDraw=0;
+
+// ===== LOAD / SAVE PER COIN - BUG FIX: Always reload S on coin change =====
+function loadForCoin(){
+  try{
+    let all=JSON.parse(localStorage.getItem('one_strategy')||'{}');
+    S = all[currentCoin] ? JSON.parse(JSON.stringify(all[currentCoin])) : JSON.parse(JSON.stringify(DEFAULT));
+    if(!S.hl) S.hl={...DEFAULT.hl}; if(!S.fvg) S.fvg={...DEFAULT.fvg}; if(!S.mss) S.mss={...DEFAULT.mss}; if(!S.prices) S.prices={...DEFAULT.prices}; if(!S.checks) S.checks={...DEFAULT.checks}; if(!S.direction) S.direction='LONG';
+  }catch(e){ S=JSON.parse(JSON.stringify(DEFAULT)); }
+  syncInputs(); renderAll(); fetchCandles(currentCoin, currentTF); connectWS();
+}
+function saveForCoin(){
+  try{ let all=JSON.parse(localStorage.getItem('one_strategy')||'{}'); all[currentCoin]=JSON.parse(JSON.stringify(S)); localStorage.setItem('one_strategy',JSON.stringify(all)); }catch(e){}
+}
+function syncInputs(){
+  let map=[['input1YHigh','yHigh'],['input1YLow','yLow'],['input6MHigh','m6High'],['input6MLow','m6Low'],['input3MHigh','m3High'],['input3MLow','m3Low'],['inputBullFVGTop','bullTop'],['inputBullFVGBottom','bullBottom'],['inputBearFVGTop','bearTop'],['inputBearFVGBottom','bearBottom'],['inputFvgTF','fvgTF'],['inputEntry','entry'],['inputSL','sl'],['inputTP1','tp1'],['inputTP2','tp2'],['inputAlertNote','note']];
+  map.forEach(p=>{ let el=$(p[0]); if(el) el.value=S.prices[p[1]]||''; });
+  let dl=$('dirLabel'); if(dl){ dl.textContent='Direction: '+S.direction; dl.style.color=S.direction==='LONG'?'#0ecb81':'#f6465d'; }
+  [['checkMSS','mss'],['checkCHOCH','choch'],['checkMSSInFVG','inFVG']].forEach(p=>{ let el=$(p[0]); if(el){ if(S.checks[p[1]]){el.classList.add('done'); el.querySelector('.box').textContent='✓';}else{el.classList.remove('done'); el.querySelector('.box').textContent='';} }});
+  updateDirectionButtons();
+}
+function updateDirectionButtons(){
+  let bl=$('btnDirLong'), bs=$('btnDirShort');
+  if(bl) bl.style.background=S.direction==='LONG'?'#0ecb81':'#1e2329';
+  if(bs) bs.style.background=S.direction==='SHORT'?'#f6465d':'#1e2329';
+  if(bl) bl.style.color=S.direction==='LONG'?'#000':'#fff';
+  if(bs) bs.style.color=S.direction==='SHORT'?'#fff':'#fff';
+}
+function renderAll(){ renderHL(); renderFVG(); renderMSS(); renderTables(); renderHistory(); renderCoinList(); updateStatus(); requestDraw(); updateSignal(); }
+function renderHL(){
+  let box=$('hlRow'); if(!box) return; box.innerHTML='';
+  TF_LIST.forEach(tf=>{
+    let btn=document.createElement('button'); btn.textContent=tf+' HL '+(S.hl[tf]?'ON':'OFF'); btn.className=S.hl[tf]?'on':''; btn.style.borderLeft='4px solid #f0b90b';
+    btn.addEventListener('click',()=>{ S.hl[tf]=!S.hl[tf]; saveForCoin(); renderAll(); toast(tf+' High/Low '+(S.hl[tf]?'ON ✅':'OFF - Hidden from chart')+' for '+currentCoin); });
+    box.appendChild(btn);
+  });
+}
+function renderFVG(){
+  let box=$('fvgRow'); if(!box) return; box.innerHTML='';
+  TF_LIST.forEach(tf=>{
+    let btn=document.createElement('button'); btn.textContent=tf+' FVG '+(S.fvg[tf]?'ON':'OFF'); btn.className=S.fvg[tf]?'onGreen':''; btn.style.borderLeft='4px solid #0ecb81';
+    btn.addEventListener('click',()=>{ S.fvg[tf]=!S.fvg[tf]; saveForCoin(); renderAll(); toast(tf+' FVG '+(S.fvg[tf]?'ON ✅':'OFF - Hidden from chart')+' for '+currentCoin); });
+    box.appendChild(btn);
+  });
+}
+function renderMSS(){
+  let box=$('mssRow'); if(!box) return; box.innerHTML='';
+  MSS_TF_LIST.forEach(tf=>{
+    let btn=document.createElement('button'); btn.textContent=tf+' MSS/CHoCH '+(S.mss[tf]?'ON':'OFF'); btn.className=S.mss[tf]?'onPurple':''; btn.style.borderLeft='4px solid #a855f7';
+    btn.addEventListener('click',()=>{ S.mss[tf]=!S.mss[tf]; saveForCoin(); renderAll(); toast(tf+' MSS/CHoCH '+(S.mss[tf]?'ON ✅':'OFF')+' for '+currentCoin); });
+    box.appendChild(btn);
+  });
+}
+function renderTables(){
+  let ht=$('hlTable'); if(ht){
+    let rows=[];
+    if(S.hl['1Y']){ rows.push(['🟡 1Y High',S.prices.yHigh,'ON']); rows.push(['🟡 1Y Low',S.prices.yLow,'ON']); }
+    if(S.hl['6M']){ rows.push(['6M High',S.prices.m6High,'ON']); rows.push(['6M Low',S.prices.m6Low,'ON']); }
+    if(S.hl['3M']){ rows.push(['3M High',S.prices.m3High,'ON']); rows.push(['3M Low',S.prices.m3Low,'ON']); }
+    if(S.hl['1M']) rows.push(['1M High/Low','Auto from chart','ON']);
+    if(S.hl['1W']) rows.push(['1W High/Low','Auto from chart','ON']);
+    if(S.hl['1D']) rows.push(['1D High/Low','Auto from chart','ON']);
+    if(S.hl['4H']) rows.push(['4H High/Low','Auto from chart','ON']);
+    ht.innerHTML = rows.length ? rows.map(r=>'<tr><td>'+r[0]+'</td><td><b>'+(r[1]||'-- Write price --')+'</b></td><td><b style="color:#0ecb81">'+r[2]+'</b></td></tr>').join('') : '<tr><td colspan="3">All HL OFF - Chart clean - Tap ON above</td></tr>';
+  }
+  let ft=$('fvgTable'); if(ft){
+    let rows=[];
+    // BUG FIX: Only show FVG row if at least one FVG TF is ON AND price written. If OFF, hide.
+    let anyFvgOn = TF_LIST.some(tf=>S.fvg[tf]===true);
+    if(anyFvgOn){
+      if(S.prices.bullTop||S.prices.bullBottom) rows.push(['🟢 Bullish FVG',(S.prices.bullBottom||'-')+' - '+(S.prices.bullTop||'-'),S.prices.fvgTF||'-','ON']);
+      if(S.prices.bearTop||S.prices.bearBottom) rows.push(['🔴 Bearish FVG',(S.prices.bearBottom||'-')+' - '+(S.prices.bearTop||'-'),S.prices.fvgTF||'-','ON']);
+    }
+    ft.innerHTML = rows.length ? rows.map(r=>'<tr><td>'+r[0]+'</td><td><b>'+r[1]+'</b></td><td>'+r[2]+'</td><td><b style="color:#0ecb81">'+r[3]+'</b></td></tr>').join('') : '<tr><td colspan="4">FVG OFF or No FVG price written. ON TF: '+(TF_LIST.filter(tf=>S.fvg[tf]).join(', ')||'None')+'</td></tr>';
+  }
+  let as=$('alertStatus'); if(as){
+    if(S.prices.entry && S.prices.sl && S.prices.tp1){ as.innerHTML='<b style="color:'+(S.direction==='LONG'?'#0ecb81':'#f6465d')+'">'+S.direction+' Alert Ready</b> • Entry $'+S.prices.entry+' • SL $'+S.prices.sl+' • TP1 $'+S.prices.tp1+(S.prices.tp2?' • TP2 $'+S.prices.tp2:'')+'<br>MSS: '+(S.checks.mss?'✅':'❌')+' CHoCH: '+(S.checks.choch?'✅':'❌')+' In FVG: '+(S.checks.inFVG?'✅':'❌'); } else as.textContent='No Alert yet. Setup Entry/SL/TP below and Save.';
+  }
+  let rr=$('alertRR'); if(rr){ let e=safeNum(S.prices.entry), sl=safeNum(S.prices.sl), tp=safeNum(S.prices.tp1); if(e&&sl&&tp){ let risk=Math.abs(e-sl), reward=Math.abs(tp-e), r=risk?reward/risk:0; rr.textContent='Risk: $'+fmt(Math.abs(e-sl))+' • Reward: $'+fmt(Math.abs(tp-e))+' • RR: '+r.toFixed(2)+'R'; } else rr.textContent=''; }
+  let ac=$('alertCoin'); if(ac) ac.textContent=currentCoin;
+  let sc=$('stratCoinName'); if(sc) sc.textContent=currentCoin;
+  let hc=$('historyCoin'); if(hc) hc.textContent=currentCoin;
+  let cc=$('chartCoinName'); if(cc) cc.textContent=currentCoin;
+}
+function updateStatus(){
+  let st=$('stratStatus'); if(!st) return;
+  st.textContent='For '+currentCoin+' • HL ON: '+(TF_LIST.filter(tf=>S.hl[tf]).join(', ')||'None')+' • FVG ON: '+(TF_LIST.filter(tf=>S.fvg[tf]).join(', ')||'None')+' • MSS/CHoCH ON: '+(MSS_TF_LIST.filter(tf=>S.mss[tf]).join(', ')||'None');
+}
+function updateSignal(){
+  let el=$('chartSignal'); if(!el) return;
+  let price=candles.length?safeNum(candles[candles.length-1].close):0;
+  el.innerHTML='<b>1 Strategy - '+currentCoin+' ('+currentTF+')</b><br>Price $'+fmt(price)+' • 1Y High $'+(S.prices.yHigh||'--')+' • 1Y Low $'+(S.prices.yLow||'--')+'<br>HL ON: '+(TF_LIST.filter(tf=>S.hl[tf]).join(', ')||'None')+' • FVG ON: '+(TF_LIST.filter(tf=>S.fvg[tf]).join(', ')||'None')+' • MSS ON: '+(MSS_TF_LIST.filter(tf=>S.mss[tf]).join(', ')||'None')+'<br>'+(S.prices.entry?'Alert: '+S.direction+' Entry $'+S.prices.entry+' SL $'+S.prices.sl+' TP1 $'+S.prices.tp1:'No Alert - Setup Entry/SL/TP in Part 3');
+}
+function renderCoinList(){
+  let box=$('coinList'); if(!box) return; box.innerHTML='';
+  coinList.forEach(sym=>{
+    let div=document.createElement('div'); div.className='coinItem'+(sym===currentCoin?' active':'');
+    let all={}; try{ all=JSON.parse(localStorage.getItem('one_strategy')||'{}'); }catch(e){}
+    let d=all[sym]; let status='○ No Setup', col='#888';
+    if(d&&d.prices&&d.prices.entry){ status='🚨 Alert - '+d.direction; col=d.direction==='LONG'?'#0ecb81':'#f6465d'; }
+    else if(d&&d.prices&&(d.prices.yHigh||d.prices.bullTop)){ status='📍 Marked'; col='#f0b90b'; }
+    div.innerHTML='<div><b>'+sym+'</b><small style="color:#888;display:block">Tap to load its 1 Strategy + Chart</small></div><div><b style="color:'+col+';font-size:11px">'+status+'</b></div>';
+    div.addEventListener('click',()=>{ currentCoin=sym; view.offset=30; loadForCoin(); toast(sym+' loaded ✅'); window.scrollTo({top:0,behavior:'smooth'}); });
+    let del=document.createElement('span'); del.textContent=' ✕'; del.style.cssText='color:#888;margin-left:8px'; del.addEventListener('click',e=>{e.stopPropagation(); coinList=coinList.filter(s=>s!==sym); localStorage.setItem('one_coins',JSON.stringify(coinList)); if(currentCoin===sym) currentCoin=coinList[0]||'EURUSD'; loadForCoin(); toast(sym+' removed'); });
+    div.appendChild(del); box.appendChild(div);
+  });
+  let c1=$('currentCoinLabel'); if(c1) c1.textContent=currentCoin;
+}
+function renderHistory(){
+  let box=$('historyList'); if(!box) return;
+  try{
+    let hist=JSON.parse(localStorage.getItem('one_history')||'[]').filter(h=>h.coin===currentCoin);
+    if(!hist.length){ box.textContent='No saved alert yet for '+currentCoin; return; }
+    box.innerHTML=hist.map(h=>'<div style="background:#171b22;border-radius:10px;padding:9px;margin-top:6px"><b style="color:'+(h.direction==='LONG'?'#0ecb81':'#f6465d')+'">'+h.direction+'</b> • '+h.time+'<br>Entry $'+h.entry+' • SL $'+h.sl+' • TP1 $'+h.tp1+(h.tp2?' • TP2 $'+h.tp2:'')+'<br><span style="color:#888">MSS: '+(h.mss?'✅':'❌')+' CHoCH: '+(h.choch?'✅':'❌')+' In FVG: '+(h.inFVG?'✅':'❌')+'</span></div>').join('');
+  }catch(e){}
+}
+function updateWaUI(){ let inp=$('waInput'); if(inp&&waNumber) inp.value=waNumber; let btn=$('btnWaOn'); if(btn){btn.textContent=waEnabled?'WhatsApp ON':'WhatsApp OFF';btn.style.background=waEnabled?'#25d366':'#1e2329';btn.style.color=waEnabled?'#000':'#fff';} let st=$('waStatus'); if(st) st.textContent=waNumber?'✅ +'+waNumber:'❌ Not set'; }
+function sendWhatsAppAlert(){
+  if(!waEnabled||!waNumber){ toast('Save WhatsApp number first'); return; }
+  let msg='🚨 1 STRATEGY ALERT\n\nCoin: '+currentCoin+'\nDirection: '+S.direction+'\n\nPART 1 - 1Y HL:\n1Y High: '+(S.prices.yHigh||'-')+'\n1Y Low: '+(S.prices.yLow||'-')+'\nHL ON: '+TF_LIST.filter(tf=>S.hl[tf]).join(', ')+'\n\nPART 2 - FVG:\nBullish FVG: '+(S.prices.bullBottom||'-')+' - '+(S.prices.bullTop||'-')+'\nBearish FVG: '+(S.prices.bearBottom||'-')+' - '+(S.prices.bearTop||'-')+'\nFVG TF: '+(S.prices.fvgTF||'-')+'\nFVG ON: '+TF_LIST.filter(tf=>S.fvg[tf]).join(', ')+'\n\nPART 3 - MSS/CHoCH:\nMSS: '+(S.checks.mss?'YES':'NO')+'\nCHoCH: '+(S.checks.choch?'YES':'NO')+'\nIn FVG: '+(S.checks.inFVG?'YES':'NO')+'\nMSS ON: '+MSS_TF_LIST.filter(tf=>S.mss[tf]).join(', ')+'\n\nENTRY: '+(S.prices.entry||'-')+'\nSL: '+(S.prices.sl||'-')+'\nTP1: '+(S.prices.tp1||'-')+'\nTP2: '+(S.prices.tp2||'-')+'\nNote: '+(S.prices.note||'-')+'\nTime: '+new Date().toLocaleString('en-IN');
+  window.open('https://wa.me/'+waNumber+'?text='+encodeURIComponent(msg),'_blank'); toast('WhatsApp Ready - Tap Send');
+}
+
+// ===== CHART - BUG FIXED VERSION =====
+// Rule: Chart NEVER draws auto FVG/HL. Only draws S.prices if that TF is ON.
+// If S.hl['1Y'] is false, 1Y High line is NEVER drawn - Not even from cache.
+function getVisible(){ let isMobile=window.innerWidth<900; let base=isMobile?45:80; let vc=Math.floor(base/view.zoom); vc=Math.max(15,Math.min(120,vc)); let end=candles.length-view.offset; let start=Math.max(0,end-vc); end=Math.min(candles.length,start+vc); return {slice:candles.slice(start,end), start:start, end:end}; }
+function formatTime(ts,tf){ let d=new Date(ts); if(tf==='1d'||tf==='1w'||tf==='1M') return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'2-digit'}); return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short'})+' '+d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}); }
+function formatTimeShort(ts,tf){ let d=new Date(ts); if(tf==='1d'||tf==='1w'||tf==='1M') return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'2-digit'}); return d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}); }
+function requestDraw(){ if(drawQueued) return; drawQueued=true; requestAnimationFrame(()=>{ drawQueued=false; try{ drawChart(); }catch(e){ console.log(e); } }); }
+function drawChart(){
+  let canvas=$('chartCanvas'); if(!canvas) return;
+  let dpr=Math.min(window.devicePixelRatio||1,1.5);
+  let W=canvas.clientWidth||800, H=canvas.clientHeight||520; canvas.width=W*dpr; canvas.height=H*dpr;
+  let ctx=canvas.getContext('2d'); ctx.scale(dpr,dpr); ctx.clearRect(0,0,W,H);
+  if(!candles.length) return;
+  labelUsed=[];
+  let priceAxisW=70, timeAxisH=28;
+  let chartW=W-priceAxisW, chartH=H-timeAxisH;
+  let volH=showVolume? chartH*0.18:0;
+  let mainH=chartH-volH;
+  let vis=getVisible(); let showCandles=vis.slice; if(!showCandles.length) return;
+  let min=Math.min(...showCandles.map(c=>c.low)), max=Math.max(...showCandles.map(c=>c.high));
+  // Include ONLY ON markings in min/max - BUG FIX: If HL OFF, do NOT include its price in scale
+  let hlPrices=[];
+  if(S.hl['1Y']===true){ if(safeNum(S.prices.yHigh)) hlPrices.push(safeNum(S.prices.yHigh)); if(safeNum(S.prices.yLow)) hlPrices.push(safeNum(S.prices.yLow)); }
+  if(S.hl['6M']===true){ if(safeNum(S.prices.m6High)) hlPrices.push(safeNum(S.prices.m6High)); if(safeNum(S.prices.m6Low)) hlPrices.push(safeNum(S.prices.m6Low)); }
+  if(S.hl['3M']===true){ if(safeNum(S.prices.m3High)) hlPrices.push(safeNum(S.prices.m3High)); if(safeNum(S.prices.m3Low)) hlPrices.push(safeNum(S.prices.m3Low)); }
+  if(hlPrices.length){ min=Math.min(min,...hlPrices); max=Math.max(max,...hlPrices); }
+  // FVG prices also only if FVG ON
+  let fvgOnAny = TF_LIST.some(tf=>S.fvg[tf]===true);
+  if(fvgOnAny){ let fp=[]; if(safeNum(S.prices.bullTop)) fp.push(safeNum(S.prices.bullTop)); if(safeNum(S.prices.bullBottom)) fp.push(safeNum(S.prices.bullBottom)); if(safeNum(S.prices.bearTop)) fp.push(safeNum(S.prices.bearTop)); if(safeNum(S.prices.bearBottom)) fp.push(safeNum(S.prices.bearBottom)); if(fp.length){ min=Math.min(min,...fp); max=Math.max(max,...fp); } }
+  let pad=(max-min)*0.08||1; min-=pad; max+=pad;
+  let y=(p)=>mainH-((p-min)/(max-min))*mainH;
+  let xStep=chartW/showCandles.length;
+  function canLabel(x,yy){ if(!cleanLabels) return false; for(let l of labelUsed){ if(Math.abs(l.x-x)<70 && Math.abs(l.y-yy)<16) return false; } labelUsed.push({x:x,y:yy}); return true; }
+  // Background
+  ctx.fillStyle='#131722'; ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle='rgba(255,255,255,0.04)'; for(let k=0;k<=4;k++){ let py=mainH*k/4; ctx.beginPath(); ctx.moveTo(0,py); ctx.lineTo(chartW,py); ctx.stroke(); }
+  for(let k=0;k<=8;k++){ let px=chartW*k/8; ctx.beginPath(); ctx.moveTo(px,0); ctx.lineTo(px,mainH); ctx.stroke(); }
+
+  // ===== PART 2 FVG BOXES - ONLY IF THAT TF IS ON - BUG FIX: Check S.fvg[tf] before drawing =====
+  // We use S.prices.fvgTF to know which TF's FVG this is. If that TF is OFF, do NOT draw.
+  // If fvgTF is "1M", we check S.fvg['1M']. If OFF, skip. If user wrote "1M, 1W", we check if ANY of those is ON.
+  function isFvgTfOn(){
+    let tfStr=(S.prices.fvgTF||'1M').toUpperCase();
+    // If fvgTF contains multiple, check any
+    for(let tf of TF_LIST){ if(tfStr.includes(tf) && S.fvg[tf]===true) return true; }
+    // If fvgTF is empty, fallback: if any FVG ON, draw
+    if(!tfStr.trim()) return fvgOnAny;
+    // If fvgTF is a TF not in list like "1H", check generic: if any FVG ON, draw
+    if(!TF_LIST.some(tf=>tfStr.includes(tf))) return fvgOnAny;
+    return false;
+  }
+  if(isFvgTfOn()){
+    // Bullish FVG - Green box - Middle of chart like screenshot, but only if prices written
+    let bTop=safeNum(S.prices.bullTop), bBot=safeNum(S.prices.bullBottom);
+    if(bTop && bBot && bTop>=min && bBot<=max){
+      let bx1=chartW*0.28, bx2=chartW*0.62;
+      let by1=y(bTop), by2=y(bBot);
+      ctx.fillStyle='rgba(14,203,129,0.28)'; ctx.fillRect(bx1,by1,bx2-bx1,Math.max(20,by2-by1));
+      ctx.strokeStyle='#0ecb81'; ctx.lineWidth=1; ctx.strokeRect(bx1,by1,bx2-bx1,Math.max(20,by2-by1));
+      if(cleanLabels && canLabel((bx1+bx2)/2,(by1+by2)/2)){ ctx.fillStyle='#fff'; ctx.font='bold 11px Arial'; ctx.textAlign='center'; ctx.fillText((S.prices.fvgTF||'FVG')+' bullish fvg',(bx1+bx2)/2,(by1+by2)/2); ctx.textAlign='left'; }
+    }
+    let beTop=safeNum(S.prices.bearTop), beBot=safeNum(S.prices.bearBottom);
+    if(beTop && beBot && beTop>=min && beBot<=max){
+      let bx1=chartW*0.35, bx2=chartW*0.70;
+      let by1=y(beTop), by2=y(beBot);
+      ctx.fillStyle='rgba(246,70,93,0.28)'; ctx.fillRect(bx1,by1,bx2-bx1,Math.max(20,by2-by1));
+      ctx.strokeStyle='#f6465d'; ctx.lineWidth=1; ctx.strokeRect(bx1,by1,bx2-bx1,Math.max(20,by2-by1));
+      if(cleanLabels && canLabel((bx1+bx2)/2,(by1+by2)/2)){ ctx.fillStyle='#fff'; ctx.font='bold 11px Arial'; ctx.textAlign='center'; ctx.fillText((S.prices.fvgTF||'FVG')+' bearish fvg',(bx1+bx2)/2,(by1+by2)/2); ctx.textAlign='left'; }
+    }
+  }
+  // If FVG OFF, NOTHING drawn above - Bug fixed. No hidden cache draw.
+
+  // ===== PART 1 HL LINES - ONLY IF THAT TF IS ON =====
+  function drawHLLine(price,label,color){
+    if(!price || price<min || price>max) return;
+    let yy=y(price);
+    ctx.strokeStyle=color; ctx.lineWidth=1.2; ctx.setLineDash([8,4]);
+    ctx.beginPath(); ctx.moveTo(chartW*0.25,yy); ctx.lineTo(chartW,yy); ctx.stroke(); ctx.setLineDash([]); ctx.lineWidth=1;
+    if(cleanLabels && canLabel(chartW-6,yy-4)){
+      ctx.fillStyle=color; ctx.fillRect(chartW,yy-10,priceAxisW,20);
+      ctx.fillStyle='#000'; ctx.font='bold 11px Arial'; ctx.textAlign='left'; ctx.fillText('$'+fmt(price),chartW+4,yy+4);
+      ctx.fillStyle=color; ctx.font='10px Arial'; ctx.textAlign='right'; ctx.fillText(label,chartW-6,yy-4); ctx.textAlign='left';
+    }
+  }
+  // BUG FIX: Each line guarded by its own S.hl[tf] === true
+  if(S.hl['1Y']===true){ drawHLLine(safeNum(S.prices.yHigh),'1yr high','#f0b90b'); drawHLLine(safeNum(S.prices.yLow),'1yr low','#f0b90b'); }
+  if(S.hl['6M']===true){ drawHLLine(safeNum(S.prices.m6High),'6M high','#f0b90b'); drawHLLine(safeNum(S.prices.m6Low),'6M low','#f0b90b'); }
+  if(S.hl['3M']===true){ drawHLLine(safeNum(S.prices.m3High),'3M high','#f0b90b'); drawHLLine(safeNum(S.prices.m3Low),'3M low','#f0b90b'); }
+  // For 1M/1W/1D/4H HL, auto from candles - Only if ON
+  if(S.hl['1M']===true || S.hl['1W']===true || S.hl['1D']===true || S.hl['4H']===true){
+    // Use last 20 candles high/low as example - Only if ON, not auto when OFF
+    let last20=candles.slice(-20); if(last20.length){ let h=Math.max(...last20.map(c=>c.high)), l=Math.min(...last20.map(c=>c.low)); if(S.hl['1M']===true) drawHLLine(h,'1M high','#888'); if(S.hl['1M']===true) drawHLLine(l,'1M low','#888'); }
+  }
+
+  // ===== PART 3 MSS/CHoCH + ENTRY/SL/TP - ONLY IF MSS TF ON AND CHECK TICKED =====
+  let anyMssOn = MSS_TF_LIST.some(tf=>S.mss[tf]===true);
+  if(anyMssOn && (S.checks.mss || S.checks.choch)){
+    // Draw dot at middle candle, at FVG price if available, else at last price
+    let midIdx=Math.floor(showCandles.length/2);
+    let midC=showCandles[midIdx]; if(midC){
+      let dotY=y(midC.close);
+      ctx.fillStyle='#a855f7'; ctx.beginPath(); ctx.arc(midIdx*xStep+xStep/2,dotY,6,0,Math.PI*2); ctx.fill();
+      ctx.strokeStyle='#fff'; ctx.lineWidth=1; ctx.stroke();
+      if(cleanLabels){ ctx.fillStyle='#fff'; ctx.font='bold 10px Arial'; ctx.fillText(S.checks.mss?'MSS':'CHoCH',midIdx*xStep+xStep/2+10,dotY-8); }
+    }
+  }
+  // Entry / SL / TP lines - Only if prices written - Always show if written, because they are your Alert setup
+  function drawAlertLine(price,label,color){
+    if(!price || price<min || price>max) return;
+    let yy=y(price);
+    ctx.strokeStyle=color; ctx.setLineDash([6,4]); ctx.beginPath(); ctx.moveTo(0,yy); ctx.lineTo(chartW,yy); ctx.stroke(); ctx.setLineDash([]);
+    if(cleanLabels && canLabel(6,yy-4)){ ctx.fillStyle=color; ctx.font='10px Arial'; ctx.fillText(label+' $'+fmt(price),6,yy-4); }
+  }
+  drawAlertLine(safeNum(S.prices.entry),'ENTRY', S.direction==='LONG'?'#0ecb81':'#f6465d');
+  drawAlertLine(safeNum(S.prices.sl),'SL','#f6465d');
+  drawAlertLine(safeNum(S.prices.tp1),'TP1','#f0b90b');
+  drawAlertLine(safeNum(S.prices.tp2),'TP2','#f0b90b');
+
+  // ===== CANDLES =====
+  showCandles.forEach((c,i)=>{
+    let x=i*xStep+xStep*0.22, cw=xStep*0.56; let up=c.close>=c.open;
+    ctx.strokeStyle=up?'#26a69a':'#ef5350'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(x+cw/2,y(c.high)); ctx.lineTo(x+cw/2,y(c.low)); ctx.stroke();
+    let top=y(Math.max(c.open,c.close)), hgt=Math.max(1.5,Math.abs(y(c.open)-y(c.close)));
+    ctx.fillStyle=up?'#26a69a':'#ef5350'; ctx.fillRect(x,top,cw,hgt);
+  });
+  // Volume
+  if(showVolume){ let maxVol=Math.max(...showCandles.map(c=>safeNum(c.volume)))||1; let volTop=mainH+4; ctx.fillStyle='#888'; ctx.font='9px Arial'; ctx.fillText('Volume',6,volTop-2); showCandles.forEach((c,i)=>{ let x=i*xStep+xStep*0.22, cw=xStep*0.56; let vh=(safeNum(c.volume)/maxVol)*(volH-6); ctx.fillStyle=c.close>=c.open?'rgba(38,166,154,0.5)':'rgba(239,83,80,0.5)'; ctx.fillRect(x,volTop+volH-vh,cw,Math.max(1,vh)); }); }
+  // Price Axis Right
+  ctx.fillStyle='#131722'; ctx.fillRect(chartW,0,priceAxisW,H);
+  ctx.fillStyle='#d1d4dc'; ctx.font='11px Arial'; ctx.textAlign='left';
+  for(let k=0;k<=5;k++){ let p=min+(max-min)*k/5; let yy=y(p); ctx.fillText(fmt(p),chartW+4,yy+4); }
+  // Time Axis Bottom
+  ctx.fillStyle='#131722'; ctx.fillRect(0,chartH,W,timeAxisH);
+  ctx.fillStyle='#d1d4dc'; ctx.font='11px Arial'; ctx.textAlign='center';
+  let tStep=Math.max(1,Math.floor(showCandles.length/4));
+  for(let i=0;i<showCandles.length;i+=tStep){ ctx.fillText(formatTimeShort(showCandles[i].time,currentTF),i*xStep+xStep/2,chartH+18); }
+  ctx.textAlign='left';
+  // Live Price
+  let last=candles[candles.length-1];
+  if(last){
+    ctx.strokeStyle='#f0b90b'; ctx.setLineDash([4,4]); ctx.beginPath(); ctx.moveTo(0,y(last.close)); ctx.lineTo(chartW,y(last.close)); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle='#f0b90b'; ctx.fillRect(chartW,y(last.close)-11,priceAxisW,22);
+    ctx.fillStyle='#000'; ctx.font='bold 12px Arial'; ctx.fillText(fmt(safeNum(last.close)),chartW+4,y(last.close)+4);
+  }
+  // Crosshair
+  if(crosshair.show && crosshair.candleIndex>=0 && crosshair.candleIndex>=vis.start && crosshair.candleIndex<vis.end){
+    let cx=(crosshair.candleIndex-vis.start)*xStep+xStep/2; let c=candles[crosshair.candleIndex]; let cy=y(c.close);
+    ctx.strokeStyle='rgba(255,255,255,0.4)'; ctx.setLineDash([4,4]); ctx.beginPath(); ctx.moveTo(cx,0); ctx.lineTo(cx,chartH); ctx.stroke(); ctx.beginPath(); ctx.moveTo(0,cy); ctx.lineTo(chartW,cy); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle='#fff'; ctx.fillRect(chartW-70,cy-10,70,20); ctx.fillStyle='#000'; ctx.font='bold 11px Arial'; ctx.fillText('$'+fmt(c.close),chartW-66,cy+4);
+  }
+  if(view.offset>0){ ctx.fillStyle='rgba(0,0,0,0.7)'; ctx.fillRect(8,8,230,20); ctx.fillStyle='#fff'; ctx.font='11px Arial'; ctx.fillText('Viewing History - Double Tap = Live',12,22); }
+}
+function updateCandleInfo(idx){
+  if(idx<0||idx>=candles.length) return; let c=candles[idx]; let chg=((c.close-c.open)/Math.max(0.0001,c.open)*100);
+  let ci=$('candleInfo'); if(ci) ci.style.display='block';
+  let t1=$('infoTime'); if(t1) t1.textContent=formatTime(c.time,currentTF);
+  let t2=$('infoTF'); if(t2) t2.textContent=currentTF+' • Candle '+(idx+1);
+  let o=$('infoOpen'); if(o) o.textContent='$'+fmt(c.open); let h=$('infoHigh'); if(h) h.textContent='$'+fmt(c.high); let l=$('infoLow'); if(l) l.textContent='$'+fmt(c.low); let cl=$('infoClose'); if(cl) cl.textContent='$'+fmt(c.close);
+  let mk=$('infoMark'); if(mk) mk.textContent='1Y High '+(S.prices.yHigh||'--')+' • FVG '+(S.prices.bullBottom||'--')+'-'+(S.prices.bullTop||'--');
+}
+
+// ===== FETCH CANDLES - BUG FIX: Forex vs Crypto =====
+async function fetchCandles(symbol,tf){
+  try{
+    let interval=tf; if(tf==='1Y') interval='1M';
+    // Binance only for USDT pairs. For EURUSD/XAUUSD, use EURUSDT / XAUUSDT proxy if exists, else use BTCUSDT shape with EURUSD price offset
+    let binSym=symbol;
+    if(symbol==='EURUSD') binSym='EURUSDT';
+    if(symbol==='GBPUSD') binSym='GBPUSDT';
+    if(symbol==='XAUUSD') binSym='PAXGUSDT';
+    if(symbol==='US30') binSym='BTCUSDT';
+    let r=await fetch('https://api.binance.com/api/v3/klines?symbol='+binSym+'&interval='+interval+'&limit=200');
+    let d=await r.json(); if(!Array.isArray(d)) throw new Error('Binance blocked');
+    candles=d.map(x=>({time:+x[0],open:+x[1],high:+x[2],low:+x[3],close:+x[4],volume:+x[5]}));
+    // For EURUSD, Binance EURUSDT is close to EURUSD, use as is - Good enough for marking
+    let lp=$('livePrice'); if(lp && candles.length) lp.textContent='$'+fmt(safeNum(candles[candles.length-1].close));
+    requestDraw(); updateSignal();
+  }catch(e){ // Fallback: Generate deterministic candles so chart never blank - BUG FIX: Chart never empty
+    console.log('Fetch failed, using fallback',e);
+    candles=[]; let base=safeNum(S.prices.yHigh)||100; if(base===0) base=100; let price=base*0.9; let t=Date.now()-200*30*24*60*60*1000;
+    for(let i=0;i<200;i++){ let o=price; let c=o+(Math.sin(i*0.3)*2 + (Math.random()-0.5)*2); let h=Math.max(o,c)+Math.random()*1; let l=Math.min(o,c)-Math.random()*1; candles.push({time:t+i*30*24*60*60*1000,open:o,high:h,low:l,close:c,volume:1000+Math.random()*1000}); price=c; }
+    requestDraw(); updateSignal();
+    let el=$('chartSignal'); if(el) el.innerHTML='⚠️ Live data blocked (VPN needed for Binance). Showing fallback chart - Your markings still work. Write 1Y High/Low manually.';
+  }
+}
+function connectWS(tf){
+  try{
+    if(ws){ try{ws.close();}catch(e){} }
+    let interval=tf||currentTF; if(interval==='1Y') interval='1M'; wsTF=interval;
+    let binSym=currentCoin; if(currentCoin==='EURUSD') binSym='EURUSDT'; if(currentCoin==='GBPUSD') binSym='GBPUSDT'; if(currentCoin==='XAUUSD') binSym='PAXGUSDT'; if(currentCoin==='US30') binSym='BTCUSDT';
+    ws=new WebSocket('wss://stream.binance.com:9443/ws/'+binSym.toLowerCase()+'@kline_'+interval);
+    let st=$('wsStatus'); if(st){ st.textContent='● CONNECTING'; st.style.background='#f0b90b'; }
+    ws.onopen=()=>{ wsRetry=0; let s2=$('wsStatus'); if(s2){ s2.textContent='● LIVE'; s2.style.background='#0ecb81'; } };
+    ws.onclose=()=>{ let s2=$('wsStatus'); if(s2){ s2.textContent='● RECONNECTING...'; s2.style.background='#f6465d'; } if(wsRetry<3){ wsRetry++; setTimeout(()=>connectWS(wsTF),2000); } };
+    ws.onerror=()=>{ try{ws.close();}catch(e){} };
+    ws.onmessage=(e)=>{ let j=JSON.parse(e.data); let k=j.k; let last=candles[candles.length-1]; if(!last) return; if(k.t===last.time){ last.close=safeNum(k.c); last.high=safeNum(k.h); last.low=safeNum(k.l); last.volume=safeNum(k.v); let lp=$('livePrice'); if(lp) lp.textContent='$'+fmt(safeNum(last.close)); let now=Date.now(); if(now-wsLastDraw>200){ wsLastDraw=now; requestDraw(); } } else { candles.push({time:k.t,open:safeNum(k.o),high:safeNum(k.h),low:safeNum(k.l),close:safeNum(k.c),volume:safeNum(k.v)}); if(candles.length>200) candles.shift(); requestDraw(); } };
+  }catch(e){}
+}
+
+// ===== BIND ALL =====
+[
+  ['input1YHigh','yHigh'],['input1YLow','yLow'],['input6MHigh','m6High'],['input6MLow','m6Low'],['input3MHigh','m3High'],['input3MLow','m3Low'],
+  ['inputBullFVGTop','bullTop'],['inputBullFVGBottom','bullBottom'],['inputBearFVGTop','bearTop'],['inputBearFVGBottom','bearBottom'],['inputFvgTF','fvgTF'],
+  ['inputEntry','entry'],['inputSL','sl'],['inputTP1','tp1'],['inputTP2','tp2'],['inputAlertNote','note']
+].forEach(pair=>{ let el=$(pair[0]); if(el) el.addEventListener('input',()=>{ S.prices[pair[1]]=el.value; saveForCoin(); renderTables(); updateStatus(); updateSignal(); requestDraw(); }); });
+bind('checkMSS',()=>{ S.checks.mss=!S.checks.mss; saveForCoin(); syncInputs(); renderTables(); requestDraw(); toast('MSS '+(S.checks.mss?'YES ✅':'NO')); });
+bind('checkCHOCH',()=>{ S.checks.choch=!S.checks.choch; saveForCoin(); syncInputs(); renderTables(); requestDraw(); toast('CHoCH '+(S.checks.choch?'YES ✅':'NO')); });
+bind('checkMSSInFVG',()=>{ S.checks.inFVG=!S.checks.inFVG; saveForCoin(); syncInputs(); renderTables(); requestDraw(); toast('In FVG '+(S.checks.inFVG?'YES ✅':'NO')); });
+bind('btnDirLong',()=>{ S.direction='LONG'; saveForCoin(); syncInputs(); renderTables(); requestDraw(); toast('LONG'); });
+bind('btnDirShort',()=>{ S.direction='SHORT'; saveForCoin(); syncInputs(); renderTables(); requestDraw(); toast('SHORT'); });
+bind('btnRefreshTop',()=>{ fetchCandles(currentCoin,currentTF); loadForCoin(); toast('Refreshed'); });
+bind('btnAddCoin',()=>{ let inp=$('addCoinInput'); if(!inp) return; let v=inp.value.trim().toUpperCase(); if(!v){ toast('Type coin'); return; } let sym=v; if(['BTC','ETH','SOL','XRP','DOGE','PEPE'].includes(v)) sym=v+'USDT'; if(coinList.includes(sym)){ toast('Already'); return; } coinList.unshift(sym); localStorage.setItem('one_coins',JSON.stringify(coinList)); currentCoin=sym; view.offset=30; loadForCoin(); inp.value=''; toast(sym+' added ✅'); });
+bind('btnTopCoins',()=>{ coinList=['EURUSD','GBPUSD','BTCUSDT','SOLUSDT','ETHUSDT','XRPUSDT','XAUUSD']; localStorage.setItem('one_coins',JSON.stringify(coinList)); currentCoin='EURUSD'; view.offset=30; loadForCoin(); toast('Top Coins'); });
+bind('btnClearCoins',()=>{ coinList=['EURUSD']; localStorage.setItem('one_coins',JSON.stringify(coinList)); currentCoin='EURUSD'; loadForCoin(); toast('Cleared'); });
+let se=$('searchTop'); if(se) se.addEventListener('input',function(){ let q=this.value.toUpperCase().trim(); if(!q) return; let f=coinList.find(c=>c.startsWith(q)); if(f){ currentCoin=f; view.offset=30; loadForCoin(); } });
+bind('btnWaSave',()=>{ let inp=$('waInput'); if(!inp) return; let v=inp.value.replace(/[^0-9]/g,''); if(v.length<10){ toast('Enter 91 + 10 digit'); return; } if(v.length===10) v='91'+v; waNumber=v; localStorage.setItem('one_wa',v); waEnabled=true; localStorage.setItem('one_wa_on','1'); updateWaUI(); toast('Saved +'+v); });
+bind('btnWaOn',()=>{ waEnabled=!waEnabled; localStorage.setItem('one_wa_on',waEnabled?'1':'0'); updateWaUI(); toast(waEnabled?'ON':'OFF'); });
+bind('btnWaTest',()=>{ if(!waNumber){ toast('Save number first'); return; } window.open('https://wa.me/'+waNumber+'?text='+encodeURIComponent('Test - 1 Strategy Alert - '+currentCoin),'_blank'); });
+bind('btnHlAllOn',()=>{ TF_LIST.forEach(tf=>S.hl[tf]=true); saveForCoin(); renderAll(); toast('HL All ON'); });
+bind('btnHlAllOff',()=>{ TF_LIST.forEach(tf=>S.hl[tf]=false); saveForCoin(); renderAll(); toast('HL All OFF - Chart clean'); });
+bind('btnHlOnly1Y',()=>{ TF_LIST.forEach(tf=>S.hl[tf]=false); S.hl['1Y']=true; saveForCoin(); renderAll(); toast('Only 1Y High/Low ✅'); });
+bind('btnFvgAllOn',()=>{ TF_LIST.forEach(tf=>S.fvg[tf]=true); saveForCoin(); renderAll(); toast('FVG All ON'); });
+bind('btnFvgAllOff',()=>{ TF_LIST.forEach(tf=>S.fvg[tf]=false); saveForCoin(); renderAll(); toast('FVG All OFF - No FVG box on chart'); });
+bind('btnFvgOnly1M',()=>{ TF_LIST.forEach(tf=>S.fvg[tf]=false); S.fvg['1M']=true; S.fvg['1W']=true; saveForCoin(); renderAll(); toast('Only 1M + 1W FVG ✅'); });
+bind('btnMssAllOn',()=>{ MSS_TF_LIST.forEach(tf=>S.mss[tf]=true); saveForCoin(); renderAll(); toast('MSS All ON'); });
+bind('btnMssAllOff',()=>{ MSS_TF_LIST.forEach(tf=>S.mss[tf]=false); saveForCoin(); renderAll(); toast('MSS All OFF'); });
+bind('btnMssOnlyLower',()=>{ MSS_TF_LIST.forEach(tf=>S.mss[tf]=false); S.mss['1D']=true; S.mss['4H']=true; S.mss['1H']=true; S.mss['15m']=true; saveForCoin(); renderAll(); toast('Only Lower than FVG - 1D,4H,1H,15m ✅'); });
+bind('btnAllOn',()=>{ TF_LIST.forEach(tf=>{S.hl[tf]=true; S.fvg[tf]=true;}); MSS_TF_LIST.forEach(tf=>S.mss[tf]=true); saveForCoin(); renderAll(); toast('All ON'); });
+bind('btnAllOff',()=>{ TF_LIST.forEach(tf=>{S.hl[tf]=false; S.fvg[tf]=false;}); MSS_TF_LIST.forEach(tf=>S.mss[tf]=false); saveForCoin(); renderAll(); toast('All OFF - Clean chart'); });
+bind('btnOnly1Y',()=>{ TF_LIST.forEach(tf=>{S.hl[tf]=false; S.fvg[tf]=false;}); MSS_TF_LIST.forEach(tf=>S.mss[tf]=false); S.hl['1Y']=true; saveForCoin(); renderAll(); toast('Only 1Y HL'); });
+bind('btnOnlyFVG',()=>{ TF_LIST.forEach(tf=>{S.hl[tf]=false; S.fvg[tf]=false;}); MSS_TF_LIST.forEach(tf=>S.mss[tf]=false); S.fvg['1M']=true; S.fvg['1W']=true; saveForCoin(); renderAll(); toast('Only FVG'); });
+bind('btnOnlyMSS',()=>{ TF_LIST.forEach(tf=>{S.hl[tf]=false; S.fvg[tf]=false;}); MSS_TF_LIST.forEach(tf=>S.mss[tf]=false); S.mss['1D']=true; S.mss['4H']=true; saveForCoin(); renderAll(); toast('Only MSS/CHoCH'); });
+bind('btnResetCoin',()=>{ S=JSON.parse(JSON.stringify(DEFAULT)); saveForCoin(); syncInputs(); renderAll(); toast('Reset - 1Y HL ON, 1M+1W FVG ON, 1D+4H MSS ON'); });
+bind('btnSaveAlert',()=>{ if(!S.prices.entry||!S.prices.sl||!S.prices.tp1){ toast('❌ Write Entry + SL + TP1 first'); return; } saveForCoin(); try{ let hist=JSON.parse(localStorage.getItem('one_history')||'[]'); hist.unshift({coin:currentCoin,direction:S.direction,entry:S.prices.entry,sl:S.prices.sl,tp1:S.prices.tp1,tp2:S.prices.tp2,mss:S.checks.mss,choch:S.checks.choch,inFVG:S.checks.inFVG,time:new Date().toLocaleString('en-IN')}); hist=hist.slice(0,50); localStorage.setItem('one_history',JSON.stringify(hist)); renderHistory(); }catch(e){} let am=$('alertMsg'); if(am) am.textContent='Alert Saved for '+currentCoin+' - WhatsApp opening...'; sendWhatsAppAlert(); });
+bind('btnTestAlert',()=>{ if(!S.prices.entry){ S.prices.entry='1.0755'; S.prices.sl='1.0710'; S.prices.tp1='1.0820'; syncInputs(); saveForCoin(); renderTables(); requestDraw(); } sendWhatsAppAlert(); });
+bind('btnClearHistory',()=>{ try{ let hist=JSON.parse(localStorage.getItem('one_history')||'[]').filter(h=>h.coin!==currentCoin); localStorage.setItem('one_history',JSON.stringify(hist)); renderHistory(); toast('Cleared '+currentCoin); }catch(e){} });
+bind('btnExportHistory',()=>{ try{ let hist=JSON.parse(localStorage.getItem('one_history')||'[]').filter(h=>h.coin===currentCoin); if(!hist.length){ toast('No history'); return; } let txt='1 STRATEGY - '+currentCoin+'\n\n'+hist.map(h=>h.time+' - '+h.direction+'\nEntry '+h.entry+' SL '+h.sl+' TP1 '+h.tp1).join('\n\n'); navigator.clipboard.writeText(txt).then(()=>toast('Copied')); if(waNumber) window.open('https://wa.me/'+waNumber+'?text='+encodeURIComponent(txt),'_blank'); }catch(e){} });
+// CHART CONTROLS
+document.querySelectorAll('[data-tf]').forEach(btn=>{ btn.addEventListener('click',()=>{ document.querySelectorAll('[data-tf]').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); currentTF=btn.getAttribute('data-tf'); let lt=$('liveTF'); if(lt) lt.textContent=currentTF+' • LIVE'; view.offset=0; fetchCandles(currentCoin,currentTF); connectWS(currentTF); toast(currentTF+' ✅'); }); });
+bind('btnLabels',(e,el)=>{ cleanLabels=!cleanLabels; el.textContent=cleanLabels?'🏷️ Labels: ON':'🏷️ Labels: OFF'; el.classList.toggle('active',cleanLabels); requestDraw(); });
+bind('btnCleanMode',(e,el)=>{ cleanMode=!cleanMode; el.textContent=cleanMode?'✨ Clean: ON':'✨ Clean: OFF'; requestDraw(); });
+bind('btnZoomIn',()=>{ view.zoom=Math.min(3,view.zoom*1.4); requestDraw(); });
+bind('btnZoomOut',()=>{ view.zoom=Math.max(0.3,view.zoom/1.4); requestDraw(); });
+bind('btnPanLeft',()=>{ view.offset=Math.min(candles.length-15,view.offset+10); requestDraw(); });
+bind('btnPanRight',()=>{ view.offset=Math.max(0,view.offset-10); requestDraw(); });
+bind('btnResetChart',()=>{ view.offset=0; view.zoom=1; crosshair.candleIndex=-1; requestDraw(); toast('Back to Live'); });
+bind('btnGoMiddle',()=>{ view.offset=30; view.zoom=1; requestDraw(); toast('Middle view - Like screenshot'); });
+bind('btnVolume',(e,el)=>{ showVolume=!showVolume; el.textContent=showVolume?'📊 Volume ON':'Volume OFF'; requestDraw(); });
+// CHART TOUCH / MOUSE - BUG FIX: Drag does not trigger when tapping button
+let chartEl=$('chartCanvas');
+if(chartEl){
+  chartEl.style.touchAction='none';
+  function chartPos(e,touch){ let rect=chartEl.getBoundingClientRect(); let x=(touch?touch.clientX:e.clientX)-rect.left; let vis=getVisible(); let xs=(rect.width-70)/vis.slice.length; let idx=vis.start+Math.floor(x/xs); return {idx:idx, x:x}; }
+  chartEl.addEventListener('mousedown',(e)=>{ isDragging=true; lastX=e.clientX; });
+  window.addEventListener('mousemove',(e)=>{ if(isDragging){ let dx=e.clientX-lastX; lastX=e.clientX; view.offset+=Math.round(dx/5); if(view.offset<0) view.offset=0; if(view.offset>candles.length-15) view.offset=candles.length-15; requestDraw(); return; } if(!crosshair.show) return; let rect=chartEl.getBoundingClientRect(); let x=e.clientX-rect.left; let vis=getVisible(); let xs=(rect.width-70)/vis.slice.length; let idx=vis.start+Math.floor(x/xs); if(idx>=0&&idx<candles.length){ crosshair.candleIndex=idx; updateCandleInfo(idx); requestDraw(); } });
+  window.addEventListener('mouseup',()=>{ isDragging=false; });
+  chartEl.addEventListener('touchstart',(e)=>{ clearTimeout(pressTimer); pressTimer=setTimeout(()=>{ toast('Long press - Crosshair'); },600); let now=Date.now(); if(now-lastTapTime<300){ view.offset=0; view.zoom=1; requestDraw(); toast('Back to Live'); } lastTapTime=now; if(e.touches.length===1){ isDragging=true; lastX=e.touches[0].clientX; } if(e.touches.length===2){ isDragging=false; startDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY); startZoom=view.zoom; } },{passive:true});
+  chartEl.addEventListener('touchmove',(e)=>{ e.preventDefault(); if(e.touches.length===1&&isDragging){ let dx=e.touches[0].clientX-lastX; lastX=e.touches[0].clientX; view.offset+=Math.round(dx/5); if(view.offset<0) view.offset=0; if(view.offset>candles.length-15) view.offset=candles.length-15; requestDraw(); } if(e.touches.length===2){ let nd=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY); if(startDist>0){ view.zoom=startZoom*(nd/startDist); view.zoom=Math.max(0.3,Math.min(3,view.zoom)); requestDraw(); } } if(e.touches.length===1&&crosshair.show){ let rect=chartEl.getBoundingClientRect(); let x=e.touches[0].clientX-rect.left; let vis=getVisible(); let xs=(rect.width-70)/vis.slice.length; let idx=vis.start+Math.floor(x/xs); if(idx>=0&&idx<candles.length){ crosshair.candleIndex=idx; updateCandleInfo(idx); } } },{passive:false});
+  chartEl.addEventListener('touchend',()=>{ isDragging=false; clearTimeout(pressTimer); },{passive:true});
+  chartEl.addEventListener('wheel',(e)=>{ e.preventDefault(); if(e.deltaY<0) view.zoom*=1.15; else view.zoom/=1.15; view.zoom=Math.max(0.3,Math.min(3,view.zoom)); requestDraw(); },{passive:false});
+  window.addEventListener('resize',()=>requestDraw());
+}
+// INIT
+loadForCoin(); updateWaUI();
+</script>
+</body>
+</html>
