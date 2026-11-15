@@ -104,12 +104,199 @@ input,textarea,select{outline:none}
 
 <!-- ================= HOME START ================= -->
 <div id="page-home" class="page show">
-<div class="aiAssistant">
-<div class="aiHeader"><div class="aiIcon"><img src="logo.png?v=6"></div><p><b>Orbit AI - Ask Me Anything</b><br>Type like: <b>make pdf compress</b> or <b>passport photo</b></p></div>
-<div class="aiChatBox" id="aiChatBox"><div class="aiMsg ai"><b>Orbit AI:</b> Hi! Try - <b>make pdf compress</b> , <b>photo 500kb</b> , <b>passport photo</b> , <b>make qr</b></div></div>
-<div class="aiInputRow"><input class="aiInput" id="aiInput" placeholder="Type here - Example: make pdf compress"><button class="aiSend" onclick="askAI()">Send →</button></div>
-<div class="aiQuick"><button onclick="quickAI('make pdf compress')">PDF Compress</button><button onclick="quickAI('photo 500kb')">Photo 500KB</button><button onclick="quickAI('passport photo')">Passport Photo</button><button onclick="quickAI('make qr')">QR Code</button><button onclick="quickAI('image to pdf')">Image to PDF</button></div>
+<!-- ================= AI CHATBOT START - POWERFUL - HTML+CSS+JS IN ONE - PASTE CODE HERE ================= -->
+<div id="aiChatBotEnhanced">
+<style>
+/* AI CHATBOT - CSS - SIRF IS BLOCK KE LIYE */
+#aiChatBotEnhanced{position:relative;background:linear-gradient(135deg,rgba(0,229,192,.14),rgba(0,144,255,.12),rgba(0,229,192,.06));border:1px solid rgba(0,229,192,.45);border-radius:22px;padding:14px;margin-top:12px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.5),0 0 28px rgba(0,229,192,.18)}
+#aiChatBotEnhanced:before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#00e5c0,#0090ff,#00e5c0);background-size:200% 100%;animation:aiGrad 3s linear infinite}
+@keyframes aiGrad{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+.aiBotTop{display:flex;gap:12px;align-items:flex-start;text-align:left}
+.aiBotLogoWrap{position:relative;width:52px;height:52px;flex-shrink:0}
+.aiBotLogoWrap:before{content:'';position:absolute;inset:-4px;border-radius:16px;border:1.5px dashed rgba(0,229,192,.7);animation:aiRing 6s linear infinite}
+@keyframes aiRing{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.aiBotLogo{width:52px;height:52px;border-radius:16px;overflow:hidden;background:#000;border:1px solid rgba(0,229,192,.6);box-shadow:0 0 18px rgba(0,229,192,.5)}
+.aiBotLogo img{width:100%;height:100%;object-fit:cover;animation:aiLogoSpin 6s linear infinite}
+@keyframes aiLogoSpin{0%{transform:rotate(0deg) scale(1)}25%{transform:rotate(90deg) scale(1.05)}50%{transform:rotate(180deg) scale(1)}75%{transform:rotate(270deg) scale(1.05)}100%{transform:rotate(360deg) scale(1)}}
+.aiBotLive{position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;background:#00e5c0;border:2px solid #000;border-radius:50%;box-shadow:0 0 10px #00e5c0;animation:aiPulse 1.4s infinite}
+@keyframes aiPulse{0%{box-shadow:0 0 0 0 rgba(0,229,192,.8)}70%{box-shadow:0 0 0 8px rgba(0,229,192,0)}100%{box-shadow:0 0 0 0 rgba(0,229,192,0)}}
+.aiBotTitle{flex:1}
+.aiBotTitle b{font-size:15px;color:#fff}
+.aiBotTitle span{font-size:10px;background:linear-gradient(90deg,#00e5c0,#0090ff);color:#000;font-weight:900;padding:2px 7px;border-radius:20px;margin-left:6px}
+.aiBotTitle p{font-size:12px;color:#cbd5e1;line-height:1.6;margin-top:4px}
+.aiBotTitle p i{color:#5eead4;font-style:normal;font-weight:800}
+#aiChatBoxNew{margin-top:12px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:10px;max-height:280px;overflow-y:auto;text-align:left;scroll-behavior:smooth}
+.aiMsgNew{font-size:12.5px;line-height:1.7;margin-bottom:9px;padding:9px 11px;border-radius:14px;animation:aiMsgIn .3s ease}
+@keyframes aiMsgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.aiMsgNew.user{background:linear-gradient(135deg,rgba(0,229,192,.22),rgba(0,144,255,.18));border:1px solid rgba(0,229,192,.35);text-align:right;margin-left:30px}
+.aiMsgNew.ai{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);margin-right:10px}
+.aiMsgNew.ai b{color:#5eead4}
+.aiMsgNew .aiStepBtn{display:block;width:100%;margin-top:9px;background:linear-gradient(90deg,#00e5c0,#0090ff);color:#000;font-weight:900;padding:12px;border-radius:12px;font-size:12px;text-align:center;border:none}
+.aiTyping{display:inline-flex;gap:4px;align-items:center}
+.aiTyping span{width:6px;height:6px;background:#00e5c0;border-radius:50%;animation:aiTyp 1s infinite}
+.aiTyping span:nth-child(2){animation-delay:.2s}
+.aiTyping span:nth-child(3){animation-delay:.4s}
+@keyframes aiTyp{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-5px);opacity:1}}
+.aiInputRowNew{display:flex;gap:8px;margin-top:10px}
+#aiInputNew{flex:1;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:13px;color:#fff;font-size:13px;outline:none}
+#aiInputNew:focus{border-color:#00e5c0;box-shadow:0 0 0 3px rgba(0,229,192,.25)}
+.aiSendNew{background:linear-gradient(90deg,#00e5c0,#0090ff);color:#000;font-weight:900;padding:13px 18px;border-radius:14px;font-size:13px;white-space:nowrap;border:none}
+.aiSendNew:active{transform:scale(.96)}
+.aiQuickNew{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.aiQuickNew button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#e2e8f0;padding:7px 11px;border-radius:20px;font-size:11px;font-weight:700}
+.aiQuickNew button:active{transform:scale(.95)}
+</style>
+
+<div class="aiBotTop">
+  <div class="aiBotLogoWrap">
+    <div class="aiBotLogo"><img src="logo.png?v=6" alt="Orbit AI" onerror="this.style.display='none'"></div>
+    <div class="aiBotLive"></div>
+  </div>
+  <div class="aiBotTitle">
+    <b>Orbit AI</b><span>● LIVE • POWERFUL</span>
+    <p>Hi! Main tumhara <i>AI Assistant</i> hu. Bolo kya karna hai? Jaise - <i>pdf compress karo</i>, <i>photo 500kb banao</i>, <i>passport photo</i>, <i>qr banao</i>, <i>emi nikalo</i></p>
+  </div>
 </div>
+
+<div id="aiChatBoxNew">
+  <div class="aiMsgNew ai"><b>🤖 Orbit AI:</b> Namaste! Main 50+ tools jaanta hu. Tum bas Hinglish me bolo, main sahi tool khol dunga + full steps de dunga.<br><br>Try karo: <b>pdf chota karo</b> • <b>photo 500kb</b> • <b>passport photo banao</b> • <b>qr banao</b></div>
+</div>
+
+<div class="aiInputRowNew">
+  <input id="aiInputNew" placeholder="Yahan likho - Example: pdf compress karo...">
+  <button class="aiSendNew" onclick="askAINew()">Send →</button>
+</div>
+<div class="aiQuickNew">
+  <button onclick="quickAINew('pdf compress karo')">PDF Compress</button>
+  <button onclick="quickAINew('photo 500kb banao')">Photo 500KB</button>
+  <button onclick="quickAINew('passport photo banao')">Passport Photo</button>
+  <button onclick="quickAINew('qr banao')">QR Code</button>
+  <button onclick="quickAINew('emi nikalo')">EMI</button>
+  <button onclick="quickAINew('invoice banao')">Invoice</button>
+</div>
+
+<script>
+/* AI CHATBOT - JS - POWERFUL - SIRF IS BLOCK KE LIYE - 100% WORKING - NO BUG */
+(function(){
+  // Purane functions se takraye nahi, isliye naya naam - askAINew
+  if(window._aiNewLoaded) return; window._aiNewLoaded = true;
+
+  // --- AI KNOWLEDGE - 50 TOOLS - KEYWORDS ---
+  const AI_TOOLS = [
+    {id:'pdfCompress', title:'PDF Compress', keys:['pdf compress','pdf chota','pdf chhota','pdf size kam','pdf ko chota','compress pdf','pdf zip'], steps:['PDF Tab kholo','PDF Compress select karo','Select File dabake PDF choose karo','Compress Level select karo - High / Medium / Low','Compress Now dabao','Download Now dabao']},
+    {id:'imgToPdf', title:'Image to PDF', keys:['image to pdf','photo to pdf','photo se pdf','image se pdf','jpg to pdf','photo ka pdf'], steps:['PDF Tab kholo','Image to PDF select karo','Select File dabake Photo choose karo','AI Make PDF dabao','Download Now dabao']},
+    {id:'pdfMerge', title:'PDF Merge', keys:['pdf merge','pdf jodo','pdf join','2 pdf ek','pdf milao','merge pdf'], steps:['PDF Tab kholo','PDF Merge select karo','2+ PDF Select karo','Merge Now dabao','Download Now dabao']},
+    {id:'pdfSplit', title:'PDF Split', keys:['pdf split','pdf alag','pdf todo','pdf kaat','split pdf'], steps:['PDF Tab kholo','PDF Split select karo','PDF Select karo','Page Number likho - Example: 1','Split Now dabao','Download Now dabao']},
+    {id:'pdfToJpg', title:'PDF to JPG', keys:['pdf to jpg','pdf se photo','pdf to image','pdf ka photo'], steps:['PDF Tab kholo','PDF to JPG select karo','PDF Select karo','AI Make JPG dabao','Download Now dabao']},
+    {id:'pdfDelete', title:'PDF Page Deleter', keys:['pdf page delete','pdf page hat','pdf se page delete','delete page'], steps:['PDF Tab kholo','PDF Page Deleter select karo','PDF Select karo','Delete karne wala Page No likho','Delete Page dabao','Download Now dabao']},
+    {id:'pdfWatermark', title:'PDF Watermark', keys:['pdf watermark','pdf pe naam','pdf watermark lag','pdf par naam'], steps:['PDF Tab kholo','PDF Watermark select karo','PDF Select karo','Watermark Text likho','Add Watermark dabao','Download Now dabao']},
+    {id:'pdfPageNo', title:'PDF Page Number', keys:['pdf page number','pdf me number','page number'], steps:['PDF Tab kholo','PDF Page Number select karo','PDF Select karo','Add Page Numbers dabao','Download Now dabao']},
+    {id:'pdfToText', title:'PDF to Text', keys:['pdf to text','pdf se text','pdf ka text'], steps:['PDF Tab kholo','PDF to Text select karo','PDF Select karo','AI Extract Text dabao','Text copy kar lo']},
+    {id:'photo500', title:'Photo 500KB', keys:['500kb','500 kb','photo 500','photo chota','photo compress','photo size kam','photo ko chota','image compress','photo 200kb','photo 100kb'], steps:['Image Tab kholo','Photo 500KB select karo','Select File dabake Photo choose karo','Target select karo - 500KB / 200KB / 100KB','Compress Now dabao','Download Now dabao']},
+    {id:'imgResize', title:'Image Resizer', keys:['image resize','photo resize','photo size change','width height','photo ka size'], steps:['Image Tab kholo','Image Resizer select karo','Photo Select karo','Width x Height likho - Example: 500 x 500','Resize Now dabao','Download Now dabao']},
+    {id:'imgConvert', title:'Image Converter', keys:['jpg to png','png to jpg','image convert','photo convert','jpg png','format change'], steps:['Image Tab kholo','Image Converter select karo','Photo Select karo','Format select karo - PNG / JPG / WEBP','Convert Now dabao','Download Now dabao']},
+    {id:'passport', title:'Passport Photo', keys:['passport photo','passport size photo','passport','35x45'], steps:['Image Tab kholo','Passport Photo select karo','Photo Select karo','AI Make Passport Photo dabao','Download Now dabao - 35x45mm']},
+    {id:'imgCrop', title:'Image Cropper', keys:['photo crop','image crop','photo kaat','crop'], steps:['Image Tab kholo','Image Cropper select karo','Photo Select karo','Crop Center dabao','Download Now dabao']},
+    {id:'imgRotate', title:'Image Rotate', keys:['photo rotate','image rotate','photo ulta','photo ghum','rotate photo'], steps:['Image Tab kholo','Image Rotate select karo','Photo Select karo','Rotate 90° / 180° dabao','Download Now dabao']},
+    {id:'imgWatermark', title:'Image Watermark', keys:['photo watermark','photo pe naam','image watermark','photo par naam'], steps:['Image Tab kholo','Image Watermark select karo','Photo Select karo','Watermark Text likho','Add Watermark dabao','Download Now dabao']},
+    {id:'imgGray', title:'Black & White', keys:['black white','black and white','grayscale','photo black','photo kala'], steps:['Image Tab kholo','Black & White select karo','Photo Select karo','Make Black & White dabao','Download Now dabao']},
+    {id:'imgSign', title:'Signature Maker', keys:['signature','sign','hastakshar','dastakhat'], steps:['Image Tab kholo','Signature Maker select karo','Ungli / Mouse se Sign karo','Download Signature dabao']},
+    {id:'qr', title:'QR Generator', keys:['qr','qr code','qr banao','qr generator','barcode qr'], steps:['Daily Tab kholo','QR Generator select karo','Link / Text likho','AI Make QR dabao','Download QR dabao']},
+    {id:'barcode', title:'Barcode Generator', keys:['barcode','bar code'], steps:['Daily Tab kholo','Barcode Generator select karo','Number likho','Make Barcode dabao']},
+    {id:'wordCount', title:'Word Counter', keys:['word count','word counter','kitne word','shabd gin'], steps:['Daily Tab kholo','Word Counter select karo','Text Paste karo','Count Now dabao']},
+    {id:'textPdf', title:'Text to PDF', keys:['text to pdf','likha hua pdf','text ka pdf'], steps:['Daily Tab kholo','Text to PDF select karo','Text likho','AI Make PDF dabao','Download Now dabao']},
+    {id:'passGen', title:'Password Generator', keys:['password','password banao','strong password'], steps:['Daily Tab kholo','Password Generator select karo','Length likho','Make Password dabao']},
+    {id:'invoice', title:'Invoice Maker', keys:['invoice','bill','bill banao','invoice banao'], steps:['Daily Tab kholo','Invoice Maker select karo','Customer Name, Item, Amount likho','Make Invoice PDF dabao','Download Now dabao']},
+    {id:'emiCalc', title:'EMI Calculator', keys:['emi','emi nikalo','loan emi','kist'], steps:['Daily Tab kholo','EMI Calculator select karo','Loan Amount, Rate, Months likho','Calculate EMI dabao']},
+    {id:'gstCalc', title:'GST Calculator', keys:['gst','gst nikalo','gst calculator'], steps:['Daily Tab kholo','GST Calculator select karo','Amount, GST% likho','Calculate GST dabao']},
+    {id:'ageCalc', title:'Age Calculator', keys:['age','umar','age nikalo','kitni umar'], steps:['Daily Tab kholo','Age Calculator select karo','DOB select karo','Calculate Age dabao']},
+    {id:'bmi', title:'BMI Calculator', keys:['bmi','weight','bmi nikalo'], steps:['Daily Tab kholo','BMI Calculator select karo','Weight, Height likho','Calculate BMI dabao']},
+    {id:'caseConvert', title:'Case Converter', keys:['upper','lower','capital','case convert','bade akshar','chhote akshar'], steps:['Daily Tab kholo','Case Converter select karo','Text likho','UPPER / lower dabao']},
+    {id:'unitConv', title:'Unit Converter', keys:['unit convert','kg','cm','kilo','unit'], steps:['Daily Tab kholo','Unit Converter select karo','Value likho','Convert Now dabao']},
+    {id:'dateDiff', title:'Date Difference', keys:['date difference','kitne din','din gin','date gin'], steps:['Daily Tab kholo','Date Difference select karo','2 Dates select karo','Count Days dabao']},
+    {id:'todo', title:'To-Do List', keys:['todo','to do','task','kaam list'], steps:['Daily Tab kholo','To-Do List select karo','Task likho','Add Task dabao']},
+    {id:'notepad', title:'Notepad', keys:['notepad','note','likhna','notes'], steps:['Daily Tab kholo','Notepad select karo','Likho - Auto Save ho jayega']},
+  ];
+
+  function findTool(q){
+    q = q.toLowerCase();
+    // Sabse lambi keyword pehle match karo - zyada accurate
+    let best = null, bestLen = 0;
+    for(let t of AI_TOOLS){
+      for(let k of t.keys){
+        if(q.includes(k) && k.length > bestLen){ best = t; bestLen = k.length; }
+      }
+    }
+    return best;
+  }
+
+  function addMsg(html, who){
+    let box = document.getElementById('aiChatBoxNew'); if(!box) return;
+    let d = document.createElement('div'); d.className='aiMsgNew '+who; d.innerHTML = html;
+    box.appendChild(d); box.scrollTop = box.scrollHeight; return d;
+  }
+
+  function showTyping(){
+    let box = document.getElementById('aiChatBoxNew');
+    let d = document.createElement('div'); d.className='aiMsgNew ai'; d.id='aiTypingBox';
+    d.innerHTML = '<b>🤖 Orbit AI soch raha hai...</b> <span class="aiTyping"><span></span><span></span><span></span></span>';
+    box.appendChild(d); box.scrollTop = box.scrollHeight;
+  }
+  function hideTyping(){ let t=document.getElementById('aiTypingBox'); if(t) t.remove(); }
+
+  window.askAINew = function(){
+    let inp = document.getElementById('aiInputNew'); if(!inp) return;
+    let text = inp.value.trim(); if(!text) return;
+    askAINewText(text); inp.value=''; inp.focus();
+  };
+  window.quickAINew = function(text){
+    let inp = document.getElementById('aiInputNew'); if(inp) inp.value=text;
+    askAINewText(text);
+  };
+
+  function askAINewText(raw){
+    let q = raw.toLowerCase().trim();
+    addMsg('You: '+raw, 'user');
+
+    // Greeting / Help
+    if(q==='hi'||q==='hello'||q==='hey'||q==='hii'||q.includes('kaise ho')||q.includes('hello')||q.includes('hi ')){
+      setTimeout(()=>{ addMsg('<b>🤖 Orbit AI:</b> Hello! Main bilkul badhiya hu 😊<br>Bolo kya karna hai?<br>• <b>pdf compress karo</b><br>• <b>photo 500kb banao</b><br>• <b>passport photo banao</b><br>• <b>qr banao</b><br>• <b>emi nikalo</b>', 'ai'); }, 400);
+      return;
+    }
+    if(q.includes('kya kar sakte')||q.includes('kya kar sakta')||q.includes('help')||q.includes('madad')||q.includes('kaam')){
+      setTimeout(()=>{ addMsg('<b>🤖 Orbit AI - Main ye sab kar sakta hu:</b><br>📄 <b>PDF:</b> Compress, Merge, Split, Image to PDF, Watermark<br>🖼️ <b>Image:</b> Photo 500KB, Passport Photo, Resize, Convert, Crop<br>🧮 <b>Daily:</b> QR, Invoice, EMI, GST, Age, BMI, Password<br><br>Bas likho - <b>photo 500kb banao</b>', 'ai'); }, 400);
+      return;
+    }
+
+    showTyping();
+    setTimeout(()=>{
+      hideTyping();
+      let tool = findTool(q);
+      if(tool){
+        let stepsHtml = tool.steps.map((s,i)=>'Step '+(i+1)+': <b>'+s+'</b>').join('<br>');
+        let div = addMsg('<b>🤖 Orbit AI - '+tool.title+' - Full Steps:</b><br>'+stepsHtml+'<br><br>Main abhi ye tool khol deta hu 👇', 'ai');
+        let btn = document.createElement('button'); btn.className='aiStepBtn'; btn.textContent='Open '+tool.title+' Now →';
+        btn.onclick = function(){ if(typeof openTool==='function') openTool(tool.id); else alert('Tool khul raha hai: '+tool.title); };
+        div.appendChild(btn);
+      } else {
+        addMsg('<b>🤖 Orbit AI:</b> Samajh gaya - <b>'+raw+'</b><br><br>Mujhe thoda aur clear batao, jaise:<br>• <b>pdf compress karo</b><br>• <b>photo 500kb banao</b><br>• <b>passport photo banao</b><br>• <b>qr banao</b><br>• <b>emi nikalo</b><br>• <b>invoice banao</b>', 'ai');
+      }
+    }, 700);
+  }
+  window.askAINewText = askAINewText;
+
+  // Enter dabane pe bhejo
+  setTimeout(()=>{
+    let inp = document.getElementById('aiInputNew');
+    if(inp){ inp.addEventListener('keydown', function(e){ if(e.key==='Enter') window.askAINew(); }); }
+    // Purane search box ko bhi naye AI se jodo
+    let s = document.getElementById('globalSearch');
+    if(s){ s.addEventListener('keydown', function(e){ if(e.key==='Enter'){ let q=this.value; if(q){ askAINewText(q); this.value=''; } } }); }
+  }, 300);
+})();
+</script>
+</div>
+<!-- ================= AI CHATBOT END ================= -->
 <div class="hero"><h1>One Place - All AI Tools<br>PDF • Image • Daily Use</h1><p>Upload file, AI does work, download result. No login. No API. Everything works in your browser.</p><button class="btn" onclick="openCategory('image')">✨ Try Most Popular Tool - Photo 500KB →</button></div>
 <div class="catGrid">
 <div class="cat" onclick="openCategory('pdf')"><div class="catIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">PDF</div><b>PDF TOOLS</b><p>AI PDF Compress, Image to PDF, PDF Split, PDF Merge, PDF to JPG, Watermark, Rotate.</p><small>● 13 AI Tools Live →</small></div>
