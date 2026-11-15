@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Orbittroniz - Premium AI Tools - PDF, Image, Daily Use - Free</title>
+<meta name="description" content="Orbittroniz Premium AI Tools - PDF Compress, Image to PDF, Photo 500KB, Passport Photo, QR Generator - Free, No Login, No API">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/JsBarcode/3.11.6/JsBarcode.all.min.js"></script>
+<style>
+/* ================= ADVANCE PREMIUM GLOBAL START ================= */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Inter,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:#04060f;color:#fff;overflow-x:hidden;min-height:100vh}
+button{cursor:pointer;border:none}button:active{transform:scale(.96)}
+input,textarea,select{outline:none}
+/* Live AI Background - Floating Orbs + Grid */
+.bgOrbs{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;animation:floatOrb 9s ease-in-out infinite}
+.orb1{width:300px;height:300px;background:#7c3aed;top:-50px;left:-50px}
+.orb2{width:240px;height:240px;background:#06b6d4;top:35%;right:-70px;animation-delay:2s}
+.orb3{width:220px;height:220px;background:#ec4899;bottom:-50px;left:30%;animation-delay:4s}
+.orb4{width:160px;height:160px;background:#22c55e;top:60%;left:-40px;animation-delay:6s}
+@keyframes floatOrb{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-35px) scale(1.12)}}
+.gridBg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse at top,black 30%,transparent 75%)}
+.wrap{position:relative;z-index:1;max-width:960px;margin:auto;padding:12px;padding-bottom:40px}
+/* ================= GLOBAL END ================= */
+
+/* ================= ADVANCE PREMIUM DANCING 3D LOGO START ================= */
+/* EDIT LOGO: Change letters O R B I T T R O N I Z or colors below */
+.logoWrap{position:relative;text-align:center;padding:20px 10px 12px;background:linear-gradient(180deg,rgba(124,58,237,.28),transparent);border-bottom:1px solid rgba(255,255,255,.08);overflow:hidden}
+.logoWrap:before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:340px;height:130px;background:radial-gradient(ellipse,rgba(124,58,237,.55),transparent);filter:blur(22px)}
+.logoDoodle{font-size:14px;letter-spacing:5px;animation:doodleBounce 1s infinite;position:relative}
+@keyframes doodleBounce{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-6px) rotate(2deg)}}
+.logo3d{display:flex;justify-content:center;align-items:flex-end;gap:3px;flex-wrap:wrap;perspective:900px;position:relative;margin-top:4px}
+.logo3d span{font-size:42px;font-weight:900;line-height:1;display:inline-block;
+background:linear-gradient(180deg,#ffffff,#c4b5fd 55%,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+filter:drop-shadow(0 6px 0 #2e1065) drop-shadow(0 14px 20px rgba(124,58,237,.65));
+animation:dancePremium 1.1s ease-in-out infinite;transform-origin:bottom center}
+.logo3d span:nth-child(1){animation-delay:0s}
+.logo3d span:nth-child(2){animation-delay:.08s}
+.logo3d span:nth-child(3){animation-delay:.16s}
+.logo3d span:nth-child(4){animation-delay:.24s}
+.logo3d span:nth-child(5){animation-delay:.32s}
+.logo3d span:nth-child(6){animation-delay:.4s}
+.logo3d span:nth-child(7){animation-delay:.48s}
+.logo3d span:nth-child(8){animation-delay:.56s}
+.logo3d span:nth-child(9){animation-delay:.64s}
+.logo3d span:nth-child(10){animation-delay:.72s}
+.logo3d span:nth-child(11){animation-delay:.8s}
+@keyframes dancePremium{
+0%,100%{transform:translateY(0) rotateZ(0deg) rotateX(0deg) scale(1)}
+25%{transform:translateY(-18px) rotateZ(-10deg) rotateX(22deg) scale(1.13)}
+50%{transform:translateY(0) rotateZ(10deg) rotateX(-12deg) scale(.93)}
+75%{transform:translateY(-10px) rotateZ(-5deg) scale(1.07)}
+}
+.logoMan{font-size:40px;display:inline-block;animation:manDancePremium 1.1s infinite;filter:drop-shadow(0 10px 14px rgba(0,0,0,.55));-webkit-text-fill-color:initial}
+@keyframes manDancePremium{0%,100%{transform:translateX(0) rotate(0) scale(1)}25%{transform:translateX(-9px) rotate(-20deg) scale(1.12)}50%{transform:translateX(9px) rotate(20deg) scale(1)}75%{transform:translateX(-4px) rotate(-9deg) scale(1.1)}}
+.logoTag{font-size:11px;color:#cbd5e1;margin-top:10px;letter-spacing:1px;position:relative}
+.logoTag b{color:#22c55e;background:rgba(34,197,94,.15);padding:3px 9px;border-radius:20px;border:1px solid rgba(34,197,94,.45)}
+.liveDot{display:inline-block;width:8px;height:8px;background:#22c55e;border-radius:50%;box-shadow:0 0 0 0 rgba(34,197,94,.7);animation:pulseDot 1.5s infinite;margin-right:4px}
+@keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(34,197,94,.7)}70%{box-shadow:0 0 0 9px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+/* ================= LOGO END ================= */
+
+/* ================= ADVANCE NAVBAR START ================= */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(4,6,15,.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1);padding:9px 10px;display:flex;gap:7px;align-items:center}
+.navBtn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#fff;padding:11px 13px;border-radius:14px;font-size:12px;font-weight:800;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.35);transition:.2s}
+.navBtn:active{transform:translateY(2px)}
+.navBtn.home{background:linear-gradient(135deg,#7c3aed,#06b6d4);border:none;box-shadow:0 8px 20px rgba(124,58,237,.55)}
+.searchTop{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:12px;color:#fff;font-size:13px}
+/* ================= NAVBAR END ================= */
+
+/* ================= ADVANCE CARDS / BUTTONS START ================= */
+.page{display:none}.page.show{display:block;animation:pageIn .3s ease}
+@keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:18px 8px 6px}
+.hero h1{font-size:28px;line-height:1.25;background:linear-gradient(90deg,#fff,#c4b5fd,#67e8f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 4px 14px rgba(124,58,237,.45))}
+.hero p{font-size:12px;color:#94a3b8;margin-top:9px;line-height:1.6}
+.heroStats{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+.heroStats span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:6px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.catGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+@media(max-width:600px){.catGrid{grid-template-columns:1fr}}
+.cat{position:relative;background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:18px;cursor:pointer;overflow:hidden;box-shadow:0 14px 32px rgba(0,0,0,.38);transition:.25s}
+.cat:hover{transform:translateY(-5px) rotateX(2deg);box-shadow:0 20px 42px rgba(124,58,237,.4)}
+.cat:before{content:'';position:absolute;top:0;left:0;right:0;height:5px}
+.cat.pdf:before{background:linear-gradient(90deg,#ef4444,#f97316)}
+.cat.img:before{background:linear-gradient(90deg,#22c55e,#06b6d4)}
+.cat.daily:before{background:linear-gradient(90deg,#f59e0b,#ec4899)}
+.catIcon{width:58px;height:58px;border-radius:17px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff;box-shadow:0 10px 20px rgba(0,0,0,.45);transform:rotate(-3deg)}
+.cat.pdf .catIcon{background:linear-gradient(135deg,#ef4444,#f97316)}
+.cat.img .catIcon{background:linear-gradient(135deg,#22c55e,#06b6d4)}
+.cat.daily .catIcon{background:linear-gradient(135deg,#f59e0b,#ec4899)}
+.cat b{font-size:16px;display:block;margin-top:11px}.cat p{font-size:12px;color:#cbd5e1;margin-top:6px;line-height:1.6}.cat small{font-size:11px;color:#22c55e;font-weight:800}
+.backBtn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:11px 16px;border-radius:14px;font-size:12px;font-weight:800;margin-bottom:12px;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+@media(max-width:600px){.grid{grid-template-columns:repeat(2,1fr)}}
+.toolCard{position:relative;background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.15);border-radius:19px;padding:15px 10px;text-align:center;cursor:pointer;box-shadow:0 9px 22px rgba(0,0,0,.32);transition:.2s;overflow:hidden}
+.toolCard:hover{transform:translateY(-5px) scale(1.03);border-color:#7c3aed;box-shadow:0 16px 30px rgba(124,58,237,.45)}
+.toolIcon{width:50px;height:50px;margin:0 auto;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff;box-shadow:0 7px 15px rgba(0,0,0,.45);transform:rotate(-2deg)}
+.toolCard b{font-size:12px;display:block;margin-top:10px;line-height:1.3}.toolCard small{font-size:11px;color:#94a3b8}
+.toolCard .live{position:absolute;top:8px;right:8px;font-size:9px;background:rgba(34,197,94,.2);border:1px solid rgba(34,197,94,.55);color:#4ade80;padding:2px 6px;border-radius:20px;font-weight:800}
+.card{background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.15);border-radius:22px;padding:16px;margin-top:14px;box-shadow:0 14px 30px rgba(0,0,0,.32)}
+.card h3{font-size:15px}.card p{font-size:12px;color:#94a3b8;margin-top:6px;line-height:1.6}
+.input{width:100%;background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:13px;color:#fff;margin-top:8px;font-size:14px}
+.input:focus{border-color:#7c3aed;box-shadow:0 0 0 3px rgba(124,58,237,.32)}
+.btn{width:100%;background:linear-gradient(135deg,#7c3aed,#06b6d4);color:#fff;padding:15px;border-radius:14px;font-weight:900;font-size:14px;margin-top:10px;box-shadow:0 9px 22px rgba(124,58,237,.5);transition:.2s}
+.btn:active{transform:translateY(2px)}
+.btn.green{background:linear-gradient(135deg,#22c55e,#06b6d4);color:#000;box-shadow:0 9px 22px rgba(34,197,94,.45)}
+.btn.orange{background:linear-gradient(135deg,#f59e0b,#ec4899);box-shadow:0 9px 22px rgba(245,158,11,.45)}
+.btn.red{background:linear-gradient(135deg,#ef4444,#f97316);box-shadow:0 9px 22px rgba(239,68,68,.45)}
+.upload{border:2px dashed rgba(255,255,255,.32);border-radius:16px;text-align:center;padding:24px 10px;cursor:pointer;margin-top:10px;background:rgba(0,0,0,.28)}
+.upload input{display:none}
+.result{background:rgba(0,0,0,.42);border:1px solid rgba(34,197,94,.55);border-radius:14px;padding:12px;margin-top:12px;display:none}
+.result b{color:#4ade80}
+.dlBtn{display:block;text-align:center;background:linear-gradient(135deg,#22c55e,#06b6d4);color:#000;font-weight:900;padding:13px;border-radius:12px;margin-top:10px;box-shadow:0 7px 18px rgba(34,197,94,.45)}
+.footer{text-align:center;padding:22px;font-size:11px;color:#94a3b8;line-height:1.7}
+.navBottom{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.navBottom button{flex:1;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#fff;padding:12px;border-radius:14px;font-size:12px;font-weight:800}
+.navBottom button.home{background:linear-gradient(135deg,#7c3aed,#06b6d4);border:none}
+/* ================= CARDS END ================= */
+</style>
+</head>
+<body>
+<div class="bgOrbs"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div><div class="orb orb4"></div></div>
+<div class="gridBg"></div>
+
+<!-- ================= PREMIUM LOGO START ================= -->
+<div class="logoWrap">
+<div class="logoDoodle">✨ 🎨 ✏️ 📄 🖼️ ✨</div>
+<div class="logo3d" onclick="goHome()" style="cursor:pointer" title="Click to go Home">
+<span>O</span><span>R</span><span>B</span><span>I</span><span>T</span><span>T</span><span>R</span><span>O</span><span>N</span><span>I</span><span>Z</span>
+<span class="logoMan">🕺</span>
+</div>
+<div class="logoTag"><span class="liveDot"></span>AI TOOLS • PDF • IMAGE • DAILY USE • <b>100% FREE • NO LOGIN</b></div>
+</div>
+<!-- ================= LOGO END ================= -->
+
+<!-- ================= TOP NAVIGATION START ================= -->
+<div class="topbar">
+<button class="navBtn home" onclick="goHome()">🏠 Home</button>
+<button class="navBtn" onclick="openCategory('pdf')">📄 PDF</button>
+<button class="navBtn" onclick="openCategory('image')">🖼️ Image</button>
+<button class="navBtn" onclick="openCategory('daily')">🧮 Daily</button>
+<input class="searchTop" id="globalSearch" placeholder="Search - pdf, photo, qr...">
+</div>
+<!-- ================= TOP NAVIGATION END ================= -->
+
+<div class="wrap">
+
+<!-- ================= HOME PAGE START ================= -->
+<div id="page-home" class="page show">
+<div class="hero"><h1>One Place - All Tools<br>PDF • Image • Daily Use</h1><p>Upload file, do work, download result. No login. No API. Everything works in your browser. Premium 3D AI Experience.</p>
+<div class="heroStats"><span>● 50+ Tools Live</span><span>● No API Cost</span><span>● 100% Free</span><span>● Privacy First</span></div></div>
+<div class="catGrid">
+<div class="cat pdf" onclick="openCategory('pdf')"><div class="catIcon">PDF</div><b>PDF TOOLS</b><p>PDF Compress, Image to PDF, PDF Split, PDF Merge, PDF to JPG, Watermark, Rotate - All PDF tools here.</p><small>● 13 Tools Live → Click to Open →</small></div>
+<div class="cat img" onclick="openCategory('image')"><div class="catIcon">IMG</div><b>IMAGE TOOLS</b><p>Photo 500KB, Compress, Resize, JPG to PNG, Passport Photo, Crop, Rotate, Watermark - All Image tools here.</p><small>● 17 Tools Live → Click to Open →</small></div>
+<div class="cat daily" onclick="openCategory('daily')"><div class="catIcon">DAILY</div><b>DAILY USE TOOLS</b><p>QR Generator, Word Counter, Password Generator, EMI, GST, Age, Invoice, Notepad - Daily work tools.</p><small>● 20 Tools Live → Click to Open →</small></div>
+</div>
+<div class="card"><h3>🔥 Most Used Today</h3><div class="grid" style="margin-top:12px">
+<div class="toolCard" onclick="openTool('photo500')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#22c55e,#06b6d4)">500KB</div><b>Photo 500KB</b><small>Image</small></div>
+<div class="toolCard" onclick="openTool('imgToPdf')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#ef4444,#f97316)">PDF</div><b>Image to PDF</b><small>PDF</small></div>
+<div class="toolCard" onclick="openTool('pdfMerge')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#7c3aed,#06b6d4)">MERGE</div><b>PDF Merge</b><small>PDF</small></div>
+<div class="toolCard" onclick="openTool('passport')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#f59e0b,#ec4899)">PASS</div><b>Passport Photo</b><small>Image</small></div>
+<div class="toolCard" onclick="openTool('qr')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#06b6d4,#22c55e)">QR</div><b>QR Generator</b><small>Daily</small></div>
+<div class="toolCard" onclick="openTool('pdfCompress')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#ef4444,#ec4899)">ZIP</div><b>PDF Compress</b><small>PDF</small></div>
+</div></div>
+</div>
+<!-- ================= HOME PAGE END ================= -->
+
+<!-- ================= PDF CATEGORY PAGE START ================= -->
+<div id="page-pdf" class="page">
+<button class="backBtn" onclick="goHome()">← Back to Home</button>
+<h2>📄 PDF TOOLS</h2><p style="font-size:12px;color:#94a3b8;margin-top:6px">Click any tool to open its own page.</p>
+<div class="grid" style="margin-top:12px">
+<div class="toolCard" onclick="openTool('pdfCompress')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#ef4444,#f97316)">ZIP</div><b>PDF Compress</b><small>Reduce Size</small></div>
+<div class="toolCard" onclick="openTool('imgToPdf')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#ef4444,#7c3aed)">PDF</div><b>Image to PDF</b><small>Photo → PDF</small></div>
+<div class="toolCard" onclick="openTool('pdfSplit')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#f97316,#f59e0b)">SPLIT</div><b>PDF Split</b><small>Split Pages</small></div>
+<div class="toolCard" onclick="openTool('pdfMerge')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#7c3aed,#06b6d4)">MERGE</div><b>PDF Merge</b><small>Join PDFs</small></div>
+<div class="toolCard" onclick="openTool('pdfToJpg')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#06b6d4,#22c55e)">JPG</div><b>PDF to JPG</b><small>Page → Image</small></div>
+<div class="toolCard" onclick="openTool('pdfDelete')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#ef4444,#000)">DEL</div><b>PDF Page Deleter</b><small>Delete Page</small></div>
+<div class="toolCard" onclick="openTool('pdfRotate')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#06b6d4,#7c3aed)">ROT</div><b>PDF Rotate</b><small>Rotate Pages</small></div>
+<div class="toolCard" onclick="openTool('pdfWatermark')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#06b6d4,#f59e0b)">WM</div><b>PDF Watermark</b><small>Add Name</small></div>
+<div class="toolCard" onclick="openTool('pdfPageNo')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#22c55e,#06b6d4)">123</div><b>PDF Page Number</b><small>Add Numbers</small></div>
+<div class="toolCard" onclick="openTool('pdfToText')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">TXT</div><b>PDF to Text</b><small>Extract Text</small></div>
+<div class="toolCard" onclick="openTool('pdfMeta')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#64748b,#334155)">META</div><b>PDF Metadata Remover</b><small>Remove Info</small></div>
+<div class="toolCard" onclick="openTool('pdfSize')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#7c3aed,#ec4899)">SIZE</div><b>PDF Size Checker</b><small>How Big?</small></div>
+<div class="toolCard" onclick="openTool('pdfPreview')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#06b6d4,#f59e0b)">VIEW</div><b>PDF Preview</b><small>View Without Download</small></div>
+</div>
+<div class="navBottom"><button onclick="goHome()">🏠 Home</button><button onclick="openCategory('image')">🖼️ Image Tools</button><button onclick="openCategory('daily')">🧮 Daily Tools</button></div>
+</div>
+<!-- ================= PDF CATEGORY END ================= -->
+
+<!-- ================= IMAGE CATEGORY PAGE START ================= -->
+<div id="page-image" class="page">
+<button class="backBtn" onclick="goHome()">← Back to Home</button>
+<h2>🖼️ IMAGE TOOLS</h2><p style="font-size:12px;color:#94a3b8;margin-top:6px">Click any tool to open its own page.</p>
+<div class="grid" style="margin-top:12px">
+<div class="toolCard" onclick="openTool('photo500')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#22c55e,#06b6d4)">500KB</div><b>Photo 500KB</b><small>Make 500KB</small></div>
+<div class="toolCard" onclick="openTool('imgCompress')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#22c55e,#f59e0b)">ZIP</div><b>Image Compressor</b><small>90% Smaller</small></div>
+<div class="toolCard" onclick="openTool('imgResize')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#06b6d4,#7c3aed)">SIZE</div><b>Image Resizer</b><small>Width x Height</small></div>
+<div class="toolCard" onclick="openTool('imgConvert')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#7c3aed,#ec4899)">JPG</div><b>Image Converter</b><small>JPG ↔ PNG</small></div>
+<div class="toolCard" onclick="openTool('passport')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">PASS</div><b>Passport Photo</b><small>35x45mm</small></div>
+<div class="toolCard" onclick="openTool('imgCrop')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#ec4899,#7c3aed)">CROP</div><b>Image Cropper</b><small>Crop</small></div>
+<div class="toolCard" onclick="openTool('imgRotate')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#06b6d4,#22c55e)">ROT</div><b>Image Rotate / Flip</b><small>Rotate</small></div>
+<div class="toolCard" onclick="openTool('imgWatermark')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#06b6d4,#f59e0b)">WM</div><b>Image Watermark</b><small>Add Name</small></div>
+<div class="toolCard" onclick="openTool('imgGray')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#64748b,#0f172a)">B&W</div><b>Black & White</b><small>Grayscale</small></div>
+<div class="toolCard" onclick="openTool('imgFilter')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#f59e0b,#facc15)">BRIGHT</div><b>Brightness / Contrast</b><small>Filter</small></div>
+<div class="toolCard" onclick="openTool('imgSign')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#7c3aed,#06b6d4)">SIGN</div><b>Signature Maker</b><small>Transparent</small></div>
+<div class="toolCard" onclick="openTool('imgCollage')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#ec4899,#f59e0b)">COLL</div><b>Photo Collage</b><small>2-4 Photos</small></div>
+<div class="toolCard" onclick="openTool('imgSize')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#06b6d4,#7c3aed)">INFO</div><b>Image Size Checker</b><small>DPI / Size</small></div>
+<div class="toolCard" onclick="openTool('imgBase64')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#64748b,#06b6d4)">64</div><b>Image to Base64</b><small>Code</small></div>
+<div class="toolCard" onclick="openTool('favicon')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">FAV</div><b>Favicon Maker</b><small>16x16</small></div>
+<div class="toolCard" onclick="openTool('imgEnlarge')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#22c55e,#7c3aed)">2X</div><b>Image Enlarger 2x</b><small>Make Bigger</small></div>
+<div class="toolCard" onclick="openTool('imgPrint')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#ef4444,#f59e0b)">PRINT</div><b>Passport Print Sheet</b><small>8 Copies</small></div>
+</div>
+<div class="navBottom"><button onclick="goHome()">🏠 Home</button><button onclick="openCategory('pdf')">📄 PDF Tools</button><button onclick="openCategory('daily')">🧮 Daily Tools</button></div>
+</div>
+<!-- ================= IMAGE CATEGORY END ================= -->
+
+<!-- ================= DAILY CATEGORY PAGE START ================= -->
+<div id="page-daily" class="page">
+<button class="backBtn" onclick="goHome()">← Back to Home</button>
+<h2>🧮 DAILY USE TOOLS</h2><p style="font-size:12px;color:#94a3b8;margin-top:6px">Click any tool to open its own page.</p>
+<div class="grid" style="margin-top:12px">
+<div class="toolCard" onclick="openTool('qr')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#06b6d4,#22c55e)">QR</div><b>QR Generator</b><small>Link → QR</small></div>
+<div class="toolCard" onclick="openTool('barcode')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#64748b,#0f172a)">BAR</div><b>Barcode Generator</b><small>Code</small></div>
+<div class="toolCard" onclick="openTool('wordCount')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#7c3aed,#06b6d4)">WORDS</div><b>Word Counter</b><small>Words / Chars</small></div>
+<div class="toolCard" onclick="openTool('textPdf')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#ef4444,#7c3aed)">PDF</div><b>Text to PDF</b><small>Text → PDF</small></div>
+<div class="toolCard" onclick="openTool('caseConvert')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#f59e0b,#ec4899)">Aa</div><b>Case Converter</b><small>UPPER / lower</small></div>
+<div class="toolCard" onclick="openTool('cleanText')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#22c55e,#06b6d4)">CLEAN</div><b>Remove Extra Spaces</b><small>Clean Text</small></div>
+<div class="toolCard" onclick="openTool('lorem')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#64748b,#7c3aed)">LOREM</div><b>Lorem Generator</b><small>Dummy Text</small></div>
+<div class="toolCard" onclick="openTool('passGen')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#22c55e,#0f172a)">PASS</div><b>Password Generator</b><small>Strong</small></div>
+<div class="toolCard" onclick="openTool('json')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#f59e0b,#0f172a)">{ }</div><b>JSON Formatter</b><small>Beautify</small></div>
+<div class="toolCard" onclick="openTool('invoice')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#06b6d4,#22c55e)">BILL</div><b>Invoice Maker</b><small>Bill → PDF</small></div>
+<div class="toolCard" onclick="openTool('ageCalc')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#ec4899,#7c3aed)">AGE</div><b>Age Calculator</b><small>Age</small></div>
+<div class="toolCard" onclick="openTool('emiCalc')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#22c55e,#06b6d4)">EMI</div><b>EMI Calculator</b><small>Loan</small></div>
+<div class="toolCard" onclick="openTool('gstCalc')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#f59e0b,#22c55e)">GST</div><b>GST Calculator</b><small>GST</small></div>
+<div class="toolCard" onclick="openTool('percentCalc')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#06b6d4,#7c3aed)">%</div><b>Percentage Calc</b><small>Find %</small></div>
+<div class="toolCard" onclick="openTool('unitConv')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#64748b,#06b6d4)">KG</div><b>Unit Converter</b><small>KG, CM</small></div>
+<div class="toolCard" onclick="openTool('stopwatch')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#ef4444,#f59e0b)">TIME</div><b>Stopwatch / Timer</b><small>Time</small></div>
+<div class="toolCard" onclick="openTool('notepad')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#f59e0b,#facc15)">NOTE</div><b>Notepad Auto Save</b><small>Write</small></div>
+<div class="toolCard" onclick="openTool('todo')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#22c55e,#f59e0b)">TODO</div><b>To-Do List</b><small>Tasks</small></div>
+<div class="toolCard" onclick="openTool('bmi')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#06b6d4,#ec4899)">BMI</div><b>BMI Calculator</b><small>Weight</small></div>
+<div class="toolCard" onclick="openTool('dateDiff')"><span class="live">● LIVE</span><div class="toolIcon" style="background:linear-gradient(135deg,#7c3aed,#f59e0b)">DATE</div><b>Date Difference</b><small>Count Days</small></div>
+</div>
+<div class="navBottom"><button onclick="goHome()">🏠 Home</button><button onclick="openCategory('pdf')">📄 PDF Tools</button><button onclick="openCategory('image')">🖼️ Image Tools</button></div>
+</div>
+<!-- ================= DAILY CATEGORY END ================= -->
+
+<!-- ================= TOOL PAGE START ================= -->
+<div id="page-tool" class="page">
+<button class="backBtn" onclick="goBackToCategory()">← Back</button>
+<h2 id="toolTitle">Tool</h2><p id="toolDesc" style="font-size:12px;color:#94a3b8;margin-top:6px"></p>
+<div id="toolBody"></div>
+<div class="navBottom"><button class="home" onclick="goHome()">🏠 Home</button><button onclick="goBackToCategory()">← Back to Category</button><button onclick="openCategory('pdf')">📄 All PDF</button></div>
+</div>
+<!-- ================= TOOL PAGE END ================= -->
+
+</div>
+<div class="footer">ORBITTRONIZ 🕺 - Premium AI Tools - PDF • Image • Daily Use<br>Privacy: Files never leave your browser • All tools work in browser • No API</div>
+
+<script>
+let lastCategory='home';
+function hideAll(){ document.querySelectorAll('.page').forEach(p=>p.classList.remove('show')); }
+function goHome(){ hideAll(); document.getElementById('page-home').classList.add('show'); lastCategory='home'; window.scrollTo(0,0); }
+function openCategory(cat){ lastCategory=cat; hideAll(); document.getElementById('page-'+cat).classList.add('show'); window.scrollTo(0,0); }
+function goBackToCategory(){ if(lastCategory==='home') goHome(); else openCategory(lastCategory); }
+function openTool(id){ hideAll(); document.getElementById('page-tool').classList.add('show'); window.scrollTo(0,0); renderTool(id); }
+document.getElementById('globalSearch').addEventListener('input',function(){
+  let q=this.value.toLowerCase().trim(); if(!q) return;
+  if(q.includes('pdf')) openCategory('pdf');
+  else if(q.includes('photo')||q.includes('image')||q.includes('passport')) openCategory('image');
+  else if(q.includes('qr')||q.includes('emi')||q.includes('calc')) openCategory('daily');
+});
+const TOOLS={
+  photo500:{title:'Photo Resize to 500KB / 200KB / 100KB',desc:'Upload photo, select target, download.',cat:'image'},
+  imgCompress:{title:'Image Compressor',desc:'Make photo 90% smaller.',cat:'image'},
+  imgResize:{title:'Image Resizer - Width x Height',desc:'Enter your size.',cat:'image'},
+  imgConvert:{title:'Image Converter - JPG ↔ PNG ↔ WEBP',desc:'Change format.',cat:'image'},
+  passport:{title:'Passport Photo Maker - 35x45mm',desc:'Make passport photo.',cat:'image'},
+  imgCrop:{title:'Image Cropper',desc:'Crop photo.',cat:'image'},
+  imgRotate:{title:'Image Rotate / Flip',desc:'Rotate photo.',cat:'image'},
+  imgWatermark:{title:'Image Watermark',desc:'Add name on photo.',cat:'image'},
+  imgGray:{title:'Black & White / Grayscale',desc:'Make Black White.',cat:'image'},
+  imgFilter:{title:'Brightness / Contrast Filter',desc:'Make bright.',cat:'image'},
+  imgSign:{title:'Signature Maker',desc:'Draw signature.',cat:'image'},
+  imgCollage:{title:'Photo Collage - 2-4 Photos',desc:'Join 2-4 photos.',cat:'image'},
+  imgSize:{title:'Image Size Checker',desc:'Check size, width, height.',cat:'image'},
+  imgBase64:{title:'Image to Base64',desc:'Convert to code.',cat:'image'},
+  favicon:{title:'Favicon Maker',desc:'Make website favicon.',cat:'image'},
+  imgEnlarge:{title:'Image Enlarger 2x',desc:'Make 2x bigger.',cat:'image'},
+  imgPrint:{title:'Passport Print Sheet - 8 Copies',desc:'8 photos in 1 page.',cat:'image'},
+  pdfCompress:{title:'PDF Compress',desc:'Reduce PDF size.',cat:'pdf'},
+  imgToPdf:{title:'Image to PDF',desc:'Make PDF from photo.',cat:'pdf'},
+  pdfSplit:{title:'PDF Split',desc:'Split PDF.',cat:'pdf'},
+  pdfMerge:{title:'PDF Merge',desc:'Join 2+ PDFs.',cat:'pdf'},
+  pdfToJpg:{title:'PDF to JPG',desc:'Make JPG from PDF page.',cat:'pdf'},
+  pdfDelete:{title:'PDF Page Deleter',desc:'Delete page.',cat:'pdf'},
+  pdfRotate:{title:'PDF Rotate',desc:'Rotate pages.',cat:'pdf'},
+  pdfWatermark:{title:'PDF Watermark',desc:'Add name on PDF.',cat:'pdf'},
+  pdfPageNo:{title:'PDF Page Number',desc:'Add numbers on pages.',cat:'pdf'},
+  pdfToText:{title:'PDF to Text',desc:'Extract text from PDF.',cat:'pdf'},
+  pdfMeta:{title:'PDF Metadata Remover',desc:'Remove PDF info.',cat:'pdf'},
+  pdfSize:{title:'PDF Size Checker',desc:'Check PDF size.',cat:'pdf'},
+  pdfPreview:{title:'PDF Preview',desc:'View without download.',cat:'pdf'},
+  qr:{title:'QR Code Generator',desc:'Make QR from link.',cat:'daily'},
+  barcode:{title:'Barcode Generator',desc:'Make barcode from number.',cat:'daily'},
+  wordCount:{title:'Word Counter',desc:'Count words, chars.',cat:'daily'},
+  textPdf:{title:'Text to PDF',desc:'Make PDF from text.',cat:'daily'},
+  caseConvert:{title:'Case Converter',desc:'UPPER / lower.',cat:'daily'},
+  cleanText:{title:'Remove Extra Spaces',desc:'Clean extra spaces.',cat:'daily'},
+  lorem:{title:'Lorem Ipsum Generator',desc:'Make dummy text.',cat:'daily'},
+  passGen:{title:'Password Generator',desc:'Make strong password.',cat:'daily'},
+  json:{title:'JSON Formatter',desc:'Beautify JSON.',cat:'daily'},
+  invoice:{title:'Invoice Maker',desc:'Make bill, download PDF.',cat:'daily'},
+  ageCalc:{title:'Age Calculator',desc:'Calculate age from DOB.',cat:'daily'},
+  emiCalc:{title:'EMI Calculator',desc:'Calculate loan EMI.',cat:'daily'},
+  gstCalc:{title:'GST Calculator',desc:'Add GST.',cat:'daily'},
+  percentCalc:{title:'Percentage Calculator',desc:'Find %.',cat:'daily'},
+  unitConv:{title:'Unit Converter',desc:'Convert KG, CM.',cat:'daily'},
+  stopwatch:{title:'Stopwatch / Timer',desc:'Start timer.',cat:'daily'},
+  notepad:{title:'Notepad - Auto Save',desc:'Write, auto save.',cat:'daily'},
+  todo:{title:'To-Do List',desc:'Write tasks.',cat:'daily'},
+  bmi:{title:'BMI Calculator',desc:'Calculate BMI.',cat:'daily'},
+  dateDiff:{title:'Date Difference',desc:'Count days.',cat:'daily'},
+};
+let currentFile=null, currentImg=null, pdfFiles=[];
+function fileInputHTML(accept,multiple){ return '<label class="upload">📁 Click Here To Upload File<input type="file" id="toolFile" accept="'+(accept||'image/*')+'" '+(multiple?'multiple':'')+' onchange="onFileChange(this)"></label><p id="fileInfo" style="font-size:12px;color:#94a3b8;margin-top:8px"></p><img id="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">'; }
+function onFileChange(inp){ let f=inp.files[0]; if(!f) return; currentFile=f; let fi=document.getElementById('fileInfo'); if(fi) fi.textContent='Selected: '+f.name+' • '+(f.size/1024).toFixed(0)+' KB'; if(f.type.startsWith('image/')){ let r=new FileReader(); r.onload=e=>{ let im=document.getElementById('toolPreview'); if(im){im.src=e.target.result; im.style.display='block';} currentImg=new Image(); currentImg.src=e.target.result; }; r.readAsDataURL(f); } }
+function showResult(title,info,blob,filename){ let body=document.getElementById('toolBody'); let div=document.createElement('div'); div.className='result'; div.style.display='block'; div.innerHTML='<b>'+title+'</b><p style="font-size:12px;color:#cbd5e1;margin-top:6px">'+info+'</p><a class="dlBtn" href="'+URL.createObjectURL(blob)+'" download="'+filename+'">⬇️ Download Now</a>'; body.appendChild(div); div.scrollIntoView({behavior:'smooth'}); }
+function onPdfFiles(inp){ pdfFiles=Array.from(inp.files); let fi=document.getElementById('fileInfo'); if(fi) fi.textContent=pdfFiles.map(f=>f.name+' ('+(f.size/1024).toFixed(0)+' KB)').join(' • '); }
+async function readPdf(file){ let buf=await file.arrayBuffer(); return await PDFLib.PDFDocument.load(buf); }
+function renderTool(id){
+  let t=TOOLS[id]; if(!t) return; lastCategory=t.cat;
+  document.getElementById('toolTitle').textContent=t.title;
+  document.getElementById('toolDesc').textContent=t.desc+' • Category: '+(t.cat==='pdf'?'PDF Tools':t.cat==='image'?'Image Tools':'Daily Use Tools');
+  let body=document.getElementById('toolBody'); body.innerHTML=''; currentFile=null; currentImg=null;
+  // ===== TOOL 1 START - PHOTO 500KB =====
+  if(id==='photo500' || id==='imgCompress'){ body.innerHTML=fileInputHTML('image/*')+'<label style="font-size:12px;color:#94a3b8">Target Size</label><select id="targetKB" class="input"><option value="500">500 KB</option><option value="200">200 KB</option><option value="100">100 KB</option><option value="1000">1 MB</option></select><button class="btn green" onclick="doResizeKB()">✨ Resize / Compress Now →</button>'; }
+  // ===== TOOL 1 END =====
+  // ===== TOOL 2 START - IMAGE RESIZER =====
+  else if(id==='imgResize'){ body.innerHTML=fileInputHTML('image/*')+'<input id="wInput" class="input" placeholder="Width - Example: 500"><input id="hInput" class="input" placeholder="Height - Example: 500"><button class="btn green" onclick="doResizeWH()">Resize Now →</button>'; }
+  // ===== TOOL 2 END =====
+  // ===== TOOL 3 START - IMAGE CONVERTER =====
+  else if(id==='imgConvert'){ body.innerHTML=fileInputHTML('image/*')+'<select id="convFormat" class="input"><option value="image/png">PNG</option><option value="image/jpeg">JPG</option><option value="image/webp">WEBP</option></select><button class="btn green" onclick="doConvert()">Convert Now →</button>'; }
+  // ===== TOOL 3 END =====
+  // ===== TOOL 4 START - PASSPORT PHOTO =====
+  else if(id==='passport'){ body.innerHTML=fileInputHTML('image/*')+'<button class="btn green" onclick="doPassport()">🪪 Make Passport Photo →</button>'; }
+  // ===== TOOL 4 END =====
+  // ===== TOOL 5 START - IMAGE CROP =====
+  else if(id==='imgCrop'){ body.innerHTML=fileInputHTML('image/*')+'<button class="btn green" onclick="doCropCenter()">✂️ Crop Center →</button>'; }
+  // ===== TOOL 5 END =====
+  // ===== TOOL 6 START - IMAGE ROTATE =====
+  else if(id==='imgRotate'){ body.innerHTML=fileInputHTML('image/*')+'<button class="btn" onclick="doRotate(90)">Rotate 90°</button><button class="btn" onclick="doRotate(180)">Rotate 180°</button><button class="btn" onclick="doFlip()">Flip Now</button>'; }
+  // ===== TOOL 6 END =====
+  // ===== TOOL 7 START - IMAGE WATERMARK =====
+  else if(id==='imgWatermark'){ body.innerHTML=fileInputHTML('image/*')+'<input id="wmText" class="input" placeholder="Watermark Text - Example: My Name"><button class="btn green" onclick="doImgWatermark()">Add Watermark →</button>'; }
+  // ===== TOOL 7 END =====
+  // ===== TOOL 8 START - BLACK & WHITE =====
+  else if(id==='imgGray'){ body.innerHTML=fileInputHTML('image/*')+'<button class="btn green" onclick="doGray()">Make Black & White →</button>'; }
+  // ===== TOOL 8 END =====
+  // ===== TOOL 9 START - BRIGHTNESS =====
+  else if(id==='imgFilter'){ body.innerHTML=fileInputHTML('image/*')+'<input id="brightVal" type="range" min="50" max="150" value="110" class="input"><button class="btn green" onclick="doBright()">Increase Brightness →</button>'; }
+  // ===== TOOL 9 END =====
+  // ===== TOOL 10 START - IMAGE SIZE CHECKER =====
+  else if(id==='imgSize'){ body.innerHTML=fileInputHTML('image/*')+'<button class="btn" onclick="doImgSize()">Check Size →</button><div id="sizeOut" style="margin-top:10px;font-size:13px;line-height:1.7"></div>'; }
+  // ===== TOOL 10 END =====
+  // ===== TOOL 11 START - IMAGE TO BASE64 =====
+  else if(id==='imgBase64'){ body.innerHTML=fileInputHTML('image/*')+'<button class="btn" onclick="doBase64()">Make Base64 →</button><textarea id="b64Out" class="input" rows="4" placeholder="Base64 will appear here"></textarea>'; }
+  // ===== TOOL 11 END =====
+  // ===== TOOL 12 START - FAVICON MAKER =====
+  else if(id==='favicon'){ body.innerHTML=fileInputHTML('image/*')+'<button class="btn green" onclick="doFavicon()">Make Favicon (32x32) →</button>'; }
+  // ===== TOOL 12 END =====
+  // ===== TOOL 13 START - IMAGE ENLARGER =====
+  else if(id==='imgEnlarge'){ body.innerHTML=fileInputHTML('image/*')+'<button class="btn green" onclick="doEnlarge()">Make 2x Bigger →</button>'; }
+  // ===== TOOL 13 END =====
+  // ===== TOOL 14 START - PASSPORT PRINT SHEET =====
+  else if(id==='imgPrint'){ body.innerHTML=fileInputHTML('image/*')+'<button class="btn green" onclick="doPrintSheet()">Make 8 Copy Print Sheet →</button>'; }
+  // ===== TOOL 14 END =====
+  // ===== TOOL 15 START - PHOTO COLLAGE =====
+  else if(id==='imgCollage'){ body.innerHTML='<label class="upload">📁 Upload Photo<input type="file" id="toolFile2" accept="image/*" onchange="onFileChange(this)"></label><button class="btn green" onclick="doPassport()">Make Collage →</button>'; }
+  // ===== TOOL 15 END =====
+  // ===== TOOL 16 START - SIGNATURE MAKER =====
+  else if(id==='imgSign'){ body.innerHTML='<canvas id="signCanvas" width="300" height="150" style="background:#fff;border-radius:10px;width:100%"></canvas><button class="btn" onclick="clearSign()">Clear</button><button class="btn green" onclick="saveSign()">Download Signature →</button>'; setTimeout(initSign,100); }
+  // ===== TOOL 16 END =====
+  // ===== TOOL 17 START - IMAGE TO PDF =====
+  else if(id==='imgToPdf'){ body.innerHTML=fileInputHTML('image/*',true)+'<button class="btn red" onclick="doImgToPdf()">📄 Make PDF →</button>'; }
+  // ===== TOOL 17 END =====
+  // ===== TOOL 18 START - PDF MERGE =====
+  else if(id==='pdfMerge'){ body.innerHTML='<label class="upload">📁 Upload 2+ PDFs<input type="file" id="toolFile" accept="application/pdf" multiple onchange="onPdfFiles(this)"></label><p id="fileInfo"></p><button class="btn red" onclick="doPdfMerge()">📑 Merge Now →</button>'; }
+  // ===== TOOL 18 END =====
+  // ===== TOOL 19 START - PDF SPLIT =====
+  else if(id==='pdfSplit'){ body.innerHTML='<label class="upload">📁 Upload PDF<input type="file" id="toolFile" accept="application/pdf" onchange="onPdfFiles(this)"></label><p id="fileInfo"></p><input id="splitPage" class="input" placeholder="Page Number - Example: 1"><button class="btn red" onclick="doPdfSplit()">✂️ Split Now →</button>'; }
+  // ===== TOOL 19 END =====
+  // ===== TOOL 20 START - PDF COMPRESS =====
+  else if(id==='pdfCompress'){ body.innerHTML='<label class="upload">📁 Upload PDF<input type="file" id="toolFile" accept="application/pdf" onchange="onPdfFiles(this)"></label><p id="fileInfo"></p><button class="btn red" onclick="doPdfCompress()">📉 Compress Now →</button><p style="font-size:11px;color:#94a3b8;margin-top:6px">Re-save in browser to reduce size.</p>'; }
+  // ===== TOOL 20 END =====
+  // ===== TOOL 21 START - PDF TO JPG =====
+  else if(id==='pdfToJpg'){ body.innerHTML='<label class="upload">📁 Upload PDF<input type="file" id="toolFile" accept="application/pdf" onchange="onPdfFiles(this)"></label><p id="fileInfo"></p><button class="btn red" onclick="doPdfToJpg()">🖼️ Make JPG →</button>'; }
+  // ===== TOOL 21 END =====
+  // ===== TOOL 22 START - PDF PAGE DELETER =====
+  else if(id==='pdfDelete'){ body.innerHTML='<label class="upload">📁 Upload PDF<input type="file" id="toolFile" accept="application/pdf" onchange="onPdfFiles(this)"></label><p id="fileInfo"></p><input id="delPage" class="input" placeholder="Delete Page No - Example: 2"><button class="btn red" onclick="doPdfDelete()">🗑️ Delete Page →</button>'; }
+  // ===== TOOL 22 END =====
+  // ===== TOOL 23 START - PDF WATERMARK =====
+  else if(id==='pdfWatermark'){ body.innerHTML='<label class="upload">📁 Upload PDF<input type="file" id="toolFile" accept="application/pdf" onchange="onPdfFiles(this)"></label><p id="fileInfo"></p><input id="pdfWmText" class="input" placeholder="Watermark - Example: CONFIDENTIAL"><button class="btn red" onclick="doPdfWatermark()">Add Watermark →</button>'; }
+  // ===== TOOL 23 END =====
+  // ===== TOOL 24 START - PDF PAGE NUMBER =====
+  else if(id==='pdfPageNo'){ body.innerHTML='<label class="upload">📁 Upload PDF<input type="file" id="toolFile" accept="application/pdf" onchange="onPdfFiles(this)"></label><p id="fileInfo"></p><button class="btn red" onclick="doPdfPageNo()">Add Page Numbers →</button>'; }
+  // ===== TOOL 24 END =====
+  // ===== TOOL 25 START - PDF TO TEXT =====
+  else if(id==='pdfToText'){ body.innerHTML='<label class="upload">📁 Upload PDF<input type="file" id="toolFile" accept="application/pdf" onchange="onPdfFiles(this)"></label><p id="fileInfo"></p><button class="btn red" onclick="doPdfToText()">Extract Text →</button><textarea id="pdfTextOut" class="input" rows="6" placeholder="Text will appear here"></textarea>'; }
+  // ===== TOOL 25 END =====
+  // ===== TOOL 26 START - PDF SIZE CHECKER =====
+  else if(id==='pdfSize'){ body.innerHTML='<label class="upload">📁 Upload PDF<input type="file" id="toolFile" accept="application/pdf" onchange="onPdfFiles(this)"></label><p id="fileInfo"></p><button class="btn red" onclick="doPdfSize()">Check Size →</button><div id="pdfSizeOut" style="margin-top:10px;font-size:13px"></div>'; }
+  // ===== TOOL 26 END =====
+  // ===== TOOL 27 START - PDF PREVIEW =====
+  else if(id==='pdfPreview'){ body.innerHTML='<label class="upload">📁 Upload PDF<input type="file" id="toolFile" accept="application/pdf" onchange="onPdfFiles(this)"></label><p id="fileInfo"></p><button class="btn red" onclick="doPdfPreview()">View Preview →</button><iframe id="pdfFrame" style="width:100%;height:400px;display:none;border-radius:10px;margin-top:10px"></iframe>'; }
+  // ===== TOOL 27 END =====
+  // ===== TOOL 28 START - PDF ROTATE / META =====
+  else if(id==='pdfRotate' || id==='pdfMeta'){ body.innerHTML='<label class="upload">📁 Upload PDF<input type="file" id="toolFile" accept="application/pdf" onchange="onPdfFiles(this)"></label><p id="fileInfo"></p><button class="btn red" onclick="doPdfCompress()">Re-Save Now (Rotate / Meta Clean) →</button>'; }
+  // ===== TOOL 28 END =====
+  // ===== TOOL 29 START - QR GENERATOR =====
+  else if(id==='qr'){ body.innerHTML='<input id="qrText" class="input" placeholder="Link / Text - Example: https://google.com"><button class="btn orange" onclick="doQR()">Make QR →</button><div id="qrOut" style="background:#fff;padding:14px;border-radius:10px;margin-top:10px;display:none;text-align:center"></div><button class="btn green" onclick="downloadQR()" style="display:none" id="qrDl">Download QR</button>'; }
+  // ===== TOOL 29 END =====
+  // ===== TOOL 30 START - BARCODE GENERATOR =====
+  else if(id==='barcode'){ body.innerHTML='<input id="barText" class="input" placeholder="Number - Example: 123456789"><button class="btn orange" onclick="doBarcode()">Make Barcode →</button><div style="background:#fff;padding:14px;border-radius:10px;margin-top:10px"><svg id="barSvg"></svg></div>'; }
+  // ===== TOOL 30 END =====
+  // ===== TOOL 31 START - WORD COUNTER =====
+  else if(id==='wordCount'){ body.innerHTML='<textarea id="wcText" class="input" rows="5" placeholder="Write here..."></textarea><button class="btn orange" onclick="doWordCount()">Count Now →</button><div id="wcOut" style="margin-top:10px;font-size:13px;line-height:1.7"></div>'; }
+  // ===== TOOL 31 END =====
+  // ===== TOOL 32 START - TEXT TO PDF =====
+  else if(id==='textPdf'){ body.innerHTML='<textarea id="tpText" class="input" rows="5" placeholder="Write text, PDF will be made"></textarea><button class="btn orange" onclick="doTextPdf()">Make PDF →</button>'; }
+  // ===== TOOL 32 END =====
+  // ===== TOOL 33 START - CASE CONVERTER =====
+  else if(id==='caseConvert'){ body.innerHTML='<textarea id="ccText" class="input" rows="4" placeholder="Write text"></textarea><button class="btn orange" onclick="doCase(\'upper\')">UPPER</button><button class="btn orange" onclick="doCase(\'lower\')">lower</button><button class="btn orange" onclick="doCase(\'cap\')">Capital</button><textarea id="ccOut" class="input" rows="4" placeholder="Result"></textarea>'; }
+  // ===== TOOL 33 END =====
+  // ===== TOOL 34 START - CLEAN TEXT =====
+  else if(id==='cleanText'){ body.innerHTML='<textarea id="clText" class="input" rows="4" placeholder="Text with extra spaces"></textarea><button class="btn orange" onclick="doCleanText()">Clean Now →</button><textarea id="clOut" class="input" rows="4"></textarea>'; }
+  // ===== TOOL 34 END =====
+  // ===== TOOL 35 START - LOREM GENERATOR =====
+  else if(id==='lorem'){ body.innerHTML='<input id="loremPara" class="input" type="number" value="3" placeholder="How many paragraphs?"><button class="btn orange" onclick="doLorem()">Make Lorem →</button><textarea id="loremOut" class="input" rows="5"></textarea>'; }
+  // ===== TOOL 35 END =====
+  // ===== TOOL 36 START - PASSWORD GENERATOR =====
+  else if(id==='passGen'){ body.innerHTML='<input id="passLen" class="input" type="number" value="12" placeholder="Length"><button class="btn orange" onclick="doPassGen()">Make Password →</button><input id="passOut" class="input" readonly>'; }
+  // ===== TOOL 36 END =====
+  // ===== TOOL 37 START - JSON FORMATTER =====
+  else if(id==='json'){ body.innerHTML='<textarea id="jsonIn" class="input" rows="5" placeholder=\'{"name":"test"}\'></textarea><button class="btn orange" onclick="doJson()">Format Now →</button><textarea id="jsonOut" class="input" rows="5"></textarea>'; }
+  // ===== TOOL 37 END =====
+  // ===== TOOL 38 START - INVOICE MAKER =====
+  else if(id==='invoice'){ body.innerHTML='<input id="invName" class="input" placeholder="Customer Name"><input id="invItem" class="input" placeholder="Item - Example: Design"><input id="invAmt" class="input" placeholder="Amount - Example: 5000"><button class="btn orange" onclick="doInvoice()">Make Invoice PDF →</button>'; }
+  // ===== TOOL 38 END =====
+  // ===== TOOL 39 START - AGE CALCULATOR =====
+  else if(id==='ageCalc'){ body.innerHTML='<input id="dobInput" type="date" class="input"><button class="btn orange" onclick="doAge()">Calculate Age →</button><div id="ageOut" style="margin-top:10px"></div>'; }
+  // ===== TOOL 39 END =====
+  // ===== TOOL 40 START - EMI CALCULATOR =====
+  else if(id==='emiCalc'){ body.innerHTML='<input id="loanAmt" class="input" placeholder="Loan Amount - 100000"><input id="loanRate" class="input" placeholder="Rate % - 10"><input id="loanMonths" class="input" placeholder="Months - 12"><button class="btn orange" onclick="doEMI()">Calculate EMI →</button><div id="emiOut" style="margin-top:10px;font-size:14px"></div>'; }
+  // ===== TOOL 40 END =====
+  // ===== TOOL 41 START - GST CALCULATOR =====
+  else if(id==='gstCalc'){ body.innerHTML='<input id="gstAmt" class="input" placeholder="Amount - 1000"><input id="gstRate" class="input" placeholder="GST % - 18"><button class="btn orange" onclick="doGST()">Calculate GST →</button><div id="gstOut" style="margin-top:10px"></div>'; }
+  // ===== TOOL 41 END =====
+  // ===== TOOL 42 START - PERCENTAGE CALCULATOR =====
+  else if(id==='percentCalc'){ body.innerHTML='<input id="pctVal" class="input" placeholder="Value - 200"><input id="pctPer" class="input" placeholder="% - 10"><button class="btn orange" onclick="doPct()">Find % →</button><div id="pctOut" style="margin-top:10px"></div>'; }
+  // ===== TOOL 42 END =====
+  // ===== TOOL 43 START - UNIT CONVERTER =====
+  else if(id==='unitConv'){ body.innerHTML='<input id="unitVal" class="input" placeholder="Value - 1"><select id="unitType" class="input"><option value="kg-lb">KG → Pound</option><option value="cm-inch">CM → Inch</option><option value="km-mile">KM → Mile</option></select><button class="btn orange" onclick="doUnit()">Convert Now →</button><div id="unitOut" style="margin-top:10px"></div>'; }
+  // ===== TOOL 43 END =====
+  // ===== TOOL 44 START - STOPWATCH =====
+  else if(id==='stopwatch'){ body.innerHTML='<div id="swTime" style="font-size:36px;text-align:center;margin:16px 0">00:00</div><button class="btn orange" onclick="startSW()">Start</button><button class="btn" onclick="stopSW()">Stop</button><button class="btn" onclick="resetSW()">Reset</button>'; }
+  // ===== TOOL 44 END =====
+  // ===== TOOL 45 START - NOTEPAD =====
+  else if(id==='notepad'){ body.innerHTML='<textarea id="notePad" class="input" rows="8" placeholder="Write here - Auto Save"></textarea><p style="font-size:11px;color:#94a3b8">Auto save in browser.</p>'; setTimeout(()=>{ let n=localStorage.getItem('ai_note')||''; document.getElementById('notePad').value=n; document.getElementById('notePad').addEventListener('input',e=>localStorage.setItem('ai_note',e.target.value)); },100); }
+  // ===== TOOL 45 END =====
+  // ===== TOOL 46 START - TODO LIST =====
+  else if(id==='todo'){ body.innerHTML='<input id="todoIn" class="input" placeholder="Write task"><button class="btn orange" onclick="addTodo()">Add Task →</button><div id="todoList" style="margin-top:10px"></div>'; setTimeout(renderTodo,100); }
+  // ===== TOOL 46 END =====
+  // ===== TOOL 47 START - BMI CALCULATOR =====
+  else if(id==='bmi'){ body.innerHTML='<input id="bmiW" class="input" placeholder="Weight KG - 70"><input id="bmiH" class="input" placeholder="Height CM - 170"><button class="btn orange" onclick="doBMI()">Calculate BMI →</button><div id="bmiOut" style="margin-top:10px"></div>'; }
+  // ===== TOOL 47 END =====
+  // ===== TOOL 48 START - DATE DIFFERENCE =====
+  else if(id==='dateDiff'){ body.innerHTML='<input id="d1" type="date" class="input"><input id="d2" type="date" class="input"><button class="btn orange" onclick="doDateDiff()">Count Days →</button><div id="dateOut" style="margin-top:10px"></div>'; }
+  // ===== TOOL 48 END =====
+}
+function doResizeKB(){ if(!currentImg){ alert('Please upload photo first'); return; } let target=parseInt(document.getElementById('targetKB').value)||500; let canvas=document.createElement('canvas'); canvas.width=currentImg.naturalWidth; canvas.height=currentImg.naturalHeight; let ctx=canvas.getContext('2d'); ctx.drawImage(currentImg,0,0); let q=0.9; function tryC(){ canvas.toBlob(b=>{ let kb=b.size/1024; if(kb>target && q>0.1){ q-=0.1; tryC(); } else showResult('Done!','Before: '+(currentFile.size/1024).toFixed(0)+' KB • Now: '+kb.toFixed(0)+' KB',b,'photo-'+target+'kb.jpg'); },'image/jpeg',q); } tryC(); }
+function doResizeWH(){ if(!currentImg) return alert('Upload photo'); let w=parseInt(document.getElementById('wInput').value)||500; let h=parseInt(document.getElementById('hInput').value)||500; let c=document.createElement('canvas'); c.width=w; c.height=h; c.getContext('2d').drawImage(currentImg,0,0,w,h); c.toBlob(b=>showResult('Resize Done!',w+'x'+h,b,'resized.jpg'),'image/jpeg',0.9); }
+function doConvert(){ if(!currentImg) return alert('Upload photo'); let f=document.getElementById('convFormat').value; let c=document.createElement('canvas'); c.width=currentImg.naturalWidth; c.height=currentImg.naturalHeight; c.getContext('2d').drawImage(currentImg,0,0); c.toBlob(b=>showResult('Convert Done!',f,b,'converted.'+(f==='image/png'?'png':f==='image/webp'?'webp':'jpg')),f,0.9); }
+function doPassport(){ if(!currentImg) return alert('Upload photo'); let c=document.createElement('canvas'); c.width=413; c.height=531; let ctx=c.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,413,531); let s=Math.min(currentImg.naturalWidth/413,currentImg.naturalHeight/531); let sw=413*s, sh=531*s; ctx.drawImage(currentImg,(currentImg.naturalWidth-sw)/2,(currentImg.naturalHeight-sh)/2,sw,sh,0,0,413,531); c.toBlob(b=>showResult('Passport Photo Ready!','35x45mm • 413x531px • White Background',b,'passport.jpg'),'image/jpeg',0.95); }
+function doCropCenter(){ if(!currentImg) return alert('Upload photo'); let s=Math.min(currentImg.naturalWidth,currentImg.naturalHeight); let c=document.createElement('canvas'); c.width=s; c.height=s; c.getContext('2d').drawImage(currentImg,(currentImg.naturalWidth-s)/2,(currentImg.naturalHeight-s)/2,s,s,0,0,s,s); c.toBlob(b=>showResult('Crop Done!','Square Crop',b,'cropped.jpg'),'image/jpeg',0.9); }
+function doRotate(deg){ if(!currentImg) return alert('Upload photo'); let c=document.createElement('canvas'); if(deg===90||deg===270){c.width=currentImg.naturalHeight; c.height=currentImg.naturalWidth;} else {c.width=currentImg.naturalWidth; c.height=currentImg.naturalHeight;} let ctx=c.getContext('2d'); ctx.translate(c.width/2,c.height/2); ctx.rotate(deg*Math.PI/180); ctx.drawImage(currentImg,-currentImg.naturalWidth/2,-currentImg.naturalHeight/2); c.toBlob(b=>showResult('Rotate Done!',deg+'°',b,'rotated.jpg'),'image/jpeg',0.9); }
+function doFlip(){ if(!currentImg) return alert('Upload photo'); let c=document.createElement('canvas'); c.width=currentImg.naturalWidth; c.height=currentImg.naturalHeight; let ctx=c.getContext('2d'); ctx.translate(c.width,0); ctx.scale(-1,1); ctx.drawImage(currentImg,0,0); c.toBlob(b=>showResult('Flip Done!','',b,'flipped.jpg'),'image/jpeg',0.9); }
+function doImgWatermark(){ if(!currentImg) return alert('Upload photo'); let t=document.getElementById('wmText').value||'My Name'; let c=document.createElement('canvas'); c.width=currentImg.naturalWidth; c.height=currentImg.naturalHeight; let ctx=c.getContext('2d'); ctx.drawImage(currentImg,0,0); ctx.font='bold 40px Arial'; ctx.fillStyle='rgba(255,255,255,0.7)'; ctx.fillText(t,20,c.height-30); c.toBlob(b=>showResult('Watermark Added!',t,b,'watermarked.jpg'),'image/jpeg',0.9); }
+function doGray(){ if(!currentImg) return alert('Upload photo'); let c=document.createElement('canvas'); c.width=currentImg.naturalWidth; c.height=currentImg.naturalHeight; let ctx=c.getContext('2d'); ctx.filter='grayscale(1)'; ctx.drawImage(currentImg,0,0); c.toBlob(b=>showResult('Black & White Done!','',b,'bw.jpg'),'image/jpeg',0.9); }
+function doBright(){ if(!currentImg) return alert('Upload photo'); let v=document.getElementById('brightVal').value||110; let c=document.createElement('canvas'); c.width=currentImg.naturalWidth; c.height=currentImg.naturalHeight; let ctx=c.getContext('2d'); ctx.filter='brightness('+v+'%)'; ctx.drawImage(currentImg,0,0); c.toBlob(b=>showResult('Brightness Increased!','',b,'bright.jpg'),'image/jpeg',0.9); }
+function doImgSize(){ if(!currentFile) return alert('Upload photo'); document.getElementById('sizeOut').innerHTML='Name: '+currentFile.name+'<br>Size: '+(currentFile.size/1024).toFixed(0)+' KB<br>Width: '+(currentImg?currentImg.naturalWidth:'-')+'px<br>Height: '+(currentImg?currentImg.naturalHeight:'-')+'px'; }
+function doBase64(){ if(!currentFile) return alert('Upload photo'); let r=new FileReader(); r.onload=e=>{ document.getElementById('b64Out').value=e.target.result.substring(0,500)+'...'; console.log(e.target.result); }; r.readAsDataURL(currentFile); }
+function doFavicon(){ if(!currentImg) return alert('Upload photo'); let c=document.createElement('canvas'); c.width=32; c.height=32; c.getContext('2d').drawImage(currentImg,0,0,32,32); c.toBlob(b=>showResult('Favicon Ready!','32x32',b,'favicon.png'),'image/png'); }
+function doEnlarge(){ if(!currentImg) return alert('Upload photo'); let c=document.createElement('canvas'); c.width=currentImg.naturalWidth*2; c.height=currentImg.naturalHeight*2; c.getContext('2d').drawImage(currentImg,0,0,c.width,c.height); c.toBlob(b=>showResult('2x Bigger Done!',c.width+'x'+c.height,b,'enlarged.jpg'),'image/jpeg',0.9); }
+function doPrintSheet(){ if(!currentImg) return alert('Upload photo'); let c=document.createElement('canvas'); c.width=413*2; c.height=531*4; let ctx=c.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,c.width,c.height); for(let i=0;i<8;i++){ let x=(i%2)*413, y=Math.floor(i/2)*531; let s=Math.min(currentImg.naturalWidth/413,currentImg.naturalHeight/531); let sw=413*s, sh=531*s; ctx.drawImage(currentImg,(currentImg.naturalWidth-sw)/2,(currentImg.naturalHeight-sh)/2,sw,sh,x,y,413,531); } c.toBlob(b=>showResult('Print Sheet Ready!','8 Copies in 1 Page',b,'print-sheet.jpg'),'image/jpeg',0.95); }
+function initSign(){ let cv=document.getElementById('signCanvas'); if(!cv) return; let ctx=cv.getContext('2d'); ctx.strokeStyle='#000'; ctx.lineWidth=2; let draw=false; cv.addEventListener('mousedown',e=>{draw=true; ctx.beginPath(); ctx.moveTo(e.offsetX,e.offsetY);}); cv.addEventListener('mousemove',e=>{ if(draw){ ctx.lineTo(e.offsetX,e.offsetY); ctx.stroke(); } }); cv.addEventListener('mouseup',()=>draw=false); cv.addEventListener('touchstart',e=>{draw=true; let r=cv.getBoundingClientRect(); ctx.beginPath(); ctx.moveTo(e.touches[0].clientX-r.left,e.touches[0].clientY-r.top);}); cv.addEventListener('touchmove',e=>{ e.preventDefault(); if(draw){ let r=cv.getBoundingClientRect(); ctx.lineTo(e.touches[0].clientX-r.left,e.touches[0].clientY-r.top); ctx.stroke(); } },{passive:false}); cv.addEventListener('touchend',()=>draw=false); }
+function clearSign(){ let cv=document.getElementById('signCanvas'); cv.getContext('2d').clearRect(0,0,cv.width,cv.height); }
+function saveSign(){ let cv=document.getElementById('signCanvas'); cv.toBlob(b=>showResult('Signature Ready!','Transparent PNG',b,'signature.png'),'image/png'); }
+async function doImgToPdf(){ if(!currentFile) return alert('Upload photo'); let imgData=await new Promise(res=>{ let r=new FileReader(); r.onload=e=>res(e.target.result); r.readAsDataURL(currentFile); }); const {jsPDF}=window.jspdf; let doc=new jsPDF(); doc.addImage(imgData,'JPEG',10,10,190,260); let blob=doc.output('blob'); showResult('PDF Ready!','Image to PDF',blob,'image-to-pdf.pdf'); }
+async function doPdfMerge(){ if(pdfFiles.length<2) return alert('Upload 2+ PDFs'); let merged=await PDFLib.PDFDocument.create(); for(let f of pdfFiles){ let src=await readPdf(f); let pages=await merged.copyPages(src,src.getPageIndices()); pages.forEach(p=>merged.addPage(p)); } let bytes=await merged.save(); showResult('PDF Merge Done!',pdfFiles.length+' PDFs Joined',new Blob([bytes],{type:'application/pdf'}),'merged.pdf'); }
+async function doPdfSplit(){ if(!pdfFiles[0]) return alert('Upload PDF'); let pageNo=parseInt(document.getElementById('splitPage').value)||1; let src=await readPdf(pdfFiles[0]); if(pageNo<1||pageNo>src.getPageCount()) return alert('Enter Page 1-'+src.getPageCount()); let out=await PDFLib.PDFDocument.create(); let [p]=await out.copyPages(src,[pageNo-1]); out.addPage(p); let bytes=await out.save(); showResult('PDF Split Done!','Page '+pageNo+' Separated',new Blob([bytes],{type:'application/pdf'}),'split-page-'+pageNo+'.pdf'); }
+async function doPdfCompress(){ if(!pdfFiles[0]) return alert('Upload PDF'); let src=await readPdf(pdfFiles[0]); let bytes=await src.save({useObjectStreams:false}); showResult('PDF Compress Done!','Before: '+(pdfFiles[0].size/1024).toFixed(0)+' KB • Now: '+(bytes.length/1024).toFixed(0)+' KB',new Blob([bytes],{type:'application/pdf'}),'compressed.pdf'); }
+async function doPdfToJpg(){ if(!pdfFiles[0]) return alert('Upload PDF'); let buf=await pdfFiles[0].arrayBuffer(); let pdf=await pdfjsLib.getDocument({data:buf}).promise; let page=await pdf.getPage(1); let vp=page.getViewport({scale:1.5}); let c=document.createElement('canvas'); c.width=vp.width; c.height=vp.height; await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise; c.toBlob(b=>showResult('PDF to JPG Done!','Page 1',b,'pdf-page-1.jpg'),'image/jpeg',0.9); }
+async function doPdfDelete(){ if(!pdfFiles[0]) return alert('Upload PDF'); let del=parseInt(document.getElementById('delPage').value)||1; let src=await readPdf(pdfFiles[0]); src.removePage(del-1); let bytes=await src.save(); showResult('Page Deleted!','Page '+del+' Removed',new Blob([bytes],{type:'application/pdf'}),'deleted.pdf'); }
+async function doPdfWatermark(){ if(!pdfFiles[0]) return alert('Upload PDF'); let txt=document.getElementById('pdfWmText').value||'CONFIDENTIAL'; let src=await readPdf(pdfFiles[0]); let pages=src.getPages(); pages.forEach(p=>{ p.drawText(txt,{x:100,y:400,size:40,opacity:0.3,color:PDFLib.rgb(0.8,0.8,0.8)}); }); let bytes=await src.save(); showResult('Watermark Added!',txt,new Blob([bytes],{type:'application/pdf'}),'watermarked.pdf'); }
+async function doPdfPageNo(){ if(!pdfFiles[0]) return alert('Upload PDF'); let src=await readPdf(pdfFiles[0]); let pages=src.getPages(); pages.forEach((p,i)=>{ p.drawText('Page '+(i+1),{x:270,y:20,size:12,color:PDFLib.rgb(0,0,0)}); }); let bytes=await src.save(); showResult('Page Numbers Added!',pages.length+' Pages',new Blob([bytes],{type:'application/pdf'}),'pageno.pdf'); }
+async function doPdfToText(){ if(!pdfFiles[0]) return alert('Upload PDF'); let buf=await pdfFiles[0].arrayBuffer(); let pdf=await pdfjsLib.getDocument({data:buf}).promise; let txt=''; for(let i=1;i<=Math.min(3,pdf.numPages);i++){ let pg=await pdf.getPage(i); let tc=await pg.getTextContent(); txt+=tc.items.map(it=>it.str).join(' ')+'\n\n'; } document.getElementById('pdfTextOut').value=txt||'No text found'; }
+async function doPdfSize(){ if(!pdfFiles[0]) return alert('Upload PDF'); let src=await readPdf(pdfFiles[0]); document.getElementById('pdfSizeOut').innerHTML='Pages: '+src.getPageCount()+'<br>Size: '+(pdfFiles[0].size/1024).toFixed(0)+' KB<br>Name: '+pdfFiles[0].name; }
+async function doPdfPreview(){ if(!pdfFiles[0]) return alert('Upload PDF'); let url=URL.createObjectURL(pdfFiles[0]); let fr=document.getElementById('pdfFrame'); fr.src=url; fr.style.display='block'; }
+function doQR(){ let t=document.getElementById('qrText').value.trim(); if(!t) return alert('Write link / text'); let out=document.getElementById('qrOut'); out.innerHTML=''; out.style.display='block'; new QRCode(out,{text:t,width:180,height:180}); document.getElementById('qrDl').style.display='block'; }
+function downloadQR(){ let img=document.querySelector('#qrOut img'); if(img){ let a=document.createElement('a'); a.href=img.src; a.download='qr.png'; a.click(); } }
+function doBarcode(){ let t=document.getElementById('barText').value.trim()||'123456789'; try{ JsBarcode('#barSvg',t,{format:'CODE128',width:2,height:80}); }catch(e){ alert('Enter valid number'); } }
+function doWordCount(){ let t=document.getElementById('wcText').value; let words=t.trim()?t.trim().split(/\s+/).length:0; document.getElementById('wcOut').innerHTML='Words: <b>'+words+'</b> • Chars: <b>'+t.length+'</b> • Lines: <b>'+t.split('\n').length+'</b>'; }
+function doTextPdf(){ let t=document.getElementById('tpText').value; if(!t) return alert('Write text'); const {jsPDF}=window.jspdf; let doc=new jsPDF(); doc.text(t,10,20,{maxWidth:180}); showResult('Text to PDF Done!','',doc.output('blob'),'text.pdf'); }
+function doCase(type){ let t=document.getElementById('ccText').value; let out=''; if(type==='upper') out=t.toUpperCase(); if(type==='lower') out=t.toLowerCase(); if(type==='cap') out=t.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()); document.getElementById('ccOut').value=out; }
+function doCleanText(){ let t=document.getElementById('clText').value; document.getElementById('clOut').value=t.replace(/\s+/g,' ').trim(); }
+function doLorem(){ let n=parseInt(document.getElementById('loremPara').value)||3; let para='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '; document.getElementById('loremOut').value=para.repeat(n); }
+function doPassGen(){ let len=parseInt(document.getElementById('passLen').value)||12; let chars='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#$%'; let p=''; for(let i=0;i<len;i++) p+=chars[Math.floor(Math.random()*chars.length)]; document.getElementById('passOut').value=p; }
+function doJson(){ try{ let o=JSON.parse(document.getElementById('jsonIn').value); document.getElementById('jsonOut').value=JSON.stringify(o,null,2); }catch(e){ alert('Invalid JSON'); } }
+function doInvoice(){ let n=document.getElementById('invName').value||'Customer'; let item=document.getElementById('invItem').value||'Service'; let amt=document.getElementById('invAmt').value||'5000'; const {jsPDF}=window.jspdf; let doc=new jsPDF(); doc.setFontSize(20); doc.text('INVOICE',20,20); doc.setFontSize(12); doc.text('Customer: '+n,20,40); doc.text('Item: '+item,20,50); doc.text('Amount: Rs '+amt,20,60); showResult('Invoice Ready!',n+' - Rs '+amt,doc.output('blob'),'invoice.pdf'); }
+function doAge(){ let dob=new Date(document.getElementById('dobInput').value); if(!dob.getTime()) return alert('Select date'); let diff=Date.now()-dob.getTime(); let age=new Date(diff).getUTCFullYear()-1970; document.getElementById('ageOut').innerHTML='Age: <b>'+age+' Years</b>'; }
+function doEMI(){ let P=parseFloat(document.getElementById('loanAmt').value)||0; let r=(parseFloat(document.getElementById('loanRate').value)||0)/1200; let n=parseFloat(document.getElementById('loanMonths').value)||0; if(!P||!r||!n) return alert('Fill all fields'); let emi=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1); document.getElementById('emiOut').innerHTML='EMI: <b>Rs '+emi.toFixed(0)+'/month</b><br>Total Pay: Rs '+(emi*n).toFixed(0); }
+function doGST(){ let amt=parseFloat(document.getElementById('gstAmt').value)||0; let rate=parseFloat(document.getElementById('gstRate').value)||18; let gst=amt*rate/100; document.getElementById('gstOut').innerHTML='GST: Rs '+gst.toFixed(0)+'<br>Total With GST: Rs '+(amt+gst).toFixed(0); }
+function doPct(){ let v=parseFloat(document.getElementById('pctVal').value)||0; let p=parseFloat(document.getElementById('pctPer').value)||0; document.getElementById('pctOut').innerHTML=p+'% of '+v+' = <b>'+(v*p/100).toFixed(2)+'</b>'; }
+function doUnit(){ let v=parseFloat(document.getElementById('unitVal').value)||0; let ty=document.getElementById('unitType').value; let out=''; if(ty==='kg-lb') out=(v*2.20462).toFixed(2)+' Pound'; if(ty==='cm-inch') out=(v/2.54).toFixed(2)+' Inch'; if(ty==='km-mile') out=(v*0.621371).toFixed(2)+' Mile'; document.getElementById('unitOut').innerHTML='<b>'+out+'</b>'; }
+let swInt=null, swSec=0; function startSW(){ if(swInt) return; swInt=setInterval(()=>{ swSec++; let m=Math.floor(swSec/60), s=swSec%60; document.getElementById('swTime').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0'); },1000); } function stopSW(){ clearInterval(swInt); swInt=null; } function resetSW(){ stopSW(); swSec=0; document.getElementById('swTime').textContent='00:00'; }
+let todos=[]; function renderTodo(){ try{todos=JSON.parse(localStorage.getItem('ai_todo')||'[]')}catch(e){todos=[]} document.getElementById('todoList').innerHTML=todos.map((t,i)=>'<div style="background:#0f172a;padding:10px;border-radius:10px;margin-top:6px;display:flex;justify-content:space-between"><span>'+t+'</span><button onclick="delTodo('+i+')" style="background:#ef4444;color:#fff;padding:4px 8px;border-radius:10px">X</button></div>').join(''); } function addTodo(){ let v=document.getElementById('todoIn').value.trim(); if(!v) return; todos.push(v); localStorage.setItem('ai_todo',JSON.stringify(todos)); document.getElementById('todoIn').value=''; renderTodo(); } function delTodo(i){ todos.splice(i,1); localStorage.setItem('ai_todo',JSON.stringify(todos)); renderTodo(); }
+function doBMI(){ let w=parseFloat(document.getElementById('bmiW').value)||0; let h=parseFloat(document.getElementById('bmiH').value)||0; if(!w||!h) return alert('Enter weight + height'); let bmi=w/((h/100)*(h/100)); document.getElementById('bmiOut').innerHTML='BMI: <b>'+bmi.toFixed(1)+'</b> - '+(bmi<18.5?'Underweight':bmi<25?'Normal':bmi<30?'Overweight':'Obese'); }
+function doDateDiff(){ let d1=new Date(document.getElementById('d1').value); let d2=new Date(document.getElementById('d2').value); if(!d1.getTime()||!d2.getTime()) return alert('Select both dates'); let diff=Math.abs(d2-d1)/(1000*60*60*24); document.getElementById('dateOut').innerHTML='Difference: <b>'+diff+' Days</b>'; }
+</script>
+</body>
+</html>
