@@ -170,30 +170,352 @@ async function fetchMood(){try{let f=await fetch('https://api.alternative.me/fng
 <p id="aiWhy" style="color:#9ca3af">AI Reason will show here.</p>
 </div>
 <script>
-// ===== AI ANALYSIS JS - HTML + JS TOGETHER =====
-function updateAI(){
-  let s=detectSMC(); let last=candles[candles.length-1]; if(!last)return; let price=last.close;
-  let bullOB=[...s.obs].reverse().find(o=>o.type==='bull'&&o.bottom<price); let bearOB=s.obs.find(o=>o.type==='bear'&&o.top>price);
-  let fng=parseInt(($('fngText').textContent||'50').split(' ')[0])||50; let fund=parseFloat(($('fundText').textContent||'0').replace('%',''))||0;
-  let hl=window._hl||{}; let targetUp=hl.mHigh||price*1.02, targetDown=hl.mLow||price*0.98;
-  let dir=s.bias.includes('BULLISH')?'UP':s.bias.includes('BEARISH')?'DOWN':'SIDEWAYS';
-  let why=[];
-  if(dir==='UP')why.push('HTF 4H Bias is Bullish - Higher Highs');
-  if(dir==='DOWN')why.push('HTF 4H Bias is Bearish - Lower Lows');
-  if(bullOB)why.push('Bullish OB at $'+bullOB.bottom.toFixed(0)+' - Buyers waiting');
-  if(bearOB)why.push('Bearish OB at $'+bearOB.top.toFixed(0)+' - Sellers waiting');
-  if(fng>70)why.push('Fear & Greed '+fng+' = Greed - Pullback possible');
-  if(fng<25)why.push('Fear & Greed '+fng+' = Fear - Smart money buys Discount');
-  if(fund>0.03)why.push('Funding +'+fund.toFixed(3)+'% = Too many Longs - Squeeze possible');
-  if(fund<0)why.push('Funding Negative = Too many Shorts - Squeeze up possible');
-  if(hl.mHigh)why.push('Month High $'+hl.mHigh.toFixed(0)+' is liquidity - Price will go there to sweep');
-  let forecast='';
-  if(aiMode==='short') forecast= dir==='UP' ? '📈 <b>Today:</b> Can go <b>UP to $'+targetUp.toFixed(0)+'</b> (Month High). <b>Why:</b> Bullish bias + OB below. <b>Plan:</b> Buy dip at OB.' : dir==='DOWN' ? '📉 <b>Today:</b> Can go <b>DOWN to $'+targetDown.toFixed(0)+'</b> (Month Low). <b>Why:</b> Bearish bias + Bearish OB above.' : '➡️ <b>Today:</b> Sideways between $'+(hl.dLow||price*0.99).toFixed(0)+' - $'+(hl.dHigh||price*1.01).toFixed(0)+'. Wait for sweep.';
-  if(aiMode==='mid') forecast='📊 <b>This Week:</b> '+(dir==='UP'?'Bullish - Target Week High $'+(hl.wHigh||price*1.03).toFixed(0):dir==='DOWN'?'Bearish - Target Week Low $'+(hl.wLow||price*0.97).toFixed(0):'Range - Wait for breakout');
-  if(aiMode==='long') forecast='📅 <b>This Month:</b> '+(dir==='UP'?'Bullish - Target Month High $'+(hl.mHigh||price*1.05).toFixed(0):dir==='DOWN'?'Bearish - Target Month Low $'+(hl.mLow||price*0.95).toFixed(0):'Range - Month High/Low will be swept');
-  $('aiForecast').innerHTML=forecast; $('aiWhy').innerHTML='<b>AI Reasons:</b><br>• '+why.join('<br>• ');
+// ===== AI ANALYSIS JS - HTML + JS TOGETHER ====
+  <!-- ===== SECTION: AI ANALYSIS START ===== -->
+<!-- SUPER POWER AI - HTML + JS TOGETHER - 1Y to 15m + Probability -->
+<div class="aiBox" id="aiSection" style="border:1px solid #3b82f6;background:linear-gradient(135deg,#0f172a,#12151a);border-radius:16px;padding:14px">
+  <h4 style="color:#60a5fa;font-size:14px;display:flex;justify-content:space-between;align-items:center">🤖 SUPER AI - Where Market Can Go? <span id="aiLiveDot" style="font-size:11px;color:#0ecb81">● LIVE • Updating</span></h4>
+  <p style="font-size:11px;color:#888;margin-top:4px">Analyses 1Y + 1M + 1W + 1D + 4H + 1H + 15m + Funding + Fear + RSI + Volume + News + Liquidity → Gives Probability</p>
+
+  <!-- AI MAIN VERDICT -->
+  <div id="aiVerdict" style="background:#1a1e23;border:1px solid #333;border-radius:12px;padding:12px;margin-top:10px">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <b id="aiMainText" style="font-size:16px;color:#fff">🧠 Analysing all timeframes...</b>
+      <b id="aiConfidence" style="font-size:13px;background:#f0b90b;color:#000;padding:5px 10px;border-radius:20px">Confidence --%</b>
+    </div>
+    <p id="aiForecast" style="font-size:12.5px;line-height:1.7;margin-top:8px;color:#ddd">Wait...</p>
+    <!-- Probability Bars -->
+    <div style="margin-top:10px">
+      <div style="display:flex;justify-content:space-between;font-size:11px"><span>🟢 BULLISH</span><b id="aiBullPct" style="color:#0ecb81">--%</b></div>
+      <div style="background:#222;height:10px;border-radius:20px;overflow:hidden;margin:4px 0 8px"><div id="aiBullBar" style="height:100%;width:0%;background:#0ecb81;transition:width .5s"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:11px"><span>🔴 BEARISH</span><b id="aiBearPct" style="color:#f6465d">--%</b></div>
+      <div style="background:#222;height:10px;border-radius:20px;overflow:hidden;margin:4px 0 8px"><div id="aiBearBar" style="height:100%;width:0%;background:#f6465d;transition:width .5s"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:11px"><span>➡️ SIDEWAYS / RANGE</span><b id="aiSidePct" style="color:#f0b90b">--%</b></div>
+      <div style="background:#222;height:10px;border-radius:20px;overflow:hidden"><div id="aiSideBar" style="height:100%;width:0%;background:#f0b90b;transition:width .5s"></div></div>
+    </div>
+  </div>
+
+  <!-- TIMEFRAME TABLE - 1Y to 15m -->
+  <div style="background:#0b0e11;border-radius:12px;padding:10px;margin-top:10px;overflow:auto">
+    <b style="font-size:12px">📊 Multi-Timeframe Bias - All Frames</b>
+    <table style="width:100%;border-collapse:collapse;margin-top:8px;font-size:12px;min-width:520px">
+      <thead><tr><th style="color:#888;text-align:left;padding:6px">Timeframe</th><th style="color:#888;text-align:left;padding:6px">Bias</th><th style="color:#888;text-align:left;padding:6px">BOS / CHoCH</th><th style="color:#888;text-align:left;padding:6px">RSI</th><th style="color:#888;text-align:left;padding:6px">Price vs 50%</th><th style="color:#888;text-align:left;padding:6px">Score</th></tr></thead>
+      <tbody id="aiTFBody"><tr><td colspan="6" style="color:#888;padding:8px">Loading timeframes...</td></tr></tbody>
+    </table>
+    <p style="font-size:11px;color:#888;margin-top:6px">Weight: 1Y=25% • 1M=20% • 1W=15% • 1D=15% • 4H=12% • 1H=8% • 15m=5% - HTF controls direction, LTF controls entry.</p>
+  </div>
+
+  <!-- TARGETS WITH PROBABILITY -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+    <div style="background:rgba(14,203,129,.08);border:1px solid rgba(14,203,129,.3);border-radius:12px;padding:11px">
+      <b style="font-size:12px;color:#0ecb81">🟢 Bullish Targets</b><div id="aiBullTargets" style="font-size:12px;line-height:1.7;margin-top:6px;color:#ddd">--</div>
+    </div>
+    <div style="background:rgba(246,70,93,.08);border:1px solid rgba(246,70,93,.3);border-radius:12px;padding:11px">
+      <b style="font-size:12px;color:#f6465d">🔴 Bearish Targets</b><div id="aiBearTargets" style="font-size:12px;line-height:1.7;margin-top:6px;color:#ddd">--</div>
+    </div>
+  </div>
+
+  <!-- WHY - REASONS -->
+  <div style="background:#0b0e11;border:1px dashed #444;border-radius:12px;padding:11px;margin-top:10px">
+    <b style="font-size:12px;color:#fff">🧠 AI Reasons - Why Market Will Go There? <span id="aiScoreText" style="color:#f0b90b"></span></b>
+    <p id="aiWhy" style="font-size:12px;line-height:1.7;margin-top:6px;color:#ccc">--</p>
+  </div>
+
+  <!-- SCENARIOS -->
+  <div style="background:#0b0e11;border-radius:12px;padding:11px;margin-top:10px">
+    <b style="font-size:12px">🎯 3 Scenarios - What Can Happen?</b>
+    <p id="aiScenarios" style="font-size:12px;line-height:1.7;margin-top:6px;color:#ddd">--</p>
+  </div>
+
+  <!-- RISK + NEWS IMPACT -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+    <div style="background:#1a1e23;border-radius:12px;padding:11px"><b style="font-size:12px">⚠️ Risk Check</b><p id="aiRisk" style="font-size:12px;line-height:1.6;margin-top:6px;color:#ddd">--</p></div>
+    <div style="background:#1a1e23;border-radius:12px;padding:11px"><b style="font-size:12px">📰 News Impact</b><p id="aiNewsImpact" style="font-size:12px;line-height:1.6;margin-top:6px;color:#ddd">--</p></div>
+  </div>
+
+  <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
+    <button data-ai="short" class="active" style="background:#3b82f6;color:#fff;padding:8px 12px;border-radius:20px;font-size:12px">Today</button>
+    <button data-ai="mid" style="background:#1e2329;color:#fff;padding:8px 12px;border-radius:20px;font-size:12px">This Week</button>
+    <button data-ai="long" style="background:#1e2329;color:#fff;padding:8px 12px;border-radius:20px;font-size:12px">This Month</button>
+    <button id="btnAIRefresh" style="background:#f0b90b;color:#000;padding:8px 12px;border-radius:20px;font-weight:800;font-size:12px;margin-left:auto">↻ Re-Analyse</button>
+  </div>
+  <p style="font-size:11px;color:#888;margin-top:8px">⚠️ AI is probability, not guarantee. Always use SL. If probability &lt; 55%, don't trade - Wait for A+ setup.</p>
+</div>
+
+<script>
+// ===== SUPER AI JS - HTML + JS TOGETHER - COPY FULL BLOCK =====
+// Cache for all timeframes - Fetched separately, not from 15m candles
+window.AI_CACHE = window.AI_CACHE || { '1M':[], '1w':[], '1d':[], '4h':[], '1h':[], '15m':[], '1Y':[] };
+let aiMode = window.aiMode || 'short';
+window.aiMode = aiMode;
+
+// --- Helper: RSI ---
+function aiRSI(arr, period){
+  if(!arr || arr.length < period+2) return 50;
+  let gains=0, losses=0;
+  for(let i=arr.length-period; i<arr.length; i++){
+    let diff = arr[i].close - arr[i-1].close;
+    if(diff>=0) gains+=diff; else losses+=Math.abs(diff);
+  }
+  let avgG=gains/period, avgL=losses/period;
+  if(avgL===0) return 100;
+  let rs=avgG/avgL;
+  return 100 - (100/(1+rs));
 }
-document.querySelectorAll('[data-ai]').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('[data-ai]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');aiMode=btn.getAttribute('data-ai');updateAI();}});
+// --- Helper: ATR for Targets ---
+function aiATR(arr, period){
+  if(!arr || arr.length<period+2) return 0;
+  let sum=0;
+  for(let i=arr.length-period; i<arr.length; i++){ sum += (arr[i].high - arr[i].low); }
+  return sum/period;
+}
+// --- Helper: Analyse ONE timeframe ---
+function aiAnalyseTF(arr){
+  if(!arr || arr.length<10) return {bias:'NEUTRAL', bos:'-', rsi:50, pos:'-', score:0, last:0, hi:0, lo:0};
+  let last = arr[arr.length-1].close;
+  let hi = Math.max(...arr.slice(-50).map(c=>c.high));
+  let lo = Math.min(...arr.slice(-50).map(c=>c.low));
+  let eq = (hi+lo)/2;
+  let pos = last>eq ? 'Premium (Above 50%)' : 'Discount (Below 50%)';
+  // BOS / CHoCH detection - Swing logic
+  let bias='NEUTRAL', bos='No BOS';
+  let lh=-1, ll=1e12;
+  for(let i=2;i<arr.length-2;i++){
+    let c=arr[i];
+    let isH=c.high>arr[i-1].high && c.high>arr[i+1].high;
+    let isL=c.low<arr[i-1].low && c.low<arr[i+1].low;
+    if(isH && c.high>lh){ bias='BULLISH'; bos='BOS Up ✅'; lh=c.high; }
+    if(isL && c.low<ll){ if(bias==='BULLISH'){ bias='CHoCH ⚠️'; bos='CHoCH - Reversal?'; } else { bias='BEARISH'; bos='BOS Down 🔴'; } ll=c.low; }
+  }
+  let rsi = aiRSI(arr,14);
+  // Score for this TF: -100 to +100
+  let score=0;
+  if(bias==='BULLISH') score+=60; if(bias==='BEARISH') score-=60; if(bias.includes('CHoCH')) score = bias.includes('BULL') ? -20 : 20;
+  if(last>eq) score+=10; else score-=10; // Premium = bearish lean, Discount = bullish lean - Actually in SMC, Discount = Buy, Premium = Sell, so we invert for direction
+  if(last>eq) score-=20; else score+=20;
+  if(rsi>70) score-=20; if(rsi<30) score+=20; // Overbought = pullback, Oversold = bounce
+  if(rsi>=50 && rsi<=70) score+=10; if(rsi>=30 && rsi<50) score-=10;
+  return {bias, bos, rsi:Math.round(rsi), pos, score, last, hi, lo, eq, atr:aiATR(arr,14)};
+}
+// --- Fetch All Timeframes for AI ---
+async function aiFetchAll(){
+  let sym = currentSymbol;
+  let jobs = [
+    ['1M','1M'], ['1w','1w'], ['1d','1d'], ['4h','4h'], ['1h','1h'], ['15m','15m']
+  ];
+  // 1Y = Use 1M candles last 12 = 1 Year
+  for(let [key, interval] of jobs){
+    try{
+      let r = await fetch('https://api.binance.com/api/v3/klines?symbol='+sym+'&interval='+interval+'&limit=200');
+      let d = await r.json();
+      window.AI_CACHE[key] = d.map(x=>({time:+x[0],open:+x[1],high:+x[2],low:+x[3],close:+x[4],volume:+x[5]}));
+    }catch(e){}
+  }
+  // 1Y from 1M candles
+  if(window.AI_CACHE['1M'].length){
+    window.AI_CACHE['1Y'] = window.AI_CACHE['1M'].slice(-12);
+  }
+  updateSuperAI();
+}
+// --- Main SUPER AI ---
+function updateSuperAI(){
+  if(!candles.length) return;
+  let price = candles[candles.length-1].close;
+  // If AI cache empty, use main candles as fallback for 15m
+  if(!window.AI_CACHE['15m'].length) window.AI_CACHE['15m']=candles;
+  if(!window.AI_CACHE['4h'].length) window.AI_CACHE['4h']=candles4h;
+  if(!window.AI_CACHE['1d'].length) window.AI_CACHE['1d']=candles1d;
+  if(!window.AI_CACHE['1w'].length) window.AI_CACHE['1w']=candles1w;
+  if(!window.AI_CACHE['1M'].length) window.AI_CACHE['1M']=candles1M;
+
+  let weights = {'1Y':25,'1M':20,'1w':15,'1d':15,'4h':12,'1h':8,'15m':5};
+  let order = ['1Y','1M','1w','1d','4h','1h','15m'];
+  let results = {};
+  let totalScore = 0, totalWeight = 0;
+
+  order.forEach(tf=>{
+    let arr = window.AI_CACHE[tf] || [];
+    // For 1Y, we need full 1M for bias, not just 12 candles - use 1M array
+    if(tf==='1Y') arr = window.AI_CACHE['1M'] || [];
+    let res = aiAnalyseTF(arr);
+    results[tf]=res;
+    let w = weights[tf];
+    totalScore += res.score * w;
+    totalWeight += w;
+  });
+  let avgScore = totalWeight ? totalScore/totalWeight : 0; // -100 to +100
+
+  // --- Other Factors ---
+  let s = detectSMC();
+  let bullOB = [...s.obs].reverse().find(o=>o.type==='bull'&&o.bottom<price);
+  let bearOB = s.obs.find(o=>o.type==='bear'&&o.top>price);
+  let bullFVG = [...s.fvgs].reverse().find(f=>f.type==='bull'&&f.bottom<price);
+  let bearFVG = s.fvgs.find(f=>f.type==='bear'&&f.top>price);
+  let sweep = s.sweeps[s.sweeps.length-1];
+
+  let fngText = ($('fngText')?$('fngText').textContent:'50')||'50';
+  let fng = parseInt(fngText.split(' ')[0])||50;
+  let fundText = ($('fundText')?$('fundText').textContent:'0')||'0';
+  let fund = parseFloat(fundText.replace('%',''))||0;
+  let hl = window._hl||{};
+  let atr = aiATR(candles,14) || price*0.01;
+
+  // Adjust score with Mood / Funding / FVG / OB
+  let extra = 0, reasons=[];
+  // HTF reasons
+  if(results['1Y'].bias==='BULLISH') reasons.push('🟢 1Y (Yearly) Bias Bullish - Big trend UP - Most important');
+  if(results['1Y'].bias==='BEARISH') reasons.push('🔴 1Y Bias Bearish - Big trend DOWN');
+  if(results['1M'].bias==='BULLISH') reasons.push('🟢 1M Bias Bullish - Monthly trend UP');
+  if(results['1M'].bias==='BEARISH') reasons.push('🔴 1M Bias Bearish - Monthly trend DOWN');
+  if(results['1w'].bias.includes('CHoCH')) reasons.push('⚠️ Weekly CHoCH - Weekly reversal coming, careful');
+  if(results['1d'].bias==='BULLISH') reasons.push('🟢 Daily Bias Bullish - Today buyers strong');
+  if(results['1d'].bias==='BEARISH') reasons.push('🔴 Daily Bias Bearish - Today sellers strong');
+  if(results['4h'].bias==='BULLISH') reasons.push('🟢 4H Bias Bullish - Your HTF direction = Long');
+  if(results['4h'].bias==='BEARISH') reasons.push('🔴 4H Bias Bearish - Your HTF direction = Short');
+
+  if(bullOB){ extra+=10; reasons.push('🟢 Bullish OB at $'+bullOB.bottom.toFixed(2)+' - Buyers waiting there'); }
+  if(bearOB){ extra-=10; reasons.push('🔴 Bearish OB at $'+bearOB.top.toFixed(2)+' - Sellers waiting there'); }
+  if(bullFVG){ extra+=5; reasons.push('🟡 Bullish FVG at $'+bullFVG.bottom.toFixed(2)+' - Gap will be filled, then bounce'); }
+  if(bearFVG){ extra-=5; reasons.push('🟡 Bearish FVG at $'+bearFVG.top.toFixed(2)+' - Gap will be filled, then drop'); }
+  if(sweep){ reasons.push('💧 Last Sweep at $'+sweep.price.toFixed(2)+' ('+sweep.type+') - Liquidity taken, reversal possible'); if(sweep.type==='bull') extra+=8; else extra-=8; }
+
+  // Fear & Greed
+  if(fng>75){ extra-=12; reasons.push('😱 Fear & Greed '+fng+' = Extreme Greed - Market overheated, Longs risky, pullback coming'); }
+  else if(fng>60){ extra-=5; reasons.push('🟡 Fear & Greed '+fng+' = Greed - Don\'t FOMO Long'); }
+  else if(fng<20){ extra+=12; reasons.push('💎 Fear & Greed '+fng+' = Extreme Fear - Smart money buys Discount, bounce coming'); }
+  else if(fng<35){ extra+=5; reasons.push('🟢 Fear & Greed '+fng+' = Fear - Good for Longs'); }
+
+  // Funding
+  if(fund>0.05){ extra-=12; reasons.push('⚠️ Funding +'+fund.toFixed(4)+'% = Too many Longs - Long squeeze DOWN possible'); }
+  else if(fund>0.02){ extra-=5; reasons.push('🟡 Funding +'+fund.toFixed(4)+'% = Longs crowded'); }
+  else if(fund< -0.02){ extra+=12; reasons.push('🚀 Funding '+fund.toFixed(4)+'% = Too many Shorts - Short squeeze UP possible'); }
+  else if(fund<0){ extra+=5; reasons.push('🟢 Funding Negative - Shorts crowded, squeeze up possible'); }
+
+  // RSI on Daily
+  let rsi1d = results['1d'].rsi;
+  if(rsi1d>70) reasons.push('📊 Daily RSI '+rsi1d+' = Overbought - Pullback to OB likely');
+  if(rsi1d<30) reasons.push('📊 Daily RSI '+rsi1d+' = Oversold - Bounce from OB likely');
+
+  // Premium / Discount
+  let eq50 = results['1d'].eq || price;
+  if(price>eq50) reasons.push('📐 Price in PREMIUM (Above 50% $'+eq50.toFixed(2)+') - Only Shorts, Longs risky');
+  else reasons.push('📐 Price in DISCOUNT (Below 50% $'+eq50.toFixed(2)+') - Only Longs, Shorts risky');
+
+  // Final Score
+  let finalScore = avgScore + extra;
+  finalScore = Math.max(-100, Math.min(100, finalScore));
+
+  // Convert Score to Probability
+  // Score +100 = 85% Bullish, 10% Bearish, 5% Sideways
+  // Score 0 = 33% each, Score -100 = opposite
+  let bullPct, bearPct, sidePct;
+  if(finalScore>=0){
+    bullPct = 35 + (finalScore/100)*50; // 35 to 85
+    bearPct = 25 - (finalScore/100)*15; // 25 to 10
+    sidePct = 100 - bullPct - bearPct;
+  } else {
+    bearPct = 35 + (Math.abs(finalScore)/100)*50;
+    bullPct = 25 - (Math.abs(finalScore)/100)*15;
+    sidePct = 100 - bullPct - bearPct;
+  }
+  bullPct=Math.round(bullPct); bearPct=Math.round(bearPct); sidePct=Math.round(100-bullPct-bearPct);
+  // If score near 0, sideways higher
+  if(Math.abs(finalScore)<10){ sidePct=40; bullPct=30; bearPct=30; }
+
+  let confidence = Math.max(Math.abs(finalScore), 35); // 35 to 100
+  let direction = finalScore>15 ? 'BULLISH 🟢' : finalScore<-15 ? 'BEARISH 🔴' : 'SIDEWAYS ➡️';
+  let directionColor = finalScore>15 ? '#0ecb81' : finalScore<-15 ? '#f6465d' : '#f0b90b';
+
+  // Targets - Using ATR + Month High/Low + OB
+  let mHigh = hl.mHigh||price+atr*3, mLow = hl.mLow||price-atr*3;
+  let wHigh = hl.wHigh||price+atr*2, wLow = hl.wLow||price-atr*2;
+  let dHigh = hl.dHigh||price+atr, dLow = hl.dLow||price-atr;
+
+  // Update UI
+  $('aiMainText').innerHTML = direction + ' - ' + currentSymbol + ' • Score ' + Math.round(finalScore) + '/100';
+  $('aiMainText').style.color = directionColor;
+  $('aiConfidence').textContent = 'Confidence ' + Math.round(confidence) + '%';
+  $('aiBullPct').textContent = bullPct+'%'; $('aiBearPct').textContent = bearPct+'%'; $('aiSidePct').textContent = sidePct+'%';
+  $('aiBullBar').style.width = bullPct+'%'; $('aiBearBar').style.width = bearPct+'%'; $('aiSideBar').style.width = sidePct+'%';
+  $('aiScoreText').textContent = 'Score: '+Math.round(finalScore)+'/100 • Confidence: '+Math.round(confidence)+'%';
+
+  // Forecast by mode
+  let forecast='';
+  if(aiMode==='short'){
+    forecast = finalScore>15 ? '📈 <b>Today:</b> Bullish <b>'+bullPct+'% chance</b> to go UP to <b>$'+wHigh.toFixed(2)+'</b> (Week High) then <b>$'+mHigh.toFixed(2)+'</b> (Month High). <b>Plan:</b> Buy dip at Bullish OB $'+(bullOB?bullOB.bottom.toFixed(2):'--')+', SL below OB, TP = Week High.'
+    : finalScore<-15 ? '📉 <b>Today:</b> Bearish <b>'+bearPct+'% chance</b> to go DOWN to <b>$'+wLow.toFixed(2)+'</b> (Week Low) then <b>$'+mLow.toFixed(2)+'</b> (Month Low). <b>Plan:</b> Sell rally at Bearish OB $'+(bearOB?bearOB.top.toFixed(2):'--')+', SL above OB.'
+    : '➡️ <b>Today:</b> Sideways <b>'+sidePct+'% chance</b> - Range $'+dLow.toFixed(2)+' to $'+dHigh.toFixed(2)+'. <b>Plan:</b> Don\'t trade middle. Wait for sweep of Day High/Low, then enter.';
+  } else if(aiMode==='mid'){
+    forecast = finalScore>15 ? '📊 <b>This Week:</b> Bullish '+bullPct+'% - Target Week High $'+wHigh.toFixed(2)+' then Month High $'+mHigh.toFixed(2)
+    : finalScore<-15 ? '📊 <b>This Week:</b> Bearish '+bearPct+'% - Target Week Low $'+wLow.toFixed(2)+' then Month Low $'+mLow.toFixed(2)
+    : '📊 <b>This Week:</b> Range '+sidePct+'% - Between Week Low $'+wLow.toFixed(2)+' and Week High $'+wHigh.toFixed(2);
+  } else {
+    forecast = finalScore>15 ? '📅 <b>This Month:</b> Bullish '+bullPct+'% - Target Month High $'+mHigh.toFixed(2)
+    : finalScore<-15 ? '📅 <b>This Month:</b> Bearish '+bearPct+'% - Target Month Low $'+mLow.toFixed(2)
+    : '📅 <b>This Month:</b> Range - Month High $'+mHigh.toFixed(2)+' / Month Low $'+mLow.toFixed(2)+' will be swept';
+  }
+  $('aiForecast').innerHTML = forecast;
+  $('aiWhy').innerHTML = '• ' + reasons.join('<br>• ');
+
+  // TF Table
+  let tfHtml = order.map(tf=>{
+    let r = results[tf];
+    let c = r.bias.includes('BULL') ? '#0ecb81' : r.bias.includes('BEAR') ? '#f6465d' : '#f0b90b';
+    let label = tf==='1Y' ? '1Y (Yearly)' : tf==='1M' ? '1M (Monthly)' : tf==='1w' ? '1W (Weekly)' : tf==='1d' ? '1D (Daily)' : tf;
+    return '<tr><td style="padding:6px"><b>'+label+'</b></td><td style="padding:6px;color:'+c+';font-weight:700">'+r.bias+'</td><td style="padding:6px">'+r.bos+'</td><td style="padding:6px">'+r.rsi+'</td><td style="padding:6px">'+r.pos+'</td><td style="padding:6px;font-weight:700">'+Math.round(r.score)+'</td></tr>';
+  }).join('');
+  $('aiTFBody').innerHTML = tfHtml;
+
+  // Bull / Bear Targets with Probability
+  let bullT1 = bullOB ? bullOB.top + atr*1 : price+atr;
+  let bullT2 = wHigh, bullT3 = mHigh;
+  let bearT1 = bearOB ? bearOB.bottom - atr*1 : price-atr;
+  let bearT2 = wLow, bearT3 = mLow;
+  $('aiBullTargets').innerHTML = '🎯 TP1 $'+bullT1.toFixed(2)+' - '+(bullPct-5)+' % chance<br>🎯 TP2 $'+bullT2.toFixed(2)+' - '+(bullPct-15)+' % chance<br>🎯 TP3 $'+bullT3.toFixed(2)+' - '+(bullPct-30)+' % chance<br><small style="color:#888">Entry: Bullish OB $'+(bullOB?bullOB.bottom.toFixed(2):'--')+'<br>SL: $'+(bullOB?(bullOB.bottom*0.998).toFixed(2):'--')+'</small>';
+  $('aiBearTargets').innerHTML = '🎯 TP1 $'+bearT1.toFixed(2)+' - '+(bearPct-5)+' % chance<br>🎯 TP2 $'+bearT2.toFixed(2)+' - '+(bearPct-15)+' % chance<br>🎯 TP3 $'+bearT3.toFixed(2)+' - '+(bearPct-30)+' % chance<br><small style="color:#888">Entry: Bearish OB $'+(bearOB?bearOB.top.toFixed(2):'--')+'<br>SL: $'+(bearOB?(bearOB.top*1.002).toFixed(2):'--')+'</small>';
+
+  // Scenarios
+  $('aiScenarios').innerHTML =
+    '<b>1. Main Scenario ('+Math.max(bullPct,bearPct)+'%):</b> ' + (finalScore>0 ? 'Bullish - Price holds OB, goes to Week High $'+wHigh.toFixed(2) : finalScore<0 ? 'Bearish - Price rejects OB, goes to Week Low $'+wLow.toFixed(2) : 'Range - Price stays between Day High/Low') + '<br>' +
+    '<b>2. Alt Scenario ('+(100-Math.max(bullPct,bearPct)-10)+'%):</b> ' + (finalScore>0 ? 'Bearish trap - Price sweeps Bullish OB, then reverses down to $'+mLow.toFixed(2) : 'Bullish trap - Price sweeps Bearish OB, then reverses up to $'+mHigh.toFixed(2)) + '<br>' +
+    '<b>3. Range Scenario ('+sidePct+'%):</b> Price chops between $'+dLow.toFixed(2)+' - $'+dHigh.toFixed(2)+' - No trade, wait for breakout.';
+
+  // Risk
+  let risk = '';
+  if(confidence<55) risk = '🔴 <b>LOW Confidence ('+Math.round(confidence)+'%) - DON\'T TRADE.</b> Wait for A+ setup. Risk: High, market confused.';
+  else if(confidence<70) risk = '🟡 <b>MEDIUM Confidence ('+Math.round(confidence)+'%) - Trade with HALF size.</b> Use SL strictly. Risk: Medium.';
+  else risk = '🟢 <b>HIGH Confidence ('+Math.round(confidence)+'%) - A+ Setup.</b> You can trade full size, but still use SL. Risk: Low.';
+  risk += '<br>ATR: $'+atr.toFixed(2)+' - SL should be > ATR. Don\'t use tight SL.';
+  $('aiRisk').innerHTML = risk;
+
+  // News Impact - Simple from News list if exists
+  let newsEl = document.getElementById('newsList');
+  let newsTxt = newsEl ? newsEl.textContent.toLowerCase() : '';
+  let newsImpact = 'No major news.';
+  if(newsTxt.includes('bullish')) newsImpact = '🟢 News is Bullish - Supports Bullish move +5% probability.';
+  if(newsTxt.includes('bearish')) newsImpact = '🔴 News is Bearish - Supports Bearish move +5% probability.';
+  if(newsTxt.includes('etf')||newsTxt.includes('adopt')) newsImpact = '🟢 ETF / Adoption news - Long-term Bullish.';
+  if(newsTxt.includes('hack')||newsTxt.includes('ban')) newsImpact = '🔴 Hack / Ban news - Short-term Bearish, avoid Longs.';
+  $('aiNewsImpact').innerHTML = newsImpact + '<br><small style="color:#888">Funding: '+fund.toFixed(4)+'% • Fear: '+fng+' • RSI 1D: '+rsi1d+'</small>';
+
+  // Live dot blink
+  let dot = $('aiLiveDot'); if(dot) dot.textContent = '● LIVE • ' + new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+
+// Buttons in AI section
+document.querySelectorAll('[data-ai]').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('[data-ai]').forEach(b=>{b.style.background='#1e2329'; b.classList.remove('active')});
+    btn.style.background='#3b82f6'; btn.classList.add('active');
+    aiMode=btn.getAttribute('data-ai'); window.aiMode=aiMode; updateSuperAI();
+  };
+});
+document.getElementById('btnAIRefresh').onclick=()=>{ toast('AI Re-Analysing all timeframes...'); aiFetchAll(); };
+
+// Auto-refresh AI every 30 sec
+setInterval(()=>{ aiFetchAll(); }, 30000);
+// First run - fetch all TFs
+setTimeout(()=>{ aiFetchAll(); }, 1000);
 </script>
 <!-- ===== SECTION: AI ANALYSIS END ===== -->
 
