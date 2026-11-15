@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Orbittroniz - AI Tools</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/JsBarcode/3.11.6/JsBarcode.all.min.js"></script>
+<script>if(window.pdfjsLib){pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';}</script>
+<style>
+/* SIRF COMMON - LOGO + HOME + BUTTONS - HAR SUB TOOL KA APNA CSS USKE APNE BLOCK ME HAI */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
+body{background:#050505;color:#fff;overflow-x:hidden}
+button{cursor:pointer;border:none}
+input,textarea,select{outline:none}
+.wrap{max-width:960px;margin:auto;padding:12px;padding-bottom:50px}
+.logoWrap{text-align:center;padding:18px 10px 10px}
+.myNewLogo{display:flex;align-items:center;justify-content:center;gap:14px;cursor:pointer;max-width:560px;margin:auto}
+.logoImgWrap{position:relative;width:84px;height:84px}
+.logoImg{width:84px;height:84px;border-radius:22px;object-fit:cover;background:#000;animation:logo3D 6s ease-in-out infinite}
+@keyframes logo3D{0%,100%{transform:rotate(0deg)}50%{transform:rotate(180deg)}100%{transform:rotate(360deg)}}
+.wordMark{text-align:left}
+.wordMark .main{font-size:35px;font-weight:900;white-space:nowrap}
+.wordMark .main .w1{color:#fff}
+.wordMark .main .w2{background:linear-gradient(90deg,#00e5c0,#0090ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.wordMark .sub{font-size:10px;letter-spacing:3px;color:#94a3b8;margin-top:4px}
+.wordMark .line{height:3px;margin-top:6px;border-radius:20px;background:linear-gradient(90deg,#00e5c0,#0090ff)}
+.logoTag{font-size:11px;color:#cbd5e1;margin-top:12px}
+.logoTag b{color:#000;background:linear-gradient(90deg,#00e5c0,#0090ff);padding:4px 10px;border-radius:20px}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(0,0,0,.92);border-bottom:1px solid rgba(255,255,255,.12);padding:9px 10px;display:flex;gap:7px;align-items:center}
+.navBtn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);color:#fff;padding:11px 13px;border-radius:14px;font-size:12px;font-weight:900}
+.navBtn.home{background:linear-gradient(270deg,#00e5c0,#0090ff,#00e5c0);color:#000;border:none}
+.searchTop{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:12px;color:#fff;font-size:13px}
+.page{display:none}.page.show{display:block}
+.hero{text-align:center;padding:16px 8px 6px}
+.hero h1{font-size:30px;line-height:1.25;margin-top:10px}
+.hero p{font-size:12px;color:#cbd5e1;margin-top:9px}
+.catGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+@media(max-width:600px){.catGrid{grid-template-columns:1fr}}
+.cat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:18px;cursor:pointer}
+.catIcon{width:62px;height:62px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#000}
+.cat b{font-size:16px;display:block;margin-top:11px}.cat p{font-size:12px;color:#cbd5e1;margin-top:6px}.cat small{font-size:11px;color:#00e5c0;font-weight:800}
+.backBtn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;padding:11px 16px;border-radius:14px;font-size:12px;font-weight:800;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+@media(max-width:600px){.grid{grid-template-columns:repeat(2,1fr)}}
+.toolCard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:15px 10px;text-align:center;cursor:pointer;position:relative}
+.toolIcon{width:54px;height:54px;margin:0 auto;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;font-size:10px}
+.toolCard b{font-size:12px;display:block;margin-top:10px}.toolCard small{font-size:11px;color:#94a3b8}
+.card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:16px;margin-top:14px}
+.input{width:100%;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:13px;color:#fff;margin-top:8px;font-size:14px}
+.btn{width:100%;background:linear-gradient(270deg,#00e5c0,#0090ff,#00e5c0);color:#000;padding:15px;border-radius:15px;font-weight:900;font-size:14px;margin-top:10px}
+.upload{border:2px dashed rgba(0,229,192,.5);border-radius:16px;text-align:center;padding:24px 10px;cursor:pointer;margin-top:10px}
+.upload input{display:none}
+.result{background:rgba(0,0,0,.5);border:1px solid rgba(0,229,192,.6);border-radius:14px;padding:12px;margin-top:12px;display:none}
+.dlBtn{display:block;text-align:center;background:linear-gradient(90deg,#00e5c0,#0090ff);color:#000;font-weight:900;padding:14px;border-radius:13px;margin-top:10px}
+.footer{text-align:center;padding:22px;font-size:11px;color:#94a3b8}
+.navBottom{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.navBottom button{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);color:#fff;padding:13px;border-radius:14px;font-size:12px;font-weight:900}
+.navBottom button.home{background:linear-gradient(270deg,#00e5c0,#0090ff,#00e5c0);color:#000;border:none}
+.stepGuide{background:rgba(0,229,192,.07);border:1px solid rgba(0,229,192,.28);border-radius:14px;padding:12px;margin-bottom:12px;font-size:12px;line-height:1.8}
+.subtool{display:none}.subtool.show{display:block}
+.aiAssistant{background:rgba(0,229,192,.08);border:1px solid rgba(0,229,192,.3);border-radius:18px;padding:12px 14px;margin-top:12px}
+.aiHeader{display:flex;gap:10px}
+.aiHeader .aiIcon{width:36px;height:36px;border-radius:12px;overflow:hidden;background:#000}
+.aiHeader .aiIcon img{width:100%;height:100%;object-fit:cover}
+.aiChatBox{margin-top:10px;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px;max-height:240px;overflow-y:auto}
+.aiMsg{font-size:12px;line-height:1.7;margin-bottom:8px;padding:8px 10px;border-radius:12px}
+.aiMsg.user{background:rgba(0,229,192,.15);text-align:right}
+.aiMsg.ai{background:rgba(255,255,255,.06)}
+.aiInputRow{display:flex;gap:8px;margin-top:10px}
+.aiInput{flex:1;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:12px;color:#fff;font-size:13px}
+.aiSend{background:linear-gradient(90deg,#00e5c0,#0090ff);color:#000;font-weight:900;padding:12px 16px;border-radius:14px}
+.aiQuick{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.aiQuick button{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);color:#e2e8f0;padding:6px 10px;border-radius:20px;font-size:11px}
+</style>
+</head>
+<body>
+
+<!-- ================= LOGO START ================= -->
+<div class="logoWrap">
+<div class="myNewLogo" onclick="goHome()">
+<div class="logoImgWrap"><img class="logoImg" src="logo.png?v=6" alt="Orbittroniz Logo" onerror="this.style.opacity='0.3'"></div>
+<div class="wordMark"><div class="main"><span class="w1">ORBIT</span><span class="w2">TRONIZ</span></div><div class="sub">AI TOOLS • PDF • IMAGE • DAILY</div><div class="line"></div></div>
+</div>
+<div class="logoTag">AI TOOLS • PDF • IMAGE • DAILY USE • <b>100% FREE • NO LOGIN</b></div>
+</div>
+<!-- ================= LOGO END ================= -->
+
+<!-- ================= TOPBAR START ================= -->
+<div class="topbar">
+<button class="navBtn home" onclick="goHome()">🏠 Home</button>
+<button class="navBtn" onclick="openCategory('pdf')">📄 PDF</button>
+<button class="navBtn" onclick="openCategory('image')">🖼️ Image</button>
+<button class="navBtn" onclick="openCategory('daily')">🧮 Daily</button>
+<input class="searchTop" id="globalSearch" placeholder="Ask AI - pdf, photo, qr... (Press Enter)">
+</div>
+<!-- ================= TOPBAR END ================= -->
+
+<div class="wrap">
+
+<!-- ================= HOME START ================= -->
+<div id="page-home" class="page show">
+<div class="aiAssistant">
+<div class="aiHeader"><div class="aiIcon"><img src="logo.png?v=6"></div><p><b>Orbit AI - Ask Me Anything</b><br>Type like: <b>make pdf compress</b> or <b>passport photo</b></p></div>
+<div class="aiChatBox" id="aiChatBox"><div class="aiMsg ai"><b>Orbit AI:</b> Hi! Try - <b>make pdf compress</b> , <b>photo 500kb</b> , <b>passport photo</b> , <b>make qr</b></div></div>
+<div class="aiInputRow"><input class="aiInput" id="aiInput" placeholder="Type here - Example: make pdf compress"><button class="aiSend" onclick="askAI()">Send →</button></div>
+<div class="aiQuick"><button onclick="quickAI('make pdf compress')">PDF Compress</button><button onclick="quickAI('photo 500kb')">Photo 500KB</button><button onclick="quickAI('passport photo')">Passport Photo</button><button onclick="quickAI('make qr')">QR Code</button><button onclick="quickAI('image to pdf')">Image to PDF</button></div>
+</div>
+<div class="hero"><h1>One Place - All AI Tools<br>PDF • Image • Daily Use</h1><p>Upload file, AI does work, download result. No login. No API. Everything works in your browser.</p><button class="btn" onclick="openCategory('image')">✨ Try Most Popular Tool - Photo 500KB →</button></div>
+<div class="catGrid">
+<div class="cat" onclick="openCategory('pdf')"><div class="catIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">PDF</div><b>PDF TOOLS</b><p>AI PDF Compress, Image to PDF, PDF Split, PDF Merge, PDF to JPG, Watermark, Rotate.</p><small>● 13 AI Tools Live →</small></div>
+<div class="cat" onclick="openCategory('image')"><div class="catIcon" style="background:linear-gradient(135deg,#00e5c0,#00c2a8)">IMG</div><b>IMAGE TOOLS</b><p>AI Photo 500KB, Compress, Resize, JPG to PNG, Passport Photo, Crop, Rotate, Watermark.</p><small>● 17 AI Tools Live →</small></div>
+<div class="cat" onclick="openCategory('daily')"><div class="catIcon" style="background:linear-gradient(135deg,#0090ff,#00e5c0)">DAILY</div><b>DAILY USE TOOLS</b><p>AI QR Generator, Word Counter, Password Generator, EMI, GST, Age, Invoice, Notepad.</p><small>● 20 AI Tools Live →</small></div>
+</div>
+</div>
+<!-- ================= HOME END ================= -->
+
+<!-- ================= TOOL 1 - PDF CATEGORY LIST START ================= -->
+<div id="page-pdf" class="page">
+<button class="backBtn" onclick="goHome()">← Back to Home</button><h2>📄 AI PDF TOOLS</h2>
+<div class="grid" style="margin-top:12px">
+<div class="toolCard" onclick="openTool('pdfCompress')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">ZIP</div><b>PDF Compress</b><small>Reduce Size</small></div>
+<div class="toolCard" onclick="openTool('imgToPdf')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">PDF</div><b>Image to PDF</b><small>Photo → PDF</small></div>
+<div class="toolCard" onclick="openTool('pdfSplit')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">SPLIT</div><b>PDF Split</b><small>Split Pages</small></div>
+<div class="toolCard" onclick="openTool('pdfMerge')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">MERGE</div><b>PDF Merge</b><small>Join PDFs</small></div>
+<div class="toolCard" onclick="openTool('pdfToJpg')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">JPG</div><b>PDF to JPG</b><small>Page → Image</small></div>
+<div class="toolCard" onclick="openTool('pdfDelete')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">DEL</div><b>PDF Page Deleter</b><small>Delete Page</small></div>
+<div class="toolCard" onclick="openTool('pdfRotate')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">ROT</div><b>PDF Rotate</b><small>Rotate Pages</small></div>
+<div class="toolCard" onclick="openTool('pdfWatermark')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">WM</div><b>PDF Watermark</b><small>Add Name</small></div>
+<div class="toolCard" onclick="openTool('pdfPageNo')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">123</div><b>PDF Page Number</b><small>Add Numbers</small></div>
+<div class="toolCard" onclick="openTool('pdfToText')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">TXT</div><b>PDF to Text</b><small>Extract Text</small></div>
+<div class="toolCard" onclick="openTool('pdfMeta')"><div class="toolIcon" style="background:linear-gradient(135deg,#64748b,#334155)">META</div><b>PDF Metadata Remover</b><small>Remove Info</small></div>
+<div class="toolCard" onclick="openTool('pdfSize')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">SIZE</div><b>PDF Size Checker</b><small>How Big?</small></div>
+<div class="toolCard" onclick="openTool('pdfPreview')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">VIEW</div><b>PDF Preview</b><small>View Without Download</small></div>
+</div><div class="navBottom"><button onclick="goHome()">🏠 Home</button><button onclick="openCategory('image')">🖼️ Image Tools</button><button onclick="openCategory('daily')">🧮 Daily Tools</button></div>
+</div>
+<!-- ================= TOOL 1 - PDF CATEGORY LIST END ================= -->
+
+<!-- ================= TOOL 2 - IMAGE CATEGORY LIST START ================= -->
+<div id="page-image" class="page">
+<button class="backBtn" onclick="goHome()">← Back to Home</button><h2>🖼️ AI IMAGE TOOLS</h2>
+<div class="grid" style="margin-top:12px">
+<div class="toolCard" onclick="openTool('photo500')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">500KB</div><b>Photo 500KB</b><small>Make 500KB</small></div>
+<div class="toolCard" onclick="openTool('imgCompress')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">ZIP</div><b>Image Compressor</b><small>90% Smaller</small></div>
+<div class="toolCard" onclick="openTool('imgResize')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">SIZE</div><b>Image Resizer</b><small>Width x Height</small></div>
+<div class="toolCard" onclick="openTool('imgConvert')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">JPG</div><b>Image Converter</b><small>JPG ↔ PNG</small></div>
+<div class="toolCard" onclick="openTool('passport')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">PASS</div><b>Passport Photo</b><small>35x45mm</small></div>
+<div class="toolCard" onclick="openTool('imgCrop')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">CROP</div><b>Image Cropper</b><small>Crop</small></div>
+<div class="toolCard" onclick="openTool('imgRotate')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">ROT</div><b>Image Rotate / Flip</b><small>Rotate</small></div>
+<div class="toolCard" onclick="openTool('imgWatermark')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">WM</div><b>Image Watermark</b><small>Add Name</small></div>
+<div class="toolCard" onclick="openTool('imgGray')"><div class="toolIcon" style="background:linear-gradient(135deg,#64748b,#0f172a)">B&W</div><b>Black & White</b><small>Grayscale</small></div>
+<div class="toolCard" onclick="openTool('imgFilter')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">BRIGHT</div><b>Brightness</b><small>Filter</small></div>
+<div class="toolCard" onclick="openTool('imgSign')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">SIGN</div><b>Signature Maker</b><small>Transparent</small></div>
+<div class="toolCard" onclick="openTool('imgCollage')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">COLL</div><b>Photo Collage</b><small>2-4 Photos</small></div>
+<div class="toolCard" onclick="openTool('imgSize')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">INFO</div><b>Image Size Checker</b><small>DPI / Size</small></div>
+<div class="toolCard" onclick="openTool('imgBase64')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">64</div><b>Image to Base64</b><small>Code</small></div>
+<div class="toolCard" onclick="openTool('favicon')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">FAV</div><b>Favicon Maker</b><small>16x16</small></div>
+<div class="toolCard" onclick="openTool('imgEnlarge')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">2X</div><b>Image Enlarger 2x</b><small>Make Bigger</small></div>
+<div class="toolCard" onclick="openTool('imgPrint')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">PRINT</div><b>Passport Print Sheet</b><small>8 Copies</small></div>
+</div><div class="navBottom"><button onclick="goHome()">🏠 Home</button><button onclick="openCategory('pdf')">📄 PDF Tools</button><button onclick="openCategory('daily')">🧮 Daily Tools</button></div>
+</div>
+<!-- ================= TOOL 2 - IMAGE CATEGORY LIST END ================= -->
+
+<!-- ================= TOOL 3 - DAILY CATEGORY LIST START ================= -->
+<div id="page-daily" class="page">
+<button class="backBtn" onclick="goHome()">← Back to Home</button><h2>🧮 AI DAILY USE TOOLS</h2>
+<div class="grid" style="margin-top:12px">
+<div class="toolCard" onclick="openTool('qr')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">QR</div><b>QR Generator</b><small>Link → QR</small></div>
+<div class="toolCard" onclick="openTool('barcode')"><div class="toolIcon" style="background:linear-gradient(135deg,#64748b,#0f172a)">BAR</div><b>Barcode Generator</b><small>Code</small></div>
+<div class="toolCard" onclick="openTool('wordCount')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">WORDS</div><b>Word Counter</b><small>Words / Chars</small></div>
+<div class="toolCard" onclick="openTool('textPdf')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">PDF</div><b>Text to PDF</b><small>Text → PDF</small></div>
+<div class="toolCard" onclick="openTool('caseConvert')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">Aa</div><b>Case Converter</b><small>UPPER / lower</small></div>
+<div class="toolCard" onclick="openTool('cleanText')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">CLEAN</div><b>Remove Extra Spaces</b><small>Clean Text</small></div>
+<div class="toolCard" onclick="openTool('lorem')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">LOREM</div><b>Lorem Generator</b><small>Dummy Text</small></div>
+<div class="toolCard" onclick="openTool('passGen')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">PASS</div><b>Password Generator</b><small>Strong</small></div>
+<div class="toolCard" onclick="openTool('json')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">{ }</div><b>JSON Formatter</b><small>Beautify</small></div>
+<div class="toolCard" onclick="openTool('invoice')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">BILL</div><b>Invoice Maker</b><small>Bill → PDF</small></div>
+<div class="toolCard" onclick="openTool('ageCalc')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">AGE</div><b>Age Calculator</b><small>Age</small></div>
+<div class="toolCard" onclick="openTool('emiCalc')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">EMI</div><b>EMI Calculator</b><small>Loan</small></div>
+<div class="toolCard" onclick="openTool('gstCalc')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">GST</div><b>GST Calculator</b><small>GST</small></div>
+<div class="toolCard" onclick="openTool('percentCalc')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">%</div><b>Percentage Calc</b><small>Find %</small></div>
+<div class="toolCard" onclick="openTool('unitConv')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">KG</div><b>Unit Converter</b><small>KG, CM</small></div>
+<div class="toolCard" onclick="openTool('stopwatch')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">TIME</div><b>Stopwatch</b><small>Time</small></div>
+<div class="toolCard" onclick="openTool('notepad')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">NOTE</div><b>Notepad</b><small>Write</small></div>
+<div class="toolCard" onclick="openTool('todo')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">TODO</div><b>To-Do List</b><small>Tasks</small></div>
+<div class="toolCard" onclick="openTool('bmi')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">BMI</div><b>BMI Calculator</b><small>Weight</small></div>
+<div class="toolCard" onclick="openTool('dateDiff')"><div class="toolIcon" style="background:linear-gradient(135deg,#00e5c0,#0090ff)">DATE</div><b>Date Difference</b><small>Count Days</small></div>
+</div><div class="navBottom"><button onclick="goHome()">🏠 Home</button><button onclick="openCategory('pdf')">📄 PDF Tools</button><button onclick="openCategory('image')">🖼️ Image Tools</button></div>
+</div>
+<!-- ================= TOOL 3 - DAILY CATEGORY LIST END ================= -->
+
+<!-- ================= TOOL PAGE - JAHAN SUB TOOL KHULEGA ================= -->
+<div id="page-tool" class="page">
+<button class="backBtn" onclick="goBackToCategory()">← Back</button>
+<h2 id="toolTitle">Tool</h2>
+<p id="toolDesc" style="font-size:12px;color:#94a3b8;margin-top:6px"></p>
+<div id="toolBody"></div>
+<div class="navBottom"><button class="home" onclick="goHome()">🏠 Home</button><button onclick="goBackToCategory()">← Back to Category</button><button onclick="openCategory('pdf')">📄 All PDF</button></div>
+</div>
+<!-- ================= TOOL PAGE END ================= -->
+
+</div>
+<div class="footer">ORBITTRONIZ - AI Tools - PDF • Image • Daily Use<br>Privacy: Files never leave your browser • No API • AI Powered</div>
+
+<!-- ============================================================ -->
+<!-- ============================================================ -->
+<!-- ============ ALL SUB TOOLS - 1 HTML - START HERE =========== -->
+<!-- HAR SUB TOOL KA HTML+CSS+JS EK HI BLOCK ME HAI -->
+<!-- ============================================================ -->
+<!-- ============================================================ -->
+
+<!-- ================= TOOL 1 - PDF - START ================= -->
+
+<!-- SUB TOOL 1 START - PDF COMPRESS - PASTE CODE HERE - HTML+CSS+JS IN ONE -->
+<div id="sub-pdfCompress" class="subtool">
+<style>
+/* SUB TOOL 1 - PDF COMPRESS - CSS - SIRF IS TOOL KE LIYE */
+.sub-pdfCompress .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}
+.sub-pdfCompress .upload{border:2px dashed #00e5c0}
+</style>
+<div class="sub-pdfCompress">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: PDF Tab • Step 2: PDF Compress • Step 3: Select File • Step 4: Select Level • Step 5: Compress Now • Step 6: Download Now</div>
+<label class="upload">📁 Select File - Click Here<input type="file" accept="application/pdf" onchange="onPdfFiles(this, 'pdfCompress')"></label>
+<p class="fileInfo" style="font-size:12px;color:#94a3b8;margin-top:8px"></p>
+<select id="pdfCompressLevel" class="input"><option value="high">High Compress - Smallest Size</option><option value="medium" selected>Medium Compress - Good Quality</option><option value="low">Low Compress - Best Quality</option></select>
+<button class="btn" onclick="doPdfCompress()">📉 Compress Now →</button>
+<div class="resultBox"></div>
+</div>
+<script>
+/* SUB TOOL 1 - PDF COMPRESS - JS - SIRF IS TOOL KE LIYE */
+async function doPdfCompress(){
+  let f = window._pdfFiles && window._pdfFiles['pdfCompress'] ? window._pdfFiles['pdfCompress'][0] : null;
+  if(!f) return alert('Upload PDF');
+  try{
+    let buf = await f.arrayBuffer();
+    let src = await PDFLib.PDFDocument.load(buf);
+    let bytes = await src.save({useObjectStreams:false});
+    showResultIn('sub-pdfCompress', 'PDF Compress Done!', 'Before: '+(f.size/1024).toFixed(0)+' KB • Now: '+(bytes.length/1024).toFixed(0)+' KB', new Blob([bytes],{type:'application/pdf'}), 'compressed.pdf');
+  }catch(e){ alert('PDF is locked or damaged'); }
+}
+</script>
+</div>
+<!-- SUB TOOL 1 END - PDF COMPRESS -->
+
+<!-- SUB TOOL 2 START - IMAGE TO PDF - PASTE CODE HERE -->
+<div id="sub-imgToPdf" class="subtool">
+<style>
+.sub-imgToPdf .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}
+</style>
+<div class="sub-imgToPdf">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: PDF Tab • Step 2: Image to PDF • Step 3: Select File • Step 4: Make PDF • Step 5: Download</div>
+<label class="upload">📁 Click Here To Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'imgToPdf')"></label>
+<p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<button class="btn" onclick="doImgToPdf()">📄 AI Make PDF →</button>
+<div class="resultBox"></div>
+</div>
+<script>
+async function doImgToPdf(){
+  let f = window._imgFile && window._imgFile['imgToPdf'];
+  if(!f) return alert('Upload photo');
+  try{
+    let imgData = await new Promise(res=>{let r=new FileReader();r.onload=e=>res(e.target.result);r.readAsDataURL(f);});
+    const {jsPDF}=window.jspdf; let doc=new jsPDF(); doc.addImage(imgData,'JPEG',10,10,190,260);
+    showResultIn('sub-imgToPdf','PDF Ready!','Image to PDF',doc.output('blob'),'image-to-pdf.pdf');
+  }catch(e){ alert('Try another image'); }
+}
+</script>
+</div>
+<!-- SUB TOOL 2 END - IMAGE TO PDF -->
+
+<!-- SUB TOOL 3 START - PDF SPLIT - PASTE CODE HERE -->
+<div id="sub-pdfSplit" class="subtool">
+<style>.sub-pdfSplit .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-pdfSplit">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: PDF Tab • Step 2: PDF Split • Step 3: Select File • Step 4: Enter Page No • Step 5: Split • Step 6: Download</div>
+<label class="upload">📁 Upload PDF<input type="file" accept="application/pdf" onchange="onPdfFiles(this,'pdfSplit')"></label><p class="fileInfo"></p>
+<input id="splitPage" class="input" placeholder="Page Number - Example: 1">
+<button class="btn" onclick="doPdfSplit()">✂️ AI Split Now →</button><div class="resultBox"></div>
+</div>
+<script>
+async function doPdfSplit(){
+  let f = window._pdfFiles && window._pdfFiles['pdfSplit'] ? window._pdfFiles['pdfSplit'][0] : null;
+  if(!f) return alert('Upload PDF');
+  try{
+    let pageNo = parseInt(document.querySelector('#sub-pdfSplit #splitPage').value)||1;
+    let buf = await f.arrayBuffer(); let src = await PDFLib.PDFDocument.load(buf);
+    if(pageNo<1||pageNo>src.getPageCount()) return alert('Enter Page 1-'+src.getPageCount());
+    let out = await PDFLib.PDFDocument.create(); let [p]=await out.copyPages(src,[pageNo-1]); out.addPage(p);
+    let bytes = await out.save();
+    showResultIn('sub-pdfSplit','PDF Split Done!','Page '+pageNo+' Separated',new Blob([bytes],{type:'application/pdf'}),'split-page-'+pageNo+'.pdf');
+  }catch(e){ alert('PDF failed'); }
+}
+</script>
+</div>
+<!-- SUB TOOL 3 END - PDF SPLIT -->
+
+<!-- SUB TOOL 4 START - PDF MERGE - PASTE CODE HERE -->
+<div id="sub-pdfMerge" class="subtool">
+<style>.sub-pdfMerge .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-pdfMerge">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: PDF Tab • Step 2: PDF Merge • Step 3: Select 2+ Files • Step 4: Merge • Step 5: Download</div>
+<label class="upload">📁 Upload 2+ PDFs<input type="file" accept="application/pdf" multiple onchange="onPdfFiles(this,'pdfMerge')"></label><p class="fileInfo"></p>
+<button class="btn" onclick="doPdfMerge()">📑 AI Merge Now →</button><div class="resultBox"></div>
+</div>
+<script>
+async function doPdfMerge(){
+  let files = window._pdfFiles && window._pdfFiles['pdfMerge'] ? window._pdfFiles['pdfMerge'] : [];
+  if(files.length<2) return alert('Upload 2+ PDFs');
+  try{
+    let merged = await PDFLib.PDFDocument.create();
+    for(let f of files){ let buf=await f.arrayBuffer(); let src=await PDFLib.PDFDocument.load(buf); let pages=await merged.copyPages(src,src.getPageIndices()); pages.forEach(p=>merged.addPage(p)); }
+    let bytes = await merged.save();
+    showResultIn('sub-pdfMerge','PDF Merge Done!',files.length+' PDFs Joined',new Blob([bytes],{type:'application/pdf'}),'merged.pdf');
+  }catch(e){ alert('PDF failed'); }
+}
+</script>
+</div>
+<!-- SUB TOOL 4 END - PDF MERGE -->
+
+<!-- SUB TOOL 5 START - PDF TO JPG - PASTE CODE HERE -->
+<div id="sub-pdfToJpg" class="subtool">
+<style>.sub-pdfToJpg .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-pdfToJpg">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: PDF Tab • Step 2: PDF to JPG • Step 3: Select File • Step 4: Make JPG • Step 5: Download</div>
+<label class="upload">📁 Upload PDF<input type="file" accept="application/pdf" onchange="onPdfFiles(this,'pdfToJpg')"></label><p class="fileInfo"></p>
+<button class="btn" onclick="doPdfToJpg()">🖼️ AI Make JPG →</button><div class="resultBox"></div>
+</div>
+<script>
+async function doPdfToJpg(){
+  let f = window._pdfFiles && window._pdfFiles['pdfToJpg'] ? window._pdfFiles['pdfToJpg'][0] : null;
+  if(!f) return alert('Upload PDF');
+  try{
+    let buf=await f.arrayBuffer(); let pdf=await pdfjsLib.getDocument({data:buf}).promise; let page=await pdf.getPage(1); let vp=page.getViewport({scale:1.5});
+    let c=document.createElement('canvas'); c.width=vp.width; c.height=vp.height; await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
+    c.toBlob(b=>showResultIn('sub-pdfToJpg','PDF to JPG Done!','Page 1',b,'pdf-page-1.jpg'),'image/jpeg',0.9);
+  }catch(e){ alert('PDF failed'); }
+}
+</script>
+</div>
+<!-- SUB TOOL 5 END - PDF TO JPG -->
+
+<!-- SUB TOOL 6 START - PDF DELETE - PASTE CODE HERE -->
+<div id="sub-pdfDelete" class="subtool">
+<style>.sub-pdfDelete .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-pdfDelete">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: PDF Tab • Step 2: Deleter • Step 3: Select File • Step 4: Enter Page No • Step 5: Delete • Step 6: Download</div>
+<label class="upload">📁 Upload PDF<input type="file" accept="application/pdf" onchange="onPdfFiles(this,'pdfDelete')"></label><p class="fileInfo"></p>
+<input id="delPage" class="input" placeholder="Delete Page No - Example: 2">
+<button class="btn" onclick="doPdfDelete()">🗑️ Delete Page →</button><div class="resultBox"></div>
+</div>
+<script>
+async function doPdfDelete(){
+  let f = window._pdfFiles && window._pdfFiles['pdfDelete'] ? window._pdfFiles['pdfDelete'][0] : null;
+  if(!f) return alert('Upload PDF');
+  try{
+    let del = parseInt(document.querySelector('#sub-pdfDelete #delPage').value)||1;
+    let buf=await f.arrayBuffer(); let src=await PDFLib.PDFDocument.load(buf); src.removePage(del-1); let bytes=await src.save();
+    showResultIn('sub-pdfDelete','Page Deleted!','Page '+del+' Removed',new Blob([bytes],{type:'application/pdf'}),'deleted.pdf');
+  }catch(e){ alert('Invalid page number'); }
+}
+</script>
+</div>
+<!-- SUB TOOL 6 END - PDF DELETE -->
+
+<!-- SUB TOOL 7 START - PDF ROTATE - PASTE CODE HERE -->
+<div id="sub-pdfRotate" class="subtool">
+<style>.sub-pdfRotate .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-pdfRotate">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: PDF Tab • Step 2: Rotate • Step 3: Select File • Step 4: Re-Save • Step 5: Download</div>
+<label class="upload">📁 Upload PDF<input type="file" accept="application/pdf" onchange="onPdfFiles(this,'pdfRotate')"></label><p class="fileInfo"></p>
+<button class="btn" onclick="doPdfRotate()">AI Re-Save Now →</button><div class="resultBox"></div>
+</div>
+<script>
+async function doPdfRotate(){
+  let f = window._pdfFiles && window._pdfFiles['pdfRotate'] ? window._pdfFiles['pdfRotate'][0] : null;
+  if(!f) return alert('Upload PDF');
+  let buf=await f.arrayBuffer(); let src=await PDFLib.PDFDocument.load(buf); let bytes=await src.save();
+  showResultIn('sub-pdfRotate','PDF Re-Saved!','',new Blob([bytes],{type:'application/pdf'}),'rotated.pdf');
+}
+</script>
+</div>
+<!-- SUB TOOL 7 END - PDF ROTATE -->
+
+<!-- SUB TOOL 8 START - PDF WATERMARK - PASTE CODE HERE -->
+<div id="sub-pdfWatermark" class="subtool">
+<style>.sub-pdfWatermark .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-pdfWatermark">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: PDF Tab • Step 2: Watermark • Step 3: Select File • Step 4: Type Text • Step 5: Add • Step 6: Download</div>
+<label class="upload">📁 Upload PDF<input type="file" accept="application/pdf" onchange="onPdfFiles(this,'pdfWatermark')"></label><p class="fileInfo"></p>
+<input id="pdfWmText" class="input" placeholder="Watermark - Example: CONFIDENTIAL">
+<button class="btn" onclick="doPdfWatermark()">Add Watermark →</button><div class="resultBox"></div>
+</div>
+<script>
+async function doPdfWatermark(){
+  let f = window._pdfFiles && window._pdfFiles['pdfWatermark'] ? window._pdfFiles['pdfWatermark'][0] : null;
+  if(!f) return alert('Upload PDF');
+  try{
+    let txt = document.querySelector('#sub-pdfWatermark #pdfWmText').value||'CONFIDENTIAL';
+    let buf=await f.arrayBuffer(); let src=await PDFLib.PDFDocument.load(buf); let font=await src.embedFont(PDFLib.StandardFonts.HelveticaBold);
+    src.getPages().forEach(p=>{let {width,height}=p.getSize(); p.drawText(txt,{x:width/2-100,y:height/2,font,size:32,color:PDFLib.rgb(0.8,0.8,0.8),opacity:0.5,rotate:PDFLib.degrees(45)});});
+    let bytes=await src.save(); showResultIn('sub-pdfWatermark','Watermark Added!',txt,new Blob([bytes],{type:'application/pdf'}),'watermarked.pdf');
+  }catch(e){ alert('PDF failed'); }
+}
+</script>
+</div>
+<!-- SUB TOOL 8 END - PDF WATERMARK -->
+
+<!-- SUB TOOL 9 START - PDF PAGE NUMBER - PASTE CODE HERE -->
+<div id="sub-pdfPageNo" class="subtool">
+<style>.sub-pdfPageNo .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-pdfPageNo">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: PDF Tab • Step 2: Page Number • Step 3: Select File • Step 4: Add Numbers • Step 5: Download</div>
+<label class="upload">📁 Upload PDF<input type="file" accept="application/pdf" onchange="onPdfFiles(this,'pdfPageNo')"></label><p class="fileInfo"></p>
+<button class="btn" onclick="doPdfPageNo()">Add Page Numbers →</button><div class="resultBox"></div>
+</div>
+<script>
+async function doPdfPageNo(){
+  let f = window._pdfFiles && window._pdfFiles['pdfPageNo'] ? window._pdfFiles['pdfPageNo'][0] : null;
+  if(!f) return alert('Upload PDF');
+  let buf=await f.arrayBuffer(); let src=await PDFLib.PDFDocument.load(buf); let font=await src.embedFont(PDFLib.StandardFonts.HelveticaBold);
+  src.getPages().forEach((p,i)=>{let {width}=p.getSize(); p.drawText('Page '+(i+1),{x:width/2-20,y:20,font,size:12,color:PDFLib.rgb(0,0,0)});});
+  let bytes=await src.save(); showResultIn('sub-pdfPageNo','Page Numbers Added!','',new Blob([bytes],{type:'application/pdf'}),'pageno.pdf');
+}
+</script>
+</div>
+<!-- SUB TOOL 9 END - PDF PAGE NUMBER -->
+
+<!-- SUB TOOL 10 START - PDF TO TEXT - PASTE CODE HERE -->
+<div id="sub-pdfToText" class="subtool">
+<style>.sub-pdfToText .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-pdfToText">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: PDF Tab • Step 2: PDF to Text • Step 3: Select File • Step 4: Extract Text</div>
+<label class="upload">📁 Upload PDF<input type="file" accept="application/pdf" onchange="onPdfFiles(this,'pdfToText')"></label><p class="fileInfo"></p>
+<button class="btn" onclick="doPdfToText()">AI Extract Text →</button>
+<textarea id="pdfTextOut" class="input" rows="6" placeholder="Text will appear here"></textarea><div class="resultBox"></div>
+</div>
+<script>
+async function doPdfToText(){
+  let f = window._pdfFiles && window._pdfFiles['pdfToText'] ? window._pdfFiles['pdfToText'][0] : null;
+  if(!f) return alert('Upload PDF');
+  try{
+    let buf=await f.arrayBuffer(); let pdf=await pdfjsLib.getDocument({data:buf}).promise; let txt='';
+    for(let i=1;i<=pdf.numPages;i++){ let pg=await pdf.getPage(i); let c=await pg.getTextContent(); txt+=c.items.map(it=>it.str).join(' ')+'\n'; }
+    document.querySelector('#sub-pdfToText #pdfTextOut').value=txt;
+  }catch(e){ alert('PDF failed'); }
+}
+</script>
+</div>
+<!-- SUB TOOL 10 END - PDF TO TEXT -->
+
+<!-- SUB TOOL 11 START - PDF META - PASTE CODE HERE -->
+<div id="sub-pdfMeta" class="subtool">
+<style>.sub-pdfMeta .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-pdfMeta">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: PDF Tab • Step 2: Metadata Remover • Step 3: Select File • Step 4: Re-Save • Step 5: Download</div>
+<label class="upload">📁 Upload PDF<input type="file" accept="application/pdf" onchange="onPdfFiles(this,'pdfMeta')"></label><p class="fileInfo"></p>
+<button class="btn" onclick="doPdfMeta()">AI Re-Save Now →</button><div class="resultBox"></div>
+</div>
+<script>
+async function doPdfMeta(){
+  let f = window._pdfFiles && window._pdfFiles['pdfMeta'] ? window._pdfFiles['pdfMeta'][0] : null;
+  if(!f) return alert('Upload PDF');
+  let buf=await f.arrayBuffer(); let src=await PDFLib.PDFDocument.load(buf); let bytes=await src.save();
+  showResultIn('sub-pdfMeta','Metadata Removed!','',new Blob([bytes],{type:'application/pdf'}),'clean.pdf');
+}
+</script>
+</div>
+<!-- SUB TOOL 11 END - PDF META -->
+
+<!-- SUB TOOL 12 START - PDF SIZE - PASTE CODE HERE -->
+<div id="sub-pdfSize" class="subtool">
+<style>.sub-pdfSize .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-pdfSize">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: PDF Tab • Step 2: Size Checker • Step 3: Select File • Step 4: Check Size</div>
+<label class="upload">📁 Upload PDF<input type="file" accept="application/pdf" onchange="onPdfFiles(this,'pdfSize')"></label><p class="fileInfo"></p>
+<button class="btn" onclick="doPdfSize()">Check Size →</button><div id="pdfSizeOut" style="margin-top:10px;font-size:13px"></div><div class="resultBox"></div>
+</div>
+<script>
+async function doPdfSize(){
+  let f = window._pdfFiles && window._pdfFiles['pdfSize'] ? window._pdfFiles['pdfSize'][0] : null;
+  if(!f) return alert('Upload PDF');
+  let buf=await f.arrayBuffer(); let src=await PDFLib.PDFDocument.load(buf);
+  document.querySelector('#sub-pdfSize #pdfSizeOut').innerHTML='Pages: '+src.getPageCount()+'<br>Size: '+(f.size/1024).toFixed(0)+' KB<br>Name: '+f.name;
+}
+</script>
+</div>
+<!-- SUB TOOL 12 END - PDF SIZE -->
+
+<!-- SUB TOOL 13 START - PDF PREVIEW - PASTE CODE HERE -->
+<div id="sub-pdfPreview" class="subtool">
+<style>.sub-pdfPreview .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-pdfPreview">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: PDF Tab • Step 2: Preview • Step 3: Select File • Step 4: View Preview</div>
+<label class="upload">📁 Upload PDF<input type="file" accept="application/pdf" onchange="onPdfFiles(this,'pdfPreview')"></label><p class="fileInfo"></p>
+<button class="btn" onclick="doPdfPreview()">View Preview →</button>
+<iframe id="pdfFrame" style="width:100%;height:400px;display:none;border-radius:10px;margin-top:10px"></iframe><div class="resultBox"></div>
+</div>
+<script>
+async function doPdfPreview(){
+  let f = window._pdfFiles && window._pdfFiles['pdfPreview'] ? window._pdfFiles['pdfPreview'][0] : null;
+  if(!f) return alert('Upload PDF');
+  let fr=document.querySelector('#sub-pdfPreview #pdfFrame'); fr.src=URL.createObjectURL(f); fr.style.display='block';
+}
+</script>
+</div>
+<!-- SUB TOOL 13 END - PDF PREVIEW -->
+
+<!-- ================= TOOL 1 - PDF - END ================= -->
+
+<!-- ================= TOOL 2 - IMAGE - START ================= -->
+
+<!-- SUB TOOL 1 START - PHOTO 500KB - PASTE CODE HERE -->
+<div id="sub-photo500" class="subtool">
+<style>.sub-photo500 .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-photo500">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Photo 500KB • Step 3: Select File • Step 4: Select Target • Step 5: Compress Now • Step 6: Download Now</div>
+<label class="upload">📁 Click Here To Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'photo500')"></label><p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<select id="targetKB" class="input"><option value="500">500 KB</option><option value="200">200 KB</option><option value="100">100 KB</option><option value="1000">1 MB</option></select>
+<button class="btn" onclick="doResizeKB()">✨ Compress Now →</button><div class="resultBox"></div>
+</div>
+<script>
+function doResizeKB(){
+  let img = window._imgObj && window._imgObj['photo500'];
+  let f = window._imgFile && window._imgFile['photo500'];
+  if(!img) return alert('Please upload photo first');
+  let target = parseInt(document.querySelector('#sub-photo500 #targetKB').value)||500;
+  let canvas=document.createElement('canvas'); canvas.width=img.naturalWidth; canvas.height=img.naturalHeight; let ctx=canvas.getContext('2d'); ctx.drawImage(img,0,0);
+  let q=0.9; function tryC(){ canvas.toBlob(b=>{ if(!b) return alert('Try another photo'); let kb=b.size/1024; if(kb>target && q>0.1){ q-=0.1; tryC(); } else showResultIn('sub-photo500','Done!','Before: '+(f.size/1024).toFixed(0)+' KB • Now: '+kb.toFixed(0)+' KB',b,'photo-'+target+'kb.jpg'); },'image/jpeg',q); } tryC();
+}
+</script>
+</div>
+<!-- SUB TOOL 1 END - PHOTO 500KB -->
+
+<!-- SUB TOOL 2 START - IMAGE COMPRESSOR - PASTE CODE HERE - SAME AS PHOTO 500KB, SIRF TITLE ALAG -->
+<div id="sub-imgCompress" class="subtool">
+<style>.sub-imgCompress .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-imgCompress">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Compressor • Step 3: Select File • Step 4: Select Target • Step 5: Compress • Step 6: Download</div>
+<label class="upload">📁 Click Here To Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'imgCompress')"></label><p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<select id="targetKB2" class="input"><option value="500">500 KB</option><option value="200">200 KB</option><option value="100">100 KB</option></select>
+<button class="btn" onclick="doImgCompress()">✨ Compress Now →</button><div class="resultBox"></div>
+</div>
+<script>
+function doImgCompress(){
+  let img = window._imgObj && window._imgObj['imgCompress']; let f = window._imgFile && window._imgFile['imgCompress'];
+  if(!img) return alert('Upload photo');
+  let target = parseInt(document.querySelector('#sub-imgCompress #targetKB2').value)||500;
+  let canvas=document.createElement('canvas'); canvas.width=img.naturalWidth; canvas.height=img.naturalHeight; canvas.getContext('2d').drawImage(img,0,0);
+  let q=0.9; function tryC(){ canvas.toBlob(b=>{ let kb=b.size/1024; if(kb>target && q>0.1){ q-=0.1; tryC(); } else showResultIn('sub-imgCompress','Done!','Before: '+(f.size/1024).toFixed(0)+' KB • Now: '+kb.toFixed(0)+' KB',b,'compressed.jpg'); },'image/jpeg',q); } tryC();
+}
+</script>
+</div>
+<!-- SUB TOOL 2 END - IMAGE COMPRESSOR -->
+
+<!-- SUB TOOL 3 START - IMAGE RESIZER - PASTE CODE HERE -->
+<div id="sub-imgResize" class="subtool">
+<style>.sub-imgResize .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-imgResize">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Resizer • Step 3: Select File • Step 4: Enter Width x Height • Step 5: Resize • Step 6: Download</div>
+<label class="upload">📁 Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'imgResize')"></label><p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<input id="wInput" class="input" placeholder="Width - Example: 500"><input id="hInput" class="input" placeholder="Height - Example: 500">
+<button class="btn" onclick="doResizeWH()">AI Resize Now →</button><div class="resultBox"></div>
+</div>
+<script>
+function doResizeWH(){
+  let img = window._imgObj && window._imgObj['imgResize']; if(!img) return alert('Upload photo');
+  let w=parseInt(document.querySelector('#sub-imgResize #wInput').value)||500; let h=parseInt(document.querySelector('#sub-imgResize #hInput').value)||500;
+  let c=document.createElement('canvas'); c.width=w; c.height=h; c.getContext('2d').drawImage(img,0,0,w,h);
+  c.toBlob(b=>showResultIn('sub-imgResize','Resize Done!',w+'x'+h,b,'resized.jpg'),'image/jpeg',0.9);
+}
+</script>
+</div>
+<!-- SUB TOOL 3 END - IMAGE RESIZER -->
+
+<!-- SUB TOOL 4 START - IMAGE CONVERTER - PASTE CODE HERE -->
+<div id="sub-imgConvert" class="subtool">
+<style>.sub-imgConvert .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-imgConvert">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Converter • Step 3: Select File • Step 4: Select Format • Step 5: Convert • Step 6: Download</div>
+<label class="upload">📁 Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'imgConvert')"></label><p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<select id="convFormat" class="input"><option value="image/png">PNG</option><option value="image/jpeg">JPG</option><option value="image/webp">WEBP</option></select>
+<button class="btn" onclick="doConvert()">AI Convert Now →</button><div class="resultBox"></div>
+</div>
+<script>
+function doConvert(){
+  let img = window._imgObj && window._imgObj['imgConvert']; if(!img) return alert('Upload photo');
+  let f=document.querySelector('#sub-imgConvert #convFormat').value;
+  let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; c.getContext('2d').drawImage(img,0,0);
+  c.toBlob(b=>showResultIn('sub-imgConvert','Convert Done!',f,b,'converted.'+(f==='image/png'?'png':f==='image/webp'?'webp':'jpg')),f,0.9);
+}
+</script>
+</div>
+<!-- SUB TOOL 4 END - IMAGE CONVERTER -->
+
+<!-- SUB TOOL 5 START - PASSPORT PHOTO - PASTE CODE HERE -->
+<div id="sub-passport" class="subtool">
+<style>.sub-passport .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-passport">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Passport Photo • Step 3: Select File • Step 4: Make Passport Photo • Step 5: Download</div>
+<label class="upload">📁 Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'passport')"></label><p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<button class="btn" onclick="doPassport()">🪪 AI Make Passport Photo →</button><div class="resultBox"></div>
+</div>
+<script>
+function doPassport(){
+  let img = window._imgObj && window._imgObj['passport']; if(!img) return alert('Upload photo');
+  let c=document.createElement('canvas'); c.width=413; c.height=531; let ctx=c.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,413,531);
+  let s=Math.min(img.naturalWidth/413,img.naturalHeight/531); let sw=413*s, sh=531*s;
+  ctx.drawImage(img,(img.naturalWidth-sw)/2,(img.naturalHeight-sh)/2,sw,sh,0,0,413,531);
+  c.toBlob(b=>showResultIn('sub-passport','Passport Photo Ready!','35x45mm • 413x531px • White Background',b,'passport.jpg'),'image/jpeg',0.95);
+}
+</script>
+</div>
+<!-- SUB TOOL 5 END - PASSPORT PHOTO -->
+
+<!-- SUB TOOL 6 START - IMAGE CROPPER - PASTE CODE HERE -->
+<div id="sub-imgCrop" class="subtool">
+<style>.sub-imgCrop .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-imgCrop">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Cropper • Step 3: Select File • Step 4: Crop • Step 5: Download</div>
+<label class="upload">📁 Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'imgCrop')"></label><p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<button class="btn" onclick="doCropCenter()">✂️ AI Crop Center →</button><div class="resultBox"></div>
+</div>
+<script>
+function doCropCenter(){
+  let img = window._imgObj && window._imgObj['imgCrop']; if(!img) return alert('Upload photo');
+  let s=Math.min(img.naturalWidth,img.naturalHeight); let c=document.createElement('canvas'); c.width=s; c.height=s;
+  c.getContext('2d').drawImage(img,(img.naturalWidth-s)/2,(img.naturalHeight-s)/2,s,s,0,0,s,s);
+  c.toBlob(b=>showResultIn('sub-imgCrop','Crop Done!','Square Crop',b,'cropped.jpg'),'image/jpeg',0.9);
+}
+</script>
+</div>
+<!-- SUB TOOL 6 END - IMAGE CROPPER -->
+
+<!-- SUB TOOL 7 START - IMAGE ROTATE - PASTE CODE HERE -->
+<div id="sub-imgRotate" class="subtool">
+<style>.sub-imgRotate .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-imgRotate">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Rotate • Step 3: Select File • Step 4: Rotate • Step 5: Download</div>
+<label class="upload">📁 Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'imgRotate')"></label><p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<button class="btn" onclick="doRotate(90)">Rotate 90°</button><button class="btn" onclick="doRotate(180)">Rotate 180°</button><button class="btn" onclick="doFlip()">Flip Now</button><div class="resultBox"></div>
+</div>
+<script>
+function doRotate(deg){
+  let img = window._imgObj && window._imgObj['imgRotate']; if(!img) return alert('Upload photo');
+  let c=document.createElement('canvas'); if(deg===90||deg===270){ c.width=img.naturalHeight; c.height=img.naturalWidth; } else { c.width=img.naturalWidth; c.height=img.naturalHeight; }
+  let ctx=c.getContext('2d'); ctx.translate(c.width/2,c.height/2); ctx.rotate(deg*Math.PI/180); ctx.drawImage(img,-img.naturalWidth/2,-img.naturalHeight/2);
+  c.toBlob(b=>showResultIn('sub-imgRotate','Rotate Done!',deg+'°',b,'rotated.jpg'),'image/jpeg',0.9);
+}
+function doFlip(){
+  let img = window._imgObj && window._imgObj['imgRotate']; if(!img) return alert('Upload photo');
+  let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); ctx.translate(c.width,0); ctx.scale(-1,1); ctx.drawImage(img,0,0);
+  c.toBlob(b=>showResultIn('sub-imgRotate','Flip Done!','',b,'flipped.jpg'),'image/jpeg',0.9);
+}
+</script>
+</div>
+<!-- SUB TOOL 7 END - IMAGE ROTATE -->
+
+<!-- SUB TOOL 8 START - IMAGE WATERMARK - PASTE CODE HERE -->
+<div id="sub-imgWatermark" class="subtool">
+<style>.sub-imgWatermark .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-imgWatermark">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Watermark • Step 3: Select File • Step 4: Type Text • Step 5: Add • Step 6: Download</div>
+<label class="upload">📁 Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'imgWatermark')"></label><p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<input id="wmText" class="input" placeholder="Watermark Text - Example: My Name">
+<button class="btn" onclick="doImgWatermark()">Add Watermark →</button><div class="resultBox"></div>
+</div>
+<script>
+function doImgWatermark(){
+  let img = window._imgObj && window._imgObj['imgWatermark']; if(!img) return alert('Upload photo');
+  let t=document.querySelector('#sub-imgWatermark #wmText').value||'My Name';
+  let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); ctx.drawImage(img,0,0); ctx.font='bold 40px Arial'; ctx.fillStyle='rgba(255,255,255,0.7)'; ctx.fillText(t,20,c.height-30);
+  c.toBlob(b=>showResultIn('sub-imgWatermark','Watermark Added!',t,b,'watermarked.jpg'),'image/jpeg',0.9);
+}
+</script>
+</div>
+<!-- SUB TOOL 8 END - IMAGE WATERMARK -->
+
+<!-- SUB TOOL 9 START - BLACK & WHITE - PASTE CODE HERE -->
+<div id="sub-imgGray" class="subtool">
+<style>.sub-imgGray .btn{background:linear-gradient(90deg,#64748b,#0f172a);color:#fff}</style>
+<div class="sub-imgGray">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Black & White • Step 3: Select File • Step 4: Convert • Step 5: Download</div>
+<label class="upload">📁 Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'imgGray')"></label><p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<button class="btn" onclick="doGray()">Make Black & White →</button><div class="resultBox"></div>
+</div>
+<script>
+function doGray(){
+  let img = window._imgObj && window._imgObj['imgGray']; if(!img) return alert('Upload photo');
+  let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); ctx.filter='grayscale(1)'; ctx.drawImage(img,0,0);
+  c.toBlob(b=>showResultIn('sub-imgGray','Black & White Done!','',b,'bw.jpg'),'image/jpeg',0.9);
+}
+</script>
+</div>
+<!-- SUB TOOL 9 END - BLACK & WHITE -->
+
+<!-- SUB TOOL 10 START - BRIGHTNESS - PASTE CODE HERE -->
+<div id="sub-imgFilter" class="subtool">
+<style>.sub-imgFilter .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-imgFilter">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Brightness • Step 3: Select File • Step 4: Move Slider • Step 5: Download</div>
+<label class="upload">📁 Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'imgFilter')"></label><p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<input id="brightVal" type="range" min="50" max="150" value="110" class="input">
+<button class="btn" onclick="doBright()">Increase Brightness →</button><div class="resultBox"></div>
+</div>
+<script>
+function doBright(){
+  let img = window._imgObj && window._imgObj['imgFilter']; if(!img) return alert('Upload photo');
+  let v=document.querySelector('#sub-imgFilter #brightVal').value||110;
+  let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; let ctx=c.getContext('2d'); ctx.filter='brightness('+v+'%)'; ctx.drawImage(img,0,0);
+  c.toBlob(b=>showResultIn('sub-imgFilter','Brightness Increased!','',b,'bright.jpg'),'image/jpeg',0.9);
+}
+</script>
+</div>
+<!-- SUB TOOL 10 END - BRIGHTNESS -->
+
+<!-- SUB TOOL 11 START - SIGNATURE - PASTE CODE HERE -->
+<div id="sub-imgSign" class="subtool">
+<style>.sub-imgSign .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-imgSign">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Signature Maker • Step 3: Draw • Step 4: Download</div>
+<canvas id="signCanvas" width="320" height="160" style="background:#fff;border-radius:10px;width:100%;touch-action:none"></canvas>
+<button class="btn" onclick="clearSign()">Clear</button><button class="btn" onclick="saveSign()">Download Signature →</button><div class="resultBox"></div>
+</div>
+<script>
+function initSign(){
+  let cv=document.querySelector('#sub-imgSign #signCanvas'); if(!cv||cv.dataset.done) return; cv.dataset.done='1';
+  let ctx=cv.getContext('2d'); ctx.strokeStyle='#000'; ctx.lineWidth=2; ctx.lineCap='round'; let draw=false;
+  function pos(e){ let r=cv.getBoundingClientRect(); let x=(e.touches?e.touches[0].clientX:e.clientX)-r.left; let y=(e.touches?e.touches[0].clientY:e.clientY)-r.top; return {x:x*cv.width/r.width,y:y*cv.height/r.height}; }
+  cv.addEventListener('mousedown',e=>{draw=true;let p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);});
+  cv.addEventListener('mousemove',e=>{if(draw){let p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();}});
+  window.addEventListener('mouseup',()=>draw=false);
+  cv.addEventListener('touchstart',e=>{e.preventDefault();draw=true;let p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);},{passive:false});
+  cv.addEventListener('touchmove',e=>{e.preventDefault();if(draw){let p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();}},{passive:false});
+  cv.addEventListener('touchend',()=>draw=false);
+}
+function clearSign(){ let cv=document.querySelector('#sub-imgSign #signCanvas'); if(cv) cv.getContext('2d').clearRect(0,0,cv.width,cv.height); }
+function saveSign(){ let cv=document.querySelector('#sub-imgSign #signCanvas'); cv.toBlob(b=>showResultIn('sub-imgSign','Signature Ready!','Transparent PNG',b,'signature.png'),'image/png'); }
+setTimeout(initSign,500);
+</script>
+</div>
+<!-- SUB TOOL 11 END - SIGNATURE -->
+
+<!-- SUB TOOL 12 START - COLLAGE - PASTE CODE HERE -->
+<div id="sub-imgCollage" class="subtool">
+<style>.sub-imgCollage .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-imgCollage">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Collage • Step 3: Select File • Step 4: Make Collage • Step 5: Download</div>
+<label class="upload">📁 Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'imgCollage')"></label><p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<button class="btn" onclick="doCollage()">Make Collage →</button><div class="resultBox"></div>
+</div>
+<script>
+function doCollage(){
+  let img = window._imgObj && window._imgObj['imgCollage']; if(!img) return alert('Upload photo');
+  let c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; c.getContext('2d').drawImage(img,0,0);
+  c.toBlob(b=>showResultIn('sub-imgCollage','Collage Done!','',b,'collage.jpg'),'image/jpeg',0.9);
+}
+</script>
+</div>
+<!-- SUB TOOL 12 END - COLLAGE -->
+
+<!-- SUB TOOL 13 START - IMAGE SIZE - PASTE CODE HERE -->
+<div id="sub-imgSize" class="subtool">
+<style>.sub-imgSize .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-imgSize">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Size Checker • Step 3: Select File • Step 4: Check Size</div>
+<label class="upload">📁 Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'imgSize')"></label><p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<button class="btn" onclick="doImgSize()">Check Size →</button><div id="sizeOut" style="margin-top:10px;font-size:13px;line-height:1.7"></div><div class="resultBox"></div>
+</div>
+<script>
+function doImgSize(){
+  let f = window._imgFile && window._imgFile['imgSize']; let img = window._imgObj && window._imgObj['imgSize'];
+  if(!f) return alert('Upload photo');
+  document.querySelector('#sub-imgSize #sizeOut').innerHTML='Name: '+f.name+'<br>Size: '+(f.size/1024).toFixed(0)+' KB<br>Width: '+(img?img.naturalWidth:'-')+'px<br>Height: '+(img?img.naturalHeight:'-')+'px';
+}
+</script>
+</div>
+<!-- SUB TOOL 13 END - IMAGE SIZE -->
+
+<!-- SUB TOOL 14 START - BASE64 - PASTE CODE HERE -->
+<div id="sub-imgBase64" class="subtool">
+<style>.sub-imgBase64 .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-imgBase64">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Base64 • Step 3: Select File • Step 4: Make Base64</div>
+<label class="upload">📁 Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'imgBase64')"></label><p class="fileInfo"></p>
+<button class="btn" onclick="doBase64()">Make Base64 →</button><textarea id="b64Out" class="input" rows="4" placeholder="Base64 will appear here"></textarea><div class="resultBox"></div>
+</div>
+<script>
+function doBase64(){
+  let f = window._imgFile && window._imgFile['imgBase64']; if(!f) return alert('Upload photo');
+  let r=new FileReader(); r.onload=e=>{ document.querySelector('#sub-imgBase64 #b64Out').value=e.target.result.substring(0,500)+'...'; }; r.readAsDataURL(f);
+}
+</script>
+</div>
+<!-- SUB TOOL 14 END - BASE64 -->
+
+<!-- SUB TOOL 15 START - FAVICON - PASTE CODE HERE -->
+<div id="sub-favicon" class="subtool">
+<style>.sub-favicon .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-favicon">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Favicon • Step 3: Select File • Step 4: Make Favicon • Step 5: Download</div>
+<label class="upload">📁 Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'favicon')"></label><p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<button class="btn" onclick="doFavicon()">Make Favicon (32x32) →</button><div class="resultBox"></div>
+</div>
+<script>
+function doFavicon(){
+  let img = window._imgObj && window._imgObj['favicon']; if(!img) return alert('Upload photo');
+  let c=document.createElement('canvas'); c.width=32; c.height=32; c.getContext('2d').drawImage(img,0,0,32,32);
+  c.toBlob(b=>showResultIn('sub-favicon','Favicon Ready!','32x32',b,'favicon.png'),'image/png');
+}
+</script>
+</div>
+<!-- SUB TOOL 15 END - FAVICON -->
+
+<!-- SUB TOOL 16 START - ENLARGER - PASTE CODE HERE -->
+<div id="sub-imgEnlarge" class="subtool">
+<style>.sub-imgEnlarge .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-imgEnlarge">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Enlarger • Step 3: Select File • Step 4: Make 2x • Step 5: Download</div>
+<label class="upload">📁 Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'imgEnlarge')"></label><p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<button class="btn" onclick="doEnlarge()">Make 2x Bigger →</button><div class="resultBox"></div>
+</div>
+<script>
+function doEnlarge(){
+  let img = window._imgObj && window._imgObj['imgEnlarge']; if(!img) return alert('Upload photo');
+  let c=document.createElement('canvas'); c.width=img.naturalWidth*2; c.height=img.naturalHeight*2; c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+  c.toBlob(b=>showResultIn('sub-imgEnlarge','2x Bigger Done!',c.width+'x'+c.height,b,'enlarged.jpg'),'image/jpeg',0.9);
+}
+</script>
+</div>
+<!-- SUB TOOL 16 END - ENLARGER -->
+
+<!-- SUB TOOL 17 START - PRINT SHEET - PASTE CODE HERE -->
+<div id="sub-imgPrint" class="subtool">
+<style>.sub-imgPrint .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-imgPrint">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Image Tab • Step 2: Print Sheet • Step 3: Select File • Step 4: Make Sheet • Step 5: Download</div>
+<label class="upload">📁 Upload Photo<input type="file" accept="image/*" onchange="onImgFile(this,'imgPrint')"></label><p class="fileInfo"></p><img class="toolPreview" style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:10px;margin-top:10px;background:#000">
+<button class="btn" onclick="doPrintSheet()">Make 8 Copy Print Sheet →</button><div class="resultBox"></div>
+</div>
+<script>
+function doPrintSheet(){
+  let img = window._imgObj && window._imgObj['imgPrint']; if(!img) return alert('Upload photo');
+  let c=document.createElement('canvas'); c.width=413*2; c.height=531*4; let ctx=c.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,c.width,c.height);
+  for(let i=0;i<8;i++){ let x=(i%2)*413, y=Math.floor(i/2)*531; let s=Math.min(img.naturalWidth/413,img.naturalHeight/531); let sw=413*s, sh=531*s; ctx.drawImage(img,(img.naturalWidth-sw)/2,(img.naturalHeight-sh)/2,sw,sh,x,y,413,531); }
+  c.toBlob(b=>showResultIn('sub-imgPrint','Print Sheet Ready!','8 Copies in 1 Page',b,'print-sheet.jpg'),'image/jpeg',0.95);
+}
+</script>
+</div>
+<!-- SUB TOOL 17 END - PRINT SHEET -->
+
+<!-- ================= TOOL 2 - IMAGE - END ================= -->
+
+<!-- ================= TOOL 3 - DAILY - START ================= -->
+
+<!-- SUB TOOL 1 START - QR - PASTE CODE HERE -->
+<div id="sub-qr" class="subtool">
+<style>.sub-qr .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-qr">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: QR Generator • Step 3: Type Link / Text • Step 4: Make QR • Step 5: Download QR</div>
+<input id="qrText" class="input" placeholder="Link / Text - Example: https://google.com">
+<button class="btn" onclick="doQR()">AI Make QR →</button>
+<div id="qrOut" style="background:#fff;padding:14px;border-radius:10px;margin-top:10px;display:none;text-align:center"></div>
+<button class="btn" onclick="downloadQR()" style="display:none" id="qrDl">Download QR</button><div class="resultBox"></div>
+</div>
+<script>
+function doQR(){
+  let t=document.querySelector('#sub-qr #qrText').value.trim(); if(!t) return alert('Type link / text');
+  let out=document.querySelector('#sub-qr #qrOut'); out.innerHTML=''; out.style.display='block'; new QRCode(out,{text:t,width:180,height:180});
+  document.querySelector('#sub-qr #qrDl').style.display='block';
+}
+function downloadQR(){ let img=document.querySelector('#sub-qr #qrOut img'); if(img){ let a=document.createElement('a'); a.href=img.src; a.download='qr.png'; a.click(); } }
+</script>
+</div>
+<!-- SUB TOOL 1 END - QR -->
+
+<!-- SUB TOOL 2 START - BARCODE - PASTE CODE HERE -->
+<div id="sub-barcode" class="subtool">
+<style>.sub-barcode .btn{background:linear-gradient(90deg,#64748b,#0f172a);color:#fff}</style>
+<div class="sub-barcode">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: Barcode • Step 3: Type Number • Step 4: Make Barcode</div>
+<input id="barText" class="input" placeholder="Number - Example: 123456789">
+<button class="btn" onclick="doBarcode()">Make Barcode →</button>
+<div style="background:#fff;padding:14px;border-radius:10px;margin-top:10px"><svg id="barSvg"></svg></div><div class="resultBox"></div>
+</div>
+<script>
+function doBarcode(){
+  let t=document.querySelector('#sub-barcode #barText').value.trim()||'123456789';
+  try{ JsBarcode('#sub-barcode #barSvg',t,{format:'CODE128',width:2,height:80,displayValue:true}); }catch(e){ alert('Enter only numbers'); }
+}
+</script>
+</div>
+<!-- SUB TOOL 2 END - BARCODE -->
+
+<!-- SUB TOOL 3 START - WORD COUNTER - PASTE CODE HERE -->
+<div id="sub-wordCount" class="subtool">
+<style>.sub-wordCount .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-wordCount">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: Word Counter • Step 3: Paste Text • Step 4: Count Now</div>
+<textarea id="wcText" class="input" rows="5" placeholder="Write here..."></textarea>
+<button class="btn" onclick="doWordCount()">AI Count Now →</button><div id="wcOut" style="margin-top:10px;font-size:13px;line-height:1.7"></div><div class="resultBox"></div>
+</div>
+<script>
+function doWordCount(){
+  let t=document.querySelector('#sub-wordCount #wcText').value; let w=t.trim()?t.trim().split(/\s+/).length:0;
+  document.querySelector('#sub-wordCount #wcOut').innerHTML='Words: <b>'+w+'</b><br>Chars: <b>'+t.length+'</b><br>Chars without space: <b>'+t.replace(/\s/g,'').length+'</b><br>Lines: <b>'+t.split('\n').length+'</b>';
+}
+</script>
+</div>
+<!-- SUB TOOL 3 END - WORD COUNTER -->
+
+<!-- SUB TOOL 4 START - TEXT TO PDF - PASTE CODE HERE -->
+<div id="sub-textPdf" class="subtool">
+<style>.sub-textPdf .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-textPdf">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: Text to PDF • Step 3: Type Text • Step 4: Make PDF • Step 5: Download</div>
+<textarea id="tpText" class="input" rows="5" placeholder="Write text, PDF will be made"></textarea>
+<button class="btn" onclick="doTextPdf()">AI Make PDF →</button><div class="resultBox"></div>
+</div>
+<script>
+function doTextPdf(){
+  let t=document.querySelector('#sub-textPdf #tpText').value.trim(); if(!t) return alert('Write text');
+  const {jsPDF}=window.jspdf; let doc=new jsPDF(); doc.text(doc.splitTextToSize(t,180),10,20);
+  showResultIn('sub-textPdf','PDF Ready!','Text to PDF',doc.output('blob'),'text.pdf');
+}
+</script>
+</div>
+<!-- SUB TOOL 4 END - TEXT TO PDF -->
+
+<!-- SUB TOOL 5 START - CASE CONVERTER - PASTE CODE HERE -->
+<div id="sub-caseConvert" class="subtool">
+<style>.sub-caseConvert .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-caseConvert">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: Case Converter • Step 3: Type Text • Step 4: Click UPPER / lower</div>
+<textarea id="ccText" class="input" rows="4" placeholder="Write text"></textarea>
+<button class="btn" onclick="doCase('upper')">UPPER</button><button class="btn" onclick="doCase('lower')">lower</button><button class="btn" onclick="doCase('cap')">Capital</button>
+<textarea id="ccOut" class="input" rows="4" placeholder="Result"></textarea><div class="resultBox"></div>
+</div>
+<script>
+function doCase(m){
+  let t=document.querySelector('#sub-caseConvert #ccText').value;
+  if(m==='upper') document.querySelector('#sub-caseConvert #ccOut').value=t.toUpperCase();
+  else if(m==='lower') document.querySelector('#sub-caseConvert #ccOut').value=t.toLowerCase();
+  else document.querySelector('#sub-caseConvert #ccOut').value=t.replace(/\b\w/g,c=>c.toUpperCase());
+}
+</script>
+</div>
+<!-- SUB TOOL 5 END - CASE CONVERTER -->
+
+<!-- SUB TOOL 6 START - CLEAN TEXT - PASTE CODE HERE -->
+<div id="sub-cleanText" class="subtool">
+<style>.sub-cleanText .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-cleanText">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: Clean Text • Step 3: Paste Text • Step 4: Clean Now</div>
+<textarea id="clText" class="input" rows="4" placeholder="Text with extra spaces"></textarea>
+<button class="btn" onclick="doCleanText()">AI Clean Now →</button><textarea id="clOut" class="input" rows="4"></textarea><div class="resultBox"></div>
+</div>
+<script>
+function doCleanText(){ let t=document.querySelector('#sub-cleanText #clText').value; document.querySelector('#sub-cleanText #clOut').value=t.replace(/\s+/g,' ').trim(); }
+</script>
+</div>
+<!-- SUB TOOL 6 END - CLEAN TEXT -->
+
+<!-- SUB TOOL 7 START - LOREM - PASTE CODE HERE -->
+<div id="sub-lorem" class="subtool">
+<style>.sub-lorem .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-lorem">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: Lorem • Step 3: Enter Paragraphs • Step 4: Make Lorem</div>
+<input id="loremPara" class="input" type="number" value="3" placeholder="How many paragraphs?">
+<button class="btn" onclick="doLorem()">AI Make Lorem →</button><textarea id="loremOut" class="input" rows="5"></textarea><div class="resultBox"></div>
+</div>
+<script>
+function doLorem(){
+  let n=parseInt(document.querySelector('#sub-lorem #loremPara').value)||3;
+  let para='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.';
+  let out=''; for(let i=0;i<n;i++) out+=para+'\n\n'; document.querySelector('#sub-lorem #loremOut').value=out;
+}
+</script>
+</div>
+<!-- SUB TOOL 7 END - LOREM -->
+
+<!-- SUB TOOL 8 START - PASSWORD - PASTE CODE HERE -->
+<div id="sub-passGen" class="subtool">
+<style>.sub-passGen .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-passGen">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: Password Generator • Step 3: Enter Length • Step 4: Make Password</div>
+<input id="passLen" class="input" type="number" value="12" placeholder="Length">
+<button class="btn" onclick="doPassGen()">AI Make Password →</button><input id="passOut" class="input" readonly><div class="resultBox"></div>
+</div>
+<script>
+function doPassGen(){
+  let len=parseInt(document.querySelector('#sub-passGen #passLen').value)||12;
+  let chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%'; let p='';
+  for(let i=0;i<len;i++) p+=chars[Math.floor(Math.random()*chars.length)];
+  document.querySelector('#sub-passGen #passOut').value=p;
+}
+</script>
+</div>
+<!-- SUB TOOL 8 END - PASSWORD -->
+
+<!-- SUB TOOL 9 START - JSON - PASTE CODE HERE -->
+<div id="sub-json" class="subtool">
+<style>.sub-json .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-json">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: JSON Formatter • Step 3: Paste JSON • Step 4: Format Now</div>
+<textarea id="jsonIn" class="input" rows="5" placeholder='{"name":"test"}'></textarea>
+<button class="btn" onclick="doJson()">AI Format Now →</button><textarea id="jsonOut" class="input" rows="5"></textarea><div class="resultBox"></div>
+</div>
+<script>
+function doJson(){ try{ let j=JSON.parse(document.querySelector('#sub-json #jsonIn').value); document.querySelector('#sub-json #jsonOut').value=JSON.stringify(j,null,2); }catch(e){ alert('Invalid JSON'); } }
+</script>
+</div>
+<!-- SUB TOOL 9 END - JSON -->
+
+<!-- SUB TOOL 10 START - INVOICE - PASTE CODE HERE -->
+<div id="sub-invoice" class="subtool">
+<style>.sub-invoice .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-invoice">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: Invoice Maker • Step 3: Enter Name, Item, Amount • Step 4: Make Invoice PDF • Step 5: Download</div>
+<input id="invName" class="input" placeholder="Customer Name"><input id="invItem" class="input" placeholder="Item - Example: Design"><input id="invAmt" class="input" placeholder="Amount - Example: 5000">
+<button class="btn" onclick="doInvoice()">AI Make Invoice PDF →</button><div class="resultBox"></div>
+</div>
+<script>
+function doInvoice(){
+  let name=document.querySelector('#sub-invoice #invName').value||'Customer'; let item=document.querySelector('#sub-invoice #invItem').value||'Item'; let amt=document.querySelector('#sub-invoice #invAmt').value||'0';
+  const {jsPDF}=window.jspdf; let doc=new jsPDF(); doc.setFontSize(20); doc.text('ORBITTRONIZ INVOICE',20,20); doc.setFontSize(12); doc.text('Customer: '+name,20,40); doc.text('Item: '+item,20,55); doc.text('Amount: Rs '+amt,20,70); doc.text('Thank you!',20,90);
+  showResultIn('sub-invoice','Invoice Ready!',name+' - Rs '+amt,doc.output('blob'),'invoice.pdf');
+}
+</script>
+</div>
+<!-- SUB TOOL 10 END - INVOICE -->
+
+<!-- SUB TOOL 11 START - AGE - PASTE CODE HERE -->
+<div id="sub-ageCalc" class="subtool">
+<style>.sub-ageCalc .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-ageCalc">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: Age Calculator • Step 3: Select DOB • Step 4: Calculate Age</div>
+<input id="dobInput" type="date" class="input">
+<button class="btn" onclick="doAge()">Calculate Age →</button><div id="ageOut" style="margin-top:10px"></div><div class="resultBox"></div>
+</div>
+<script>
+function doAge(){
+  let dob=document.querySelector('#sub-ageCalc #dobInput').value; if(!dob) return alert('Select DOB');
+  let b=new Date(dob), now=new Date(); let age=now.getFullYear()-b.getFullYear(); let m=now.getMonth()-b.getMonth(); if(m<0||(m===0&&now.getDate()<b.getDate())) age--;
+  document.querySelector('#sub-ageCalc #ageOut').innerHTML='Age: <b>'+age+' years</b>';
+}
+</script>
+</div>
+<!-- SUB TOOL 11 END - AGE -->
+
+<!-- SUB TOOL 12 START - EMI - PASTE CODE HERE -->
+<div id="sub-emiCalc" class="subtool">
+<style>.sub-emiCalc .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-emiCalc">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: EMI Calculator • Step 3: Enter Loan, Rate, Months • Step 4: Calculate EMI</div>
+<input id="loanAmt" class="input" placeholder="Loan Amount - 100000"><input id="loanRate" class="input" placeholder="Rate % - 10"><input id="loanMonths" class="input" placeholder="Months - 12">
+<button class="btn" onclick="doEMI()">Calculate EMI →</button><div id="emiOut" style="margin-top:10px;font-size:14px"></div><div class="resultBox"></div>
+</div>
+<script>
+function doEMI(){
+  let P=parseFloat(document.querySelector('#sub-emiCalc #loanAmt').value)||0; let r=(parseFloat(document.querySelector('#sub-emiCalc #loanRate').value)||0)/1200; let n=parseFloat(document.querySelector('#sub-emiCalc #loanMonths').value)||1;
+  let emi=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  document.querySelector('#sub-emiCalc #emiOut').innerHTML='Monthly EMI: <b>Rs '+emi.toFixed(0)+'</b><br>Total: <b>Rs '+(emi*n).toFixed(0)+'</b>';
+}
+</script>
+</div>
+<!-- SUB TOOL 12 END - EMI -->
+
+<!-- SUB TOOL 13 START - GST - PASTE CODE HERE -->
+<div id="sub-gstCalc" class="subtool">
+<style>.sub-gstCalc .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-gstCalc">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: GST Calculator • Step 3: Enter Amount, GST% • Step 4: Calculate GST</div>
+<input id="gstAmt" class="input" placeholder="Amount - 1000"><input id="gstRate" class="input" placeholder="GST % - 18">
+<button class="btn" onclick="doGST()">Calculate GST →</button><div id="gstOut" style="margin-top:10px"></div><div class="resultBox"></div>
+</div>
+<script>
+function doGST(){
+  let amt=parseFloat(document.querySelector('#sub-gstCalc #gstAmt').value)||0; let rate=parseFloat(document.querySelector('#sub-gstCalc #gstRate').value)||18; let gst=amt*rate/100;
+  document.querySelector('#sub-gstCalc #gstOut').innerHTML='GST: <b>Rs '+gst.toFixed(0)+'</b><br>Total: <b>Rs '+(amt+gst).toFixed(0)+'</b>';
+}
+</script>
+</div>
+<!-- SUB TOOL 13 END - GST -->
+
+<!-- SUB TOOL 14 START - PERCENTAGE - PASTE CODE HERE -->
+<div id="sub-percentCalc" class="subtool">
+<style>.sub-percentCalc .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-percentCalc">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: Percentage • Step 3: Enter Value, % • Step 4: Find %</div>
+<input id="pctVal" class="input" placeholder="Value - 200"><input id="pctPer" class="input" placeholder="% - 10">
+<button class="btn" onclick="doPct()">Find % →</button><div id="pctOut" style="margin-top:10px"></div><div class="resultBox"></div>
+</div>
+<script>
+function doPct(){
+  let v=parseFloat(document.querySelector('#sub-percentCalc #pctVal').value)||0; let p=parseFloat(document.querySelector('#sub-percentCalc #pctPer').value)||0;
+  document.querySelector('#sub-percentCalc #pctOut').innerHTML=p+'% of '+v+' = <b>'+(v*p/100).toFixed(2)+'</b>';
+}
+</script>
+</div>
+<!-- SUB TOOL 14 END - PERCENTAGE -->
+
+<!-- SUB TOOL 15 START - UNIT CONVERTER - PASTE CODE HERE -->
+<div id="sub-unitConv" class="subtool">
+<style>.sub-unitConv .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-unitConv">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: Unit Converter • Step 3: Enter Value • Step 4: Convert</div>
+<input id="unitVal" class="input" placeholder="Value - 1">
+<select id="unitType" class="input"><option value="kg-lb">KG → Pound</option><option value="cm-inch">CM → Inch</option><option value="km-mile">KM → Mile</option></select>
+<button class="btn" onclick="doUnit()">Convert Now →</button><div id="unitOut" style="margin-top:10px"></div><div class="resultBox"></div>
+</div>
+<script>
+function doUnit(){
+  let v=parseFloat(document.querySelector('#sub-unitConv #unitVal').value)||0; let t=document.querySelector('#sub-unitConv #unitType').value; let out='';
+  if(t==='kg-lb') out=(v*2.20462).toFixed(2)+' Pound'; else if(t==='cm-inch') out=(v*0.393701).toFixed(2)+' Inch'; else out=(v*0.621371).toFixed(2)+' Mile';
+  document.querySelector('#sub-unitConv #unitOut').innerHTML='Result: <b>'+out+'</b>';
+}
+</script>
+</div>
+<!-- SUB TOOL 15 END - UNIT CONVERTER -->
+
+<!-- SUB TOOL 16 START - STOPWATCH - PASTE CODE HERE -->
+<div id="sub-stopwatch" class="subtool">
+<style>.sub-stopwatch .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-stopwatch">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: Stopwatch • Step 3: Click Start</div>
+<div id="swTime" style="font-size:36px;text-align:center;margin:16px 0">00:00</div>
+<button class="btn" onclick="startSW()">Start</button><button class="btn" onclick="stopSW()">Stop</button><button class="btn" onclick="resetSW()">Reset</button><div class="resultBox"></div>
+</div>
+<script>
+let swTimer=null, swSec=0;
+function startSW(){ if(swTimer) return; swTimer=setInterval(()=>{ swSec++; let m=Math.floor(swSec/60), s=swSec%60; document.querySelector('#sub-stopwatch #swTime').textContent=(m<10?'0'+m:m)+':'+(s<10?'0'+s:s); },1000); }
+function stopSW(){ clearInterval(swTimer); swTimer=null; }
+function resetSW(){ stopSW(); swSec=0; document.querySelector('#sub-stopwatch #swTime').textContent='00:00'; }
+</script>
+</div>
+<!-- SUB TOOL 16 END - STOPWATCH -->
+
+<!-- SUB TOOL 17 START - NOTEPAD - PASTE CODE HERE -->
+<div id="sub-notepad" class="subtool">
+<style>.sub-notepad .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-notepad">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: Notepad • Step 3: Write - Auto Save</div>
+<textarea id="notePad" class="input" rows="8" placeholder="Write here - Auto Save"></textarea><p style="font-size:11px;color:#94a3b8">Auto save in browser.</p><div class="resultBox"></div>
+</div>
+<script>
+setTimeout(()=>{ let n=localStorage.getItem('ai_note')||''; let el=document.querySelector('#sub-notepad #notePad'); if(el){ el.value=n; el.addEventListener('input',e=>localStorage.setItem('ai_note',e.target.value)); } },500);
+</script>
+</div>
+<!-- SUB TOOL 17 END - NOTEPAD -->
+
+<!-- SUB TOOL 18 START - TODO - PASTE CODE HERE -->
+<div id="sub-todo" class="subtool">
+<style>.sub-todo .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-todo">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: To-Do • Step 3: Type Task • Step 4: Add Task</div>
+<input id="todoIn" class="input" placeholder="Write task">
+<button class="btn" onclick="addTodo()">Add Task →</button><div id="todoList" style="margin-top:10px"></div><div class="resultBox"></div>
+</div>
+<script>
+let todos=[];
+function renderTodo(){ let el=document.querySelector('#sub-todo #todoList'); if(!el) return; el.innerHTML=todos.map((t,i)=>'<div style="background:rgba(255,255,255,.06);padding:10px;border-radius:10px;margin-bottom:6px;display:flex;justify-content:space-between">'+t+'<button onclick="todos.splice('+i+',1);renderTodo()" style="background:#ff4757;color:#fff;padding:4px 10px;border-radius:8px">X</button></div>').join(''); }
+function addTodo(){ let v=document.querySelector('#sub-todo #todoIn').value.trim(); if(!v) return; todos.push(v); document.querySelector('#sub-todo #todoIn').value=''; renderTodo(); }
+</script>
+</div>
+<!-- SUB TOOL 18 END - TODO -->
+
+<!-- SUB TOOL 19 START - BMI - PASTE CODE HERE -->
+<div id="sub-bmi" class="subtool">
+<style>.sub-bmi .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-bmi">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: BMI • Step 3: Enter Weight, Height • Step 4: Calculate BMI</div>
+<input id="bmiW" class="input" placeholder="Weight KG - 70"><input id="bmiH" class="input" placeholder="Height CM - 170">
+<button class="btn" onclick="doBMI()">Calculate BMI →</button><div id="bmiOut" style="margin-top:10px"></div><div class="resultBox"></div>
+</div>
+<script>
+function doBMI(){
+  let w=parseFloat(document.querySelector('#sub-bmi #bmiW').value)||0; let h=parseFloat(document.querySelector('#sub-bmi #bmiH').value)||170;
+  let bmi=w/((h/100)*(h/100)); document.querySelector('#sub-bmi #bmiOut').innerHTML='BMI: <b>'+bmi.toFixed(1)+'</b>';
+}
+</script>
+</div>
+<!-- SUB TOOL 19 END - BMI -->
+
+<!-- SUB TOOL 20 START - DATE DIFF - PASTE CODE HERE -->
+<div id="sub-dateDiff" class="subtool">
+<style>.sub-dateDiff .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}</style>
+<div class="sub-dateDiff">
+<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: Daily Tab • Step 2: Date Difference • Step 3: Select 2 Dates • Step 4: Count Days</div>
+<input id="d1" type="date" class="input"><input id="d2" type="date" class="input">
+<button class="btn" onclick="doDateDiff()">Count Days →</button><div id="dateOut" style="margin-top:10px"></div><div class="resultBox"></div>
+</div>
+<script>
+function doDateDiff(){
+  let d1=new Date(document.querySelector('#sub-dateDiff #d1').value); let d2=new Date(document.querySelector('#sub-dateDiff #d2').value);
+  if(!d1||!d2||isNaN(d1)||isNaN(d2)) return alert('Select both dates');
+  let diff=Math.abs(d2-d1)/(1000*60*60*24); document.querySelector('#sub-dateDiff #dateOut').innerHTML='Difference: <b>'+diff+' days</b>';
+}
+</script>
+</div>
+<!-- SUB TOOL 20 END - DATE DIFF -->
+
+<!-- ================= TOOL 3 - DAILY - END ================= -->
+
+<!-- ============================================================ -->
+<!-- ============ ALL SUB TOOLS END - 1 HTML ENDS HERE ========== -->
+<!-- ============================================================ -->
+
+<script>
+// ============ COMMON ENGINE - ISKO MAT CHEDO - SIRF SUB TOOL KO BULATA HAI ============
+window._pdfFiles={}; window._imgFile={}; window._imgObj={};
+function onPdfFiles(inp, toolId){
+  let files = Array.from(inp.files);
+  window._pdfFiles[toolId]=files;
+  let info = inp.closest('.subtool').querySelector('.fileInfo');
+  if(info) info.textContent = files.map(f=>f.name+' ('+(f.size/1024).toFixed(0)+' KB)').join(' • ');
+}
+function onImgFile(inp, toolId){
+  let f = inp.files[0]; if(!f) return;
+  window._imgFile[toolId]=f;
+  let box = inp.closest('.subtool');
+  let info = box.querySelector('.fileInfo'); if(info) info.textContent='Selected: '+f.name+' • '+(f.size/1024).toFixed(0)+' KB';
+  if(f.type.startsWith('image/')){
+    let r=new FileReader(); r.onload=e=>{
+      let im = box.querySelector('.toolPreview'); if(im){ im.src=e.target.result; im.style.display='block'; }
+      let img=new Image(); img.src=e.target.result; window._imgObj[toolId]=img;
+    }; r.readAsDataURL(f);
+  }
+}
+function showResultIn(subId, title, info, blob, filename){
+  let box = document.querySelector('#'+subId+' .resultBox');
+  if(!box) return;
+  box.innerHTML='<div class="result" style="display:block"><b>'+title+'</b><p style="font-size:12px;color:#cbd5e1;margin-top:6px">'+info+'</p><a class="dlBtn" href="'+URL.createObjectURL(blob)+'" download="'+filename+'">⬇️ Download Now</a></div>';
+  box.scrollIntoView({behavior:'smooth'});
+}
+// ============ NAVIGATION ============
+let lastCategory='home';
+const TOOLS={
+pdfCompress:{title:'PDF Compress',desc:'Reduce PDF size.',cat:'pdf'},
+imgToPdf:{title:'Image to PDF',desc:'Make PDF from photo.',cat:'pdf'},
+pdfSplit:{title:'PDF Split',desc:'Split PDF.',cat:'pdf'},
+pdfMerge:{title:'PDF Merge',desc:'Join 2+ PDFs.',cat:'pdf'},
+pdfToJpg:{title:'PDF to JPG',desc:'Make JPG from PDF page.',cat:'pdf'},
+pdfDelete:{title:'PDF Page Deleter',desc:'Delete page.',cat:'pdf'},
+pdfRotate:{title:'PDF Rotate',desc:'Rotate pages.',cat:'pdf'},
+pdfWatermark:{title:'PDF Watermark',desc:'Add name on PDF.',cat:'pdf'},
+pdfPageNo:{title:'PDF Page Number',desc:'Add numbers on pages.',cat:'pdf'},
+pdfToText:{title:'PDF to Text',desc:'Extract text from PDF.',cat:'pdf'},
+pdfMeta:{title:'PDF Metadata Remover',desc:'Remove PDF info.',cat:'pdf'},
+pdfSize:{title:'PDF Size Checker',desc:'Check PDF size.',cat:'pdf'},
+pdfPreview:{title:'PDF Preview',desc:'View without download.',cat:'pdf'},
+photo500:{title:'Photo Resize to 500KB',desc:'Upload photo, select target, download.',cat:'image'},
+imgCompress:{title:'Image Compressor',desc:'Make photo 90% smaller.',cat:'image'},
+imgResize:{title:'Image Resizer',desc:'Enter your size.',cat:'image'},
+imgConvert:{title:'Image Converter',desc:'Change format.',cat:'image'},
+passport:{title:'Passport Photo Maker',desc:'Make passport photo.',cat:'image'},
+imgCrop:{title:'Image Cropper',desc:'Crop photo.',cat:'image'},
+imgRotate:{title:'Image Rotate / Flip',desc:'Rotate photo.',cat:'image'},
+imgWatermark:{title:'Image Watermark',desc:'Add name on photo.',cat:'image'},
+imgGray:{title:'Black & White',desc:'Make Black White.',cat:'image'},
+imgFilter:{title:'Brightness Filter',desc:'Make bright.',cat:'image'},
+imgSign:{title:'Signature Maker',desc:'Draw signature.',cat:'image'},
+imgCollage:{title:'Photo Collage',desc:'Join photos.',cat:'image'},
+imgSize:{title:'Image Size Checker',desc:'Check size.',cat:'image'},
+imgBase64:{title:'Image to Base64',desc:'Convert to code.',cat:'image'},
+favicon:{title:'Favicon Maker',desc:'Make favicon.',cat:'image'},
+imgEnlarge:{title:'Image Enlarger 2x',desc:'Make 2x bigger.',cat:'image'},
+imgPrint:{title:'Passport Print Sheet',desc:'8 photos in 1 page.',cat:'image'},
+qr:{title:'QR Code Generator',desc:'Make QR from link.',cat:'daily'},
+barcode:{title:'Barcode Generator',desc:'Make barcode.',cat:'daily'},
+wordCount:{title:'Word Counter',desc:'Count words.',cat:'daily'},
+textPdf:{title:'Text to PDF',desc:'Make PDF from text.',cat:'daily'},
+caseConvert:{title:'Case Converter',desc:'UPPER / lower.',cat:'daily'},
+cleanText:{title:'Remove Extra Spaces',desc:'Clean text.',cat:'daily'},
+lorem:{title:'Lorem Generator',desc:'Make dummy text.',cat:'daily'},
+passGen:{title:'Password Generator',desc:'Make strong password.',cat:'daily'},
+json:{title:'JSON Formatter',desc:'Beautify JSON.',cat:'daily'},
+invoice:{title:'Invoice Maker',desc:'Make bill.',cat:'daily'},
+ageCalc:{title:'Age Calculator',desc:'Calculate age.',cat:'daily'},
+emiCalc:{title:'EMI Calculator',desc:'Calculate EMI.',cat:'daily'},
+gstCalc:{title:'GST Calculator',desc:'Add GST.',cat:'daily'},
+percentCalc:{title:'Percentage Calculator',desc:'Find %.',cat:'daily'},
+unitConv:{title:'Unit Converter',desc:'Convert KG, CM.',cat:'daily'},
+stopwatch:{title:'Stopwatch',desc:'Start timer.',cat:'daily'},
+notepad:{title:'Notepad',desc:'Write, auto save.',cat:'daily'},
+todo:{title:'To-Do List',desc:'Write tasks.',cat:'daily'},
+bmi:{title:'BMI Calculator',desc:'Calculate BMI.',cat:'daily'},
+dateDiff:{title:'Date Difference',desc:'Count days.',cat:'daily'}
+};
+function hideAll(){document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));}
+function goHome(){hideAll();document.getElementById('page-home').classList.add('show');lastCategory='home';window.scrollTo(0,0);}
+function openCategory(cat){lastCategory=cat;hideAll();document.getElementById('page-'+cat).classList.add('show');window.scrollTo(0,0);}
+function goBackToCategory(){if(lastCategory==='home')goHome();else openCategory(lastCategory);}
+function openTool(id){
+  let t=TOOLS[id]; if(!t) return; lastCategory=t.cat;
+  hideAll(); document.getElementById('page-tool').classList.add('show');
+  document.getElementById('toolTitle').textContent=t.title;
+  document.getElementById('toolDesc').textContent=t.desc+' • Category: '+(t.cat==='pdf'?'PDF Tools':t.cat==='image'?'Image Tools':'Daily Use Tools');
+  // SAB SUB TOOL CHHUPAO, SIRF WALA DIKHAO
+  document.querySelectorAll('.subtool').forEach(s=>s.classList.remove('show'));
+  let target = document.getElementById('sub-'+id);
+  let body = document.getElementById('toolBody');
+  if(target){ body.innerHTML=''; body.appendChild(target); target.classList.add('show'); }
+  window.scrollTo(0,0);
+}
+// ============ AI CHAT ============
+function quickAI(text){var inp=document.getElementById('aiInput');if(inp)inp.value=text;askAI();}
+function askAI(){var inp=document.getElementById('aiInput');if(!inp)return;var text=inp.value.trim();if(!text)return;askAIFromText(text);inp.value='';}
+var aiInp=document.getElementById('aiInput');if(aiInp){aiInp.addEventListener('keydown',function(e){if(e.key==='Enter')askAI();});}
+var searchEl=document.getElementById('globalSearch');if(searchEl){searchEl.addEventListener('keydown',function(e){if(e.key==='Enter'){var q=this.value;if(q){askAIFromText(q);this.value='';}}});}
+function askAIFromText(raw){
+  var q=raw.toLowerCase().trim(); var box=document.getElementById('aiChatBox'); if(!box) return;
+  var u=document.createElement('div'); u.className='aiMsg user'; u.textContent='You: '+raw; box.appendChild(u);
+  var a=document.createElement('div'); a.className='aiMsg ai'; var toolId=''; var title=''; var steps='';
+  if(q.includes('pdf')&&q.includes('compress')){toolId='pdfCompress';title='PDF Compress';steps='<b>PDF Compress:</b><br>Step 1: PDF Tab<br>Step 2: PDF Compress<br>Step 3: Select File<br>Step 4: Compress Now<br>Step 5: Download';}
+  else if(q.includes('500')){toolId='photo500';title='Photo 500KB';steps='<b>Photo 500KB:</b><br>Step 1: Image Tab<br>Step 2: Photo 500KB<br>Step 3: Select File<br>Step 4: Compress Now<br>Step 5: Download';}
+  else if(q.includes('passport')){toolId='passport';title='Passport Photo';steps='<b>Passport Photo:</b><br>Step 1: Image Tab<br>Step 2: Passport Photo<br>Step 3: Select File<br>Step 4: Make Photo<br>Step 5: Download';}
+  else if(q.includes('qr')){toolId='qr';title='QR Generator';steps='<b>QR:</b><br>Step 1: Daily Tab<br>Step 2: QR Generator<br>Step 3: Type Link<br>Step 4: Make QR';}
+  else if(q.includes('image')&&q.includes('pdf')){toolId='imgToPdf';title='Image to PDF';steps='<b>Image to PDF:</b><br>Step 1: PDF Tab<br>Step 2: Image to PDF<br>Step 3: Select File<br>Step 4: Make PDF';}
+  else if(q.includes('merge')){toolId='pdfMerge';title='PDF Merge';steps='<b>PDF Merge:</b><br>Step 1: PDF Tab<br>Step 2: PDF Merge<br>Step 3: Select 2+ PDFs<br>Step 4: Merge';}
+  else if(q.includes('emi')){toolId='emiCalc';title='EMI Calculator';steps='<b>EMI:</b><br>Step 1: Daily Tab<br>Step 2: EMI Calculator<br>Step 3: Enter Loan, Rate, Months<br>Step 4: Calculate';}
+  else if(q.includes('password')){toolId='passGen';title='Password Generator';steps='<b>Password:</b><br>Step 1: Daily Tab<br>Step 2: Password Generator<br>Step 3: Enter Length<br>Step 4: Make Password';}
+  else if(q.includes('invoice')){toolId='invoice';title='Invoice Maker';steps='<b>Invoice:</b><br>Step 1: Daily Tab<br>Step 2: Invoice Maker<br>Step 3: Enter Name, Item, Amount<br>Step 4: Make PDF';}
+  else if(q.includes('word')){toolId='wordCount';title='Word Counter';steps='<b>Word Counter:</b><br>Step 1: Daily Tab<br>Step 2: Word Counter<br>Step 3: Paste Text<br>Step 4: Count';}
+  else{steps='<b>Orbit AI:</b> Try: <b>make pdf compress</b> , <b>photo 500kb</b> , <b>passport photo</b> , <b>make qr</b> , <b>image to pdf</b> , <b>emi</b>';}
+  a.innerHTML=steps; if(toolId){ var btn=document.createElement('button'); btn.className='aiSend'; btn.style.cssText='display:block;width:100%;margin-top:8px;padding:11px;border-radius:12px'; btn.textContent='Open '+title+' Now →'; btn.onclick=function(){openTool(toolId);}; a.appendChild(btn); }
+  box.appendChild(a); box.scrollTop=box.scrollHeight;
+}
+</script>
+</body>
+</html>
