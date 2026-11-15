@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>SMC PRO - Section Wise</title>
+<!-- ===== SECTION: CSS START ===== -->
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif}
+:root{--bg:#0b0e11;--card:#12151a;--card2:#1a1e23;--border:#222;--gold:#f0b90b;--green:#0ecb81;--red:#f6465d;--purple:#a855f7;--blue:#3b82f6;--txt:#eaecef;--muted:#888}
+body{background:var(--bg);color:var(--txt);min-height:100vh}
+button{cursor:pointer;border:none}button:active{transform:scale(.96)}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(11,14,17,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:10px 12px;display:flex;align-items:center;gap:10px}
+.logo{font-size:19px;font-weight:900;color:var(--gold)}.logo span{color:#fff;font-size:13px;font-weight:400}
+.searchTop{flex:1;background:#1e2329;border:1px solid #333;border-radius:999px;padding:9px 12px;color:#fff;outline:none}
+.iconBtn{width:38px;height:38px;border-radius:50%;background:#1e2329;color:#fff;font-size:17px}
+.layout{display:flex;max-width:1300px;margin:auto}
+.sidebar{width:280px;flex-shrink:0;padding:12px;display:flex;flex-direction:column;gap:14px;position:sticky;top:58px;height:calc(100vh - 58px);overflow:auto}
+.main{flex:1;min-width:0;padding:12px;display:flex;flex-direction:column;gap:12px;padding-bottom:100px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px}
+.card h3{font-size:14px;display:flex;justify-content:space-between;align-items:center}
+.card h3 span{font-size:11px;color:var(--muted);font-weight:400}
+.card p{font-size:12px;color:var(--muted);line-height:1.6;margin-top:6px}
+.watchItem{display:flex;justify-content:space-between;align-items:center;padding:11px;background:var(--card2);border-radius:12px;cursor:pointer;border:1px solid transparent;margin-top:8px}
+.watchItem.active{border-color:var(--gold)}.watchItem b{font-size:13px}.watchItem small{color:var(--muted);font-size:11px;display:block}
+.up{color:var(--green)}.down{color:var(--red)}
+.addRow{display:flex;gap:8px;margin-top:10px}.addRow input{flex:1;background:#0b0e11;border:1px solid #333;border-radius:10px;padding:10px;color:#fff;outline:none}.addRow button{background:var(--gold);color:#000;padding:10px 14px;border-radius:10px;font-weight:800}
+.moodGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.moodBox{background:var(--card2);padding:11px;border-radius:12px}.moodBox small{color:var(--muted);font-size:10px}.moodBox b{font-size:13px;display:block;margin-top:4px;line-height:1.3}
+.coinHead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.coinHead b{font-size:20px}.price{font-size:20px;color:var(--gold);font-weight:800}
+.tfRow{display:flex;gap:6px;overflow:auto}.tfRow button{background:#1e2329;color:#fff;padding:8px 13px;border-radius:20px;font-size:12px;white-space:nowrap}.tfRow button.active{background:var(--gold);color:#000;font-weight:800}
+.toggleRow{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.toggleRow button{background:#1e2329;color:#fff;padding:7px 11px;border-radius:20px;font-size:11px}.toggleRow button.on{background:var(--gold);color:#000;font-weight:800}
+.chartBox{background:#000;border:1px solid var(--border);border-radius:16px;overflow:hidden}.chartBox canvas{width:100%;height:420px;display:block}
+.signalBox{background:linear-gradient(135deg,#1a1e23,#111);border:1px solid var(--gold);border-radius:14px;padding:13px}.signalBox h4{color:var(--gold);font-size:13px}.signalBox p{font-size:12.5px;line-height:1.7;margin-top:6px;color:#ddd}
+.legend{display:flex;gap:6px;flex-wrap:wrap}.legend span{font-size:11px;background:#1a1e23;padding:5px 9px;border-radius:20px;border:1px solid #333}
+.levelTable{width:100%;border-collapse:collapse;margin-top:10px;font-size:12px}.levelTable th{color:#888;font-weight:400;text-align:left;padding:8px 6px;border-bottom:1px solid #222}.levelTable td{padding:9px 6px;border-bottom:1px solid #1a1e23}
+.tag{font-size:10px;padding:3px 7px;border-radius:20px;font-weight:700}.tag.green{background:rgba(14,203,129,.15);color:#0ecb81}.tag.red{background:rgba(246,70,93,.15);color:#f6465d}.tag.gold{background:rgba(240,185,11,.15);color:#f0b90b}.tag.purple{background:rgba(168,85,247,.15);color:#c084fc}.tag.blue{background:rgba(59,130,246,.15);color:#60a5fa}
+.aiBox{background:linear-gradient(135deg,#1a1e23,#0f172a);border:1px solid #3b82f6;border-radius:14px;padding:14px}.aiBox h4{color:#60a5fa;font-size:13px}.aiBox p{font-size:12.5px;line-height:1.7;margin-top:6px;color:#ddd}
+.aiRow{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.aiRow button{background:#1e2329;color:#fff;padding:8px 12px;border-radius:20px;font-size:12px}.aiRow button.active{background:#3b82f6}
+.alertBox{border-radius:14px;padding:13px;display:none}.alertBox.show{display:block}.alertBox.bull{background:rgba(14,203,129,.1);border:1px solid #0ecb81}.alertBox.bear{background:rgba(246,70,93,.1);border:1px solid #f6465d}.alertBox.wait{background:rgba(240,185,11,.08);border:1px solid #f0b90b}
+.newsItem{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid #1a1e23;cursor:pointer}.newsItem img{width:64px;height:48px;object-fit:cover;border-radius:8px;background:#222;flex-shrink:0}.newsItem b{font-size:12.5px;line-height:1.4;display:block}.newsItem small{color:#888;font-size:11px}
+.sent{font-size:10px;padding:2px 6px;border-radius:20px;margin-left:6px}.sent.bull{background:rgba(14,203,129,.2);color:#0ecb81}.sent.bear{background:rgba(246,70,93,.2);color:#f6465d}.sent.neutral{background:#222;color:#aaa}
+.stratGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.stratCard{background:var(--card2);border:1px solid #222;border-radius:14px;padding:13px;cursor:pointer}.stratCard.active{border-color:var(--gold)}.stratCard b{font-size:13px;display:block}.stratCard small{color:var(--muted);font-size:11px;line-height:1.5;display:block;margin-top:4px}
+.pasteBox{background:#0b0e11;border:1px dashed #555;border-radius:12px;padding:12px;margin-top:10px;text-align:center;color:#888;font-size:12px}
+.entryGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.entryBox{border-radius:14px;padding:13px}.entryBox.long{background:rgba(14,203,129,.08);border:1px solid rgba(14,203,129,.3)}.entryBox.short{background:rgba(246,70,93,.08);border:1px solid rgba(246,70,93,.3)}.entryBox p{font-size:12px;line-height:1.7;margin-top:6px;color:#ddd}
+.bottomNav{position:fixed;bottom:0;left:0;right:0;background:#12151a;border-top:1px solid #222;display:none;z-index:60;padding:8px 6px}.bottomNav button{flex:1;background:none;color:#888;font-size:11px;display:flex;flex-direction:column;gap:2px;align-items:center}.bottomNav button.active{color:var(--gold)}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--gold);color:#000;padding:10px 16px;border-radius:20px;font-weight:700;display:none;z-index:999;font-size:13px}
+@media(max-width:900px){.sidebar{display:none}.sidebar.show{display:flex;position:fixed;z-index:70;left:0;top:0;bottom:0;width:300px;background:#12151a}.main{padding:10px;padding-bottom:100px}.moodGrid{grid-template-columns:repeat(2,1fr)}.stratGrid,.entryGrid{grid-template-columns:1fr}.bottomNav{display:flex}.chartBox canvas{height:340px}}
+</style>
+<!-- ===== SECTION: CSS END ===== -->
+</head>
+<body>
+
+<!-- ===== SECTION: TOPBAR START ===== -->
+<div class="topbar"><button class="iconBtn" id="btnMenu">☰</button><div class="logo">SMC <span>PRO</span></div><input class="searchTop" id="searchTop" placeholder="Search coin... BTC, ETH, SOL"><button class="iconBtn" id="btnRefreshTop">↻</button></div>
+<!-- ===== SECTION: TOPBAR END ===== -->
+
+<div class="layout">
+
+<!-- ===== SECTION: SIDEBAR START ===== -->
+<aside class="sidebar" id="sidebar">
+
+<!-- ===== SECTION: WATCHLIST START ===== -->
+<div class="card" id="watchlistSection">
+<h3>⭐ My Watchlist <span id="watchCount">0</span></h3>
+<p>Add any coin you want. Saved in your phone.</p>
+<div class="addRow"><input id="addCoinInput" placeholder="e.g. BTC, DOGE, PEPE"><button id="btnAddCoin">+ Add</button></div>
+<div id="watchList"></div>
+<!-- TO ADD MORE IN WATCHLIST LATER: Paste your new HTML here, between WATCHLIST START and END -->
+</div>
+<!-- ===== SECTION: WATCHLIST END ===== -->
+
+<!-- ===== SECTION: EXPLORE START ===== -->
+<div class="card" id="exploreSection">
+<h3>🔥 Explore Market <span>Top Volume</span></h3>
+<p>Tap any coin to open its SMC chart.</p>
+<div id="exploreList"></div>
+<!-- TO ADD MORE IN EXPLORE LATER: Paste here -->
+</div>
+<!-- ===== SECTION: EXPLORE END ===== -->
+
+<!-- ===== SECTION: GAINERS START ===== -->
+<div class="card" id="gainersSection">
+<h3>📊 Top Gainers / Losers</h3>
+<div id="gainersList"></div>
+</div>
+<!-- ===== SECTION: GAINERS END ===== -->
+
+<!-- ===== SECTION: ALERT HISTORY START ===== -->
+<div class="card" id="alertHistorySection">
+<h3>🔔 SMC Alerts History</h3>
+<p>Alerts will come here when price touches OB / FVG / Liquidity.</p>
+<div id="alertHistory"></div>
+</div>
+<!-- ===== SECTION: ALERT HISTORY END ===== -->
+
+</aside>
+<!-- ===== SECTION: SIDEBAR END ===== -->
+
+<main class="main">
+
+<!-- ===== SECTION: MARKET MOOD START ===== -->
+<div class="card" id="moodSection">
+<h3>🌡️ Market Mood <span>Live</span></h3>
+<div class="moodGrid">
+<div class="moodBox"><small>FEAR & GREED</small><b id="fngText">--</b></div>
+<div class="moodBox"><small>MOOD</small><b id="moodText">--</b></div>
+<div class="moodBox"><small>FUNDING</small><b id="fundText">--</b></div>
+<div class="moodBox"><small>OPEN INTEREST</small><b id="oiText">--</b></div>
+<div class="moodBox"><small>LONG / SHORT</small><b id="lsText">--</b></div>
+</div>
+<p id="moodAdvice" style="color:#f0b90b">Loading...</p>
+<!-- TO ADD MORE MOOD DATA LATER: Paste here - e.g. BTC Dominance, Stablecoin Flow -->
+</div>
+<!-- ===== SECTION: MARKET MOOD END ===== -->
+
+<!-- ===== SECTION: AI ANALYSIS START ===== -->
+<div class="aiBox" id="aiSection">
+<h4>🤖 AI - Where Market Can Go & Why?</h4>
+<p id="aiForecast">Analysing SMC + Mood + News... Wait 2 sec.</p>
+<div class="aiRow"><button data-ai="short" class="active">Short Term (Today)</button><button data-ai="mid">Mid Term (This Week)</button><button data-ai="long">Long Term (This Month)</button></div>
+<p id="aiWhy" style="color:#9ca3af">AI Reason will show here - BOS, OB, FVG, Liquidity, News, Funding.</p>
+<!-- TO ADD MORE AI LATER: Paste your AI logic description here -->
+<!-- EXAMPLE: AI will also check News sentiment + Funding + HTF Bias together -->
+</div>
+<!-- ===== SECTION: AI ANALYSIS END ===== -->
+
+<!-- ===== SECTION: SMC ALERT START ===== -->
+<div class="alertBox wait show" id="alertBox">
+<b id="alertTitle">⏳ Waiting for Entry...</b>
+<p id="alertDetail" style="font-size:12px;line-height:1.7;margin-top:6px">Price is in middle. No alert yet.</p>
+<div style="display:flex;gap:8px;margin-top:8px"><button id="btnAlertSound" style="background:#f0b90b;color:#000;padding:8px 12px;border-radius:20px;font-weight:800;font-size:12px">🔔 Alert ON</button><button id="btnAlertTest" style="background:#1e2329;color:#fff;padding:8px 12px;border-radius:20px;font-size:12px">Test Alert</button></div>
+<!-- TO ADD MORE ALERTS LATER: e.g. Telegram Alert, Sound Alert, Email Alert - Paste here -->
+</div>
+<!-- ===== SECTION: SMC ALERT END ===== -->
+
+<!-- ===== SECTION: CHART HEADER START ===== -->
+<div class="card" id="chartHeaderSection">
+<div class="coinHead"><b id="coinName">BTCUSDT</b><span class="price" id="livePrice">--</span><span id="liveChange">--</span><button id="btnAddWatch" style="background:#f0b90b;color:#000;padding:8px 12px;border-radius:20px;font-weight:800;font-size:12px;margin-left:auto">⭐ Watchlist</button></div>
+<div class="tfRow" style="margin-top:10px"><button data-tf="5m">5m</button><button data-tf="15m" class="active">15m</button><button data-tf="1h">1H</button><button data-tf="4h">4H</button><button data-tf="1d">1D</button><button data-tf="1w">1W</button></div>
+<div class="toggleRow"><button id="tFVG" class="on">FVG ON</button><button id="tOB" class="on">OB ON</button><button id="tBreaker" class="on">Breaker ON</button><button id="tIFVG" class="on">iFVG ON</button><button id="tLiq" class="on">Liquidity ON</button><button id="tMit" class="on">Mitigation ON</button><button id="tHL" class="on">Month High/Low ON</button></div>
+</div>
+<!-- ===== SECTION: CHART HEADER END ===== -->
+
+<!-- ===== SECTION: CHART START ===== -->
+<div class="chartBox" id="chartSection"><canvas id="chartCanvas"></canvas></div>
+<div class="legend"><span>🟩 Bull OB</span><span>🟥 Bear OB</span><span>🟨 FVG</span><span>🟪 Breaker</span><span>🟦 iFVG</span><span>🔵 Sweep</span><span>🟧 Mitigation</span><span>⬜ Month High/Low</span></div>
+<!-- ===== SECTION: CHART END ===== -->
+
+<!-- ===== SECTION: HIGH LOW MONTH START ===== -->
+<div class="card" id="hlSection">
+<h3>📅 High / Low - Liquidity Points <span>Where stops are</span></h3>
+<table class="levelTable"><thead><tr><th>Level</th><th>Price</th><th>Distance</th><th>What It Means</th></tr></thead><tbody id="hlBody"><tr><td colspan="4">Loading...</td></tr></tbody></table>
+<p>Monthly High/Low = Biggest liquidity. Weekly = Swing stops. Daily = Intraday liquidity.</p>
+<!-- TO ADD MORE HL LATER: e.g. Asia High/Low, Previous Day High/Low - Paste here -->
+</div>
+<!-- ===== SECTION: HIGH LOW MONTH END ===== -->
+
+<!-- ===== SECTION: LIQUIDITY MAP START ===== -->
+<div class="card" id="liquiditySection">
+<h3>💧 Liquidity Map <span>Equal Highs / Lows</span></h3>
+<p id="liqMap">Scanning Equal Highs / Lows...</p>
+<div id="liqList" style="margin-top:8px"></div>
+<!-- TO ADD MORE LIQUIDITY LATER: e.g. Liquidation Heatmap, CVD - Paste here -->
+</div>
+<!-- ===== SECTION: LIQUIDITY MAP END ===== -->
+
+<!-- ===== SECTION: SMC LEVELS START ===== -->
+<div class="card" id="smcLevelsSection">
+<h3>📍 SMC Levels <span>Nearest to price</span></h3>
+<table class="levelTable"><thead><tr><th>Type</th><th>Level</th><th>Distance</th><th>Status</th></tr></thead><tbody id="levelsBody"><tr><td colspan="4">Loading...</td></tr></tbody></table>
+</div>
+<!-- ===== SECTION: SMC LEVELS END ===== -->
+
+<!-- ===== SECTION: ENTRY PLAN START ===== -->
+<div class="signalBox" id="entryPlanSection"><h4>🎯 SMC ENTRY PLAN - MTF</h4><p id="signalDetail">Loading...</p></div>
+<div class="card" id="longShortSection">
+<h3>🎯 Long / Short Entry - Fully Detailed</h3>
+<div class="entryGrid"><div class="entryBox long"><h4>🟢 LONG PLAN</h4><p id="longPlan">Waiting...</p></div><div class="entryBox short"><h4>🔴 SHORT PLAN</h4><p id="shortPlan">Waiting...</p></div></div>
+<p><b style="color:#fff">MTF Rule:</b> 4H Bias = Direction. 1H = POI. 15m = CHoCH Entry. 5m = Precise Entry.</p>
+</div>
+<!-- ===== SECTION: ENTRY PLAN END ===== -->
+
+<!-- ===== SECTION: STRATEGY START ===== -->
+<div class="card" id="strategySection">
+<h3>🧪 My Strategies - Filter <span>You tell, I give code</span></h3>
+<p>Tap a filter - Chart will show ONLY that. Example: "Only FVG" → Only FVG shows.</p>
+<div class="stratGrid" id="strategyGrid"></div>
+<div style="background:#0b0e11;border:1px dashed #444;border-radius:12px;padding:12px;margin-top:10px;font-size:12px;line-height:1.7;color:#ccc">
+<b style="color:#fff">Selected: <span id="stratName">SMC Classic - OB + FVG</span></b><br><span id="stratDesc">HTF 4H Bias → 15m OB + FVG + CHoCH</span><br><br>
+<b style="color:#f0b90b">CODE SLOT - I will paste code when you tell:</b><br><code id="stratCode">// === STRATEGY CODE SLOT ===</code>
+</div>
+<!-- ===== STRATEGY SLOT 1 START ===== -->
+<div class="pasteBox" id="slot1">📋 <b>SLOT 1 - ONLY FVG:</b> Paste code later - When you say "Only FVG", chart shows only FVG</div>
+<!-- ===== STRATEGY SLOT 1 END ===== -->
+<!-- ===== STRATEGY SLOT 2 START ===== -->
+<div class="pasteBox" id="slot2">📋 <b>SLOT 2 - ONLY OB:</b> Paste code later - Only Order Blocks</div>
+<!-- ===== STRATEGY SLOT 2 END ===== -->
+<!-- ===== STRATEGY SLOT 3 START ===== -->
+<div class="pasteBox" id="slot3">📋 <b>SLOT 3 - ONLY MONTH HIGH/LOW:</b> Paste code later - Only Month High/Low + Liquidity</div>
+<!-- ===== STRATEGY SLOT 3 END ===== -->
+<!-- ===== STRATEGY SLOT 4 START ===== -->
+<div class="pasteBox" id="slot4">📋 <b>SLOT 4 - ONLY BREAKER + iFVG:</b> Paste code later</div>
+<!-- ===== STRATEGY SLOT 4 END ===== -->
+<!-- ===== STRATEGY SLOT 5 START ===== -->
+<div class="pasteBox" id="slot5">📋 <b>SLOT 5 - ONLY SWEEP:</b> Paste code later - Only Liquidity Sweep</div>
+<!-- ===== STRATEGY SLOT 5 END ===== -->
+<!-- TO ADD MORE STRATEGY LATER: Copy SLOT 5 block, paste below, change number to 6, 7... -->
+<button id="btnAddStrategy" style="background:#f0b90b;color:#000;padding:11px;border-radius:12px;font-weight:800;width:100%;margin-top:10px">+ Add New Strategy Slot</button>
+</div>
+<!-- ===== SECTION: STRATEGY END ===== -->
+
+<!-- ===== SECTION: MORE DATA START ===== -->
+<div class="card" id="moreDataSection">
+<h3>📈 More Data That Helps</h3>
+<div class="moodGrid"><div class="moodBox"><small>HTF BIAS 4H</small><b id="bias4h">--</b></div><div class="moodBox"><small>HTF BIAS 1D</small><b id="bias1d">--</b></div><div class="moodBox"><small>PREMIUM / DISCOUNT</small><b id="pdText">--</b></div><div class="moodBox"><small>EQUILIBRIUM 50%</small><b id="eqText">--</b></div><div class="moodBox"><small>KILLZONE</small><b id="kzText">--</b></div></div>
+<p>Premium = Above 50% → Only Shorts. Discount = Below 50% → Only Longs. Killzone: London 12:30-15:30 IST, New York 19:00-22:00 IST.</p>
+<!-- TO ADD MORE DATA LATER: e.g. BTC Dominance, CVD, Liquidation - Paste here -->
+</div>
+<!-- ===== SECTION: MORE DATA END ===== -->
+
+<!-- ===== SECTION: NEWS START ===== -->
+<div class="card" id="newsSection">
+<h3>📰 Crypto News - Why Market Moved <span>Live</span></h3>
+<p>News = Why price moved. Bullish News + Bullish OB = Strong Long. Bearish News + Bearish OB = Strong Short.</p>
+<div id="newsList"><p style="color:#888">Loading news...</p></div>
+<!-- TO ADD MORE NEWS LATER: e.g. Twitter, Economic Calendar - Paste here -->
+</div>
+<!-- ===== SECTION: NEWS END ===== -->
+
+</main>
+</div>
+
+<!-- ===== SECTION: BOTTOM NAV START ===== -->
+<div class="bottomNav"><button class="active" data-nav="chart">📊<span>Chart</span></button><button data-nav="watch">⭐<span>Watchlist</span></button><button data-nav="strategy">🧪<span>Strategy</span></button><button data-nav="news">📰<span>News</span></button><button data-nav="mood">🌡️<span>Mood</span></button></div>
+<!-- ===== SECTION: BOTTOM NAV END ===== -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== JS SECTION: STATE START =====
+let currentSymbol='BTCUSDT', currentTF='15m', candles=[], candles4h=[], candles1d=[], candles1w=[], candles1M=[];
+let show={fvg:true, ob:true, breaker:true, ifvg:true, liq:true, mit:true, hl:true};
+let filterMode='ALL';
+let watchlist=JSON.parse(localStorage.getItem('smc_watch')||'["BTCUSDT","ETHUSDT","SOLUSDT","XRPUSDT","DOGEUSDT"]');
+let allCoins=[]; let selectedStrategy=0; let alertOn=true; let aiMode='short';
+let STRATEGIES=[
+{id:1,name:'SMC Classic - OB + FVG',desc:'HTF 4H Bias → 15m OB + FVG + CHoCH',code:"showOnly = ['OB','FVG']",filter:'ALL'},
+{id:2,name:'Only FVG - Mark It',desc:'Chart shows ONLY FVG. Nothing else.',code:"showOnly = ['FVG'] // When you say 'Only FVG mark it' -> This runs",filter:'ONLY_FVG'},
+{id:3,name:'Only Month High/Low',desc:'Only Month High/Low + Liquidity.',code:"showOnly = ['MONTH_HL','LIQ']",filter:'ONLY_HL'},
+{id:4,name:'Only Breaker + iFVG',desc:'Only Breaker + iFVG. For reversal.',code:"showOnly = ['BREAKER','IFVG']",filter:'ONLY_BREAKER'},
+{id:5,name:'Only Liquidity Sweep',desc:'Only Sweep + Equal High/Low.',code:"showOnly = ['LIQ','SWEEP']",filter:'ONLY_SWEEP'},
+{id:6,name:'Only Order Block',desc:'Only OB. No FVG, No Breaker.',code:"showOnly = ['OB']",filter:'ONLY_OB'},
+{id:7,name:'YOUR CUSTOM - Tell Me',desc:'You tell me filter, I give code.',code:"// Paste your custom filter here",filter:'CUSTOM'},
+];
+function $(id){return document.getElementById(id)}
+function toast(m){let t=$('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500)}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+// ===== JS SECTION: STATE END =====
+
+// ===== JS SECTION: DATA START =====
+// DATA SOURCE: Binance Free API - No Key
+// Candles: https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=15m&limit=200
+async function fetchCandles(symbol,tf,store){
+  try{let r=await fetch('https://api.binance.com/api/v3/klines?symbol='+symbol+'&interval='+tf+'&limit=200');let d=await r.json();let arr=d.map(x=>({time:+x[0],open:+x[1],high:+x[2],low:+x[3],close:+x[4],volume:+x[5]}));
+  if(store==='main'){candles=arr;drawChart();analyseSMC();updateLevels();updateHL();updateLiquidity();updateAI();updateLive();checkAlert();}
+  if(store==='4h')candles4h=arr; if(store==='1d')candles1d=arr; if(store==='1w')candles1w=arr; if(store==='1M')candles1M=arr; if(store!=='main')updateHTF();
+  }catch(e){}
+}
+async function fetchMarket(){try{let r=await fetch('https://api.binance.com/api/v3/ticker/24hr');let d=await r.json();allCoins=d.filter(c=>c.symbol.endsWith('USDT')).sort((a,b)=>parseFloat(b.quoteVolume)-parseFloat(a.quoteVolume));renderExplore();renderWatch();renderGainers();let cur=d.find(c=>c.symbol===currentSymbol);if(cur){$('livePrice').textContent='$'+parseFloat(cur.lastPrice).toLocaleString();let ch=parseFloat(cur.priceChangePercent);$('liveChange').textContent=ch.toFixed(2)+'%';$('liveChange').className=ch>=0?'up':'down';}}catch(e){}}
+// ===== JS SECTION: DATA END =====
+
+// ===== JS SECTION: MOOD START =====
+async function fetchMood(){try{let f=await fetch('https://api.alternative.me/fng/');let fj=await f.json();let v=+fj.data[0].value;$('fngText').textContent=v+' - '+fj.data[0].value_classification;let fr=await fetch('https://fapi.binance.com/fapi/v1/fundingRate?symbol='+currentSymbol+'&limit=1');let frj=await fr.json();if(frj[0])$('fundText').textContent=(parseFloat(frj[0].fundingRate)*100).toFixed(4)+'%';let oi=await fetch('https://fapi.binance.com/fapi/v1/openInterest?symbol='+currentSymbol);let oij=await oi.json();$('oiText').textContent=(parseFloat(oij.openInterest)/1000).toFixed(1)+'K';try{let ls=await fetch('https://fapi.binance.com/futures/data/globalLongShortAccountRatio?symbol='+currentSymbol+'&period=1h&limit=1');let lsj=await ls.json();if(lsj[0])$('lsText').textContent=(parseFloat(lsj[0].longShortRatio)*100).toFixed(0)+'% Long'}catch(e){}let mood=v>70?'GREED - Avoid Long':v<25?'FEAR - Avoid Short':'NEUTRAL';$('moodText').textContent=mood;$('moodAdvice').textContent=v>75?'⚠️ Overheated - Don\'t FOMO Long. Wait for Discount.':v<20?'💎 Fear - Smart money buys Discount. Look for Bullish OB.':'✅ Normal - Trade SMC setup.';let hr=new Date().getHours()+new Date().getMinutes()/60;let kz='Asia - Low Vol';if(hr>=12.5&&hr<=15.5)kz='🔥 London Killzone';if(hr>=19&&hr<=22)kz='🔥 New York Killzone';$('kzText').textContent=kz;}catch(e){}}
+// ===== JS SECTION: MOOD END =====
+
+// ===== JS SECTION: NEWS START =====
+async function fetchNews(){
+  try{let r=await fetch('https://min-api.cryptocompare.com/data/v2/news/?lang=EN&sortOrder=latest');let j=await r.json();let list=j.Data.slice(0,6);
+  $('newsList').innerHTML=list.map(n=>{let txt=(n.title+n.body).toLowerCase();let sent='neutral',label='NEUTRAL';if(txt.includes('bull')||txt.includes('surge')||txt.includes('rally')||txt.includes('etf')||txt.includes('adopt')){sent='bull';label='BULLISH 🟢'}if(txt.includes('bear')||txt.includes('crash')||txt.includes('dump')||txt.includes('hack')||txt.includes('ban')){sent='bear';label='BEARISH 🔴'}return '<div class="newsItem" onclick="window.open(\''+n.url+'\',\'_blank\')"><img src="'+(n.imageurl||'')+'" onerror="this.style.display=\'none\'"><div><b>'+esc(n.title)+'<span class="sent '+sent+'">'+label+'</span></b><small>'+esc(n.source)+' • '+new Date(n.published_on*1000).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})+'</small></div></div>';}).join('');
+  }catch(e){$('newsList').innerHTML='<p>News load failed.</p>'}
+}
+// ===== JS SECTION: NEWS END =====
+
+// ===== JS SECTION: WATCHLIST START =====
+function renderWatch(){let box=$('watchList');box.innerHTML='';$('watchCount').textContent=watchlist.length;watchlist.forEach(sym=>{let coin=allCoins.find(c=>c.symbol===sym);let chg=coin?parseFloat(coin.priceChangePercent):0;let price=coin?parseFloat(coin.lastPrice):0;let div=document.createElement('div');div.className='watchItem'+(sym===currentSymbol?' active':'');div.innerHTML='<div><b>'+sym.replace('USDT','')+' / USDT</b><small>Tap to open</small></div><div style="text-align:right"><b>$'+price.toLocaleString(undefined,{maximumFractionDigits:4})+'</b><small class="'+(chg>=0?'up':'down')+'">'+chg.toFixed(2)+'%</small></div>';div.onclick=()=>openCoin(sym);let del=document.createElement('span');del.textContent=' ✕';del.style.cssText='color:#888;margin-left:8px';del.onclick=(e)=>{e.stopPropagation();watchlist=watchlist.filter(s=>s!==sym);localStorage.setItem('smc_watch',JSON.stringify(watchlist));renderWatch();toast(sym+' removed')};div.appendChild(del);box.appendChild(div);});}
+// ===== JS SECTION: WATCHLIST END =====
+
+// ===== JS SECTION: EXPLORE START =====
+function renderExplore(){let box=$('exploreList');box.innerHTML='';allCoins.slice(0,10).forEach(coin=>{let div=document.createElement('div');div.className='watchItem';div.innerHTML='<div><b>'+coin.symbol.replace('USDT','')+'</b><small>Vol $'+(parseFloat(coin.quoteVolume)/1000000).toFixed(1)+'M</small></div><div style="text-align:right"><b>$'+parseFloat(coin.lastPrice).toLocaleString(undefined,{maximumFractionDigits:4})+'</b><small class="'+(parseFloat(coin.priceChangePercent)>=0?'up':'down')+'">'+parseFloat(coin.priceChangePercent).toFixed(2)+'%</small></div>';div.onclick=()=>openCoin(coin.symbol);box.appendChild(div);});}
+function renderGainers(){let box=$('gainersList');box.innerHTML='';let sorted=[...allCoins].sort((a,b)=>parseFloat(b.priceChangePercent)-parseFloat(a.priceChangePercent));let top=[...sorted.slice(0,3),...sorted.slice(-3).reverse()];top.forEach(coin=>{let div=document.createElement('div');div.className='watchItem';div.innerHTML='<div><b>'+coin.symbol.replace('USDT','')+'</b><small>'+(parseFloat(coin.priceChangePercent)>=0?'🟢 Gainer':'🔴 Loser')+'</small></div><b class="'+(parseFloat(coin.priceChangePercent)>=0?'up':'down')+'">'+parseFloat(coin.priceChangePercent).toFixed(1)+'%</b>';div.onclick=()=>openCoin(coin.symbol);box.appendChild(div);});}
+function openCoin(sym){currentSymbol=sym;$('coinName').textContent=sym;fetchCandles(sym,currentTF,'main');fetchCandles(sym,'4h','4h');fetchCandles(sym,'1d','1d');fetchCandles(sym,'1w','1w');fetchCandles(sym,'1M','1M');fetchMarket();fetchMood();fetchNews();renderWatch();connectWS();$('sidebar').classList.remove('show');window.scrollTo({top:0,behavior:'smooth'});}
+// ===== JS SECTION: EXPLORE END =====
+
+// ===== JS SECTION: SMC LOGIC START =====
+// SMC: FVG, OB, Breaker, iFVG, Mitigation, Sweep, BOS, CHoCH
+function getBias(arr){if(!arr.length)return 'NEUTRAL';let lh=-1,ll=1e12,bias='NEUTRAL';for(let i=2;i<arr.length-2;i++){let c=arr[i];let isH=c.high>arr[i-1].high&&c.high>arr[i+1].high;let isL=c.low<arr[i-1].low&&c.low<arr[i+1].low;if(isH&&c.high>lh){bias='BULLISH';lh=c.high}if(isL&&c.low<ll){if(bias==='BULLISH')bias='CHoCH - Reversal?';else bias='BEARISH';ll=c.low}}return bias;}
+function detectSMC(){
+  let fvgs=[],ifvgs=[],obs=[],breakers=[],mits=[],sweeps=[];
+  for(let i=1;i<candles.length-1;i++){let a=candles[i-1],b=candles[i],c=candles[i+1];
+    if(c.low>a.high)fvgs.push({index:i,top:c.low,bottom:a.high,type:'bull'});
+    if(c.high<a.low)fvgs.push({index:i,top:a.low,bottom:c.high,type:'bear'});
+    let move=Math.abs(c.close-c.open)/c.open*100;
+    if(move>0.8){if(c.close>c.open&&a.close<a.open)obs.push({index:i-1,top:a.high,bottom:a.low,type:'bull'});if(c.close<c.open&&a.close>a.open)obs.push({index:i-1,top:a.high,bottom:a.low,type:'bear'});}
+    if(c.low<candles[i-1].low&&c.close>candles[i-1].low&&c.close>c.open)sweeps.push({index:i,price:c.low,type:'bull'});
+    if(c.high>candles[i-1].high&&c.close<candles[i-1].high&&c.close<c.open)sweeps.push({index:i,price:c.high,type:'bear'});
+  }
+  fvgs.forEach(f=>{let later=candles.slice(f.index+1,f.index+15);if(f.type==='bull'&&later.some(c=>c.close<f.bottom))ifvgs.push({...f,type:'bear-ifvg'});if(f.type==='bear'&&later.some(c=>c.close>f.top))ifvgs.push({...f,type:'bull-ifvg'});});
+  obs.forEach(ob=>{let later=candles.slice(ob.index+1,ob.index+12);if(ob.type==='bull'&&later.some(c=>c.close<ob.bottom))breakers.push({...ob,type:'bear-breaker'});if(ob.type==='bear'&&later.some(c=>c.close>ob.top))breakers.push({...ob,type:'bull-breaker'});let touches=later.filter(c=>c.low<=ob.top&&c.low>=ob.bottom).length;if(touches===1)mits.push({...ob,type:ob.type+'-mit'});});
+  return {fvgs,ifvgs,obs,breakers,mits,sweeps,bias:getBias(candles)};
+}
+// TO ADD MORE SMC LOGIC LATER: Paste new function here - e.g. function detectInducement() {}
+// ===== JS SECTION: SMC LOGIC END =====
+
+// ===== JS SECTION: HIGH LOW + LIQUIDITY START =====
+function updateHTF(){let b4=getBias(candles4h),b1=getBias(candles1d);$('bias4h').textContent=b4;$('bias4h').style.color=b4.includes('BULL')?'#0ecb81':b4.includes('BEAR')?'#f6465d':'#fff';$('bias1d').textContent=b1;$('bias1d').style.color=b1.includes('BULL')?'#0ecb81':b1.includes('BEAR')?'#f6465d':'#fff';if(candles.length>50){let sl=candles.slice(-50);let hi=Math.max(...sl.map(c=>c.high)),lo=Math.min(...sl.map(c=>c.low));let eq=(hi+lo)/2;let last=candles[candles.length-1].close;$('eqText').textContent='$'+eq.toFixed(2);$('pdText').textContent=last>eq?'PREMIUM - Short Only':'DISCOUNT - Long Only';$('pdText').style.color=last>eq?'#f6465d':'#0ecb81';}}
+function updateHL(){
+  if(!candles.length)return; let price=candles[candles.length-1].close;
+  let mHigh=candles1M.length?Math.max(...candles1M.map(c=>c.high)):0, mLow=candles1M.length?Math.min(...candles1M.map(c=>c.low)):0;
+  let wHigh=candles1w.length?Math.max(...candles1w.slice(-4).map(c=>c.high)):0, wLow=candles1w.length?Math.min(...candles1w.slice(-4).map(c=>c.low)):0;
+  let daySlice=candles.slice(-96); let dHigh=Math.max(...daySlice.map(c=>c.high)), dLow=Math.min(...daySlice.map(c=>c.low));
+  let rows=[['📅 Month High',mHigh,'Sweep High → Reverse Short'],['📅 Month Low',mLow,'Sweep Low → Reverse Long'],['📅 Week High',wHigh,'Weekly liquidity'],['📅 Week Low',wLow,'Weekly liquidity'],['📅 Day High',dHigh,'Intraday liquidity'],['📅 Day Low',dLow,'Intraday liquidity']];
+  $('hlBody').innerHTML=rows.map(r=>'<tr><td>'+r[0]+'</td><td><b>$'+(r[1]?r[1].toFixed(2):'--')+'</b></td><td>'+(r[1]?Math.abs(r[1]-price)/price*100:'0').toFixed(2)+'%</td><td>'+r[2]+'</td></tr>').join('');
+  window._hl={mHigh,mLow,wHigh,wLow,dHigh,dLow};
+}
+function updateLiquidity(){
+  if(candles.length<10)return; let price=candles[candles.length-1].close; let eqHighs=[],eqLows=[];
+  for(let i=2;i<candles.length-2;i++){let c=candles[i]; if(Math.abs(c.high-candles[i-1].high)/c.high<0.001) eqHighs.push(c.high); if(Math.abs(c.low-candles[i-1].low)/c.low<0.001) eqLows.push(c.low);}
+  let above=eqHighs.filter(h=>h>price).slice(-2); let below=eqLows.filter(l=>l<price).slice(-2);
+  $('liqMap').innerHTML='Price <b>$'+price.toFixed(2)+'</b> is between liquidity. <b>Above:</b> Equal Highs $'+(above.length?above.map(x=>x.toFixed(0)).join(', $'):'--')+' = Stops of Shorts. <b>Below:</b> Equal Lows $'+(below.length?below.map(x=>x.toFixed(0)).join(', $'):'--')+' = Stops of Longs.';
+  $('liqList').innerHTML=(above.map(h=>'<span class="tag red" style="margin-right:6px">Equal High $'+h.toFixed(0)+'</span>').join('')+below.map(l=>'<span class="tag green" style="margin-right:6px">Equal Low $'+l.toFixed(0)+'</span>').join(''));
+}
+function updateLevels(){
+  let s=detectSMC();let last=candles[candles.length-1];if(!last)return;let price=last.close;let rows=[];
+  let bullOB=[...s.obs].reverse().find(o=>o.type==='bull'&&o.bottom<price); if(bullOB)rows.push(['Bullish OB','$'+bullOB.bottom.toFixed(2),((price-bullOB.bottom)/price*100).toFixed(2)+'%','<span class="tag green">NEAR</span>']);
+  let bearOB=s.obs.find(o=>o.type==='bear'&&o.top>price); if(bearOB)rows.push(['Bearish OB','$'+bearOB.top.toFixed(2),((bearOB.top-price)/price*100).toFixed(2)+'%','<span class="tag red">NEAR</span>']);
+  let bullFVG=[...s.fvgs].reverse().find(f=>f.type==='bull'&&f.bottom<price); if(bullFVG)rows.push(['Bullish FVG','$'+bullFVG.bottom.toFixed(2),((price-bullFVG.bottom)/price*100).toFixed(2)+'%','<span class="tag gold">GAP</span>']);
+  let bearFVG=s.fvgs.find(f=>f.type==='bear'&&f.top>price); if(bearFVG)rows.push(['Bearish FVG','$'+bearFVG.top.toFixed(2),((bearFVG.top-price)/price*100).toFixed(2)+'%','<span class="tag gold">GAP</span>']);
+  let br=s.breakers[s.breakers.length-1]; if(br)rows.push(['Breaker','$'+br.top.toFixed(2),'--','<span class="tag purple">BREAKER</span>']);
+  let iv=s.ifvgs[s.ifvgs.length-1]; if(iv)rows.push(['iFVG','$'+iv.bottom.toFixed(2),'--','<span class="tag blue">iFVG</span>']);
+  let sw=s.sweeps[s.sweeps.length-1]; if(sw)rows.push(['Sweep','$'+sw.price.toFixed(2),'--','<span class="tag blue">SWEEP</span>']);
+  let mit=s.mits[s.mits.length-1]; if(mit)rows.push(['Mitigation','$'+mit.bottom.toFixed(2),'--','<span class="tag gold">MIT</span>']);
+  $('levelsBody').innerHTML=rows.length?rows.map(r=>'<tr><td>'+r[0]+'</td><td><b>'+r[1]+'</b></td><td>'+r[2]+'</td><td>'+r[3]+'</td></tr>').join(''):'<tr><td colspan="4">No levels</td></tr>';
+}
+// ===== JS SECTION: HIGH LOW + LIQUIDITY END =====
+
+// ===== JS SECTION: AI ANALYSIS START =====
+function updateAI(){
+  let s=detectSMC(); let last=candles[candles.length-1]; if(!last)return; let price=last.close;
+  let bullOB=[...s.obs].reverse().find(o=>o.type==='bull'&&o.bottom<price); let bearOB=s.obs.find(o=>o.type==='bear'&&o.top>price);
+  let fng=parseInt(($('fngText').textContent||'50').split(' ')[0])||50; let fund=parseFloat(($('fundText').textContent||'0').replace('%',''))||0;
+  let hl=window._hl||{}; let targetUp=hl.mHigh||price*1.02, targetDown=hl.mLow||price*0.98;
+  let dir=s.bias.includes('BULLISH')?'UP':s.bias.includes('BEARISH')?'DOWN':'SIDEWAYS';
+  let why=[];
+  if(dir==='UP')why.push('HTF 4H Bias is Bullish - Higher Highs');
+  if(dir==='DOWN')why.push('HTF 4H Bias is Bearish - Lower Lows');
+  if(bullOB)why.push('Bullish OB at $'+bullOB.bottom.toFixed(0)+' - Buyers waiting');
+  if(bearOB)why.push('Bearish OB at $'+bearOB.top.toFixed(0)+' - Sellers waiting');
+  if(fng>70)why.push('Fear & Greed '+fng+' = Greed - Pullback possible');
+  if(fng<25)why.push('Fear & Greed '+fng+' = Fear - Smart money buys Discount');
+  if(fund>0.03)why.push('Funding +'+fund.toFixed(3)+'% = Too many Longs - Squeeze possible');
+  if(fund<0)why.push('Funding Negative = Too many Shorts - Squeeze up possible');
+  if(hl.mHigh)why.push('Month High $'+hl.mHigh.toFixed(0)+' is liquidity - Price will go there to sweep');
+  let forecast='';
+  if(aiMode==='short') forecast= dir==='UP' ? '📈 <b>Today:</b> Can go <b>UP to $'+targetUp.toFixed(0)+'</b> (Month High). <b>Why:</b> Bullish bias + OB below. <b>Plan:</b> Buy dip at OB.' : dir==='DOWN' ? '📉 <b>Today:</b> Can go <b>DOWN to $'+targetDown.toFixed(0)+'</b> (Month Low). <b>Why:</b> Bearish bias + Bearish OB above.' : '➡️ <b>Today:</b> Sideways between $'+(hl.dLow||price*0.99).toFixed(0)+' - $'+(hl.dHigh||price*1.01).toFixed(0)+'. Wait for sweep.';
+  if(aiMode==='mid') forecast='📊 <b>This Week:</b> '+(dir==='UP'?'Bullish - Target Week High $'+(hl.wHigh||price*1.03).toFixed(0):dir==='DOWN'?'Bearish - Target Week Low $'+(hl.wLow||price*0.97).toFixed(0):'Range - Wait for breakout');
+  if(aiMode==='long') forecast='📅 <b>This Month:</b> '+(dir==='UP'?'Bullish - Target Month High $'+(hl.mHigh||price*1.05).toFixed(0):dir==='DOWN'?'Bearish - Target Month Low $'+(hl.mLow||price*0.95).toFixed(0):'Range - Month High/Low will be swept');
+  $('aiForecast').innerHTML=forecast; $('aiWhy').innerHTML='<b>AI Reasons:</b><br>• '+why.join('<br>• ');
+}
+function analyseSMC(){
+  let s=detectSMC();let last=candles[candles.length-1];if(!last)return;let price=last.close;
+  let bullOB=[...s.obs].reverse().find(o=>o.type==='bull'&&o.bottom<price); let bearOB=s.obs.find(o=>o.type==='bear'&&o.top>price);
+  let bullFVG=[...s.fvgs].reverse().find(f=>f.type==='bull'&&f.bottom<price); let bearFVG=s.fvgs.find(f=>f.type==='bear'&&f.top>price);
+  let sweep=s.sweeps[s.sweeps.length-1]; let strat=STRATEGIES[selectedStrategy];
+  let html='', longHtml='Waiting...', shortHtml='Waiting...';
+  if(bullOB){let e=bullOB.top,sl=bullOB.bottom*0.998,tp2=e+(e-sl)*2,tp3=e+(e-sl)*3;longHtml='<b>Entry:</b> $'+e.toFixed(2)+' (Bullish OB)<br><b>SL:</b> $'+sl.toFixed(2)+'<br><b>TP1:</b> $'+(price*1.01).toFixed(2)+'<br><b>TP2:</b> $'+tp2.toFixed(2)+' (2R)<br><b>TP3:</b> $'+tp3.toFixed(2)+' (3R)';}
+  if(bearOB){let e=bearOB.bottom,sl=bearOB.top*1.002,tp2=e-(sl-e)*2,tp3=e-(sl-e)*3;shortHtml='<b>Entry:</b> $'+e.toFixed(2)+' (Bearish OB)<br><b>SL:</b> $'+sl.toFixed(2)+'<br><b>TP2:</b> $'+tp2.toFixed(2)+' (2R)<br><b>TP3:</b> $'+tp3.toFixed(2)+' (3R)';}
+  $('longPlan').innerHTML=longHtml;$('shortPlan').innerHTML=shortHtml;
+  if(s.bias.includes('BULLISH')&&bullOB)html='<span style="color:#0ecb81;font-weight:800">🟢 LONG BIAS - '+esc(strat.name)+'</span><br><b>Entry:</b> $'+bullOB.top.toFixed(2)+' (OB) + FVG $'+(bullFVG?bullFVG.bottom.toFixed(2):'--')+'<br><b>SL:</b> $'+(bullOB.bottom*0.998).toFixed(2)+'<br><b>Confirm:</b> Wait 15m CHoCH up, then Long.';
+  else if(s.bias.includes('BEARISH')&&bearOB)html='<span style="color:#f6465d;font-weight:800">🔴 SHORT BIAS - '+esc(strat.name)+'</span><br><b>Entry:</b> $'+bearOB.bottom.toFixed(2)+' (OB)<br><b>SL:</b> $'+(bearOB.top*1.002).toFixed(2)+'<br><b>Confirm:</b> Wait 15m CHoCH down, then Short.';
+  else if(sweep)html='<span style="color:#f0b90b;font-weight:800">⚡ LIQUIDITY SWEEP!</span><br>Swept $'+sweep.price.toFixed(2)+' ('+sweep.type+')<br><b>Next:</b> Wait CHoCH, then enter opposite.';
+  else html='<b>WAIT - No A+ Setup</b><br>Price in middle.<br><b>Bullish OB:</b> $'+(bullOB?bullOB.bottom.toFixed(2):'--')+'<br><b>Bearish OB:</b> $'+(bearOB?bearOB.top.toFixed(2):'--');
+  $('signalDetail').innerHTML=html;
+}
+// TO ADD MORE AI LATER: Paste new AI function here - e.g. function updateAI_V2() {}
+// ===== JS SECTION: AI ANALYSIS END =====
+
+// ===== JS SECTION: SMC ALERT START =====
+function checkAlert(){
+  if(!candles.length||!alertOn)return; let s=detectSMC(); let last=candles[candles.length-1]; let price=last.close;
+  let bullOB=[...s.obs].reverse().find(o=>o.type==='bull'&&o.bottom<price); let bearOB=s.obs.find(o=>o.type==='bear'&&o.top>price);
+  let bullFVG=[...s.fvgs].reverse().find(f=>f.type==='bull'&&f.bottom<price); let bearFVG=s.fvgs.find(f=>f.type==='bear'&&f.top>price);
+  let box=$('alertBox'), title=$('alertTitle'), detail=$('alertDetail');
+  let nearBull = bullOB && Math.abs(price-bullOB.top)/price<0.003; let nearBear = bearOB && Math.abs(price-bearOB.bottom)/price<0.003; let nearBullFVG = bullFVG && Math.abs(price-bullFVG.bottom)/price<0.003;
+  if(nearBull || nearBullFVG){ box.className='alertBox bull show'; title.textContent='🟢 🔔 ALERT - BULLISH ENTRY NEAR!'; detail.innerHTML='<b>Why Bullish?</b><br>• Price at Bullish OB $'+(bullOB?bullOB.bottom.toFixed(2):'--')+'<br>• Bullish FVG $'+(bullFVG?bullFVG.bottom.toFixed(2):'--')+'<br>• HTF Bias: '+s.bias+'<br><b>What to do:</b> Wait for 15m CHoCH up → Long. SL below OB. TP = Next Liquidity.<br><b>Why not Short?</b> Price in Discount, buyers active.'; addAlertHistory('🟢 BULLISH ALERT - '+currentSymbol+' at $'+price.toFixed(2)); }
+  else if(nearBear){ box.className='alertBox bear show'; title.textContent='🔴 🔔 ALERT - BEARISH ENTRY NEAR!'; detail.innerHTML='<b>Why Bearish?</b><br>• Price at Bearish OB $'+bearOB.top.toFixed(2)+'<br>• Bearish FVG $'+(bearFVG?bearFVG.top.toFixed(2):'--')+'<br>• HTF Bias: '+s.bias+'<br><b>What to do:</b> Wait for 15m CHoCH down → Short. SL above OB.<br><b>Why not Long?</b> Price in Premium, sellers active.'; addAlertHistory('🔴 BEARISH ALERT - '+currentSymbol+' at $'+price.toFixed(2)); }
+  else { box.className='alertBox wait show'; title.textContent='⏳ Waiting for Entry...'; detail.innerHTML='Price $'+price.toFixed(2)+' is in middle.<br><b>Next Bullish OB:</b> $'+(bullOB?bullOB.bottom.toFixed(2):'--')+'<br><b>Next Bearish OB:</b> $'+(bearOB?bearOB.top.toFixed(2):'--')+'<br><b>Rule:</b> Don\'t chase. Alert will ring when price touches OB.'; }
+}
+function addAlertHistory(txt){let box=$('alertHistory'); if(box.children.length>5)box.removeChild(box.lastChild); let d=document.createElement('div'); d.style.cssText='background:#1a1e23;padding:8px;border-radius:8px;margin-top:6px;font-size:11px'; d.textContent=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})+' - '+txt; box.insertBefore(d,box.firstChild);}
+// ===== JS SECTION: SMC ALERT END =====
+
+// ===== JS SECTION: CHART DRAW START =====
+function drawChart(){
+  let canvas=$('chartCanvas');let dpr=window.devicePixelRatio||1;let w=canvas.clientWidth||800,h=canvas.clientHeight||420;canvas.width=w*dpr;canvas.height=h*dpr;let ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);if(!candles.length)return;
+  let min=Math.min(...candles.map(c=>c.low)),max=Math.max(...candles.map(c=>c.high));let pad=(max-min)*0.1;min-=pad;max+=pad;let y=(p)=>h-40-((p-min)/(max-min))*(h-80);let xStep=w/candles.length;let s=detectSMC();
+  let onlyFVG=filterMode==='ONLY_FVG', onlyOB=filterMode==='ONLY_OB', onlyHL=filterMode==='ONLY_HL', onlyBreaker=filterMode==='ONLY_BREAKER', onlySweep=filterMode==='ONLY_SWEEP'; let showAll=filterMode==='ALL';
+  if((show.hl||onlyHL)&&(showAll||onlyHL)&&window._hl){let hl=window._hl;ctx.strokeStyle='rgba(255,255,255,0.6)';ctx.setLineDash([6,4]);[[hl.mHigh,'MONTH HIGH'],[hl.mLow,'MONTH LOW'],[hl.wHigh,'WEEK HIGH'],[hl.wLow,'WEEK LOW']].forEach(([p,label])=>{if(!p)return;ctx.beginPath();ctx.moveTo(0,y(p));ctx.lineTo(w,y(p));ctx.stroke();ctx.fillStyle='#fff';ctx.font='10px Arial';ctx.fillText(label+' $'+p.toFixed(0),6,y(p)-4)});ctx.setLineDash([]);}
+  if((show.fvg&&(showAll||onlyFVG))||onlyFVG) s.fvgs.slice(-8).forEach(f=>{ctx.fillStyle=f.type==='bull'?'rgba(240,185,11,0.18)':'rgba(246,70,93,0.14)';ctx.fillRect(f.index*xStep,y(f.top),xStep*3,Math.max(2,y(f.bottom)-y(f.top)));ctx.fillStyle='#f0b90b';ctx.font='10px Arial';ctx.fillText('FVG',f.index*xStep+2,y(f.top)-4)});
+  if(show.ob&&(showAll||onlyOB)) s.obs.slice(-6).forEach(ob=>{ctx.fillStyle=ob.type==='bull'?'rgba(14,203,129,0.22)':'rgba(246,70,93,0.22)';ctx.fillRect(ob.index*xStep,y(ob.top),xStep*4,Math.max(3,y(ob.bottom)-y(ob.top)));ctx.fillStyle=ob.type==='bull'?'#0ecb81':'#f6465d';ctx.font='10px Arial';ctx.fillText(ob.type==='bull'?'BULL OB':'BEAR OB',ob.index*xStep+2,y(ob.top)-4)});
+  if(show.breaker&&(showAll||onlyBreaker)) s.breakers.slice(-3).forEach(br=>{ctx.fillStyle='rgba(168,85,247,0.25)';ctx.fillRect(br.index*xStep,y(br.top),xStep*4,Math.max(3,y(br.bottom)-y(br.top)));ctx.fillStyle='#c084fc';ctx.font='10px Arial';ctx.fillText('BREAKER',br.index*xStep+2,y(br.top)-4)});
+  if(show.ifvg&&(showAll||onlyBreaker)) s.ifvgs.slice(-3).forEach(iv=>{ctx.fillStyle='rgba(59,130,246,0.25)';ctx.fillRect(iv.index*xStep,y(iv.top),xStep*3,Math.max(3,y(iv.bottom)-y(iv.top)));ctx.fillStyle='#60a5fa';ctx.font='10px Arial';ctx.fillText('iFVG',iv.index*xStep+2,y(iv.top)-4)});
+  if(show.mit&&showAll) s.mits.slice(-3).forEach(m=>{ctx.fillStyle='rgba(249,115,22,0.22)';ctx.fillRect(m.index*xStep,y(m.top),xStep*4,Math.max(3,y(m.bottom)-y(m.top)));ctx.fillStyle='#fb923c';ctx.font='10px Arial';ctx.fillText('MIT',m.index*xStep+2,y(m.top)-4)});
+  if(show.liq&&(showAll||onlySweep||onlyHL)) s.sweeps.slice(-4).forEach(sw=>{ctx.fillStyle='#3b82f6';ctx.beginPath();ctx.arc(sw.index*xStep,y(sw.price),5,0,Math.PI*2);ctx.fill()});
+  candles.forEach((c,i)=>{let x=i*xStep+xStep*0.15,cw=xStep*0.7;let up=c.close>=c.open;ctx.strokeStyle=up?'#0ecb81':'#f6465d';ctx.fillStyle=up?'#0ecb81':'#f6465d';ctx.beginPath();ctx.moveTo(x+cw/2,y(c.high));ctx.lineTo(x+cw/2,y(c.low));ctx.stroke();ctx.fillRect(x,y(Math.max(c.open,c.close)),cw,Math.max(1,Math.abs(y(c.open)-y(c.close))))});
+  let last=candles[candles.length-1];ctx.strokeStyle='#f0b90b';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(0,y(last.close));ctx.lineTo(w,y(last.close));ctx.stroke();ctx.setLineDash([]);
+}
+function updateLive(){let l=candles[candles.length-1];if(l)$('livePrice').textContent='$'+l.close.toLocaleString()}
+// ===== JS SECTION: CHART DRAW END =====
+
+// ===== JS SECTION: STRATEGY START =====
+function renderStrategies(){
+  let grid=$('strategyGrid');grid.innerHTML='';
+  STRATEGIES.forEach((s,idx)=>{
+    let div=document.createElement('div');div.className='stratCard'+(idx===selectedStrategy?' active':'');
+    div.innerHTML='<b>'+(idx+1)+'. '+s.name+'</b><small>'+s.desc+'</small>';
+    div.onclick=()=>{selectedStrategy=idx;filterMode=s.filter;$('stratName').textContent=s.name;$('stratDesc').textContent=s.desc;$('stratCode').textContent=s.code;renderStrategies();drawChart();analyseSMC();updateAI();toast('Filter: '+s.name)};
+    grid.appendChild(div);
+  });
+}
+function toggle(id,key,btn){show[key]=!show[key];btn.textContent=btn.textContent.replace(show[key]?'OFF':'ON',show[key]?'ON':'OFF');btn.classList.toggle('on',show[key]);drawChart();}
+// TO ADD NEW STRATEGY LATER: Add new object in STRATEGIES array above, e.g. {id:8,name:'Your Strategy',desc:'...',code:"...",filter:'ONLY_FVG'}
+// ===== JS SECTION: STRATEGY END =====
+
+// ===== JS SECTION: BINDINGS START =====
+function bindAll(){
+  $('btnMenu').onclick=()=>$('sidebar').classList.toggle('show');
+  $('btnRefreshTop').onclick=()=>{fetchCandles(currentSymbol,currentTF,'main');fetchMarket();fetchMood();fetchNews();toast('Refreshed')};
+  $('searchTop').oninput=function(){let q=this.value.toUpperCase().trim();if(!q)return;let f=allCoins.find(c=>c.symbol.startsWith(q));if(f)openCoin(f.symbol)};
+  $('btnAddCoin').onclick=()=>{let v=$('addCoinInput').value.trim().toUpperCase();if(!v)return;let sym=v.endsWith('USDT')?v:v+'USDT';if(!watchlist.includes(sym)){watchlist.push(sym);localStorage.setItem('smc_watch',JSON.stringify(watchlist));renderWatch();toast(sym+' added');$('addCoinInput').value='';}else toast('Already in watchlist')};
+  $('btnAddWatch').onclick=()=>{if(!watchlist.includes(currentSymbol)){watchlist.push(currentSymbol);localStorage.setItem('smc_watch',JSON.stringify(watchlist));renderWatch();toast(currentSymbol+' added')}else toast('Already in Watchlist')};
+  document.querySelectorAll('[data-tf]').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('[data-tf]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');currentTF=btn.getAttribute('data-tf');fetchCandles(currentSymbol,currentTF,'main');connectWS();toast(currentTF+' loaded')}});
+  document.querySelectorAll('[data-ai]').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('[data-ai]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');aiMode=btn.getAttribute('data-ai');updateAI();}});
+  $('tFVG').onclick=(e)=>toggle('tFVG','fvg',e.target);$('tOB').onclick=(e)=>toggle('tOB','ob',e.target);$('tBreaker').onclick=(e)=>toggle('tBreaker','breaker',e.target);$('tIFVG').onclick=(e)=>toggle('tIFVG','ifvg',e.target);$('tLiq').onclick=(e)=>toggle('tLiq','liq',e.target);$('tMit').onclick=(e)=>toggle('tMit','mit',e.target);$('tHL').onclick=(e)=>toggle('tHL','hl',e.target);
+  $('btnAlertSound').onclick=()=>{alertOn=!alertOn;$('btnAlertSound').textContent=alertOn?'🔔 Alert ON':'🔕 Alert OFF';toast(alertOn?'Alerts ON':'Alerts OFF')};
+  $('btnAlertTest').onclick=()=>{let p=candles[candles.length-1].close;addAlertHistory('🧪 TEST ALERT - '+currentSymbol+' $'+p.toFixed(2));toast('Test alert sent')};
+  $('btnAddStrategy').onclick=()=>{let n=STRATEGIES.length+1;STRATEGIES.push({id:n,name:'Custom Strategy '+n,desc:'Paste your code for Strategy '+n,code:'// Paste code for Strategy '+n,filter:'ALL'});renderStrategies();toast('New Slot '+n+' added')};
+  document.querySelectorAll('.bottomNav button').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('.bottomNav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');let nav=btn.getAttribute('data-nav');if(nav==='watch')$('sidebar').classList.add('show');if(nav==='strategy')document.getElementById('strategySection').scrollIntoView({behavior:'smooth'});if(nav==='news')document.getElementById('newsSection').scrollIntoView({behavior:'smooth'});if(nav==='mood')window.scrollTo({top:0,behavior:'smooth'});if(nav==='chart'){window.scrollTo({top:0,behavior:'smooth'});$('sidebar').classList.remove('show')}}});
+  window.addEventListener('resize',drawChart);
+}
+let ws;function connectWS(){try{if(ws)ws.close();ws=new WebSocket('wss://stream.binance.com:9443/ws/'+currentSymbol.toLowerCase()+'@kline_'+currentTF);ws.onmessage=(e)=>{let j=JSON.parse(e.data);let k=j.k;let last=candles[candles.length-1];if(!last)return;if(k.t===last.time){last.close=+k.c;last.high=+k.h;last.low=+k.l;$('livePrice').textContent='$'+last.close.toLocaleString();drawChart();}else{candles.push({time:k.t,open:+k.o,high:+k.h,low:+k.l,close:+k.c,volume:+k.v});if(candles.length>200)candles.shift();drawChart();analyseSMC();updateLevels();updateHL();updateLiquidity();updateAI();checkAlert();}};}catch(e){}}
+// ===== JS SECTION: BINDINGS END =====
+
+// ===== JS SECTION: INIT START =====
+renderStrategies();bindAll();
+fetchCandles(currentSymbol,currentTF,'main');fetchCandles(currentSymbol,'4h','4h');fetchCandles(currentSymbol,'1d','1d');fetchCandles(currentSymbol,'1w','1w');fetchCandles(currentSymbol,'1M','1M');
+fetchMarket();fetchMood();fetchNews();connectWS();
+setInterval(()=>{fetchMarket();fetchMood();fetchNews()},60000);setInterval(()=>{fetchCandles(currentSymbol,currentTF,'main')},60000);
+// ===== JS SECTION: INIT END =====
+</script>
+</body>
+</html>
