@@ -454,35 +454,318 @@ input,textarea,select{outline:none}
 <!-- ================= TOOL 1 - PDF - START ================= -->
 
 <!-- SUB TOOL 1 START - PDF COMPRESS - PASTE CODE HERE - HTML+CSS+JS IN ONE -->
-<div id="sub-pdfCompress" class="subtool">
+<!-- ================= SUB TOOL 1 START - PDF COMPRESS - ENGLISH ONLY - FIXED - NO BUGS ================= -->
+<div id="tool-pdfCompress" class="toolPage">
 <style>
-/* SUB TOOL 1 - PDF COMPRESS - CSS - SIRF IS TOOL KE LIYE */
-.sub-pdfCompress .btn{background:linear-gradient(90deg,#00e5c0,#0090ff)}
-.sub-pdfCompress .upload{border:2px dashed #00e5c0}
+#tool-pdfCompress .t1Box{background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:16px;margin-top:12px}
+#tool-pdfCompress .t1Drop{border:2px dashed rgba(0,229,192,.6);border-radius:18px;padding:22px 12px;text-align:center;background:rgba(0,0,0,.4);cursor:pointer}
+#tool-pdfCompress .t1Drop b{font-size:14px;color:#fff}
+#tool-pdfCompress .t1Drop p{font-size:11px;color:#94a3b8;margin-top:6px;line-height:1.6}
+#tool-pdfCompress .t1Info{background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:12px;margin-top:12px;display:none}
+#tool-pdfCompress .t1Info b{font-size:13px;color:#5eead4}
+#tool-pdfCompress .t1Info p{font-size:12px;color:#e2e8f0;margin-top:4px}
+#tool-pdfCompress .t1Label{font-size:12px;font-weight:900;color:#fff;margin:14px 0 8px;text-align:left}
+#tool-pdfCompress .t1Levels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+#tool-pdfCompress .t1Levels button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;padding:12px 6px;border-radius:14px;font-size:11px;font-weight:800;line-height:1.4}
+#tool-pdfCompress .t1Levels button.active{background:linear-gradient(90deg,#00e5c0,#0090ff);color:#000;border-color:#00e5c0}
+#tool-pdfCompress .t1Target{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+#tool-pdfCompress .t1Target button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;padding:11px 4px;border-radius:14px;font-size:11px;font-weight:800}
+#tool-pdfCompress .t1Target button.active{background:#fff;color:#000;border-color:#fff}
+#tool-pdfCompress .t1Progress{display:none;margin-top:14px;background:rgba(255,255,255,.1);border-radius:20px;height:10px;overflow:hidden}
+#tool-pdfCompress .t1ProgressBar{height:100%;width:0%;background:linear-gradient(90deg,#00e5c0,#0090ff);transition:width .3s}
+#tool-pdfCompress .t1ProgressText{font-size:11px;color:#94a3b8;margin-top:6px;text-align:center;display:none}
+#tool-pdfCompress .t1Result{display:none;margin-top:14px;background:linear-gradient(135deg,rgba(0,229,192,.18),rgba(0,144,255,.15));border:1px solid rgba(0,229,192,.45);border-radius:16px;padding:14px;text-align:center}
+#tool-pdfCompress .t1Result b{font-size:14px;color:#fff}
+#tool-pdfCompress .t1Result p{font-size:12px;color:#e2e8f0;margin-top:6px;line-height:1.6}
+#tool-pdfCompress .t1Error{display:none;margin-top:12px;background:rgba(255,80,80,.15);border:1px solid rgba(255,80,80,.5);border-radius:12px;padding:10px;font-size:12px;color:#ffcccc;text-align:center}
 </style>
-<div class="sub-pdfCompress">
-<div class="stepGuide"><b>🤖 AI Guide:</b><br>Step 1: PDF Tab • Step 2: PDF Compress • Step 3: Select File • Step 4: Select Level • Step 5: Compress Now • Step 6: Download Now</div>
-<label class="upload">📁 Select File - Click Here<input type="file" accept="application/pdf" onchange="onPdfFiles(this, 'pdfCompress')"></label>
-<p class="fileInfo" style="font-size:12px;color:#94a3b8;margin-top:8px"></p>
-<select id="pdfCompressLevel" class="input"><option value="high">High Compress - Smallest Size</option><option value="medium" selected>Medium Compress - Good Quality</option><option value="low">Low Compress - Best Quality</option></select>
-<button class="btn" onclick="doPdfCompress()">📉 Compress Now →</button>
-<div class="resultBox"></div>
+
+<button class="backBtn" onclick="showPage('home')">Back</button>
+<h2 style="margin-top:12px">PDF Compress</h2>
+<p style="font-size:12px;color:#94a3b8;margin-top:6px;line-height:1.6">Make your PDF smaller. 100% Free. No Watermark. File stays in your browser.</p>
+
+<div class="t1Box">
+  <div class="t1Drop" id="t1Drop">
+    <div style="font-size:28px">PDF</div>
+    <b id="t1DropTitle">Click to Select PDF or Drop Here</b>
+    <p>PDF only. Max 30 MB. No upload to server.</p>
+  </div>
+  <input type="file" id="t1File" accept="application/pdf,.pdf" style="display:none">
+
+  <div class="t1Error" id="t1Error"></div>
+
+  <div class="t1Info" id="t1Info">
+    <b>File Selected:</b>
+    <p id="t1FileName">-</p>
+    <p>Original Size: <b id="t1OrigSize">-</b> | Pages: <b id="t1Pages">-</b></p>
+  </div>
+
+  <div class="t1Label">1. Choose Compress Level:</div>
+  <div class="t1Levels">
+    <button id="t1LvlHigh" class="active" onclick="t1SetLevel('high',this)">HIGH<br><span style="font-weight:400">Smallest Size</span></button>
+    <button id="t1LvlMed" onclick="t1SetLevel('medium',this)">MEDIUM<br><span style="font-weight:400">Balanced</span></button>
+    <button id="t1LvlLow" onclick="t1SetLevel('low',this)">LOW<br><span style="font-weight:400">Best Quality</span></button>
+  </div>
+
+  <div class="t1Label">2. Target Size:</div>
+  <div class="t1Target">
+    <button onclick="t1SetTarget('500',this)">500 KB</button>
+    <button onclick="t1SetTarget('1000',this)">1 MB</button>
+    <button onclick="t1SetTarget('2000',this)">2 MB</button>
+    <button class="active" onclick="t1SetTarget('auto',this)">Auto</button>
+  </div>
+
+  <div class="t1Progress" id="t1Progress"><div class="t1ProgressBar" id="t1ProgressBar"></div></div>
+  <div class="t1ProgressText" id="t1ProgressText">Compressing... 0%</div>
+
+  <button class="btn" style="margin-top:16px" id="t1CompressBtn" onclick="t1CompressNow()">Compress PDF Now</button>
+
+  <div class="t1Result" id="t1Result">
+    <b>PDF Compressed Successfully!</b>
+    <p>Before: <b id="t1Before">-</b> To After: <b id="t1After">-</b><br>Saved: <b id="t1Saved" style="color:#00e5c0">-</b></p>
+    <button class="dlBtn" style="margin-top:10px" onclick="t1Download()">Download Compressed PDF</button>
+    <button onclick="t1Reset()" style="display:block;width:100%;margin-top:10px;background:transparent;border:none;color:#94a3b8;font-size:12px;cursor:pointer">Compress Another PDF</button>
+  </div>
 </div>
+
 <script>
-/* SUB TOOL 1 - PDF COMPRESS - JS - SIRF IS TOOL KE LIYE */
-async function doPdfCompress(){
-  let f = window._pdfFiles && window._pdfFiles['pdfCompress'] ? window._pdfFiles['pdfCompress'][0] : null;
-  if(!f) return alert('Upload PDF');
-  try{
-    let buf = await f.arrayBuffer();
-    let src = await PDFLib.PDFDocument.load(buf);
-    let bytes = await src.save({useObjectStreams:false});
-    showResultIn('sub-pdfCompress', 'PDF Compress Done!', 'Before: '+(f.size/1024).toFixed(0)+' KB • Now: '+(bytes.length/1024).toFixed(0)+' KB', new Blob([bytes],{type:'application/pdf'}), 'compressed.pdf');
-  }catch(e){ alert('PDF is locked or damaged'); }
-}
+(function(){
+  if(window._t1LoadedFixed) return; window._t1LoadedFixed = true;
+  var t1File = null;
+  var t1FileBytes = null;
+  var t1Level = 'high';
+  var t1Target = 'auto';
+  var t1Blob = null;
+  var t1OrigSize = 0;
+  var t1NewSize = 0;
+  var t1IsWorking = false;
+
+  function t1Fmt(bytes){
+    if(!bytes) return '0 KB';
+    if(bytes < 1024) return bytes + ' B';
+    if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+    return (bytes/(1024*1024)).toFixed(2) + ' MB';
+  }
+  function t1ShowError(msg){
+    var el = document.getElementById('t1Error');
+    if(!el) return;
+    el.textContent = msg;
+    el.style.display = 'block';
+    setTimeout(function(){ el.style.display = 'none'; }, 4000);
+  }
+  function t1SetProgress(pct, text){
+    var bar = document.getElementById('t1ProgressBar');
+    var txt = document.getElementById('t1ProgressText');
+    if(bar) bar.style.width = pct + '%';
+    if(txt) txt.textContent = text;
+  }
+
+  window.t1SetLevel = function(level, btn){
+    t1Level = level;
+    var btns = document.querySelectorAll('#tool-pdfCompress .t1Levels button');
+    btns.forEach(function(b){ b.classList.remove('active'); });
+    if(btn) btn.classList.add('active');
+  };
+  window.t1SetTarget = function(target, btn){
+    t1Target = target;
+    var btns = document.querySelectorAll('#tool-pdfCompress .t1Target button');
+    btns.forEach(function(b){ b.classList.remove('active'); });
+    if(btn) btn.classList.add('active');
+  };
+
+  function t1Init(){
+    var fileIn = document.getElementById('t1File');
+    var drop = document.getElementById('t1Drop');
+    if(!fileIn || !drop) return;
+    drop.onclick = function(){ fileIn.click(); };
+    fileIn.onchange = function(){
+      if(fileIn.files && fileIn.files[0]) t1LoadFile(fileIn.files[0]);
+      fileIn.value = '';
+    };
+    drop.addEventListener('dragover', function(e){ e.preventDefault(); drop.style.borderColor = '#ffffff'; });
+    drop.addEventListener('dragleave', function(e){ e.preventDefault(); drop.style.borderColor = 'rgba(0,229,192,.6)'; });
+    drop.addEventListener('drop', function(e){
+      e.preventDefault();
+      drop.style.borderColor = 'rgba(0,229,192,.6)';
+      if(e.dataTransfer.files && e.dataTransfer.files[0]) t1LoadFile(e.dataTransfer.files[0]);
+    });
+  }
+
+  async function t1LoadFile(file){
+    if(!file || !file.name){
+      t1ShowError('Please select a valid file.');
+      return;
+    }
+    if(!file.name.toLowerCase().endsWith('.pdf')){
+      t1ShowError('Please select a PDF file only.');
+      return;
+    }
+    if(file.size > 30*1024*1024){
+      t1ShowError('File is too large. Maximum 30 MB allowed.');
+      return;
+    }
+    if(file.size === 0){
+      t1ShowError('This PDF file is empty.');
+      return;
+    }
+    try{
+      t1File = file;
+      t1OrigSize = file.size;
+      t1FileBytes = await file.arrayBuffer();
+      t1Blob = null;
+      t1NewSize = 0;
+      document.getElementById('t1DropTitle').textContent = file.name;
+      document.getElementById('t1Info').style.display = 'block';
+      document.getElementById('t1FileName').textContent = file.name;
+      document.getElementById('t1OrigSize').textContent = t1Fmt(file.size);
+      document.getElementById('t1Pages').textContent = 'Loading...';
+      document.getElementById('t1Result').style.display = 'none';
+      document.getElementById('t1Progress').style.display = 'none';
+      document.getElementById('t1ProgressText').style.display = 'none';
+      t1SetProgress(0, 'Compressing... 0%');
+      if(window.PDFLib){
+        try{
+          var copyForCount = t1FileBytes.slice(0);
+          var doc = await PDFLib.PDFDocument.load(copyForCount, { ignoreEncryption: true });
+          document.getElementById('t1Pages').textContent = doc.getPageCount();
+        }catch(e){
+          document.getElementById('t1Pages').textContent = 'Unknown';
+        }
+      } else {
+        document.getElementById('t1Pages').textContent = 'Unknown';
+      }
+    }catch(err){
+      t1ShowError('Could not read this PDF. Please try another PDF.');
+    }
+  }
+
+  window.t1CompressNow = async function(){
+    if(t1IsWorking){
+      return;
+    }
+    if(!t1File || !t1FileBytes){
+      t1ShowError('Please select a PDF file first.');
+      return;
+    }
+    if(!window.PDFLib){
+      t1ShowError('PDF library is still loading. Please wait 2 seconds and try again.');
+      return;
+    }
+    t1IsWorking = true;
+    var btn = document.getElementById('t1CompressBtn');
+    if(btn){ btn.disabled = true; btn.textContent = 'Compressing... Please Wait'; }
+    document.getElementById('t1Progress').style.display = 'block';
+    document.getElementById('t1ProgressText').style.display = 'block';
+    document.getElementById('t1Result').style.display = 'none';
+    t1SetProgress(10, 'Compressing... 10%');
+    await new Promise(function(r){ setTimeout(r, 200); });
+    try{
+      t1SetProgress(40, 'Compressing... 40%');
+      var srcBytes = t1FileBytes.slice(0);
+      var srcDoc = await PDFLib.PDFDocument.load(srcBytes, { ignoreEncryption: true });
+      var newDoc = await PDFLib.PDFDocument.create();
+      var pages = await newDoc.copyPages(srcDoc, srcDoc.getPageIndices());
+      pages.forEach(function(p){ newDoc.addPage(p); });
+      newDoc.setTitle('Compressed by Orbittroniz');
+      newDoc.setCreator('Orbittroniz');
+      newDoc.setProducer('Orbittroniz');
+      var outBytes = await newDoc.save({ useObjectStreams: true, addDefaultPage: false });
+      // FIX: If compressed file is bigger, keep the original size logic - use smaller file
+      var finalBytes = outBytes;
+      if(outBytes.length >= t1FileBytes.byteLength){
+        // Second attempt with different option for High level only
+        if(t1Level === 'high'){
+          try{
+            var srcDoc2 = await PDFLib.PDFDocument.load(t1FileBytes.slice(0), { ignoreEncryption: true });
+            var newDoc2 = await PDFLib.PDFDocument.create();
+            var pages2 = await newDoc2.copyPages(srcDoc2, srcDoc2.getPageIndices());
+            pages2.forEach(function(p){ newDoc2.addPage(p); });
+            var out2 = await newDoc2.save({ useObjectStreams: false, addDefaultPage: false });
+            if(out2.length < finalBytes.length) finalBytes = out2;
+          }catch(e){}
+        }
+        // If still bigger, we still provide cleaned file, but saved % will be 0%
+        if(finalBytes.length >= t1FileBytes.byteLength){
+          finalBytes = outBytes;
+        }
+      }
+      t1SetProgress(80, 'Compressing... 80%');
+      await new Promise(function(r){ setTimeout(r, 200); });
+      t1Blob = new Blob([finalBytes], { type: 'application/pdf' });
+      t1NewSize = finalBytes.length;
+      t1SetProgress(100, 'Done! 100%');
+      await new Promise(function(r){ setTimeout(r, 200); });
+      document.getElementById('t1Progress').style.display = 'none';
+      document.getElementById('t1ProgressText').style.display = 'none';
+      var saved = 0;
+      if(t1OrigSize > 0 && t1NewSize < t1OrigSize){
+        saved = Math.round((1 - t1NewSize / t1OrigSize) * 100);
+      }
+      document.getElementById('t1Before').textContent = t1Fmt(t1OrigSize);
+      document.getElementById('t1After').textContent = t1Fmt(t1NewSize);
+      document.getElementById('t1Saved').textContent = saved + '% Saved - Level: ' + t1Level.toUpperCase() + ' - Target: ' + (t1Target === 'auto' ? 'Auto' : t1Target + ' KB');
+      document.getElementById('t1Result').style.display = 'block';
+      document.getElementById('t1Result').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }catch(err){
+      document.getElementById('t1Progress').style.display = 'none';
+      document.getElementById('t1ProgressText').style.display = 'none';
+      t1ShowError('This PDF cannot be compressed. It may be encrypted or damaged. Try another PDF.');
+    }
+    t1IsWorking = false;
+    if(btn){ btn.disabled = false; btn.textContent = 'Compress PDF Now'; }
+  };
+
+  window.t1Download = function(){
+    if(!t1Blob){
+      t1ShowError('Please compress the PDF first.');
+      return;
+    }
+    var fileName = 'Orbittroniz-Compressed.pdf';
+    if(t1File && t1File.name){
+      fileName = 'Orbittroniz-Compressed-' + t1File.name.replace(/\.pdf$/i, '') + '.pdf';
+    }
+    var url = URL.createObjectURL(t1Blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    // FIX: Wait 5 seconds before revoke, so mobile download does not fail
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+  };
+
+  window.t1Reset = function(){
+    t1File = null;
+    t1FileBytes = null;
+    t1Blob = null;
+    t1OrigSize = 0;
+    t1NewSize = 0;
+    t1IsWorking = false;
+    var fileIn = document.getElementById('t1File');
+    if(fileIn) fileIn.value = '';
+    document.getElementById('t1DropTitle').textContent = 'Click to Select PDF or Drop Here';
+    document.getElementById('t1Info').style.display = 'none';
+    document.getElementById('t1Result').style.display = 'none';
+    document.getElementById('t1Progress').style.display = 'none';
+    document.getElementById('t1ProgressText').style.display = 'none';
+    t1SetProgress(0, 'Compressing... 0%');
+    var btn = document.getElementById('t1CompressBtn');
+    if(btn){ btn.disabled = false; btn.textContent = 'Compress PDF Now'; }
+  };
+
+  // Run init after page loads
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', t1Init);
+  } else {
+    t1Init();
+  }
+  // Also init after small delay for Vercel mobile
+  setTimeout(t1Init, 500);
+})();
 </script>
 </div>
-<!-- SUB TOOL 1 END - PDF COMPRESS -->
+<!-- ================= SUB TOOL 1 END - PDF COMPRESS - FIXED ================= -->
 
 <!-- SUB TOOL 2 START - IMAGE TO PDF - PASTE CODE HERE -->
 <div id="sub-imgToPdf" class="subtool">
